@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="168.52699mm"
+   height="120.95238mm"
+   viewBox="0 0 597.14289 428.57144"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="scopes.svg">
+  <title
+     id="title22092">Scoping in JavaScript</title>
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="200.94357"
+     inkscape:cy="156.25429"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer3"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     borderlayer="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <sodipodi:guide
+       position="340,428.57146"
+       orientation="0,1"
+       id="guide21036"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="-4.6511231e-07,328.57146"
+       orientation="1,0"
+       id="guide21038"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="173.57143,382.85717"
+       orientation="0,1"
+       id="guide21894" />
+    <sodipodi:guide
+       position="105.71429,190.00002"
+       orientation="1,0"
+       id="guide21896" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Scoping in JavaScript</dc:title>
+        <dc:date>24-12-2015</dc:date>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Nicolaie Constantinescu</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>CC-BY-NC-SA</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Kosson</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:language>RO</dc:language>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>scope</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:coverage>javascript scope</dc:coverage>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by-nc-sa/3.0/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:prohibits
+           rdf:resource="http://creativecommons.org/ns#CommercialUse" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#ShareAlike" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Global scope"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-60,-152.3622)">
+    <rect
+       style="opacity:1;fill:#b3b3b3;fill-opacity:1;stroke:none;stroke-width:1.16220474;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect21059"
+       width="597.14288"
+       height="428.57144"
+       x="60"
+       y="152.3622"
+       rx="3.14451"
+       ry="2.54392" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Scope pentru 1"
+     transform="translate(-60,-152.3622)">
+    <rect
+       style="opacity:1;fill:#241c1c;fill-opacity:1;stroke:none;stroke-width:1.16220474;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect21898"
+       width="596.42859"
+       height="342.85715"
+       x="60.000004"
+       y="198.07649"
+       rx="0"
+       ry="3.5995436e-07" />
+  </g>
+  <g
+     inkscape:label="Scope pentru faceva()"
+     id="g21949"
+     inkscape:groupmode="layer"
+     transform="translate(-60,-152.3622)">
+    <rect
+       ry="3.5995436e-07"
+       rx="0"
+       y="198.07649"
+       x="134.28572"
+       height="342.85715"
+       width="497.85715"
+       id="rect21951"
+       style="opacity:1;fill:#ffcc00;fill-opacity:1;stroke:none;stroke-width:1.16220474;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="g21955"
+     inkscape:label="Scope pentru doi"
+     transform="translate(-60,-152.3622)">
+    <rect
+       style="opacity:1;fill:#ccaaff;fill-opacity:1;stroke:none;stroke-width:1.16220474;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect21957"
+       width="392.85715"
+       height="191.42857"
+       x="145.71429"
+       y="309.50507"
+       rx="0"
+       ry="2.009745e-07" />
+  </g>
+  <g
+     inkscape:label="Scope pentru trei"
+     id="g21959"
+     inkscape:groupmode="layer"
+     transform="translate(-60,-152.3622)">
+    <rect
+       ry="4.1994671e-08"
+       rx="0"
+       y="420.21936"
+       x="238.57143"
+       height="40"
+       width="367.14285"
+       id="rect21961"
+       style="opacity:1;fill:#5d536c;fill-opacity:1;stroke:none;stroke-width:1.16220474;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Code"
+     transform="translate(-60,-152.3622)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="163.88951"
+       y="185.76863"
+       id="text21861"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan21863"
+         x="163.88951"
+         y="185.76863"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#008000">function container(){   </tspan><tspan
+         sodipodi:role="line"
+         x="163.88951"
+         y="223.26863"
+         id="tspan21865"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#008000">  var unu = 1;</tspan><tspan
+         sodipodi:role="line"
+         x="163.88951"
+         y="260.76862"
+         id="tspan21867"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'" /><tspan
+         sodipodi:role="line"
+         x="163.88951"
+         y="298.26862"
+         id="tspan21869"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#ff6600">  function faceva(){</tspan><tspan
+         sodipodi:role="line"
+         x="163.88951"
+         y="335.76862"
+         id="tspan21871"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#ff6600">    var doi = 2;</tspan><tspan
+         sodipodi:role="line"
+         x="163.88951"
+         y="373.26862"
+         id="tspan21873"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#ff6600" /><tspan
+         sodipodi:role="line"
+         x="163.88951"
+         y="410.76862"
+         id="tspan21875"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#ff6600">    if( unu == 1){</tspan><tspan
+         sodipodi:role="line"
+         x="163.88951"
+         y="448.26862"
+         id="tspan21877"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#ff6600">      var  trei = 3;</tspan><tspan
+         sodipodi:role="line"
+         x="163.88951"
+         y="485.76862"
+         id="tspan21879"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#ff6600">    }</tspan><tspan
+         sodipodi:role="line"
+         x="163.88951"
+         y="523.26862"
+         id="tspan21881"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#ff6600">  }</tspan><tspan
+         sodipodi:role="line"
+         x="163.88951"
+         y="560.76862"
+         id="tspan21883"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#008000">}</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="74.285713"
+       y="574.50507"
+       id="text21963"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan21965"
+         x="74.285713"
+         y="574.50507"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'">Global</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#e3d7f4;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="95.896164"
+       y="213.81079"
+       id="text21963-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan21965-6"
+         x="95.896164"
+         y="213.81079"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#e3d7f4">scope</tspan><tspan
+         sodipodi:role="line"
+         x="95.896164"
+         y="232.56079"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#e3d7f4"
+         id="tspan21985">pentru</tspan><tspan
+         sodipodi:role="line"
+         x="95.896164"
+         y="251.31079"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#e3d7f4"
+         id="tspan21987">var unu</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#9955ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="588.74811"
+       y="213.39328"
+       id="text21963-5-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan21965-6-1"
+         x="588.74811"
+         y="213.39328"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#9955ff">scope</tspan><tspan
+         sodipodi:role="line"
+         x="588.74811"
+         y="232.14328"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#9955ff"
+         id="tspan21985-1">pentru</tspan><tspan
+         sodipodi:role="line"
+         x="588.74811"
+         y="250.89328"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#9955ff"
+         id="tspan21987-4">function</tspan><tspan
+         sodipodi:role="line"
+         x="588.74811"
+         y="269.64328"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#9955ff"
+         id="tspan22013">faceva()</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#6600ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="186.16315"
+       y="325.53293"
+       id="text21963-5-5-7"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan21965-6-1-0"
+         x="186.16315"
+         y="325.53293"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#6600ff">scope</tspan><tspan
+         sodipodi:role="line"
+         x="186.16315"
+         y="344.28293"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#6600ff"
+         id="tspan21985-1-8">pentru</tspan><tspan
+         sodipodi:role="line"
+         x="186.16315"
+         y="363.03293"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#6600ff"
+         id="tspan22013-5">var doi</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#e3d7f4;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="573.60529"
+       y="429.25043"
+       id="text21963-5-55"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan21965-6-3"
+         x="573.60529"
+         y="429.25043"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.25px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#e3d7f4">scope</tspan><tspan
+         sodipodi:role="line"
+         x="573.60529"
+         y="443.31293"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.25px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#e3d7f4"
+         id="tspan21985-7">pentru</tspan><tspan
+         sodipodi:role="line"
+         x="573.60529"
+         y="457.37543"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.25px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#e3d7f4"
+         id="tspan21987-9">var trei</tspan></text>
+  </g>
+</svg>
