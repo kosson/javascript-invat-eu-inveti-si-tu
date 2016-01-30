@@ -411,10 +411,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.1557083"
-     inkscape:cx="521.53"
-     inkscape:cy="481.32771"
+     inkscape:cx="239.88454"
+     inkscape:cy="680.33987"
      inkscape:document-units="px"
-     inkscape:current-layer="layer7"
+     inkscape:current-layer="layer3"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1016"
@@ -940,7 +940,7 @@
          x="393.1312"
          y="389.56296"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.28638935px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22551-6">    this.me = who; </tspan><tspan
+         id="tspan22551-6">    return &quot;Sunt eu &quot; + this.me; </tspan><tspan
          sodipodi:role="line"
          x="393.1312"
          y="406.17096"
@@ -1027,30 +1027,6 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:35.43037415px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="391.41364"
-       y="306.20731"
-       id="text22347-7"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan22349-5"
-         x="391.41364"
-         y="306.20731"
-         style="font-size:13.28638935px">»Foo.prototype.constructor<tspan
-   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.28638935px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-   id="tspan22351-2"> // =&gt;</tspan></tspan><tspan
-         sodipodi:role="line"
-         x="391.41364"
-         y="322.81531"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.28638935px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22353-2">function Foo()</tspan><tspan
-         sodipodi:role="line"
-         x="391.41364"
-         y="339.42328"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.28638935px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22364-3" /></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:35.43037415px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="165.34009"
        y="431.19336"
        id="text22261-1-2"
@@ -1072,6 +1048,28 @@
          x="212.00424"
          y="276.85892"
          style="font-size:8.85759354px;fill:#dd4814">prototype link extern __proto__</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:35.43037415px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="389.55011"
+       y="294.68094"
+       id="text22521-6-9-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="389.55011"
+         y="294.68094"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.28638935px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
+         id="tspan22555-2-9">function Foo(who){ </tspan><tspan
+         sodipodi:role="line"
+         x="389.55011"
+         y="311.28891"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.28638935px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
+         id="tspan22551-6-4">    this.me = who; </tspan><tspan
+         sodipodi:role="line"
+         x="389.55011"
+         y="327.89691"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.28638935px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
+         id="tspan22553-1-8">   }</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"

@@ -10,7 +10,7 @@ JavaScript un mecanism clasic de moștenire așa cum este așteptat în cazul ti
   2. **stabilește legătura prototipală**.
 - Legătura prototipală se obține și prin efectul al doilea al folosirii cuvântului cheie ```new```.
 - Legătura prototipală creează un lanț de delegare pentru cazurile în care nu găsești o proprietate sau o metodă într-un anumit context de execuție.
-- Mecanismul pe care-l realizează .prototype este unul de delegare a cererii pentru referința unei proprietăți sau metode către un oiect mai sus pe lanțul prototipal către un alt obiect.
+- Mecanismul pe care-l realizează .prototype este unul de delegare a cererii pentru referința unei proprietăți sau metode către un obiect mai sus pe lanțul prototipal către un alt obiect.
 
 ```js
 function Foo(who){

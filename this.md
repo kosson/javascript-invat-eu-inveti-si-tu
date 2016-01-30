@@ -1,10 +1,10 @@
 # this
+---
+
 ## Acumulări rapide
-**this** este un cuvânt cheie.
-
-**this** este o referință către contextul de execuție curent în timp ce funcția se execută.
-
-`this` este un binding pentru fiecare invocare a unei funcții care se bazează pe de-antregul pe call-site
+- **this** este un cuvânt cheie.
+- **this** este o referință către contextul de execuție curent în timp ce funcția se execută.
+- `this` este un binding pentru fiecare invocare a unei funcții care se bazează pe de-antregul pe call-site
 
 ## Mantre
 
@@ -15,8 +15,6 @@
 - La ce face trimitere ```this``` este definit de modul în care funcția este declarată, ci de modul în care este invocată.
 - Valoarea lui ```this``` este context.
 - Atunci când există un obiect-context, regula de bază a binding-ului spune că obiectul-context va fi cel la care se face bindingul this.
-
-
 
 ## Regulile de binding
 
@@ -47,7 +45,6 @@ faceva(); // 2
 ```
 
 Bindingul primar se face la global object (Window).
-
 ---
 
 ### Binding implicit - eu îi spun „binding atașat implicit”
@@ -90,7 +87,6 @@ obiectLiteral2.metoda(); // altceva
 var proprietate = "valoarea proprietății obiectului global";  // proprietate a obiectului global
 var metoda = obiectLiteral.metoda;                            // metodă a obiectului global
 metoda(); // => valoarea proprietății obiectului global; echivalent cu window.metoda()
-
 ```
 ---
 
@@ -173,7 +169,7 @@ bind() va fi găsit în funcția __proto__ al oricărui obiect generat de o func
 
 ## Binding cu `new`
 
-Poți pune în fața oricărei funcții new și o transformi astfel într-un apel pentru un Constructor. Atenție, aici trebuie precizat faptul că JavaScript nu are clase.
+Poți pune în fața oricărei funcții ```new``` și o transformi astfel într-un apel către un Constructor. Atenție, aici trebuie precizat faptul că JavaScript nu are clase.
 
 ### Mantra
 - O funcție apelată cu ```new``` în fața sa este un constructor.
@@ -184,8 +180,8 @@ Ceea ce va face la instanțiere este exact ceea ce a fost proiectată funcția l
 Ce se întâmplă când pui cuvântul cheie rezervat new în fața oricărei funcții?
 1. Se creează un obiect nou.
 2. Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu ```new```. Se creează legătura prototipală.
-3. ```this``` se leagă la obiectul abia creat. Contextul este setat la ```this``` pentru obiectul abia creat prin ```new```.
-4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), se va returna automat ```this```.
+3. Creează un noi ```this``` pe care-l leagă la scope-ul obiectul abia creat. Contextul este setat la ```this``` pentru obiectul abia creat prin ```new```.
+4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), ```this``` va fi returnat automat.
 
 ```js
 function test2(){
