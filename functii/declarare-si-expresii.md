@@ -75,9 +75,9 @@ Ex.: var anonima = function(){};
   var test = function ceva(){};
 ```
 
-În acest caz este declarată o variabilă test perimetrului (scope).
+În acest caz este declarată o variabilă test în scope.
 
-Numele „ceva" este declarat în perimetrul propriu al funcției, ATENȚIE, nu în perimetrul în care a fost declarat test.
+Numele „ceva" este declarat în perimetrul propriu al funcției, ATENȚIE, nu în scope-ul în care a fost declarat test.
 
 De exemplu:
 
@@ -96,5 +96,5 @@ De exemplu:
 
 --------------------------------------------------------------------------------
 
-#### Alonje:
+### Alonje:
 1. Atunci când o funcție va fi folosită ca proprietate a unui obiect, atunci funcția va fi una exprimată cu indentificator (named function expression) întotdeauna.

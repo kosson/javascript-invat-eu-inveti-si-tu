@@ -1,8 +1,9 @@
 # Clojures
+---
 
 ## Definiție
 
-    Clojure este atunci când o FUNCȚIE ține minte scope-ul lexical chiar și atunci când este executată în afara acelui scope lexical (Kyle Simpson).
+Clojure este atunci când o FUNCȚIE ține minte scope-ul lexical chiar și atunci când este executată în afara acelui scope lexical (Kyle Simpson).
 
 ## Analiză
 

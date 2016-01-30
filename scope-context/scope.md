@@ -1,31 +1,25 @@
-Despre scope
+# Despre scope
 ============
 
-Posibilă traducere în limba română: perimetru; arie de efect
+Posibilă traducere în limba română: „perimetru” sau „arie de efect”
 
-Este locul unde te uiți după lucruri.
+Este **locul** unde te uiți după lucruri.
 
 Javascript generează un scope lexical. Nu este unul dinamic.
 
 Bash are un scope (perimetru) dinamic și Perl activând o opțiune.
 
-Acumulări rapide
-----------------
-
-JavaScript are un **scope lexical**. De fapt, este vorba despre scope
+## Acumulări rapide
+- JavaScript are un **scope lexical**. De fapt, este vorba despre scope
 care este format la faza de compilare.
-
-Declararea unei funcții conduce la stabilirea un scope (un perimetru, o
+- Declararea unei funcții conduce la stabilirea un scope (un perimetru, o
 zonă).
-
-**Scope chain** este totalitatea obiectelor care definesc variabilele
+- **Scope chain** este totalitatea obiectelor care definesc variabilele
 existente în scope pentru o secvență de cod. Când motorul are nevoie să
 găsească valoarea unei variabile, se uită la primul obiect din lanț.
 Operațiunea se mai numește „walking up the scope chain".
 
-Mantre
-------
-
+## Mantre
 -   JavaScript are un **scope lexical** general la faza de compilare.
 -   Când funcțiile sunt executate SCOPE-ul folosit este cel de la
     MOMENTUL DEFINIRII (faza de compilare), nu cel de la momentul
@@ -57,10 +51,9 @@ Mantre
     copii private ale scope-ului și nici nu fac snapshoturi ale
     binding-urilor variabilelor.
 
-------------------------------------------------------------------------
+## Q&A
 
 **Întrebare**: Când se formează scope?
-
 **Răspuns**: La faza de compilare.
 
 Iată cum arată scope-ul ca reprezentare și ca arie în care are efect o
