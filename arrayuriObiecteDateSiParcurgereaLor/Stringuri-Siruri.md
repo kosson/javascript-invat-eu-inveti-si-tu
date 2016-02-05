@@ -14,7 +14,7 @@ var str = new String("test");
 ### Cu declararea simplă prin paranteze drepte: string literal
 
 Metodele indexOf() și lastIndexOf() pot fi utilizate pentru căutarea unui substing într-un string. ```indexOf("substring")``` returnează valoarea indexului de la care începe substringul pasat ca argument.
-```indexOf()``` și ```lastIndexOf()``` pot primi un al doilea parametru care indică indexul de la care să pornească căutarea. Dacă al doilea parametru nu este menționat, căutarea se va face de la index 0. Dacă nu este este găsit substringul, va fi returnată valoarea -1.
+`indexOf()` și `lastIndexOf()` pot primi un al doilea parametru care indică indexul de la care să pornească căutarea. Dacă al doilea parametru nu este menționat, căutarea se va face de la index 0. Dacă nu este este găsit substringul, va fi returnată valoarea -1.
 
 ### Extragerea substringurilor
 

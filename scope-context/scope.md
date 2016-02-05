@@ -20,6 +20,7 @@ găsească valoarea unei variabile, se uită la primul obiect din lanț.
 Operațiunea se mai numește „walking up the scope chain".
 
 ## Mantre
+-   Funcțiile generează SCOPE-ul.
 -   JavaScript are un **scope lexical** general la faza de compilare.
 -   Când funcțiile sunt executate SCOPE-ul folosit este cel de la
     MOMENTUL DEFINIRII (faza de compilare), nu cel de la momentul
@@ -30,16 +31,14 @@ Operațiunea se mai numește „walking up the scope chain".
     funcțiilor interne. Variabilele locale sunt reatribuite cu valori de
     fiecare dată când o funcție este invocată. Nu uita, parametrii sunt
     la rândul lor variabile locale.
--   Funcțiile generează SCOPE-ul.
 -   Când este definită o funcție, aceasta stochează scope chain-ul care
     era în efect în acel moment.
--   Obiectul creat de invocarea unei funcții este adăugat scope
-    chain-ului existent. Scope chain-ul astfel rezultat reprezintă scope
-    chain-ul de la acel moment. Obiectul rezultat de fapt are rolul de a
-    face legăturile tuturor variabilelor funcției în scope chain.
+-   Obiectul creat de invocarea unei funcții este adăugat scope chain-ului existent.
+    - Scope chain-ul astfel rezultat reprezintă scope chain-ul de la acel moment.
+    - Obiectul rezultat de fapt are rolul de a face legăturile tuturor variabilelor funcției în scope chain.
 -   Când funcția returnează, obiectul care face binding-ul variabilelor
     este scos din **scope chain**.
--   Dacă nu existau funcții interne, nu mai există nicio legătură spre
+-   Dacă nu există funcții interne, nu mai există nicio legătură spre
     obiectul care face binding-ul variabilelor și se face
     GARBAGE COLLECTING.
 -   Când sunt definite funcții interne, acestea la rândul lor generează
@@ -60,3 +59,7 @@ Iată cum arată scope-ul ca reprezentare și ca arie în care are efect o
 vaiabilă sau o funcție
 
 ![Scope in JavaScript](scopes.svg "Scope în Javascript")
+
+## Aprofundare prin efect
+- ### [Clojures](clojures/clojures.md "Subiectul clojures")
+  - #### [Clojures in loop](clojures/clojures.md "Caz explicat de clojures")
