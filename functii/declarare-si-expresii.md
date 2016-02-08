@@ -14,6 +14,7 @@ Ex.: var anonima = function(){};
 - O declarație de funcție începe cu `function` ca și cuvânt cheie. Orice altceva este o expresie de funcție.
 - Invocarea unei funcții generează un nou CONTEXT de EXECUȚIE (TOT ce se întâmplă atunci când funcția se execută).
 - Toate variabilele și funcțiile definite în funcție sunt considerate parte a contextului de execuție.
+- fiecare argument al unei funcții este de fapt o variabilă locală.
 - Variabilele și funcțiile care fac parte din contextul de execuție, sunt memorate în EXECUTION CONTEXT OBJECT, care este un obiect al motorului JavaScript.
 - Când este definită o funcție, aceasta stochează scope chain-ul care era în efect în acel moment.
 - Când o funcție este invocată creează un obiect în care stochează propriile variabile și adaugă acel obiect la scope chain.

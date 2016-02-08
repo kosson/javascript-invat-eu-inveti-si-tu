@@ -7,6 +7,13 @@ Clojure este atunci când o FUNCȚIE ține minte scope-ul lexical chiar și atun
 
 Un clojure este un obiect special care combină două lucruri: o funcție și mediul în care aceasta a fost declarată. Mediul, adică scope-ul lexical constă din toate variabilele locale care erau în-scope la momentul în care s-a creat clojure-ul.
 
+## Mantre
+- JavaScript are un **scope lexical** generat la faza de compilare.
+- Clojure-uri generează doar funcțiile.
+- Un clojure permite accesarea variabilelor definite în funcția container.
+- de fiecare dată când funcția externă este apelată, funcția internă este definită din nou. Codul funcției interne va fi identic, dar scope chain-ul asociat va fi diferit.
+- un clojure nu poate accesa `this` al funcției container. În acest scop se folosește salvarea lui this într-o variabilă ```var self = this;``
+
 ## Analiză
 
 Un clojure este creat atunci când salvezi o funcție care are acces la contextul de execuție curent și o salvezi într-o variabilă în afara contextului de execuție curent.
@@ -27,13 +34,6 @@ makeAdder() este cazul prezentat de Mozilla. Este perfect pentru a înțelege fe
 - add5(2) atribuie variabilei interne valoarea 2 și returnează suma dintre variabila locală și variabila peste care s-a făcut clojure din funcția container.
 
 Spune documentația Mozilla că „în esență, makeAdder este o fabrică de funcții”.
-
-
-## Mantre
-- JavaScript are un **scope lexical** generat la faza de compilare.
-- Clojures generează doar funcțiile.
-- de fiecare dată când funcția externă este apelată, funcția internă este definită din nou. Codul funcției interne va fi identic, dar scope chain-ul asociat va fi diferit.
-- un clojure nu poate accesa `this` al funcției container. În acest scop se folosește salvarea lui this într-o variabilă ```var self = this;`` `
 
 Exemplu de referințe către obiecte care nu este un clojure (prezentat de Kyle Simpson):
 
