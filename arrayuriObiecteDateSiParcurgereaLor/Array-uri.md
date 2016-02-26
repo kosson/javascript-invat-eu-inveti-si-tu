@@ -33,3 +33,13 @@ var tablou = [];
 |                  | unshift()            |           | findIndex()   | filter()      | includes()   |
 |                  |                      |           | keys()        | some()        |              |
 |                  |                      |           |               | every()       |              |
+
+![](operatiuniArrayuri.svg)
+
+#### Metoda slice
+
+![](slicingArrayuri.svg)
+
+#### Metoda splice
+
+![](splicingArrayuri.svg)

@@ -1,3 +1,6 @@
+## Mantre
+- variabilele și funcțiile beneficiază de un proces al motorului JavaScript numit ***identifier lookup***. Este necesar pentru a discrimina între variabilele din local scope dintr-o funcție și una din global scope.  
+
 ## Evaluarea unei expresii care conține valori delimitate prin virgulă
 
 ```js

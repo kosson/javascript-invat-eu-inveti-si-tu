@@ -3,7 +3,10 @@
 
 Posibilă traducere în limba română: „perimetru” sau „arie de efect”
 
+## Definiții
 Este **locul** unde te uiți după lucruri.
+Este **perimetrul** din cuprinsul codului în care au efect funcțiile și sunt disponibile variabilele.
+Global scope este locul de unde pot fi accesate funcții și variabile în întreg codul.
 
 Javascript generează un scope lexical. Nu este unul dinamic.
 
