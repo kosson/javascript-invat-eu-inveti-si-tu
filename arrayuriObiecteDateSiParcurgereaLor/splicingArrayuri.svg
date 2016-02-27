@@ -282,8 +282,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.1982274"
-     inkscape:cx="407.04959"
-     inkscape:cy="340.6994"
+     inkscape:cx="208.84013"
+     inkscape:cy="339.03027"
      inkscape:document-units="px"
      inkscape:current-layer="layer10"
      showgrid="false"
@@ -2083,7 +2083,7 @@
          x="351.02646"
          y="569.35608"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.60596085px;font-family:'Ubuntu Mono';-inkscape-font-specification:'Ubuntu Mono';text-align:center;text-anchor:middle;fill:#ff0900;fill-opacity:1"
-         id="tspan125340">var insertion = widow.splice(widow.indexOf('b'), 0,'b');</tspan></text>
+         id="tspan125340">var insertion = widow.splice(widow.indexOf('c'), 0,'b');</tspan></text>
     <path
        style="display:inline;opacity:1;fill:none;fill-opacity:1;stroke:#226418;stroke-width:4.74456024;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        d="m 210.29423,264.35099 -23.7228,0 0,47.44561 23.7228,0"
