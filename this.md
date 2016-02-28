@@ -208,3 +208,6 @@ console.log(start.x); //
 2. A fost apelată prin call() sau apply()? Dacă da, folosește acel obiect pentru context.
 3. A fost apelată funcția într-un obiect care conține referința sau o deține (context).
 4. Global object (cu excepția rulării în `use strict`)
+
+## Menționarea resurselor folosite pentru documentare:
+[MDN>Web technology for developers>JavaScript>JavaScript reference>Expressions and operators>this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
