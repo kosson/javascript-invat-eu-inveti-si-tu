@@ -236,6 +236,8 @@ Funcția care va fi executată poate avea trei argumente:
 
 Opțional se mai poate pasa o valoare care să reprezinte ``this`` la executarea callback-ului.
 
+***Este implementarea naturală a ES5 pentru utilitățile _.each și $.each.***
+
 Metoda nu poate fi înlănțuită (chainable).
 Spre deosebire de map() și reduce() returnează întotdeauna ``undefined``.
 
@@ -244,8 +246,8 @@ function logArrayElements(element, index, array) {
   console.log('a[' + index + '] = ' + element);
 }
 
-// Notice that index 2 is skipped since there is no item at
-// that position in the array.
+// A se nota faptul că index 2 este sărit pentru că
+// nu există element la acea poziție în array.
 [2, 5, , 9].forEach(logArrayElements);
 // logs:
 // a[0] = 2
@@ -342,6 +344,99 @@ Opțional se mai poate pasa o valoare care să reprezinte ``this`` la executarea
 
 Callback-ul este invocat doar pentru indexurile care au valori chiar dacă sunt `undefined`.
 
+Un exemplu super privind ce se poate obține folosind metoda este construirea unui mic utilitar care să transforme valorile unui obiect într-un șir url-encoded.
+
+```js
+var obiect = {paraunu: "unu", paradoi: "doi trei"};
+
+var stringCodat = Object.keys(obiect)
+                        .map(function(key){
+                          return key + "=" + window.encodeURIComponent(obiect[key]);
+                        })
+                        .join("&");
+
+console.log(stringCodat); // paraunu=unu&paradoi=doi%20trei
+```
+
+#### Array.prototype.filter()
+
+Returnează un array care conține valori ce au trecut de verificările unei funcții callback.
+
+```js
+var data = [ "bar", "foo", "", 0 ],
+    filtered = data.filter(function( item ){
+      return !!item;
+    });
+console.log( filtered ); // ["bar", "foo"]
+```
+
+#### Array.prototype.reduce()
+
+Este o metodă care returnează produsul valorilor dintr-un array. Metodei i se dă un array, o funcție callback și o valoare opțională pentru a fi folosită la prima invocare.
+
+Funcția callback primește patru argumente și se va aplica pe fiecare element al array-ului:
+- previousValue: este valoarea returnată de invocarea anterioară a callback-ului. Poate fi valoarea de la care se pornește dacă o astfel de valoare este dată (initialValue).
+- currentValue: este elementul curent din array care este procesat.
+- currentIndex: indexul elementului care tocmai este procesat.
+
+Pe lângă callback mai poți da o valoare opțională, iar aceasta va fi folosită ca prim argment la prima invocare a callback-ului.
+Dacă nu este dată o valoare inițială previousValue va fi prima valoare din array iar currentValue va fi cea de-a doua din array. Numai dacă este dată initialValue, aceasta devine previousValue.
+
+Dacă array-ul este gol și nu este dată o valoare de pornire initialValue, atunci va fi emisă o eroare TypeError.
+Dacă array-ul are o singură valoare indiferent de poziția acesteia și nu este oferită o valoare initialValue sau dacă initialValue este dată, dar array-ul este gol, atunci valoarea unică va fi returnată fără a fi invocat callback-ul.
+
+```js
+[0, 1, 2, 3, 4].reduce(function(previousValue, currentValue, currentIndex, array) {
+  return previousValue + currentValue;
+});
+```
+
+|                  | previousValue | currentValue  | previousIndex | array           | valoarea returnată  |
+| :--------------- | :------------ | :------------ | :------------ | :-------------- | :------------------ |
+| prima invocare   | 0             | 1             | 1             | [0, 1, 2, 3, 4] | 1                   |
+| a doua invocare  | 1             | 2             | 2             | [0, 1, 2, 3, 4] | 3                   |
+| a treia invocare | 3             | 3             | 3             | [0, 1, 2, 3, 4] | 6                   |
+| a patra invocare | 6             | 4             | 4             | [0, 1, 2, 3, 4] | 10                  |
+
+Rezultatul lui reduce este la final 10.
+
+Varianta ES6 a aceleiași funcții reduce arată astfel:
+
+```js
+[0, 1, 2, 3, 4].reduce( (prev, curr) => prev + curr );
+```
+
+Dacă s-ar oferi o valoare inițială ca al doilea argument:
+
+```js
+[0, 1, 2, 3, 4].reduce(function(previousValue, currentValue, currentIndex, array) {
+  return previousValue + currentValue;
+}, 10);
+```
+|                  | previousValue | currentValue  | previousIndex | array           | valoarea returnată  |
+| :--------------- | :------------ | :------------ | :------------ | :-------------- | :------------------ |
+| prima invocare   | 10            | 0             | 0             | [0, 1, 2, 3, 4] | 10                  |
+| a doua invocare  | 10            | 1             | 1             | [0, 1, 2, 3, 4] | 11                  |
+| a treia invocare | 11            | 2             | 2             | [0, 1, 2, 3, 4] | 13                  |
+| a patra invocare | 13            | 3             | 3             | [0, 1, 2, 3, 4] | 16                  |
+| a patra invocare | 16            | 4             | 4             | [0, 1, 2, 3, 4] | 20                  |
+
+Însumarea valorilor dintr-un array:
+
+```js
+var total = [0, 1, 2, 3].reduce(function(a, b) {
+  return a + b;
+}); // total 6
+```
+
+Aplatizarea unui array de array-uri:
+
+```js
+var flattened = [[0, 1], [2, 3], [4, 5]].reduce(function(a, b) {
+  return a.concat(b);
+}, []);
+// flattened is [0, 1, 2, 3, 4, 5]
+```
 
 ## Menționarea resurselor folosite pentru documentare:
 [MDN>Web technology for developers>JavaScript>JavaScript reference>Standard built-in objects>Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array?redirectlocale=en-US&redirectslug=JavaScript%2FReference%2FGlobal_Objects%2FArray)

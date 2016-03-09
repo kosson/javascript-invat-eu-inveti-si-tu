@@ -1,6 +1,6 @@
 # FUNCȚII
 ## Mantre
-- O funcție este creată de o expresie care începe cu cuvânt rezervat limbajului: `function`.
+- O funcție este declarată de o expresie care începe cu cuvânt rezervat limbajului: `function`.
 - Când funcțiile sunt executate SCOPE-ul folosit este cel de la MOMENTUL DEFINIRII, nu cel de la momentul invocării (asta înseamnă LEXICAL SCOPE, de fapt).
 - Funcțiile sunt „IDENTIFICATORI" așa cum sunt și variabilele.
 - Funcțiile returnează o valoare prestabilită: undefined
@@ -14,7 +14,7 @@
 - O funcție apelată cu ```new``` în fața sa este un constructor.
 - Funcțiile generează SCOPE-ul.
 - Unei funcții care este o metodă îi este pasat însăși obiectul în care a fost invocată.
-- Dacă definești o funcție în interiorul altei funcții, atunci funcția internă trebuie să fie recreată de fiecare dată când funcția externă este executată (acest lucru se întâmplă petru că funcțiile, de fapt, sunt obiecte). Acest comportament trebuie evitat. Definește funcția în afară și referențiaz-o sau execut-o în contect local prin call/apply/bind 
+- Dacă definești o funcție în interiorul altei funcții, atunci funcția internă trebuie să fie recreată de fiecare dată când funcția externă este executată (acest lucru se întâmplă petru că funcțiile, de fapt, sunt obiecte). Acest comportament trebuie evitat. Definește funcția în afară și referențiaz-o sau execut-o în contect local prin call/apply/bind
 
 --------------------------------------------------------------------------------
 
@@ -32,3 +32,24 @@ Invocarea funcțiilor se poate face în patru cazuri:
 2. ca metode
 3. ca și constructori cu `new`
 4. indirect prin apelarea într-un context de execuție diferit folosind call() și apply()
+
+## Invocare condițională
+
+Poți invoca rapid prin evaluarea Truthy sau Falsy a unei expresii
+
+```js
+var testVal = 200;
+testVal >= 150 && console.log("Acest mesaj va apărea dacă evaluarea lui testVal este truthy");            // Acest mesaj va apărea dacă evaluarea lui testVal este truthy
+testVal >= 150 || console.log("Acest mesaj va apărea doar dacă evaluarea din left-hand-side este true");  // true
+```
+
+În caz de valoare truthy, pentru && se va afișa mesajul, dacă false, va returna false expresia.
+În caz de valoare truthy, pentru || se va returna `true`. Pentru false, se va afișa mesajul.
+
+Un alt caz este apelarea unui callback:
+
+```js
+function tester(callback){
+  callback && callback();
+};
+```

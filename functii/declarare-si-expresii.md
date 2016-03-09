@@ -22,8 +22,6 @@ Ex.: var anonima = function(){};
 
 --------------------------------------------------------------------------------
 
-## Crearea funcțiilor
-
 ### A. DECLARAREA unei funcții cu nume (named function declaration)
 
 #### Q&A
