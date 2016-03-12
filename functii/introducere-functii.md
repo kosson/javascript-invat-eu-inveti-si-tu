@@ -5,8 +5,8 @@
 - Funcțiile sunt „IDENTIFICATORI" așa cum sunt și variabilele.
 - Funcțiile returnează o valoare prestabilită: undefined
 - Funcțiile sunt ele însele valori.
-- Funcțiile sunt obiecte. Asta înseamnă că au conectări [[Prototype]] - prototypal linkage.
-- Funcțiile au o referință către contextul de execuție curent în timp ce se execută prin cuvântul cheie rezervat „this"
+- Funcțiile sunt obiecte. Asta înseamnă că au conectări [[Prototype]] - lanț prototipal.
+- Funcțiile au o referință către contextul de execuție curent în timp ce se execută prin cuvântul cheie rezervat „this".
 - În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype (numeFunctie.prototype) care se leagă automat la Object.prototype.
 - Funcțiile sunt legate de obiectul prototip prin metoda .constructor
 - Funcțiile nu sunt cele care generează obiectul prototype.
@@ -14,7 +14,8 @@
 - O funcție apelată cu ```new``` în fața sa este un constructor.
 - Funcțiile generează SCOPE-ul.
 - Unei funcții care este o metodă îi este pasat însăși obiectul în care a fost invocată.
-- Dacă definești o funcție în interiorul altei funcții, atunci funcția internă trebuie să fie recreată de fiecare dată când funcția externă este executată (acest lucru se întâmplă petru că funcțiile, de fapt, sunt obiecte). Acest comportament trebuie evitat. Definește funcția în afară și referențiaz-o sau execut-o în contect local prin call/apply/bind
+- Dacă definești o funcție în interiorul altei funcții, atunci funcția internă trebuie să fie recreată de fiecare dată când funcția externă este executată (acest lucru se întâmplă pentru că funcțiile, de fapt, sunt obiecte). Acest comportament trebuie evitat. Definește funcția în afară și referențiaz-o sau execut-o în context local prin call/apply/bind
+- Orice funcție publică poate fi invocată cu `call()` sau 'apply()'.
 
 --------------------------------------------------------------------------------
 

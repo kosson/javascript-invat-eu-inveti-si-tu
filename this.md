@@ -3,6 +3,7 @@
 
 ## Acumulări rapide
 - **this** este un cuvânt cheie.
+- this este o referință către obiectul care execută secvența de cod. În browser este obiectul window
 - **this** este o referință către contextul de execuție curent în timp ce funcția se execută.
 - `this` este un binding pentru fiecare invocare a unei funcții care se bazează pe de-antregul pe call-site
 

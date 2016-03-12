@@ -1,6 +1,9 @@
-# Delegarea prototipală
+# Delegarea comportamentală - ex moștenire prototipală
 
-JavaScript un mecanism clasic de moștenire așa cum este așteptat în cazul tipic al moștenirii unei clase copil a caracteristicilor clasei părinte, în fapt, o copiere a acestor caracteristici, după care se nu mai există nicio relație la instanțierea într-un obiect, nu există în JavaScript. De fapt, se poate vorbi de o „delegare comportamentală” și nu de o moștenire în sensul clasic. Obiectele stabilesc legături prototipale prin care se pot face delegări pe lanțul prototipal.
+Această modificare în înțelegerea relațiilor care se stabilesc între obiecte în JavaScript vine de la Kyle Simpson.
+
+JavaScript nu are un mecanism clasic de moștenire așa cum este așteptat în cazul tipic al moștenirii unei clase copil a caracteristicilor clasei părinte. O copiere a caracteristicilor, după care nu mai există nicio relație la instanțierea într-un obiect, nu există în JavaScript. Mereu va exista o legătură în Javascript între obiecte.
+De fapt, se poate vorbi de o „delegare comportamentală” și nu de o moștenire în sensul clasic. Obiectele stabilesc legături prototipale prin care se pot face delegări pe lanțul prototipal.
 
 ## Mantre
 

@@ -8,26 +8,29 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
 
 ---
 ## Mantre
-- Mai întâi de orice este obiectul window.
-- Obiectul window are o metodă numită Object [ function Object() ].
+
+- JavaScript nu are clase!
+- În clientul care rulează codul mai întâi de orice există obiectul window.
+- Obiectul window are o metodă numită Object [ function Object() ]. Motorul Javascript construiește automat metoda Obiect în obiectul window (window.Object returnează function Object()).
+- Toate obiectele în JavaScript descind din Object, își au originea în Object. Toate obiectele moștenesc metode și proprietăți din Object.prototype. Acestea pot fi suprascrise.
 - Object.prototype este un obiect în care poți adăuga propriile proprietăți și metode.
-- Nu există clase!
-- Motorul Javascript construiește automat o metodă Obiect în obiectul window. Această metodă are un obiect foarte important care se numește prototype.
-- În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype (numeFunctie.prototype).
+- Modificările aduce obiectului Object.prototype se propagă către toate obiectele. Singura excepție este atunci când proprietățile și metodele supuse modificărilor nu sunt ele la rândul lor modificate mai departe în lanțul prototipal.
+- În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype (numeFunctie.prototype). Acest obiect (prototype), este gol și este creat de constructorul lui Object()
 - Funcțiile sunt legate de obiectul prototip prin metoda .constructor.
-- ***Funcțiile nu sunt cele care generează obiectul prototype***.
 - Fiecare funcție are un obiect prototip diferit.
-- Un obiect poate fi creat cu ```new Object()```:
+- Obiectele pot invoca orice funcție publică indiferent de lanțul prototipal.
+- Un obiect poate fi creat cu `new Object()`:
   1. acestă modalitate **nu va crea și constructor**.
   2. Accesarea numeObiect.__proto__.constructor răspunde cu Obiect() la care s-a ajuns prin delegare.
-- JavaScript are și obiecte deja în limbaj precum String(), Array(), Math(), Date() (```var test = new Date()```).
+- JavaScript are și obiecte globale existente deja în limbaj precum String(), Array(), Math(), Date() (```var test = new Date()```).
 - O funcție apelată cu ```new``` în fața sa este un constructor:
-  1. Punct contructor (.constructor) este o proprietate.
+  1. `contructor` (numeObiect.constructor) este o proprietate.
   2. apelarea unei funcții cu ```new``` în față este un constructor.
   3. metoda .constructor realizează legătura prototipală cu obiectul
   4. Funcție.prototype.constructor răspunde cu Funcție().
-- Obiectele pot moșteni alte proprietăți direct din alte obiecte
-- [[Prototype]], adică proprietatea .prototype este o legătură care se stabilește de la un obiect la altul.
+- Obiectele pot moșteni alte proprietăți direct din alte obiecte.
+- Când introduci o proprietate nouă într-un obiect care generează prototipul pentru alte obiecte, obiectele legate prin lanțul prototipal, vor moșteni noile proprietăți.
+- [[Prototype]], adică proprietatea `prototype` este o legătură internă, care se stabilește de la un obiect la altul. Pentru aflarea prototipului se apelează la __proto__ (dunder-dunder proto) sau sse va folosi Object.getPrototypeOf(obiect).
 - Legătura prototipală se obține legătura prin Object.create() și are două efecte:
   1. **creează un obiect**,
   2. **stabilește legătura prototipală**.
@@ -36,10 +39,19 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
 - Mecanismul pe care-l realizează .prototype este unul de delegare a cererii pentru referința unei proprietăți sau metode către un oiect mai sus pe lanțul prototipal către un alt obiect.
 - Obiecte cu un prototip și proprietăți prestabilite, se pot contrui cu Object.create(UnObiect, {exemplu: 'proprietate'}):
   1. se realizează legătura prototipală la obiectul UnObiect.
+- Obiectele create cu `new Fnc()` și `Object.create(...)` nu li se atașează un `.constructor`. `.constructor` va trimite la funcția la care a fost atașat prototype la momentul declarării.
 
 ---
 
-## Crearea obiectelor prin funcție constructor
+## Inițializarea obiectelor
+
+1. new Object()
+2. Object.create()
+3. {} prin notație literală
+
+### Crearea obiectelor prin funcție constructor
+
+Mai este numită de o parte a programatorilor „moștenire clasică”. De fapt, este vorba tot despre moștenire prototipală, dat care are un constructor.
 
 Acesta este modelul cel mai des întâlnit și acceptat ca practică istorică:
 1. Creezi o funcție constructor (este o practică acceptată ca funcțiile constructor să aibă numele începând cu literă mare).
@@ -62,7 +74,7 @@ unObiect.glas('o vorbă să-ți mai spun');  // unObiect.__proto__.constructor r
 
 ```
 
-Atenție! Aici există ceva foarte important de lămurit. Proprietatea `prototype` aparține funcției constructor. În afară de această legătură vizibilă, care poate fi „întrebată”, mai există o legătură internă referită de standard ca [[Prototype]].
+Atenție! Aici există ceva foarte important de lămurit. Proprietatea `prototype` aparține funcției constructor. Această legătură vizibilă, care poate fi „întrebată”, expune o legătură internă referită de standard ca [[Prototype]].
 
 Cum testezi, cum întrebi care este prototipul unui obiect? Există două metode echivalente ca rezultat returnat (obiectul prototype):
 1. Object.getPrototypeOf(obiectulTestat),
@@ -92,7 +104,9 @@ a1.__proto__ === Foo.prototype;
 a1.__proto__ === a2.__proto_;
 ```
 
-## Crearea unui obiect printr-o declarație literală
+!["Moștenire clasică cu new"](Prototype.svg)
+
+### Crearea unui obiect printr-o declarație literală
 
 Un obiect poate fi creat foarte simplu astfel:
 
@@ -107,7 +121,7 @@ var obiectNou = {};
 obiectNou.__proto__.constructor // returnează: function Object()
 ```
 
-## Crearea obiectelor cu Object.create()
+### Crearea obiectelor cu Object.create()
 
 Este o metodă a lui Object introdusă de ES5.
 Permite atribuirea directă a unui prototip unui obiect eliberând prototipul de legătura cu, constructorul.
@@ -126,8 +140,23 @@ Construirea unui prototip care să stea la baza unui nou obiect construit.
 
 ```js
 var prototip = {
-  bar: "bar",
-  foo: "foo"
-},
-instanta = Object.create( prototip );
+  prop1: "salut",
+  prop2: function(){
+    console.log('Te ' + this.prop1);
+  }
+};                                          // prototip.__proto__.constructor răspunde: function Object()
+
+var instanta = Object.create( prototip );   // instanta.__proto__.constructor răspunde: function Object()
+
+instanta.prop2();
+
+instanta.salutNou = function(){
+  console.log('Te ' + this.prop1 + ' iar');
+};
 ```
+
+## Accesarea proprietăților unui obiect
+
+Se face în două feluri:
+1. obiect.proprietate
+2. obiect["proprietate"]
