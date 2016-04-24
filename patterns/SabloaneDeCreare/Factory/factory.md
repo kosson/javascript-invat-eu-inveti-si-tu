@@ -1,5 +1,7 @@
 # Factory
 
+Este un șablon folosit pentru a simplifica creare obiectelor.
+Folosit și la crearea de obiecte în baza unor necesități.
 Este o funcție care creează și returnează un obiect.
 
 ```js

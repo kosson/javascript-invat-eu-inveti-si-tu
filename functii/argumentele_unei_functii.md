@@ -1,6 +1,7 @@
 # Argumentele funcțiilor
 
-Pe scurt, este ceea ce pasezi funcțiilor.
+Pe scurt, este ceea ce pasezi funcțiilor. Numărul de argumente pasate unei funcții se numește „arity”.
+Fiecare parametru trebuie pasat funcției în ordinea corectă.
 
 ## Setarea unei valori implicite pentru un argument
 

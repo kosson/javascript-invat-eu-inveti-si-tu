@@ -36,22 +36,23 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
   2. **stabilește legătura prototipală**.
 - Legătura prototipală se obține și prin efectul al doilea al folosirii cuvântului cheie ```new```.
 - Legătura prototipală creează un lanț de delegare pentru cazurile în care nu găsești o proprietate sau o metodă într-un anumit context de execuție.
-- Mecanismul pe care-l realizează .prototype este unul de delegare a cererii pentru referința unei proprietăți sau metode către un oiect mai sus pe lanțul prototipal către un alt obiect.
+- Mecanismul pe care-l realizează .prototype este unul de delegare a cererii pentru referința unei proprietăți sau metode către un obiect mai sus pe lanțul prototipal către un alt obiect.
 - Obiecte cu un prototip și proprietăți prestabilite, se pot contrui cu Object.create(UnObiect, {exemplu: 'proprietate'}):
   1. se realizează legătura prototipală la obiectul UnObiect.
 - Obiectele create cu `new Fnc()` și `Object.create(...)` nu li se atașează un `.constructor`. `.constructor` va trimite la funcția la care a fost atașat prototype la momentul declarării.
 
 ---
 
-## Inițializarea obiectelor
+## Crearea obiectelor
 
-1. new Object()
-2. Object.create()
-3. {} prin notație literală
+1. var newObj = new Object();
+2. var newObj = Object.create(null);
+3. var newObj = Object.create(Object.prototype);
+4. var newObj = {};
 
-### Crearea obiectelor prin funcție constructor
+### Crearea obiectelor printr-o funcție cu rol de constructor și instanțiezi cu `new`
 
-Mai este numită de o parte a programatorilor „moștenire clasică”. De fapt, este vorba tot despre moștenire prototipală, dat care are un constructor.
+Mai este numită de o parte a programatorilor „moștenire clasică”. De fapt, este vorba tot despre moștenire prototipală, dar care face uz de un constructor (vezi și [Șablonul Constructor](../patterns/SabloaneDeCreare/Module/ModulePattern.md) ).
 
 Acesta este modelul cel mai des întâlnit și acceptat ca practică istorică:
 1. Creezi o funcție constructor (este o practică acceptată ca funcțiile constructor să aibă numele începând cu literă mare).
@@ -108,7 +109,7 @@ a1.__proto__ === a2.__proto_;
 
 ### Crearea unui obiect printr-o declarație literală
 
-Un obiect poate fi creat foarte simplu astfel:
+Un obiect poate fi creat foarte simplu folosind acoladele:
 
 ```js
 var obiectNou = {};
@@ -154,9 +155,3 @@ instanta.salutNou = function(){
   console.log('Te ' + this.prop1 + ' iar');
 };
 ```
-
-## Accesarea proprietăților unui obiect
-
-Se face în două feluri:
-1. obiect.proprietate
-2. obiect["proprietate"]

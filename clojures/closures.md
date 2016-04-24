@@ -1,11 +1,16 @@
 # Clojures
 ---
 
+## Dependințe cognitive
+- funcții
+- scope
+
 ## Definiții
 
 Clojure este atunci când o FUNCȚIE ține minte scope-ul lexical chiar și atunci când este executată în afara acelui scope lexical (Kyle Simpson).
 
-Un clojure este un obiect special care combină două lucruri: o funcție și mediul în care aceasta a fost declarată. Mediul, adică scope-ul lexical constă din toate variabilele locale care erau în-scope la momentul în care s-a creat clojure-ul.
+Un clojure este un obiect special care combină două lucruri: o funcție și mediul în care aceasta a fost declarată.
+Mediul, adică scope-ul lexical constă din toate variabilele locale care erau în-scope la momentul în care s-a creat clojure-ul.
 
 ## Mantre
 - JavaScript are un **scope lexical** generat la faza de compilare.
@@ -16,7 +21,32 @@ Un clojure este un obiect special care combină două lucruri: o funcție și me
 
 ## Analiză
 
-Un clojure este creat atunci când salvezi o funcție care are acces la contextul de execuție curent și o salvezi într-o variabilă în afara contextului de execuție curent.
+Clojure-ul este folosit atunci când vrei să dai parametri unei funcții înainte ca acea funcție să fie executată.
+
+Cazul 1 - funcție internă care folosește variabilele din scope
+
+- ai o funcție iar în interior există altă funcție
+- funcția internă are acces la tot ce-i în scope
+
+```js
+function localizare(loc){
+  var localitate = 'Mihailești';
+
+  function undeSunt(){
+    console.log('Te afli la ' + localitate + ', ' + loc);
+  };
+
+  undeSunt();
+};
+
+localizare('La bar');
+```
+
+Cazul 2 -
+
+Un clojure este creat atunci când salvezi o funcție care are acces la contextul de execuție curent într-o variabilă în afara contextului de execuție curent.
+
+
 
 ```js
 function makeAdder(x) {
@@ -28,6 +58,7 @@ function makeAdder(x) {
 var add5 = makeAdder(5);
 console.log(add5(2));  // 7
 ```
+
 makeAdder() este cazul prezentat de Mozilla. Este perfect pentru a înțelege felul în care clojure-ul se formează în primă fază returnându-se funcția internă iar aceasta la rândul său returnând variabilele din mediu.
 - makeAdder() generează scope-ul iar parametrul x devine variabilă locală atribuindu-se valoarea 5 la momentul invocării;
 - makeAdder returnează o funcție iar variabila add5 devine referință către funcția internă. Astfel, add5 este o funcție a cărui parametru y devine variabilă locală în scope-ul creat de ea.

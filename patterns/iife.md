@@ -1,5 +1,7 @@
 # IIFE - Immediately Invoked Function Expression
 
+IIFE permite invocarea imediată a unei funcții și permite crearea de spații de cod executabile separat de global scope.
+
 ## Model
 
 ```js
@@ -11,10 +13,13 @@ var x = "ceva";
 })();
 
 console.log(x);
+// => 'ceva ascuns'
+// => 'ceva'
 ```
 
 Când folosești?
-- atunci când dorești să ascuzi funcționalități fără a lăsa nicio urmă în GLOBAL sau LOCAL SCOPE
+- atunci când dorești să ascunzi funcționalități fără a lăsa nicio urmă în GLOBAL sau LOCAL SCOPE
+- atunci când construiești Șabloane Modul.
 
 ### Ce este?
 Este o **_funcție exprimată_** (function expression) Este o funcție exprimată pentru că o îmbraci în paranteze
@@ -47,7 +52,7 @@ var iife = (function(x){
 console.log(x);             // ceva
 ```
 
-Foarte interesant este cazul în care în IIFE ai marea partea a funcțiilor care trebuie să rămână private, dar ai nevoie să expui câteva în global. Kyle Simpson trimite obiectul window în IIFE și îl denumește în parametru `global`. Pentru a expune ceva din IIFE folosește mai apoi `global.ceva`.
+Foarte interesant este cazul în care în IIFE ai marea partea a funcțiilor care trebuie să rămână private, dar ai nevoie să expui câteva în global (de fapt, Șablonul Modul - Module Pattern). Kyle Simpson trimite obiectul window în IIFE și îl denumește în parametru `global`. Pentru a expune ceva din IIFE folosește mai apoi `global.ceva`.
 
 ```js
 var y = "ceva din global";

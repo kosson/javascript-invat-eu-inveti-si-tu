@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="168.52699mm"
-   height="120.95238mm"
-   viewBox="0 0 597.14289 428.57144"
+   width="165.50316mm"
+   height="135.86983mm"
+   viewBox="0 0 586.42851 481.42856"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
@@ -19,7 +19,143 @@
   <title
      id="title22092">Scoping in JavaScript</title>
   <defs
-     id="defs4" />
+     id="defs4">
+    <marker
+       inkscape:stockid="DotM"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="DotM"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4253"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         style="fill:#ffcc00;fill-opacity:1;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(0.4,0,0,0.4,2.96,0.4)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="DotL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="DotL"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4250"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         style="fill:#333333;fill-opacity:1;fill-rule:evenodd;stroke:#ffec00;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(0.8,0,0,0.8,5.92,0.8)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="EmptyDiamondSend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="EmptyDiamondSend"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4319"
+         d="M 0,-7.0710768 -7.0710894,0 0,7.0710589 7.0710462,0 0,-7.0710768 Z"
+         style="fill:#333333;fill-opacity:1;fill-rule:evenodd;stroke:#ffec00;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(0.2,0,0,0.2,-1.2,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="DiamondSend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="DiamondSend"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4292"
+         d="M 0,-7.0710768 -7.0710894,0 0,7.0710589 7.0710462,0 0,-7.0710768 Z"
+         style="fill:#faf100;fill-opacity:1;fill-rule:evenodd;stroke:#ffec00;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(0.2,0,0,0.2,-1.2,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Send"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Send"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4222"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ff00ba;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="matrix(-0.3,0,0,-0.3,0.69,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mend"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4216"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ff00ba;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6,-0.6)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="TriangleInM"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleInM"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4325"
+         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
+         style="fill:#faf100;fill-opacity:1;fill-rule:evenodd;stroke:#ffec00;stroke-width:1pt;stroke-opacity:1"
+         transform="scale(-0.4,-0.4)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Mstart"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Mstart"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4213"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ff00ba;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(0.6,0.6)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="DotM"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="DotM-3"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4253-6"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(0.4,0,0,0.4,2.96,0.4)" />
+    </marker>
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -28,10 +164,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="200.94357"
-     inkscape:cy="156.25429"
+     inkscape:cx="338.44354"
+     inkscape:cy="210.53998"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer1"
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
@@ -46,23 +182,23 @@
      fit-margin-right="0"
      fit-margin-bottom="0">
     <sodipodi:guide
-       position="340,428.57146"
+       position="339.99996,430"
        orientation="0,1"
        id="guide21036"
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
     <sodipodi:guide
-       position="-4.6511231e-07,328.57146"
+       position="-3.1240359e-05,330"
        orientation="1,0"
        id="guide21038"
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
     <sodipodi:guide
-       position="173.57143,382.85717"
+       position="173.57139,384.28571"
        orientation="0,1"
        id="guide21894" />
     <sodipodi:guide
-       position="105.71429,190.00002"
+       position="105.71425,191.42856"
        orientation="1,0"
        id="guide21896" />
   </sodipodi:namedview>
@@ -124,28 +260,41 @@
      inkscape:label="Global scope"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-60,-152.3622)">
+     transform="translate(-60.000031,-100.93362)"
+     style="display:inline">
     <rect
        style="opacity:1;fill:#b3b3b3;fill-opacity:1;stroke:none;stroke-width:1.16220474;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect21059"
-       width="597.14288"
-       height="428.57144"
+       width="586.42859"
+       height="481.42859"
        x="60"
-       y="152.3622"
-       rx="3.14451"
-       ry="2.54392" />
+       y="100.93362"
+       rx="3.0880895"
+       ry="2.8576703" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="64.285713"
+       y="135.21933"
+       id="text4179"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4181"
+         x="64.285713"
+         y="135.21933"
+         style="font-size:27.50000191px;fill:#ffffff">GEC - Global Execution Context</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Scope pentru 1"
-     transform="translate(-60,-152.3622)">
+     transform="translate(-60.000031,-100.93362)">
     <rect
        style="opacity:1;fill:#241c1c;fill-opacity:1;stroke:none;stroke-width:1.16220474;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect21898"
-       width="596.42859"
+       width="334.28574"
        height="342.85715"
-       x="60.000004"
+       x="181.42859"
        y="198.07649"
        rx="0"
        ry="3.5995436e-07" />
@@ -154,28 +303,40 @@
      inkscape:label="Scope pentru faceva()"
      id="g21949"
      inkscape:groupmode="layer"
-     transform="translate(-60,-152.3622)">
+     transform="translate(-60.000031,-100.93362)">
     <rect
-       ry="3.5995436e-07"
+       ry="2.8271415e-07"
        rx="0"
-       y="198.07649"
-       x="134.28572"
-       height="342.85715"
-       width="497.85715"
+       y="271.64792"
+       x="195.00002"
+       height="269.28571"
+       width="397.14285"
        id="rect21951"
        style="opacity:1;fill:#ffcc00;fill-opacity:1;stroke:none;stroke-width:1.16220474;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       style="opacity:1;fill:#ffcc00;fill-opacity:1;stroke:#b3b3b3;stroke-width:5.2130003;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#DotM)"
+       d="m 562.14289,260.21933 0,37.85714"
+       id="path6869"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:#b3b3b3;stroke-width:5.2130003;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#DotM-3)"
+       d="m 166.07141,241.60183 37.85714,0"
+       id="path6869-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="g21955"
      inkscape:label="Scope pentru doi"
-     transform="translate(-60,-152.3622)">
+     transform="translate(-60.000031,-100.93362)">
     <rect
-       style="opacity:1;fill:#ccaaff;fill-opacity:1;stroke:none;stroke-width:1.16220474;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="opacity:1;fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:1.16220474;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect21957"
-       width="392.85715"
+       width="313.57141"
        height="191.42857"
-       x="145.71429"
+       x="225.00002"
        y="309.50507"
        rx="0"
        ry="2.009745e-07" />
@@ -184,22 +345,22 @@
      inkscape:label="Scope pentru trei"
      id="g21959"
      inkscape:groupmode="layer"
-     transform="translate(-60,-152.3622)">
+     transform="translate(-60.000031,-100.93362)">
     <rect
        ry="4.1994671e-08"
        rx="0"
        y="420.21936"
        x="238.57143"
        height="40"
-       width="367.14285"
+       width="347.85715"
        id="rect21961"
-       style="opacity:1;fill:#5d536c;fill-opacity:1;stroke:none;stroke-width:1.16220474;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+       style="opacity:1;fill:#333333;fill-opacity:1;stroke:none;stroke-width:1.16220474;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Code"
-     transform="translate(-60,-152.3622)">
+     transform="translate(-60.000031,-100.93362)">
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -264,108 +425,113 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#008000">}</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="74.285713"
-       y="574.50507"
-       id="text21963"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan21965"
-         x="74.285713"
-         y="574.50507"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'">Global</tspan></text>
-    <text
-       xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#e3d7f4;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="95.896164"
-       y="213.81079"
+       x="472.3248"
+       y="210.95364"
        id="text21963-5"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan21965-6"
-         x="95.896164"
-         y="213.81079"
+         x="472.3248"
+         y="210.95364"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#e3d7f4">scope</tspan><tspan
          sodipodi:role="line"
-         x="95.896164"
-         y="232.56079"
+         x="472.3248"
+         y="229.70364"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#e3d7f4"
          id="tspan21985">pentru</tspan><tspan
          sodipodi:role="line"
-         x="95.896164"
-         y="251.31079"
+         x="472.3248"
+         y="248.45364"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#e3d7f4"
          id="tspan21987">var unu</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#9955ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="588.74811"
-       y="213.39328"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="561.60529"
+       y="234.10757"
        id="text21963-5-5"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         id="tspan21965-6-1"
-         x="588.74811"
-         y="213.39328"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#9955ff">scope</tspan><tspan
+         x="561.60529"
+         y="234.10757"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.50000095px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#666666"
+         id="tspan22013">acces</tspan><tspan
          sodipodi:role="line"
-         x="588.74811"
-         y="232.14328"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#9955ff"
-         id="tspan21985-1">pentru</tspan><tspan
+         x="561.60529"
+         y="249.73257"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.50000095px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#666666"
+         id="tspan8755">la</tspan><tspan
          sodipodi:role="line"
-         x="588.74811"
-         y="250.89328"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#9955ff"
-         id="tspan21987-4">function</tspan><tspan
-         sodipodi:role="line"
-         x="588.74811"
-         y="269.64328"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#9955ff"
-         id="tspan22013">faceva()</tspan></text>
+         x="561.60529"
+         y="265.35757"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.50000095px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#666666"
+         id="tspan8757">GEC</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#6600ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="186.16315"
-       y="325.53293"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="500.44891"
+       y="321.24722"
        id="text21963-5-5-7"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan21965-6-1-0"
-         x="186.16315"
-         y="325.53293"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#6600ff">scope</tspan><tspan
+         x="500.44891"
+         y="321.24722"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#ffffff">scope</tspan><tspan
          sodipodi:role="line"
-         x="186.16315"
-         y="344.28293"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#6600ff"
+         x="500.44891"
+         y="339.99722"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#ffffff"
          id="tspan21985-1-8">pentru</tspan><tspan
          sodipodi:role="line"
-         x="186.16315"
-         y="363.03293"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#6600ff"
+         x="500.44891"
+         y="358.74722"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#ffffff"
          id="tspan22013-5">var doi</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#e3d7f4;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="573.60529"
+       x="553.60529"
        y="429.25043"
        id="text21963-5-55"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan21965-6-3"
-         x="573.60529"
+         x="553.60529"
          y="429.25043"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.25px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#e3d7f4">scope</tspan><tspan
          sodipodi:role="line"
-         x="573.60529"
+         x="553.60529"
          y="443.31293"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.25px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#e3d7f4"
          id="tspan21985-7">pentru</tspan><tspan
          sodipodi:role="line"
-         x="573.60529"
+         x="553.60529"
          y="457.37543"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.25px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#e3d7f4"
          id="tspan21987-9">var trei</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="162.87027"
+       y="229.00343"
+       id="text21963-5-5-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="162.87027"
+         y="229.00343"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.50000095px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#666666"
+         id="tspan22013-58">acces</tspan><tspan
+         sodipodi:role="line"
+         x="162.87027"
+         y="244.62843"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.50000095px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#666666"
+         id="tspan8755-1">la</tspan><tspan
+         sodipodi:role="line"
+         x="162.87027"
+         y="260.25345"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.50000095px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#666666"
+         id="tspan8757-8">GEC</tspan></text>
   </g>
 </svg>

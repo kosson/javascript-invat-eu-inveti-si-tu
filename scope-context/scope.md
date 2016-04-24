@@ -59,7 +59,7 @@ Operațiunea se mai numește „walking up the scope chain".
 **Răspuns**: La faza de compilare.
 
 Iată cum arată scope-ul ca reprezentare și ca arie în care are efect o
-vaiabilă sau o funcție
+valabilă sau o funcție
 
 ![Scope in JavaScript](scopes.svg "Scope în Javascript")
 
