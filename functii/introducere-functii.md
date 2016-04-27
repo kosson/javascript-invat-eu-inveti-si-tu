@@ -1,5 +1,7 @@
 # FUNCȚII
 
+Funcțiile sunt obiecte first-class. Pot fi pasate ca argumente alor funcții și pot fi returnate din funcții.
+
 ## Mantre
 - O funcție este declarată de o expresie care începe cu cuvânt rezervat limbajului: `function`.
 - Când funcțiile sunt executate SCOPE-ul folosit este cel de la MOMENTUL DEFINIRII, nu cel de la momentul invocării (asta înseamnă LEXICAL SCOPE, de fapt).
