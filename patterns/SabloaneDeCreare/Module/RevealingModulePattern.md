@@ -80,7 +80,7 @@ D. În „interior” (scope) se construiește un obiect cu referințe către fu
 E. În „interior” (scope) pot exista și alte funcționalități auxiliare care să fie de ajutor.
 F. Se construiește un obiect care „strânge” toate referințele către funcțiile din scope-ul funcției container.
 G. Obiectul este returnat.
-D. Variabila căreia îi este atribuit IFFE-ul, de fapt, menține o referință către obiectul returnat, care la rândul său este o colecție de referințe.
+H. Variabila căreia îi este atribuit IFFE-ul, de fapt, menține o referință către obiectul returnat, care la rândul său este o colecție de referințe.
 
 Astfel, pot fi ascunse toate detaliile de implementare și prin returnare (ca în cazul API-urilor), sunt expuse părțile care sunt necesare.
 

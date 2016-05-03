@@ -126,7 +126,7 @@ var suma = function suma() {
 ```
 
 Sunt folosite pentru:
-- performare de operațiuni asupra argumentelor,
+- a face operațiuni asupra argumentelor,
 - atașarea de event handlers pentru interacțiunea cu DOM-ul,
 - pasarea unei funcții callback la încheierea execuției funcției curente,
 - pentru a adăuga funcționalitate unei alte funcții. O funcție care adaugă funcționalitate unei alte funcții, se numește `function decorator`,

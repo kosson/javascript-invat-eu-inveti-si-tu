@@ -1,12 +1,14 @@
+# Module pattern
+
+Original a fost creată pentru a oferi încapsulare privată și publică.
+
 # Dependințe cognitive
+
+- scope
 - funcții, funcții anonime
 - this
 - Clojures
 - Immediately Invoked Function Expressions - IIFE
-
-# Module pattern
-
-Original a fost creată pentru a oferi încapsulare privată și publică.
 
 ## Mantre
 - nu necesită instanțiere cu `new`

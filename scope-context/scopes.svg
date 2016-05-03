@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="165.50316mm"
-   height="135.86983mm"
-   viewBox="0 0 586.42851 481.42856"
+   width="147.56187mm"
+   height="135.86984mm"
+   viewBox="0 0 522.85703 481.42861"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
@@ -155,6 +155,21 @@
          style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#b3b3b3;stroke-width:1pt;stroke-opacity:1"
          transform="matrix(0.4,0,0,0.4,2.96,0.4)" />
     </marker>
+    <marker
+       inkscape:stockid="DotM"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="DotM-36"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path4253-3"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         style="fill:#ffcc00;fill-opacity:1;fill-rule:evenodd;stroke:#241c1c;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(0.4,0,0,0.4,2.96,0.4)"
+         inkscape:connector-curvature="0" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -164,8 +179,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="338.44354"
-     inkscape:cy="210.53998"
+     inkscape:cx="227.01498"
+     inkscape:cy="209.11142"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -182,25 +197,37 @@
      fit-margin-right="0"
      fit-margin-bottom="0">
     <sodipodi:guide
-       position="339.99996,430"
+       position="267.14282,430.00004"
        orientation="0,1"
        id="guide21036"
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
     <sodipodi:guide
-       position="-3.1240359e-05,330"
+       position="-72.857164,330.00003"
        orientation="1,0"
        id="guide21038"
        inkscape:label=""
        inkscape:color="rgb(0,0,255)" />
     <sodipodi:guide
-       position="173.57139,384.28571"
+       position="100.71425,384.28575"
        orientation="0,1"
        id="guide21894" />
     <sodipodi:guide
-       position="105.71425,191.42856"
+       position="32.857116,191.42858"
        orientation="1,0"
        id="guide21896" />
+    <sodipodi:guide
+       position="373.57142,384.28575"
+       orientation="1,0"
+       id="guide4503" />
+    <sodipodi:guide
+       position="500.71426,340.71434"
+       orientation="1,0"
+       id="guide4505" />
+    <sodipodi:guide
+       position="373.57142,415.00007"
+       orientation="0,1"
+       id="guide4507" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -260,62 +287,59 @@
      inkscape:label="Global scope"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-60.000031,-100.93362)"
+     transform="translate(-132.85718,-100.93362)"
      style="display:inline">
     <rect
        style="opacity:1;fill:#b3b3b3;fill-opacity:1;stroke:none;stroke-width:1.16220474;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect21059"
-       width="586.42859"
+       width="522.85712"
        height="481.42859"
-       x="60"
+       x="132.85715"
        y="100.93362"
-       rx="3.0880895"
+       rx="2.7533271"
        ry="2.8576703" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="64.285713"
-       y="135.21933"
+       x="162.14287"
+       y="139.50505"
        id="text4179"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4181"
-         x="64.285713"
-         y="135.21933"
+         x="162.14287"
+         y="139.50505"
          style="font-size:27.50000191px;fill:#ffffff">GEC - Global Execution Context</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Scope pentru 1"
-     transform="translate(-60.000031,-100.93362)">
-    <rect
+     transform="translate(-132.85718,-100.93362)">
+    <path
        style="opacity:1;fill:#241c1c;fill-opacity:1;stroke:none;stroke-width:1.16220474;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 181.42859,198.07649 321.00004,0 0.71428,-31.42857 80.42856,0 0,374.28572 0,0 -402.14288,0 0,0 z"
        id="rect21898"
-       width="334.28574"
-       height="342.85715"
-       x="181.42859"
-       y="198.07649"
-       rx="0"
-       ry="3.5995436e-07" />
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccc" />
   </g>
   <g
      inkscape:label="Scope pentru faceva()"
      id="g21949"
      inkscape:groupmode="layer"
-     transform="translate(-60.000031,-100.93362)">
+     transform="translate(-132.85718,-100.93362)">
     <rect
-       ry="2.8271415e-07"
+       ry="2.737153e-07"
        rx="0"
        y="271.64792"
        x="195.00002"
-       height="269.28571"
-       width="397.14285"
+       height="260.71426"
+       width="381.42856"
        id="rect21951"
        style="opacity:1;fill:#ffcc00;fill-opacity:1;stroke:none;stroke-width:1.16220474;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <path
        style="opacity:1;fill:#ffcc00;fill-opacity:1;stroke:#b3b3b3;stroke-width:5.2130003;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#DotM)"
-       d="m 562.14289,260.21933 0,37.85714"
+       d="m 593.9286,317.00505 -37.85714,0"
        id="path6869"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
@@ -325,18 +349,24 @@
        id="path6869-4"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
+    <path
+       style="opacity:1;fill:#ffcc00;fill-opacity:1;stroke:#241c1c;stroke-width:5.2130003;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#DotM-36)"
+       d="m 579.68899,358.36216 -23.57142,0"
+       id="path6869-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="g21955"
      inkscape:label="Scope pentru doi"
-     transform="translate(-60.000031,-100.93362)">
+     transform="translate(-132.85718,-100.93362)">
     <rect
        style="opacity:1;fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:1.16220474;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect21957"
-       width="313.57141"
+       width="308.57141"
        height="191.42857"
-       x="225.00002"
+       x="230.00002"
        y="309.50507"
        rx="0"
        ry="2.009745e-07" />
@@ -345,14 +375,14 @@
      inkscape:label="Scope pentru trei"
      id="g21959"
      inkscape:groupmode="layer"
-     transform="translate(-60.000031,-100.93362)">
+     transform="translate(-132.85718,-100.93362)">
     <rect
        ry="4.1994671e-08"
        rx="0"
        y="420.21936"
-       x="238.57143"
+       x="270"
        height="40"
-       width="347.85715"
+       width="252.85716"
        id="rect21961"
        style="opacity:1;fill:#333333;fill-opacity:1;stroke:none;stroke-width:1.16220474;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
   </g>
@@ -360,7 +390,7 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Code"
-     transform="translate(-60.000031,-100.93362)">
+     transform="translate(-132.85718,-100.93362)">
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -372,12 +402,12 @@
          id="tspan21863"
          x="163.88951"
          y="185.76863"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#008000">function container(){   </tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#008000">function container(par1){   </tspan><tspan
          sodipodi:role="line"
          x="163.88951"
          y="223.26863"
          id="tspan21865"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#008000">  var unu = 1;</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#008000">  var unu = par1;</tspan><tspan
          sodipodi:role="line"
          x="163.88951"
          y="260.76862"
@@ -402,12 +432,12 @@
          x="163.88951"
          y="410.76862"
          id="tspan21875"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#ff6600">    if( unu == 1){</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#ff6600">    if(unu == 1){</tspan><tspan
          sodipodi:role="line"
          x="163.88951"
          y="448.26862"
          id="tspan21877"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#ff6600">      var  trei = 3;</tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#ff6600">      var trei = 3;</tspan><tspan
          sodipodi:role="line"
          x="163.88951"
          y="485.76862"
@@ -426,45 +456,40 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#e3d7f4;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="472.3248"
-       y="210.95364"
+       x="517.32477"
+       y="215.95364"
        id="text21963-5"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan21965-6"
-         x="472.3248"
-         y="210.95364"
+         x="517.32477"
+         y="215.95364"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#e3d7f4">scope</tspan><tspan
          sodipodi:role="line"
-         x="472.3248"
-         y="229.70364"
+         x="517.32477"
+         y="234.70364"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#e3d7f4"
          id="tspan21985">pentru</tspan><tspan
          sodipodi:role="line"
-         x="472.3248"
-         y="248.45364"
+         x="517.32477"
+         y="253.45364"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#e3d7f4"
          id="tspan21987">var unu</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="561.60529"
-       y="234.10757"
+       x="618.31958"
+       y="312.96472"
        id="text21963-5-5"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="561.60529"
-         y="234.10757"
+         x="618.31958"
+         y="312.96472"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.50000095px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#666666"
-         id="tspan22013">acces</tspan><tspan
+         id="tspan8755">acces la</tspan><tspan
          sodipodi:role="line"
-         x="561.60529"
-         y="249.73257"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.50000095px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#666666"
-         id="tspan8755">la</tspan><tspan
-         sodipodi:role="line"
-         x="561.60529"
-         y="265.35757"
+         x="618.31958"
+         y="328.58972"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.50000095px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#666666"
          id="tspan8757">GEC</tspan></text>
     <text
@@ -492,25 +517,25 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#e3d7f4;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="553.60529"
-       y="429.25043"
+       x="248.74811"
+       y="427.67899"
        id="text21963-5-55"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan21965-6-3"
-         x="553.60529"
-         y="429.25043"
+         x="248.74811"
+         y="427.67899"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.25px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#e3d7f4">scope</tspan><tspan
          sodipodi:role="line"
-         x="553.60529"
-         y="443.31293"
+         x="248.74811"
+         y="441.74149"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.25px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#e3d7f4"
-         id="tspan21985-7">pentru</tspan><tspan
+         id="tspan21985-7">pt</tspan><tspan
          sodipodi:role="line"
-         x="553.60529"
-         y="457.37543"
+         x="248.74811"
+         y="455.80399"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.25px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#e3d7f4"
-         id="tspan21987-9">var trei</tspan></text>
+         id="tspan21987-9">trei</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -533,5 +558,27 @@
          y="260.25345"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.50000095px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#666666"
          id="tspan8757-8">GEC</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#666666;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="620.28394"
+       y="347.25769"
+       id="text21963-5-5-9"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="620.28394"
+         y="347.25769"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.50000095px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#666666"
+         id="tspan22013-1">acces</tspan><tspan
+         sodipodi:role="line"
+         x="620.28394"
+         y="362.88269"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.50000095px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#666666"
+         id="tspan8755-7">la</tspan><tspan
+         sodipodi:role="line"
+         x="620.28394"
+         y="378.50769"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.50000095px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';text-align:center;text-anchor:middle;fill:#666666"
+         id="tspan8757-7">container</tspan></text>
   </g>
 </svg>
