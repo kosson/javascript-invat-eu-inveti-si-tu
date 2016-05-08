@@ -1,4 +1,5 @@
 # Dependințe cognitive
+
 - Immediately Invoked Function Expressions - IIFE
 - Șablonul Module - Module Pattern
 
@@ -38,13 +39,13 @@ var Module = function(){
 
   var privat = "Sunt variabilă privată";
 
-  var metoda1 = function(){},
-  var metoda2 = function(){},
+  var metoda1 = function(){};
+  var metoda2 = function(){};
 
   return {
     metoda1: metoda1,
     metoda2: metoda2
-  };
+  }
 };
 ```
 

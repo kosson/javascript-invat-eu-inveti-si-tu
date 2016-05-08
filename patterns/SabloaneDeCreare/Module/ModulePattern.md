@@ -1,5 +1,6 @@
 # Module pattern
 
+Este o modalitate de a incapsula metode înrudite într-un singur container.
 Original a fost creată pentru a oferi încapsulare privată și publică.
 
 # Dependințe cognitive

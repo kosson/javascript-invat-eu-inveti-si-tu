@@ -4,6 +4,9 @@ Este un șablon folosit pentru a simplifica crearea obiectelor.
 Folosit și la crearea de obiecte în baza unor necesități.
 Este o funcție care creează și returnează un obiect.
 
+## Mantre
+ - creează și returnează un obiect
+
 ```js
 var persoana = function(nume, prenume){
   return {
