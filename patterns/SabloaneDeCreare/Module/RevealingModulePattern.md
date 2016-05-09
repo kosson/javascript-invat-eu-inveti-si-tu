@@ -94,7 +94,7 @@ var foo = (function(){
 
     bar: function(){ publicAPI.baz(); },
 
-    baz: function(){ console.log("baz");}
+    baz: function(){ console.log("baz"); }
 
   };
   return publicAPI;

@@ -1,21 +1,24 @@
 # this
----
 
-## Acumulări rapide
-- **this** este un cuvânt cheie.
-- this este o referință către obiectul care execută secvența de cod. În browser este obiectul window
-- **this** este o referință către contextul de execuție curent în timp ce funcția se execută.
-- `this` este un binding pentru fiecare invocare a unei funcții care se bazează pe de-antregul pe call-site
+`this` este un obiect-context.
+
+Funcția de bază a lui `this` este de a permite obiectului să se poată autoreferenția din interiorul metodelor.
 
 ## Mantre
 
-- Funcția de bază este de a permite obiectului să se poată autoreferenția din interiorul metodelor.
+- **this** este un cuvânt cheie.
+- `this` este un obiect-context.
+- this este o referință către obiectul care execută secvența de cod. În browser este obiectul window
+- **this** este o referință către contextul de execuție curent în timp ce funcția se execută.
+- `this` este un binding pentru fiecare invocare a unei funcții care se bazează pe de-antregul pe call-site
 - Funcțiile și obiectele sunt REFERENȚIATE, nu sunt deținute atunci când atribui IDENTIFICATORUL într-o expresie sau ca valoarea a unei metode.
 - Call-site (locul din cod unde este apelată o funcție) determină ce este ```this```.
 - ```this``` este o referință către contextul de execuție a fiecărei funcții care se execută curent.
 - La ce face trimitere ```this``` este definit de modul în care funcția este declarată, ci de modul în care este invocată.
-- Valoarea lui ```this``` este context.
+- Valoarea lui ```this``` este contextul de execuție.
 - Atunci când există un obiect-context, regula de bază a binding-ului spune că obiectul-context va fi cel la care se face bindingul this.
+- Bindingul primar se face la obiectul global.
+- Bindingul implicit se face la contextul de execuție al unei funcții sau al unei metode.
 
 ## Regulile de binding
 
@@ -31,28 +34,13 @@ function faceva(){
 
 faceva(); // 2
 ```
-dacă codul este rulat sub ``` 'use strict' ```, răspunsul la rulare este ```this is undefined```
-
-```js
-'use strict';
-
-var test = 2;
-
-function faceva(){
-  console.log(this.test);
-}
-
-faceva(); // 2
-```
 
 Bindingul primar se face la global object (Window).
----
 
 ### Binding implicit - eu îi spun „binding atașat implicit”
-Îi spun atașat pentru că bindingul se face la obiectul în care este invocată funcția (call site), fie ca metodă, fie ca funcție.
 
-#### Mantra
-- Bindingul implicit constă într-o funcție pe care o „împrumuți” contextului unui obiect.
+Îi spun atașat pentru că bindingul se face la obiectul în care este invocată funcția (call site), fie ca metodă, fie ca funcție.
+Bindingul implicit constă într-o funcție pe care o „împrumuți” contextului unui obiect.
 
 ```js
 var obiectLiteral = {
@@ -61,11 +49,16 @@ var obiectLiteral = {
 };
 
 function faceva(){
-  console.log( this.ceva );
+  this.test = 1001; // introduce în obj test
+  this.ceva = 50;   // modifica existent
+  console.log( this.ceva ); // 50
 }
 
 obiectLiteral.metoda();
+console.log(obiectLiteral.test); // 1001
+console.log(obiectLiteral.ceva); // 50
 ```
+
 Următoarea secvență de cod este asemănătoare.
 
 ```js
@@ -140,6 +133,7 @@ obiect.metoda.apply(window, [1,2,3]); //acelasi lucru ca si call numai ca paseaz
 Este modul în care te asiguri întotdeauna că ```this``` este predictibil și nu alunecă în global scope.
 
 Hardbinding ```this``` în obiectul care se dorește a fi contextul. Este un cuplaj forțat între o funcție care trebuie să ruleze musai în contextul unui obiect.
+
 Începând cu ES5 bind() a fost introdusă ca metodă în prototipul oricărei funcții.
 Vezi și documentația MDN pentru bind la:  [Function.prototype.bind()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
 
@@ -151,6 +145,7 @@ Exemplul de la MDN
 
 ```js
 this.x = 9;
+
 var modul = {
   x: 81,
   getX: function() { return this.x; }
@@ -159,7 +154,8 @@ var modul = {
 modul.getX(); // 81
 
 var retrieveX = modul.getX;
-retrieveX(); // 9, deoarece "this" face referință la obiectul global
+
+retrieveX(); // 9, deoarece "this" face referință la obiectul global. Funcția este doar „împrumutată” din metoda obiectului
 
 // Creează o nouă funcție cu this bound la modul
 var boundGetX = retrieveX.bind(modul);

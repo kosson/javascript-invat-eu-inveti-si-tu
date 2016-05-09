@@ -1,7 +1,3 @@
-// ((
-//
-//
-// )());
 var dbOps = require('./databasesim');
 
 var Ctrl = function (date){
