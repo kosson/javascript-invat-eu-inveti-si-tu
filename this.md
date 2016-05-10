@@ -1,12 +1,13 @@
 # this
 
 `this` este un obiect-context.
+`this` reprezintă întregul context de execuție al unei funcții cu tot cu variabilele și rezultatele returnate de alte funcții înterne, toate acestea asamblate într-un obiect.
 
 Funcția de bază a lui `this` este de a permite obiectului să se poată autoreferenția din interiorul metodelor.
 
 ## Mantre
 
-- **this** este un cuvânt cheie.
+- **this** este un cuvânt cheie rezervat.
 - `this` este un obiect-context.
 - this este o referință către obiectul care execută secvența de cod. În browser este obiectul window
 - **this** este o referință către contextul de execuție curent în timp ce funcția se execută.
