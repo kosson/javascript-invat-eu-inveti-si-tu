@@ -1,27 +1,34 @@
 # this
 
-`this` este un obiect-context.
-`this` reprezintă întregul context de execuție al unei funcții cu tot cu variabilele și rezultatele returnate de alte funcții înterne, toate acestea asamblate într-un obiect.
+`this` este o legătură către un obiect, un obiect-context, care se formeză în funcție de contextul de execuție.
+`this` este cuvânt cheie rezervat.
+`this` este o legătură care se face pentru fiecare invocare a vreunei funcții pe baza call-site-ului.
+Referința `this` va fi folosită pe durata execuției funcției.
+`this` NU ESTE O REFERINȚĂ CĂTRE FUNCȚIA ÎN SINE.
+`this` NU ESTE O REFERINȚĂ CĂTRE SCOPE-ul LEXICAL AL FUNCȚIEI.
 
-Funcția de bază a lui `this` este de a permite obiectului să se poată autoreferenția din interiorul metodelor.
+Legătura (binding-ul) la `this` DEPINDE DE OBIECTUL specificat la call-site.
+
+Folosit pentru a lua un obiect și pentru a-i îmbogăți și/sau prelucra valorile membrilor după care poate fi returnat și folosit mai departe.
 
 ## Mantre
 
-- **this** este un cuvânt cheie rezervat.
+- funcțiile sunt obiecte!
 - `this` este un obiect-context.
-- this este o referință către obiectul care execută secvența de cod. În browser este obiectul window
+- Obiectul `this` se constituie la execuția codului, nu la momentul scrierii lui.
 - **this** este o referință către contextul de execuție curent în timp ce funcția se execută.
+- `this` nu se referă în niciun caz la **lexical scope**.
 - `this` este un binding pentru fiecare invocare a unei funcții care se bazează pe de-antregul pe call-site
 - Funcțiile și obiectele sunt REFERENȚIATE, nu sunt deținute atunci când atribui IDENTIFICATORUL într-o expresie sau ca valoarea a unei metode.
-- Call-site (locul din cod unde este apelată o funcție) determină ce este ```this```.
-- ```this``` este o referință către contextul de execuție a fiecărei funcții care se execută curent.
-- La ce face trimitere ```this``` este definit de modul în care funcția este declarată, ci de modul în care este invocată.
-- Valoarea lui ```this``` este contextul de execuție.
-- Atunci când există un obiect-context, regula de bază a binding-ului spune că obiectul-context va fi cel la care se face bindingul this.
+- Call-site (locul din cod unde este apelată o funcție) determină formarea lui `this`.
+- Modul de invocare influiențează felul în care obiectul este constituit (către care face referință `this`).
+- Toate funcțiile au la dispoziția lor un set de utilități preexistent, care poate fi apelat prin `[[Prototype]]`. Cele mai evidente sunt call(), apply().
+- Atunci când există un obiect-context (folosit de o funcție prin apelare cu apply() sau call()), regula de bază a binding-ului spune că obiectul-context va fi cel la care se face bindingul this.
+- în contextul de execuție tot ce este cu `this.ceva` devine membru al obiectului generat.
 - Bindingul primar se face la obiectul global.
 - Bindingul implicit se face la contextul de execuție al unei funcții sau al unei metode.
 
-## Regulile de binding
+## Regulile de binding - de generare a obiectului this
 
 ### Binding primar
 Este prima regulă și este cazul simplei invocării a funcției. Atunci când nicio altă regulă nu se aplică, aceasta se aplică din start. Funcționează dacă nu este rulat codul sub „use strict”.
@@ -38,10 +45,12 @@ faceva(); // 2
 
 Bindingul primar se face la global object (Window).
 
-### Binding implicit - eu îi spun „binding atașat implicit”
+### Binding implicit
 
-Îi spun atașat pentru că bindingul se face la obiectul în care este invocată funcția (call site), fie ca metodă, fie ca funcție.
+Îi spun atașat pentru că bindingul se face la obiectul în care este invocată funcția (call site), ca metodă.
 Bindingul implicit constă într-o funcție pe care o „împrumuți” contextului unui obiect.
+
+Regula este că obiectul în contextul căruia se execută funcția ca metodă este folosit de către funcție pentru a face binding la `this`.
 
 ```js
 var obiectLiteral = {
@@ -59,6 +68,8 @@ obiectLiteral.metoda();
 console.log(obiectLiteral.test); // 1001
 console.log(obiectLiteral.ceva); // 50
 ```
+
+Pentru că obiectLiteral este `this` pentru invocarea faceva(), atunci **this.ceva** este fix același lucru cu cu **obj.ceva**.
 
 Următoarea secvență de cod este asemănătoare.
 
@@ -83,11 +94,34 @@ var proprietate = "valoarea proprietății obiectului global";  // proprietate a
 var metoda = obiectLiteral.metoda;                            // metodă a obiectului global
 metoda(); // => valoarea proprietății obiectului global; echivalent cu window.metoda()
 ```
----
 
-### Binding explicit - eu îi spun „binding atașat explicit”
+Bindingul implicit poate fi pierdut atunci când faci referință către metodă, când nu o și execuți. De fapt, nu faci referința către metodă, căci însăși metoda este o referință către funcție.
 
-Se realizează prin intermediul lui call() și apply(). Ambele iau ca prim parametru un obiect care va fi folosit pentru this și apoi va invoca funcția. Pentru că este afirmat în mod direct unde dorești să fie this, numim aceasta binding explicit.
+```js
+var obiectStudiu = {
+  ceva: 1001,
+  metoda: function special(){
+    console.log(this.ceva);
+  }
+};
+
+var ceva = 2002;
+
+var referinta = obiectStudiu.metoda; // e doar o referință, nu este valoarea funcției.
+
+referinta(); // 2002  call-site pentru care se aplică regula 1 - binding primar.
+```
+
+Ceea ce s-a întâmplat, de fapt este că a fost „împrumutată” (invocată) funcția în contextul obiectului global. În acest caz se aplică regula bindingului primar. Dacă funcția nu ar fi fost numită, în call stack ar fi apărut cu numele referinței (obiectStudiu.metoda).
+
+### Binding explicit
+
+`call()` și `apply()` sunt utilități disponibile prin `[[Prototype]]` tuturor funcțiilor, care sunt de fapt la rândul lor obiecte.
+
+Bindingul explicit se realizează prin intermediul lui call() și apply(). Ambele iau ca prim parametru un obiect care va fi folosit pentru `this` și apoi va invoca funcția cu acel `this` deja specificat. Pentru că este afirmat în mod direct unde dorești să fie this, numim aceasta binding explicit.
+
+How do these utilities work? They both take, as their first parameter, an object to use for the `this`, and then invoke the function with that `this` specified. Since you are directly stating what you want the `this` to be, we call it *explicit binding*.
+
 
 ```js
 var proprietate = "ceva din global"; // este proprietate a obiectului global

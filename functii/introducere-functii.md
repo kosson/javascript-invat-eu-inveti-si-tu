@@ -9,51 +9,15 @@ Funcțiile sunt obiecte first-class. Pot fi pasate ca argumente alor funcții ș
 - Funcțiile returnează o valoare prestabilită: undefined
 - Funcțiile sunt ele însele valori.
 - Funcțiile sunt obiecte. Asta înseamnă că au conectări [[Prototype]] - lanț prototipal.
+- Toate funcțiile au la dispoziția lor un set de utilități preexistent, care poate fi apelat prin `[[Prototype]]`. Cele mai evidente sunt call(), apply().
 - Funcțiile au o referință către contextul de execuție curent în timp ce se execută prin cuvântul cheie rezervat „this".
 - În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype (numeFunctie.prototype) care se leagă automat la Object.prototype.
 - Funcțiile sunt legate de obiectul prototip prin metoda .constructor
 - Funcțiile nu sunt cele care generează obiectul prototype.
 - Fiecare funcție are un prototype object diferit.
-- O funcție apelată cu ```new``` în fața sa este un constructor.
+- O funcție apelată cu ```new``` în fața sa este un constructor. De regulă, numele funcției care va fi constructor, se scrie cu literă mare.
 - Funcțiile generează SCOPE-ul.
-- Unei funcții care este o metodă îi este pasat însăși obiectul în care a fost invocată.
+- Funcțiile care joacă rol de metode într-un obiect, de fapt nu aparțin obiectului, ci sunt doar invocare în contextul obiectului. Ceea ce „aparține” obiectului este, de fapt, referința către funcție. ATENȚIE! investighează mereu call-site-ul pentru a afla ce este în 'this'.
+- Atunci când funcția este un callback, ține minte că tot o referință către funcție este (implicit assignment), nu este valoarea sa.
 - Dacă definești o funcție în interiorul altei funcții, atunci funcția internă trebuie să fie recreată de fiecare dată când funcția externă este executată (acest lucru se întâmplă pentru că funcțiile, de fapt, sunt obiecte). Acest comportament trebuie evitat. Definește funcția în afară și referențiaz-o sau execut-o în context local prin call/apply/bind
-- Orice funcție publică poate fi invocată cu `call()` sau 'apply()'.
-
---------------------------------------------------------------------------------
-
-## Ce se întâmplă când o funcție este invocată?
-1. se aplează funcția iar locul în care se întâmplă acest lucru se numește call-site
-- Se stabilește **function context**
-  1. vorbim de context de execuție global (obiectul **window**) când funcția este invocată ca funcție, nu ca metodă sau callback
-
-- Se generează un obiect căruia îi sunt pasate automat ARGUMENTELE și **this**.
-
-**arguments** este o colecție (seamănă dar NU ESTE UN ARRAY) a tuturor argumentelor pasate funcției și are proprietatea length pentru a afla numărul argumentelor pasate. Valorile pot fi obținute prin indecși arguments[i].
-
-Invocarea funcțiilor se poate face în patru cazuri:
-1. ca funcții
-2. ca metode
-3. ca și constructori cu `new`
-4. indirect prin apelarea într-un context de execuție diferit folosind call() și apply()
-
-## Invocare condițională
-
-Poți invoca rapid prin evaluarea Truthy sau Falsy a unei expresii
-
-```js
-var testVal = 200;
-testVal >= 150 && console.log("Acest mesaj va apărea dacă evaluarea lui testVal este truthy");            // Acest mesaj va apărea dacă evaluarea lui testVal este truthy
-testVal >= 150 || console.log("Acest mesaj va apărea doar dacă evaluarea din left-hand-side este true");  // true
-```
-
-În caz de valoare truthy, pentru && se va afișa mesajul, dacă false, va returna false expresia.
-În caz de valoare truthy, pentru || se va returna `true`. Pentru false, se va afișa mesajul.
-
-Un alt caz este apelarea unui callback:
-
-```js
-function tester(callback){
-  callback && callback();
-};
-```
+- Orice funcție publică poate fi invocată cu `call()` sau 'apply()' (vezi regulile de binding pentru `this`).

@@ -21,6 +21,7 @@ arataMesajul('funcția internă este chemată după trei secunde');
 ## Mantre
 - Funcțiile sunt obiecte first-class
 - Funcțiile pot fi pasate ca argumente alor funcții și pot fi returnate din funcții.
+- Atunci când funcția este un callback, ține minte că tot o referință către funcție este (implicit assignment), nu este valoarea sa.
 
 ## Folosire
 

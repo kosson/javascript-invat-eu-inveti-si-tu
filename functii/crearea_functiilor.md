@@ -3,6 +3,7 @@
 ## Mantre
 - Funcțiile sunt obiecte
 - Funcțiile pot fi create dinamic folosind constructorul `Function`
+- funcțiile nu sunt „deținute” sau „conținute” de un obiect atunci când sunt metode chiar dacă sunt declarate în obiect sau în afara lui
 
 ## Crearea funcțiilor prin constructor
 

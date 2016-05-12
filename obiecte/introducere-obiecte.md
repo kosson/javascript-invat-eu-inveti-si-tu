@@ -14,7 +14,7 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
 - Obiectul window are o metodă numită Object [ function Object() ]. Motorul Javascript construiește automat metoda Obiect în obiectul window (window.Object returnează function Object()).
 - Toate obiectele în JavaScript descind din Object, își au originea în Object. Toate obiectele moștenesc metode și proprietăți din Object.prototype. Acestea pot fi suprascrise.
 - Object.prototype este un obiect în care poți adăuga propriile proprietăți și metode.
-- Modificările aduce obiectului Object.prototype se propagă către toate obiectele. Singura excepție este atunci când proprietățile și metodele supuse modificărilor nu sunt ele la rândul lor modificate mai departe în lanțul prototipal.
+- Modificările aduse obiectului Object.prototype se propagă către toate obiectele. Singura excepție este atunci când proprietățile și metodele supuse modificărilor nu sunt ele la rândul lor modificate mai departe în lanțul prototipal.
 - În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype (numeFunctie.prototype). Acest obiect (prototype), este gol și este creat de constructorul lui Object()
 - Funcțiile sunt legate de obiectul prototip prin metoda .constructor.
 - Fiecare funcție are un obiect prototip diferit.
@@ -40,6 +40,8 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
 - Obiecte cu un prototip și proprietăți prestabilite, se pot contrui cu Object.create(UnObiect, {exemplu: 'proprietate'}):
   1. se realizează legătura prototipală la obiectul UnObiect.
 - Obiectele create cu `new Fnc()` și `Object.create(...)` nu li se atașează un `.constructor`. `.constructor` va trimite la funcția la care a fost atașat prototype la momentul declarării.
+- Obiectele atunci când au metode, nu „dețin” sau „conțin” acele funcții, ci doar referințe către funcțiile pe post de metode. Funcțiile (metodele) nu fac parte din obiect; referința către acestea este parte a obiectului.
+
 
 ---
 
