@@ -47,6 +47,8 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
 
 ## Crearea obiectelor
 
+Obiectele pot fi create în două feluri: prin declararea acestora sau prin construirea lor.
+
 1. var newObj = new Object();
 2. var newObj = Object.create(null);
 3. var newObj = Object.create(Object.prototype);
@@ -60,6 +62,13 @@ Acesta este modelul cel mai des întâlnit și acceptat ca practică istorică:
 1. Creezi o funcție constructor (este o practică acceptată ca funcțiile constructor să aibă numele începând cu literă mare).
 2. Adaugi metode la proprietatea `prototype` a funcției constructor.
 3. Instanțiezi obiectul folosind cuvântul cheie `new`.
+
+#### Ce se întâmplă când folosești `new`
+
+1. Se creează un obiect nou din nimic.
+2. Se creează legătura prototipală `[[Prototype]]`.
+3. Obiectul abia creat devine contextul la care se leagă `this`.
+4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), obiectul care, de altfel este `this`, va fi returnat automat.
 
 Cel mai simplu exemplu:
 

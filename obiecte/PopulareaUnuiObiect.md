@@ -1,5 +1,7 @@
 # Popularea obiectelor
 
+Conținutul unui obiect constă din valori (de oricare tip) stocată într-o locație anume care poartă un nume și pe care le numim proprietăți.
+
 Odată ce poți crea un obiect, ai nevoie să-l faci funcțional populându-l.
 
 ## Crearea obiectelor - alternative
