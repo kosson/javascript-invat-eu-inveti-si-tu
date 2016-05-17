@@ -1,6 +1,6 @@
 # Popularea obiectelor
 
-Conținutul unui obiect constă din valori (de oricare tip) stocată într-o locație anume care poartă un nume și pe care le numim proprietăți.
+Conținutul unui obiect constă din valori (de oricare tip) stocate într-o locație anume care poartă un nume și pe care le numim proprietăți.
 
 Odată ce poți crea un obiect, ai nevoie să-l faci funcțional populându-l.
 
@@ -69,4 +69,25 @@ Object.defineProperties(newObj, {
     writable: true
   }
 });
+```
+
+ATENȚIE!
+Folosirea unei funcții într-un obiect drept „metodă”, nu este decât apelarea unei funcții în cadrul obiectului. Nu se poate spune că obiectul „conține” funcția. Obiectul doar face o referință
+
+```js
+function actiune() {
+	console.log( "actiune" );
+}
+
+var aceeasiActiune = actiune;	// variabila „conține” referința către `actiune`
+
+var obiect = {
+	acceasiActiune: actiune
+};
+
+actiune;				// function actiune(){..}
+
+acceasiActiune;			// function actiune(){..}
+
+obiect.acceasiActiune;	// function actiune(){..}
 ```

@@ -184,9 +184,9 @@ gazda(); // gazda întărește legătura lui this la obi.
 gazda.call(window); // 2
 ```
 
-Este modul în care te asiguri întotdeauna că ```this``` este predictibil și nu alunecă în global scope.
+Este modul în care te asiguri întotdeauna că `this` este predictibil și nu alunecă în global scope.
 
-Hardbinding ```this``` în obiectul care se dorește a fi contextul. Este un cuplaj forțat între o funcție care trebuie să ruleze musai în contextul unui obiect.
+Hardbinding `this` în obiectul care se dorește a fi contextul. Este un cuplaj forțat între o funcție care trebuie să ruleze musai în contextul unui obiect.
 
 Împachetarea într-o funcție gazdă creează și comunicare înspre și dinspre hard binding:
 
@@ -382,6 +382,10 @@ console.log(obiect.x, obiect.y);   // bau miau
 ```
 
 Ceea ce se observă este că `new` are capacitatea de a suprascrie hard binding-ul. Motivul pentru care este permis un astfel de comportament este pentru că poți creea dintr-o funcție un obiect, care să ignore hard-binding-ul existent, dar care presetează o parte sau toate argumentele funcției.
+
+### Lucruri la care să fii atent
+
+În cazul în care folosești forEach(), trebuie să știi că poți pasa și `this`, ca al doilea argument. Deci, nu face „punte lexicală” de genul `var that = this` pentru a adăuga rezultatele iterării la this. (vezi [MDN>Web technology for developers>JavaScript>JavaScript reference>Standard built-in objects>Array>Array.prototype.forEach()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach))
 
 ## Menționarea resurselor folosite pentru documentare:
 [MDN>Web technology for developers>JavaScript>JavaScript reference>Expressions and operators>this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)

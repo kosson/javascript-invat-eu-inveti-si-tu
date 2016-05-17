@@ -41,6 +41,7 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
   1. se realizează legătura prototipală la obiectul UnObiect.
 - Obiectele create cu `new Fnc()` și `Object.create(...)` nu li se atașează un `.constructor`. `.constructor` va trimite la funcția la care a fost atașat prototype la momentul declarării.
 - Obiectele atunci când au metode, nu „dețin” sau „conțin” acele funcții, ci doar referințe către funcțiile pe post de metode. Funcțiile (metodele) nu fac parte din obiect; referința către acestea este parte a obiectului.
+- În obiecte numele proprietăților sunt întotdeauna stringuri
 
 
 ---

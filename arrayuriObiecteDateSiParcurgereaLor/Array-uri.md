@@ -7,6 +7,9 @@ Indexarea internă a elementelor atunci când nu este explicită, pornește de l
 |---------|:---:|:---:|:---:|
 | index   |  0  |  1  |  2  |
 
+## Mantre
+- Array-urile sunt **obiecte** și poți adăuga proprietăți în array folosind notația dot `var a = [1,2]; a.i = 23; a.i // 23`. Valorile sunt adăugate indiferent că array-ul are un index numeric prestabilit. Ele sunt acolo.
+
 ## Crearea array-urilor
 
 ### Folosind constructorul: ```new Array()```
@@ -60,7 +63,7 @@ f(1, 2, 3);
 // [1, 2, 3]
 
 // String
-Array.from("foo");                      
+Array.from("foo");
 // ["f", "o", "o"]
 ```
 
@@ -112,7 +115,7 @@ console.log(eArr.next().value); // [2, 'c']
 
 #### Array.prototype.every()
 
-Metoda testează dacă elementele din array trec un test care e face printr-un callback.
+Metoda testează dacă elementele din array trec un test care se face printr-un callback.
 
 Funcția de test poate primi trei argumente:
 - valoarea curentă (obligatoriu) - elementul care este procesat,
@@ -229,6 +232,7 @@ console.log(indices);
 #### Array.prototype.forEach()
 
 Execută o funcție pentru fiecare element din array.
+
 Funcția care va fi executată poate avea trei argumente:
 - currentValue; elementul din array care este procesat,
 - index; indexul elementului din array care este procesat,

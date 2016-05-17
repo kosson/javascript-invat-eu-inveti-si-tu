@@ -120,14 +120,11 @@ var colectia = document.querySelectorAll('[data-target=\"element\"]');
 
 var caAr = [].slice.call(colectia);
 console.log(caAr);            // Array[li, li, li]
-caAr.forEach(function(elem){  
+caAr.forEach(function(elem){
   console.log(elem);          // <li data-target="element">
 });
 ```
 
 Elementele găsite sunt de fapt o colecție de noduri, care este dinamică în sensul că de fiecare dată când DOM-ul va suferi o modificare, se va actualiza și aceasta.
-
-
-
 
 În ES6 există o aceeași abordare: `arrayLike = Array.from(nodes)`. ES6 introduce un nou tip de obiecte iterabile - obiecte ale căror elemente pot fi extrase rând pe rând.
