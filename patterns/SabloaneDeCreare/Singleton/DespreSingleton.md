@@ -5,12 +5,15 @@
 
 Îi spune Singleton (pe filieră Java) pentru că, ipotetic, nu poți să ai decât o singură instanță a acestui obiect.
 În JavaScript toate obiectele sunt Singleton pentru că JavaScript nu are clase.
-Modificarea concomitentă va duce la suprascrierea valorilor.
+
+## Mantre
+
+- creează un namespace distinct
+- Modificarea concomitentă a valorilor, va duce la suprascrierea valorilor.
 
 În Javascript, singleton-urile folosesc la crearea unui namespace distinct care izolează codul implementării de global scope oferind un singur punct de intrare pentru funcții.
 
 Un Singleton este doar o structură.
-
 
 ```js
 var VehiculSpatial = {
@@ -83,9 +86,7 @@ var unSingleton = (function (){
 
   function init (){             // returnează obiectul care este Singleton-ul
 
-    /**
-     * ACESTA ESTE SINGLETONUL
-     */
+    // se returnează obiectul
     return {
       metodaPublica: function (){
         console.log('Salutare!');
@@ -152,3 +153,9 @@ var singletonTest = TestSingleton.getInstance({
 console.log(singletonTest.coordX); // afiseaza 10
 
 ```
+
+În cazul folosirii Node, datorită modului în care se face caching-ul, pentru a beneficia de un Singleton este îndejuns să faci:
+
+module.exports = numeFuncție()
+sau
+module.exports = new numeFunctie()

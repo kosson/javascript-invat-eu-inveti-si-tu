@@ -15,7 +15,7 @@ Secvența de mai sus creează același lanț de legături simple între obiecte 
 ```js
 var Foo = {
   init: function(who){
-   this.me = who;
+    this.me = who;
   },
   identify: function(){
     return "I'm " + this.me;
@@ -25,7 +25,8 @@ var Foo = {
 var Bar = Object.create(Foo);
 
 Bar.speak = function(){
-  alert("Hello, " + this.identify() + ".");
+  console.log("Hello, " + this.identify() + ".");
+  console.log(this);
 };
 
 var b1 = Object.create(Bar);
