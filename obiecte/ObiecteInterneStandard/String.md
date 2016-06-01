@@ -6,9 +6,19 @@ Obiectul global String este un constructor de șiruri de caractere.
 
 Stringurile pot fi create direct cu `String(ceva)`, în care `ceva` este orice ar putea fi convertit la string.
 
+## Dependințe cognitive
+- primitiva string
+- Expresii Regulate
+- Obiecte
+- Obiectul intern RegExp
+
 ## Mantre
 
--  JavaScript convertește automat primitivele în obiecte String, fiind astfel posibilă folosirea metodelor obiectului String pentru primitivele string.
+- șirurile în JavaScript sunt imuabile (nu se modifică șirul original),
+- șirurile sunt „consumate” de JavaScript de la stânga la dreapta,
+- din moment ce un caracter a fost „consumat”, acesta nu mai este folosit,
+- JavaScript convertește automat primitivele șir în obiecte String, fiind astfel posibilă folosirea metodelor obiectului String pentru primitivele string,
+- pentru a te asigura că poți face căutarea fără a te lovi de posibilele majuscule, mai întâi convertește toate caracterele șirului în minuscule folosind toLowerCase(). De exemplu: `var sir = "Acesta este un SIR"; sir.toLowerCase().startsWith("acesta"); // true`.
 
 Începând cu ECMAScript 2015, stringurile literale pot fi numite și „Stringuri șablon” - Template strings. Un simplu exemplu:
 
@@ -229,18 +239,6 @@ console.log(continut.includes("test")); // true
 console.log(continut.includes("este", 7)); // true
 ```
 
-#### String.prototype.match()
-
-Faci o căutare într-un string după un Regex
-
-```js
-var continut = 'For more information, see Chapter 3.4.5.1';
-var reg = /see (chapter \d+(\.\d)*)/i;
-var ceagasit = continut.match(reg);
-
-console.log(ceagasit);
-```
-
 #### String.prototype.repeat()
 
 Construiește și returnează un string nou făcut din concatenarea a câte ori a fost specificat prin parametru
@@ -253,6 +251,22 @@ Construiește și returnează un string nou făcut din concatenarea a câte ori 
 'abc'.repeat(3.5);  // 'abcabcabc' (se va converti la integer)
 'abc'.repeat(1/0);  // RangeError
 ```
+
+### Metode care folosesc regexuri
+
+#### String.prototype.match()
+
+Faci o căutare într-un string după un Regex. Regexurile sun șabloane care spun ce trebuie găsit într-un șir de caractere.
+
+```js
+var continut = 'Acesta este un text demonstrativ versiunea 0.0.1';
+var reg = /demonstrativ (versiunea \d+(\.\d*))/i;
+var ceAgasit = continut.match(reg);
+
+console.log(ceAgasit); // Array [ "demonstrativ versiunea 0.0", "versiunea 0.0", ".0" ]
+```
+
+A fost generat acest array pentru că regexul conține criterii de căutare grupate prin `()`.
 
 #### String.prototype.replace()
 
@@ -267,6 +281,43 @@ var deinlocuit = "parasutat";
 var noulcontinut = continut.replace("trimis", deinlocuit);
 console.log(noulcontinut); // Eu am fost parasutat în lume
 ```
+##### Folosirea unui regex pentru a găsi un fragment și înlocuirea cu un alt șir prestabilit
+
+replace() poate folosi un regex pentru a face o înlocuire.
+
+```js
+var continut = "Acesta este un text demonstrativ";
+var noulContinut = continut.replace(/\w{4,}/ig, '****');
+console.log(noulContinut); // **** **** un **** ****
+```
+
+##### Folosirea unui regex pentru a găsi un fragment și înlocuirea cu ce returnează o funcție
+
+În locul unui string predefinit, poți introduce o funcție ca un al doilea parametru, care să folosească un obiect RegExp.
+În acest caz, funcția va fi invocată imediat ce a fost găsit un șir care să se potrivească regex-ului. Rezultatul funcției, care va fi returnat, va fi folosit ca șir de caractere ce va fi înlocuit. ATENȚIE! Funcția va fi invocată ori de câte ori se va găsi șirul căutat după modelul construit de regex. Condiția ca acest lucru să se întâmple este ca obiectul RegExp să fie declarat la nivel global (introdu switch-ul g în regex).
+
+Argumentele pe care le poate lua o funcție sunt după cum urmează:
+
+| Posibilă denumire a parametrului | Valoarea introdusă                     |
+|:---------------------------------|:---------------------------------------|
+| match (de ex: /(\a+)(\b+)/ )     | șirul după care se face căutarea       |
+| p1, p2, ș.a.m.d.                 | bucata de șir de căutare* dintre paranteze la formarea șablonului RegExp|
+| offset                           | este indexul de la care să pornească căutarea |
+| string                           | indică faptul că se va face căutare în tot șirul |
+
+Mai jos este exemplul propus de Mozilla Developer Network pentru  [replace()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) .
+
+```js
+function replacer(match, p1, p2, p3, offset, string) {
+  // p1 is nondigits, p2 digits, and p3 non-alphanumerics
+  return [p1, p2, p3].join(' - ');
+}
+var newString = 'abc12345#$*%'.replace(/([^\d]*)(\d*)([^\w]*)/, replacer);
+```
+
+Pentru a înțelege pe deplin acest mod de operare cu replace, trebuie stăpânită sintaxa în baza căreia se construiesc șabloane de căutare: regex-urile. Un punct de pornire este chiar documentul dedicat obiectului intern RegExp.
+Un alt document important este cel dedicat (expresiilor regulate)[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions] de la MDN.
+
 
 ### Construcție de elemente DOM
 
