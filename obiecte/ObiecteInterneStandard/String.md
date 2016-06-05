@@ -252,11 +252,27 @@ Construiește și returnează un string nou făcut din concatenarea a câte ori 
 'abc'.repeat(1/0);  // RangeError
 ```
 
+#### String.prototype.split()
+
+Metoda pur și simplu sparge șirul construind un array cu fragemntele șirului. Poate accepta doi parametri: un separator și o limită.
+Separatorul este un caracter sau o **expresie regulată**.
+
+Dacă este omis separatorul, arrayul returnat va conține un singur element care va fi întregul șir.
+Dacă separatorul este un șir vid, atunci șirul este convertit la un array de caractere.
+Dacă separatorul este o expresie regulată care conține paranteze de captură, atunci de fiecare dată când când se face identificare, rezultatele (chiar și undefined) sunt introduce prin slicing în arrayul rezultat.
+
+Setarea limitei este opțională. Este un număr întreg, care indică de câte ori va fi spart șirul.
+
+```js
+var arr = "unu,doi,trei,patru,cinci".split(",");
+console.log(arr); // Array [ "unu", "doi", "trei", "patru", "cinci" ]
+```
+
 ### Metode care folosesc regexuri
 
 #### String.prototype.match()
 
-Faci o căutare într-un string după un Regex. Regexurile sun șabloane care spun ce trebuie găsit într-un șir de caractere.
+Faci o căutare într-un string după un Regex. Regexurile sunt șabloane care spun ce trebuie găsit într-un șir de caractere.
 
 ```js
 var continut = 'Acesta este un text demonstrativ versiunea 0.0.1';
@@ -267,6 +283,7 @@ console.log(ceAgasit); // Array [ "demonstrativ versiunea 0.0", "versiunea 0.0",
 ```
 
 A fost generat acest array pentru că regexul conține criterii de căutare grupate prin `()`.
+
 
 #### String.prototype.replace()
 
@@ -291,6 +308,54 @@ var noulContinut = continut.replace(/\w{4,}/ig, '****');
 console.log(noulContinut); // **** **** un **** ****
 ```
 
+Un exemplu util ar fi căutarea și înlocuirea într-o sursă html a unui tag și înlocuirea cu un altul.
+
+```js
+var sursa = '<html><head></head><body><p>Lorem ipsum <span>ceva</span> mai mult</p></body></html>';
+var modificat = sursa.replace(/<span>(.*)<\/span>/ig, '<strong>$1</strong>');
+console.log(modificat);
+// <html><head></head><body><p>Lorem ipsum <strong>ceva</strong> mai mult</p></body></html>
+
+// cazul in care ai două spanuri
+var sursa2 = '<html><head></head><body><p>Lorem ipsum <span>ceva</span> mai <span>mult</span></p></body></html>';
+var modificat2 = sursa2.replace(/<span>(.*)<\/span>/ig, '<strong>$1</strong>');
+console.log(modificat2);
+// <html><head></head><body><p>Lorem ipsum <strong>ceva</span> mai <span>mult</strong></p></body></html>
+// <strong>ceva</span> mai <span>mult</strong> se întâmplă tocmai că regexul este greedy, adică pornește de la prima identificare și include până după ultima din șir
+
+// Pentru a-l face lazy, pui un semnul întrebării în grup
+var modificat3 = sursa2.replace(/<span>(.*?)<\/span>/ig, '<strong>$1</strong>');
+console.log(modificat3);
+// <html><head></head><body><p>Lorem ipsum <strong>ceva</strong> mai <strong>mult</strong></p></body></html>
+```
+
+##### Folosirea regexurilor pentru a inversa două cuvinte
+
+```js
+var re = /(\w+)\s(\w+)/;
+var str = 'Nume Prenume';
+var newstr = str.replace(re, '$2, $1'); // observă faptul că poți modela șirul creat (a fost pusă o virgulă)
+console.log(newstr);  // Prenume, Nume
+```
+
+Pentru a înțelege ce este cu $1 și $2, vezi capitolul dedicat **Expresiilor Regulate**.
+
+##### Folosirea regexurilor pentru a transforma intern un șir (ex: borderTop în border-top; exemplu oferit de MDN)
+
+```js
+function styleHyphenFormat(propertyName) {
+
+  // transformarea șirului în lowercase
+  function upperToHyphenLower(match) {
+    return '-' + match.toLowerCase(); // returnează caracterul majuscul identificat cu o liniuță în față
+  }
+
+  // identifică caracterele majuscule din întreg șirul și aplică-le funcția de transformare
+  return propertyName.replace(/[A-Z]/g, upperToHyphenLower);
+}
+styleHyphenFormat("borderTop"); // border-top
+```
+
 ##### Folosirea unui regex pentru a găsi un fragment și înlocuirea cu ce returnează o funcție
 
 În locul unui string predefinit, poți introduce o funcție ca un al doilea parametru, care să folosească un obiect RegExp.
@@ -313,11 +378,58 @@ function replacer(match, p1, p2, p3, offset, string) {
   return [p1, p2, p3].join(' - ');
 }
 var newString = 'abc12345#$*%'.replace(/([^\d]*)(\d*)([^\w]*)/, replacer);
+console.log(newString); // abc - 12345 - #$*%
 ```
+
+Un alt exemplu oferit de MDN este cel al transformării gradelor Celsius în grade Fahrenheit.
+
+```js
+function f2c(x) {
+
+  function convert(str, p1, offset, s) {
+    return ((p1 - 32) * 5/9);
+  }
+
+  var test = /(-?\d+(?:\.\d*)?)F\b/g;
+  // identifică dacă e un minus, identifică unul sau mai mulți digiți
+  // se face grup -> ?: spune că va face identificarea unui grup pentru care nu se va face captură
+  // identifică dacă există vreun punct
+  // identifică toți digiții - se închide grupul
+  // ? identifică dacă ceea ce este în grup există o singură dată
+
+  return x.replace(test, convert);
+}
+var nr = f2c('250.23F'); // 121.238888888888
+console.log(nr);
+console.log(Math.floor(nr)); // 121
+ //
+```
+
+##### Folosirea unui regex cu replace pentru a evita folosirea unei bucle `for`
+
+Am putea presupune că avem un dispozitiv, o funcție, etc., care produce semnale sau chiar scrie fragmente de text care să indice o stare.
+Exemplul de mai jos este preluat de la MDN, dar este adaptat.
+
+```js
+// va prelua un șir
+// va genera un array, care va converti informația brută din șir în informație descrisă
+var sir = "0100111010001";
+var arr = [];
+sir.replace(/(0+)|(1+)/g, function(match, p1, p2, string){
+  if(p1){arr.push({semnal: false, frecvență: p1.length});};
+  if(p2){arr.push({semnal: true, frecvență: p2.length});};
+});
+console.log(JSON.stringify(arr));
+// [{"semnal":false,"frecvență":1},{"semnal":true,"frecvență":1},{"semnal":false,"frecvență":2},{"semnal":true,"frecvență":3},{"semnal":false,"frecvență":1},{"semnal":true,"frecvență":1},{"semnal":false,"frecvență":3},{"semnal":true,"frecvență":1}]
+```
+
+#### String.prototype.search()
+
+Face o căutare pe șir după un regex.
+Atunci când reușește o identificare, funcția returnează indexul primei identificări. Dacă nu face nicio identificare, returnează -1.
 
 Pentru a înțelege pe deplin acest mod de operare cu replace, trebuie stăpânită sintaxa în baza căreia se construiesc șabloane de căutare: regex-urile. Un punct de pornire este chiar documentul dedicat obiectului intern RegExp.
 Un alt document important este cel dedicat (expresiilor regulate)[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions] de la MDN.
-
 
 ### Construcție de elemente DOM
 

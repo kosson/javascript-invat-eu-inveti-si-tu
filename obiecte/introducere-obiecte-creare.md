@@ -23,11 +23,12 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
   1. acestă modalitate **nu va crea și constructor**.
   2. Accesarea numeObiect.__proto__.constructor răspunde cu Obiect() la care s-a ajuns prin delegare.
 - JavaScript are și obiecte globale existente deja în limbaj precum String(), Array(), Math(), Date() (```var test = new Date()```).
-- O funcție apelată cu ```new``` în fața sa este un constructor:
-  1. `contructor` (numeObiect.constructor) este o proprietate.
-  2. apelarea unei funcții cu ```new``` în față este un constructor.
-  3. metoda .constructor realizează legătura prototipală cu obiectul
-  4. Funcție.prototype.constructor răspunde cu Funcție().
+- O funcție apelată cu `new` în fața sa este un constructor:
+  1. Se creează un obiect nou.
+  2. Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu ```new```. Se creează legătura prototipală.
+  3. Obiectul generat automat este pasat funcției cu rol de constructor ca fiind parametrul `this` și astfel, devine contextul de execuție a funcției constructor invocate (`this` este pasat ca parametru împreună cu `arguments`).
+  4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), ```this``` va fi returnat automat.
+- `this` este un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat. 
 - Obiectele pot moșteni alte proprietăți direct din alte obiecte.
 - Când introduci o proprietate nouă într-un obiect care generează prototipul pentru alte obiecte, obiectele legate prin lanțul prototipal, vor moșteni noile proprietăți.
 - [[Prototype]], adică proprietatea `prototype` este o legătură internă, care se stabilește de la un obiect la altul. Pentru aflarea prototipului se apelează la __proto__ (dunder-dunder proto) sau sse va folosi Object.getPrototypeOf(obiect).
@@ -67,10 +68,10 @@ Acesta este modelul cel mai des întâlnit și acceptat ca practică istorică:
 
 #### Ce se întâmplă când folosești `new`
 
-1. Se creează un obiect nou din nimic.
-2. Se creează legătura prototipală `[[Prototype]]`.
-3. Obiectul abia creat devine contextul la care se leagă `this`.
-4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), obiectul care, de altfel este `this`, va fi returnat automat.
+1. Se creează un obiect nou.
+2. Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu ```new```. Se creează legătura prototipală.
+3. Obiectul generat automat este pasat funcției cu rol de constructor ca fiind parametrul `this` și astfel, devine contextul de execuție a funcției constructor invocate (`this` este pasat ca parametru împreună cu `arguments`).
+4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), ```this``` va fi returnat automat.
 
 Cel mai simplu exemplu:
 

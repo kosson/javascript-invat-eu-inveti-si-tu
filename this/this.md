@@ -13,8 +13,9 @@ Folosit pentru a lua un obiect și pentru a-i îmbogăți și/sau prelucra valor
 
 ## Mantre
 
-- funcțiile sunt obiecte!
-- `this` este un obiect-context.
+- Funcțiile sunt obiecte!
+- La invocarea funcțiilor pe lângă argumente sunt pasate „tacit” `this` și `arguments`.
+- `this` este un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat. 
 - Obiectul `this` se constituie la execuția codului, nu la momentul scrierii lui.
 - **this** este o referință către contextul de execuție curent în timp ce funcția se execută.
 - `this` nu se referă în niciun caz la **lexical scope**.
@@ -24,9 +25,14 @@ Folosit pentru a lua un obiect și pentru a-i îmbogăți și/sau prelucra valor
 - Modul de invocare influiențează felul în care obiectul este constituit (către care face referință `this`).
 - Toate funcțiile au la dispoziția lor un set de utilități preexistent, care poate fi apelat prin `[[Prototype]]`. Cele mai evidente sunt call(), apply().
 - Atunci când există un obiect-context (folosit de o funcție prin apelare cu apply() sau call()), regula de bază a binding-ului spune că obiectul-context va fi cel la care se face bindingul this.
-- în contextul de execuție tot ce este cu `this.ceva` devine membru al obiectului generat.
+- În contextul de execuție tot ce este cu `this.ceva` devine membru al obiectului generat.
 - Bindingul primar se face la obiectul global.
 - Bindingul implicit se face la contextul de execuție al unei funcții sau al unei metode.
+
+
+For methods, it’s the method’s
+owning object; for top-level functions, it’s always window (in other words, a method of
+window ); for constructors, it’s a newly created object instance.
 
 ## Regulile de binding - de generare a obiectului this
 

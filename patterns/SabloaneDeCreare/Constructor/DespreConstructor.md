@@ -7,12 +7,14 @@ Este folosit pentru a creea noi obiecte care au propriul scope.
 - funcții
 - this
 - legături prototipale
+- obiecte
 
 ## Mantre
 
 - Sunt funcții invocate cu `new` în față, fapt ce le transformă în obiecte.
 - O funcție apelată cu ```new``` în fața sa este un constructor,
 - Numele funcției devine numele obiectului,
+- `this` este un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat. 
 - Constructorii au propriul scope,
 - Constructorii creează obiecte cu propriul scope din alte obiecte,
 - `this` va reflecta noul obiect creat.
@@ -25,7 +27,7 @@ Este folosit pentru a creea noi obiecte care au propriul scope.
 
 1. Se creează un obiect nou.
 2. Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu ```new```. Se creează legătura prototipală.
-3. Creează un nou ```this``` pe care-l leagă la scope-ul obiectul abia creat. Contextul este setat la ```this``` pentru obiectul abia creat prin ```new```.
+3. Obiectul generat automat este pasat funcției cu rol de constructor ca fiind parametrul `this` și astfel, devine contextul de execuție a funcției constructor invocate (`this` este pasat ca parametru împreună cu `arguments`).
 4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), ```this``` va fi returnat automat.
 
 Cea mai simplă formă este exprimată de exemplul de mai jos:

@@ -38,6 +38,11 @@ Variabilele locale sunt disponibile funcției în care au fost declarate și tut
 Variabilele locale sunt reatribuite cu valori de fiecare dată când o funcție este invocată.
 Nu uita, parametrii unei funcții sunt la rândul lor variabile locale.
 
+Declarațiile de variabile se află în scope de la momentul în care au fost declarare până la închiderea blocului funcției în care au fost declarate indiferent de imbricarea altor blocuri `{}`.
+
+Funcțiile care poartă nume se află în scope-ul întreg al funcției în care au fost declarate indiferent de adâncimea blocurilor imbricate.
+
+
 ## Q&A
 
 **Întrebare**: Când se formează scope?

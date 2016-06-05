@@ -108,4 +108,36 @@ Este specificat să se ignore majusculele și să se facă căutare la nivel glo
 |:---------|:-------------| |
 | (x) | Identifică x și ține minte ce a găsit. Acestea sunt numite grupuri de captură. Subșirurile descoperite pot fi reapelate din array-ul rezultatelor sau din proprietățile predefinite ale obiectului RegExp ($1, ..., $9). Atenție, folosirea grupurilor penalizează performanța. Dacă nu este nevoie de un apel la substringurile descoperite, mai bine se face identificarea fără paranteze. |  |
 | \n | n este un număr întreg pozitiv |  |
-| (?:x) | Îl identifică pe x, dar nu-l ține minte |  |
+| (?:x) | Îl identifică pe x, dar nu-l ține minte, nu-l „capturează”. |  |
+
+Gruparea permite formarea de expresii secundare, care pot fi tratate ca o unitate.
+Gruparea permite și așa-zisa „capturare” a rezultatelor grupurilor pentru a fi utilizate ulterior.
+
+Grupurile care să nu captureze rezultatele sunt de preferat.
+
+Avantajul grupării este că le poți aplica repetiții. În mod normal, repetițiile se aplică unui singur caracter aflat la stânga metacaracterului.
+
+Ca exemplu, putem construi un regex care să identifice o adresă web incluzând și protocolul.
+
+```js
+var adrese = '<a href = "http://www.kosson.ro">Un site interesant</a><link rel="stylesheet" href="https://cloudshare.io/main.css">';
+var identificare = adrese.match(/(?:https?)?\/\/[a-z][a-z0-9-]+[a-z0-9]+/ig);
+// (?:https?)? ?: spune că este un grup care nu trebuie capturat.
+// identifică http
+// s? vezi dacă este și s în cazul unui https
+// ? tot grupul vezi dacă există o dată.
+// \/\/ se face escaping pentru slashuri
+// apoi o serie de domenii de caractere
+```
+
+## Diferența dintre identificările lazy și cele greedy.
+
+În mod natural, expresiile regulate au un comportament greedy, adică vor încerca să facă identificări până când resursa șir este epuizată.
+
+Gruparea permite o tehnică de apelare a grupului numită `backreferencing`. În cazul regexurilor, fiecărui grup îi sunt asignate numere de la stânga la dreapta începând cu 1. Se pot referenția aceste grupuri cu backslash număr.
+
+```js
+var sir = "Dorel era UN mare băiețel DE fel.";
+var identificare = sir.match(/(?:[A-Z])(?:[A-Z])\2\1/g);
+console.log(identificare);
+```

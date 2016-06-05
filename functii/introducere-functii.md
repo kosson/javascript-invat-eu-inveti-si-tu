@@ -10,9 +10,13 @@ Funcțiile sunt obiecte first-class. Pot fi pasate ca argumente altor funcții �
 - Funcțiile sunt „IDENTIFICATORI" așa cum sunt și variabilele.
 - Funcțiile returnează o valoare prestabilită: undefined
 - Funcțiile sunt ele însele valori.
-- Funcțiile sunt obiecte. Asta înseamnă că au conectări [[Prototype]] - lanț prototipal.
+- Funcțiile pot fi pasate ca argumente altor funcții.
+- Funcțiile sunt obiecte („first-class objects”). Asta înseamnă că au conectări [[Prototype]] - lanț prototipal.
 - Toate funcțiile au la dispoziția lor un set de utilități preexistent, care poate fi apelat prin `[[Prototype]]`. Cele mai evidente sunt call(), apply().
-- Funcțiile au o referință către contextul de execuție curent în timp ce se execută prin cuvântul cheie rezervat „this".
+- `this` și `arguments` sunt pasate tacit la invocarea unei funcții.
+- Când invoci funcția ca metodă a unui obiect, acel obiect devine **contextul** funcției și acesta devine disponibil în funcție prin intermediul parametrului `this`.
+- `this` este un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
+- O funcție are acces și poate performa operațiuni asupra obiectului în interiorul căruia a fost invocată.
 - În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype (numeFunctie.prototype) care se leagă automat la Object.prototype.
 - Funcțiile sunt legate de obiectul prototip prin metoda .constructor
 - Funcțiile nu sunt cele care generează obiectul prototype.

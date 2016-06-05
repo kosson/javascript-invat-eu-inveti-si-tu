@@ -1,6 +1,10 @@
 # Ce sunt callback-urile?
 
-Este o funcție care este executată ca răspuns la un eveniment.
+Este o funcție care este executată ca răspuns la un eveniment. Ori de câte ori o funcție este construită pentru a fi apelată ulterior, fie de browser, fie de o altă parte a codului, aceasta se numește `callback`.
+
+## Mantre
+
+- Funcțiile pot fi pasate ca argumente altor funcții.
 
 Funcțiile care acceptă alte funcții drept argumente sau care returnează funcții se numesc „funcții de ordin superior” - „higher-order function”.
 
@@ -16,6 +20,13 @@ function arataMesajul(mesaj){
 }
 
 arataMesajul('funcția internă este chemată după trei secunde');
+```
+Un alt exemplu simplu ca demonstrație:
+
+```js
+function test (numeFuncție){
+  return numeFuncție();
+};
 ```
 
 ## Mantre

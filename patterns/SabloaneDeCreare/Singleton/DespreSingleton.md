@@ -2,16 +2,24 @@
 - funcții
 - this
 - obiecte
+- clojure
+- IIFE
+- Revealing Module Pattern
 
 Îi spune Singleton (pe filieră Java) pentru că, ipotetic, nu poți să ai decât o singură instanță a acestui obiect.
 În JavaScript toate obiectele sunt Singleton pentru că JavaScript nu are clase.
 
 ## Mantre
 
+- este folosit doar la momentul instanțierii, după poate fi actializat doar
 - creează un namespace distinct
+- are instanțiere întârziată - când este nevoie, de fapt
+- obiectul este unic în întreaga aplicație
+- e o interfață globală constantp pentru toți cei care au nevoie să-l folosească
 - Modificarea concomitentă a valorilor, va duce la suprascrierea valorilor.
+- are o instanțiere întârziată, adică va fi folosit atunci când va fi nevoie de acesta.
 
-În Javascript, singleton-urile folosesc la crearea unui namespace distinct care izolează codul implementării de global scope oferind un singur punct de intrare pentru funcții.
+În Javascript, Singleton-urile folosesc la crearea unui namespace distinct care izolează codul implementării de global scope oferind un singur punct de intrare pentru funcții.
 
 Un Singleton este doar o structură.
 
@@ -75,7 +83,7 @@ var unSingleton = (function (){})();
 Pe scurt:
 1. Faci o referință către o funcție anonimă.
 2. Funcția anonimă are o metodă init ce returnează un obiect care poartă tot ce este public (atribute și metode).
-3. În funcție mai este o variabilă ține instanța Singleton-ului.
+3. În funcție mai este o variabilă care va ține instanța Singleton-ului.
 4. La final, funcția returnează un obiect cu o metodă care odată apelată ulterior, va încărca variabila cu o instanță a Singleton-ului, dacă aceasta nu există deja. Aceeași metodă, după instanțiere, returnează variabila purtătoare a instanței.
 5. Ajungi la atributele și metodele Singleton prin apelarea funcției returnate, care la rândul său returnează Singleton-ul instațiat deja.
 
@@ -86,11 +94,15 @@ var unSingleton = (function (){
 
   function init (){             // returnează obiectul care este Singleton-ul
 
+    var _proprietatePrivata = 10;
+
+    var metodaPublica = function (){
+      console.log('Salutare!');
+    }
+
     // se returnează obiectul
     return {
-      metodaPublica: function (){
-        console.log('Salutare!');
-      },
+      metodaPublica: metodaPublica,
       proprietatePublica: 'ceva'
     };
 
