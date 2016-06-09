@@ -20,6 +20,15 @@ Stringurile pot fi create direct cu `String(ceva)`, în care `ceva` este orice a
 - JavaScript convertește automat primitivele șir în obiecte String, fiind astfel posibilă folosirea metodelor obiectului String pentru primitivele string,
 - pentru a te asigura că poți face căutarea fără a te lovi de posibilele majuscule, mai întâi convertește toate caracterele șirului în minuscule folosind toLowerCase(). De exemplu: `var sir = "Acesta este un SIR"; sir.toLowerCase().startsWith("acesta"); // true`.
 
+## Crearea obiectelor String
+
+### Folosind constructorul: `new String()`
+```js
+var str = new String("test");
+```
+
+## Stringuri șablon - string patterns
+
 Începând cu ECMAScript 2015, stringurile literale pot fi numite și „Stringuri șablon” - Template strings. Un simplu exemplu:
 
 ```js
@@ -60,6 +69,27 @@ String.length și String.prototype
 
 String.fromCharCode() și String.fromCodePoint()
 
+## Lista metodelor disponibile stringurilor
+
+| obiectul în sine      | to                 | formatare    | identificare  | extragere     | evenimente    | manipulare    |
+| :------------         | :------------      | :------------| :-------------| :-------------| :-------------| :-------------|
+| constructor()         | toLocalLowerCase() | anchor()     | charAt()      | slice()       | watch()       | concat()      |
+| isPrototypeOf()       | toLocalString()    | * big()      | charCodeAt()  | substr()      | unwatch()     | repeat()      |
+| propertyIsEnumerable()| toLocalUppperCase()| * bold()     | codePointAt() | substring()   |               | replace()     |
+| hasOwnProperty()      | toLowerCase()      | * fontsize() | indexOf()     | trim()        |               | split()       |
+|                       | toSource()         | textcolor()  | lastIndexOf() | trimLeft()    |               | localCompare()|
+|                       | toString()         | italics()    | length()      | trimRight()   |
+|                       | toUpperCase()      | link()       | search()      |
+|                       |                    | * small()    | endsWith()    |
+|                       |                    | * strike()   | startsWith()  |
+|                       |                    | * sup()      | valueof()     |
+|                       |                    | * blink()    | contains()    |
+|                       |                    | * sub()      | inludes()     |
+|                       |                    | * fixed()    | match()       |
+|                       |                    | * normalize()|
+
+( * nu mai sunt suportate de standard )
+
 ## Anatomia unui șir de caractere
 
 Literele dintr-un `șir` se așează într-o ordine de la stânga la dreapta iar fiecare caracter este indexat purtând câte un număr începând de la 0.
@@ -81,6 +111,28 @@ Poate fi aflată prin invocarea proprietății .length direct pe șir:
 ### Lucrul cu indexul
 
 Este esențială înțelegerea indexului pentru că acesta poate fi considerat ca o adresă a caracterului. Închipuiește-ți că ești în fața unui perete, pe care sunt înșiruite tablouri, numai că în loc de eticheta cu autorul sau descrierea conținutului, este numărul de inventar care pornește de la 0.
+
+Metodele indexOf() și lastIndexOf() pot fi utilizate pentru căutarea unui substing într-un string. ```indexOf("substring")``` returnează valoarea indexului de la care începe substringul pasat ca argument.
+`indexOf()` și `lastIndexOf()` pot primi un al doilea parametru care indică indexul de la care să pornească căutarea. Dacă al doilea parametru nu este menționat, căutarea se va face de la index 0. Dacă nu este este găsit substringul, va fi returnată valoarea -1.
+
+### Extragerea substringurilor
+
+| t | e | s | t | e |   | d | e |   | s | t | r | i | n | g | u | r | i |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 |
+
+
+```js
+var str = "teste de stringuri";
+
+str.substr(11, 3); // => "rin"
+
+str.substring(11, 14); // => "rin"
+
+str.slice(11, 14); // => "rin"
+
+str.substring(11, 3); // => "te de st"
+```
 
 #### String.prototype.indexOf()
 
@@ -115,7 +167,6 @@ Poți verifica rapid dacă o secvență de text există într-un șir:
 ##### Reține:
 `indexOf()` este case sensitive!: `'Ceva Mare'.indexOf('mare'); // -1`
 
-
 #### String.prototype.lastIndexOf()
 
 Returnează indexul ultimei apariții a fragmentului pentru care se face căutarea. Dacă valoarea nu este găsită, este returnat -1.
@@ -149,6 +200,13 @@ Căutările se fac în sens invers, de la dreapta spre stânga, având punctul d
 
 // Returnarea dimensiunii șirului
 'cevatext'.lastIndexOf('');        // 8 fiind echivalent cu 'cevatext'.length
+```
+O combinație între substr și lastIndexOf.
+
+```js
+var fileName = window.location.href;
+fileName = fileName.substr(fileName.lastIndexOf("/") + 1);
+document.write("The file name of this page is " + fileName);
 ```
 
 ### Lucrul direct pe caractere și fragmente

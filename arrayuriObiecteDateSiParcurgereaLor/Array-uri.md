@@ -12,19 +12,21 @@ Indexarea internă a elementelor atunci când nu este explicită, pornește de l
 
 ## Crearea array-urilor
 
-### Folosind constructorul: ```new Array()```
+### Folosind constructorul: `new Array()`
+
 ```js
 var tablou = new Array();
 ```
 
 ### Cu declararea simplă prin paranteze drepte: array literal
+
 ```js
 var tablou = [];
 ```
 
 ## Mantre
 
-- ``Array`` este un obiect global. Acesta este folosit pentru crearea array-urilor
+- `Array` este un obiect intern limbajului JavaScript. Acesta este folosit pentru crearea array-urilor
 - Array este un obiect iterabil pentru că obiectul prototip are o metodă @@iterator (precum String, TypedArray, Map și Set).
 
 ### Metode aplicabile obiectului array
@@ -37,7 +39,7 @@ var tablou = [];
 |                  | unshift()            |                     | findIndex()     | filter()           | includes()   | |
 |                  | fill()               |                     | keys()          | some()             |              | |
 |                  |                      |                     | Array.isArray() | every()            |              | |
-|                  |                      |                     |                 | copyWithin()       |              | |
+|                  |                      |                     | sort()          | copyWithin()       |              | |
 
 ![](operatiuniArrayuri.svg)
 
@@ -243,7 +245,7 @@ Opțional se mai poate pasa o valoare care să reprezinte ``this`` la executarea
 ***Este implementarea naturală a ES5 pentru utilitățile _.each și $.each.***
 
 Metoda nu poate fi înlănțuită (chainable).
-Spre deosebire de map() și reduce() returnează întotdeauna ``undefined``.
+Spre deosebire de map() și reduce(), forEach() returnează întotdeauna ``undefined``.
 
 ```js
 function logArrayElements(element, index, array) {
@@ -288,7 +290,7 @@ array.indexOf(2, -1); // -1
 array.indexOf(2, -3); // 0
 ```
 
-Caută și scoate unde apare și se repetă un element.
+##### Caută și scoate unde apare și se repetă un element.
 
 ```js
 var indices = [];
@@ -303,7 +305,7 @@ console.log(indices);
 // [0, 2, 4]
 ```
 
-Căutarea unui element în array, iar dacă nu există, introducerea acestuia
+##### Căutarea unui element în array, iar dacă nu există, introducerea acestuia
 
 ```js
 function updateVegetablesCollection (veggies, veggie) {
@@ -374,6 +376,72 @@ var data = [ "bar", "foo", "", 0 ],
 console.log( filtered ); // ["bar", "foo"]
 ```
 
+#### Array.prototype.sort()
+
+Sortează elementele unui array și returnează acel array.
+Dacă nu este pasat un argument, de fapt o funcție care să îndeplinească sortare, aceasta se va face prin compararea codurilor de caractere Unicode.
+
+Pentru șiruri funcția de comparare poate fi astfel:
+
+```js
+function compare(primulCaracter, aldoileaCaracter) {
+  if (primulCaracter este mai mic decât aldoileaCaracter folosind un criteriu de ordonare) {
+    return -1;
+  }
+  if (primulCaracter este mai mare decât aldoileaCaracter folosind un criteriu de ordonare) {
+    return 1;
+  }
+  // primulCaracter trebuie să fie egal cu aldoileaCaracter
+  return 0;
+}
+```
+
+De exemplu:
+
+```js
+[-23, -2, 102, 3, -54].sort(function(x, y){
+  if(x < y){return -1}; // sortează x comparativ cu y, dacă x este mai mic decât y, pune-l pe x pe un index mai mic decât y: se deplasează spre stânga.
+  if(x > y){return 1}; // dacă y este mai mic decât x, acordă un index mai mic.
+  return 0; // dacă valorile sunt sortate lasă neschimbată poziția unuia față de celălalt.
+}); // Array [ -54, -23, -2, 3, 102 ]
+```
+
+O altă variantă de comparator pentru numere este pur și simplu scăderea unuia din celălalt:
+
+```js
+[-23, -2, 102, 3, -54].sort(function(x,y){
+  return x - y;
+}); // Array [ -54, -23, -2, 3, 102 ]
+```
+
+Și obiectele pot fi sortate dacă este dată o valoare a uneia dintre proprietăți.
+
+```js
+var colectie = [
+  {nume: 'Gina', valoare: 20},
+  {nume: 'Dobrin', valoare: 16},
+  {nume: 'Sanda', valoare: -12},
+  {nume: 'Nicolae', valoare: 40},
+  {nume: 'Pavel', valoare: -6}
+];
+
+// sortare după o valoare arbitrară
+colectie.sort(function(x,y){
+  if(x.valoare > y.valoare){return 1};
+  if(x.valoare < y.valoare){return -1};
+  return 0;
+});
+
+// sortare după o valoare text
+colectie.sort(function(x,y){
+  var numeX = x.nume.toUpperCase(); // uniformizezi caracterele
+  var numeY = y.nume.toUpperCase();
+  if(numeX < numeY){return -1};
+  if(numeX > numeY){return 1};
+  return 0;
+});
+```
+
 #### Array.prototype.reduce()
 
 Este o metodă care returnează produsul valorilor dintr-un array. Metodei i se dă un array, o funcție callback și o valoare opțională pentru a fi folosită la prima invocare.
@@ -392,7 +460,7 @@ Dacă array-ul are o singură valoare indiferent de poziția acesteia și nu est
 ```js
 [0, 1, 2, 3, 4].reduce(function(previousValue, currentValue, currentIndex, array) {
   return previousValue + currentValue;
-});
+}); // 10
 ```
 
 |                  | previousValue | currentValue  | previousIndex | array           | valoarea returnată  |
@@ -436,10 +504,16 @@ var total = [0, 1, 2, 3].reduce(function(a, b) {
 Aplatizarea unui array de array-uri:
 
 ```js
-var flattened = [[0, 1], [2, 3], [4, 5]].reduce(function(a, b) {
+var plat = [[0, 1], [2, 3], [4, 5]].reduce(function(a, b) {
   return a.concat(b);
 }, []);
 // flattened is [0, 1, 2, 3, 4, 5]
+```
+
+```js
+var texte = [["Gică", "Georgică"], "Abramburica", ["Nadia", "Ana"]].reduce(function(previousValue, currentValue, currentIndex, array){
+  return previousValue.concat(currentValue);
+}, []);
 ```
 
 ## Menționarea resurselor folosite pentru documentare:

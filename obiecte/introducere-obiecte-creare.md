@@ -86,7 +86,6 @@ var unObiect = new Salut();               // unObiect returnează: Object {}
                                           // unObiect.__proto__              returnează: Object{  glas: Salut.prototype.glas(), constructor: Salut() }
                                           // Object.getPrototypeOf(unObiect) returnează: Object{  glas: Salut.prototype.glas(), constructor: Salut() }
 unObiect.glas('o vorbă să-ți mai spun');  // unObiect.__proto__.constructor returnează: function Salut()
-
 ```
 
 Atenție! Aici există ceva foarte important de lămurit. Proprietatea `prototype` aparține funcției constructor. Această legătură vizibilă, care poate fi „întrebată”, expune o legătură internă referită de standard ca [[Prototype]].

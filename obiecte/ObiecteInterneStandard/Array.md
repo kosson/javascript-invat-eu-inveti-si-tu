@@ -1,1 +1,1 @@
-Este o funcție Constructor existentă în limbaj deja.
+Este o funcție Constructor existentă în limbaj.

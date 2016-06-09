@@ -5,6 +5,9 @@
 Funcțiile sunt obiecte first-class. Pot fi pasate ca argumente altor funcții și pot fi returnate din funcții.
 
 ## Mantre
+
+- Orice funcție poate fi apelată cu oricâte argumente de orice tip în orice moment.
+- Toate funcțiile sunt de fapt obiecte `Function` (obiecte interne).
 - O funcție este declarată de o expresie care începe cu cuvânt rezervat limbajului: `function`.
 - Când funcțiile sunt executate SCOPE-ul folosit este cel de la MOMENTUL DEFINIRII, nu cel de la momentul invocării (asta înseamnă LEXICAL SCOPE, de fapt).
 - Funcțiile sunt „IDENTIFICATORI" așa cum sunt și variabilele.

@@ -14,8 +14,9 @@ Folosit pentru a lua un obiect și pentru a-i îmbogăți și/sau prelucra valor
 ## Mantre
 
 - Funcțiile sunt obiecte!
+- Toate funcțiile sunt de fapt obiecte `Function` (obiecte interne).
 - La invocarea funcțiilor pe lângă argumente sunt pasate „tacit” `this` și `arguments`.
-- `this` este un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat. 
+- `this` este un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
 - Obiectul `this` se constituie la execuția codului, nu la momentul scrierii lui.
 - **this** este o referință către contextul de execuție curent în timp ce funcția se execută.
 - `this` nu se referă în niciun caz la **lexical scope**.
@@ -122,11 +123,17 @@ Ceea ce s-a întâmplat, de fapt este că a fost „împrumutată” (invocată)
 
 ### 3. Binding explicit
 
-`call()` și `apply()` sunt utilități disponibile prin `[[Prototype]]` tuturor funcțiilor, care sunt de fapt la rândul lor obiecte.
+`call()` și `apply()` sunt utilități disponibile prin `[[Prototype]]` tuturor funcțiilor, care sunt de fapt la rândul lor obiecte (funcțiile sunt obiecte `Function`, care moștenesc metodele din prototipul său).
 
 Bindingul explicit se realizează prin intermediul lui call() și apply(). Ambele iau ca prim parametru un obiect care va fi folosit pentru `this` și apoi va invoca funcția cu acel `this` deja specificat. Pentru că este afirmat în mod direct unde dorești să fie this, numim aceasta binding explicit.
 
 O chestie interesantă este că de vei pasa valoarea unei primitive simple de tip string, boolean sau number, atunci primitiva va fi „impachetată” în forma de obiect corespondentă (`new String(..)`, `new Boolean(..)`, or `new Number(..)`) și abia la acesta se va face binding-ul `this`. Acest lucru se numește "boxing".
+
+### Mecanism oferit de apply()
+
+Obiectul pasat ca și context, în fapt cel care este și `this`, este, de fapt apelantul funcției. Ceea ce permite acest mecanism, de fapt este posibilitatea de a scrie o funcție cu rol de metodă, care să poată fi folosită în alt obiect fără a fi necesară rescrierea metodei pentru un nou obiect.
+
+Începând cu ECMAScript 5, array-ul argumentelor pasate poate fi și un obiect care are caracteristicile unui array.
 
 
 ```js
@@ -269,7 +276,7 @@ var obiect = {
 
 #### Mantre
 
-- bind() creează o nouă funcție, care atunci când este apelată va avea ```this``` setat la valoarea introdusă ca paramentru împreună cu o serie de argumente.
+- bind() creează o nouă funcție, care atunci când este apelată va avea `this` setat la valoarea introdusă ca paramentru împreună cu o serie de argumente.
 
 Exemplul de la MDN
 
@@ -296,20 +303,20 @@ bind() va fi găsit în funcția __proto__ al oricărui obiect generat de o func
 
 ## 4. Binding cu `new`
 
-Poți pune în fața oricărei funcții ```new``` și o transformi astfel într-un apel către un Constructor. Atenție, aici trebuie precizat faptul că JavaScript nu are clase.
+Poți pune în fața oricărei funcții `new` și o transformi astfel într-un apel către un Constructor. Atenție, aici trebuie precizat faptul că JavaScript nu are clase.
 
 ### Mantre
-- O funcție apelată cu ```new``` în fața sa este un constructor.
+- O funcție apelată cu `new` în fața sa este un constructor.
 - new este mai puternic decât hard binding-ului.
 
 Ceea ce va face la instanțiere este exact ceea ce a fost proiectată funcția la care se adaugă patru comportamente nevăzute.
 
-Ce se întâmplă când pui cuvântul cheie rezervat new în fața oricărei funcții?
+Ce se întâmplă când pui cuvântul cheie rezervat `new` în fața oricărei funcții?
 
-1. Se creează un obiect nou din nimic.
-2. Se creează legătura prototipală `[[Prototype]]`.
-3. Obiectul abia creat devine contextul la care se leagă `this`.
-4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), obiectul care, de altfel este `this`, va fi returnat automat.
+1. Se creează un obiect nou.
+2. Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu ```new```. Se creează legătura prototipală.
+3. Obiectul generat automat este pasat funcției cu rol de constructor ca fiind parametrul `this` și astfel, devine contextul de execuție a funcției constructor invocate (`this` este pasat ca parametru împreună cu `arguments`).
+4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), ```this``` va fi returnat automat.
 
 ```js
 function viitorObiect(data){
@@ -392,6 +399,10 @@ Ceea ce se observă este că `new` are capacitatea de a suprascrie hard binding-
 ### Lucruri la care să fii atent
 
 În cazul în care folosești forEach(), trebuie să știi că poți pasa și `this`, ca al doilea argument. Deci, nu face „punte lexicală” de genul `var that = this` pentru a adăuga rezultatele iterării la this. (vezi [MDN>Web technology for developers>JavaScript>JavaScript reference>Standard built-in objects>Array>Array.prototype.forEach()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach))
+
+## Alonje
+
+- înțelegerea programării funcționale
 
 ## Menționarea resurselor folosite pentru documentare:
 [MDN>Web technology for developers>JavaScript>JavaScript reference>Expressions and operators>this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)

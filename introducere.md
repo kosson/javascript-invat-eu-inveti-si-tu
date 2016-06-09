@@ -12,7 +12,7 @@ Conține experiențe și note strânse după ce am citit și văzut multe alte l
 
 Este posibil ca multe dintre interpretările mele sau felul în care explic să nu fie cel canonic, cel predat la facultate sau în mediile academice dedicate. Limbajul adoptat este unul dedicat celui care dorește să înțeleagă fenomenul și să ajungă la a înțelege repede anumite concepte sensibile.
 
-Materialele vor fi redactate în Markdown iar cei care doresc, vor putea transforma în orice moment cu pandoc într-un format care să aventajeze obișnuințele proprii de lectură. Materialele pot servi și ca date prelucrabile pentru un posibil sistem de învățare dinamic și adaptat pe subiect. În acest sens, unele materiale includ secțiuni intitulare „dependințe cognitive” sau „alonje”. Mai toate subiectele tratate conțin o secțiune intitulată „mantre”, care au scopul de a realiza liste de „atribute” ce descriu aspectele cele mai importante.
+Materialele vor fi redactate în Markdown iar cei care doresc, vor putea transforma în orice moment cu pandoc într-un format care să avantajeze obișnuințele proprii de lectură. Materialele pot servi și ca date prelucrabile pentru un posibil sistem de învățare dinamic și adaptat pe subiect. În acest sens, unele materiale includ secțiuni intitulare „dependințe cognitive” sau „alonje”. Mai toate subiectele tratate conțin o secțiune intitulată „mantre”, care au scopul de a realiza liste de „atribute” care descriu aspectele cele mai importante.
 
 # Anti-introducere
 
@@ -20,6 +20,9 @@ JavaScript este motorul dinamicii paginilor web.
 
 John Resig, creatorul bibliotecii de cod jQuery spune despre înțelegerea acestui limbaj că este o relație între obiecte, funcții și clojure-uri.
 
+# Generalități privind JavaScript
+
+Unul dintre cele mai mari avantaje ale limbajului este acela că orice funcție poate fi apelată cu oricâte argumente de orice tip în orice moment.
 
 # Resurse
 

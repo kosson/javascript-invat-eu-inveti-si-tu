@@ -1,5 +1,7 @@
 # Closures
 
+Closure-ul este mecanismul prin care JavaScript permite ascunderea datelor - încapsularea datelor.
+
 Un closure este mecanismul prin care putem obține o încapsulare dinamică a stări scope-ului, care, atenție, poate fi modificat atâta vreme cât closure-ul există.
 
 ## Dependințe cognitive
