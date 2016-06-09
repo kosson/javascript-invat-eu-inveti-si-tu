@@ -28,7 +28,7 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
   2. Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu ```new```. Se creează legătura prototipală.
   3. Obiectul generat automat este pasat funcției cu rol de constructor ca fiind parametrul `this` și astfel, devine contextul de execuție a funcției constructor invocate (`this` este pasat ca parametru împreună cu `arguments`).
   4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), ```this``` va fi returnat automat.
-- `this` este un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat. 
+- `this` este un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
 - Obiectele pot moșteni alte proprietăți direct din alte obiecte.
 - Când introduci o proprietate nouă într-un obiect care generează prototipul pentru alte obiecte, obiectele legate prin lanțul prototipal, vor moșteni noile proprietăți.
 - [[Prototype]], adică proprietatea `prototype` este o legătură internă, care se stabilește de la un obiect la altul. Pentru aflarea prototipului se apelează la __proto__ (dunder-dunder proto) sau sse va folosi Object.getPrototypeOf(obiect).
@@ -69,9 +69,9 @@ Acesta este modelul cel mai des întâlnit și acceptat ca practică istorică:
 #### Ce se întâmplă când folosești `new`
 
 1. Se creează un obiect nou.
-2. Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu ```new```. Se creează legătura prototipală.
+2. Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu `new`. Se creează legătura prototipală.
 3. Obiectul generat automat este pasat funcției cu rol de constructor ca fiind parametrul `this` și astfel, devine contextul de execuție a funcției constructor invocate (`this` este pasat ca parametru împreună cu `arguments`).
-4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), ```this``` va fi returnat automat.
+4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), `this` va fi returnat automat.
 
 Cel mai simplu exemplu:
 
@@ -94,6 +94,33 @@ Atenție! Aici există ceva foarte important de lămurit. Proprietatea `prototyp
 Cum testezi, cum întrebi care este prototipul unui obiect? Există două metode echivalente ca rezultat returnat (obiectul prototype):
 1. Object.getPrototypeOf(obiectulTestat),
 2. obiectulTestat.__proto__
+
+#### Crearea și accesarea membrilor unui obiect creat cu un constructor
+
+Funcțiile cu rol de constuctori pot defini întern metodele, iar acestea devin niște metode tip „accessor” sau „getter”, care te ajută să ajungi din scope-ul extern la valorile din constructor.
+
+```js
+function Sablon(){
+  var cantitate = 10;
+
+  this.getCantitate = function(){
+    return cantitate;
+  };
+
+  this.incrementare = function(){
+    cantitate++;
+  };
+};
+
+var obiect = new Sablon();
+
+obiect.getCantitate(); // 10
+obiect.incrementare(); // undefined
+obiect.getCantitate(); // 11
+```
+Pentru a ajunge la cantitate este nevoie de metode de acces („accessors”). Acesta este și unul din cazurile de realizare a unui closure.
+
+## Cazuistică de realizare a obiectelor cu new și introducerea de metode direct în prototip
 
 Un exemplu ceva mai dezvoltat.
 

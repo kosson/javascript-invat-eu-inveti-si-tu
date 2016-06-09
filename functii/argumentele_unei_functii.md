@@ -3,13 +3,19 @@
 Pe scurt, este ceea ce pasezi funcțiilor. Numărul de argumente pasate unei funcții se numește „arity”.
 Fiecare parametru trebuie pasat funcției în ordinea corectă.
 
+## Mantre
+
+- argumentele pasate funcțiilor pot avea echivalență în numărul parametrilor declarați sau nu
+- o funcție are o proprietate `length`, care nu trebuie confundată cu propritatea cu același nume a parametrului `arguments`. nume_funcție.length returnează câți parametri care au un nume au fost declarați.
+- pentru o funcție poți vedea câți parametri au fost declarați (`nume_functie.length`) și câte argumente i-au fost pasate (`arguments.length`).
+
 ## Numărul argumentelor la invocare față de numărul parametrilor la declarare
 
 Argumentele pasate unei funcții la momentul invocării trebuie să se potrivească numărului de parametri specificați în declarația funcției și în acceași ordine. Dar sunt cazuri în care numărul argumentelor este mai mare decât cel al parametrilor, precum și cazuri în care numărul argumentelor este mai mic decât cel al parametrilor. Trebuie reținut faptul că JavaScript nu va da vreo eroare atunci când sunt diferențe.
 
 ### Numărul argumentelor este mai mare decât al parametrilor
 
-Valorile „în plus” nu vor fi atrinuite numelor parametrilor.
+Valorile „în plus” nu vor fi atribuite numelor parametrilor.
 
 ### Numărul argumentelor este mai mic decât al parametrilor
 
@@ -45,6 +51,6 @@ La invocarea tuturor funcțiilor suplimentar argumentelor sunt pasați și alți
 Este o colecție a tuturor argumentelor pasate funcției.
 Această colecție care pare un array are o proprietate `length`, iar valorile pot fi obținute ca dintr-un array `arguments[0]` și se poate chiar itera cu o ciclare for.
 
-### Paramentrul `this`
+### Parametrul `this`
 
 Acest parametru se referă la obiectul asociat invocării funcții și este cunoscut ca și `contextul funcției` (function context).

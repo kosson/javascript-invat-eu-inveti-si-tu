@@ -1,5 +1,4 @@
-# Despre scope
-============
+# Scope
 
 Posibilă traducere în limba română: „perimetru” sau „arie de efect”.
 
@@ -10,19 +9,13 @@ Global scope este locul de unde pot fi accesate funcții și variabile în într
 
 Javascript generează un scope lexical, care se leagă fix de locul unde s-a făcut o declarație. Nu este unul dinamic.
 
-Bash are un scope (perimetru) dinamic și Perl activând o opțiune.
-
-## Acumulări rapide
-- JavaScript are un **scope lexical**. De fapt, este vorba despre scope, care este format la faza de compilare.
-- Declararea unei funcții conduce la stabilirea un scope (un perimetru, o zonă).
-- **Scope chain** este totalitatea obiectelor care definesc variabilele existente în scope pentru o secvență de cod. Când motorul are nevoie să găsească valoarea unei variabile, se uită la primul obiect din lanț. Operațiunea se mai numește „walking up the scope chain".
-
 ## Mantre
 
 - JavaScript are o fază de compilare.
-- JavaScript are un **scope lexical** general la faza de compilare. Acesta este de fapt, un set de reguli pentru a determina cum se face căutarea după un anume identificator.
-- Funcțiile generează SCOPE-ul.
+- JavaScript are un **scope lexical** generat la faza de compilare. Acesta este de fapt, un set de reguli pentru a determina cum se face căutarea după un anume identificator.
+- Declararea funcțiilor generează SCOPE-ul.
 - Când funcțiile sunt executate SCOPE-ul folosit este cel de la MOMENTUL DEFINIRII (faza de compilare), nu cel de la momentul invocării (asta înseamnă LEXICAL SCOPE, de fapt).
+- **Scope chain** este totalitatea obiectelor care definesc variabilele existente în scope pentru o secvență de cod. Când motorul are nevoie să găsească valoarea unei variabile, se uită la primul obiect din lanț. Operațiunea se mai numește „walking up the scope chain".
 - Când este definită o funcție, aceasta stochează scope chain-ul care era în efect în acel moment.
 - Obiectul creat de invocarea unei funcții este adăugat scope chain-ului existent.
   - Scope chain-ul astfel rezultat reprezintă scope chain-ul de la acel moment.
@@ -30,18 +23,23 @@ Bash are un scope (perimetru) dinamic și Perl activând o opțiune.
 - Când funcția returnează, obiectul care face binding-ul variabilelor este scos din **scope chain**.
 - Dacă nu există funcții interne, nu mai există nicio legătură spre obiectul care face binding-ul variabilelor și se face GARBAGE COLLECTING.
 - Când sunt definite funcții interne, acestea la rândul lor generează referințe în scope chain.
-- Dacă o funcție internă este returnată sau introdusă într-o variabilă, atunci va exista o referință către aceasta și nu se va face garbage collecting (avem un clojure).
+- **Dacă o funcție internă este returnată sau introdusă într-o variabilă**, atunci va exista o referință către aceasta și nu se va face garbage collecting (avem un clojure).
 - Scope chain-ul unui closure este unul viu; funcțiile interne nu fac copii private ale scope-ului și nici nu fac snapshoturi ale binding-urilor variabilelor.
+
+## Variabilele din scope
 
 Scope-ul unei variabile poate fi înțeles setul de linii de cod sursă pentru care este definit un identificator.
 Variabilele locale sunt disponibile funcției în care au fost declarate și tuturor funcțiilor interne.
 Variabilele locale sunt reatribuite cu valori de fiecare dată când o funcție este invocată.
 Nu uita, parametrii unei funcții sunt la rândul lor variabile locale.
 
-Declarațiile de variabile se află în scope de la momentul în care au fost declarare până la închiderea blocului funcției în care au fost declarate indiferent de imbricarea altor blocuri `{}`.
+Declarațiile de variabile se află în scope de la momentul în care au fost declarate, până la închiderea blocului funcției în care au fost declarate indiferent de imbricarea altor blocuri `{}`.
 
 Funcțiile care poartă nume se află în scope-ul întreg al funcției în care au fost declarate indiferent de adâncimea blocurilor imbricate.
 
+## Alonjă
+
+Necesar pentru înțelegerea clojure-urilor.
 
 ## Q&A
 

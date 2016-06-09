@@ -8,9 +8,10 @@ Funcțiile sunt obiecte first-class. Pot fi pasate ca argumente altor funcții �
 - O funcție este declarată de o expresie care începe cu cuvânt rezervat limbajului: `function`.
 - Când funcțiile sunt executate SCOPE-ul folosit este cel de la MOMENTUL DEFINIRII, nu cel de la momentul invocării (asta înseamnă LEXICAL SCOPE, de fapt).
 - Funcțiile sunt „IDENTIFICATORI" așa cum sunt și variabilele.
-- Funcțiile returnează o valoare prestabilită: undefined
+- Funcțiile returnează o valoare prestabilită: `undefined`
 - Funcțiile sunt ele însele valori.
 - Funcțiile pot fi pasate ca argumente altor funcții.
+- Pentru o funcție poți vedea câți parametri au fost declarați (`nume_functie.length`) și câte argumente i-au fost pasate (`arguments.length`).
 - Funcțiile sunt obiecte („first-class objects”). Asta înseamnă că au conectări [[Prototype]] - lanț prototipal.
 - Toate funcțiile au la dispoziția lor un set de utilități preexistent, care poate fi apelat prin `[[Prototype]]`. Cele mai evidente sunt call(), apply().
 - `this` și `arguments` sunt pasate tacit la invocarea unei funcții.

@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="abstractizareVizualaPatterns.svg">
+   sodipodi:docname="closures.svg">
   <defs
      id="defs4">
     <marker
@@ -385,21 +385,6 @@
       </g>
     </marker>
     <marker
-       inkscape:stockid="TriangleInS"
-       orient="auto"
-       refY="0.0"
-       refX="0.0"
-       id="marker17832"
-       style="overflow:visible"
-       inkscape:isstock="true"
-       inkscape:collect="always">
-      <path
-         id="path17834"
-         d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
-         style="fill-rule:evenodd;stroke:#00d9ff;stroke-width:1pt;stroke-opacity:1;fill:#00d9ff;fill-opacity:1"
-         transform="scale(-0.2)" />
-    </marker>
-    <marker
        inkscape:stockid="Arrow2Sstart"
        orient="auto"
        refY="0.0"
@@ -558,22 +543,6 @@
          d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
          id="path5283"
          inkscape:connector-curvature="0" />
-    </marker>
-    <marker
-       inkscape:stockid="TriangleOutS"
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="marker5045"
-       style="overflow:visible"
-       inkscape:isstock="true"
-       inkscape:collect="always">
-      <path
-         inkscape:connector-curvature="0"
-         id="path5047"
-         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
-         style="fill:#008000;fill-opacity:1;fill-rule:evenodd;stroke:#008000;stroke-width:1pt;stroke-opacity:1"
-         transform="scale(0.2,0.2)" />
     </marker>
     <marker
        inkscape:stockid="TriangleInS"
@@ -1060,22 +1029,6 @@
          d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
          style="fill:#008000;fill-opacity:1;fill-rule:evenodd;stroke:#008000;stroke-width:1pt;stroke-opacity:1"
          transform="scale(-0.2,-0.2)" />
-    </marker>
-    <marker
-       inkscape:stockid="TriangleOutS"
-       orient="auto"
-       refY="0"
-       refX="0"
-       id="marker5045-8-7"
-       style="overflow:visible"
-       inkscape:isstock="true"
-       inkscape:collect="always">
-      <path
-         inkscape:connector-curvature="0"
-         id="path5047-9-8"
-         d="m 5.77,0 -8.65,5 0,-10 8.65,5 z"
-         style="fill:#00d9ff;fill-opacity:1;fill-rule:evenodd;stroke:#00d9ff;stroke-width:1pt;stroke-opacity:1"
-         transform="scale(0.2,0.2)" />
     </marker>
     <marker
        inkscape:stockid="TriangleInS"
@@ -1625,9 +1578,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8284271"
-     inkscape:cx="595.03875"
-     inkscape:cy="910.87071"
+     inkscape:zoom="2"
+     inkscape:cx="291.57593"
+     inkscape:cy="678.15752"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1649,12 +1602,7 @@
      inkscape:snap-midpoints="true"
      inkscape:snap-object-midpoints="true"
      gridtolerance="10"
-     inkscape:snap-nodes="true">
-    <sodipodi:guide
-       position="764.52307,920.24999"
-       orientation="1,0"
-       id="guide49775" />
-  </sodipodi:namedview>
+     inkscape:snap-nodes="true" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -1690,248 +1638,6 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <rect
-       style="opacity:1;fill:#b3b3b3;fill-opacity:0.78531075;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="rect9336-7-6"
-       width="192.86827"
-       height="156"
-       x="304.18665"
-       y="32.870941" />
-    <rect
-       style="opacity:1;fill:#b3b3b3;fill-opacity:0.78531075;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="rect9336-7"
-       width="158"
-       height="156"
-       x="60.067722"
-       y="34.820927" />
-    <rect
-       style="opacity:1;fill:#b3b3b3;fill-opacity:0.78531075;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="rect9336"
-       width="158"
-       height="156"
-       x="45.414215"
-       y="637.42169" />
-    <rect
-       style="opacity:1;fill:#ffff00;fill-opacity:1;stroke:#00d9ff;stroke-width:3.26899981;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:3.26899916, 6.53799814;stroke-dashoffset:0;stroke-opacity:1"
-       id="functieContainerFactory"
-       width="126.99928"
-       height="104.18146"
-       x="56.873627"
-       y="647.53656"
-       rx="0"
-       ry="0"
-       inkscape:label="#functie_container_factory">
-      <title
-         id="title7550">Funcția container pentru un factory</title>
-    </rect>
-    <circle
-       style="opacity:0.87000002;fill:#ffffff;fill-opacity:1;stroke:#00d9ff;stroke-width:3.26900101;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:3.2690005, 6.53800097;stroke-dashoffset:0;stroke-opacity:1"
-       id="path5265"
-       cx="134.22041"
-       cy="707.16138"
-       r="31.651649" />
-    <circle
-       style="opacity:1;fill:#800080;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="paraFuncCont"
-       cx="-661.14587"
-       cy="106.1299"
-       transform="matrix(0.0510916,-0.99869397,0.99869397,0.0510916,0,0)"
-       r="11.476145"
-       inkscape:label="#para_func_cont">
-      <desc
-         id="desc7554">Parametrii pe care funcția container al factory-ului îi primește</desc>
-      <title
-         id="title7552">Parametrii</title>
-    </circle>
-    <circle
-       style="opacity:0.87000002;fill:#ff6600;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="funcMetodeObjReturnat"
-       cx="-700.82123"
-       cy="182.44279"
-       r="11.476145"
-       transform="matrix(0.0510916,-0.99869397,0.99869397,0.0510916,0,0)"
-       inkscape:label="#func_metoda_obj_ret">
-      <desc
-         id="desc7562">Metode returnate în obiect care fac clojure</desc>
-      <title
-         id="title7560">Metode</title>
-    </circle>
-    <circle
-       style="opacity:1;fill:#008000;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="path4918-5-4-1-5-4-2"
-       cx="-767.7699"
-       cy="174.32059"
-       r="11.476145"
-       transform="matrix(0.0510916,-0.99869397,0.99869397,0.0510916,0,0)" />
-    <circle
-       style="opacity:1;fill:#800080;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="identifReturnFact"
-       cx="-702.10657"
-       cy="157.30608"
-       r="11.476145"
-       transform="matrix(0.0510916,-0.99869397,0.99869397,0.0510916,0,0)"
-       inkscape:label="#identif_return_fact">
-      <desc
-         id="desc7558">Indetificatorii către variabilele care vor fi returnate ca membri ai obiectului returnat</desc>
-      <title
-         id="title7556">Identificatori</title>
-    </circle>
-    <path
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#00d9ff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker5045)"
-       d="m 83.688395,665.67641 37.402595,-0.0924 0,32.18116"
-       id="path5037"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccc" />
-    <path
-       style="opacity:1;fill:#008000;fill-opacity:1;stroke:#008000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker8490-4-5)"
-       d="m 134.45263,738.81305 c 0,21.87671 0,21.43608 0,21.43608"
-       id="path8304-6-7"
-       inkscape:connector-curvature="0" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#00ffff;fill-opacity:1;stroke:#00d9ff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="123.47885"
-       y="733.02753"
-       id="text11329-3-5"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan11331-8-5"
-         x="123.47885"
-         y="733.02753"
-         style="font-size:12.5px;fill:#00ffff;stroke:#00d9ff;stroke-opacity:1">this</tspan></text>
-    <path
-       style="opacity:1;fill:#b3b3b3;fill-opacity:1;stroke:#b3b3b3;stroke-width:3.26900005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 153.79129,709.22717 42.23451,-5.4e-4"
-       id="path8016"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
-    <circle
-       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#b3b3b3;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="path5061-5-9-2"
-       cx="192.45438"
-       cy="709.22662"
-       r="3.5714285" />
-    <circle
-       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#b3b3b3;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="path5061-5-9"
-       cx="175.2981"
-       cy="709.22662"
-       r="3.5714285" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="51.535179"
-       y="821.27551"
-       id="text10995-9"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan10997-8"
-         x="51.535179"
-         y="821.27551"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'">var fabrica = function (<tspan
-   style="font-size:7.5px;fill:#800080"
-   id="tspan8357">val</tspan>){</tspan><tspan
-         sodipodi:role="line"
-         x="51.535179"
-         y="830.65051"
-         id="tspan8282"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"> return {</tspan><tspan
-         sodipodi:role="line"
-         x="51.535179"
-         y="840.02551"
-         id="tspan8286"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"><tspan
-   style="fill:#0000ff"
-   id="tspan8417">  attr</tspan>: <tspan
-   style="font-size:7.5px;fill:#800080"
-   id="tspan8359">val</tspan>,</tspan><tspan
-         sodipodi:role="line"
-         x="51.535179"
-         y="849.40051"
-         id="tspan8290"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'">  actiune: <tspan
-   style="font-size:7.5px;fill:#ff6600"
-   id="tspan8361">function(){</tspan></tspan><tspan
-         sodipodi:role="line"
-         x="51.535179"
-         y="858.77551"
-         id="tspan8292"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#ff6600">   return this.<tspan
-   style="fill:#0000ff"
-   id="tspan8415">attr</tspan>;</tspan><tspan
-         sodipodi:role="line"
-         x="51.535179"
-         y="868.15051"
-         id="tspan8294"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch';fill:#ff6600">  }</tspan><tspan
-         sodipodi:role="line"
-         x="51.535179"
-         y="877.52551"
-         id="tspan8288"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"> }</tspan><tspan
-         sodipodi:role="line"
-         x="51.535179"
-         y="886.90051"
-         id="tspan8284"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'">};</tspan><tspan
-         sodipodi:role="line"
-         x="51.535179"
-         y="896.27551"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan8351">var util = <tspan
-   style="font-size:7.5px;fill:#008000"
-   id="tspan8363">new fabrica('ceva')</tspan>;</tspan><tspan
-         sodipodi:role="line"
-         x="51.535179"
-         y="905.65051"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan8355">util.<tspan
-   style="font-size:7.5px;fill:#ff6600"
-   id="tspan8365">actiune()</tspan>; // &quot;ceva&quot;</tspan><tspan
-         sodipodi:role="line"
-         x="51.535179"
-         y="915.02551"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan8353" /></text>
-    <g
-       id="g11083-4"
-       transform="translate(-282.92565,415.13044)"
-       style="stroke:#00d9ff;stroke-opacity:1">
-      <circle
-         r="3.5714285"
-         cy="250.82964"
-         cx="384.36389"
-         id="path5061-2-5"
-         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#00d9ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <g
-         transform="matrix(0.37128832,0,0,0.37128832,251.61399,159.9146)"
-         id="text5407-3-4"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';letter-spacing:0px;word-spacing:0px;fill:#b3b3b3;fill-opacity:1;stroke:#00d9ff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1">
-        <path
-           inkscape:connector-curvature="0"
-           id="path5419-4-8"
-           style="fill:#b3b3b3;stroke:#00d9ff;stroke-opacity:1"
-           d="m 358.44586,244.81024 q 0.57129,0.14649 0.97412,0.55664 0.40283,0.40283 1.00342,1.61865 l 1.48682,2.98829 -1.58936,0 -1.30371,-2.76123 q -0.56396,-1.1792 -1.01807,-1.51612 -0.44677,-0.34424 -1.17187,-0.34424 l -1.41357,0 0,4.62159 -1.48682,0 0,-10.93506 3.04687,0 q 1.80176,0 2.76123,0.81299 0.95948,0.81298 0.95948,2.35107 0,1.08398 -0.59326,1.77246 -0.58594,0.68115 -1.65528,0.83496 z m -3.03222,-4.55566 0,3.88183 1.61865,0 q 1.06201,0 1.58203,-0.47607 0.52002,-0.47607 0.52002,-1.45752 0,-0.94482 -0.55664,-1.44287 -0.54932,-0.50537 -1.60401,-0.50537 l -1.56005,0 z" />
-      </g>
-    </g>
-    <circle
-       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#b3b3b3;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="path5061-5-9-5"
-       cx="152.39844"
-       cy="709.22723"
-       r="3.5714285" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="60.10408"
-       y="630.92657"
-       id="labelSimpleFactory"
-       sodipodi:linespacing="125%"><title
-         id="title9207">Simple Factory Label</title><tspan
-         sodipodi:role="line"
-         id="tspan8349"
-         x="60.10408"
-         y="630.92657">SIMPLE FACTORY</tspan></text>
     <flowRoot
        xml:space="preserve"
        id="flowRoot8367"
@@ -1945,484 +1651,6 @@
          id="flowPara8373" /></flowRoot>    <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="15.033448"
-       y="202.58806"
-       id="text8393"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         x="15.033448"
-         y="202.58806"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan8781">var Sarcina = function(<tspan
-   style="fill:#800080"
-   id="tspan9097">numeSarcina</tspan>){</tspan><tspan
-         sodipodi:role="line"
-         x="15.033448"
-         y="211.96306"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9037">  this.nume = <tspan
-   style="fill:#800080"
-   id="tspan9099">numeSarcina</tspan>;</tspan><tspan
-         sodipodi:role="line"
-         x="15.033448"
-         y="221.33806"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9039">  this.terminat = false;</tspan><tspan
-         sodipodi:role="line"
-         x="15.033448"
-         y="230.71306"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9041">};</tspan><tspan
-         sodipodi:role="line"
-         x="15.033448"
-         y="240.08806"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9043" /><tspan
-         sodipodi:role="line"
-         x="15.033448"
-         y="249.59587"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9045">Sarcina.<tspan
-   style="fill:#ff0000"
-   id="tspan9203">prototype</tspan>.<tspan
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch Bold';fill:#ff6600"
-   id="tspan9224">termin</tspan> = function () {</tspan><tspan
-         sodipodi:role="line"
-         x="15.033448"
-         y="259.04901"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9047">  console.log(&quot;inchei de facut sarcina „&quot; + this.nume + &quot;”&quot;);</tspan><tspan
-         sodipodi:role="line"
-         x="15.033448"
-         y="268.42401"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9049">  this.terminat = true;</tspan><tspan
-         sodipodi:role="line"
-         x="15.033448"
-         y="277.79901"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9059">};</tspan><tspan
-         sodipodi:role="line"
-         x="15.033448"
-         y="287.17401"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9061" /><tspan
-         sodipodi:role="line"
-         x="15.033448"
-         y="296.54901"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9063">var sarcina1 = new Sarcina(&quot;fa demo pentru constructor&quot;); </tspan><tspan
-         sodipodi:role="line"
-         x="15.033448"
-         y="305.92401"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9069">// inchei de facut sarcina „fa demo pentru constructor</tspan><tspan
-         sodipodi:role="line"
-         x="15.033448"
-         y="315.29901"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9218" /><tspan
-         sodipodi:role="line"
-         x="15.033448"
-         y="324.80682"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9071">sarcina1.<tspan
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch Bold';fill:#ff6600"
-   id="tspan9228">termin()</tspan>;</tspan><tspan
-         sodipodi:role="line"
-         x="15.033448"
-         y="334.39276"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9075" /></text>
-    <rect
-       style="opacity:1;fill:#ffff00;fill-opacity:1;stroke:#00d9ff;stroke-width:3.26899981;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:3.26899916, 6.53799815;stroke-dashoffset:0;stroke-opacity:1"
-       id="functieContainerFactory-4"
-       width="45.178543"
-       height="60.181458"
-       x="122.46021"
-       y="79.083138"
-       rx="0"
-       ry="0"
-       inkscape:label="#functie_container_factory">
-      <title
-         id="title7550-9">Funcția container pentru un factory</title>
-    </rect>
-    <circle
-       style="opacity:1;fill:#800080;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="paraFuncCont-4"
-       cx="-88.795158"
-       cy="146.68813"
-       transform="matrix(0.0510916,-0.99869397,0.99869397,0.0510916,0,0)"
-       r="11.476145"
-       inkscape:label="#para_func_cont">
-      <desc
-         id="desc7554-3">Parametrii pe care funcția container al factory-ului îi primește</desc>
-      <title
-         id="title7552-7">Parametrii</title>
-    </circle>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="81.752754"
-       y="27.759602"
-       id="text9209"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan9211"
-         x="81.752754"
-         y="27.759602">CONSTRUCTOR</tspan></text>
-    <circle
-       style="opacity:1;fill:#ff6600;fill-opacity:0.78531075;stroke:#ff0000;stroke-width:3.26900101;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:3.26900052, 6.538001;stroke-dashoffset:0;stroke-opacity:1"
-       id="path5265-5-7-7"
-       cx="141.95984"
-       cy="123.17387"
-       r="8.1516495" />
-    <g
-       id="g18996"
-       transform="translate(-18.384776,-10.606601)">
-      <path
-         sodipodi:nodetypes="cc"
-         inkscape:connector-curvature="0"
-         id="path8016-8"
-         d="m 180.34428,120.78071 11.35852,-5.4e-4"
-         style="opacity:1;fill:#b3b3b3;fill-opacity:1;stroke:#b3b3b3;stroke-width:3.26900005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <circle
-         r="3.5714285"
-         cy="120.78016"
-         cx="195.6725"
-         id="path5061-5-9-8"
-         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#b3b3b3;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <circle
-         r="3.5714285"
-         cy="120.78074"
-         cx="176.77284"
-         id="path5061-5-9-5-6"
-         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#b3b3b3;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    </g>
-    <g
-       id="g5290"
-       transform="matrix(0,-1,1,0,-207.48822,501.02887)">
-      <circle
-         transform="matrix(0.0510916,-0.99869397,0.99869397,0.0510916,0,0)"
-         r="11.476145"
-         cy="353.86987"
-         cx="-331.21497"
-         id="path4918-8-0-9-5-8"
-         style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <path
-         sodipodi:nodetypes="cc"
-         inkscape:connector-curvature="0"
-         id="path8016-8-2-8"
-         d="m 347.94651,349.44859 25.75684,-5.4e-4"
-         style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:3.26900005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    </g>
-    <circle
-       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ff0000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="path5061-5-9-8-5-2"
-       cx="141.8082"
-       cy="123.17387"
-       r="3.5714285" />
-    <circle
-       style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="path4918-8-0-9-5-8-3"
-       cx="-770.2865"
-       cy="110.41359"
-       r="11.476145"
-       transform="matrix(0.0510916,-0.99869397,0.99869397,0.0510916,0,0)" />
-    <path
-       style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:3.26900005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 70.163943,745.04326 5.4e-4,18.42702"
-       id="path8016-8-2-8-5"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
-    <circle
-       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ff0000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="path5061-5-9-8-5-2-2"
-       cx="70.414215"
-       cy="741.42169"
-       r="3.5714285" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="304.74051"
-       y="202.06723"
-       id="text9548"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         x="304.74051"
-         y="202.06723"
-         id="tspan9572"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'">var Module = function(){</tspan><tspan
-         sodipodi:role="line"
-         x="304.74051"
-         y="211.44223"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9736" /><tspan
-         sodipodi:role="line"
-         x="304.74051"
-         y="221.58972"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9738">  var <tspan
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch Bold';fill:#800080"
-   id="tspan5276">privat</tspan> = &quot;Sunt variabilă privată&quot;;</tspan><tspan
-         sodipodi:role="line"
-         x="304.74051"
-         y="231.81534"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9740" /><tspan
-         sodipodi:role="line"
-         x="304.74051"
-         y="241.40128"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9742">  var <tspan
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch Bold';fill:#ff6600"
-   id="tspan5284">metoda1</tspan> = function(para1){</tspan><tspan
-         sodipodi:role="line"
-         x="304.74051"
-         y="250.8544"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan15453">   if(para1){privat = para1};</tspan><tspan
-         sodipodi:role="line"
-         x="304.74051"
-         y="260.36224"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan15448">   return <tspan
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch Bold';fill:#800080"
-   id="tspan5280">privat;</tspan></tspan><tspan
-         sodipodi:role="line"
-         x="304.74051"
-         y="269.81537"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan15451">  };</tspan><tspan
-         sodipodi:role="line"
-         x="304.74051"
-         y="279.19037"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9746" /><tspan
-         sodipodi:role="line"
-         x="304.74051"
-         y="288.56537"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9748">  return {</tspan><tspan
-         sodipodi:role="line"
-         x="304.74051"
-         y="298.07318"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9752">    metoda1: <tspan
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch Bold';fill:#ff6600"
-   id="tspan5288">metoda1</tspan></tspan><tspan
-         sodipodi:role="line"
-         x="304.74051"
-         y="307.52631"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9754">  }</tspan><tspan
-         sodipodi:role="line"
-         x="304.74051"
-         y="316.90131"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan9756">};</tspan></text>
-    <rect
-       style="opacity:1;fill:#ffff00;fill-opacity:1;stroke:#00d9ff;stroke-width:3.26899981;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:3.26899928, 6.53799834;stroke-dashoffset:0;stroke-opacity:1"
-       id="functieContainerFactory-2"
-       width="141.02478"
-       height="102.10094"
-       x="345.8718"
-       y="52.870941"
-       rx="0"
-       ry="0"
-       inkscape:label="#functie_container_factory">
-      <title
-         id="title7550-3">Funcția container pentru un factory</title>
-    </rect>
-    <circle
-       style="opacity:1;fill:#800080;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="paraFuncCont-4-7-1"
-       cx="-103.64825"
-       cy="380.664"
-       transform="matrix(0.0510916,-0.99869397,0.99869397,0.0510916,0,0)"
-       r="11.476145"
-       inkscape:label="#para_func_cont">
-      <desc
-         id="desc7554-3-9-0">Parametrii pe care funcția container al factory-ului îi primește</desc>
-      <title
-         id="title7552-7-1-1">Parametrii</title>
-    </circle>
-    <circle
-       style="opacity:0.87000002;fill:#ff6600;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="funcMetodeObjReturnat-6-4"
-       cx="-101.59161"
-       cy="424.245"
-       r="11.476145"
-       transform="matrix(0.0510916,-0.99869397,0.99869397,0.0510916,0,0)"
-       inkscape:label="#func_metoda_obj_ret">
-      <desc
-         id="desc7562-2-3">Metode returnate în obiect care fac clojure</desc>
-      <title
-         id="title7560-7-4">Metode</title>
-    </circle>
-    <rect
-       style="opacity:1;fill:#ffff00;fill-opacity:1;stroke:#00d9ff;stroke-width:3.26899981;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:3.26899916, 6.53799814;stroke-dashoffset:0;stroke-opacity:1"
-       id="functieContainerFactory-2-1"
-       width="45.792953"
-       height="41.69241"
-       x="435.85944"
-       y="58.357918"
-       rx="0"
-       ry="0"
-       inkscape:label="#functie_container_factory">
-      <title
-         id="title7550-3-0">Funcția container pentru un factory</title>
-    </rect>
-    <path
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#00d9ff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker5045-8-7)"
-       d="m 433.53228,93.108709 -14.5433,0 0,18.181151"
-       id="path5037-2-3"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccc" />
-    <g
-       id="g18991"
-       transform="matrix(0,1,-1,0,502.17057,-364.75523)">
-      <circle
-         transform="matrix(0.0510916,-0.99869397,0.99869397,0.0510916,0,0)"
-         r="11.476145"
-         cy="438.76572"
-         cx="-158.5237"
-         id="path4918-8-0-9-5-8-3-6"
-         style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <path
-         sodipodi:nodetypes="cc"
-         inkscape:connector-curvature="0"
-         id="path8016-8-2-8-5-8"
-         d="m 430.67925,150.84572 5.4e-4,18.42702"
-         style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:3.26900005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <circle
-         r="3.5714285"
-         cy="147.22411"
-         cx="430.92969"
-         id="path5061-5-9-8-5-2-2-0"
-         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ff0000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    </g>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="327.16327"
-       y="24.53661"
-       id="text9209-6"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan9211-6"
-         x="327.16327"
-         y="24.53661">REVEALING MODULE</tspan></text>
-    <circle
-       style="opacity:1;fill:#008000;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="path4918-5-0"
-       cx="419.02438"
-       cy="170.91269"
-       r="11.476495" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="370.69489"
-       y="128.48288"
-       id="text15482"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan15484"
-         x="370.69489"
-         y="128.48288">P</tspan></text>
-    <path
-       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00d9ff;fill-opacity:1;fill-rule:nonzero;stroke:#00d9ff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#marker17832);marker-end:url(#marker16549);color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       d="m 386.33247,122.96216 20.6928,-0.26611"
-       id="path15726"
-       inkscape:connector-curvature="0" />
-    <circle
-       style="opacity:1;fill:#800080;fill-opacity:1;stroke:#00d9ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4, 2;stroke-dashoffset:0;stroke-opacity:1"
-       id="paraFuncCont-4-7-1-0"
-       cx="-55.770954"
-       cy="466.2977"
-       transform="matrix(0.0510916,-0.99869397,0.99869397,0.0510916,0,0)"
-       r="11.476145"
-       inkscape:label="#para_func_cont">
-      <desc
-         id="desc7554-3-9-0-7">Parametrii pe care funcția container al factory-ului îi primește</desc>
-      <title
-         id="title7552-7-1-1-4">Parametrii</title>
-    </circle>
-    <g
-       transform="translate(159.84828,-40.229403)"
-       id="g18996-0">
-      <path
-         sodipodi:nodetypes="cc"
-         inkscape:connector-curvature="0"
-         id="path8016-8-1"
-         d="m 180.34428,120.78071 11.35852,-5.4e-4"
-         style="opacity:1;fill:#b3b3b3;fill-opacity:1;stroke:#b3b3b3;stroke-width:3.26900005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <circle
-         r="3.5714285"
-         cy="120.78016"
-         cx="195.6725"
-         id="path5061-5-9-8-8"
-         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#b3b3b3;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <circle
-         r="3.5714285"
-         cy="120.78074"
-         cx="176.77284"
-         id="path5061-5-9-5-6-99"
-         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#b3b3b3;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    </g>
-    <g
-       transform="matrix(-1,0,0,-1,619.883,199.98456)"
-       id="g18996-0-3">
-      <path
-         sodipodi:nodetypes="cc"
-         inkscape:connector-curvature="0"
-         id="path8016-8-1-7"
-         d="m 180.34428,120.78071 11.35852,-5.4e-4"
-         style="opacity:1;fill:#b3b3b3;fill-opacity:1;stroke:#b3b3b3;stroke-width:3.26900005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <circle
-         r="3.5714285"
-         cy="120.78016"
-         cx="195.6725"
-         id="path5061-5-9-8-8-1"
-         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#b3b3b3;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <circle
-         r="3.5714285"
-         cy="120.78074"
-         cx="176.77284"
-         id="path5061-5-9-5-6-99-8"
-         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#b3b3b3;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    </g>
-    <g
-       id="g9544-3"
-       transform="translate(619.22357,-452.81267)">
-      <path
-         sodipodi:nodetypes="cc"
-         inkscape:connector-curvature="0"
-         id="path8016-8-2-8-6-0"
-         d="m -260.01097,518.8628 80.64686,-5.4e-4"
-         style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:3.26900005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <circle
-         r="3.5714285"
-         cy="518.86218"
-         cx="-175.79269"
-         id="path5061-5-9-8-5-2-1-7"
-         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ff0000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    </g>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="453.37671"
-       y="80.443962"
-       id="text19490"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan19492"
-         x="453.37671"
-         y="80.443962"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:5px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#ffffff">param</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="-298"
        y="46.612232"
        id="text19564"
@@ -2434,17 +1662,17 @@
     <rect
        style="opacity:1;fill:#b3b3b3;fill-opacity:0.78531075;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect9336-7-6-5"
-       width="192.86827"
-       height="156"
-       x="540.56586"
-       y="32.862228" />
+       width="326.36829"
+       height="216.41937"
+       x="75.100777"
+       y="117.71504" />
     <rect
-       style="opacity:1;fill:#ffff00;fill-opacity:1;stroke:#00d9ff;stroke-width:3.26899981;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:3.26899928, 6.53799834;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:#ffff00;fill-opacity:1;stroke:#00d9ff;stroke-width:3.26899981;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:3.26899927, 6.5379983;stroke-dashoffset:0;stroke-opacity:1"
        id="functieContainerFactory-2-9"
-       width="141.02478"
-       height="102.10094"
-       x="582.25098"
-       y="52.862232"
+       width="218.02478"
+       height="182.60094"
+       x="129.27251"
+       y="134.62427"
        rx="0"
        ry="0"
        inkscape:label="#functie_container_factory">
@@ -2454,8 +1682,8 @@
     <circle
        style="opacity:0.87000002;fill:#ff6600;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="funcMetodeObjReturnat-6-4-7"
-       cx="-41.436562"
-       cy="646.26343"
+       cx="-278.7778"
+       cy="258.5914"
        r="11.476145"
        transform="matrix(0.0510916,-0.99869397,0.99869397,0.0510916,0,0)"
        inkscape:label="#func_metoda_obj_ret">
@@ -2465,12 +1693,12 @@
          id="title7560-7-4-5">Metode</title>
     </circle>
     <rect
-       style="opacity:1;fill:#ffff00;fill-opacity:1;stroke:#00d9ff;stroke-width:3.26899981;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:3.26899914, 6.5379981;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:#ffff00;fill-opacity:1;stroke:#00d9ff;stroke-width:3.26899981;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:3.26899905, 6.5379979;stroke-dashoffset:0;stroke-opacity:1"
        id="functieContainerFactory-2-1-9"
-       width="45.792953"
-       height="56.015606"
-       x="672.23865"
-       y="57.056309"
+       width="90.292953"
+       height="94.515602"
+       x="199.27351"
+       y="162.90915"
        rx="0"
        ry="0"
        inkscape:label="#functie_container_factory">
@@ -2478,41 +1706,7 @@
          id="title7550-3-0-4">Funcția container pentru un factory</title>
     </rect>
     <g
-       id="g29618"
-       transform="translate(86.499998,-51.621317)">
-      <circle
-         inkscape:label="#para_func_cont"
-         r="11.476145"
-         transform="matrix(0.0510916,-0.99869397,0.99869397,0.0510916,0,0)"
-         cy="616.73407"
-         cx="-91.562553"
-         id="paraFuncCont-4-7-1-00"
-         style="opacity:1;fill:#800080;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1">
-        <desc
-           id="desc7554-3-9-0-8">Parametrii pe care funcția container al factory-ului îi primește</desc>
-        <title
-           id="title7552-7-1-1-2">Parametrii</title>
-      </circle>
-      <text
-         sodipodi:linespacing="125%"
-         id="text15482-4"
-         y="128.47417"
-         x="607.0741"
-         style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         xml:space="preserve"><tspan
-           y="128.47417"
-           x="607.0741"
-           id="tspan15484-8"
-           sodipodi:role="line">P</tspan></text>
-    </g>
-    <path
-       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00d9ff;fill-opacity:1;fill-rule:nonzero;stroke:#00d9ff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#marker25572);color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       d="m 658.51461,74.569328 13.72404,0"
-       id="path15726-6"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
-    <g
-       transform="matrix(0,-1,1,0,590.89341,340.40095)"
+       transform="matrix(-1,0,0,-1,475.59002,367.81155)"
        id="g18996-0-37">
       <path
          sodipodi:nodetypes="cc"
@@ -2533,68 +1727,24 @@
          id="path5061-5-9-5-6-99-7"
          style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#b3b3b3;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     </g>
-    <g
-       transform="matrix(0,1,-1,0,832.03622,-69.898702)"
-       id="g18996-0-3-5">
-      <path
-         sodipodi:nodetypes="cc"
-         inkscape:connector-curvature="0"
-         id="path8016-8-1-7-8"
-         d="m 180.34428,120.78071 11.35852,-5.4e-4"
-         style="opacity:1;fill:#b3b3b3;fill-opacity:1;stroke:#b3b3b3;stroke-width:3.26900005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <circle
-         r="3.5714285"
-         cy="120.78016"
-         cx="195.6725"
-         id="path5061-5-9-8-8-1-3"
-         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#b3b3b3;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <circle
-         r="3.5714285"
-         cy="120.78074"
-         cx="176.77284"
-         id="path5061-5-9-5-6-99-8-8"
-         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#b3b3b3;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    </g>
-    <g
-       id="g9544-3-1"
-       transform="matrix(0,-1,1,0,162.12447,-69.148742)">
-      <path
-         sodipodi:nodetypes="cc"
-         inkscape:connector-curvature="0"
-         id="path8016-8-2-8-6-0-2"
-         d="m -210.01249,518.8628 30.64838,-5.4e-4"
-         style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:3.26900005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-      <circle
-         r="3.5714285"
-         cy="518.86218"
-         cx="-175.79269"
-         id="path5061-5-9-8-5-2-1-7-6"
-         style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ff0000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    </g>
     <circle
        style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path4918-8-0-9-5-8-3-6-3"
-       cx="-137.84274"
-       cy="688.09229"
+       cx="-275.28024"
+       cy="382.06061"
        r="11.476145"
        transform="matrix(0.0510916,-0.99869397,0.99869397,0.0510916,0,0)" />
-    <path
-       style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:3.26900005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 680.73683,147.88002 5.4e-4,13.47727"
-       id="path8016-8-2-8-5-8-4"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="597.02637"
-       y="24.822437"
+       x="206.7034"
+       y="104.37195"
        id="text9209-6-2"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan9211-6-9"
-         x="597.02637"
-         y="24.822437">SINGLETON</tspan></text>
+         x="206.7034"
+         y="104.37195">CLOSURE</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -2609,280 +1759,194 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="541.01434"
-       y="201.77895"
+       x="112.67207"
+       y="352.37393"
        id="text9548-5"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="541.01434"
-         y="201.77895"
+         x="112.67207"
+         y="352.37393"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22264">var unSingleton = (function (){</tspan><tspan
-         sodipodi:role="line"
-         x="541.01434"
-         y="211.28676"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22268">  var <tspan
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch Bold';fill:#800080;fill-opacity:1"
-   id="tspan22322">activ</tspan>;</tspan><tspan
-         sodipodi:role="line"
-         x="541.01434"
-         y="220.8727"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22354" /><tspan
-         sodipodi:role="line"
-         x="541.01434"
-         y="230.32582"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22270">  function init (){</tspan><tspan
-         sodipodi:role="line"
-         x="541.01434"
-         y="239.70082"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22272" /><tspan
-         sodipodi:role="line"
-         x="541.01434"
-         y="249.20863"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22274">    var <tspan
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch Bold';fill:#ff0000"
-   id="tspan22324">_proprietatePrivata</tspan> = 10,</tspan><tspan
-         sodipodi:role="line"
-         x="541.01434"
-         y="258.79456"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22278"><tspan
+         id="tspan22320">function <tspan
    style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch Bold';fill:#ff6600"
-   id="tspan22328">        metodaPublica</tspan> = function (){</tspan><tspan
+   id="tspan8888">localizare</tspan>(<tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch Bold';fill:#800080"
+   id="tspan8900">loc</tspan>){</tspan><tspan
          sodipodi:role="line"
-         x="541.01434"
-         y="268.24768"
+         x="112.67207"
+         y="361.95987"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22280">         console.log('Salutare!');</tspan><tspan
+         id="tspan8644">  var <tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch Bold';fill:#800080"
+   id="tspan8892">localitate</tspan> = 'Rotbav';</tspan><tspan
          sodipodi:role="line"
-         x="541.01434"
-         y="277.62268"
+         x="112.67207"
+         y="371.54581"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22282">        };</tspan><tspan
+         id="tspan8646" /><tspan
          sodipodi:role="line"
-         x="541.01434"
-         y="286.99768"
+         x="112.67207"
+         y="380.99893"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22284" /><tspan
+         id="tspan8648">  function undeSunt(){</tspan><tspan
          sodipodi:role="line"
-         x="541.01434"
-         y="297.1452"
+         x="112.67207"
+         y="391.14642"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22286">    // se returnează obiectul</tspan><tspan
+         id="tspan10106">   var <tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch Bold';fill:#800080"
+   id="tspan10108">intern</tspan> = 'ceva din funcția internă';</tspan><tspan
          sodipodi:role="line"
-         x="541.01434"
-         y="306.5202"
+         x="112.67207"
+         y="400.73236"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22288">    return {</tspan><tspan
+         id="tspan10239">   console.log('Te afli la ' + <tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch Bold';fill:#800080"
+   id="tspan8896">localitate</tspan> + ', ' + <tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch Bold';fill:#800080"
+   id="tspan8904">loc</tspan>);</tspan><tspan
          sodipodi:role="line"
-         x="541.01434"
-         y="316.02802"
+         x="112.67207"
+         y="410.18549"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22290">      metodaPublica: <tspan
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch Bold';fill:#ff6600"
-   id="tspan22332">metodaPublica</tspan>,</tspan><tspan
+         id="tspan10265">   ceFac();</tspan><tspan
          sodipodi:role="line"
-         x="541.01434"
-         y="325.48114"
+         x="112.67207"
+         y="419.56049"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22292">      proprietatePublica: 'ceva'</tspan><tspan
+         id="tspan8652">  };</tspan><tspan
          sodipodi:role="line"
-         x="541.01434"
-         y="334.85614"
+         x="112.67207"
+         y="428.93549"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22296">    };</tspan><tspan
+         id="tspan8654"> </tspan><tspan
          sodipodi:role="line"
-         x="541.01434"
-         y="344.23114"
+         x="112.67207"
+         y="438.31049"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22298">  };</tspan><tspan
+         id="tspan10251">  function ceFac(){</tspan><tspan
          sodipodi:role="line"
-         x="541.01434"
-         y="353.60614"
+         x="112.67207"
+         y="447.8183"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22300" /><tspan
+         id="tspan10247">   var <tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch Bold';fill:#800080"
+   id="tspan10255">actiune</tspan> = 'cosesc';</tspan><tspan
          sodipodi:role="line"
-         x="541.01434"
-         y="362.98114"
+         x="112.67207"
+         y="458.04391"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22302">  return {</tspan><tspan
+         id="tspan10253">   console.log('Sunt în ' + localitate + 'și ' + <tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch Bold';fill:#800080"
+   id="tspan10259">actiune)</tspan>; </tspan><tspan
          sodipodi:role="line"
-         x="541.01434"
-         y="372.35614"
+         x="112.67207"
+         y="467.49704"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22304">    getInstance: function (){</tspan><tspan
+         id="tspan10249">  };</tspan><tspan
          sodipodi:role="line"
-         x="541.01434"
-         y="381.73114"
+         x="112.67207"
+         y="476.87204"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22306">      if(!activ){</tspan><tspan
+         id="tspan10263" /><tspan
          sodipodi:role="line"
-         x="541.01434"
-         y="391.10614"
+         x="112.67207"
+         y="486.24704"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22308">        activ = init();</tspan><tspan
+         id="tspan8656">  return undeSunt();</tspan><tspan
          sodipodi:role="line"
-         x="541.01434"
-         y="400.48114"
+         x="112.67207"
+         y="495.62204"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22310">      }</tspan><tspan
+         id="tspan8658">};</tspan><tspan
          sodipodi:role="line"
-         x="541.01434"
-         y="409.85614"
+         x="112.67207"
+         y="504.99704"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22312">      return activ;</tspan><tspan
+         id="tspan8660" /><tspan
          sodipodi:role="line"
-         x="541.01434"
-         y="419.23114"
+         x="112.67207"
+         y="515.14453"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22314">    }</tspan><tspan
+         id="tspan8662">var <tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch Bold';fill:#800080"
+   id="tspan8908">intrebare</tspan> = localizare('la bibliotecă');</tspan><tspan
          sodipodi:role="line"
-         x="541.01434"
-         y="428.60614"
+         x="112.67207"
+         y="525.37018"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22318">  };</tspan><tspan
-         sodipodi:role="line"
-         x="541.01434"
-         y="437.98114"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.5px;font-family:'Courier 10 Pitch';-inkscape-font-specification:'Courier 10 Pitch'"
-         id="tspan22320">})();</tspan></text>
-    <path
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#008000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#marker14775-6-0);marker-end:url(#marker9572-1-5)"
-       d="m 418.66411,134.59544 c 0,6.79215 0,13.58429 0,20.37644"
-       id="path8304-6-7-2-9-5-0"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
-    <circle
-       style="opacity:0.87000002;fill:#ff6600;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="funcMetodeObjReturnat-6-4-7-1"
-       cx="-59.14975"
-       cy="701.68854"
-       r="11.476145"
-       transform="matrix(0.0510916,-0.99869397,0.99869397,0.0510916,0,0)"
-       inkscape:label="#func_metoda_obj_ret">
-      <desc
-         id="desc7562-2-3-2-3">Metode returnate în obiect care fac clojure</desc>
-      <title
-         id="title7560-7-4-5-5">Metode</title>
-    </circle>
-    <rect
-       style="opacity:1;fill:#ffff00;fill-opacity:1;stroke:#00d9ff;stroke-width:3.26900005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:3.26899924, 6.53799829;stroke-dashoffset:0;stroke-opacity:1"
-       id="functieContainerFactory-2-1-9-5"
-       width="45.072823"
-       height="28.831423"
-       x="586.58057"
-       y="121.24911"
-       rx="0"
-       ry="0"
-       inkscape:label="#functie_container_factory">
-      <title
-         id="title7550-3-0-4-3">Funcția container pentru un factory</title>
-    </rect>
-    <circle
-       style="opacity:1;fill:#008000;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="path4918-5-0-7"
-       cx="606.72864"
-       cy="172.63573"
-       r="11.476495" />
-    <circle
-       style="opacity:0.87000002;fill:#ffffff;fill-opacity:1;stroke:#00d9ff;stroke-width:3.26900077;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:3.2690004, 6.53800077;stroke-dashoffset:0;stroke-opacity:1"
-       id="path5265-8"
-       cx="772.20166"
-       cy="266.18027"
-       r="8.4016495" />
+         id="tspan8664" /></text>
     <circle
        style="opacity:1;fill:#ff6600;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path4918"
-       cx="772.20166"
-       cy="109.7676"
+       cx="486.03302"
+       cy="204.99509"
        r="7.6785712" />
     <circle
        style="opacity:1;fill:#008000;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path4918-5"
-       cx="772.20166"
-       cy="87.422935"
+       cx="486.03302"
+       cy="182.65042"
        r="7.6785712" />
     <circle
        style="opacity:1;fill:#800080;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path4918-4"
-       cx="772.20166"
-       cy="65.078278"
+       cx="486.03302"
+       cy="160.30577"
        r="7.6785712" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="788.82971"
-       y="70.036652"
+       x="502.66107"
+       y="165.26414"
        id="text4941"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4943"
-         x="788.82971"
-         y="70.036652">valori</tspan></text>
+         x="502.66107"
+         y="165.26414">valori</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="788.13391"
-       y="114.5931"
+       x="501.96527"
+       y="209.82059"
        id="text4945"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4947"
-         x="788.13391"
-         y="114.5931">funcții referențiate</tspan></text>
+         x="501.96527"
+         y="209.82059">funcții referențiate</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="788.55872"
-       y="92.355431"
+       x="502.39008"
+       y="187.58292"
        id="text4949"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4951"
-         x="788.55872"
-         y="92.355431">obiecte referențiate</tspan></text>
+         x="502.39008"
+         y="187.58292">obiecte referențiate</tspan></text>
     <circle
        style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path4918-8"
-       cx="772.20166"
-       cy="132.11223"
+       cx="486.03302"
+       cy="227.33972"
        r="7.6785712" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="788.7052"
-       y="137.2556"
+       x="502.53656"
+       y="232.48309"
        id="text4945-0"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4947-5"
-         x="788.7052"
-         y="137.2556">Object.prototype</tspan></text>
-    <circle
-       style="opacity:1;fill:#ff6600;fill-opacity:0.78531075;stroke:#ff0000;stroke-width:3.26900101;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:3.26900052, 6.538001;stroke-dashoffset:0;stroke-opacity:1"
-       id="path5265-5-7"
-       cx="772.20166"
-       cy="154.45691"
-       r="8.1516495" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="785.98059"
-       y="159.0612"
-       id="text4945-0-0"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4947-5-6"
-         x="785.98059"
-         y="159.0612">.prototype</tspan></text>
+         x="502.53656"
+         y="232.48309">Object.prototype</tspan></text>
     <g
        id="g9425"
-       transform="translate(947.95167,-320.06059)">
+       transform="translate(661.78305,-246.8331)">
       <path
          sodipodi:nodetypes="cc"
          inkscape:connector-curvature="0"
@@ -2905,17 +1969,17 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="788.00208"
-       y="181.73108"
+       x="501.83344"
+       y="254.95856"
        id="text4945-2"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4947-2"
-         x="788.00208"
-         y="181.73108">scope chain</tspan></text>
+         x="501.83344"
+         y="254.95856">scope chain</tspan></text>
     <g
        id="g9544"
-       transform="translate(955.77954,-319.71592)">
+       transform="translate(669.61092,-246.48843)">
       <path
          sodipodi:nodetypes="cc"
          inkscape:connector-curvature="0"
@@ -2932,39 +1996,39 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="788.17053"
-       y="204.00912"
+       x="502.00189"
+       y="277.2366"
        id="text4945-2-3"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4947-2-7"
-         x="788.17053"
-         y="204.00912">prototipal chain</tspan></text>
+         x="502.00189"
+         y="277.2366">prototipal chain</tspan></text>
     <rect
        style="opacity:1;fill:#b3b3b3;fill-opacity:0.78531075;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect9336-7-3"
        width="17.285755"
        height="17.066948"
-       x="763.55878"
-       y="212.95741" />
+       x="477.39014"
+       y="286.18491" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="788.81506"
-       y="226.1955"
+       x="502.64642"
+       y="299.42297"
        id="text4945-2-3-3"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4947-2-7-2"
-         x="788.81506"
-         y="226.1955">GEC - global exec context</tspan></text>
+         x="502.64642"
+         y="299.42297">GEC - global exec context</tspan></text>
     <rect
        style="opacity:1;fill:#ffff00;fill-opacity:1;stroke:#00d9ff;stroke-width:3.26899934;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:3.26899917, 6.53799811;stroke-dashoffset:0;stroke-opacity:1"
        id="functieContainerFactory-2-4"
        width="14.236686"
        height="15.455233"
-       x="765.08331"
-       y="236.10797"
+       x="478.91467"
+       y="309.33545"
        rx="0"
        ry="0"
        inkscape:label="#functie_container_factory">
@@ -2973,7 +2037,7 @@
     </rect>
     <g
        id="g19539"
-       transform="matrix(0.62966658,0,0,0.62966658,858.13327,-95.409178)">
+       transform="matrix(0.83010056,0,0,0.83010056,285.99382,-6.9825551)">
       <circle
          inkscape:label="#para_func_cont"
          r="11.476145"
@@ -2981,7 +2045,7 @@
          cy="-125.08436"
          cx="-226.07646"
          id="paraFuncCont-4-7-1-0-6"
-         style="opacity:1;fill:#800080;fill-opacity:1;stroke:#00d9ff;stroke-width:3.17628407;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:6.35256832, 3.17628416;stroke-dashoffset:0;stroke-opacity:1">
+         style="opacity:1;fill:#800080;fill-opacity:1;stroke:#00d9ff;stroke-width:2.40934658;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:4.81869309, 2.40934655;stroke-dashoffset:0;stroke-opacity:1">
         <desc
            id="desc7554-3-9-0-7-0">Parametrii pe care funcția container al factory-ului îi primește</desc>
         <title
@@ -3003,151 +2067,73 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="788.17053"
-       y="48.304787"
+       x="502.00189"
+       y="143.53227"
        id="text4941-8"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4943-2"
-         x="788.17053"
-         y="48.304787">parametri</tspan></text>
+         x="502.00189"
+         y="143.53227">parametri</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="788.13391"
-       y="248.01944"
+       x="501.96527"
+       y="321.24692"
        id="text4945-8"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4947-1"
-         x="788.13391"
-         y="248.01944">funcții/obiecte desfăcute</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="788.60266"
-       y="272.13583"
-       id="text4945-4"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4947-3"
-         x="788.60266"
-         y="272.13583">this</tspan></text>
+         x="501.96527"
+         y="321.24692">funcții/obiecte desfăcute</tspan></text>
     <path
        style="opacity:1;fill:none;fill-opacity:1;stroke:#008000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#marker14775-6);marker-end:url(#marker9572-1)"
-       d="m 772.91015,291.46552 0,8.05301 0,2.5457"
+       d="m 486.74153,346.69301 0,8.05301 0,2.5457"
        id="path8304-6-7-2-9-5"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccc" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="787.76337"
-       y="296.68665"
+       x="501.59473"
+       y="351.91412"
        id="text4945-4-1"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4947-3-8"
-         x="787.76337"
-         y="296.68665">return</tspan></text>
+         x="501.59473"
+         y="351.91412">return</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="841.24957"
-       y="13.108491"
+       x="555.08093"
+       y="108.33598"
        id="text4945-4-1-4"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4947-3-8-3"
-         x="841.24957"
-         y="13.108491">LEGENDA</tspan></text>
-    <path
-       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00d9ff;fill-opacity:1;fill-rule:nonzero;stroke:#00d9ff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#marker25572-6-1);marker-mid:url(#EmptyDiamondS-8);color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       d="m 763.66578,317.92246 10.25055,0 10.69224,0"
-       id="path15726-6-1-5"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccc" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:125%;font-family:'DejaVu Sans Mono';-inkscape-font-specification:'DejaVu Sans Mono';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="787.79834"
-       y="320.58237"
-       id="text4945-4-1-8"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4947-3-8-8"
-         x="787.79834"
-         y="320.58237">decizie</tspan></text>
-    <circle
-       style="opacity:0.87000002;fill:#ff6600;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="funcMetodeObjReturnat-6-4-7-5"
-       cx="-104.94372"
-       cy="613.38983"
-       r="11.476145"
-       transform="matrix(0.0510916,-0.99869397,0.99869397,0.0510916,0,0)"
-       inkscape:label="#func_metoda_obj_ret">
-      <desc
-         id="desc7562-2-3-2-36">Metode returnate în obiect care fac clojure</desc>
-      <title
-         id="title7560-7-4-5-7">Metode</title>
-    </circle>
-    <path
-       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#00d9ff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#marker25572-7);color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       d="m 463.03361,95.454133 0,75.458557 -32.53273,0"
-       id="path15726-6-8"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccc" />
+         x="555.08093"
+         y="108.33598">LEGENDA</tspan></text>
     <path
        style="opacity:1;fill:none;fill-opacity:1;stroke:#008000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#marker14775-6-5);marker-end:url(#marker9572-1-6)"
-       d="m 607.39044,147.60685 0.006,7.05143 0,2.5457"
+       d="m 244.42411,303.08671 0.006,7.05143 0,13.0457"
        id="path8304-6-7-2-9-5-3"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccc" />
-    <circle
-       style="opacity:1;fill:#008000;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="path4918-5-0-7-1"
-       cx="558.09973"
-       cy="96.909813"
-       r="11.476495" />
-    <path
-       style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#00d9ff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#marker25572-6);marker-mid:url(#EmptyDiamondSend);color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       d="m 643.86528,90.01679 0,9.87528 0,35.84515 -25.16942,-3e-5"
-       id="path15726-6-1"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cccc" />
-    <circle
-       style="opacity:1;fill:#800080;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="paraFuncCont-4-7-1-00-6"
-       cx="-66.232773"
-       cy="611.73993"
-       transform="matrix(0.0510916,-0.99869397,0.99869397,0.0510916,0,0)"
-       r="11.476145"
-       inkscape:label="#para_func_cont">
-      <desc
-         id="desc7554-3-9-0-8-7">Parametrii pe care funcția container al factory-ului îi primește</desc>
-      <title
-         id="title7552-7-1-1-2-3">Parametrii</title>
-    </circle>
-    <path
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#008000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#marker14775-6-5-6-3);marker-end:url(#marker9572-1-6-3-5)"
-       d="m 631.83539,74.86226 -23.98715,0 -0.11333,7.143391"
-       id="path8304-6-7-2-9-5-3-6-2"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccc" />
     <path
        style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00d9ff;fill-opacity:1;fill-rule:nonzero;stroke:#00d9ff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#marker25572-9);color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       d="m 622.8009,96.72823 16.90602,0"
+       d="m 188.16979,175.71989 16.90602,0"
        id="path15726-6-5"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
     <path
        style="color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;fill:#00d9ff;fill-opacity:1;fill-rule:nonzero;stroke:#00d9ff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#marker25572-9-6);color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       d="m 573.35618,96.9915 c 2.65165,0 22.73965,-0.17678 22.73965,-0.17678"
+       d="m 244.59677,280.16439 c 0,-2.65165 -0.17678,-22.73965 -0.17678,-22.73965"
        id="path15726-6-5-2"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
     <g
-       transform="matrix(0,1,-1,0,713.99616,-67.967484)"
+       transform="matrix(-1,0,0,-1,533.32084,366.88846)"
        id="g18996-0-3-5-6">
       <path
          sodipodi:nodetypes="cc"
@@ -3169,26 +2155,62 @@
          style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#b3b3b3;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     </g>
     <g
-       id="g9544-3-1-5"
-       transform="matrix(-1,0,0,-1,448.81477,662.61683)">
+       id="g7200"
+       transform="matrix(0,-1,1,0,91.441049,677.60698)">
       <path
          sodipodi:nodetypes="cc"
          inkscape:connector-curvature="0"
-         id="path8016-8-2-8-6-0-2-2"
-         d="m -228.95722,518.8628 49.59311,-5.4e-4"
+         id="path8016-8-2-8-5-8-4"
+         d="m 383.75198,251.11761 5.4e-4,13.47727"
          style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#ff0000;stroke-width:3.26900005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
       <circle
          r="3.5714285"
-         cy="518.86218"
-         cx="-175.79269"
-         id="path5061-5-9-8-5-2-1-7-6-7"
+         cy="246.95529"
+         cx="384.00238"
+         id="path5061-5-9-8-5-2-2-0-2"
          style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ff0000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     </g>
     <circle
-       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ff0000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="path5061-5-9-8-5-2-2-0-2"
-       cx="680.98724"
-       cy="143.7177"
-       r="3.5714285" />
+       style="opacity:1;fill:#800080;fill-opacity:1;stroke:#b3b3b3;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="paraFuncCont-4-7-1-00-6-4"
+       cx="-194.81332"
+       cy="233.27776"
+       transform="matrix(0.0510916,-0.99869397,0.99869397,0.0510916,0,0)"
+       r="11.476145"
+       inkscape:label="#para_func_cont">
+      <desc
+         id="desc7554-3-9-0-8-7-1">Parametrii pe care funcția container al factory-ului îi primește</desc>
+      <title
+         id="title7552-7-1-1-2-3-7">Parametrii</title>
+    </circle>
+    <g
+       id="g19539-3"
+       transform="matrix(0.64525448,0,0,0.64525448,573.30574,-2.1537482)">
+      <circle
+         inkscape:label="#para_func_cont"
+         r="11.476145"
+         transform="matrix(0.0510916,-0.99869397,0.99869397,0.0510916,0,0)"
+         cy="-125.08436"
+         cx="-226.07646"
+         id="paraFuncCont-4-7-1-0-6-6"
+         style="opacity:1;fill:#800080;fill-opacity:1;stroke:#00d9ff;stroke-width:3.09955215;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:6.19910431, 3.09955216;stroke-dashoffset:0;stroke-opacity:1">
+        <desc
+           id="desc7554-3-9-0-7-0-8">Parametrii pe care funcția container al factory-ului îi primește</desc>
+        <title
+           id="title7552-7-1-1-4-6-4">Parametrii</title>
+      </circle>
+      <text
+         sodipodi:linespacing="125%"
+         id="text19490-4-3"
+         y="220.31239"
+         x="-145.93417"
+         style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:5px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#ffffff"
+           y="220.31239"
+           x="-145.93417"
+           id="tspan19492-1-0"
+           sodipodi:role="line">param</tspan></text>
+    </g>
   </g>
 </svg>
