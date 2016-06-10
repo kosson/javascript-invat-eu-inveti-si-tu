@@ -43,7 +43,39 @@ var tablou = [];
 
 ![](operatiuniArrayuri.svg)
 
-#### Metoda slice
+#### Arrray.prototype.slice()
+
+Slice în limba engleză se referă la a tăia, la a decupa, la a extrage o bucată. Pentru a înțelege slice, cel mai bine este să vă imaginați un croitor care măsoară stofa cu un centimetru, face semne pentru bucata pe care o dorește și apoi taie materialul.
+
+Slice pentru array-uri este o metodă care returnează un nou array. Acesta este o copie a unei porțiuni delimitate prin argumentele pasate. Slice nu alterează array-ul original în niciun fel.
+
+Ca parametri acceptă:
+- indexul de la care să pornească.
+- indexul la care să se oprească
+
+Dacă indexul de pornire este o valoare negativă, atunci se va porni de la finalul array-ului spre indexul 0. Dacă nu este menționat indexul (`undefined`), atunci `slice` pornește de la 0. Dacă nu se menționează capătul, atunci va „tăia” până la capăt.
+
+ATENȚIE! Slice se duce până la limita menționată, dar nu include și valoarea de la indexul menționat.
+
+Menționarea unui index negativ indică limita către coada listei. De exemplu, un slice(2, -1), va extrage începând cu al treilea element până la penultimul element.
+
+Această metodă este folosită și pentru a converti obiecte care seamănă cu array-urile în Array-uri noi. Pur și simplu se face un binding al metodei la obiect. Cel mai folosit exemplu este cel al folosirii lui slice() pentru a transforma `arguments` într-un array:
+
+```js
+var converteste = function(){
+  return Array.prototype.slice.call(arguments);
+};
+var unArrayNou = converteste(1, "ceva", 23); // Array [ 1, "ceva", 23 ]
+```
+
+În loc de `Array.prototype.slice.call(arguments)` se poate folosi pur și simplu `[].slice.call(arguments)`.
+
+```js
+var converteste = function(){
+  return [].slice.call(arguments);
+};
+var unArrayNou = converteste(1, "ceva", 23); // Array [ 1, "ceva", 23 ]
+```
 
 ![](slicingArrayuri.svg)
 
@@ -51,7 +83,7 @@ var tablou = [];
 
 ![](splicingArrayuri.svg)
 
-#### Array.from()
+#### Array.from() - ECMAScript 2015
 
 Creează o instanță ``new Array`` din orice obiect care arată ca un array sau care iterabil.
 Obiectele din care se creează array-urile trebuie să aibe o lungime și elemente indexate.
@@ -69,6 +101,53 @@ Array.from("foo");
 // ["f", "o", "o"]
 ```
 
+Array.from() are trei argumente:
+
+- obiectul iterabil pe care vrei să-l transformi
+- o funcție de mapping, care să fie apelată pentru fiecare dintre elementele din input
+- `this` necesar la apelarea funcției de mapare.
+
+Cu Array.from() nu se poate face slice(), dar poți să indici ce sunt părțile: dice!
+
+```js
+function ceEste(){
+  return Array.from(arguments, valoare => typeof valoare);
+};
+ceEste("ceva", null, true, undefined, NaN, 23);
+```
+
+Polyfill - ul pentru ES5 arată astfel:
+
+```js
+function transforma (){
+  return Array.prototype.slice.call(arguments);
+}
+transforma('a', 'b'); // <- ['a', 'b']
+```
+iar forma și mai scurtă:
+
+```js
+function transforma(){
+  return [].slice.call(arguments);
+};
+```
+Un operator nou introdus de ECMAScript 2015 care face același lucru. Este vorba despre operatorul spread. Acest operator folosește protocolul de iterare ceea ce înseamnă că obiectele pe care dorim să le transformăm, trebuie să aibe implementat @@iterator prin intermediul lui Symbol.iterator. `arguments` are deja implementat protocolul de iterare în ECMAScript 2015.
+
+```js
+function transforma(){
+  return [...arguments];
+};
+transforma("unu","doi",3); // Array [ "unu", "doi", 3 ]
+```
+
+ATENȚIE! Operatorul spread se bazează pe existența implementării protocolului de iterare, pe când `Array.from()`, nu se bazează doar pe acesta. Această metodă are capacitatea de a procesa și structuri de date „array-like”.
+
+De exemplu, jQuery la momentul redactării acestui material, nu are implementat protocolul de iterare, dar produce o structură „array-like”:
+
+```js
+Array.from($('div')); // în unele cazuri: Array.from(jQuery('div'));
+```
+
 #### Array.isArray()
 
 Este testat un obiect pentru a vedea dacă este un array.
@@ -80,7 +159,7 @@ Array.isArray(test); // true
 
 #### Array.of()
 
-Metoda creează o instanță ``new Array`` cu un număr variabil de argumente indiferent de numărul sau tipul argumentelor.
+Metoda creează o instanță `new Array` cu un număr variabil de argumente indiferent de numărul sau tipul argumentelor.
 
 Diferența dintre metoda Array.of() și constructorul Array este în felul în care sunt gestionate argumentele ca numere întregi. Array.of(42) creează un array cu un singur element în vreme ce Array(42) creează un array cu 42 de elemente.
 
@@ -93,6 +172,16 @@ Elementele array-urilor originale sunt copiate în noul array format respectând
 - în cazul șirurilor și numerelor, acestea vor fi copiate în noul array. Modificarea valorilor din array-urile originale nu se vor răsfrânge în cel nou constituit.
 
 ![Array.prototype.concat()](ArrayConcat.svg)
+
+Se poate chiar construi o funcție concat folosind slice, dar care să facă concat pe argumentele pasate.
+
+```js
+function concat () {
+  return Array.prototype.slice.call(arguments).join(' ');
+}
+var sirNou = concat('ceva', 'text', 'pentru', 'a', 'fi', 'unit')
+console.log(sirNou);
+```
 
 #### Array.prototype.copyWithin()
 
@@ -108,7 +197,7 @@ Returnează un obiect care poate fi iterat.
 
 ```js
 var arr = ['a', 'b', 'c'];
-var eArr = arr.entries();
+var eArr = arr.entries(); // acesta este un Iterator
 
 console.log(eArr.next().value); // [0, 'a']
 console.log(eArr.next().value); // [1, 'b']
@@ -215,7 +304,7 @@ array.lastIndexOf(2, -2); // 0
 array.lastIndexOf(2, -1); // 3
 ```
 
-Găsirea tuturor indicilor la care apare valoarea căutată
+##### Găsirea tuturor indicilor la care apare valoarea căutată
 
 ```js
 var indices = [];
@@ -242,7 +331,7 @@ Funcția care va fi executată poate avea trei argumente:
 
 Opțional se mai poate pasa o valoare care să reprezinte ``this`` la executarea callback-ului.
 
-***Este implementarea naturală a ES5 pentru utilitățile _.each și $.each.***
+***Este implementarea naturală a ES5 pentru utilitățile _.each și $.each din Underscore și jQuery.***
 
 Metoda nu poate fi înlănțuită (chainable).
 Spre deosebire de map() și reduce(), forEach() returnează întotdeauna ``undefined``.
@@ -501,7 +590,7 @@ var total = [0, 1, 2, 3].reduce(function(a, b) {
 }); // total 6
 ```
 
-Aplatizarea unui array de array-uri:
+##### Aplatizarea unui array de array-uri:
 
 ```js
 var plat = [[0, 1], [2, 3], [4, 5]].reduce(function(a, b) {
@@ -514,6 +603,29 @@ var plat = [[0, 1], [2, 3], [4, 5]].reduce(function(a, b) {
 var texte = [["Gică", "Georgică"], "Abramburica", ["Nadia", "Ana"]].reduce(function(previousValue, currentValue, currentIndex, array){
   return previousValue.concat(currentValue);
 }, []);
+texte ; // Array [ "Gică", "Georgică", "Abramburica", "Nadia", "Ana" ]
+```
+
+Există în ECMAScript 2015 conceptul de `rest parameters`, adică o sintaxă ce permite extragerea unui Array din argumentele pasate unei funcții. Această sintaxă constă din adăugarea unui nume de parametru prefixat de trei puncte de suspensie. Această sintaxă generează un Array adevărat, nu un array-like așa cum este `arguments`.
+
+Un exemplu de transformare a funcționalității unei funcții construite clasic, care foace suma tuturor argumentelor (`arguments`) cu excepția primului, care va fi folosit drept multiplicator pentru suma obținută. Acest exemplu este oferit de Nicolás, un consultant JavaScript din Buenos Aires, Argentina în explicarea conceptelor noi pe care le introduce ECMAScript 2015 - [ES6 Spread and Butter in Depth](https://ponyfoo.com/articles/es6-spread-and-butter-in-depth)
+
+```js
+function faSumaSiDubleaza(){
+
+  var setNumere = Array.prototype.slice.call(arguments); // constituie array-ul transformand arguments; slice „taie” de la 0 până la capăt
+
+  var multiplicator = setNumere.shift();                 // setarea cifrei care va reprezenta multiplicatorul
+  var referinta = setNumere.shift();                     // reținerea primei cifre din array
+
+  var insumare = setNumere.reduce( (previousValue, currentValue) => previousValue + currentValue, referinta );
+
+  return multiplicator * insumare;
+};
+
+var total = faSumaSiDubleaza(34,10,2,30,12);
+
+console.log(total);
 ```
 
 ## Menționarea resurselor folosite pentru documentare:

@@ -134,6 +134,14 @@ str.slice(11, 14); // => "rin"
 str.substring(11, 3); // => "te de st"
 ```
 
+#### String.prototype.slice()
+
+Taie un segment de caractere dintr-un șir de la indexul menționat ca prim argument, până la indexul menționat ca limită dar care nu include și valoarea de la acel index.
+
+Este asemănătoare metodei cu același nume aplicată Array-urilor.
+
+Acceptă două argumente care delimitează marginile de tăiere. Primul argument delimitează de unde începe extragerea segementului iar dacă este negativ, atunci se va face de la nume_array.legth -valoare_numar_negativ.
+
 #### String.prototype.indexOf()
 
 Este o metodă care returnează indexul unde apare pentru prima dată un fragment de text. Este returnat -1 dacă fragmentul nu este găsit. Atenție, dacă o parte a fragmentului este corectă și s-a greșit, fie și numai un caracter, nu se face identificarea și este returnat -1. Deci, trebuie să fie fix ceea ce este în textul în care se face căutare.
@@ -264,6 +272,29 @@ var nucleu = "Salutare, ";
 console.log(nucleu.concat('prietene,', ' ce mai faci?')); // Salutare, prietene, ce mai faci?
 ```
 
+Același efect poate fi obținut cu următoarea secvență de cod, care de această dată construiește o funcție concat și care operează asupra array-like-ului `arguments`:
+
+```js
+function concat () {
+  return Array.prototype.slice.call(arguments).join(' ');
+}
+var sirNou = concat('ceva', 'text', 'pentru', 'a', 'fi', 'unit')
+console.log(sirNou); // ceva text pentru a fi unit
+```
+
+Există în ECMAScript 2015 conceptul de `rest parameters`, adică o sintaxă ce permite extragerea unui Array din argumentele pasate unei funcții. Această sintaxă constă din adăugarea unui nume de parametru prefixat de trei puncte de suspensie. Această sintaxă generează un Array adevărat, nu un array-like așa cum este `arguments`.
+
+```js
+function concat (...argumentePasate){
+  return argumentePasate.join(' ');
+};
+var reunite = concat("Aceste", "cuvinte", "vor", "fi", "un", "șir!");
+console.log(reunite); // Aceste cuvinte vor fi un șir!
+```
+Ce se întâmplă:
+- parametrul rest obține `arguments`, care este pasat la apelarea funcției
+- de fiecare dată când un parametru este adăugat la stânga, este ca și cum s-ar face `argumentePasate.shift()`
+
 #### String.prototype.startsWith()
 
 Stabilește dacă un șir de caractere începe cu un anumit șir specificat.
@@ -325,6 +356,8 @@ Setarea limitei este opțională. Este un număr întreg, care indică de câte 
 var arr = "unu,doi,trei,patru,cinci".split(",");
 console.log(arr); // Array [ "unu", "doi", "trei", "patru", "cinci" ]
 ```
+
+ATENȚIE! Operațiunea inversă este concat().
 
 ### Metode care folosesc regexuri
 
