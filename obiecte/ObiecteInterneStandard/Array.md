@@ -56,7 +56,7 @@ var unArrayNou = converteste(1, "ceva", 23); // Array [ 1, "ceva", 23 ]
 
 ![](splicingArrayuri.svg)
 
-#### Array.from() - ECMAScript 2015
+## Array.from() - ECMAScript 2015
 
 Creează o instanță ``new Array`` din orice obiect care arată ca un array sau care iterabil.
 Obiectele din care se creează array-urile trebuie să aibe o lungime și elemente indexate.
@@ -74,7 +74,7 @@ Array.from("foo");
 // ["f", "o", "o"]
 ```
 
-Array.from() are trei argumente:
+`Array.from()` are trei argumente:
 
 - obiectul iterabil pe care vrei să-l transformi
 - o funcție de mapping, care să fie apelată pentru fiecare dintre elementele din input
@@ -104,6 +104,7 @@ function transforma(){
   return [].slice.call(arguments);
 };
 ```
+
 Un operator nou introdus de ECMAScript 2015 care face același lucru. Este vorba despre operatorul spread. Acest operator folosește protocolul de iterare ceea ce înseamnă că obiectele pe care dorim să le transformăm, trebuie să aibe implementat @@iterator prin intermediul lui Symbol.iterator. `arguments` are deja implementat protocolul de iterare în ECMAScript 2015.
 
 ```js
@@ -121,7 +122,7 @@ De exemplu, jQuery la momentul redactării acestui material, nu are implementat 
 Array.from($('div')); // în unele cazuri: Array.from(jQuery('div'));
 ```
 
-#### Array.isArray()
+## Array.isArray()
 
 Este testat un obiect pentru a vedea dacă este un array.
 
@@ -130,13 +131,41 @@ var test = ['unu', 'doi', 'trei', 'patru'];
 Array.isArray(test); // true
 ```
 
-#### Array.of()
+## Array.of()
 
 Metoda creează o instanță `new Array` cu un număr variabil de argumente indiferent de numărul sau tipul argumentelor.
 
 Diferența dintre metoda Array.of() și constructorul Array este în felul în care sunt gestionate argumentele ca numere întregi. Array.of(42) creează un array cu un singur element în vreme ce Array(42) creează un array cu 42 de elemente.
 
-#### Array.prototype.concat()
+## Arrray.prototype.shift()
+
+Scoate primul element din array și-l returnează.
+Dacă `length` este 0 este returnat `undefined`. `shift()` este generic și funcționează pe orice seamănă cu un array folosind call sau apply.
+
+## Arrray.prototype.unshift()
+
+Introduce un element sau mai multe în array chiar în cap. `unshift()` este generic și funcționează pe orice seamănă cu un array folosind call sau apply.
+
+## Arrray.prototype.push()
+
+Adaugă la finalul array-ului unu sau mai multe elemente.
+ATENȚIE! Returnează noul `length` al array-ului.
+
+### Merging de array
+
+```js
+var tabel1 = ['veverita', 'liliac'];
+var tabel2 = ['fluture', 'cărăbuș'];
+
+Array.prototype.push.apply(tabel1, tabel2);
+console.log(tabel1); // Array [ "veverita", "liliac", "fluture", "cărăbuș" ]
+```
+
+## Arrray.prototype.pop()
+
+Scoate din array ultimul element și îl returnează. `pop()` este generic și funcționează pe orice seamănă cu un array folosind call sau apply.
+
+## Arrray.prototype.concat()
 
 Realizează o „copie simplă” (shallow copy) formată din elementele array-ului asupra căruia se invocă metoda și elementele care se doresc a fi adăugate.
 
@@ -156,7 +185,7 @@ var sirNou = concat('ceva', 'text', 'pentru', 'a', 'fi', 'unit')
 console.log(sirNou);
 ```
 
-#### Array.prototype.copyWithin()
+## Arrray.prototype.copyWithin()
 
 Această metodă copiază o secvență de elemente din array și le inserează în același array la o poziție specificată suprascriind valorile existente.
 Obiectele vor fi copiate începând de la indexul specificat de al doilea parametru cu limita menționată de cel de-al treilea parametru.
@@ -164,7 +193,7 @@ Cel de-al treilea argument este opțional și în lipsa lui secvența de valori 
 
 ![Array.prototype.copyWithin() exemplificat](ArrayCopyWithin.svg)
 
-#### Array.prototype.entries()
+## Arrray.prototype.entries()
 
 Returnează un obiect care poate fi iterat.
 
@@ -177,7 +206,7 @@ console.log(eArr.next().value); // [1, 'b']
 console.log(eArr.next().value); // [2, 'c']
 ```
 
-#### Array.prototype.every()
+## Arrray.prototype.every()
 
 Metoda testează dacă elementele din array trec un test care se face printr-un callback.
 
@@ -200,7 +229,7 @@ function isBigEnough(element, index, array) {
 [12, 54, 18, 130, 44].every(isBigEnough); // true
 ```
 
-#### Array.prototype.fill()
+## Arrray.prototype.fill()
 
 Umple un array cu o valoare fixă.
 
@@ -214,7 +243,7 @@ Umple un array cu o valoare fixă.
 Array(3).fill(4);                // [4, 4, 4]
 ```
 
-#### Array.prototype.find()
+## Arrray.prototype.find()
 
 Returnează valoarea căutată într-un array, dacă un element al array-ului satisface condițiile unei funcții de test. Dacă nu este găsit, este returnat undefined.
 
@@ -241,7 +270,7 @@ function findCherries(fruit) {
 console.log(inventory.find(findCherries)); // { name: 'cherries', quantity: 5 }
 ```
 
-#### Array.prototype.findIndex()
+## Arrray.prototype.findIndex()
 
 Este returnat indexul unui element al array-ului dacă elementul din array satisface anumite condiții de test.
 În caz contrar, adică elementul nu este găsit, este returnat -1.
@@ -261,7 +290,7 @@ console.log([4, 6, 8, 12].findIndex(isPrime)); // -1, not found
 console.log([4, 6, 7, 12].findIndex(isPrime)); // 2
 ```
 
-#### Array.prototype.lastIndexOf()
+## Arrray.prototype.lastIndexOf()
 
 Returnează ultimul index al unui element căutat în array. Returnează -1 dacă elementul nu există.
 Opțional se poate menționa un al doilea parametru care indică indexul de unde să se facă căutarea pornind dinspre coadă.
@@ -277,7 +306,7 @@ array.lastIndexOf(2, -2); // 0
 array.lastIndexOf(2, -1); // 3
 ```
 
-##### Găsirea tuturor indicilor la care apare valoarea căutată
+### Găsirea tuturor indicilor la care apare valoarea căutată
 
 ```js
 var indices = [];
@@ -293,7 +322,7 @@ console.log(indices);
 // [4, 2, 0]
 ```
 
-#### Array.prototype.forEach()
+## Arrray.prototype.forEach()
 
 Execută o funcție pentru fiecare element din array.
 
@@ -323,7 +352,7 @@ function logArrayElements(element, index, array) {
 // a[3] = 9
 ```
 
-#### Array.prototype.includes()
+## Arrray.prototype.includes()
 
 Metoda verifică dacă într-un array există un anume element returnând true sau false după caz.
 Se poate menționa și indexul de la care să se facă căutarea.
@@ -336,7 +365,7 @@ Se poate menționa și indexul de la care să se facă căutarea.
 [1, 2, NaN].includes(NaN); // true
 ```
 
-#### Array.prototype.indexOf()
+## Arrray.prototype.indexOf()
 
 Returnează primul index pentru primul element care se potrivește cu cel căutat.
 Dacă nu este găsit, este returnat -1.
@@ -352,7 +381,7 @@ array.indexOf(2, -1); // -1
 array.indexOf(2, -3); // 0
 ```
 
-##### Caută și scoate unde apare și se repetă un element.
+### Caută și scoate unde apare și se repetă un element.
 
 ```js
 var indices = [];
@@ -367,7 +396,7 @@ console.log(indices);
 // [0, 2, 4]
 ```
 
-##### Căutarea unui element în array, iar dacă nu există, introducerea acestuia
+### Căutarea unui element în array, iar dacă nu există, introducerea acestuia
 
 ```js
 function updateVegetablesCollection (veggies, veggie) {
@@ -385,7 +414,7 @@ updateVegetablesCollection(veggies, 'spinach'); // New veggies collection is : p
 updateVegetablesCollection(veggies, 'spinach'); // spinach already exists in the veggies collection.
 ```
 
-#### Array.prototype.join()
+## Arrray.prototype.join()
 
 Concatenează elementele unui array într-un string a cărui carater de separare poate fi setat.
 
@@ -397,7 +426,7 @@ var myVar3 = a.join(' + '); // assigns 'Wind + Rain + Fire' to myVar3
 var myVar4 = a.join('');    // assigns 'WindRainFire' to myVar4
 ```
 
-#### Array.prototype.map()
+## Arrray.prototype.map()
 
 Metoda creează un nou array care cuprinde rezultatele rezultate din executarea unei funcții callback pentru fiecare dintre elementele acestuia.
 
@@ -426,7 +455,7 @@ var stringCodat = Object.keys(obiect)
 console.log(stringCodat); // paraunu=unu&paradoi=doi%20trei
 ```
 
-#### Array.prototype.filter()
+## Arrray.prototype.filter()
 
 Returnează un array care conține valori ce au trecut de verificările unei funcții callback.
 
@@ -438,7 +467,7 @@ var data = [ "bar", "foo", "", 0 ],
 console.log( filtered ); // ["bar", "foo"]
 ```
 
-#### Array.prototype.sort()
+## Arrray.prototype.sort()
 
 Sortează elementele unui array și returnează acel array.
 Dacă nu este pasat un argument, de fapt o funcție care să îndeplinească sortare, aceasta se va face prin compararea codurilor de caractere Unicode.
@@ -504,7 +533,7 @@ colectie.sort(function(x,y){
 });
 ```
 
-#### Array.prototype.reduce()
+## Arrray.prototype.reduce()
 
 Este o metodă care returnează produsul valorilor dintr-un array. Metodei i se dă un array, o funcție callback și o valoare opțională pentru a fi folosită la prima invocare.
 
@@ -563,7 +592,7 @@ var total = [0, 1, 2, 3].reduce(function(a, b) {
 }); // total 6
 ```
 
-##### Aplatizarea unui array de array-uri:
+### Aplatizarea unui array de array-uri:
 
 ```js
 var plat = [[0, 1], [2, 3], [4, 5]].reduce(function(a, b) {
@@ -601,7 +630,7 @@ var total = faSumaSiDubleaza(34,10,2,30,12);
 console.log(total);
 ```
 
-#### Array.prototype.values()
+## Arrray.prototype.values()
 
 Returnează un nou obiect `Array Iterator`, care conține valorile pentru fiecare index din array.
 La momentul redactării materialului spuportul este limitat. Doar Chrome.
@@ -616,7 +645,7 @@ for(let elem of iterabil){
 };
 ```
 
-#### Array.prototype[@@iterator]()
+## Arrray.prototype[@@iterator]()
 
 Valoarea inițială a lui `@@iterator` este același obiect funcție ca și valoarea inițială a proprietății value().
 
