@@ -26,10 +26,3 @@ var faOAdunare = oFunctie(function(unu, doi){return unu + doi;});
 
 faOAdunare([2, 3]); // 5
 ```
-
-
-```js
-var transformare = function (csv){
-  return csv.reduce();
-};
-```
