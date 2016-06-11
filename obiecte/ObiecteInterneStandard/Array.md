@@ -2,7 +2,7 @@
 
 Este o funcție Constructor existentă în limbaj.
 
-### Metode aplicabile obiectului Array
+## Metode aplicabile obiectului Array
 
 | to               | încărcare/descărcare | extragere/încărcare | identificare    | parcurgere/mutații | altele         | creare       |
 |:-----------------|:---------------------|:--------------------|:----------------|:-------------------|:---------------|:------------ |
@@ -16,7 +16,7 @@ Este o funcție Constructor existentă în limbaj.
 
 ![](operatiuniArrayuri.svg)
 
-#### Arrray.prototype.slice()
+## Arrray.prototype.slice()
 
 Slice în limba engleză se referă la a tăia, la a decupa, la a extrage o bucată. Pentru a înțelege slice, cel mai bine este să vă imaginați un croitor care măsoară stofa cu un centimetru, face semne pentru bucata pe care o dorește și apoi taie materialul.
 
@@ -52,7 +52,7 @@ var unArrayNou = converteste(1, "ceva", 23); // Array [ 1, "ceva", 23 ]
 
 ![](slicingArrayuri.svg)
 
-#### Metoda splice
+## Arrray.prototype.splice()
 
 ![](splicingArrayuri.svg)
 
