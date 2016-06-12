@@ -18,6 +18,8 @@ Materialele vor fi redactate în Markdown iar cei care doresc, vor putea transfo
 
 JavaScript este motorul dinamicii paginilor web.
 
+În JavaScript nu veți găsi decât două lucruri pe care se construiește totul: primitive și obiecte.
+
 John Resig, creatorul bibliotecii de cod jQuery spune despre înțelegerea acestui limbaj că este o relație între obiecte, funcții și clojure-uri.
 
 # Generalități privind JavaScript

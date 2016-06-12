@@ -1,7 +1,26 @@
-# Argumentele funcțiilor
+# Argumentele și parametrii funcțiilor
 
 Pe scurt, este ceea ce pasezi funcțiilor. Numărul de argumente pasate unei funcții se numește „arity”.
-Fiecare parametru trebuie pasat funcției în ordinea corectă.
+Fiecare argument trebuie pasat funcției în ordinea corectă.
+
+Ceea ce este declarat în funcție se numește parametru.
+
+```js
+function demo(param1, param2){ return param1 + param2}; // parametrii sunt declarațiile din funcție
+
+demo(1, 2); // argumentele este ceea ce pasezi funcției la invocare.
+```
+
+La nevoie poți specifica strict numărul argumentelor primite:
+
+```js
+function faCeva(a,b){
+  if(arguments.length !== 2){
+    throw new Error('Trebuie musai doar două argumente');
+  };
+};
+faCeva(1, 3, 4); // Error: Trebuie musai doar două argumente
+```
 
 ## Mantre
 

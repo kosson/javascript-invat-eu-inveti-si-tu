@@ -71,6 +71,12 @@ obiect['doi'] = 2;
 obiect; // Object { unu: 1, doi: 2 }
 ```
 
+Se pot și șterge exact ca și în cazul operatorului cu punct:
+
+```js
+delete obiect['doi']; // true
+```
+
 ## Operatorul `delete`
 
 Permite eliminarea unei proprietăți, adică a perechii cheie-valoare din obiect. `delete` are efect doar asupra proprietăților care aparțin obiectului (`own`). Prototipul nu este afectat. Delete returnează false dacă proprietatea nu poate fi ștearsă dar care este deținută de obiect, și va returna true dacă proprietatea a fost ștearsă cu succes.
