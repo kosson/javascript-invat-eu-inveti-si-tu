@@ -12,6 +12,7 @@ Creează un wrapper (ambalaj) pentru un obiect.
 - Toate obiectele în JavaScript descind din Object, își au originea în Object. Toate obiectele moștenesc metode și proprietăți din Object.prototype. Acestea pot fi suprascrise.
 - Object.prototype este un obiect în care poți adăuga propriile proprietăți și metode.
 - Modificările aduce obiectului Object.prototype se propagă către toate obiectele. Singura excepție este atunci când proprietățile și metodele supuse modificărilor nu sunt ele la rândul lor modificate mai departe în lanțul prototipal.
+- Proprietățile lui Object nu sunt `enumerable`.
 
 ## Crearea obiectelor cu Object
 
@@ -101,4 +102,41 @@ var animal = {
 
 var cal    = Object.create(animal, {caracteristici: {writable: true, configurable: true, value: {picioare: 4}}});
 var cangur = Object.create(animal, {caracteristici: {writable: true, configurable: true, value: {picioare: 2}}});
+```
+
+## Object.prototype.hasOwnProperty()
+
+Pentru a testa doar cheile care aparțin obiectului contruit fără proprietățile moștenite prin prototip se va testa dacă obiectul are proprietăți ale sale folosind `Object.prototype.hasOwnProperty`.
+
+```js
+"use strict";
+var obiect = { unu: "primul", doi: "al doilea" },
+    cheie;
+Object.prototype.trei = "al treilea";
+for( cheie in obiect ){
+  if(obiect.hasOwnProperty(cheie)){       // verificarea se face pentru fiecare cheie. Taxează performanța
+    console.log( cheie, obiect[cheie] );
+  }
+};
+/*
+unu primul
+doi al doilea
+ */
+```
+## Object.keys()
+
+Returnează un array care conține numele tuturor proprietăților `deținute` de un obiect. ATENȚIE! Aceste proprietăți trebuie să fie setate ca `enumerable`.
+
+Metoda `Object.keys` extrage toate cheile proprii (nu cele moștenite) ale unui obiect iterabil.
+
+Această metodă ne oferă un array de chei, care poate fi iterat prin metode așa cum este `Array.prototype.forEach`.
+Performanțele folosind această metodă sunt net superioare lui `hasOwnProperty`.
+
+```js
+"use strict";
+var obiect = { unu: "primul", doi: "al doilea" };
+
+Object.keys(obiect).forEach(function(cheie){
+  console.log( cheie, obiect[cheie] );
+});
 ```

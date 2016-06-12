@@ -16,7 +16,39 @@ Este o funcție Constructor existentă în limbaj.
 
 ![](operatiuniArrayuri.svg)
 
-## Arrray.prototype.slice()
+## Arrray.prototype.join() - nu afectează array-ul
+
+Concatenează elementele unui array într-un string a cărui carater de separare poate fi setat.
+
+```js
+var a = ['Wind', 'Rain', 'Fire'];
+var myVar1 = a.join();      // assigns 'Wind,Rain,Fire' to myVar1
+var myVar2 = a.join(', ');  // assigns 'Wind, Rain, Fire' to myVar2
+var myVar3 = a.join(' + '); // assigns 'Wind + Rain + Fire' to myVar3
+var myVar4 = a.join('');    // assigns 'WindRainFire' to myVar4
+```
+
+## Arrray.prototype.concat() - nu afectează array-ul
+
+Realizează o „copie simplă” (shallow copy) formată din elementele array-ului asupra căruia se invocă metoda și elementele care se doresc a fi adăugate.
+
+Elementele array-urilor originale sunt copiate în noul array format respectându-se următoarele reguli:
+- în cazul obiectelor sunt copiate referințe către acestea, nu obiectele în sine. Dacă un obiect referențiat este modificat, se va reflecta în array-ul original și cel nou format.
+- în cazul șirurilor și numerelor, acestea vor fi copiate în noul array. Modificarea valorilor din array-urile originale nu se vor răsfrânge în cel nou constituit.
+
+![Array.prototype.concat()](ArrayConcat.svg)
+
+Se poate chiar construi o funcție concat folosind slice, dar care să facă concat pe argumentele pasate.
+
+```js
+function concat () {
+  return Array.prototype.slice.call(arguments).join(' ');
+}
+var sirNou = concat('ceva', 'text', 'pentru', 'a', 'fi', 'unit')
+console.log(sirNou);
+```
+
+## Arrray.prototype.slice() - nu afectează array-ul
 
 Slice în limba engleză se referă la a tăia, la a decupa, la a extrage o bucată. Pentru a înțelege slice, cel mai bine este să vă imaginați un croitor care măsoară stofa cu un centimetru, face semne pentru bucata pe care o dorește și apoi taie materialul.
 
@@ -52,7 +84,17 @@ var unArrayNou = converteste(1, "ceva", 23); // Array [ 1, "ceva", 23 ]
 
 ![](slicingArrayuri.svg)
 
-## Arrray.prototype.splice()
+## Arrray.prototype.splice() - afectează definitiv
+
+Elimină elementele din intervalul de indecși menționat și opțional introduce ceva între.
+
+Dacă indexul de start este negativ, acesta se va scădea din length pentru a determina valoare indexului de start. De exemplu, dacă indexul este -1, atunci operațiunea de splicing începe de la array.length - 1, adică chiar ultimul element în acest caz. Dacă al doilea argument care indică câte elemente să fie scoase este omis, atunci se vor scoate toate elementele pornind cu indexul de start inclusiv.
+
+```js
+var tablou = ["unu", "doi", "trei", "patru", "cinci"];
+tablou.splice(-2);   // Array [ "patru", "cinci"]
+console.log(tablou); // Array ["unu", "doi", "trei"]
+```
 
 ![](splicingArrayuri.svg)
 
@@ -137,19 +179,21 @@ Metoda creează o instanță `new Array` cu un număr variabil de argumente indi
 
 Diferența dintre metoda Array.of() și constructorul Array este în felul în care sunt gestionate argumentele ca numere întregi. Array.of(42) creează un array cu un singur element în vreme ce Array(42) creează un array cu 42 de elemente.
 
-## Arrray.prototype.shift()
+## Arrray.prototype.shift() - afectează definitiv
 
 Scoate primul element din array și-l returnează.
 Dacă `length` este 0 este returnat `undefined`. `shift()` este generic și funcționează pe orice seamănă cu un array folosind call sau apply.
 
-## Arrray.prototype.unshift()
+## Arrray.prototype.unshift() - afectează definitiv
 
 Introduce un element sau mai multe în array chiar în cap. `unshift()` este generic și funcționează pe orice seamănă cu un array folosind call sau apply.
 
-## Arrray.prototype.push()
+## Arrray.prototype.push() - afectează definitiv
 
 Adaugă la finalul array-ului unu sau mai multe elemente.
 ATENȚIE! Returnează noul `length` al array-ului.
+
+Același efect îl poți obține folosind `apply()`.
 
 ### Merging de array
 
@@ -161,29 +205,9 @@ Array.prototype.push.apply(tabel1, tabel2);
 console.log(tabel1); // Array [ "veverita", "liliac", "fluture", "cărăbuș" ]
 ```
 
-## Arrray.prototype.pop()
+## Arrray.prototype.pop() - afectează definitiv
 
 Scoate din array ultimul element și îl returnează. `pop()` este generic și funcționează pe orice seamănă cu un array folosind call sau apply.
-
-## Arrray.prototype.concat()
-
-Realizează o „copie simplă” (shallow copy) formată din elementele array-ului asupra căruia se invocă metoda și elementele care se doresc a fi adăugate.
-
-Elementele array-urilor originale sunt copiate în noul array format respectându-se următoarele reguli:
-- în cazul obiectelor sunt copiate referințe către acestea, nu obiectele în sine. Dacă un obiect referențiat este modificat, se va reflecta în array-ul original și cel nou format.
-- în cazul șirurilor și numerelor, acestea vor fi copiate în noul array. Modificarea valorilor din array-urile originale nu se vor răsfrânge în cel nou constituit.
-
-![Array.prototype.concat()](ArrayConcat.svg)
-
-Se poate chiar construi o funcție concat folosind slice, dar care să facă concat pe argumentele pasate.
-
-```js
-function concat () {
-  return Array.prototype.slice.call(arguments).join(' ');
-}
-var sirNou = concat('ceva', 'text', 'pentru', 'a', 'fi', 'unit')
-console.log(sirNou);
-```
 
 ## Arrray.prototype.copyWithin()
 
@@ -399,31 +423,20 @@ console.log(indices);
 ### Căutarea unui element în array, iar dacă nu există, introducerea acestuia
 
 ```js
-function updateVegetablesCollection (veggies, veggie) {
-    if (veggies.indexOf(veggie) === -1) {
-        veggies.push(veggie);
-        console.log('New veggies collection is : ' + veggies);
-    } else if (veggies.indexOf(veggie) > -1) {
-        console.log(veggie + ' already exists in the veggies collection.');
-    }
-}
+function adaugLaArray(arrayDeOrigine, elementDeIntegrat){
+  if(arrayDeOrigine.indexOf(elementDeIntegrat) === -1){
+    arrayDeOrigine.push(elementDeIntegrat);
+  } else if (arrayDeOrigine.indexOf(elementDeIntegrat) > -1){
+    console.log(elementDeIntegrat + ' deja există în colecție');
+  }
+};
 
-var veggies = ['potato', 'tomato', 'chillies', 'green-pepper'];
+var unelte = ["ciocan", "nicovală", "clești", "foarfeci"];
 
-updateVegetablesCollection(veggies, 'spinach'); // New veggies collection is : potato,tomato,chillies,green-papper,spinach
-updateVegetablesCollection(veggies, 'spinach'); // spinach already exists in the veggies collection.
-```
+adaugLaArray(unelte, 'foale');
+adaugLaArray(unelte, 'ciocan');
 
-## Arrray.prototype.join()
-
-Concatenează elementele unui array într-un string a cărui carater de separare poate fi setat.
-
-```js
-var a = ['Wind', 'Rain', 'Fire'];
-var myVar1 = a.join();      // assigns 'Wind,Rain,Fire' to myVar1
-var myVar2 = a.join(', ');  // assigns 'Wind, Rain, Fire' to myVar2
-var myVar3 = a.join(' + '); // assigns 'Wind + Rain + Fire' to myVar3
-var myVar4 = a.join('');    // assigns 'WindRainFire' to myVar4
+unelte; // Array [ "ciocan", "nicovală", "clești", "foarfeci", "foale" ]
 ```
 
 ## Arrray.prototype.map()
@@ -467,7 +480,7 @@ var data = [ "bar", "foo", "", 0 ],
 console.log( filtered ); // ["bar", "foo"]
 ```
 
-## Arrray.prototype.sort()
+## Arrray.prototype.sort() - afectează definitiv
 
 Sortează elementele unui array și returnează acel array.
 Dacă nu este pasat un argument, de fapt o funcție care să îndeplinească sortare, aceasta se va face prin compararea codurilor de caractere Unicode.
@@ -475,6 +488,7 @@ Dacă nu este pasat un argument, de fapt o funcție care să îndeplinească sor
 Pentru șiruri funcția de comparare poate fi astfel:
 
 ```js
+// atenție, acesta este pseudocod
 function compare(primulCaracter, aldoileaCaracter) {
   if (primulCaracter este mai mic decât aldoileaCaracter folosind un criteriu de ordonare) {
     return -1;
@@ -485,16 +499,25 @@ function compare(primulCaracter, aldoileaCaracter) {
   // primulCaracter trebuie să fie egal cu aldoileaCaracter
   return 0;
 }
+["c", "a", "d"].sort(compare);
 ```
 
-De exemplu:
+### Compararea și sortarea numerelor
 
 ```js
 [-23, -2, 102, 3, -54].sort(function(x, y){
   if(x < y){return -1}; // sortează x comparativ cu y, dacă x este mai mic decât y, pune-l pe x pe un index mai mic decât y: se deplasează spre stânga.
-  if(x > y){return 1}; // dacă y este mai mic decât x, acordă un index mai mic.
-  return 0; // dacă valorile sunt sortate lasă neschimbată poziția unuia față de celălalt.
-}); // Array [ -54, -23, -2, 3, 102 ]
+  if(x > y){return 1};  // dacă y este mai mic decât x, acordă un index mai mic.
+  return 0;             // dacă valorile sunt sortate lasă neschimbată poziția unuia față de celălalt.
+});                     // Array [ -54, -23, -2, 3, 102 ]
+```
+
+Se poate condensa folosindu-se operatorul ternar:
+
+```js
+[-23, -2, 102, 3, -54].sort(function(x, y){
+  return x < y ? -1 : ( x > y ? 1 : 0 );
+});
 ```
 
 O altă variantă de comparator pentru numere este pur și simplu scăderea unuia din celălalt:
@@ -531,6 +554,15 @@ colectie.sort(function(x,y){
   if(numeX > numeY){return 1};
   return 0;
 });
+```
+
+## Arrray.prototype.reverse() - afectează definitiv
+
+Inversează ordinea dintr-un array și returnează o referință către array-ul modificat definitiv.
+
+```js
+var tablou = ["unu", "doi", 3];
+tablou.reverse(); // Array [ 3, "doi", "unu" ]
 ```
 
 ## Arrray.prototype.reduce()
