@@ -3,7 +3,7 @@
 Funcțiile pot fi create în trei feluri:
 
 - prin intermediul unei `function expression`: `var adunare = function demo(param1, param2){ return param1 + param2};` (`named function expression`)
-- prin declararea funcției
+- prin declararea funcției: `function demo(param1, param2){ return param1 + param2};`
 - și prin constructorul `Function()`
 
 ## Mantre

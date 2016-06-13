@@ -442,6 +442,11 @@ unelte; // Array [ "ciocan", "nicovală", "clești", "foarfeci", "foale" ]
 ## Arrray.prototype.map()
 
 Metoda creează un nou array care cuprinde rezultatele rezultate din executarea unei funcții callback pentru fiecare dintre elementele acestuia.
+Pentru fiecare element din array, se execută funcția iar rezultatul devine un element al unui nou array. `map()` împreună cu `filter()` și `reduce()` sunt baza programării funcționale (stil de programare bazat pe folosirea funcțiilor).
+
+`map()` are doi parametri:
+- callback-ul și
+- `this`
 
 Callback-ul primește trei argumente:
 - currentValue - elementul procesat,
@@ -466,6 +471,13 @@ var stringCodat = Object.keys(obiect)
                         .join("&");
 
 console.log(stringCodat); // paraunu=unu&paradoi=doi%20trei
+```
+
+Callbackul poate fi și o metodă a unui obiect intern standard:
+
+```js
+var numereIntregi = [-2, 4, -23, 34];
+console.log(numereIntregi.map(Math.abs)); //Array [ 2, 4, 23, 34 ]
 ```
 
 ## Arrray.prototype.filter()
@@ -642,7 +654,7 @@ texte ; // Array [ "Gică", "Georgică", "Abramburica", "Nadia", "Ana" ]
 
 Există în ECMAScript 2015 conceptul de `rest parameters`, adică o sintaxă ce permite extragerea unui Array din argumentele pasate unei funcții. Această sintaxă constă în adăugarea unui nume de parametru prefixat de trei puncte de suspensie. Această sintaxă generează un Array adevărat, nu un array-like așa cum este `arguments`.
 
-Un exemplu de transformare a funcționalității unei funcții construite clasic, care foace suma tuturor argumentelor (`arguments`) cu excepția primului, care va fi folosit drept multiplicator pentru suma obținută. Acest exemplu este oferit de Nicolás, un consultant JavaScript din Buenos Aires, Argentina în explicarea conceptelor noi pe care le introduce ECMAScript 2015 - [ES6 Spread and Butter in Depth](https://ponyfoo.com/articles/es6-spread-and-butter-in-depth)
+Un exemplu de transformare a funcționalității unei funcții construite clasic, care face suma tuturor argumentelor (`arguments`) cu excepția primului, care va fi folosit drept multiplicator pentru suma obținută. Acest exemplu este oferit de Nicolás, un consultant JavaScript din Buenos Aires, Argentina în explicarea conceptelor noi pe care le introduce ECMAScript 2015 - [ES6 Spread and Butter in Depth](https://ponyfoo.com/articles/es6-spread-and-butter-in-depth)
 
 ```js
 function faSumaSiDubleaza(){

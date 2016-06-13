@@ -1,5 +1,8 @@
 # Closures
 
+Un closure este o funcție care „capturează” valorile din jur care exsitau la momentul în care s-a născut.
+Closure-urile sunt funcții care au acces la scope-ul părinte chiar și atunci când părintele nu mai există.
+
 Closure-ul este mecanismul prin care JavaScript permite ascunderea datelor - încapsularea datelor.
 
 Un closure este mecanismul prin care putem obține o încapsulare dinamică a stări scope-ului, care, atenție, poate fi modificat atâta vreme cât closure-ul există.

@@ -26,3 +26,9 @@ var faOAdunare = oFunctie(function(unu, doi){return unu + doi;});
 
 faOAdunare([2, 3]); // 5
 ```
+
+## Funcțiile map(), filter(), reduce()
+
+Sunt o colecție nucleu pentru lucrul cu funcții de ordin înalt (higher order). Constituie instrumentarul pentru programarea funcțională pentru că iau o funcție drept input și returnează un rezultat care nu are efect.
+
+Aceste metode lucrează cu array-uri. Aceste metode aplică un callback pentru fiecare element dintr-un array, pe care nu-l modifică și returnează un alt array cu rezultatele pentru fiecare element asupra căruia a acționat respectivul callback.
