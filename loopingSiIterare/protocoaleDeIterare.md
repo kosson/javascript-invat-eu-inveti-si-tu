@@ -1,5 +1,3 @@
-
-
 # Protocoale de iterare
 
 Există două protocoale:

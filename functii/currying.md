@@ -1,6 +1,6 @@
 # Currying
 
-Currying descrie o funcție care este apelată cu mai puține argumente decâte așteaptă și returnează o funcție care primește restul argumentelor.
+Currying descrie o funcție care este apelată cu mai puține argumente decât așteaptă și returnează o funcție care primește restul argumentelor, care le rândul ei returnează rezultatul operațiunii asupra parametrilor.
 
 Tehnica de a introduce câteva argumente unei funcții cu returnarea uneia noi se numește `currying`.
 
@@ -60,9 +60,21 @@ var tipul = function(tip){
 };
 
 colectie.filter(tipul("panou")); // Array [ Object, Object ]
+```
 
-// sau poți folosi fat arrow
+sau poți folosi fat arrow
+
+```js
 var tipul = tip => dispozitiv => dispozitiv.tip === tip; // Array [ Object, Object ]
 ```
 
-Câștigul la currying este acela că lucrurile sunt segmentate pe responsabilități și se evită nebunia încercării de a determina starea.
+pentru o impresie vizuală care explică mai bine lucrurile se poate scrie și
+
+```js
+var tipul =
+      tip =>
+        dispozitiv =>
+          dispozitiv.tip === tip;
+```
+
+Câștigul la currying este acela că lucrurile sunt segmentate pe responsabilități și se evită nebunia încercării de a determina starea sistemului.

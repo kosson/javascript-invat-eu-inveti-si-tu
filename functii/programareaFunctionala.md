@@ -1,4 +1,4 @@
-Javascript are un model de execuție foarte flexibil. Toate funcțiile beneficiază de metoda apply(), care permite apelarea funcției cu un array ca și cum elementele din array ar fi argumentele funcției.
+Javascript are un model de execuție foarte flexibil. Toate funcțiile beneficiază de metoda `apply()`, care permite apelarea funcției cu un array ca și cum elementele din array ar fi argumentele funcției.
 
 ## Definiții
 

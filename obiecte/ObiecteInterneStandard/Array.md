@@ -483,6 +483,7 @@ console.log(numereIntregi.map(Math.abs)); //Array [ 2, 4, 23, 34 ]
 ## Arrray.prototype.filter()
 
 Returnează un array care conține valori ce au trecut de verificările unei funcții callback.
+Face parte integrantă din paradigma „programării funcționale” alături de `map()` și `reduce()`.
 
 ```js
 var data = [ "bar", "foo", "", 0 ],
@@ -491,6 +492,29 @@ var data = [ "bar", "foo", "", 0 ],
     });
 console.log( filtered ); // ["bar", "foo"]
 ```
+
+Și o filtrare a valorilor unui array cu obiecte.
+
+```js
+var colectie = [
+  {nume: "ISS", tip: "statie"},
+  {nume: "Soyuz", tip: "vehicul"},
+  {nume: "Atlantis", tip: "vehicul"},
+  {nume: "Ariane", tip: "propulsor"}
+];
+
+var existaElementul = function(element, obiect){
+  return obiect.tip === element;
+};
+
+var elementeComune = colectie.filter(function(obiect){
+  return existaElementul('vehicul', obiect);
+});
+
+console.log(JSON.stringify(elementeComune, null, 2));
+```
+
+Poate fi folosit cu mare succes și în funcții recursive.
 
 ## Arrray.prototype.sort() - afectează definitiv
 
@@ -639,8 +663,8 @@ var total = [0, 1, 2, 3].reduce(function(a, b) {
 ### Aplatizarea unui array de array-uri:
 
 ```js
-var plat = [[0, 1], [2, 3], [4, 5]].reduce(function(a, b) {
-  return a.concat(b);
+var plat = [[0, 1], [2, 3], [4, 5]].reduce(function(previousValue, currentValue) {
+  return previousValue.concat(currentValue);
 }, []);
 // flattened is [0, 1, 2, 3, 4, 5]
 ```
