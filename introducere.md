@@ -16,7 +16,7 @@ Materialele vor fi redactate în Markdown iar cei care doresc, vor putea transfo
 
 # Anti-introducere
 
-JavaScript este motorul dinamicii paginilor web.
+JavaScript este motorul dinamicii paginilor web și nu numai. Avantajele folosirii JS pornesc de la server (NodeJs), până la aplicațiile rulate în pagina web a utilizatorului.
 
 În JavaScript nu veți găsi decât două lucruri pe care se construiește totul: primitive și obiecte.
 
