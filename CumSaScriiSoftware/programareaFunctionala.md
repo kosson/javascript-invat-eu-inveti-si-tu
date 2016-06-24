@@ -1,3 +1,7 @@
+# Programarea funcțională
+
+Conceptele programării funcționale sunt necesare pentru a înțelege cum se face „descompunerea” (decomposing) unei funcții ceea ce conduce la o mai bună înțelegere a felului în care trebuie scris software în JavaScript. Este vorba și despre cum să denumești părțile la nivel individual pentru ca la momentul „compunerii” lor să stabilească relații între entități, care să fie ușor de modelat.
+
 Javascript are un model de execuție foarte flexibil. Toate funcțiile beneficiază de metoda `apply()`, care permite apelarea funcției cu un array ca și cum elementele din array ar fi argumentele funcției.
 
 ## Definiții
@@ -56,7 +60,7 @@ demoFunctie(oFunctie, 2, 3); // 5
 
 ## Funcțiile pot returna alte funcții
 
-Cel mai ușor de exemplficat este un currying:
+Cel mai ușor de exemplificat este un currying:
 
 ```js
 var oFunctie = function(x,y){
@@ -128,7 +132,7 @@ console.log(colectieDeNume); // Array [ "Tereza", "Ciprian", "Gina" ]
 ```
 
 Promisiunile sunt implementate și ele ca functori. ECMAScript 2015 nu are o metodă map, dar alte biblioteci de cod au.
-Streamurile sunt și ele implementatori ai lui `map()`. 
+Streamurile sunt și ele implementatori ai lui `map()`.
 
 
 ## Funcțiile map(), filter(), reduce()

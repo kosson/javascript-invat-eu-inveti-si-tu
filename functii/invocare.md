@@ -4,10 +4,12 @@ Este chemarea funcțiilor pentru a fi executate.
 
 ## Mantre
 
-- Funcțiile sunt invocate într-un loc care determină rezultatul.
+- A invoca înseamnă aplicarea funcției pe zero sau mai multe argumente.
+- De fiecare dată când o funcție este invocată, se creează un nou „mediu” (**environment**).
+- Funcțiile sunt invocate într-un loc care determină rezultatul, adică într-un anumit *context*.
 - La invocarea funcțiilor pe lângă argumente sunt pasate „tacit” `this` și `arguments`.
 - Când invoci funcția ca metodă a unui obiect, acel obiect devine **contextul** funcției și acesta devine disponibil în funcție prin intermediul parametrului `this`.
-- `this` este un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat. 
+- `this` este un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
 - există patru cazuri în care o funcție este invocată:
   - ca funcție invocată în mod direct;
   - ca metodă, fapt care leagă invocarea de un obiect;
