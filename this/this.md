@@ -17,7 +17,7 @@ Folosit pentru a lua un obiect și pentru a-i îmbogăți și/sau prelucra valor
 - Toate funcțiile sunt de fapt obiecte `Function` (obiecte interne).
 - La invocarea funcțiilor pe lângă argumente sunt pasate „tacit” `this` și `arguments`.
 - `this` este un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
-- Obiectul `this` se constituie la execuția codului, nu la momentul scrierii lui.
+- Obiectul `this` se constituie la execuția codului, nu la momentul scrierii lui. Pentru metode este chiar obiectul care deține metoda, pentru funcții este întotdeauna window (deci, o funcție este de fapt o metodă a obiectului window), iar pentru constructori este noua instanță de obiect creată.
 - **this** este o referință către contextul de execuție curent în timp ce funcția se execută.
 - `this` nu se referă în niciun caz la **lexical scope**.
 - `this` este un binding pentru fiecare invocare a unei funcții care se bazează pe de-antregul pe call-site
@@ -30,10 +30,21 @@ Folosit pentru a lua un obiect și pentru a-i îmbogăți și/sau prelucra valor
 - Bindingul primar se face la obiectul global.
 - Bindingul implicit se face la contextul de execuție al unei funcții sau al unei metode.
 
+## Lămurirea lui `this`
 
-For methods, it’s the method’s
-owning object; for top-level functions, it’s always window (in other words, a method of
-window ); for constructors, it’s a newly created object instance.
+În cazul obiectelor, atunci când apelezi o funcție (care joacă rolul de metodă), folosind `.` sau `[]`, vei avea un obiect drept context, altfel, vei avea global environment.
+
+Un exemplu pentru cazul în care o funcție este metoda unui obiect:
+
+```js
+var obiect = {
+  getThis: function(){
+    return this;
+  }
+};
+
+obiect.getThis() === obiect; // true
+```
 
 ## Regulile de binding - de generare a obiectului this
 
@@ -174,6 +185,8 @@ obiect.metoda.call(window); // 4000
 obiect.metoda.call(window, 1, 2, 3);
 obiect.metoda.apply(window, [1,2,3]); //acelasi lucru ca si call numai ca paseaza params ca array
 ```
+
+#### Pierderea bindingului
 
 Chiar și când se face un binding explicit, se poate pierde bindingul la `this`. Soluția ar fi „îmbrăcarea” într-o funcție „gazdă”
 

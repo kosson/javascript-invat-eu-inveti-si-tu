@@ -1,7 +1,8 @@
 # Global Execution Context - contextul de execuție a codului
+
 Tot codul JavaScript rulează în Global Execution Context (GEC). Este un wrapper pentru cod.
 
-Este creat un **Global Object** și **this**, o variabilă specială. De regulă, este window.
+Este creat un **Global Object** și **this**, o variabilă specială. De regulă, pentru codul top-level este window.
 
 Execution Context este inițiat la executarea codului.
 
@@ -28,3 +29,30 @@ ATENȚIE, toate acestea sunt create de Enginul JavaScript.
 - contextul e execuție este parte a scope (format la faza de compilare).
 - Context este valoarea lui ```this```
 - toate variabilele și funcțiile definite într-o funcție sunt considerate parte a contextului de execuție
+
+## Cazul obiectelor
+
+În cazul obiectelor, atunci când apelezi o funcție (care joacă rolul de metodă), folosind `.` sau `[]`, vei avea un obiect drept context, altfel, vei avea global environment.
+
+Vorbim de faptul că funcțiile, atunci când sunt apelate, generează un context. `this` este legat la acest context iar acesta este setat după modul în care este apelată funcția. Reginald Braithwaite chiar exprima regretul că `this` nu a fost numit `context` direct.
+
+Contextul unei funcții nu poate fi determinat examinând strict codul.
+
+```js
+var obiect = {
+  getThis: function(){
+    return this;
+  }
+};
+
+obiect.getThis() === obiect; // true
+```
+
+Care ar fi contextul pentru funcția obiect.getThis()? Să investigăm:
+
+```js
+var getThis = obiect.getThis; // getThis este doar o referință către aceeași funcție
+
+getThis === obiect.getThis; // true
+getThis(); // window
+```
