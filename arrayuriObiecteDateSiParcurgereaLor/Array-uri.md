@@ -16,6 +16,40 @@ Indexarea internă a elementelor atunci când nu este explicită, pornește de l
 
 ## Crearea array-urilor
 
+### Folosirea lui Array ca funcție (este recomandat)
+
+```js
+var prestabilit = Array(5); // Array [ <5 empty slots> ]
+
+Array(5).join('-'); // "----"
+
+[null, NaN, null, undefined].join('-'); // "-NaN--"
+```
+
+Dacă nu sunt menționate elementele array-ului, acesta va fi constituit din locuri goale, exact ca o sală de teatru goală. Toate scaunele poartă un număr, dar nu este nimeni așezat pe el.
+
+#### Folosirea lui `Array.apply`
+
+Există un truc pentru a genera array-uri de o dimensiune fixă, dar care în loc să nu aibe elemente, să fie populată cu `undefined`. Pentru aceasta contextul va fi stabilit la obiectul general (în cazul browserului este `window`), iar drept argumente, va fi invocat Apply pasându-i-se numărul de elemente dorit:
+
+```js
+Array.apply(window, Apply(5)); // Array.apply(window, Array(3));
+Array.apply(window, [1,,3]); // Array [ 1, undefined, 3 ]
+
+Array.apply(window, Array(5)).map(function (x, y) { return y + 1; });  // [1, 2, 3, 4, 5]
+Array.apply(window, )
+
+Array.apply(window, Array(26))
+     .map( function (x,y){ return String.fromCharCode(y + 65); })
+     .join(''); // "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+// si versiunea ECMAScript 2015
+
+[ for (i of Array.apply(window, Array(26)).map((x, y) => y))String.fromCharCode(65 + i) ].join(''); // "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+```
+
+Acesta este un pont de la Brandon Benvie descoperit prin intermediul articolului lui Ariya Hidayat, [Sequences using JavaScript Array](https://ariya.io/2013/07/sequences-using-javascript-array).
+
 ### Folosind constructorul: `new Array()`
 
 ```js
@@ -80,7 +114,7 @@ tablou[-1];          // ceva în afară
 
 ## Operatorul `in`
 
-Operatorul `in` detectează dacă o valoare care reprezintă un index are o valoare în array
+Operatorul `in` detectează dacă pentru valoare (indexul), există o valoare în array.
 
 ```js
 var tablou = [0,1, ,2,4,"unu"];
