@@ -14,9 +14,11 @@ Callback-ul primește trei argumente:
 
 Opțional se mai poate pasa o valoare care să reprezinte ``this`` la executarea callback-ului.
 
-``map()`` construiește un array nou din rezultate.
+## Mantre
 
-Callback-ul este invocat doar pentru indexurile care au valori chiar dacă sunt `undefined`.
+- ``map()`` construiește un array nou din rezultate
+- Callback-ul este invocat doar pentru indexurile care au valori chiar dacă sunt `undefined`
+- Callbackul poate fi și o metodă a unui obiect intern standard al JavaScript
 
 Un exemplu super privind ce se poate obține folosind metoda este construirea unui mic utilitar care să transforme valorile unui obiect într-un șir url-encoded.
 

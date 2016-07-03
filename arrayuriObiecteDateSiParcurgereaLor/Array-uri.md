@@ -7,7 +7,26 @@ Indexarea internă a elementelor atunci când nu este explicită, pornește de l
 |---------|:---:|:---:|:---:|
 | index   |  0  |  1  |  2  |
 
+
+## Lanțul prototipal al unui array:
+
+```js
+var tablou = ['prima', 'a doua', 1, 2];
+
+var pas1 = Object.getPrototypeOf(tablou);
+pas1 // Array [  ]
+
+var pas2 = Object.getPrototypeOf(pas1);
+pas2 // Object { , 15 more… }
+
+Object.getPrototypeOf(pas2); // null
+```
+
+tablou --> Array.prototype --> Object.prototype --> null.
+
+
 ## Mantre
+
 - Array-urile sunt **obiecte** și poți adăuga proprietăți în array folosind notația dot `var a = [1,2]; a.i = 23; a.i // 23`. Valorile sunt adăugate indiferent că array-ul are un index numeric prestabilit. Ele sunt acolo.
 - cheia unei proprietăți al unui array se numește `index` al unui array (valorile dintre paranteze pătrate sunt convertite la string)
 - o proprietate într-un array care este identificată printr-un index este numită `element`
@@ -28,16 +47,19 @@ Array(5).join('-'); // "----"
 
 Dacă nu sunt menționate elementele array-ului, acesta va fi constituit din locuri goale, exact ca o sală de teatru goală. Toate scaunele poartă un număr, dar nu este nimeni așezat pe el.
 
-#### Folosirea lui `Array.apply`
+#### Folosirea lui `Array.apply` pentru crearea de array-uri dense
 
-Există un truc pentru a genera array-uri de o dimensiune fixă, dar care în loc să nu aibe elemente, să fie populată cu `undefined`. Pentru aceasta contextul va fi stabilit la obiectul general (în cazul browserului este `window`), iar drept argumente, va fi invocat Apply pasându-i-se numărul de elemente dorit:
+Există un truc pentru a genera array-uri de o dimensiune fixă, dar care în loc să nu aibe elemente, să fie populată cu `undefined`.
+Se folosește Function.prototype.apply(), care se poate invoca direct pe Array pentru că și Array, de fapt este o funcție.
+Pentru aceasta contextul va fi stabilit la obiectul general (în cazul browserului este `window`) sau la `null`, iar drept argumente, va fi invocat Apply pasându-i-se numărul de elemente dorit:
 
 ```js
-Array.apply(window, Apply(5)); // Array.apply(window, Array(3));
+Array.apply(window, Array(5)); // Array [ undefined, undefined, undefined, undefined, undefined ] echivalent cu Array(5).fill()
+Array.apply(null, Array(5)); // Array [ undefined, undefined, undefined, undefined, undefined ]
 Array.apply(window, [1,,3]); // Array [ 1, undefined, 3 ]
 
 Array.apply(window, Array(5)).map(function (x, y) { return y + 1; });  // [1, 2, 3, 4, 5]
-Array.apply(window, )
+Array.apply(null, Array(5)).map(Function.prototype.call.bind(Number)); // [0,1,2,3,4,5]
 
 Array.apply(window, Array(26))
      .map( function (x,y){ return String.fromCharCode(y + 65); })
@@ -49,6 +71,16 @@ Array.apply(window, Array(26))
 ```
 
 Acesta este un pont de la Brandon Benvie descoperit prin intermediul articolului lui Ariya Hidayat, [Sequences using JavaScript Array](https://ariya.io/2013/07/sequences-using-javascript-array).
+
+#### Folosirea lui `fill()` pentru a crea array-uri dense (vezi `Array.prototype.fill()`)
+
+Cu fill() se pot crea array-uri dense care să conțină valori:
+
+```js
+[1,2,3].fill();                  // Array [ undefined, undefined, undefined ] echivalent cu Array(3).fill()
+Array(3).fill(4);                // [4, 4, 4]
+[].fill.call({ length: 3 }, 4);  // {0: 4, 1: 4, 2: 4, length: 3}
+```
 
 ### Folosind constructorul: `new Array()`
 
@@ -164,7 +196,7 @@ tablou.length = 3;
 
 ## Scăderea dimensiunii unui array menționând length
 
-Se poate face simplu prin
+Se poate face simplu prin:
 
 ```js
 var tablou = ['unu', 'doi', 'trei', 'patru'];
@@ -211,7 +243,7 @@ tablou; // []
 altTablou; // Array [ "prima", "a doua", 1, 2 ]
 ```
 
-## Tratarea array-urilor după sparse sau dense.
+## Tratarea array-urilor după felul lor: sparse sau dense.
 
 Array-urile care au goluri se numesc „sparse”. Un array care nu are goluri se numește „dense”.
 
@@ -229,12 +261,14 @@ Array-urile care au goluri se numesc „sparse”. Un array care nu are goluri s
 ### every() trece peste goluri
 ### some() trece peste goluri
 ### map() sare peste goluri, dar le păstrează
+
 ```js
 ['prima',, 1, 2].map(function(currentValue, index){
   return currentValue + ' -> ' + index;
 });
 // Array [ "prima -> 0", <1 empty slot>, "1 -> 2", "2 -> 3" ]
 ```
+
 ### filter() elimină golurile
 
 ```js
