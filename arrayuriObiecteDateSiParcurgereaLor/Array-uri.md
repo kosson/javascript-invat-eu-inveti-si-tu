@@ -10,19 +10,27 @@ Indexarea internă a elementelor atunci când nu este explicită, pornește de l
 
 ## Lanțul prototipal al unui array:
 
+Uneori este necesar să afli care este prototipul unei colecții de care nu ești sigur dacă este array curat sau array-like (asemănător-cu-array).
+
 ```js
 var tablou = ['prima', 'a doua', 1, 2];
 
-var pas1 = Object.getPrototypeOf(tablou);
-pas1 // Array [  ]
+var protoTablou = Object.getPrototypeOf(tablou);
+protoTablou // Array [  ]
 
-var pas2 = Object.getPrototypeOf(pas1);
-pas2 // Object { , 15 more… }
+var protoLaProtoTablou = Object.getPrototypeOf(protoTablou);
+protoLaProtoTablou // Object { , 15 more… }
 
-Object.getPrototypeOf(pas2); // null
+Object.getPrototypeOf(protoLaProtoTablou); // null
 ```
 
 tablou --> Array.prototype --> Object.prototype --> null.
+
+Colecțiile care sunt asemănătoare-cu-array-urile vor avea un lanț mult mai scurt care indică Object.
+
+arrayLike --> Object.prototype --> null.
+
+TODO: scrie un exemplu
 
 
 ## Mantre
@@ -106,20 +114,15 @@ var tablou = [1, 2, 3];
 Realizarea array-urilor multidimensionale - array de array-uri
 
 ```js
-var arrDeArr = [];                                                      // array-ul care le va conține pe celelalte (un array de array-uri)
-
-for(var contorRanduri = 0; contorRanduri < 3; contorRanduri++) {       // adaugă în array-ul randuri
-
-    arrDeArr[contorRanduri] = [];                                       // cate un array
-
-    for (var contorColoane=0; contorColoane < 3; contorColoane++) {    // generat de bucla interna (ruleaza de 3 ori pentru fiecare iteratie externa)
-        arrDeArr[contorRanduri][contorColoane] = '0';                   // cu indexul setat de bucla externă (o singura valoare pentru 3 iteratii interne)
-                                                                        // și cu 3 indexuri generate intern pentru care atribuie o valoare
+var arrDeArr = [];                                                   // array-ul care le va conține pe celelalte (un array de array-uri)
+for(var contorRanduri = 0; contorRanduri < 3; contorRanduri++) {     // adaugă în array-ul randuri
+    arrDeArr[contorRanduri] = [];                                    // cate un array
+    for (var contorColoane=0; contorColoane < 3; contorColoane++) {  // generat de bucla interna (ruleaza de 3 ori pentru fiecare iteratie externa)
+        arrDeArr[contorRanduri][contorColoane] = '0';                // cu indexul setat de bucla externă (o singura valoare pentru 3 iteratii interne)
+                                                                     // și cu 3 indexuri generate intern pentru care atribuie o valoare
     }
-}
-
+};
 arrDeArr[0][2] = 'X';  // Arata ca o adresă [rand][coloana]
-
 arrDeArr.forEach(function (arrDeArr) {
   console.log(arrDeArr.join(' '));
 });
@@ -164,12 +167,15 @@ delete tablou[2];
 console.log(tablou); // Array [ 1, 2, <1 empty slot>, 4 ]
 ```
 
-## `length` numără toate elementele array-ului chiar daca acestea sunt goale
+## Manipularea dimensiunii unui array folosind `length`
+
+### `length` numără toate elementele array-ului chiar daca acestea au și goluri
 
 ```js
-var tablou = [0,1,,3];
+var tablou = [0,1,,3]; // conține un element lipsă
 tablou.length; // 4
 ```
+
 Pentru a număra câte elemente chiar există în array se va croi o funcție specializată:
 
 ```js
@@ -186,7 +192,7 @@ function numaraElementeReale(date){
 numaraElementeReale(tablou); // 3
 ```
 
-## Creșterea lungimii array-ului prin introducerea valorii
+### Creșterea lungimii array-ului prin introducerea valorii
 
 ```js
 var tablou = ['x', 'y'];
@@ -194,7 +200,7 @@ tablou.length = 3;
 // în acest moment ceea ce s-a întâmplat este că a fost introdus un slot gol în array.
 ```
 
-## Scăderea dimensiunii unui array menționând length
+### Scăderea dimensiunii unui array menționând length
 
 Se poate face simplu prin:
 
@@ -206,7 +212,7 @@ tablou.length;        // 2
 console.log(tablou);  // Array [ "unu", "doi" ]
 ```
 
-## Curățarea unui array - resetarea sa la zero.
+### Curățarea unui array - resetarea sa la zero.
 
 ```js
 var tablou = ['unu', 'doi', 'trei', 'patru'];
@@ -217,7 +223,7 @@ console.log(tablou);  // Array [  ]
 tablou = [];
 ```
 
-## Resetarea array-urilor partajate la 0 - varianta distructivă și cea nedistructivă
+### Resetarea array-urilor partajate la 0 - varianta distructivă și cea nedistructivă
 
 Resetarea la 0 a array-urilor dacă se face cu length, cei care accesează acel array vor avea surpriza unuia gol.
 
@@ -246,6 +252,15 @@ altTablou; // Array [ "prima", "a doua", 1, 2 ]
 ## Tratarea array-urilor după felul lor: sparse sau dense.
 
 Array-urile care au goluri se numesc „sparse”. Un array care nu are goluri se numește „dense”.
+
+```js
+// array sparce
+var arrayCuGoluri = [1,,3,4];
+
+// array dense
+var arrayDens = [1,2,3,4];
+Array(4).fill(); // Array [undefined, undefined, undefined, undefined]
+```
 
 ### forEach() trece peste goluri
 
@@ -288,4 +303,34 @@ Array [ "prima", 1, 2 ];
 
 ```js
 for (var key in ['prima',,1,2]){ console.log(key); }; // 0 2 3
+```
+
+## Completarea unui array existent
+
+```js
+var primul = [1,2,3];
+var alDoilea = [4,5,6];
+
+Array.prototype.push.apply(primul, alDoilea);
+console.log(primul); // Array [ 1, 2, 3, 4, 5, 6 ]
+```
+
+O altă soluție
+
+```js
+var a = [1,2,3,7,8,9];
+
+var b = [4,5,6]; var insertIndex = 3;
+
+a.splice.apply(a, Array.concat(insertIndex, 0, b));
+```
+
+## Shuffle pentru conținutul unui array
+
+```js
+var colectie = [1,2,3,'unu','doi','trei'];
+
+colectie = colectie.sort(function() return Math.random() - 0.5);
+
+colectie
 ```
