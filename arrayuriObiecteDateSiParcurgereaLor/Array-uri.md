@@ -30,7 +30,7 @@ Colecțiile care sunt asemănătoare-cu-array-urile vor avea un lanț mult mai s
 
 arrayLike --> Object.prototype --> null.
 
-TODO: scrie un exemplu
+TODO: scrie cod pentru exemplificare
 
 
 ## Mantre
