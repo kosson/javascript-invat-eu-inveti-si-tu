@@ -80,6 +80,9 @@ Este specificat să se ignore majusculele și să se facă căutare la nivel glo
 | \f | Identifică un form feed ||
 | [\b] | Identifică un backspace ||
 | 0 | Identifică un caracter NUL ||
+| \w | Identifică orice caracter din setul de bază Latin, incluzând și underscore. | Echivalent cu `[A-Za-z0-9_]` |
+| \W | Identifică orice caracter care nu este un caracter dintr-un psibil cuvânt format cu Latine. De exemplu, /\W/ identifică „%” din 50%. | Echivalent cu `[^A-Za-z0-9_]` |
+
 
 ### Seturi de caractere
 

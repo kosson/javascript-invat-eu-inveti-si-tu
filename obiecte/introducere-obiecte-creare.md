@@ -10,6 +10,7 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
 ## Mantre
 
 - JavaScript nu are clase!
+- Totul în JavaScript are comportamentul unui obiect cu două excepții: null și undefined.
 - În clientul care rulează codul mai întâi de orice există obiectul window.
 - Obiectul window are o metodă numită Object [ function Object() ]. Motorul Javascript construiește automat metoda Obiect în obiectul window (window.Object returnează function Object()).
 - Toate obiectele în JavaScript descind din Object, își au originea în Object. Toate obiectele moștenesc metode și proprietăți din Object.prototype. Acestea pot fi suprascrise.
@@ -25,9 +26,9 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
 - JavaScript are și obiecte globale existente deja în limbaj precum String(), Array(), Math(), Date() (```var test = new Date()```).
 - O funcție apelată cu `new` în fața sa este un constructor:
   1. Se creează un obiect nou.
-  2. Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu ```new```. Se creează legătura prototipală.
+  2. Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu `new`. Se creează legătura prototipală.
   3. Obiectul generat automat este pasat funcției cu rol de constructor ca fiind parametrul `this` și astfel, devine contextul de execuție a funcției constructor invocate (`this` este pasat ca parametru împreună cu `arguments`).
-  4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), ```this``` va fi returnat automat.
+  4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), `this` va fi returnat automat.
 - `this` este un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
 - Obiectele pot moșteni alte proprietăți direct din alte obiecte.
 - Când introduci o proprietate nouă într-un obiect care generează prototipul pentru alte obiecte, obiectele legate prin lanțul prototipal, vor moșteni noile proprietăți.
@@ -35,7 +36,7 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
 - Legătura prototipală se obține legătura prin Object.create() și are două efecte:
   1. **creează un obiect**,
   2. **stabilește legătura prototipală**.
-- Legătura prototipală se obține și prin efectul al doilea al folosirii cuvântului cheie ```new```.
+- Legătura prototipală se obține și prin efectul al doilea al folosirii cuvântului cheie `new`.
 - Legătura prototipală creează un lanț de delegare pentru cazurile în care nu găsești o proprietate sau o metodă într-un anumit context de execuție.
 - Mecanismul pe care-l realizează .prototype este unul de delegare a cererii pentru referința unei proprietăți sau metode către un obiect mai sus pe lanțul prototipal către un alt obiect.
 - Obiecte cu un prototip și proprietăți prestabilite, se pot contrui cu Object.create(UnObiect, {exemplu: 'proprietate'}):
@@ -50,12 +51,12 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
 
 Obiectele pot fi create în două feluri: prin declararea acestora sau prin construirea lor.
 
-1. var newObj = new Object();
+1. `var newObj = new Object();`
 // se respectă cele patru reguli:
 // 1.crearea obiectului; 2. stabilirea lanțului prototipal; 3. bindingul lui `this` la noul obiect; 4. obiectul nou creat este returnat
-2. var newObj = Object.create(null);             // prototype este setat la null
-3. var newObj = Object.create(Object.prototype); // echivalentă cu var newObj = {};
-4. var newObj = {};                              // echivalentă cu new Object();
+2.` var newObj = Object.create(null);             // prototype este setat la null`
+3. `var newObj = Object.create(Object.prototype); // echivalentă cu var newObj = {};`
+4. `var newObj = {};                              // echivalentă cu new Object();`
 
 ### Crearea obiectelor printr-o funcție cu rol de constructor și instanțiezi cu `new`
 
@@ -71,7 +72,7 @@ Acesta este modelul cel mai des întâlnit și acceptat ca practică istorică:
 1. Se creează un obiect nou.
 2. Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu `new`. Se creează legătura prototipală.
 3. Obiectul generat automat este pasat funcției cu rol de constructor ca fiind parametrul `this` și astfel, devine contextul de execuție a funcției constructor invocate (`this` este pasat ca parametru împreună cu `arguments`).
-4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), `this` va fi returnat automat.
+4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), iar `this` va fi returnat automat.
 
 Cel mai simplu exemplu:
 
@@ -91,8 +92,8 @@ unObiect.glas('o vorbă să-ți mai spun');  // unObiect.__proto__.constructor r
 Atenție! Aici există ceva foarte important de lămurit. Proprietatea `prototype` aparține funcției constructor. Această legătură vizibilă, care poate fi „întrebată”, expune o legătură internă referită de standard ca [[Prototype]].
 
 Cum testezi, cum întrebi care este prototipul unui obiect? Există două metode echivalente ca rezultat returnat (obiectul prototype):
-1. Object.getPrototypeOf(obiectulTestat),
-2. obiectulTestat.__proto__
+1. `Object.getPrototypeOf(obiectulTestat)`,
+2. `obiectulTestat.__proto__`
 
 #### Crearea și accesarea membrilor unui obiect creat cu un constructor
 
