@@ -21,6 +21,7 @@ function arataMesajul(mesaj){
 
 arataMesajul('funcția internă este chemată după trei secunde');
 ```
+
 Un alt exemplu simplu ca demonstrație:
 
 ```js
@@ -30,6 +31,7 @@ function test (numeFuncție){
 ```
 
 ## Mantre
+
 - Funcțiile sunt obiecte first-class
 - Funcțiile pot fi pasate ca argumente alor funcții și pot fi returnate din funcții.
 - Atunci când funcția este un callback, ține minte că tot o referință către funcție este (implicit assignment), nu este valoarea sa.
@@ -37,3 +39,22 @@ function test (numeFuncție){
 ## Folosire
 
 Sunt folosite în bibliotecile de cod pentru că oferă reutilizare. Permite ca metodele bibliotecii să fie ușor de configurat și de extins.
+
+### Utilizare în Node.js
+
+Un exemplu de folosire a callback-urilor în Node.js
+
+```js
+var fs = require('fs');
+
+var callback = function faCeva(error, data){  // o practică bună este a numi funcțiile pentru a le vedea în stivă
+  if(error){
+    return callback(error, null);
+  };
+  // fă ceva cu datele
+};
+
+fs.readFile('date.csv', 'utf-8', callback);
+```
+
+Atenție, în Node, primul argument al unui callback va fi întotdeauna un obiect de eroare. Acesta este modelul care trebuie urmat. Datele vehiculate constituie cel de-al doilea argument.

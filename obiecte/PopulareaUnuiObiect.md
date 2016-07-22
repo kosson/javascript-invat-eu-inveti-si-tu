@@ -88,6 +88,20 @@ var obiect = {
 actiune;				// function actiune(){..}
 
 acceasiActiune;			// function actiune(){..}
-
+https://mic.com/articles/85987/turkish-protesters-are-spray-painting-8-8-8-8-and-8-8-4-4-on-walls-here-s-what-it-means#.FAmHZ33NK
 obiect.acceasiActiune;	// function actiune(){..}
+```
+
+## Cum se șterge un membru al unui obiect
+
+```js
+var obi = {unu: 'ceva', doi: 'altceva', trei: 'diferit', patru: 'prop'};
+
+delete obi.doi;
+
+for(var i in obi){
+  if(obi.hasOwnProperty(i)){
+    console.log(i, ' '+obi[i]);
+  };
+};
 ```

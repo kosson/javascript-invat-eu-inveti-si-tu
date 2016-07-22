@@ -11,11 +11,12 @@
 
 ## Mantre
 
-- este folosit doar la momentul instanțierii, după poate fi actializat doar
+- folosit pentru a „conserva” starea unei aplicații și apoi accesa această stare în întreaga aplicație
+- este folosit doar la momentul instanțierii, iar după, poate fi doar actualizat
 - creează un namespace distinct
 - are instanțiere întârziată - când este nevoie, de fapt
 - obiectul este unic în întreaga aplicație
-- e o interfață globală constantp pentru toți cei care au nevoie să-l folosească
+- e o interfață globală constantă pentru toți cei care au nevoie să-l folosească
 - Modificarea concomitentă a valorilor, va duce la suprascrierea valorilor.
 - are o instanțiere întârziată, adică va fi folosit atunci când va fi nevoie de acesta.
 
@@ -39,7 +40,7 @@ VehiculSpatial.an = 2015;
 console.log(VehiculSpatial.prezentare());
 ```
 
-Structura simpla de mai sus poate fi extinsă prin adăugare de membri și metode private prin incapsularea declarațiilor de variabile și funcții într-un clojure.
+Structura simplă de mai sus poate fi extinsă prin adăugare de membri și metode private prin încapsularea declarațiilor de variabile și funcții într-un clojure.
 
 ```js
 var unSingleton = function(){
@@ -163,11 +164,10 @@ var singletonTest = TestSingleton.getInstance({
 });
 
 console.log(singletonTest.coordX); // afiseaza 10
-
 ```
 
 În cazul folosirii Node, datorită modului în care se face caching-ul, pentru a beneficia de un Singleton este îndejuns să faci:
 
-module.exports = numeFuncție()
+`module.exports = numeFuncție()`
 sau
-module.exports = new numeFunctie()
+`module.exports = new numeFunctie()`
