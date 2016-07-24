@@ -2,6 +2,31 @@
 
 Este o funcție care este executată ca răspuns la un eveniment. Ori de câte ori o funcție este construită pentru a fi apelată ulterior, fie de browser, fie de o altă parte a codului, aceasta se numește `callback`.
 
+Un callback este o funcție care este pasată ca argument unei alte funcții și care este invocată atunci când se ajunge la un rezultat. Pe scurt, rezultatul funcției nu este intors celui care a invocat-o, ci este preluat de callback.
+
+În programarea funcțională, acest mod de a propaga rezultatul se numește „continuation-passing style” (CPS). Returnarea rezultatului dintr-o funcție se numește „direct style”.
+
+```js
+// exemplificare direct style versus continuation-passing style
+
+function adunare(a, b){
+  return a + b; // direct style
+};
+
+function adunare(a, b, faAdunarea){
+  faAdunarea(a + b); // continuation-passing style
+}; //se va returna o valoare abia după ce callback-ul și-a încheiat execuția
+
+console.log('inainte de adunare');
+adunare(1, 2, function(rezultat){console.log('Rezultatul este: ' + rezultat)});
+console.log('după adunare');
+// Rezultatul este: 3
+// Această funcție se execută sincron
+
+// adunarea ca operațiune asincronă
+function adunareAsincrona(){};
+```
+
 ## Mantre
 
 - Funcțiile pot fi pasate ca argumente altor funcții.
