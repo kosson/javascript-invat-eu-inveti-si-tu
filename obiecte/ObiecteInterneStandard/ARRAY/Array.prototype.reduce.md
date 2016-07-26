@@ -15,8 +15,8 @@ Funcția callback primește patru argumente și se va aplica pe fiecare element 
 Pentru a înțelege mai repede reduce, este util să reținem următoarea secvență de cod:
 
 ```js
-['unu', 'doi', 'trei'].reduce(function(primOptSauReturnat, elementulDeLucru, index){
-  return primOptSauReturnat;
+['unu', 'doi', 'trei'].reduce(function(acumulator, elementulDeLucru, index){
+  return acumulator;
 },{});
 // în acest caz primOptSauReturnat este chiar valoarea opțională {}
 ```
@@ -25,6 +25,7 @@ Pentru a înțelege mai repede reduce, este util să reținem următoarea secven
 
 - se mai numește și `fold`, adică o funcție care să plieze valori pe rezultatul computat deja.
 - este o metodă Array care primește drept argumente un callback și o valoare opțională
+- [1,2,3].reduce(reducător, valoareInitiala) este, de fapt, o expresie care va fi evaluată la o singură valoare finală a acumulatorului
 - callback-ul primește patru argumente: primaValoare, următoareaValoare, index, array
 - când este primită ca argument valoarea opțională, aceasta devine primaValoare.
 - reduce() trebuie să returneze ceva neapărat.

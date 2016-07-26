@@ -1,6 +1,6 @@
-# Clojures în bucle
+# Closures în bucle
 
-Acesta este un caz de clojure care ilustrează cel mai bine felul în care se manifestă și efectele manifestate.
+Acesta este un caz de closure care ilustrează cel mai bine felul în care se manifestă și efectele manifestate.
 
 Cazul a fost preluat de la resursa online „js by example”: [Closures in loop](https://github.com/bmkmanoj/js-by-examples/blob/master/examples/closures_in_loop.md "Link către resursa originală Closures in loop")
 
@@ -31,9 +31,9 @@ run();
 
 // 0, 2
 // 1, 2
-// 2, 2  
+// 2, 2
 ```
-![Ilustrație pentru Clojures in loop](closuresInLoop.svg)
+![Ilustrație pentru Closures in loop](closuresInLoop.svg)
 
 ## init()
 init() ciclează de 3 ori iar x va rămâne după finalizarea buclei la valoarea 2.
@@ -52,22 +52,22 @@ Variabilele din funcțiile interne cu același identificator (x în cazul nostru
 var data = [0, 1, 2];
 var funcs = [];
 
-function init() {                       
+function init() {
     for (var i = 0; i < 3; i++) {
 
-        var x = data[i];                
-        var innerFunc = function() {    
+        var x = data[i];
+        var innerFunc = function() {
             var temp = x;
             return function() {
                 return temp;
             };
         }();
 
-        funcs.push(innerFunc);          
+        funcs.push(innerFunc);
     }
 }
 
-function run() {                        
+function run() {
     for (var i = 0; i < 3; i++) {
         console.log(data[i] + ", " +  funcs[i]());
     }

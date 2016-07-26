@@ -20,6 +20,8 @@ Funcțiile sunt obiecte first-class. Pot fi pasate ca argumente altor funcții �
 - `this` și `arguments` sunt pasate tacit la invocarea unei funcții.
 - Când invoci funcția ca metodă a unui obiect, acel obiect devine **contextul** funcției și acesta devine disponibil în funcție prin intermediul parametrului `this`.
 - `this` este un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
+- Funcțiile sincrone procedează la execuție fără a lăsa programul să execute altceva.
+- Funcțiile asincrone returnează imediat iar rezultatul este pasat unui handler, adică un callback. În cazul event loop, pasarea rezultatului se face la un ciclu viitor.
 - O funcție are acces și poate performa operațiuni asupra obiectului în interiorul căruia a fost invocată.
 - În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype (numeFunctie.prototype) care se leagă automat la Object.prototype.
 - Funcțiile sunt legate de obiectul prototip prin metoda .constructor

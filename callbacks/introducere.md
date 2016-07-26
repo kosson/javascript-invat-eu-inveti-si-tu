@@ -10,28 +10,45 @@ Un callback este o funcție care este pasată ca argument unei alte funcții și
 // exemplificare direct style versus continuation-passing style
 
 function adunare(a, b){
-  return a + b; // direct style
+  return a + b;                      // direct style
 };
 
+// adunare ca operațiune sincronă
 function adunare(a, b, faAdunarea){
-  faAdunarea(a + b); // continuation-passing style
-}; //se va returna o valoare abia după ce callback-ul și-a încheiat execuția
+  faAdunarea(a + b);                // continuation-passing style
+};                                  //se va returna o valoare abia după ce callback-ul și-a încheiat execuția
 
 console.log('inainte de adunare');
-adunare(1, 2, function(rezultat){console.log('Rezultatul este: ' + rezultat)});
+adunare(1, 2, function(rezultat){  // callbackul primește un singur argument, care reflectă evaluarea operațiunii a+b
+  console.log('Rezultatul este: ' + rezultat);
+});
 console.log('după adunare');
-// Rezultatul este: 3
-// Această funcție se execută sincron
+// mesajele în consolă apar în ordine
 
 // adunarea ca operațiune asincronă
-function adunareAsincrona(){};
+function adunareAsinc(a, b, callback){
+  setTimeout(function(){ // simularea asincronicității
+    callback(a+b);
+  },3000);
+};
+
+console.log('inainte');
+adunareAsinc(1, 2, function(rezultat){  // callbackul primește un singur argument, care reflectă evaluarea operațiunii a+b
+  console.log('Rezultat: ' + rezultat);
+});
+console.log('după');
+// mesajul rezultatului apare în consolă după
 ```
+
+Atenție! funcția adunareAsincrona nu va mai aștepta la execuție să se declanșeze execuția callbackului și va relua execuția mai departe și abia după ce setTimeout va fi terminat, după cele 3 secunde, abia atunci va fi executat și callback-ul. După ce timpul se va fi scurs, execuția callback-ului returnează rezultatul. Menținerea contextului se face datorită closure-ului.
+
+![Exemplificare asincronicitate folosind Nodejs](callbacksSiEventLoop.svg)
 
 ## Mantre
 
 - Funcțiile pot fi pasate ca argumente altor funcții.
-
-Funcțiile care acceptă alte funcții drept argumente sau care returnează funcții se numesc „funcții de ordin superior” - „higher-order function”.
+- Funcțiile care acceptă alte funcții drept argumente sau care returnează funcții se numesc „funcții de ordin superior” - „higher-order function”.
+- Nu toate funcțiile cărora li se pasează un callback sunt asincrone. Un exemplu este `[1,2].map(function(elem){return elem+1;});`. Rezultatul este returnat sincron folosind „direct style”.
 
 În programare, un callback este o secvență de cod executabilă care este pasată ca argument unei funcții. Aceasta este „apelată” - „called back” de către funcție la un moment ulterior.
 

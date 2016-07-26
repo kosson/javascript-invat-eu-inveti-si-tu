@@ -1,6 +1,6 @@
 # Closures
 
-Un closure este o funcție care „capturează” valorile din jur care exsitau la momentul în care s-a născut.
+Un closure este o funcție care „capturează” valorile din jur care existau la momentul în care s-a născut.
 Closure-urile sunt funcții care au acces la scope-ul părinte chiar și atunci când părintele nu mai există.
 
 Closure-ul este mecanismul prin care JavaScript permite ascunderea datelor - încapsularea datelor.
@@ -10,6 +10,12 @@ Un closure este mecanismul prin care putem obține o încapsulare dinamică a st
 ## Dependințe cognitive
 - funcții
 - scope
+
+## Alonjă
+
+Înțelegerea modului în care se face closure vă va ajuta în înțelegerea lui Revealing Module Pattern.
+Formează baza funcțională a callback-urilor și a temporizărilor. Amble cazuri implică funcții care sunt apelate asincron la un moment nespecificat din viitor. De regulă, se folosesc astfel de funcții pentru accesarea datelor externe.
+Va ajuta la înțelegerea felului în care Event Loop funcționează. Pentru că un clojure memorează contextul, poate prelua controlul de la Event Loop pentru a încheia execuția unui callback, de exemplu.
 
 ## Definiții
 
@@ -149,9 +155,6 @@ obiect.getCantitate(); // 11
 ```
 Pentru a ajunge la cantitate este nevoie de metode de acces („accessors”). Acesta este și unul din cazurile de realizare a unui closure.
 
-
-
-
 ## Referințe către obiecte care nu fac closure.
 
 Exemplu de referințe către obiecte care nu este un closure (prezentat de Kyle Simpson):
@@ -171,8 +174,3 @@ Este baza lui MODULE PATTERN prin care se realizează încapsularea și/sau ascu
 
 ## Erori
 Este considerată a fi o eroare crearea de closure-uri în bucle.
-
-## Alonjă
-
-Înțelegerea modului în care se face closure vă va ajuta în înțelegerea lui Revealing Module Pattern.
-Înțelegerea callback-urilor și a temporizărilor. Amble cazuri implică funcții care sunt apelate asincron la un moment nespecificat din viitor. De regulă, se folosesc astfel de funcții pentru accesarea datelor externe.
