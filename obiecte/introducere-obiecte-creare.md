@@ -4,7 +4,7 @@
 
 În JavaScript neexistând clase (cod care se comportă ca un plan pentru construcția obiectelor), pentru a reutiliza cod, se creează obiecte care se bazează pe cele existente.
 
-Astfel, între aceste obiecte se creează o legătură. Această legătură se numește „legătură prototipală”. Aceste legături realizează „moștenirea prototipală” - prototypal inheritance. Obiectul preexistent constituie prototipul pentru cel nou creat care poate adăuga noi membri, noi comportamente.
+Astfel, între aceste obiecte se creează o legătură. Această legătură se numește „legătură prototipală”. Aceste legături realizează „moștenirea prototipală” - `prototypal inheritance`. Obiectul preexistent constituie prototipul pentru cel nou creat care poate adăuga noi membri, noi comportamente.
 
 ---
 ## Mantre
@@ -46,6 +46,7 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
 - Obiectele atunci când au metode, nu „dețin” sau „conțin” acele funcții, ci doar referințe către funcțiile pe post de metode. Funcțiile (metodele) nu fac parte din obiect; referința către acestea este parte a obiectului.
 - În obiecte numele proprietăților sunt întotdeauna stringuri.
 - relațiile prototipale pot cauza probleme atunci când este nevoie de enumerarea proprietăților obiectelor. Crockford recomandă „ambalarea” conținutului buclei de ciclare într-o funcție de verificare hasOwnPropery();
+- Dacă dorești „înghețarea” obiectelor pentru a nu fi modificate, se va folosi Object.freeze() iar în cazul Node.js, modulul `deep-freeze`.
 
 ## Crearea obiectelor
 

@@ -1,5 +1,7 @@
 # HOISTING
-## Acumulări rapide
+
+## Mantre
+
 - Hoistingul este o conceptualizare menită a înțelege felul în care JavaScript funcționează. ATENȚIE! este doar un model, nu trebuie a se înțelege că este mecanica reală a limbajului.
 - Declararea variabilelor și funcțiilor este „săltată" - hoisted la vârful scope-ului funcțional indiferent de poziția lor în cod.
 - Funcțiile sunt săltate înaintea variabilelor.

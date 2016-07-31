@@ -1,4 +1,5 @@
 # Expressions - expresii
+
 Afirmațiile sunt construite din mai multe expresii.
 
 În cazul afirmației de mai jos:
@@ -13,6 +14,7 @@ var a = b * 3;
 - `var a = b * 3` este o **_expresie de atribuire_** ceea ce înseamnă atribuirea rezultatului b * 3 variabilei a
 
 ## O expresie afirmație - expression statement
+
 este o expresie de sine stătătoare precum
 
 ```js
