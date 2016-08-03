@@ -11,21 +11,31 @@ Legătura (binding-ul) la `this` DEPINDE DE OBIECTUL specificat la call-site.
 
 Folosit pentru a lua un obiect și pentru a-i îmbogăți și/sau prelucra valorile membrilor după care poate fi returnat și folosit mai departe.
 
+## Dependințe cognitive
+
+- funcții
+- arguments
+- call-site
+- constructori
+- Function.prototype.apply()
+- Function.prototype.bind()
+- Function.prototype.call()
+
 ## Mantre
 
 - Funcțiile sunt obiecte!
 - Toate funcțiile sunt de fapt obiecte `Function` (obiecte interne).
 - La invocarea funcțiilor pe lângă argumente sunt pasate „tacit” `this` și `arguments`.
-- `this` este un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
-- Obiectul `this` se constituie la execuția codului, nu la momentul scrierii lui. Pentru metode este chiar obiectul care deține metoda, pentru funcții este întotdeauna window (deci, o funcție este de fapt o metodă a obiectului window), iar pentru constructori este noua instanță de obiect creată.
+- `this` este un obiect-context: pentru funcții simple în General Execution Context este `window`. Pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
+- Obiectul `this` se constituie la execuția codului, nu la momentul scrierii lui. Pentru metode este chiar obiectul care deține metoda, pentru funcțiile din Global Execution Context este întotdeauna window (deci, o funcție este de fapt o metodă a obiectului window), iar pentru constructori este noua instanță de obiect creată.
 - **this** este o referință către contextul de execuție curent în timp ce funcția se execută.
 - `this` nu se referă în niciun caz la **lexical scope**.
-- `this` este un binding pentru fiecare invocare a unei funcții care se bazează pe de-antregul pe call-site
+- `this` este un binding pentru fiecare invocare a unei funcții care se bazează pe de-antregul pe call-site.
 - Funcțiile și obiectele sunt REFERENȚIATE, nu sunt deținute atunci când atribui IDENTIFICATORUL într-o expresie sau ca valoarea a unei metode.
 - Call-site (locul din cod unde este apelată o funcție) determină formarea lui `this`.
 - Modul de invocare influiențează felul în care obiectul este constituit (către care face referință `this`).
-- Toate funcțiile au la dispoziția lor un set de utilități preexistent, care poate fi apelat prin `[[Prototype]]`. Cele mai evidente sunt call(), apply().
-- Atunci când există un obiect-context (folosit de o funcție prin apelare cu apply() sau call()), regula de bază a binding-ului spune că obiectul-context va fi cel la care se face bindingul this.
+- Toate funcțiile au la dispoziția lor un set de utilități preexistent, care poate fi apelat prin `[[Prototype]]`. Cele mai evidente sunt `call()` și `apply()`.
+- Atunci când există un obiect-context (folosit de o funcție prin apelare cu `apply()` sau `call()`), regula de bază a binding-ului spune că obiectul-context va fi cel la care se face bindingul this.
 - În contextul de execuție tot ce este cu `this.ceva` devine membru al obiectului generat.
 - Bindingul primar se face la obiectul global.
 - Bindingul implicit se face la contextul de execuție al unei funcții sau al unei metode.
@@ -289,7 +299,7 @@ var obiect = {
 
 #### Mantre
 
-- bind() creează o nouă funcție, care atunci când este apelată va avea `this` setat la valoarea introdusă ca paramentru împreună cu o serie de argumente.
+- `bind()` creează o nouă funcție, care atunci când este apelată va avea `this` setat la valoarea introdusă ca paramentru împreună cu o serie de argumente.
 
 Exemplul de la MDN
 
@@ -312,7 +322,7 @@ var boundGetX = retrieveX.bind(modul);
 boundGetX(); // 81
 ```
 
-bind() va fi găsit în funcția __proto__ al oricărui obiect generat de o funcție alături de call() și apply().
+bind() va fi găsit în funcția __proto__ al oricărui obiect generat de o funcție alături de `call()` și `apply()` pentru că orice funcție este un obiect care are o legătură prototipală și astfel acces la obiectul `Function` (Function.prototype.apply(), Function.prototype.bind(), Function.prototype.call()).
 
 ## 4. Binding cu `new`
 
@@ -320,16 +330,17 @@ Poți pune în fața oricărei funcții `new` și o transformi astfel într-un a
 
 ### Mantre
 - O funcție apelată cu `new` în fața sa este un constructor.
-- new este mai puternic decât hard binding-ului.
+- `new` este mai puternic decât hard binding-ului.
+- Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), `this` va fi returnat automat.
 
 Ceea ce va face la instanțiere este exact ceea ce a fost proiectată funcția la care se adaugă patru comportamente nevăzute.
 
-Ce se întâmplă când pui cuvântul cheie rezervat `new` în fața oricărei funcții?
+### Ce se întâmplă când pui cuvântul cheie rezervat `new` în fața oricărei funcții?
 
 1. Se creează un obiect nou.
-2. Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu ```new```. Se creează legătura prototipală.
+2. Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu `new`. Se creează legătura prototipală.
 3. Obiectul generat automat este pasat funcției cu rol de constructor ca fiind parametrul `this` și astfel, devine contextul de execuție a funcției constructor invocate (`this` este pasat ca parametru împreună cu `arguments`).
-4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), ```this``` va fi returnat automat.
+4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), `this` va fi returnat automat.
 
 ```js
 function viitorObiect(data){
@@ -353,13 +364,13 @@ console.log(obiectul.x, obiectul.y); // ceva din obiectul test2 venit din afară
 Întrebări de verificare cheie în call-site pentru a determina la ce este făcut bindingul prin `this`. Aceasta este și ordinea precedenței:
 
 1. A fost chemată funcția cu `new`? Dacă da, `this` este chiar acel obiectul returnat (**binding cu new**).
-2. A fost apelată prin call() sau apply()? Dacă da, folosește acel obiect pentru context - binding explicit.
+2. A fost apelată prin `call()` sau `apply()`? Dacă da, folosește acel obiect pentru context - binding explicit.
 3. A fost apelată funcția într-un obiect care conține referința sau o deține (context) - binding implicit.
 4. Global object (cu excepția rulării în `use strict`)
 
 Concluzie: Bindingul explicit are precedență asupra celui implicit.
 
-Un alt studiu de caz este acțiunea lui new asupra bindingului lui `this`:
+## Studiu de caz: acțiunea lui new asupra bindingului lui `this`:
 
 ```js
 function actiune(val1, val2){
@@ -372,18 +383,24 @@ var obiect = {
 };
 
 var sudura = actiune.bind(obiect); // o referință către funcția actiune in contextului lui obiect
-console.log(sudura);               // function actiune()
+console.log(sudura);               // function bound actiune()
 
 sudura('1000');
 console.log(obiect.x);             // 1000
+console.log(obiect.y);             // undefined
 
+sudura('5000', '10000');
+console.log(obiect.x);             // 5000
+console.log(obiect.y);             // 10000
+
+// constructor
 var nou = new sudura(2000);        // se creează un nou obiect, având un nou binding
+console.log(nou);                  // Object { x: 2000, y: undefined }
 console.log(nou.x);                // 2000
 console.log(JSON.stringify(nou));  // {"x":2000}
-console.log(obiect.x, obiect.y);   // 1000 5000
 ```
 
-Ce se întâmplă atunci când setezi valorile funcției:
+Ce se întâmplă atunci când setezi valorile argumentelor:
 
 ```js
 function actiune(val1, val2){
@@ -408,6 +425,65 @@ console.log(obiect.x, obiect.y);   // bau miau
 ```
 
 Ceea ce se observă este că `new` are capacitatea de a suprascrie hard binding-ul. Motivul pentru care este permis un astfel de comportament este pentru că poți creea dintr-o funcție un obiect, care să ignore hard-binding-ul existent, dar care presetează o parte sau toate argumentele funcției.
+
+## Comportamentul lui `this` în cazul fat arrows
+
+Funcțiile fat arrows sunt legate de scope-ul lexical, asta însemând că `this` va fi același ca și cel din blocul părintelui.
+
+```js
+var nume = 'Auraș din Global Scope';
+
+function ciao(nume){
+  this.nume = nume;
+};
+
+ciao.prototype.urare = function(){
+  setTimeout(function callback(){     // this care este pasat automat este cel al global scope (window)
+    console.log('Ciao '+ this.nume);
+  }, 500);
+};
+
+var intalnire = new ciao('Grigoras');
+intalnire.urare();
+// Ciao undefined (asta daca nume nu este declarat în Global Scope)
+// Când este declarată o variabilă în global scope, va fi afișat în consolă: Ciao Auraș din Global Scope
+```
+
+Pentru a face un binding la obiectul generat de ciao, se va face un bind cu metoda `bind()`.
+
+```js
+var nume = 'Auraș din Global Scope';
+
+function ciao(nume){
+  this.nume = nume;
+};
+
+ciao.prototype.urare = function(){
+  setTimeout((function callback(){     // this care este pasat automat este cel al global scope (window)
+    console.log('Ciao '+ this.nume);
+  }).bind(this), 500);
+};
+
+var intalnire = new ciao('Grigoras');
+intalnire.urare(); // Ciao Grigoras
+```
+
+Datorită faptului că fat arrows este legat la scope-ul lexical, nu mai trebuie făcut un binding apeland la `bind()`.
+
+```js
+var nume = 'Auraș din Global Scope';
+
+function ciao(nume){
+  this.nume = nume;
+};
+
+ciao.prototype.urare = function(){
+  setTimeout(() => console.log('Salutare ' + this.nume), 500);
+};
+
+var intalnire = new ciao('Grigoras');
+intalnire.urare(); // Ciao Grigoras
+```
 
 ### Lucruri la care să fii atent
 

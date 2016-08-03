@@ -39,6 +39,7 @@ console.log("Cinsprezece este suma " + (a + b) + " și\nnu " + (2 * a + b) + "."
 // este echivalent cu:
 console.log(`Cinsprezece este suma ${a + b} și\nnu ${2 * a + b}.`);
 ```
+„
 O formă și mai avansată de template-uri literale este cea numită `tagged template literals`. Un simplu exemplu:
 
 ```js

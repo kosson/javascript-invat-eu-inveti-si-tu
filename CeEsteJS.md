@@ -2,6 +2,8 @@
 
 JavaScript este un runtime cu un singur fir de execuție. Acest lucru implică existența unei stive unice pentru apeluri (callstack).
 
+JavaScript este un limbaj de programare bazat pe evenimente (event driven).
+
 Motoarele JavaScript au o structură ceva mai complexă. Au o stivă de apeluri cu tot atâtea contexte de execuție, au un event loop - o buclă care capturează evenimente și mai au și o coadă de așteptare a callback-urilor (funcții care se execută când funcția gazdă și-a încheiat execuția), plus API-urile web.
 
 ![Structura motorului din browserul Chrome](StructuraMotoruluiJSV8.svg)

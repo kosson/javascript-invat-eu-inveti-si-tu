@@ -1,3 +1,5 @@
+# Function
+
 Este un constructor pentru funcții.
 
 Metode:

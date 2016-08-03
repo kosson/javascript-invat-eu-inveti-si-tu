@@ -6,16 +6,15 @@
 
 Astfel, între aceste obiecte se creează o legătură. Această legătură se numește „legătură prototipală”. Aceste legături realizează „moștenirea prototipală” - `prototypal inheritance`. Obiectul preexistent constituie prototipul pentru cel nou creat care poate adăuga noi membri, noi comportamente.
 
----
 ## Mantre
 
 - JavaScript nu are clase!
-- Totul în JavaScript are comportamentul unui obiect cu două excepții: null și undefined.
+- Totul în JavaScript are comportamentul unui obiect cu două excepții: `null` și `undefined`.
 - În clientul care rulează codul mai întâi de orice există obiectul window.
-- Obiectul window are o metodă numită Object [ function Object() ]. Motorul Javascript construiește automat metoda Obiect în obiectul window (window.Object returnează function Object()).
-- Toate obiectele în JavaScript descind din Object, își au originea în Object. Toate obiectele moștenesc metode și proprietăți din Object.prototype. Acestea pot fi suprascrise.
-- Object.prototype este un obiect în care poți adăuga propriile proprietăți și metode.
-- Modificările aduse obiectului Object.prototype se propagă către toate obiectele. Singura excepție este atunci când proprietățile și metodele supuse modificărilor nu sunt ele la rândul lor modificate mai departe în lanțul prototipal.
+- Obiectul window are o metodă numită Object [ function Object() ]. Motorul Javascript construiește automat metoda Obiect în obiectul window (window.Object returnează function `Object()`).
+- Toate obiectele în JavaScript descind din Object, adică își au originea în Object. Toate obiectele moștenesc metode și proprietăți din `Object.prototype`. Acestea pot fi suprascrise.
+- `Object.prototype` este un obiect în care poți adăuga propriile proprietăți și metode.
+- Modificările aduse obiectului `Object.prototype `se propagă către toate obiectele. Singura excepție este atunci când proprietățile și metodele supuse modificărilor nu sunt ele la rândul lor modificate mai departe în lanțul prototipal.
 - În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype (numeFunctie.prototype). Acest obiect (prototype), este gol și este creat de constructorul lui Object()
 - Funcțiile sunt legate de obiectul prototip prin metoda .constructor.
 - Fiecare funcție are un obiect prototip diferit.
@@ -23,7 +22,7 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
 - Un obiect poate fi creat cu `new Object()`:
   1. acestă modalitate **nu va crea și constructor**.
   2. Accesarea numeObiect.__proto__.constructor răspunde cu Obiect() la care s-a ajuns prin delegare.
-- JavaScript are și obiecte globale existente deja în limbaj precum String(), Array(), Math(), Date() (```var test = new Date()```).
+- JavaScript are și obiecte globale existente deja în limbaj precum `String()`, `Array()`, `Math()`, `Date()` (`var test = new Date()`).
 - O funcție apelată cu `new` în fața sa este un constructor:
   1. Se creează un obiect nou.
   2. Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu `new`. Se creează legătura prototipală.
@@ -52,12 +51,28 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
 
 Obiectele pot fi create în două feluri: prin declararea acestora sau prin construirea lor.
 
-1. `var newObj = new Object();`
-// se respectă cele patru reguli:
-// 1.crearea obiectului; 2. stabilirea lanțului prototipal; 3. bindingul lui `this` la noul obiect; 4. obiectul nou creat este returnat
-2.` var newObj = Object.create(null);             // prototype este setat la null`
-3. `var newObj = Object.create(Object.prototype); // echivalentă cu var newObj = {};`
-4. `var newObj = {};                              // echivalentă cu new Object();`
+1. `var newObj = new Object();` se respectă cele patru reguli: (1)crearea obiectului; (2)stabilirea lanțului prototipal; (3)bindingul lui `this` la noul obiect; (4)obiectul nou creat este returnat
+2. `var newObj = Object.create(null);` prototype este setat la `null`
+3. `var newObj = Object.create(Object.prototype);` echivalentă cu var `newObj = {}`
+4. `var newObj = {};` echivalentă cu `new Object()`
+
+## Crearea obiectelor cu valori deja computate
+
+Această metodă este introdusă de EcmaScript 2015. De fapt, este crearea unor obiecte literale, dar de această dată se pot introduce valori computate (computed property names) chiar la momentul în care este constituit obiectul.
+
+```js
+// cel mai simplu exemplu
+const a = 10;
+const b = 20;
+const obi = {a, b};
+
+// un alt exemplu
+const namespace = 'moz';
+const webObi = {
+  [namespace + 'box-sizing']: 'border-box',
+  [namespace + 'box-shadow']: '25px25px10px #888888'
+};
+```
 
 ### Crearea obiectelor printr-o funcție cu rol de constructor și instanțiezi cu `new`
 
@@ -93,6 +108,7 @@ unObiect.glas('o vorbă să-ți mai spun');  // unObiect.__proto__.constructor r
 Atenție! Aici există ceva foarte important de lămurit. Proprietatea `prototype` aparține funcției constructor. Această legătură vizibilă, care poate fi „întrebată”, expune o legătură internă referită de standard ca [[Prototype]].
 
 Cum testezi, cum întrebi care este prototipul unui obiect? Există două metode echivalente ca rezultat returnat (obiectul prototype):
+
 1. `Object.getPrototypeOf(obiectulTestat)`,
 2. `obiectulTestat.__proto__`
 
@@ -119,6 +135,7 @@ obiect.getCantitate(); // 10
 obiect.incrementare(); // undefined
 obiect.getCantitate(); // 11
 ```
+
 Pentru a ajunge la cantitate este nevoie de metode de acces („accessors”). Acesta este și unul din cazurile de realizare a unui closure.
 
 ## Cazuistică de realizare a obiectelor cu new și introducerea de metode direct în prototip
@@ -226,9 +243,9 @@ ObiectTrei instanceof ObiectUnu;   // true
 ObiectTrei instanceof ObiectZero;  // true
 ```
 
-Object.create permite o implementare simplă a conceputului de „moștenire diferențială” în care obiectele sunt capabile să moștenească direct din alte obiecte. Vezi șablonul Objects Linked to Other Objects (OLOO) a lui Kyle Simpson.
+`Object.create` permite o implementare simplă a conceputului de „moștenire diferențială” în care obiectele sunt capabile să moștenească direct din alte obiecte. Vezi șablonul Objects Linked to Other Objects (OLOO) a lui Kyle Simpson.
 
-Object.create are posibilitatea de a adăuga și în același timp configura proprietăți ale obiectului. Este de fapt un caz de șablon Prototype.
+`Object.create` are posibilitatea de a adăuga și în același timp configura proprietăți ale obiectului. Este de fapt un caz de șablon Prototype.
 
 ```js
 var vehicul = {
