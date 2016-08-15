@@ -4,6 +4,17 @@ Conceptele programării funcționale sunt necesare pentru a înțelege cum se fa
 
 Javascript are un model de execuție foarte flexibil. Toate funcțiile beneficiază de metoda `apply()`, care permite apelarea funcției cu un array ca și cum elementele din array ar fi argumentele funcției.
 
+Diferențele între paradigma orientată pe obiecte și cea funcțională:
+
+```js
+// în obiect avem metode care transformă și lucrează cu starea obiectului exprimată prin this
+faCeva: function faCeva(){
+  return this.primo + this.secundo;
+}
+// in paradigma funcțională, obiectul este pasat ca argument.
+var faCeva = obiectulDeLucru => obiectulDeLucru.primo + obiectulDeLucru.secundo;
+```
+
 ## Definiții
 
 Functional programming -- programarea bazată pe funcții constă în folosirea funcțiilor pentru a transforma valorile în unități de abstractizare, care mai apoi sunt folosite pentru a construi software. (Michael Fogus, „Functional Javascript”).
@@ -113,7 +124,7 @@ console.log(scoateNume); // Array [ "Jenifer", "dude", "ciocan" ]
 
 ## Functor-ii
 
-Sunt obiecte care au o metodă map. Functor-ul este obiectul care implementează `map()`. Deci, putem spune că, de fapt, `Array` este un fanctor pentru că are o metodă `map()`.
+Sunt obiecte care au o metodă map. Functor-ul este obiectul care implementează `map()`. Deci, putem spune că, de fapt, `Array` este un functor pentru că are o metodă `map()`.
 
 Regulile pe care le îndeplinește Array prin metoda sa map:
 - transformă conținutul

@@ -1,10 +1,11 @@
 # Funcții fat arrow
 
 Sunt introduse odată cu ECMAScript 2015.
+Funcțiile fat-arrow își au originile în expresiile lambda ale programării bazate pe funcții.
 
 ## Mantre
 
-- Funcțiile fat arrows sunt legate la scope-ul lexical. Nu mai este nevoie de trucul self = this pentru a accesa contextul.
+- Funcțiile fat arrows sunt legate la scope-ul lexical. Nu mai este nevoie de trucul `var self = this` pentru a accesa contextul.
 
 O funcție declarată clasic:
 

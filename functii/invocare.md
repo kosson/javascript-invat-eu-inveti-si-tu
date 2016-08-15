@@ -41,6 +41,7 @@ Invocarea funcțiilor se poate face în patru cazuri:
 4. indirect prin apelarea într-un context de execuție diferit folosind call() și apply() (vezi binding explicit la `this`).
 
 ## Cazurile de invocare
+
 ### Funcție invocată
 
 Această invocare se întâmplă atunci când este folosit operatorul `()`.
@@ -72,8 +73,8 @@ testVal >= 150 && console.log("Acest mesaj va apărea dacă evaluarea lui testVa
 testVal >= 150 || console.log("Acest mesaj va apărea doar dacă evaluarea din left-hand-side este true");  // true
 ```
 
-În caz de valoare truthy, pentru && se va afișa mesajul, dacă false, va returna false expresia.
-În caz de valoare truthy, pentru || se va returna `true`. Pentru false, se va afișa mesajul.
+În caz de valoare truthy, pentru `&&` se va afișa mesajul, dacă false, va returna false expresia.
+În caz de valoare truthy, pentru `||` se va returna `true`. Pentru false, se va afișa mesajul.
 
 Un alt caz este apelarea unui callback:
 

@@ -1,5 +1,7 @@
 # HOISTING
 
+Ridicarea la vârful scope-ului a declarațiilor de variabile și funcții.
+
 ## Mantre
 
 - Hoistingul este o conceptualizare menită a înțelege felul în care JavaScript funcționează. ATENȚIE! este doar un model, nu trebuie a se înțelege că este mecanica reală a limbajului.

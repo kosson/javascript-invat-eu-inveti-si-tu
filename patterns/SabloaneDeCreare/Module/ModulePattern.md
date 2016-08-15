@@ -8,7 +8,7 @@ Original a fost creată pentru a oferi încapsulare privată și publică.
 - scope
 - funcții, funcții anonime
 - this
-- Clojures
+- clojures
 - Immediately Invoked Function Expressions - IIFE
 
 ## Mantre

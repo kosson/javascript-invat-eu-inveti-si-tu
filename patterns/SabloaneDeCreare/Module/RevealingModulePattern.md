@@ -1,5 +1,6 @@
 # Dependințe cognitive
 
+- closures
 - Immediately Invoked Function Expressions - IIFE
 - Șablonul Module - Module Pattern
 
@@ -85,7 +86,7 @@ H. Variabila căreia îi este atribuit IFFE-ul, de fapt, menține o referință 
 
 Astfel, pot fi ascunse toate detaliile de implementare și prin returnare (ca în cazul API-urilor), sunt expuse părțile care sunt necesare.
 
-## Șablonul Module urmărește logica unui API.
+## Logica unui API.
 
 ```js
 // oferit de Kyle Simpson
@@ -117,10 +118,15 @@ Un modul poate avea puncte de legătură cu mediul înconjurător prin pasarea �
 ```js
 var modul = (function(){
   var obiectDeReturnat = {
-    membru: 'un membru public'
+    membru: 'un membru public',
+    faCeva: function (){
+      console.log('ceva din interiorul modulului');
+    }
   };
   return obiectDeReturnat;
 }());
+
+// în acest moment, modulul conservă și starea internă datorită closure-ului realizat.
 
 var plugin = (function(modul){
   modul.membruDinPlugin = 'membru inserat în modul de plugin';
@@ -130,3 +136,5 @@ var plugin = (function(modul){
 Instantaneu ceea ce se întâmplă este că plugin introduce în obiectul modul un nou membru.
 
 Dezavantajul major acestui șablon este acela că în cazul în care o funcție internă face o referință către o funcție publică, acea funcție publică nu poate fi suprascrisă dacă este nevoie de o corectură.
+
+Un alt dezavantaj este acela că modulul trebuie să fie într-un singur fișier.

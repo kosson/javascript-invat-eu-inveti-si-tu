@@ -3,6 +3,27 @@
 Un closure este o funcție care „capturează” valorile din jur care existau la momentul în care s-a născut.
 Closure-urile sunt funcții care au acces la scope-ul părinte chiar și atunci când părintele nu mai există.
 
+```js
+function closureEx(){
+  var a = 'ceva';
+  var b = 1000;
+  return function(valoare){
+    switch (valoare) {
+      case 'a': return a;
+      case 'b': return b;
+    }
+  };
+};
+
+var cheama = closureEx();
+cheama('a'); // ceva
+```
+
+Un closure, adică codul din funcția care face closure-ul conține:
+- variabile și obiectele care aparțin de scope-ul global,
+- variabilele și obiectele care aparțin scope-ului funcției părinte, plus parametrii acesteia,
+- toate variabilele declarate după ce funcția (care face closure-ul) a fost declarată.
+
 Closure-ul este mecanismul prin care JavaScript permite ascunderea datelor - încapsularea datelor.
 
 Un closure este mecanismul prin care putem obține o încapsulare dinamică a stări scope-ului, care, atenție, poate fi modificat atâta vreme cât closure-ul există.
@@ -16,6 +37,7 @@ Un closure este mecanismul prin care putem obține o încapsulare dinamică a st
 Înțelegerea modului în care se face closure vă va ajuta în înțelegerea lui Revealing Module Pattern.
 Formează baza funcțională a callback-urilor și a temporizărilor. Amble cazuri implică funcții care sunt apelate asincron la un moment nespecificat din viitor. De regulă, se folosesc astfel de funcții pentru accesarea datelor externe.
 Va ajuta la înțelegerea felului în care Event Loop funcționează. Pentru că un clojure memorează contextul, poate prelua controlul de la Event Loop pentru a încheia execuția unui callback, de exemplu.
+Funcțiile de nivel înalt și closure-urile formează coloana vertebrală a programării funcționale.
 
 ## Definiții
 
@@ -26,6 +48,9 @@ Closure este atunci când o FUNCȚIE ține minte scope-ul lexical chiar și atun
 
 Un closure este un obiect special care combină două lucruri: o funcție și mediul în care aceasta a fost declarată.
 Mediul, adică scope-ul lexical constă din toate variabilele locale care erau în-scope la momentul în care s-a creat closure-ul.
+
+Un closure este o structură de date care leagă o funcție de mediul preexistent la momentul declarării.
+
 
 ## Mantre
 
@@ -38,8 +63,6 @@ Mediul, adică scope-ul lexical constă din toate variabilele locale care erau �
 - **Un closure nu poate accesa `this` al funcției container**. În acest scop se folosește salvarea lui this într-o variabilă `var self = this;`
 
 ## Analiză
-
-closure-ul este folosit atunci când vrei să dai parametri unei funcții înainte ca acea funcție să fie executată.
 
 ### Cazul 1 - funcție internă care folosește variabilele din scope
 
@@ -170,7 +193,28 @@ console.log(obiect.obj.test); // => test
 
 ## Utilitate
 
+Closure-ul poate simula variabile private.
 Este baza lui MODULE PATTERN prin care se realizează încapsularea și/sau ascunderea datelor.
+
+Cu ajutorul closure-urilor se poate scrie cod care să ruleze într-un mediu izolat, adică într-un closure. Acest closure, acest model de incapsulare a funcționalităților, durează câtă vreme rulează aplicația și oferă o zonă privată care poate memora o stare. Un exemplu este o funcție anonimă executată imediat.
+
+```js
+// exemplu de closure anonim
+(function () {
+	// toate variabilele și funcțiile se află doar în acest scope
+	// se pot accesa toate variabilele globale
+}());
+```
+
+Pornind de la acest model, se poat rula cod extern:
+
+```js
+(function($, Mootools){
+  // acum ai acces la globalele jQuery ca prescurtarea $ și la Mootools
+}(jQuery, Mootools));
+```
+
+Acest model stă la baza șablonului Module.
 
 ## Erori
 Este considerată a fi o eroare crearea de closure-uri în bucle.

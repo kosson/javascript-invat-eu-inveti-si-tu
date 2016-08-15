@@ -2,6 +2,20 @@
 
 Posibilă traducere în limba română: „perimetru” sau „arie de efect”.
 
+Scope-ul nu se realizează la nivel de bloc în JavaScript pentru declarațiile `for`, `while`, `if` și `switch`.
+
+```js
+function faCeva (){
+  if(!oVar){
+    var oVar = 30;
+  }
+  console.log(oVar);
+};
+faCeva(); //-> 30
+```
+
+Este observabil faptul că variabila declarată în `if` este accesibilă în afara blocului if. Acest lucru se petrece datorită mecanismului de hoisting.
+
 ## Definiții
 Este **locul** unde te uiți după lucruri.
 Este **perimetrul** din cuprinsul codului în care au efect funcțiile și sunt disponibile variabilele.
@@ -23,7 +37,7 @@ Javascript generează un scope lexical, care se leagă fix de locul unde s-a fă
 - Când funcția returnează, obiectul care face binding-ul variabilelor este scos din **scope chain**.
 - Dacă nu există funcții interne, nu mai există nicio legătură spre obiectul care face binding-ul variabilelor și se face GARBAGE COLLECTING.
 - Când sunt definite funcții interne, acestea la rândul lor generează referințe în scope chain.
-- **Dacă o funcție internă este returnată sau introdusă într-o variabilă**, atunci va exista o referință către aceasta și nu se va face garbage collecting (avem un clojure).
+- **Dacă o funcție internă este returnată sau introdusă într-o variabilă**, atunci va exista o referință către aceasta și nu se va face garbage collecting (avem un closure).
 - Scope chain-ul unui closure este unul viu; funcțiile interne nu fac copii private ale scope-ului și nici nu fac snapshoturi ale binding-urilor variabilelor.
 
 ## Variabilele din scope
@@ -41,7 +55,7 @@ Funcțiile care poartă nume se află în scope-ul întreg al funcției în care
 
 Necesar pentru înțelegerea clojure-urilor.
 
-## Q&A
+## Q\&A
 
 **Întrebare**: Când se formează scope?
 **Răspuns**: La faza de compilare.

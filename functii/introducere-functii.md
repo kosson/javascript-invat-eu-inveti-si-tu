@@ -2,14 +2,14 @@
 
 `function` este un subtip de obiecte numit tehnic „callable object”.
 
-Funcțiile sunt obiecte first-class. Pot fi pasate ca argumente altor funcții și pot fi returnate din funcții. 
+Funcțiile sunt obiecte first-class. Pot fi pasate ca argumente altor funcții și pot fi returnate din funcții.
 
 Funcțiile în JavaScript sunt de ordin înalt, adică pot fi pasate ca valori și pot primi ca argumente alte funcții.
 
 ## Mantre
 
 - Orice funcție poate fi apelată cu oricâte argumente de orice tip în orice moment.
-- Toate funcțiile sunt de fapt obiecte `Function` (obiecte interne).
+- Toate funcțiile sunt de fapt obiecte instanțe ale tipului `Function` (obiecte interne).
 - O funcție este declarată de o expresie care începe cu cuvânt rezervat limbajului: `function`.
 - Când funcțiile sunt executate SCOPE-ul folosit este cel de la MOMENTUL DEFINIRII, nu cel de la momentul invocării (asta înseamnă LEXICAL SCOPE, de fapt).
 - Funcțiile sunt „IDENTIFICATORI" așa cum sunt și variabilele.

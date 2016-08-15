@@ -25,25 +25,26 @@ Opțional se mai poate pasa o valoare care să reprezinte `this` la executarea c
 Pentru a înțelege felul în care funcționează intern funcția map, este foarte util să construim de la 0 un utilitar care să facă exact același lucru precum map din prototipul lui Array.
 
 ```js
-
 var colectie = ["prima", "a doua", "a treia", "a doua", "prima"];
 
 function mapper(array, callback){
-  var mapate = [];
-  for(var i = 0; i < array.length; i++){
-    mapate.push(callback(array[i]));
+  var mapate = [];                        // array-ul care va conține datele prelucrate
+  for(var i = 0; i < array.length; i++){  // pentru fiecare element al array-ului pasat ca parametru
+    mapate.push(callback(array[i]));      // trimite în array-ul nou valoarea rezultată din prelucrarea făcută în callback
   };
-  return mapate;
+  return mapate;                          // returnează array-ul
 };
 
-var rezultatMapat = mapper(colectie, function(element){
-  return element + ' prelucrare';
+var rezultatMapat = mapper(colectie, function(element){ // ia o colecție și un callback
+  return element + ' prelucrare';                       // returnează valoarea prelucrată
 });
 
 console.log(rezultatMapat);
 
 // Array [ "prima prelucrare", "a doua prelucrare", "a treia prelucrare", "a doua prelucrare", "prima prelucrare" ]
 ```
+
+## Exemplificare a posibilităților de prelucrare
 
 Un exemplu super privind ce se poate obține folosind metoda este construirea unui mic utilitar care să transforme valorile unui obiect într-un șir url-encoded.
 

@@ -27,6 +27,7 @@ Folosit pentru a lua un obiect și pentru a-i îmbogăți și/sau prelucra valor
 - Toate funcțiile sunt de fapt obiecte `Function` (obiecte interne).
 - La invocarea funcțiilor pe lângă argumente sunt pasate „tacit” `this` și `arguments`.
 - `this` este un obiect-context: pentru funcții simple în General Execution Context este `window`. Pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
+- Prin `this`, de fapt accesezi starea obiectului cu care lucrezi.
 - Obiectul `this` se constituie la execuția codului, nu la momentul scrierii lui. Pentru metode este chiar obiectul care deține metoda, pentru funcțiile din Global Execution Context este întotdeauna window (deci, o funcție este de fapt o metodă a obiectului window), iar pentru constructori este noua instanță de obiect creată.
 - **this** este o referință către contextul de execuție curent în timp ce funcția se execută.
 - `this` nu se referă în niciun caz la **lexical scope**.

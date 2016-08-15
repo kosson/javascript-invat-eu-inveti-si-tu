@@ -1,5 +1,7 @@
 # Ce sunt callback-urile?
 
+Un callback este o secvență de cod executabilă care este pasată ca argument unei funcții. Aceasta este „apelată” - „called back” de către funcție la un moment ulterior.
+
 Este o funcție care este executată ca răspuns la un eveniment. Ori de câte ori o funcție este construită pentru a fi apelată ulterior, fie de browser, fie de o altă parte a codului, aceasta se numește `callback`.
 
 Un callback este o funcție (un obiect, de fapt), care este pasată ca argument unei alte funcții și care este invocată atunci când se ajunge la un rezultat. Pe scurt, rezultatul funcției nu este intors celui care a invocat-o, ci este preluat de callback.
@@ -53,7 +55,6 @@ Atenție! funcția adunareAsincrona nu va mai aștepta la execuție să se decla
 - Callback-ul care folosește fat arrows este legat de scope-ul lexical și nu mai este nevoie de `call()`, `apply()` sau `bind()`.
 - Invocarea unui callback este invocarea unei funcții a cărui `this` este obiectul global (implicit assignment).
 
-În programare, un callback este o secvență de cod executabilă care este pasată ca argument unei funcții. Aceasta este „apelată” - „called back” de către funcție la un moment ulterior.
 
 Cel mai simplu exemplu este oferit de execuția la un anumit moment în timp.
 
@@ -97,3 +98,9 @@ fs.readFile('date.csv', 'utf-8', callback);
 ```
 
 Atenție, în Node, primul argument al unui callback va fi întotdeauna un obiect de eroare. Acesta este modelul care trebuie urmat. Datele vehiculate constituie cel de-al doilea argument.
+
+## Disciplina folosirii callback-urilor
+
+- Ieși din funcție cât se poate de repede cu `return`, `continue` sau `break`.
+- Creează funcții cu nume pentru callback-uri pasând rezultatele intermediare ca argumente.
+- Modularizează codul împărțindu-l în funcții mici, reutilizabil ori de câte ori acest lucru este posibil.
