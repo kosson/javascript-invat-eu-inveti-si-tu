@@ -5,7 +5,9 @@ Folosit și la crearea de obiecte în baza unor necesități.
 Este o funcție care creează și returnează un obiect.
 
 ## Mantre
+
  - creează și returnează un obiect
+ - datorită closure-urilor, un factory poate fi folosit ca un mecanism de încapsulare.
 
 ```js
 var persoana = function(nume, prenume){
