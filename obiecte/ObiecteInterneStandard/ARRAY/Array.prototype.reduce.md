@@ -102,17 +102,17 @@ function numaraDuplicatele(){
 numaraDuplicatele(); // Object { mânătărci: 3, bureți: 2, gălbiori: 2, ghebe: 1 }
 ```
 
-### Ordonarea cuvintelor după litera cu care încep
+### Ordonarea cuvintelor după litera cu care încep - dicționar
 
 ```js
 var colectie = ["Constanța", "Bărcănești", "Sinaia", "Călimănești", "Bacău", "Oradea", "Cluj", "Baia Mare"];
 
-var alfabetic = colectie.reduce(function(a, cuvant){
-  if(!a[cuvant[0]]){
-    a[cuvant[0]] = [];
+var alfabetic = colectie.reduce(function(acumulator, cuvant){
+  if(!acumulator[cuvant[0]]){
+    acumulator[cuvant[0]] = [];
   }
-  a[cuvant[0]].push(cuvant);
-  return a;
+  acumulator[cuvant[0]].push(cuvant);
+  return acumulator;
 },{});
 // Object { C: Array[3], B: Array[3], S: Array[1], O: Array[1] }
 ```
@@ -136,9 +136,6 @@ colectie.reduce(function(colectie, element, index){
 
 // Object { masculin: Array[3], feminin: Array[2] } --> fiecare array conține obiectele
 ```
-
-
-
 
 Dacă array-ul este gol și nu este dată o valoare de pornire initialValue, atunci va fi emisă o eroare TypeError.
 Dacă array-ul are o singură valoare indiferent de poziția acesteia și nu este oferită o valoare initialValue sau dacă initialValue este dată, dar array-ul este gol, atunci valoarea unică va fi returnată fără a fi invocat callback-ul.
