@@ -239,18 +239,18 @@ var activitate = function activ(date){
 
 // un obiect care oferă contextul de lucru pentru activitate()
 // 1. conține date și sau metode necesare prelucrărilor pe care le face activitate()
-var obiect = {
+var obiectGazda = {
   a: 1000
 };
 
 // o funcție gazdă care „întărește” bindingul this la obiect
 // returnează o valoare, care este ceea ce a returnat activitate după ce a prelucrat datele
-var gazda = function (){
+var modificaGazda = function (){
   return activitate.apply(obiect, arguments); // arguments este un array like
 };
 
 // introdu date in gazdă, care le va folosi activitate
-var rezultat = gazda(100);
+var rezultat = modificaGazda(100);
 console.log(rezultat); // 1100
 ```
 

@@ -7,8 +7,8 @@ Se poate menționa și indexul de la care să se facă căutarea.
 
 ```js
 var array = [2, 9, 9];
-array.indexOf(2);     // 0
-array.indexOf(7);     // -1
+array.indexOf(2);     // 0  --> este returnat indexul 0
+array.indexOf(7);     // -1 --> nu a fost găsit, returnează -1
 array.indexOf(9, 2);  // 2
 array.indexOf(2, -1); // -1
 array.indexOf(2, -3); // 0

@@ -20,7 +20,7 @@ Este important de spus faptul că Object, ca și obiect intern standard JavaScri
 - `Object.hasOwnProperty(proprietate)`
 - `Object.keys`
 
-Un alt aspect important este diferența dintre accesarea proprietăților folosind operatorul punct și operatorul paranteze pătrate.
+Un alt aspect important este diferența dintre accesarea proprietăților folosind **operatorul punct și operatorul paranteze pătrate**.
 
 ## Dot operator - operatorul punct
 
@@ -49,7 +49,7 @@ var obiect = {'aceasta cheie nu este identificator': 10};
 obiect['aceasta cheie nu este identificator']; // 10
 ```
 
-Trebuie spus că operatorul paranteză dreaptă constrânge (coerse) ceea ce are în interior la string.
+Trebuie spus că operatorul paranteză dreaptă constrânge, transformă automat (coerce) ceea ce are în interior la string.
 
 ```js
 var obiect = {23: 10};
@@ -172,7 +172,7 @@ Elementele găsite sunt de fapt o colecție de noduri, care este dinamică în s
 
 JavaScript nu are structuri de date specifice unei „hărți” de valori - ceea ce se înțelege în alte limbaje de programare a fi un `map`.
 
-Singura modalitate este aceea de a folosi un obiect. În aces caz sunt anumite probleme care trebuie luate în considerare:
+Singura modalitate este aceea de a folosi un obiect. În acest caz sunt anumite probleme care trebuie luate în considerare:
 
 ### Moștenirea - o problemă
 
@@ -211,7 +211,7 @@ obiect.hasOwnProperty('toString'); // false
 
 ### Testare cu `for...in`
 
-Dacă folosești un `for...in` vei obține toate cheile, adică și pe cele din matrita. Deci, nu funcționează.
+Dacă folosești un `for...in` vei obține toate cheile, adică și pe cele din prototip. Deci, nu funcționează corect.
 De ce se întâmplă acest lucru? Pentru că sunt luate în considerare și proprietățile moștenite prin prototip, care sunt setate ca `enumerable`. Motivul pentru care proprietățile lui Object nu apar este că acestea nu sunt `enumerable`.
 
 ```js
@@ -233,7 +233,7 @@ Object.keys(obiect); // Array [ "altaProprietate" ]
 Dacă vrei să obții numele tuturor proprietăților, se va folosi `Object.getOwnPropertyNames(obiect)`;
 
 ```js
-obiect.artefact = ['vază', 'statuietă'];
+obiect.artefact = ['vază', 'statuetă'];
 Object.keys(obiect); // Array [ "altaProprietate", "artefact" ]
 ```
 
@@ -260,7 +260,7 @@ function accesProprietatiProprii(obiectul, proprietatea){
 };
 
 accesProprietatiProprii(obiect, 'altaProprietate'); // "altceva"
-accesProprietatiProprii(obiect, 'artefact');        // Array [ "vază", "statuietă" ]
+accesProprietatiProprii(obiect, 'artefact');        // Array [ "vază", "statuetă" ]
 accesProprietatiProprii(obiect, 'toString');        // undefined
 ```
 
@@ -281,7 +281,6 @@ var obiect = Object.create(null); // asta înseamnă că Object.prototype este n
 obiect.__proto__ // undefined
 ```
 
-În acest moment nu vom mai avea legătură la Object.prototype, ceea ce elimină problemele pe care legătura prototipală le pune unui obiect care se dorește a fi un `map` sau un
-„dicționar”.
+În acest moment nu vom mai avea legătură la Object.prototype, ceea ce elimină problemele pe care legătura prototipală le pune unui obiect care se dorește a fi un `map` sau un „dicționar”.
 
 Acest șablon poate fi folosit pentru a crea biblioteci de cod fără a avea problema `prototype`.
