@@ -2,9 +2,11 @@
 
 Această metodă aplică o funcție unui acumulator iar fiecare valoare din array (de la stâng la dreapta), trebuie să se reducă la una singură.
 
+Este returnată valoarea rezultată după reducere („pliere”).
+
 Pentru a înțelege ce-i acumulatorul trebui să-ți închipui o valoare de start asupra căruia faci o operațiune cu valori dintr-un array și de fiecare dată cînd mai iei o valoare din array pentru a repeta operațiunea, folosești valoarea rezultată din operațiunea anterioară.
 
-Metodei se aplică pe un array și primește ca argumente o funcție callback și o valoare opțională.
+Metoda se aplică pe un array și primește ca argumente o funcție callback și o valoare opțională de pornire, dacă se dorește.
 
 Funcția callback primește patru argumente și se va aplica pe fiecare element al array-ului:
 - `previousValue`: este valoarea acumulată până la momentul unei noi operațiuni. Aceasta este returnată de invocarea anterioară a callback-ului sau inițial este valoarea opțională pasată ca al doilea argument lui reduce.
@@ -26,8 +28,8 @@ Pentru a înțelege mai repede reduce, este util să reținem următoarea secven
 - se mai numește și `fold`, adică o funcție care să plieze valori pe rezultatul computat deja.
 - este o metodă Array care primește drept argumente un callback și o valoare opțională
 - [1,2,3].reduce(reducător, valoareInitiala) este, de fapt, o expresie care va fi evaluată la o singură valoare finală a acumulatorului
-- callback-ul primește patru argumente: primaValoare, următoareaValoare, index, array
-- când este primită ca argument valoarea opțională, aceasta devine primaValoare.
+- callback-ul primește patru argumente: `valoareaAnterioara`, `valoareaDeLucru`, `indexCurent`, `array`
+- când este primită ca argument valoarea opțională, aceasta devine `valoareaAnterioara`.
 - reduce() trebuie să returneze ceva neapărat.
 - când pasezi ca argument opțional un obiect, elementele array-ului devin cheile obiectului nou creat
 - dacă valoarea opțională este un obiect, în acesta se pot specifica criterii de selecție `{varsta: [], sex[]}`.
@@ -214,7 +216,6 @@ var aplatizare = function(colectii) {
 
 aplatizare(colectii); // Array [ "unul", "altul", "cineva", "munte", "șes", "podiș" ]
 ```
-
 
 Există în ECMAScript 2015 conceptul de `rest parameters`, adică o sintaxă ce permite extragerea unui Array din argumentele pasate unei funcții. Această sintaxă constă în adăugarea unui nume de parametru prefixat de trei puncte de suspensie. Această sintaxă generează un Array adevărat, nu un array-like așa cum este `arguments`.
 
