@@ -46,6 +46,8 @@ console.log(rezultatMapat);
 
 ## Exemplificare a posibilităților de prelucrare
 
+### Transformarea unui obiect într-un șir url-encoded
+
 Un exemplu super privind ce se poate obține folosind metoda este construirea unui mic utilitar care să transforme valorile unui obiect într-un șir url-encoded.
 
 ```js
@@ -60,9 +62,57 @@ var stringCodat = Object.keys(obiect)
 console.log(stringCodat); // paraunu=unu&paradoi=doi%20trei
 ```
 
+### Transformarea unor primitive
+
 Callbackul poate fi și o metodă a unui obiect intern standard:
 
 ```js
 var numereIntregi = [-2, 4, -23, 34];
 console.log(numereIntregi.map(Math.abs)); //Array [ 2, 4, 23, 34 ]
+```
+
+### Extragerea unui array dintr-o colecție de obiecte.
+
+```js
+var colectie = [
+  {"nume": "Iulius", "id": 1},
+  {"nume": "Alequin", "id": 2}
+];
+
+var nume = colectie.map(element => element.nume);
+console.log(nume); // Array [ "Iulius", "Alequin" ]
+```
+
+### Folosirea metodelor obiectelor interne operând valori din obiecte
+
+```js
+var colectie = [
+  {"nume": "Iulius", "id": 1},
+  {"nume": "Alequin", "id": 2}
+];
+var nume = colectie.map(element => element.nume);
+console.log(nume.map(String.toLowerCase)); // Array [ "iulius", "alequin" ]
+// echivalentul ar fi fost declararea callback-ului astfel: console.log(nume.map(unNume => unNume.toLowerCase()));
+```
+
+`console.log(nume.map(String.toLowerCase));` funcționează pentru că metodei map nu-i pasă cum îi pasezi funcția.
+
+### Maparea valoare cu valoare din două array-uri diferite
+
+Metoda map trimite trei argumente callback-ului:
+- elementul curent pe care se lucrează
+- cheia elementului
+- și array-ul întreg.
+
+Pentru acest fapt se poate realiza o împerechiere a elementelor din două array-uri diferite:
+
+```js
+var stanga  = ['Ileana', 'Anca'],
+    dreapta = [21, 43];
+
+// în acest moment luăm array-ul stânga, îl parcurgem element cu element și pentru fiecare element, vom genera un obiect generat a cărui valori pentru proprietăți sunt chiar valoarile din array-urile mapate.
+var colectie = stanga.map( (elem, index) => ({nume: elem, varsta: dreapta[index]}) );
+
+console.log(JSON.stringify(colectie)); // [{"nume":"Ileana","varsta":21},{"nume":"Anca","varsta":43}]
+// s-au folosit paranteze pentru că altfel `{}` ar fi indicat blocul de cod
 ```

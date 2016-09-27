@@ -84,7 +84,7 @@ function localizare(loc){
 localizare('la biserica întărită');
 ```
 
-### Cazul 2 - Funcțiile interne pot referi variabile definite în funcția container chiar dacă aceasta a returnat deja.
+### Cazul 2 - Funcțiile interne pot referi variabile definite în funcția container chiar dacă aceasta a returnat deja. Acesta este un closure.
 
 ```js
 function localizare(loc){

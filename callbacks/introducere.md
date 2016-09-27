@@ -20,12 +20,9 @@ function adunare(a, b, faAdunarea){
   faAdunarea(a + b);                // continuation-passing style
 };                                  //se va returna o valoare abia după ce callback-ul și-a încheiat execuția
 
-console.log('inainte de adunare');
 adunare(1, 2, function(rezultat){  // callbackul primește un singur argument, care reflectă evaluarea operațiunii a+b
   console.log('Rezultatul este: ' + rezultat);
 });
-console.log('după adunare');
-// mesajele în consolă apar în ordine
 
 // adunarea ca operațiune asincronă
 function adunareAsinc(a, b, callback){
@@ -51,10 +48,9 @@ Atenție! funcția adunareAsincrona nu va mai aștepta la execuție să se decla
 - Funcțiile pot fi pasate ca argumente altor funcții pentru că, de fapt, este pasat un obiect.
 - Funcțiile care acceptă alte funcții drept argumente sau care returnează funcții se numesc „funcții de ordin superior” - „higher-order function”.
 - Nu toate funcțiile cărora li se pasează un callback sunt asincrone. Un exemplu este `[1,2].map(function(elem){return elem+1;});`. Rezultatul este returnat sincron folosind „direct style”.
-- `this` al unui callback indică către obiectul global. Pentru a fixa `this` la funcția gazdă se va folosi `call()`, `apply()` sau `bind()`.
-- Callback-ul care folosește fat arrows este legat de scope-ul lexical și nu mai este nevoie de `call()`, `apply()` sau `bind()`.
+- **`this` al unui callback indică către obiectul global. Pentru a fixa `this` la funcția gazdă se va folosi `call()`, `apply()` sau `bind()`**.
+- **Callback-ul care folosește fat arrows este legat de scope-ul lexical și nu mai este nevoie de `call()`, `apply()` sau `bind()`**.
 - Invocarea unui callback este invocarea unei funcții a cărui `this` este obiectul global (implicit assignment).
-
 
 Cel mai simplu exemplu este oferit de execuția la un anumit moment în timp.
 
