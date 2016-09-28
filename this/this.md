@@ -1,5 +1,9 @@
 # this
 
+This este un obiect pasat automat unei funcții și care se formează în funcție de contextul de execuție.
+
+## Mantre
+
 `this` este o legătură către un obiect, un obiect-context, care se formeză în funcție de contextul de execuție.
 `this` este cuvânt cheie rezervat.
 `this` este o legătură care se face pentru fiecare invocare a vreunei funcții pe baza call-site-ului.

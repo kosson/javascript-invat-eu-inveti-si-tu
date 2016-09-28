@@ -7,10 +7,10 @@ Dacă vreți să dați mai departe, vă rog să o faceți sub aceeași licență
 
 Colecția fi actualizată cât de des posibil iar scopul final este un manual vizual, care să vină în sprijinul celor care doresc să netezească multe asperități legate de acest limbaj de programare.
 
-Multe dintre resursele dedicate învățării limbajului fac parte din propriile cercetări și studii. În închiderea a multora dintre subiectele prezentate vor fi menționate sursele din care materialul a fost compus ca părți utile care explică ușor anumite zone obscure.
+Multe dintre resursele dedicate învățării limbajului fac parte din propriile cercetări și studii. La finalul multora dintre subiectele prezentate vor fi menționate sursele din care materialul a fost compus ca părți utile care explică ușor anumite zone obscure.
 
-Majoritata codului conține nume de variabile în limba română care caută să explice și în același timp să explice cât mai bine resursele cu care se operează.
-Colecția nu este una finală și poate suferi multe modificări de acum încolo. Unele lucruri sunt abia la început, altele chiar sunt bine ilustrate, dar vă las să aruncați un ochi.
+Majoritata codului conține nume de variabile în limba română care caută să explice cât mai bine resursele cu care se operează.
+Colecția nu este una finală și poate suferi multe modificări. Unele lucruri sunt abia la început, altele chiar sunt bine ilustrate.
 
 ***JavaScript, I learn, you learn*** is a collection of texts meant to shed light on JavaScript topics aiming to become a free educational resource for all those who would like to learn the language.
 The content is in the Romanian language, but all the graphics are using English words enlarging the scope of their usefulness.
