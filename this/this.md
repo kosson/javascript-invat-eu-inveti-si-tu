@@ -13,6 +13,24 @@ Referința `this` va fi folosită pe durata execuției funcției.
 
 Legătura (binding-ul) la `this` DEPINDE DE OBIECTUL specificat la call-site.
 
+```js
+function faCeva (){
+  console.log(this);      // Răspunde cu obiectul context Object { actiune: faCeva() }
+  console.log(this.ceva); // răspunde cu undefined pentru că obiectul context nu are o proprietatea ceva
+};
+
+var obj = {
+  faCeva: faCeva
+};
+
+// în ECMAScript 6, dacă ai denumit cheia metodei la fel cu numele funcției care va fi metodă pentru acel obiect, se poate menționa simplu numele
+var obj = {
+  faCeva
+};
+
+obj.faCeva(); // s-ar putea spune că this este chiar obiectul menționat la stânga metodei
+```
+
 Folosit pentru a lua un obiect și pentru a-i îmbogăți și/sau prelucra valorile membrilor după care poate fi returnat și folosit mai departe.
 
 ## Dependințe cognitive

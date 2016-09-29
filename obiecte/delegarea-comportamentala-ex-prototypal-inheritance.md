@@ -11,7 +11,7 @@ De fapt, se poate vorbi de o „delegare comportamentală” și nu de o moșten
 - Legătura prototipală se obține legătura prin Object.create() și are două efecte:
   1. **creează un obiect**,
   2. **stabilește legătura prototipală**.
-- Legătura prototipală se obține și prin efectul al doilea al folosirii cuvântului cheie ```new```.
+- Legătura prototipală se obține și prin efectul al doilea al folosirii cuvântului cheie `new`.
 - Legătura prototipală creează un lanț de delegare pentru cazurile în care nu găsești o proprietate sau o metodă într-un anumit context de execuție.
 - Mecanismul pe care-l realizează .prototype este unul de delegare a cererii pentru referința unei proprietăți sau metode către un obiect mai sus pe lanțul prototipal către un alt obiect.
 - relațiile prototipale pot cauza probleme atunci când este nevoie de enumerarea proprietăților obiectelor. Crockford recomandă „ambalarea” conținutului buclei de ciclare într-o funcție de verificare hasOwnPropery();
