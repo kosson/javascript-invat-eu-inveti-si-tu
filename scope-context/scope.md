@@ -23,6 +23,46 @@ Global scope este locul de unde pot fi accesate funcții și variabile în într
 
 Javascript generează un scope lexical, care se leagă fix de locul unde s-a făcut o declarație. Nu este unul dinamic.
 
+## Un exemplu în cazul obiectelor
+
+```js
+function Obi(){
+  var obi = new Object();
+  obi.token = 100;
+  obi.mesaj = function(){
+    console.log('Esti un om de nota ' + this.token);
+    console.log(this);
+  };
+  setInterval(obi.mesaj, 2000);
+  return obi;
+};
+Obi();
+// Object { token: 100, mesaj: Obi/obi.mesaj(), ceva: Obi/obi.ceva() }
+// Esti un om de nota undefined
+```
+
+Atenție!
+În cazul invocării lui setInterval `this` este setat la obiectul global, care este, de regulă, `window`. Acest lucru se întâmplă pentru că setInterval se execută într-un context diferit de cel în care este invocat. setInterval va căuta o funcție `obi.ceva` în obiectul `window`. Acest lucru se întâmplă pentru că setInterval schimbă contextul la global și astfel taie calea către funcția cu rol de metodă din obi. Bineînțeles, funcția care există în obi cu rol de metodă nu există în obiectul global. Pentru ca referința să se facă corect, `obi.mesaj` trebuie apelată ca metodă: `obi.ceva()`. Când setInterval va invoca `obi.ceva` ca funcție și nu ca metodă, nu va avea acces la `this`. Doar metodele au acces la `this`. În cazul de mai sus Obi() își va încheia execuția după returnarea obiectului.
+
+```js
+function Obi(){
+  var obi = new Object();
+  obi.token = 100;
+  obi.mesaj = function(){
+    console.log('Esti un om de nota ' + this.token);
+    console.log(this);
+  };
+  setInterval(function(){obi.mesaj();}, 2000);
+  return obi;
+};
+Obi();
+// Object { token: 100, mesaj: Obi/obi.mesaj(), ceva: Obi/obi.ceva() }
+// Esti un om de nota 100
+// blocul se repetă
+```
+
+În acest al doilea caz, invocăm funcția cu rol de metodă dintr-un callback. Motivul pentru care se scope-ul este corect este pentru că funcția care invocă metoda trăiește în același scope cu obiectul pentru care invocă metoda. Funcția anonimă (callback-ul) oferă posibilitatea de a executa metoda și de a ne asigura că nu va executa ca funcție. Dacă s-ar invoca direct metoda `obi.mesaj()`, aceasta s-ar executa o singura dată la momentul execuției lui Obi() și apoi ar pierde scope-ul la a doua invocare în favoarea lui global. În acest caz Obi() va continua execuția pânî când setInterval va fi întrerupt.
+
 ## Mantre
 
 - JavaScript are o fază de compilare.

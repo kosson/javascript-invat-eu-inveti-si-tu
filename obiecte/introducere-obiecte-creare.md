@@ -31,8 +31,8 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
 - `this` este un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
 - Obiectele pot moșteni alte proprietăți direct din alte obiecte.
 - Când introduci o proprietate nouă într-un obiect care generează prototipul pentru alte obiecte, obiectele legate prin lanțul prototipal, vor moșteni noile proprietăți.
-- [[Prototype]], adică proprietatea `prototype` este o legătură internă, care se stabilește de la un obiect la altul. Pentru aflarea prototipului se apelează la __proto__ (dunder-dunder proto) sau sse va folosi Object.getPrototypeOf(obiect).
-- Legătura prototipală se obține legătura prin Object.create() și are două efecte:
+- [[Prototype]], adică proprietatea `prototype` este o legătură internă, care se stabilește de la un obiect la altul. Pentru aflarea prototipului se apelează la __proto__ (dunder-dunder proto) sau sse va folosi Object.getPrototypeOf Mulțumesc de invitație. Vin.(obiect).
+- Legătura prototipală se obține legătura prin `Object.create()` și are două efecte:
   1. **creează un obiect**,
   2. **stabilește legătura prototipală**.
 - Legătura prototipală se obține și prin efectul al doilea al folosirii cuvântului cheie `new`.
@@ -53,7 +53,7 @@ Obiectele pot fi create în două feluri: prin declararea acestora sau prin cons
 
 1. `var newObj = new Object();` se respectă cele patru reguli: (1)crearea obiectului; (2)stabilirea lanțului prototipal; (3)bindingul lui `this` la noul obiect; (4)obiectul nou creat este returnat
 2. `var newObj = Object.create(null);` prototype este setat la `null`
-3. `var newObj = Object.create(Object.prototype);` echivalentă cu var `newObj = {}`
+3. `var newObj = Object.create(Object.prototype);` echivalentă cu `var newObj = {}`
 4. `var newObj = {};` echivalentă cu `new Object()`
 
 ## Crearea obiectelor cu valori deja computate
@@ -74,7 +74,62 @@ const webObi = {
 };
 ```
 
-### Crearea obiectelor printr-o funcție cu rol de constructor și instanțiezi cu `new`
+## Crearea metodelor
+
+O funcție care este declarată într-un obiect, devine metodă a acelui obiect. Atenție! este totuși o funcție în sine.
+
+```js
+var obi = {
+  token: 10,
+  faCeva: function faCeva(){
+    console.log(this.token);
+  }
+};
+obi.faCeva(); // 10
+faCeva(); // faCeva is not defined
+```
+
+faCeva este o metodă a obiectului obi. `faCeva` este de fapt o referință către funcția anonimă care afișează în consolă valoare lui token. `obi.faCeva` poate fi considerată o referință către funcție. Nu uita faptul că oricărei funcții îi este pasat `this` automat.
+
+Modalitatea de a crea o metodă într-un obiect este perfect echivalentă cu următoarea alternativă.
+
+```js
+var obi = {
+  token: 10
+};
+
+obi.faCeva = function faCeva(){
+  console.log(this.token);
+};
+
+obi.faCeva(); // 10
+faCeva(); // faCeva is not defined
+```
+
+Dar și această alternativă este perfect identică cu următoarea:
+
+```js
+var token = 1000;
+
+var obi = {
+  token: 10
+};
+
+function faCeva(){
+  console.log(this.token);
+};
+
+obi.faCeva = faCeva;
+
+obi.faCeva(); // 10
+faCeva(); // undefined (e undefined pentru că JS creează automat variabila token in global, dar nu are valoare pentru ea)
+          //sau 1000, dacă ai token declarat în global.
+```
+
+Ei bine, aici este un element în plus. Funcția faCeva a fost declarată în global, ceea ce înseamnă că `scope`-ul său lexical se află în global scope.
+În cazul în care în global scope ar fi fost declarată valoarea token, la invocarea funcției în sine, nu ca metodă, valaorea acesteia ar fi fost adusă.
+
+### Crearea obiectelor printr-o funcție cu rol de constructor și instanțierea cu `new` - constructori
 
 Mai este numită de o parte a programatorilor „moștenire clasică”. De fapt, este vorba tot despre moștenire prototipală, dar care face uz de un constructor (vezi și [Șablonul Constructor](../patterns/SabloaneDeCreare/Module/ModulePattern.md) ).
 

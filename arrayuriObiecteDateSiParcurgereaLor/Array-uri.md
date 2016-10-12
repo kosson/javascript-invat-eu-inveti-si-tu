@@ -35,11 +35,11 @@ TODO: scrie cod pentru exemplificare
 
 ## Mantre
 
-- Array-urile sunt **obiecte** și poți adăuga proprietăți în array folosind notația dot `var a = [1,2]; a.i = 23; a.i // 23`. Valorile sunt adăugate indiferent că array-ul are un index numeric prestabilit. Ele sunt acolo.
-- cheia unei proprietăți al unui array se numește `index` al unui array (valorile dintre paranteze pătrate sunt convertite la string)
-- o proprietate într-un array care este identificată printr-un index este numită `element`
-- `Array` este un obiect intern limbajului JavaScript. Acesta este folosit pentru crearea array-urilor
-- Array este un obiect iterabil pentru că obiectul prototip are o metodă @@iterator (precum String, TypedArray, Map și Set).
+-Array-urile sunt **obiecte** și poți adăuga proprietăți în array folosind notația dot `var a = [1,2]; a.i = 23; a.i // 23`. Valorile sunt adăugate indiferent că array-ul are un index numeric prestabilit. Ele sunt acolo.
+-cheia unei proprietăți al unui array se numește `index` al unui array (valorile dintre paranteze pătrate sunt convertite la string)
+-o proprietate într-un array care este identificată printr-un index este numită `element`
+-`Array` este un obiect intern limbajului JavaScript. Acesta este folosit pentru crearea array-urilor
+-Array este un obiect iterabil pentru că obiectul prototip are o metodă @@iterator (precum String, TypedArray, Map și Set).
 
 ## Crearea array-urilor
 

@@ -4,12 +4,13 @@ This este un obiect pasat automat unei funcții și care se formează în funcț
 
 ## Mantre
 
-`this` este o legătură către un obiect, un obiect-context, care se formeză în funcție de contextul de execuție.
-`this` este cuvânt cheie rezervat.
-`this` este o legătură care se face pentru fiecare invocare a vreunei funcții pe baza call-site-ului.
-Referința `this` va fi folosită pe durata execuției funcției.
-`this` NU ESTE O REFERINȚĂ CĂTRE FUNCȚIA ÎN SINE.
-`this` NU ESTE O REFERINȚĂ CĂTRE SCOPE-ul LEXICAL AL FUNCȚIEI.
+- `this` este o legătură către un obiect, un obiect-context, care se formeză în funcție de contextul de execuție.
+- în interiorul unui obiect, apelezi metodele folosind `this`, pentru că este singura referință către proprietățile și metodele interne.
+- `this` este cuvânt cheie rezervat.
+- `this` este o legătură care se face pentru fiecare invocare a vreunei funcții pe baza call-site-ului.
+- Referința `this` va fi folosită pe durata execuției funcției.
+- `this` NU ESTE O REFERINȚĂ CĂTRE FUNCȚIA ÎN SINE.
+- `this` NU ESTE O REFERINȚĂ CĂTRE SCOPE-ul LEXICAL AL FUNCȚIEI.
 
 Legătura (binding-ul) la `this` DEPINDE DE OBIECTUL specificat la call-site.
 
@@ -77,6 +78,45 @@ var obiect = {
 };
 
 obiect.getThis() === obiect; // true
+```
+
+Atenție! Legătura la this se manifestă la cel mai apropiat membru al unui obiect la care se face referință:
+
+```js
+var token = 1000;
+
+var obi = {
+  token: 10
+};
+
+function faCeva(){
+  console.log(this.token);
+};
+
+obi.faCeva = faCeva;
+
+obi.adancit = {altceva: faCeva, token: 10000}; // deci, faCeva, va primi implicit this, care este obiectul (adancit) membru a lui obi
+
+obi.faCeva(); // 10
+faCeva(); // 1000, dacă ai token declarat în global.
+obi.adancit.altceva(); // 10000
+```
+
+## `this` pe lanțul prototipal al obiectului
+
+Dacă metoda este definită în lanțul prototipal al obiectului, `this` face referință către obiectul în care s-a invocat metoda ca și cum metoda ar face parte din obiect.
+
+```js
+var alfa = {
+  primo: function(){
+    return this.ceva + this.altceva;
+  }
+};
+var beta = Object.create(alfa); // s-a făcut legătura prototipală la alfa
+beta.ceva = 10;
+beta.altceva = 10;
+
+console.log(beta.primo()); // 20
 ```
 
 ## Regulile de binding - de generare a obiectului this
@@ -347,11 +387,42 @@ boundGetX(); // 81
 
 bind() va fi găsit în funcția __proto__ al oricărui obiect generat de o funcție alături de `call()` și `apply()` pentru că orice funcție este un obiect care are o legătură prototipală și astfel acces la obiectul `Function` (Function.prototype.apply(), Function.prototype.bind(), Function.prototype.call()).
 
-## 4. Binding cu `new`
+## 4. Binding cu `new` - constructori
 
 Poți pune în fața oricărei funcții `new` și o transformi astfel într-un apel către un Constructor. Atenție, aici trebuie precizat faptul că JavaScript nu are clase.
 
+### Cum funcționează constructorii:
+
+```js
+function SuntUnConstructor (){
+  // se creează proprietăți în this
+  this.ceva = 100;
+
+  // dacă funcția returnează un obiect, atunci obiectul va fi rezultatul apelării cu new
+  // dacă nu returnează un obiect, atunci this va fi rezultatul apelării cu new.
+};
+
+var obi = new SuntUnConstructor();
+
+console.log(obi.ceva); // 100
+```
+
+Și cazul în care se face returnare:
+
+```js
+function AltConstructor (){
+  this.alfa = 10000;
+  return {alfa: 1};
+};
+
+var obi = new AltConstructor();
+
+console.log(obi.alfa); // 1
+```
+
+
 ### Mantre
+
 - O funcție apelată cu `new` în fața sa este un constructor.
 - `new` este mai puternic decât hard binding-ului.
 - Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), `this` va fi returnat automat.

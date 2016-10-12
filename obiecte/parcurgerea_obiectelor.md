@@ -1,4 +1,4 @@
-# Parcurgere și iterare a obiectelor
+# Parcurgerea și iterarea obiectelor
 
 Obiectele pot fi considerate a fi colecții de date
 
@@ -19,6 +19,28 @@ Este important de spus faptul că Object, ca și obiect intern standard JavaScri
 - `Object.create({prop: 1})` și cu a sa variantă `Object.create(null)`,
 - `Object.hasOwnProperty(proprietate)`
 - `Object.keys`
+
+## Accesarea proprietăților și a metodelor din interiorul aceluiași obiect
+
+Metodele se vor apela cu `this`.
+
+```js
+function Obi(){
+  let obi = new Object();
+  obi.mesaj = function(){
+    console.log('Te salut, om bun!');
+  };
+  obi.numar = function(){
+    this.mesaj();
+  };
+  obi.mesaj();
+  obi.numar();
+  return obi;
+};
+Obi();
+// Te salut, om bun!
+// Object { mesaj: Obi/obi.mesaj() }
+```
 
 Un alt aspect important este diferența dintre accesarea proprietăților folosind **operatorul punct și operatorul paranteze pătrate**.
 
