@@ -1,4 +1,4 @@
-# Automatic semicolon insertion
+# Automatic semicolon insertion - introducerea automată a lui punct și virgulă
 
 Unele declarații (statements) JavaScript trebuie să se termine cu punct și virgulă, fiind supuse de ASI - Automatic Semicolon Insertion:
 
