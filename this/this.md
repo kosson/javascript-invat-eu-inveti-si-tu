@@ -78,7 +78,14 @@ var obiect = {
 };
 
 obiect.getThis() === obiect; // true
+var ceEsteThis = obiect.getThis(); // este apelată o metodă
+var doarOFunctieOarecare = obiect.getThis; // o referință către o funcție.
+console.log(ceEsteThis); // Object { getThis: obiect.getThis() }
+console.log(doarOFunctieOarecare); // function obiect.getThis()
+console.log(doarOFunctieOarecare()); // Window → about:newtab
 ```
+
+Ceea ce remarcă este că invocarea funcției ca metodă a obiectului conduce la executarea acesteia în contextul obiectului, iar atunci când se face o referință, ceea ce se întâmplă este că funcția pierde rolul de metodă și odată cu acest fapt și legătura la `this` al obiectului în favoarea celui global.
 
 Atenție! Legătura la this se manifestă la cel mai apropiat membru al unui obiect la care se face referință:
 
