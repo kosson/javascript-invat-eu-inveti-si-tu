@@ -7,7 +7,7 @@ This este un obiect pasat automat unei funcții și care se formează în funcț
 - `this` este o legătură către un obiect, un obiect-context, care se formeză în funcție de contextul de execuție.
 - în interiorul unui obiect, apelezi metodele folosind `this`, pentru că este singura referință către proprietățile și metodele interne.
 - `this` este cuvânt cheie rezervat.
-- `this` este o legătură care se face pentru fiecare invocare a vreunei funcții pe baza call-site-ului.
+pentru- `this` este o legătură care se face  fiecare invocare a vreunei funcții pe baza call-site-ului.
 - Referința `this` va fi folosită pe durata execuției funcției.
 - `this` NU ESTE O REFERINȚĂ CĂTRE FUNCȚIA ÎN SINE.
 - `this` NU ESTE O REFERINȚĂ CĂTRE SCOPE-ul LEXICAL AL FUNCȚIEI.
