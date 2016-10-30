@@ -4,7 +4,7 @@
 
 În JavaScript neexistând clase (cod care se comportă ca un plan pentru construcția obiectelor), pentru a reutiliza cod, se creează obiecte care se bazează pe cele existente.
 
-Astfel, între aceste obiecte se creează o legătură. Această legătură se numește „legătură prototipală”. Aceste legături realizează „moștenirea prototipală” - `prototypal inheritance`. Obiectul preexistent constituie prototipul pentru cel nou creat care poate adăuga noi membri, noi comportamente.
+Astfel, între aceste obiecte se creează o legătură. Această legătură se numește „legătură prototipală”. Aceste legături realizează „moștenirea prototipală” - `prototypal inheritance`. Obiectul preexistent constituie prototipul pentru cel nou creat care poate adăuga noi membri, noi comportamente. Mai trebuie adăugat că, de fapt, vorbim despre o *delegare* pe lanțul prototipal format.  Acest lucru înseamnă că atunci când ceri o proprietate care nu există, delegi solicitarea către prototip că ți-o servească.
 
 ## Mantre
 
@@ -16,12 +16,12 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
 - `Object.prototype` este un obiect în care poți adăuga propriile proprietăți și metode.
 - Modificările aduse obiectului `Object.prototype `se propagă către toate obiectele. Singura excepție este atunci când proprietățile și metodele supuse modificărilor nu sunt ele la rândul lor modificate mai departe în lanțul prototipal.
 - În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype (numeFunctie.prototype). Acest obiect (prototype), este gol și este creat de constructorul lui Object()
-- Funcțiile sunt legate de obiectul prototip prin metoda .constructor.
+- Funcțiile sunt legate de obiectul prototip prin metoda .constructor. Acest lucru înseamnă că poți afla în orice moment care este funcția care generează prototipul prin apelarea constructorului cu ***dunder-dunder-proto***: `obiect.__proto__constructor`
 - Fiecare funcție are un obiect prototip diferit.
 - Obiectele pot invoca orice funcție publică indiferent de lanțul prototipal.
 - Un obiect poate fi creat cu `new Object()`:
   1. acestă modalitate **nu va crea și constructor**.
-  2. Accesarea numeObiect.__proto__.constructor răspunde cu Obiect() la care s-a ajuns prin delegare.
+  2. Accesarea `numeObiect.__proto__.constructor` răspunde cu `function Obiect()` la care s-a ajuns prin delegare.
 - JavaScript are și obiecte globale existente deja în limbaj precum `String()`, `Array()`, `Math()`, `Date()` (`var test = new Date()`).
 - O funcție apelată cu `new` în fața sa este un constructor:
   1. Se creează un obiect nou.

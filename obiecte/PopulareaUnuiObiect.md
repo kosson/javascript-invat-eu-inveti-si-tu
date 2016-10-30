@@ -6,6 +6,8 @@ Odată ce poți crea un obiect, ai nevoie să-l faci funcțional populându-l.
 
 ## Crearea obiectelor - alternative
 
+Toate alternativele de mai jos au același efect: creează un obiect gol.
+
 ```js
 var newObj = new Object();
 var newObj = Object.create(null);

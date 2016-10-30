@@ -1,15 +1,16 @@
 # this
 
-This este un obiect pasat automat unei funcții și care se formează în funcție de contextul de execuție.
+This este un obiect pasat automat unei funcții și care se formează în funcție de contextul de execuție. Este și singura modalitate de a apela membrii unui obiect - proprietățile și metodele.
 
 ## Mantre
 
-- `this` este o legătură către un obiect, un obiect-context, care se formeză în funcție de contextul de execuție.
-- în interiorul unui obiect, apelezi metodele folosind `this`, pentru că este singura referință către proprietățile și metodele interne.
 - `this` este cuvânt cheie rezervat.
-- `this` este o legătură care se face pentru fiecare invocare a vreunei funcții pe baza call-site-ului.
+- `this` este o referință la obiectul care se creează în funcție de contextul de execuție.
+- `this` este o referință către un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
+- în interiorul unui obiect, apelezi metodele folosind `this`, pentru că este singura referință către proprietățile și metodele interne.
+- dacă o funcție a fost invocată în interiorul altei funcții sau a unui obiect, atunci `this` este o referință către obiectul în contextul în care a fost invocată. Pentru a înțelege, adu-ți aminte faptul că o funcție este un obiect, de fapt, dar nu uita că primește this automat, nu-l formează. Doar obiectele formează this.
 - Referința `this` va fi folosită pe durata execuției funcției.
-- `this` NU ESTE O REFERINȚĂ CĂTRE FUNCȚIA ÎN SINE.
+- în cazul funcțiilor`this` nu este o referință către funcția în sine. Ține minte faptul că unei funcții îi sunt pasate tacit this și arguments.
 - `this` NU ESTE O REFERINȚĂ CĂTRE SCOPE-ul LEXICAL AL FUNCȚIEI.
 
 Legătura (binding-ul) la `this` DEPINDE DE OBIECTUL specificat la call-site.
@@ -78,9 +79,9 @@ var obiect = {
 };
 
 obiect.getThis() === obiect; // true
-var ceEsteThis = obiect.getThis(); // este apelată o metodă
+var cineEsteThis = obiect.getThis(); // este apelată o metodă
 var doarOFunctieOarecare = obiect.getThis; // o referință către o funcție.
-console.log(ceEsteThis); // Object { getThis: obiect.getThis() }
+console.log(cineEsteThis); // Object { getThis: obiect.getThis() }
 console.log(doarOFunctieOarecare); // function obiect.getThis()
 console.log(doarOFunctieOarecare()); // Window → about:newtab
 ```
@@ -143,12 +144,12 @@ faceva(); // 2
 
 Bindingul primar se face la global object (Window).
 
-### 2. Binding implicit
+### 2. Binding implicit sau *atașat*
 
-Îi spun atașat pentru că bindingul se face la obiectul în care este invocată funcția (call site), ca metodă.
+Îi spun *atașat* pentru că bindingul se face la obiectul în care este invocată funcția (call site), ca metodă.
 Bindingul implicit constă într-o funcție pe care o „împrumuți” contextului unui obiect.
 
-Regula este că obiectul în contextul căruia se execută funcția ca metodă este folosit de către funcție pentru a face binding la `this`.
+Regula: obiectul în contextul căruia se execută funcția ca metodă este folosit de către funcție pentru a face binding la `this`.
 
 ```js
 var obiectLiteral = {
@@ -193,7 +194,7 @@ var metoda = obiectLiteral.metoda;                            // metodă a obiec
 metoda(); // => valoarea proprietății obiectului global; echivalent cu window.metoda()
 ```
 
-Bindingul implicit poate fi pierdut atunci când faci referință către metodă, când nu o și execuți. De fapt, nu faci referința către metodă, căci însăși metoda este o referință către funcție.
+Bindingul implicit poate fi pierdut atunci când faci referință către metodă, când nu o și execuți. De fapt, nu faci referința către metodă, căci însăși metoda este o referință către funcția care joacă rol de metodă.
 
 ```js
 var obiectStudiu = {
@@ -220,12 +221,11 @@ Bindingul explicit se realizează prin intermediul lui call() și apply(). Ambel
 
 O chestie interesantă este că de vei pasa valoarea unei primitive simple de tip string, boolean sau number, atunci primitiva va fi „impachetată” în forma de obiect corespondentă (`new String(..)`, `new Boolean(..)`, or `new Number(..)`) și abia la acesta se va face binding-ul `this`. Acest lucru se numește "boxing".
 
-### Mecanism oferit de apply()
+#### Mecanismul oferit de apply() și call()
 
-Obiectul pasat ca și context, în fapt cel care este și `this`, este, de fapt apelantul funcției. Ceea ce permite acest mecanism, de fapt este posibilitatea de a scrie o funcție cu rol de metodă, care să poată fi folosită în alt obiect fără a fi necesară rescrierea metodei pentru un nou obiect.
+Ceea ce permite acest mecanism, de fapt este posibilitatea de a scrie o funcție cu rol de metodă, care să poată fi folosită în alt obiect fără a fi necesară rescrierea metodei pentru un nou obiect.
 
 Începând cu ECMAScript 5, array-ul argumentelor pasate poate fi și un obiect care are caracteristicile unui array.
-
 
 ```js
 var proprietate = "ceva din global"; // este proprietate a obiectului global
@@ -240,11 +240,10 @@ var faceva = function maner(){
 
 faceva.call(obiectLiteral); // Spune: foloseste objectLiteral ca this. => ceva
 faceva(); // => ceva din global
-
 ```
 
-call() modifică contextul.
-Dacă vrei să pasezi argumente funcției, acestea vor urma referinței către noul context
+De fapt, `call()` schimbă contextul.
+Dacă vrei să pasezi argumente funcției, acestea vor urma referința către noul context.
 
 De exemplu:
 
@@ -268,12 +267,14 @@ obiect.metoda.apply(window, [1,2,3]); //acelasi lucru ca si call numai ca paseaz
 
 #### Pierderea bindingului
 
-Chiar și când se face un binding explicit, se poate pierde bindingul la `this`. Soluția ar fi „îmbrăcarea” într-o funcție „gazdă”
+Chiar și când se face un binding explicit, se poate pierde bindingul la `this`. Soluția ar fi „îmbrăcarea” într-o funcție „gazdă”.
 
 #### Binding puternic (hard binding)
 
 ```js
-function fa()}{
+var a = 101;
+
+function fa(){
   console.log(this.a);
 };
 
@@ -282,22 +283,22 @@ var obi = {
 };
 
 var gazda = function(){
-  fa.call(obi); // 2
+  fa.call(obi);
 };
 
-gazda(); // gazda întărește legătura lui this la obi.
+gazda(); //1010
+// functia gazda întărește legătura lui this la obi.
 
-gazda.call(window); // 2
+gazda.call(window); // 1010
 ```
 
 Este modul în care te asiguri întotdeauna că `this` este predictibil și nu alunecă în global scope.
 
-Hardbinding `this` în obiectul care se dorește a fi contextul. Este un cuplaj forțat între o funcție care trebuie să ruleze musai în contextul unui obiect.
+Hardbinding `this` în obiectul care se dorește a fi contextul. Este un cuplaj forțat între o funcție care trebuie să ruleze musai în contextul unui anumit  obiect.
 
 Împachetarea într-o funcție gazdă creează și comunicare înspre și dinspre hard binding:
 
 ```js
-
 // o funcție care se va executa în contextul unui obiect
 // 1. acceptă date prin parametri
 // 2. returnează date prelucrate
@@ -318,12 +319,12 @@ var modificaGazda = function (){
   return activitate.apply(obiect, arguments); // arguments este un array like
 };
 
-// introdu date in gazdă, care le va folosi activitate
+// introdu date in gazdă, pe care le va folosi activitate
 var rezultat = modificaGazda(100);
 console.log(rezultat); // 1100
 ```
 
-Începând cu ES5 bind() a fost introdusă ca metodă în prototipul oricărei funcții - `Function.prototype.bind`.
+Începând cu ES5 `bind()` a fost introdusă ca metodă în prototipul oricărei funcții - `Function.prototype.bind`.
 Vezi și documentația MDN pentru bind la:  [Function.prototype.bind()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
 
 ```js
