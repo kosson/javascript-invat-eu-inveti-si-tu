@@ -84,9 +84,55 @@ var doarOFunctieOarecare = obiect.getThis; // o referință către o funcție.
 console.log(cineEsteThis); // Object { getThis: obiect.getThis() }
 console.log(doarOFunctieOarecare); // function obiect.getThis()
 console.log(doarOFunctieOarecare()); // Window → about:newtab
+var functiaLegata = obiect.getThis.bind(obiect); // reatasarea funcției ca metodă
+console.log(functiaLegata()); // Object { getThis: obiect.getThis() }
 ```
 
 Ceea ce remarcă este că invocarea funcției ca metodă a obiectului conduce la executarea acesteia în contextul obiectului, iar atunci când se face o referință, ceea ce se întâmplă este că funcția pierde rolul de metodă și odată cu acest fapt și legătura la `this` al obiectului în favoarea celui global.
+
+### Cazul lui `this` pentru un constructor
+
+```js
+var Dorel = function dorel(){
+  this.nume = "Dorel";
+  this.ego = function ego(){
+    console.log(`Sunt constructorul ${this.nume}`);
+  };
+  setInterval(this.ego(), 1000);
+};
+Dorel();
+```
+
+#### `setInterval(this.ego, 1000);`
+
+Efectul execuției:
+* Mesajul va fi afișat la fiecare secundă.
+* this este obiectul global
+* la invocarea lui Dorel(), este automat trimis this, care este globalul
+* obiectul global se îmbogățește cu proprietățile nume și ego.
+
+Explicație:
+
+Acest lucru se întâmplă pentru că setInterval interpretează `this.ego` ca referința către o funcție pe care o și execută în contextul obiectului global, care a fost îmbogățit cu proprietatea nume.
+
+#### `setInterval(this.ego(), 1000);`
+
+Efectul execuției:
+* Mesajul este afișat o singură dată,
+* this este obiectul global
+* la invocarea lui Dorel(), este automat trimis this, care este globalul
+* obiectul global se îmbogățește cu proprietățile nume și ego.
+* După execuție, va fi afișat `undefined`
+
+Explicație:
+Mesajul va fi afișat o singură dată pentru că funcția `ego` este invocată ca metodă: `this.ego()` a obiectului Dorel. Imediat ce execuția funcției Dorel() s-a încheiat, contextul creat de funcția Dorel a dispărut.
+
+#### `setInterval(function(){this.ego()}, 1000);`
+
+
+
+Împachetând apelul către metoda obiectului într-o funcție, ne asigurăm că nu pierdem legătura la `this`. Este echivalentul (ca efect) al primei situații: `setInterval(this.ego, 1000);`
+
 
 Atenție! Legătura la this se manifestă la cel mai apropiat membru al unui obiect la care se face referință:
 
