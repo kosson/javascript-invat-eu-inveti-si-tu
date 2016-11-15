@@ -74,7 +74,7 @@ Object.defineProperties(newObj, {
 ```
 
 ATENȚIE!
-Folosirea unei funcții într-un obiect drept „metodă”, nu este decât apelarea unei funcții în cadrul obiectului. Nu se poate spune că obiectul „conține” funcția. Obiectul doar face o referință
+Folosirea unei funcții într-un obiect drept „metodă”, nu este decât apelarea unei funcții în cadrul obiectului. Nu se poate spune că obiectul „conține” funcția. Obiectul doar face o referință. Funcției cu rol de metodă i se pasează `this`, care este, de fapt obiectul în care este metodă.
 
 ```js
 function actiune() {

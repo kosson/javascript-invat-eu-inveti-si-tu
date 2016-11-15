@@ -82,3 +82,58 @@ run();
 
 ```
 ![Scopping făcut la nivel de funcție internă care ține minte mediul pentru fiecare iterație](closureInLoops.png)
+
+### Diferența dintre binding și assignment - closures în bucle
+
+Crearea unui scope la momentul rulării codului conduce la alocarea unui „spațiu” în memorie pentru fiecare variabilă care se „leagă” (bind) la respectivul scope.
+
+```js
+function adunaFunctii(arr) {
+  var functii = [], i;
+  for (i = 0; i < arr.length; i++) {
+    functii.push(function() { console.log(arr[i]);}); // arr[i] nu este valoarea, pentru că i este doar o referință către valoare
+  }
+  return functii;
+};
+
+var colectieFunctii = adunaFunctii([23, 221, 4342]);
+var y = colectieFunctii[0];
+y(); // undefined
+
+// se poate imagina chiar o funcție care să testeze funcțiile closure
+function test(){
+  var lista = adunaFunctii([23, 221, 4342]);
+  for(var j = 0; j < lista.length; j++){
+    lista[j]();
+  };
+};
+test(); // undefined (3)
+```
+
+Funcția `adunaFunctii` „leagă” la scope-ul său trei variabile: ***functii, i și n*** iar când este invocată, se alocă „spațiu” în memorie pentru acestea. La fiecare iterare, bucla creează un closure pentru funcția declarată și care este apoi introdusă în array-ul `functii`.
+În cazul de mai sus, logica superficială spune că `arr[i]` ar trebui să rezolve la valoare. Dar i, de fapt este o referință către valoare.
+Pentru că valoarea lui i se modifică la fiecare iterație, funcțiile declarate vor vedea doar ultima valoare. Acest lucru se întâmplă pentru că un closure stochează valorile externe prin referință, nu prin valoare.
+Toate funcțiile create de adunaFunctii, care, de fapt fac closure, stochează o referință către i care exista de dinainte să înceapă iterarea. Între timp, iterarea incrementează valoarea lui i.
+La momentul în care se invocă una dintre funcțiile din array-ul constituit, dar care face closure, i are deja valoare 5 (valoarea lui n, care este lungimea array-ului). Este returnat `undefined` pentru că array-ul pasat ca parametru nu are index cu valoarea 5, indexul oprindu-se la 4.
+
+Pentru a face să funcționeze:
+
+```js
+var functii = [];
+
+function emiteFunctii(index){
+  return function(){
+    return index;
+  };
+};
+
+for(var index = 0; index < 5; index++){
+  functii[index] = emiteFunctii(index);
+};
+
+for(var index in functii){
+  console.log(functii[index]());
+};
+```
+
+Diferența este că `emiteFunctii` este invocat pentru fiecare interație. Ca efect se creează un scope nou iar index este legat de acel scope ceea ce înseamnă ca avem 5 scope-uri create,

@@ -13,13 +13,13 @@ Conține:
 - Outer environment (pentru cazul funcțiilor. Global env nu are outer env)
 - codul js
 
-ATENȚIE, toate acestea sunt create de Enginul JavaScript.
+ATENȚIE, toate acestea sunt create de motorul JavaScript.
 
 ## Acumulări rapide
 - Motorul JavaScript creează un obiect al contextului de execuție: EXECUTION CONTEXT OBJECT.
 - Invocarea unei funcții generează un nou CONTEXT de EXECUȚIE. **Acesta nu este un obiect, ATENȚIE!**
 - Contextul de execuție este parte a scope (perimetru).
-- Contextul de execuție este constituit din TOT ce se întâmplă atunci când funcția se execută, adică in toate variabilele și funcțiile. O variabilă este considerată a fi „în scope", dacă este accesibilă în contextul de execuție curent.
+- Contextul de execuție este constituit din TOT ce se întâmplă atunci când funcția se execută, adică in toate variabilele și funcțiile. O variabilă este considerată a fi „în scope - in-scope", dacă este accesibilă în contextul de execuție curent.
 - Variabilele și funcțiile care fac parte din contextul de execuție sunt stocate în OBIECTUL CONTEXTULUI DE EXECUȚIE - Execution Context Object.
 - Pentru orice program există un **global execution context** (activat spre exemplu când declari `<script>`)
 
@@ -27,7 +27,7 @@ ATENȚIE, toate acestea sunt create de Enginul JavaScript.
 - Ori de câte ori este invocată o funcție, se creează un nou context execuție (TOT ce se întâmplă atunci când funcția se execută).
 - Variabilele și funcțiile care fac parte din contextul de execuție, sunt memorate în EXECUTION CONTEXT OBJECT, care este un obiect al motorului JavaScript.
 - contextul e execuție este parte a scope (format la faza de compilare).
-- Context este valoarea lui ```this```
+- Context este valoarea lui `this`
 - toate variabilele și funcțiile definite într-o funcție sunt considerate parte a contextului de execuție
 
 ## Cazul obiectelor

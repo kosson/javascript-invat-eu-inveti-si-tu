@@ -1,16 +1,29 @@
-# Declararea funcțiilor:
+# Declararea funcțiilor
+
 **function declaration statement** și **function definition expression**
 
 ## Concepte tratate:
 
 ### A. declararea funcțiilor cu nume (named function declaration).
-Ex.: ```function ceva(){};```
+Ex.:
+
+```js
+function ceva(){};
+```
 
 ### B. funcție exprimată, (function expression).
-Ex.: ```var ceva = function (){};```
+Ex.:
+
+```js
+var ceva = function (){};
+```
 
 sau funcție exprimată anonimă, (anonymous function expression).
-Ex.: ```var anonima = function(){};```
+Ex.:
+
+```js
+var anonima = function(){};
+```
 
 ### C. funcție exprimată cu identificator (named function expression). Ex.: ```var test = function ceva(){};```
 
@@ -25,11 +38,9 @@ Ex.: ```var anonima = function(){};```
 - Funcțiile anonime nu permit ***recursivitatea***
 - Funcțiile care au nume permit referențierea după nume din interiorul ei.
 - `Closure` nu este sinonim cu `lambda`. Nu toate closure-urile sunt lambda și vice-versa.
-- funcțiile declarate (```function ceva(){}```) se bucură de mecanismul de hoisting.
-- funcțiile exprimate (```var ceva = function(){}``) nu se supun hoistingului ceea ce le permite să rețină o copie a variabilelor dn scope-ul în care au fost definite.
+- funcțiile declarate (`function ceva(){}`) se bucură de mecanismul de hoisting.
+- funcțiile exprimate (`var ceva = function(){}`) nu se supun hoistingului ceea ce le permite să rețină o copie a variabilelor dn scope-ul în care au fost definite.
 - funcțiile exprimate pot fi folosite ca: argumente pentru alte funcții, clojures, IIFEs
-
---------------------------------------------------------------------------------
 
 ### A. DECLARAREA unei funcții cu nume (named function declaration)
 
@@ -40,77 +51,72 @@ Ex.: ```var anonima = function(){};```
 
 ```js
   function ceva(){};
-
   // funcției i se dă un identificator în perimetrul (scope) în care există, cu numele ceva
 ```
-*Orice altceva ce nu începe cu ```function``` este o expresie.*
+*Orice altceva ce nu începe cu `function` este o expresie.*
 
---------------------------------------------------------------------------------
 
 **Întrebare**: Cum INVOCI o funcție?
 **Răspuns**:
 
 ```js
-  ceva();
+ceva();
 ```
---------------------------------------------------------------------------------
 
 ### B. Funcție EXPRIMATĂ (function expression):
 
 ```js
-  function ceva(){};
+function ceva(){};
 ```
+
 În acest caz funcția este declarată perimetrului (scope)
 
 #### Q&A
+
 **Întrebare**: De ce se numește exprimată?
 **Răspuns**: Pentru că invocând-o ajungi la un rezultat, la o valoare (fie aceasta un boolean, număr, șir, obiect).
 
 ```js
-  function ceva(){ return "o valoare" };
+function ceva(){ return "o valoare" };
 ```
---------------------------------------------------------------------------------
 
 ### C. Funcție EXPRIMATĂ ANONIMĂ (anonymous function expression)
 
 ```js
-  var anonima = function(){};
+var anonima = function(){};
 ```
+Atenție, nu permite recursivitate
 
-- Nu permite recursivitate
-
---------------------------------------------------------------------------------
 
 ### D. Funcție EXPRIMATĂ CU IDENTIFICATOR (named function expression):
 
 ```js
-  var test = function ceva(){};
+var test = function ceva(){};
 ```
 
 În acest caz este declarată o variabilă test în scope.
 
-Numele „ceva" este declarat în perimetrul propriu al funcției, ATENȚIE, nu în scope-ul în care a fost declarat test.
+Numele „ceva” este declarat în scope-ul propriu al funcției. ATENȚIE, nu în scope-ul în care a fost declarat test.
 
 De exemplu:
 
 ```js
-  var test = function ceva(){
-      console.log(typeof(ceva));
-      return "merge";
-  };
-  test(); // function merge
-  ceva(); // ReferenceError: ceva is not defined
+var test = function ceva(){
+  console.log(typeof(ceva));
+  return "merge";
+};
+test(); // function merge
+ceva(); // ReferenceError: ceva is not defined
 ```
 
 - Permite recursivitatea pentru că putem face referință la funcție chiar din interiorul ei.
 - Global scope nu este poluat
 - Autodocumentează codul în cel mai simplu mod posibil.
 
---------------------------------------------------------------------------------
 
-## Funcții lambda
+## Funcții lambda sau funcțiile de nivel înalt
 
-Sunt funcțiile folosite ca valori.
+Orice funcție este, de fapt o valoare.
 Dacă o funcție este folosită ca argument sau ca valoare returnată, aceasta este o funcție lambda.
 
 Unele funcții consumă și returnează funcții ca date.
@@ -134,4 +140,5 @@ Sunt folosite pentru:
 - returnarea unei funcții dintr-o altă funcție (curring). De exemplu, returnarea unei funcții care ia altă funcție căreia îi aplică un calcul pe argumentele existente.
 
 ### Alonje:
+
 1. Atunci când o funcție va fi folosită ca proprietate a unui obiect, atunci funcția va fi una exprimată cu indentificator (named function expression) întotdeauna.

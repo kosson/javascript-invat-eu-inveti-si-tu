@@ -1,0 +1,41 @@
+# Variabile
+
+Variabilele sunt identificatori pentru valori.
+Javascript folosește trei cuvinte cheie specifice limbajului: `var`, `let` și `const`. `let` și `const` au fost adăugate în ES6.
+
+Cele trei moduri de a declara variabile au efect și asupra scope-ului.
+
+## var
+
+Prin folosirea lui `var`, declararea variabilei se face în global scope sau în cea mai apropiată funcție. Nu este localizată la nivel de bloc de cod `{}`. De exemplu, pentru o ciclare cu for, variabila definită ca și condiție și poate o variabilă în blocul său, de fapt sunt „înregistrate” în scope-ul funcției care găzduiește `for` și nu în cel al lui `for`. Din nevoia de a localiza la nivel de bloc variabilele, au fost introduce de ES6 `let` și `const`.
+
+## `let` și `const`
+
+Definesc variabile în cel mai apropiat „mediu lexical” (scope), care poate fi global scope, un block `{}` sau o buclă precum `for`.
+Rolul lor este de a localiza la nivel de înregistrare în scope la nivel de `global`, `function` și block `{}`.
+
+## Mantre
+
+- Variabilele și funcțiile beneficiază de un proces al motorului JavaScript numit ***identifier lookup***. Este necesar pentru a discrimina între variabilele din local scope dintr-o funcție și una din global scope.
+- La executarea codului JavaScript este nevoie de un loc unde să fie stocate variabilele locale. Acest loc este **obiectul scope** cunoscut și sub numele de **lexical environment**. Se poate percepe ca un obiect la a cărui membri ai acces, dar nu poți referenția obiectul în sine.
+- Dacă declari o variabilă în corpul unei declarații if, această variabilă va fi disponibilă și în afara blocului funcțional, fie că blocul a fost executat sau nu. Se întâmplă pentru că se face hoisting. Folosirea cuvântului cheie `let` atașează variabila de blocul funcțional.
+- Scope-ul unei variabile poate fi înțeles setul de linii de cod sursă pentru care este definit un identificator.
+- Variabilele locale sunt disponibile funcției în care au fost declarate și tuturor funcțiilor interne.
+- Variabilele locale sunt reatribuite cu valori de fiecare dată când o funcție este invocată.
+- Parametrii unei funcții sunt la rândul lor variabile locale.
+- Declarațiile de variabile se află în scope de la momentul în care au fost declarate, până la închiderea blocului funcției în care au fost declarate indiferent de imbricarea altor blocuri `{}`.
+
+## Evaluarea unei expresii care conține valori delimitate prin virgulă
+
+```js
+var x = 1;
+var y = 2;
+var z = x + y; // 3
+
+console.log( y = (x = y,z) ); // evaluează la 3
+```
+
+// x va fi 2 pentru că va primi valoarea pe care o are y
+// y va fi 3 pentru că evaluarea unei înșiruiri delimitate de virgulă returnează ultima valoare din înșiruire.
+
+Am menționat faptul că variabilele locale sunt stocate în scope, care poate fi perceput ca un obiect la al cărui membri ai access. Atunci când în execuție interpretorul caută o proprietate în obiectul scope curent. Dacă nu o găsește, atunci interpretorul va văuta mai sus în obiectul scope părinte și tot așa până când nu mai există un alt obiect părinte. Această secvență de obiecte scope se numește **scope chain**. Atenție, scope-ul se formează la momentul declarări, nu la momentul execuției.

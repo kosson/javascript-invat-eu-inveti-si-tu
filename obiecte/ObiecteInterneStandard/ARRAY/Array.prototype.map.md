@@ -1,6 +1,6 @@
 # Array.prototype.map()
 
-Metoda creează un nou array care cuprinde rezultatele rezultate din executarea unei funcții callback pentru fiecare dintre elementele acestuia.
+Metoda creează un nou array care cuprinde valorile rezultate din executarea unei funcții callback pentru fiecare dintre elementele unui array căruia i se aplică.
 Pentru fiecare element din array, se execută funcția iar rezultatul devine un element al unui nou array. `map()` împreună cu `filter()` și `reduce()` sunt baza programării funcționale (stil de programare bazat pe folosirea funcțiilor).
 
 `map()` are doi parametri:
@@ -10,7 +10,44 @@ Pentru fiecare element din array, se execută funcția iar rezultatul devine un 
 Callback-ul primește trei argumente:
 - currentValue - elementul procesat,
 - index,
-- array.
+- și array-ul în sine.
+
+## Anatomie
+
+```js
+let colectie = [1, 'primul', true];
+colectie.map(function test(elem, index, array){
+  console.log(typeof elem + ' ' + 'index: ' + index + ' ' + array + this);
+});
+
+/*
+number index: 0 1,primul,true[object Window]
+string index: 1 1,primul,true[object Window]
+boolean index: 2 1,primul,true[object Window]
+ */
+```
+
+```js
+let obi = {id: 'obiect 1', colectie: [1, 'primul', true]};
+obi.colectie.map(function test(elem, index, array){
+  console.log('context: ' + this.id + ' ' + typeof elem + ' ' + 'index: ' + index + ' ' + array + this);
+});
+/*
+context: undefined number index: 0 1,primul,true[object Window]
+context: undefined string index: 1 1,primul,true[object Window]
+context: undefined boolean index: 2 1,primul,true[object Window]
+ */
+ let obi = {id: 'primo', colectie: [1, 'primul', true]};
+ let obix = {id: 'secundo', colectie: ['ceva', 1000, true]};
+ obi.colectie.map(function test(elem, index, array){
+   console.log('context: ' + this.id + ' ' + typeof elem + ' ' + 'index: ' + index + ' ' + array + this);
+ }, obix);
+/*
+context: secundo number index: 0 1,primul,true[object Object]
+context: secundo string index: 1 1,primul,true[object Object]
+context: secundo boolean index: 2 1,primul,true[object Object]
+ */
+```
 
 Opțional se mai poate pasa o valoare care să reprezinte `this` la executarea callback-ului.
 
@@ -110,7 +147,9 @@ Pentru acest fapt se poate realiza o împerechiere a elementelor din două array
 var stanga  = ['Ileana', 'Anca'],
     dreapta = [21, 43];
 
-// în acest moment luăm array-ul stânga, îl parcurgem element cu element și pentru fiecare element, vom genera un obiect generat a cărui valori pentru proprietăți sunt chiar valoarile din array-urile mapate.
+// în acest moment luăm array-ul stânga,
+// îl parcurgem element cu element și pentru fiecare element,
+// vom crea un obiect a cărui valori pentru proprietăți sunt chiar valorile din array-urile mapate.
 var colectie = stanga.map( (elem, index) => ({nume: elem, varsta: dreapta[index]}) );
 
 console.log(JSON.stringify(colectie)); // [{"nume":"Ileana","varsta":21},{"nume":"Anca","varsta":43}]

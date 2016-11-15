@@ -4,6 +4,7 @@ This este un obiect pasat automat unei funcții și care se formează în funcț
 
 ## Mantre
 
+- o funcție poate fi invocată în patru moduri: (1) ca funcție (this e window); (2) ca metodă (this e obiectul); (3) ca și constructor (this e obiectul abia construit); (4) cu `apply()` și `call()` (this e primul obiect introdus).
 - `this` este cuvânt cheie rezervat.
 - `this` este o referință la obiectul care se creează în funcție de contextul de execuție.
 - `this` este o referință către un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
@@ -37,6 +38,7 @@ Folosit pentru a lua un obiect și pentru a-i îmbogăți și/sau prelucra valor
 
 ## Dependințe cognitive
 
+- scope
 - funcții
 - arguments
 - call-site
@@ -50,7 +52,7 @@ Folosit pentru a lua un obiect și pentru a-i îmbogăți și/sau prelucra valor
 - Funcțiile sunt obiecte!
 - Toate funcțiile sunt de fapt obiecte `Function` (obiecte interne).
 - La invocarea funcțiilor pe lângă argumente sunt pasate „tacit” `this` și `arguments`.
-- `this` este un obiect-context: pentru funcții simple în General Execution Context este `window`. Pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
+- `this` este un obiect-context: pentru funcții simple în General Execution Context este chiar `window`. Pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
 - Prin `this`, de fapt accesezi starea obiectului cu care lucrezi.
 - Obiectul `this` se constituie la execuția codului, nu la momentul scrierii lui. Pentru metode este chiar obiectul care deține metoda, pentru funcțiile din Global Execution Context este întotdeauna window (deci, o funcție este de fapt o metodă a obiectului window), iar pentru constructori este noua instanță de obiect creată.
 - **this** este o referință către contextul de execuție curent în timp ce funcția se execută.
@@ -98,43 +100,51 @@ var Dorel = function dorel(){
   this.ego = function ego(){
     console.log(`Sunt constructorul ${this.nume}`);
   };
-  setInterval(this.ego(), 1000);
+  setInterval(this.ego(), 5000);
+};
+Dorel();
+// Sunt constructorul Dorel (afișat o singură dată)
+```
+
+#### `setInterval(this.ego(), 1000);` - pierderea contextului de execuție prin încheierea execuției în sine.
+
+Efectul execuției:
+* Mesajul este afișat o singură dată,
+* this este obiectul global care este pasat la execuția funcției Dorel() și se va îmbogăți automat cu `nume` (`window.nume`) și `ego` (`window.ego`)
+* `window` va sta îmbogățit cât timp funcția este executată.
+* După execuție, va fi afișat `undefined` pentru că funcția și-a terminat execuția, contextul de execuție a dispărut, valorile lui `nume` și cea rezultată din evaluarea lui `ego` au fost ***colectate la gunoi*** (garbage collected) iar `this`, care, de fapt era `window` revine la forma anterioară.
+
+Explicație:
+
+Mesajul va fi afișat o singură dată pentru că funcția `ego` este invocată ca metodă: `this.ego()` a obiectului Dorel. Imediat ce execuția funcției Dorel() s-a încheiat, contextul creat de funcția Dorel a și dispărut.
+Acest lucru se întâmplă pentru că setInterval interpretează `this.ego` ca referință către o funcție pe care o și execută în contextul obiectului global. Vezi că obiectul global a fost îmbogățit și cu proprietatea nume. Drept dovadă, se pot apela direct `window.nume` și se poate executa `this.ego()`.
+
+REȚINE: **`this` al unui callback indică întotdeauna către obiectul global. Pentru a fixa `this` la funcția gazdă se va folosi `call()`, `apply()` sau `bind()`**.
+
+#### `setInterval(function(){this.ego()}, 1000);` - menținerea legăturii la contextul de execuție corect
+
+```js
+var Dorel = function dorel(){
+  this.nume = "Dorel";
+  this.ego = function ego(){
+    console.log(`Sunt constructorul ${this.nume}`);
+  };
+  setInterval(function(){this.ego()}, 5000);
 };
 Dorel();
 ```
 
-#### `setInterval(this.ego, 1000);`
-
-Efectul execuției:
-* Mesajul va fi afișat la fiecare secundă.
-* this este obiectul global
-* la invocarea lui Dorel(), este automat trimis this, care este globalul
-* obiectul global se îmbogățește cu proprietățile nume și ego.
-
 Explicație:
 
-Acest lucru se întâmplă pentru că setInterval interpretează `this.ego` ca referința către o funcție pe care o și execută în contextul obiectului global, care a fost îmbogățit cu proprietatea nume.
+Împachetând apelul către metoda obiectului într-o funcție, ne asigurăm că nu pierdem legătura la `this`.
+Acest lucru se întâmplă pentru că funcția setInterval nu a fost declarată în interiorul funcției noastre.
+Noi doar îi setăm un nou context de execuție. În schimb, declarăm o funcție, ce-i drept, ca parametru și în acest mod ca valoare internă în scope-ul creat de funcția `dorel`.
+La execuție, ceea ce se îmtâmplă este că împrumutăm funcționalitatea lui setInterval, dar contextul de execuție va fi setat la scope-ul și this-ul funcției dorel pentru care funcția callback face closure.
+This-ul este chiar `window`, cel care a fost primit automat la invocarea lui dorel și care a fost îmbogățit deja cu proprietatea nume și metoda ego.
 
-#### `setInterval(this.ego(), 1000);`
+## Manifestarea legăturii la `this` în funcție de vecinătate
 
-Efectul execuției:
-* Mesajul este afișat o singură dată,
-* this este obiectul global
-* la invocarea lui Dorel(), este automat trimis this, care este globalul
-* obiectul global se îmbogățește cu proprietățile nume și ego.
-* După execuție, va fi afișat `undefined`
-
-Explicație:
-Mesajul va fi afișat o singură dată pentru că funcția `ego` este invocată ca metodă: `this.ego()` a obiectului Dorel. Imediat ce execuția funcției Dorel() s-a încheiat, contextul creat de funcția Dorel a dispărut.
-
-#### `setInterval(function(){this.ego()}, 1000);`
-
-
-
-Împachetând apelul către metoda obiectului într-o funcție, ne asigurăm că nu pierdem legătura la `this`. Este echivalentul (ca efect) al primei situații: `setInterval(this.ego, 1000);`
-
-
-Atenție! Legătura la this se manifestă la cel mai apropiat membru al unui obiect la care se face referință:
+Atenție! Legătura la `this` se manifestă la cel mai apropiat membru al unui obiect la care se face referință:
 
 ```js
 var token = 1000;
@@ -151,9 +161,9 @@ obi.faCeva = faCeva;
 
 obi.adancit = {altceva: faCeva, token: 10000}; // deci, faCeva, va primi implicit this, care este obiectul (adancit) membru a lui obi
 
-obi.faCeva(); // 10
-faCeva(); // 1000, dacă ai token declarat în global.
-obi.adancit.altceva(); // 10000
+obi.faCeva();           // 10
+faCeva();               // 1000, dacă ai token declarat în global.
+obi.adancit.altceva();  // 10000
 ```
 
 ## `this` pe lanțul prototipal al obiectului
@@ -176,7 +186,10 @@ console.log(beta.primo()); // 20
 ## Regulile de binding - de generare a obiectului this
 
 ### 1. Binding primar
-Este prima regulă și este cazul simplei invocării a funcției. Atunci când nicio altă regulă nu se aplică, aceasta se aplică din start. Funcționează dacă nu este rulat codul sub „use strict”.
+
+Bindingul primar se face la global object (Window).
+
+Este prima regulă și este și cazul simplei invocării a funcției. Atunci când nicio altă regulă nu se aplică, aceasta se aplică din start. Funcționează dacă nu este rulat codul sub „use strict”.
 
 ```js
 var test = 2;
@@ -187,8 +200,6 @@ function faceva(){
 
 faceva(); // 2
 ```
-
-Bindingul primar se face la global object (Window).
 
 ### 2. Binding implicit sau *atașat*
 
@@ -271,8 +282,6 @@ O chestie interesantă este că de vei pasa valoarea unei primitive simple de ti
 
 Ceea ce permite acest mecanism, de fapt este posibilitatea de a scrie o funcție cu rol de metodă, care să poată fi folosită în alt obiect fără a fi necesară rescrierea metodei pentru un nou obiect.
 
-Începând cu ECMAScript 5, array-ul argumentelor pasate poate fi și un obiect care are caracteristicile unui array.
-
 ```js
 var proprietate = "ceva din global"; // este proprietate a obiectului global
 
@@ -311,9 +320,34 @@ obiect.metoda.call(window, 1, 2, 3);
 obiect.metoda.apply(window, [1,2,3]); //acelasi lucru ca si call numai ca paseaza params ca array
 ```
 
-#### Pierderea bindingului
+##### Pierderea bindingului
 
 Chiar și când se face un binding explicit, se poate pierde bindingul la `this`. Soluția ar fi „îmbrăcarea” într-o funcție „gazdă”.
+
+##### Restabilirea contextului
+
+`apply()` și `call()` oferă posibilitatea de a specifica direct contextul dorit. O altă metodă este de a folosi arrow functions. Funcțiile săgeată - arrow function au drept caracteristică faptul că mențin legătura la `this` care exista la momentul definirii sale.
+ATENȚIE! Dacă funcția arrow este definită într-un object literal, valoarea lui this pe care o referențiază arrow function este obiectul global `window`.
+
+```js
+var fix = 1000;
+var faCeva = function(){
+  console.log(this);
+  console.log(this.fix);
+};
+var faAltceva = () => {
+  console.log(this);
+  console.log(this.fix);
+};
+var centru = {
+  fix: 10,
+  faCeva: faCeva,
+  faAltceva: faAltceva
+};
+
+centru.faCeva();    // Object { fix: 10, faCeva: faCeva(), faAltceva: faAltceva() } // 10
+centru.faAltceva(); // Window → about:newtab // 1000
+```
 
 #### Binding puternic (hard binding)
 
@@ -417,6 +451,7 @@ var obiect = {
 #### Mantre
 
 - `bind()` creează o nouă funcție, care atunci când este apelată va avea `this` setat la valoarea introdusă ca paramentru împreună cu o serie de argumente.
+- `bind()` nu modifică funcția originală cu nimic, pur și simplu construiește una nouă.
 
 Exemplul de la MDN
 
@@ -576,6 +611,7 @@ Ceea ce se observă este că `new` are capacitatea de a suprascrie hard binding-
 
 ## Comportamentul lui `this` în cazul fat arrows
 
+Funcțiile arrow nu au propria valoare pentru parametrul `this`. Pur și simplu îl constituie la momentul creării acestora.
 Funcțiile fat arrows sunt legate de scope-ul lexical, asta însemând că `this` va fi același ca și cel din blocul părintelui.
 
 ```js

@@ -19,6 +19,11 @@ new String("test").length;
 
 Crearea unui wrapper object pentru o valoare primară nu este recomandabilă.
 
+```javascript
+var sir = new String('ceva'); // nu se recomandă
+typeof sir;     // "object"
+typeof 'ceva';  // "string"
+```
 
 ## String ca obiect iterabil
 

@@ -39,3 +39,20 @@ Pentru a returna un obiect:
 ```js
 [1,2,3].map( (numar, index) => ({numar: numar, indexul: index}) );
 ```
+
+Arrow functions fac bindingul la contextul lexical stabilit.
+
+```html
+<button type="button" name="button" id="test">Testeaza this</button>
+<script type="text/javascript">
+  function Apasa(){
+    this.stare = false;
+    this.schimba = () => {
+      this.stare = true;
+    };
+  };
+  var ruptor = new Apasa();
+  var element = document.getElementById('test');
+  element.addEventListener('click', ruptor.schimba);
+</script>
+```

@@ -3,15 +3,24 @@
 Creează o instanță ``new Array`` din orice obiect care arată ca un array sau care iterabil.
 Obiectele din care se creează array-urile trebuie să aibe o lungime și elemente indexate.
 
+## Aplicarea pe `arguments`
+
 ```js
-function f() {
+function sparge() {
   return Array.from(arguments);
 }
 
-f(1, 2, 3);
+sparge(1, 2, 3);
 // [1, 2, 3]
 
 // String
+Array.from("foo");
+// ["f", "o", "o"]
+```
+
+## Aplicarea pe string-uri
+
+```js
 Array.from("foo");
 // ["f", "o", "o"]
 ```
@@ -65,4 +74,19 @@ De exemplu, jQuery la momentul redactării acestui material, nu are implementat 
 
 ```js
 Array.from($('div')); // în unele cazuri: Array.from(jQuery('div'));
+```
+# Constituirea unei colecții de elemente DOM
+
+Acest lucru este posibil pentru că `NodeList` permite protocolul de iterare. Efectul este convertirea unui `NodeList` într-un Array.
+
+```js
+var divuri = Array.from(document.querySelectorAll('div'));
+
+// ca alternativă folosim operatorul spread
+function colectDivs(){
+  return [...document.querySelectorAll('div')];
+};
+
+// sau:
+var divuri = [...document.querySelectorAll('div')];
 ```

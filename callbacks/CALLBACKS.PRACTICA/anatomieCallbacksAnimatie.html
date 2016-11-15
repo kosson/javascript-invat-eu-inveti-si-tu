@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Anatomia unui callback</title>
+    <style media="screen">
+      #element{
+        width: 60px;
+        height: 40px;
+        text-align: center;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="element">
+      <p>Un nod de text</p>
+    </div>
+    <script type="text/javascript">
+      function Misca(elem){
+        var elementTinta = document.getElementById('element'),
+            increment = 0;
+        var temporizator = setInterval(function(){
+          if(increment < 400){
+            elementTinta.style.position = "relative";
+            elementTinta.style.background = "red";
+            elementTinta.style.left = elementTinta.style.top = increment + "px";
+            increment++;
+          }else{
+            clearInterval(temporizator);
+          }
+        }, 10);
+      };
+      Misca("element");
+    </script>
+  </body>
+</html>

@@ -17,6 +17,8 @@ var identificat = document.getElementById( "identificator" ),
 identificat.appendChild( div );
 ```
 
-# Metoda inserării exacte cu .insertBefore()
+## Metoda inserării exacte cu .insertBefore()
 
-# Eliminarea unui anumit element se face cu removeChild(el)
+## Eliminarea unui anumit element
+
+se face cu removeChild(el)

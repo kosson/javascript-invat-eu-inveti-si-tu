@@ -1,5 +1,7 @@
 # FUNCȚII
 
+Funcțiile sunt unități de execuție a codului JavaScript. Funcțiile sunt obiecte. Spre deosebire de obiecte, funcțiile pot fi invocate.
+
 `function` este un subtip de obiecte numit tehnic „callable object”.
 
 Funcțiile sunt obiecte first-class. Pot fi pasate ca argumente altor funcții și pot fi returnate din funcții.
@@ -12,6 +14,11 @@ Funcțiile în JavaScript sunt de ordin înalt, adică pot fi pasate ca valori �
 - Toate funcțiile sunt de fapt obiecte instanțe ale tipului `Function` (obiecte interne).
 - O funcție este declarată de o expresie care începe cu cuvânt rezervat limbajului: `function`.
 - Când funcțiile sunt executate SCOPE-ul folosit este cel de la MOMENTUL DEFINIRII, nu cel de la momentul invocării (asta înseamnă LEXICAL SCOPE, de fapt).
+- La momentul declarării, funcțiile sunt doar trecute în inventarul scope-ului existent printr-un identificator cu care se face o referință. În spate, se creează obiectul funcție care va conține codul intern al său și alte proprietăți între care chiar o referință către scope-ul existent la momentul declarării - **lexical scope**. La invocarea funcției se creează un nou obiect scope care moștenește proprietăți din cel la care s-a făcut referință la momentul declarării.
+- - `this` și `arguments` sunt pasate tacit la invocarea unei funcții.
+- Când invoci funcția ca metodă a unui obiect, acel obiect devine **contextul** funcției și acesta devine disponibil în funcție prin intermediul parametrului `this`.
+- `this` este un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
+- Funcția pe lângă proprietățile sale, va primi tacit `this`, `arguments` și o altă proprietate internă care este scope-ul preexistent la momentul declarării. Dacă declarăm o funcție în Global Object, scope va fi chiar Global Object.
 - Funcțiile sunt „IDENTIFICATORI" așa cum sunt și variabilele.
 - Funcțiile returnează o valoare prestabilită: `undefined`.
 - Funcțiile sunt ele însele valori.
@@ -19,9 +26,6 @@ Funcțiile în JavaScript sunt de ordin înalt, adică pot fi pasate ca valori �
 - Pentru o funcție poți vedea câți parametri au fost declarați (`nume_functie.length`) și câte argumente i-au fost pasate (`arguments.length`).
 - Funcțiile sunt obiecte („first-class objects”). Asta înseamnă că au conectări [[Prototype]] - lanț prototipal.
 - Toate funcțiile au la dispoziția lor un set de utilități preexistent, care poate fi apelat prin `[[Prototype]]`. Cele mai evidente sunt `call()` și `apply()`.
-- `this` și `arguments` sunt pasate tacit la invocarea unei funcții.
-- Când invoci funcția ca metodă a unui obiect, acel obiect devine **contextul** funcției și acesta devine disponibil în funcție prin intermediul parametrului `this`.
-- `this` este un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
 - Funcțiile sincrone procedează la execuție fără a lăsa programul să execute altceva (comportament ce induce blocaje).
 - Funcțiile asincrone returnează imediat iar rezultatul este pasat unui handler, adică un callback. În cazul eventloop-ului, pasarea rezultatului se face la un ciclu viitor (adică când stiva de execuție este liberă).
 - O funcție are acces și poate performa operațiuni asupra obiectului în interiorul căruia a fost invocată.
@@ -35,6 +39,70 @@ Funcțiile în JavaScript sunt de ordin înalt, adică pot fi pasate ca valori �
 - Atunci când funcția este un callback, ține minte că tot o referință către funcție este (implicit assignment), nu este valoarea sa.
 - Dacă definești o funcție în interiorul altei funcții, atunci funcția internă trebuie să fie recreată de fiecare dată când funcția externă este executată (acest lucru se întâmplă pentru că funcțiile, de fapt, sunt obiecte). Acest comportament trebuie evitat. Definește funcția în afară și referențiaz-o sau execut-o în context local prin call / apply / bind.
 - Orice funcție publică poate fi invocată cu `call()` sau `apply()` (vezi regulile de binding pentru `this`).
+
+## Parametri și argumente - parameters and arguments
+
+Parametrii sunt variabile care fac parte din definirea funcției.
+Argumentele sunt valori pe care le trimitem funcției atunci când o invocăm.
+
+Începând cu EcmaScript 2015 (ES6), unui parametru îi poți atribui direct o valoare la momentul definirii:
+
+```js
+function facCeva(a, b = "o valoare"){
+  return b;
+};
+facCeva(); // "o valoare"
+```
+
+Parametrii pot fi mai mulți față de ceea ce o funcție poate primi. Fiecare valoare primită va fi introdusă și asignată parametrilor precizați în ordine.
+
+La invocarea unei funcții sunt primiți tacit `this`, care formează contextul de execuție și `arguments`, care este un obiect. `arguments` seamănă cu array-urile prin faptul că pot fi accesate valorile în mod similar, dar nu este un array.
+
+```js
+(function adunare(){
+  var cumulator = 0, i;
+  for(i = 0; i < arguments.length; i++){
+    cumulator += arguments[i];
+  };
+  return cumulator;
+})(2, 3);
+// 5
+```
+ES6 introduce un nou parametru: `rest` care permite reprezentarea unui număr nedefinit de argumente ca un array.
+
+```js
+function operatiune(...argumente){
+  console.log(argumente.length);
+};
+operatiune(23,145,83); // 3
+```
+
+```js
+function operatiune(a, b, ...valori){
+  console.log(a, b, valori.length);
+};
+operatiune(2, 4, 20, 32, 110); // 2 4 3
+```
+
+Diferențe dintre `arguments` și `rest`
+
+- parametrii rest sunt un array al celor cărora nu li s-a dat un nume.
+- array-ul rest poate fi folosit cu metode precum `forEach`, `sort`, `map` ori `sort`.
+- `arguments` este un obiect care are proprietatea `callee`
+
+```js
+// emularea lui rest - exemplu oferit de Mozilla Developer Network
+function f(a, b){
+  var args = Array.prototype.slice.call(arguments, f.length);
+  // ...codul funcției mai departe
+}
+// este echivalent cu
+function f(a, b, ...args){
+  // cod funcție.
+};
+```
+
+Valorile primelor două argumente pasate vor fi potrivite cu cei doi parametri menționați: a și b
 
 ## Fat arrow
 
