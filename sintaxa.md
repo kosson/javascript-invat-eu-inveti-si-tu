@@ -5,9 +5,9 @@ Unele declarații (statements) JavaScript trebuie să se termine cu punct și vi
 Aceste declarații și comenzi sunt:
 
 - comenzi goale
-- let, const, declarații de variabile
-- import, export, declarațiile de module
+- `let`, `const`, declarații de variabile
+- `import`, `export`, declarațiile de module
 - declararea expresiilor
 - debugger
-- continue, break, throw
-- return
+- `continue`, `break`, `throw`
+- `return`

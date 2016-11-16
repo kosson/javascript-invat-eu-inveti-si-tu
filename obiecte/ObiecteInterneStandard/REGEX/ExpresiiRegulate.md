@@ -60,7 +60,7 @@ Este specificat să se ignore majusculele și să se facă căutare la nivel glo
 ### Caracterele speciale din expresiile regulate
 
 | Caracter | Semnificație | Echivalență |
-|:---------|:-------------| |
+|:---------|:-------------|:----------- |
 | \ | indică faptul că următorul caracter are înțeles special pentru sistem (numite și „metacaractere”). Dacă caracterul este special este de înțeles pentru sistem că acesta trebuie tratat ca oricare altul fără a-l interpreta. `/a*/` înseamnă caută un a, care poate fi urmat de mai mulți a, dar `/a\*/` înseamnă caută chiar `a*`. Însuși backslashul trebuie să i se facă „escaping” pentru a fi tratat ca orice caracter simplu: `/\\/` - caută un `\`. | |
 | ^ | indică faptul că se dorește căutarea cu primele caractere ale șirului. Dacă stegulețul pentru multiline este prezent (true), atunci căutarea se va face și după caracterul `line break`, adică pe următoarea linie. De exemplu `/^A/` nu va găsi nimic în „un A”, dar îl găsește pe A în „Anul viitor”. `^` are un înțeles diferit atunci când apare ca fiind primul caracter dintr-un șablon de caractere (vezi mai jos). | |
 | $ | indică că se dorește căutarea pe caracterele chiar de dinaintea finalizării șirului. Dacă stegulețul pentru multiline este prezent (true), atunci căutarea se va face imediat înainte de caracterul `line break`. De exemplu, `/t$/` nu îl găsește pe „t” în „etern”, dar îl găsește în „dorit”. | |
@@ -87,20 +87,20 @@ Este specificat să se ignore majusculele și să se facă căutare la nivel glo
 ### Seturi de caractere
 
 | Caracter | Semnificație | Echivalență |
-|:---------|:-------------| |
+|:---------|:-------------|:----------- |
 | [abc] sau [a-c] | Este un set de caractere. Identificările se fac după oricare dintre caractere ||
 | [^abc] sau [^a-c] | Este un set de caractere negat. Identificările se fac după oricare dintre caractere mai puțin cele precizate astfel ||
 
 ### Alternative
 
 | Caracter | Semnificație | Echivalență |
-|:---------|:-------------| |
-| `a|b` | Îl identifică, fie pe a, fie pe b ||
+|:---------|:-------------|:--------------- |
+| `a|b` | Îl identifică, fie pe a, fie pe b |
 
 ### Limite
 
 | Caracter | Semnificație | Echivalență |
-|:---------|:-------------| |
+|:---------|:-------------|:----------- |
 | ^ | Identifică unde începe șirul. Dacă stegulețul pentru multiline este setat, se face identificare și imediat după caracterul de line break. De exemplu, `/^X/` nu identifică X-ul din „este un X”, dar identifică pe X în „X este”.  ||
 | $ | Identifică finalul șirului. Dacă stegulețul pentru multiline este setat, se face identificare imediat înainte de caracterul line break. ||
 | \b | Marchează granițele unui șir. `"saturn".match(/\bs/); // Array [ "s" ]` fiind limita superioară, iar `"saturn".match(/urn\b/); // Array [ "urn" ]` |  |
@@ -108,7 +108,7 @@ Este specificat să se ignore majusculele și să se facă căutare la nivel glo
 ### Grupare și referențiere
 
 | Caracter | Semnificație | Echivalență |
-|:---------|:-------------| |
+|:---------|:-------------|:----------- |
 | (x) | Identifică x și ține minte ce a găsit. Acestea sunt numite grupuri de captură. Subșirurile descoperite pot fi reapelate din array-ul rezultatelor sau din proprietățile predefinite ale obiectului RegExp ($1, ..., $9). Atenție, folosirea grupurilor penalizează performanța. Dacă nu este nevoie de un apel la substringurile descoperite, mai bine se face identificarea fără paranteze. |  |
 | \n | n este un număr întreg pozitiv |  |
 | (?:x) | Îl identifică pe x, dar nu-l ține minte, nu-l „capturează”. |  |
