@@ -1,11 +1,17 @@
 # Context de execuție
 
+Contextul de execuție este un mecanism pentru a ține evidența evaluării codului la momentul în care acesta este rulat. La oricare moment în timp ceea ce rulează când arunci privirea se numește „running execution context” - contextul de execuție în efect sau care rulează, mai pe scurt **ce rulează pe moment**.
+
+Pentru a ține evidența a ceea ce se rulează este nevoie de un „răboj” pe care să poți aduna și scădea ce intră și se termină de rulat - contextele de execuție. Un astfel de mecanism este organizat ca o stivă și se numește „execution context stack” - stiva contextelor de execuție.
+
+Evaluarea codului care se face într-un „context de execuție în efect” în plină desfășurare, se poate suspenda din diferite motive. În acest moment este posibil ca un alt context de execuție să devină „context de execuție în efect” și să pornească evaloarea propriului cod. Mai târziu, codul suspendat poate deveni la rândul său „contextul de execuție în efect” și să reia evaluara codului de la momentul de unde s-a oprit. Această succesiune a contextelor de execuție în efect este gestionată cu ajutorul unei stive care funcționează pe principiul FIFO - first in, first out.
+
 Contextul de execuție se leagă organic de **lexical environment**, adică de scope.
 
 ## Global Execution Context - contextul de execuție a codului
 
 Tot codul JavaScript rulează în Global Execution Context (GEC). Este un wrapper pentru cod.
-Este creat un **Global Object** și **this**, o variabilă specială. De regulă, pentru codul top-level este window.
+Este creat un **Global Object** și **this**, o variabilă specială. De regulă, pentru codul top-level este `window`.
 Execution Context este inițiat la executarea codului și este unul per pagină web.
 
 Conține:

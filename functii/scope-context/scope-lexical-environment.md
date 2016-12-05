@@ -2,6 +2,14 @@
 
 Motorul JavaScript atunci când este pus să evalueze o funcție, consultă mai întâi „lexical environment” - o zonă delimitată de felul în care rânduit codul ca și text, care este cunoscută de toată lumea ca „scope”. Acest lexical environment este în strânsă legătură cu diferite structuri de cod cum ar fi blocurile de cod (`{}`, începând cu versiunea ES6; anterior era limitat doar la funcții) și funcțiile. Această zonă se stabilește chiar și la nivelul `catch` din constructul `try-catch` a limbajului.
 
+## Spune standardul
+
+- Un **lexical environment** este un tip al specificațiilor standardului care este utilizat pentru a defini asocierea `identificatorilor` cu variabilele și funcțiile specifice pe baza structurii lexicale de organizare pe niveluri (inculcare - nesting) a codului.
+- Un **lexical environment** constă dintr-un „environment record” (un domeniu al valorilor) și o **referință** la un lexical environment extern dacă există unul.
+- Lexical environment este asociat cu structura lexicală a codului așa cum este declararea funcțiilor, blocurile de cod dintre acolade și secvența `Catch` din blocurile Try...Catch.
+- Un **function environment** este un **lexical environment** care corespunde momentului invocării funcției.
+
+
 Scope trebuie înțeles ca totalitatea identificatorilor din zonele menționate anterior. Un anume scope este zona unui program în care un identificator este asociat cu valoare.
 O posibilă interpretare pentru a înțelege și mai bine este aceea de hartă de identificatori, cine ține evidența la ce.
 

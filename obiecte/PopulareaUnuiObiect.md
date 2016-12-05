@@ -9,10 +9,32 @@ Odată ce poți crea un obiect, ai nevoie să-l faci funcțional populându-l.
 Toate alternativele de mai jos au același efect: creează un obiect gol.
 
 ```js
-var newObj = new Object();
-var newObj = Object.create(null);
-var newObj = {};
+var obi = new Object();
+var obi = Object.create(null);
+var obi = {};
+let obi = Object.create(Object.prototype);
 ```
+
+Atenție, obiectele create cu `new` și cu `Object.create` nu au constructor. `.constructor` va trimite la funcția la care a fost atașat prototype la momentul declarării.
+
+```javascript
+// Cazul object literal
+let obi1 = {};
+obi1.constructor; // function Object()
+
+// Cazul new
+function FaCeva(){
+  console.log("Salut!");
+};
+
+let obi = new FaCeva();
+obi.constructor; // function FaCeva()
+
+// Cazul Object.create
+let obi2 = Object.create(null);
+obi2.constructor; // undefined
+```
+
 
 ## Populare folosind notația cu punct - Dot notation
 

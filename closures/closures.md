@@ -55,10 +55,11 @@ Mediul, adică scope-ul lexical constă din toate variabilele locale care erau *
 - Folosirea cuvântului cheie `function` într-o funcție gazdă, creează un closure.
 - JavaScript are un **scope lexical** generat la faza de compilare.
 - Closure-uri generează doar funcțiile.
-- Closure-ul nu este un obiect care să conțină toată informația necesară.
-- Un closure permite accesarea variabilelor definite în funcția container și, atenție, le poate modifica.
+- Closure-ul în sine nu este un obiect care să conțină toată informația necesară.
+- Un closure permite accesarea variabilelor definite în funcția container și, atenție, le poate și modifica.
 - Toate variabilele din scope, chiar dacă sunt declarate după ce funcția container a fost declarată, sunt incluse în closure.
 - Accesarea de informație prin intermediul unui closure, taxează memoria, pentru că la fiecare invocare a funcției care face closure, un nou set de informații va fi alocat în memorie.
+- În cazul buclelor, bindingul closer-ului se va face pe ultimul rezultat al buclei. Nu te aștepta să existe rezultate intermediare. În acest caz, abia la momentul returnării funcției interne, se face referențierea valorilor și de aceea va fi ultima valoare din operațiunea de ciclare.
 - De fiecare dată când funcția externă este apelată, funcția internă este definită din nou. Codul funcției interne va fi identic, dar scope chain-ul asociat va fi diferit. Pe scurt, se resetează valorile la cele definite, daca acestea au fost modificate.
 - De fiecare dată când funcția gazdă este apelată, se creează un nou set de variabile pentru acea invocare.
 - Variabilele din scope-ul pus la dispoziție de un closure POT FI MODIFICATE.
@@ -319,7 +320,23 @@ Pornind de la acest model, se poat rula cod extern:
 
 ## Erori
 
-Este considerată a fi o eroare crearea de closure-uri în bucle.
+Este considerată a fi o eroare crearea de closure-uri în bucle. De exemplu, în cazul buclelor cu for, bindingul se va face pe ultima valoare stabilită și aceasta va fi returnată.
+Pentru a soluționa problema, se va introduce bucla în funcția returnată:
+
+```js
+var colectie = ["Gino", "Rahan", "Mario"];
+function faCeva(nume, unArray){
+    for(var i = 0; i < unArray.length; i++){
+      if(unArray[i] == nume){
+        return function(){
+          console.log(nume);
+        };
+      }else{console.log("Nu se potrivește");}
+    }
+};
+var alege = faCeva("Gino", colectie);
+alege();  // Gino
+```
 
 ## Alonjă
 

@@ -30,7 +30,7 @@ var obiect = Object.create(Object.prototype, {
 });
 ```
 
-Cazul unui constructor
+## Cazul unui constructor
 
 ```js
 function Constructor() {};
@@ -71,4 +71,18 @@ var Foo = {};
 var Bar = Object.create(Foo);
 
 var Far = Object.create(Bar);
+```
+
+## Crearea unei clone de obiecte folosind Object.create()
+
+```javascript
+let obi = {
+  prima: 10,
+  aDoua: function(){console.log("Salut!");}
+};
+
+var obi2 = Object.create(
+  Object.getPrototypeOf(obi),
+  Object.getOwnPropertyDescriptors(obi)
+);
 ```

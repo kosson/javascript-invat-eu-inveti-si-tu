@@ -1,7 +1,7 @@
 # FUNCȚII
 
-Funcțiile sunt unități de execuție a codului JavaScript. Funcțiile sunt obiecte. Spre deosebire de obiecte, funcțiile pot fi invocate.
-
+Funcțiile sunt unitățile de execuție a codului JavaScript.
+Funcțiile sunt obiecte. Spre deosebire de obiecte, funcțiile pot fi invocate.
 `function` este un subtip de obiecte numit tehnic „callable object”.
 
 Funcțiile sunt obiecte first-class. Pot fi pasate ca argumente altor funcții și pot fi returnate din funcții.
@@ -22,12 +22,13 @@ Funcțiile în JavaScript sunt de ordin înalt, adică pot fi pasate ca valori �
 - Funcțiile sunt „IDENTIFICATORI" așa cum sunt și variabilele.
 - Funcțiile returnează o valoare prestabilită: `undefined`.
 - Funcțiile sunt ele însele valori.
-- Funcțiile pot fi pasate ca argumente altor funcții.
-- Pentru o funcție poți vedea câți parametri au fost declarați (`nume_functie.length`) și câte argumente i-au fost pasate (`arguments.length`).
+  - Funcțiile pot fi pasate ca argumente altor funcții (function expression).
+  - Funcțiile pot returna alte funcții (function expression).
+- Pentru o funcție poți vedea câți parametri au fost declarați (`nume_functie.length`) și câte argumente i-au fost pasate (apelând din interiorul ei: `arguments.length`).
 - Funcțiile sunt obiecte („first-class objects”). Asta înseamnă că au conectări [[Prototype]] - lanț prototipal.
 - Toate funcțiile au la dispoziția lor un set de utilități preexistent, care poate fi apelat prin `[[Prototype]]`. Cele mai evidente sunt `call()` și `apply()`.
 - Funcțiile sincrone procedează la execuție fără a lăsa programul să execute altceva (comportament ce induce blocaje).
-- Funcțiile asincrone returnează imediat iar rezultatul este pasat unui handler, adică un callback. În cazul eventloop-ului, pasarea rezultatului se face la un ciclu viitor (adică când stiva de execuție este liberă).
+- Funcțiile asincrone returnează imediat iar rezultatul este pasat unui handler, adică un callback. În cazul event-loop-ului, pasarea rezultatului se face la un ciclu viitor (adică când stiva de execuție este liberă).
 - O funcție are acces și poate performa operațiuni asupra obiectului în interiorul căruia a fost invocată.
 - În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype (`numeFunctie.prototype`), care se leagă automat la `Object.prototype`.
 - Funcțiile sunt legate de obiectul prototip prin metoda `.constructor`.
@@ -68,6 +69,7 @@ La invocarea unei funcții sunt primiți tacit `this`, care formează contextul 
 })(2, 3);
 // 5
 ```
+
 ES6 introduce un nou parametru: `rest` care permite reprezentarea unui număr nedefinit de argumente ca un array.
 
 ```js

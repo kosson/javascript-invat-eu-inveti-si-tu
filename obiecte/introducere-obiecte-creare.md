@@ -1,14 +1,19 @@
 # Obiecte
 
+Standardul spune că obiectele sunt „colecții de zero sau mai multe proprietăți fiecare având atribute care determină cum poate fi folosită”. Un obiect are un singur obiect prototip.
+
+JavaScript vine din start cu câteva obiecte care se numesc „built-in object” pe care le putem înțelege ca obiecte interne limbajului la care ai acces din start. Atenție, `obiectul global` este parte a obiectelor interne preexistente.
+
 ***JavaScript este un limbaj bazat pe moștenire prototipală - prototypal inheritance***
 
 În JavaScript neexistând clase (cod care se comportă ca un plan pentru construcția obiectelor), pentru a reutiliza cod, se creează obiecte care se bazează pe cele existente.
 
-Astfel, între aceste obiecte se creează o legătură. Această legătură se numește „legătură prototipală”. Aceste legături realizează „moștenirea prototipală” - `prototypal inheritance`. Obiectul preexistent constituie prototipul pentru cel nou creat care poate adăuga noi membri, noi comportamente. Mai trebuie adăugat că, de fapt, vorbim despre o *delegare* pe lanțul prototipal format.  Acest lucru înseamnă că atunci când ceri o proprietate care nu există, delegi solicitarea către prototip că ți-o servească.
+Astfel, între aceste obiecte se creează o legătură. Această legătură se numește „legătură prototipală”. Aceste legături realizează „moștenirea prototipală” - `prototypal inheritance`. Obiectul preexistent constituie prototipul pentru cel nou creat care poate adăuga noi membri, noi comportamente. Mai trebuie adăugat că, de fapt, vorbim despre o *delegare* pe lanțul prototipal format.  Acest lucru înseamnă că atunci când ceri o proprietate care nu există, delegi solicitarea către prototip să ți-o servească.
 
 ## Mantre
 
-- JavaScript nu are clase!
+- ECMAScript vine cu obiectele sale din start care se numesc obiecte `built-in` în care este inclus și `global object` - obiectul global.
+- JavaScript nu are clase! Atenție, nu vă lăsați amăgiți de formulele sintactice moderne introduse pentru a face codul scris să pară că JavaScript are clase.
 - Totul în JavaScript are comportamentul unui obiect cu două excepții: `null` și `undefined`.
 - În clientul care rulează codul mai întâi de orice există obiectul window.
 - Obiectul window are o metodă numită Object [ function Object() ]. Motorul Javascript construiește automat metoda Obiect în obiectul window (window.Object returnează function `Object()`).
@@ -37,11 +42,8 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
   2. **stabilește legătura prototipală**.
 - Legătura prototipală se obține și prin efectul al doilea al folosirii cuvântului cheie `new`.
 - Legătura prototipală creează un lanț de delegare pentru cazurile în care nu găsești o proprietate sau o metodă într-un anumit context de execuție.
-- Mecanismul pe care-l realizează .prototype este unul de delegare a cererii pentru referința unei proprietăți sau metode către un obiect mai sus pe lanțul prototipal către un alt obiect.
-- Obiecte cu un prototip și proprietăți prestabilite, se pot contrui cu Object.create(UnObiect, {exemplu: 'proprietate'}):
-  1. se realizează legătura prototipală la obiectul UnObiect.
-- o = {}; este echivalent cu o = Object.create(Object.prototype);
-- Obiectele create cu `new Fnc()` și `Object.create(...)` nu li se atașează un `.constructor`. `.constructor` va trimite la funcția la care a fost atașat prototype la momentul declarării.
+- Mecanismul pe care-l realizează `.prototype` este unul de delegare a cererii pentru referința unei proprietăți sau metode către un obiect mai sus pe lanțul prototipal către un alt obiect.
+- Obiecte cu un prototip și proprietăți prestabilite, se pot contrui cu Object.create(obi, {exemplu: 'proprietate'}). Se realizează o legătura prototipală la obiectul obi.
 - Obiectele atunci când au metode, nu „dețin” sau „conțin” acele funcții, ci doar referințe către funcțiile pe post de metode. Funcțiile (metodele) nu fac parte din obiect; referința către acestea este parte a obiectului.
 - În obiecte numele proprietăților sunt întotdeauna stringuri.
 - relațiile prototipale pot cauza probleme atunci când este nevoie de enumerarea proprietăților obiectelor. Crockford recomandă „ambalarea” conținutului buclei de ciclare într-o funcție de verificare hasOwnPropery();
@@ -72,6 +74,41 @@ const webObi = {
   [namespace + 'box-sizing']: 'border-box',
   [namespace + 'box-shadow']: '25px25px10px #888888'
 };
+```
+
+## Atributele proprietăților unui obiect
+
+Atributele sunt folosite pentru a defini și a explica starea proprietăților unui obiect.
+
+Atributele unei proprietăți folosite pentru date.
+
+|Numele atributului|Valoare|Descriere|
+|:-----------------|:------|:--------|
+|`value`|oricare tip ECMAScript|Este valoarea obținută prin accesarea proprietății|
+|`writable`|Boolean|Dacă este setat la `false`, atributul `value` nu va putea fi scris folosind `set`|
+|`enumerable`|Boolean|Dacă este setat la `true`, proprietatea va putea fi enumerată într-un `for-in`|
+|`configurable`|Boolean|Dacă este setat la `false`, orice încercare de a modifica atributele, de a șterge proprietate, va fi destinată eșecului. Tot ce permite este modificarea lui `value` și setarea lui `writable` la `false`.|
+
+Atributele unei proprități de tip Accessor
+
+|Numele atributului|Valoare|Descriere|
+|:-----------------|:------|:--------|
+|`get`|Obiect sau undefined|Dacă valoarea este un obiect acesta este o funcție-obiect|
+|`set`|Obiect sau undefined|Dacă valoarea este un obiect acesta este o funcție-obiect|
+|`enumerable`|Boolean|Dacă este setat la `true`, proprietatea va putea fi enumerată într-un `for-in`|
+|`configurable`|Boolean|Dacă este setat la `false`, orice încercare de a a modifica să fie o proprietate de date sau să-i schimbi atributele, va eșua|
+
+Ca exemplu practic:
+
+```js
+var newObj = {};              // Creează obiectul
+
+Object.defineProperty(newObj, 'numeCheieNoua', {
+  value: 'Salutare',
+  writable: true,
+  enumerable: true,
+  configurable: true
+});
 ```
 
 ## Crearea metodelor
@@ -126,10 +163,41 @@ faCeva(); // undefined (e undefined pentru că JS creează automat variabila tok
           //sau 1000, dacă ai token declarat în global.
 ```
 
-Ei bine, aici este un element în plus. Funcția faCeva a fost declarată în global, ceea ce înseamnă că `scope`-ul său lexical se află în global scope.
-În cazul în care în global scope ar fi fost declarată valoarea token, la invocarea funcției în sine, nu ca metodă, valaorea acesteia ar fi fost adusă.
+Ei bine, aici este un element în plus. Funcția `faCeva` a fost declarată în global, ceea ce înseamnă că `scope`-ul său lexical se află în `global scope`.
+În cazul în care în global scope ar fi fost declarată valoarea token, la invocarea funcției în sine, nu ca metodă, valoarea acesteia ar fi fost adusă.
 
-### Crearea obiectelor printr-o funcție cu rol de constructor și instanțierea cu `new` - constructori
+## Metode interne ale obiectelor
+
+Modul în înțelegem un obiect este determinat și de un set de algoritmi care sunt oferiți de orice motor care implementează standardul ECMAScript. Acești algoritmi sunt numiți `metode interne`.
+Metodele interne definesc comportamentul la momentul în care este rulat codul pentru acel obiect. Reține faptul că aceste metode interne cad în responsabilitatea celor care fac o implementare, un motor de JavaScript.
+
+În scopul exemplificării vom folosi un obiect literal care are câteva proprietăți și un alt obiect creat folosind `Object.create` pentru care setăm lanțul prototipal la primul creat.
+
+```javascript
+let obi = {
+  prop1: 10,
+  prop2: function(){console.log("Salut");}
+};
+
+let obi2 = Object.create(obi);
+
+obi2.stare = 100;
+```
+
+### `getPrototypeOf`
+
+Returnează un obiect sau null și indică obiectul care oferă proprietăți care sunt moștenite și de cel asupra căruia se face interogarea cu `getPrototypeOf`. `null` indică faptul că obiectul curent nu moștenește nicio proprietate.
+
+```javascript
+Object.getPrototypeOf(obi2);
+// Object { prop1: 10, prop2: obi.prop2() }
+```
+
+Celelalte proprietăți sunt: `setPrototypeOf`, `isExtensible`
+
+Acestea pot fi consultate în detaliu la secțiunea dedicată obiectului intern `Object`.
+
+## Crearea obiectelor printr-o funcție cu rol de constructor și instanțierea cu `new` - constructori
 
 Mai este numită de o parte a programatorilor „moștenire clasică”. De fapt, este vorba tot despre moștenire prototipală, dar care face uz de un constructor (vezi și [Șablonul Constructor](../patterns/SabloaneDeCreare/Module/ModulePattern.md) ).
 
@@ -138,7 +206,11 @@ Acesta este modelul cel mai des întâlnit și acceptat ca practică istorică:
 2. Adaugi metode la proprietatea `prototype` a funcției constructor.
 3. Instanțiezi obiectul folosind cuvântul cheie `new`.
 
-#### Ce se întâmplă când folosești `new`
+### Standardul spune
+
+Un constructor, de fapt o funcție constructor, este un obiect funcție care suportă metoda internă `Construct`.
+
+### Ce se întâmplă când folosești `new`
 
 1. Se creează un obiect nou.
 2. Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu `new`. Se creează legătura prototipală.

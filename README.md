@@ -2,6 +2,8 @@
 
 Aceste texte nu sunt finale și pot să se schimbe ca formă și conținut pe măsură ce timpul va permite cu scopul de a avea și ceva material în limba română privind JavaScript.
 
+Materialele vor fi redactate în Markdown iar cei care doresc, vor putea transforma în orice moment cu pandoc într-un format care să avantajeze obișnuințele proprii de lectură.
+
 Toate textele și ilustrațiile sunt sub o licență Creative Commons BY-NC-SA 4.0. Acest lucru înseamnă că puteți lua aceste resurse și puteți face ceva mai mult, mai bine cu mai mult folos, dar fără drept de comercializare. Rezerv acest drept pentru o posibilă cale de valorificare care sa susțină dezvoltarea pe mai departe într-un posibil curs online susținut de mai multe resurse de calitate cu o dinamică mai mare.
 Dacă vreți să dați mai departe, vă rog să o faceți sub aceeași licență.
 
