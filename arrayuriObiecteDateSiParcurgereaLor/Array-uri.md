@@ -1,6 +1,9 @@
-# Generalități
+# Array-uri sau tablouri
 
-Array-urile conțin mai multe valori numite elemente.
+Pentru că este mai simplu și în obișnuița multor programatori români să folosească cuvântul din engleză ca neologism acceptat de practica curentă, vom folosi și în acest material cuvântul array.
+
+Array-urile conțin mai multe valori numite `elemente`.
+
 Indexarea internă a elementelor atunci când nu este explicită, pornește de la 0.
 
 | valoare | el1 | el2 | el3 |
@@ -24,18 +27,16 @@ protoLaProtoTablou // Object { , 15 more… }
 Object.getPrototypeOf(protoLaProtoTablou); // null
 ```
 
-tablou --> Array.prototype --> Object.prototype --> null.
+array --> Array.prototype --> Object.prototype --> null.
 
-Colecțiile care sunt asemănătoare-cu-array-urile vor avea un lanț mult mai scurt care indică Object.
+Colecțiile care sunt asemănătoare-cu-array-urile (array-like) vor avea un lanț mult mai scurt care indică Object.
 
 arrayLike --> Object.prototype --> null.
-
-TODO: scrie cod pentru exemplificare
-
 
 ## Mantre
 
 -Array-urile sunt **obiecte** și poți adăuga proprietăți în array folosind notația dot `var a = [1,2]; a.i = 23; a.i // 23`. Valorile sunt adăugate indiferent că array-ul are un index numeric prestabilit. Ele sunt acolo.
+- Orice obiect Array are o proprietate `length`
 -cheia unei proprietăți al unui array se numește `index` al unui array (valorile dintre paranteze pătrate sunt convertite la string)
 -o proprietate într-un array care este identificată printr-un index este numită `element`
 -`Array` este un obiect intern limbajului JavaScript. Acesta este folosit pentru crearea array-urilor
@@ -43,7 +44,7 @@ TODO: scrie cod pentru exemplificare
 
 ## Crearea array-urilor
 
-### Folosirea lui Array ca funcție (este recomandat)
+### Este recomandtă folosirea constructorului Array
 
 ```js
 var prestabilit = Array(5); // Array [ <5 empty slots> ]
@@ -57,7 +58,7 @@ Dacă nu sunt menționate elementele array-ului, acesta va fi constituit din loc
 
 #### Folosirea lui `Array.apply` pentru crearea de array-uri dense
 
-Există un truc pentru a genera array-uri de o dimensiune fixă, dar care în loc să nu aibe elemente, să fie populată cu `undefined`.
+Există un truc pentru a genera array-uri de o dimensiune fixă, dar care în loc să nu aibă elemente, să fie populată cu `undefined`.
 Se folosește Function.prototype.apply(), care se poate invoca direct pe Array pentru că și Array, de fapt este o funcție.
 Pentru aceasta contextul va fi stabilit la obiectul general (în cazul browserului este `window`) sau la `null`, iar drept argumente, va fi invocat Apply pasându-i-se numărul de elemente dorit:
 

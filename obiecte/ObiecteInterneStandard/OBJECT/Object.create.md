@@ -11,6 +11,7 @@ Este returnat un obiect noi care are prototipul setat la obiectul care a fost me
 
 ```js
 var obiect = Object.create(null); // are drept efect crearea unui obiect nou.
+// Object.getPrototypeOf(produs2) => null. Atenție! Prototipul este null
 
 var obiect = {};
 // declararea unui obiect cu forma literală este echivalent cu expresia de mai jos care are același efect:

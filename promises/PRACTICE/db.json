@@ -1,0 +1,34 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "un comentariu rău",
+      "postId": 1
+    },
+    {
+      "id": 2,
+      "body": "ce comentariu bizar",
+      "postId": 1
+    },
+    {
+      "id": 3,
+      "body": "st",
+      "postId": 1
+    },
+    {
+      "id": 4,
+      "body": "bai frate!",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

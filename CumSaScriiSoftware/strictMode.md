@@ -1,5 +1,7 @@
 # strict mode
 
+Pentru a face codul ceva puțin tolerant la erori, `use strict;` se poate pune în capul fișierului sau a unei funcții.
+
 ## Mantre
 
 - directiva este recunoscută doar în deschiderea codului sau în capul unei funcții.

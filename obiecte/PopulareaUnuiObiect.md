@@ -127,3 +127,41 @@ for(var i in obi){
   };
 };
 ```
+
+## Getters și setters
+
+```javascript
+var obiect = {
+  colectie: [],
+  set ceva(valoare){
+    this.colectie[this.colectie.length] = valoare;
+  },
+  get ceva(){
+    return this.colectie.join(', ');
+  }
+};
+
+obiect.ceva = 10;
+obiect.ceva = 'un ceva';
+obiect.colectie // "un ceva, 10"
+
+delete obiect.ceva; /true
+obiect // Object { colectie: Array[2] }
+```
+
+### Definirea unui setter pe un obiect folosind `defineProperty`
+
+```javascript
+var obiect = {
+  colectie: []
+};
+
+Object.defineProperty(obiect, 'ceva', {
+  set: function(valoare){this.colectie[this.colectie.length] = valoare;},
+  get: function(return this.colectie.join(', ');)
+});
+
+obiect.ceva = 'test';
+
+obiect.colectie; //Array [ "test" ]
+```

@@ -1,14 +1,34 @@
-# Scope
+# Lexical environment - scope
 
 Motorul JavaScript atunci când este pus să evalueze o funcție, consultă mai întâi „lexical environment” - o zonă delimitată de felul în care rânduit codul ca și text, care este cunoscută de toată lumea ca „scope”. Acest lexical environment este în strânsă legătură cu diferite structuri de cod cum ar fi blocurile de cod (`{}`, începând cu versiunea ES6; anterior era limitat doar la funcții) și funcțiile. Această zonă se stabilește chiar și la nivelul `catch` din constructul `try-catch` a limbajului.
 
 ## Spune standardul
 
-- Un **lexical environment** este un tip al specificațiilor standardului care este utilizat pentru a defini asocierea `identificatorilor` cu variabilele și funcțiile specifice pe baza structurii lexicale de organizare pe niveluri (inculcare - nesting) a codului.
-- Un **lexical environment** constă dintr-un „environment record” (un domeniu al valorilor) și o **referință** la un lexical environment extern dacă există unul.
-- Lexical environment este asociat cu structura lexicală a codului așa cum este declararea funcțiilor, blocurile de cod dintre acolade și secvența `Catch` din blocurile Try...Catch.
-- Un **function environment** este un **lexical environment** care corespunde momentului invocării funcției.
+Lexical environment este asociat cu structura lexicală a codului așa cum este declararea funcțiilor, blocurile de cod dintre acolade și secvența `Catch` din blocurile Try...Catch.
 
+Scope-ul 0, cel după care nu mai are nimic este, de fapt un **enviroment record** global care este un spațiu, un **tărâm** comun tuturor elementelor unui program care sunt procesate.
+
+Valorile lui **lexical environment** și a lui **environment record** sunt mecanisme stabilite de specificația standardului și este posibil să nu se regăsească în implementare.
+
+Un **lexical environment** este un tip al specificațiilor standardului care este utilizat pentru a defini asocierea `identificatorilor` cu variabilele și funcțiile specifice pe baza structurii lexicale de organizare pe niveluri (inculcare - nesting) a codului.
+Un **lexical environment** constă dintr-un „environment record” (un domeniu al valorilor) și o **referință** la un lexical environment extern dacă există unul.
+
+Un **environment record** este un mecanism prin care este ținută evidența legăturilor realizate prin identificatori. Acest conectări se formează în **lexical environment**. Se mai poate spune că este **environment record-ul** **lexical environment-ului**.
+
+Câte medii lexicale (**lexical environments**) se pot stabili:
+- **global environment** cel global la care cele imbricate fac conexiuni. Nu are un alt mediu extern.
+- **module environment** conține legăturile la declarațiile de prim nivel ale unui **Module**. Conține legături importate în mod explicit de Module. Mediul extern al unui Module este **global environment**.
+- **function environment** este un mediu care se stabilește **la invocarea** unei funcții. Mediul funcției poate să stabilească o nouă legătură la „this”. Un **function environment** este un **lexical environment** care corespunde momentului invocării funcției. Mediul funcției capturează și starea necesară pentru a suporta invocații ale metodei **super**.
+
+Un **global environment** este un **lexical environment** care nu mai are vreun alt mediu extern (outer environment). Spunem că mediul extern al lui global environment este null. Un **environment record** pentru global environment poate fi prepopulat cu legături de identificatori și include și un obiect global asociat ale cărui proprietăți fac parte din setul de legături de identificatori din mediul global (global environment). Pe măsură ce avansează execuția codului se pot adăuga sau șterge proprietăți în **global object**.
+
+În obiectul **environment record** există două tipuri de valori: ***declarative Enviroment Records*** și  ***object Environment Records***.
+***Declarative Enviroment Records*** definește efectele unor elemente precum declarații de funcții, de variabile și structuri Catch.
+***Object Environment Records*** definește efectele unor elemente precum declarația `with` care asociază legătura identificatorului cu proprietățile unui obiect.
+
+Fiecare obiect **environment record** este legat de un obiect numit **binding object**. Un obiect **environment record** are drept sarcină să lege șirurile de caractere care sunt numele identificatorilor proprietăților obiectului pentru care se stabilește acest **environment record**. Cheile proprietăți care nu sunt numere nu vor fi considerate în obiectul **environment record**. În setul legăturilor (bindings) sunt incluse deopotrivă proprietățile moștenite, cât și cele proprii indiferent de setarea atributului „enumerable”. Setul identificatorilor legați de environment record poate varia în funcție de șteregerea sau adăugarea proprietăților și sunt considerate a fi „legături schimbătoare” - mutable bindings. Toate legăturile din obiectul environment records se pot schimba.
+
+## Lexical environment - scope în practică
 
 Scope trebuie înțeles ca totalitatea identificatorilor din zonele menționate anterior. Un anume scope este zona unui program în care un identificator este asociat cu valoare.
 O posibilă interpretare pentru a înțelege și mai bine este aceea de hartă de identificatori, cine ține evidența la ce.

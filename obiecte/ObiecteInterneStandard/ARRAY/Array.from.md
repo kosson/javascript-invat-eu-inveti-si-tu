@@ -1,6 +1,6 @@
 # Array.from() - ECMAScript 2015
 
-Creează o instanță ``new Array`` din orice obiect care arată ca un array sau care iterabil.
+Creează o instanță new Array` din orice obiect care arată ca un array sau care iterabil.
 Obiectele din care se creează array-urile trebuie să aibe o lungime și elemente indexate.
 
 ## Aplicarea pe `arguments`

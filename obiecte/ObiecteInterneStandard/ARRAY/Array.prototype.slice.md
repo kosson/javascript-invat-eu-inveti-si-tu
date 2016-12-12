@@ -1,4 +1,6 @@
-# Array.prototype.slice() - nu afectează array-ul
+# Array.prototype.slice()
+
+**Nu afectează array-ul!**
 
 Slice în limba engleză se referă la a tăia, la a decupa, la a extrage o bucată. Pentru a înțelege slice, cel mai bine este să vă imaginați un croitor care măsoară stofa cu un centimetru, face semne pentru bucata pe care o dorește și apoi taie materialul.
 
@@ -18,7 +20,7 @@ Menționarea unui index negativ indică limita către coada listei. De exemplu, 
 
 ## Transformarea obiectelor array-like în array-uri
 
-### `arguments` într-un array
+### Exemplul lui `arguments` într-un array
 
 Această metodă este folosită și pentru a converti obiecte care seamănă cu array-urile în Array-uri noi. Pur și simplu se face un binding al metodei la obiect. Cel mai folosit exemplu este cel al folosirii lui slice() pentru a transforma `arguments` într-un array:
 
@@ -37,6 +39,17 @@ var converteste = function(){
 };
 var unArrayNou = converteste(1, "ceva", 23); // Array [ 1, "ceva", 23 ]
 ```
+
+### Exemplul unei colecții DOM transformată în array
+
+```javascript
+var colectieDeP = document.body.getElementsByTagName('p');
+var arrColectie = Array.prototype.slice.call(colectieDeP, 0); // acum un array!
+arrColectie.forEach(function(element){
+  console.log(element);
+});
+```
+
 
 ### `NodeList` într-un array
 
