@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Practică JavaScript</title>
+    <style media="screen">
+      .exemplu {
+        width: 25em;
+        /*height: 10em;*/
+        /*padding: 1em;*/
+        float: left;
+      }
+      .articole {
+        float: left;
+        clear: both;
+      }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <header>
+      <h1>Acesta este spațiul de practică</h1>
+    </header>
+    <article id="intro" class="jumbotron">
+      Pentru a realiza acest server, am folosit <a href="https://www.npmjs.com/package/json-server">JSON Server</a> pentru că oferă pagini statice și pentru că este și un REST API în același timp.
+    </article>
+    <div class="container-fluid">
+      <section id="oop" class="articole span12">
+        <h2>OBIECTE</h2>
+        <article class="exemplu span4">
+          <h3>Stabilirea unui namespace</h2>
+          <p>În main.js este exemplificat modul în care se poate obține un spațiu separat pentru codul pe care îl scrii.</p>
+          <a href="http://localhost:3000/OBIECTE/OOP.000/index.html" class="btn btn-default">Încarcă exemplu</a>
+        </article>
+      </section>
+      <section id="context" class="articole span12">
+        <h2>TEMPORIZĂRI</h2>
+        <article class="exemplu span4">
+          <h3>Exemplu simplu</h2>
+          <p>Acesta este un exemplu foarte simplu pentru cum folosești <code>setInterval()</code> și <code>clearInterval()</code></p>
+          <a href="http://localhost:3000/TEMPORIZARI/exempluSimplu.html" class="btn btn-default">Încarcă exemplu</a>
+          <!-- TODO: Repară exemplul la TEMPORIZARI: exempluSimplu.html. Repară exemplul! Nu funcționează așa cum ar trebui -->
+        </article>
+        <article class="exemplu span4">
+          <h3>Anatomie Callbacks - animație</h2>
+          <p>O animație realizată prin folosirea lui <code>setInterval()</code> și <code>clearInterval()</code>. Ceea ce s-a realizat este mutarea pe ecran a unui block element (p).</p>
+          <a href="http://localhost:3000/CALLBACKS/anatomieCallbacksAnimatie.html" class="btn btn-default">Încarcă exemplu</a>
+          <note></note>
+        </article>
+      </section>
+      <section id="dom" class="articole span12">
+        <h2>Document Object Model</h2>
+        <article class="exemplu span4">
+          <h3>Colecție de noduri pe baza atributului</h3>
+          <p> Este un exemplu simplu care constituie o colecție de noduri având criteriul de selecție atributul data.</p>
+          <a href="http://localhost:3000/DOM.000-ParcurgereaSiColectareNoduri/parcurgereColectieDOM.html" class="btn btn-default">Încarcă exemplu</a>
+        </article>
+      </section>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  </body>
+</html>
