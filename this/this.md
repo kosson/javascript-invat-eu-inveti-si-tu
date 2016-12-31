@@ -2,6 +2,10 @@
 
 This este un obiect pasat automat unei funcții și care se formează în funcție de contextul de execuție. Este și singura modalitate de a apela membrii unui obiect - proprietățile și metodele.
 
+## Spune standardul
+
+`this` se leagă de evaluarea codului, adică la momentul evaluării codului `this` este rezultatul operațiunii abstracte `ResolveThisBinging()`. Se leagă strâns de Lexical Environment pentru `contextul de execuție curent` - `current execution context`.
+
 ## Mantre
 
 - o funcție poate fi invocată în patru moduri: (1) ca funcție (this e window); (2) ca metodă (this e obiectul); (3) ca și constructor (this e obiectul abia construit); (4) cu `apply()` și `call()` (this e primul obiect introdus).

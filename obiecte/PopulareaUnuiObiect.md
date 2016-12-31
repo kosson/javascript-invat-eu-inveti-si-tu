@@ -35,7 +35,6 @@ let obi2 = Object.create(null);
 obi2.constructor; // undefined
 ```
 
-
 ## Populare folosind notația cu punct - Dot notation
 
 ```js

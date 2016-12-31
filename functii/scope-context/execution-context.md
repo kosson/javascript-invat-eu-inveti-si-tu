@@ -2,9 +2,27 @@
 
 Contextul de execuție este un mecanism pentru a ține evidența evaluării codului la momentul în care acesta este rulat. La oricare moment în timp ceea ce rulează când arunci privirea se numește „running execution context” - contextul de execuție în efect sau care rulează, mai pe scurt **ce rulează pe moment**.
 
+## Spune standardul
+
+În oricare moment există cel mult un singur context de execuție per agent, care execută cod.
+
+Un context de execuție conține tot ce este necesar pentru a urmări evoluția execuției și a codului său asociat. Tot înseamnă orice este caracteristic motorului care implementează ECMAScript și necesar urmăririi execuției codului.
+
+O stare are următoarele componente:
+- starea de execuție a codului, care este starea necesară pentru a executa, suspenda sau relua evaluarea codului asociat cu acest context de execuție
+- Function. Dacă contextul de execuție evaluează codul dintr-o funcție obiect, atunci valoarea acestei componente este chiar acea funcție obiect. Dacă contextul evaluează codul dintr-un **Script** sau dintr-un **Module**, atunci, valoarea componentei **Function** este `null`. Valoarea pentru Function în `running execution context` este numită și `active function object`.
+- Realm. Este registrul de tărâmuri (***Realm Record***) prin care codul asociat accesează resurse ECMAScript. Tărâmul asociat contextului de execuție este numit `current Realm Record`.
+- ScriptOrModule. Este o înregistrare care identifică un Module sau un Script în care își are originea codul rulat.
+-  LexicalEnvironment. Identifică `Lexical Environment` - scope-ul care este folosit pentru a referințele pe care le fac identificatorii din codul care rulează în contextul de execuție curent.
+- VariableEnvironment. Identifică scope-ul (`Lexical Environment`) al cărui EnvironmentRecord conține legăturile create de `VariableStatements` din contextul de execuție curent. Când se creează un context de execuție nou, LexicalEnvironment și VariableEnvironment au aceeași valoare.
+
+## Mecanismul
+
 Pentru a ține evidența a ceea ce se rulează este nevoie de un „răboj” pe care să poți aduna și scădea ce intră și se termină de rulat - contextele de execuție. Un astfel de mecanism este organizat ca o stivă și se numește „execution context stack” - stiva contextelor de execuție.
 
-Evaluarea codului care se face într-un „context de execuție în efect” în plină desfășurare, se poate suspenda din diferite motive. În acest moment este posibil ca un alt context de execuție să devină „context de execuție în efect” și să pornească evaloarea propriului cod. Mai târziu, codul suspendat poate deveni la rândul său „contextul de execuție în efect” și să reia evaluara codului de la momentul de unde s-a oprit. Această succesiune a contextelor de execuție în efect este gestionată cu ajutorul unei stive care funcționează pe principiul FIFO - first in, first out.
+`Running execution context` este întotdeauna în vârful stivei.
+
+Evaluarea codului care se face într-un „context de execuție în efect” în plină desfășurare, se poate suspenda din diferite motive. În acest moment este posibil ca un alt context de execuție să devină „context de execuție în efect” și să pornească evaloarea propriului cod. Trebuie înțeles acest moment ca un moment în care codul care rulează transferă controlul unei alte secvențe de cod care își începe execuția. Acest nou context de execuție trece direct în vârful stivei. Mai târziu, codul suspendat poate deveni la rândul său „contextul de execuție în efect” și să reia evaluara codului de la momentul de unde s-a oprit. Această succesiune a contextelor de execuție în efect este gestionată cu ajutorul unei stive care funcționează pe principiul FIFO - first in, first out.
 
 Contextul de execuție se leagă organic de **lexical environment**, adică de scope.
 

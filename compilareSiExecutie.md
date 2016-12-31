@@ -1,25 +1,36 @@
-# Ce face motorul JavaScript când „vede” codul
+# Comportamentul unei implementări ECMAScript atunci când evaluează codul sursă
 
-## Începe compilarea:
+## Faza de compilare
 
-Faza de compilare este distinctă de faza de execuție a codului. În faza de compilare codul este parcurs linie cu linie. La execuție, entitățile deja există și relaționează.
+Înainte ca întregul cod ECMAScript să fie evaluat, acesta trebuie asociat unui `realm`, unui tărâm, a unui spațiu distinct propriu implementării de JavaScript. Standardul spune că un tărâm - realm este constituit dintr-un set de obiecte interne (cele built-in), un `global environment`, codul sursă care este redactat în acest global evironment și care formează un `lexical environment` (cunoscut și sub numele de `scope`) și alte stări asociate și resurse.
 
-Motorul de JavaScript face două treceri peste cod:
-1. Este faza compilării. Citește codul sursă și înregistrează variabilele și ia act de funcțiile existente, construind o listă a declarațiilor de variabile și de parametrii din funcții
+În faza de compilare codul este parcurs linie cu linie.
+
+### Standardul spune
+
+Codul sursă este prelucrat (parsed) și convertit într-o „succesiune de elemente de intrare” - `stream of input elements`, care se generează prin aplicarea regulilor lexicale pe care gramatica ECMAScript le impune. Toate elementele lexicografice ce constituie codul, în afara spațiilor și a comentariilor, se numesc `tokens` - **atomi lexicali**.
+Succesiunea de elemente este prelucrată (parsed) încă o dată fiind aplicate regulile de sintaxă ale gramaticii impuse de standard, fiind astfel identificate fragmentele de cod în succesiunea dictată de redactarea codului, adică cine ce este.
+
+Se înțelege că motorul de JavaScript face două treceri peste cod:
+1. Este faza unei așa-zise compilării, când citește codul sursă, îl transformă în atomi lexicali (`tokens`) și înregistrează variabilele și ia act de funcțiile existente, construind o listă a declarațiilor de variabile și de parametrii din funcții în cazul evaluări codului din interiorul unei funcții.
 2. Este faza de execuție. Execută codul.
 
 ## PRIMA TRECERE: DECLARAREA variabilelor și a funcțiilor
 
 Este momentul când **lexical environment** (scope) este creat și se face inventarul identificatorilor.
 Este întrebat global scope dacă există declarații de variabile și de funcții. Rând pe rând, linie cu linie sunt notate (registered) în global scope variabilele și funcțiile. Este ca un recensământ.
-Dacă un nume de identificator deja există, valoarea sa este suprascrisă.
+Dacă un nume de identificator deja există, valoarea sa este suprascrisă în cazul în care este declarat ulterior un identificator cu același nume. Acest lucru se întâmplă pentru că setul de legături identificatori - valoare din global object sunt asimilate celor din registrul de mediu (`environment record`) creat automat de `lexical environment-ul` care este chiar valoarea lui `global environment`.
 
 ## Mantre
 
-- în faza de compilare, variabilele și funcțiile sunt „înregistrate” în global scope, adică sunt create referințe în memorie pentru acestea pe baza identificatorilor lor.
-- este o fază în care sunt create doar referințe.
+- Faza de compilare este distinctă de faza de execuție a codului.
+- Înainte de evaluare este creat un `realm` pentru codul sursă.
+- La fiecare evaluare a codului sursă este recreat `lexical environment` - scope-ul.
+- În faza de compilare, variabilele și funcțiile sunt „înregistrate” în global scope, adică sunt create referințe în memorie pentru acestea pe baza identificatorilor lor.
+- În compilare sunt create doar referințe în ceea ce standardul numește `environment record` - registrul mediului pe care îl creează `lexical environment` (scope-ul).
 - conținutul funcțiilor nu este procesat deocamdată.
 - execuția pornește imediat după această fază de „înregistrare”.
+- La momentul execuției, entitățile deja există și relaționează.
 
 ### Cazul funcțiilor
 

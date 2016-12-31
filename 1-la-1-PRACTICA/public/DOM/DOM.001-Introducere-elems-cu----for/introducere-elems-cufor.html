@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Introducerea de elemente cu for</title>
+  </head>
+  <body>
+    <h1>Introducere elemente în DOM folosind iterarea</h1>
+    <div class="" id="carlig"></div>
+  </body>
+  <script>
+  var x, y;
+  console.time("start");
+  for(x = 0; x < 20; x++){
+    y = document.createElement('p');
+    y.innerText = x;
+    document.body.appendChild(y);
+  };
+  console.timeEnd("final");
+  </script>
+</html>

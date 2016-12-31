@@ -1,6 +1,6 @@
 # Object
 
-Creează un wrapper (ambalaj) pentru un obiect.
+Creează un wrapper (ambalează, îmbracă) pentru un obiect. Parafrazând o zicală românească, am putea spune că în acest moment „haina face pe om”. Acest wrapper spune că lucrăm cu un obiect.
 
 ## Mantre
 
@@ -60,7 +60,7 @@ animal.caracteristici.picioare // 4
 vrabie.caracteristici.picioare // 4
 ```
 
-Ceea ce se întâmplă în acest caz este că obiectele nou create sunt la concurență în a modifica un membru al prototipului: animal.caracteristici.picioare.
+Ceea ce se întâmplă în acest caz este că obiectele nou create sunt la concurență în a modifica un membru al prototipului: `animal.caracteristici.picioare`.
 
 Pentru a evita un astfel de comportament, ai putea gândi că pentru fiecare obiect nou creat să setezi un obiect nou care că reprezinte atributele specifice ale fiecărui animal.
 
@@ -75,7 +75,8 @@ cal.caracteristici = {picioare: 4};
 var cangur = Object.create(animal);
 cangur.caracteristici = {picioare: 2};
 ```
-Acest cod este și el limitativ pentru că în cazul în care setezi obiectul caracteristici în acest mod, îl vei rescrie ori de câte ori voi folosi o nouă instanțiere care vine cu propriile-i caracteristici.
+
+Acest exemplu este limitat, pentru că în cazul în care setezi obiectul caracteristici în acest mod, îl vei rescrie ori de câte ori vei folosi o nouă instanțiere, care vine. la rândul său cu propriile-i caracteristici.
 
 Soluția este de a renunța la setarea completă a obiectului caracteristici și setarea specifică a fiecărei proprietăți a obiectului caracteristici pentru fiecare dintre posibilitățile contribuite de obiectele create.
 
@@ -123,6 +124,7 @@ unu primul
 doi al doilea
  */
 ```
+
 ## Object.keys()
 
 Returnează un array care conține numele tuturor proprietăților `deținute` de un obiect. ATENȚIE! Aceste proprietăți trebuie să fie setate ca `enumerable`.
@@ -143,7 +145,7 @@ Object.keys(obiect).forEach(function(cheie){
 
 ## Object.freeze()
 
-Această funcție controlează o proprietate a obiectului care se referă la posibilitatea ca un obiect să-i fie suprascrise proprietățile. Astfel, folosind această funcție se poate preveni modificarea stării unui obiect.
+Această funcție controlează o proprietate a obiectului care se referă la posibilitatea ca un obiect să-i fie suprascrise proprietățile. Astfel, folosind această funcție, se poate preveni modificarea stării unui obiect.
 
 ```js
 var test = {
