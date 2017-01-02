@@ -1,7 +1,5 @@
 # Obiecte interne standard
 
-Obiectele interne (`built-in`) includ `global object`.
-
 O structură a acestor obiecte este oferită chiar de standardul ECMAScript care le subîmparte pe următoarele linii de funcționalitate:
 
 - obiecte care sunt esențiale pentru rularea programelor includ `Object`, `Function`, `Boolean`, `Symbol` și `Error`,
@@ -14,56 +12,24 @@ O structură a acestor obiecte este oferită chiar de standardul ECMAScript care
 
 ## Mantre
 
+- Constructorul lui `Function` este chiar o funcție. În schimb, `Function` este constructor pentru Object.
+- Toate obiectele au un slot intern `[[Prototype]]` prin care se realizează moștenirea.
+- Dacă nu este specificat altfel, obiectele interne sunt extensibile.
+- Fiecare obiect intern are memorat Realm-ul pentru care setul de obiecte interne a fost generat.
+- Multe dintre obiectele interne sunt funcții care pot fi invocate cu argumente. O parte din acestea sunt concepute pentru a fi constructori, adică pentru a fi folosite cu `new`.
 - Nu trebuie confundate cu obiectul global.
-- Obiectele built-in includ și obiectul global.
+- Obiectele interne (`built-in`) includ `global object`.
+- Obiectul global este creat înainte de a se crea vreun context de execuție.
 
-## Obiecte de bază
+Standardul spune că fiecare funcție internă și fiecare constructor oferit de motor are obiectul prototipal al lui Function, care este valoarea inițială a expresiei Function.prototype. Această valoarea va fi valoarea slotului intern [[Prototype]] și este o simplă funcție. Acest lucru se întâmplă pentru că Function nu are o metodă internă `[[Construct]]`.
 
-Object
-Function
-Boolean
-Symbol
-Error
+În ceea ce privește oricare obiect care servește drept prototip, are ca valoare pe cea pe care o are `Object.prototype`, cu excepția obiectului prototip a lui Object.
 
-## Numere
+## Obiectul global
 
-Number
-Math
-Date
+Pentru DOM al HTML, obiectul global este proprietatea `window` a obiectului global, care este obiectul global în sine.
 
-## Procesarea textului
-
-String
-RegExp
-
-## Colecții indexate
-
-Array
-
-## Colecții indexate cu chei
-Aceste colecții conțin elemente care sunt iterabile.
-
-Map
-Set
-WeakMap
-WeakSet
-
-## Date structurate
-
-ArrayBuffer
-DataView
-JSON
-
-## Obiecte pentru controlul abstractizărilor
-
-Promise
-Generator
-GeneratorFunction
-
-Reflection
-
-Reflect
-Proxy
+`eval()` este o proprietate a obiectului global.
 
 # Resurse
 

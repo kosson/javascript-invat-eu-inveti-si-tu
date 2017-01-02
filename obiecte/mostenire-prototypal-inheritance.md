@@ -5,8 +5,8 @@ De fapt, se poate vorbi de o „delegare comportamentală” și nu de o moșten
 
 ## Spune standardul
 
-Toate obiectele comune au „un slot intern” numit `Prototype`. Valoarea acestui slot poate fi null sau un obiect care să realizeze moștenirea prototipală.
-Toate obiectele comune au „un slot intern” numit `Extensible`, care controlează dacă pot fi adăugate sau nu proprietăți la obiect. Dacă valoarea acestui slot este `false`, atunci nu se mai pot adăuga proprietăți noi. Legătura cu `Prototype` este aceea că în cazul unui `Extensible` cu valoare `false`, valoarea slotului intern `Prototype` a obiectului, nu poate fi modificată. În plus, de vreme ce a fost pusă pe `false`, nu o mai poți modifica la `true`.
+Toate obiectele comune au „un slot intern” numit `[[Prototype]]`. Valoarea acestui slot poate fi null sau un obiect care să realizeze moștenirea prototipală.
+Toate obiectele comune au „un slot intern” numit `[[Extensible]]`, care controlează dacă pot fi adăugate sau nu proprietăți la obiect. Dacă valoarea acestui slot este `false`, atunci nu se mai pot adăuga proprietăți noi. Legătura cu `[[Prototype]]` este aceea că în cazul unui `[[Extensible]]` cu valoare `false`, valoarea slotului intern `[[Prototype]]` a obiectului, nu poate fi modificată. În plus, de vreme ce a fost pusă pe `false`, nu o mai poți modifica la `true`.
 
 ## Mantre
 
@@ -16,7 +16,7 @@ Toate obiectele comune au „un slot intern” numit `Extensible`, care controle
   2. **stabilește legătura prototipală**.
 - Legătura prototipală se obține și prin efectul al doilea al folosirii cuvântului cheie `new`.
 - Legătura prototipală creează un lanț de delegare pentru cazurile în care nu găsești o proprietate sau o metodă într-un anumit context de execuție.
-- Mecanismul pe care-l realizează .prototype este unul de delegare a cererii pentru referința unei proprietăți sau metode către un obiect mai sus pe lanțul prototipal către un alt obiect.
+- Mecanismul pe care-l realizează `prototype` este unul de delegare a cererii pentru referința unei proprietăți sau metode către un obiect mai sus pe lanțul prototipal către un alt obiect.
 - relațiile prototipale pot cauza probleme atunci când este nevoie de enumerarea proprietăților obiectelor. Crockford recomandă „ambalarea” conținutului buclei de ciclare într-o funcție de verificare `hasOwnPropery()`;
 
 ## Inspecție și inventar

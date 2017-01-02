@@ -42,7 +42,10 @@ Aceasta este cadrul foarte general.
 ## Mică anatomie a limbajului
 
 Caracterele folosite pentru a scrie cod respectă standardul de codare Unicode. Toate elementele lexicografice care constituie codul în sine, cu excepția spațiului și a comentariilor, se numesc `token-uri`, adică `atomi lexicali`. Acești atomi lexicali, token-ii, sunt rezultatul parcurgerii unui fragment de cod (codul sursă) asupra căruia se aplică regulile lexicale specifice gramaticii pe care o impune standardul ECMAScript.
-De fapt, spune standardul că mai întâi textul codului este parcurs pentru a-l „converti într-o succesiune de elemente de input” folosindu-se regulile lexicale. Imediat după această fază, acestă succesiune de elemente de input mai este parcursă încă o dată aplicându-se regulile gramaticale pentru a identifica ce este ce în text, care sunt identificatori, cuvintele rezervate limbajului, etc.
+Textul sursă poate fi un `Script` sau un `Module`.
+Spune standardul că mai întâi textul codului este parcurs pentru a-l „converti într-o succesiune de elemente de input” folosindu-se regulile lexicale. Aceste elemente de input sunt: token-uri, line terminators (line-feed, carriage return, line separator, paragraph separator), comentariile și white space (tab, spece, non-breakable space, line tabulation, form feed, no-break space). Imediat după această fază, acestă succesiune de elemente de input mai este parcursă încă o dată aplicându-se regulile gramaticale pentru a identifica ce este ce în text, care sunt identificatori, cuvintele rezervate limbajului, etc.
+
+ECMAScript are un set de cuvinte rezervate care nu pot fi folosite decât în sensul efectelor care le sunt menite: `break, do in,typeof,case,else,instanceof,var,catch,export,new,void,class,extends,return,while,const,finally,super,with,continue,for,switch,yield,debugger,function,this,default,if,throw,delete,import,try,await`
 
 # Resurse
 

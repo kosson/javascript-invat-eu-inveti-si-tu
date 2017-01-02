@@ -25,7 +25,6 @@ Pentru parametrul listei de argumente se poate folosi și array-like-ul `argumen
 
 Începând cu ECMAScript 5 se poate folosi orice obiect care este array-like pentru al doilea argument. Cazul cel mai util ar fi aplicațiile practice în lucrul cu API-ul DOM-ului. Aici ne gândim la obiectele `NodeList` ( [referința MDN](https://developer.mozilla.org/en-US/docs/Web/API/NodeList) ) returnate de `Node.childNodes` și `document.querySelectorAll`. ATENȚIE! NodeList nu sunt array-uri și nu se pot invoca metodele din prototipul lui Array.
 
-
 ### Mecanisme oferite de `apply()`
 
 Obiectul pasat ca și context, în fapt cel care este și `this`, este, de fapt apelantul funcției. Ceea ce permite acest mecanism, de fapt este posibilitatea de a scrie o funcție cu rol de metodă, care să poată fi folosită în alt obiect fără a fi necesară rescrierea metodei pentru un nou obiect.
@@ -58,6 +57,8 @@ Array.apply(null, Array(5)); // Array [ undefined, undefined, undefined, undefin
 
 Creează o funcție nouă a cărui `this` este setat la valoarea oferită. Secvența de argumente introdusă are precedență asupra celor existente la momentul apelării funcției.
 
+Standardul spune că funcțiile obiecte create folosind Function.prototype.bind() sunt obiecte exotice. Nu au proprietatea `prototype`.
+
 ## Function.prototype.call()
 
 Apelează (call) o funcție. Setează `this` la obiectul pasat și argumentele pot fi pasate așa cum sunt.
@@ -66,7 +67,9 @@ Apelează (call) o funcție. Setează `this` la obiectul pasat și argumentele p
 
 Returnează un șir de caractere, care, de fapt este chiar codul sursă al acelei funcții.
 
-Un exemplu simplu ar fi:
+## Crearea unei funcții cu ajutorul constructorului
+
+Ultimul argument specifică codul executabil.
 
 ```js
 var adunare = new Function("primulNr", "alDoileaNr", "return primulNr + alDoileaNr");

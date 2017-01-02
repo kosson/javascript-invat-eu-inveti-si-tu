@@ -1,12 +1,15 @@
-# FUNCȚII
+# Funcții în ECMAScript
 
 Funcțiile sunt unitățile de execuție a codului JavaScript.
-Funcțiile sunt obiecte. Spre deosebire de obiecte, funcțiile pot fi invocate.
-`function` este un subtip de obiecte numit tehnic „callable object”.
+Funcțiile sunt obiecte. Standardul le numește chiar `function objects`.
+Spre deosebire de restul obiectelor, funcțiile pot fi invocate.
+`function` este un subtip de obiecte numit tehnic „callable object” iar acest lucru înseamnă că pentru acea funcție, motorul care implementează standardul ECMAScript are o metodă `[[Call]]`, care permite apelarea funcției. Funcțiile care pot deveni constructori prin apelarea cu `new`, au, de fapt, o metodă internă `[[Construct]]`.
 
 Funcțiile sunt obiecte first-class. Pot fi pasate ca argumente altor funcții și pot fi returnate din funcții.
 
 Funcțiile în JavaScript sunt de ordin înalt, adică pot fi pasate ca valori și pot primi ca argumente alte funcții.
+
+Funcțiile pot fi stricte, atunci când se folosește `use strict` sau non-strict.
 
 ## Spune standardul
 
@@ -20,6 +23,9 @@ Funcțiile obiecte au sloturi interne și merită menționat `Realm`, care este 
 
 ## Mantre
 
+- Funcțiile sunt obiecte care incapsulează cod parametrizat care este beneficiarul întregului scope în care a fost declarată funcția („closed over a lexical environment”).
+- Funcțiile permit evaluarea dinamică a codului pe care îl conțin.
+- Constructorul lui Function este chiar o funcție. În schimb, Function este constructor pentru Object. Cele două sunt contructorii pentru restul obiectelor interne.
 - Orice funcție poate fi apelată cu oricâte argumente de orice tip în orice moment.
 - Toate funcțiile sunt de fapt obiecte instanțe ale tipului `Function` (obiecte interne).
 - O funcție este declarată de o expresie care începe cu cuvânt rezervat limbajului: `function`.
