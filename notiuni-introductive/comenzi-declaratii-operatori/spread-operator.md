@@ -2,6 +2,12 @@ Este un operator ECMAScript 2015
 
 Acest operator folosește protocolul de iterare ceea ce înseamnă că obiectele pe care dorim să le transformăm, trebuie să aibe implementat @@iterator prin intermediul lui Symbol.iterator. `arguments` are deja implementat protocolul de iterare în ECMAScript 2015.
 
+```javascript
+[..."012345"]
+// la evaluare generează un array Array [ "0", "1", "2", "3", "4", "5" ]
+[..."012345"].length // 6
+```
+
 Permite expadarea unei expresii în locuri în care argumente multiple sau elemente multiple sunt așteptate să existe.
 
 ```js
@@ -11,7 +17,7 @@ birou; // Array [ "lampă", "pixuri", "creioane", "scaun", "tușieră" ]
 ```
 
 Permite transformarea unor obiecte array-like precum `arguments` și `NodeList` în array-uri adevărate.
-Anterior existenței acestui operator, aceste transformări se făceau cu prin aplicarea lui slice cu un call:
+Anterior existenței acestui operator, aceste transformări se făceau cu prin aplicarea lui `slice` cu un `call`:
 
 ```js
 Array.prototype.slice.call();

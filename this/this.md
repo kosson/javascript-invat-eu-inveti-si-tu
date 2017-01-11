@@ -1,6 +1,8 @@
 # this
 
-This este un obiect pasat automat unei funcții și care se formează în funcție de contextul de execuție. Este și singura modalitate de a apela membrii unui obiect - proprietățile și metodele.
+This este un obiect pasat automat unei funcții și care se formează în funcție de contextul de execuție. `this` este strict legat de „locul” în care a fost apelată, nu de „locul” unde a fost declarată.
+
+Închipuiește-ți cum este făcută vata de zahăr. Funcția este persoana care plimbă bățul pe circumferința vasului care conține zahărul. Bățul este `this`, cel care strânge toate filamentele de zahăr existente în vas. Este un mijloc de a colecta vata de zahăr iar în cazul nostru identificatorii unui obiect context care face parte din contextul de execuție.
 
 ## Spune standardul
 
@@ -11,11 +13,11 @@ This este un obiect pasat automat unei funcții și care se formează în funcț
 - o funcție poate fi invocată în patru moduri: (1) ca funcție (this e window); (2) ca metodă (this e obiectul); (3) ca și constructor (this e obiectul abia construit); (4) cu `apply()` și `call()` (this e primul obiect introdus).
 - `this` este cuvânt cheie rezervat.
 - `this` este o referință la obiectul care se creează în funcție de contextul de execuție.
-- `this` este o referință către un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
-- în interiorul unui obiect, apelezi metodele folosind `this`, pentru că este singura referință către proprietățile și metodele interne.
-- dacă o funcție a fost invocată în interiorul altei funcții sau a unui obiect, atunci `this` este o referință către obiectul în contextul în care a fost invocată. Pentru a înțelege, adu-ți aminte faptul că o funcție este un obiect, de fapt, dar nu uita că primește this automat, nu-l formează. Doar obiectele formează this.
+- `this` este o referință către un obiect-context: pentru funcțiile din global scope este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
+- în interiorul unui obiect, apelezi metodele folosind `this`, pentru că este o referință către proprietățile și metodele interne.
+- dacă o funcție a fost invocată în interiorul altei funcții sau a unui obiect, atunci `this` este o referință către obiectul în contextul în care a fost invocată. Pentru a înțelege, adu-ți aminte faptul că o funcție este un obiect, de fapt, dar nu uita că primește `this` automat, nu-l formează. Doar obiectele formează `this`.
 - Referința `this` va fi folosită pe durata execuției funcției.
-- în cazul funcțiilor`this` nu este o referință către funcția în sine. Ține minte faptul că unei funcții îi sunt pasate tacit this și arguments.
+- în cazul funcțiilor`this` nu este o referință către funcția în sine. Reține faptul că unei funcții îi sunt pasate tacit `this` și `arguments`.
 - `this` NU ESTE O REFERINȚĂ CĂTRE SCOPE-ul LEXICAL AL FUNCȚIEI.
 
 Legătura (binding-ul) la `this` DEPINDE DE OBIECTUL specificat la call-site.
@@ -30,12 +32,12 @@ var obj = {
   faCeva: faCeva
 };
 
-// în ECMAScript 6, dacă ai denumit cheia metodei la fel cu numele funcției care va fi metodă pentru acel obiect, se poate menționa simplu numele
+// în ES 6, dacă ai denumit cheia metodei la fel cu numele funcției care va fi metodă pentru acel obiect, se poate menționa simplu numele
 var obj = {
   faCeva
 };
 
-obj.faCeva(); // s-ar putea spune că this este chiar obiectul menționat la stânga metodei
+obj.faCeva(); // this este chiar obiectul menționat la stânga metodei
 ```
 
 Folosit pentru a lua un obiect și pentru a-i îmbogăți și/sau prelucra valorile membrilor după care poate fi returnat și folosit mai departe.
@@ -53,12 +55,8 @@ Folosit pentru a lua un obiect și pentru a-i îmbogăți și/sau prelucra valor
 
 ## Mantre
 
-- Funcțiile sunt obiecte!
-- Toate funcțiile sunt de fapt obiecte `Function` (obiecte interne).
-- La invocarea funcțiilor pe lângă argumente sunt pasate „tacit” `this` și `arguments`.
-- `this` este un obiect-context: pentru funcții simple în General Execution Context este chiar `window`. Pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
 - Prin `this`, de fapt accesezi starea obiectului cu care lucrezi.
-- Obiectul `this` se constituie la execuția codului, nu la momentul scrierii lui. Pentru metode este chiar obiectul care deține metoda, pentru funcțiile din Global Execution Context este întotdeauna window (deci, o funcție este de fapt o metodă a obiectului window), iar pentru constructori este noua instanță de obiect creată.
+- Obiectul `this` se constituie la execuția codului, nu la momentul scrierii lui.
 - **this** este o referință către contextul de execuție curent în timp ce funcția se execută.
 - `this` nu se referă în niciun caz la **lexical scope**.
 - `this` este un binding pentru fiecare invocare a unei funcții care se bazează pe de-antregul pe call-site.
@@ -66,12 +64,62 @@ Folosit pentru a lua un obiect și pentru a-i îmbogăți și/sau prelucra valor
 - Call-site (locul din cod unde este apelată o funcție) determină formarea lui `this`.
 - Modul de invocare influiențează felul în care obiectul este constituit (către care face referință `this`).
 - Toate funcțiile au la dispoziția lor un set de utilități preexistent, care poate fi apelat prin `[[Prototype]]`. Cele mai evidente sunt `call()` și `apply()`.
-- Atunci când există un obiect-context (folosit de o funcție prin apelare cu `apply()` sau `call()`), regula de bază a binding-ului spune că obiectul-context va fi cel la care se face bindingul this.
+- Atunci când există un obiect-context (folosit de o funcție prin apelare cu `apply()` sau `call()`), regula de bază a binding-ului spune că obiectul-context va fi cel la care se face bindingul `this`.
 - În contextul de execuție tot ce este cu `this.ceva` devine membru al obiectului generat.
-- Bindingul primar se face la obiectul global.
+  - Bindingul primar se face la obiectul global.
 - Bindingul implicit se face la contextul de execuție al unei funcții sau al unei metode.
 
-## Lămurirea lui `this`
+## Mică anatomie pentru `this`
+
+Cazul funcțiilor simple. Ceea ce se va observa rapid este faptul că în cazul folosirii lui var pentru declarații, obiectul `this` va fi însuși obiectul global. Am introdus cazul funcțiilor simple pentru că au, de fapt un context de execuție, acesta fiind obiectul global a cărui proprietăți pot fi accesate prin legătura pe care o face obiectul this.
+
+```javascript
+var x = 10;
+function container (){
+  var x = 1000;
+  this.y = function interna(){
+    var x = 10000;
+    console.log(this.x);
+  };
+  this.z = function interna2(){
+    var x = 10001;
+    console.log(this.x);
+  };
+  console.log(this);              // Window
+  console.log(this.x);            // 10 pentru că var a creat automat o prop. în global
+  console.log(this.y);            // function interna()
+  console.log(this.z);            // function interna2()
+  console.log(typeof this);       // object
+  console.log(this.constructor);  // function ()
+  console.log(this.__proto__);    // Window
+  this.y();                       // 10
+  this.z();                       // 10
+}; container();
+```
+
+Cazul folosirii declarării variabilelor cu `let`. Valoarea lui x nu poate fi accesată din scope-ul funcției pentru că este declarată în global scope.
+
+```javascript
+let x = 10;
+function container (){
+  let x = 1000;
+  this.y = function interna(){
+    let x = 10000;
+    console.log(this);  // este Window
+    console.log(x);     // 10000
+    console.log(this.x);// undefined pentru că în global let nu creeaza proprietati
+  };
+  console.log(x);       // 1000
+  console.log(this);    // Window
+  console.log(this.x);  // undefined
+  console.log(this.y);  // function interna()
+  this.y();             // 10000 și undefined
+}; container();
+```
+
+Evaluările se soldează cu `undefined` pentru cazul global scope pentru că `let` și `const` sunt blocked scoped. Spre deosebire de `var`, `let` nu creează o proprietate nouă în global scope.
+
+## Cazurile lui `this`
 
 În cazul obiectelor, atunci când apelezi o funcție (care joacă rolul de metodă), folosind `.` sau `[]`, vei avea un obiect drept context, altfel, vei avea global environment.
 
@@ -491,7 +539,7 @@ function SuntUnConstructor (){
   // se creează proprietăți în this
   this.ceva = 100;
 
-  // dacă funcția returnează un obiect, atunci obiectul va fi rezultatul apelării cu new
+  // dacă se returnează un obiect, atunci obiectul va fi rezultatul apelării cu new
   // dacă nu returnează un obiect, atunci this va fi rezultatul apelării cu new.
 };
 
@@ -512,7 +560,6 @@ var obi = new AltConstructor();
 
 console.log(obi.alfa); // 1
 ```
-
 
 ### Mantre
 

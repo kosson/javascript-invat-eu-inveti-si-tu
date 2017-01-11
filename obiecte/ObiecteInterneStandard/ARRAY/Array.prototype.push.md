@@ -5,12 +5,21 @@ ATENȚIE! Returnează noul `length` al array-ului.
 
 Același efect îl poți obține folosind `apply()`.
 
-## Merging de array
+## Fuzionarea a două array-uri al doilea în continuarea primlui
 
-```js
+```javascript
 var tabel1 = ['veverita', 'liliac'];
 var tabel2 = ['fluture', 'cărăbuș'];
 
 Array.prototype.push.apply(tabel1, tabel2);
+console.log(tabel1); // Array [ "veverita", "liliac", "fluture", "cărăbuș" ]
+```
+
+Aceeași operațiune poate fi împlinită folosind operatorul spread:
+
+```javascript
+var tabel1 = ['veverita', 'liliac'];
+var tabel2 = ['fluture', 'cărăbuș'];
+tabel1.push(...tabel2);
 console.log(tabel1); // Array [ "veverita", "liliac", "fluture", "cărăbuș" ]
 ```

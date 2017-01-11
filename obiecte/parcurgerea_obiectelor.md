@@ -210,7 +210,8 @@ var obiect = Object.create(matrita);
 obiect.altaProprietate = 'altceva';
 ```
 
-### Testare cu `in`
+### Verificări
+#### Testare cu `in`
 
 Pentru a testa dacă o proprietate există se poate folosi operatorul `in`. Problema cu `in` este aceea că ia în calcul și ceea ce este în prototip, în cazul nostru în matrita.
 
@@ -221,7 +222,7 @@ Pentru a testa dacă o proprietate există se poate folosi operatorul `in`. Prob
 'proprietate' in obiect; // true
 ```
 
-### Testare cu `hasOwnProperty()`
+#### Testare cu `hasOwnProperty()`
 
 Pentru a verifica dacă o proprietate aparține obiectului se va folosi `hasOwnProperty()`:
 
@@ -231,7 +232,7 @@ obiect.hasOwnProperty('proprietate'); // false
 obiect.hasOwnProperty('toString'); // false
 ```
 
-### Testare cu `for...in`
+#### Testare cu `for...in`
 
 Dacă folosești un `for...in` vei obține toate cheile, adică și pe cele din prototip. Deci, nu funcționează corect.
 De ce se întâmplă acest lucru? Pentru că sunt luate în considerare și proprietățile moștenite prin prototip, care sunt setate ca `enumerable`. Motivul pentru care proprietățile lui Object nu apar este că acestea nu sunt `enumerable`.

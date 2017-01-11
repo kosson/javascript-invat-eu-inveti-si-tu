@@ -1,5 +1,7 @@
 # Obiectul intern String
 
+TODO: Sparge documentul pe metode precum celelalte obiecte interne.
+
 Este un constructor pentru string-uri.
 
 Stăpânirea consolidată prin practică a șirurilor de caractere va permite manipularea datelor de tip `.txt, .csv, .json, etc.`. Combinarea lucrului pe șiruri de caractere cu lucrul pe array-uri, va permite transformări dintr-un format în altul, de manipulare la transferomare, de îmbogățire și de segmentare a datelor.
@@ -38,41 +40,6 @@ Caracterele speciale vor putea fi menționate în string-uri folosindu-se notaț
 ```js
 var str = new String("test");
 ```
-
-## Stringuri șablon - string patterns
-
-Începând cu ECMAScript 2015, stringurile literale pot fi numite și „Stringuri șablon” - Template strings. Un simplu exemplu:
-
-```js
-var a = 5;
-var b = 10;
-
-console.log("Cinsprezece este suma " + (a + b) + " și\nnu " + (2 * a + b) + ".");
-// este echivalent cu:
-console.log(`Cinsprezece este suma ${a + b} și\nnu ${2 * a + b}.`);
-```
-„
-O formă și mai avansată de template-uri literale este cea numită `tagged template literals`. Un simplu exemplu:
-
-```js
-var a = 5;
-var b = 10;
-
-function tag(strings, ...values) {
-  console.log(strings[0]); // "Hello "
-  console.log(strings[1]); // " world "
-  console.log(strings[2]); // ""
-  console.log(values[0]);  // 15
-  console.log(values[1]);  // 50
-
-  return "Bazinga!";
-}
-
-tag`Hello ${ a + b } world ${ a * b }`;
-// "Bazinga!"
-```
-
-Mai multe detalii la: [Mozilla Developer Network - Template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)
 
 ## Proprietăți
 
@@ -147,7 +114,7 @@ str.slice(11, 14); // => "rin"
 str.substring(11, 3); // => "te de st"
 ```
 
-#### String.prototype.slice()
+#### `String.prototype.slice()`
 
 Taie un segment de caractere dintr-un șir de la indexul menționat ca prim argument, până la indexul menționat ca limită dar care nu include și valoarea de la acel index.
 
@@ -155,7 +122,7 @@ Este asemănătoare metodei cu același nume aplicată Array-urilor.
 
 Acceptă două argumente care delimitează marginile de tăiere. Primul argument delimitează de unde începe extragerea segementului iar dacă este negativ, atunci se va face de la nume_array.legth -valoare_numar_negativ.
 
-#### String.prototype.indexOf()
+#### `String.prototype.indexOf()`
 
 Este o metodă care returnează indexul unde apare pentru prima dată un fragment de text. Este returnat -1 dacă fragmentul nu este găsit. Atenție, dacă o parte a fragmentului este corectă și s-a greșit, fie și numai un caracter, nu se face identificarea și este returnat -1. Deci, trebuie să fie fix ceea ce este în textul în care se face căutare.
 
@@ -182,18 +149,20 @@ Este o metodă care returnează indexul unde apare pentru prima dată un fragmen
 Poți verifica rapid dacă o secvență de text există într-un șir:
 
 ```js
-'Rosinante era o mîrțoagă, dar și ce emitea un transponder'.indexOf('era o ') !== -1; // true
+'Rosinante era o mârțoagă, dar și identificatorul emis de un transponder'.indexOf('era o ') !== -1; // true
 ```
 
 ##### Reține:
+
 `indexOf()` este case sensitive!: `'Ceva Mare'.indexOf('mare'); // -1`
 
-#### String.prototype.lastIndexOf()
+#### `String.prototype.lastIndexOf()`
 
 Returnează indexul ultimei apariții a fragmentului pentru care se face căutarea. Dacă valoarea nu este găsită, este returnat -1.
 Opțional se poate menționa de unde să se înceapă căutarea prin specificarea unui index de la care să se pornească. Valoarea din oficiu pentru parametru este `str.length - 1`.
 
 ##### Reține:
+
 Căutarea se face fix după caracterul sau fragmentul specificat. Atenție la caracterele mari, la spații și diacritice.
 `lastIndexOf()` este case sensitive!
 Căutările se fac în sens invers, de la dreapta spre stânga, având punctul de origine valoarea parametrului suplimentar iar atunci când acesta nu este specificat, cu valoarea de index a ultimului caracter din șir.
@@ -222,6 +191,7 @@ Căutările se fac în sens invers, de la dreapta spre stânga, având punctul d
 // Returnarea dimensiunii șirului
 'cevatext'.lastIndexOf('');        // 8 fiind echivalent cu 'cevatext'.length
 ```
+
 O combinație între substr și lastIndexOf.
 
 ```js
@@ -232,14 +202,28 @@ document.write("The file name of this page is " + fileName);
 
 ### Lucrul direct pe caractere și fragmente
 
-- String.fromCharCode() este o metodă statică a obiectului String, care transformă secvențe de numere Unicode în caractere.
-- String.fromCodePoint() este o metodă statică a obiectului String, care transformă un o secvență de caractere considerată a fi un cod al unui caracter (a fost adăugată în ECMAScript 6).
-- String.prototype.charAt() este o metodă aplicabilă direct pe string, care returnează caracterul căutat la indexul specificat ca argument.
-- String.prototype.charCodeAt() returnează un număr care reprezintă codul UTF-16 a caracterului de la indexul specificat.
-- String.prototype.concat()
-- String.prototype.endsWith()
+#### UTF-16, câteva precizări utile.
 
-#### String.fromCharCode()
+UTF (Uniform Transformation Format) este un sistem de codare numerică a caracterelor. Aceste coduri pot fi percepute ca niște identificatori unici pentru caractere.
+Codarea adresează ceea ce este numit un „code unit” și se face prin „code points”, codurile de identificare despre care vorbeam. UTF-16 oferă coduri până la limita de 2<sup>16</sup>, valori ce se înscriu în așa-numitul Basic Multilingual Plane (BMP) iar codurile care depășesc această limită sunt codificate prin două coduri de identificare care formează o pereche. Această stare de fapt poate conduce la erori în ceea ce privește manipularea caracterelor în JavaScript.
+
+```javascript
+let exemplu = '𝒥';
+console.log(exemplu.length); // lungimea textului este 2 în loc de 1 așteptat
+console.log(exemplu.charCodeAt(0)); // 55349
+console.log(exemplu.charCodeAt(1)); // 56485
+```
+
+Regăsirea folosind regex-urile nu se va putea face. Nici `charAt()` nu va funcționa corect iar `charCodeAt()` va aduce codul pentru fiecare code unit separat așa cum arată și exemplu.
+
+- `String.fromCharCode()` este o metodă statică a obiectului String, care transformă secvențe de numere Unicode în caractere.
+- `String.fromCodePoint()` este o metodă statică a obiectului String, care transformă un o secvență de caractere considerată a fi un cod al unui caracter (a fost adăugată în ECMAScript 6).
+- `String.prototype.charAt()` este o metodă aplicabilă direct pe string, care returnează caracterul căutat la indexul specificat ca argument.
+- `String.prototype.charCodeAt()` returnează un număr care reprezintă codul UTF-16 a caracterului de la indexul specificat.
+- `String.prototype.concat()`
+- `String.prototype.endsWith()`
+
+#### `String.fromCharCode()`
 
 Este o metodă care returnează un string, nu un obiect String. Parametrii sunt secvențe de numere care sunt valori Unicode.
 
@@ -249,7 +233,7 @@ Returnează un string:
 String.fromCharCode(65, 66, 67);  // "ABC"
 ```
 
-#### String.prototype.charAt()
+#### `String.prototype.charAt()`
 
 Este o metodă care o aplici direct pe string. Acceptă un parametru numeric, care este de fapt indexul la care se află caracterul ce urmează a fi returnat.
 
@@ -274,7 +258,7 @@ sir.charAt(100); // ""
 ```
 
 ##### Reține:
-- charCodeAt() returnează NaN dacă indexul specificat este mai mic de 0 sau este egal cu lungimea șirului.
+- `charCodeAt()` returnează NaN dacă indexul specificat este mai mic de 0 sau este egal cu lungimea șirului.
 
 #### String.prototype.concat()
 
@@ -295,7 +279,7 @@ var sirNou = concat('ceva', 'text', 'pentru', 'a', 'fi', 'unit')
 console.log(sirNou); // ceva text pentru a fi unit
 ```
 
-Există în ECMAScript 2015 conceptul de `rest parameters`, adică o sintaxă ce permite extragerea unui Array din argumentele pasate unei funcții. Această sintaxă constă din adăugarea unui nume de parametru prefixat de trei puncte de suspensie. Această sintaxă generează un Array adevărat, nu un array-like așa cum este `arguments`.
+Folosirea `rest parameters`, adică o sintaxă ce permite extragerea unui Array din argumentele pasate unei funcții. Această sintaxă constă din adăugarea unui nume de parametru prefixat de trei puncte de suspensie. Această sintaxă generează un Array adevărat, nu un array-like așa cum este `arguments`.
 
 ```js
 function concat (...argumentePasate){
@@ -308,9 +292,9 @@ Ce se întâmplă:
 - parametrul rest obține `arguments`, care este pasat la apelarea funcției
 - de fiecare dată când un parametru este adăugat la stânga, este ca și cum s-ar face `argumentePasate.shift()`
 
-#### String.prototype.startsWith()
+#### `String.prototype.startsWith()`
 
-Stabilește dacă un șir de caractere începe cu un anumit șir specificat.
+Stabilește dacă un șir de caractere începe cu un anumit subșir specificat. Dacă da este returnat `true`, dacă nu `false`.
 Poate primi si numărul de caractere de la care să stabilească o nouă falsă dimensiune a șirului pe care să facă căutarea.
 
 ```js
@@ -319,9 +303,9 @@ console.log(continut.startsWith("Acesta")); // true
 console.log(continut.startsWith("este", 7)); // true
 ```
 
-#### String.prototype.endsWith()
+#### `String.prototype.endsWith()`
 
-Stabilește dacă un șir de caractere se încheie cu un alt șir specificat.
+Stabilește dacă un șir de caractere se încheie cu un alt șir specificat. Dacă da este returnat `true`, dacă nu `false`.
 Poate primi și un număr de caractere care definește o falsă nouă dimensiune a șirului pe care să se facă căutarea.
 
 ```js
@@ -330,10 +314,12 @@ console.log(continut.endsWith("test")); // true
 console.log(continut.endsWith("este", 11)); // true
 ```
 
-#### String.prototype.includes()
+#### `String.prototype.includes()`
 
-Determină dacă un șir căutat se află într-un altul.
-Poate primi un număr de caractere care indică de unde se va incepe căutarea.
+Este o metodă introdusă recent. Înainte de aceasta era folosită `String.prototype.indexOf()`.
+
+Determină dacă un șir căutat se află într-un altul. Dacă nu găsește șirul este returnat `false`.
+Poate primi un număr de caractere care indică de unde se va începe căutarea.
 
 ```js
 var continut = "Acesta este o mostră de test";
@@ -341,7 +327,7 @@ console.log(continut.includes("test")); // true
 console.log(continut.includes("este", 7)); // true
 ```
 
-#### String.prototype.repeat()
+#### `String.prototype.repeat()`
 
 Construiește și returnează un string nou făcut din concatenarea a câte ori a fost specificat prin parametru
 
@@ -354,7 +340,7 @@ Construiește și returnează un string nou făcut din concatenarea a câte ori 
 'abc'.repeat(1/0);  // RangeError
 ```
 
-#### String.prototype.split()
+#### `String.prototype.split()`
 
 Metoda pur și simplu sparge șirul construind un array cu fragemntele șirului. Poate accepta doi parametri: un separator și o limită.
 Separatorul este un caracter sau o **expresie regulată**.
@@ -370,11 +356,11 @@ var arr = "unu,doi,trei,patru,cinci".split(",");
 console.log(arr); // Array [ "unu", "doi", "trei", "patru", "cinci" ]
 ```
 
-ATENȚIE! Operațiunea inversă este concat().
+ATENȚIE! Operațiunea inversă este `concat()`.
 
 ### Metode care folosesc regexuri
 
-#### String.prototype.match()
+#### `String.prototype.match()`
 
 Faci o căutare într-un string după un Regex. Regexurile sunt șabloane care spun ce trebuie găsit într-un șir de caractere.
 
@@ -389,7 +375,7 @@ console.log(ceAgasit); // Array [ "demonstrativ versiunea 0.0", "versiunea 0.0",
 A fost generat acest array pentru că regexul conține criterii de căutare grupate prin `()`.
 
 
-#### String.prototype.replace()
+#### `String.prototype.replace()`
 
 Metoda returnează un nou șir care a incorporat modificări a unor părți care s-au potrivit criteriilor de căutare sub forma unui alt string sau al unui `RegExp` și care sunt înlocuite de un alt șir sau de rezultatul execuției unei funcții.
 
@@ -462,8 +448,8 @@ styleHyphenFormat("borderTop"); // border-top
 
 ##### Folosirea unui regex pentru a găsi un fragment și înlocuirea cu ce returnează o funcție
 
-În locul unui string predefinit, poți introduce o funcție ca un al doilea parametru, care să folosească un obiect RegExp.
-În acest caz, funcția va fi invocată imediat ce a fost găsit un șir care să se potrivească regex-ului. Rezultatul funcției, care va fi returnat, va fi folosit ca șir de caractere ce va fi înlocuit. ATENȚIE! Funcția va fi invocată ori de câte ori se va găsi șirul căutat după modelul construit de regex. Condiția ca acest lucru să se întâmple este ca obiectul RegExp să fie declarat la nivel global (introdu switch-ul g în regex).
+În locul unui string predefinit, poți introduce o funcție ca un al doilea parametru, care să folosească un obiect `RegExp`.
+În acest caz, funcția va fi invocată imediat ce a fost găsit un șir care să se potrivească regex-ului. Rezultatul funcției, care va fi returnat, va fi folosit ca șir de caractere ce va fi înlocuit. ATENȚIE! Funcția va fi invocată ori de câte ori se va găsi șirul căutat după modelul construit de regex. Condiția ca acest lucru să se întâmple este ca obiectul `RegExp` să fie declarat la nivel global (introdu switch-ul g în regex).
 
 Argumentele pe care le poate lua o funcție sunt după cum urmează:
 
@@ -527,7 +513,7 @@ console.log(JSON.stringify(arr));
 // [{"semnal":false,"frecvență":1},{"semnal":true,"frecvență":1},{"semnal":false,"frecvență":2},{"semnal":true,"frecvență":3},{"semnal":false,"frecvență":1},{"semnal":true,"frecvență":1},{"semnal":false,"frecvență":3},{"semnal":true,"frecvență":1}]
 ```
 
-#### String.prototype.search()
+#### `String.prototype.search()`
 
 Face o căutare pe șir după un regex.
 Atunci când reușește o identificare, funcția returnează indexul primei identificări. Dacă nu face nicio identificare, returnează -1.
@@ -552,7 +538,7 @@ Se va genera:
 <a name="numele_meu">Ceva</a>
 ```
 
-#### String.prototype.link()
+#### `String.prototype.link()`
 
 Se folosește pentru a creea un snippet pentru un hiperlink HTML. Stringul returnat poate fi adăugat obiectului prin intermediul document.write() sau element.innerHTML. Linkrurile create astfel se adaugă array-ului de linkuri document.links.
 
@@ -592,3 +578,7 @@ efectul este același: este returnat 6, adică numărul total de caractere din �
     a. unui caracter sau fragment:
 
     `'fragmente'.lastIndexOf('nt'); // 6`
+
+## Resurse
+
+[Mozilla Developer Network - Template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)

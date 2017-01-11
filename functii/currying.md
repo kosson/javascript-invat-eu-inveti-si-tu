@@ -62,7 +62,7 @@ var tipul = function(tip){
 colectie.filter(tipul("panou")); // Array [ Object, Object ]
 ```
 
-sau poți folosi fat arrow
+sau poți folosi `fat arrow`:
 
 ```js
 var tipul = tip => dispozitiv => dispozitiv.tip === tip; // Array [ Object, Object ]

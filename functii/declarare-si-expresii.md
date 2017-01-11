@@ -1,12 +1,12 @@
 # Definirea funcțiilor
 
-Funcțiile pot fi definite („create”) în trei feluri:
+Funcțiile pot fi definite („create”) în următoarele moduri:
 
-- prin intermediul unei **function expression**: `var adunare = function demo(param1, param2){ return param1 + param2; };`. Este cazul unei `named function expression`
-- prin **declararea funcției**: `function demo(param1, param2){ return param1 + param2; };`
-- Prin folosirea constructorului `new Function()`
-- Prin folosirea lui „fat arrow” pentru a defini o funcție: `argument => argument++`. **Fat arrow** este introdus de EcmaScript 2015 (ES6).
-- Prin folosirea funcțiilor „generator”: `function* generator(){ yield true; };`, fiind introdus de EcmaScript 2015 (ES6).
+- prin intermediul unui **function expression**: `var adunare = function demo(param1, param2){ return param1 + param2; };`. Este cazul unei `named function expression`,
+- prin **declararea funcției**: `function demo(param1, param2){ return param1 + param2; };`,
+- prin folosirea constructorului `new Function()`,
+- prin folosirea lui „fat arrow” pentru a defini o funcție: `argument => argument++`. **Fat arrow** este introdus de EcmaScript 2015 (ES6),
+- prin folosirea funcțiilor „generator”: `function* generator(){ yield true; };`, fiind introdus de EcmaScript 2015 (ES6).
 
 ## Mantre
 - Funcțiile sunt obiecte.
@@ -14,10 +14,10 @@ Funcțiile pot fi definite („create”) în trei feluri:
 - Funcțiile pot fi create dinamic folosind constructorul `Function`.
 - funcțiile nu sunt „deținute” sau „conținute” de un obiect atunci când sunt metode chiar dacă sunt declarate în obiect sau în afara lui.
 - O declarație de funcție începe cu `function` ca și cuvânt cheie. Orice altceva este o expresie de funcție.
-- Invocarea unei funcții generează un nou CONTEXT de EXECUȚIE (TOT ce se întâmplă atunci când funcția se execută).
+- Invocarea unei funcții generează un nou **context de execuție** (TOT ce există și este necesar atunci când funcția se execută).
 - Toate variabilele și funcțiile definite în funcție sunt considerate parte a contextului de execuție.
 - fiecare argument al unei funcții este de fapt o variabilă locală.
-- Variabilele și funcțiile care fac parte din contextul de execuție, sunt memorate în EXECUTION CONTEXT OBJECT, care este un obiect al motorului JavaScript.
+- Variabilele și funcțiile care fac parte din contextul de execuție, sunt memorate în **execution context object**, care este un obiect al motorului JavaScript.
 - Când este definită o funcție, aceasta stochează scope chain-ul care era în efect în acel moment.
 - Când o funcție este invocată creează un obiect în care stochează propriile variabile și adaugă acel obiect la scope chain.
 - Funcțiile anonime nu permit ***recursivitatea***
@@ -26,7 +26,7 @@ Funcțiile pot fi definite („create”) în trei feluri:
 - funcțiile exprimate (`var ceva = function(){}`) nu se supun hoistingului ceea ce le permite să rețină o copie a variabilelor dn scope-ul în care au fost definite.
 - funcțiile exprimate pot fi folosite ca: argumente pentru alte funcții, clojures, IIFEs
 
-# Declararea funcțiilor
+# Funcție declarată
 
 **function declaration statement** și **function definition expression**
 
@@ -37,6 +37,7 @@ Funcțiile pot fi definite („create”) în trei feluri:
 ```js
 function ceva(){};
 ```
+
 Numirea funcției este obligatorie.
 
 ```js
@@ -62,7 +63,7 @@ functie(function(){
 (function functie(){})();   // chiar și în cazul unui IFFE, tot despre un function expression vorbim.
 ```
 
-Expressile de funcții pot fi pasate ca valori altor funcții ca parametri. Aceste funcții vor putea fi executate din interiorul funcției cărora au fost pasate.
+Expresiile de funcții pot fi pasate ca valori altor funcții ca parametri. Aceste funcții vor putea fi executate din interiorul funcției cărora au fost pasate.
 
 ```js
 let oActivitate = function ceva(){console.log("O valoare din funcția pasată");};
@@ -95,7 +96,6 @@ alert(prelucrare(start, colectie)); // alert => 60
 
 Funcțiile pot fi stocate într-un array care să determine ordinea de prelucrare a unor date.
 Parcurgerea colecției de funcții are drept scope apelarea rând pe rând a fiecărei funcții și pasarea ca parametru ceea ce a returnat anterioara.
-
 
 #### Funcție exprimată anonimă, (anonymous function expression).
 
@@ -154,7 +154,6 @@ var anonima = function(){};
 ```
 Atenție, nu permite recursivitate.
 
-
 ### D. Funcție EXPRIMATĂ CU IDENTIFICATOR (named function expression):
 
 ```js
@@ -179,7 +178,6 @@ ceva(); // ReferenceError: ceva is not defined
 - Global scope nu este poluat
 - Autodocumentează codul în cel mai simplu mod posibil.
 
-
 ## Funcții lambda sau funcțiile de nivel înalt
 
 Orice funcție este, de fapt o valoare.
@@ -187,7 +185,7 @@ Dacă o funcție este folosită ca argument sau ca valoare returnată, aceasta e
 
 Unele funcții consumă și returnează funcții ca date.
 
-Un exemplu de funcții lambda. adaugaCifra() este o funcție lambda care are acces la variabila rezultat.
+Un exemplu de funcții lambda. `adaugaCifra()` este o funcție lambda care are acces la variabila rezultat.
 
 ```js
 var suma = function suma() {
@@ -198,6 +196,7 @@ var suma = function suma() {
 ```
 
 Sunt folosite pentru:
+
 - a face operațiuni asupra argumentelor,
 - atașarea de event handlers pentru interacțiunea cu DOM-ul,
 - pasarea unei funcții callback la încheierea execuției funcției curente,

@@ -34,7 +34,7 @@ Din acest motive este cel mai bine ca variabilele să fie declarate în capul fu
 - Variabila primește valoarea `undefined`. Pentru că se întâmplă acest lucru, cel mai bine este să declari variabilele în capul funcției și de preferat într-o singură declarație var.
 - Hoistingul are un rol funamental în cazurile de recursiviate și recursivitate mutuală (o funcție o cheamă pe alta până când o condiție rupe lanțul).
 - Folosirea noului cuvânt cheie `let` pentru a declara variabilele, are ca efect limitarea scope-ului la nivelul blocului `{}` (block scoping).
-- Excepția pentru care JavaScript face block scopeing este contructul try... catch
+- Excepția pentru care JavaScript face block scopeing este contrucția `try... catch`.
 
 ```js
 unu(1);

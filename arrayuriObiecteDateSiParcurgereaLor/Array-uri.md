@@ -15,7 +15,7 @@ Indexarea internă a elementelor atunci când nu este explicită, pornește de l
 
 Uneori este necesar să afli care este prototipul unei colecții de care nu ești sigur dacă este array curat sau array-like (asemănător-cu-array).
 
-```js
+```javascript
 var tablou = ['prima', 'a doua', 1, 2];
 
 var protoTablou = Object.getPrototypeOf(tablou);
@@ -35,7 +35,7 @@ arrayLike --> Object.prototype --> null.
 
 ## Mantre
 
--Array-urile sunt **obiecte** și poți adăuga proprietăți în array folosind notația dot `var a = [1,2]; a.i = 23; a.i // 23`. Valorile sunt adăugate indiferent că array-ul are un index numeric prestabilit. Ele sunt acolo.
+- Array-urile sunt **obiecte** și poți adăuga proprietăți în array folosind notația dot `var a = [1,2]; a.i = 23; a.i // 23`. Valorile sunt adăugate indiferent că array-ul are un index numeric prestabilit. Ele sunt acolo.
 - Orice obiect Array are o proprietate `length`
 -cheia unei proprietăți al unui array se numește `index` al unui array (valorile dintre paranteze pătrate sunt convertite la string)
 -o proprietate într-un array care este identificată printr-un index este numită `element`
@@ -44,9 +44,9 @@ arrayLike --> Object.prototype --> null.
 
 ## Crearea array-urilor
 
-### Este recomandtă folosirea constructorului Array
+### Este recomandată folosirea constructorului `Array`
 
-```js
+```javascript
 var prestabilit = Array(5); // Array [ <5 empty slots> ]
 
 Array(5).join('-'); // "----"
@@ -56,13 +56,13 @@ Array(5).join('-'); // "----"
 
 Dacă nu sunt menționate elementele array-ului, acesta va fi constituit din locuri goale, exact ca o sală de teatru goală. Toate scaunele poartă un număr, dar nu este nimeni așezat pe el.
 
-#### Folosirea lui `Array.apply` pentru crearea de array-uri dense
+#### Folosirea lui `Array.apply()` pentru crearea de array-uri „dense”.
 
 Există un truc pentru a genera array-uri de o dimensiune fixă, dar care în loc să nu aibă elemente, să fie populată cu `undefined`.
 Se folosește Function.prototype.apply(), care se poate invoca direct pe Array pentru că și Array, de fapt este o funcție.
 Pentru aceasta contextul va fi stabilit la obiectul general (în cazul browserului este `window`) sau la `null`, iar drept argumente, va fi invocat Apply pasându-i-se numărul de elemente dorit:
 
-```js
+```javascript
 Array.apply(window, Array(5)); // Array [ undefined, undefined, undefined, undefined, undefined ] echivalent cu Array(5).fill()
 Array.apply(null, Array(5)); // Array [ undefined, undefined, undefined, undefined, undefined ]
 Array.apply(window, [1,,3]); // Array [ 1, undefined, 3 ]
@@ -83,9 +83,9 @@ Acesta este un pont de la Brandon Benvie descoperit prin intermediul articolului
 
 #### Folosirea lui `fill()` pentru a crea array-uri dense (vezi `Array.prototype.fill()`)
 
-Cu fill() se pot crea array-uri dense care să conțină valori:
+Cu `fill()` se pot crea array-uri dense care să conțină valori:
 
-```js
+```javascript
 [1,2,3].fill();                  // Array [ undefined, undefined, undefined ] echivalent cu Array(3).fill()
 Array(3).fill(4);                // [4, 4, 4]
 [].fill.call({ length: 3 }, 4);  // {0: 4, 1: 4, 2: 4, length: 3}
@@ -93,20 +93,20 @@ Array(3).fill(4);                // [4, 4, 4]
 
 ### Folosind constructorul: `new Array()`
 
-```js
+```javascript
 var tablou = new Array('abc','def'); // nu este o practică încurajată. A se evita.
 console.log(tablou); // Array [ "abc", "def" ]
 ```
 Poți prestabili dimensiunea array-ul. Dacă se poate, acest lucru conduce la eficientizarea alocării memoriei pentru array-uri.
 
-```js
+```javascript
 var test = new Array(5);
 console.log(test); // Array [ <5 empty slots> ]
 ```
 
 ### Cu declararea simplă prin paranteze drepte: array literal
 
-```js
+```javascript
 var tablou = [1, 2, 3];
 ```
 
@@ -114,7 +114,7 @@ var tablou = [1, 2, 3];
 
 Realizarea array-urilor multidimensionale - array de array-uri
 
-```js
+```javascript
 var arrDeArr = [];                                                   // array-ul care le va conține pe celelalte (un array de array-uri)
 for(var contorRanduri = 0; contorRanduri < 3; contorRanduri++) {     // adaugă în array-ul randuri
     arrDeArr[contorRanduri] = [];                                    // cate un array
@@ -131,7 +131,7 @@ arrDeArr.forEach(function (arrDeArr) {
 
 Codul de mai sus este perfect echivalent cu
 
-```js
+```javascript
 var arrDeArr = [ ['0','0','X'], ['0','0','0'], ['0','0','0'] ];
 ```
 
@@ -141,7 +141,7 @@ Numărul maxim de indici este 2^23 - 1.
 
 Indicii care sunt numere negative vor fi considerați chei pentru valori care pot fi introduse în obiectul Array.
 
-```js
+```javascript
 var tablou = [];
 tablou[-1] = 'ceva în afară';
 console.log(tablou); // Array [ ]
@@ -152,7 +152,7 @@ tablou[-1];          // ceva în afară
 
 Operatorul `in` detectează dacă pentru valoare (indexul), există o valoare în array.
 
-```js
+```javascript
 var tablou = [0,1, ,2,4,"unu"];
 3 in tablou; // true
 2 in tablou; // false
@@ -162,7 +162,7 @@ var tablou = [0,1, ,2,4,"unu"];
 
 Această metodă creează „goluri” în array. Proprietatea `length` nu va fi afectată.
 
-```js
+```javascript
 var tablou = [1,2,3,4];
 delete tablou[2];
 console.log(tablou); // Array [ 1, 2, <1 empty slot>, 4 ]
@@ -170,16 +170,16 @@ console.log(tablou); // Array [ 1, 2, <1 empty slot>, 4 ]
 
 ## Manipularea dimensiunii unui array folosind `length`
 
-### `length` numără toate elementele array-ului chiar daca acestea au și goluri
+### `length` numără toate elementele array-ului chiar dacă acestea au și goluri.
 
-```js
+```javascript
 var tablou = [0,1,,3]; // conține un element lipsă
 tablou.length; // 4
 ```
 
 Pentru a număra câte elemente chiar există în array se va croi o funcție specializată:
 
-```js
+```javascript
 var tablou = [0,1,,3];
 
 function numaraElementeReale(date){
@@ -195,7 +195,7 @@ numaraElementeReale(tablou); // 3
 
 ### Creșterea lungimii array-ului prin introducerea valorii
 
-```js
+```javascript
 var tablou = ['x', 'y'];
 tablou.length = 3;
 // în acest moment ceea ce s-a întâmplat este că a fost introdus un slot gol în array.
@@ -205,7 +205,7 @@ tablou.length = 3;
 
 Se poate face simplu prin:
 
-```js
+```javascript
 var tablou = ['unu', 'doi', 'trei', 'patru'];
 tablou.length;        // 4
 tablou.length = 2;
@@ -215,7 +215,7 @@ console.log(tablou);  // Array [ "unu", "doi" ]
 
 ### Curățarea unui array - resetarea sa la zero.
 
-```js
+```javascript
 var tablou = ['unu', 'doi', 'trei', 'patru'];
 tablou.length;        // 4
 tablou.length = 0;
@@ -228,7 +228,7 @@ tablou = [];
 
 Resetarea la 0 a array-urilor dacă se face cu length, cei care accesează acel array vor avea surpriza unuia gol.
 
-```js
+```javascript
 var tablou = ['prima', 'a doua'];
 var altTablou = tablou;
 
@@ -240,7 +240,7 @@ altTablou; // []
 
 Folosirea resetării prin inițializarea variabilei cu un array gol, nu afectează alte referințe. Acestea vor păstra arrayul preexistent.
 
-```js
+```javascript
 var tablou = ['prima', 'a doua', 1, 2];
 var altTablou = tablou;
 
@@ -254,7 +254,7 @@ altTablou; // Array [ "prima", "a doua", 1, 2 ]
 
 Array-urile care au goluri se numesc „sparse”. Un array care nu are goluri se numește „dense”.
 
-```js
+```javascript
 // array sparce
 var arrayCuGoluri = [1,,3,4];
 
@@ -263,9 +263,11 @@ var arrayDens = [1,2,3,4];
 Array(4).fill(); // Array [undefined, undefined, undefined, undefined]
 ```
 
-### forEach() trece peste goluri
+### Trecerea peste goluri
 
-```js
+#### forEach()
+
+```javascript
 ['prima',, 1, 2].forEach(function(element, index){
   console.log(index + ' -> ' + element);
 });
@@ -274,11 +276,11 @@ Array(4).fill(); // Array [undefined, undefined, undefined, undefined]
 // 3 -> 2
 ```
 
-### every() trece peste goluri
-### some() trece peste goluri
-### map() sare peste goluri, dar le păstrează
+#### every() trece peste goluri
+#### some() trece peste goluri
+#### map() sare peste goluri, dar le păstrează
 
-```js
+```javascript
 ['prima',, 1, 2].map(function(currentValue, index){
   return currentValue + ' -> ' + index;
 });
@@ -287,14 +289,14 @@ Array(4).fill(); // Array [undefined, undefined, undefined, undefined]
 
 ### filter() elimină golurile
 
-```js
+```javascript
 ['prima',, 1, 2].filter(function(x){return true});
 Array [ "prima", 1, 2 ];
 ```
 
 ### join() convertește golurile, undefined și null la stringul pasat în join.
 
-```js
+```javascript
 ['prima',,1,2].join('X');
 // "primaXX1X2"
 ```
@@ -302,13 +304,13 @@ Array [ "prima", 1, 2 ];
 ### Bucla for...in listează cheile array-ului (acestea sunt un superset al indicilor array-ului)
 ### apply()
 
-```js
+```javascript
 for (var key in ['prima',,1,2]){ console.log(key); }; // 0 2 3
 ```
 
 ## Completarea unui array existent
 
-```js
+```javascript
 var primul = [1,2,3];
 var alDoilea = [4,5,6];
 
@@ -318,7 +320,7 @@ console.log(primul); // Array [ 1, 2, 3, 4, 5, 6 ]
 
 O altă soluție
 
-```js
+```javascript
 var a = [1,2,3,7,8,9];
 
 var b = [4,5,6]; var insertIndex = 3;
@@ -328,10 +330,64 @@ a.splice.apply(a, Array.concat(insertIndex, 0, b));
 
 ## Shuffle pentru conținutul unui array
 
-```js
+```javascript
 var colectie = [1,2,3,'unu','doi','trei'];
 
-colectie = colectie.sort(function() return Math.random() - 0.5);
+colectie = colectie.sort(function(){return Math.random() - 0.5});
 
-colectie
+colectie; // Array [ 3, 1, "doi", 2, "unu", "trei" ]
 ```
+
+## Destructurarea array-urilor
+
+Destructurarea este un procedeu care are drept scop extragerea sau manipularea valorilor asignându-le unor variabile.
+
+```javascript
+var arr = ['unu', 'doi'];
+var [unu, doi] = arr;
+
+console.log(unu, doi); // unu doi
+```
+
+Un alt exemplu este cel de potrivire unu la unu
+
+```javascript
+var unu, doi, trei;
+[unu, doi, trei] = [1, 2, 3];
+console.log(unu, doi, trei); // 1 2 3
+```
+
+Potrivirea unu la unu funcționează și în cazul returnării unui array.
+
+```javascript
+function genArray(){
+  return ['unu', 'doi', 'trei'];
+};
+[x, y, z] = genArray();
+console.log(x, y, z); // unu doi trei
+```
+
+Valori implicite:
+
+```javascript
+var x, y, z;
+[x = 1, y = 2, z = 3] = [1000];
+console.log(x, y, z); // 1000 2 3
+```
+
+Inversare de valori:
+
+```javascript
+var x = 10, y = 1000;
+[x, y] = [y, x];
+console.log(x, y); // 1000 10
+```
+
+Folosirea operatorului rest (`...`)
+
+```javascript
+var [x, ...restop] = [1, 2, 3];
+console.log(x, restop); // 1 și Array [ 2, 3 ]
+```
+
+Tot ce generează un array, folosindu-se această sintaxă, se poate transforma în legături la identificatori, adică valorile array-ului se pot asigna unor variabile ce sunt elementele unui alt array.

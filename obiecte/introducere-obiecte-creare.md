@@ -8,7 +8,7 @@ JavaScript vine din start cu câteva obiecte care se numesc „built-in object�
 
 În JavaScript neexistând clase (cod care se comportă ca un plan pentru construcția obiectelor), pentru a reutiliza cod, se creează obiecte care se bazează pe cele existente.
 
-Astfel, între aceste obiecte se creează o legătură. Această legătură se numește „legătură prototipală”. Aceste legături realizează „moștenirea prototipală” - `prototypal inheritance`. Obiectul preexistent constituie prototipul pentru cel nou creat care poate adăuga noi membri, noi comportamente. Mai trebuie adăugat că, de fapt, vorbim despre o *delegare* pe lanțul prototipal format.  Acest lucru înseamnă că atunci când ceri o proprietate care nu există, delegi solicitarea către prototip să ți-o servească.
+Astfel, între aceste obiecte se creează o legătură. Această legătură se numește „legătură prototipală”. Aceste legături realizează „moștenirea prototipală” - `prototypal inheritance`. Obiectul preexistent constituie prototipul pentru cel nou creat care poate adăuga noi membri, noi comportamente. Mai trebuie adăugat că, de fapt, vorbim despre o *delegare* pe lanțul prototipal format. Acest lucru înseamnă că atunci când ceri o proprietate care nu există, delegi solicitarea către prototip să ți-o servească.
 
 ## Mantre
 
@@ -21,7 +21,7 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
 - `Object.prototype` este un obiect în care poți adăuga propriile proprietăți și metode.
 - Modificările aduse obiectului `Object.prototype `se propagă către toate obiectele. Singura excepție este atunci când proprietățile și metodele supuse modificărilor nu sunt ele la rândul lor modificate mai departe în lanțul prototipal.
 - În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype (numeFunctie.prototype). Acest obiect (prototype), este gol și este creat de constructorul lui Object()
-- Funcțiile sunt legate de obiectul prototip prin metoda .constructor. Acest lucru înseamnă că poți afla în orice moment care este funcția care generează prototipul prin apelarea constructorului cu ***dunder-dunder-proto***: `obiect.__proto__constructor`
+- Funcțiile sunt legate de obiectul prototip prin metoda .constructor. Acest lucru înseamnă că poți afla în orice moment care este funcția care generează prototipul prin apelarea constructorului cu ***dunder-dunder-proto***: `obiect.__proto__.constructor`
 - Fiecare funcție are un obiect prototip diferit.
 - Obiectele pot invoca orice funcție publică indiferent de lanțul prototipal.
 - Un obiect poate fi creat cu `new Object()`:
@@ -43,11 +43,11 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
 - Legătura prototipală se obține și prin efectul al doilea al folosirii cuvântului cheie `new`.
 - Legătura prototipală creează un lanț de delegare pentru cazurile în care nu găsești o proprietate sau o metodă într-un anumit context de execuție.
 - Mecanismul pe care-l realizează `.prototype` este unul de delegare a cererii pentru referința unei proprietăți sau metode către un obiect mai sus pe lanțul prototipal către un alt obiect.
-- Obiecte cu un prototip și proprietăți prestabilite, se pot contrui cu Object.create(obi, {exemplu: 'proprietate'}). Se realizează o legătura prototipală la obiectul obi.
+- Obiecte cu un prototip și proprietăți prestabilite, se pot contrui cu `Object.create(obi, {exemplu: 'proprietate'})`. Se realizează o legătura prototipală la obiectul obi.
 - Obiectele atunci când au metode, nu „dețin” sau „conțin” acele funcții, ci doar referințe către funcțiile pe post de metode. Funcțiile (metodele) nu fac parte din obiect; referința către acestea este parte a obiectului.
 - În obiecte numele proprietăților sunt întotdeauna stringuri.
-- relațiile prototipale pot cauza probleme atunci când este nevoie de enumerarea proprietăților obiectelor. Crockford recomandă „ambalarea” conținutului buclei de ciclare într-o funcție de verificare hasOwnPropery();
-- Dacă dorești „înghețarea” obiectelor pentru a nu fi modificate, se va folosi Object.freeze() iar în cazul Node.js, modulul `deep-freeze`.
+- Relațiile prototipale pot cauza probleme atunci când este nevoie de enumerarea proprietăților obiectelor. Douglas Crockford recomandă „ambalarea” conținutului buclei de ciclare într-o funcție de verificare `hasOwnPropery()`;
+- Dacă dorești „înghețarea” obiectelor pentru a nu fi modificate, se va folosi `Object.freeze()` iar în cazul Node.js, modulul `deep-freeze`.
 
 ## Crearea obiectelor
 
@@ -57,10 +57,11 @@ Obiectele pot fi create în două feluri: prin declararea acestora sau prin cons
 2. `var newObj = Object.create(null);` prototype este setat la `null`.
 3. `var newObj = Object.create(Object.prototype);` echivalentă cu `var newObj = {}`.
 4. `var newObj = {};` echivalentă cu `new Object()`.
+5. `function x(){return{a:1}}; var y = x();`
 
 ## Crearea obiectelor cu valori deja computate
 
-Această metodă este introdusă de EcmaScript 2015. De fapt, este crearea unor obiecte literale, dar de această dată se pot introduce valori computate (computed property names) chiar la momentul în care este constituit obiectul.
+Această metodă este introdusă de ECMAScript 2015. De fapt, creezi obiecte literale, dar de această dată se pot introduce valori computate (computed property names) chiar la momentul în care este constituit obiectul.
 
 ```js
 // cel mai simplu exemplu
@@ -98,7 +99,7 @@ Atributele unei proprități de tip Accessor
 |`enumerable`|Boolean|Dacă este setat la `true`, proprietatea va putea fi enumerată într-un `for-in`|
 |`configurable`|Boolean|Dacă este setat la `false`, orice încercare de a a modifica să fie o proprietate de date sau să-i schimbi atributele, va eșua|
 
-Ca exemplu practic:
+Un exemplu practic:
 
 ```js
 var newObj = {};              // Creează obiectul
@@ -114,7 +115,7 @@ Object.defineProperty(newObj, 'numeCheieNoua', {
 ## Crearea metodelor
 
 O funcție care este declarată într-un obiect, devine metodă a acelui obiect. Atenție! este totuși o funcție în sine.
-
+Object.freeze()
 ```js
 var obi = {
   token: 10,
@@ -184,7 +185,7 @@ let obi2 = Object.create(obi);
 obi2.stare = 100;
 ```
 
-### `getPrototypeOf`
+### `Object.getPrototypeOf()`
 
 Returnează un obiect sau null și indică obiectul care oferă proprietăți care sunt moștenite și de cel asupra căruia se face interogarea cu `getPrototypeOf`. `null` indică faptul că obiectul curent nu moștenește nicio proprietate.
 
@@ -208,19 +209,19 @@ Acesta este modelul cel mai des întâlnit și acceptat ca practică istorică:
 
 ### Standardul spune
 
-Un constructor, de fapt o funcție constructor, este un obiect funcție care suportă metoda internă `Construct`.
+Un constructor, de fapt o funcție constructor, este un obiect funcție care suportă metoda internă `[[Construct]]`.
 
 ### Ce se întâmplă când folosești `new`
 
 1. Se creează un obiect nou.
 2. Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu `new`. Se creează legătura prototipală.
-3. Obiectul generat automat este pasat funcției cu rol de constructor ca fiind parametrul `this` și astfel, devine contextul de execuție a funcției constructor invocate (`this` este pasat ca parametru împreună cu `arguments`).
-4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), iar `this` va fi returnat automat.
+3. Obiectul generat automat este pasat funcției cu rol de constructor ca fiind parametrul `this` și astfel, devine contextul de execuție a funcției constructor invocate (`this` este pasat ca parametru împreună cu obiectul `arguments`). `this` va fi obiectul nou construit
+4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”) se va returna automat obiectul constituit la pasul 1.
 
 Cel mai simplu exemplu:
 
 ```js
-var Salut = function(){};                 // din consola browserului> Salut returnează: function Salut()
+var Salut = function(){};                 // function Salut()
 
 Salut.prototype.glas = function(vorbe){
   console.log(vorbe);
@@ -232,7 +233,20 @@ var unObiect = new Salut();               // unObiect returnează: Object {}
 unObiect.glas('o vorbă să-ți mai spun');  // unObiect.__proto__.constructor returnează: function Salut()
 ```
 
-Atenție! Aici există ceva foarte important de lămurit. Proprietatea `prototype` aparține funcției constructor. Această legătură vizibilă, care poate fi „întrebată”, expune o legătură internă referită de standard ca [[Prototype]].
+Atenție! Aici există ceva foarte important de lămurit. Proprietatea `prototype` aparține funcției constructor (`Function.prototype`). Această legătură vizibilă, care poate fi „întrebată”, expune o legătură internă referită de standard ca [[Prototype]].
+
+La nevoie, poți adăuga în prototipul funcției proprietăți pe care îți dorești să fie moștenite mai târziu de obiectele create. Să spunem că avem o funcție cu rol de constructor după care se instanțiază un obiect. Dar mai târziu, pentru că este nevoie de o proprietate care să fie moștenită de toate obiectele generate, se poate introduce direct în obiectul `prototype` al funcției.
+
+```javascript
+function TestInstantiere(){
+  this.x = 100;
+};
+var obi = new TestInstantiere();
+console.log(obi.x);
+// acum ne-am dat seama că mai e nevoie de o valoare de 1000.
+TestInstantiere.prototype.y = 1000;
+console.log(obi.y);
+```
 
 Cum testezi, cum întrebi care este prototipul unui obiect? Există două metode echivalente ca rezultat returnat (obiectul prototype):
 

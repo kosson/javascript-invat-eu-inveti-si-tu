@@ -148,6 +148,24 @@ delete obiect.ceva; /true
 obiect // Object { colectie: Array[2] }
 ```
 
+Reține faptul că funcțiile în JavaScript sunt obiecte și că, orice funcție în JS, poate face referință la variabile definite în scope-ul extern.
+
+```js
+function unObiect(){
+  var oValoare;
+  return {
+    set: function(modVal){ oValoare = modVal; },
+    get: function(){ return oValoare; },
+    tip: function(){ return typeof oValoare; }
+  };
+};
+let x = unObiect(); // typeof x => "object"
+x.get();    // undefined
+x.set(10);  // undefined
+x.get();    // 10
+x.tip();    // "number"
+```
+
 ### Definirea unui setter pe un obiect folosind `defineProperty`
 
 ```javascript

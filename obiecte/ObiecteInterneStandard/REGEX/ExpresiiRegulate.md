@@ -1,8 +1,19 @@
 # Expresii regulate
 
-Expresiile regulate sunt șabloane folosite pentru a căuta combinații de caractere în șiruri.
+Șirurile de caractere în JavaScript sunt înșiruiri de secvențe de 16 biți denumite tehnic `unități de cod` (code unit) ce reprezintă, de fapt, un singur caracter. RegExp se așteaptă să lucreze cu unități de cod pe 16 biți, care reprezintă un singur caracter. Totuși începând cu ECMAScript 6, există un fanion dedicat care semnalizează RegExp că va avea de lucru cu un șir de caractere Unicode - `u`. De fapt, îi este indicat motorului faptul că trebuie să lucreze la nivel de caractere și nu la nivel de `code unit`.
 
-Expresiile regulate pot fi construite fie cu ajutorul unui constructor sau pot fi expresii literale în sine.
+```javascript
+let exemplu = '𝒥';
+
+console.log(exemplu.length); // lungimea textului este 2
+
+// testează pentru potrivirea cu orice caracter /^.$/
+console.log(/^.$/.test(exemplu)); // false, nu se face potrivirea
+console.log(/^.$/u.test(exemplu)); // true, fanionul este ridicat pentru Unicode
+```
+
+Expresiile regulate sunt șabloane folosite pentru a căuta combinații de caractere în șiruri.
+Expresiile regulate pot fi construite, fie cu ajutorul unui constructor, ori pot fi expresii literale în sine.
 
 ```js
 var exempluDeRegExp = new RegExp("ab+c", "g");
@@ -12,10 +23,10 @@ exempluDeRegExp.global; // true
 
 ## Mantre
 
-- șirurile în JavaScript sunt imuabile (nu se modifică șirul original),
-- șirurile sunt „consumate” de JavaScript de la stânga la dreapta,
-- din moment ce un caracter a fost „consumat”, acesta nu mai este folosit,
-- expresiile regulate sunt obiecte în JavaScript
+- șirurile în JavaScript sunt imuabile (nu se modifică șirul original).
+- șirurile sunt „consumate” (cu sensul de procesare) de JavaScript de la stânga la dreapta.
+- din moment ce un caracter a fost „consumat”, acesta nu mai este folosit.
+- expresiile regulate sunt obiecte în JavaScript.
 - regexul avansează caracter cu caracter iar când a fost găsit un șir care se potrivește, acestea sunt „consumate” deodată regex trecând la caracterul următor (dacă regex este global).
 
 Aceste șabloane sunt folosite cu metodele `exec` și `test` ale obiectului RegExp.
@@ -133,9 +144,9 @@ var identificare = adrese.match(/(?:https?)?\/\/[a-z][a-z0-9-]+[a-z0-9]+/ig);
 // apoi o serie de domenii de caractere
 ```
 
-## Diferența dintre identificările lazy și cele greedy.
+## Diferența dintre identificările lazy și cele `greedy`.
 
-În mod natural, expresiile regulate au un comportament greedy, adică vor încerca să facă identificări până când resursa șir este epuizată.
+În mod natural, expresiile regulate au un comportament `greedy`, adică vor încerca să facă identificări până când resursa șir este epuizată.
 
 Gruparea permite o tehnică de apelare a grupului numită `backreferencing`. În cazul regexurilor, fiecărui grup îi sunt asignate numere de la stânga la dreapta începând cu 1. Se pot referenția aceste grupuri cu backslash număr.
 

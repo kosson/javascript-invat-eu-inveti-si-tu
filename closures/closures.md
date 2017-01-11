@@ -1,10 +1,20 @@
 # Closures
 
-Un closure se creează chiar în momentul definirii funcției și menține accesul la toate variabilele care erau „în scope” la momentul definirii funcției.
-Funcția definită și care face closure poate fi asignată unei variabile, pasată ca argument unei funcții sau poate fi returnată.
-Efect: Scope-ul existent (totalitatea identificatorilor) la momentul definirii funcției va fi accesbil câtă vreme există o referință către funcție. De fapt, closure-urile sunt un efect al modului în care lucrează motorul JavaScript pentru a realiza scope-urile (**lexical environment**).
+O funcție definită în interiorul unei funcții container, creează un closure.
 
-## Moment zen: Definirea unei funcții are ca efect menținerea „în viață” a tuturor identificatorilor necesari pentru ca aceasta să fie executată.
+Este o funcție internă care „fotografiază” mediul lexical în care a fost declarată și pe care îl folosește pentru a utiliza tot ce este necesar să se execute.
+
+Îți poți închipui un pescar (funcția internă), care stând în barca sa pe mare (funcția gazdă) aruncă un prostovol (closure) peste un banc de pești (identificatorii existenți din contextul de execuție la momentul evaluării). Poți să-ți imaginezi și un cățel într-o cutie. Cutia fiind funcția gazdă iar cățelul fiind funcția internă. Cățelul cunoaște cutia și are acces la toate obiectele din interiorul său.
+
+Un closure se creează chiar în momentul definirii funcției și menține accesul la toate variabilele care erau „în scope” la momentul definirii funcției. Putem spune că o funcție din interiorul altei funcții este o funcție ***privată***, care are acces la argumentele și variabilele gazdei.
+
+Funcția definită și care face closure poate fi asignată unei variabile, pasată ca argument unei funcții sau poate fi returnată.
+
+**Efect**: Scope-ul existent (totalitatea identificatorilor) la momentul definirii funcției va fi accesibil câtă vreme există o referință către funcție. De fapt, closure-urile sunt un efect al modului în care lucrează motorul JavaScript pentru a realiza scope-urile (**lexical environment**). Fiecare funcție imbricată creează propriul scope la momentul evaluării. În cazul mai multor niveluri de adâncime, creându-se un lanț al scope-urilor, trebuie avut grijă la conflictele ce pot apărea atunci când doi identificatori poartă același nume.
+
+Closure este atunci când o FUNCȚIE ține minte scope-ul lexical chiar și atunci când este executată în afara acelui scope lexical (Kyle Simpson).
+
+**Moment zen**: definirea unei funcții are ca efect menținerea „în viață” a tuturor identificatorilor necesari pentru ca aceasta să fie executată.
 
 Simplist poți spune că un closure se formează atunci când o funcție returnează o alta pe care a găzduit-o sau când există o referință externă la funcția internă. Acest lucru înseamnă că această funcție poate fi invocată la un moment viitor.
 
@@ -38,22 +48,15 @@ La nevoie, se poate executa funcția returnată fără a mai fi asignată.
 closureEx()();
 ```
 
-## Definiții
-
-Closure este atunci când o FUNCȚIE ține minte scope-ul lexical chiar și atunci când este executată în afara acelui scope lexical (Kyle Simpson).
-
-Un closure este un obiect special care combină două lucruri: o funcție și mediul în care aceasta a fost **declarată**.
-Mediul, adică scope-ul lexical constă din toate variabilele locale care erau **in-scope** la momentul în care s-a creat closure-ul inclusiv parametrii.
-
 ## Dependințe cognitive
 
 - funcții
-- scope
+- scope (**Lexical Environment**)
 
 ## Mantre
 
 - Folosirea cuvântului cheie `function` într-o funcție gazdă, creează un closure.
-- JavaScript are un **scope lexical** generat la faza de compilare.
+- JavaScript are un **scope lexical** (lexical environment) generat la faza de compilare.
 - Closure-uri generează doar funcțiile.
 - Closure-ul în sine nu este un obiect care să conțină toată informația necesară.
 - Un closure permite accesarea variabilelor definite în funcția container și, atenție, le poate și modifica.
@@ -62,13 +65,13 @@ Mediul, adică scope-ul lexical constă din toate variabilele locale care erau *
 - În cazul buclelor, bindingul closer-ului se va face pe ultimul rezultat al buclei. Nu te aștepta să existe rezultate intermediare. În acest caz, abia la momentul returnării funcției interne, se face referențierea valorilor și de aceea va fi ultima valoare din operațiunea de ciclare.
 - De fiecare dată când funcția externă este apelată, funcția internă este definită din nou. Codul funcției interne va fi identic, dar scope chain-ul asociat va fi diferit. Pe scurt, se resetează valorile la cele definite, daca acestea au fost modificate.
 - De fiecare dată când funcția gazdă este apelată, se creează un nou set de variabile pentru acea invocare.
-- Variabilele din scope-ul pus la dispoziție de un closure POT FI MODIFICATE.
+- Variabilele din scope-ul pus la dispoziție de un closure **pot fi modificate**.
 - **Un closure nu poate accesa `this` al funcției container**. În acest scop se folosește salvarea lui this într-o variabilă `var self = this;`
 - Un closure stochează valorile externe prin referință, nu prin valoare.
 - Ori de câte ori folosești `eval()` într-o funcție, este folosit un closure. Textul de cod pe care-l folosești cu eval poate referenția variabile locale ale funcției gazde, dar și variabile declarare în textul de cod folosit cu eval.
 - Folosirea constructorului de funcții în interiorul unei funcții gazde `new Function()`, nu conduce la crearea unui closure.
-- Closure-urile pot merge mai adând de un nivel.
-- Closure-ul introduce conceptul de variabile private.
+- Closure-urile pot merge mai adânc de un nivel.
+- Closure-ul introduce posibilitatea unor **variabile private**.
 - Pentru ca un closure să se formeze nu este neapărat nevoie să se facă un return. Accesarea variabilelor din afara scope-ului lexical propriu, creează un closure.
 
 ## Anatomie
@@ -76,7 +79,7 @@ Mediul, adică scope-ul lexical constă din toate variabilele locale care erau *
 Un closure, are acces la:
 - variabile și obiectele care aparțin de scope-ul global,
 - variabilele și obiectele care aparțin scope-ului funcției părinte, plus parametrii acesteia,
-- toate variabilele declarate după ce funcția (care face closure-ul) a fost declarată.
+- toate variabilele declarate după (d.p.d.v. lexical) ce funcția (care face closure-ul) a fost declarată.
 
 ### La ce avem acces:
 
@@ -103,8 +106,9 @@ var tip = init(); // typeof tip => "undefined"
 init.__proto__.constructor // => function Function()
 ```
 
-Un closure este mecanismul prin care putem obține o încapsulare dinamică a stării scope-ului, care, atenție, poate fi modificat atâta vreme cât closure-ul există.
-Closure-urile se pot face prin returnarea unei funcții sau a unui obiect care conține metode sau se poate crea la momentul execuției funcției chiar în interiorul funcției gazdă.
+Un closure este mecanismul prin care putem obține o încapsulare dinamică a stării scope-ului, care, atenție, poate fi modificat atâta vreme cât closure-ul există. Cel mai simplu closure se face atunci când funcția internă se execută chiar în funcția gazdă.
+
+Closure-urile întâlnite în practica curentă se fac prin returnarea unei funcții sau a unui obiect care conține metode sau se poate crea la momentul execuției funcției chiar în interiorul funcției gazdă.
 
 ### Closure fără a returna
 
@@ -149,7 +153,7 @@ referintaCatreIntern(container());
 
 ### Variabile „private” și accesarea acestora.
 
-Cazul cel mai simplu este al unei funcții returnate care păstrează referințele către toți identificatorii din propriul scope, dar și scope-ul părinte. Aici se observă cât de intim conceptul de closure este legat de cel al scope-ului (lexical environment) creat la momentul compilării.
+Cazul cel mai simplu este al unei funcții returnate care păstrează referințele către toți identificatorii din propriul scope, dar și scope-ul părinte. Aici se observă cât de intim conceptul de closure este legat de cel al scope-ului (lexical environment) creat la momentul procesării codului sursă (**function code**).
 
 ```js
 function gazda(ceva){
@@ -192,17 +196,17 @@ Pas cu pas:
 
 `new` execută Lansare().
 Este instanțiat un nou obiect pe care-l vor folosi metodele drept context (`this`).
-Când firul de execuție întră în Lansare() este creat automat o referință către lexical environment (scope-ul) găsit. În exemplul nostru sunt doi identificatori, variabila altitudine și constanta viteza.
+Când firul de execuție întră în `Lansare()` este creat automat o referință către lexical environment-ul (scope-ul) găsit. În exemplul nostru sunt doi identificatori, variabila `altitudine` și constanta `viteza`.
 De fiecare dată când este invocată o funcție cu rol de constructor, se creează un nou **lexical environment** (scope), care conține identificatorii pentru varibilele locale ale funcției contructorului.
-În timpul execuției cu `new` a funcției constructor Lansare(), se creează și cele două funcții (getAltitudine și setAltitudine), care devin proprietățile noului obiect creat (primaLansare). Respectând tipicul, funcțiile acestea vor păstra o referință a scope-ului în care au fost create, adică **lexical environment**-ul lui Lansare.
-Efectul final este că putem accesa funcțiile getAltitudine și setAltitudine, bineînțeles cu rolurile lor de metode ale noului obiect, dar care fac closure pe variabilele existente în Lansare(); altitudine și viteza. Cu alte cuvinte, țin în viață lexical environment (scope-ul) lui Lansare.
+În timpul execuției cu `new` a funcției constructor `Lansare()`, se creează și cele două funcții (`getAltitudine` și `setAltitudine`), care devin proprietățile noului obiect creat (`primaLansare`). Respectând tipicul, funcțiile acestea vor păstra o referință a scope-ului în care au fost create, adică **lexical environment**-ul lui `Lansare`.
+Efectul final este că putem accesa funcțiile `getAltitudine` și `setAltitudine`, bineînțeles cu rolurile lor de metode ale noului obiect, dar care fac closure pe variabilele existente în `Lansare()`; altitudine și viteza. Cu alte cuvinte, țin în viață lexical environment-ul (scope-ul) lui Lansare.
 
-Pentru aDouaLansare întreg procesul se repetă cu repetarea la valorile default a variabilelor din Lansare. Metodele celor două obiecte generate vor fi diferite.
+Pentru `aDouaLansare` întreg procesul se repetă cu repetarea la valorile default a variabilelor din Lansare. Metodele celor două obiecte generate vor fi diferite.
 
-Merită observat faptul că în exemplul nostru metodele sunt rulate în **global execution context** iar scope-ul asociat, firesc este cel global.
+Trebuie remarcat faptul că în exemplul nostru metodele sunt rulate în **global execution context** iar scope-ul asociat, firesc este cel global.
 La execuția metodelor, acestea vor crea câte un context de execuție propriu care va fi adăugat la call-stack și care va dispărea din stack la momentul finalizării execuției lor. Executarea metodelor mai are ca efect crearea scope-ului propriu (**lexical environment**) și crearea referinței către scope-ul în care au fost create (Lansare), care era activ la crearea funcției. Accesarea variabilei altitudine se face prin căutarea mai întâi în propriul scope creat, care nu conține un identificator pe nume altitudine și mai apoi căutarea în scope-ul care exista la momentul creării, adică scope-ul lui Lansare, unde îl găsește și rezolvă aducând valoarea.
 
-Reține faptul că în cazul în care este nevoie poți atribui metoda unui obiect creat cu new unei proprietăți a altui obiect creat ad-hoc și care va putea accesa valorile din scope-ul funcției contructor. Acest caz conduce la concluzia că aceste variabile nu sunt atât de ascunse pe cât s-ar crede la prima vedere. Dar acest mecanism totuși este cel mai aproape de „încapsularea” din alte limbaje de programare.
+Reține faptul că în cazul în care este nevoie poți atribui metoda unui obiect creat cu `new` unei proprietăți a altui obiect creat ad-hoc și care va putea accesa valorile din scope-ul funcției contructor. Acest caz conduce la concluzia că aceste variabile nu sunt atât de ascunse pe cât s-ar crede la prima vedere. Dar acest mecanism totuși este cel mai aproape de „încapsularea” din alte limbaje de programare.
 
 ### Crearea accesarea și modificarea membrilor unui obiect
 
@@ -253,7 +257,7 @@ Se observă că după invocarea a doua oară a funcției gazdă, orice modificar
 
 John Resig aduce acest caz de closure format la crearea unui obiect pe baza unei funcții constructor.
 
-Funcțiile cu rol de constuctori pot defini întern metodele, iar acestea devin niște metode tip „accessor” sau „getter”, care te ajută să ajungi din scope-ul extern la valorile din constructor.
+Funcțiile cu rol de constructori pot defini întern metodele, iar acestea devin niște metode tip „accessor” sau „getter”, care te ajută să ajungi din scope-ul extern la valorile din constructor.
 
 ```js
 function Sablon(){

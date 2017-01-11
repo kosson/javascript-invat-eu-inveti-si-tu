@@ -1,7 +1,9 @@
 # Variabile
 
+TODO: Ilustrează referința și copia
+
 Variabilele sunt identificatori pentru valori.
-Javascript folosește trei cuvinte cheie specifice limbajului: `var`, `let` și `const`. `let` și `const` au fost adăugate în ES6.
+Javascript folosește trei cuvinte cheie specifice limbajului: `var`, `let` și `const`. `let` și `const` au fost adăugate în ES6 și sunt legate strict de blocul de cod delimitat prin acolade.
 
 Cele trei moduri de a declara variabile au efect și asupra scope-ului.
 
@@ -11,17 +13,18 @@ Prin folosirea lui `var`, declararea variabilei se face în global scope sau în
 
 ### Standardul spune
 
-Un enunț `var` declară variabile care au drept scope contextul de execuție curent. Variabilele `var` sunt create atunci când este instanțiat mediul lexical care le conține dar la momentul în care sunt create li se asignează valoarea `undefined`. Asignarea valorii se face la momentul execuției, nu la momentul creării.
+Un enunț `var` declară variabile care au drept `scope` contextul de execuție curent. Variabilele `var` sunt create atunci când este instanțiat mediul lexical care le conține dar la momentul în care sunt create li se asignează valoarea `undefined`. Asignarea valorii se face la momentul execuției, nu la momentul creării.
 
 ## `let` și `const`
 
+Numele de `let` vine din matematică însemnând: `fie`: fie x un număr cu valoarea 1.
 Definesc variabile în cel mai apropiat „mediu lexical” (scope), care poate fi global scope, un block `{}` sau o buclă precum `for`.
 Rolul lor este de a localiza la nivel de înregistrare în scope la nivel de `global`, `function` și block `{}`.
 
 ### Standardul spune
 
 Declarațiile `let` și `const` definesc variabilele care sunt în mediul lexical, adică scope-ul contextului de execuție curent (running execution context).
-Variabilele sunt create atunci când mediul lexical este instanțiat, dar nu vor fi accesate nicicum până când  ***lexical binding*** este evaluat. Valaorea este asignată atunci când este evaluat acest **lexical binding**, nu la momentul creării lor. Dacă o declarație cu `let` nu are o valoare de inițializare, este asignat `undefined` la momentul în care este evaluat `lexical binding`.
+Variabilele sunt create atunci când mediul lexical este instanțiat, dar nu vor fi accesate nicicum până când  ***lexical binding*** este evaluat. Valorea este asignată atunci când este evaluat acest **lexical binding**, nu la momentul declarării lor. Dacă o declarație cu `let` nu are o valoare de inițializare, este asignat `undefined` la momentul în care este evaluat, adică la momentul când se face `lexical binding` și se completează așa-numitul „Registru de mediu”.
 
 ## Mantre
 

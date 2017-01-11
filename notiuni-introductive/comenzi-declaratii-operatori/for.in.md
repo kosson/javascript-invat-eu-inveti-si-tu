@@ -81,3 +81,20 @@ for(let i in colectie){
   console.log(colectie[i]);
 };
 ```
+
+## Bune practici
+
+Nu folosi `for...in` pentru array-uri. Un motiv foarte bun este acela că ai putea avea de-a face cu array-uri sparte.
+
+```javascript
+var arr = [];
+
+arr[8] = 'o valoare';
+console.log(arr); // Array [ <8 empty slots>, "o valoare" ]
+
+for(var elem in arr){
+  console.log(elem);
+}; // 8
+```
+
+Acest rezultat este datorat faptului că array-ul este tratat precum un obiect pentru care doar cheia 8 are o valoare. Această cheie este returnată.

@@ -26,13 +26,13 @@ La invocare se creează un nou context de execuție, care ajunge în call-stack.
 
 1. Se aplează funcția iar locul în care se întâmplă acest lucru se numește **call-site**.
 2. Se creează un nou **execution context** - context de execuție care este introdus în call-stack.
-  1. vorbim de context de execuție global (obiectul **window**) când funcția este invocată ca funcție, nu ca metodă sau callback
+  1. vorbim de context de execuție global (obiectul **window**), când funcția este invocată ca funcție, nu ca metodă sau callback.
   2. contextul de execuție este o sumă de informații (activation record) privind
     1. **unde** a fost apelată funcția (în callstack);
     2. ce parametri au fost pasați, etc,;
     3. referința `this` care va fi folosită pe durata execuției funcției.
-3. Se face legătura la contextul lexical asociat acelei funcții (scope-ul). Pentru scope-ul extern, funcția va pune drept referință valoarea proprietății interne a funcției numită `[[Environment]]`
-3. Se generează un obiect căruia îi sunt pasate automat ARGUMENTELE într-o colecție aemănătoare unui array și **this**.
+3. Se face legătura la contextul lexical asociat acelei funcții (scope-ul). Pentru scope-ul extern, funcția va pune drept referință valoarea proprietății interne a funcției numită `[[Environment]]`.
+3. Se generează un obiect căruia îi sunt pasate automat ARGUMENTELE într-o colecție asemănătoare unui array și **this**.
 
 **arguments** este o colecție (seamănă dar NU ESTE UN ARRAY) a tuturor argumentelor pasate funcției și are proprietatea length pentru a afla numărul argumentelor pasate. Valorile pot fi obținute prin indecși arguments[i].
 
@@ -64,7 +64,7 @@ Scopul unui constructor este de a crea un obiect, care este, de fapt valoarea re
 3. Obiectul generat automat este pasat funcției cu rol de constructor ca fiind parametrul `this` și astfel, devine contextul de execuție a funcției constructor invocate (`this` este pasat ca parametru împreună cu `arguments`).
 4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), `this` va fi returnat automat.
 
-### Invocarea funcțiilor prin call() și apply()
+### Invocarea funcțiilor prin `call()` și `apply()`
 
 Cele două funcții realizează un binding explicit a funcției cu un nou context de execuție. Se face „un împrumut” al mecanismelor și proceselor interne ale funcției în contextul de lucru oferit de un anume obiect.
 
