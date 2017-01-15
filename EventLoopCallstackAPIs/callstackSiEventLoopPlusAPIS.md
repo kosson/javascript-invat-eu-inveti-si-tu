@@ -29,3 +29,5 @@ setTimeout(function cb(){
 # Referințe
 
 Acest material a fost inspirat de prezetarea lui Philip Roberts: [What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ) de la JSConf EU 2014. Instrumentul de simulare „Loupe” este la [acest link](http://latentflip.com/loupe).
+
+[Wikipedia Call stack](https://en.wikipedia.org/wiki/Call_stack)

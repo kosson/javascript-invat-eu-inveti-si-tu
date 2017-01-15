@@ -54,7 +54,7 @@ Astfel, între aceste obiecte se creează o legătură. Această legătură se n
 Obiectele pot fi create în două feluri: prin declararea acestora sau prin construirea lor.
 
 1. `var newObj = new Object();` se respectă cele patru reguli: (1)crearea obiectului; (2)stabilirea lanțului prototipal; (3)bindingul lui `this` la noul obiect; (4)obiectul nou creat este returnat.
-2. `var newObj = Object.create(null);` prototype este setat la `null`.
+2. `var newObj = Object.create(null);` prototype este setat la `null`. Supranumit `dict pattern`
 3. `var newObj = Object.create(Object.prototype);` echivalentă cu `var newObj = {}`.
 4. `var newObj = {};` echivalentă cu `new Object()`.
 5. `function x(){return{a:1}}; var y = x();`

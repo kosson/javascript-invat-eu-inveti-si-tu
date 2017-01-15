@@ -1,10 +1,24 @@
 # Lexical environment - scope
 
-Motorul JavaScript atunci când este pus să evalueze o funcție, consultă mai întâi „lexical environment” - o zonă delimitată de felul în care rânduit codul ca și text, care este cunoscută de toată lumea ca „scope”. Acest lexical environment este în strânsă legătură cu diferite structuri de cod cum ar fi blocurile de cod (`{}`, începând cu versiunea ES6; anterior era limitat doar la funcții) și funcțiile. Această zonă se stabilește chiar și la nivelul `catch` din constructul `try-catch` a limbajului.
+„Este porțiunea de cod sursă pentru care este disponibilă o legătură între un nume și o entitate” (definiție pentru ALGOL 60, 1960).
+
+Motorul JavaScript atunci când este pus să evalueze o funcție, consultă mai întâi „lexical environment” - o zonă delimitată de felul în care rânduit codul ca și text, care este cunoscută de toată lumea ca „scope”.
+
+Acest lexical environment este în strânsă legătură cu diferite structuri de cod cum ar fi blocurile de cod (`{}` simplu, începând cu versiunea ES6, anterior fiind limitat doar la funcții) și funcțiile.
+
+Înainte de ES6 block scope-ul se realiza doar printr-un IIFE (Immediately-invoked function expression), care produce propriul său lexical scope izolat de restul codului.
+
+```javascript
+// cele două stiluri de a scrie IIFE-uri
+(function () { … })(); // dog balls
+(function () { … }()); // stilul Douglas Crockford
+```
+
+Această zonă se stabilește chiar și la nivelul `catch` din constructul `try-catch` a limbajului.
 
 ## Spune standardul
 
-Lexical environment este asociat cu structura lexicală a codului așa cum este declararea funcțiilor, blocurile de cod dintre acolade și secvența `Catch` din blocurile Try...Catch.
+Lexical environment este asociat cu structura lexicală a codului așa cum este declararea funcțiilor, blocurile de cod dintre acolade și secvența `Catch` din blocurile `Try...Catch`.
 
 Scope-ul 0, cel după care nu mai are nimic este, de fapt un **enviroment record** global care este un spațiu, un **tărâm** comun tuturor elementelor unui program care sunt procesate.
 
@@ -16,7 +30,7 @@ Un **lexical environment** constă dintr-un „environment record” (un domeniu
 Un **environment record** este un mecanism prin care este ținută evidența legăturilor realizate prin identificatori. Acest conectări se formează în **lexical environment**. Se mai poate spune că este **environment record-ul** **lexical environment-ului**.
 
 Câte medii lexicale (**lexical environments**) se pot stabili:
-- **global environment** cel global la care cele imbricate fac conexiuni. Nu are un alt mediu extern.
+- **global environment** cel global la care cele imbricate fac conexiuni. Nu are un alt mediu extern."the portion of source code in which a binding of a name with an entity applies"
 - **module environment** conține legăturile la declarațiile de prim nivel ale unui **Module**. Conține legături importate în mod explicit de Module. Mediul extern al unui Module este **global environment**.
 - **function environment** este un mediu care se stabilește **la invocarea** unei funcții. Mediul funcției poate să stabilească o nouă legătură la „this”. Un **function environment** este un **lexical environment** care corespunde momentului invocării funcției. Mediul funcției capturează și starea necesară pentru a suporta invocații ale metodei **super**.
 
@@ -195,3 +209,8 @@ Iată cum arată scope-ul ca reprezentare și ca arie în care are efect o varia
 ## Aprofundare prin efect
 - ### [Clojures](clojures/clojures.md "Subiectul clojures")
   - #### [Clojures in loop](clojures/clojures.md "Caz explicat de clojures")
+
+## Resurse
+
+[Wikipedia, Scope](https://en.wikipedia.org/wiki/Scope_(computer_science))
+[Wikipedia, Immediately-invoked function expression](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression)

@@ -1,12 +1,21 @@
-# String.prototype.split()
+# `String.prototype.split()`
 
-Această metodă subîmparte un obiect String, în părți componente (substring-uri), care sunt delimitate de un separator care este menționat. Se poate menționa chiar și o limită pentru care se face subîmpărțirea. Această limită este, de fapt un număr care menționează de câte ori să se facă „tăierea” șirului.
-
-Separatorul poate fi un caracter, un string sau o expresie regulată.
-Dacă separatorul este omis, array-ul va conține un singur element compus din șirul original.
-Dacă avem ca și separator un șir gol, stringul care se dorește a fi subîmpărțit, va fi convertit la un array de caractere în loc de array de subșiruri.
+Metoda pur și simplu sparge șirul construind un array cu fragmentele șirului. Poate accepta doi parametri: un separator și o limită. Această limită este, de fapt un număr care menționează de câte ori să se facă „tăierea” șirului. ATENȚIE! Operațiunea inversă este `concat()`.
 
 Metoda returnează un array de substringuri care au fost „tăiate” acolo unde a fost găsit separatorul, dar separatorul este „șters” din subșirul care este introdus în array.
+
+Separatorul este un caracter sau o **expresie regulată**.
+
+Dacă este omis separatorul, arrayul returnat va conține un singur element care va fi întregul șir.
+Dacă separatorul este un șir vid, atunci șirul este convertit la un array de caractere.
+Dacă separatorul este o expresie regulată care conține paranteze de captură, atunci de fiecare dată când când se face identificare, rezultatele (chiar și undefined) sunt introduce prin slicing în arrayul rezultat.
+
+Setarea limitei este opțională. Este un număr întreg, care indică de câte ori va fi spart șirul.
+
+```js
+var arr = "unu,doi,trei,patru,cinci".split(",");
+console.log(arr); // Array [ "unu", "doi", "trei", "patru", "cinci" ]
+```
 
 Dacă separatorul este o expresie regulată care conține paranteze, atunci, ori de câte ori se pace regăsirea după criteriile menționate de regex, rezultatele (plus cele undefined), dictate de paranteze, vor fi incluse în array-ul rezultat.
 

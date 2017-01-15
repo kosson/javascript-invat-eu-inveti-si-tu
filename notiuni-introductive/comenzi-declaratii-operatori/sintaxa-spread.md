@@ -33,5 +33,3 @@ var arr1 = ['a','b'],
 arr1.push(...arr2); // returnează automat numărul elementelor (length)
 arr1; // Array [ "a", "b", "c", "d" ]
 ```
-
-Operatorul spread `...` nu se poate utilizare decât pentru obiectele care sunt iterabile (vezi obiectul intern Symbol).

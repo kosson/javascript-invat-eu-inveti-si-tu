@@ -1,6 +1,6 @@
 # Array-uri sau tablouri
 
-Pentru că este mai simplu și în obișnuița multor programatori români să folosească cuvântul din engleză ca neologism acceptat de practica curentă, vom folosi și în acest material cuvântul array.
+Pentru că este mai simplu și în obișnuința multor programatori români să folosească cuvântul din engleză ca neologism acceptat de practica curentă, vom folosi și în acest material cuvântul array.
 
 Array-urile conțin mai multe valori numite `elemente`.
 
@@ -349,7 +349,7 @@ var [unu, doi] = arr;
 console.log(unu, doi); // unu doi
 ```
 
-Un alt exemplu este cel de potrivire unu la unu
+Un alt exemplu este cel de potrivire unu-la-unu
 
 ```javascript
 var unu, doi, trei;
@@ -357,7 +357,7 @@ var unu, doi, trei;
 console.log(unu, doi, trei); // 1 2 3
 ```
 
-Potrivirea unu la unu funcționează și în cazul returnării unui array.
+Potrivirea unu-la-unu funcționează și în cazul returnării unui array.
 
 ```javascript
 function genArray(){

@@ -4,7 +4,8 @@ Este o funcție Constructor existentă în limbaj.
 
 ## Mantre
 
-- Atunci când Array este apelat ca funcție și nu ca un constructor, va creea și va inițializa un nou obiect Array
+- Atunci când Array este apelat ca funcție și nu ca un constructor, va creea și va inițializa un nou obiect Array.
+- Are metodă internă `@@iterator`.
 
 Crearea de array-uri de dimensiuni prestabilite:
 

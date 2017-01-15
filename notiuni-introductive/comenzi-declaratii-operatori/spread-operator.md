@@ -1,6 +1,27 @@
-Este un operator ECMAScript 2015
+# Operatorul spread (`...`)
 
-Acest operator folosește protocolul de iterare ceea ce înseamnă că obiectele pe care dorim să le transformăm, trebuie să aibe implementat @@iterator prin intermediul lui Symbol.iterator. `arguments` are deja implementat protocolul de iterare în ECMAScript 2015.
+Este un operator nou introdus de ECMAScript 2015.
+
+**Parametrii rest** se deosebesc de **operatorul spread**.
+
+Parametrii rest permit agregarea mai multor argumente independente într-un array.
+
+```javascript
+function ex(primul, ...multiAltii){
+  console.log(`Primul argument ${primul} și un array: ${multiAltii}`);
+}; ex(1, 2, 3, 4, 5); // Primul argument 1 și un array: 2,3,4,5
+```
+
+Operatorul spread permite „desfacerea” (destructurarea) unui array în elementele sale componente luate independent pentru a fi pasate unei funcții.
+
+```javascript
+var colectie = ['cooperare', 'independență', 'acceptare'];
+function ex(primul, ...multime){
+  console.log(primul, `${multime}`);
+}; ex(1, colectie); // 1 cooperare,independență,acceptare
+```
+
+Acest operator folosește protocolul de iterare ceea ce înseamnă că obiectele pe care dorim să le transformăm, trebuie să aibe implementată metoda internă `@@iterator` prin intermediul lui Symbol.iterator. `arguments` are deja implementat protocolul de iterare în ECMAScript 2015.
 
 ```javascript
 [..."012345"]
@@ -59,15 +80,4 @@ var divuri = Array.from(document.querySelectorAll('div'));
 ```js
 let numbers = [23, 400, 6, 1021];
 Math.min(...numbers); // 6
-```
-
-## Alternative
-
-Se poate folosi cu succes operatorul rest
-
-```js
-function genereazaUnArrayDinArgs(...argumente){
-  return argumente; // Array [ "ceva", 0, true ]
-};
-genereazaUnArrayDinArgs("ceva", 0, true);
 ```

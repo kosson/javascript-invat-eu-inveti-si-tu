@@ -7,7 +7,7 @@ Nimic din conținutul unei funcții nu produce niciun rezultat până când func
 Funcțiile sunt obiecte. Standardul le numește chiar `function objects`. Funcțiile sunt efemere, fiind mecanismul prin care date intră, sunt prelucrate și apoi sunt returnate apelantului iar după aceasta „dispar”.
 
 Spre deosebire de restul obiectelor, funcțiile pot fi invocate.
-`function` este un subtip de obiecte numit tehnic „callable object” iar acest lucru înseamnă că pentru acea funcție, motorul care implementează standardul ECMAScript are o metodă `[[Call]]`, care permite apelarea funcției dar și recursivitatea.
+`function` este un subtip de obiecte numit tehnic „callable object” iar acest lucru înseamnă că pentru acea funcție, motorul care implementează standardul ECMAScript are o metodă internă `[[Call]]`, care permite apelarea funcției dar și recursivitatea.
 
 O funcție poate fi invocată chiar din interiorul său. O funcție care se apelează din interiorul său se numește funcție recursivă. Sunt trei modalități de a apela o funcție din interiorul ei:
 - după numele său,
@@ -186,3 +186,7 @@ const pare = numere.filter( x => {
 34 e par, prietene!
 */
 ```
+
+## Resurse
+
+[Wikipedia Subroutine](https://en.wikipedia.org/wiki/Subroutine)

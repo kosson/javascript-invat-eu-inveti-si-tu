@@ -4,7 +4,9 @@ Obiectul Map este o colecție chei - valori. Acceptă valori primitive și obiec
 
 Se va instanția cu new: `new Map([interable])`. Obiectul care va constitui colecția trebuie să fie o colecție iterabilă.
 
-Lucrul cel mai folositor în cazul Map este posibilitatea de folosi funcțiile și obiectele ca și chei ale map-ului. Acest lucru nu este posibil în cazul obiectelor clasice pentru că avem cheile ca și stringuri.
+Are metodă internă `@@iterator`.
+
+Lucrul cel mai folositor în cazul `Map` este posibilitatea de folosi funcțiile și obiectele ca și chei ale map-ului. Acest lucru nu este posibil în cazul obiectelor clasice pentru că avem cheile ca și stringuri.
 
 ```js
 var bibliotecaTest = new Map();
@@ -19,9 +21,7 @@ for(var test of bibliotecaTest){
 
 ## Proprietăți
 
-Map.length
-
-Map.prototype
+`Map.length`, `Map.prototype`
 
 ## Metode
 

@@ -3,6 +3,8 @@
 Adaugă la finalul array-ului unu sau mai multe elemente.
 ATENȚIE! Returnează noul `length` al array-ului.
 
+## Formula `push.apply(arr1, arr2)`
+
 Același efect îl poți obține folosind `apply()`.
 
 ## Fuzionarea a două array-uri al doilea în continuarea primlui

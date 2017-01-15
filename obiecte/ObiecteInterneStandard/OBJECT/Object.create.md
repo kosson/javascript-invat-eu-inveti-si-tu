@@ -1,13 +1,13 @@
-# Object.create()
+# `Object.create()`
 
-Este o metodă care creează un obiect nou cu un prototip și proprietăți specificate.
+Este o metodă propusă de Douglas Crockford. Aceasta creează un obiect nou cu un prototip și proprietăți specificate.
 Permite atribuirea directă a unui prototip unui obiect eliberând prototipul de legătura cu, constructorul.
 
 Metoda primește doi parametri:
 - obiectul la a cărui prototip se va lega obiectul nou creat
-- opțional poate primi și parametri pentru noul obiect.
+- și al doilea, opțional poate primi propritățile pentru noul obiect.
 
-Este returnat un obiect noi care are prototipul setat la obiectul care a fost menționat.
+Este returnat un obiect nou care are prototipul setat la obiectul care a fost menționat.
 
 ```js
 var obiect = Object.create(null); // are drept efect crearea unui obiect nou.
@@ -64,7 +64,7 @@ var obi = Object.create({},{
 });
 ```
 
-Cu ajutorul lui Object.create poți face legătura directă la prototipul unui obiect. Este șablonul propus de Kyle Simpson - Object Linked To Other Objects
+Cu ajutorul lui `Object.create` poți face legătura directă la prototipul unui obiect. Este șablonul propus de Kyle Simpson - Object Linked To Other Objects
 
 ```js
 var Foo = {};

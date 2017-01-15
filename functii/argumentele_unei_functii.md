@@ -14,7 +14,7 @@ var argumentele = [0, 1, 2];
 oFunctie.apply(null, argumentele); // argumentele sunt aplicate literalmente funcției.
 ```
 
-Acest exemplu ilustrează în adâncime ceea ce se petrece cu argumentele unei funcții. Am folosit trucul `Array.prototype.slice.call(arguments)` pentru a transforma obiectul arguments într-un array. Se pot obține valorile direct folosind noua sintaxă ES6: `...arguments`.
+Acest exemplu ilustrează în adâncime ceea ce se petrece cu argumentele unei funcții. Am folosit soluția practică `Array.prototype.slice.call(arguments)` pentru a transforma obiectul arguments într-un array. Se pot obține valorile direct folosind noua sintaxă ES6: `...arguments`.
 
 Pentru că am menționat sintaxa spread introdusă de ES6, hai să vedem același exemplu dar folosind această nouă sintaxă:
 
@@ -24,7 +24,7 @@ var argumente = [4, 5, 6];
 oFunctie(...argumente); // Array [ 4, 5, 6 ]
 ```
 
-Ceea ce este declarat în funcție se numește **parametru**. Parametrii preiau valorile pasate prin argumente.
+Ceea se declară în interiorul funcției se numește **parametru**. Parametrii preiau valorile pasate prin intermediul argumentelor.
 
 ```js
 function demo(param1, param2){ return param1 + param2 }; // parametrii sunt declarațiile din funcție

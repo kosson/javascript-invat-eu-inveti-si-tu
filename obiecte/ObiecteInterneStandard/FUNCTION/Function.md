@@ -4,9 +4,24 @@ Este un constructor pentru funcții.
 
 În exemplul alăturat, ultimul argument specifică codul executabil.
 
-```js
+```javascript
 var adunare = new Function("primulNr", "alDoileaNr", "return primulNr + alDoileaNr");
 adunare(1, 2); // 3
+```
+
+Începând cu ES6 argumentele pasate constructorului pot fi manipulate astfel încât un argument să existe în funcție de existența unuia anterior.
+
+```javascript
+var functieNoua = new Function("unu", "doi = unu", "return unu + doi");
+functieNoua(5); // 10
+functieNoua(5, 4);  // 9
+```
+
+Pot fi folosiți și parametri rest:
+
+```javascript
+var functieNoua = new Function('...intrari', 'return intrari[0]');
+functieNoua('a','b','c','d'); // "a"
 ```
 
 Metode:
@@ -23,6 +38,7 @@ Apelează o funcție căreia îi setează bindingul pentru `this` la valoarea ca
 Funcția este pur și simplu invocată în contextul indicat de primul argument al lui apply și îi sunt pasate argumentele care sunt elementele array-ului din al doilea argument al lui apply `functie.apply(this, ['prima', 'a doua'])`.
 
 Primește două argumente:
+
 - o referință către un obiect, care devine și `this` pentru funcția apelată cu apply().
 - o listă de argumente organizată ca array sau ceva ce seamănă cu un array (`array-like`).
 

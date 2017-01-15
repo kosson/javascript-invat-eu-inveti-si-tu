@@ -1,7 +1,7 @@
 # Array.prototype.indexOf()
 
 Returnează primul index pentru primul element care se potrivește cu cel căutat.
-Dacă nu este găsit, este returnat -1.
+Dacă nu este găsit, este returnat `-1`.
 Căutarea se face folosind egalitatea strictă ( === ).
 Se poate menționa și indexul de la care să se facă căutarea.
 
@@ -14,7 +14,9 @@ array.indexOf(2, -1); // -1
 array.indexOf(2, -3); // 0
 ```
 
-### Caută și scoate unde apare și se repetă un element.
+Pentru
+
+## Caută și elimină elementul acolo unde apare și se repetă.
 
 ```js
 var indices = [];
@@ -29,7 +31,7 @@ console.log(indices);
 // [0, 2, 4]
 ```
 
-### Căutarea unui element în array, iar dacă nu există, introducerea acestuia
+## Căutarea unui element în array, iar dacă nu există, introducerea acestuia
 
 ```js
 function adaugLaArray(arrayDeOrigine, elementDeIntegrat){
