@@ -1,4 +1,4 @@
-# Function
+# `Function()`
 
 Este un constructor pentru funcții.
 

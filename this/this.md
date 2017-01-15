@@ -97,6 +97,8 @@ function container (){
 }; container();
 ```
 
+Un lucru interesant este că poți folosi `this` pentru a testa instanțierea unui constructor cu ajutorul lui `instanceOf`. Dincolo de faptul că poți face acest lucru, de fapt ceea se observă este faptul că `this` este un obiect
+
 Cazul folosirii declarării variabilelor cu `let`. Valoarea lui x nu poate fi accesată din scope-ul funcției pentru că este declarată în global scope.
 
 ```javascript
@@ -255,7 +257,7 @@ faceva(); // 2
 
 ### 2. Binding implicit sau *atașat*
 
-Îi spun *atașat* pentru că bindingul se face la obiectul în care este invocată funcția (call site), ca metodă.
+Îi spun *atașat* pentru că binding-ul se face la obiectul în care este invocată funcția (call site), ca metodă.
 Bindingul implicit constă într-o funcție pe care o „împrumuți” contextului unui obiect.
 
 Regula: obiectul în contextul căruia se execută funcția ca metodă este folosit de către funcție pentru a face binding la `this`.
@@ -589,6 +591,47 @@ var obiectul = new viitorObiect('venit din afară');
 /* Atunci ai acces la proprietatea x și y
 *  pentru că este returnat obiectul */
 console.log(obiectul.x, obiectul.y); // ceva din obiectul test2 venit din afară
+```
+
+### Restricționarea folosirii unei funcții doar ca și constructor
+
+Restricția se aplică astfel:
+
+```javascript
+function VehiculSpatial(nume){
+  if(this instanceof VehiculSpatial){
+    this.nume = nume;
+    this.tip = 'vehicul';
+  } else {
+    throw new Error('Funcția are rol de constructor! Invocă cu new');
+  }
+};
+var obiectNou = new VehiculSpatial('ISS'); // { nume: "ISS", tip: "vehicul" }
+var obiectEsuat = VehiculSpatial(); // Error: Funcția are rol de constructor! Invocă cu new
+```
+
+Această restricționare poate fi păcălită apelând funcția constructor în contextul unui obiect deja creat de funcția constructor fără a instanția cu new.
+
+```javascript
+var obiectPacalitor = VehiculSpatial.call(obiectNou, 'Soyuz');
+// în acest moment, obiectNou este modificat la Object { nume: "Soyuz", tip: "vehicul" }
+```
+
+Ceea ce tocmai s-a petrecut este că s-a invocat constructorul în contextul unui obiect deja construit pe baza lui iar `this`, de fapt a devenit obiectul deja creat. Acest lucru conduce la rescrierea lui `nume` în obiectul gazdă (obiectNou). Aceast comportament nu este cel așteptat atâta vreme cât am dorit ca funcția constructor să permită invocarea dor cu `new`.
+
+În ES6 această problemă este reglată prin `new.target`. Acestă proprietate, care este mai specială pentru că se adresează unui viitor obiect ce nu a fost creat încă, capătă o valoare atunci când metoda `[[Construct]]`. Valoarea este constructorul obiectului proaspăt generat, adică `this`. Dacă funcția constructor este apelată fără `new` asta înseamnă că este apleată cu `[[Call]]`, `new.target` va avea valoarea `undefined`.
+
+```javascript
+function VehiculSpatial(nume){
+  if(typeof new.target !== "undefined"){
+    this.nume = nume;
+    this.tip = 'vehicul';
+  } else {
+    throw new Error('Funcția are rol de constructor! Invocă cu new');
+  }
+};
+var obiectNou = new VehiculSpatial('ISS'); // { nume: "ISS", tip: "vehicul" }
+var obiectPacalitor = VehiculSpatial.call(obiectNou, 'Soyuz'); // Error: Funcția are rol de constructor! Invocă cu new
 ```
 
 ## Precedența regulilor

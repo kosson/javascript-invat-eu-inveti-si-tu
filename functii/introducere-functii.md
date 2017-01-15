@@ -14,7 +14,7 @@ O funcție poate fi invocată chiar din interiorul său. O funcție care se apel
 - folosind `arguments.callee`, o proprietate a obiectului `arguments` care conține funcția `arguments.callee()`,
 - folosind un identificator din scope care trimite la funcție.
 
-Funcțiile care pot deveni constructori prin apelarea cu `new`, au, de fapt, o metodă internă `[[Construct]]` care permite ca acestea să „construiască” obiecte. Acesta este cazul recursivității.
+Funcțiile care pot deveni constructori prin apelarea cu `new`, au, de fapt, o metodă internă `[[Construct]]` care permite ca acestea să „construiască” obiecte. Nu toate funcțiile au această metodă internă. `Arrow functions` nu au `[[Construct]]`
 
 Funcțiile sunt obiecte first-class. Pot fi pasate ca argumente altor funcții și pot fi returnate din funcții.
 
@@ -37,6 +37,7 @@ Funcțiile obiecte au sloturi interne și merită menționat `Realm`, care este 
 - Funcțiile sunt obiecte care incapsulează cod parametrizat care este beneficiarul întregului scope în care a fost declarată funcția („closed over a lexical environment”).
 - Funcțiile permit evaluarea dinamică a codului pe care îl conțin.
 - Constructorul lui Function este chiar o funcție. În schimb, Function este constructor pentru Object. Cele două sunt contructorii pentru restul obiectelor interne.
+- Începând cu ES6, este posibilă declararea funcțiilor în blocuri (de exemplu, în `if`-uri).
 - Orice funcție poate fi apelată cu oricâte argumente de orice tip în orice moment.
 - Toate funcțiile sunt de fapt obiecte instanțe ale tipului `Function` (obiecte interne).
 - O funcție este declarată de o expresie care începe cu cuvânt rezervat limbajului: `function`.

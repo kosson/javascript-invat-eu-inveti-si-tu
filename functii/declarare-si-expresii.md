@@ -15,6 +15,7 @@ Funcțiile pot fi definite („create”) în următoarele moduri:
 - funcțiile nu sunt „deținute” sau „conținute” de un obiect atunci când sunt metode chiar dacă sunt declarate în obiect sau în afara lui.
 - O declarație de funcție începe cu `function` ca și cuvânt cheie. Orice altceva este o expresie de funcție.
 - Invocarea unei funcții generează un nou **context de execuție** (TOT ce există și este necesar atunci când funcția se execută).
+- Începând cu ES6, este posibilă declararea funcțiilor în blocuri (de exemplu, în `if`-uri).
 - Toate variabilele și funcțiile definite în funcție sunt considerate parte a contextului de execuție.
 - fiecare argument al unei funcții este de fapt o variabilă locală.
 - Variabilele și funcțiile care fac parte din contextul de execuție, sunt memorate în **execution context object**, care este un obiect al motorului JavaScript.

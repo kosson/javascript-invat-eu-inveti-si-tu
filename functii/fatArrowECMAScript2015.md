@@ -6,6 +6,7 @@ Funcțiile fat-arrow își au originile în expresiile lambda ale programării b
 ## Mantre
 
 - Funcțiile fat arrows sunt legate la scope-ul lexical. Nu mai este nevoie de trucul `var self = this` pentru a accesa contextul.
+- nu au funcție internă [[Construct]] și astfel, nu pot crea obiecte cu `new`.
 
 O funcție declarată clasic:
 
