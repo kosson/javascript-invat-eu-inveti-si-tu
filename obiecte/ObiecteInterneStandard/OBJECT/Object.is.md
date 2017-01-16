@@ -1,4 +1,4 @@
-# Object.is
+# `Object.is()`
 
 Compară două valori pentru a vedea dacă sunt egale. Nu este același lucru cu operatorii `==` și `===` care fac operațiuni de coerciție asupra operatorilor.
 
@@ -15,13 +15,13 @@ Verifică dacă valorile sunt ambele:
   - amble sunt NaN
 
 ```javascript
-Object.is('text', 'text');  // true
-Object.is(window, window);  // true
-Object.is([], []);  // false
-Object.is(null, null);  // true
+Object.is('text', 'text'); // true
+Object.is(window, window); // true
+Object.is([], []);         // false
+Object.is(null, null);     // true
 
-Object.is(0, -0); // false
-Object.is(-0, -0); // true
+Object.is(0, -0);    // false
+Object.is(-0, -0);   // true
 Object.is(NaN, 0/0); // true
 
 let obi = {

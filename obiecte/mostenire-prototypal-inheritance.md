@@ -1,12 +1,20 @@
 # Moștenirea prototipală
 
 JavaScript nu are un mecanism clasic de moștenire așa cum este așteptat în cazul tipic al moștenirii unei clase copil a caracteristicilor clasei părinte. O copiere a caracteristicilor, după care nu mai există nicio relație la instanțierea într-un obiect, nu există în JavaScript. Mereu va exista o legătură în Javascript între obiecte.
+
 De fapt, se poate vorbi de o „delegare comportamentală” și nu de o moștenire în sensul clasic. Obiectele stabilesc legături prototipale prin care se pot face delegări pe lanțul prototipal.
 
 ## Spune standardul
 
-Toate obiectele comune au „un slot intern” numit `[[Prototype]]`. Valoarea acestui slot poate fi null sau un obiect care să realizeze moștenirea prototipală.
-Toate obiectele comune au „un slot intern” numit `[[Extensible]]`, care controlează dacă pot fi adăugate sau nu proprietăți la obiect. Dacă valoarea acestui slot este `false`, atunci nu se mai pot adăuga proprietăți noi. Legătura cu `[[Prototype]]` este aceea că în cazul unui `[[Extensible]]` cu valoare `false`, valoarea slotului intern `[[Prototype]]` a obiectului, nu poate fi modificată. În plus, de vreme ce a fost pusă pe `false`, nu o mai poți modifica la `true`.
+Toate obiectele comune au „un slot intern” numit `[[Prototype]]`.
+
+Valoarea acestui slot poate fi `null` sau un obiect care realizează moștenirea prototipală.
+
+`Object.getPrototypeOf()` returnează valoarea din proprietatea internă `[[Prototype]]` iar `Object.setPrototypeOf()` o schimbă.
+
+Toate obiectele comune au „un slot intern” numit `[[Extensible]]`, care controlează dacă pot fi adăugate sau nu proprietăți la obiect. Dacă valoarea acestui slot este `false`, atunci nu se mai pot adăuga proprietăți noi.
+
+Legătura cu `[[Prototype]]` este aceea că în cazul unui `[[Extensible]]` cu valoare `false`, valoarea slotului intern `[[Prototype]]` a obiectului, nu poate fi modificată. În plus, de vreme ce a fost pusă pe `false`, nu o mai poți modifica la `true`.
 
 ## Mantre
 
@@ -72,6 +80,13 @@ let obiect2 = Object.create(
 
 Object.getPrototypeOf(obiect2); // Object { , 15 more… }
 Object.getPrototypeOf(obiect2) === Object.prototype; // true
+```
+
+## Apelarea unei metode din `prototype`
+
+```javascript
+Object.getPrototypeOf(this).numeMetodaDinPrototip.call(this); // varianta ES5
+super.numeMetodaDinPrototip() // varianta ES6
 ```
 
 ### Cazul constructorilor

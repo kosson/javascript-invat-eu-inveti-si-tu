@@ -36,7 +36,7 @@ La invocare se creează un nou context de execuție, care ajunge în call-stack.
 
 **arguments** este o colecție (seamănă dar NU ESTE UN ARRAY) a tuturor argumentelor pasate funcției și are proprietatea length pentru a afla numărul argumentelor pasate. Valorile pot fi obținute prin indecși arguments[i].
 
-Invocarea funcțiilor se poate face în patru cazuri:
+## Invocarea funcțiilor se poate face în patru cazuri:
 
 1. ca funcții;
 2. ca metode;
@@ -86,5 +86,15 @@ Un alt caz este apelarea unui callback:
 ```js
 function tester(callback){
   callback && callback();
+};
+```
+
+## Invocare `tail call`
+
+Un `tail call` este invocarea unei funcții atunci când o funcție este invocată ca ultimă instrucțiune a unei funcții gazde.
+
+```javascript
+function gazda(){
+  return faCeva();
 };
 ```

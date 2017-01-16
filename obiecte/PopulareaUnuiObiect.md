@@ -35,12 +35,63 @@ let obi2 = Object.create(null);
 obi2.constructor; // undefined
 ```
 
+## Popularea obiectelor folosind noile posibilități oferite de ES6
+
+### Property initializer
+
+Dacă parametrii vor fi folosiți pentru a da valorile proprietăților unui obiect literal returnat de o funcție, atunci ES6 permite meționarea doar a proprietății. Este o prescurtare, un artificiu util pentru inițializarea proprietăților (`property initializer`).
+
+```javascript
+function construiesteObi(unu, doi){
+  return {
+    unu,
+    doi
+  };
+}; var obiNou = construiesteObi(1, 2); // Object { unu: 1, doi: 2 }
+```
+
+### Metode în formă concisă `concise method`
+
+Această înlesnire în redactarea proprietăților care au metode definite ca funcții anonime.
+Pornind de la formula clasică:
+
+```javascript
+var obiNou = {
+  primaProp = 'proprietăți',
+  aDouaProp = function(){console.log(this.primaProp);}
+};
+```
+
+se poate contrage la:
+
+```javascript
+var obiNou = {
+  primaProp = 'proprietăți',
+  aDouaProp(){console.log(this.primaProp);}
+}; obiNou.aDouaProp();
+```
+
+### Nume de proprietăți computate
+
+Dacă ai un obiect literal, poți să-i pui numele proprietății o valoare string oferită de o variabilă:
+
+```javascript
+var prop = 'identitificator';
+var comp = 'primul';
+var obi = {
+  [prop]: 189439,
+  [comp + ' lucru']: 'o balenă'
+};
+console.log(obi[prop]); // 189439
+console.log(obi['primul lucru']); // o balenă
+```
+
 ## Populare folosind notația cu punct - Dot notation
 
 ```js
-var newObj = {};              // Creează obiectul
-newObj.oCheie = 'Salutare';   // Scrie proprietăți
-var cheie = newObj.oCheie;    // Accesează proprietățile
+var newObj = {};            // Creează obiectul
+newObj.oCheie = 'Salutare'; // Scrie proprietăți
+var cheie = newObj.oCheie;  // Accesează proprietățile
 ```
 
 ## Populare folosind sintaxa parantezelor drepte - Square bracket syntax
@@ -51,7 +102,7 @@ newObj['oCheie'] = 'Salutare';  // Scrie proprietăți
 var cheie = newObj['oCheie'];   // Accesează proprietățile
 ```
 
-## Populare folosind Object.defineProperty()
+## Populare folosind `Object.defineProperty()`
 
 ```js
 var newObj = {};              // Creează obiectul
@@ -79,7 +130,7 @@ defProp(newObj, 'oAltaCheieNoua', 'an');    // mai adaugă o proprietate
 
 ```
 
-## Populare folosind Object.defineProperties()
+## Populare folosind `Object.defineProperties()`
 
 ```js
 Object.defineProperties(newObj, {

@@ -37,7 +37,8 @@ Funcțiile obiecte au sloturi interne și merită menționat `Realm`, care este 
 - Funcțiile sunt obiecte care incapsulează cod parametrizat care este beneficiarul întregului scope în care a fost declarată funcția („closed over a lexical environment”).
 - Funcțiile permit evaluarea dinamică a codului pe care îl conțin.
 - Constructorul lui Function este chiar o funcție. În schimb, Function este constructor pentru Object. Cele două sunt contructorii pentru restul obiectelor interne.
-- Începând cu ES6, este posibilă declararea funcțiilor în blocuri (de exemplu, în `if`-uri).
+- Începând cu ES6, este posibilă declararea funcțiilor în blocuri (de exemplu, în `if`-uri).ncției pe zero sau mai multe argumente.
+- Funcțiile sunt invocate într-un loc care determină rezultatul, adică într-un anumit *context*.
 - Orice funcție poate fi apelată cu oricâte argumente de orice tip în orice moment.
 - Toate funcțiile sunt de fapt obiecte instanțe ale tipului `Function` (obiecte interne).
 - O funcție este declarată de o expresie care începe cu cuvânt rezervat limbajului: `function`.

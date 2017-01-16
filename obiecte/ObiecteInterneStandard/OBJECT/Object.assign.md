@@ -1,6 +1,6 @@
 # `Object.assign()`
 
-Această metodă este introdusă de ES6.
+Această metodă este introdusă de ES6. Este replica oficială la practica curentă a mixin-urilor.
 
 Permite copierea tuturor proprietăților enumerable de la unul sau mai multe obiecte sursă într-un obiect țintă. Metoda returnează obiectul țintă.
 Metodei îi pasezi obiectul destinație urmat de obiectele din care copiezi proprietățile. Dacă vreo proprietate este întâlnită în două din obiectele din care se face copierea, ultima găsită este luată în considerare.

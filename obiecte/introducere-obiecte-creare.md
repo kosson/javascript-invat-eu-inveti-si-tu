@@ -4,25 +4,31 @@ Standardul spune că obiectele sunt „colecții de zero sau mai multe propriet�
 
 JavaScript vine din start cu câteva obiecte care se numesc „built-in object” pe care le putem înțelege ca obiecte interne limbajului la care ai acces din start. Atenție, `obiectul global` este parte a obiectelor interne preexistente.
 
+De fapt, în standard obiectele chiar sunt categorisite astfel:
+- „Ordinary object” au comportamentul comun pentru toate obiectele în JavaScript
+- „Exotic object” au comportamentul comun pentru obiectele în JS, dar cu mici diferențe
+- „Standard objects” sunt toate obiectele JS iar cele „ordinary” și cele „exotice” sunt parte a celor standard
+- „Built-in objects” - toate obiectele standard fac parte din obiectele built-in
+
 ***JavaScript este un limbaj bazat pe moștenire prototipală - prototypal inheritance***
 
 În JavaScript neexistând clase (cod care se comportă ca un plan pentru construcția obiectelor), pentru a reutiliza cod, se creează obiecte care se bazează pe cele existente.
 
-Astfel, între aceste obiecte se creează o legătură. Această legătură se numește „legătură prototipală”. Aceste legături realizează „moștenirea prototipală” - `prototypal inheritance`. Obiectul preexistent constituie prototipul pentru cel nou creat care poate adăuga noi membri, noi comportamente. Mai trebuie adăugat că, de fapt, vorbim despre o *delegare* pe lanțul prototipal format. Acest lucru înseamnă că atunci când ceri o proprietate care nu există, delegi solicitarea către prototip să ți-o servească.
+Astfel, între aceste obiecte se creează o legătură. Această legătură se numește „legătură prototipală”. Aceste legături realizează „moștenirea prototipală” - `prototypal inheritance`. Obiectul preexistent constituie prototipul pentru cel nou creat care poate adăuga noi membri, noi comportamente. Mai trebuie adăugat că, de fapt, vorbim despre o *delegare* pe lanțul prototipal format. Acest lucru înseamnă că atunci când ceri o proprietate care nu există, delegi solicitarea către prototip să o analizeze și să servească o valoare sau să delege mai sus cererea.
 
 ## Mantre
 
 - ECMAScript vine cu obiectele sale din start care se numesc obiecte `built-in` în care este inclus și `global object` - obiectul global.
-- JavaScript nu are clase! Atenție, nu vă lăsați amăgiți de formulele sintactice moderne introduse pentru a face codul scris să pară că JavaScript are clase.
+- JavaScript nu are clase! Atenție, nu vă lăsați amăgiți de formula sintactică introdusă de ES6 pentru a face codul scris să pară că JavaScript are clase.
 - Totul în JavaScript are comportamentul unui obiect cu două excepții: `null` și `undefined`.
 - În clientul care rulează codul mai întâi de orice există obiectul window.
 - Obiectul window are o metodă numită Object [ function Object() ]. Motorul Javascript construiește automat metoda Obiect în obiectul window (window.Object returnează function `Object()`).
 - Toate obiectele în JavaScript descind din Object, adică își au originea în Object. Toate obiectele moștenesc metode și proprietăți din `Object.prototype`. Acestea pot fi suprascrise.
 - `Object.prototype` este un obiect în care poți adăuga propriile proprietăți și metode.
 - Modificările aduse obiectului `Object.prototype` se propagă către toate obiectele. Singura excepție este atunci când proprietățile și metodele supuse modificărilor nu sunt ele la rândul lor modificate mai departe în lanțul prototipal.
-- În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype (numeFunctie.prototype). Acest obiect (prototype), este gol și este creat de constructorul lui Object()
+- În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype (numeFunctie.prototype). Acest obiect (prototype), este gol și este creat de constructorul lui `Object()`.
 - Funcțiile sunt legate de obiectul prototip prin metoda .constructor. Acest lucru înseamnă că poți afla în orice moment care este funcția care generează prototipul prin apelarea constructorului cu ***dunder-dunder-proto***: `obiect.__proto__.constructor`
-- Fiecare funcție are un obiect prototip diferit.
+- Fiecare funcție obiect are un obiect prototip diferit.
 - Obiectele pot invoca orice funcție publică indiferent de lanțul prototipal.
 - Un obiect poate fi creat cu `new Object()`:
   1. acestă modalitate **nu va crea și constructor**.
@@ -116,7 +122,7 @@ Object.defineProperty(newObj, 'numeCheieNoua', {
 ## Crearea metodelor
 
 O funcție care este declarată într-un obiect, devine metodă a acelui obiect. Atenție! este totuși o funcție în sine.
-Object.freeze()
+
 ```js
 var obi = {
   token: 10,
@@ -128,7 +134,7 @@ obi.faCeva(); // 10
 faCeva(); // faCeva is not defined
 ```
 
-faCeva este o metodă a obiectului obi. `faCeva` este de fapt o referință către funcția anonimă care afișează în consolă valoare lui token. `obi.faCeva` poate fi considerată o referință către funcție. Nu uita faptul că oricărei funcții îi este pasat `this` automat.
+`faCeva` este o metodă a obiectului obi. `faCeva` este de fapt o referință către funcția anonimă care afișează în consolă valoare lui token. `obi.faCeva` poate fi considerată o referință către funcție. Nu uita faptul că oricărei funcții îi este pasat `this` automat.
 
 Modalitatea de a crea o metodă într-un obiect este perfect echivalentă cu următoarea alternativă.
 
@@ -168,6 +174,17 @@ faCeva(); // undefined (e undefined pentru că JS creează automat variabila tok
 Ei bine, aici este un element în plus. Funcția `faCeva` a fost declarată în global, ceea ce înseamnă că `scope`-ul său lexical se află în `global scope`.
 În cazul în care în global scope ar fi fost declarată valoarea token, la invocarea funcției în sine, nu ca metodă, valoarea acesteia ar fi fost adusă.
 
+Odată cu apariția noii versiuni ECMAScript, metodele au fost definite în mod formal. Standardul definește o metodă o funcție care au o proprietate internă `[[HomeObject]]`. Această proprietate conține obiectul căruia îi aparține metoda.
+
+```javascript
+var obi = {
+  x: 10,
+  faCeva(){
+    console.log(this.x);
+  }
+}; obi.faCeva();
+```
+
 ## Metode interne ale obiectelor
 
 Modul în înțelegem un obiect este determinat și de un set de algoritmi care sunt oferiți de orice motor care implementează standardul ECMAScript. Acești algoritmi sunt numiți `metode interne`.
@@ -182,7 +199,6 @@ let obi = {
 };
 
 let obi2 = Object.create(obi);
-
 obi2.stare = 100;
 ```
 

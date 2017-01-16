@@ -37,3 +37,17 @@ Valori implicite
 var {unu = 10, doi = 100} = {unu: 1000};
 console.log(unu); // 1000
 ```
+
+Se pot suprascrie valorile unor variable cu valorile proprietăților unui obiect prin destructurare.
+
+```javascript
+var obi = {
+  unu: 1,
+  doi: 2
+};
+var unu = 10,
+    doi = 20;
+// si acum destructurezi folosind operatorul ()
+({unu, doi} = obi); console.log(unu, doi); // 1 2
+// () este nevoie pentru a indica ca {} nu sunt un bloc de cod, ci o expresie
+```

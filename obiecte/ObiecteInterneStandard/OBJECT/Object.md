@@ -12,7 +12,7 @@ Creează un wrapper (ambalează, îmbracă) pentru un obiect. Parafrazând o zic
 - Toate obiectele în JavaScript descind din Object, își au originea în Object. Toate obiectele moștenesc metode și proprietăți din Object.prototype. Acestea pot fi suprascrise.
 - Object.prototype este un obiect în care poți adăuga propriile proprietăți și metode.
 - Modificările aduce obiectului Object.prototype se propagă către toate obiectele. Singura excepție este atunci când proprietățile și metodele supuse modificărilor nu sunt ele la rândul lor modificate mai departe în lanțul prototipal.
-- Proprietățile lui Object nu sunt `enumerable`.
+- Proprietățile lui Object nu sunt `enumerable`. Deci, nu vor apărea în bucle `for...in` care nu ciclează doar proprietățile proprii.
 
 ## Crearea obiectelor cu Object
 
