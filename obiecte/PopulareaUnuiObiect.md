@@ -73,7 +73,7 @@ var obiNou = {
 
 ### Nume de proprietăți computate
 
-Dacă ai un obiect literal, poți să-i pui numele proprietății o valoare string oferită de o variabilă:
+Dacă ai un obiect literal, poți să-i pui numele proprietății o valoare string oferită de o variabilă, de fapt orice expresie validă care poate fi evaluată:
 
 ```javascript
 var prop = 'identitificator';

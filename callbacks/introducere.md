@@ -80,7 +80,7 @@ Reține faptul că de fiecare dată când intervalul presetat expiră, funcția 
 
 - Funcțiile pot fi pasate ca argumente altor funcții pentru că, de fapt, este pasat un obiect, este pasată o valoare în sine.
 - Funcțiile care acceptă alte funcții drept argumente sau care returnează funcții se numesc „funcții de ordin superior” - „higher-order function”.
-- Un callback este un clojure a cărui funcție va fi invocată atunci când un anumit eveniment se întâmplă.
+- Un callback este un closure a cărui funcție va fi invocată atunci când un anumit eveniment se întâmplă.
 - Nu toate funcțiile cărora li se pasează un callback sunt asincrone. Un exemplu este `[1,2].map(function(elem){return elem+1;});`. Rezultatul este returnat sincron folosind „direct style”.
 - **`this` al unui callback indică întotdeauna către obiectul global. Pentru a fixa `this` la funcția gazdă se va folosi `call()`, `apply()` sau `bind()`**.
 - **Callback-ul care folosește fat arrows este legat de scope-ul lexical și nu mai este nevoie de `call()`, `apply()` sau `bind()`**.

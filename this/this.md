@@ -471,7 +471,21 @@ var rezultat = binding(4000); console.log(rezultat); // 5000
 
 Rolul lui `bind()` este acela de a returna o funcție care setează `this` la obiectul context.
 
+```javascript
+var obi = {
+  prop1: 10,
+  metho: function ex(){
+    setTimeout(function(){
+      console.log(this.prop1);
+    }.bind(this), 1500);
+  }
+};
+obi.metho();
+```
+
 O mulțime de funcții built-in ale limbajului oferă un parametru opțional numit „context”, care are rolul de a evita folosirea lui `bind()`, asigurând faptul că funcția callback folosește un anume `this`.
+
+Nu uitați că odată cu ES6 se pot folosi „funcțiile săgeată” - arrow functions, care sunt legate de `this` automat. Folosirea lui `this` într-o astfel de funcție trimite la `this` al funcției context / gazdă.
 
 ### Parcurgerea unui array cu aplicarea unei funcții:
 

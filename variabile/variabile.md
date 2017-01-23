@@ -28,6 +28,7 @@ Variabilele sunt create atunci când mediul lexical este instanțiat, dar nu vor
 
 ## Mantre
 
+- La momentul evaluării variabilele sunt create la momentul în care se constituie `lexical environment` (scope), dar nu poate fi accesată până nu se face legătura la valoare. La momentul creării variabile declarate cu var, vor fi inițializate automat cu valoarea `undefined`.
 - Variabilele și funcțiile beneficiază de un proces al motorului JavaScript numit ***identifier lookup***. Este necesar pentru a discrimina între variabilele din local scope dintr-o funcție și una din global scope.
 - La executarea codului JavaScript este nevoie de un loc unde să fie stocate variabilele locale. Acest loc este **obiectul scope** cunoscut și sub numele de **lexical environment**. Se poate percepe ca un obiect la a cărui membri ai acces, dar nu poți referenția obiectul în sine.
 - Dacă declari o variabilă în corpul unei declarații if, această variabilă va fi disponibilă și în afara blocului funcțional, fie că blocul a fost executat sau nu. Se întâmplă pentru că se face hoisting. Folosirea cuvântului cheie `let` atașează variabila de blocul funcțional.
