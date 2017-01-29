@@ -10,7 +10,24 @@ O structură a acestor obiecte este oferită chiar de standardul ECMAScript care
 - obiecte care oferă abstracțiuni de control așa cum sunt funcțiile generator și obiectele `Promise`,
 - obiecte care oferă reflexie așa cum sunt `Proxy` și `Reflect`.
 
-Multe dintre obiectele interne sunt funcții de fapt. Acestea pot fi invocate cu argumente. O parte dintre acestea sunt constructori și sunt menite să fie invocate cu `new`.
+Multe dintre obiectele interne sunt funcții de fapt. Acestea pot fi invocate cu argumente. O parte dintre acestea sunt constructori și sunt menite să fie invocate cu `new`. Acestea sunt proprietăți constructor ale obiectului global.
+
+Proprietățile constructor:
+- Array, ArrayBuffer,
+- Boolean,
+- DataView, Date,
+- Error, EvalError,
+- Float32Array, Float64Array, Function,
+- Int8Array, Int16Array, Int32Array
+- Map,
+- Number,
+- Object,
+- Proxy, Promise,
+- RangeError, ReferenceError, RegExp,
+- Set, String, Symbol, SyntaxError,
+- TypeError,
+- Uint8Array, Uint8ClampedArray, Uint16Array, Uint32Array, URIError,
+- WeakMap, WeakSet
 
 Dacă nu este prevăzut altfel, toate funcțiile interne și toți constructorii au acces la obiectul prototype al lui Function, care este valoarea lui `Function.prototype`.
 

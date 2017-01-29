@@ -2,14 +2,14 @@
 
 Funcțiile pot fi definite („create”) în următoarele moduri:
 
-- prin intermediul unui **function expression**: `var adunare = function demo(param1, param2){ return param1 + param2; };`. Este cazul unei `named function expression`,
+- prin intermediul unui **function expression**: `var adunare = function demo(param1, param2){ return param1 + param2; };`, fiind cazul unei `named function expression`,
 - prin **declararea funcției**: `function demo(param1, param2){ return param1 + param2; };`,
 - prin folosirea constructorului `new Function()`,
 - prin folosirea lui „fat arrow” pentru a defini o funcție: `argument => argument++`. **Fat arrow** este introdus de EcmaScript 2015 (ES6),
 - prin folosirea funcțiilor „generator”: `function* generator(){ yield true; };`, fiind introdus de EcmaScript 2015 (ES6).
 
 ## Mantre
-- Funcțiile sunt obiecte.
+- Funcțiile sunt obiecte, mai exact function objects.
 - Toate funcțiile sunt instanțe ale obiectului intern standard `Function`.
 - Funcțiile pot fi create dinamic folosind constructorul `Function`.
 - Funcțiile nu sunt „deținute” sau „conținute” de un obiect atunci când sunt metode chiar dacă sunt declarate în obiect sau în afara lui.
@@ -28,16 +28,24 @@ Funcțiile pot fi definite („create”) în următoarele moduri:
 - funcțiile exprimate (`var ceva = function(){}`) nu se supun hoistingului ceea ce le permite să rețină o copie a variabilelor dn scope-ul în care au fost definite.
 - funcțiile exprimate pot fi folosite ca: argumente pentru alte funcții, clojures, IIFEs
 
-# Funcție declarată
+# Funcție declarată și funcție exprimată
 
-**function declaration statement** și **function definition expression**
+## Concepte tratate: **function declaration statement** și **function definition expression**
 
-## Concepte tratate:
+### A. Funcții declarate
 
-### A. declararea funcțiilor cu nume (named function declaration).
+Regula de identificare și diferențiere de funcții ca expresii este următoarea: dacă linia de cod începe cu, cuvântul cheie `function` și apoi urmată de numele funcției, atunci vorbim despre o declarație de funcție.
 
-```js
-function ceva(){};
+Declararea unei funcții este doar o variantă prescurtată pentru declarația `var` care are drept valoare o funcție. Să vedem, de fapt prin ce trece declararea unei funcții:
+
+```javascript
+function ex(){};
+// de fapt, se expandează, în:
+var ex = function ex(){};// se face hoistingul
+// apoi se expandează în;
+var ex = undefined;
+// apoi se face asignarea:
+ex = function ex(){};
 ```
 
 Numirea funcției este obligatorie.
@@ -47,6 +55,11 @@ function oFunctie(){              // funcție declarată
   function oFunctieGazduita(){};  // o altă funcție declarată
 };
 ```
+
+Reține aspectul important că o funcție declarată este `hoisted` - ridicată în capul codului ca o variabilă. Acesta este și motivul pentru care nu vei introduce niciodată declarații de funcții în `if`-uri, de exemplu.
+
+Sfatul lui Crockford: declară toate funcțiile înainte să începi să le apelezi.
+Acest sfat poate fi vizualizat ca un pescar care dimineața întinde toate plasele.
 
 ### B. funcție exprimată, (function expression).
 

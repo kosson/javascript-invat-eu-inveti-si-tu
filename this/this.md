@@ -32,7 +32,8 @@ var obj = {
   faCeva: faCeva
 };
 
-// în ES 6, dacă ai denumit cheia metodei la fel cu numele funcției care va fi metodă pentru acel obiect, se poate menționa simplu numele
+// ES6, dacă ai denumit cheia metodei la fel cu numele funcției,
+// se poate menționa simplu numele
 var obj = {
   faCeva
 };
@@ -56,7 +57,7 @@ Folosit pentru a lua un obiect și pentru a-i îmbogăți și/sau prelucra valor
 ## Mantre
 
 - Prin `this`, de fapt accesezi starea obiectului cu care lucrezi.
-- Obiectul `this` se constituie la execuția codului, nu la momentul scrierii lui.
+- Legătura la obiectul reprezentat de cuvântul cheie `this` se realizează la momentul execuției codului, nu la momentul scrierii lui.
 - **this** este o referință către contextul de execuție curent în timp ce funcția se execută.
 - `this` nu se referă în niciun caz la **lexical scope**.
 - `this` este un binding pentru fiecare invocare a unei funcții care se bazează pe de-antregul pe call-site.
@@ -171,7 +172,7 @@ Efectul execuției:
 Explicație:
 
 Mesajul va fi afișat o singură dată pentru că funcția `ego` este invocată ca metodă: `this.ego()` a obiectului Dorel. Imediat ce execuția funcției Dorel() s-a încheiat, contextul creat de funcția Dorel a și dispărut.
-Acest lucru se întâmplă pentru că setInterval interpretează `this.ego` ca referință către o funcție pe care o și execută în contextul obiectului global. Vezi că obiectul global a fost îmbogățit și cu proprietatea nume. Drept dovadă, se pot apela direct `window.nume` și se poate executa `this.ego()`.
+Acest lucru se întâmplă pentru că `setInterval()` interpretează `this.ego` ca referință către o funcție pe care o și execută în contextul obiectului global. Vezi că obiectul global a fost îmbogățit și cu proprietatea nume. Drept dovadă, se pot apela direct `window.nume` și se poate executa `this.ego()`.
 
 REȚINE: **`this` al unui callback indică întotdeauna către obiectul global. Pentru a fixa `this` la funcția gazdă se va folosi `call()`, `apply()` sau `bind()`**.
 
@@ -237,7 +238,18 @@ beta.altceva = 10;
 console.log(beta.primo()); // 20
 ```
 
-## Regulile de binding - de generare a obiectului this
+## Regulile de binding - de generare a obiectului `this`
+
+Douglas Crockford spune despre `this` că este un parametru bonus și mai spune un lucru la care trebuie să reflectăm: `this` este motivul pentru care avem mecanismul de moștenire.
+
+Pe scurt cazurile în care se face legătura la `this` și cine este `this` pentru fiecare caz.
+
+|Cazul de invocare a funcției|Cine este `this`|
+|:-|:-|
+|funcție simplă|obiectul global, iar în „strict” este „undefined”|
+|metodă|obiectul pentru care funcția joacă rol de metodă|
+|funcția este folosită ca și constructor|`this` este însuși obiectul returnat de invocarea cu `new`|
+|folosirea cu `apply()`, `call()` și `bind()`|`this` este pur și simplu obiectul specificat în primul parametru.|
 
 ### 1. Binding primar
 
@@ -300,9 +312,9 @@ var obiectLiteral2 = {
 
 obiectLiteral2.metoda(); // altceva
 
-var proprietate = "valoarea proprietății obiectului global";  // proprietate a obiectului global
-var metoda = obiectLiteral.metoda;                            // metodă a obiectului global
-metoda(); // => valoarea proprietății obiectului global; echivalent cu window.metoda()
+var proprietate = "valoarea proprietății obiectului global";  // prop. a obi. global
+var metoda = obiectLiteral.metoda;                            // metodă a obi. global
+metoda(); // => valoarea proprietății obi. global; echivalent cu window.metoda()
 ```
 
 Bindingul implicit poate fi pierdut atunci când faci referință către metodă, când nu o și execuți. De fapt, nu faci referința către metodă, căci însăși metoda este o referință către funcția care joacă rol de metodă.
@@ -788,8 +800,8 @@ ciao.prototype.urare = function(){
   setTimeout(() => console.log('Salutare ' + this.nume), 500);
 };
 
-var intalnire = new ciao('Grigoras');
-intalnire.urare(); // Ciao Grigoras
+var intalnire = new ciao('Grigoraș');
+intalnire.urare(); // Ciao Grigoraș
 ```
 
 ### Lucruri la care să fii atent
@@ -803,5 +815,5 @@ intalnire.urare(); // Ciao Grigoras
 ## Resurse:
 
 [MDN Function.prototype.bind()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
-
 [MDN this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
+[Crockford on Javascript - Functions](https://www.youtube.com/watch?v=lVnnxfdLdlM)

@@ -2,7 +2,7 @@
 
 O funcție definită în interiorul unei funcții container, creează un closure.
 
-Este o funcție internă care „fotografiază” mediul lexical în care a fost declarată și pe care îl folosește pentru a utiliza tot ce este necesar să se execute.
+Este o funcție internă care „fotografiază”, „cartografiază”, „inventariază” mediul lexical în care a fost declarată și pe care îl folosește pentru a utiliza tot ce este necesar să se execute.
 
 Îți poți închipui un pescar (funcția internă), care stând în barca sa pe mare (funcția gazdă) aruncă un prostovol (closure) peste un banc de pești (identificatorii existenți din contextul de execuție la momentul evaluării). Poți să-ți imaginezi și un cățel într-o cutie. Cutia fiind funcția gazdă iar cățelul fiind funcția internă. Cățelul cunoaște cutia și are acces la toate obiectele din interiorul său.
 
@@ -28,6 +28,8 @@ function closureEx(){
 };
 closureEx();
 ```
+
+Returnarea unei funcții care va deveni valoarea unei variabile.
 
 ```js
 function closureEx(){
@@ -324,6 +326,8 @@ Pornind de la acest model, se poat rula cod extern:
 
 ## Erori
 
+### Closure în bucle
+
 Este considerată a fi o eroare crearea de closure-uri în bucle. De exemplu, în cazul buclelor cu for, bindingul se va face pe ultima valoare stabilită și aceasta va fi returnată.
 Pentru a soluționa problema, se va introduce bucla în funcția returnată:
 
@@ -340,6 +344,20 @@ function faCeva(nume, unArray){
 };
 var alege = faCeva("Gino", colectie);
 alege();  // Gino
+```
+
+### Lazy loading
+
+```javascript
+var faCeva = function(bool){
+  var oValoare = 10;
+  faCeva = function(bool){
+    if (bool === true) {
+      return oValoare;
+    }
+  };
+  return faCeva(bool);
+}; console.log(faCeva(true)); // 10
 ```
 
 ## Alonjă

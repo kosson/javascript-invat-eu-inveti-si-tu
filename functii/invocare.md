@@ -48,7 +48,12 @@ La invocare se creează un nou context de execuție, care ajunge în call-stack.
 
 ### Funcție invocată
 
-Această invocare se întâmplă atunci când este folosit operatorul `()`.
+Această invocare se întâmplă atunci când este folosit operatorul `()`. În ES5 și versiunile anterioare, la invocarea funcțiilor, `this` este setat la obiectul global.
+
+#### Puntea lexicală `self = this`
+
+Acesta este cazul în care o metodă este gazda unei funcții interne. Știm că fiecare funcție are propriul `this`. Dacă funcția internă ar dori să acceseze `this`, referința nu va fi `this` al funcției gazdă cu rol de metodă, ci propriul `this` format la momentul propriei invocări în funcție de contextul de execuție existent.
+Dar pentru că din punct de vedere a structurii lexicale a codului ar fi de înțeles faptul că dorim accesul la `this` care să fie referință către obiectul metodei, de cele mai multe ori se recurge la un artificiu, la o punte lexicală de forma `var self = this;`.
 
 ### Invocarea ca metodă
 
@@ -71,7 +76,7 @@ Cele două funcții realizează un binding explicit a funcției cu un nou contex
 
 ## Invocare condițională
 
-Poți invoca rapid prin evaluarea Truthy sau Falsy a unei expresii
+Poți invoca rapid prin evaluarea `truthy` sau `falsy` a unei expresii.
 
 ```js
 var testVal = 200;
@@ -79,8 +84,8 @@ testVal >= 150 && console.log("Acest mesaj va apărea dacă evaluarea lui testVa
 testVal >= 150 || console.log("Acest mesaj va apărea doar dacă evaluarea din left-hand-side este true");  // true
 ```
 
-În caz de valoare truthy, pentru `&&` se va afișa mesajul, dacă false, va returna false expresia.
-În caz de valoare truthy, pentru `||` se va returna `true`. Pentru false, se va afișa mesajul.
+În caz de valoare `truthy`, pentru `&&` se va afișa mesajul, dacă false, va returna false expresia.
+În caz de valoare `truthy`, pentru `||` se va returna `true`. Pentru false, se va afișa mesajul.
 
 Un alt caz este apelarea unui callback:
 

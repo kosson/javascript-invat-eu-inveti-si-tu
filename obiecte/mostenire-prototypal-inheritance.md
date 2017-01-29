@@ -18,7 +18,7 @@ Legătura cu `[[Prototype]]` este aceea că în cazul unui `[[Extensible]]` cu v
 
 ## Mantre
 
-- [[Prototype]], adică proprietatea .prototype este o legătură care se stabilește de la un obiect la altul.
+- \[[Prototype]], adică proprietatea .prototype este o legătură care se stabilește de la un obiect la altul.
 - Legătura prototipală se obține legătura prin Object.create() și are două efecte:
   1. **creează un obiect**,
   2. **stabilește legătura prototipală**.
@@ -109,19 +109,45 @@ Matrita.prototype.isPrototypeOf(produs); // true
 Object.getPrototypeOf(produs); // Object { , 1 more… }
 ```
 
+### Introducerea de proprietăți noi în prototipul unui obiect
+
+Este ceea ce Douglas Crockford numește moștenire presudoclasică și argumentează că ar fi o practică ce ar trebui evitată.
+
+```javascript
+function SuntUnContructor(){
+  this.oProprietate = 10;
+};
+SuntUnContructor.prototype.oFunctie = function oFunctie(){
+  return this.oProprietate;
+};
+```
+
+Acest exemplu arată cum practica de zi cu zi oferă exemple de atribuire a unor funcții chiar în constructor.
+
+Crockford indică faptul că în practică mai sunt întâlnite și situații „nebune”, când se înlocuiește prototipul unui obiect funcție cu on obiect creat din apelarea cu `new` a unei funcții constructor. Mergând pe exemplul de mai sus în completare, vom avea:
+
+```javascript
+function UnConstructorNou(){ this.oValoare = 1000; };
+UnConstructorNou.prototype = new SuntUnContructor();
+UnConstructorNou.prototype.propNoua = function(){
+  return oValoare;
+};
+```
+
 ### Introducerea de proprietăți în prototipul unui obiect gol - obiect literal
 
 Acesta este cazul simplu de moștenire care se poate realiza. Dacă avem un obiect, folosești metoda create a obiectului intern Object.
 
 ```javascript
 let obiect = {};
-Object.getPrototypeOf(obiect);
-
+Object.getPrototypeOf(obiect); // Object { , 15 more… }
 Object.setPrototypeOf(obiect, {ceva: 10});
 // Object.getPrototypeOf(produs2) => Object { ceva: 10 }
 ```
 
 ### Folosirea unui constructor și adăugarea direct în `prototype`
+
+Este preferabilă folosirea lui `Object.create` pentru a crea un obiect și pentru a seta prototipul.
 
 ```javascript
 let Matrita = function(date){
@@ -135,8 +161,6 @@ let obiect = new Matrita("ceva date"); // Object { ceva: 10, date: "ceva date" }
 Object.setPrototypeOf(obiect, {surpriza: true});
 // în acest moment Object.getPrototypeOf(object) este Object { surpriza: true }
 ```
-
-Atenție! Este preferabilă folosirea lui `Object.create` pentru a crea un obiect și pentru a seta prototipul.
 
 ### Setarea directă a prototipului unui obiect generat cu un constructor
 
@@ -153,7 +177,7 @@ function BenziDesenate(titlu){
 
 let rahan = new BenziDesenate("Rahan");
 
-console.log(rahan.identificare()); // Acum citești Rahan, care este aventuri
+console.log(rahan.identificare()); // Acum citești Rahan, care este de aventuri
 
 BenziDesenate.prototype.apreciere = function () {
   return `Sunt un mare fan ${this.titlu}`;
@@ -227,3 +251,7 @@ b2.speak();
 ## Delegarea comportamentală
 
 ![Modelul delegării comportamentale](PrototypeExtindere.svg "Delegare comportamentală simplă")
+
+## Resurse
+
+[Crockford on Javascript - Functions](https://www.youtube.com/watch?v=lVnnxfdLdlM)

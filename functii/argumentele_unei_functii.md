@@ -58,6 +58,8 @@ Există un obiect `arguments` care este pasat funcției și care permite accesul
 
 ## Ce este `arguments`?
 
+Sfatul lui Crockford: tratează `arguments` ca pe o structură read-only, pentru că, altfel, poți modifica valorile și ordinea parametrilor funcției.
+
 `arguments` este un obiect.
 
 ```javascript
@@ -68,6 +70,7 @@ function testX(unu, doi){
   console.log(arguments.prototype);   // undefined
 }; testX(10, 1000);
 ```
+
 Parametrii funcției au propriul lor scope (lexical environment), care este separat de cel al funcției.
 
 ```javascript
@@ -111,13 +114,13 @@ function convertireArgs(a, b){
 
 ## Câte argumente sunt?
 
+Acest lucru este posibil pentru că `arguments` este array-like și astfel, oferă o proprietate `length` pe care orice array o oferă.
+
 ```js
 function cateSunt(){
   return arguments['length'];
 };
-
 cateSunt(1); // 1
-
 cateSunt(23, 10, 5, 'aha'); // 4
 ```
 

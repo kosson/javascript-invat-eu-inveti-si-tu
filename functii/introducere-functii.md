@@ -2,9 +2,17 @@
 
 Funcțiile sunt unitățile de execuție a codului JavaScript. O funcție poate fi percepută ca un subprogram, ca o subrutină.
 
+Motivul pentru care există funcțiile este acela al reutilizări în diferite scenarii. De ce? Pentru că ar fi o nebunie să scrii aceeași secvență de cod de 1000 de ori, dacă în diferite părți ale codului este nevoie de un „tratament” identic al unor diferite seturi de valori.
+
 Nimic din conținutul unei funcții nu produce niciun rezultat până când funcția nu este apelată și evaluată. La momentul apelării (a invocării), funcția evaluează codul său intern și returnează un rezultat pe baza operațiunilor specificate în **codul funcției**.
 
-Funcțiile sunt obiecte. Standardul le numește chiar `function objects`. Funcțiile sunt efemere, fiind mecanismul prin care date intră, sunt prelucrate și apoi sunt returnate apelantului iar după aceasta „dispar”.
+Funcțiile sunt obiecte.
+Standardul le numește chiar `function objects`. O funcție produce o instanță a unui function object. În JavaScript, funcțiile au metode.
+Funcțiile sunt obiecte first-class. Pot fi pasate ca argumente altor funcții și pot fi returnate din funcții.
+Funcțiile în JavaScript sunt de ordin înalt, adică pot fi pasate ca valori și pot primi ca argumente alte funcții, dar acest lucru tot de faptul că sunt first class ține.
+Funțiile moștenesc din `Function.prototype`.
+
+Funcțiile sunt efemere, fiind mecanismul prin care date intră, sunt prelucrate și apoi sunt returnate apelantului iar după aceasta „dispar”.
 
 Spre deosebire de restul obiectelor, funcțiile pot fi invocate.
 `function` este un subtip de obiecte numit tehnic „callable object” iar acest lucru înseamnă că pentru acea funcție, motorul care implementează standardul ECMAScript are o metodă internă `[[Call]]`, care permite apelarea funcției dar și recursivitatea.
@@ -15,10 +23,6 @@ O funcție poate fi invocată chiar din interiorul său. O funcție care se apel
 - folosind un identificator din scope care trimite la funcție.
 
 Funcțiile care pot deveni constructori prin apelarea cu `new`, au, de fapt, o metodă internă `[[Construct]]` care permite ca acestea să „construiască” obiecte. Nu toate funcțiile au această metodă internă. `Arrow functions` nu au `[[Construct]]`
-
-Funcțiile sunt obiecte first-class. Pot fi pasate ca argumente altor funcții și pot fi returnate din funcții.
-
-Funcțiile în JavaScript sunt de ordin înalt, adică pot fi pasate ca valori și pot primi ca argumente alte funcții.
 
 Funcțiile pot fi stricte, atunci când se folosește `use strict` sau non-strict.
 

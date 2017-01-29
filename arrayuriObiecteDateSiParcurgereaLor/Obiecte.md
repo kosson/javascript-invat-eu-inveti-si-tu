@@ -13,6 +13,8 @@ var arrColectie4 = [...colectieDeP];
 
 ## Destructurarea obiectelor
 
+Destructurarea a fost introdusă în ES6.
+
 Similar destructurării array-urilor, se poate face același lucru în cazul obiectelor.
 
 Cel mai simplu caz este cel de potrivire unu la unu prin asignarea directă a valorilor.

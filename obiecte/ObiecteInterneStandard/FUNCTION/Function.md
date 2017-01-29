@@ -1,6 +1,26 @@
 # `Function()`
 
-Este un constructor pentru funcții.
+Este un constructor pentru funcții. Primele argumente introduse constituie parametrii formali ai viitoarei funcții iar ultimul argument va fi codul executabil.
+
+## Spune standardul
+
+Atunci când `Function` este apelat ca funcție și nu ca un constructor, este creat și inițializat un nou obiect Function. Astfel, apelul `Function()` este echivalent cu expresia care generează obiectul Function: `new Function()`.
+
+Constructorul lui Function este în sine un obiect funcție built-in care are două proprietăți:
+- Function.prototype și
+- Function.prototype
+
+Obiectul prototype a lui Function este el în sine un built-in function object dar care nu poate fi constructor (nu are metoda internă [[Construct]]). Acest obiect nu are la rândul său o proprietate `property`.
+
+Funcțiile create folosind `Function.prototype.bind()` au următoarele sloturi interne:
+- \[[BoundTargetFunction]] care este obiectul funcție împachetat,
+- \[[BoundThis]] fiind valoarea care este pasată întotdeauna ca this atunci când este apelată funcția împachetată.
+- \[[BoundArguments]] este o listă de valori a cărei valori sunt folosite ca prime argumente pentru funcția împachetată apelată.
+
+Nu au proprietatea `prototype` obiectele funcții care sunt create prin `Function.prototype.bind` sau care au fost create prin evaluarea definirii unei simple metode (care nu este `Generator`) sau funcțiile arrow.
+
+
+## Pe larg
 
 În exemplul alăturat, ultimul argument specifică codul executabil.
 

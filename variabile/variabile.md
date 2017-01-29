@@ -11,6 +11,19 @@ Cele trei moduri de a declara variabile au efect și asupra scope-ului.
 
 Prin folosirea lui `var`, declararea variabilei se face în global scope sau în cea mai apropiată funcție. Nu este localizată la nivel de bloc de cod `{}`. De exemplu, pentru o ciclare cu for, variabila definită ca și condiție și poate o variabilă în blocul său, de fapt sunt „înregistrate” în scope-ul funcției care găzduiește `for` și nu în cel al lui `for`. Din nevoia de a localiza la nivel de bloc variabilele, au fost introduce de ES6 `let` și `const`.
 
+O declarație `var` în cadrul unei funcții urmează două ipostaze:
+- partea declarativă este supusă `hoisting-ului` ajungând automat în `capul funcției`, având valoarea `undefined`, iar
+- inițializarea se face acolo unde există în cod și unde se face și asignarea valorii.
+
+```javascript
+function ex(){
+  var x = undefined; // nu se vede, lucrează hoistingul.
+  //...
+  x = 10;
+};
+```
+Sfatul lui Crockford: declară toate variabile în capul funcției.
+
 ### Standardul spune
 
 Un enunț `var` declară variabile care au drept `scope` contextul de execuție curent. Variabilele `var` sunt create atunci când este instanțiat mediul lexical care le conține dar la momentul în care sunt create li se asignează valoarea `undefined`. Asignarea valorii se face la momentul execuției, nu la momentul creării.
