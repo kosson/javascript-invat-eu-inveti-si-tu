@@ -357,8 +357,7 @@ var obiectLiteral = {
 
 var faceva = function maner(){
   console.log(this.proprietate);
-}ncției pe zero sau mai multe argumente.
-- Funcțiile sunt invocate într-un loc care determină rezultatul, adică într-un anumit *context*.
+}
 
 faceva.call(obiectLiteral); // Spune: foloseste objectLiteral ca this. => ceva
 faceva(); // => ceva din global

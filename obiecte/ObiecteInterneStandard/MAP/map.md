@@ -2,11 +2,15 @@
 
 Obiectul Map este o colecție chei - valori. Acceptă valori primitive și obiecte.
 
+Obiectele în JavaScript au fost folosite pentru a stoca perechi de chei - valori. Din nefericire, o astfel de mulțime gestionată prin obiecte este pur și simplu poluată de chei - valori moștenite prin mecanismul prototipal. Singura metodă de a contracara acest lucru era să întrerupi moștenirea prin `var map = Object.create(null);`. Efectul este crearea unui obiect care nu mai moștenea din prototip nimic păstrând o izolare benefică pentru scopul depozitării de chei - valori proprii.
+
+Spre deosebire de obiectul clasic, într-un Map poți introduce orice va valoare, de la primitive, la obiecte.
+
 Se va instanția cu new: `new Map([interable])`. Obiectul care va constitui colecția trebuie să fie o colecție iterabilă.
 
 Are metodă internă `@@iterator`.
 
-Lucrul cel mai folositor în cazul `Map` este posibilitatea de folosi funcțiile și obiectele ca și chei ale map-ului. Acest lucru nu este posibil în cazul obiectelor clasice pentru că avem cheile ca și stringuri.
+Lucrul cel mai folositor în cazul `Map` este posibilitatea de folosi funcțiile și obiectele ca și chei ale map-ului. Acest lucru nu este posibil în cazul obiectelor clasice pentru că avem toatea cheile exprimate ca și stringuri.
 
 ```js
 var bibliotecaTest = new Map();
@@ -16,16 +20,20 @@ bibliotecaTest.set(() => 1000 - 500, 500);
 
 for(var test of bibliotecaTest){
   console.log((test[0]() === test[1]) ? 'OK!' : 'FALSE');
-};
+}; // OK!
 ```
 
 ## Proprietăți
 
-`Map.length`, `Map.prototype`
+Acestea sunt `Map.length`, `Map.prototype` și foarte important `Map.size`.
+
+```javascript
+bibliotecaTest.size; // 2
+```
 
 ## Metode
 
-### Map.prototype.set() și Map.prototype.get()
+### `Map.prototype.set()` și `Map.prototype.get()`
 
 Adaugă un element nou la un Map, adică o pereche cheie - valoare.
 
@@ -33,14 +41,16 @@ Adaugă un element nou la un Map, adică o pereche cheie - valoare.
 var colectie = new Map();
 
 colectie.set('ceva', 'valoare');
-colectie.get('ceva');
+colectie.get('ceva'); // valoare
 
 // actualizarea unui element
 colectie.set('ceva', 1000);
-colectie.get('ceva');
+colectie.get('ceva'); // 100
 ```
 
-### Map.prototype.delete() și Map.prototype.has()
+### `Map.prototype.delete()` și `Map.prototype.has()`
+
+Este evident că folosind delete se poate șterge o pereche, atenție întreaga pereche. Dacă dorești să verifici existența unei chei, vei folosi `has()` pentru a face interogarea asupra map-ului.
 
 ```js
 var colectie = new Map();
@@ -53,7 +63,11 @@ colectie.delete('altceva'); //true
 colectie.has('altceva') // false
 ```
 
-### Map.prototype.entries()
+### `Map.prototype.clear()`
+
+Metoda este cât se poate de clară: șterge toate perechile din `Map`.
+
+### `Map.prototype.entries()`
 
 Metoda returnează un obiect Iterator care conține perechi cheie - valoare pentru fiecare element din obiectul Map.
 
@@ -71,7 +85,7 @@ console.log(iteratorColectie.next().value); // Array [ "altceva", 1000 ]
 console.log(iteratorColectie.next().value); // Array [ Object, "hmmmmm" ]
 ```
 
-### Map.prototype.forEach()
+### `Map.prototype.forEach()`
 
 Metoda execută o funcție pentru fiecare pereche cheie - valoare din obiectul Map în ordinea inserției. Callback-ul nu se va executa pentru cheile care au fost șterse, dar se va executa pentru valorile prezente dar care sunt `undefined`.
 
@@ -83,7 +97,7 @@ Callback-ul este invocat cu trei argumente:
 - cheia elementului
 - obiectul Map care trebuie traversat
 
-forEach execută funcție vizitând fiecare element, dar nu va returna nicio valoare.
+`forEach` execută o funcție vizitând fiecare element, dar nu va returna nicio valoare.
 
 ```js
 // vezi ce este în fiecare element al Map-ului
@@ -96,7 +110,7 @@ colectie.forEach(ceEste);
 
 Fiecare element într-o buclă este un array format din cheie, care este primul element și valoare, care este al doilea element.
 
-### Map.prototype.keys() și Map.prototype.values()
+### `Map.prototype.keys()` și `Map.prototype.values()`
 
 Este o metodă care returnează un nou obiect iterator care conține cheile pentru fiecare element din obiectul Map în ordinea inserării.
 

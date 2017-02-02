@@ -2,11 +2,11 @@
 
 Literalele următoare sunt rezervate:
 
-## Literal null
+## Literal `null`
 
 Avem unul singur și acesta este cuvântul rezervat `null`
 
-## Literale boolean:
+## Literale `boolean`
 
 Avem cele două variante `true` și `false`.
 

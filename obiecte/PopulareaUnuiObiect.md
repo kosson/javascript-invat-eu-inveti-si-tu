@@ -57,8 +57,8 @@ Pornind de la formula clasică:
 
 ```javascript
 var obiNou = {
-  primaProp = 'proprietăți',
-  aDouaProp = function(){console.log(this.primaProp);}
+  primaProp: 'proprietăți',
+  aDouaProp: function(){console.log(this.primaProp);}
 };
 ```
 
@@ -66,7 +66,7 @@ se poate contrage la:
 
 ```javascript
 var obiNou = {
-  primaProp = 'proprietăți',
+  primaProp: 'proprietăți',
   aDouaProp(){console.log(this.primaProp);}
 }; obiNou.aDouaProp();
 ```
