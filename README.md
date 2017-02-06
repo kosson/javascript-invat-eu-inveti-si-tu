@@ -7,7 +7,7 @@ Materialele vor fi redactate în Markdown iar cei care doresc, vor putea transfo
 Toate textele și ilustrațiile sunt sub o licență Creative Commons BY-NC-SA 4.0. Acest lucru înseamnă că puteți lua aceste resurse și puteți face ceva mai mult, mai bine cu mai mult folos, dar fără drept de comercializare. Rezerv acest drept pentru o posibilă cale de valorificare care sa susțină dezvoltarea pe mai departe într-un posibil curs online susținut de mai multe resurse de calitate cu o dinamică mai mare.
 Dacă vreți să dați mai departe, vă rog să o faceți sub aceeași licență.
 
-Colecția fi actualizată cât de des posibil iar scopul final este un manual vizual, care să vină în sprijinul celor care doresc să netezească multe asperități legate de acest limbaj de programare.
+Colecția va fi actualizată foarte des iar scopul final este un manual vizual, care să vină în sprijinul celor care doresc să netezească multe asperități legate de acest limbaj de programare.
 
 Multe dintre resursele dedicate învățării limbajului fac parte din propriile cercetări și studii. La finalul multora dintre subiectele prezentate vor fi menționate sursele din care materialul a fost compus ca părți utile care explică ușor anumite zone obscure.
 
