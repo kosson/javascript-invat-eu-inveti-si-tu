@@ -2,6 +2,10 @@
 
 Pentru că este mai simplu și în obișnuința multor programatori români să folosească cuvântul din engleză ca neologism acceptat de practica curentă, vom folosi și în acest material cuvântul array.
 
+Array-ul este cel mai des întâlnit mecanism de a „prelua” date care vin ca efect al evaluării unei funcții, de exemplu.
+
+## Descriere sumară
+
 Array-urile conțin mai multe valori numite `elemente`.
 
 Indexarea internă a elementelor atunci când nu este explicită, pornește de la 0.

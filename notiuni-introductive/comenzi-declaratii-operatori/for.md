@@ -1,6 +1,6 @@
 # Declarația `for`
 
-Această declarație (standardul o numește `IterationStatement`), creează o buclă.
+Această declarație (standardul o numește `IterationStatement`), creează o buclă care produce un set de rezultate sau parcurge o structură de date existentă.
 
 Această buclă va fi creată ținându-se cont de câteva expresii opționale care se introduc între paranteze, așa-numitul bloc de inițializare, fiind urmate de un bloc de execuție care conține codul ce va fi executat pentru fiecare pas al buclei.
 
@@ -48,7 +48,7 @@ Declararea unei variabile într-un `for`, are ca efect, declararea unei variabil
 
 Atenție, un `for` nu creează un scope, doar funcțiile creează unul.
 
-## Sari peste o iterație
+## Sari peste o iterație - iterare cu verificare
 
 În cazul în care este necesar, se poate face un `salt`, evitându-se execuția la unul din pașii buclei.
 

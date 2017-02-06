@@ -15,8 +15,11 @@
       var lista = document.querySelector('[data-target=\"lista\"]');
       var colectia = document.querySelectorAll('[data-target=\"element\"]');
 
-      var caAr = [].slice.call(colectia);
+      // var caAr = [].slice.call(colectia);
+      var caAr =  Array.from(colectia);
+
       console.log(caAr);
+
       caAr.forEach(function(elem){
         console.log(elem);
       });

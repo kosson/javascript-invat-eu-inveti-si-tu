@@ -1,13 +1,15 @@
 # Pentru voi!
 
-Dedic acest efort copiilor mei, copiilor tuturor celor care vor citi materialele și vouă, celor care veți citi, veți învăța și veți înțelege.
+Dedic acest efort copiilor mei, copiilor tuturor celor care vor citi materialele și vouă, celor care veți citi, veți învăța dorind să înțelegeți.
 
-Speranța mea se îndreaptă către cei care vor reuși să stăpânească limbajul într-atât de bine încât să intre în etapa creativă fără întârziere.
+Este pentru voi colegii mei care lucrați în biblioteci și în instituțiile de memorie.
 
-## O resursă cu ceva explicații pentru a înțelege JavaScript
+Speranța mea se îndreaptă către cei care vor reuși să stăpânească limbajul într-atât de bine încât să intre în etapa creativă fără întârziere. Nu este îndeajuns să folosești ceea ce îți este oferit de celalți, pur și simplu este nevoie să poți rezolva problemele reale cu care te confrunți.
 
-Aceasta este o colecție de subiecte care privesc JavaScript-ul. Învăț mai bine dacă scriu lucrurile pe care vreau să le înțeleg iar această carte mă va ajuta să înțeleg mai bine pentru a putea explica mai bine.
-Ținta este realizarea unui material de învățare pentru JavaScript, care să fie eficient în înțelegerea aspectelor celor mai dificile. Și acestea nu sunt puține.
+## O resursă pentru a înțelege JavaScript
+
+Aceasta este o colecție de subiecte care privesc JavaScript-ul, care nu este exhaustivă. Învăț mai bine dacă scriu lucrurile pe care vreau să le înțeleg iar această carte mă va ajuta să înțeleg mai bine pentru a putea explica mai bine concepte care se însușesc cu dificultate în timp. Am dorit să vă iau cu mine în această întreprindere pentru că îmi doresc să vă fac părtași unui model nou de a scrie cărți: cel incluziv, care expune totul înainte. 
+Ținta este realizarea unui material de învățare pentru JavaScript, care să fie eficient în înțelegerea aspectelor dificil de pătruns. Și acestea nu sunt puține.
 
 Conține experiențe și note strânse după ce am citit și văzut multe alte lucrări dedicate acestui limbaj de programare pe diferite subiecte.
 
@@ -22,7 +24,19 @@ Când vorbim de JavaScript, de fapt vorbim despre o implementare, adică de resp
 
 Programarea ar fi util să fie înțeleasă ca o limbă nouă pe care trebuie să o înveți. De aceea se numește și limbaj. Acest limbaj are o gramatică proprie cu toate regulile pe care le poate avea, de la felul în care înșiruiești caracterele, până la modul în care faci enunțurile pentru a avea sens și pentru un computer atunci când le evaluează.
 
+### Astăzi întrebarea este `cum`, nu `de ce`
+
+Pentru că această colecție se adresează și bibliotecarilor, nu mai poate fi despărțită nevoia de cerință. Ceea ce doresc să subliniez este faptul că aproape toate serviciile moderne ale unei instituții de memorie nu mai pot fi gândite fără o formă sau alta de prelucrare a datelor.
+
+Întrebarea pentru toți profesioniștii domeniului științelor informării este în acest moment cum. Cum să învăț să gestionez date, cum să le manipulez, cum să le prezint pentru a fi mai ușor de înțeles celor care au nevoie de ele.
+
+Această carte dorește să ofere o cale prin care să fie dobândite cunoștințe în domeniul programării îndeajuns de avansate să permită o a doua natură celor care au nevoie să lucreze cu datele.
+
+Voi încheia pledoaria pentru acest drum cu o afirmație care se va dovedi adevărată pe măsură ce veți descoperi bucuria de a lucra cu structuri de cod ce permit prelucrarea: textul în sinea lui este o colecție de date. De fapt un array... te-am făcut curios?
+
 ## Perspectivă peste un tărâm
+
+Atunci când am pornit la scrierea acestei cărți nu am avut nevoia să văd de pe orbită cum arată planeta Javascript, dar pe mâsură ce am avansat cu scrierea textului, am realizat că este nevoie să privești mai întâi din spațiu pentru a înțelege valoarea tuturor entităților și relațiilor pe care le stabilesc acestea la nivelul solului. Vorbim despre o adevărată lume, despre un tărâm special.
 
 Textul standardului oferă cea mai bună perspectivă atunci când vine vorba despre un program JavaScript care este privit la lucru. Voi parafraza și cita acolo unde este necesar standardul pentru a contura un cadru cât mai complet.
 

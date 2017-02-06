@@ -1,4 +1,4 @@
-# Parcurgerea și manipularea datelor din obiecte
+## Parcurgerea și manipularea datelor din obiecte
 
 Obiectele care sunt array-like pot fi transformate în array-uri prin folosirea unor metode ale obiectului intern `Array` și prin folosirea operatorului spread `[...identificatorArrayLike]`
 

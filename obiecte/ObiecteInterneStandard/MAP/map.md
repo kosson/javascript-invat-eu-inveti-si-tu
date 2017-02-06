@@ -1,14 +1,43 @@
 # Map
 
-Obiectul Map este o colecție chei - valori. Acceptă valori primitive și obiecte.
+Obiectul Map este o colecție chei - valori. Acceptă valori primitive și obiecte și respectă protocolul iterabil ceea ce înseamnă că poți folosi și operatorii `spread`.
 
 Obiectele în JavaScript au fost folosite pentru a stoca perechi de chei - valori. Din nefericire, o astfel de mulțime gestionată prin obiecte este pur și simplu poluată de chei - valori moștenite prin mecanismul prototipal. Singura metodă de a contracara acest lucru era să întrerupi moștenirea prin `var map = Object.create(null);`. Efectul este crearea unui obiect care nu mai moștenea din prototip nimic păstrând o izolare benefică pentru scopul depozitării de chei - valori proprii.
 
-Spre deosebire de obiectul clasic, într-un Map poți introduce orice va valoare, de la primitive, la obiecte.
+Spre deosebire de obiectul clasic, într-un Map poți introduce orice valoare, de la primitive, la obiecte iar cheile nu vor mai fi limitate la stringuri.
 
 Se va instanția cu new: `new Map([interable])`. Obiectul care va constitui colecția trebuie să fie o colecție iterabilă.
 
-Are metodă internă `@@iterator`.
+```javascript
+var obiect = new Map([
+  ['ceva', 'un fragment'],
+  [() => 'altceva', true],
+  [Symbol('elementeNoi'), [10, 20, 30]]
+]);
+console.log([...obiect]); // Array [ Array[2], Array[2], Array[2] ]
+```
+
+Obiectele `Map` au o metodă internă `@@iterator`. Aceasta este o veste foarte bună pentru că vom fi beneficiarii unor noi instrumente de acces la date cum ar fi operatorul `spread`.
+
+```javascript
+var x = 'ceva';
+var obi = new Map([
+  [1, 'unu'], [x, 'altceva'], ['ex', true]
+]);
+console.log([...obi]); // Array [ Array[2], Array[2], Array[2] ]
+// extragi valori folosind destructurarea și string tempaltes
+for(let [cheie, valoare] of obi){
+  console.log(`${cheie}: ${valoare}`);
+}; // => 1: unu => ceva: altceva => ex: true
+```
+
+Atunci când folosești un `Map` ca un iterator, de fapt se face o iterare asupra lui `.entries()`.
+
+```javascript
+console.log(obiect[Symbol.iterator] === obiect.entries); // true
+```
+
+Atenție, folosirea unui aceluiași identificator pentru o cheie, nu va crea una duplicat în `Map`, ci va suprascrie valoarea existentă.
 
 Lucrul cel mai folositor în cazul `Map` este posibilitatea de folosi funcțiile și obiectele ca și chei ale map-ului. Acest lucru nu este posibil în cazul obiectelor clasice pentru că avem toatea cheile exprimate ca și stringuri.
 
@@ -129,3 +158,12 @@ console.log(iteratorColectie.next().value); // Object {  }
 ```
 
 Același mecanism se aplică valorilor.
+
+Folosind cele două proprietăți, putem obține cu ajutorul operatorului spread array-uri de valori și array-uri de chei:
+
+```javascript
+console.log([...colectie.keys()]); // [ "ceva", "altceva", Object ]
+console.log([...colectie.values()]); // [ "o valoare", 1000, "hmmmmm" ]
+```
+
+Ca și curiozitate, valoarea `NaN` poate fi folosită ca și cheie.

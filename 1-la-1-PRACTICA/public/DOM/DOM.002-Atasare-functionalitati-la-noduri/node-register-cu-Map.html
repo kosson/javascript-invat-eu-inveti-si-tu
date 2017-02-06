@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>DOM node register with Map</title>
+  </head>
+  <body>
+    <div>
+      <p>Acesta este un paragraf de test</p>
+      <p class='tinta'>Un alt avertisment.</p>
+      <p>Câteva lucruri importante</p>
+    </div>
+    <script type="text/javascript">
+      var tinta = document.getElementsByClassName('tinta');
+
+      var registru = new Map();
+
+      function introdu(elemDOM, functionalitati){
+        registru.set(elemDOM, functionalitati);
+      };
+
+      function cauta(elemDOM){
+        return registru.get(elemDOM);
+      };
+
+      function sterge(elemDOM){
+        registru.delete(elemDOM);
+      };
+
+      function adaugaEveniment(element){
+        console.log(`this este: `, this);
+        return this.element[0].addEventListener('onclick', function(){console.log('fac ceva');});
+      };
+
+      function combinaElemCuFunctionalitati(elementDOM){
+        // verifică dacă pentru elementul DOM există deja funcționalități
+        var existent = cauta(elementDOM);
+        if(existent){
+          return existent;
+        };
+        // definești funcționalitățile pentru un anume element DOM
+        functionalitati = {
+          element: elementDOM,
+          faCeva: adaugaEveniment,
+          stergeElem: sterge.bind(null, elementDOM)
+        };
+        // introduci în registru
+        introdu(elementDOM, functionalitati);
+        // și returnezi combinația curentă
+        return functionalitati;
+      };
+
+      combinaElemCuFunctionalitati(tinta);
+
+      console.log(registru);
+      // registru[0].faCeva();
+    </script>
+  </body>
+</html>
