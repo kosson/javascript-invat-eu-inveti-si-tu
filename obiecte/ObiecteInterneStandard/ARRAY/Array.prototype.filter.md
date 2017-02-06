@@ -1,6 +1,7 @@
 # Array.prototype.filter()
 
 Returnează un array care conține valori ce au trecut de verificările unei funcții callback.
+Array-ul original nu este modificat.
 
 ## Construiește de la 0 o funcție de filtrare
 

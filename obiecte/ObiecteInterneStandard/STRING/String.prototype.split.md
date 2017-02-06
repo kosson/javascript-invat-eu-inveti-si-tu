@@ -21,7 +21,7 @@ Dacă separatorul este o expresie regulată care conține paranteze, atunci, ori
 
 ```js
 var unsir = 'Acesta este un șir de test'
-    altsir = 'Dac\'aterizezi, Pe o planetă, Unde-i frig, Și n-ai jaketă';
+    altsir = 'Dac\'aterizezi, Pe o planetă, Unde-i frig, Și n-ai jachetă';
 
 unsir.split(); // Array [ "Acesta este un șir de test" ]
 unsir.split(' '); // Array [ "Acesta", "este", "un", "șir", "de", "test" ]
