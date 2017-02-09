@@ -58,7 +58,7 @@ console.log(gasit); // Array ["abbbc"]
 
 ### Expresii care oferă alternative
 
-Un caz ar fi atunci când dorești să găsești mai multe lucru într-un șir.
+Un caz ar fi atunci când dorești să găsești mai multe fragmente într-un șir.
 
 ```js
 var paginaWeb = '<a href="/undeva">resursă</a><link rel="stylesheet" href="/style.css"><script type="text/javascript" src="/js/main.js"></script>';
@@ -92,7 +92,7 @@ Este specificat să se ignore majusculele și să se facă căutare la nivel glo
 | [\b] | Identifică un backspace ||
 | 0 | Identifică un caracter NUL ||
 | \w | Identifică orice caracter din setul de bază Latin, incluzând și underscore. | Echivalent cu `[A-Za-z0-9_]` |
-| \W | Identifică orice caracter care nu este un caracter dintr-un psibil cuvânt format cu Latine. De exemplu, /\W/ identifică „%” din 50%. | Echivalent cu `[^A-Za-z0-9_]` |
+| \W | Identifică orice caracter care nu este un caracter dintr-un posibil cuvânt format cu Latine. De exemplu, /\W/ identifică „%” din 50%. | Echivalent cu `[^A-Za-z0-9_]` |
 
 
 ### Seturi de caractere
@@ -106,7 +106,7 @@ Este specificat să se ignore majusculele și să se facă căutare la nivel glo
 
 | Caracter | Semnificație | Echivalență |
 |:---------|:-------------|:--------------- |
-| `a|b` | Îl identifică, fie pe a, fie pe b |
+| `a[pipe]b` | Îl identifică, fie pe a, fie pe b | |
 
 ### Limite
 

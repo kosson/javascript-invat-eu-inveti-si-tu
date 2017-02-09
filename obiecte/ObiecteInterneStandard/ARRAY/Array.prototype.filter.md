@@ -10,19 +10,19 @@ Array-ul original nu este modificat.
 ```js
 var colectie = ["prima", "a doua", "a treia", "a doua", "prima"];
 
-function filtrare(array, callback){       // aceasta este o funcție „pură”, adică nu aduce modificări asupra array-ului original
-  var colector = [];                      // declari un array care va colecta valorile, dacă acestea sunt găsite
+function filtrare(array, callback){       // este o funcție „pură”, adică nu modifică array-ului original
+  var colector = [];                      // declari un array care va colecta valorile, dacă sunt găsite
   for(var i = 0; i < array.length; i++){  // ciclezi întregul array
-    if(callback(array[i])){               // dacă evaluarea callback-ului returnează un true pentru o valoare care este căutată
-      colector.push(array[i]);            // se va încărca colector cu elementele repetate, fiecare dintre acestea fiind valoarea căutată
+    if(callback(array[i])){               // dacă evaluarea callback-ului returnează true pentru valoarea căutată
+      colector.push(array[i]);            // se încărcă colector cu elementele repetate, fiecare fiind valoarea
     };
   };
   return colector;                        // returnează colectorul
 };
 
-filtrare(colectie, function(element){  // invocare filtrării se face cu un array și cu un callback. callback-ul are misiunea de a returna un true
-  if(element == "prima"){              // testează dacă elem, care, de fapt este un element al array-ului se potrivește cu valoarea căutată
-    return true                     // dacă da, atunci ciclarea din funcția filtrare va produce elemente în array-ul colector.
+filtrare(colectie, function(element){  // invoci filtrarea cu un array și callback. callback-ul caută true
+  if(element == "prima"){              // testează dacă elem se potrivește cu valoarea căutată
+    return true                     // dacă da, atunci ciclarea va produce elemente în array-ul colector.
   };                                // dacă nu, atunci va fi returnat un array gol.
 });
 
@@ -59,14 +59,16 @@ console.log(JSON.stringify(rezultat, null, ' '));
 // ]
 ```
 
-Metoda filter face parte integrantă din metodele lui Array.
+Metoda filter face parte integrantă din metodele obiectului intern Array.
 
 Alături de `map()` și `reduce()` face parte integrantă din paradigma „programării funcționale”.
+
+Un exemplu de filtrare a tuturor valorilor care sunt adevărate, care conțin ceva:
 
 ```js
 var data = [ "bar", "foo", "", 0 ],
     filtered = data.filter(function( item ){
-      return !!item;
+      return !!item; // sunt returnate valorile „truthy”
     });
 console.log( filtered ); // ["bar", "foo"]
 ```

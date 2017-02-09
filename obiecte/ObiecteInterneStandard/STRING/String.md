@@ -1,10 +1,8 @@
 # Obiectul intern String
 
-TODO: Sparge documentul pe metode precum celelalte obiecte interne.
-
 Este un constructor pentru string-uri.
 
-Stăpânirea consolidată prin practică a șirurilor de caractere va permite manipularea datelor de tip `.txt, .csv, .json, etc.`. Combinarea lucrului pe șiruri de caractere cu lucrul pe array-uri, va permite transformări dintr-un format în altul, de manipulare la transferomare, de îmbogățire și de segmentare a datelor.
+Stăpânirea consolidată prin practică a șirurilor de caractere va permite manipularea datelor de tip `.txt, .csv, .json, etc.`. Combinarea lucrului pe șiruri de caractere cu lucrul pe array-uri, va permite transformări dintr-un format în altul, de manipulare la transformare, de îmbogățire și de segmentare a datelor.
 
 Obiectul global String este un constructor de șiruri de caractere.
 
@@ -20,7 +18,7 @@ JavaScript nu face diferență între string-urile între ghilimele și cele dub
 
 ## Mantre
 - Pentru a concatena se folosește operatorul `+`.
-- Are metoda internă `@@iterator`.
+- Are metoda internă `@@iterator` ceea ce permite iterarea cu `for...of`. Se pot itera și fragmente `code point`-uri UTF.
 - JavaScript face o diferență foarte clară între obiectul String și primitiva șir. Același lucru se aplică și în cazul obiectelor Boolean și Number cu ale lor corespondențe la primitive.
 - JavaScript face automat conversia de la primitiva șir la obiectul String. Astfel este posibilă aplicarea metodelor obiectului.
 - șirurile în JavaScript sunt imuabile (nu se modifică șirul original),
@@ -44,32 +42,11 @@ var str = new String("test");
 
 ## Proprietăți
 
-String.length și String.prototype
+`String.length` și `String.prototype`
 
 ## Metode statice
 
-String.fromCharCode() și String.fromCodePoint()
-
-## Lista metodelor disponibile stringurilor
-
-| obiectul în sine      | to                 | formatare    | identificare  | extragere     | evenimente    | manipulare    |
-| :------------         | :------------      | :------------| :-------------| :-------------| :-------------| :-------------|
-| constructor()         | toLocalLowerCase() | anchor()     | charAt()      | slice()       | watch()       | concat()      |
-| isPrototypeOf()       | toLocalString()    | * big()      | charCodeAt()  | substr()      | unwatch()     | repeat()      |
-| propertyIsEnumerable()| toLocalUppperCase()| * bold()     | codePointAt() | substring()   |               | replace()     |
-| hasOwnProperty()      | toLowerCase()      | * fontsize() | indexOf()     | trim()        |               | split()       |
-|                       | toSource()         | textcolor()  | lastIndexOf() | trimLeft()    |               | localCompare()|
-|                       | toString()         | italics()    | length()      | trimRight()   |
-|                       | toUpperCase()      | link()       | search()      |
-|                       |                    | * small()    | endsWith()    |
-|                       |                    | * strike()   | startsWith()  |
-|                       |                    | * sup()      | valueof()     |
-|                       |                    | * blink()    | contains()    |
-|                       |                    | * sub()      | inludes()     |
-|                       |                    | * fixed()    | match()       |
-|                       |                    | * normalize()|
-
-( * nu mai sunt suportate de standard )
+`String.fromCharCode()`, `String.fromCodePoint()` și `String.raw`.
 
 ## Anatomia unui șir de caractere
 
@@ -96,25 +73,6 @@ Este esențială înțelegerea indexului pentru că acesta poate fi considerat c
 Metodele indexOf() și lastIndexOf() pot fi utilizate pentru căutarea unui substring într-un string. `indexOf("substring")` returnează valoarea indexului de la care începe substringul pasat ca argument.
 `indexOf()` și `lastIndexOf()` pot primi un al doilea parametru care indică indexul de la care să pornească căutarea. Dacă al doilea parametru nu este menționat, căutarea se va face de la index 0. Dacă nu este este găsit substringul, va fi returnată valoarea -1.
 
-### Extragerea substringurilor
-
-| t | e | s | t | e |   | d | e |   | s | t | r | i | n | g | u | r | i |
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 |
-
-
-```js
-var str = "teste de stringuri";
-
-str.substr(11, 3); // => "rin"
-
-str.substring(11, 14); // => "rin"
-
-str.slice(11, 14); // => "rin"
-
-str.substring(11, 3); // => "te de st"
-```
-
 ### Lucrul direct pe caractere și fragmente
 
 #### UTF-16, câteva precizări utile.
@@ -129,14 +87,38 @@ console.log(exemplu.charCodeAt(0)); // 55349
 console.log(exemplu.charCodeAt(1)); // 56485
 ```
 
-Regăsirea folosind regex-urile nu se va putea face. Nici `charAt()` nu va funcționa corect iar `charCodeAt()` va aduce codul pentru fiecare code unit separat așa cum arată și exemplu.
+Regăsirea folosind regex-urile nu se va putea face. Nici `charAt()` nu va funcționa corect, iar `charCodeAt()` va aduce codul pentru fiecare `code unit` separat așa cum arată și exemplul.
 
 - `String.fromCharCode()` este o metodă statică a obiectului String, care transformă secvențe de numere Unicode în caractere.
-- `String.fromCodePoint()` este o metodă statică a obiectului String, care transformă un o secvență de caractere considerată a fi un cod al unui caracter (a fost adăugată în ECMAScript 6).
+- `String.fromCodePoint()` este o metodă statică a obiectului String, care transformă o secvență de caractere considerată a fi un cod al unui caracter (a fost adăugată în ECMAScript 6).
 - `String.prototype.charAt()` este o metodă aplicabilă direct pe string, care returnează caracterul căutat la indexul specificat ca argument.
 - `String.prototype.charCodeAt()` returnează un număr care reprezintă codul UTF-16 a caracterului de la indexul specificat.
 - `String.prototype.concat()`
 - `String.prototype.endsWith()`
+
+Odată cu ES6, se pot folosi oricare `code point` de Unicode beneficiind de o notație prescurtată.
+
+```javascript
+console.log('\u{13165}'); // 𓅥 acum dincolo de 16 biți
+// este același lucru ca și
+console.log('\uD80C\uDD65'); // 𓅥
+```
+
+Poți chiar să numeri câte code point-uri sunt:
+
+```javascript
+[...'\u{13165}\u{13189}\u{13197}'].length; // 3
+```
+
+Se poate chiar inversa ordinea unor code-point-uri
+
+```javascript
+// ordinea
+console.log('\u{13165}\u{13189}\u{13197}'); // 𓅥𓆉𓆗
+// inversarea ordinii
+var sir = '\u{13165}\u{13189}\u{13197}';
+console.log([...sir].reverse().join(' ')); // 𓆗 𓆉 𓅥
+```
 
 ### Metode care folosesc regexuri
 

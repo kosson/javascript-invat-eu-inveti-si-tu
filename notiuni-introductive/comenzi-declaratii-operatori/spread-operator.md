@@ -44,7 +44,39 @@ Anterior existenței acestui operator, aceste transformări se făceau cu prin a
 Array.prototype.slice.call();
 ```
 
-## Transformarea argumentelor unei funcții într-un array:
+## Combinarea array-urilor
+
+Adăugarea elementelor unui array la unul preexistent.
+
+```javascript
+primulArray.push(...alDoileaArray);
+```
+
+Adăugarea elementelor unui array înaintea celor dintr-un array care are nevoie de această mutare.
+
+```javascript
+primulArray.unshift(...alDoileaArray);
+```
+
+## Introducerea elementelor unui array printre elementele unuia existent
+
+```javascript
+var arrIntrodus = [1, 2, 3];
+var arrGazda = [x, ...arrIntrodus, y, z];
+```
+
+## Copierea unui array
+
+În versiunile anterioare, acest lucru se obținea folosind `[].slice()`.
+
+```javascript
+var arr1 = [1, 2, 3];
+var arr2 = [...arr1]; // gata copia
+```
+
+Această copiere în cazul elementelor care sunt obiecte, se face prin referință.
+
+## Transformarea argumentelor unei funcții într-un array
 
 ```js
 function transforma(){
@@ -80,4 +112,11 @@ var divuri = Array.from(document.querySelectorAll('div'));
 ```js
 let numbers = [23, 400, 6, 1021];
 Math.min(...numbers); // 6
+```
+
+## Folosirea cu metode ale lui Math
+
+```javascript
+let setNumere = [1, 3, 24];
+Math.min(...setNumere); // 1
 ```

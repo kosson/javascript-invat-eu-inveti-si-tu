@@ -14,8 +14,6 @@ array.indexOf(2, -1); // -1
 array.indexOf(2, -3); // 0
 ```
 
-Pentru
-
 ## Caută și elimină elementul acolo unde apare și se repetă.
 
 ```js

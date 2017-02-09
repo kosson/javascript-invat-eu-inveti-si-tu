@@ -12,8 +12,8 @@ function isPrime(element, index, array) {
     }
   }
   return element > 1;
-}
+};
 
 console.log([4, 6, 8, 12].findIndex(isPrime)); // -1, not found
-console.log([4, 6, 7, 12].findIndex(isPrime)); // 2
+console.log([4, 6, 7, 12].findIndex(isPrime)); // indexul este 2
 ```

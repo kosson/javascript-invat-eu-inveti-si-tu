@@ -1,6 +1,6 @@
 # `String.prototype.repeat()`
 
-Construiește și returnează un string nou făcut din concatenarea a câte ori a fost specificat prin parametru
+Construiește și returnează un string nou făcut din concatenarea unui șir care se va repeta de câte ori o specifică parametrul.
 
 ```js
 'abc'.repeat(-1);   // RangeError
