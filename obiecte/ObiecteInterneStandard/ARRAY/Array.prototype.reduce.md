@@ -4,9 +4,9 @@ Această metodă aplică o funcție unui acumulator iar fiecare valoare din arra
 
 Este returnată valoarea rezultată după reducere („pliere”).
 
-Pentru a înțelege ce-i acumulatorul trebui să-ți închipui o valoare de start asupra căruia faci o operațiune cu valori dintr-un array și de fiecare dată cînd mai iei o valoare din array pentru a repeta operațiunea, folosești valoarea rezultată din operațiunea anterioară.
+Pentru a înțelege ce-i acumulatorul trebui să-ți închipui o valoare de start asupra căruia faci o operațiune cu valori dintr-un array și de fiecare dată când mai iei o valoare din array pentru a repeta operațiunea, folosești valoarea rezultată din operațiunea anterioară.
 
-Metoda se aplică pe un array și primește ca argumente o funcție callback și o valoare opțională de pornire, dacă se dorește.
+Metoda se aplică pe un array și primește ca argumente o funcție callback și o valoare opțională de pornire, dacă se dorește. Trebuie reținut faptul că array-ul pe care se face „reducerea” foate fi constituit din elemente care pot fi orice valoare.
 
 Funcția callback primește patru argumente și se va aplica pe fiecare element al array-ului:
 - `previousValue`: este valoarea acumulată până la momentul unei noi operațiuni. Aceasta este returnată de invocarea anterioară a callback-ului sau inițial este valoarea opțională pasată ca al doilea argument lui reduce.
@@ -20,7 +20,7 @@ Pentru a înțelege mai repede reduce, este util să reținem următoarea secven
 ['unu', 'doi', 'trei'].reduce(function(acumulator, elementulDeLucru, index){
   return acumulator;
 },{});
-// în acest caz primOptSauReturnat este chiar valoarea opțională {}
+// este returnată chiar valoarea de pornire {}
 ```
 
 ## Mantre

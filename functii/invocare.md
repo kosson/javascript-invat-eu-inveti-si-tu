@@ -22,6 +22,7 @@ La invocare se creează un nou context de execuție, care ajunge în call-stack.
 - Contextul de execuție al unei funcții se modifică după „locul” în care a fost invocată.
 - Ori de câte ori o funcție este invocată se creează un nou context de execuție care este introdus în call-stack.
 - O funcție are acces și poate performa operațiuni asupra obiectului în interiorul căruia a fost invocată.
+- O funcție care returnează, fie `true`, fie `false` se numește funcție „predicat”.
 
 ## Ce se întâmplă când o funcție este invocată?
 

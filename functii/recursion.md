@@ -1,3 +1,5 @@
+# Recursivitate
+
 Este o funcție care se apelează pe sine însăși până când lovește o limită.
 
 Exemplu simplu:
@@ -52,4 +54,16 @@ var generator = function(colectie, parinte){
 };
 
 console.log(JSON.stringify(generator(colectie, null), null,2)); // apeleaza generatorul pasand colectia si elementul radacina, cel care are părintele null
+```
+
+## Simularea lui map
+
+Poți folosi principiul recursivității pentru a recnstrui funcționalitatea lui `Array.prototype.map`:
+
+```javascript
+let arr = [1, 2, 3], func = (el) => ++el ;
+function mapper(func, arr){
+  if(arr.length === 0){return [];};
+  return [func([arr[0]])].concat(mapper(func, arr.slice(1)));
+}; mapper(func, arr); // [ 2, 3, 4 ]
 ```

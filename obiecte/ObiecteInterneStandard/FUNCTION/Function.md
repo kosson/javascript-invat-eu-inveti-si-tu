@@ -98,13 +98,40 @@ Array.apply(null, Array(5)); // Array [ undefined, undefined, undefined, undefin
 
 ## `Function.prototype.bind()`
 
-Creează o funcție nouă a cărui `this` este setat la valoarea oferită. Secvența de argumente introdusă are precedență asupra celor existente la momentul apelării funcției.
+Creează o funcție nouă a cărui `this` este setat la un obiect care trebuie să-l oferi. Secvența de argumente introdusă de `bind()` are precedență asupra celor introduse la momentul apelării funcției.
+
+```javascript
+function incrementare(arg){
+  console.log(arg);;
+  console.log(arguments); //  { 0: 12, 1: 10, 2: 5, callee: incrementare(), length: 3, __proto__: Object }
+  return arg + 1;
+};
+var adauga = incrementare.bind(null, 12, 10); // 12 suprascrie pe 5
+console.log(adauga(5)); // 13
+```
 
 Standardul spune că funcțiile obiecte create folosind `Function.prototype.bind()` sunt obiecte exotice. Nu au proprietatea `prototype`.
+
+Un exemplu cu aplicatibilitate directă este manipularea DOM-ului. Spre exemplu să te asiguri că vei referenția mereu obiectul `document`.
+
+```javascript
+var extrage = document.getElementById.bind(document, 'elementulX');
+var elemX = extrage();
+```
 
 ## `Function.prototype.call()`
 
 Apelează (`call`) o funcție. Setează `this` la obiectul pasat și argumentele pot fi pasate așa cum sunt.
+
+Argumentele de după specificarea lui `this` sunt pasate funcției apelată cu call.
+
+```javascript
+function faCeva (arg){
+  console.log('Am primit ' + arg);
+};
+faCeva.call(null, ['o banană', ' și un măr']);
+// Am primit o banană, și un măr
+```
 
 ## `Function.prototype.toString()`
 

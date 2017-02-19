@@ -1,1 +1,0 @@
-graph LR A{are o prop. x?} -- DA --> B[folosește valoarea] A -- NU --> C[caută în următorul obiect din lanț] C --> D{are o prop. x?} D -- DA --> E[folosește valoarea] D -- NU --> F{mai sunt obj?} F -- NU --> C F -- DA - global object --> G[apare un Reference error]

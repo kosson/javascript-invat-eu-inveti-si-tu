@@ -8,7 +8,7 @@ Speranța mea se îndreaptă către cei care vor reuși să stăpânească limba
 
 ## O resursă pentru a înțelege JavaScript
 
-Aceasta este o colecție de subiecte care privesc JavaScript-ul, care nu este exhaustivă. Învăț mai bine dacă scriu lucrurile pe care vreau să le înțeleg iar această carte mă va ajuta să înțeleg mai bine pentru a putea explica mai bine concepte care se însușesc cu dificultate în timp. Am dorit să vă iau cu mine în această întreprindere pentru că îmi doresc să vă fac părtași unui model nou de a scrie cărți: cel incluziv, care expune totul înainte. 
+Aceasta este o colecție de subiecte care privesc JavaScript-ul, care nu este exhaustivă. Învăț mai bine dacă scriu lucrurile pe care vreau să le înțeleg iar această carte mă va ajuta să înțeleg mai bine pentru a putea explica mai bine concepte care se însușesc cu dificultate în timp. Am dorit să vă iau cu mine în această întreprindere pentru că îmi doresc să vă fac părtași unui model nou de a scrie cărți: cel incluziv, care expune totul înainte.
 Ținta este realizarea unui material de învățare pentru JavaScript, care să fie eficient în înțelegerea aspectelor dificil de pătruns. Și acestea nu sunt puține.
 
 Conține experiențe și note strânse după ce am citit și văzut multe alte lucrări dedicate acestui limbaj de programare pe diferite subiecte.
@@ -36,7 +36,7 @@ Voi încheia pledoaria pentru acest drum cu o afirmație care se va dovedi adev�
 
 ## Perspectivă peste un tărâm
 
-Atunci când am pornit la scrierea acestei cărți nu am avut nevoia să văd de pe orbită cum arată planeta Javascript, dar pe mâsură ce am avansat cu scrierea textului, am realizat că este nevoie să privești mai întâi din spațiu pentru a înțelege valoarea tuturor entităților și relațiilor pe care le stabilesc acestea la nivelul solului. Vorbim despre o adevărată lume, despre un tărâm special.
+Atunci când am pornit la scrierea acestei cărți nu am avut nevoia să văd de pe orbită cum arată planeta Javascript, dar pe măsură ce am avansat cu scrierea textului, am realizat că este nevoie să privești mai întâi din spațiu pentru a înțelege valoarea tuturor entităților și relațiilor pe care le stabilesc acestea la nivelul solului. Vorbim despre o adevărată lume, despre un tărâm special.
 
 Textul standardului oferă cea mai bună perspectivă atunci când vine vorba despre un program JavaScript care este privit la lucru. Voi parafraza și cita acolo unde este necesar standardul pentru a contura un cadru cât mai complet.
 
@@ -64,6 +64,30 @@ Textul sursă poate fi un `Script` sau un `Module`.
 Spune standardul că mai întâi textul codului este parcurs pentru a-l „converti într-o succesiune de elemente de input” folosindu-se regulile lexicale. Aceste elemente de input sunt: token-uri, line terminators (line-feed, carriage return, line separator, paragraph separator), comentariile și white space (tab, spece, non-breakable space, line tabulation, form feed, no-break space). Imediat după această fază, acestă succesiune de elemente de input mai este parcursă încă o dată aplicându-se regulile gramaticale pentru a identifica ce este ce în text, care sunt identificatori, cuvintele rezervate limbajului, etc.
 
 ECMAScript are un set de cuvinte rezervate care nu pot fi folosite decât în sensul efectelor care le sunt menite: `break, do, in, typeof, case, else, instanceof, var, catch, export, new, void, class, extends, return, while, const, finally, super, with, continue, for, switch, yield, debugger, function, this, default, if, throw, delete, import, try, await`.
+
+Buna practică spune ca toate liniile de instrucțiuni în JavaScript să fie terminate prin punct și virgulă (`;`), chiar dacă motoarele care implementează ECMAScript la momentul evaluării codului, introduc automat (automatic semicolon insertion) acest caracter care spune că o anumită linie este o instrucțiune.
+
+## Automatic semicolon insertion - introducerea automată a lui punct și virgulă
+
+Unele declarații (statements) JavaScript trebuie să se termine cu punct și virgulă, fiind supuse de ASI - Automatic Semicolon Insertion:
+
+Aceste declarații și instrucțiuni sunt:
+
+- comenzi simple
+- `let`, `const`, declarații de variabile
+- `import`, `export`, declarațiile de module
+- declararea expresiilor
+- debugger
+- `continue`, `break`, `throw`
+- `return`
+
+## Caracterele cu rol special
+
+Există câteva caractere care necesită chiar acum la început de drum o atenție specială. Acestea sunt `'` (ghilimele simple), `"` (ghilimele duble), `\n` (end of line), '\r' (carriage return), '\t' (tab), '\\'.
+
+JavaScript este un limbaj de programare folosit la manipularea șirurilor de caractere indiferent ce reprezintă pentru noi oamenii.
+Caracterele de mai sus și combinațiile lor au un înțeles special pentru motorul de JavaScript, dar atunci când ele însele sunt necesare ca și caractere, fie că fac parte dintr-un text analizat, fie că se dorește compunerea unuia într-o manieră dinamică, aceste caractere trebuie să fie precedate de backslash (`\`).
+În cazul ghilimelelor, ca bună practică, se vor folosi ghilimele simple pentru declararea șirurilor de caractere pentru că, fiind un limbaj strâns legat de markup-ul paginilor web, ar putea cuprinde ghilimele duble ca parte a fragmentelor de pagină web construite dinamic.
 
 # Resurse
 

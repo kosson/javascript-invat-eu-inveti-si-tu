@@ -1,4 +1,6 @@
-# Array.prototype.filter()
+# `Array.prototype.filter()`
+
+Funcția de filtrare păstrează valorile dintr-o colecție pe care o parcurge în funcție de anumite criterii.
 
 Returnează un array care conține valori ce au trecut de verificările unei funcții callback.
 Array-ul original nu este modificat.

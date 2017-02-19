@@ -12,6 +12,8 @@ Callback-ul primește trei argumente:
 - index,
 - și array-ul în sine.
 
+Noul array constituit are fix același număr de obiecte precum cel prelucrat.
+
 ## Anatomie
 
 ```js
@@ -79,6 +81,28 @@ var rezultatMapat = mapper(colectie, function(element){ // ia o colecție și un
 console.log(rezultatMapat);
 
 // Array [ "prima prelucrare", "a doua prelucrare", "a treia prelucrare", "a doua prelucrare", "prima prelucrare" ]
+```
+
+O variantă mai simplă de mapper:
+
+```javascript
+function mapper(functie, array){
+  let rezultat = [];
+  for(let element of array){
+    rezultat.push(functie(element));
+  };
+  return rezultat;
+};
+```
+
+Și ceva mai avansat care folosește recursivitatea:
+
+```javascript
+let arr = [1, 2, 3], func = (el) => ++el ;
+function mapper(func, arr){
+  if(arr.length === 0){return [];};
+  return [func([arr[0]])].concat(mapper(func, arr.slice(1)));
+}; mapper(func, arr); // [ 2, 3, 4 ]
 ```
 
 ## Exemplificare a posibilităților de prelucrare
@@ -155,3 +179,5 @@ var colectie = stanga.map( (elem, index) => ({nume: elem, varsta: dreapta[index]
 console.log(JSON.stringify(colectie)); // [{"nume":"Ileana","varsta":21},{"nume":"Anca","varsta":43}]
 // s-au folosit paranteze pentru că altfel `{}` ar fi indicat blocul de cod
 ```
+
+### Aplicarea unei funcții pentru fiecare element dintr-un array

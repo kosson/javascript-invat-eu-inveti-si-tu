@@ -44,7 +44,7 @@ Fiecare obiect **environment record** este legat de un obiect numit **binding ob
 
 ## Lexical environment - scope în practică
 
-Scope trebuie înțeles ca totalitatea identificatorilor din zonele menționate anterior. Un anume scope este zona unui program în care un identificator este asociat cu valoare.
+Scope trebuie înțeles ca totalitatea identificatorilor din zonele menționate anterior. Un anume scope este zona unui program în care un identificator este asociat cu o valoare.
 O posibilă interpretare pentru a înțelege și mai bine este aceea de hartă de identificatori, cine ține evidența la ce.
 
 ```js

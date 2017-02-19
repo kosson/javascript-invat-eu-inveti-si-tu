@@ -1,4 +1,4 @@
-# const
+# `const`
 
 Este adăugat de ECMAScript 2015 (ES6).
 

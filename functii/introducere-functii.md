@@ -2,11 +2,21 @@
 
 Funcțiile sunt unitățile de execuție a codului JavaScript. O funcție poate fi percepută ca un subprogram, ca o subrutină.
 
+O funcție este declarată folosind cuvântul cheie `function` urmat de un șir de caractere care este numele funcției urmate de paranteze rotunde între care sunt declarate valori care sunt parametrii funcției (acestea formează așa-numitul antet) și apoi acolade care conțin codul ce va fi executat.
+
+```javascript
+function faCeva(arg1, arg2){
+  // cod pentru a fi executat
+  return oValoare;
+};
+```
+
 Motivul pentru care există funcțiile este acela al reutilizări în diferite scenarii. De ce? Pentru că ar fi o nebunie să scrii aceeași secvență de cod de 1000 de ori, dacă în diferite părți ale codului este nevoie de un „tratament” identic al unor diferite seturi de valori.
 
 Nimic din conținutul unei funcții nu produce niciun rezultat până când funcția nu este apelată și evaluată. La momentul apelării (a invocării), funcția evaluează codul său intern și returnează un rezultat pe baza operațiunilor specificate în **codul funcției**.
 
-Funcțiile sunt obiecte.
+Moment ZEN: Funcțiile sunt obiecte!
+
 Standardul le numește chiar `function objects`. O funcție produce o instanță a unui function object. În JavaScript, funcțiile au metode.
 Funcțiile sunt obiecte first-class. Pot fi pasate ca argumente altor funcții și pot fi returnate din funcții.
 Funcțiile în JavaScript sunt de ordin înalt, adică pot fi pasate ca valori și pot primi ca argumente alte funcții, dar acest lucru tot de faptul că sunt first class ține.

@@ -6,12 +6,21 @@ Javascript are un model de execuție foarte flexibil. Toate funcțiile beneficia
 
 Diferențele între paradigma orientată pe obiecte și cea funcțională:
 
+În cazul obiectelor avem metodele, care transformă și lucrează cu starea obiectului exprimată prin `this`.
+
 ```js
-// în obiect avem metode care transformă și lucrează cu starea obiectului exprimată prin this
 faCeva: function faCeva(){
   return this.primo + this.secundo;
 }
-// in paradigma funcțională, obiectul este pasat ca argument.
+```
+
+În paradigma funcțională, obiectul este pasat ca argument.
+
+```javascript
+var faCeva = function(obiectulDeLucru){
+  return obiectulDeLucru.primo + obiectulDeLucru.secundo;
+};
+// sau mai simplu:
 var faCeva = obiectulDeLucru => obiectulDeLucru.primo + obiectulDeLucru.secundo;
 ```
 
@@ -25,8 +34,9 @@ Ascunderea datelor și a comportamentelor este felul în care pot fi privite fun
 
 ## Mantre
 
+- Funcțiile care sunt folosite pentru a creea alte funcții se numesc „de ordin înalt”.
 - Orice funcție poate fi apelată cu oricâte argumente de orice tip în orice moment.
-- Funcțiile care returnează un Boolean, se numesc predicate.
+- Funcțiile care returnează un Boolean, se numesc **predicate**.
 
 Un exemplu este o funcție care primește o funcție ca argument și returnează o altă funcție.
 

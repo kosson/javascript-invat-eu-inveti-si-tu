@@ -15,7 +15,7 @@ este echivalent cu
 new String("test").length;
 ```
 
-Crearea unui wrapper object pentru o valoare primară nu este recomandabilă.
+Crearea unui wrapper object pentru o valoare primară, nu este o practică recomandabilă.
 
 ```javascript
 var sir = new String('ceva'); // nu se recomandă
@@ -25,11 +25,24 @@ typeof 'ceva';  // "string"
 
 ## String ca obiect iterabil
 
-```js
+```javescript
 var someString = "hi";
 var iterator = someString[Symbol.iterator]();
 
 iterator.next(); // Object { value: "h", done: false }
 iterator.next(); // Object { value: "i", done: false }
+```
 
+Pentru a vedea toate metodele care pot fi aplicate unui șir de caractere, vă invit să mergeți la informațiile despre obiectul intern String.
+
+## Concatenarea șirurilor de caractere
+
+Șirurile pot fi „legate” unele de altele pentru a forma alte șiruri de caractere.
+
+Se poate folosi `concat()` sau operatorul plus (`+`).
+
+```javascript
+'ceva plus '.concat('altceva'); // ceva plus altceva
+// sau
+'ceva plus ' + 'altceva'; // ceva plus altceva
 ```
