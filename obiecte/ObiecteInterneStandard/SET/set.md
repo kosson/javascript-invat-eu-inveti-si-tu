@@ -1,6 +1,6 @@
 # Set
 
-Este ceea ce spune numele său: un set de valori, dar unul care permite stocarea de **elemente unice** indiferent de tipul acestora.
+Un `Set` ceea ce spune numele său: un set de valori, dar unul care permite stocarea de **elemente unice** indiferent de tipul acestora.
 
 `Null` este tratat ca `undefined`.
 
@@ -125,4 +125,16 @@ Folosirea iteratorului creat prin folosirea metodei `entries()`.
 
 ```javascript
 for (let [cheie, valoare] of setNou.entries()) console.log(cheie); // unu 1 true
+```
+
+### Constituirea unui set cu elemente unice dintr-un Array
+
+Există posibilitatea ca la un moment dat să parcurgi programatic un text din care să extragi o submulțime de cuvinte după anumite criterii. Există posibilitatea ca aceste cuvinte să se repete în array-ul nou constituit. Ceea ce ar fi nevoie în acest scenariu este să se constituie un `Set` inițial de cuvinte la care în timp să se poată adăuga altele.
+`Set` va excela la acest capitol.
+
+```javascript
+var subset = ['pădure', 'tăiere', 'inactivitate', 'pădure', 'inactivitate', 'deșertificare', 'tăiere'];
+var unice = [...new Set(subset)];
+console.log(unice);
+// [ "pădure", "tăiere", "inactivitate", "deșertificare" ]
 ```

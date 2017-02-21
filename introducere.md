@@ -8,11 +8,10 @@ Speranța mea se îndreaptă către cei care vor reuși să stăpânească limba
 
 ## O resursă pentru a înțelege JavaScript
 
-Aceasta este o colecție de subiecte care privesc JavaScript-ul, care nu este exhaustivă. Învăț mai bine dacă scriu lucrurile pe care vreau să le înțeleg iar această carte mă va ajuta să înțeleg mai bine pentru a putea explica mai bine concepte care se însușesc cu dificultate în timp. Am dorit să vă iau cu mine în această întreprindere pentru că îmi doresc să vă fac părtași unui model nou de a scrie cărți: cel incluziv, care expune totul înainte.
+Orcine învață mai bine dacă scrie lucrurile pe care dorește să le înțeleagă iar această carte mă va ajuta și pe mine să înțeleg mai bine concepte și practici care se însușesc cu dificultate în timp. Am dorit să vă iau cu mine în această întreprindere pentru că îmi doresc să vă fac părtași unui model nou de a scrie cărți: cel incluziv, care expune totul înainte.
 Ținta este realizarea unui material de învățare pentru JavaScript, care să fie eficient în înțelegerea aspectelor dificil de pătruns. Și acestea nu sunt puține.
 
-Conține experiențe și note strânse după ce am citit și văzut multe alte lucrări dedicate acestui limbaj de programare pe diferite subiecte.
-
+Sunt cuprinse între coperți experiențe și note strânse după ce am citit și am vizionat multe alte lucrări dedicate acestui limbaj de programare.
 Este posibil ca multe dintre interpretările mele sau felul în care explic să nu fie cel canonic, cel predat în școală sau în mediile academice dedicate. Limbajul adoptat este unul dedicat celui care dorește să înțeleagă fenomenul și să ajungă la contextualizare rapidă a anumitor concepte sensibile.
 
 Materialele pot servi și ca date prelucrabile pentru un posibil sistem de învățare dinamic și adaptat pe subiect. În acest sens, unele materiale includ secțiuni intitulate „dependințe cognitive” sau „alonje”. Mai toate subiectele tratate conțin o secțiune intitulată „mantre”, care au scopul de a realiza liste de „atribute” care descriu aspectele cele mai importante.
@@ -30,7 +29,9 @@ Pentru că această colecție se adresează și bibliotecarilor, nu mai poate fi
 
 Întrebarea pentru toți profesioniștii domeniului științelor informării este în acest moment cum. Cum să învăț să gestionez date, cum să le manipulez, cum să le prezint pentru a fi mai ușor de înțeles celor care au nevoie de ele.
 
-Această carte dorește să ofere o cale prin care să fie dobândite cunoștințe în domeniul programării îndeajuns de avansate să permită o a doua natură celor care au nevoie să lucreze cu datele.
+Această carte dorește să ofere o cale prin care să fie dobândite cunoștințe în domeniul programării îndeajuns de avansate, să permită o a doua natură celor care au nevoie să lucreze cu datele.
+
+Una din țintele acestei cărți este aceea de a explica și însuși cunoștințele necesare de a manipula date, de a le transforma, și pentru a le genera dinamic într-o formă de prezentare.
 
 Voi încheia pledoaria pentru acest drum cu o afirmație care se va dovedi adevărată pe măsură ce veți descoperi bucuria de a lucra cu structuri de cod ce permit prelucrarea: textul în sinea lui este o colecție de date. De fapt un array... te-am făcut curios?
 
@@ -48,8 +49,8 @@ Un program JavaScript este de fapt un grup de obiecte care comunică între ele.
 
 Moment ZEN: ECMAScript este bazat pe obiecte.
 
-Simplu, avem șase primitive în acest moment: Boolean, Null, Undefined, String, Number și Symbol.
-Obiectele sunt de fapt membri ai tipului de obiect intern limbajului numit `Object`. Funcțiile sunt un tip de obiecte pe care în jargonul limbajului le înțelegem a fi de tip `callable` iar funcțiile care sunt identificate printr-o proprietate a unui obiect sunt metode ale acestuia.
+Simplu, avem șase primitive în acest moment: `Boolean`, `Null`, `Undefined`, `String`, `Number` și `Symbol`.
+Obiectele sunt de fapt membri ai tipului de obiect intern limbajului numit `Object`. Funcțiile sunt un tip de obiecte care în jargonul limbajului sunt de tip `callable` (pentru care se poate iniția un apel), iar funcțiile care sunt identificate printr-o proprietate a unui obiect sunt metode ale acestuia.
 
 Mai adăugăm că ECMAScript, adică JavaScript are niște obiecte cu care vine el din start (`built-in objects`).
 

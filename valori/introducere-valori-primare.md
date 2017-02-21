@@ -17,6 +17,8 @@ Atunci când nu ești sigur de valoarea reprezentată de un identificator, exist
 typeof 10; // number
 ```
 
+Atenție! `typeof null`, returnează `object`. Acest lucru se întâmplă pentru că standardul ECMAScript spune că `null` este un tip distinct în sine.
+
 Valorile primitive și obiectele au proprietăți și metode. Primitivele beneficiază de acestea prin „împachetarea” valorii în obiectul corespondent pentru că pentru fiecare primitivă există un obiect intern. Împachetarea (wrapping-ul) se face fără știrea sau intervenția utilizatorului și astfel, pare că și primitivele au metode.
 
 Poți verifica acest lucru prin accesarea uneia dintre cele mai utile proprietăți a unui șir de caractere: `length`.
@@ -34,7 +36,7 @@ Veți observa mai departe, când veți studia array-urile câteva similarități
 - Obiectele wrapper corespondente nu au același comportament cu primara în sine atunci când se fac comparații.
 - Setarea și apelarea proprietăților pentru o primară, are ca efect crearea obiectului wrapper.
 
-Atenție! `typeof null`, returnează `object`. Acest lucru se întâmplă pentru că standardul ECMAScript spune că `null` este un tip distinct în sine.
+## Împachetarea primarelor
 
 Există și constructori care „împachetează” primarele în obiectul corespondent.
 
@@ -53,3 +55,11 @@ Constructorii sunt utili pentru metodele tip utilitar pe care le pun la dispozi�
 ```
 
 Ceea ce s-a întâmplat este că `ceva` a fost „împachetat” în obiectul corespondent primarei. Acest obiect are în prototipul său metoda `toUpperCase()`.
+
+## NaN - Not a Number
+
+Dacă încerci o operațiune matematică cu două tipuri de date diferite dintre care una nu poate fi „convertită” la număr, va fi returnată valoarea de eroare NaN.
+
+```javascript
+3 * 'trei'; // NaN
+```

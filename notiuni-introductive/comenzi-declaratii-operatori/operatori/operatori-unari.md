@@ -2,11 +2,11 @@
 
 Un operator unar este un operator care aplică o operațiune asupra unui singur operand sau argument.
 
-Acest tip de operator se pune înaintea sau după operator.
+Acest tip de operator se pune înainte sau după operator.
 
 ## Operatorul plus `+`
 
-Mai întâi de toate încearcă o conversie a operandului într-un număr. Dacă operandul nu poate fi convertit, operatorul va returna `NaN`.
+Mai întâi de toate încearcă o transformare a operandului într-un număr. Dacă operandul nu poate fi convertit, operatorul va returna `NaN`.
 
 ```javascript
 +10; // 10
@@ -24,7 +24,11 @@ Mai întâi de toate încearcă o conversie a operandului într-un număr. Dacă
 -'ten'; // NaN
 ```
 
-După cum este observabil, dacă un obiect are o metodă `valueOf` care
+După cum este observabil, dacă un obiect are o metodă `valueOf` care returnează o valoare numerică, operatorul va face evaluarea rezultatului.
+
+```javascript
+10 + 1.1; // 11.1
+```
 
 ## Operatorul minus `-`
 
@@ -69,6 +73,26 @@ Adaugă o unitate la valoarea preexistentă a operandului și returnează rezult
 Acest operator poate fi folosit ca prefix sau ca postfix.
 Ca prefix, operatorul va returna valoarea după incrementare.
 Ca postfix, va returna valoarea înaintea incrementării cu o unitate.
+
+Operațiunea de incrementare a unei valori se poate face prin adăugarea explicită a unei valori sau prin utilizarea operatorului `++` ca prefix sau sufix.
+
+Vom porni cu cea care produce un rezultat neașteptat pentru moment. Folosirea operatorului `++` ca sufix.
+
+```javascript
+var x = 1;
+x++; // 1
+x; // 2
+```
+
+Te-ai fi așteptat ca la incrementare să fie returnat rezultatul 2. Ei bine, acest lucru nu s-a întâmplat pentru că valoarea a fost returnată și abia după aceea a fost incrementată.
+
+```javascript
+var x = 1;
+++x; // 2
+```
+
+Când operatorul este folosit ca prefix, incrementarea se face înainte ca operatorul să returneze noua valoare.
+
 
 ## Operatorul de decrementare `--`
 
