@@ -93,7 +93,6 @@ var x = 1;
 
 Când operatorul este folosit ca prefix, incrementarea se face înainte ca operatorul să returneze noua valoare.
 
-
 ## Operatorul de decrementare `--`
 
 Operatorul scade o unitate din valoarea preexistentă a operandului.

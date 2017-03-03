@@ -1,6 +1,10 @@
 # Valorile primare în JavaScript
 
-Valorile primare în JavaScript formează nucleul lucrului cu datele. Aceste valori sunt cele pe care diferitele structuri de prelucrare sau de stocare permanentă ori temporară le vor organiza și manipula. Sunt baza structurilor de date, dacă vrei, atomii substanței cu care lucrăm în programare.
+Valorile primare în JavaScript formează nucleul lucrului cu datele.
+
+Valorile sunt expresii. De fapt expresiile sunt reprezentarea valorii.
+
+Aceste valori sunt cele pe care diferitele structuri de prelucrare sau de stocare permanentă ori temporară le vor organiza și manipula. Sunt baza structurilor de date, dacă vrei, atomii substanței cu care lucrăm în programare.
 
 JavaScript are șase valori primare:
 
@@ -63,3 +67,5 @@ Dacă încerci o operațiune matematică cu două tipuri de date diferite dintre
 ```javascript
 3 * 'trei'; // NaN
 ```
+
+// TODO: Explică copierea prin valoare și copierea prin referință

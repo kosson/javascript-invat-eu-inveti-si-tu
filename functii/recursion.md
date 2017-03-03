@@ -4,31 +4,79 @@ Este o funcție care se apelează pe sine însăși până când lovește o limi
 
 Exemplu simplu:
 
-```js
+```javascript
 var scad = function(numar){
-  if(numar === 0) return;
-  console.log(numar);
-  scad(numar - 1);
-}
-
-scad(10);
+  if(numar === 0) return; // limita de repetare a apelului
+  console.log(numar);     // ce face efectiv funcția
+  scad(numar - 1);        // mecanismul de tip contor
+}; scad(10);
 ```
 
-Varianta ECMAScript 2015
+Cum funcționează:
 
-```js
+1. declari o funcție printr-o expresie care ia un argument
+2. se creează variabila internă „număr” cu valoarea 10
+3. se testează condiția de ieșire din execuția funcției
+4. dacă condiția nu este satisfăcută, se mai aplează o dată funcția
+5. de aceasă dată la argument se introduce expresia care transformă
+6. este evaluată expresia și noua valoare va fi valoarea lui număr
+7. Ciclul inițiat la pasul 3 se reia până când valoarea evaluată la argument satisface condiția.
+8. La satisfacerea condiției se iese din execuția primului apel scad()
+
+Varianta ECMAScript 2015 folosind un *fat arrow*:
+
+```javascript
 var scad = (numar) => {
   if(numar === 0) return;
   console.log(numar);
   scad(numar - 1);
-};
-
-scad(10);
+}; scad(10);
 ```
 
-Un exemplu ceva mai complex, care construiește un arbore de categorii și subcategorii dintr-o structură liniară. Exemplu a fost adaptat după cel oferit de mpj (Mattias Petter Johansson) în al său mic tutorial video: [Recursion - Part 7 of Functional Programming in JavaScript](https://www.youtube.com/watch?v=k7-N8R0-KY4)
+Un alt exemplu permite și o prelucrare a unor valori la fiecare apelare recursivă.
+Aceasta folosește un ternar pentru test, un callback, iar atunci când testul nu este satisfăcut, se va evalua o întreagă expresie de forma `(functie recursiva, functie de executat pentru fiecare ciclu)`, Ambele componente despărțite de virgulă vor fi evaluate la rândul lor, fiind returnată doar valoarea din partea dreaptă a virgulei conform efectului pe care-l are operatorul virgulă.
 
-```js
+```javascript
+const decrementor = (numar, functie) =>
+  (numar > 0)
+    ? (decrementor(numar - 1, functie), functie(numar))
+    : undefined;
+
+decrementor(3, function (x) {
+  console.log(`Am ajuns la ${x}`);
+});
+```
+
+1. declari o funcție fat arrow folosind o expresie. Funcția primește o valoare și un callback și returnează evaluarea unui ternar
+2. `numar` primește valoarea 3, iar `functie` primește ca valoare callbackul
+2. se evaluează condiția și firul merge pe true (ciclul `#1`)
+3. se va evalua expresia `(functie recursiva, functie de executat pentru fiecare ciclu)`
+4. se intră în evaluarea expresiei și se va evalua de la stânga la dreapta operanzii operatorului virgulă. Acest lucru conduce la execuția funcției din stânga virgulei
+5. execuția primului apel a lui decrementor este suspendată în stivă ceea ce va conduce ca apelul `functie(numar)` să nu mai fie făcut acum
+6. **controlul** este preluat de un nou apel `decrementor(numar - 1, functie)`
+7. `numar` primește valoarea 2, iar `functie` primește ca valoare callbackul
+8. se evaluează condiția și firul merge pe true (ciclul `#2`)
+9. se va evalua expresia `(functie recursiva, functie de executat pentru fiecare ciclu)`
+10. se intră în evaluarea expresiei și se va evalua de la stânga la dreapta operanzii operatorului virgulă. Acest lucru conduce la execuția funcției din stânga virgulei
+11. execuția celui de-al doilea apel a lui decrementor este suspendată în stivă ceea ce va conduce ca apelul `functie(numar)` să nu mai fie făcut acum
+12. **controlul** este preluat de un nou apel `decrementor(numar - 1, functie)`
+13. `numar` primește valoarea 1, iar `functie` primește ca valoare callbackul
+14. se evaluează condiția și firul merge pe true (ciclul `#3`)
+15. se va evalua expresia `(functie recursivă, functie de executat pentru fiecare ciclu)`
+16. se intră în evaluarea expresiei și se va evalua de la stânga la dreapta operanzii operatorului virgulă. Acest lucru conduce la execuția funcției din stânga virgulei
+17. execuția celui de-al treilea apel a lui decrementor este suspendată în stivă ceea ce va conduce ca apelul `functie(numar)` să nu mai fie făcut acum
+18. **controlul** este preluat de un nou apel `decrementor(numar - 1, functie)`
+19. `numar` primește valoarea 0, iar `functie` primește ca valoare callbackul
+20. se evaluează condiția și firul merge pe false
+21. în acest moment, este returnat `undefined`
+22. controlul este redat execuției apelului de la ciclul `#3`. Chiar acum este executată expresia din partea dreaptă a virgulei. Valoarea lui `numar` este 1 și se va returna rezultatul evaluării acestei expresii. Se va afișa mesajul în consolă `Am ajuns la 1`.
+23. după returnarea anterioară, evaluarea s-a încheiat iar conctroul este redat apelului de la ciclul `#2`. Valoarea lui `numar` este 2 și se va returna rezultatul evaluării acestei expresii. Se va afișa mesajul în consolă `Am ajuns la 2`.
+24. după returnarea anterioară, evaluarea s-a încheiat iar conctroul este redat apelului de la ciclul `#1`. Valoarea lui `numar` este 3 și se va returna rezultatul evaluării acestei expresii. Se va afișa mesajul în consolă `Am ajuns la 3`.
+25. Se încheie execuția.
+
+Un exemplu ceva mai complex, care construiește un arbore de categorii și subcategorii dintr-o structură liniară. Exemplul a fost adaptat după cel oferit de **mpj** (Mattias Petter Johansson) în al său mic tutorial video: [Recursion - Part 7 of Functional Programming in JavaScript](https://www.youtube.com/watch?v=k7-N8R0-KY4)
+
+```javascript
 var colectie = [
   {cat: 'trunchi', parinte: null},
   {cat: 'ramura1', parinte: 'trunchi'},
@@ -36,14 +84,15 @@ var colectie = [
   {cat: 'frunza', parinte: 'ramura1'}
 ];
 
-// #1 definirea unei funcții care are rolul de a construi o structura arborescentă care este returnată
+// #1 definirea unei funcții cu rol de a construi
+// o structura arborescentă ce este returnată
 var generator = function(colectie, parinte){
   // #2 declara obiectul care va fi returnat
   var nod = {};
 
   // #3 filtram colectia și căutăm elementul rădăcină mai întâi
   colectie
-    .filter(function(obi){            // argumentul obi reprezintă un rând, un obiect din array-ul de obiecte
+    .filter(function(obi){
       return obi.parinte === parinte; // daca parinte este null, (true)
     })                                // returnează obiectul cu parinte: null
     .forEach(function(obi){           // pe obiectul returnat {cat: 'trunchi', parinte: null} fă un forEach
@@ -58,7 +107,7 @@ console.log(JSON.stringify(generator(colectie, null), null,2)); // apeleaza gene
 
 ## Simularea lui map
 
-Poți folosi principiul recursivității pentru a recnstrui funcționalitatea lui `Array.prototype.map`:
+Poți folosi principiul recursivității pentru a reconstrui funcționalitatea lui `Array.prototype.map`:
 
 ```javascript
 let arr = [1, 2, 3], func = (el) => ++el ;

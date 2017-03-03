@@ -2,11 +2,27 @@
 
 O funcție definită în interiorul unei funcții container, creează un closure.
 
-Este o funcție internă care „fotografiază”, „cartografiază”, „inventariază” mediul lexical în care a fost declarată și pe care îl folosește pentru a utiliza tot ce este necesar să se execute.
+Este o funcție internă care „fotografiază și stochează” mediul lexical în care a fost declarată și pe care îl folosește pentru a utiliza tot ce este necesar să se execute. Mai exact, un closure este efectul evaluării unei funcții interne atunci când s-a pornit execuția funcției gazdă.
 
 Îți poți închipui un pescar (funcția internă), care stând în barca sa pe mare (funcția gazdă) aruncă un prostovol (closure) peste un banc de pești (identificatorii existenți din contextul de execuție la momentul evaluării). Poți să-ți imaginezi și un cățel într-o cutie. Cutia fiind funcția gazdă iar cățelul fiind funcția internă. Cățelul cunoaște cutia și are acces la toate obiectele din interiorul său.
 
-Un closure se creează chiar în momentul definirii funcției și menține accesul la toate variabilele care erau „în scope” la momentul definirii funcției. Putem spune că o funcție din interiorul altei funcții este o funcție ***privată***, care are acces la argumentele și variabilele gazdei.
+Un closure menține accesul la toate variabilele care erau „în scope” la momentul definirii funcției. Putem spune că o funcție din interiorul altei funcții este o funcție ***privată***, care are acces la argumentele și variabilele gazdei.
+
+Cel mai simplu și mai elegant exemplu este oferit de sintaxa modernă **fat arrow** pentru a ilustra un closure. Acest exemplu concis este prezentat de Reg “raganwald” Braithwaite în lucrarea sa „JavaScript Allongé, the "Six" Edition” și îl vom diseca la rândul nostru pentru a vedea cum se leagă cunoștințele dobândite de la **mediul lexical**, **funcții** și **compilare și execuție**.
+
+```javascript
+((x) => (y) => x)(5)(10); // 5
+```
+
+Ceea ce avem mai sus este o expresie a unei funcții care este executată pe argumentul din prima paranteză iar rezultatul evaluării va fi o funcție care se va executa pe al doilea parametru.
+
+Contras avem: `(expresie)(argument)(argument)`. JavaScript va vedea a doua pereche de paranteze și va decide că perechile de paranteze `(expresie)(argument)` trebuie evaluate.
+Pornind la execuție, va evalua ce-i în prima paranteză căutând expresia de funcție care este declarată. O găsește iar aceasta arată astfel: `(x) => ...`. Acum pasul următor este să construiască „registrul inventar” al mediul lexical: `{x: 5, ...}`. S-a ajuns la faza returnării, dar, ce să vezi? Rezultatul returnării este o altă expresie, care, conform modului de operare al JavaScript, trebuie evaluată, dar care se aplică pe argumentul din a treia pereche de paranteze, adică `10`. Deci, va trebuie evaluată expresia `((y) => x)(10);`. În acest moment, „registrul inventar” al acestei funcții este `{y: 10, ...}` plus registrul inventar al funcției gazdă `{x: 5, ...}`. Variabila `x` pare să nu mai existe în noul mediu lexical stabilit. Și totuși ea există pentru că tocmai a fost returnată. Variabila `x` nu a fost pasată **explicit** celei de-a doua funcții și este una „detașată” dar acesibilă.
+Referința către variabila `x` este menținută pentru că funcția internă, cea care trebuie returnată în cazul nostru pur și simplu are nevoie de ea pentru a se executa, pentru a fi evaluată. De aceea există.
+
+**Moment Zen**: Funcțiile care nu păstrează referințe către variabile „detașate”, se numesc funcții **pure**. Funcțiile care păstrează astfel de referințe, se numesc **closures**.
+
+Și acum vine o concluzie importantă: funcția gazdă este pură pentru că nu are referințe către variabile „detașate”, dar poate găzdui funcții care fac closure. Reține faptul că în cazul `(x) => (y) => x`, evaluarea se face funcției gazdă, care nu menține referinșe la nicio variabilă „detașată”.
 
 Funcția definită și care face closure poate fi asignată unei variabile, pasată ca argument unei funcții sau poate fi returnată.
 
@@ -369,3 +385,7 @@ Closure-urile formează baza funcțională a callback-urilor și a temporizăril
 Va ajuta la înțelegerea felului în care Event Loop funcționează.
 Pentru că un closure memorează contextul, poate prelua controlul de la Event Loop pentru a încheia execuția unui callback, de exemplu.
 Funcțiile de nivel înalt și closure-urile formează coloana vertebrală a programării funcționale.
+
+## Referințe
+
+[JavaScript Allongé, the "Six" Edition](https://leanpub.com/javascriptallongesix/read#closures)

@@ -20,7 +20,7 @@ const ᚠ = 'o rună'; // se poate pentru că folosim UTF16
 const 𓄿 = 'Horus'; // UTF16 din nou
 ```
 
-Magia atribuirii valorii identificatorului o face operatorul `=`. Ceea ce se întâmplă dincolo de cortină este că un spațiu din memoria coputerului este alocată pentru a „reține” valoarea asignată. Asignarea valorii se poate face dintr-un singur pas (`var x = 1;`), declarând și asignând imediat, sau mai întâi poți declara numele variabilei și abia la momentul oportun vei face asignarea.
+Magia atribuirii valorii identificatorului o face operatorul `=`. Ceea ce se întâmplă dincolo de cortină este că se alocă un spațiu în memoria computerului pentru a „reține” valoarea asignată. Asignarea valorii se poate face dintr-un singur pas (`var x = 1;`), declarând și asignând imediat, sau mai întâi poți declara numele variabilei și abia la momentul oportun vei face asignarea.
 
 ```javascript
 var x; // în acest moment are valoarea undefined
@@ -29,11 +29,13 @@ x; // este returnat 10
 ```
 
 TODO: Ilustrează referința și copia
+TODO: Ilustrează variable shadowing
 
 Moment ZEN: Variabilele sunt identificatori pentru valori.
 
 Nu folosiți niciodată cuvintele rezervate ale limbajului drept nume pentru variabile. Efectul va fi apariția unei erori.
-Reține și faptul că JavaScript face diferența dintre majuscule și minuscule. Astfel, `oVariabila` nu este echivalentul lui `ovariabila`. Sunt două variabile diferite din punctul de vedere JavaScript.
+
+Reține și faptul că JavaScript face diferența dintre majuscule și minuscule. Astfel, `oVariabila` nu este echivalentul lui `ovariabila`. Sunt două variabile diferite din punctul de vedere al JavaScript.
 
 Javascript folosește trei cuvinte cheie specifice limbajului: `var`, `let` și `const`. `let` și `const` au fost adăugate în ES6 și sunt legate strict de blocul de cod delimitat prin acolade.
 

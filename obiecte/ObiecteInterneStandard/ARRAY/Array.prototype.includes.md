@@ -1,6 +1,6 @@
-# Array.prototype.includes()
+# `Array.prototype.includes()`
 
-Metoda verifică dacă într-un array există un anume element returnând true sau false după caz.
+Metoda verifică dacă într-un array există un anume element returnând `true` sau `false `după caz.
 Se poate menționa și indexul de la care să se facă căutarea.
 
 ```js

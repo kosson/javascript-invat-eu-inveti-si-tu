@@ -60,7 +60,7 @@ Aceasta este cadrul foarte general.
 
 Caracterele folosite pentru a scrie cod respectă standardul de codare Unicode. Toate elementele lexicografice care constituie codul în sine, cu excepția spațiului și a comentariilor, se numesc `token-uri`, adică `atomi lexicali`. Acești atomi lexicali, token-ii, sunt rezultatul parcurgerii unui fragment de cod (codul sursă) asupra căruia se aplică regulile lexicale specifice gramaticii pe care o impune standardul ECMAScript.
 
-Textul sursă poate fi un `Script` sau un `Module`.
+Textul sursă poate fi un `Script` sau un `Module`. Codul pe care-l scrii poate fi compus pe mai multe linii pentru că pentru JavaScript spațiile, taburile și line breaks-urile sunt spații albe și nu semnale că ar trebui să ia o decizie.
 
 Spune standardul că mai întâi textul codului este parcurs pentru a-l „converti într-o succesiune de elemente de input” folosindu-se regulile lexicale. Aceste elemente de input sunt: token-uri, line terminators (line-feed, carriage return, line separator, paragraph separator), comentariile și white space (tab, spece, non-breakable space, line tabulation, form feed, no-break space). Imediat după această fază, acestă succesiune de elemente de input mai este parcursă încă o dată aplicându-se regulile gramaticale pentru a identifica ce este ce în text, care sunt identificatori, cuvintele rezervate limbajului, etc.
 
@@ -68,7 +68,7 @@ ECMAScript are un set de cuvinte rezervate care nu pot fi folosite decât în se
 
 Buna practică spune ca toate liniile de instrucțiuni în JavaScript să fie terminate prin punct și virgulă (`;`), chiar dacă motoarele care implementează ECMAScript la momentul evaluării codului, introduc automat (automatic semicolon insertion) acest caracter care spune că o anumită linie este o instrucțiune.
 
-## Automatic semicolon insertion - introducerea automată a lui punct și virgulă
+### Automatic semicolon insertion - introducerea automată a lui punct și virgulă
 
 Unele declarații (statements) JavaScript trebuie să se termine cu punct și virgulă, fiind supuse de ASI - Automatic Semicolon Insertion:
 
@@ -82,13 +82,18 @@ Aceste declarații și instrucțiuni sunt:
 - `continue`, `break`, `throw`
 - `return`
 
-## Caracterele cu rol special
+### Caracterele cu rol special
 
 Există câteva caractere care necesită chiar acum la început de drum o atenție specială. Acestea sunt `'` (ghilimele simple), `"` (ghilimele duble), `\n` (end of line), '\r' (carriage return), '\t' (tab), '\\'.
 
 JavaScript este un limbaj de programare folosit la manipularea șirurilor de caractere indiferent ce reprezintă pentru noi oamenii.
 Caracterele de mai sus și combinațiile lor au un înțeles special pentru motorul de JavaScript, dar atunci când ele însele sunt necesare ca și caractere, fie că fac parte dintr-un text analizat, fie că se dorește compunerea unuia într-o manieră dinamică, aceste caractere trebuie să fie precedate de backslash (`\`).
 În cazul ghilimelelor, ca bună practică, se vor folosi ghilimele simple pentru declararea șirurilor de caractere pentru că, fiind un limbaj strâns legat de markup-ul paginilor web, ar putea cuprinde ghilimele duble ca parte a fragmentelor de pagină web construite dinamic.
+
+Acoladele `{}` au rolul de a indica mediul în care se va executa codul în JavaScript. Cel mai ades veți vedea că indică blocurile de cod ale funcțiilor. Între acolade veți introduce liste de instrucțiuni (**statements**) specifice JavaScript separate prin punct și virgulă `;`.
+
+Ce sunt instrucțiunile?
+Instrucțiunile sunt expresii (`expressions`), de fapt idioame specifice limbajului JavaScript. Reține, o expresie este o instrucțiune.
 
 # Resurse
 

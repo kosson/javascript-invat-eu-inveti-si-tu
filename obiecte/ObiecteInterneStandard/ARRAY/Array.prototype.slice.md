@@ -14,7 +14,7 @@ Dacă indexul de pornire este o valoare negativă, atunci se va porni de la fina
 
 ATENȚIE! Slice se duce până la limita menționată, dar nu include și valoarea de la indexul menționat.
 
-Menționarea unui index negativ indică limita către coada listei. De exemplu, un slice(2, -1), va extrage începând cu al treilea element până la penultimul element.
+Menționarea unui index negativ indică limita către coada listei. De exemplu, un `slice(2, -1)`, va extrage începând cu al treilea element până la penultimul element.
 
 ![](slicingArrayuri.svg)
 
@@ -22,18 +22,22 @@ Menționarea unui index negativ indică limita către coada listei. De exemplu, 
 
 ### Exemplul lui `arguments` într-un array
 
-Această metodă este folosită și pentru a converti obiecte care seamănă cu array-urile în Array-uri noi. Pur și simplu se face un binding al metodei la obiect. Cel mai folosit exemplu este cel al folosirii lui slice() pentru a transforma `arguments` într-un array:
+Această metodă este folosită și pentru a converti obiecte care seamănă cu array-urile în Array-uri noi. Pur și simplu se face un binding al metodei la obiect. Cel mai folosit exemplu este cel al folosirii lui `slice()` pentru a transforma `arguments` într-un array:
 
-```js
+```javascript
 var converteste = function(){
   return Array.prototype.slice.call(arguments);
 };
 var unArrayNou = converteste(1, "ceva", 23); // Array [ 1, "ceva", 23 ]
 ```
 
+Trebuie lămurit aici de ce putem folosi o astfel de invocare a lui `slice()`.
+
+Ceea ce tocmai am făcut este un apel direct a metodei `slice` pusă la dispoziție de prototipul obiectul intern `Array` folosind notația cu punct. Această metodă este ca oricare metodă, o funcție. Ca orice funcție, aceasta poate fi aplicată folosind metoda `call()` pusă la dispoziție de obiectul `Function`. Deci, aplicăm metoda `slice()` folosind `call()` pe obiectul care seamănă a array numit standardizat `arguments`.
+
 În loc de `Array.prototype.slice.call(arguments)` se poate folosi pur și simplu `[].slice.call(arguments)`.
 
-```js
+```javascript
 var converteste = function(){
   return [].slice.call(arguments);
 };
@@ -50,26 +54,25 @@ arrColectie.forEach(function(element){
 });
 ```
 
-
 ### `NodeList` într-un array
 
 Este necesar pentru manipularea ușoară a elementelor din DOM.
 
-```js
+```javascript
 var listaDivuri = document.querySelectorAll('div'); // returnează NodeList
 var arrayDivuri = Array.prototype.slice.call(listaDivuri); // convertește NodeList în Array
 ```
 
 Pentru browserele care suportă ECMAScript 2015 se poate folosi operatorul Spread
 
-```js
+```javascript
 var listaDivuri = document.querySelectorAll('div'); // returnează NodeList
 var arrayDivuri = [...listaDivuri]; // convertește NodeList în Array
 ```
 
 Se mai poate face conversiune și folosind `Array.from()`
 
-```js
+```javascript
 var listaDivuri = document.querySelectorAll('div'); // returnează NodeList
 var arrayDivuri = Array.from(listaDivuri); // convertește NodeList în Array
 ```

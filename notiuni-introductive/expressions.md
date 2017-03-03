@@ -13,7 +13,7 @@ var a = b * 3;
 - `b * 3` este o **_expresie aritmetică_** - **arithmetic expression**, care are de făcut o operațiune de înmulțire
 - `var a = b * 3` este o **_expresie de atribuire_** ceea ce înseamnă atribuirea rezultatului b * 3 variabilei a
 
-## O expresie afirmație - expression statement
+## Instrucțiuni ca expresii - expression statement
 
 este o expresie de sine stătătoare precum
 

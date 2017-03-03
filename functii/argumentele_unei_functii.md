@@ -1,9 +1,10 @@
 # Argumentele și parametrii funcțiilor
 
 Pe scurt, argumentele sunt ceea ce pasezi funcțiilor. Numărul de argumente pasate unei funcții se numește în jargonul programatorilor „arity”.
-Fiecare argument trebuie pasat funcției în ordinea corectă.
 
-Mai jos este dat un exemplu care ilustrează afirmația: o funcție este o rutină aplicată pe argumentele sale. Exemplul se bazează pe `Function.prototype.apply`.
+Fiecare argument trebuie pasat funcției în ordinea corectă pentru că valoarea sa se va „lega” de numele desemnat de programator între parantezele rotunde.
+
+Mai jos este dat un exemplu care ilustrează afirmația: ***o funcție este o rutină aplicată pe argumentele sale***. Exemplul se bazează pe funcționalitatea metodei `apply()` oferită prin moștenire (`Function.prototype.apply`).
 
 ```javascript
 function oFunctie(x, y, z) {
@@ -14,12 +15,14 @@ var argumentele = [0, 1, 2];
 oFunctie.apply(null, argumentele); // argumentele sunt aplicate literalmente funcției.
 ```
 
-Acest exemplu ilustrează în adâncime ceea ce se petrece cu argumentele unei funcții. Am folosit soluția practică `Array.prototype.slice.call(arguments)` pentru a transforma obiectul arguments într-un array. Se pot obține valorile direct folosind noua sintaxă ES6: `...arguments`.
+Acest exemplu ilustrează în adâncime ceea ce se petrece cu argumentele unei funcții. Am folosit soluția practică `Array.prototype.slice.call(arguments)` pentru a transforma obiectul `arguments` într-un array.
 
-Pentru că am menționat sintaxa spread introdusă de ES6, hai să vedem același exemplu dar folosind această nouă sintaxă:
+Se mai pot obține valorile direct, folosindu-se noua sintaxă ES6: `...argumente`.
+
+Pentru că am menționat ***sintaxa spread*** introdusă de ES6, hai să vedem același exemplu, dar folosind această nouă sintaxă:
 
 ```javascript
-function oFunctie(x, y, z){console.log([].slice.call(arguments));};
+function oFunctie (x, y, z) { console.log([].slice.call(arguments)); };
 var argumente = [4, 5, 6];
 oFunctie(...argumente); // Array [ 4, 5, 6 ]
 ```
@@ -27,8 +30,8 @@ oFunctie(...argumente); // Array [ 4, 5, 6 ]
 Ceea se declară în interiorul funcției se numește **parametru**. Parametrii preiau valorile pasate prin intermediul argumentelor.
 
 ```js
-function demo(param1, param2){ return param1 + param2 }; // parametrii sunt declarațiile din funcție
-
+function demo(param1, param2){ return param1 + param2 };
+// parametrii sunt declarațiile din funcție
 demo(1, 2); // argumentele este ceea ce pasezi funcției la invocare.
 ```
 
@@ -36,14 +39,12 @@ La nevoie poți specifica strict numărul argumentelor primite:
 
 ```js
 function faCeva(a,b){
-  if(arguments.length !== 2){
+  if(arguments.length !== 2){ // sintaxa spread
     throw new Error('Trebuie musai doar două argumente');
   };
 };
 faCeva(1, 3, 4); // Error: Trebuie musai doar două argumente
 ```
-
-Există un obiect `arguments` care este pasat funcției și care permite accesul la toți parametrii, fără a fi necesar să-i definești în interiorul funcției.
 
 ## Mantre
 
@@ -53,14 +54,16 @@ Există un obiect `arguments` care este pasat funcției și care permite accesul
 - O funcție are o proprietate `length`, care nu trebuie confundată cu proprietatea cu același nume a parametrului `arguments`. `nume_funcție.length` returnează câți parametri care au un nume au fost declarați.
 - Obiectul `arguments` este actualizat în permanență când codul nu-i `strict` și poți modifica în interiorul funcției valoarea parametrilor.
 - `arguments` are caracteristicile unui array, zicem că este array-like.
-- pentru o funcție poți vedea câți parametri au fost declarați (`nume_functie.length`) și câte argumente i-au fost pasate (`arguments.length`).
-- Parametrii cu valori inițiale trebuie să aibe valori primitive. Asta chiar dacă este o funcție invocată, aceasta trebuie să returneze o primitivă.
+- Pentru o funcție poți vedea câți parametri au fost declarați (`nume_functie.length`) și câte argumente i-au fost pasate (`arguments.length`).
 
 ## Ce este `arguments`?
 
-Sfatul lui Crockford: tratează `arguments` ca pe o structură read-only, pentru că, altfel, poți modifica valorile și ordinea parametrilor funcției.
+Este un obiect care este pasat funcției și care permite accesul la toți parametrii, fără a fi necesar să-i definești în interiorul funcției.
+Scenariul în care va fi folosit acest obiect este cel al funcțiilor care primesc un număr variabil de argumente.
 
-`arguments` este un obiect.
+**Sfatul lui Crockford**: tratează `arguments` ca pe o structură read-only, pentru că, altfel, poți modifica valorile și ordinea parametrilor funcției.
+
+**Moment Zen**: `arguments` este un obiect.
 
 ```javascript
 function testX(unu, doi){
@@ -98,7 +101,7 @@ console.log(window.trei);
 
 ## Transformarea lui `arguments` într-un array
 
-Se folosește metoda slice a lui Array:
+Se folosește metoda `slice()` a lui Array:
 
 ```javascript
 function convertireArgs(a, b){

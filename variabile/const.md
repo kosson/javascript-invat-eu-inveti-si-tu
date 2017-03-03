@@ -2,7 +2,10 @@
 
 Este adăugat de ECMAScript 2015 (ES6).
 
-Ca și variabilele declarate cu `let`, cele declarate prin `const` sunt limitate la blocul de cod delimitat prin acolade `{}`. Asta înseamnă că deîndată ce execuția s-a încheiat pentru un anume bloc, variabilele declarate prin `const` nu vor mai fi disponibile. Declarațiile nu beneficiază de mecanismul de hoisting.
+Ca și variabilele declarate cu `let`, cele declarate prin `const` sunt limitate la blocul de cod delimitat prin acolade `{}`. Asta înseamnă că, de îndată ce execuția s-a încheiat pentru un anume bloc, variabilele declarate prin `const` nu vor mai fi disponibile.
+
+Declarațiile cu `const` nu beneficiază de mecanismul de hoisting.
+
 Poate fi folosit pentru a identifica setări precum URL-uri, accesse la baze de date, etc.
 
 ```js
@@ -40,3 +43,5 @@ Practica indică faptul că variabilele din global ar trebui scrise cu majuscule
 ```js
 const O_SETARE_CEVA = true;
 ```
+
+JavaScript nu permite un „rebinding” (conectarea la altă valoare) al unui nume de identificator care s-a „legat” deja de o valoare în mediul lexical existent.

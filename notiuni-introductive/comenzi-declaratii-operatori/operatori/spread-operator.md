@@ -4,7 +4,7 @@ Este un operator nou introdus de ECMAScript 2015.
 
 **Parametrii rest** se deosebesc de **operatorul spread**.
 
-Parametrii rest permit agregarea mai multor argumente independente într-un array.
+Parametrii rest permit agregarea mai multor argumente independente dintr-un array într-o listă separată prin virgule.
 
 ```javascript
 function ex(primul, ...multiAltii){

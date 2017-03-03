@@ -2,25 +2,18 @@
 
 „Este porțiunea de cod sursă pentru care este disponibilă o legătură între un nume și o entitate” (definiție pentru ALGOL 60, 1960).
 
-Motorul JavaScript atunci când este pus să evalueze o funcție, consultă mai întâi „lexical environment” - o zonă delimitată de felul în care rânduit codul ca și text, care este cunoscută de toată lumea ca „scope”.
+Mediul lexical sau scope-ul poate fi foarte ușor înțeles ca un „registru inventar” al tuturor identificatorilor care au valori „legate” de aceștia.
 
-Acest lexical environment este în strânsă legătură cu diferite structuri de cod cum ar fi blocurile de cod (`{}` simplu, începând cu versiunea ES6, anterior fiind limitat doar la funcții) și funcțiile.
+În cazul funcțiilor, atunci când sunt pasate valori, reține faptul că JavaScript, de fapt copiază valoarea în **lexical environment** care poate fi comparat pentru o ușoară referință comună cu un „registru inventar al mediului”. Acum putem spune că o valoare este în scope.
+Atunci când unei funcții îi sunt pasate referințe către valori drept argumente, valorile către care se face referința, nu mai sunt copiate în **lexical environment**, ci doar referința, care va fi utilizată pentru a ajunge la valoare. Mai multe referințe pot trimite către aceeași valoare.
 
-Înainte de ES6 block scope-ul se realiza doar printr-un IIFE (Immediately-invoked function expression), care produce propriul său lexical scope izolat de restul codului.
-
-```javascript
-// cele două stiluri de a scrie IIFE-uri
-(function () { … })(); // dog balls
-(function () { … }()); // stilul Douglas Crockford
-```
-
-Această zonă se stabilește chiar și la nivelul `catch` din constructul `try-catch` a limbajului.
+Astfel, putem spune că există „tipuri de valoare” (**value types**) și „tipuri de referințe” (**reference types**).
 
 ## Spune standardul
 
 Lexical environment este asociat cu structura lexicală a codului așa cum este declararea funcțiilor, blocurile de cod dintre acolade și secvența `Catch` din blocurile `Try...Catch`.
 
-Scope-ul 0, cel după care nu mai are nimic este, de fapt un **enviroment record** global care este un spațiu, un **tărâm** comun tuturor elementelor unui program care sunt procesate.
+Mediul lexical 0, cel după care nu mai există nimic este, de fapt un **enviroment record** global care este un spațiu, un **tărâm** comun tuturor elementelor unui program care sunt procesate.
 
 Valorile lui **lexical environment** și a lui **environment record** sunt mecanisme stabilite de specificația standardului și este posibil să nu se regăsească în implementare.
 
@@ -44,7 +37,10 @@ Fiecare obiect **environment record** este legat de un obiect numit **binding ob
 
 ## Lexical environment - scope în practică
 
-Scope trebuie înțeles ca totalitatea identificatorilor din zonele menționate anterior. Un anume scope este zona unui program în care un identificator este asociat cu o valoare.
+Scope trebuie înțeles ca totalitatea identificatorilor din zonele menționate anterior.
+
+Un mediu lexical (scope) este un registru al unui program în deplină execuție în care un identificatorii sunt asociați unor valori și astfel poți știi ce există la un moment dat.
+
 O posibilă interpretare pentru a înțelege și mai bine este aceea de hartă de identificatori, cine ține evidența la ce.
 
 ```js
@@ -61,6 +57,8 @@ var faCeva = function redau(){
 În exemplul de mai sus GEC (Global Execution Context) ține evidența identificatorilor `ceva` și `faCeva`. `faCeva` ține evidența identificatorilor `altceva`, `console.log` și `prelucrez`.
 
 Zona lexicală sau scope-ul depinde de gradul de inculcare a codului (o funcție care conține o alta ș.a.m.d. = **code nesting**).
+
+Această zonă se stabilește chiar și la nivelul `catch` din constructul `try-catch` a limbajului.
 
 Scope-ul nu se realizează la nivel de bloc în JavaScript pentru declarațiile `for`, `while`, `if` și `switch`.
 
@@ -112,7 +110,7 @@ Global scope este locul de unde pot fi accesate funcții și variabile în într
 - declarații de funcții,
 - scope-ul blocului părinte (se face lanțul prin care se caută „pe fir” mai sus identificatorul pentru care a fost definită o variabilă)
 
-## Cazul obiectelor
+## Mediul lexical al obiectelor
 
 ```js
 function Obi(){
@@ -131,7 +129,7 @@ Obi();
 ```
 
 Atenție!
-În cazul invocării lui setInterval `this` este setat la obiectul global, care este, de regulă, `window`. Acest lucru se întâmplă pentru că setInterval se execută într-un context diferit de cel în care este invocat. setInterval va căuta o funcție `obi.ceva` în obiectul `window`. Acest lucru se întâmplă pentru că setInterval schimbă contextul la global și astfel taie calea către funcția cu rol de metodă din obi. Bineînțeles, funcția care există în obi cu rol de metodă nu există în obiectul global. Pentru ca referința să se facă corect, `obi.mesaj` trebuie apelată ca metodă: `obi.ceva()`. Când setInterval va invoca `obi.ceva` ca funcție și nu ca metodă, nu va avea acces la `this`. Doar metodele au acces la `this`. În cazul de mai sus Obi() își va încheia execuția după returnarea obiectului.
+În cazul invocării lui `setInterval`, `this` este setat la obiectul global, care este, de regulă, `window`. Acest lucru se întâmplă pentru că `setInterval` se execută într-un context diferit de cel în care este invocat. `setInterval` va căuta o funcție `obi.ceva` în obiectul `window`. Acest lucru se întâmplă pentru că `setInterval` schimbă contextul la global și astfel taie calea către funcția cu rol de metodă din obi. Bineînțeles, funcția care există în obi cu rol de metodă nu există în obiectul global. Pentru ca referința să se facă corect, `obi.mesaj` trebuie apelată ca metodă: `obi.ceva()`. Când `setInterval` va invoca `obi.ceva` ca funcție și nu ca metodă, nu va avea acces la `this`. Doar metodele au acces la `this`. În cazul de mai sus Obi() își va încheia execuția după returnarea obiectului.
 
 ```js
 function Obi(){
@@ -147,7 +145,7 @@ function Obi(){
 Obi();
 // Object { token: 100, mesaj: Obi/obi.mesaj(), ceva: Obi/obi.ceva() }
 // Esti un om de nota 100
-// blocul se repetăÎn acest al doilea caz, invocăm funcția cu rol de metodă dintr-un callback. Motivul pentru care se scope-ul este corect este pentru că funcția care invocă metoda trăiește în același scope cu obiectul pentru care invocă metoda. Funcția anonimă (callback-ul) oferă posibilitatea de a executa metoda și de a ne asigura că nu va executa ca funcție. Dacă s-ar invoca direct metoda `obi.mesaj()`, aceasta s-ar executa o singura dată la momentul execuției lui Obi() și apoi ar pierde scope-ul la a doua invocare în favoarea lui global. În acest caz Obi() va continua execuția pânî când setInterval va fi întrerupt.
+// blocul se repetă
 ```
 
 În acest al doilea caz, invocăm funcția cu rol de metodă dintr-un callback. Motivul pentru care se scope-ul este corect este pentru că funcția care invocă metoda trăiește în același scope cu obiectul pentru care invocă metoda. Funcția anonimă (callback-ul) oferă posibilitatea de a executa metoda și de a ne asigura că nu va executa ca funcție. Dacă s-ar invoca direct metoda `obi.mesaj()`, aceasta s-ar executa o singura dată la momentul execuției lui Obi() și apoi ar pierde scope-ul la a doua invocare în favoarea lui global. În acest caz Obi() va continua execuția până când setInterval va fi întrerupt.
@@ -180,16 +178,28 @@ Metoda de a căuta o variabilă în **scope chain** este similară cu cea care s
 
 Ultimul element din **scope chain** este Obiectul Global.
 
-### Cazul funcțiilor
+### Mediul lexical al funcțiilor
 
-A. La momentul declarării
+Motorul JavaScript atunci când este pus să evalueze o funcție, consultă mai întâi „lexical environment” - o zonă delimitată de felul în care rânduit codul ca și text, care este cunoscută de toată lumea ca „scope”.
+
+Acest lexical environment este în strânsă legătură cu diferite structuri de cod cum ar fi blocurile de cod (`{}` simplu, începând cu versiunea ES6, anterior fiind limitat doar la funcții) și funcțiile.
+
+Înainte de ES6 block scope-ul se realiza doar printr-un IIFE (Immediately-invoked function expression), care produce propriul său lexical scope izolat de restul codului.
+
+```javascript
+// cele două stiluri de a scrie IIFE-uri
+(function () { … })(); // dog balls
+(function () { … }()); // stilul Douglas Crockford
+```
+
+#### Momentul declarării
 
 La momentul declarării, identificatorul funcției este adăugat la obiectul scope existent deja, care să spunem că este Global Object.
 Identificatorul acestei noi funcții, care doar a fost declarată, referă un obiect funcție care tocmai s-a generat.
 
 Când o funcție este adăugată scope-ului existent la momentul declarării,  o altă proprietate internă care este scope-ul preexistent la momentul declarării. Dacă declarăm o funcție în Global Object, scope va fi chiar Global Object.
 
-B. La momentul invocării
+#### Momentul invocării
 
 Când o funcție este invocată, se creează un nou obiect scope, care va conține variabilele locale pentru acea funcție. Acest nou scope creat, moștenește din obiectul scope preexistent.
 
@@ -205,10 +215,6 @@ Constituie baza pentru înțelegerea clojure-urilor.
 Iată cum arată scope-ul ca reprezentare și ca arie în care are efect o variabilă sau o funcție.
 
 ![Scope in JavaScript](scopes.svg "Scope în Javascript")
-
-## Aprofundare prin efect
-- ### [Clojures](clojures/clojures.md "Subiectul clojures")
-  - #### [Clojures in loop](clojures/clojures.md "Caz explicat de clojures")
 
 ## Resurse
 

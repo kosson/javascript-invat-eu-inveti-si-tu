@@ -1,5 +1,16 @@
 # for... of
 
+Ori de câte ori un obiect trebuie să fie iterat, metoda `@@iterator` este apelată fără argumente.
+Iteratorul care este returnat este folosit pentru a obține valorile care trebuie iterate.
+
+`for...of` poate parcurge și extrage valori din următoarele obiecte care respectă ***protocolul iterator***:
+- Array
+- Map
+- Set
+- String
+- TypedArray
+- arguments
+
 Este un operator folosit pentru cicla array-uri, dar cel mai bine se aplică pe obiecte „iterable” precum `Array`, `Map`, `Set`.
 
 ```javascript

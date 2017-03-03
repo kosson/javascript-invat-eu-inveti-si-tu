@@ -1,30 +1,116 @@
 # Funcții în ECMAScript
 
-Funcțiile sunt unitățile de execuție a codului JavaScript. O funcție poate fi percepută ca un subprogram, ca o subrutină.
+Funcțiile sunt unitățile de execuție a codului JavaScript. O funcție poate fi percepută ca un subprogram, ca o subrutină. Cel mai sănătos mod de a privi activitatea și efectele unei funcții este gândind întotdeauna că o funcție este un set de instrucțiuni care se aplică unui set de date primit ca argumente. Aplicarea unei funcții argumentelor sale produce un nou mediu lexical, un nou scope în care se fac legături între identificatori și valori.
 
-O funcție este declarată folosind cuvântul cheie `function` urmat de un șir de caractere care este numele funcției urmate de paranteze rotunde între care sunt declarate valori care sunt parametrii funcției (acestea formează așa-numitul antet) și apoi acolade care conțin codul ce va fi executat.
+**Mecanisme magice**: Declararea unei funcții are ca efect magic „urcarea” ( în jargonul limbajului se numește **hoising** ) în „capul codului”. Capul codului se referă la prezența unei declarații în registrul inventar al mediului lexical existent. Magia rezidă în faptul că poți invoca o funcție înainte ca aceasta să fie declarată. Superciudățel, nu?!
+
+O perspectivă simpatică ar fi dacă-ți închipui o funcție ca pe un caracter dintr-un joc de strategie pe care dai click și-l pui să facă ceva. Când ai nevoie să „producă” mâncare îl pui să facă o fermă. Îl trimiți după lemne ca să aibă cu ce și așa mai departe. Dacă ajunge la un punct de pe hartă unde concurează cu alte caractere pentru o resursă, pur și simplu așteaptă cuminte să-i vină rândul la „tufă” sau la „minerit aur”. Îmediat ce termină treaba, caracterul nostru nu are inițiativă, așteaptă să fie chemat cu un click să facă ceva.
+Așa sunt și funcțiile ca și comportament.
+
+O funcție este declarată folosind cuvântul cheie `function` urmat de un șir de caractere, care este numele funcției urmate de paranteze rotunde.
+Între paranteze sunt declarate valori care constituie argumentele funcției (acestea formează așa-numitul antet), urmate apoi de acolade. Acoladele delimitează **blocul de cod** ce va fi executat la invocarea funcției.
 
 ```javascript
 function faCeva(arg1, arg2){
-  // cod pentru a fi executat
+  var oValoare = arg1 + arg2;
   return oValoare;
-};
+}; faCeva(1, 3); //4
+```
+
+**Mecanisme magice**: Am aflat mai devreme că la executarea unei funcții, aceasta creează și un scope propriu, dar mai e o chestie supertare: dacă într-un bloc de cod introduci o declarație, se va crea un nou scope pentru respectivul cod. Ciudățel și superinteresant, nu?
+
+```javascript
+var x = 100, y = 'ceva';
+{ var x = 10; console.log(this.x, this.y) }; // 10 ceva
 ```
 
 Motivul pentru care există funcțiile este acela al reutilizări în diferite scenarii. De ce? Pentru că ar fi o nebunie să scrii aceeași secvență de cod de 1000 de ori, dacă în diferite părți ale codului este nevoie de un „tratament” identic al unor diferite seturi de valori.
 
-Nimic din conținutul unei funcții nu produce niciun rezultat până când funcția nu este apelată și evaluată. La momentul apelării (a invocării), funcția evaluează codul său intern și returnează un rezultat pe baza operațiunilor specificate în **codul funcției**.
+Și acum, vom face un exercițiu Zen și vom privi la exemplul perfect de funcție, care se poate executa, dar a cărei esență este golul, nedefinitul.
 
-Moment ZEN: Funcțiile sunt obiecte!
+```javascript
+() => {}; // returnează constructorul
+// executând privim Ensō
+(() => {})(); // undefined
+```
+
+Un moment de un calm asemănător este utilizarea operatorului `void`, care golește de valoare orice expresie care a fost evaluată pe care o precedă.
+
+```javascript
+void 1; // undefined
+void (function ki(){return 'prana';})(); // undefined
+```
+
+**Moment Zen**: O funcție, de fapt, „se aplică” argumentelor pasate.
+
+Nimic din conținutul unei funcții nu produce niciun rezultat până când funcția nu este apelată și evaluată.
+
+La momentul apelării (a invocării), funcția evaluează codul său intern și returnează un rezultat pe baza operațiunilor specificate în **codul funcției**. De fapt, ar trebui să pornim de la 0 și să spunem că mai întâi de toate o funcție este o expresie pe care motorul JavaScript are nevoie să o evalueze, dar această expresie are în componența ei alte expresii care la rândul lor au nevoie să fie evaluate pentru ca funcția să poată fi evaluată. Deci, se vor evalua expresiile până când se va ajunge la valorile de care funcția are nevoie să se execute.
+
+Această concluzie vă va ajuta să înțelegeți mai repede ce sunt și cum funcționează un „closure”.
+
+O funcție foarte simplă este una introdusă ca sintaxă de ultima versiune a standardului ES6 și numită „fat arrow”. Aceasta returnează imediat rezultatul. Acesta nu are nevoie să fie folosit cuvântul rezervat `function`. De regulă, veți vedea aceste funcții lucrând din poziția de ***callback-uri*** (funcții trimise ca argument care sunt apelate după ce întreaga funcție a fost evaluată)
+
+```javascript
+(() => 'ceva')(); // ceva
+```
+
+După cum se observă, sintaxa aplicată este ceva mai specială. Fat arows au nevoie de un eveniment care să declanșeze execuția. Pentru a face exemplul să funcționeze, am împachetat funcția într-o structură `()()`, ceea ce are drept efect executarea funcției dintre parantezele de grupare. În comunitatea coderilor JavaScript aceste structuri care sunt executate imediat se numesc **Immediately Invoked Function Expressions** - expresii de funcții invocate imediat.
+
+Pentru că am deschis o fereastră în interiorul funcțiilor, trebuie menționat faptul că returnarea directă a unei expresii are drept efect returnarea valorii, dar dacă expresia este introdusă într-un bloc funcțional, va fi returnat `undefined`.
+
+```javascript
+(() => 1 + 1 )(); // 2
+(() => {1 + 1})(); // undefined
+```
+
+Acesta este motivul pentru care pentru a obține o valoare în urma evaluării unei funcții care are expresiile într-un bloc de cod delimitat de acolade, se va folosi cuvântul rezervat `return`.
+
+```javascript
+(function () { return 1 + 1; })(); // 2
+```
+
+Comanda `return` inițiază o instrucțiune de returnare care termină aplicarea funcției evaluând rezultatul expresiei de după cuvântul cheie.
+
+**Moment Zen**: Funcțiile returnează rezultatul evaluării expresiilor.
+
+```javascript
+(function ex () { return 10 + 1; })(); // 11
+(() => { return 10 + 1; })(); // 11
+(() => return 11 )(); // SyntaxError: expected expression, got keyword 'return'
+```
+
+Concluzia pentru care avem o eroare de sintaxă este că toate expresiile trebuie să stea într-un bloc dedicat `{}`.
+
+În inventarul expresiilor care pot fi returnate putem adăuga array-uri, care pot fi multidimensionale și care la rândul lor ca elemente pot conține alte expresii ș.a.m.d. Ceea ce doresc să accentuez este faptul că poți returna structuri întregi.
+
+```javascript
+((x, y, z) => [++x, ++y, ++z])(1, 2, 3); // [ 2, 3, 4 ]
+(() => [() => 'ceva', () => 'altceva'])(); // [ function (), function () ]
+```
+
+**Moment Zen**: Dacă funcțiile pot returna evaluarea expresiilor, atunci pot returna la rândul lor alte funcții pentru că și o funcție tot o expresie este.
+
+```javascript
+() => () => true; // function ()
+var x = (y) => () => y; x(1)(); // 1; același lucru cu bloc
+var a = (b) => () => { return b; }; a(2)(); // 2
+```
+
+**Moment Zen**: Funcțiile sunt obiecte!
 
 Standardul le numește chiar `function objects`. O funcție produce o instanță a unui function object. În JavaScript, funcțiile au metode.
 Funcțiile sunt obiecte first-class. Pot fi pasate ca argumente altor funcții și pot fi returnate din funcții.
-Funcțiile în JavaScript sunt de ordin înalt, adică pot fi pasate ca valori și pot primi ca argumente alte funcții, dar acest lucru tot de faptul că sunt first class ține.
-Funțiile moștenesc din `Function.prototype`.
+Funcțiile în JavaScript sunt de ***ordin înalt***, adică pot fi pasate ca valori și pot primi ca argumente alte funcții, dar acest lucru tot de faptul că sunt first class ține.
 
-Funcțiile sunt efemere, fiind mecanismul prin care date intră, sunt prelucrate și apoi sunt returnate apelantului iar după aceasta „dispar”.
+**Moment Zen**: Funcțiile sunt valori în sine care pot fi referențiate printr-un identificator (variabilă).
+
+Funcțiile moștenesc din `Function.prototype`.
+
+**Moment Zen**: Funcțiile sunt efemere, fiind mecanismul prin care sunt preluate date, sunt prelucrate și apoi sunt returnate apelantului. După ce treaba s-a terminat „dispar” ca parte activă.
 
 Spre deosebire de restul obiectelor, funcțiile pot fi invocate.
+
 `function` este un subtip de obiecte numit tehnic „callable object” iar acest lucru înseamnă că pentru acea funcție, motorul care implementează standardul ECMAScript are o metodă internă `[[Call]]`, care permite apelarea funcției dar și recursivitatea.
 
 O funcție poate fi invocată chiar din interiorul său. O funcție care se apelează din interiorul său se numește funcție recursivă. Sunt trei modalități de a apela o funcție din interiorul ei:
@@ -49,7 +135,9 @@ Funcțiile obiecte au sloturi interne și merită menționat `Realm`, care este 
 ## Mantre
 
 - Funcțiile sunt obiecte care incapsulează cod parametrizat care este beneficiarul întregului scope în care a fost declarată funcția („closed over a lexical environment”).
-- Funcțiile permit evaluarea dinamică a codului pe care îl conțin.
+- Funcțiile au în ***corpul*** lor (`{...}`) zero sau mai multe instrucțiuni.
+- Funcțiile a căror corp este un ***bloc*** vor avea drept rezultat al evaluării ceea ce rezultă în urma instrucțiunii `return` sau `undefined`.
+- Funcțiile a căror corp este o ***expresie***, avea drept evaluare, chiar evaluarea acelei expresii. Vorbim aici despre „fat arrows”.
 - Constructorul lui Function este chiar o funcție. În schimb, Function este constructor pentru Object. Cele două sunt contructorii pentru restul obiectelor interne.
 - Începând cu ES6, este posibilă declararea funcțiilor în blocuri (de exemplu, în `if`-uri).ncției pe zero sau mai multe argumente.
 - Funcțiile sunt invocate într-un loc care determină rezultatul, adică într-un anumit *context*.
@@ -84,41 +172,28 @@ Funcțiile obiecte au sloturi interne și merită menționat `Realm`, care este 
 - Dacă definești o funcție în interiorul altei funcții, atunci funcția internă trebuie să fie recreată de fiecare dată când funcția externă este executată (acest lucru se întâmplă pentru că funcțiile, de fapt, sunt obiecte). Acest comportament trebuie evitat. Definește funcția în afară și referențiaz-o sau execut-o în context local prin call / apply / bind.
 - Orice funcție publică poate fi invocată cu `call()` sau `apply()` (vezi regulile de binding pentru `this`).
 
-## Anatomie
-
-Pentru că este absolut necesară înțelegerea mecanismelor interne pe care le pune la dispoziție o funcție pentru a prelucra date și pentru a le returna, vom examina o funcție pentru a avea o privire generală.
-
-Trebuie reținut din start că o funcție este declarată și apoi evaluată pentru a returna apelantului un rezultat.
-
-Următorul exemplu expune o funcție care conține la rândul său o altă funcție. Acest scenariu este unul care introduce și conceptul de closure (o funcție internă care „fotografiază” mediul lexical în care a fost declarată și pe care îl folosește pentru a utiliza tot ce este necesar să se execute).
-
-```javascript
-function ex(unu, doi){
-  console.log(this);  // Window
-  this.trei = 3;      // se creează prop trei: window.trei care este 3
-  console.log(ex.arguments); // Arguments {0:1,1:2,calee:ex(),length:2,__proto__:Object}
-  function intern(patru, cinci){
-    console.log(this.trei);    // 3
-    console.log(ex.arguments); // Arguments {0:1,1:2,calee:ex(),length:2,__proto__:Object}
-    console.log(unu); // 1
-  };
-  intern();
-}; ex(1,2);
-console.log(window.trei);
-```
-
-Codul sursă a acestei funcții este considerat a fi `Global code`.
-Această funcție a fost declarată în primul mediu lexical (adică nu are părinte) pe care-l generează motorul JavaScript - `global environment` sau `global scope`. În cazul browserelor acesta este obiectul global `window` cu toate proprietățile sale printre care și obiectele interne specifice JavaScript.
-Pentru a testa care este mediul lexical, se face un `console.log` pe `this`, care relevă cine este contextul în care funcția este evaluată. Contextul în cazul nostru este acest obiect window creat de browser.
-Pentru că `this` este un identificator pentru contextul în care se face evaluarea, care la rândul său este un obiect, se pot introduce din interiorul funcției, la momentul evaluării, proprietăți noi cu valorile dorite: `this.trei = 3`. Chiar și după ce funcția a fost evaluată deja și nu mai este în execuție, proprietatea setată obiectului context, va exista în continuare. Poți verifica printr-o interogare simplă: `console.log(window.trei);`.
-Pentru ambele funcții `this` este obiectul global.
-Pe lângă `this`, funcția mai are acces la un obiect la momentul evaluării: `arguments`, care este un obiect ce seamnă cu un array, cuprinzând toate argumentele pasate funcției. Acesta poate fi accesat chiar și dintr-o funcție internă după sintaxa `numeFunctieGazda.arguments` dacă acest lucru este necesar sau direct fiecare parametru separat: `console.log(unu); `.
-Funcția `intern()` are posibilitatea de a accesa proprietățile funcției gazdă pentru că la momentul evaluării face **o poză** cu toți identificatorii pe care-i are gazda în `Environment Record`. Această **poză** se numește **closure**.
-
 ## Parametri și argumente - parameters and arguments
 
 Parametrii sunt variabile care fac parte din definirea funcției.
 Argumentele sunt valori pe care le trimitem funcției atunci când o invocăm.
+
+Ne amintim faptul că, de fapt, o funcție este aplicată argumentelor sale și că, la momentul apelării acesteia, se creează și un mediu lexical nou. În acest nou mediu lexical (inventarul identificatorilor), argumentele sunt variabile care identifică, de fapt, expresii ce vor fi „legate” de o valoare.
+
+```javascript
+((x) => x)(2 + 3); // 5
+```
+
+Valoarea este obținută prin evaluare mai înainte ca funcția să se execute. Abia după această etapă, o funcție se aplică argumentelor sale.
+Acum începe executarea funcției pe argumentul al cărui valoare este 5. Următorul pas este generarea unui mediu lexical nou pentru funcție în care valoarea 5 este „legată” de variabila x. La final, valoarea variabilei x din scope-ul intern funcției, este returnată.
+
+```javascript
+// #1 Fără asignare
+((diametru) => diametru * 3.1415)(2); // 6.283
+// #2 Cu asignare
+var circumferinta = (diametru) => diametru * 3.1415; circumferinta(2); /* 6.283, adică Tau (curios? vezi The Tau Manifesto) */
+// #3 Sintaxă convențională
+(function (diametru) { return diametru * 3.1415; })(2);
+```
 
 Începând cu EcmaScript 2015 (ES6), unui parametru îi poți atribui direct o valoare la momentul definirii:
 
@@ -179,6 +254,37 @@ function f(a, b, ...args){
 ```
 
 Valorile primelor două argumente pasate vor fi potrivite cu cei doi parametri menționați: a și b
+
+## Anatomie
+
+Pentru că este absolut necesară înțelegerea mecanismelor interne pe care le pune la dispoziție o funcție pentru a prelucra date și pentru a le returna, vom examina o funcție pentru a avea o privire generală.
+
+Atunci când este invocată o funcție, se creează un nou mediu lexical propriu acelei funcții.
+
+Următorul exemplu expune o funcție care conține la rândul său o altă funcție. Acest scenariu este unul care introduce și conceptul de closure (o funcție internă care „fotografiază” mediul lexical în care a fost declarată și pe care îl folosește pentru a utiliza tot ce este necesar să se execute).
+
+```javascript
+function ex(unu, doi){
+  console.log(this);  // Window
+  this.trei = 3;      // se creează prop trei: window.trei care este 3
+  console.log(ex.arguments); // Arguments {0:1,1:2,calee:ex(),length:2,__proto__:Object}
+  function intern(patru, cinci){
+    console.log(this.trei);    // 3
+    console.log(ex.arguments); // Arguments {0:1,1:2,calee:ex(),length:2,__proto__:Object}
+    console.log(unu); // 1
+  };
+  intern();
+}; ex(1,2);
+console.log(window.trei);
+```
+
+Codul sursă a acestei funcții este considerat a fi `Global code`.
+Această funcție a fost declarată în primul mediu lexical (adică nu are părinte) pe care-l generează motorul JavaScript - `global environment` sau `global scope`. În cazul browserelor acesta este obiectul global `window` cu toate proprietățile sale printre care și obiectele interne specifice JavaScript.
+Pentru a testa care este mediul lexical, se face un `console.log` pe `this`, care relevă cine este contextul în care funcția este evaluată. Contextul în cazul nostru este acest obiect window creat de browser.
+Pentru că `this` este un identificator pentru contextul în care se face evaluarea, care la rândul său este un obiect, se pot introduce din interiorul funcției, la momentul evaluării, proprietăți noi cu valorile dorite: `this.trei = 3`. Chiar și după ce funcția a fost evaluată deja și nu mai este în execuție, proprietatea setată obiectului context, va exista în continuare. Poți verifica printr-o interogare simplă: `console.log(window.trei);`.
+Pentru ambele funcții `this` este obiectul global.
+Pe lângă `this`, funcția mai are acces la un obiect la momentul evaluării: `arguments`, care este un obiect ce seamnă cu un array, cuprinzând toate argumentele pasate funcției. Acesta poate fi accesat chiar și dintr-o funcție internă după sintaxa `numeFunctieGazda.arguments` dacă acest lucru este necesar sau direct fiecare parametru separat: `console.log(unu); `.
+Funcția `intern()` are posibilitatea de a accesa proprietățile funcției gazdă pentru că la momentul evaluării face **o poză** cu toți identificatorii pe care-i are gazda în `Environment Record`. Această **poză** se numește **closure**.
 
 ## Fat arrow
 
