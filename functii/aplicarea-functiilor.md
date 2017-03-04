@@ -11,8 +11,8 @@ const prima = (functie, arg) => function (...set) {
   return functie.call(this, arg, ...set);
 };
 const combinaArgs = (a, b) => `am combinat ${a} cu ${b}`;
-const finalizare = prima(combinaArgs, 'ping');
-finalizare('pong'); // "am combinat ping cu Bre!"
+const finalizare = prima(combinaArgs, ['ping', 'echo']);
+finalizare('pong'); // "am combinat ping,echo cu pong"
 ```
 
 În exemplu avem `prima` care este o funcție ***fat arrow***.

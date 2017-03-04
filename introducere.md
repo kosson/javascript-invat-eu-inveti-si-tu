@@ -8,7 +8,7 @@ Speranța mea se îndreaptă către cei care vor reuși să stăpânească limba
 
 ## O resursă pentru a înțelege JavaScript
 
-Orcine învață mai bine dacă scrie lucrurile pe care dorește să le înțeleagă iar această carte mă va ajuta și pe mine să înțeleg mai bine concepte și practici care se însușesc cu dificultate în timp. Am dorit să vă iau cu mine în această întreprindere pentru că îmi doresc să vă fac părtași unui model nou de a scrie cărți: cel incluziv, care expune totul înainte.
+Oricine învață mai bine dacă scrie lucrurile pe care dorește să le înțeleagă iar această carte mă va ajuta și pe mine să înțeleg mai bine concepte și practici care se însușesc cu dificultate în timp. Am dorit să vă iau cu mine în această întreprindere pentru că îmi doresc să vă fac părtași unui model nou de a scrie cărți: cel incluziv, care expune totul înainte.
 Ținta este realizarea unui material de învățare pentru JavaScript, care să fie eficient în înțelegerea aspectelor dificil de pătruns. Și acestea nu sunt puține.
 
 Sunt cuprinse între coperți experiențe și note strânse după ce am citit și am vizionat multe alte lucrări dedicate acestui limbaj de programare.
@@ -21,7 +21,7 @@ Materialele pot servi și ca date prelucrabile pentru un posibil sistem de înv�
 JavaScript este motorul dinamicii paginilor web și nu numai. Avantajele folosirii JS pornesc de la server (NodeJs), până la aplicațiile rulate în pagina web a utilizatorului.
 Când vorbim de JavaScript, de fapt vorbim despre o implementare, adică de respectarea tuturor regulilor pe care le impune standardul ECMAScript.
 
-Programarea ar fi util să fie înțeleasă ca o limbă nouă pe care trebuie să o înveți. De aceea se numește și limbaj. Acest limbaj are o gramatică proprie cu toate regulile pe care le poate avea, de la felul în care înșiruiești caracterele, până la modul în care faci enunțurile pentru a avea sens și pentru un computer atunci când le evaluează.
+Programarea ar fi util să fie înțeleasă ca o limbă nouă pe care trebuie să o înveți. De aceea se numește și limbaj. Acest limbaj are o gramatică proprie cu toate regulile pe care le poate avea, de la felul în care înșirui caracterele, până la modul în care faci enunțurile pentru a avea sens și pentru un computer atunci când le evaluează.
 
 ### Astăzi întrebarea este `cum`, nu `de ce`
 
@@ -37,7 +37,7 @@ Voi încheia pledoaria pentru acest drum cu o afirmație care se va dovedi adev�
 
 ## Perspectivă peste un tărâm
 
-Atunci când am pornit la scrierea acestei cărți nu am avut nevoia să văd de pe orbită cum arată planeta Javascript, dar pe măsură ce am avansat cu scrierea textului, am realizat că este nevoie să privești mai întâi din spațiu pentru a înțelege valoarea tuturor entităților și relațiilor pe care le stabilesc acestea la nivelul solului. Vorbim despre o adevărată lume, despre un tărâm special.
+Atunci când am pornit la scrierea acestei cărți nu am avut nevoia să văd de pe orbită cum arată planeta JavaScript, dar pe măsură ce am avansat cu scrierea textului, am realizat că este nevoie să privești mai întâi din spațiu pentru a înțelege valoarea tuturor entităților și relațiilor pe care le stabilesc acestea la nivelul solului. Vorbim despre o adevărată lume, despre un tărâm special.
 
 Textul standardului oferă cea mai bună perspectivă atunci când vine vorba despre un program JavaScript care este privit la lucru. Voi parafraza și cita acolo unde este necesar standardul pentru a contura un cadru cât mai complet.
 
@@ -47,10 +47,10 @@ Un tărâm este constituit dintr-un set de obiecte interne, obiectul global pent
 
 Un program JavaScript este de fapt un grup de obiecte care comunică între ele. Obiectele acestea sunt niște colecții de proprietăți iar pentru fiecare dintre proprietăți există atribute care determină cum se pot folosi acestea. Proprietățile pot fi considerate ca niște cutii care conțin la rândul lor **obiecte**, **valori primitive** sau **funcții**.
 
-Moment ZEN: ECMAScript este bazat pe obiecte.
+**Moment ZEN**: ECMAScript este bazat pe obiecte.
 
 Simplu, avem șase primitive în acest moment: `Boolean`, `Null`, `Undefined`, `String`, `Number` și `Symbol`.
-Obiectele sunt de fapt membri ai tipului de obiect intern limbajului numit `Object`. Funcțiile sunt un tip de obiecte care în jargonul limbajului sunt de tip `callable` (pentru care se poate iniția un apel), iar funcțiile care sunt identificate printr-o proprietate a unui obiect sunt metode ale acestuia.
+Obiectele sunt de fapt membri ai tipului de obiect intern limbajului numit `Object`. Funcțiile sunt un tip de obiecte care în jargonul limbajului sunt de tip `callable` (pentru care se poate iniția un apel pentru a le executa), iar funcțiile care sunt identificate printr-o proprietate a unui obiect sunt metode ale acestuia.
 
 Mai adăugăm că ECMAScript, adică JavaScript are niște obiecte cu care vine el din start (`built-in objects`).
 
@@ -70,7 +70,7 @@ Buna practică spune ca toate liniile de instrucțiuni în JavaScript să fie te
 
 ### Automatic semicolon insertion - introducerea automată a lui punct și virgulă
 
-Unele declarații (statements) JavaScript trebuie să se termine cu punct și virgulă, fiind supuse de ASI - Automatic Semicolon Insertion:
+Unele declarații (statements) JavaScript trebuie să se termine cu punct și virgulă, fiind supuse mecanismului ASI - Automatic Semicolon Insertion:
 
 Aceste declarații și instrucțiuni sunt:
 
@@ -98,7 +98,5 @@ Instrucțiunile sunt expresii (`expressions`), de fapt idioame specifice limbaju
 # Resurse
 
 [ECMAScript® 2017 Language Specification](https://tc39.github.io/ecma262/)
-
-Simpson Kyle, [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS)
-
-Haverbeke Marijn, [Eloquent JavaScript](http://eloquentjavascript.net/)
+Simpson, Kyle. [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS)
+Haverbeke, Marijn. [Eloquent JavaScript](http://eloquentjavascript.net/)
