@@ -4,9 +4,15 @@ O funcție definită în interiorul unei funcții container, creează un closure
 
 Este o funcție internă care „fotografiază și stochează” mediul lexical în care a fost declarată și pe care îl folosește pentru a utiliza tot ce este necesar să se execute. Mai exact, un closure este efectul evaluării unei funcții interne atunci când s-a pornit execuția funcției gazdă.
 
+**Moment Zen**: Closure-urile cuplează funcțiile cu mediile peste care face closure-uri.
+
 Îți poți închipui un pescar (funcția internă), care stând în barca sa pe mare (funcția gazdă) aruncă un prostovol (closure) peste un banc de pești (identificatorii existenți din contextul de execuție la momentul evaluării). Poți să-ți imaginezi și un cățel într-o cutie. Cutia fiind funcția gazdă iar cățelul fiind funcția internă. Cățelul cunoaște cutia și are acces la toate obiectele din interiorul său.
 
 Un closure menține accesul la toate variabilele care erau „în scope” la momentul definirii funcției. Putem spune că o funcție din interiorul altei funcții este o funcție ***privată***, care are acces la argumentele și variabilele gazdei.
+
+**Moment Zen**: Toate closure-urile - funcțiile din aceeași gazdă - împărtășesc același mediu.
+
+Acest comportament al closure-urilor este perfect pentru a „ascunde” date, pentru a le face private.
 
 Cel mai simplu și mai elegant exemplu este oferit de sintaxa modernă **fat arrow** pentru a ilustra un closure. Acest exemplu concis este prezentat de Reg “raganwald” Braithwaite în lucrarea sa „JavaScript Allongé, the "Six" Edition” și îl vom diseca la rândul nostru pentru a vedea cum se leagă cunoștințele dobândite de la **mediul lexical**, **funcții** și **compilare și execuție**.
 

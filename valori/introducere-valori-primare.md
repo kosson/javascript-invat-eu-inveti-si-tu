@@ -67,5 +67,3 @@ Dacă încerci o operațiune matematică cu două tipuri de date diferite dintre
 ```javascript
 3 * 'trei'; // NaN
 ```
-
-// TODO: Explică copierea prin valoare și copierea prin referință

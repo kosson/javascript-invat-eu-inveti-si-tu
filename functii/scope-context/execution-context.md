@@ -65,7 +65,7 @@ Vorbim de faptul că funcțiile, atunci când sunt apelate, generează un contex
 
 Contextul unei funcții nu poate fi determinat examinând strict codul.
 
-```js
+```javascript
 var obiect = {
   getThis: function(){
     return this;
@@ -77,7 +77,7 @@ obiect.getThis() === obiect; // true
 
 Care ar fi contextul pentru funcția obiect.getThis()? Să investigăm:
 
-```js
+```javascript
 var getThis = obiect.getThis; // getThis este doar o referință către aceeași funcție
 
 getThis === obiect.getThis; // true

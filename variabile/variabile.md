@@ -1,16 +1,13 @@
 # Variabile
 
-## Despre identificatori
-
-Înainte de a introduce variabilele acesta este cel mai potrivit moment să explorăm **tărâmul** JavaScript pentru a înțelege după aceea ce sunt variabilele. Să ne imaginăm că avem o hartă imaginară pe care avem marcate prin fanioane diferite locații. Locațiile reprezintă valorile pentru care avem nevoie de un nume, de un toponim. De exemplu, pentru orașul (valoarea) din centrul regiunii Moldova avem numele Bacău, care este identificatorul.
-Identificatorii pot fi orice secvență de caractere care poate să înceapă cu `$`, sau cu `_` urmate de orice puncte de cod codate numeric respectând schema de codare a caracterelor UTF16. Am putea spune foarte simplist că un identificator este numele unei valori, iar identificatorul este o serie de caractere.
+O variabilă este ceea ce spune însăși cuvântul: o zonă rezervată de care este nevoie pentru a „memora” o valoare. Această valoare poate să se modifice pe măsură ce codul se execută și de aici și denumirea de variabilă. Pentru a înțelege cât mai bine variabilele, amintiți-vă de identificatori și rolul acestora în „spațiul” creat de mediul lexical. După cum bine v-ați amintit, identificatorii sunt etichetele necesare variabilelor pentru a identificat „zona rezervată”. E ca o tăbliță de idetificare a stației de autobuz. Știm că stația se numește „Laborator” și identifică un spațiu în care va intra autobuzul din când în când. 
 
 Pentru a declara o variabilă se va scrie `var variabila = 'ceva';`. În cazul în care sunt declarate mai multe variabile, se vor înșirui folosindu-se virgula, fără a mai specifica cuvântul cheie rezervat limbajului.
 
 ```javascript
 var a, b = 'ceva', c = true;
 ```
-
+Moment ZEN
 ```javascript
 var $ceva = 'Hanna';
 var _altceva = 10,
@@ -20,7 +17,7 @@ const ᚠ = 'o rună'; // se poate pentru că folosim UTF16
 const 𓄿 = 'Horus'; // UTF16 din nou
 ```
 
-Magia atribuirii valorii identificatorului o face operatorul `=`. Ceea ce se întâmplă dincolo de cortină este că se alocă un spațiu în memoria computerului pentru a „reține” valoarea asignată. Asignarea valorii se poate face dintr-un singur pas (`var x = 1;`), declarând și asignând imediat, sau mai întâi poți declara numele variabilei și abia la momentul oportun vei face asignarea.
+Magia atribuirii valorii identificatorului o face operatorul `=`. Ceea ce se întâmplă dincolo de cortină este că se alocă un spațiu în memoria computerului pentru a „reține" valoarea asignată. Asignarea valorii se poate face dintr-un singur pas (`var x = 1;`), declarând și asignând imediat, sau mai întâi poți declara numele variabilei și abia la momentul oportun vei face asignarea.
 
 ```javascript
 var x; // în acest moment are valoarea undefined
@@ -28,10 +25,57 @@ x = 10; // poți verifica dacă s-a făcut asignarea:
 x; // este returnat 10
 ```
 
-TODO: Ilustrează referința și copia
-TODO: Ilustrează variable shadowing
+În JavaScript, la momentul constituirii mediului lexical, se fac și legăturile dintre numele identificatorilor și valorile lor. Atunci când sunt folosite numele identificatorilor ca și expresii, acestea sunt evaluate prin returnarea valorii lor.
 
-Moment ZEN: Variabilele sunt identificatori pentru valori.
+```javascript
+var a = {0: 10},
+    b = a;
+a === b; // true
+```
+
+De fapt, ceea ce am realizat este o copiere a variabilei `a` prin referință.
+
+Aceeași demonstație se poate realiza prin pasarea valorii ca argument al unei funcții.
+
+```javascript
+var a = {0: 10};
+(function (b) {
+  console.log(b === a);
+})(a); // true
+```
+
+JavaScript permite modificarea valorii unei varibile. Această posibilitate se numește „umbrire” (shadowing).
+
+```javascript
+var valoare = 10;
+valoare = 15; console.log(valoare); // 15
+```
+
+Ceea ce se întâmplă este o refacere a unei legături la o altă valoare în mediul lexical. Merită investigat ceea ce se întâmplă și în cazul mediilor lexicale generate de funcții.
+
+```javascript
+(function x () {
+  var ceva = 10;
+  (function y () {
+    var ceva = 15;  // declarare
+  })();
+  return ceva;
+})(); // 10
+```
+
+Funcția `x` creează un mediul lexical (un scope) în care se va afla valoarea `10` legată de numele `x`. În interiorul funcției x, este evaluată funcția y care creează propriul mediu lexical în care este declarată o variabilă proprie cu numele `ceva`. Pentru că se face o declarare în sine, chiar dacă variabila poartă același nume cu variabila din mediul lexical (scope) extern la care funcția internă are acces, variabila din mediul intern, nu o va „umbri” (suprascrie) pe cea din mediul lexical extern. Situația se va schimba dacă nu se face declarare, ci asignare a unei valori.
+
+```javascript
+(function x () {
+  var ceva = 10;
+  (function y () {
+    ceva = 15;  // asignare
+  })();
+  return ceva;
+})(); // 15
+```
+
+**Moment ZEN**: Variabilele sunt identificatori pentru valori.
 
 Nu folosiți niciodată cuvintele rezervate ale limbajului drept nume pentru variabile. Efectul va fi apariția unei erori.
 
@@ -43,9 +87,10 @@ Cele trei moduri de a declara variabile au efect și asupra scope-ului.
 
 ## Folosirea lui `var`
 
-Prin folosirea lui `var`, declararea variabilei se face în global scope sau în cea mai apropiată funcție. Nu este localizată la nivel de bloc de cod `{}`. De exemplu, pentru o ciclare cu for, variabila definită ca și condiție și poate o variabilă în blocul său, de fapt sunt „înregistrate” în scope-ul funcției care găzduiește `for` și nu în cel al lui `for`. Din nevoia de a localiza la nivel de bloc variabilele, au fost introduce de ES6 `let` și `const`.
+Prin folosirea lui `var`, declararea variabilei se face în global scope sau în cea mai apropiată funcție. Nu este localizată la nivel de bloc de cod `{}`. De exemplu, pentru o ciclare cu for, variabila definită ca și condiție și poate o variabilă în blocul său, de fapt sunt „înregistrate" în scope-ul funcției care găzduiește `for` și nu în cel al lui `for`. Din nevoia de a localiza la nivel de bloc variabilele, au fost introduce de ES6 `let` și `const`.
 
 O declarație `var` în cadrul unei funcții urmează două ipostaze:
+
 - partea declarativă este supusă `hoisting-ului` ajungând automat în `capul funcției`, având valoarea `undefined`, iar
 - inițializarea se face acolo unde există în cod și unde se face și asignarea valorii.
 
@@ -56,7 +101,8 @@ function ex(){
   x = 10;
 };
 ```
-Sfatul lui Crockford: declară toate variabile în capul funcției.
+
+**Sfatul lui Crockford**: declară toate variabile în capul funcției.
 
 ### Standardul spune
 
@@ -64,20 +110,17 @@ Un enunț `var` declară variabile care au drept `scope` contextul de execuție 
 
 ## `let` și `const`
 
-Numele de `let` vine din matematică însemnând: `fie`: fie x un număr cu valoarea 1.
-Definesc variabile în cel mai apropiat „mediu lexical” (scope), care poate fi global scope, un block `{}` sau o buclă precum `for`.
-Rolul lor este de a localiza la nivel de înregistrare în scope la nivel de `global`, `function` și block `{}`.
+Numele de `let` vine din matematică însemnând: `fie`: fie x un număr cu valoarea 1. Definesc variabile în cel mai apropiat „mediu lexical" (scope), care poate fi global scope, un block `{}` sau o buclă precum `for`. Rolul lor este de a localiza la nivel de înregistrare în scope la nivel de `global`, `function` și block `{}`.
 
 ### Standardul spune
 
-Declarațiile `let` și `const` definesc variabilele care sunt în mediul lexical, adică scope-ul contextului de execuție curent (running execution context).
-Variabilele sunt create atunci când mediul lexical este instanțiat, dar nu vor fi accesate nicicum până când  ***lexical binding*** este evaluat. Valorea este asignată atunci când este evaluat acest **lexical binding**, nu la momentul declarării lor. Dacă o declarație cu `let` nu are o valoare de inițializare, este asignat `undefined` la momentul în care este evaluat, adică la momentul când se face `lexical binding` și se completează așa-numitul „Registru de mediu”.
+Declarațiile `let` și `const` definesc variabilele care sunt în mediul lexical, adică scope-ul contextului de execuție curent (running execution context). Variabilele sunt create atunci când mediul lexical este instanțiat, dar nu vor fi accesate nicicum până când **_lexical binding_** este evaluat. Valorea este asignată atunci când este evaluat acest **lexical binding**, nu la momentul declarării lor. Dacă o declarație cu `let` nu are o valoare de inițializare, este asignat `undefined` la momentul în care este evaluat, adică la momentul când se face `lexical binding` și se completează așa-numitul „Registru de mediu".
 
 ## Mantre
 
-- Valorile primitive și obiectele au proprietăți și metode. Primitivele beneficiază de acestea prin „împachetarea” valorii în obiectul corespondent.
+- Valorile primitive și obiectele au proprietăți și metode. Primitivele beneficiază de acestea prin „împachetarea" valorii în obiectul corespondent.
 - La momentul evaluării, variabilele sunt create când se constituie `lexical environment`-ul (scope), dar nu poate fi accesată până când nu se face legătura la valoare. La momentul creării, variabile declarate cu `var`, vor fi inițializate automat cu valoarea `undefined`.
-- Variabilele și funcțiile beneficiază de un proces al motorului JavaScript numit ***identifier lookup***. Este necesar pentru a discrimina între variabilele din local scope dintr-o funcție și una din global scope.
+- Variabilele și funcțiile beneficiază de un proces al motorului JavaScript numit **_identifier lookup_**. Este necesar pentru a discrimina între variabilele din local scope dintr-o funcție și una din global scope.
 - La executarea codului JavaScript este nevoie de un loc unde să fie stocate variabilele locale. Acest loc este **obiectul scope** cunoscut și sub numele de **lexical environment**. Se poate percepe ca un obiect la a cărui membri ai acces, dar nu poți referenția obiectul în sine.
 - Dacă declari o variabilă în corpul unei declarații if, această variabilă va fi disponibilă și în afara blocului funcțional, fie că blocul a fost executat sau nu. Se întâmplă pentru că se face hoisting. Folosirea cuvântului cheie `let` atașează variabila de blocul funcțional.
 - Scope-ul unei variabile poate fi înțeles setul de linii de cod sursă pentru care este definit un identificator.
@@ -88,7 +131,7 @@ Variabilele sunt create atunci când mediul lexical este instanțiat, dar nu vor
 
 ## Evaluarea unei expresii care conține valori delimitate prin virgulă
 
-```js
+```javascript
 var x = 1;
 var y = 2;
 var z = x + y; // 3
@@ -96,8 +139,7 @@ var z = x + y; // 3
 console.log( y = (x = y,z) ); // evaluează la 3
 ```
 
-// x va fi 2 pentru că va primi valoarea pe care o are y
-// y va fi 3 pentru că evaluarea unei înșiruiri delimitate de virgulă returnează ultima valoare din înșiruire.
+// x va fi 2 pentru că va primi valoarea pe care o are y // y va fi 3 pentru că evaluarea unei înșiruiri delimitate de virgulă returnează ultima valoare din înșiruire.
 
 Am menționat faptul că variabilele locale sunt stocate în scope, care poate fi perceput ca un obiect la al cărui membri ai access. Atunci când în execuție interpretorul caută o proprietate în obiectul scope curent. Dacă nu o găsește, atunci interpretorul va văuta mai sus în obiectul scope părinte și tot așa până când nu mai există un alt obiect părinte. Această secvență de obiecte scope se numește **scope chain**. Atenție, scope-ul se formează la momentul declarări, nu la momentul execuției.
 

@@ -30,6 +30,8 @@ var aDoua = prima(20, 21); console.log(aDoua); // 41
 - funcții
 - closure
 
+## Aspecte practice
+
 Cazul unei funcții care returnează altă funcție făcând o operațiune de currying:
 
 ```js
@@ -105,3 +107,7 @@ Un alt exemplu mai simplu de „curring” este cel de folosire a noii sintaxe �
   (b) =>
     (c) => a + b + c)(1)(2)(3); // 6
 ```
+
+## Alonje
+
+- funcții de tip tap.

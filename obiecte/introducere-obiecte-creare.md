@@ -2,7 +2,7 @@
 
 Standardul spune că obiectele sunt „colecții de zero sau mai multe proprietăți fiecare având atribute care determină cum poate fi folosită”. Un obiect are un singur obiect prototip.
 
-JavaScript vine din start cu câteva obiecte care se numesc „built-in object” pe care le putem înțelege ca obiecte interne limbajului la care ai acces din start. Atenție, `obiectul global` este parte a obiectelor interne preexistente.
+JavaScript vine din start cu câteva obiecte care se numesc „built-in object” pe care le putem înțelege ca obiecte interne limbajului la care ai acces din start. Atenție, `obiectul global` esteIf the name is an alphanumeric string conforming to the same rules as names of variables, there’s a simplified syntax for accessing the values: parte a obiectelor interne preexistente.
 
 De fapt, în standard obiectele chiar sunt categorisite astfel:
 - „Ordinary object” au comportamentul comun pentru toate obiectele în JavaScript
@@ -15,6 +15,20 @@ De fapt, în standard obiectele chiar sunt categorisite astfel:
 În JavaScript neexistând clase (cod care se comportă ca un plan pentru construcția obiectelor), pentru a reutiliza cod, se creează obiecte care se bazează pe cele existente.
 
 Astfel, între aceste obiecte se creează o legătură. Această legătură se numește „legătură prototipală”. Aceste legături realizează „moștenirea prototipală” - `prototypal inheritance`. Obiectul preexistent constituie prototipul pentru cel nou creat care poate adăuga noi membri, noi comportamente. Mai trebuie adăugat că, de fapt, vorbim despre o *delegare* pe lanțul prototipal format. Acest lucru înseamnă că atunci când ceri o proprietate care nu există, delegi solicitarea către prototip să o analizeze și să servească o valoare sau să delege mai sus cererea.
+
+Două obiecte care conțin fix aceiași membri, nu sunt identice; au identități diferite și acest lucru le face unice.
+
+```javascript
+var a = {0: 'ceva'},
+    b = {0: 'ceva'};
+a === b; // false
+```
+
+Obiectele sunt structuri care își pot modifica structura chiar dacă identitatea rămâne neschimbată și spunem că pot suferi mutații. Același comportament îl au și array-urile. Și mai este un lucru pe care obiectele îl împărtășesc cu array-urile. Membrii unui obiect pot fi accesați prin folosirea parantezelor drepte.
+
+```javascript
+var obi = {a: 10}; obi['a']; // 10
+```
 
 ## Mantre
 

@@ -1,4 +1,4 @@
-# Array-uri sau tablouri
+# Array-uri - tablouri, vectori
 
 Această structură capabilă să țină valori este cel mai folosit atunci când suntem confruntați cu nevoia de a prelucra fragmente de date sau pentru a „memora” temporar valori utile unui anumit context în care se execută codul.
 
@@ -8,15 +8,16 @@ Array-ul este cel mai des întâlnit mecanism de a „prelua” date care vin ca
 
 În comunitatea profesională array-ul mai este întâlnit și sub denumirea de listă sau vector.
 
-## Descriere sumară
+## Descriere
 
 Array-urile conțin mai multe valori numite `elemente` care sunt ordonate cu niște chei numite indecși de pornesc numărătoarea de la 0.
-
-Hai să vedem, de fapt ce este un array în JavaScript verificând cu `typeof`.
+De fapt, aflăm ce este un array în JavaScript verificând cu `typeof`.
 
 ```javascript
 typeof []; // "object"
 ```
+
+## Natura unui array
 
 Este un obiect. Este o structură care poate „agrega” date indiferent de tipul lor, pe care le structurează după un sistem de indexare care pornește de la 0 atunci când indecșii nu sunt menționați explicit. Pentru a introduce o valoare se va folosi sintaxa cu paranteze pătrate.
 
@@ -38,9 +39,53 @@ Pentru că este foarte util, poți afla dimensiunea unui array foarte rapid prin
 ```javascript
 [1,2,3].length; // 3
 ```
+
 Pe cale de consecință putem afla indexul ultimului element scăzând 1 din numărul returnat la evaluarea lui `length`. Da, ai intuit perfect. Trebuie făcut acest lucru pentru că indecșii array-ului pornesc de la valoarea 0.
 
-Cea mai simplă întrebare este: cum ștergi o valoare dintr-un array?
+## Shadowing
+
+Arrayurile sunt structuri care își pot modifica structura chiar dacă identitatea rămâne neschimbată și spunem că pot suferi mutații. Folosind sufixul `[]`, este posibil să modificăm elementele interne.
+
+```javascript
+var arr = [1, 2];
+arr[1] = 5; console.log(arr); // [1, 5]
+```
+
+Un pas mai departe decât modificarea simplă a unui element, ar fi necesar sî vedem cum se petrece acest lucru în cazul mediilor lexicale (scope) create de funcții. Avem un prim caz, în care, în mediul lexical format de o funcție, se face o reasignare a identificatorului (`rebounding`), care până la momentul reasignării trimitea și el tot către arr.
+
+```javascript
+var arr = [1, 2, 3];
+(function (a) {
+  a = [2, 3, 4];
+})(arr); console.log(arr); // [1, 2, 3]
+```
+
+Ca și în cazul „umbririi” simple, se va folosi sufixul `[]` pentru a modifica valorile array-ului original.
+
+```javascript
+var arr = [1, 2, 3];
+(function (a) {
+  a[0] = 10;
+})(arr); console.log(arr); // [ 10, 2, 3 ]
+```
+
+În cazul array-urilor, valorile sunt copiate prin referință. Acest lucru este util de reținut atunci când în array-uri se vor introduce funcții, de exemplu - o colecție de funcții. Acestea vor fi referențiate și nu declarate direct în array.
+
+```javascript
+var faCeva = function () {
+  return function () {console.log('salut');};
+};
+var actiune = faCeva(); // actiune este funcția returnată
+var arr = [actiune];
+// acum testul
+arr[0] === actiune; // true
+```
+
+Rezultatul este `true` pentru că valoarea evaluată a expresiei `arr[0]` este actiune, care la rândul său ține valoarea evaluată a invocării lui `faCeva()`.
+
+## Ștergerea unei valori
+
+În regulă, ai introdus sau ai deja un array cu valori, dar ai nevoie să ștergi din acest array o valoare. Pentru acest lucru există un cuvânt rezervat dedicat: `delete`.
 
 ```javascript
 delete colectie[2];
@@ -68,7 +113,7 @@ Un array poate conține și expresii care **vor fi evaluate** ănainte vreme ca 
 var arr = [1 + 2, 4, (2 - 1) + 2]; console.log(arr); // [ 3, 4, 3 ]
 ```
 
-Reține faptul că fiecare array este în sine o entitate distinctă.
+**Moment Zen**: fiecare array este în sine o entitate distinctă.
 
 ```javascript
 [1, 2, 3] === [1, 2, 3]; // false
@@ -146,7 +191,7 @@ Cel mai adesea vei întâlni array-uri create prin forma literală mult mai simp
 var colectie = [];
 ```
 
-Este recomandată și folosirea constructorului `Array` pentru motivul principal că poți controla dimeniunea și acest lucru este foarte important din motive de performanță.
+Este recomandată și folosirea constructorului `Array` pentru motivul principal că poți controla dimensiunea și acest lucru este foarte important din motive de performanță.
 
 ```javascript
 var prestabilit = Array(5); // Array [ <5 empty slots> ]

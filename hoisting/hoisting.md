@@ -1,9 +1,13 @@
-# HOISTING
+# Hoisting - ridicarea în „capul codului”
 
 Ridicarea la vârful scope-ului a declarațiilor de variabile și funcții.
 
 Există un mic truc care trebuie stăpânit pentru a înțelege hoising. Declararea variabilelor folosind `var` trebuie detașată de asignarea valorii.
-Declarația variabilei este **hoisted** în capul funcției gazdă, dar locul unde se face asignare rămâne nemodificat. Deci, variabila se va afla în scope-ul funcției, dar atribuirea, asignarea valorii se face la momentul în care apare enunțul var. Pentru a lămuri și mai bine ce se întâmplă, consultă și documentația care explică compilarea și execuția codului JavaScript.
+
+**Moment Zen**: declararea unei variabile și atribuirea variabilei (construirea legăturii dintre identificator și valoare) sunt două operațiuni diferite.
+
+Declarația variabilei este **hoisted** în capul funcției gazdă, dar locul unde se face asignare rămâne nemodificat.
+Deci, variabila se va afla în scope-ul funcției, dar atribuirea, asignarea valorii se face la momentul în care apare enunțul var. Pentru a lămuri și mai bine ce se întâmplă, consultă și documentația care explică compilarea și execuția codului JavaScript.
 
 ```js
 function faCeva(){
@@ -16,13 +20,22 @@ Ceea ce se întâmplă poate fi ilustrat printr-o nouă reformulare a codului:
 
 ```js
 function faCeva(){
-  var oValoare;
+  var oValoare; // este returnat undefined
   // cod al funcției
-  oValoare = 0;
+  oValoare = 0; // „legătura” s-a făcut
 };
 ```
 
 Din acest motive este cel mai bine ca variabilele să fie declarate în capul funcției de la bun început.
+
+Cel mai evident exemplu este să scrii o funcție care să returneze după ce ai declarat variabila. Șocul este mare pentru că totuși este returnat `undefined` deoarece declarația a hoistat variabila, dar nu a mai apucat să facă și „legătura” la valoare.
+
+```javascript
+(function () {
+  return x;
+  var x = 10;
+})(); // undefined
+```
 
 ## Mantre
 

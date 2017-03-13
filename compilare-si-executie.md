@@ -51,7 +51,7 @@ Dacă funcțiile au în perimetru o variabilă care nu a fost declarată în per
 
 #### Problema suprascrierii prin folosirea aceluiași identificator
 
-```js
+```javascript
 function ceva(){};
 var ceva = 0;
 
@@ -68,7 +68,7 @@ Se pierde referința către funcție.
 
 În cazul:
 
-```js
+```javascript
 var test = "ceva";
 ```
 
@@ -89,7 +89,7 @@ La invocarea funcției se creează un nou obiect scope care moștenește proprie
 
 ## Analiză
 
-```js
+```javascript
 var duda = "o dudă";                // 0
 altaDuda = "o altă dudă";           // 1
 ex = 0;                             // modificabila
@@ -117,51 +117,52 @@ faceva(2);                          // 13
 
 ### COMPILARE
 
-- **// 0**
-  - Variabila „duda” este *înregistrată*.
-- **// 1**
-  - *Compilatorul întreabă*: cine este „**altaDuda**”?
-  - *Răspuns*: nu știu, nu este o declarație de variabilă.
-  - *Efect*: altaDuda este ignorat (deocamdată).
-- **// 2**
-  - Funcția faceva este înregistrată. Conținutul funcției nu este parcurs de compilator, ci, este stocat în memorie (deocamdată).
+- **# 0** Variabila „duda” este *înregistrată*.
+- **# 1**
+  1. *Compilatorul întreabă*: cine este „**altaDuda**”?
+  2. *Răspuns*: nu știu, nu este o declarație de variabilă.
+  3. *Efect*: `altaDuda` este ignorat (deocamdată).
+- **# 2** Funcția `faceva` este înregistrată. Conținutul funcției nu este parcurs de compilator, ci, este stocat în memorie (deocamdată).
 
 ### EXECUȚIE
-- **// 0**
-  - valoarea „o dudă” este atribuită lui duda.
-- **// 1**
-  - *Context*: Global scope
-  - *Motorul întreabă*: știi cumva ce este „altaDuda”?
-  - *Răspuns*: nu, nu știu ce este, dar uite, pentru că sunt băiat bun, voi crea o referință.
-  - *Efect*: altaDuda devine variabilă. Valoarea "o altă dudă" este atribuită.
-        Condiții: să fii în Global scope și să nu fie invocat ``use strict``
-- **// 12** Este invocată funcția faceva() și se intră într-o nouă fază de compilare
- - #### COMPILARE:
+- **# 0** Valoarea „o dudă” este atribuită lui `duda`.
+- **# 1**
+  1. *Context*: Global scope
+  2. *Motorul întreabă*: știi cumva ce este „altaDuda”?
+  3. *Răspuns*: nu, nu știu ce este, dar uite, pentru că sunt băiat bun, voi crea o referință.
+  4. *Efect*: `altaDuda` devine variabilă. Valoarea "o altă dudă" este atribuită.
+        Condiții: să fii în Global scope și să nu fie invocat `use strict`.
+- **# 12** Este invocată funcția `faceva()` și se intră într-o nouă fază de compilare
+
+### COMPILARE:
    - parametrii funcției sunt declarați ca variabile locale.
-   - **// 5** compilatorul trece peste ex pentru că nu este o declarație și nu intră în compilare
-   - declară funcția internă sarcinaInterna.
-   - ex este declarată și este hoisted. Atenție, chiar dacă ex are mai sus o atribuire, în această fază sunt două lucruri distincte.
- - #### EXECUȚIE (se creează automat contextul de execuție).
+   - **# 5** compilatorul trece peste `ex` pentru că nu este o declarație și nu intră în compilare
+   - declară funcția internă `sarcinaInterna`.
+   - `ex` este declarată și este hoisted. Atenție, chiar dacă `ex` are mai sus o atribuire, în această fază sunt două lucruri distincte.
+
+### EXECUȚIE (se creează automat contextul de execuție).
    - variabilei locale param îi este atribuită valoarea 2
    - variabilei param îi este modificată valoarea.
-    - **// 5** Cine este *ex*?
+    - **# 5** Cine este *ex*?
      - **Context**: local scope
-     - **Motorul întreabă**: știi ce este ex?
+     - **Motorul întreabă**: știi ce este `ex`?
      - **Răspuns**: Nu, nu știu, dar mă duc pe „scope chain” și caut în container până în Global Scope dacă este nevoie.
      - **Efect**: dacă o variabilă cu același nume este găsită pe lanțul de scope în Global scope valoarea din funcție modifică valoarea variabilei din Global scope. - **Dacă**: nu este găsită o variabilă cu același nume *mai sus*, atunci va crea una din oficiu. Dacă se folosește „use strict”, va fi returnată o eroare ReferenceError
-   - **//11** se returnează funcția internă ``sarcinaInterna`` ceea ce conduce la invocarea acesteia.
-    - ##### COMPILARE
-      - **//7** este declarată variabila ex. Dacă există o variabilă cu același nume în funcția container, variabila acestuia nu va fi suprascrisă, ci întotdeauna se va referenția cea din scope-ul existent. Așa funcționează „scope resolution” iar această stare de lucruri se numește variable shadowing.
-      - este declarată variabila locală fruct.
-      - **// 9** Cine este *masura*?
-       - **Context**: local scope
-       - **Motorul întreabă**: știi ce este masura?
-       - **Răspuns**: Nu, nu știu, dar mă duc pe „scope chain” și caut în funcția container până în Global Scope dacă este nevoie.
-    - #### EXECUȚIE
-      - variabilei ex îi este atribuită valoarea „din interior”.
-      - variabilei fruct îi este atribuită valoarea 0.
-      - valiabila măsura va fi modificată în contextul local fiind înmulțită cu 2 și atribuită ei înseși
-      - valoarea măsurii este returnată în contextul de mai sus, adică valoarea 24.
+   - **#11** se returnează funcția internă `sarcinaInterna` ceea ce conduce la invocarea acesteia.
+
+### COMPILARE
+- **#7** este declarată variabila `ex`. Dacă există o variabilă cu același nume în funcția container, variabila acestuia nu va fi suprascrisă, ci întotdeauna se va referenția cea din scope-ul existent. Așa funcționează „scope resolution” iar această stare de lucruri se numește variable shadowing.
+- este declarată variabila locală `fruct`.
+- **# 9** Cine este *masura*?
+ - **Context**: local scope
+ - **Motorul întreabă**: știi ce este masura?
+ - **Răspuns**: Nu, nu știu, dar mă duc pe „scope chain” și caut în funcția container până în Global Scope dacă este nevoie.
+
+### EXECUȚIE
+- variabilei `ex` îi este atribuită valoarea „din interior”.
+- variabilei `fruct` îi este atribuită valoarea 0.
+- valiabila măsura va fi modificată în contextul local fiind înmulțită cu 2 și atribuită ei înseși
+- valoarea măsurii este returnată în contextul de mai sus, adică valoarea 24.
 
 ## Referințe
 

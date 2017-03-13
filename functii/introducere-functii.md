@@ -2,6 +2,8 @@
 
 Funcțiile sunt unitățile de execuție a codului JavaScript. O funcție poate fi percepută ca un subprogram, ca o subrutină. Cel mai sănătos mod de a privi activitatea și efectele unei funcții este gândind întotdeauna că o funcție este un set de instrucțiuni care se aplică unui set de date primit ca argumente. Aplicarea unei funcții argumentelor sale produce un nou mediu lexical, un nou scope în care se fac legături între identificatori și valori.
 
+Ca și obișnuință, ar fi cel mai util să gândești că funcția „cutare” se aplică pe „cutare și cutare”. Multă perioadă am gândit altfel: funcția „primește” pentru că, într-adevăr, introduci niște argumente. Nu este greșit, dar pentru o iluminare rapidă în domeniul funcțiilor, cel mai bine este să gândești în termenii aplicării sale pe argumente.
+
 **Mecanisme magice**: Declararea unei funcții are ca efect magic „urcarea” ( în jargonul limbajului se numește **hoising** ) în „capul codului”. Capul codului se referă la prezența unei declarații în registrul inventar al mediului lexical existent. Magia rezidă în faptul că poți invoca o funcție înainte ca aceasta să fie declarată. Superciudățel, nu?!
 
 O perspectivă simpatică ar fi dacă-ți închipui o funcție ca pe un caracter dintr-un joc de strategie pe care dai click și-l pui să facă ceva. Când ai nevoie să „producă” mâncare îl pui să facă o fermă. Îl trimiți după lemne ca să aibă cu ce și așa mai departe. Dacă ajunge la un punct de pe hartă unde concurează cu alte caractere pentru o resursă, pur și simplu așteaptă cuminte să-i vină rândul la „tufă” sau la „minerit aur”. Îmediat ce termină treaba, caracterul nostru nu are inițiativă, așteaptă să fie chemat cu un click să facă ceva.
@@ -48,6 +50,13 @@ Nimic din conținutul unei funcții nu produce niciun rezultat până când func
 La momentul apelării (a invocării), funcția evaluează codul său intern și returnează un rezultat pe baza operațiunilor specificate în **codul funcției**. De fapt, ar trebui să pornim de la 0 și să spunem că mai întâi de toate o funcție este o expresie pe care motorul JavaScript are nevoie să o evalueze, dar această expresie are în componența ei alte expresii care la rândul lor au nevoie să fie evaluate pentru ca funcția să poată fi evaluată. Deci, se vor evalua expresiile până când se va ajunge la valorile de care funcția are nevoie să se execute.
 
 Această concluzie vă va ajuta să înțelegeți mai repede ce sunt și cum funcționează un „closure”.
+
+Rețineți și faptul că o funcție evaluată este diferită de fiecare dată. Evaluarea unei funcții nu este echivalente evaluării aceleiași funcții.
+
+```javascript
+var faCeva = function () {return 10;};
+faCeva() === faCeva; // false
+```
 
 O funcție foarte simplă este una introdusă ca sintaxă de ultima versiune a standardului ES6 și numită „fat arrow”. Aceasta returnează imediat rezultatul. Acesta nu are nevoie să fie folosit cuvântul rezervat `function`. De regulă, veți vedea aceste funcții lucrând din poziția de ***callback-uri*** (funcții trimise ca argument care sunt apelate după ce întreaga funcție a fost evaluată)
 
