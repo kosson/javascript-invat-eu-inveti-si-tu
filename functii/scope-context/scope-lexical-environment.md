@@ -1,13 +1,13 @@
 # Lexical environment - scope
 
 Mediul lexical sau scope-ul poate fi foarte ușor înțeles ca un „registru inventar” al tuturor identificatorilor care au valori „legate” de aceștia.
-În acest demersul nostru, vom folosi interșanjabil următoarele: „mediu lexical”, „scope” și „lexical scope”. Toate au același sens.
+În acest demersul nostru, vom folosi interșanjabil următoarele: „mediu lexical”, „scope” și „lexical scope”. Toate au același sens. Termenul standardului este mediu lexical.
 
 > „Este porțiunea de cod sursă pentru care este disponibilă o legătură între un nume și o entitate” (definiție pentru limbajul de programare ALGOL 60, 1960).
 
 Această definiție explică cel mai bine conceptul de „legătură”. De fapt, acesta este menirea mediului lexical, de a ține evidența acestor legături. De ce? Pentru că valorile legate de un anume identificator se pot modifica în timp, un identificator se poate lega de un alt identificator care este legat la o valoare. Da! Ai intuit perfect; unii identificatori se comportă ca referințele bibliografice. Trimit la alți identificatori.
 
-În cazul funcțiilor, atunci când sunt pasate valori, reține faptul că JavaScript, de fapt copiază valoarea în **lexical environment** care poate fi comparat pentru o ușoară referință comună cu un „registru inventar al mediului”. Acum putem spune că o valoare este în scope.
+În cazul funcțiilor, atunci când sunt pasate valori, reține faptul că JavaScript, de fapt copiază valoarea în **lexical environment** care poate fi comparat pentru o ușoară referință comună cu un „registru inventar al mediului”. Acum putem spune că ***o valoare este în scope***.
 
 Atunci când unei funcții îi sunt pasate referințe către valori drept argumente, valorile către care se face referința, nu mai sunt copiate în **lexical environment**, ci doar referința, care va fi utilizată pentru a ajunge la valoare. Mai multe referințe pot trimite către aceeași valoare.
 
@@ -16,8 +16,17 @@ Astfel, putem spune că există „tipuri” asociate valorilor (**value types**
 ## Definiții
 
 Este **locul** unde te uiți după lucruri.
+Locul unde definești variabilele determină zona unde le poți folosi și astfel scope se stabilește în funcție de structura codului.
 Este **perimetrul** din cuprinsul codului în care au efect funcțiile și sunt disponibile variabilele.
 Global scope este locul de unde pot fi accesate funcții și variabile în întreg codul.
+
+## Formarea scope-ului
+
+Există câteva situații disctate de modul de redactare a codului sursă care are ca efect direct formarea mediului lexical (scope).
+
+1. Prin crearea unei funcții. În acest caz, variabilele declarate în interiorul funcțiilor sunt vizibile doar în interiorul funcțiilor și funcțiilor imbricate
+2. Prin declararea variabilelor cu `let` și `const` în interiorulul unui bloc de cod delimitat de acolade `{}`.
+3. Prin crearea unui bloc `Catch`.
 
 ## Spune standardul
 
@@ -38,7 +47,7 @@ Câte medii lexicale (**lexical environments**) se pot stabili:
 - **module environment** conține legăturile la declarațiile de prim nivel ale unui **Module**. Conține legături importate în mod explicit de Module. Mediul extern al unui Module este **global environment**,
 - **function environment** este un mediu care se stabilește **la invocarea** unei funcții. Mediul funcției poate să stabilească o nouă legătură la „this”. Un **function environment** este un **lexical environment** care corespunde momentului invocării funcției. Mediul funcției capturează și starea necesară pentru a suporta invocații ale metodei **super**.
 
-Un **global environment** este un **lexical environment** care nu mai are vreun alt mediu extern (outer environment). Spunem că mediul extern al lui global environment este null. Un **environment record** pentru global environment poate fi prepopulat cu legături de identificatori și include și un obiect global asociat ale cărui proprietăți fac parte din setul de legături de identificatori din mediul global (global environment). Pe măsură ce avansează execuția codului se pot adăuga sau șterge proprietăți în **global object**.
+Un **global environment** este un **lexical environment** care nu mai are vreun alt mediu extern (outer environment). Spunem că mediul extern al lui global environment este `null`. Un **environment record** pentru global environment poate fi prepopulat cu legături de identificatori și include și un obiect global asociat ale cărui proprietăți fac parte din setul de legături de identificatori din mediul global (global environment). Pe măsură ce avansează execuția codului se pot adăuga sau șterge proprietăți în **global object**.
 
 În obiectul **environment record** există două tipuri de valori:
 
@@ -71,7 +80,7 @@ var faCeva = function redau(){
 
 În exemplul de mai sus GEC (Global Execution Context) ține evidența identificatorilor `ceva` și `faCeva`. `faCeva` ține evidența identificatorilor `altceva`, `console.log` și `prelucrez`.
 
-Mediul lexical (scope-ul) depinde de gradul de imbricare a codului (o funcție care conține o alta ș.a.m.d. = **code nesting**).
+Mediul lexical (scope-ul) depinde de gradul de imbricare a codului (o funcție care conține o alta ș.a.m.d. înseamnă **code nesting**).
 
 După cum spuneam, mediul lexical se stabilește chiar și la nivelul `catch` din constructul `try-catch` al limbajului.
 
@@ -91,7 +100,7 @@ Este observabil faptul că variabila declarată în `if` este accesibilă în af
 
 ## Mantre
 
-- JavaScript are o fază de compilare.
+- JavaScript are o fază de compilare urmată de o fază de execuție.
 - JavaScript are un **scope lexical** generat la faza de compilare. De fapt, acesta este un set de reguli pentru a determina cum se face căutarea după un anume identificator.
 - La momentul rulării codului scope-urile există deja. Doar „this”, care se apropie de ideea de scope dinamic caracteristic altor limbaje se consituie la momentul rulării codului, relectând cum a fost apelată funcția.
 - Declararea funcțiilor generează SCOPE-ul - **lexical environment**.
@@ -120,7 +129,7 @@ Este observabil faptul că variabila declarată în `if` este accesibilă în af
 - declarații de funcții,
 - scope-ul blocului părinte (se face lanțul prin care se caută „pe fir” mai sus identificatorul pentru care a fost definită o variabilă)
 
-## Variabilele în scope
+## Variabilele „în scope”
 
 Scope-ul unei variabile poate fi înțeles setul de linii de cod sursă pentru care este definit un identificator.
 Variabilele locale sunt disponibile funcției în care au fost declarate și tuturor funcțiilor interne.
@@ -129,7 +138,7 @@ Nu uita, parametrii unei funcții sunt la rândul lor variabile locale.
 
 ```javascript
 var ceva = 1000;
-function scope1 (){
+function scope1 (){takes note of all of your variable names
   // pot accesa ceva aici
   function scope2 (){
     // pot accesa ceva și aici
@@ -154,6 +163,14 @@ Acest lexical environment este în strânsă legătură cu diferite structuri de
 // cele două stiluri de a scrie IIFE-uri
 (function () { … })(); // dog balls
 (function () { … }()); // stilul Douglas Crockford
+```
+
+În ES6 pur și simplu ai nevoie doar de acolade și declarare folosind `let`.
+
+```javascript
+{
+  let x = 1;
+}
 ```
 
 ### Momentul declarării unei funcții

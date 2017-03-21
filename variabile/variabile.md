@@ -1,27 +1,28 @@
 # Variabile
 
-O variabilă este ceea ce spune însăși cuvântul: o zonă rezervată de care este nevoie pentru a „memora” o valoare. Această valoare poate să se modifice pe măsură ce codul se execută și de aici și denumirea de variabilă. Pentru a înțelege cât mai bine variabilele, amintiți-vă de identificatori și rolul acestora în „spațiul” creat de mediul lexical. După cum bine v-ați amintit, identificatorii sunt etichetele necesare variabilelor pentru a identificat „zona rezervată”. E ca o tăbliță de idetificare a stației de autobuz. Știm că stația se numește „Laborator” și identifică un spațiu în care va intra autobuzul din când în când. 
+## Introducere
+
+O variabilă este ceea ce spune însăși cuvântul: o zonă rezervată de care este nevoie pentru a „memora” o valoare. Această valoare poate să se modifice pe măsură ce codul se execută și de aici și denumirea de variabilă. Pentru a înțelege cât mai bine variabilele, amintiți-vă de identificatori și rolul acestora în „spațiul” creat de mediul lexical. După cum bine v-ați amintit, identificatorii sunt etichetele necesare variabilelor pentru a identifica „zona rezervată”. E ca o tăbliță cu numele stației de autobuz. Știm că stația se numește „Laborator” și identifică un spațiu în care va intra autobuzul din când în când.
+
+## Declararea variabilelor
 
 Pentru a declara o variabilă se va scrie `var variabila = 'ceva';`. În cazul în care sunt declarate mai multe variabile, se vor înșirui folosindu-se virgula, fără a mai specifica cuvântul cheie rezervat limbajului.
 
 ```javascript
-var a, b = 'ceva', c = true;
-```
-Moment ZEN
-```javascript
-var $ceva = 'Hanna';
-var _altceva = 10,
+var a, b = 'ceva', c = true; // declararea una după alta
+var $ceva = 'Hanna',
+    _altceva = 10,
     un_nume = 'George'; // DA, poți face asta! :D
 let asteptValoarea01 = 100;
 const ᚠ = 'o rună'; // se poate pentru că folosim UTF16
 const 𓄿 = 'Horus'; // UTF16 din nou
 ```
 
-Magia atribuirii valorii identificatorului o face operatorul `=`. Ceea ce se întâmplă dincolo de cortină este că se alocă un spațiu în memoria computerului pentru a „reține" valoarea asignată. Asignarea valorii se poate face dintr-un singur pas (`var x = 1;`), declarând și asignând imediat, sau mai întâi poți declara numele variabilei și abia la momentul oportun vei face asignarea.
+Magia atribuirii valorii identificatorului o face operatorul `=`. Ceea ce se întâmplă dincolo de cortină este că se alocă un spațiu în memoria computerului pentru a „reține" valoarea asignată. Asignarea valorii se poate face dintr-un singur pas (`var x = 1;`), declarând și atribuind imediat, sau mai întâi poți declara numele variabilei și abia la momentul oportun vei face atribuirea valorii. Atribuirea, când spunem acest cuvânt ar trebui să ne gândim la realizarea „legăturii” dintre identificator și valoarea pe care o individualizează.
 
 ```javascript
 var x; // în acest moment are valoarea undefined
-x = 10; // poți verifica dacă s-a făcut asignarea:
+x = 10; // poți verifica dacă s-a făcut atribuirea:
 x; // este returnat 10
 ```
 
@@ -33,9 +34,22 @@ var a = {0: 10},
 a === b; // true
 ```
 
-De fapt, ceea ce am realizat este o copiere a variabilei `a` prin referință.
+De fapt, ceea ce am realizat este o copiere a variabilei `a` prin referință. Spunem că noua variabilă `b` face o trimitere către variabila deja existentă `a` care este legată la o valoare. În cazul nostru vorbim despre un obiect. Da, structura `{0: 10}` este un obiect foarte, foarte simplu.
 
-Aceeași demonstație se poate realiza prin pasarea valorii ca argument al unei funcții.
+Aceeași demonstație se poate realiza prin pasarea valorii ca argument al unei funcții. Pentru exemplificare vom folosi un șablon des întâlnit în JavaScript care se aplică pentru a executa imediat o funcție fără a o apela după identificatorul său. Deci, îmbrăcăm funcția în `()();`, ceea ce va avea drept efect direct evaluarea funcției instant. În limbaj tehnic, aceast șablon de lucru se numește IIFE (Imediately Invoked Function Expression) - expresie de funcție invocabilă imediat. Și mai folosim ceva foarte util: metoda `log` a obiectului `Console`. Dar mai întâi, vă invit să priviți la exemplu pentru a crea ceva context și cu siguranță nedumerire.
+
+```javascript
+(function () {
+  var x = 10;
+})(); console.log(x); // ReferenceError
+```
+
+Poți trage cu ochiul repede la funcții să afli mai multe, dar pentru moment este îndeajuns cât să ne putem descurca.
+Știu că pe moment e cam multișor de înghițit, dar am pus astfel baze importante pentru viitor.
+
+## Izolarea variabilelor în propriul lor scope
+
+Folosim funcțiile aici pentru că acestea au o proprietate extraordinară care face ca aceste exemple să funcționeze: creează propriul mediu lexical. Supertare! Bine, începând cu ES6, simpla declarare a blocului de cod prin acolade `{}` creează un mediu lexical (scope). E foarte importantă această caracteristică pentru că de ea ține felul în care izolăm, combinăm și punem execuția unei funcții într-un anumit context.
 
 ```javascript
 var a = {0: 10};
@@ -44,7 +58,7 @@ var a = {0: 10};
 })(a); // true
 ```
 
-JavaScript permite modificarea valorii unei varibile. Această posibilitate se numește „umbrire” (shadowing).
+JavaScript permite modificarea valorii preexistente a unei varibile. Această posibilitate se numește „umbrire” (shadowing).
 
 ```javascript
 var valoare = 10;
@@ -102,7 +116,7 @@ function ex(){
 };
 ```
 
-**Sfatul lui Crockford**: declară toate variabile în capul funcției.
+**Sfatul lui Crockford**: declară toate variabile în capul funcției atunci când folosești `var`.
 
 ### Standardul spune
 

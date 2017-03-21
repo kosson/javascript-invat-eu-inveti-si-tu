@@ -1,6 +1,6 @@
 # Folosirea lui `var` și `let`
 
-Identitifcatorii declarați cu `var` beneficiază de mecanismul de hoisting prin care sunt aduși în „capul codului” (scope-ului).
+Identificatorii declarați cu `var` beneficiază de mecanismul de hoisting prin care sunt aduși în „capul codului” (scope-ului).
 
 `let` oferă scoping la nivel de bloc de cod - `{}`.
 
@@ -138,7 +138,6 @@ apeluri.forEach(function(callback){
 ```
 
 La fiecare iterare bucla creează o nouă variabilă și o inițializează cu valoarea variabilei cu același nume de identificator din iterarea precedentă.
-
 
 ## Erori la redeclarare
 

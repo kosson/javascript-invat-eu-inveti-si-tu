@@ -1,1 +1,0 @@
-Operatorul virgulă

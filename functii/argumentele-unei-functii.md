@@ -271,15 +271,35 @@ function demoArgs(unu, doi = 2){
 }; demoArgs(1000);
 ```
 
-`console.log(doi === arguments[1]);` returnează `false` pentru că doar un singur argument a fost pasat funcției. Acest lucru poate fi demonstrat prin valoare 1 a lui `arguments.length` iar `arguments[1]` va fi `undefined`, ceea ce este și firesc pentru că doar un singur argument a fost pasat.
+`console.log(doi === arguments[1]);` returnează `false` pentru că doar un singur argument a fost pasat funcției. Acest lucru poate fi demonstrat prin valoarea `1` data lui `arguments.length`, iar în acest moment `arguments[1]` va fi `undefined`, ceea ce este și firesc pentru că doar un singur argument a fost pasat.
 
 Reține faptul că `arguments` reflectă starea inițială și că trebuie să fie numai valori primitive, chiar dacă acestea sunt rezultatul evaluării unei alte funcții - trebuie să invoci funcție, nu să pasezi o referință către aceasta.
 
 ```javascript
-function demoArgs(unu, doi = doi()){
-  // cod funcție
-};
+function demoArgs (unu, doi = doi()) {};
 ```
+
+### Parametrare presetată cu argumente ca modificatori
+
+ES6 permite introducerea unui obiect cu proprietăți cu valori presetate. Acestea pot fi modificate prin argumentele funcției. Acesta este cazul de eleganță pe care destructurarea îl oferă.
+
+```javascript
+function faCeva ({prim = 1, secund = 2, tert = 3} = {}) {
+  console.log(prim, secund, tert);
+  console.log(...arguments);
+}; // 1 2 3
+faCeva({secund: 'ceva'}); // 1 ceva 3
+faCeva(10); // // 1 2 3
+faCeva({tert: true}, 10); // 1 2 true
+faCeva({secund: 'ceva', test: true});
+faCeva({secund: 'doi', tert: false, prim: 9});
+```
+
+Oricare alt argument pasat poate fi găsit în `arguments` dacă se dorește, dar ceea ce este parametrat omite orice alceva ce nu este obiectul. Dar și în cazul obiectelor, trebuie să se respecte identificatorii proprietăților, dacă valorile acestora se doresc să treacă ca parametri. Alte proprietăți vor fi regăsite în `arguments`.
+
+Mai este ceva interesant care merită evidențiat. La momentul presetării valorilor prin `{prim = 1, secund} = {}`, dacă o proprietate are aceeași valoare literală ca și valoarea, nu mai este necesară asignare. Pur și simplu scrii doar cheia.
+
+Mai observăm un lucru foarte important: parametrii pot fi introduși în oricare ordine. Nu mai suntem limitați de „poziție” ca în cazul prevederilor standardului până la ES5. Vă reaminintesc că trebuia să introduci argumentele în ordinea în care erau menționați parametrii pentru a se face legăturile corecte în `arguments`.
 
 ## Parametrii cu valori inițiale pot servi valori celor care urmează
 

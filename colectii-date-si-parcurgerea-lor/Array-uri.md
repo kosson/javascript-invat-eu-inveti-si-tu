@@ -483,11 +483,10 @@ Destructurarea este un procedeu care are drept scop extragerea sau manipularea v
 ```javascript
 var arr = ['unu', 'doi'];
 var [unu, doi] = arr;
-
-console.log(unu, doi); // unu doi
+console.log(unu, doi); // 'unu' 'doi'
 ```
 
-Un alt exemplu este cel de potrivire unu-la-unu
+### Potrivire unu-la-unu
 
 ```javascript
 var unu, doi, trei;
@@ -495,7 +494,7 @@ var unu, doi, trei;
 console.log(unu, doi, trei); // 1 2 3
 ```
 
-Potrivirea unu-la-unu funcționează și în cazul returnării unui array.
+### Potrivirea unu-la-unu cu unu array returnat
 
 ```javascript
 function genArray(){
@@ -505,7 +504,7 @@ function genArray(){
 console.log(x, y, z); // unu doi trei
 ```
 
-Valori implicite:
+### Valori implicite
 
 ```javascript
 var x, y, z;
@@ -513,7 +512,7 @@ var x, y, z;
 console.log(x, y, z); // 1000 2 3
 ```
 
-Inversare de valori:
+### Inversare de valori
 
 ```javascript
 var x = 10, y = 1000;
@@ -521,7 +520,15 @@ var x = 10, y = 1000;
 console.log(x, y); // 1000 10
 ```
 
-Folosirea operatorului rest (`...`)
+### Folosirea cu Regex
+
+```javascript
+let [data, an, luna, zi] = /^(\d\d\d\d)-(\d\d)-(\d\d)$/.exec('1912-12-3');
+```
+
+Ceea ce s-a întâmplat este că ai scăpat de sarcina de a crea un array intermediar din care să extragi indice su indice.
+
+### Folosirea operatorului rest (`...`)
 
 ```javascript
 var [x, ...restop] = [1, 2, 3];
