@@ -6,7 +6,7 @@ Este pentru voi, cei care lucrați în biblioteci și în alte instituții de me
 
 Speranța mea se îndreaptă către cei care vor reuși să stăpânească limbajul într-atât de bine, încât să intre în etapa creativă fără întârziere. Nu este îndeajuns să folosești ceea ce îți este oferit de ceilalți. Pur și simplu este nevoie să poți rezolva problemele reale cu care te confrunți, fără a încerca adaptarea soluțiilor altora.
 
-Mai dedic acest material celor care trăiesc în solitudine sau încarcerați, celor cărora viața nu le-a fost ușoară și tuturor celor care având timp la îndemână, ar dori să încerce ceva deosebit, ceva ce le-ar aduce satisfacțiimari și care i-ar apropia de un tărâm magic cu infinite posibilități.
+Mai dedic acest material celor care trăiesc în solitudine sau încarcerați, celor cărora viața nu le-a fost ușoară și tuturor celor care având timp la îndemână, ar dori să încerce ceva deosebit, ceva ce le-ar aduce satisfacții mari și care i-ar apropia de un tărâm magic cu infinite posibilități.
 
 ## O resursă pentru a înțelege ECMAScript, adică JavaScript
 
@@ -42,7 +42,7 @@ Această carte dorește să ofere o cale prin care să fie dobândite cunoștin�
 
 Una din țintele acestei cărți este aceea de a explica și însuși cunoștințele necesare pentru a manipula date, transforma, și pentru a le genera dinamic într-o formă de prezentare.
 
-Această lucrare îți este adresată și ție specialistul în umanioare digital - digital humanities. Îți va oferi cunoștințele necesare să pui cap la cap diferite scripturi pentru a facilita munca curentă. Îți va veni ușor să înțelegi de ce funcționează o colecție de software, cum se leagă un framework de un altul și de ce funcționează acest lucru. Capacitatea de expresie și de prelucrare îți va fi ușurată semnificativ prin înțelegerea multor aspecte obscure ale funcționării JavaScript-ului.
+Această lucrare îți este adresată și ție specialistul în umanioare digitale - digital humanities. Îți va oferi cunoștințele necesare să pui cap la cap diferite scripturi pentru a facilita munca curentă. Îți va veni ușor să înțelegi de ce funcționează o colecție de software, cum se leagă un framework de un altul și de ce funcționează acest lucru. Capacitatea de expresie și de prelucrare îți va fi ușurată semnificativ prin înțelegerea multor aspecte obscure ale funcționării JavaScript-ului.
 
 Voi încheia pledoaria pentru acest nou drum cu o afirmație care se va dovedi adevărată pe măsură ce veți descoperi bucuria de a lucra cu structuri de cod ce permit prelucrarea. De exemplu, textul în dimensiunea lui digitală este o colecție de date în sine. Este ca o colecție destructurată cu înțeles doar pentru om, care așteaptă un agent software care să o reordoneze și interconecteze cu alte surse pentru a oferi o nouă dimensiune valorică. De fapt, acesta este scopul final: extragerea valorii indiferent de formă și destinație.
 
@@ -56,7 +56,7 @@ Programarea, ca și activitate, ar fi util să fie înțeleasă ca o limbă str�
 
 Vă va ajuta să înțelegeți că scrierea unui fragment de cod este precum scrierea unei fraze foarte lungi constituită din propoziții separate prin punct și virgulă. Dar această frază este forma concretă a unui algoritm pentru că la această etapă, de fapt, pornește totul.
 
-Ai o problemă pe care dorești să o rezolvi și în acest sens, creezi pașii necesari. Succesiunea tuturor pașilor se numește algoritm. Transpunerea unui algoritm într-o soluție tehnică, se numește program. Pentru a scrie un program, alegi un limbaj de programare, iar în cazul nostru, am ales deja: ECMAScript, adică JavaScript. Mai adug doar că o transpunere a unui algoritm într-un program constituie, de fapt, o transpunere într-un limbaj formal.
+Ai o problemă pe care dorești să o rezolvi și în acest sens, creezi pașii necesari. Succesiunea tuturor pașilor se numește algoritm. Transpunerea unui algoritm într-o soluție tehnică, se numește program. Pentru a scrie un program, alegi un limbaj de programare, iar în cazul nostru, am ales deja: ECMAScript, adică JavaScript. Mai adaug doar că o transpunere a unui algoritm într-un program constituie, de fapt, o transpunere într-un limbaj formal.
 
 Propun să începem și am ales să fac acest lucru printr-o privire generală asupra limbajului.
 
@@ -143,7 +143,7 @@ JavaScript nu poate face decât un singur lucru la un moment dat, dar pentru că
 
 # Perspectivă peste un tărâm
 
-Atunci când am pornit la scrierea acestei cărți nu am avut nevoia să văd de pe orbită cum arată planeta JavaScript, dar pe măsură ce am avansat cu scrierea textului, am realizat că este nevoie să privești mai întâi din spațiu pentru a înțelege valoarea tuturor entităților și relațiilor pe care le stabilesc acestea la nivelul solului.
+Atunci când am pornit la scrierea acestei cărți nu am avut nevoia să văd de pe orbită cum arată planeta JavaScript, dar pe măsură ce am avansat, am realizat că este nevoie să privești mai întâi din spațiu pentru a înțelege valoarea tuturor entităților și relațiilor pe care le stabilesc acestea la nivelul solului.
 
 Vorbim despre o adevărată lume, chiar despre un **tărâm** special.
 
