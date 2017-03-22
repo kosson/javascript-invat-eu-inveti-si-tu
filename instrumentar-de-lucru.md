@@ -29,34 +29,12 @@ Deschide editorul tău de cod preferat. Dacă nu ai unul deja, te invit să folo
 var a = 10;           // break
 function facCeva () {
   var a = 11;         // break
+  console.log(a);     // break
   return a;           // break
-};
+};                    // break
 facCeva();            // break
 console.log(a);       // break
 ```
-
-După cum vedem în exemplul prezentat, vom lucra cu patru enunțuri de cod separate fiecare prin punct și virgulă.
-
-#1 Vom declara variabila `a`, ceea ce conduce la crearea unui identificator și vom atribui identificatorului `a` valoarea `10`.
- - pentru aceasta vom folosi cuvântul rezervat limbajului `var`. Acesta spune motorului JavaScript că următoarea secvență de caractere de după un spațiu este numele identificatorului;
- - după de am dat un nume pentru identificator, urmează un operator, în cazul nostru semnul egal `=`, care are scopul de a atribui valoarea de `10` lui `a`, ceea ce pentru motorul JavaScript este echivalentul stabilirii unei legături dintre identificatorul `a` cu valoarea `10`. E ca și cum am pune valoarea `10` într-un borcănel pe care scriem `a`. Legătura este evidentă: borcănelul inscripționat cu `a` conține valoarea de `10`;
-
-#2 Declarăm că un fragment de cod cuprins între acolade este o funcție. Pentru asta folosim cuvântul rezervat `function` urmat de identificatorul pentru această funcție: `function facCeva`. Apoi urmează un spațiu și o pereche de paranteze rotunde în care, dacă se dorește sau este necesar, vor fi pasate argumente (valori necesare în corpul funcției pentru operațiunile care se întâmplă acolo).
-Urmează după un alt spațiu o pereche de acolade în care va fi introdus codul care constituie corpul funcției. Cel mai simplu este să-ți imaginezi o funcție precum un motor care între parantezele rotunde primește combustibil (benzină, aer, NOS) iar între acolade sunt toate părțile sale componente.
-Sper că ai remarcat că fiecare enunț se încheie cu semnul de punctuație punct și virgulă.
-
-- În interiorul funcției putem introduce orice fragment de cod JavaScript. Ca urmare, vom declara o nouă variabilă.
-- apoi ajung la momentul crucial al unei funcții. Cuvântul rezervat `return` este ceea ce a produs motorul nostru. În cazul nostru, vom returna valoarea variabilei `a`.
-
-Acum, e acum! Pentru ce toată această pregătire? Pentru că sunt sigur că ai observat rapid faptul că identificatorul variabilei declarate în interiorul funcției este fix același cu cel al variabilei declarate „în afara” funcției.
-
-Întrebarea se pune așa: valoarea din interiorul funcției va suprascrie valoarea „din afară”? Pentru a răspunde la această întrebare, vom folosi debugger-ul.
-
-Dar să terminăm pregătirile prin apelarea funcției. Dacă nu apelezi funcția, aceasta nu-și produce efectele. Urmând comparația cu motorul, dacă nu învârți cheia în contact din poziția de staționare în cea de pornire, motorul va sta oprit.
-
-#3 Apelăm funcția prin scrierea identificatorului funcției urmată de paranteze rotunde. Parantezele rotunde spun motorului JavaScript: pornește execuția funcției. Este momentul când funcția este aplelată / invocată.
-
-#4 Vom folosi „sonda” de care povesteam mai sus pentru a vedea cu ochii noștri rezultatul.
 
 ### Folosirea debuggerului
 
@@ -77,11 +55,78 @@ Pentru acest lucru deschide un fișier nou pe care-l vom numi `index.html`. Fiș
 ```
 
 Ai observat cum am făcut legătura cu fișierul JavaScript?
-Am folosit tag-ul special `script`, care specifică prin atributul `src="primul.js"`, că va trebui să încarce și să ruleze acest fișier sursă de JavaScript.
 
-Acum deschide fișierul `index.html` în Firefox și apasă tasta magică F12 pentru a accesa Developer Tools. Acesta este un panou care expune o serie de instrumente cu care va trebui să te familiarizezi pentru că este centrul de testare și depanare a codului JavaScript. Este observabil tabul „Console” urmat de „Debugger”. În Console poți introduce cod JavaScript pentru a-l testa rapid, dar și pentru a vedea codul încărcat deja de browser. Dacă nu găsești fișierul, folosește combinația `CTRL + P`. Tastezi primele caractere ale numelui fișierului și îl încarci.
+Am folosit tag-ul special (în HTML, informația este codată între niște secvențe de text numite taguri precum `<html>pagina web</html>`) `script`, care specifică prin atributul `src="primul.js"`, că va trebui să încarce și să ruleze acest fișier sursă de JavaScript.
 
-Un exemplu ceva mai dezvoltat urmărește felul în care se face shadowing în mediul lexical creat de o funcție. Mai exact, cum o variabilă după declarare (adică crearea identificatorului) este disponibilă întregului cod, apoi valoarea este setată la o valoare, iar mai apoi, valoarea este schimbată. Tot procesul acesta descris în linii mari poate fi urmărit cu debuggerul pentru a vedea efectiv cum funcționează codul.
+**Totul e pregătit? Ne lansăm!**
+
+Acum, deschide fișierul `index.html` în Firefox și apasă tasta magică F12 pentru a accesa Developer Tools. Poți folosi și combinația CTRL + SHIFT + i. Acesta este un panou care expune o serie de instrumente cu care va trebui să te familiarizezi pentru că este centrul de testare și depanare a codului JavaScript. Este observabil tabul „Console” urmat de „Debugger”. În Console poți introduce cod JavaScript pentru a-l testa rapid, dar și pentru a vedea codul încărcat deja de browser. Dacă nu găsești fișierul, folosește combinația `CTRL + P`. Tastezi primele caractere ale numelui fișierului și îl încarci.
+
+Vei vedea deja în consolă (din partea dreaptă sus apasă pe Toggle Split Toggle), în zona de consolă rezultatele execuției codului: 11 și 10.
+
+Pune cu mouse-ul break point-urile pe liniile unde există comentariul `// break`. Comentariul l-am pus eu să vă vină mai ușor pentru a vă ghida.
+
+După ce ai setat toate punctele de inspecție a codului (break point-uri), faci reîncărcare la pagină (apeși săgeata circulară din partea dreaptă imediat după caseta în care introduci adresa web). Astfel, se va porni debugger-ul și vei putea „păși” din punct de întrerupere în altul până la încheierea unei execuții simulate a codului. Vei avansa folosind F11. Am ales F11 pentru că în cazul că este întâlnită o funcție, se va intra și se va parcurge și codul din acea funcție.
+
+Câteva detalii despre posibilitatea de a avansa prin codul scris - butoanele și expunerea funcționalității lor.
+- Comanda **Play** (F8), înseamnă rulează tot codul până la următorul break-point setat.
+- Comanda **Step over** (F10), spune debugger-ului să avanseze la linia următoare dacă ești în interiorul unei funcții.
+- Comanda **Step in** (F11), spune: avansează la linia următoare în cadrul funcției, dar dacă linia următoare este invocarea unei alte funcții, intră în acea funcție.
+- Comanda **Step out** (Shift + F11), spune: rulează tot codul până la finalul funcției investigate în acest moment.
+
+După cum vedem în exemplul prezentat, vom lucra cu patru enunțuri de cod separate fiecare prin punct și virgulă. Propun să pornim cu parcurgerea codului (hai, ia o piatră în gură dacă ești începător... va fi fain, curaj). Eram să uit, dacă ai dat de mai multe ori clic din greșeală și ai trecut repede pentru un pas, pur și simplu, reîncarcă pagina și ia-o de la capăt.
+
+![Momentul 0 al parcurgerii secvenței de cod](StartDebugger.png)
+
+#1 Vom declara variabila `a`, ceea ce conduce la crearea unui identificator și vom atribui identificatorului `a` valoarea `10`.
+ - pentru aceasta vom folosi cuvântul rezervat limbajului `var`. Acesta spune motorului JavaScript că următoarea secvență de caractere de după un spațiu este numele identificatorului;
+ - după ce am dat un nume pentru identificator, urmează un operator, în cazul nostru semnul egal `=`, care are scopul de a atribui valoarea de `10` lui `a`, ceea ce pentru motorul JavaScript este echivalentul stabilirii unei legături dintre identificatorul `a` cu valoarea `10`. E ca și cum am pune valoarea `10` într-un borcănel pe care scriem `a`. Legătura este evidentă: borcănelul inscripționat cu `a` conține valoarea de `10`;
+
+Să ne bazăm puțin pe logica pe care imaginea cu borcănelul etichetat ne-o oferă. Mai întâi de a pune valoarea în borcănel, mai întâi trebuie să avem borcănelul (momentul când ai scris `var`), apoi aplicăm o etichetă pe care scriem denumirea conținutului (momentul când ai scris `a` după `var`).
+
+Acum este un moment cheie, care odată înțeles, multe, chiar foarte multe probleme de programare în JavaScript vor fi evitate.
+
+Avem borcănelul și eticheta inscripționată pe el. Korekt! Dar ce observăm?! Da, ai dreptate, e simplu: borcănelul este gol. Această observație vă va salva din multe situații de confuzie: variabilele, inițial sunt legate de o valoare specială care se numește `undefined`. Și să-ți mai spun un mare, un imens secret, care te va scoate din bucluc de multe ori.
+
+    Variabilele, cu excepția celor dintr-o funcție, imediat ce codul sursă a fost citit de motorul JavaScript, sunt „strânse în capul codului” (mecanism de hoistings îi spunem), iar fiecare dintre ele au valoarea `undefined`.
+
+Ce înseamnă „în capul codului”? Adică sunt disponibile instant întregului cod pentru a le atribui valori, modifica, etc. Același comportament este aplicat și funcțiilor după cum vom vedea pentru că... (tobele bat intens), și funcțiile sunt tot niște valori identificate printr-o „etichetă”. Putem afirma cu multă simplitate că în momentul în care browserul a trecut prin cod încărcându-l, are o fază în care culege toți identificatorii și le atribuie valoarea `undefined`. Abia după acest pas, motorul JavaScript se mai uită la detaliile codului și începe să atribuie valorile specificate fiecare la momentul său pe măsură ce codul este rulat.
+
+Hai să ne uităm la primul pas făcut cu debuggerul și vom observa tocmai această „ridicare în capul codului” cu atribuirea valorii `undefined`. Dacă pui mouse-ul pe identificatorul `a` interoghezi valoarea.
+
+![Variabila a este „ridicată” și acum are valoarea inițială undefined](VariabileHoistedCuUndefined.png)
+
+Valoarea identificatorului nostru se reflectă și în cele ținute în evidență de `this`.
+
+![Valoarea „undefined” a lui „a”, se reflectă și în evidențele lui „this” vizibil din panoul „Variables”](VariablesThisUndefined.png)
+
+Ce-o fi `this`?! Deocamdată este îndeajuns să-ți imaginezi că este un context de moment în care se execută un fragment de cod sau mai specific o funcție, de exemplu. Ca să-ți imaginezi mai simplu, `this` este oala în care fierbi borcănelele pentru a le pasteuriza.
+
+Aici, în zona de „Variables” vei vedea toți identificatorii și valorile lor asociate. Această zonă a Debuggerului va fi lupa sub care veți trece pașii de execuție a codului.
+
+#2 Declarăm că un fragment de cod cuprins între acolade este o funcție. Pentru asta folosim cuvântul rezervat `function` urmat de identificatorul pentru această funcție: `function facCeva`. Apoi urmează un spațiu și o pereche de paranteze rotunde în care, dacă se dorește sau este necesar, vor fi pasate argumente (valori necesare în corpul funcției pentru operațiunile care se întâmplă acolo).
+Urmează după un alt spațiu o pereche de acolade în care va fi introdus codul care constituie corpul funcției. Cel mai simplu este să-ți imaginezi o funcție precum un motor care între parantezele rotunde primește combustibil (benzină, aer, NOS) iar între acolade sunt toate părțile sale componente.
+Sper că ai remarcat că fiecare enunț se încheie cu semnul de punctuație punct și virgulă.
+
+- În interiorul funcției putem introduce orice fragment de cod JavaScript. Ca urmare, vom declara o nouă variabilă.
+- Mai punem o sondă pentru a scoate și în consolă să vedem cu ochii noștri valoarea.
+- Apoi ajung la momentul crucial al unei funcții. Cuvântul rezervat `return` este ceea ce a produs motorul nostru. În cazul nostru, vom returna valoarea variabilei `a`.
+
+### Momentul cheie
+
+Acum, e acum! Pentru ce toată această pregătire? Pentru că sunt sigur că ai observat rapid faptul că identificatorul variabilei declarate în interiorul funcției este fix același cu cel al variabilei declarate „în afara” funcției.
+
+Întrebarea se pune așa: valoarea din interiorul funcției va suprascrie valoarea „din afară”? Tocmai pentru a răspunde la această întrebare, vom folosi debugger-ul.
+
+Dar să terminăm pregătirile prin apelarea funcției. Dacă nu apelezi funcția, aceasta nu-și produce efectele. Urmând comparația cu motorul, dacă nu învârți cheia în contact din poziția de staționare în cea de pornire, motorul va sta oprit.
+
+#3 Apelăm funcția prin scrierea identificatorului funcției urmată de paranteze rotunde. Parantezele rotunde spun motorului JavaScript: pornește execuția funcției. Este momentul când funcția este aplelată / invocată.
+
+#4 Vom folosi „sonda” de care povesteam mai sus pentru a vedea cu ochii noștri rezultatul.
+
+## Curiozitatea nu a omorât pisica!
+
+Un exemplu ceva mai dezvoltat urmărește felul în care se face shadowing (supra) în mediul lexical creat de o funcție. Mai exact, cum o variabilă după declarare (adică crearea identificatorului) este disponibilă întregului cod, apoi valoarea este setată la o valoare, iar mai apoi, valoarea este schimbată. Tot procesul acesta descris în linii mari poate fi urmărit cu debuggerul pentru a vedea efectiv cum funcționează codul.
 
 ```javascript
 var a = 10;           // break
@@ -94,4 +139,4 @@ facCeva();            // break
 console.log(a);       // break
 ```
 
-Rulează cu debugger-ul pentru a vedea de ce rezultatul afișat este 11 urmat de 10 și nu 11 urmat de 12
+Rulează cu debugger-ul pentru a vedea de ce rezultatul afișat este 11 urmat de 10 și nu 11 urmat de 12.
