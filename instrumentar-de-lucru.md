@@ -105,7 +105,10 @@ Valoarea identificatorului nostru se reflectă și în cele ținute în evidenț
 ![Valoarea „undefined” a lui „a”, se reflectă și în evidențele lui „this” vizibil din panoul „Variables”](VariablesThisUndefined.png)
 
 Ce-o fi `this`?! Deocamdată este îndeajuns să-ți imaginezi că este un context de moment în care se execută un fragment de cod sau mai specific o funcție, de exemplu. Ca să-ți imaginezi mai simplu, `this` este oala în care fierbi borcănelele pentru a le pasteuriza.
-Putem privi `this` ca spațiul de unde tot codul rulat îți ia valorile de care are nevoie pentru a rula. De exemplu, dacă o funcție este construită cu valorile 10 și 1000, ea, funcția se așteaptă ca aceste valori să fie disponibile deja undeva numai bune să le ia și să le folosească. Acest „undeva” este `this`. Ține minte că în afară de „undeva”, mai trebuie dată atenție și lui „cândva” (asta e o chestie faină care ține chiar de felul în care se rulează codul pe „linia timpului).
+
+Vrei să te complic rău de tot? E bain-marie-ul în care totul există pentru ca zacusca să se facă zacuscă, pentru ca gemul să se facă gem iar țuica, țuică... ceva neclar? Bine, cu țuica e altceva... :)
+
+Putem privi `this` ca spațiul de unde tot codul rulat își ia valorile de care are nevoie pentru a rula. De exemplu, dacă o funcție este construită cu valorile 10 și 1000, ea, funcția se așteaptă ca aceste valori să fie disponibile deja undeva numai bune să le ia și să le folosească. Acest „undeva” este `this`. Ține minte că în afară de „undeva”, mai trebuie dată atenție și lui „cândva” (asta e o chestie faină care ține chiar de felul în care se rulează codul pe „linia timpului).
 
 Să revenim. Aici, în zona de „Variables” vei vedea toți identificatorii și valorile lor asociate. Această zonă a Debuggerului va fi lupa sub care veți trece pașii de execuție a codului.
 
