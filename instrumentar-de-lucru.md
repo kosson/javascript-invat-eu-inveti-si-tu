@@ -78,7 +78,9 @@ După cum vedem în exemplul prezentat, vom lucra cu patru enunțuri de cod sepa
 
 ![Momentul 0 al parcurgerii secvenței de cod](StartDebugger.png)
 
-#1 Vom declara variabila `a`, ceea ce conduce la crearea unui identificator și vom atribui identificatorului `a` valoarea `10`.
+#1 Variabila
+
+Vom declara variabila `a`, ceea ce conduce la crearea unui identificator și vom atribui identificatorului `a` valoarea `10`.
  - pentru aceasta vom folosi cuvântul rezervat limbajului `var`. Acesta spune motorului JavaScript că următoarea secvență de caractere de după un spațiu este numele identificatorului;
  - după ce am dat un nume pentru identificator, urmează un operator, în cazul nostru semnul egal `=`, care are scopul de a atribui valoarea de `10` lui `a`, ceea ce pentru motorul JavaScript este echivalentul stabilirii unei legături dintre identificatorul `a` cu valoarea `10`. E ca și cum am pune valoarea `10` într-un borcănel pe care scriem `a`. Legătura este evidentă: borcănelul inscripționat cu `a` conține valoarea de `10`;
 
@@ -112,7 +114,10 @@ Putem privi `this` ca spațiul de unde tot codul rulat își ia valorile de care
 
 Să revenim. Aici, în zona de „Variables” vei vedea toți identificatorii și valorile lor asociate. Această zonă a Debuggerului va fi lupa sub care veți trece pașii de execuție a codului.
 
-#2 Declarăm că un fragment de cod cuprins între acolade este o funcție. Pentru asta folosim cuvântul rezervat `function` urmat de identificatorul pentru această funcție: `function facCeva`. Apoi urmează un spațiu și o pereche de paranteze rotunde în care, dacă se dorește sau este necesar, vor fi pasate argumente (valori necesare în corpul funcției pentru operațiunile care se întâmplă acolo).
+#2 Funcția
+
+Declarăm că un fragment de cod cuprins între acolade este o funcție. Pentru asta folosim cuvântul rezervat `function` urmat de identificatorul pentru această funcție: `function facCeva`. Apoi urmează un spațiu și o pereche de paranteze rotunde în care, dacă se dorește sau este necesar, vor fi pasate argumente (valori necesare în corpul funcției pentru operațiunile care se întâmplă acolo).
+
 Urmează după un alt spațiu o pereche de acolade în care va fi introdus codul care constituie corpul funcției. Cel mai simplu este să-ți imaginezi o funcție precum un motor care între parantezele rotunde primește combustibil (benzină, aer, NOS) iar între acolade sunt toate părțile sale componente.
 Sper că ai remarcat că fiecare enunț se încheie cu semnul de punctuație punct și virgulă.
 
@@ -128,9 +133,13 @@ Acum, e acum! Pentru ce toată această pregătire? Pentru că sunt sigur că ai
 
 Haideți să terminăm prin apelarea funcției. Dacă nu apelezi funcția, aceasta nu-și produce efectele. Urmând comparația cu motorul, dacă nu învârți cheia în contact din poziția de staționare în cea de pornire, motorul va sta oprit.
 
-#3 Apelăm funcția prin scrierea identificatorului funcției urmată de paranteze rotunde. Parantezele rotunde spun motorului JavaScript: pornește execuția funcției. Este momentul când funcția este aplelată / invocată.
+#3 Apelarea funcției
 
-#4 Vom folosi „sonda” de care povesteam mai sus pentru a vedea cu ochii noștri rezultatul.
+Apelăm funcția prin scrierea identificatorului funcției urmată de paranteze rotunde. Parantezele rotunde spun motorului JavaScript: pornește execuția funcției. Este momentul când funcția este aplelată / invocată.
+
+#4 Sondarea
+
+Vom folosi „sonda” de care povesteam mai sus pentru a vedea cu ochii noștri rezultatul.
 
 ## Curiozitatea nu a omorât pisica!
 
