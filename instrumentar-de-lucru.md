@@ -21,9 +21,9 @@ Vor fi îndeajuns de multe cazurile în care vei avea nevoie de acest instrument
 
 Debuggerul am putea să-l traducem în română cu o transliterare unu-la-unu prin „operator de dezinsecție”, dar pentru a fi foarte eleganți îl vom denumi „depanator”. Depanatorul este un instrument care permite parcurgerea unui fragment de cod încărcat în browser pentru a-i vedea comportamentul și efectele.
 
-Chiar dacă multe din elementele cu care vom lucra în continuare pentru a exemplifica, nu vă sunt cunoscute, nu vă impacientați. Pur și simplu doresc să vă arăt care sunt posibilitățile acestui instrument. Promit să explic pas cu pas ce se întâmplă.
+Chiar dacă multe din elementele cu care vom lucra în continuare pentru a exemplifica, nu vă sunt cunoscute, nu vă impacientați. Pur și simplu doresc să vă arăt care sunt posibilitățile acestui instrument și făcând asta, să reușesc să vă fac să asimilați câteva concepte de lucru în programare cum ar fi variabilele și funcțiile. Promit să explic pas cu pas ce se întâmplă.
 
-Deschide editorul tău de cod preferat. Dacă nu ai unul deja, te invit să folosești editorul Atom. Dar să știi că orice editor este bun atâta vreme cât poți salva cu extensia de fișier `.js` și `.html`, fără adaosuri ciudate. Dacă ai deschis deja editorul, te rog introdu următoarea secvență de cod și salveaz-o într-un director pregătit special dinainte. În același director vom mai introduce un fragment de cod, de data aceasta de html. Deci, salvează cu denumirea de `primul.js` acum și lasă deschis pentru a privi la cod urmând explicațiile.
+Deschide editorul tău de cod preferat. Dacă nu ai unul deja, te invit să folosești editorul Atom. Dar să știi că orice editor este bun atâta vreme cât poți salva cu extensia de fișier `.js` și `.html`, fără adaosuri ciudate. Dacă ai deschis deja editorul, te rog, introdu următoarea secvență de cod și salveaz-o într-un director pregătit special dinainte. În același director vom mai introduce un fragment de cod, de data aceasta de html într-un pas următor. Deci, salvează cu denumirea de `primul.js` acum și lasă deschis pentru a privi la cod urmând explicațiile.
 
 ```javascript
 var a = 10;           // break
@@ -56,7 +56,7 @@ Pentru acest lucru deschide un fișier nou pe care-l vom numi `index.html`. Fiș
 
 Ai observat cum am făcut legătura cu fișierul JavaScript?
 
-Am folosit tag-ul special (în HTML, informația este codată între niște secvențe de text numite taguri precum `<html>pagina web</html>`) `script`, care specifică prin atributul `src="primul.js"`, că va trebui să încarce și să ruleze acest fișier sursă de JavaScript.
+Am folosit tag-ul special `script` (în HTML, informația este codată între niște secvențe de text numite taguri precum `<html>pagina web</html>`), care specifică prin atributul `src="primul.js"`, că va trebui să încarce și să ruleze acest fișier sursă de JavaScript.
 
 **Totul e pregătit? Ne lansăm!**
 
@@ -88,7 +88,7 @@ Acum este un moment cheie, care odată înțeles, multe, chiar foarte multe prob
 
 Avem borcănelul și eticheta inscripționată pe el. Korekt! Dar ce observăm?! Da, ai dreptate, e simplu: borcănelul este gol. Această observație vă va salva din multe situații de confuzie: variabilele, inițial sunt legate de o valoare specială care se numește `undefined`. Și să-ți mai spun un mare, un imens secret, care te va scoate din bucluc de multe ori.
 
-    Variabilele, cu excepția celor dintr-o funcție, imediat ce codul sursă a fost citit de motorul JavaScript, sunt „strânse în capul codului” (mecanism de hoistings îi spunem), iar fiecare dintre ele au valoarea `undefined`.
+  Imediat ce codul sursă a fost citit de motorul JavaScript, tuturor variabilelor și funcțiilor le sunt colectate identificatorii care sunt „puși în capul codului” (mecanism de hoistings îi spunem), iar fiecare dintre ele au valoarea `undefined`.
 
 Ce înseamnă „în capul codului”? Adică sunt disponibile instant întregului cod pentru a le atribui valori, modifica, etc. Același comportament este aplicat și funcțiilor după cum vom vedea pentru că... (tobele bat intens), și funcțiile sunt tot niște valori identificate printr-o „etichetă”. Putem afirma cu multă simplitate că în momentul în care browserul a trecut prin cod încărcându-l, are o fază în care culege toți identificatorii și le atribuie valoarea `undefined`. Abia după acest pas, motorul JavaScript se mai uită la detaliile codului și începe să atribuie valorile specificate fiecare la momentul său pe măsură ce codul este rulat.
 
@@ -96,7 +96,7 @@ Există o notabilă excepție de la acest comportament. Acest comportament este 
 
 Mie îmi place `let` pentru că îmi mai simplifică din procesul de gândire a codului, dar și pentru faptul că tradus are o anumită melodie. Fii atent la următorul enunț: `let a = 10;`. Chiar tradus în română sună foarte fain, ca în matematică (da, ca și tine, am iubit matematica... aaa... nu): „fie ca `a` să fie legat de valoarea 10”. E aproape de spusele unui magician, nu? Fain!
 
-Hai să ne uităm la primul pas făcut cu debuggerul și vom observa tocmai această „ridicare în capul codului” cu atribuirea valorii `undefined`. Dacă pui mouse-ul pe identificatorul `a` interoghezi valoarea.
+Să revenim. Hai să ne uităm la primul pas făcut cu debuggerul și vom observa tocmai această „ridicare în capul codului” cu atribuirea valorii `undefined`. Dacă pui mouse-ul pe identificatorul `a` interoghezi valoarea.
 
 ![Variabila a este „ridicată” și acum are valoarea inițială undefined](VariabileHoistedCuUndefined.png)
 
