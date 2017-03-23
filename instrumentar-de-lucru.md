@@ -88,7 +88,7 @@ Acum este un moment cheie, care odată înțeles, multe, chiar foarte multe prob
 
 Avem borcănelul și eticheta inscripționată pe el. Korekt! Dar ce observăm?! Da, ai dreptate, e simplu: borcănelul este gol. Această observație vă va salva din multe situații de confuzie: variabilele, inițial sunt legate de o valoare specială care se numește `undefined`. Și să-ți mai spun un mare, un imens secret, care te va scoate din bucluc de multe ori.
 
-  Imediat ce codul sursă a fost citit de motorul JavaScript, tuturor variabilelor și funcțiilor le sunt colectate identificatorii care sunt „puși în capul codului” (mecanism de hoistings îi spunem), iar fiecare dintre ele au valoarea `undefined`.
+**Imediat ce codul sursă a fost citit de motorul JavaScript, tuturor variabilelor și funcțiilor le sunt colectate identificatorii care sunt „puși în capul codului” (mecanism de hoistings îi spunem), iar fiecare dintre ele au valoarea `undefined`.**
 
 Ce înseamnă „în capul codului”? Adică sunt disponibile instant întregului cod pentru a le atribui valori, modifica, etc. Același comportament este aplicat și funcțiilor după cum vom vedea pentru că... (tobele bat intens), și funcțiile sunt tot niște valori identificate printr-o „etichetă”. Putem afirma cu multă simplitate că în momentul în care browserul a trecut prin cod încărcându-l, are o fază în care culege toți identificatorii și le atribuie valoarea `undefined`. Abia după acest pas, motorul JavaScript se mai uită la detaliile codului și începe să atribuie valorile specificate fiecare la momentul său pe măsură ce codul este rulat.
 
