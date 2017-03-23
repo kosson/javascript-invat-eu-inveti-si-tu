@@ -16,7 +16,7 @@ Am dorit să vă iau cu mine în această călătorie pentru că îmi doresc să
 
 Ținta este realizarea unui material de învățare pentru limbajul de programare JavaScript, care să fie eficient în înțelegerea aspectelor dificil de pătruns. Și, acestea nu sunt puține.
 
-Sunt cuprinse experiențe și note strânse după ce am citit și am vizionat multe alte lucrări dedicate acestui limbaj de programare. Acesta nu este primul limbaj de programare pe care l-am folosit pentru a rezolva cerințe punctuale. Am început pe vremuri să învăț Pascal dintr-o carte xeroxată, deh, pe vremea aia nu erau nici computere prea multe, iar cartea tehnică în limba română rară... hmmm... ca și acum, parcă. Apoi am trecut prin BASIC folosind primul meu calculator, un HC și apoi m-am reapucat de programare din nou odată cu creșterea Internetului în anii 2000. PHP-ul a fost experiența de programare care m-a pregătit pentru JavaScript și de aici împreună cu voi ce va urma.
+Sunt cuprinse experiențe și note strânse după ce am citit și am vizionat multe alte lucrări dedicate acestui limbaj de programare. Acesta nu este primul limbaj de programare pe care l-am folosit pentru a rezolva cerințe punctuale. Am început pe vremuri să învăț Pascal dintr-o carte xeroxată, deh, pe vremea aia nu erau nici computere prea multe, iar cartea tehnică în limba română rară... hmmm... ca și acum, parcă. Apoi am trecut prin BASIC folosind primul meu calculator, un HC și apoi m-am reapucat de programare din nou odată cu avântul Internetului în anii 2000. PHP-ul a fost experiența de programare care m-a pregătit pentru JavaScript și de aici împreună cu voi ce va urma.
 
 Ceea ce am realizat după un efort de câțiva ani de acumulare personală, este faptul că nu există materiale de învățare în domeniul programării care să explice și cu ajutor vizual extins concepte și situații pe care anumite abstractizări ale unui limbaj le expune celor nefamiliarizați. Acesta este și un efort de a lărgi baza de acces în limba română către un nou instrument de expresie: programarea. Motivele le puteți bănui cu ușurință.
 
@@ -28,7 +28,7 @@ Materialele pot servi și ca date prelucrabile pentru un posibil sistem de înv�
 
 Pentru că de curând a apărut noul standard ECMAScript 6, care introduce noi structuri sintactice, am preferat să le introduc în economia explicațiilor. Astfel, veți vedea că în majoritatea cazurilor sunt oferite sintaxele alternative conform ultimelor specificații, care stau alăturat celor familiare din ECMAScript 5.
 
-Cred că v-am zăpăcit nițel cu cele două denumiri: ECMAScript și JavaScript. Nu sunt două lucruri distincte. JavaScript este o marcă înregistrată iar ECMAScript la fel, dar parține creatorilor limbajului. JavaScript este ceea ce întreaga comunitate de programatori înțelege a fi iterațiile standardului ECMAScript. Închei povestea ECMAScript / JavaScript spunându-vă că începând cu ECMAScript 6, toate iterațiile vor purta marca anului în care s-a făcut incrementul. De exemplu, în acest an standardul se numește ECMAScript 2017.
+Cred că v-am zăpăcit nițel cu cele două denumiri: ECMAScript și JavaScript. Nu sunt două lucruri distincte. JavaScript este o marcă înregistrată iar ECMAScript la fel, dar aceasta din urmă aparține creatorilor limbajului. JavaScript este ceea ce întreaga comunitate de programatori înțelege a fi iterațiile standardului ECMAScript. Închei povestea ECMAScript / JavaScript spunându-vă că începând cu ECMAScript 6, toate iterațiile vor purta marca anului în care s-a făcut incrementul. De exemplu, în acest an standardul se numește ECMAScript 2017.
 
 Dacă veți căuta instrumentul perfect pentru a învăța, această lucrare nu este locul potrivit. Chiar dacă tot codul a fost testat, chiar dacă fragmentele care explică funcționalitatea au dimensiuni care să permită înțelegerea, sunt convins că se poate și mai bine. Mă voi strădui.
 
@@ -44,7 +44,9 @@ Una din țintele acestei cărți este aceea de a explica și însuși cunoștin�
 
 Această lucrare îți este adresată și ție specialistul în umanioare digitale - digital humanities. Îți va oferi cunoștințele necesare să pui cap la cap diferite scripturi pentru a facilita munca curentă. Îți va veni ușor să înțelegi de ce funcționează o colecție de software, cum se leagă un framework de un altul și de ce funcționează acest lucru. Capacitatea de expresie și de prelucrare îți va fi ușurată semnificativ prin înțelegerea multor aspecte obscure ale funcționării JavaScript-ului.
 
-Voi încheia pledoaria pentru acest nou drum cu o afirmație care se va dovedi adevărată pe măsură ce veți descoperi bucuria de a lucra cu structuri de cod ce permit prelucrarea. De exemplu, textul în dimensiunea lui digitală este o colecție de date în sine. Este ca o colecție destructurată cu înțeles doar pentru om, care așteaptă un agent software care să o reordoneze și interconecteze cu alte surse pentru a oferi o nouă dimensiune valorică. De fapt, acesta este scopul final: extragerea valorii indiferent de formă și destinație.
+Voi încheia pledoaria pentru acest nou drum cu o afirmație care se va dovedi adevărată pe măsură ce veți descoperi bucuria de a lucra cu structuri de cod ce permit prelucrarea. Textul în dimensiunea lui digitală este o colecție de date în sine.
+
+Este ca o colecție destructurată cu înțeles doar pentru om, care așteaptă un agent software care să o reordoneze și interconecteze cu alte surse pentru a oferi o nouă dimensiune valorică. De fapt, acesta este scopul final: extragerea valorii indiferent de formă și destinație.
 
 # Anti-introducere
 
@@ -52,11 +54,19 @@ JavaScript este motorul dinamicii paginilor web și nu numai. Spun acest lucru p
 
 Când vorbim de JavaScript, de fapt vorbim despre o implementare, adică de respectarea tuturor regulilor pe care le impune standardul ECMAScript - http://www.ecma-international.org/memento/TC39.htm.
 
-Programarea, ca și activitate, ar fi util să fie înțeleasă ca o limbă străină nouă, pe care ai nevoie să o înveți pentru a comunica cu un străin - computerul. De aceea, se numește și limbaj. Javascript sau JS (de fapt o implementare a ECMAScript), pe scurt, ca și limbaj are o gramatică proprie cu toate regulile sale, de la felul în care înșiri caracterele, până la modul în care faci enunțurile pentru a avea sens și pentru un computer atunci când le evaluează.
+Programarea, ca și activitate, ar fi util să fie înțeleasă ca o limbă străină nouă, pe care ai nevoie să o înveți pentru a comunica cu un străin - computerul. De aceea, se numește și limbaj. Javascript sau JS (de fapt o implementare a ECMAScript), pe scurt, ca și limbaj are o gramatică proprie cu toate regulile sale, de la modul în care înșiri caracterele, până la modul în care faci enunțurile pentru a avea sens și pentru un computer atunci când le evaluează.
 
 Vă va ajuta să înțelegeți că scrierea unui fragment de cod este precum scrierea unei fraze foarte lungi constituită din propoziții separate prin punct și virgulă. Dar această frază este forma concretă a unui algoritm pentru că la această etapă, de fapt, pornește totul.
 
-Ai o problemă pe care dorești să o rezolvi și în acest sens, creezi pașii necesari. Succesiunea tuturor pașilor se numește algoritm. Transpunerea unui algoritm într-o soluție tehnică, se numește program. Pentru a scrie un program, alegi un limbaj de programare, iar în cazul nostru, am ales deja: ECMAScript, adică JavaScript. Mai adaug doar că o transpunere a unui algoritm într-un program constituie, de fapt, o transpunere într-un limbaj formal.
+Ai o problemă pe care dorești să o rezolvi și în acest sens, creezi **pașii necesari**.
+
+Succesiunea tuturor pașilor se numește **algoritm**.
+
+Transpunerea unui algoritm într-o soluție tehnică, se numește **program**.
+
+Pentru a scrie un program, alegi un limbaj de programare, iar în cazul nostru, am ales deja: ECMAScript, adică JavaScript.
+
+Mai adaug doar că o transpunere a unui algoritm într-un program constituie, de fapt, o transpunere într-un **limbaj formal** (regulile sale interne îl formalizează).
 
 Propun să începem și am ales să fac acest lucru printr-o privire generală asupra limbajului.
 
