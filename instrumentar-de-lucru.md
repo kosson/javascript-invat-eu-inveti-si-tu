@@ -66,7 +66,7 @@ Vei vedea deja în consolă (din partea dreaptă sus apasă pe Toggle Split Togg
 
 Pune cu mouse-ul break point-urile pe liniile unde există comentariul `// break`. Comentariul l-am pus eu să vă vină mai ușor pentru a vă ghida.
 
-După ce ai setat toate punctele de inspecție ale codului (break point-uri), faci reîncărcare la pagină (apeși săgeata circulară din partea dreaptă imediat după caseta în care introduci adresa web). Astfel, se va porni debugger-ul și vei putea „păși” din punct de întrerupere în altul până la încheierea unei execuții simulate a codului. Vei avansa folosind F11. Am ales F11 pentru că în cazul că este întâlnită o funcție, se va intra și se va parcurge și codul din acea funcție.
+După ce ai setat toate punctele de inspecție ale codului (break point-uri), faci reîncărcare la pagină (apeși săgeata circulară din partea dreaptă imediat după caseta în care introduci adresa web). Astfel, se va porni debugger-ul și vei putea „păși” din punct de întrerupere în altul până la încheierea unei execuții simulate a codului. Vei avansa folosind F11. Am ales F11 pentru că în cazul când este întâlnită o funcție, se va intra și se va parcurge și codul din acea funcție.
 
 Câteva detalii despre posibilitatea de a avansa prin codul scris - butoanele și expunerea funcționalității lor.
 - Comanda **Play** (F8), înseamnă rulează tot codul până la următorul break-point setat.
@@ -105,8 +105,9 @@ Valoarea identificatorului nostru se reflectă și în cele ținute în evidenț
 ![Valoarea „undefined” a lui „a”, se reflectă și în evidențele lui „this” vizibil din panoul „Variables”](VariablesThisUndefined.png)
 
 Ce-o fi `this`?! Deocamdată este îndeajuns să-ți imaginezi că este un context de moment în care se execută un fragment de cod sau mai specific o funcție, de exemplu. Ca să-ți imaginezi mai simplu, `this` este oala în care fierbi borcănelele pentru a le pasteuriza.
+Putem privi `this` ca spațiul de unde tot codul rulat îți ia valorile de care are nevoie pentru a rula. De exemplu, dacă o funcție este construită cu valorile 10 și 1000, ea, funcția se așteaptă ca aceste valori să fie disponibile deja undeva numai bune să le ia și să le folosească. Acest „undeva” este `this`. Ține minte că în afară de „undeva”, mai trebuie dată atenție și lui „cândva” (asta e o chestie faină care ține chiar de felul în care se rulează codul pe „linia timpului).
 
-Aici, în zona de „Variables” vei vedea toți identificatorii și valorile lor asociate. Această zonă a Debuggerului va fi lupa sub care veți trece pașii de execuție a codului.
+Să revenim. Aici, în zona de „Variables” vei vedea toți identificatorii și valorile lor asociate. Această zonă a Debuggerului va fi lupa sub care veți trece pașii de execuție a codului.
 
 #2 Declarăm că un fragment de cod cuprins între acolade este o funcție. Pentru asta folosim cuvântul rezervat `function` urmat de identificatorul pentru această funcție: `function facCeva`. Apoi urmează un spațiu și o pereche de paranteze rotunde în care, dacă se dorește sau este necesar, vor fi pasate argumente (valori necesare în corpul funcției pentru operațiunile care se întâmplă acolo).
 Urmează după un alt spațiu o pereche de acolade în care va fi introdus codul care constituie corpul funcției. Cel mai simplu este să-ți imaginezi o funcție precum un motor care între parantezele rotunde primește combustibil (benzină, aer, NOS) iar între acolade sunt toate părțile sale componente.
