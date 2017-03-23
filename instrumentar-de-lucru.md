@@ -92,6 +92,8 @@ Avem borcănelul și eticheta inscripționată pe el. Korekt! Dar ce observăm?!
 
 Ce înseamnă „în capul codului”? Adică sunt disponibile instant întregului cod pentru a le atribui valori, modifica, etc. Același comportament este aplicat și funcțiilor după cum vom vedea pentru că... (tobele bat intens), și funcțiile sunt tot niște valori identificate printr-o „etichetă”. Putem afirma cu multă simplitate că în momentul în care browserul a trecut prin cod încărcându-l, are o fază în care culege toți identificatorii și le atribuie valoarea `undefined`. Abia după acest pas, motorul JavaScript se mai uită la detaliile codului și începe să atribuie valorile specificate fiecare la momentul său pe măsură ce codul este rulat.
 
+Există o notabilă excepție de la acest comportament. Acest comportament este dictat de modificările aduse standardului începând cu ES6. Regula standardului nou spune că variabilele declarate cu `let` în locul lui `var`, for fi pironite de „locul” în cod unde au fost declarate. Acest nou comportament este încurajat ca practică și este menit să elimine toate problemele de înțelegere a mecanismului de „ridicare în capul codului” (hoisting). De fapt, a fost gândit să dea o mână de ajutor și celor care vin din zona de C și C++ pentru a le da familiaritate în felul în care funcționează codul. După toată balonarea și toată lauda pentru `let`, se pare că este destinat să-l înlocuiască pe `var` încet, încet.
+
 Hai să ne uităm la primul pas făcut cu debuggerul și vom observa tocmai această „ridicare în capul codului” cu atribuirea valorii `undefined`. Dacă pui mouse-ul pe identificatorul `a` interoghezi valoarea.
 
 ![Variabila a este „ridicată” și acum are valoarea inițială undefined](VariabileHoistedCuUndefined.png)
@@ -116,9 +118,9 @@ Sper că ai remarcat că fiecare enunț se încheie cu semnul de punctuație pun
 
 Acum, e acum! Pentru ce toată această pregătire? Pentru că sunt sigur că ai observat rapid faptul că identificatorul variabilei declarate în interiorul funcției este fix același cu cel al variabilei declarate „în afara” funcției.
 
-Întrebarea se pune așa: valoarea din interiorul funcției va suprascrie valoarea „din afară”? Tocmai pentru a răspunde la această întrebare, vom folosi debugger-ul.
+Întrebarea se pune așa: valoarea din interiorul funcției va suprascrie valoarea „din afară”? Tocmai pentru a răspunde la această întrebare, am folosit debugger-ul.
 
-Dar să terminăm pregătirile prin apelarea funcției. Dacă nu apelezi funcția, aceasta nu-și produce efectele. Urmând comparația cu motorul, dacă nu învârți cheia în contact din poziția de staționare în cea de pornire, motorul va sta oprit.
+Haideți să terminăm prin apelarea funcției. Dacă nu apelezi funcția, aceasta nu-și produce efectele. Urmând comparația cu motorul, dacă nu învârți cheia în contact din poziția de staționare în cea de pornire, motorul va sta oprit.
 
 #3 Apelăm funcția prin scrierea identificatorului funcției urmată de paranteze rotunde. Parantezele rotunde spun motorului JavaScript: pornește execuția funcției. Este momentul când funcția este aplelată / invocată.
 
@@ -126,7 +128,7 @@ Dar să terminăm pregătirile prin apelarea funcției. Dacă nu apelezi funcți
 
 ## Curiozitatea nu a omorât pisica!
 
-Un exemplu ceva mai dezvoltat urmărește felul în care se face shadowing (supra) în mediul lexical creat de o funcție. Mai exact, cum o variabilă după declarare (adică crearea identificatorului) este disponibilă întregului cod, apoi valoarea este setată la o valoare, iar mai apoi, valoarea este schimbată. Tot procesul acesta descris în linii mari poate fi urmărit cu debuggerul pentru a vedea efectiv cum funcționează codul.
+Un exemplu ceva mai dezvoltat urmărește felul în care se face shadowing (suprascrierea) în mediul lexical creat de o funcție. Mai exact, cum o variabilă după declarare (adică crearea identificatorului) este disponibilă întregului cod, apoi valoarea este setată la o valoare, iar mai apoi, valoarea este schimbată. Tot procesul acesta descris în linii mari poate fi urmărit cu debuggerul pentru a vedea efectiv cum funcționează codul.
 
 ```javascript
 var a = 10;           // break
