@@ -16,15 +16,15 @@ Am dorit să vă iau cu mine în această călătorie pentru că îmi doresc să
 
 Ținta este realizarea unui material de învățare pentru limbajul de programare JavaScript, care să fie eficient în înțelegerea aspectelor dificil de pătruns. Și, acestea nu sunt puține.
 
-Sunt cuprinse experiențe și note strânse după ce am citit și am vizionat multe alte lucrări dedicate acestui limbaj de programare. Acesta nu este primul limbaj de programare pe care l-am folosit pentru a rezolva cerințe punctuale. Am început pe vremuri să învăț Pascal dintr-o carte xeroxată, deh, pe vremea aia nu erau nici computere prea multe, iar cartea tehnică în limba română rară... hmmm... ca și acum, parcă. Apoi am trecut prin BASIC folosind primul meu calculator, un HC și apoi m-am reapucat de programare din nou odată cu avântul Internetului în anii 2000. PHP-ul a fost experiența de programare care m-a pregătit pentru JavaScript și de aici împreună cu voi ce va urma.
+Sunt cuprinse experiențe și note strânse după ce am citit și am vizionat multe alte lucrări dedicate acestui limbaj de programare. Acesta nu este primul limbaj de programare pe care l-am folosit pentru a rezolva cerințe punctuale. Am început pe vremuri să învăț Pascal dintr-o carte xeroxată, deh, pe vremea aia nu erau nici computere prea multe, iar cartea tehnică în limba română rară... hmmm... ca și acum, parcă. Apoi am trecut prin BASIC folosind primul meu calculator, un HC și apoi m-am reapucat de programare din nou odată cu avântul Internetului în anii 2000\. PHP-ul a fost experiența de programare care m-a pregătit pentru JavaScript și de aici împreună cu voi ce va urma.
 
 Ceea ce am realizat după un efort de câțiva ani de acumulare personală, este faptul că nu există materiale de învățare în domeniul programării care să explice și cu ajutor vizual extins concepte și situații pe care anumite abstractizări ale unui limbaj le expune celor nefamiliarizați. Acesta este și un efort de a lărgi baza de acces în limba română către un nou instrument de expresie: programarea. Motivele le puteți bănui cu ușurință.
 
-Este posibil ca multe dintre interpretările mele sau felul în care explic să nu fie cel canonic, cel predat în școală sau în mediile academice dedicate. Nu este o lucrare orientată către comunitatea de cercetare a domeniului informaticii. Audiența include și pe aceștia, dar baza o constituie cei care au nevoie de o ușă deschisă pentru a scrie primele programe, pentru „a prinde gustul”, pentru a realiza un potențial pe care doar îl intuiau.
+Este posibil ca multe dintre interpretările mele sau felul în care explic să nu fie cel canonic, cel predat în școală sau în mediile academice dedicate. Nu este o lucrare orientată către comunitatea de cercetare a domeniului informaticii. Audiența include și pe aceștia, dar baza o constituie cei care au nevoie de o ușă deschisă pentru a scrie primele programe, pentru „a prinde gustul", pentru a realiza un potențial pe care doar îl intuiau.
 
 Limbajul adoptat este unul dedicat celui care dorește să înțeleagă fenomenul și să ajungă la contextualizare rapidă a anumitor concepte sau abstractizări cu un prag mai ridicat. Pentru a realiza cât mai multe punți între subiectele care au o legătură directă, am ales să repet în anumite puncte cheie câteva informații necesare în defavoarea unor trimiteri seci care să aibă ca efect cât mai puține salturi între segmentele de cunoștințe.
 
-Materialele pot servi și ca date prelucrabile pentru un posibil sistem de învățare dinamic și adaptat pe subiect. În acest sens, unele materiale includ secțiuni intitulate „dependințe cognitive” sau „alonje”. Mai toate subiectele tratate conțin o secțiune intitulată „mantre”, care are scopul de a realiza liste de „atribute”. Acestea descriu aspectele cele mai importante.
+Materialele pot servi și ca date prelucrabile pentru un posibil sistem de învățare dinamic și adaptat pe subiect. În acest sens, unele materiale includ secțiuni intitulate „dependințe cognitive" sau „alonje". Mai toate subiectele tratate conțin o secțiune intitulată „mantre", care are scopul de a realiza liste de „atribute". Acestea descriu aspectele cele mai importante.
 
 Pentru că de curând a apărut noul standard ECMAScript 6, care introduce noi structuri sintactice, am preferat să le introduc în economia explicațiilor. Astfel, veți vedea că în majoritatea cazurilor sunt oferite sintaxele alternative conform ultimelor specificații, care stau alăturat celor familiare din ECMAScript 5.
 
@@ -52,7 +52,7 @@ Este ca o colecție destructurată cu înțeles doar pentru om, care așteaptă 
 
 JavaScript este motorul dinamicii paginilor web și nu numai. Spun acest lucru pentru că textul standardului declară ECMAScript ca fiind un limbaj de programare general. Acest lucru înseamnă că poate fi folosit la mult mai multe lucruri în afara intențiilor sale originare. Avantajele folosirii JS pornesc de la server (NodeJs), până la aplicațiile rulate în browserul web al utilizatorului.
 
-Când vorbim de JavaScript, de fapt vorbim despre o implementare, adică de respectarea tuturor regulilor pe care le impune standardul ECMAScript - http://www.ecma-international.org/memento/TC39.htm.
+Când vorbim de JavaScript, de fapt vorbim despre o implementare, adică de respectarea tuturor regulilor pe care le impune standardul ECMAScript - <http://www.ecma-international.org/memento/TC39.htm>.
 
 Programarea, ca și activitate, ar fi util să fie înțeleasă ca o limbă străină nouă, pe care ai nevoie să o înveți pentru a comunica cu un străin - computerul. De aceea, se numește și limbaj. Javascript sau JS (de fapt o implementare a ECMAScript), pe scurt, ca și limbaj are o gramatică proprie cu toate regulile sale, de la modul în care înșiri caracterele, până la modul în care faci enunțurile pentru a avea sens și pentru un computer atunci când le evaluează.
 
@@ -70,14 +70,17 @@ Mai adaug doar că o transpunere a unui algoritm într-un program constituie, de
 
 Propun să începem și am ales să fac acest lucru printr-o privire generală asupra limbajului.
 
-A, eram să uit. De ceva vreme a ieșit o nouă versiune a standardului. Comunitatea de programatori îi spune ECMAScript 6 iar celei anterioare ECMAScript 5. În cuprinsul materialelor veți găsi referințe la standard așa sau mai simplu ES5 și ES6.
+A, eram să uit. De ceva vreme a ieșit o nouă versiune a standardului. Comunitatea de programatori îi spune ECMAScript 6 iar celei anterioare ECMAScript 5\. În cuprinsul materialelor veți găsi referințe la standard așa sau mai simplu ES5 și ES6.
 
 # Mică anatomie a limbajului
 
 > Un ansamblu de primitive și o mulțime de reguli care guvernează modul în care aceste primitive pot fi combinate pentru reprezentarea ideilor mai complexe, constituie un **limbaj de programare**
-> <cite>[J. Glenn Brookshear.1998][1]</cite>.
+> <cite>
+>   <a href="http://www.teora.ro/cgi-bin/teora/romania/mbshop.cgi?database=01&amp;action=view_product&amp;productID=%20823&amp;category=" title="Brookshear, J. Glenn. Introducere în informatică. Editura Teora. 1998\. Titlul original: Computer science - An overview, Fifth Edition">J. Glenn Brookshear.1998</a>
+> </cite>
 
-Standardul ECMAScript 2016 este un „limbaj de programare” cu aplicativitate largă. Inițial ECMAScript a fost dezvoltat ca un limbaj de scriptare, dar a evoluat în unul care este aplicabil la o paletă foarte largă de aplicații.
+
+Standardul ECMAScript 2016 este un „limbaj de programare" cu aplicativitate largă. Inițial ECMAScript a fost dezvoltat ca un limbaj de scriptare, dar a evoluat în unul care este aplicabil la o paletă foarte largă de aplicații.
 
 JavaScript este un limbaj creat de Brendan Eich în perioada când lucra la compania Netscape. Numele corect este ECMAScript și este rezultatul unui efort colaborativ care a pornit în 1996, un an mai târziu fiind publicată prima ediție. În aprilie 1998 devine standardul internațional ISO/IEC 16262.
 
@@ -91,19 +94,19 @@ Ca să-ți vină ușor să înțelegi, îți poți imagina un giuvaergiu care di
 
 Trebuie să te avertizez de faptul că toate cuvintele speciale folosite de JavaScript sunt în limba engleză. Fondul lexical este cel al limbii engleze.
 
-Textul sursă poate fi de două tipuri: `Script` sau un `Module`. Codul pe care-l scrii poate fi redactat pe mai multe linii pentru că pentru JavaScript ***spațiile***, ***taburile*** și ***line breaks***-urile sunt *spații albe* și nu semnale care să indice un curs de acțiune.
+Textul sursă poate fi de două tipuri: `Script` sau un `Module`. Codul pe care-l scrii poate fi redactat pe mai multe linii pentru că pentru JavaScript **_spațiile_**, **_taburile_** și **_line breaks_**-urile sunt _spații albe_ și nu semnale care să indice un curs de acțiune.
 
-Spune standardul că mai întâi textul codului este parcurs pentru a-l „converti într-o succesiune de elemente de input” folosindu-se regulile lexicale. Aceste elemente de input sunt: **token-uri**, **line terminators** (`line-feed` (un caracter special care marchează faptul că motorul trebuie să continuie citirea de pe o nouă linie de cod), `carriage return` (un caracter special care spune motorului că trebuie să faă un salt pe linia de mai jos), `line separator` și `paragraph separator`), **comentariile** și **spațiile albe** (`tab`, `space`, `non-breakable space`, `line tabulation`, `form feed`, `no-break space`). Imediat după această fază, acestă succesiune de elemente de input mai este parcursă încă o dată, aplicându-se din nou regulile gramaticale pentru a identifica ce este ce în text, care sunt identificatorii, cuvintele rezervate limbajului, etc.
+Spune standardul că mai întâi textul codului este parcurs pentru a-l „converti într-o succesiune de elemente de input" folosindu-se regulile lexicale. Aceste elemente de input sunt: **token-uri**, **line terminators** (`line-feed` (un caracter special care marchează faptul că motorul trebuie să continuie citirea de pe o nouă linie de cod), `carriage return` (un caracter special care spune motorului că trebuie să faă un salt pe linia de mai jos), `line separator` și `paragraph separator`), **comentariile** și **spațiile albe** (`tab`, `space`, `non-breakable space`, `line tabulation`, `form feed`, `no-break space`). Imediat după această fază, acestă succesiune de elemente de input mai este parcursă încă o dată, aplicându-se din nou regulile gramaticale pentru a identifica ce este ce în text, care sunt identificatorii, cuvintele rezervate limbajului, etc.
 
-ECMAScript are un set de cuvinte rezervate care nu pot fi folosite decât în scopul pentru care au fost rezervate. Le vom enumera aici cu traducerea lor pentru a vă familiariza la un prim contact: `break` (***întrerupe*** cu sensul de *ieși din execuție*), `do` (***fă*** cu sensul de *continuă ce faci*), `in` (***în*** cu sensul *din*), `typeof` (***de tipul***), `case` (***cazul*** cu sensul *în cazul*), `else` (***altfel*** cu sensul de *în caz contrar*), `instanceof` (***instanță a lui***), `var` (***variabilă***), `catch` (***prinde***), `export` (***exportă***), `new` (***nou*** cu sensul de *instanțiază un nou obiect*), `void` (***golește*** cu sensul *golește de valoare*), `class` (***clasă***), `extends` (***extinde***), `return` (***returnează***), `while` (***cât timp***), `const` (***constantă***), `finally` (***încheie***), `super` (**super**), `with` (***cu***), `continue` (***continuă***), `for` (***pentru*** cu sensul *evaluând următoarea(le) expresie(i) pentru fiecare element din*), `switch` (***schimbă*** cu sensul *mergi pe ramura*), `yield` (***produ***), `debugger` (***depanare*** cu sensul *activează depanatorul*), `function` (***funcție***), `this` (***acesta***), `default` (***inițial***), `if` (***dacă***), `throw` (***aruncă*** cu sensul de a *scoate la lumină erorile*), `delete` (***șterge***), `import` (***importă***), `try` (***încearcă***), `await` (***așteaptă*** cu sensul de *în așteptare*).
+ECMAScript are un set de cuvinte rezervate care nu pot fi folosite decât în scopul pentru care au fost rezervate. Le vom enumera aici cu traducerea lor pentru a vă familiariza la un prim contact: `break` (**_întrerupe_** cu sensul de _ieși din execuție_), `do` (**_fă_** cu sensul de _continuă ce faci_), `in` (**_în_** cu sensul _din_), `typeof` (**_de tipul_**), `case` (**_cazul_** cu sensul _în cazul_), `else` (**_altfel_** cu sensul de _în caz contrar_), `instanceof` (**_instanță a lui_**), `var` (**_variabilă_**), `catch` (**_prinde_**), `export` (**_exportă_**), `new` (**_nou_** cu sensul de _instanțiază un nou obiect_), `void` (**_golește_** cu sensul _golește de valoare_), `class` (**_clasă_**), `extends` (**_extinde_**), `return` (**_returnează_**), `while` (**_cât timp_**), `const` (**_constantă_**), `finally` (**_încheie_**), `super` (**super**), `with` (**_cu_**), `continue` (**_continuă_**), `for` (**_pentru_** cu sensul _evaluând următoarea(le) expresie(i) pentru fiecare element din_), `switch` (**_schimbă_** cu sensul _mergi pe ramura_), `yield` (**_produ_**), `debugger` (**_depanare_** cu sensul _activează depanatorul_), `function` (**_funcție_**), `this` (**_acesta_**), `default` (**_inițial_**), `if` (**_dacă_**), `throw` (**_aruncă_** cu sensul de a _scoate la lumină erorile_), `delete` (**_șterge_**), `import` (**_importă_**), `try` (**_încearcă_**), `await` (**_așteaptă_** cu sensul de _în așteptare_).
 
 Cuvintele rezervate poartă în sine o acțiune. Ele numesc o acțiune pentru computerul nostru, un curs de acțiune pe care trebuie să-l urmeze.
 
-Buna practică spune ca toate expresiile (liniile de cod cu instrucțiuni) în JavaScript trebuie să fie încheiate prin punct și virgulă (`;`), chiar dacă motoarele care implementează ECMAScript la momentul evaluării codului, introduc automat prin mecanismul de ***automatic semicolon insertion*** acest caracter. Da, motoarele permit anumite facilități celor grăbiți sau celor care chiar aleg aceasta practică înadins. Eu personal, mă feresc și pun semnele de punctuație pentru că astfel, codul devine lizibil și poți folosi însăși codul pentru a-l prelucra (știi sigur că un enunț s-a încheiat după `;`).
+Buna practică spune ca toate expresiile (liniile de cod cu instrucțiuni) în JavaScript trebuie să fie încheiate prin punct și virgulă (`;`), chiar dacă motoarele care implementează ECMAScript la momentul evaluării codului, introduc automat prin mecanismul de **_automatic semicolon insertion_** acest caracter. Da, motoarele permit anumite facilități celor grăbiți sau celor care chiar aleg aceasta practică înadins. Eu personal, mă feresc și pun semnele de punctuație pentru că astfel, codul devine lizibil și poți folosi însăși codul pentru a-l prelucra (știi sigur că un enunț s-a încheiat după `;`).
 
 ## Automatic semicolon insertion - introducerea automată a lui punct și virgulă
 
-Enunțurile (*statements*) în JavaScript trebuie să se termine cu punct și virgulă, iar acolo unde semnul grafic nu a fost scris de programator, codul se supune mecanismului ASI - Automatic Semicolon Insertion:
+Enunțurile (_statements_) în JavaScript trebuie să se termine cu punct și virgulă, iar acolo unde semnul grafic nu a fost scris de programator, codul se supune mecanismului ASI - Automatic Semicolon Insertion:
 
 Aceste declarații și instrucțiuni sunt:
 
@@ -121,15 +124,13 @@ Există câteva caractere care necesită chiar acum la început de drum o atenț
 
 JavaScript este un limbaj de programare folosit la manipularea șirurilor de caractere indiferent ce reprezintă pentru noi oamenii.
 
-Caracterele de mai sus și combinațiile lor au un înțeles special pentru motorul de JavaScript, dar atunci când ele însele sunt necesare ca și caractere, fie că fac parte dintr-un text analizat, fie că se dorește compunerea unuia într-o manieră dinamică, aceste caractere trebuie să fie precedate de backslash (`\`).
-În cazul ghilimelelor, ca bună practică, se vor folosi ghilimele simple pentru declararea șirurilor de caractere pentru că, fiind un limbaj strâns legat de markup-ul paginilor web, ar putea cuprinde ghilimele duble ca parte a fragmentelor de pagină web construite dinamic.
+Caracterele de mai sus și combinațiile lor au un înțeles special pentru motorul de JavaScript, dar atunci când ele însele sunt necesare ca și caractere, fie că fac parte dintr-un text analizat, fie că se dorește compunerea unuia într-o manieră dinamică, aceste caractere trebuie să fie precedate de backslash (`\`). În cazul ghilimelelor, ca bună practică, se vor folosi ghilimele simple pentru declararea șirurilor de caractere pentru că, fiind un limbaj strâns legat de markup-ul paginilor web, ar putea cuprinde ghilimele duble ca parte a fragmentelor de pagină web construite dinamic.
 
 Acoladele `{}` au rolul de a indica mediul în care se va executa codul în JavaScript. Cel mai ades veți vedea că indică blocurile de cod ale funcțiilor. Între acolade veți introduce liste de instrucțiuni (**statements**) specifice JavaScript separate prin punct și virgulă `;`.
 
 ### Expresiile
 
-Continuăm cu o precizare foarte importantă. Atunci când codul sursă este rulat pentru a obține un rezultat, de fapt, ceea ce se petrece este o sesiune de evaluări ale expresiilor care se reduc la o valoare după rezolvarea lor condiționată de diverșii operatori.
-Totul, dar totul se reduce, de fapt, la a evalua expresii rezolvând operațiunile și ajungând la valori care sunt necesare altor expresii (ce să vezi), care la rândul lor așteptau cuminți ca evaluarea precedentă să se încheie pentru a avea și ele valorile de care aveau nevoie.
+Continuăm cu o precizare foarte importantă. Atunci când codul sursă este rulat pentru a obține un rezultat, de fapt, ceea ce se petrece este o sesiune de evaluări ale expresiilor care se reduc la o valoare după rezolvarea lor condiționată de diverșii operatori. Totul, dar totul se reduce, de fapt, la a evalua expresii rezolvând operațiunile și ajungând la valori care sunt necesare altor expresii (ce să vezi), care la rândul lor așteptau cuminți ca evaluarea precedentă să se încheie pentru a avea și ele valorile de care aveau nevoie.
 
 ### Ce sunt instrucțiunile?
 
@@ -141,9 +142,15 @@ Rețineți faptul că modul în care redactezi codul are efect direct asupra fun
 
 ### Despre identificatori
 
+![Identificatori ca fanioane](Identificatori.jpg "Identificatori ca niște fanioane")
+
 Acesta este cel mai potrivit moment să explorăm **tărâmul** JavaScript în căutarea reperelor care identifică valori. Nu uita că scriem software pentru a manipula valori. Reperele de mai sus sunt identificatorii, care odată înțeleși, vor permite accesul la ceea ce înseamnă variabilele ca și concept.
 
-Să ne imaginăm că avem o hartă imaginară pe care avem marcate prin fanioane diferite locații. Locațiile reprezintă valorile pentru care avem nevoie de un nume, de un toponim. De exemplu, pentru orașul (percepem orașu ca fiind valoarea) din centrul regiunii Moldova avem numele Bacău, care este identificatorul. Adică, identificăm orașul ca valoare cu un toponim. Putem să ne închipuim că identificatorii sunt toponime ale „tărâmului” JavaScript. Identificatorii pot fi orice secvență de caractere care poate să înceapă cu `$`, sau cu `_` urmate de orice puncte de cod codate numeric respectând schema de codare a caracterelor UTF16.
+Să ne imaginăm că avem o hartă imaginară pe care avem marcate prin fanioane diferite locații. Locațiile reprezintă valorile pentru care avem nevoie de un nume, de un toponim. De exemplu, pentru orașul (percepem orașu ca fiind valoarea) din centrul regiunii Moldova avem numele Bacău, care este identificatorul. Adică, identificăm orașul ca valoare cu un toponim.
+
+![Identificatori ca toponime](IndicatoriToponimic.jpg "Identificatorii ca toponime")
+
+Putem să ne închipuim că identificatorii sunt toponime ale „tărâmului" JavaScript. Identificatorii pot fi orice secvență de caractere care poate să înceapă cu `$`, sau cu `_` urmate de orice puncte de cod codate numeric respectând schema de codare a caracterelor UTF16.
 
 Am putea spune foarte simplu că un identificator este numele unei valori, iar identificatorul este o înșiruire de caractere.
 
@@ -157,8 +164,6 @@ John Resig (JQuery) spune că JavaScript este o relație între funcții, closur
 
 Motoarele JavaScript au o structură ceva mai complexă. Au o stivă de apeluri cu tot atâtea contexte de execuție, au un event loop - o buclă care capturează evenimente și mai au și o coadă de așteptare a callback-urilor (funcții care se execută când funcția gazdă și-a încheiat execuția), plus API-urile web.
 
-![Structura motorului din browserul Chrome](StructuraMotoruluiJSV8.svg)
-
 JavaScript nu poate face decât un singur lucru la un moment dat, dar pentru că runtime-ul JS nu este singur, ci mai avem și bucla, dar și [API-urile web](https://www.w3.org/TR/html5/webappapis.html#webappapis), se poate rula cod asincron, ceea ce înseamnă că un eveniment, nu va bloca firul de execuție pentru că nu și-a terminat treaba. Toate aceste lucruri suplimentare care există în browser, de fapt înseamnă tot atâtea fire de execuție și asta înseamnă că poți să te apropii de ceea ce ar fi un mediu care execută mai multe treburi deodată fără să se creeze blocaje.
 
 # Perspectivă peste un tărâm
@@ -167,21 +172,23 @@ Atunci când am pornit la scrierea acestei cărți nu am avut nevoia să văd de
 
 Vorbim despre o adevărată lume, chiar despre un **tărâm** special.
 
+![Tărâm](Realm.jpg)
+
 Textul standardului ECMAScript oferă cea mai bună perspectivă atunci când vine vorba despre un program JavaScript care este privit la lucru. Voi parafraza și cita acolo unde este necesar textul standardului pentru a contura un cadru cât mai complet.
 
-Urmând firul narativ al unei adevărate geneze, standardul menționează chiar termenul de „realm” - **tărâm**: „înainte de a fi evaluat, tot codul ECMAScript trebuie asociat unui tărâm. Conceptual, un tărâm constă dintr-un set de ***obiecte intrinseci***, un ***mediu global*** și tot ***codul ECMAScript*** care este încărcat în cadrul «scope-ul» acelui mediu global, precum și alte stări și resurse asociate”.
+Urmând firul narativ al unei adevărate geneze, standardul menționează chiar termenul de „realm" - **tărâm**: „înainte de a fi evaluat, tot codul ECMAScript trebuie asociat unui tărâm. Conceptual, un tărâm constă dintr-un set de **_obiecte intrinseci_**, un **_mediu global_** și tot **_codul ECMAScript_** care este încărcat în cadrul «scope-ul» acelui mediu global, precum și alte stări și resurse asociate".
 
-Am precizat câțiva termeni deja care fac parte dintr-un adevărat idiom pe care-l impune limbajul. Comunitatea de coderi în JS, au propriul limbaj de comunicare, un jargon din care se strecoară în uzul de zi cu zi câte un termen, de exemplu cum este „scope”, care formal în ECMAScript se numește „lexical environment”. Pentru că deja am intrat într-o mini descriere a limbajului, mai adaug faptul că JavaScript prin varietatea de stiluri dezvoltate în timp, s-au creat chiar dialecte așa cum este TypeScript. Dar asta este o discuție lungă și nu mai zăbovim aici.
+Am precizat câțiva termeni deja care fac parte dintr-un adevărat idiom pe care-l impune limbajul. Comunitatea de coderi în JS, au propriul limbaj de comunicare, un jargon din care se strecoară în uzul de zi cu zi câte un termen, de exemplu cum este „scope", care formal în ECMAScript se numește „lexical environment". Pentru că deja am intrat într-o mini descriere a limbajului, mai adaug faptul că JavaScript prin varietatea de stiluri dezvoltate în timp, s-au creat chiar dialecte așa cum este TypeScript. Dar asta este o discuție lungă și nu mai zăbovim aici.
 
-Termenii noi nu trebuie să te descurajeze. Fac parte din efortul de a înțelege și chiar dacă apar chiar de la început, vor fi descriși pe parcurs și vei înțelege ce se ascunde în spatele lor. Am spus eu mai sus despre ***obiecte intrinseci***. Pentru moment înțelege că obiectele sunt niște structuri de date și dacă-ți vine mai la îndemână poți imagina obiectele precum niște fructe de rodie. În interior sunt bobițele care pot fi asociate proprietăților.
+Termenii noi nu trebuie să te descurajeze. Fac parte din efortul de a înțelege și chiar dacă apar chiar de la început, vor fi descriși pe parcurs și vei înțelege ce se ascunde în spatele lor. Am spus eu mai sus despre **_obiecte intrinseci_**. Pentru moment înțelege că obiectele sunt niște structuri de date și dacă-ți vine mai la îndemână poți imagina obiectele precum niște fructe de rodie. În interior sunt bobițele care pot fi asociate proprietăților.
 
 Este nevoie să traducem textul standardului pentru a înțelege ce se întâmplă mai întâi de toate, iar **toate** înseamnă executarea de cod JavaScript de către browser sau de Node.js pentru a indica și un alt domeniu de aplicativitate.
 
-Standardul spune că producătorul browserului trebuie să pună la dispoziție toate mecanismele necesare genezei unui nou tărâm (**realm**), care constă dintr-o zonă ce include totul, iar **totul** însemnând ceea ce am enumerat mai sus: obiectele intrinseci, codul ECMAScript plus „alte stări și resurse asociate”.
+Standardul spune că producătorul browserului trebuie să pună la dispoziție toate mecanismele necesare genezei unui nou tărâm (**realm**), care constă dintr-o zonă ce include totul, iar **totul** însemnând ceea ce am enumerat mai sus: obiectele intrinseci, codul ECMAScript plus „alte stări și resurse asociate".
 
-Atenție, pentru fiecare „context de execuție în efect”, adică bucata de cod care este evaluată la momentul în care bagi capul în „căpița de cod care se execută”, se creează câte o nouă înregistrare pentru cum arată tărâmul.
+Atenție, pentru fiecare „context de execuție în efect", adică bucata de cod care este evaluată la momentul în care bagi capul în „căpița de cod care se execută", se creează câte o nouă înregistrare pentru cum arată tărâmul.
 
-Un tărâm este constituit dintr-un set de obiecte interne, obiectul global pentru tărâmul la care ne referim, cadrul lexical creat de însăși felul în care este redactat codul („lexical environment”) și elemente care au capacitatea de a crea șabloane. Toate tărâmurile care sunt create sunt evidențiate de o înregistrare specială numită de standard `Realm Record`. Din toată această mică listă reține faptul că JavaScript vine cu câteva lucruri din start care împreună cu programul scris de tine construiesc un tărâm.
+Un tărâm este constituit dintr-un set de obiecte interne, obiectul global pentru tărâmul la care ne referim, cadrul lexical creat de însăși felul în care este redactat codul („lexical environment") și elemente care au capacitatea de a crea șabloane. Toate tărâmurile care sunt create sunt evidențiate de o înregistrare specială numită de standard `Realm Record`. Din toată această mică listă reține faptul că JavaScript vine cu câteva lucruri din start care împreună cu programul scris de tine construiesc un tărâm.
 
 **Moment Zen**: un program JavaScript este de fapt un grup de obiecte care comunică între ele.
 
@@ -189,9 +196,9 @@ Obiectele acestea sunt niște colecții de proprietăți iar pentru fiecare dint
 
 Cuvinte noi deja!? Știu, dar nu se poate fără. Hai să vedem. Primitivele sunt ca niște blocuri elementare de lucru. Sunt chiar datele, forma primară de reprezentare a lor. Funcțiile sunt miniprograme în programul mare. Obiectele, am stabilit: rodii! :).
 
-Avem șase primitive în acest moment: `Boolean`, `Null`, `Undefined`, `String`, `Number` și `Symbol`. După cum se observă, fiecare primitivă constă din două elemente: sintaxa și semantica. Sintaxa implică „codarea” printr-un cuvând din limbajul natural, care în cazul JavaScript este limba engleză, iar semantica indică conceptul reprezentat.
+Avem șase primitive în acest moment: `Boolean`, `Null`, `Undefined`, `String`, `Number` și `Symbol`. După cum se observă, fiecare primitivă constă din două elemente: sintaxa și semantica. Sintaxa implică „codarea" printr-un cuvând din limbajul natural, care în cazul JavaScript este limba engleză, iar semantica indică conceptul reprezentat.
 
-Funcțiile sunt un ***tip de obiecte***. Deci, tot niște rodii. Ha ha! În JS acestea sunt de tip `callable`, adică niște rodii pentru care se poate iniția un apel pentru a le executa. Pentru că lucrurile simple sunt plicticoase, mai completăm cu faptul că funcțiile care sunt proprietăți ale unui obiect, sunt numite metode ale acestuia.
+Funcțiile sunt un **_tip de obiecte_**. Deci, tot niște rodii. Ha ha! În JS acestea sunt de tip `callable`, adică niște rodii pentru care se poate iniția un apel pentru a le executa. Pentru că lucrurile simple sunt plicticoase, mai completăm cu faptul că funcțiile care sunt proprietăți ale unui obiect, sunt numite metode ale acestuia.
 
 Mai adăugăm că ECMAScript, adică JavaScript are niște obiecte cu care vine el din start (`built-in objects`). Deci, din start browserul ca și instrument care aplică standardul ECMAScript, vine cu propria lădiță de rodii.
 
@@ -199,9 +206,6 @@ Sintetic, acesta este cadrul general.
 
 ## Resurse
 
-[1]: http://www.teora.ro/cgi-bin/teora/romania/mbshop.cgi?database=01&action=view_product&productID=%20823&category= "Brookshear, J. Glenn. Introducere în informatică. Editura Teora. 1998. Titlul original: Computer science - An overview, Fifth Edition"
+[ECMAScript® 2017 Language Specification](https://tc39.github.io/ecma262/) Simpson, Kyle. [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS) Haverbeke, Marijn. [Eloquent JavaScript](http://eloquentjavascript.net/) Brookshear, J. Glenn. [Computer science - An overview](https://www.amazon.com/Computer-Science-Overview-Global/dp/1292061162)
 
-[ECMAScript® 2017 Language Specification](https://tc39.github.io/ecma262/)
-Simpson, Kyle. [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS)
-Haverbeke, Marijn. [Eloquent JavaScript](http://eloquentjavascript.net/)
-Brookshear, J. Glenn. [Computer science - An overview](https://www.amazon.com/Computer-Science-Overview-Global/dp/1292061162)
+[1]: http://www.teora.ro/cgi-bin/teora/romania/mbshop.cgi?database=01&action=view_product&productID=%20823&category= "Brookshear, J. Glenn. Introducere în informatică. Editura Teora. 1998. Titlul original: Computer science - An overview, Fifth Edition"

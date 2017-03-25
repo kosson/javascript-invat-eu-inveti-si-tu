@@ -1,11 +1,16 @@
 # Lexical environment - scope
 
 Mediul lexical sau scope-ul poate fi foarte ușor înțeles ca un „registru inventar” al tuturor identificatorilor care au valori „legate” de aceștia.
+
+![Identificatori în cod](IdentificatoriCod.jpg "Identificatorii într-o structură de cod")
+
 În acest demersul nostru, vom folosi interșanjabil următoarele: „mediu lexical”, „scope” și „lexical scope”. Toate au același sens. Termenul standardului este mediu lexical.
 
 > „Este porțiunea de cod sursă pentru care este disponibilă o legătură între un nume și o entitate” (definiție pentru limbajul de programare ALGOL 60, 1960).
 
 Această definiție explică cel mai bine conceptul de „legătură”. De fapt, acesta este menirea mediului lexical, de a ține evidența acestor legături. De ce? Pentru că valorile legate de un anume identificator se pot modifica în timp, un identificator se poate lega de un alt identificator care este legat la o valoare. Da! Ai intuit perfect; unii identificatori se comportă ca referințele bibliografice. Trimit la alți identificatori.
+
+![Referințe](IdentificatoriReferinta.jpg "Referințe")
 
 În cazul funcțiilor, atunci când sunt pasate valori, reține faptul că JavaScript, de fapt copiază valoarea în **lexical environment** care poate fi comparat pentru o ușoară referință comună cu un „registru inventar al mediului”. Acum putem spune că ***o valoare este în scope***.
 
