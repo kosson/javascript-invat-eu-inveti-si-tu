@@ -2,9 +2,43 @@
 
 Sunt un nou tip de funcții introduse în ECMAScript 2015.
 
-Apelarea unui generator nu îl execută, ci doar este trimisă funcția în call-stack. Se creează și scope-ul aferent. Ca efect este creat și returnat un obiect iterator prin care putem cere valori din generator. Obiectul iterator ține o referință către contextul de execuție a generatorului care este în call-stack.
+Apelarea unui generator nu îl execută, ci doar este trimisă funcția în call-stack. De fapt, la executare este returnată o instanță a funcției.
+
+```javascript
+function* faCeva () {
+  console.log('o metoda executata la inceput');
+  console.log('o metoda executata la final');
+};
+const exempluGen = faCeva(); // instanța generatorului
+exempluGen.next();
+/*
+o metoda executata la inceput
+o metoda executata la final
+{ value: undefined, done: true }
+ */
+```
+
+Pentru a opri execuția din funcția generator se va folosi cuvântul rezervat `yield`.
+
+```javascript
+function* faCeva () {
+  console.log('o metoda executata la inceput');
+  yield;
+  console.log('o metoda executata la final');
+};
+const exempluGen = faCeva();
+exempluGen.next();
+```
+
+Returnează doar evaluarea primei metode `log`.
+Pentru a obține și rezultatul celei de-a doua metode `log`, se va aplica din nou metoda `next`.
+
+Se creează și scope-ul aferent. Ca efect este creat și returnat un obiect iterator prin care putem cere valori din generator. Obiectul iterator ține o referință către contextul de execuție a generatorului care este în call-stack.
 La apelarea funcției generatorului, acesta este scoasă din call-stack (nu este garbage collected), iar variabila care va identifica iteratorul, va ține o referință către funcția generatorului și astfel la contextul de execuție prin obiectul iterator care tocmai s-a creat. Mecanismul seamănă cu cel al closure-urilor.
-Execuția metodei next() nu creează un nou execution context ca în cazul clasic, ci doar reactivează contextul de execuție a generatorului pe care-l împinge din nou în call-stack, funcția generatorului continuând execuția de unde a rămas. Dacă nu mai este niciun `yield`, funcția generator returnează.
+
+Execuția metodei `next()` nu creează un nou execution context ca în cazul clasic, ci doar reactivează contextul de execuție a generatorului pe care-l împinge din nou în call-stack, funcția generatorului continuând execuția de unde a rămas.
+
+Dacă nu mai este niciun `yield`, funcția generator returnează.
 
 La prima cerere prin `next()`, Generatorul produce o valoare (prin `yield`) și își suspendă execuția asteptând următoarea cerere prin (`next()`).
 
@@ -19,9 +53,67 @@ function* generator(){
 };
 ```
 
-## Scoaterea datelor dintr-un generator
+## Trimiterea mesajelor
 
-Un exemplu care implică un grad mai ridicat de utilitate:
+Un lucru foarte interesant care privește funcțiile generator este că se pot trimite mesaje din funcție în instanță și invers.
+
+### Trimiterea unui mesaj din funcție în instanță
+
+Funcția generator va returna un obiect atunci când va face yield.
+
+```javascript
+function* unGenerator () {
+  yield 'primul mesaj'
+};
+const emitator = unGenerator();
+console.log(emitator.next());
+// returneaza { value: "primul mesaj", done: false }
+```
+
+Valoarea lui `done` este `false` pentru că execuția funcției doar a fost oprită temporar. Funcția nu și-a încheiat execuția. Pentru a încheia în cazul nostru, va trebui să mai chemăm odată `next()`.
+
+```javascript
+console.log(emitator.next());
+// returneaza { value: undefined, done: true }
+```
+
+### Trimiterea unui mesaj din instanță către generator
+
+```javascript
+function* altGenerator () {
+  const mesajPrimit = yield;
+  console.log(mesajPrimit);
+};
+
+const instantaAltGenerator = altGenerator();
+console.log(instantaAltGenerator.next());
+// { value: undefined, done: false }
+console.log(instantaAltGenerator.next('mesaj spre generator'));
+// mesaj spre generator
+// returneaza si { value: undefined, done: true }
+```
+
+Pentru că o funcție generator este totuși sincronă, se pot trimite mesaje în cazul apariției unor erori folosind un bloc `try...catch`.
+
+```javascript
+function* facCevaSecvential () {
+  try {
+    const x = yield;
+    console.log(`Salut ${x}`);
+  } catch (err) {
+    console.log('Eroare', err);
+  };
+};
+const ziCeva = facCevaSecvential();
+ziCeva.next(); // { value: undefined, done: false }
+ziCeva.throw('Auleu, ceva e rău.');
+// Eroare Auleu, ceva e rău.
+// { value: undefined, done: true }
+```
+
+## Scoaterea datelor dintr-un generator cu `for...of`
+
+Constructul `for...of` trece prin generator și returnează chiar valorile existente.
 
 ```js
 function* emiteFormule(){

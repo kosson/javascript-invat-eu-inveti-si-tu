@@ -1,6 +1,6 @@
-# Template Literals - Stringuri șablon - string patterns
+# Template Literals
 
-Începând cu ECMAScript 2015, stringurile literale pot fi numite și „Stringuri șablon” - Template strings. Un simplu exemplu:
+Începând cu ECMAScript 2015, stringurile literale pot fi numite și „șabloane literale”. Șabloanele literale oferă posibilitatea de a introduce text pus între semne backticks (\`text\`) în care se poate interpola rezultatul evaluării unei expresii folosind constructul `${oVariabilaSauExpresie}`.
 
 ```js
 var a = 5;
@@ -17,11 +17,11 @@ O formă și mai avansată de template-uri literale este cea numită `tagged tem
 var a = 0.5;
 var b = 10;
 
-var stranse = `Adunarea este: ${ (a+b).toFixed(2) },înmulțirea este: ${ a*b }`;
+var stranse = `Adunarea este: ${ (a+b).toFixed(2) }, înmulțirea este: ${ a*b }`;
 console.log(stranse);
 ```
 
-Se pot inculca template-urile precum în următorul exemplu:
+Se pot imbrica template-urile precum în următorul exemplu:
 
 ```javascript
 var oParte = 'o parte de text';
@@ -38,7 +38,6 @@ var ceva = etichetare`Un text`;
 `etichetare` este o funcție care este apelată cu datele template-ului literal care este procesat. Funcția primește datele din template ca bucăți individuale și trebuie să le combine pentru a creea rezultatul. Primul argument este chiar un array iar cel de-al doilea este un `rest arguments`.
 
 ```javascript
-
 let atribut = 'foarte bun',
     procent = '100',
     ceva = eticheta`Un text ${atribut} cu ${procent}% suspans pentru ${(procent*0.23).toFixed(4)} emoții.`;

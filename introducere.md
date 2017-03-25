@@ -89,13 +89,17 @@ Acești **atomi lexicali** (token-ii) sunt rezultatul parcurgerii unui fragment 
 
 Ca să-ți vină ușor să înțelegi, îți poți imagina un giuvaergiu care dintr-un maldăr de pietre prețioase (codul sursă), ia una câte una (fragmente de cod), pentru a-i identifica caracteristicile și în final pentru a le pune pe fiecare după sortare în cutiuțele pregătite special.
 
-Textul sursă poate fi de două tipuri: `Script` sau un `Module`. Codul pe care-l scrii poate fi compus pe mai multe linii pentru că pentru JavaScript spațiile, taburile și line breaks-urile sunt spații albe și nu semnale că ar trebui să ia o decizie.
+Trebuie să te avertizez de faptul că toate cuvintele speciale folosite de JavaScript sunt în limba engleză. Fondul lexical este cel al limbii engleze.
 
-Spune standardul că mai întâi textul codului este parcurs pentru a-l „converti într-o succesiune de elemente de input” folosindu-se regulile lexicale. Aceste elemente de input sunt: token-uri, line terminators (`line-feed`, `carriage return`, `line separator` și `paragraph separator`), comentariile și spațiile albe (`tab`, `space`, `non-breakable space`, `line tabulation`, `form feed`, `no-break space`). Imediat după această fază, acestă succesiune de elemente de input mai este parcursă încă o dată, aplicându-se din nou regulile gramaticale pentru a identifica ce este ce în text, care sunt identificatorii, cuvintele rezervate limbajului, etc.
+Textul sursă poate fi de două tipuri: `Script` sau un `Module`. Codul pe care-l scrii poate fi redactat pe mai multe linii pentru că pentru JavaScript ***spațiile***, ***taburile*** și ***line breaks***-urile sunt *spații albe* și nu semnale care să indice un curs de acțiune.
 
-ECMAScript are un set de cuvinte rezervate care nu pot fi folosite decât în scopul pentru care au fost rezervate: `break`, `do`, `in`, `typeof`, `case`, `else`, `instanceof`, `var`, `catch`, `export`, `new`, `void`, `class`, `extends`, `return`, `while`, `const`, `finally`, `super`, `with`, `continue`, `for`, `switch`, `yield`, `debugger`, `function`, `this`, `default`, `if`, `throw`, `delete`, `import`, `try`, `await`.
+Spune standardul că mai întâi textul codului este parcurs pentru a-l „converti într-o succesiune de elemente de input” folosindu-se regulile lexicale. Aceste elemente de input sunt: **token-uri**, **line terminators** (`line-feed` (un caracter special care marchează faptul că motorul trebuie să continuie citirea de pe o nouă linie de cod), `carriage return` (un caracter special care spune motorului că trebuie să faă un salt pe linia de mai jos), `line separator` și `paragraph separator`), **comentariile** și **spațiile albe** (`tab`, `space`, `non-breakable space`, `line tabulation`, `form feed`, `no-break space`). Imediat după această fază, acestă succesiune de elemente de input mai este parcursă încă o dată, aplicându-se din nou regulile gramaticale pentru a identifica ce este ce în text, care sunt identificatorii, cuvintele rezervate limbajului, etc.
 
-Buna practică spune ca toate expresiile (liniile de cod cu instrucțiuni) în JavaScript să fie încheiate prin punct și virgulă (`;`), chiar dacă motoarele care implementează ECMAScript la momentul evaluării codului, introduc automat prin mecanismul de ***automatic semicolon insertion*** acest caracter.
+ECMAScript are un set de cuvinte rezervate care nu pot fi folosite decât în scopul pentru care au fost rezervate. Le vom enumera aici cu traducerea lor pentru a vă familiariza la un prim contact: `break` (***întrerupe*** cu sensul de *ieși din execuție*), `do` (***fă*** cu sensul de *continuă ce faci*), `in` (***în*** cu sensul *din*), `typeof` (***de tipul***), `case` (***cazul*** cu sensul *în cazul*), `else` (***altfel*** cu sensul de *în caz contrar*), `instanceof` (***instanță a lui***), `var` (***variabilă***), `catch` (***prinde***), `export` (***exportă***), `new` (***nou*** cu sensul de *instanțiază un nou obiect*), `void` (***golește*** cu sensul *golește de valoare*), `class` (***clasă***), `extends` (***extinde***), `return` (***returnează***), `while` (***cât timp***), `const` (***constantă***), `finally` (***încheie***), `super` (**super**), `with` (***cu***), `continue` (***continuă***), `for` (***pentru*** cu sensul *evaluând următoarea(le) expresie(i) pentru fiecare element din*), `switch` (***schimbă*** cu sensul *mergi pe ramura*), `yield` (***produ***), `debugger` (***depanare*** cu sensul *activează depanatorul*), `function` (***funcție***), `this` (***acesta***), `default` (***inițial***), `if` (***dacă***), `throw` (***aruncă*** cu sensul de a *scoate la lumină erorile*), `delete` (***șterge***), `import` (***importă***), `try` (***încearcă***), `await` (***așteaptă*** cu sensul de *în așteptare*).
+
+Cuvintele rezervate poartă în sine o acțiune. Ele numesc o acțiune pentru computerul nostru, un curs de acțiune pe care trebuie să-l urmeze.
+
+Buna practică spune ca toate expresiile (liniile de cod cu instrucțiuni) în JavaScript trebuie să fie încheiate prin punct și virgulă (`;`), chiar dacă motoarele care implementează ECMAScript la momentul evaluării codului, introduc automat prin mecanismul de ***automatic semicolon insertion*** acest caracter. Da, motoarele permit anumite facilități celor grăbiți sau celor care chiar aleg aceasta practică înadins. Eu personal, mă feresc și pun semnele de punctuație pentru că astfel, codul devine lizibil și poți folosi însăși codul pentru a-l prelucra (știi sigur că un enunț s-a încheiat după `;`).
 
 ## Automatic semicolon insertion - introducerea automată a lui punct și virgulă
 
@@ -113,27 +117,33 @@ Aceste declarații și instrucțiuni sunt:
 
 ## Caracterele cu rol special
 
-Există câteva caractere care necesită chiar acum la început de drum o atenție specială. Acestea sunt `'` (ghilimele simple), `"` (ghilimele duble), `\n` (end of line), '\r' (carriage return), '\t' (tab), '\\'.
+Există câteva caractere care necesită chiar acum la început de drum o atenție specială. Acestea sunt `'` (ghilimele simple), `"` (ghilimele duble), `\n` (end of line), `\r` (carriage return), `\t` (tab), `\` (slash) și `/` (backslash).
 
 JavaScript este un limbaj de programare folosit la manipularea șirurilor de caractere indiferent ce reprezintă pentru noi oamenii.
+
 Caracterele de mai sus și combinațiile lor au un înțeles special pentru motorul de JavaScript, dar atunci când ele însele sunt necesare ca și caractere, fie că fac parte dintr-un text analizat, fie că se dorește compunerea unuia într-o manieră dinamică, aceste caractere trebuie să fie precedate de backslash (`\`).
 În cazul ghilimelelor, ca bună practică, se vor folosi ghilimele simple pentru declararea șirurilor de caractere pentru că, fiind un limbaj strâns legat de markup-ul paginilor web, ar putea cuprinde ghilimele duble ca parte a fragmentelor de pagină web construite dinamic.
 
 Acoladele `{}` au rolul de a indica mediul în care se va executa codul în JavaScript. Cel mai ades veți vedea că indică blocurile de cod ale funcțiilor. Între acolade veți introduce liste de instrucțiuni (**statements**) specifice JavaScript separate prin punct și virgulă `;`.
 
+### Expresiile
+
+Continuăm cu o precizare foarte importantă. Atunci când codul sursă este rulat pentru a obține un rezultat, de fapt, ceea ce se petrece este o sesiune de evaluări ale expresiilor care se reduc la o valoare după rezolvarea lor condiționată de diverșii operatori.
+Totul, dar totul se reduce, de fapt, la a evalua expresii rezolvând operațiunile și ajungând la valori care sunt necesare altor expresii (ce să vezi), care la rândul lor așteptau cuminți ca evaluarea precedentă să se încheie pentru a avea și ele valorile de care aveau nevoie.
+
 ### Ce sunt instrucțiunile?
 
 Instrucțiunile sunt parte a expresilor (`expressions`). Este obsevabil că cel mai adesea veți vedea că o expresie este o instrucțiune. În JavaScript, sunt permise expresii care nu sunt neapărat instrucțiuni: `1 + 1;`
 
-JavaScript este un limbaj de programare pentru care este de importanță vitală felul în care este redactat codul sursă. Acest aranjament de scriere a codului, succesiunea în care sunt introduse instrucțiunile imprimă diferite efecte la momentul executării sale.
+JavaScript este un limbaj de programare pentru care este de importanță vitală felul în care este redactat codul sursă. Acest aranjament de scriere a codului, succesiunea în care sunt introduse instrucțiunile imprimă diferite efecte la momentul evaluării sale.
 
-Rețineți faptul că modul în care redactezi codul are efect direct asupra funcționării programului.
+Rețineți faptul că modul în care redactezi codul are efect direct asupra funcționării programului. Nu uita faptul că poți scrie instrucțiunile pe mai multe linii și astfel îmbnătățești lizibilitatea programlui. Ba mai mult, poți identa (pui spații înaintea fragmentului de cod și ca efect vizual se vor deplasa spre dreapta).
 
 ### Despre identificatori
 
 Acesta este cel mai potrivit moment să explorăm **tărâmul** JavaScript în căutarea reperelor care identifică valori. Nu uita că scriem software pentru a manipula valori. Reperele de mai sus sunt identificatorii, care odată înțeleși, vor permite accesul la ceea ce înseamnă variabilele ca și concept.
 
-Să ne imaginăm că avem o hartă imaginară pe care avem marcate prin fanioane diferite locații. Locațiile reprezintă valorile pentru care avem nevoie de un nume, de un toponim. De exemplu, pentru orașul (valoarea) din centrul regiunii Moldova avem numele Bacău, care este identificatorul. Identificatorii pot fi orice secvență de caractere care poate să înceapă cu `$`, sau cu `_` urmate de orice puncte de cod codate numeric respectând schema de codare a caracterelor UTF16.
+Să ne imaginăm că avem o hartă imaginară pe care avem marcate prin fanioane diferite locații. Locațiile reprezintă valorile pentru care avem nevoie de un nume, de un toponim. De exemplu, pentru orașul (percepem orașu ca fiind valoarea) din centrul regiunii Moldova avem numele Bacău, care este identificatorul. Adică, identificăm orașul ca valoare cu un toponim. Putem să ne închipuim că identificatorii sunt toponime ale „tărâmului” JavaScript. Identificatorii pot fi orice secvență de caractere care poate să înceapă cu `$`, sau cu `_` urmate de orice puncte de cod codate numeric respectând schema de codare a caracterelor UTF16.
 
 Am putea spune foarte simplu că un identificator este numele unei valori, iar identificatorul este o înșiruire de caractere.
 

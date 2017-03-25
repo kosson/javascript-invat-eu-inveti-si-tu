@@ -13,7 +13,14 @@ const ceva = 'http://www.kosson.ro';
 ceva = "altceva" // TypeError: invalid assignment to const `ceva`
 ```
 
-Variabilele definite prin `const` nu pot fi modificate, valoarea lor fiind setată o singură dată. Valoarea lor trebuie dată din start.
+Variabilele definite prin `const` pot fi modificate, dar ceea ce nu se poate modifica este legătura la altă valoare. Reține că folosirea lui `const`, nu garantează imutabilitatea.
+
+```javascript
+const x = {a: 10};
+x = {x: 1}; // TypeError: invalid assignment to const `x'
+x.a = 11;
+x; // { a: 11 }
+```
 
 Totuși în cazul obiectelor, proprietățile acestora pot fi modificate. Acest lucru este posibil pentru că nu este modificată legătura (bindingul) la valoare, ci se modifică valoarea legată.
 
