@@ -1,34 +1,35 @@
 # Hoisting - ridicarea în „capul codului”
 
-Ridicarea la vârful scope-ului a declarațiilor de variabile și funcții.
+Hoistingul trebuie privit ca pe un instrument care ia identificatorii și îi face omniprezenți pentru blocul de cod în care au fost declarați.
 
-Există un mic truc care trebuie stăpânit pentru a înțelege hoising. Declararea variabilelor folosind `var` trebuie detașată de asignarea valorii.
+Această omniprezență permite disponibilitatea variabilelor și a funcțiilor înainte ca acestea să capete și valorile lor.
 
-**Moment Zen**: declararea unei variabile și atribuirea variabilei (construirea legăturii dintre identificator și valoare) sunt două operațiuni diferite.
+Acest lucru se petrece deoarece mai întâi de a fi executat programul, codul sursă trece printr-o fază de compilare în care motorul JavaScript se uită să vadă mai întâi de toate care sunt identificatorii. Apoi motorul trece la execuție, moment în care toți identificatorii primesc și valorile.
 
-Declarația variabilei este **hoisted** în capul funcției gazdă, dar locul unde se face asignare rămâne nemodificat.
-Deci, variabila se va afla în scope-ul funcției, dar atribuirea, asignarea valorii se face la momentul în care apare enunțul var. Pentru a lămuri și mai bine ce se întâmplă, consultă și documentația care explică compilarea și execuția codului JavaScript.
+Există un mic truc care trebuie stăpânit pentru a înțelege hoisting: declararea trebuie detașată de asignarea valorii. Nu cădea în capcana celui care văzând operatorul de atribuire `=` crede că valoarea a fost și atribuită la momentul în care ai declarat variabila.
 
-```js
-function faCeva(){
-  // cod al funcției și deodată trebuie să declari o nouă valoare
+**Moment Zen**: declararea unei variabile și atribuirea variabilei (construirea legăturii dintre identificator și valoare) sunt două operațiuni diferite în timp. Declararea are drept efect constituirea mediului lexical prin popularea sa cu identificatori legați doar la `undefined`.
+
+În cazul funcțiilor, declarația variabilei este **hoisted** în capul funcției gazdă, iar locul unde se face asignare rămâne nemodificat.
+
+```javascript
+function faCeva () {
   var oValoare = 0;
 };
 ```
 
 Ceea ce se întâmplă poate fi ilustrat printr-o nouă reformulare a codului:
 
-```js
-function faCeva(){
-  var oValoare; // este returnat undefined
-  // cod al funcției
-  oValoare = 0; // „legătura” s-a făcut
+```javascript
+function faCeva () {
+  var oValoare; // oValoare este acum undefined
+  oValoare = 0; // s-a făcut „legătura” la valoarea 0
 };
 ```
 
 Din acest motive este cel mai bine ca variabilele să fie declarate în capul funcției de la bun început.
 
-Cel mai evident exemplu este să scrii o funcție care să returneze după ce ai declarat variabila. Șocul este mare pentru că totuși este returnat `undefined` deoarece declarația a hoistat variabila, dar nu a mai apucat să facă și „legătura” la valoare.
+Cel mai evident exemplu este să scrii o funcție care să returneze după ce ai declarat variabila. Surpriza mare este returnarea valorii `undefined` deoarece declarația a hoistat variabila, dar nu a mai apucat să facă și „legătura” la valoare.
 
 ```javascript
 (function () {
@@ -47,9 +48,11 @@ Cel mai evident exemplu este să scrii o funcție care să returneze după ce ai
 - Variabila primește valoarea `undefined`. Pentru că se întâmplă acest lucru, cel mai bine este să declari variabilele în capul funcției și de preferat într-o singură declarație var.
 - Hoistingul are un rol funamental în cazurile de recursiviate și recursivitate mutuală (o funcție o cheamă pe alta până când o condiție rupe lanțul).
 - Folosirea noului cuvânt cheie `let` pentru a declara variabilele, are ca efect limitarea scope-ului la nivelul blocului `{}` (block scoping).
-- Excepția pentru care JavaScript face block scopeing este contrucția `try... catch`.
+- Excepția pentru care JavaScript face block scope este contrucția `try... catch`.
 
-```js
+În contextul tuturor celor deja acumulate despre hoisting, următorul exemplu este ușor de înțeles. Faptul că putem invoca chiar de la bun început funcția unu, nu mai este o mare surpriză.
+
+```javascript
 unu(1);
 
 function unu(ceva){

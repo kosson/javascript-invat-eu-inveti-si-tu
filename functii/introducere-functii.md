@@ -2,7 +2,7 @@
 
 Funcțiile sunt unitățile de execuție a codului JavaScript. O funcție poate fi percepută ca un subprogram, ca o subrutină. Veți mai întâlni în alte lucrări și denumirea de „proceduri”. Cel mai sănătos mod de a privi activitatea și efectele unei funcții este gândind întotdeauna că o funcție este un set de instrucțiuni care se aplică unui set de date primit ca argumente. Aplicarea unei funcții argumentelor sale produce un nou mediu lexical, un nou scope în care se fac legături între identificatori și valori.
 
-Ca și obișnuință, ar fi cel mai util să gândești că funcția „cutare” se aplică pe „cutare și cutare”. Multă perioadă am gândit altfel: funcția „primește” pentru că, într-adevăr, introduci niște argumente. Nu este greșit, dar pentru o iluminare rapidă în domeniul funcțiilor, cel mai bine este să gândești în termenii aplicării sale pe argumente.
+Ca și obișnuință, ar fi cel mai util să gândești că funcția „cutare” se aplică pe „cutare și cutare”. Mult timp am gândit altfel: funcția „primește” pentru că, într-adevăr, introduci niște argumente. Nu este greșit, dar pentru o iluminare rapidă în domeniul funcțiilor, cel mai bine este să gândești în termenii aplicării sale pe argumente.
 
 **Mecanisme magice**: Declararea unei funcții are ca efect magic „urcarea” ( în jargonul limbajului se numește **hoising** ) în „capul codului”. Capul codului se referă la prezența unei declarații în registrul inventar al mediului lexical existent. Magia rezidă în faptul că poți invoca o funcție înainte ca aceasta să fie declarată. Superciudățel, nu?!
 
