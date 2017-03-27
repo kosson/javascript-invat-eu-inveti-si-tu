@@ -13,7 +13,15 @@ Un alt instrument de test pentru cod este și Nodejs, care odată instalat, poat
 Mă voi întoarce pentru scurt timp la conceptele cheie cu care vom lucra în JavaScript pentru că este nevoie să avem mai mult context. Menționam anterior că atunci când privești prin prisma standardului, motorul JavaScript trebuie să creeze un tărâm. Întrebarea care se pune este care sunt locuitorii acestui tărâm pe care trebuie să-i cunoaștem mai întâi?
 Aceștia sunt primitivele și obiectele. Bineînțeles, și funcțiile, dar acestea sunt tot o specie de obiecte. De fapt, în JavaScript totul este un obiect, o proprietate a unui obiect și sau o metodă a unuia.
 
-Primitivele sunt blocurile constructive. La ce mă refer este faptul că avem nevoie să lucrăm în mod curent cu numere, cu șiruri de caractere și cu valori de adevăr. Dar mai mult, în programare, mai este nevoie să exprimi și realități care se leagă în mod direct de felul cum este alocată memoria și astfel avem primitive precum valori nule (`null`), nedefinite [încă] (`undefined`)
+Primitivele sunt blocurile constructive. La ce mă refer este faptul că avem nevoie să lucrăm în mod curent cu numere, cu șiruri de caractere și cu valori de adevăr. Dar mai mult, în programare, mai este nevoie să exprimi și realități care se leagă în mod direct de felul cum este alocată memoria și mediul lexical pe care codul îl formează și astfel avem primitive precum valori nule (`null`), nedefinite [încă] (`undefined`).
+
+Deci, avem primitivele cu care putem introduce date brute în evaluări: cifre, text și valori de adevăr.
+
+Așa cum oamenii stăpânesc Pământul, și în tărâmul JavaScript există o specie care stăpânește în `Realm`. Acesta este obiectul. Îți aduci aminte, e rodia de mai devreme. Toată execuția codului JavaScript se leagă de obiecte și felul cum interacționează acestea unele cu celelalte. Sunt convins că ați reacționat citind acestea și întrebarea despre cui am lăsat funcțiile a apărut instant. Funcțiile nu au fost uitate pentru simplul fapt că și ele sunt obiecte foarte speciale. Spre deosebire de restul, acestea pot fi invocate, pot fi apelate să facă ceva cu niște valori date.
+
+Toate detaliile cu privire la acești membri ai ecosferei tărâmului JavaScript, vor fi lămurile.
+
+Pentru a putea pătrunde aspectele de funcționare fără nici o altă întârziere, mai avem nevoie de ceva foarte important: instrumente de investigare. Odată revelate aceste instrumente, vom explora o secvență de cod pentru a vedea și cum trebuie să le manevrăm.
 
 ## O sondă în JavaScript
 
@@ -43,7 +51,7 @@ facCeva();            // break
 console.log(a);       // break
 ```
 
-### Folosirea debugger-ului
+## Folosirea debugger-ului
 
 Am terminat pregătirea codului JavaScript. Acum este necesar să folosim un fișier html care să folosească fișierul sursă pe care tocmai l-am creat drept resursă proprie.
 Pentru acest lucru deschide un fișier nou pe care-l vom numi `index.html`. Fișierul va fi constituit din următorul fragment HTML.
@@ -85,7 +93,7 @@ După cum vedem în exemplul prezentat, vom lucra cu patru enunțuri de cod sepa
 
 ![Momentul 0 al parcurgerii secvenței de cod](StartDebugger.png)
 
-## Variabila
+### Variabila
 
 Vom declara variabila `a`, ceea ce conduce la crearea unui identificator și vom atribui identificatorului `a` valoarea `10`.
  - pentru aceasta vom folosi cuvântul rezervat limbajului `var`. Acesta spune motorului JavaScript că următoarea secvență de caractere de după un spațiu este numele identificatorului;
@@ -105,7 +113,7 @@ Există o notabilă excepție de la acest comportament. Acest comportament este 
 
 Mie îmi place `let` pentru că îmi mai simplifică din procesul de gândire a codului, dar și pentru faptul că tradus are o anumită melodie. Fii atent la următorul enunț: `let a = 10;`. Chiar tradus în română sună foarte fain, ca în matematică (da, ca și tine, am iubit matematica... aaa... nu): „fie ca `a` să fie legat de valoarea 10”. E aproape de spusele unui magician, nu? Fain!
 
-Să revenim. Hai să ne uităm la primul pas făcut cu debuggerul și vom observa tocmai această „ridicare în capul codului” cu atribuirea valorii `undefined`. Dacă pui mouse-ul pe identificatorul `a` interoghezi valoarea.
+Să revenim. Hai să ne uităm la primul pas făcut cu debugger-ul și vom observa tocmai această „ridicare în capul codului” cu atribuirea valorii `undefined`. Dacă pui mouse-ul pe identificatorul `a` interoghezi valoarea.
 
 ![Variabila a este „ridicată” și acum are valoarea inițială undefined](VariabileHoistedCuUndefined.png)
 
@@ -119,9 +127,9 @@ Vrei să te complic rău de tot? E bain-marie-ul în care totul există pentru c
 
 Putem privi `this` ca spațiul de unde tot codul rulat își ia valorile de care are nevoie pentru a rula. De exemplu, dacă o funcție este construită cu valorile 10 și 1000, ea, funcția se așteaptă ca aceste valori să fie disponibile deja undeva numai bune să le ia și să le folosească. Acest „undeva” este `this`. Ține minte că în afară de „undeva”, mai trebuie dată atenție și lui „cândva” (asta e o chestie faină care ține chiar de felul în care se rulează codul pe „linia timpului).
 
-Să revenim. Aici, în zona de „Variables” vei vedea toți identificatorii și valorile lor asociate. Această zonă a Debuggerului va fi lupa sub care veți trece pașii de execuție a codului.
+Să revenim. Aici, în zona de „Variables” vei vedea toți identificatorii și valorile lor asociate. Această zonă a Debugger-ului va fi lupa sub care veți trece pașii de execuție a codului.
 
-## Funcția
+### Funcția
 
 Declarăm că un fragment de cod cuprins între acolade este o funcție. Pentru asta folosim cuvântul rezervat `function` urmat de identificatorul pentru această funcție: `function facCeva`. Apoi urmează un spațiu și o pereche de paranteze rotunde în care, dacă se dorește sau este necesar, vor fi pasate argumente (valori necesare în corpul funcției pentru operațiunile care se întâmplă acolo).
 
@@ -132,7 +140,7 @@ Sper că ai remarcat că fiecare enunț se încheie cu semnul de punctuație pun
 - Mai punem o sondă pentru a scoate și în consolă să vedem cu ochii noștri valoarea.
 - Apoi ajung la momentul crucial al unei funcții. Cuvântul rezervat `return` este ceea ce a produs motorul nostru. În cazul nostru, vom returna valoarea variabilei `a`.
 
-## Momentul cheie
+### Momentul cheie
 
 Acum, e acum! Pentru ce toată această pregătire? Pentru că sunt sigur că ai observat rapid faptul că identificatorul variabilei declarate în interiorul funcției este fix același cu cel al variabilei declarate „în afara” funcției.
 
@@ -140,17 +148,17 @@ Acum, e acum! Pentru ce toată această pregătire? Pentru că sunt sigur că ai
 
 Haideți să terminăm prin apelarea funcției. Dacă nu apelezi funcția, aceasta nu-și produce efectele. Urmând comparația cu motorul, dacă nu învârți cheia în contact din poziția de staționare în cea de pornire, motorul va sta oprit.
 
-## Apelarea funcției
+### Apelarea funcției
 
 Apelăm funcția prin scrierea identificatorului funcției urmată de paranteze rotunde. Parantezele rotunde spun motorului JavaScript: pornește execuția funcției. Este momentul când funcția este aplelată / invocată.
 
-## Sondarea
+#### Sondarea
 
 Vom folosi „sonda” de care povesteam mai sus pentru a vedea cu ochii noștri rezultatul.
 
 ## Curiozitatea nu a omorât pisica!
 
-Un exemplu ceva mai dezvoltat urmărește felul în care se face shadowing (suprascrierea) în mediul lexical creat de o funcție. Mai exact, cum o variabilă după declarare (adică crearea identificatorului) este disponibilă întregului cod, apoi valoarea este setată la o valoare, iar mai apoi, valoarea este schimbată. Tot procesul acesta descris în linii mari poate fi urmărit cu debuggerul pentru a vedea efectiv cum funcționează codul.
+Un exemplu ceva mai dezvoltat urmărește felul în care se face shadowing (suprascrierea) în mediul lexical creat de o funcție. Mai exact, cum o variabilă după declarare (adică crearea identificatorului) este disponibilă întregului cod, apoi valoarea este setată la o valoare, iar mai apoi, valoarea este schimbată. Tot procesul acesta descris în linii mari poate fi urmărit cu debugger-ul pentru a vedea efectiv cum funcționează codul.
 
 ```javascript
 var a = 10;           // break
@@ -164,3 +172,11 @@ console.log(a);       // break
 ```
 
 Rulează cu debugger-ul pentru a vedea de ce rezultatul afișat este 11 urmat de 10 și nu 11 urmat de 12.
+
+## Un Tărâm al mediilor lexicale
+
+Prin experimentarea modului de lucru cu Debugger-ul, da fapt am privit la microscop felul în care motorul care implemententează standardul „interpretează” și evaluează cod JavaScript.
+
+Ceea ce am făcut totuși este o acomodare cu majoritatea conceptelor de lucru. Mi-a fost tare teamă să nu introduc subiectele care sunt menite să consolideze cunoștințe fără a avea deja o minimă experiență.
+
+Următorul pas este unul foarte important și țintește înțelegerea mediului lexical (***lexical environment***) sau mai pe scurt, așa cum este numit de programatori: scope.
