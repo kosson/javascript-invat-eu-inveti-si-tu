@@ -132,24 +132,27 @@ Textul sursă sau codul sursă poate fi de două tipuri: `Script` sau un `Module
 
 Spune standardul că mai întâi textul codului este parcurs pentru a-l „converti într-o succesiune de elemente de input" folosindu-se regulile lexicale. Aceste elemente de input sunt:
 
-#### Tokenuri
+#### Token-uri
 
-Ceea ce rezultă în urma aplicării regulilor de identificare a componentelor ce formează fragmentele „inteligibile” pentru computer din șirul de text de intrare. Dacă-ți vine mai ușor este ca o analiză gramaticală în care identifici părțile de propoziție, ce sunt acestea din punct de vedere al părților de vorbile și așa mai departe.
+Ceea ce rezultă în urma aplicării regulilor de identificare a componentelor ce formează fragmentele „inteligibile” pentru computer din șirul de text de intrare. Dacă-ți vine mai ușor este ca o analiză gramaticală în care identifici părțile de propoziție, ce sunt acestea din punct de vedere al părților de vorbire și așa mai departe.
 
-#### Line terminators
+#### Line terminators - semnele capetelor de rând
 
- - `line-feed` - *line nouă* (un caracter special care marchează faptul că motorul trebuie să continue citirea de pe o nouă linie de cod),
- - `carriage return` - *trage la capăt tamburul* (un caracter special care spune motorului că trebuie să facă un salt pe linia de mai jos. Acest caracter este o reminiscență a utilizării vechilor mașini de scris, care migrând la cele electronice, încă aveau nevoie de un caracter special care să spună mecanismelor electromecanice să tragă hârtia mai sus și să aducă tamburul de imprimare la poziția gata de a imprima noul caracter de pe un rând nou.),
+ - `line-feed` - *mergi pe line nouă* (`\n`, abreviat LF sau NL un caracter special care marchează faptul că motorul trebuie să continue citirea de pe o nouă linie de cod: `print("ceva\ncapat");`),
+ - `carriage return` ( `\r` abreviat CR) - *trage înapoi tamburul* (un caracter special care spune motorului că trebuie să se întoarcă pe linia curentă pentru o operațiune pe șirul de caractere al rândului. Acest caracter este o reminiscență a utilizării vechilor mașini de scris, care migrând la cele electronice, încă aveau nevoie de un caracter special care să spună mecanismelor electromecanice să se întoarcă pe același rând: `print("ceva\rcapat"); // "ceva
+capat"`),
  - `line separator` și
  - `paragraph separator`.
 
+Pentru a înțelege mai bine, accesați și materialul explicativ de la https://en.wikipedia.org/wiki/Typewriter și https://en.wikipedia.org/wiki/Newline.
+
 #### Comentariile
 
-Acestea sunt utile pentru a documenta codul.
+Acestea sunt utile pentru a documenta codul. Sunt două moduri de a introduce comentarii. Se poate folosi dublu slash `// comentariu` sau atunci când ai nevoie de comentarii pe mai multe linii `/* comentariu */`.
 
 #### Spațiile albe
 
-Sunt considerate a fi spații albe următoarele: `tab`, `space`, `non-breakable space`, `line tabulation`, `form feed`, `no-break space`.
+Sunt considerate a fi spații albe următoarele: `tab` (`\t` un spațiu cu o anumită întindere), `space` (spațiu), `non-breakable space` (spațiu care nu poată fi fracționat), `line tabulation` (sau vertical tab - `\v` - referindu-se la mișcarea pe verticală a liniilor), `form feed` (se referă la trecerea pe ceea ce este înțeles a fi o pagină nouă `\f`).
 
 ### Recunoașterea structurilor lexicale proprii - faza 1
 

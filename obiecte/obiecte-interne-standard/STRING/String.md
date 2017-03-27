@@ -36,6 +36,7 @@ Caracterele speciale vor putea fi menționate în string-uri folosindu-se notaț
 ## Crearea obiectelor String
 
 ### Folosind constructorul: `new String()`
+
 ```js
 var str = new String("test");
 ```
@@ -118,6 +119,14 @@ console.log('\u{13165}\u{13189}\u{13197}'); // 𓅥𓆉𓆗
 // inversarea ordinii
 var sir = '\u{13165}\u{13189}\u{13197}';
 console.log([...sir].reverse().join(' ')); // 𓆗 𓆉 𓅥
+```
+
+Și încă o chestie supertare este că poți itera un codepoint folosind un `for...of`.
+
+```javascript
+for (let point of '𠮷') {
+  console.log(point);
+};
 ```
 
 ### Metode care folosesc regexuri

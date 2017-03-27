@@ -8,6 +8,13 @@ Aici puteți introduce fragmentele de cod pentru a urmări rezultatele și pentr
 
 Un alt instrument de test pentru cod este și Nodejs, care odată instalat, poate fi utilizat ca un REPL foarte capabil.
 
+## Locuitorii tărâmului
+
+Mă voi întoarce pentru scurt timp la conceptele cheie cu care vom lucra în JavaScript pentru că este nevoie să avem mai mult context. Menționam anterior că atunci când privești prin prisma standardului, motorul JavaScript trebuie să creeze un tărâm. Întrebarea care se pune este care sunt locuitorii acestui tărâm pe care trebuie să-i cunoaștem mai întâi?
+Aceștia sunt primitivele și obiectele. Bineînțeles, și funcțiile, dar acestea sunt tot o specie de obiecte. De fapt, în JavaScript totul este un obiect, o proprietate a unui obiect și sau o metodă a unuia.
+
+Primitivele sunt blocurile constructive. La ce mă refer este faptul că avem nevoie să lucrăm în mod curent cu numere, cu șiruri de caractere și cu valori de adevăr. Dar mai mult, în programare, mai este nevoie să exprimi și realități care se leagă în mod direct de felul cum este alocată memoria și astfel avem primitive precum valori nule (`null`), nedefinite [încă] (`undefined`)
+
 ## O sondă în JavaScript
 
 Sonda despre care doresc să vorbim este un obiect cu care JavaScript vine în propriul bagaj și pe care-l vom folosi ca pe o sondă în codul pe care-l scriem. Este vorba despre `Console`. Acesta este instrumentul primar pentru inspectarea codului în vederea îndreptării erorilor sau pentru a sonda cine, ce conține sau cum arată. Browserul expune `console` ca `window.console`. Dar cum în practică `window` este ignorat, vom apela direct obiectul.
@@ -19,7 +26,7 @@ Pentru a detecta valori sau pentru a inspecta anumite situații, cel mai ades vo
 Pentru momentul în care folosești biblioteci de cod care nu-ți aparțin sau atunci când scrii cod care produce erori sau rezultate neașteptate, cel mai adesea vei folosi un instrument pe care oricare browser modern îl pune la dispoziție: Debugger-ul. Erorile de cod se numesc „bug-uri” (insecte deranjante), iar acest instrument ajută la identificarea fragmentului de cod care le produce.
 Vor fi îndeajuns de multe cazurile în care vei avea nevoie de acest instrument foarte util. În ciuda verbozității cu care am să însoțesc fiecare exemplu, fiecare situație, vei dori, pur și simplu să vezi cu ochii tăi cum funcționează.
 
-Debuggerul am putea să-l traducem în română cu o transliterare unu-la-unu prin „operator de dezinsecție”, dar pentru a fi foarte eleganți îl vom denumi „depanator”. Depanatorul este un instrument care permite parcurgerea unui fragment de cod încărcat în browser pentru a-i vedea comportamentul și efectele.
+Debugger-ul am putea să-l traducem în română cu o transliterare unu-la-unu prin „operator de dezinsecție”, dar pentru a fi foarte eleganți îl vom denumi „depanator”. Depanatorul este un instrument care permite parcurgerea unui fragment de cod încărcat în browser pentru a-i vedea comportamentul și efectele.
 
 Chiar dacă multe din elementele cu care vom lucra în continuare pentru a exemplifica, nu vă sunt cunoscute, nu vă impacientați. Pur și simplu doresc să vă arăt care sunt posibilitățile acestui instrument și făcând asta, să reușesc să vă fac să asimilați câteva concepte de lucru în programare cum ar fi variabilele și funcțiile. Promit să explic pas cu pas ce se întâmplă.
 
@@ -36,7 +43,7 @@ facCeva();            // break
 console.log(a);       // break
 ```
 
-### Folosirea debuggerului
+### Folosirea debugger-ului
 
 Am terminat pregătirea codului JavaScript. Acum este necesar să folosim un fișier html care să folosească fișierul sursă pe care tocmai l-am creat drept resursă proprie.
 Pentru acest lucru deschide un fișier nou pe care-l vom numi `index.html`. Fișierul va fi constituit din următorul fragment HTML.
@@ -64,7 +71,7 @@ Acum, deschide fișierul `index.html` în Firefox și apasă tasta magică F12 p
 
 Vei vedea deja în consolă (din partea dreaptă sus apasă pe Toggle Split Toggle), în zona de consolă rezultatele execuției codului: 11 și 10.
 
-Pune cu mouse-ul break point-urile pe liniile unde există comentariul `// break`. Comentariul l-am pus eu să vă vină mai ușor pentru a vă ghida. Ai reușit să pui un break point atunci când va apărea o săgeată albastră peste numărul liniei de cod. Fii foarte atent pentru că ordinea în care pui punctele ține de ordinea în care debuggerul va urmări execuția codului. Pentru a nu complica povestea, pune break point-urile în ordine linie după linie până la sfârșit.
+Pune cu mouse-ul break point-urile pe liniile unde există comentariul `// break`. Comentariul l-am pus eu să vă vină mai ușor pentru a vă ghida. Ai reușit să pui un break point atunci când va apărea o săgeată albastră peste numărul liniei de cod. Fii foarte atent pentru că ordinea în care pui punctele ține de ordinea în care debugger-ul va urmări execuția codului. Pentru a nu complica povestea, pune break point-urile în ordine linie după linie până la sfârșit.
 
 După ce ai setat toate punctele de inspecție ale codului (break point-uri), faci reîncărcare la pagină (apeși săgeata circulară din partea dreaptă imediat după caseta în care introduci adresa web). Astfel, se va porni debugger-ul și vei putea „păși” din punct de întrerupere în altul până la încheierea unei execuții simulate a codului. Vei avansa folosind F11. Am ales F11 pentru că în cazul când este întâlnită o funcție, se va intra și se va parcurge și codul din acea funcție.
 
@@ -78,7 +85,7 @@ După cum vedem în exemplul prezentat, vom lucra cu patru enunțuri de cod sepa
 
 ![Momentul 0 al parcurgerii secvenței de cod](StartDebugger.png)
 
-#1 Variabila
+## Variabila
 
 Vom declara variabila `a`, ceea ce conduce la crearea unui identificator și vom atribui identificatorului `a` valoarea `10`.
  - pentru aceasta vom folosi cuvântul rezervat limbajului `var`. Acesta spune motorului JavaScript că următoarea secvență de caractere de după un spațiu este numele identificatorului;
@@ -114,7 +121,7 @@ Putem privi `this` ca spațiul de unde tot codul rulat își ia valorile de care
 
 Să revenim. Aici, în zona de „Variables” vei vedea toți identificatorii și valorile lor asociate. Această zonă a Debuggerului va fi lupa sub care veți trece pașii de execuție a codului.
 
-#2 Funcția
+## Funcția
 
 Declarăm că un fragment de cod cuprins între acolade este o funcție. Pentru asta folosim cuvântul rezervat `function` urmat de identificatorul pentru această funcție: `function facCeva`. Apoi urmează un spațiu și o pereche de paranteze rotunde în care, dacă se dorește sau este necesar, vor fi pasate argumente (valori necesare în corpul funcției pentru operațiunile care se întâmplă acolo).
 
@@ -125,7 +132,7 @@ Sper că ai remarcat că fiecare enunț se încheie cu semnul de punctuație pun
 - Mai punem o sondă pentru a scoate și în consolă să vedem cu ochii noștri valoarea.
 - Apoi ajung la momentul crucial al unei funcții. Cuvântul rezervat `return` este ceea ce a produs motorul nostru. În cazul nostru, vom returna valoarea variabilei `a`.
 
-### Momentul cheie
+## Momentul cheie
 
 Acum, e acum! Pentru ce toată această pregătire? Pentru că sunt sigur că ai observat rapid faptul că identificatorul variabilei declarate în interiorul funcției este fix același cu cel al variabilei declarate „în afara” funcției.
 
@@ -133,11 +140,11 @@ Acum, e acum! Pentru ce toată această pregătire? Pentru că sunt sigur că ai
 
 Haideți să terminăm prin apelarea funcției. Dacă nu apelezi funcția, aceasta nu-și produce efectele. Urmând comparația cu motorul, dacă nu învârți cheia în contact din poziția de staționare în cea de pornire, motorul va sta oprit.
 
-#3 Apelarea funcției
+## Apelarea funcției
 
 Apelăm funcția prin scrierea identificatorului funcției urmată de paranteze rotunde. Parantezele rotunde spun motorului JavaScript: pornește execuția funcției. Este momentul când funcția este aplelată / invocată.
 
-#4 Sondarea
+## Sondarea
 
 Vom folosi „sonda” de care povesteam mai sus pentru a vedea cu ochii noștri rezultatul.
 
