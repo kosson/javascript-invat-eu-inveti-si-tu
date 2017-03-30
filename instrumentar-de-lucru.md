@@ -1,25 +1,62 @@
 # Instrumentar
 
-Vom lucra foarte mult cu secvențe de cod pe care vei dori să le testezi pentru a vedea efectul imediat și astfel pentru a consolida ceea ce înveți. În ceea ce privește instrumentarul de bază, veți auzi cel mai ades acronimul REPL care înseamnă `read–eval–print loop`, adică un instrument software, care preia fragmentul tău de cod, îl evaluează (îl rulează) și îți oferă rezultatul. La o simplă căutare online după cheia JavaScript REPL, veți găsi și o grămadă de instrumente online cu ajutorul cărora puteți să testați codul.
+## Introducere - labirintul cu mai multe porți de intrare
+
+Vom lucra foarte mult cu secvențe de cod pe care vei dori să le testezi pentru a vedea efectul imediat și astfel pentru a consolida ceea ce înveți. În ceea ce privește instrumentarul de bază, veți auzi cel mai adesea acronimul REPL care înseamnă `read–eval–print loop`, adică un instrument software, care preia fragmentul tău de cod, îl evaluează (îl rulează) și îți oferă rezultatul. La o simplă căutare online după cheia JavaScript REPL, veți găsi și o grămadă de instrumente online cu ajutorul cărora puteți să testați codul.
 
 Pentru scopul de învățare a acestei lucrări, vom lua contact cu unul de bază: consola web. Cel mai simplu este în această consolă web pe care o accesați din browserul pe care-l folosiți. Am ales pentru acest manual browserul Firefox. Pentru a accesa consola web, pur și simplu apăsați tasta F12 și apoi alegeți Console.
 
 Aici puteți introduce fragmentele de cod pentru a urmări rezultatele și pentru a experimenta din curiozitate.
 
-Un alt instrument de test pentru cod este și Nodejs, care odată instalat, poate fi utilizat ca un REPL foarte capabil.
+Un alt instrument de test pentru cod este și Node.js, care odată instalat, poate fi utilizat ca un REPL foarte capabil. Acesta se folosește apelând comanda nodejs în Terminal. Odată apelată comada, se deschide consola Node.js. Nu uita, ca să o închizi dai de două ori CTRL + C.
+
+Pe lângă acestea mai există o suită de instrumente online pentru evaluarea codului JavaScript, care mai de care mai utile. Câteva exemple: repl.it, jsbin.com ori jsfiddle.net. La ce bune acestea? Vă oferă posibilitatea de a schița rapid cod pentru a fi testat.
 
 ## Locuitorii tărâmului
 
 Mă voi întoarce pentru scurt timp la conceptele cheie cu care vom lucra în JavaScript pentru că este nevoie să avem mai mult context. Menționam anterior că atunci când privești prin prisma standardului, motorul JavaScript trebuie să creeze un tărâm. Întrebarea care se pune este care sunt locuitorii acestui tărâm pe care trebuie să-i cunoaștem mai întâi?
-Aceștia sunt primitivele și obiectele. Bineînțeles, și funcțiile, dar acestea sunt tot o specie de obiecte. De fapt, în JavaScript totul este un obiect, o proprietate a unui obiect și sau o metodă a unuia.
+
+### Primitivele
 
 Primitivele sunt blocurile constructive. La ce mă refer este faptul că avem nevoie să lucrăm în mod curent cu numere, cu șiruri de caractere și cu valori de adevăr. Dar mai mult, în programare, mai este nevoie să exprimi și realități care se leagă în mod direct de felul cum este alocată memoria și mediul lexical pe care codul îl formează și astfel avem primitive precum valori nule (`null`), nedefinite [încă] (`undefined`).
 
 Deci, avem primitivele cu care putem introduce date brute în evaluări: cifre, text și valori de adevăr.
 
-Așa cum oamenii stăpânesc Pământul, și în tărâmul JavaScript există o specie care stăpânește în `Realm`. Acesta este obiectul. Îți aduci aminte, e rodia de mai devreme. Toată execuția codului JavaScript se leagă de obiecte și felul cum interacționează acestea unele cu celelalte. Sunt convins că ați reacționat citind acestea și întrebarea despre cui am lăsat funcțiile a apărut instant. Funcțiile nu au fost uitate pentru simplul fapt că și ele sunt obiecte foarte speciale. Spre deosebire de restul, acestea pot fi invocate, pot fi apelate să facă ceva cu niște valori date.
+### Obiecte
 
-Toate detaliile cu privire la acești membri ai ecosferei tărâmului JavaScript, vor fi lămurile.
+Când folosim browserul web al sistemului de operare, cel mai mare locatar este obiectul global iar acesta este `window.` (`window` urmat de punct). Curios din fire, vei deschide repede browserul, vei apăsa F12 și în linia consolei vei scrie `window`. De îndată ce ai scris numele obiectului global, vor „țâșni” toate proprietățile acestui obiect... obiectul care oferă tot ce spune standardul că ar trebui să fie. În Node.js chiar se numește `global`. Având Node.js instalat pe sistem deja, deschizi un Terminal sau Command Prompt și deschizi o sesiune de node. Scrie global și vei vedea o descriere amănunțită a acestui obiect.
+
+Bineînțeles, și funcțiile, dar acestea sunt tot o specie de obiecte. De fapt, în JavaScript totul este o proprietate a unui obiect și sau o metodă a unuia. Vorbim despre o metodă atunci când o funcție joacă un rol activ în interiorul unui obiect.
+
+Și acum că tot am vorbit de obiecte anterior, vom depăși viziunea unei rodii pe care am propus-o anterior pentru a explica simplu, la cea a unui robot. Un robot, chiar este un „obiect”. Hahaha!
+
+Acum că avem la îndemână un robot, poți să-ți imaginezi o metodă ca pe un semnal transmis unui membru pentru a-l mișca. Hai să ne uităm nițel cam cum arată scris un mic robot care are o codiță ca mijloc de locomoție.
+
+![Ilustrare a unui obiect](IlustratieObiectCaRobotelCodat-Obiect-reprezentare.png "Un roboțel este un obiect")
+
+Codul complet pentru un obiect este o listă de perechi cheie - valoare.
+
+```javascript
+var robotel = {
+  ochi: 2,
+  sunet: 'bing',
+  deplasare: function miscCoada () {
+    console.log(`mișc coada și fac ${this.sunet}`);
+  }
+};
+robotel.deplasare();
+// mișc coada și fac bing
+```
+
+După cum se vede, am trimis o comandă robotului meu printr-un apel la funcția destinată mișcării. Ai observat cum se face? Prin enunțarea obiectului cu care lucrez, apoi un punct ca să-i spun că vreau ceva de la el și apoi invocarea acțiunii, dar hai să-i spunem **metodă**. Cred că te-ai prins deja că o metodă e o funcție... îmi place, te miști repede.
+
+M-a luat valul și am apăsat pedala. Cred că pentru moment este destul cât să ai o bază.
+
+Toată execuția codului JavaScript se leagă de obiecte și felul cum interacționează obiectele unele cu celelalte. Sunt convins că ați reacționat citind acestea și întrebarea despre cui am lăsat funcțiile a apărut instant.
+
+Funcțiile nu au fost uitate, dar le-am amânat introducerea pentru acest moment deoarece și ele sunt obiecte foarte speciale. Spre deosebire de restul, acestea pot fi invocate, pot fi apelate să facă ceva cu niște valori date.
+
+Sper că acum nu ești confuz. Toate detaliile cu privire la acești membri ai ecosferei tărâmului JavaScript, vor fi lămurile în mare amănunt, fiecare la timpul lor.
 
 Pentru a putea pătrunde aspectele de funcționare fără nici o altă întârziere, mai avem nevoie de ceva foarte important: instrumente de investigare. Odată revelate aceste instrumente, vom explora o secvență de cod pentru a vedea și cum trebuie să le manevrăm.
 
@@ -28,6 +65,16 @@ Pentru a putea pătrunde aspectele de funcționare fără nici o altă întârzi
 Sonda despre care doresc să vorbim este un obiect cu care JavaScript vine în propriul bagaj și pe care-l vom folosi ca pe o sondă în codul pe care-l scriem. Este vorba despre `Console`. Acesta este instrumentul primar pentru inspectarea codului în vederea îndreptării erorilor sau pentru a sonda cine, ce conține sau cum arată. Browserul expune `console` ca `window.console`. Dar cum în practică `window` este ignorat, vom apela direct obiectul.
 
 Pentru a detecta valori sau pentru a inspecta anumite situații, cel mai ades vom folosi `console.log(expresie)` și / sau `console.dir()` iar atunci când avem nevoie de o afișare rapidă a felului cum s-a rulat o funcție, vom folosi `console.trace()`.
+
+## Citirea cărții de identitate a locuitorilor
+
+Ca și în realitate, fiecare locuitor al tărâmului JavaScript poate fi întrebat ce „hram poartă”. Există o comandă care poate fi dată pentru toți identificatorii pentru a afla ce se află în spatele lor. Aceasta este `typeof` și vă va oferi tipul valorii la care conduce identificatorul.
+
+```javascript
+var x = 10; typeof x; // number
+```
+
+Când nu este codul scris de tine, când ai îndoieli asupra unui identificator, poți să-l întrebi la ce tip de valoare face trimitere.
 
 ## Inspectarea codului la rulare și detectarea problemelor
 
@@ -105,9 +152,13 @@ Acum este un moment cheie, care odată înțeles, multe, chiar foarte multe prob
 
 Avem borcănelul și eticheta inscripționată pe el. Korekt! Dar ce observăm?! Da, ai dreptate, e simplu: borcănelul este gol. Această observație vă va salva din multe situații de confuzie: variabilele, inițial sunt legate de o valoare specială care se numește `undefined`. Și să-ți mai spun un mare, un imens secret, care te va scoate din bucluc de multe ori.
 
-**Imediat ce codul sursă a fost citit de motorul JavaScript, tuturor variabilelor și funcțiilor le sunt colectate identificatorii care sunt „puși în capul codului” (mecanism de hoistings îi spunem), iar fiecare dintre ele au valoarea `undefined`.**
+**Imediat ce codul sursă a fost citit de motorul JavaScript, tuturor variabilelor și funcțiilor le sunt colectate identificatorii care sunt „puși în capul codului” (mecanism de hoistings îi spune), iar fiecare dintre ele au valoarea `undefined`.**
 
-Ce înseamnă „în capul codului”? Adică sunt disponibile instant întregului cod pentru a le atribui valori, modifica, etc. Același comportament este aplicat și funcțiilor după cum vom vedea pentru că... (tobele bat intens), și funcțiile sunt tot niște valori identificate printr-o „etichetă”. Putem afirma cu multă simplitate că în momentul în care browserul a trecut prin cod încărcându-l, are o fază în care culege toți identificatorii și le atribuie valoarea `undefined`. Abia după acest pas, motorul JavaScript se mai uită la detaliile codului și începe să atribuie valorile specificate fiecare la momentul său pe măsură ce codul este rulat.
+Ce înseamnă „în capul codului”? Adică sunt disponibile instant întregului cod pentru a le atribui valori, modifica, etc. Sunt omniprezente pentru mediul lexical în care au fost declarate.
+
+Stop joc! Cum?! Nu ți-am povestit ce-i cu mediul lexical? Ba da, recitește atent introducerea. Dacă nu ai chef, e zona de cod în care căutăm identificatorii.
+
+Același comportament este aplicat și funcțiilor după cum vom vedea pentru că... (tobele bat intens), și funcțiile sunt tot niște valori identificate printr-o „etichetă” (un identificator). Putem afirma cu multă simplitate că în momentul în care browserul a trecut prin cod încărcându-l, are o fază în care culege toți identificatorii și le atribuie valoarea `undefined`. Abia după acest pas, motorul JavaScript se mai uită la detaliile codului și începe să atribuie valorile specificate fiecare la momentul său pe măsură ce codul este rulat.
 
 Există o notabilă excepție de la acest comportament. Acest comportament este dictat de modificările aduse standardului începând cu ES6. Regula standardului nou spune că variabilele declarate cu `let` în locul lui `var`, vor fi pironite de „locul” în cod unde au fost declarate. Acest nou comportament este încurajat ca practică și este menit să elimine toate problemele de înțelegere a mecanismului de „ridicare în capul codului” (hoisting). De fapt, a fost gândit să dea o mână de ajutor și celor care vin din zona de C și C++ pentru a le da familiaritate în felul în care funcționează codul. După toată balonarea și toată lauda pentru `let`, se pare că este destinat să-l înlocuiască pe `var` încet, încet.
 
@@ -121,9 +172,7 @@ Valoarea identificatorului nostru se reflectă și în cele ținute în evidenț
 
 ![Valoarea „undefined” a lui „a”, se reflectă și în evidențele lui „this” vizibil din panoul „Variables”](VariablesThisUndefined.png)
 
-Ce-o fi `this`?! Deocamdată este îndeajuns să-ți imaginezi că este un context de moment în care se execută un fragment de cod sau mai specific o funcție, de exemplu. Ca să-ți imaginezi mai simplu, `this` este oala în care fierbi borcănelele pentru a le pasteuriza.
-
-Vrei să te complic rău de tot? E bain-marie-ul în care totul există pentru ca zacusca să se facă zacuscă, pentru ca gemul să se facă gem iar țuica, țuică... ceva neclar? Bine, cu țuica e altceva... :)
+Ce-o fi `this`?! Deocamdată este îndeajuns să-ți imaginezi că este un context de moment în care se execută un fragment de cod sau mai specific o funcție, de exemplu. Ca să-ți imaginezi mai simplu, `this` este un obiect agregat dinamic, care conține toți identificatorii necesari evaluării expresiilor și execuției unei funcții.
 
 Putem privi `this` ca spațiul de unde tot codul rulat își ia valorile de care are nevoie pentru a rula. De exemplu, dacă o funcție este construită cu valorile 10 și 1000, ea, funcția se așteaptă ca aceste valori să fie disponibile deja undeva numai bune să le ia și să le folosească. Acest „undeva” este `this`. Ține minte că în afară de „undeva”, mai trebuie dată atenție și lui „cândva” (asta e o chestie faină care ține chiar de felul în care se rulează codul pe „linia timpului).
 
@@ -131,9 +180,9 @@ Să revenim. Aici, în zona de „Variables” vei vedea toți identificatorii �
 
 ### Funcția
 
-Declarăm că un fragment de cod cuprins între acolade este o funcție. Pentru asta folosim cuvântul rezervat `function` urmat de identificatorul pentru această funcție: `function facCeva`. Apoi urmează un spațiu și o pereche de paranteze rotunde în care, dacă se dorește sau este necesar, vor fi pasate argumente (valori necesare în corpul funcției pentru operațiunile care se întâmplă acolo).
+Un fragment de cod de întindere mică sau medie care face un lucru precis este o funcție. Acest fragment de cod este pus între acolade. Pentru a declara o funcție folosim cuvântul rezervat `function` urmat de identificatorul pentru această funcție: `function facCeva`. Apoi urmează un spațiu și o pereche de paranteze rotunde în care, dacă se dorește sau este necesar, vor fi pasate argumente (valori necesare în corpul funcției pentru operațiunile care se întâmplă acolo).
 
-Urmează după un alt spațiu o pereche de acolade în care va fi introdus codul care constituie corpul funcției. Cel mai simplu este să-ți imaginezi o funcție precum un motor care între parantezele rotunde primește combustibil (benzină, aer, NOS) iar între acolade sunt toate părțile sale componente.
+Urmează după un alt spațiu o pereche de acolade în care va fi introdus fragmentul de cod sursă care constituie corpul funcției. Cel mai simplu este să-ți imaginezi o funcție precum un motor care între parantezele rotunde primește combustibil (benzină, aer, NOS) iar între acolade sunt toate părțile sale componente.
 Sper că ai remarcat că fiecare enunț se încheie cu semnul de punctuație punct și virgulă.
 
 - În interiorul funcției putem introduce orice fragment de cod JavaScript. Ca urmare, vom declara o nouă variabilă.
@@ -155,6 +204,8 @@ Apelăm funcția prin scrierea identificatorului funcției urmată de paranteze 
 #### Sondarea
 
 Vom folosi „sonda” de care povesteam mai sus pentru a vedea cu ochii noștri rezultatul.
+
+Acum e rândul tău să experimentezi.
 
 ## Curiozitatea nu a omorât pisica!
 

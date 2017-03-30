@@ -234,7 +234,7 @@ Vorbim despre o adevărată lume, chiar despre un **tărâm** special.
 
 Textul standardului ECMAScript oferă cea mai bună perspectivă atunci când vine vorba despre un program JavaScript care este privit la lucru. Voi parafraza și cita acolo unde este necesar textul standardului pentru a contura un cadru cât mai complet.
 
-Urmând firul unei adevărate geneze, standardul menționează chiar termenul de „realm" - **tărâm**: „înainte de a fi evaluat, tot codul ECMAScript trebuie asociat unui tărâm. Conceptual, un tărâm constă dintr-un set de **_obiecte intrinseci_**, un **_mediu global_** și tot **_codul ECMAScript_** care este încărcat în cadrul «scope-ul» acelui mediu global, precum și alte stări și resurse asociate". Acesta este cel mai valoros citat al standardului pentru că este ca o fotografie a planetei JavaScript de pe orbită.
+Urmând firul unei adevărate geneze, standardul menționează chiar termenul de „realm" - **tărâm**: „înainte de a fi evaluat, tot codul ECMAScript trebuie asociat unui tărâm. Conceptual, un tărâm constă dintr-un set de **obiecte intrinseci** (***built-in***), un **mediu global** (***global environment***) și tot **codul ECMAScript** care este încărcat în cadrul «scope-ul» acelui mediu global, precum și alte stări și resurse asociate". Acesta este cel mai valoros citat al standardului pentru că este ca o fotografie a planetei JavaScript de pe orbită.
 
 Am precizat câțiva termeni deja care fac parte dintr-un adevărat idiom pe care-l impune limbajul. Comunitatea de programatori în JS au propriul limbaj de comunicare, uneori un jargon din care se strecoară în uzul de zi cu zi câte un termen, de exemplu cum este „scope", care formal în ECMAScript se numește „lexical environment". Pentru că deja am intrat într-o mini descriere a limbajului, mai adaug faptul că JavaScript prin varietatea de stiluri dezvoltate în timp, s-au creat chiar dialecte așa cum este TypeScript. Dar asta este o discuție lungă și nu mai zăbovim aici.
 
@@ -249,7 +249,9 @@ Standardul spune că producătorul browserului trebuie să pună la dispoziție 
 ![Tărâm](Realm.jpg)
 
 Am ilustrat acest tărâm ca pe o sferă de activitate (**obiectul global**) în care găsești în zona centrală codul reprezentat de ciorchini de obiecte și date ce stabilesc relații strânse (valori, obiecte și funcții).
+
 Această structură se constituie la momentul executării codului.
+
 Structura eliptică ca o bandă care se rotește continuu imaginează o „buclă” care se rotește (rulează) permanent câtă vreme este rulat întregul cod în care apar „evenimente” (fragmente de cod care trebuie rulate). Pe suprafața sferei sunt disponibile „obiectele intrinseci” reprezentate ca structuri hexagonale și care sunt acolo pentru a oferi funcționalități ciorchinilor din zona centrală.
 
 Atenție, pentru fiecare „context de execuție în efect", adică bucata de cod care este evaluată la momentul în care bagi capul în „căpița de cod care se execută", se creează câte o nouă înregistrare pentru cum arată tărâmul. Este ca și o foaie de observație în spital. Când apare o modificare în starea unui pacient este actualizată foaia de observație.
@@ -277,7 +279,7 @@ După cum se observă, fiecare primitivă constă din două elemente: sintaxa ș
 
 ### Funcțiile pe scurt
 
-Funcțiile sunt un ***tip de obiecte***. Deci, tot niște rodii. Ha ha! În JS acestea sunt de tip `callable`, adică niște rodii pentru care se poate iniția un apel pentru a le executa.
+Funcțiile sunt un ***tip de obiecte***. Deci, tot niște rodii. Ha ha! În JS acestea sunt de tip `callable` (în rom. *apelabile*), adică niște rodii pentru care se poate iniția un apel pentru a le executa.
 
 Ce înseamnă a le executa? Pur și simplu motorul se va uita între acolade, va compila codul, va face recensământul identificatorilor și îl va evalua returnând un rezultat.
 

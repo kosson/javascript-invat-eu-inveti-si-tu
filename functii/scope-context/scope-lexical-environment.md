@@ -64,7 +64,7 @@ Un **global environment** este un **lexical environment** care nu mai are vreun 
 
 Fiecare obiect **environment record** este legat de un obiect numit **binding object**. Un obiect **environment record** are drept sarcină să lege șirurile de caractere care sunt numele identificatorilor proprietăților obiectului pentru care se stabilește acest **environment record**. Cheile proprietăți care nu sunt numere nu vor fi considerate în obiectul **environment record**. În setul legăturilor (bindings) sunt incluse deopotrivă proprietățile moștenite, cât și cele proprii indiferent de setarea atributului „enumerable”. Setul identificatorilor legați de environment record poate varia în funcție de șteregerea sau adăugarea proprietăților și sunt considerate a fi „legături schimbătoare” - ***mutable bindings***.
 
-Toate legăturile din obiectul environment records se pot schimba.
+Toate legăturile din obiectul environment records se pot schimba pe parcursul execuției.
 
 ## Lexical environment în practică
 
@@ -133,6 +133,8 @@ Este observabil faptul că variabila declarată în `if` este accesibilă în af
 - parametrii funcției,
 - declarații de funcții,
 - scope-ul blocului părinte (se face lanțul prin care se caută „pe fir” mai sus identificatorul pentru care a fost definită o variabilă)
+
+![Mediul lexical al unei funcții](exempluIdentificatori.png "Exemplu simplu de variabile în global scope și mediul lexical format de o funcție")
 
 ## Variabilele „în scope”
 
