@@ -24,7 +24,7 @@ Deci, avem primitivele cu care putem introduce date brute în evaluări: cifre, 
 
 ### Obiecte
 
-Când folosim browserul web al sistemului de operare, cel mai mare locatar este obiectul global iar acesta este `window.` (`window` urmat de punct). Curios din fire, vei deschide repede browserul, vei apăsa F12 și în linia consolei vei scrie `window`. De îndată ce ai scris numele obiectului global, vor „țâșni” toate proprietățile acestui obiect... obiectul care oferă tot ce spune standardul că ar trebui să fie. În Node.js chiar se numește `global`. Având Node.js instalat pe sistem deja, deschizi un Terminal sau Command Prompt și deschizi o sesiune de node. Scrie global și vei vedea o descriere amănunțită a acestui obiect.
+Când folosim browserul web al sistemului de operare, cel mai mare locatar este obiectul global iar acesta este `window`. Curios din fire, vei deschide repede browserul, vei apăsa F12 și în linia consolei vei scrie `window.` (`window` urmat de punct). De îndată ce ai scris numele obiectului global, vor „țâșni” toate proprietățile acestui obiect... obiectul care oferă tot ce spune standardul că ar trebui să fie. În Node.js chiar se numește `global`. Având Node.js instalat pe sistem deja, deschizi un Terminal sau Command Prompt și deschizi o sesiune de node. Scrie global și vei vedea o descriere amănunțită a acestui obiect.
 
 Bineînțeles, și funcțiile, dar acestea sunt tot o specie de obiecte. De fapt, în JavaScript totul este o proprietate a unui obiect și sau o metodă a unuia. Vorbim despre o metodă atunci când o funcție joacă un rol activ în interiorul unui obiect.
 
