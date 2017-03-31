@@ -62,7 +62,7 @@ Pentru a putea pătrunde aspectele de funcționare fără nici o altă întârzi
 
 ## O sondă în JavaScript
 
-Sonda despre care doresc să vorbim este un obiect cu care JavaScript vine în propriul bagaj și pe care-l vom folosi ca pe un instrument de investigare în codul pe care-l executăm. Este vorba despre `Console`. Acesta este instrumentul primar pentru inspectarea codului în vederea îndreptării erorilor sau pentru a sonda cine, ce conține sau cum arată. Browserul expune `console` ca proprietate a obiectului global `window` și putem avea acces la el introducând în consololă adresa `window.console`. Dar cum în practică rădăcina `window` este ignorată, vom apela direct obiectul scriind în consolă `console.` (console punct). Acum vei vedea și ce funcționalități oferă în lista derulantă care a apărut.
+Sonda despre care doresc să vorbim este un obiect cu care JavaScript vine în propriul bagaj și pe care-l vom folosi ca pe un instrument de investigare în codul pe care-l executăm. Este vorba despre `Console`. Acesta este instrumentul primar pentru inspectarea codului în vederea îndreptării erorilor sau pentru a sonda cine, ce conține sau cum arată. Browserul expune `console` ca proprietate a obiectului global `window` și putem avea acces la el introducând în consola browserului `window.console`. Dar cum în practică rădăcina `window` este ignorată, vom apela direct obiectul scriind în consolă `console.` (console punct). Acum vei vedea și ce funcționalități oferă în lista derulantă care a apărut.
 
 Pentru a detecta valori sau pentru a inspecta anumite situații, cel mai ades vom folosi `console.log(expresie)` și / sau `console.dir()` iar atunci când avem nevoie de o afișare rapidă a felului cum s-a rulat o funcție, vom folosi `console.trace()`.
 
