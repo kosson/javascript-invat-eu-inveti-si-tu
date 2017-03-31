@@ -152,7 +152,7 @@ Acestea sunt utile pentru a documenta codul. Sunt două moduri de a introduce co
 
 #### Spațiile albe
 
-Sunt considerate a fi spații albe următoarele: `tab` (`\t` un spațiu cu o anumită întindere), `space` (spațiu), `non-breakable space` (spațiu care nu poată fi fracționat), `line tabulation` (sau vertical tab - `\v` - referindu-se la mișcarea pe verticală a liniilor), `form feed` (se referă la trecerea pe ceea ce este înțeles a fi o pagină nouă `\f`).
+Sunt considerate a fi spații albe următoarele: `tab` (`\t` un spațiu cu o anumită întindere), `space` (spațiu), `non-breakable space` (spațiu care nu poate fi fracționat), `line tabulation` (sau vertical tab - `\v` - referindu-se la mișcarea pe verticală a liniilor), `form feed` (se referă la trecerea pe ceea ce este înțeles a fi o pagină nouă `\f`).
 
 ### Recunoașterea structurilor lexicale proprii - faza 1
 

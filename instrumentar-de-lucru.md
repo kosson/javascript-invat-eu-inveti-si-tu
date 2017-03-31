@@ -131,6 +131,7 @@ Pune cu mouse-ul *break point*-urile pe liniile unde există comentariul `// bre
 După ce ai setat toate punctele de inspecție ale codului (break point-uri), faci reîncărcare la pagină (apeși săgeata circulară din partea dreaptă imediat după caseta în care introduci adresa web). Astfel, se va porni debugger-ul și vei putea „păși” din punct de întrerupere în altul până la încheierea unei execuții simulate a codului. Vei avansa folosind F11. Am ales F11 pentru că în cazul când este întâlnită o funcție, se va intra și se va parcurge și codul din acea funcție.
 
 Câteva detalii despre posibilitatea de a avansa prin codul scris - butoanele și expunerea funcționalității lor.
+
 - Comanda **Play** (F8), înseamnă rulează tot codul până la următorul break-point setat.
 - Comanda **Step over** (F10), spune debugger-ului să avanseze la linia următoare dacă ești în interiorul unei funcții.
 - Comanda **Step in** (F11), spune: avansează la linia următoare în cadrul funcției, dar dacă linia următoare este invocarea unei alte funcții, intră mai departe în execuția acelei funcții.
@@ -161,7 +162,7 @@ Avem borcănelul și eticheta inscripționată pe el. Korekt! Dar ce observăm?!
 
 Cum putem să ne închipuim că funcționează hoisting-ul pentru a fixa mecanismul?
 
-Închipuiește-ți un vas cu apă. Acesta este mediul lexical. Bun! În vasul cu apă cu ajutorul unei pipete am dori să plasăm picături de ulei la diferite straturi. Oricât ne-am chinui, toate picăturile ajung la suprafață. Nu poți țintui picătura la o anumită adâncime. Așa este mecanismul acesta de „omniprezență” a identificatorilor.
+Închipuiește-ți un vas cu apă. Acesta este mediul lexical. Bun! În vasul cu apă cu ajutorul unei pipete am dori să plasăm picături de ulei pe diferite straturi. Oricât ne-am chinui, toate picăturile ajung la suprafață. Nu poți țintui picătura la o anumită adâncime. Așa este mecanismul acesta de „omniprezență” a identificatorilor.
 
 Ce înseamnă „în capul codului”? Adică sunt disponibile instant întregului cod pentru a le atribui valori, modifica, etc. Sunt omniprezente pentru mediul lexical în care au fost declarate.
 

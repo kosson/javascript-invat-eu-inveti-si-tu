@@ -1,10 +1,20 @@
+![](InsulaObiectelor01.jpg "Mediul lexical")
+
 # Lexical environment - scope
+
+## Introducere
+
+Povesteam anterior că în ceea ce privește limbajul de programare JavaScript, felul în care este redactat textul, adică codul sursă, este crucial. De ce?
+
+Pentru că JavaScript interpretează locul declarațiilor de obiecte de funcții și variabile ca fiind semnalul că trebuie să genereze niște planuri cu o separare între ele.
+
+Ca să mă fac înțeles mai bine e ca și cum te-ai apuca să faci o casă, ai terenul nivelat și aduci materialele de construcție. Apoi rânduiești materialele în funcție de ansamblurile create. Dulapii din lemn, cuiele și caielele vor constitui subansamblul structurii de rezistență. Vata de sticlă, izolația și plăcile de rigips vor fi componentele subansamblului numit pereți. Fiecare subansamblu va fi apoi combinat cu celelalte. Unele vor fi incluse în altele și toate împreună vor forma obiectul final.
+
+Astfel, după ordonare, fiecare material de construcție va ști cărui „subansamblu” aparține. Aceste „subansambluri”, hai să le numim **medii lexicale**. Mediile acestea au atributul de lexical pentru că sunt generate după apariția lor în „firul narativ” al codului, în funcție de punctuație și semne.
 
 Mediul lexical sau scope-ul poate fi foarte ușor înțeles ca un „registru inventar” al tuturor identificatorilor care au valori „legate” de aceștia.
 
-![Identificatori în cod](IdentificatoriCod.jpg "Identificatorii într-o structură de cod")
-
-În acest demersul nostru, vom folosi interșanjabil următoarele: „mediu lexical”, „scope” și „lexical scope”. Toate au același sens. Termenul standardului este mediu lexical.
+În demersul nostru, vom folosi interșanjabil următoarele: „mediu lexical”, „scope” și „lexical scope”. Toate au același sens. Termenul standardului este „mediu lexical”.
 
 > „Este porțiunea de cod sursă pentru care este disponibilă o legătură între un nume și o entitate” (definiție pentru limbajul de programare ALGOL 60, 1960).
 
@@ -12,7 +22,7 @@ Această definiție explică cel mai bine conceptul de „legătură”. De fapt
 
 ![Referințe](IdentificatoriReferinta.jpg "Referințe")
 
-În cazul funcțiilor, atunci când sunt pasate valori, reține faptul că JavaScript, de fapt copiază valoarea în **lexical environment** care poate fi comparat pentru o ușoară referință comună cu un „registru inventar al mediului”. Acum putem spune că ***o valoare este în scope***.
+În cazul funcțiilor, atunci când sunt pasate valori, reține faptul că JavaScript, de fapt copiază valoarea în **lexical environment**, care poate fi comparat pentru o ușoară referință comună cu un „registru inventar al mediului”. Acum putem spune că ***o valoare este în scope***.
 
 Atunci când unei funcții îi sunt pasate referințe către valori drept argumente, valorile către care se face referința, nu mai sunt copiate în **lexical environment**, ci doar referința, care va fi utilizată pentru a ajunge la valoare. Mai multe referințe pot trimite către aceeași valoare.
 
@@ -22,24 +32,24 @@ Astfel, putem spune că există „tipuri” asociate valorilor (**value types**
 
 Este **locul** unde te uiți după lucruri.
 Locul unde definești variabilele determină zona unde le poți folosi și astfel scope se stabilește în funcție de structura codului.
-Este **perimetrul** din cuprinsul codului în care au efect funcțiile și sunt disponibile variabilele.
+Este **mediul** în care au efect funcțiile și sunt disponibile variabilele.
 Global scope este locul de unde pot fi accesate funcții și variabile în întreg codul.
 
 ## Formarea scope-ului
 
-Există câteva situații disctate de modul de redactare a codului sursă care are ca efect direct formarea mediului lexical (scope).
+Există câteva situații legate de modul de redactare a codului sursă care are ca efect direct formarea mediului lexical (scope).
 
 1. Prin crearea unei funcții. În acest caz, variabilele declarate în interiorul funcțiilor sunt vizibile doar în interiorul funcțiilor și funcțiilor imbricate
-2. Prin declararea variabilelor cu `let` și `const` în interiorulul unui bloc de cod delimitat de acolade `{}`.
-3. Prin crearea unui bloc `Catch`.
+2. Prin declararea variabilelor cu `let` și `const` în interiorul unui bloc de cod delimitat de acolade `{}`.
+3. Prin crearea unui bloc `Try...Catch`.
 
 ## Spune standardul
 
 Lexical environment este asociat cu structura lexicală a codului așa cum este declararea funcțiilor, blocurile de cod dintre acolade și secvența `Catch` din blocurile `Try...Catch`.
 
-Mediul lexical 0, cel după care nu mai există nimic, de fapt, este un **enviroment record** global (o înregistrare descriptivă pentru mediul lexical), care este un spațiu, un **tărâm** comun tuturor elementelor unui program care vor fi procesate.
+Mediul lexical 0, cel după care nu mai există nimic, de fapt, este cel global, care este un spațiu, un **tărâm** comun tuturor elementelor unui program care vor fi evaluate. Acest mediu lexical 0 are un **environment record**, care este o înregistrare descriptivă a mediului lexical.
 
-Valorile lui **lexical environment** și a lui **environment record** sunt mecanisme interne stabilite de specificația standardului și este posibil să nu se regăsească în implementare.
+Valorile lui **lexical environment** și a lui **environment record** sunt mecanisme interne stabilite de specificația standardului și este posibil să nu se regăsească în implementare. Le-am menționat pentru că lucrul cu JavaScript trebuie privit din perspectiva standardului și a mecanismelor descrise de acesta.
 
 Un **lexical environment** este un **tip al specificațiilor standardului**, care este utilizat pentru a defini asocierea `identificatorilor` cu variabilele și funcțiile specifice pe baza structurii lexicale de organizare pe niveluri (imbricare - în engleză: „nesting”) a codului.
 Un **lexical environment** constă dintr-un „environment record” (un domeniu declarativ pentru toate valorile legate de un identificator) și o **referință** la un „lexical environment extern”, dacă există unul.
@@ -124,7 +134,7 @@ Este observabil faptul că variabila declarată în `if` este accesibilă în af
 - Dacă nu există funcții interne, nu mai există nicio legătură spre obiectul care face binding-ul variabilelor și se face GARBAGE COLLECTING.
 - Când sunt definite funcții interne, acestea la rândul lor generează referințe în scope chain.
 - **Dacă o funcție internă este returnată sau introdusă într-o variabilă**, atunci va exista o referință către aceasta și nu se va face garbage collecting (avem un closure).
-- Scope chain-ul unui closure este unul viu; funcțiile interne nu fac copii private ale scope-ului și nici nu fac snapshoturi ale binding-urilor variabilelor.
+- Scope chain-ul unui closure este unul viu; funcțiile interne nu fac copii private ale scope-ului și nici nu fac snapshot-uri ale binding-urilor variabilelor.
 - Câtă vreme există o referință către o proprietate din scope acest obiect scope exista. Este principiul din spatele funcționării closure-urilor. Când o funcție returnează, scope-ul creat de ea dispare, doar dacă nu cumva avem un closure (o altă funcție este găzduită). Funcția va rămâne ca referință în scope-ul părinte.
 
 ## Ce conține scope-ul (**lexical environment**)?
