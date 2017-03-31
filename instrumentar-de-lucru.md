@@ -26,11 +26,11 @@ Deci, avem primitivele cu care putem introduce date brute în evaluări: cifre, 
 
 Când folosim browserul web al sistemului de operare, cel mai mare locatar este obiectul global iar acesta este `window`. Curios din fire, vei deschide repede browserul, vei apăsa F12 și în linia consolei vei scrie `window.` (`window` urmat de punct). De îndată ce ai scris numele obiectului global, vor „țâșni” toate proprietățile acestui obiect... obiectul care oferă tot ce spune standardul că ar trebui să fie. În Node.js chiar se numește `global`. Având Node.js instalat pe sistem deja, deschizi un Terminal sau Command Prompt și deschizi o sesiune de node. Scrie global și vei vedea o descriere amănunțită a acestui obiect.
 
-Bineînțeles, și funcțiile, dar acestea sunt tot o specie de obiecte. De fapt, în JavaScript totul este o proprietate a unui obiect și sau o metodă a unuia. Vorbim despre o metodă atunci când o funcție joacă un rol activ în interiorul unui obiect.
+De fapt, în JavaScript totul este o proprietate a unui obiect și sau o metodă a unuia. Vorbim despre o metodă atunci când o funcție joacă un rol activ în interiorul unui obiect.
 
-Și acum că tot am vorbit de obiecte anterior, vom depăși viziunea unei rodii pe care am propus-o anterior pentru a explica simplu, la cea a unui robot. Un robot, chiar este un „obiect”. Hahaha!
+Și acum că tot am vorbit de obiecte anterior, vom depăși viziunea unei rodii pe care am propus-o în introducere pentru simplitate și vom folosi-o pe cea a unui robot. Un robot, chiar este un „obiect”. Hahaha!
 
-Acum că avem la îndemână un robot, poți să-ți imaginezi o metodă ca pe un semnal transmis unui membru pentru a-l mișca. Hai să ne uităm nițel cam cum arată scris un mic robot care are o codiță ca mijloc de locomoție.
+Acum că avem la îndemână un robot, poți să-ți imaginezi o metodă ca pe un semnal transmis unui membru pentru a-l mișca. Hai să ne uităm nițel cam cum arată scris un mic robot care are o codiță ca mijloc de locomoție căruia îi dăm comanda să se miște.
 
 ![Ilustrare a unui obiect](IlustratieObiectCaRobotelCodat-Obiect-reprezentare.png "Un roboțel este un obiect")
 
@@ -56,7 +56,7 @@ Toată execuția codului JavaScript se leagă de obiecte și felul cum interacț
 
 Funcțiile nu au fost uitate, dar le-am amânat introducerea pentru acest moment deoarece și ele sunt obiecte foarte speciale. Spre deosebire de restul, acestea pot fi invocate, pot fi apelate să facă ceva cu niște valori date.
 
-Sper că acum nu ești confuz. Toate detaliile cu privire la acești membri ai ecosferei tărâmului JavaScript, vor fi lămurile în mare amănunt, fiecare la timpul lor.
+Sper că acum nu ești confuz. Toate detaliile cu privire la acești membri ai ecosferei tărâmului JavaScript, vor fi lămurilte în mare amănunt, fiecare la timpul lor.
 
 Pentru a putea pătrunde aspectele de funcționare fără nici o altă întârziere, mai avem nevoie de ceva foarte important: instrumente de investigare. Odată revelate aceste instrumente, vom explora o secvență de cod pentru a vedea și cum trebuie să le manevrăm.
 
@@ -226,7 +226,7 @@ Rulează cu debugger-ul pentru a vedea de ce rezultatul afișat este 11 urmat de
 
 ## Un Tărâm al mediilor lexicale
 
-Prin experimentarea modului de lucru cu Debugger-ul, da fapt am privit la microscop felul în care motorul care implemententează standardul „interpretează” și evaluează cod JavaScript.
+Prin experimentarea modului de lucru cu Debugger-ul, de fapt am privit la microscop felul în care motorul care implemententează standardul „interpretează” și evaluează cod JavaScript.
 
 Ceea ce am făcut totuși este o acomodare cu majoritatea conceptelor de lucru. Mi-a fost tare teamă să nu introduc subiectele care sunt menite să consolideze cunoștințe fără a avea deja o minimă experiență.
 
