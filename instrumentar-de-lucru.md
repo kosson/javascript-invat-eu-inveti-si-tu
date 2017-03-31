@@ -24,7 +24,7 @@ Deci, avem primitivele cu care putem introduce date brute în evaluări: cifre, 
 
 ### Obiecte
 
-Când folosim browserul web al sistemului de operare, cel mai mare locatar este obiectul global iar acesta este `window`. Curioasă din fire, vei deschide repede browserul, vei apăsa F12 și în linia consolei vei scrie `window.` (`window` urmat de punct). De îndată ce ai scris numele obiectului global, vor „țâșni” toate proprietățile acestui obiect... obiectul care oferă tot ce spune standardul că ar trebui să fie. În Node.js chiar se numește `global`. Dacă ești curiozitate personificată, având Node.js instalat pe sistem deja, deschizi un Terminal sau Command Prompt și inițiezi o sesiune de nodejs. Scrie global și vei vedea o descriere amănunțită a acestui obiect.
+Când folosim browserul web al sistemului de operare, cel mai mare locatar este obiectul global iar acesta este `window`. Curioasă din fire, vei deschide repede browserul, vei apăsa F12 și în linia consolei vei scrie `window.` (`window` urmat de punct). De îndată ce ai scris numele obiectului global, vor „țâșni” toate proprietățile acestui obiect... obiectul care oferă tot ce spune standardul că ar trebui să fie. În Node.js chiar se numește `global`. Dacă ești curiozitatea personificată, având Node.js instalat pe sistem deja, deschizi un Terminal sau Command Prompt și inițiezi o sesiune de nodejs. Scrie `global` și vei vedea o descriere amănunțită a acestui obiect.
 
 De fapt, în JavaScript totul este o proprietate a unui obiect și sau o metodă a unuia. Vorbim despre o metodă atunci când o funcție joacă un rol activ în interiorul unui obiect.
 
@@ -56,13 +56,13 @@ Toată execuția codului JavaScript se leagă de obiecte și felul cum interacț
 
 Funcțiile nu au fost uitate, dar le-am amânat introducerea pentru acest moment deoarece și ele sunt obiecte foarte speciale. Spre deosebire de restul, acestea pot fi invocate, pot fi apelate să facă ceva cu niște valori date.
 
-Sper că acum nu ești confuz. Toate detaliile cu privire la acești membri ai ecosferei tărâmului JavaScript, vor fi lămurilte în mare amănunt, fiecare la timpul lor.
+Sper că acum nu ești confuz. Toate detaliile cu privire la acești membri ai ecosferei tărâmului JavaScript, vor fi lămurite în mare amănunt, fiecare la timpul lor.
 
 Pentru a putea pătrunde aspectele de funcționare fără nici o altă întârziere, mai avem nevoie de ceva foarte important: instrumente de investigare. Odată revelate aceste instrumente, vom explora o secvență de cod pentru a vedea și cum trebuie să le manevrăm.
 
 ## O sondă în JavaScript
 
-Sonda despre care doresc să vorbim este un obiect cu care JavaScript vine în propriul bagaj și pe care-l vom folosi ca pe o sondă în codul pe care-l scriem. Este vorba despre `Console`. Acesta este instrumentul primar pentru inspectarea codului în vederea îndreptării erorilor sau pentru a sonda cine, ce conține sau cum arată. Browserul expune `console` ca `window.console`. Dar cum în practică `window` este ignorat, vom apela direct obiectul.
+Sonda despre care doresc să vorbim este un obiect cu care JavaScript vine în propriul bagaj și pe care-l vom folosi ca pe un instrument de investigare în codul pe care-l executăm. Este vorba despre `Console`. Acesta este instrumentul primar pentru inspectarea codului în vederea îndreptării erorilor sau pentru a sonda cine, ce conține sau cum arată. Browserul expune `console` ca `window.console`. Dar cum în practică `window` este ignorat, vom apela direct obiectul.
 
 Pentru a detecta valori sau pentru a inspecta anumite situații, cel mai ades vom folosi `console.log(expresie)` și / sau `console.dir()` iar atunci când avem nevoie de o afișare rapidă a felului cum s-a rulat o funcție, vom folosi `console.trace()`.
 
