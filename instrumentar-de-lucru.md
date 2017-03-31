@@ -172,7 +172,7 @@ Valoarea identificatorului nostru se reflectă și în cele ținute în evidenț
 
 ![Valoarea „undefined” a lui „a”, se reflectă și în evidențele lui „this” vizibil din panoul „Variables”](VariablesThisUndefined.png)
 
-Ce-o fi `this`?! Deocamdată este îndeajuns să-ți imaginezi că este un context de moment în care se execută un fragment de cod sau mai specific o funcție, de exemplu. Ca să-ți imaginezi mai simplu, `this` este un obiect agregat dinamic, care conține toți identificatorii necesari evaluării expresiilor și execuției unei funcții.
+Ce-o fi `this`?! Mai ții minte când spuneam că în JavaScript totul este un obiect și că din start totul este o proprietate a obiectului global (`window`)?! Atunci, explicația lui `this` e simplă: este referința către obiectul a cărui proprietate este de fapt funcția. Tradus în românește ar fi: „folosește ACEST obiect drept context în care mă execut eu ca funcție”.
 
 Putem privi `this` ca spațiul de unde tot codul rulat își ia valorile de care are nevoie pentru a rula. De exemplu, dacă o funcție este construită cu valorile 10 și 1000, ea, funcția se așteaptă ca aceste valori să fie disponibile deja undeva numai bune să le ia și să le folosească. Acest „undeva” este `this`. Ține minte că în afară de „undeva”, mai trebuie dată atenție și lui „cândva” (asta e o chestie faină care ține chiar de felul în care se rulează codul pe „linia timpului).
 
