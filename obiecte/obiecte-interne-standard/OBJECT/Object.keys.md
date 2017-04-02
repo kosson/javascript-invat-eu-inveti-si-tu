@@ -4,6 +4,6 @@ Această metodă returnează un array cu proprietățile enumerabile ale unui ob
 
 Sintaxă:
 
-```js
+```javascript
 Object.keys(obj);
 ```

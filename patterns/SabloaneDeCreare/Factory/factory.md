@@ -7,7 +7,7 @@ Este o funcție care creează și returnează un obiect.
 ## Mantre
  - creează și returnează un obiect
 
-```js
+```javascript
 var persoana = function(nume, prenume){
   return {
     nume: nume,

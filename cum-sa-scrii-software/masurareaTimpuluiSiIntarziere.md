@@ -2,7 +2,7 @@
 
 Atenție! Timerele/cronometrele lucrează și ele în același fir de execuție a JavaScriptului.
 
-```js
+```javascript
 let identificator = setTimeout(callback, 2000);
 ```
 
@@ -10,7 +10,7 @@ let identificator = setTimeout(callback, 2000);
 Timpul se măsoară în milisecunde, astfel că 2000 de milisecunde = 2 secunde.
 Pentru a opri, se folosește `clearTimeout(identificator)`.
 
-```js
+```javascript
 let identificator = setInterval(callback, 2000);
 ```
 

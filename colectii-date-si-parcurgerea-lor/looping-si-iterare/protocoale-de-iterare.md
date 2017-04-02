@@ -42,7 +42,7 @@ Pentru a fi iterabil, un obiect trebuie să implementeze metoda `@@iterator`, ce
 
 Exemplu pe `String` care este un exemplu de obiect iterabil construit în limbaj.
 
-```js
+```javascript
 var unSir = "un sir de caractere";
 typeof unSir[Symbol.iterator]; // "function"
 ```

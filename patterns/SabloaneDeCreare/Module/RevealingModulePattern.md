@@ -14,7 +14,7 @@ Avantajul este că sintaxa prezintă mult mai multă consistentă.
 
 La bază poate fi și un object literal:
 
-```js
+```javascript
 var Modul = {
   var metoda1: function(){},
   var metoda2: function(){}
@@ -23,7 +23,7 @@ var Modul = {
 
 Folosirea unei funcții permite declararea de „variabile private”.
 
-```js
+```javascript
 var Module = function(){
   var privat = "Sunt variabilă privată";
   return {
@@ -35,7 +35,7 @@ var Module = function(){
 
 Construirea acestui șablon pentru a returna selectiv:
 
-```js
+```javascript
 var Module = function(){
 
   var privat = "Sunt variabilă privată";
@@ -52,7 +52,7 @@ var Module = function(){
 
 ## Modelul „clasic” (Module) - funcție - nu permite modificarea
 
-```js
+```javascript
 var modul = (function(){
 
   var obiectIntern = {prop: "ceva"};
@@ -88,7 +88,7 @@ Astfel, pot fi ascunse toate detaliile de implementare și prin returnare (ca î
 
 ## Logica unui API.
 
-```js
+```javascript
 // oferit de Kyle Simpson
 var foo = (function(){
   var publicAPI = {
@@ -107,7 +107,7 @@ La momentul rulării, acest model permite modificări. Modelul anterior, clasic,
 
 Un modul poate avea puncte de legătură cu mediul înconjurător prin pasarea în IIFE a unor referințe către alte obiecte.
 
-```js
+```javascript
 (function($, Backbone){
   // codul modulului
 }(jQuery, Backbone));
@@ -115,7 +115,7 @@ Un modul poate avea puncte de legătură cu mediul înconjurător prin pasarea �
 
 ### Cum faci un mic plugin?
 
-```js
+```javascript
 var modul = (function(){
   var obiectDeReturnat = {
     membru: 'un membru public',

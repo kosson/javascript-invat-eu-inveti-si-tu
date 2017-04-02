@@ -8,7 +8,7 @@ Este o metodă care o aplici direct pe string. Acceptă un parametru numeric, ca
 - indexul se termină cu `identificatorSir.length - 1`;
 - dacă indexul este mai mare decât cel al șirului, va fi returnat un șir gol.
 
-```js
+```javascript
 var sir = "Acesta este un șir";
 
 sir.charAt(2); // "e"

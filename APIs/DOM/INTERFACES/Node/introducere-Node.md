@@ -1,6 +1,13 @@
-# Interfața Node
+# Interfața Node - fundamentală
 
-Node este o interfață de la care moștenesc o serie de tipuri DOM printre care Document, Element, CharacterData (which Text, Comment, and CDATASection inherit), ProcessingInstruction, DocumentFragment, DocumentType, Notation, Entity, EntityReference.
+Este considerată a fi o interfață fundamentală.
+În DOM, Node-ul este unitatea de bază pentru a accesa datele. Este un reper fix.
+
+Node este o interfață de la care moștenesc o serie de tipuri DOM printre care Document, Element, CharacterData (din care moștenesc la rându lor Text, Comment, and CDATASection), ProcessingInstruction, DocumentFragment, DocumentType, Notation, Entity, EntityReference.
+
+Standardul spune că această interfață este „tipul de dată primar pentru întreg DOM-ul”.
+
+Atenție, nu toate nodurile pot avea copii.
 
 ## Mantre
 

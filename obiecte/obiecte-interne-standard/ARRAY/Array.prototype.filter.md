@@ -9,7 +9,7 @@ Array-ul original nu este modificat.
 
 Înainte de a folosi filter așa cum este deja implementat, este util să vedem cum am construi de la 0 o astfel de funcționalitate.
 
-```js
+```javascript
 var colectie = ["prima", "a doua", "a treia", "a doua", "prima"];
 
 function filtrare(array, callback){       // este o funcție „pură”, adică nu modifică array-ului original
@@ -33,7 +33,7 @@ filtrare(colectie, function(element){  // invoci filtrarea cu un array și callb
 
 Cum ar funcționa același procedeu pentru un JSON?
 
-```js
+```javascript
 var colectie = [
   {"nume": "ISS", "tip": "stație", "viteza": 27000},
   {"nume": "Soyuz", "tip": "vehicul", "viteza": 21000},
@@ -67,7 +67,7 @@ Alături de `map()` și `reduce()` face parte integrantă din paradigma „progr
 
 Un exemplu de filtrare a tuturor valorilor care sunt adevărate, care conțin ceva:
 
-```js
+```javascript
 var data = [ "bar", "foo", "", 0 ],
     filtered = data.filter(function( item ){
       return !!item; // sunt returnate valorile „truthy”
@@ -79,7 +79,7 @@ console.log( filtered ); // ["bar", "foo"]
 
 De foarte multe ori este necesară parcurgerea unui obiect și extragerea elementelor comune.
 
-```js
+```javascript
 var colectie = [
   {nume: "ISS", tip: "statie"},
   {nume: "Soyuz", tip: "vehicul"},

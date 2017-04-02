@@ -11,7 +11,7 @@ Pe lângă argumente, poate seta legătura la un alt context (`this`).
 
 Nu modifică array-ul pentru care este apelată metoda.
 
-```js
+```javascript
 var inventory = [
   {name: 'apples', quantity: 2},
   {name: 'bananas', quantity: 0},
@@ -27,7 +27,7 @@ console.log(inventory.find(findCherries)); // { name: 'cherries', quantity: 5 }
 
 Un alt exemplu foarte simplu:
 
-```js
+```javascript
 let colectie = [23, 43, 123, 93, 234, 964];
 
 let pesteLimitaPrimul = colectie.find(element => element > 93);     // cauta primul element conform criteriului
@@ -37,7 +37,7 @@ console.log(pesteLimita, pesteLimitaIndex);                         // 123 2
 
 Mozilla MDN propune spre exemplificare un tester pentru prime:
 
-```js
+```javascript
 function isPrime(element, index, array) {
   var start = 2;
   while (start <= Math.sqrt(element)) {

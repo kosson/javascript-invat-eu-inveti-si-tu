@@ -17,7 +17,7 @@ Atunci când invoci o metodă folosind notația cu punct (dot notation), ai acce
 
 Pentru că sintaxa `[".."]` folosește valoarea unui **string**, acest lucru înseamnă că o secvență de cod poate fi folosită pentru a construi valoarea acelui string:
 
-```js
+```javascript
 var stegulet = true;
 var obiect = {
 	a: 2000
@@ -36,7 +36,7 @@ Dacă pentru accesare se va folosi orice altceva în afară de stringuri, număr
 
 ES6 introduce o nouă sintaxă care ușurează modul de redenumire dinamică a cheilor unui obiect. Până acum, acest lucru se făcea astfel:
 
-```js
+```javascript
 var numeCheieNou = "special";
 
 var obi = {
@@ -50,7 +50,7 @@ obi; // Object { cheie1: 10, cheie2: "ceva", special: 1000 }
 
 ECMAScript 2015 propune următoarea sintaxă:
 
-```js
+```javascript
 var numeCheieNou = "special";
 
 var obi = {

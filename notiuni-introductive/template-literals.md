@@ -2,7 +2,7 @@
 
 Începând cu ECMAScript 2015, stringurile literale pot fi numite și „șabloane literale”. Șabloanele literale oferă posibilitatea de a introduce text pus între semne backticks (\`text\`) în care se poate interpola rezultatul evaluării unei expresii folosind constructul `${oVariabilaSauExpresie}`.
 
-```js
+```javascript
 var a = 5;
 var b = 10;
 
@@ -13,7 +13,7 @@ console.log(`Cinsprezece este suma ${a + b} și\nnu ${2 * a + b}.`);
 
 O formă și mai avansată de template-uri literale este cea numită `tagged template literals`. Un simplu exemplu:
 
-```js
+```javascript
 var a = 0.5;
 var b = 10;
 

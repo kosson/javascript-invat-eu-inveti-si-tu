@@ -11,7 +11,7 @@ Ce poate fi considerat spații goale:
 
 Metoda returnează un nou string fără „spații goale”.
 
-```js
+```javascript
 var unsir  = ' ceva ',
     altsir = ' altceva';
     

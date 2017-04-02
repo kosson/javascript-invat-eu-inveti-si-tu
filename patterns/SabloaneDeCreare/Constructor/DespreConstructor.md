@@ -32,7 +32,7 @@ Este folosit pentru a creea noi obiecte care au propriul scope.
 
 Cea mai simplă formă este exprimată de exemplul de mai jos:
 
-```js
+```javascript
 function VehiculSpatial (param1, param2){
   this.nume = param1;
   this.viteza = param2;
@@ -50,7 +50,7 @@ Pentru a nu instanția de fiecare dată, cel mai bine este să le creezi în pro
 
 Un exemplu:
 
-```js
+```javascript
 var Sarcina = function(numeSarcina){
   this.nume = numeSarcina;
   this.terminat = false;
@@ -78,7 +78,7 @@ sarcina3.salveaza();
 
 Se poate testa în Nodejs 5 cu `'use strict'` iar în browser cu un transpiler precum Babel.
 
-```js
+```javascript
 'use strict'
 
 class VehiculSpatial {

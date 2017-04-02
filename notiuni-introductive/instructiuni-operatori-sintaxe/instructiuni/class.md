@@ -2,7 +2,7 @@
 
 Creează o clasă pe baza moștenirii prototipale.
 
-```js
+```javascript
 class test {
   constructor(){}
   actiune(){}
@@ -13,7 +13,7 @@ Spre deosebire de funcții, declarația de clasă nu beneficiază de mecanismul 
 
 Clasele pot fi extinse. Este indicată extinderea unei clase folosindu-se cuvântul cheie `extends`.
 
-```js
+```javascript
 'use strict'
 class Ceva {
   constructor(primo, secundo){
@@ -41,7 +41,7 @@ class Altceva extends Ceva {
 
 Expresia pentru clase în JavaScript este una din modalitățile prin care se pot declara clasele. Similar funcțiilor, clasele pot să aibe nume sau nu. Dacă poartă nume, acesta este disponibil în blocul de cod al clasei. Testul cu `typeof` va fi întotdeauna `function`.
 
-```js
+```javascript
 'use strict'
 var Test = class {};
 typeof Test; // "function"
@@ -52,7 +52,7 @@ Test instanceof Function; // true
 
 Un exemplu de clasă simplă:
 
-```js
+```javascript
 var Test = class test{
   constructor(){}
   salve(){

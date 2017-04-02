@@ -34,7 +34,7 @@ var aDoua = prima(20, 21); console.log(aDoua); // 41
 
 Cazul unei funcții care returnează altă funcție făcând o operațiune de currying:
 
-```js
+```javascript
 var inmultire = function (a){
   return function(b){
     return a*b;
@@ -46,7 +46,7 @@ oInmultire(2); // 20
 
 O funcție cu argumente care returnează o funcție care face closure peste parametrii funcției container. Aceasta face ceva cu datele iar apoi returnează rezultatul.
 
-```js
+```javascript
 var colectie = [
   {
     objId: 1,
@@ -85,13 +85,13 @@ colectie.filter(tipul("panou")); // Array [ Object, Object ]
 
 sau poți folosi `fat arrow`:
 
-```js
+```javascript
 var tipul = tip => dispozitiv => dispozitiv.tip === tip; // Array [ Object, Object ]
 ```
 
 pentru un aranjament vizual care explică mai bine lucrurile se poate scrie și astfel:
 
-```js
+```javascript
 var tipul =
       tip =>
         dispozitiv =>

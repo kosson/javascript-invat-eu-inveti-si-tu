@@ -16,7 +16,7 @@ Noul array constituit are fix același număr de obiecte precum cel prelucrat.
 
 ## Anatomie
 
-```js
+```javascript
 let colectie = [1, 'primul', true];
 colectie.map(function test(elem, index, array){
   console.log(typeof elem + ' ' + 'index: ' + index + ' ' + array + this);
@@ -29,7 +29,7 @@ boolean index: 2 1,primul,true[object Window]
  */
 ```
 
-```js
+```javascript
 let obi = {id: 'obiect 1', colectie: [1, 'primul', true]};
 obi.colectie.map(function test(elem, index, array){
   console.log('context: ' + this.id + ' ' + typeof elem + ' ' + 'index: ' + index + ' ' + array + this);
@@ -63,7 +63,7 @@ Opțional se mai poate pasa o valoare care să reprezinte `this` la executarea c
 
 Pentru a înțelege felul în care funcționează intern funcția map, este foarte util să construim de la 0 un utilitar care să facă exact același lucru precum map din prototipul lui Array.
 
-```js
+```javascript
 var colectie = ["prima", "a doua", "a treia", "a doua", "prima"];
 
 function mapper(array, callback){
@@ -111,7 +111,7 @@ function mapper(func, arr){
 
 Un exemplu super privind ce se poate obține folosind metoda este construirea unui mic utilitar care să transforme valorile unui obiect într-un șir url-encoded.
 
-```js
+```javascript
 var obiect = {paraunu: "unu", paradoi: "doi trei"};
 
 var stringCodat = Object.keys(obiect)
@@ -127,14 +127,14 @@ console.log(stringCodat); // paraunu=unu&paradoi=doi%20trei
 
 Callbackul poate fi și o metodă a unui obiect intern standard:
 
-```js
+```javascript
 var numereIntregi = [-2, 4, -23, 34];
 console.log(numereIntregi.map(Math.abs)); //Array [ 2, 4, 23, 34 ]
 ```
 
 ### Extragerea unui array dintr-o colecție de obiecte.
 
-```js
+```javascript
 var colectie = [
   {"nume": "Iulius", "id": 1},
   {"nume": "Alequin", "id": 2}
@@ -146,7 +146,7 @@ console.log(nume); // Array [ "Iulius", "Alequin" ]
 
 ### Folosirea metodelor obiectelor interne operând valori din obiecte
 
-```js
+```javascript
 var colectie = [
   {"nume": "Iulius", "id": 1},
   {"nume": "Alequin", "id": 2}
@@ -167,7 +167,7 @@ Metoda map trimite trei argumente callback-ului:
 
 Pentru acest fapt se poate realiza o împerechiere a elementelor din două array-uri diferite:
 
-```js
+```javascript
 var stanga  = ['Ileana', 'Anca'],
     dreapta = [21, 43];
 

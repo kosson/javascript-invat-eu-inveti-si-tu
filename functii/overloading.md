@@ -8,7 +8,7 @@ Tuturor funcțiilor le este pasat parametrul `arguments`.
 
 Un exemplu ar fi fuzionarea datelor a două obiecte distincte:
 
-```js
+```javascript
 var obiect1 = {nume: 'ISS'};
 var obiect2 = {tip: 'vehicul spațial', viteza: '270000', actiune: function(){console.log('ceva din obiect');}};
 
@@ -32,7 +32,7 @@ var obiectCompus = fuzioneazaObiecte(obiect1, obiect2);
 
 Ținta este să realizezi ceva diferit ori de câte ori numărul argumentelor este de o anumită valoare.
 
-```js
+```javascript
 var obiectCuMetodeConstruiteDinamic = {};
 
 var adaugMetoda = function(obiect, nume, functie){

@@ -22,7 +22,7 @@ Valoarea slotului intern [[Prototype]] a obiectului cu rol de prototype pentru O
 
 A. Crearea de obiecte goale
 
-```js
+```javascript
 var obiect = new Object();
 var object = new Object(null);
 var object = new Object(undefined);
@@ -30,7 +30,7 @@ var object = new Object(undefined);
 
 B. Crearea de obiecte de un anumit tip
 
-```js
+```javascript
 // crearea de obiecte Boolean
 var obiect = new Object(true);
 var object = new Object(Boolean());
@@ -48,7 +48,7 @@ Va creea un obiect având un obiect prototip și proprietăți care sunt specifi
 
 Să luăm un exemplu simplu care va descoperi anumite comportamente în cazul lui Object.
 
-```js
+```javascript
 var animal = {
   caracteristici: {}
 };                                    // Object.getPrototypeOf(animale) returnează prototype-ul lui Object
@@ -68,7 +68,7 @@ Ceea ce se întâmplă în acest caz este că obiectele nou create sunt la concu
 
 Pentru a evita un astfel de comportament, ai putea gândi că pentru fiecare obiect nou creat să setezi un obiect nou care că reprezinte atributele specifice ale fiecărui animal.
 
-```js
+```javascript
 var animal = {
   caracteristici: {}
 };
@@ -84,7 +84,7 @@ Acest exemplu este limitat, pentru că în cazul în care setezi obiectul caract
 
 Soluția este de a renunța la setarea completă a obiectului caracteristici și setarea specifică a fiecărei proprietăți a obiectului caracteristici pentru fiecare dintre posibilitățile contribuite de obiectele create.
 
-```js
+```javascript
 var animal = {
   caracteristici: {}
 };
@@ -100,7 +100,7 @@ Astfel, nu se vor mai înregistra schimbări în obiectul care servește drept p
 
 Plus de asta Object permite crearea unui obiect specificând în mod direct atributele fiecărui membru prin pasarea unui obiect de configurare.
 
-```js
+```javascript
 var animal = {
   caracteristici: {}
 };
@@ -113,7 +113,7 @@ var cangur = Object.create(animal, {caracteristici: {writable: true, configurabl
 
 Pentru a testa doar cheile care aparțin obiectului contruit fără proprietățile moștenite prin prototip se va testa dacă obiectul are proprietăți ale sale folosind `Object.prototype.hasOwnProperty`.
 
-```js
+```javascript
 "use strict";
 var obiect = { unu: "primul", doi: "al doilea" },
     cheie;
@@ -138,7 +138,7 @@ Metoda `Object.keys` extrage toate cheile proprii (nu cele moștenite) ale unui 
 Această metodă ne oferă un array de chei, care poate fi iterat prin metode așa cum este `Array.prototype.forEach`.
 Performanțele folosind această metodă sunt net superioare lui `hasOwnProperty`.
 
-```js
+```javascript
 "use strict";
 var obiect = { unu: "primul", doi: "al doilea" };
 
@@ -151,7 +151,7 @@ Object.keys(obiect).forEach(function(cheie){
 
 Această funcție controlează o proprietate a obiectului care se referă la posibilitatea ca un obiect să-i fie suprascrise proprietățile. Astfel, folosind această funcție, se poate preveni modificarea stării unui obiect.
 
-```js
+```javascript
 var test = {
   prop1: 10,
   prop2: function() {
@@ -169,7 +169,7 @@ Object.freeze() nu protejeaza obiectele care sunt proprietăți în obiectul în
 
 Înghețarea totală a unui obiect se poate face prin intermediul unei funcții dedicate:
 
-```js
+```javascript
 function deepFreeze(obj){
 
   // Adu numele proprietăților care sunt definite numai de obiect

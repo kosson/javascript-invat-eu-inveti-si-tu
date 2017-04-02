@@ -84,7 +84,7 @@ Obiectele pot fi create în două feluri: prin declararea acestora sau prin cons
 
 Această metodă este introdusă de ECMAScript 2015. De fapt, creezi obiecte literale, dar de această dată se pot introduce valori computate (computed property names) chiar la momentul în care este constituit obiectul.
 
-```js
+```javascript
 // cel mai simplu exemplu
 const a = 10;
 const b = 20;
@@ -122,7 +122,7 @@ Atributele unei proprități de tip Accessor
 
 Un exemplu practic:
 
-```js
+```javascript
 var newObj = {};              // Creează obiectul
 
 Object.defineProperty(newObj, 'numeCheieNoua', {
@@ -137,7 +137,7 @@ Object.defineProperty(newObj, 'numeCheieNoua', {
 
 O funcție care este declarată într-un obiect, devine metodă a acelui obiect. Atenție! este totuși o funcție în sine.
 
-```js
+```javascript
 var obi = {
   token: 10,
   faCeva: function faCeva(){
@@ -152,7 +152,7 @@ faCeva(); // faCeva is not defined
 
 Modalitatea de a crea o metodă într-un obiect este perfect echivalentă cu următoarea alternativă.
 
-```js
+```javascript
 var obi = {
   token: 10
 };
@@ -167,7 +167,7 @@ faCeva(); // faCeva is not defined
 
 Dar și această alternativă este perfect identică cu următoarea:
 
-```js
+```javascript
 var token = 1000;
 
 var obi = {
@@ -251,7 +251,7 @@ Un constructor, de fapt o funcție constructor, este un obiect funcție care sup
 
 Cel mai simplu exemplu:
 
-```js
+```javascript
 var Salut = function(){};                 // function Salut()
 
 Salut.prototype.glas = function(vorbe){
@@ -288,7 +288,7 @@ Cum testezi, cum întrebi care este prototipul unui obiect? Există două metode
 
 Funcțiile cu rol de constuctori pot defini întern metodele, iar acestea devin niște metode tip „accessor” sau „getter”, care te ajută să ajungi din scope-ul extern la valorile din constructor.
 
-```js
+```javascript
 function Sablon(){
   var cantitate = 10;
 
@@ -314,7 +314,7 @@ Pentru a ajunge la cantitate este nevoie de metode de acces („accessors”). A
 
 Un exemplu ceva mai dezvoltat.
 
-```js
+```javascript
 function Foo(who){
   this.me = who;
 }
@@ -342,13 +342,13 @@ a1.__proto__ === a2.__proto_;
 
 Un obiect poate fi creat foarte simplu folosind acoladele:
 
-```js
+```javascript
 var obiectNou = {};
 ```
 
 Ce s-a întâmplat chiar în acest moment este o legătură prototipală la Object.
 
-```js
+```javascript
 var obiectNou = {};
 obiectNou.__proto__.constructor // returnează: function Object()
 ```
@@ -358,7 +358,7 @@ obiectNou.__proto__.constructor // returnează: function Object()
 Este o metodă a lui Object introdusă de ES5.
 Permite atribuirea directă a unui prototip unui obiect eliberând prototipul de legătura cu, constructorul.
 
-```js
+```javascript
 var obiect;
 
 obiect = Object.create(null);   // pasarea lui null conduce la crearea unui obiect nou
@@ -370,7 +370,7 @@ obiect = Object.create(Object.prototype);
 
 Construirea unui prototip care să stea la baza unui nou obiect construit.
 
-```js
+```javascript
 var prototip = {
   prop1: "salut",
   prop2: function(){
@@ -393,7 +393,7 @@ Object.create permite inițializarea proprietăților obiectului folosind un arg
 
 Cu ajutorul lui Object.create() se poate realiza chiar și o moștenire prototipală „clasică”.
 
-```js
+```javascript
 var ObiectZero = function(){
   this.name = "Obiectul zero";
 };
@@ -419,7 +419,7 @@ ObiectTrei instanceof ObiectZero;  // true
 
 `Object.create` are posibilitatea de a adăuga și în același timp configura proprietăți ale obiectului. Este de fapt un caz de șablon Prototype.
 
-```js
+```javascript
 var vehicul = {
   getModel: function () {
     console.log('Modelul este: ' + this.model);

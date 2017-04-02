@@ -24,7 +24,7 @@
 
 Un Singleton este doar o structură.
 
-```js
+```javascript
 var VehiculSpatial = {
   id: '',
   functie: '',
@@ -42,7 +42,7 @@ console.log(VehiculSpatial.prezentare());
 
 Structura simplă de mai sus poate fi extinsă prin adăugare de membri și metode private prin încapsularea declarațiilor de variabile și funcții într-un clojure.
 
-```js
+```javascript
 var unSingleton = function(){
   /**
    * ZONA PRIVATA
@@ -75,7 +75,7 @@ Codul de instanțiere al unui Singleton se poate pune într-o altă funcție con
 
 ### 1. declară un IIFE
 
-```js
+```javascript
 var unSingleton = (function (){})();
 ```
 
@@ -88,7 +88,7 @@ Pe scurt:
 4. La final, funcția returnează un obiect cu o metodă care odată apelată ulterior, va încărca variabila cu o instanță a Singleton-ului, dacă aceasta nu există deja. Aceeași metodă, după instanțiere, returnează variabila purtătoare a instanței.
 5. Ajungi la atributele și metodele Singleton prin apelarea funcției returnate, care la rândul său returnează Singleton-ul instațiat deja.
 
-```js
+```javascript
 var unSingleton = (function (){
 
   var activ;                    // poarta instanta de Singleton
@@ -128,7 +128,7 @@ unSingleton.getInstance().metodaPublica();
 
 Atunci când un singur obiect este necesar pentru a coordona șabloanele întregului sistem.
 
-```js
+```javascript
 var TestSingleton = (function (){
 
   function Singleton(inputs) {        // inputs: e obiect de configurare pentru asemanator cu { name: 'ceva', pointX: 5}

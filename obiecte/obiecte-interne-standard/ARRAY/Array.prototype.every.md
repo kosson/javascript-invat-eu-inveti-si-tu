@@ -13,7 +13,7 @@ Metoda every execută callback-ul pentru fiecare element al array-ului până c�
 
 `every` nu modifică array-ul pentru care este apelată.
 
-```js
+```javascript
 function treceLimita(element, index, array) {
   return element >= 10;
 }

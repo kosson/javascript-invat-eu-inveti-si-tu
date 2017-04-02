@@ -79,7 +79,7 @@ Obiectul pasat ca și context, în fapt cel care constituie `this`, este, de fap
 
 **În cazul obiectului intern Math**
 
-```js
+```javascript
 var numere = [12, 43, 32, 3];
 
 var max = Math.max.apply(null, numere); // 43
@@ -91,7 +91,7 @@ var min = Math.min.apply(null, numere); // 3
 
 Putem crea un array „dens” (adică populat cu valori):
 
-```js
+```javascript
 Array.apply(null, Array(5)); // Array [ undefined, undefined, undefined, undefined, undefined ]
 ```
 

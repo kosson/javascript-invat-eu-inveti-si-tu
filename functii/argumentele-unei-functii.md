@@ -29,7 +29,7 @@ oFunctie(...argumente); // Array [ 4, 5, 6 ]
 
 Ceea se declară în interiorul funcției se numește **parametru**. Parametrii preiau valorile pasate prin intermediul argumentelor.
 
-```js
+```javascript
 function demo(param1, param2){ return param1 + param2 };
 // parametrii sunt declarațiile din funcție
 demo(1, 2); // argumentele este ceea ce pasezi funcției la invocare.
@@ -37,7 +37,7 @@ demo(1, 2); // argumentele este ceea ce pasezi funcției la invocare.
 
 La nevoie poți specifica strict numărul argumentelor primite:
 
-```js
+```javascript
 function faCeva(a,b){
   if(arguments.length !== 2){ // sintaxa spread
     throw new Error('Trebuie musai doar două argumente');
@@ -119,7 +119,7 @@ function convertireArgs(a, b){
 
 Acest lucru este posibil pentru că `arguments` este array-like și astfel, oferă o proprietate `length` pe care orice array o oferă.
 
-```js
+```javascript
 function cateSunt(){
   return arguments['length'];
 };
@@ -158,7 +158,7 @@ Sunt cazuri în care numărul argumentelor este mai mare decât cel al parametri
 
 Până la standardul ECMAScript 2015, JavaScript nu permitea colectarea unui număr variabil de argumente într-un singur parametru. Pentru a face acest lucru, se recurgea la un truc care exploata argumentul pasat automat `arguments`:
 
-```js
+```javascript
 function test(){
   var primulArg = arguments[0],
       alDoileaA = [].slice.call(arguments, 1);
@@ -187,7 +187,7 @@ Valorile corespondente vor fi atribuite iar parametrii care nu au valori, vor fi
 
 Până la noua versiune a ECMAScript, mai întâi se verifica în funcție dacă un anumit parametru este `undefined` iar dacă acesta era cazul, se inițializa cu o valoare. Acest lucru este posibil dacă ne readucem aminte faptul că și parametrii sunt identificatori în scope-ul funcției (`lexical environment`).
 
-```js
+```javascript
 var test = function(ceva){
   return ceva || 'Valoare implicită';
 };
@@ -215,7 +215,7 @@ Acesta este un șablon de lucru foarte important care permite utilizarea de valo
 
 Acest mic șablon se va schimba odată cu folosirea ECMAScript6, când se va putea seta valoarea implicită chiar la pasarea argumentelor:
 
-```js
+```javascript
 function test(ceva = "Valoare implicită"){
   return ceva;
 };

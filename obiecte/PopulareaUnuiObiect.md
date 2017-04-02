@@ -8,7 +8,7 @@ Odată ce poți crea un obiect, ai nevoie să-l faci funcțional populându-l.
 
 Toate alternativele de mai jos au același efect: creează un obiect gol.
 
-```js
+```javascript
 var obi = new Object();
 var obi = Object.create(null);
 var obi = {};
@@ -88,7 +88,7 @@ console.log(obi['primul lucru']); // o balenă
 
 ## Populare folosind notația cu punct - Dot notation
 
-```js
+```javascript
 var newObj = {};            // Creează obiectul
 newObj.oCheie = 'Salutare'; // Scrie proprietăți
 var cheie = newObj.oCheie;  // Accesează proprietățile
@@ -96,7 +96,7 @@ var cheie = newObj.oCheie;  // Accesează proprietățile
 
 ## Populare folosind sintaxa parantezelor drepte - Square bracket syntax
 
-```js
+```javascript
 var newObj = {};                // Creează obiectul
 newObj['oCheie'] = 'Salutare';  // Scrie proprietăți
 var cheie = newObj['oCheie'];   // Accesează proprietățile
@@ -104,7 +104,7 @@ var cheie = newObj['oCheie'];   // Accesează proprietățile
 
 ## Populare folosind `Object.defineProperty()`
 
-```js
+```javascript
 var newObj = {};              // Creează obiectul
 
 Object.defineProperty(newObj, 'numeCheieNoua', {
@@ -117,7 +117,7 @@ Object.defineProperty(newObj, 'numeCheieNoua', {
 
 Exemplul de mai sus ar putea fi rescris astfel:
 
-```js
+```javascript
 var newObj = {};              // Creează obiectul
 
 var defProp = function(obiect, cheie, valoare){
@@ -132,7 +132,7 @@ defProp(newObj, 'oAltaCheieNoua', 'an');    // mai adaugă o proprietate
 
 ## Populare folosind `Object.defineProperties()`
 
-```js
+```javascript
 Object.defineProperties(newObj, {
   'oCheie': {
     value: 'Salutare',
@@ -148,7 +148,7 @@ Object.defineProperties(newObj, {
 ATENȚIE!
 Folosirea unei funcții într-un obiect drept „metodă”, nu este decât apelarea unei funcții în cadrul obiectului. Nu se poate spune că obiectul „conține” funcția. Obiectul doar face o referință. Funcției cu rol de metodă i se pasează `this`, care este, de fapt obiectul în care este metodă.
 
-```js
+```javascript
 function actiune() {
 	console.log( "actiune" );
 }
@@ -166,7 +166,7 @@ obiect.acceasiActiune;	// function actiune(){..}
 
 ## Cum se șterge un membru al unui obiect
 
-```js
+```javascript
 var obi = {unu: 'ceva', doi: 'altceva', trei: 'diferit', patru: 'prop'};
 
 delete obi.doi;
@@ -201,7 +201,7 @@ obiect // Object { colectie: Array[2] }
 
 Reține faptul că funcțiile în JavaScript sunt obiecte și că, orice funcție în JS, poate face referință la variabile definite în scope-ul extern.
 
-```js
+```javascript
 function unObiect(){
   var oValoare;
   return {

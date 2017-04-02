@@ -1,6 +1,7 @@
 # `String.prototype.search()`
 
-Face o căutare pe șir după un regex.
+Face o căutare pe șir după un șablon construit cu un RegExp.
+
 Atunci când reușește o identificare, funcția returnează indexul primei identificări. Dacă nu face nicio identificare, returnează -1.
 
 ```javascript

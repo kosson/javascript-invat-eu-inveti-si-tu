@@ -16,7 +16,7 @@ Sunt create obiecte care devin prototipuri pentru alte obiecte. Obiectul prototi
 
 Implementarea lui șablonului Prototype fără a folosi Object.create().
 
-```js
+```javascript
 var prototipDeVehicul = {
   init: function (model) {
     this.model = model;
@@ -41,7 +41,7 @@ car.getModel();
 
 Implementarea șablonului Prototype folosind Object.create().
 
-```js
+```javascript
 var vehicul = {
   getModel: function () {
     console.log('Modelul este: ' + this.model);

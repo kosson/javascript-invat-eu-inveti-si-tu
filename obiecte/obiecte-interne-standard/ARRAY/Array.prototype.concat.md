@@ -2,7 +2,7 @@
 
 Realizează o „copie simplă” (shallow copy) formată din elementele array-ului asupra căruia se invocă metoda și elementele care se doresc a fi adăugate.
 
-```js
+```javascript
 var arr = [1, 2, 3];
 
 arr.concat(4, 5, 6);    // returnează Array [ 1, 2, 3, 4, 5, 6 ]
@@ -22,7 +22,7 @@ Elementele array-urilor originale sunt copiate în noul array format respectând
 
 Se poate chiar construi o funcție concat folosind slice, dar care să facă concat pe argumentele pasate.
 
-```js
+```javascript
 
 function concat () {
   return Array.prototype.slice.call(arguments).join(' ');

@@ -2,7 +2,7 @@
 
 Construiește și returnează un string nou făcut din concatenarea unui șir care se va repeta de câte ori o specifică parametrul.
 
-```js
+```javascript
 'abc'.repeat(-1);   // RangeError
 'abc'.repeat(0);    // ''
 'abc'.repeat(1);    // 'abc'

@@ -206,7 +206,7 @@ var circumferinta = (diametru) => diametru * 3.1415; circumferinta(2); /* 6.283,
 
 Începând cu EcmaScript 2015 (ES6), unui parametru îi poți atribui direct o valoare la momentul definirii:
 
-```js
+```javascript
 function facCeva(a, b = "o valoare"){
   return b;
 };
@@ -217,7 +217,7 @@ Parametrii pot fi mai mulți față de ceea ce o funcție poate primi. Fiecare v
 
 La invocarea unei funcții sunt primite tacit `this`, care formează contextul de execuție și `arguments`, care este un obiect. `arguments` seamănă cu array-urile prin faptul că pot fi accesate valorile în mod similar, dar nu este un array.
 
-```js
+```javascript
 (function adunare(){
   var cumulator = 0, i;
   for(i = 0; i < arguments.length; i++){
@@ -230,14 +230,14 @@ La invocarea unei funcții sunt primite tacit `this`, care formează contextul d
 
 ES6 introduce un nou parametru: `rest` care permite reprezentarea unui număr nedefinit de argumente ca un array.
 
-```js
+```javascript
 function operatiune(...argumente){
   console.log(argumente.length);
 };
 operatiune(23,145,83); // 3
 ```
 
-```js
+```javascript
 function operatiune(a, b, ...valori){
   console.log(a, b, valori.length);
 };
@@ -250,7 +250,7 @@ Diferențe dintre `arguments` și `rest`
 - array-ul rest poate fi folosit cu metode precum `forEach`, `sort`, `map` ori `sort`.
 - `arguments` este un obiect care are proprietatea `callee`
 
-```js
+```javascript
 // emularea lui rest - exemplu oferit de Mozilla Developer Network
 function f(a, b){
   var args = Array.prototype.slice.call(arguments, f.length);
@@ -299,7 +299,7 @@ Funcția `intern()` are posibilitatea de a accesa proprietățile funcției gazd
 
 Este un nou mod de notație introdus odată cu EcmaScript 2015. Acest nou tip de notație urmărește concizia. ATENȚIE! aceste funcții sunt legate de scope-ul lexical, asta însemând că `this` va fi același ca și cel din blocul părintelui.
 
-```js
+```javascript
 // un singur argument pasat (util în callbackuri)
 x => x + 1; // se face automat return
 

@@ -7,13 +7,13 @@ Pentru ca un eveniment să aibe loc, trebuie să spunem explicit acest lucru bro
 
 Un exemplu foarte simplu ar fi cel pe care practica îl indică ca fiind o cerință la momentul în care începi să scrii cod pentru client. Verifici dacă pagina s-a încărcat prin faimoasa secvență:
 
-```js
+```javascript
 window.onload = function(){}; // la încărcarea paginii execută funcția
 // DOM-ul este pregătit și pe deplin încărcat
 ```
 Și o variantă mai dezvoltată:
 
-```js
+```javascript
 function onReady(){
   console.log('Totul s-a încărcat');
 }
@@ -23,7 +23,7 @@ window.onload = onReady;
 
 Se pot atașa funcții direct unor proprietăți, dar această practică poate conduce la erori, suprascrieri de eveniment, ș.a.m.d. Cel mai bine este să se folosească metoda `addEventListener`:
 
-```js
+```javascript
 // poți atașa direct
 document.body.onclick = function(){};
 

@@ -7,14 +7,14 @@ Este o metodă folosită pentru a obține o reprezentare a obiectului ca un text
 - metoda returnează `[object type]`, unde `type` este tipul de obiect.
 - metoda poate fi suprascrisă
 
-```js
+```javascript
 var obiect = new Object();
 obiect.toString(); // este returnat [object Object]
 ```
 
 Folosirea lui `Object.prototype.toString()` cu `Function.prototype.call()` sau `Function.prototype.apply()`, permite identificarea tipului de obiect pentru care se face investigația.
 
-```js
+```javascript
 Object.prototype.toString.call(new Date);   // "[object Date]"
 Object.prototype.toString.call(new String); // "[object String]"
 Object.prototype.toString.call(Math);       // "[object Math]"

@@ -4,7 +4,7 @@ Umple un array cu o valoare fixă specificată pornind de la un index menționat
 
 Dacă indexul de start este un număr negativ, se va trata ca lungimea arrray-ului plus valoarea negativă a startului. Dacă limita este un număr negativ este tratat ca lungimea array-ului plus valoarea negativă.
 
-```js
+```javascript
 [1, 2, 3].fill(4);               // [4, 4, 4]
 [1, 2, 3].fill(4, 1);            // [1, 4, 4]
 [1, 2, 3].fill(4, 1, 2);         // [1, 4, 3]

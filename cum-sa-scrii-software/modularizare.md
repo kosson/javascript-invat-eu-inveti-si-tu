@@ -29,7 +29,7 @@ Cu ajutorul closure-urilor se poate scrie cod care să ruleze într-un mediu izo
 
 Cel mai simplu este de a „îmbrăca” codul într-o funcție anonimă autoexecutabilă, care are drept efect izolarea de Global space. Acest model stă la baza șablonului Module.
 
-```js
+```javascript
 // exemplu de closure anonim, adică Imediately Invoked Function Expressions - IIFE
 (function () {
 	// toate variabilele și funcțiile se află doar în acest scope
@@ -39,7 +39,7 @@ Cel mai simplu este de a „îmbrăca” codul într-o funcție anonimă autoexe
 
 Pornind de la acest model, se poat rula cod extern:
 
-```js
+```javascript
 (function($, Mootools){
   // acum ai acces la globalele jQuery ca prescurtarea $ și la Mootools
 }(jQuery, Mootools));
@@ -47,7 +47,7 @@ Pornind de la acest model, se poat rula cod extern:
 
 Se pot trimite referințe către alte obiecte de care este nevoie cum ar fi chiar `window`.
 
-```js
+```javascript
 (function(window, document, jQuery){
   // cod izolat de global scope.
 })(window, document, jQuery);
@@ -57,7 +57,7 @@ Se pot trimite referințe către alte obiecte de care este nevoie cum ar fi chia
 
 Motivul pentru care ai dori să trimiți window este pentru că ai dori să construiești un API chiar în window:
 
-```js
+```javascript
 (function(window, document, jQuery){
   // cod izolat de global scope.
 

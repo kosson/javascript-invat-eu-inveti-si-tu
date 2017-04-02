@@ -10,7 +10,7 @@ Este de dorit să fie evitată această practică în favoarea lui `Object.creat
 
 Valoarea returnată este chiar obiectul în sine.
 
-```js
+```javascript
 var obj = Object.setPrototypeOf({}, null); // are ca efect crearea unui obiect gol.
 ```
 

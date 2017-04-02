@@ -2,14 +2,14 @@
 
 Combină textul din două sau mai multe stringuri și returnează un string nou.
 
-```js
+```javascript
 var nucleu = "Salutare, ";
 console.log(nucleu.concat('prietene,', ' ce mai faci?')); // Salutare, prietene, ce mai faci?
 ```
 
 Același efect poate fi obținut cu următoarea secvență de cod, care de această dată construiește o funcție concat și care operează asupra array-like-ului `arguments`:
 
-```js
+```javascript
 function concat () {
   return Array.prototype.slice.call(arguments).join(' ');
 }
@@ -19,7 +19,7 @@ console.log(sirNou); // ceva text pentru a fi unit
 
 Folosirea `rest parameters`, adică o sintaxă ce permite extragerea unui Array din argumentele pasate unei funcții. Această sintaxă constă din adăugarea unui nume de parametru prefixat de trei puncte de suspensie. Această sintaxă generează un Array adevărat, nu un array-like așa cum este `arguments`.
 
-```js
+```javascript
 function concat (...argumentePasate){
   return argumentePasate.join(' ');
 };

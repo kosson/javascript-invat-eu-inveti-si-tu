@@ -41,13 +41,17 @@ Există câteva situații legate de modul de redactare a codului sursă care are
 
 1. Prin crearea unei funcții. În acest caz, variabilele declarate în interiorul funcțiilor sunt vizibile doar în interiorul funcțiilor și funcțiilor imbricate
 2. Prin declararea variabilelor cu `let` și `const` în interiorul unui bloc de cod delimitat de acolade `{}`.
-3. Prin crearea unui bloc `Try...Catch`.
+3. Prin crearea blocului `Catch`.
 
 ## Spune standardul
 
-Lexical environment este asociat cu structura lexicală a codului așa cum este declararea funcțiilor, blocurile de cod dintre acolade și secvența `Catch` din blocurile `Try...Catch`.
+Lexical environment este asociat cu structura lexicală a codului așa cum o dictează următoarele situații:
 
-Mediul lexical 0, cel după care nu mai există nimic, de fapt, este cel global, care este un spațiu, un **tărâm** comun tuturor elementelor unui program care vor fi evaluate. Acest mediu lexical 0 are un **environment record**, care este o înregistrare descriptivă a mediului lexical.
+- declararea funcțiilor,
+- blocurile de cod dintre acolade și
+- secvența `Catch` din blocurile `Try...Catch`.
+
+Mediul lexical 0, cel după care nu mai există nimic, de fapt, este cel global, care este un spațiu comun tuturor elementelor unui program care urmează să fie evaluate. Acest mediu lexical 0 are un **environment record**, care este un registru descriptiv al mediului lexical.
 
 Valorile lui **lexical environment** și a lui **environment record** sunt mecanisme interne stabilite de specificația standardului și este posibil să nu se regăsească în implementare. Le-am menționat pentru că lucrul cu JavaScript trebuie privit din perspectiva standardului și a mecanismelor descrise de acesta.
 

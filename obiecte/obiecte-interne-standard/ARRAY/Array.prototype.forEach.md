@@ -14,7 +14,7 @@ Opțional se mai poate pasa o valoare care să reprezinte ``this`` la executarea
 Metoda nu poate fi înlănțuită (chainable).
 Spre deosebire de map() și reduce(), forEach() returnează întotdeauna ``undefined``.
 
-```js
+```javascript
 function logArrayElements(element, index, array) {
   console.log('a[' + index + '] = ' + element);
 }

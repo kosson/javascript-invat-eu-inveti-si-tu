@@ -2,7 +2,7 @@
 
 Mai întâi de toate, te asiguri că pagina a fost încărcată și la fel și scripturile
 
-```js
+```javascript
 function onReady(){
   console.log('Totul s-a încărcat');
 }

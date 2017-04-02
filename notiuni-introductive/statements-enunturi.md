@@ -8,6 +8,6 @@ Enunțurile sunt separate prin punct și virgulă în JavaScript.
 
 Exemplu:
 
-```js
+```javascript
 var a = x + 1;
 ```

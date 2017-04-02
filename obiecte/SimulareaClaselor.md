@@ -6,7 +6,7 @@ Pentru cei care doresc forțarea conceptului de clasă, se pot folosi de funcți
 
 ### Funcție simplă
 
-```js
+```javascript
 function VehiculSpatial(identificator){
   this.id = identificator;
   this.functie = '';
@@ -28,7 +28,7 @@ console.log(Santinel.prezentare());
 
 ### Funcție simplă care are metode adăugate direct la prototip
 
-```js
+```javascript
 function VehiculSpatial(identificator){
   this.id = identificator;
   this.functie = '';
@@ -48,7 +48,7 @@ console.log(Santinel.prezentare());
 
 ### Folosirea unui obiect literal (în fapt, un Singleton)
 
-```js
+```javascript
 var VehiculSpatial = {
   id: '',
   functie: '',

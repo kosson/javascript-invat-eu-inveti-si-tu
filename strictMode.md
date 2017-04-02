@@ -4,6 +4,6 @@ A fost adăugat odată cu ES5 și are rolul de a modifica comportamentul motoare
 
 Pentru a activa acest comportament, pur și simplu se va introduce mențiunea pe prima linie a scriptului js.
 
-```js
+```javascript
 "use strict";
 ```

@@ -16,7 +16,7 @@ Funcția callback primește patru argumente și se va aplica pe fiecare element 
 
 Pentru a înțelege mai repede reduce, este util să reținem următoarea secvență de cod:
 
-```js
+```javascript
 ['unu', 'doi', 'trei'].reduce(function(acumulator, elementulDeLucru, index){
   return acumulator;
 },{});
@@ -39,7 +39,7 @@ Pe lângă callback mai poți da o valoare opțională, iar aceasta va fi folosi
 
 **Dacă nu este dată o valoare opțională, previousValue va fi prima valoare din array iar currentValue va fi cea de-a doua din array.**
 
-```js
+```javascript
 ['unu', 'doi', 'trei'].reduce(function(a, b){ return ceva; },{});
 
 // Prima dată, a va fi obiectul opțional {}, iar b va fi array[0], adică primul element din array
@@ -51,7 +51,7 @@ Pe lângă callback mai poți da o valoare opțională, iar aceasta va fi folosi
 
 Un exemplu de calcul pentru generarea unui obiect care să conțină pentru fiecare valoare a elementelor din array, pătratul lor
 
-```js
+```javascript
 [1,2,3,4,5].reduce(function(a, b){
   a[b] = b * b;
   return a;
@@ -71,7 +71,7 @@ Un exemplu de calcul pentru generarea unui obiect care să conțină pentru fiec
 
 Exemplul de mai jos ia un array și returnează un obiect. Se observă că fiecare element de array devine cheie în noile perechi create în obiect.
 
-```js
+```javascript
 var colectie = ['mânătărci', 'bureți', 'gălbiori', 'ghebe', 'mânătărci', 'bureți', 'gălbiori', 'mânătărci'];
 
 /** 1. Varianta amănunțită */
@@ -106,7 +106,7 @@ numaraDuplicatele(); // Object { mânătărci: 3, bureți: 2, gălbiori: 2, gheb
 
 ### Ordonarea cuvintelor după litera cu care încep - dicționar
 
-```js
+```javascript
 var colectie = ["Constanța", "Bărcănești", "Sinaia", "Călimănești", "Bacău", "Oradea", "Cluj", "Baia Mare"];
 
 var alfabetic = colectie.reduce(function(acumulator, cuvant){
@@ -123,7 +123,7 @@ var alfabetic = colectie.reduce(function(acumulator, cuvant){
 
 ### Reduce pentru selectare după criterii specificate printr-un obiect opțional.
 
-```js
+```javascript
 var colectie = [
   {clasa: 'cervide', sex: 'masculin', varsta: 10},
   {clasa: 'cervide', sex: 'masculin', varsta: 8},
@@ -142,7 +142,7 @@ colectie.reduce(function(colectie, element, index){
 Dacă array-ul este gol și nu este dată o valoare de pornire initialValue, atunci va fi emisă o eroare TypeError.
 Dacă array-ul are o singură valoare indiferent de poziția acesteia și nu este oferită o valoare initialValue sau dacă initialValue este dată, dar array-ul este gol, atunci valoarea unică va fi returnată fără a fi invocat callback-ul.
 
-```js
+```javascript
 [0, 1, 2, 3, 4].reduce(function(previousValue, currentValue, currentIndex, array) {
   return previousValue + currentValue;
 }); // 10
@@ -159,13 +159,13 @@ Rezultatul lui reduce este la final 10.
 
 Varianta ES6 a aceleiași funcții reduce arată astfel:
 
-```js
+```javascript
 [0, 1, 2, 3, 4].reduce( (prev, curr) => prev + curr );
 ```
 
 Dacă s-ar oferi o valoare inițială ca al doilea argument:
 
-```js
+```javascript
 [0, 1, 2, 3, 4].reduce(function(previousValue, currentValue, currentIndex, array) {
   return previousValue + currentValue;
 }, 10);
@@ -180,7 +180,7 @@ Dacă s-ar oferi o valoare inițială ca al doilea argument:
 
 ### Însumarea valorilor dintr-un array:
 
-```js
+```javascript
 var total = [0, 1, 2, 3].reduce(function(a, b) {
   return a + b;
 }); // total 6
@@ -188,14 +188,14 @@ var total = [0, 1, 2, 3].reduce(function(a, b) {
 
 ### Aplatizarea unui array de array-uri:
 
-```js
+```javascript
 var plat = [[0, 1], [2, 3], [4, 5]].reduce(function(previousValue, currentValue) {
   return previousValue.concat(currentValue);
 }, []);
 // flattened is [0, 1, 2, 3, 4, 5]
 ```
 
-```js
+```javascript
 var texte = [["Gică", "Georgică"], "Abramburica", ["Nadia", "Ana"]].reduce(function(previousValue, currentValue, currentIndex, array){
   return previousValue.concat(currentValue);
 }, []);
@@ -204,7 +204,7 @@ texte ; // Array [ "Gică", "Georgică", "Abramburica", "Nadia", "Ana" ]
 
 #### Contopirea a două array-uri variantă cu functor
 
-```js
+```javascript
 var colectii = [["unul", "altul", "cineva"], ["munte", "șes", "podiș"]];
 // var secundo = ;
 
@@ -221,7 +221,7 @@ Folosirea de `rest parameters`, adică o sintaxă ce permite extragerea unui Arr
 
 Un exemplu de transformare a funcționalității unei funcții construite clasic, care face suma tuturor argumentelor (`arguments`) cu excepția primului, care va fi folosit drept multiplicator pentru suma obținută. Acest exemplu este oferit de Nicolás, un consultant JavaScript din Buenos Aires, Argentina în explicarea conceptelor noi pe care le introduce ECMAScript 2015 - [ES6 Spread and Butter in Depth](https://ponyfoo.com/articles/es6-spread-and-butter-in-depth)
 
-```js
+```javascript
 function faSumaSiDubleaza(){
 
   var setNumere = Array.prototype.slice.call(arguments); // constituie array-ul transformand arguments; slice „taie” de la 0 până la capăt
@@ -255,7 +255,7 @@ Condiții:
 - NU -> returnează valoarea lui celMaiLung
 - Aceeași operațiune de comparare se face pentru toate elementele array-ului cu valoarea găsită anterior până când este păstrată cea mai mare.
 
-```js
+```javascript
 var colectie = ['ceva', 'altceva', 'telejurnal', 'agave'];
 
 function cautaSirLung(colectie){
@@ -273,7 +273,7 @@ cautaSirLung(colectie); // telejurnal
 
 Varianta folosind reduce:
 
-```js
+```javascript
 function cautaSirLung(colectie){
   return colectie.reduce(function(celMaiLung, valoareCurenta){
     return valoareCurenta.length > celMaiLung.length ? valoareCurenta : celMaiLung;
@@ -285,7 +285,7 @@ cautaSirLung(colectie); // telejurnal
 
 Acum ar fi util să cunoaștem indexul celui mai lung șir de caractere.
 
-```js
+```javascript
 function cautaSirLung(colectie){
   return colectie.reduce(function(celMaiLung, valoareCurenta, index){
     return valoareCurenta.length > celMaiLung.valoare.length ? {index: index, valoare: valoareCurenta} : celMaiLung;

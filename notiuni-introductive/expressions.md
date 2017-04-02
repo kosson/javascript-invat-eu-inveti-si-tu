@@ -4,7 +4,7 @@ Afirmațiile sunt construite din mai multe expresii.
 
 În cazul afirmației de mai jos:
 
-```js
+```javascript
 var a = b * 3;
 ```
 
@@ -17,7 +17,7 @@ var a = b * 3;
 
 este o expresie de sine stătătoare precum
 
-```js
+```javascript
 a * 4;
 ```
 

@@ -8,7 +8,7 @@ Declarațiile cu `const` nu beneficiază de mecanismul de hoisting.
 
 Poate fi folosit pentru a identifica setări precum URL-uri, accesse la baze de date, etc.
 
-```js
+```javascript
 const ceva = 'http://www.kosson.ro';
 ceva = "altceva" // TypeError: invalid assignment to const `ceva`
 ```
@@ -40,14 +40,14 @@ obi = {x: 'ceva nou'}; // TypeError: invalid assignment to const `obi'
 
 Putem inițializa o variabilă const și cu un array:
 
-```js
+```javascript
 const arr = [];
 arr.push("ceva"); // => 1; returnează dimensiunea array-ului
 ```
 
 Practica indică faptul că variabilele din global ar trebui scrise cu majuscule:
 
-```js
+```javascript
 const O_SETARE_CEVA = true;
 ```
 

@@ -3,7 +3,7 @@
 Este returnat indexul unui element al array-ului dacă elementul din array satisface anumite condiții de test.
 În caz contrar, adică elementul nu este găsit, este returnat -1.
 
-```js
+```javascript
 function isPrime(element, index, array) {
   var start = 2;
   while (start <= Math.sqrt(element)) {

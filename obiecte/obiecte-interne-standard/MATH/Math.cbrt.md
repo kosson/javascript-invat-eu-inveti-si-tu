@@ -2,7 +2,7 @@
 
 Returnează rădăcina cubică (radical în baza 3) a unui număr.
 
-```js
+```javascript
 Math.cbrt(-1); // -1
 Math.cbrt(0);  // 0
 Math.cbrt(1);  // 1

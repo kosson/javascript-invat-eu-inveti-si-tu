@@ -2,7 +2,7 @@
 
 Faci o căutare într-un string după un Regex. Regexurile sunt șabloane care spun ce trebuie găsit într-un șir de caractere.
 
-```js
+```javascript
 var continut = 'Acesta este un text demonstrativ versiunea 0.0.1';
 var reg = /demonstrativ (versiunea \d+(\.\d*))/i;
 var ceAgasit = continut.match(reg);

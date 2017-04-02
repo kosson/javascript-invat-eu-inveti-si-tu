@@ -15,7 +15,7 @@ console.log(/^.$/u.test(exemplu)); // true, fanionul este ridicat pentru Unicode
 Expresiile regulate sunt șabloane folosite pentru a căuta combinații de caractere în șiruri.
 Expresiile regulate pot fi construite, fie cu ajutorul unui constructor, ori pot fi expresii literale în sine.
 
-```js
+```javascript
 var exempluDeRegExp = new RegExp("ab+c", "g");
 var exempluDeRegExp = /ab+c/g;
 exempluDeRegExp.global; // true
@@ -43,13 +43,13 @@ Folosirea funcției constructor are ca efect compilarea la momentul rulării. Se
 
 Cel mai simplu exemplu este al unui șir exact (direct match), care să fie căutat în alt șir - `/abc/`
 
-```js
+```javascript
 "sa fie: abcd".match(/abc/); // Array ["abc"]
 ```
 
 Exemplul unui șir în care un anume caracter se repetă - `/ab*c/` : a este urmat de 0 sau mai mulți b
 
-```js
+```javascript
 var sir = "sa fie: abbbc";
 var reg = /ab*c/;
 var gasit = sir.match(reg);
@@ -60,7 +60,7 @@ console.log(gasit); // Array ["abbbc"]
 
 Un caz ar fi atunci când dorești să găsești mai multe fragmente într-un șir.
 
-```js
+```javascript
 var paginaWeb = '<a href="/undeva">resursă</a><link rel="stylesheet" href="/style.css"><script type="text/javascript" src="/js/main.js"></script>';
 var identificate = paginaWeb.match(/area|a|link|script|source/ig);
 console.log(identificate);
@@ -133,7 +133,7 @@ Avantajul grupării este că le poți aplica repetiții. În mod normal, repeti�
 
 Ca exemplu, putem construi un regex care să identifice o adresă web incluzând și protocolul.
 
-```js
+```javascript
 var adrese = '<a href = "http://www.kosson.ro">Un site interesant</a><link rel="stylesheet" href="https://cloudshare.io/main.css">';
 var identificare = adrese.match(/(?:https?)?\/\/[a-z][a-z0-9-]+[a-z0-9]+/ig);
 // (?:https?)? ?: spune că este un grup care nu trebuie capturat.
@@ -150,7 +150,7 @@ var identificare = adrese.match(/(?:https?)?\/\/[a-z][a-z0-9-]+[a-z0-9]+/ig);
 
 Gruparea permite o tehnică de apelare a grupului numită `backreferencing`. În cazul regexurilor, fiecărui grup îi sunt asignate numere de la stânga la dreapta începând cu 1. Se pot referenția aceste grupuri cu backslash număr.
 
-```js
+```javascript
 var sir = "Dorel era UN mare băiețel DE fel.";
 var identificare = sir.match(/(?:[A-Z])(?:[A-Z])\2\1/g);
 console.log(identificare);

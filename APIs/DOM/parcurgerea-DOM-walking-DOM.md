@@ -97,7 +97,7 @@ onload = function () {
 
 ## Parcurgerea DOM folosing o funcție generator.
 
-```js
+```javascript
 function* parcurgDOM(element){
   yield element;
   element = element.firstElementChild;

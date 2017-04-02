@@ -2,7 +2,7 @@
 
 Se referă la eliminarea complexității pe care o implică delegarea comportamentală prin intermediul obiectului prototype. Acest model a fost conceput de Kyle Simpson pentru a simplifica relațiile între obiecte între care totuși se stabilește o legătură.
 
-```js
+```javascript
 var Foo = {};
 
 var Bar = Object.create(Foo);
@@ -12,7 +12,7 @@ var b1 = Object.create(Bar);
 
 Secvența de mai sus creează același lanț de legături simple între obiecte fără a folosi obiectul prototype.
 
-```js
+```javascript
 var Foo = {
   init: function(who){
     this.me = who;

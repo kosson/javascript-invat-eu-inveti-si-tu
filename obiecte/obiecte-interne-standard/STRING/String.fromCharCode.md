@@ -4,6 +4,6 @@ Este o metodă care returnează un string, nu un obiect String. Parametrii sunt 
 
 Returnează un string:
 
-```js
+```javascript
 String.fromCharCode(65, 66, 67);  // "ABC"
 ```

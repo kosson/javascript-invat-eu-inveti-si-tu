@@ -31,7 +31,7 @@ Acest operator folosește protocolul de iterare ceea ce înseamnă că obiectele
 
 Permite expadarea unei expresii în locuri în care argumente multiple sau elemente multiple sunt așteptate să existe.
 
-```js
+```javascript
 var obiecte = ['pixuri', 'creioane'];
 var birou = ['lampă', ...obiecte, 'scaun', 'tușieră'];
 birou; // Array [ "lampă", "pixuri", "creioane", "scaun", "tușieră" ]
@@ -40,7 +40,7 @@ birou; // Array [ "lampă", "pixuri", "creioane", "scaun", "tușieră" ]
 Permite transformarea unor obiecte array-like precum `arguments` și `NodeList` în array-uri adevărate.
 Anterior existenței acestui operator, aceste transformări se făceau cu prin aplicarea lui `slice` cu un `call`:
 
-```js
+```javascript
 Array.prototype.slice.call();
 ```
 
@@ -78,7 +78,7 @@ Această copiere în cazul elementelor care sunt obiecte, se face prin referinț
 
 ## Transformarea argumentelor unei funcții într-un array
 
-```js
+```javascript
 function transforma(){
   return [...arguments];
 };
@@ -95,7 +95,7 @@ transforma("unu","doi",3); // Array [ "unu", "doi", 3 ]
 
 Acest lucru este posibil pentru că `NodeList` permite protocolul de iterare. Efectul este convertirea unui `NodeList` într-un Array.
 
-```js
+```javascript
 function colectDivs(){
   return [...document.querySelectorAll('div')];
 };
@@ -109,7 +109,7 @@ var divuri = Array.from(document.querySelectorAll('div'));
 
 ## Pasarea către metode ale obiectelor interne
 
-```js
+```javascript
 let numbers = [23, 400, 6, 1021];
 Math.min(...numbers); // 6
 ```

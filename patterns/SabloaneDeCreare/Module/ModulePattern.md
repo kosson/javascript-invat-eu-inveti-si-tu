@@ -22,7 +22,7 @@ O cale simplă de a incapsula metode. Poate fi considerat o cutie cu scule. O co
 
 Exemplu de sintaxa de object literal pentru un modul.
 
-```js
+```javascript
 var Modul = {
 
   // o proprietate simpla

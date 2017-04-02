@@ -8,7 +8,7 @@ Diferențele între paradigma orientată pe obiecte și cea funcțională:
 
 În cazul obiectelor avem metodele, care transformă și lucrează cu starea obiectului exprimată prin `this`.
 
-```js
+```javascript
 faCeva: function faCeva(){
   return this.primo + this.secundo;
 }
@@ -40,7 +40,7 @@ Ascunderea datelor și a comportamentelor este felul în care pot fi privite fun
 
 Un exemplu este o funcție care primește o funcție ca argument și returnează o altă funcție.
 
-```js
+```javascript
 function oFunctie (functie_primita){
   return function (array){
     return functie_primita.apply(null, array); // null setează obiectul context la global object (window, de regulă)
@@ -67,7 +67,7 @@ O funcție pură oferă același rezultat dacă folosește aceiați parametri. C
 
 Un exemplu care arată ce înseamnă ca o funcție să fie de primă clasă (first-class).
 
-```js
+```javascript
 var oFunctie = function(x,y){
   return x + y;
 };
@@ -83,7 +83,7 @@ demoFunctie(oFunctie, 2, 3); // 5
 
 Cel mai ușor de exemplificat este un currying:
 
-```js
+```javascript
 var oFunctie = function(x,y){
   return x + y;
 };
@@ -103,7 +103,7 @@ secundo // 5
 
 Un alt exemplu care implică și mapping:
 
-```js
+```javascript
 var colectie = [
   {ceva: 'Jenifer'},
   {ceva: 'dude'},
@@ -141,7 +141,7 @@ Regulile pe care le îndeplinește Array prin metoda sa map:
 - menține structura
 - valoare pe care o returneză map trebuie să fie un functor de același tip. Adică poți face chaining cu map (.map(//cod).map(// cod).map(// cod)).
 
-```js
+```javascript
 var colectie = [
   {nume: 'Tereza', chestie: 'expertă în HTML'},
   {nume: 'Ciprian', chestie: 'foarte bun cu CSS-ul'},

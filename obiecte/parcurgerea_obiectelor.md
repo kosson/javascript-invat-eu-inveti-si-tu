@@ -2,7 +2,7 @@
 
 Obiectele pot fi considerate a fi colecții de date
 
-```js
+```javascript
 "use strict";
 var obiect = { unu: "primul", doi: "al doilea" },
     cheie;
@@ -24,7 +24,7 @@ Este important de spus faptul că Object, ca și obiect intern standard JavaScri
 
 Metodele se vor apela cu `this`.
 
-```js
+```javascript
 function Obi(){
   let obi = new Object();
   obi.mesaj = function(){
@@ -56,7 +56,7 @@ Tot cu operatorul punct se pot apela metode ale obiectelor: `obiect.oMetoda()`.
 
 Operatorul punct lucrează cu proprietăți fixe. Operatorul paranteză pătrată permite să faci referință către o proprietate printr-o expresie.
 
-```js
+```javascript
 var obiect = { unu: "primul", doi: "al doilea" };
 obiect['u' + 'nu']; // "primul"
 // sau
@@ -66,28 +66,28 @@ obiect[cheieProprietate]; // "al doilea"
 
 Acest operator permite accesarea proprietăților a căror chei nu sunt și identificatori:
 
-```js
+```javascript
 var obiect = {'aceasta cheie nu este identificator': 10};
 obiect['aceasta cheie nu este identificator']; // 10
 ```
 
 Trebuie spus că operatorul paranteză dreaptă constrânge, transformă automat (coerce) ceea ce are în interior la string.
 
-```js
+```javascript
 var obiect = {23: 10};
 obiect[20 + 3]; // se rezolvă adunarea și se face constrângere la string
 ```
 
 Apelarea unei metode chiar se întâmplă:
 
-```js
+```javascript
 var obiect = {unu: 1, meto: function(){return 'ciao'}};
 obiect['meto'](); // "ciao"
 ```
 
 Se pot seta și proprietăți folosind notația paranteză pătrată la fel ca în cazul operatorului cu punct:
 
-```js
+```javascript
 var obiect = {unu: 1};
 obiect['doi'] = 2;
 obiect; // Object { unu: 1, doi: 2 }
@@ -95,7 +95,7 @@ obiect; // Object { unu: 1, doi: 2 }
 
 Se pot și șterge exact ca și în cazul operatorului cu punct:
 
-```js
+```javascript
 delete obiect['doi']; // true
 ```
 
@@ -103,7 +103,7 @@ delete obiect['doi']; // true
 
 Permite eliminarea unei proprietăți, adică a perechii cheie-valoare din obiect. `delete` are efect doar asupra proprietăților care aparțin obiectului (`own`). Prototipul nu este afectat. Delete returnează false dacă proprietatea nu poate fi ștearsă dar care este deținută de obiect, și va returna true dacă proprietatea a fost ștearsă cu succes.
 
-```js
+```javascript
 var obiect = {prima: 1, aDoua: 2};
 delete obiect.prima; // true
 console.log(obiect); // Object { aDoua: 2 }
@@ -113,7 +113,7 @@ Dacă o proprietate este ștearsă, atunci și cheia sa va fi ștearsă.
 
 Dacă o bibliotecă de cod ar introduce o proprietate nouă în prototipul obiectului general `Object`, atunci la parcurgerea obiectului, vom avea o proprietate suplimentară care apare.
 
-```js
+```javascript
 "use strict";
 var obiect = { unu: "primul", doi: "al doilea" },
     cheie;
@@ -143,7 +143,7 @@ DOM-ul este o colecție de noduri. Cel mai ades pentru accesarea informației di
 - document.getElementsByTagName,
 - document.querySelector (pot fi tag-uri, class, id-uri, attributes, pseudoclase, elemente).
 
-```js
+```javascript
 "use strict";
 var noduriDOM = document.querySelectorAll("div"),   // se constituie o colecție array-like
     arrayLike = Array.prototype.slice.call(noduriDOM);    // transformarea într-un array-like
@@ -155,7 +155,7 @@ arrayLike.forEach(function(element){
 
 Cu o simplificare:
 
-```js
+```javascript
 var noduriDOM = document.querySelectorAll("div"),   // se constituie o colecție array-like
     arrayLike = [].slice.call(noduriDOM);           // transformarea într-un array-like
 
@@ -175,7 +175,7 @@ Atenție, pentru că o țintire a elementelor de interes cu ajutorul lui querySe
 
 Țintele de selecție devin mult mai clare nefiind afectate de schimbările posibile aduse elementelor DOM sau CSS
 
-```js
+```javascript
 var lista = document.querySelector('[data-target=\"lista\"]');
 var colectia = document.querySelectorAll('[data-target=\"element\"]');
 
@@ -203,7 +203,7 @@ Alte operațiuni accesează doar proprietățile pe care obiectul le are fără 
 
 Atunci când folosești un obiect drept colecție (`map`), trebuie operat asupra lui cu mare atenție.
 
-```js
+```javascript
 var matrita = {proprietate: 'ceva'};
 var obiect = Object.create(matrita);
 
@@ -215,7 +215,7 @@ obiect.altaProprietate = 'altceva';
 
 Pentru a testa dacă o proprietate există se poate folosi operatorul `in`. Problema cu `in` este aceea că ia în calcul și ceea ce este în prototip, în cazul nostru în matrita.
 
-```js
+```javascript
 'altaProprietate' in obiect; // true
 // din nefericire in se uită și în prototip
 'toString' in obiect; // true -> e foarte rău pentru că se uită și în Object.prototype.
@@ -226,7 +226,7 @@ Pentru a testa dacă o proprietate există se poate folosi operatorul `in`. Prob
 
 Pentru a verifica dacă o proprietate aparține obiectului se va folosi `hasOwnProperty()`:
 
-```js
+```javascript
 obiect.hasOwnProperty('altaProprietate'); // true
 obiect.hasOwnProperty('proprietate'); // false
 obiect.hasOwnProperty('toString'); // false
@@ -237,7 +237,7 @@ obiect.hasOwnProperty('toString'); // false
 Dacă folosești un `for...in` vei obține toate cheile, adică și pe cele din prototip. Deci, nu funcționează corect.
 De ce se întâmplă acest lucru? Pentru că sunt luate în considerare și proprietățile moștenite prin prototip, care sunt setate ca `enumerable`. Motivul pentru care proprietățile lui Object nu apar este că acestea nu sunt `enumerable`.
 
-```js
+```javascript
 for (key in obiect) console.log(key);
 // altaProprietate
 // proprietate
@@ -247,7 +247,7 @@ for (key in obiect) console.log(key);
 
 Pentru a avea acces la cheile unui obiect și numai la cheile pe care respectivul obiect le deține, se va folosi `Object.keys`.
 
-```js
+```javascript
 Object.keys(obiect); // Array [ "altaProprietate" ]
 ```
 
@@ -255,7 +255,7 @@ Object.keys(obiect); // Array [ "altaProprietate" ]
 
 Dacă vrei să obții numele tuturor proprietăților, se va folosi `Object.getOwnPropertyNames(obiect)`;
 
-```js
+```javascript
 obiect.artefact = ['vază', 'statuetă'];
 Object.keys(obiect); // Array [ "altaProprietate", "artefact" ]
 ```
@@ -270,14 +270,14 @@ Operatorul cu punct nu poate fi folosit pentru că avem de a face cu diverse che
 
 Din nefericire, operatorul cu paranteză dreaptă ia în considerare și proprietățile moștenite.
 
-```js
+```javascript
 obiect['toString']; // function toString()
 ```
 
 Pentru că nu există o operațiune built-in pentru a citi doar proprietățile proprii. Este nevoie de a scrie o funcție care să facă chiar asta:
 This is not what we want. There is no built-in operation for reading only own properties, but you can easily implement one yourself:
 
-```js
+```javascript
 function accesProprietatiProprii(obiectul, proprietatea){
   return (obiectul.hasOwnProperty(proprietatea)) ? obiectul[proprietatea] : undefined;
 };
@@ -289,7 +289,7 @@ accesProprietatiProprii(obiect, 'toString');        // undefined
 
 Varianta de mai sus are o problemă atunci când o proprietate a obiectului se numește exact `hasOwnProperty`. Atunci aceasta va înceta să mai lucreze și este recomandabil să se facă un call().
 
-```js
+```javascript
 function accesProprietatiProprii(obiectul, proprietatea){
   return (Object.prototype.hasOwnProperty.call(obiectul, proprietatea)) ? obiectul[proprietatea] : undefined;
 };
@@ -299,7 +299,7 @@ function accesProprietatiProprii(obiectul, proprietatea){
 
 Acest mod de a crea un obiect este net superior celui normal și este cunoscut ca fiind „dict pattern”, adică șablonul de creare a unui dicționar.
 
-```js
+```javascript
 var obiect = Object.create(null); // asta înseamnă că Object.prototype este null
 obiect.__proto__ // undefined
 ```

@@ -3,7 +3,7 @@
 Metodata returnează valoarea rădăcinii pătrate a unui număr.
 Dacă se încearcă o valaore negativă, este returnat `NaN`.
 
-```js
+```javascript
 Math.sqrt(9); // 3
 Math.sqrt(2); // 1.414213562373095
 

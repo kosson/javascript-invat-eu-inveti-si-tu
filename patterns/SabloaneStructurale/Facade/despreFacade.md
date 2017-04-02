@@ -2,7 +2,7 @@
 
 Acest șablon oferă o interfață de nivel înalt la un corp mai mare de cod. Un șablon Facade ascunde complexitatea.
 
-```js
+```javascript
 var module = (function() {
 
   var privat = {

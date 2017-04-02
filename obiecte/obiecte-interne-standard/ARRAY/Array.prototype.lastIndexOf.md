@@ -4,7 +4,7 @@ Returnează ultimul index al unui element căutat în array. Returnează -1 dac�
 Opțional se poate menționa un al doilea parametru care indică indexul de unde să se facă căutarea pornind dinspre coadă.
 Din start acest parametru opțional este lungimea array-ului -1.
 
-```js
+```javascript
 var array = [2, 5, 9, 2];
 array.lastIndexOf(2);     // 3
 array.lastIndexOf(7);     // -1
@@ -16,7 +16,7 @@ array.lastIndexOf(2, -1); // 3
 
 ### Găsirea tuturor indicilor la care apare valoarea căutată
 
-```js
+```javascript
 var indices = [];
 var array = ['a', 'b', 'a', 'c', 'a', 'd'];
 var element = 'a';

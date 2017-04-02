@@ -12,7 +12,7 @@ Opțional se poate menționa de unde să se înceapă căutarea prin specificare
 
 ## Cazuistică lastIndexOf()
 
-```js
+```javascript
 // Caracterul sau fragmentul a fost identificat și se returnează valoarea de index al ultimei apariții în string
 'cevatext'.lastIndexOf('e');       // 5
 
@@ -36,7 +36,7 @@ Opțional se poate menționa de unde să se înceapă căutarea prin specificare
 
 ## Combinația dintre `substr` și `lastIndexOf`.
 
-```js
+```javascript
 var fileName = window.location.href;
 fileName = fileName.substr(fileName.lastIndexOf("/") + 1);
 document.write("The file name of this page is " + fileName);

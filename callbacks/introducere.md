@@ -14,7 +14,7 @@ Un callback este o funcție (un obiect, de fapt), care este pasată ca argument 
 
 În programarea funcțională, acest mod de a propaga rezultatul se numește „continuation-passing style” (CPS). Returnarea rezultatului dintr-o funcție se numește „direct style”.
 
-```js
+```javascript
 // exemplificare direct style versus continuation-passing style
 
 function adunare(a, b){
@@ -88,7 +88,7 @@ Reține faptul că de fiecare dată când intervalul presetat expiră, funcția 
 
 Cel mai simplu exemplu este oferit de execuția la un anumit moment în timp.
 
-```js
+```javascript
 function arataMesajul(mesaj){
   setTimeout(function(){
     alert(mesaj);
@@ -106,7 +106,7 @@ Sunt folosite în bibliotecile de cod pentru că oferă reutilizare. Permite ca 
 
 Un exemplu de folosire a callback-urilor în Node.js
 
-```js
+```javascript
 var fs = require('fs');
 
 var callback = function faCeva(error, data){  // o practică bună este a numi funcțiile pentru a le vedea în stivă

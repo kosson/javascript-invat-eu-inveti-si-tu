@@ -47,7 +47,7 @@ O astfel de funcție nu-și încheie execuția între cereri, doar o suspendă.
 
 Sunt funcții din care poți ieși și apoi reintra mai târziu în funcționarea programului. Ceea ce le face importante este faptul că rețin valorile între diferitele accesări.
 
-```js
+```javascript
 function* generator(){
   yield true;
 };
@@ -115,7 +115,7 @@ ziCeva.throw('Auleu, ceva e rău.');
 
 Constructul `for...of` trece prin generator și returnează chiar valorile existente.
 
-```js
+```javascript
 function* emiteFormule(){
   yield "Salutare!";
   yield "Hai noroc!";
@@ -140,7 +140,7 @@ Dacă creem o referință la funcție, putem parcurge valorile obiectului creat 
 
 Pentru exemplul de mai sus, să spunem că dorim să accesăm prima valoare. În acest caz, pur și simplu punem cursorul pe ea (o metodă oferită de iterator).
 
-```js
+```javascript
 function* emiteFormule(){
   yield "Salutare!";
   yield "Hai noroc!";
@@ -178,7 +178,7 @@ Explicație:
 
 Vom continua completând exemplul de mai sus.
 
-```js
+```javascript
 let obi;
 while( !(obi = refIterator.next()).done ){
   console.log(obi.value);
@@ -193,7 +193,7 @@ Noapte bună
 
 Modalitatea de a pargurge un generator cu o buclă `while` este mai greoaie față de ceea ce oferă `for...of`.
 
-```js
+```javascript
 function* emiteFormule(){
   yield "Salutare!";
   yield "Hai noroc!";
@@ -212,7 +212,7 @@ Noapte bună
 
 Dintr-un generator poți apela alte generatoare.
 
-```js
+```javascript
 function* traduceri(){
   yield 'Salut!';
   yield 'Holla!';
@@ -245,7 +245,7 @@ O chestie foarte faină care ține de felul în care funcționează generatoarel
 
 ### Parcurgerea DOM folosing o funcție generator.
 
-```js
+```javascript
 function* parcurgDOM(element){
   yield element;
   element = element.firstElementChild;
@@ -268,7 +268,7 @@ Reține faptul că funcțiile generator pot primi date și după ce au pornit ex
 
 Prima metodă de a trimite date în generator este prin intermediul argumentelor la invocare.
 
-```js
+```javascript
 function* faCeva(ceva){
   yield ("Cineva a primit " + ceva);
 };
@@ -285,7 +285,7 @@ console.log(afirm.value); // Cineva a primit o dudă
 Nu pot fi pasate valori la prima apelare a lui next() pentru că metoda next(), de fpat primite o valoare unui yield care așteaptă. Dacă nu există vreun yield care să aștept, nici valoare nu are cui să-i fie pasată.
 Valoarea pasată este folosită de generator ca valoare a întregii expresii yield în care a fost înghețat generatorul.
 
-```js
+```javascript
 function* faCeva(ceva){
   let intern = yield ("Cineva a primit " + ceva);
   yield ("Altcineva a primit " + ceva +  "\nValoarea lui next anterior este " + intern);

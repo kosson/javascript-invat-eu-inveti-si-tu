@@ -93,25 +93,25 @@ w(2, 2); // Array [ 2, 2 ]
 
 O funcție declarată clasic:
 
-```js
+```javascript
 [1,2,3].map(function (numar) { return numar * 2; });  // Array [ 2, 4, 6 ]
 ```
 
 Funcția anonimă folosită de `map`, se poate rescrie folosind „fat arrow” astfel:
 
-```js
+```javascript
 [1,2,3].map( numar => numar * 2 );
 ```
 
 Pentru a declara mai multe argumente se vor folosi parantezele:
 
-```js
+```javascript
 [1,2,3].map( (numar, index) => numar * 2 + index );
 ```
 
 Dacă este nevoie de mai multe expresii, nu numai să returnezi ceva simplu:
 
-```js
+```javascript
 [1,2,3].map( numar => {
   var multiplicare = 2 + numar;
   return numar * multiplicare;
@@ -120,7 +120,7 @@ Dacă este nevoie de mai multe expresii, nu numai să returnezi ceva simplu:
 
 Pentru a returna un obiect:
 
-```js
+```javascript
 [1,2,3].map( (numar, index) => ({numar: numar, indexul: index}) );
 ```
 

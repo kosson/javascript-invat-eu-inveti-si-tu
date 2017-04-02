@@ -12,14 +12,14 @@ Dacă separatorul este o expresie regulată care conține paranteze de captură,
 
 Setarea limitei este opțională. Este un număr întreg, care indică de câte ori va fi spart șirul.
 
-```js
+```javascript
 var arr = "unu,doi,trei,patru,cinci".split(",");
 console.log(arr); // Array [ "unu", "doi", "trei", "patru", "cinci" ]
 ```
 
 Dacă separatorul este o expresie regulată care conține paranteze, atunci, ori de câte ori se pace regăsirea după criteriile menționate de regex, rezultatele (plus cele undefined), dictate de paranteze, vor fi incluse în array-ul rezultat.
 
-```js
+```javascript
 var unsir = 'Acesta este un șir de test'
     altsir = 'Dac\'aterizezi, Pe o planetă, Unde-i frig, Și n-ai jachetă';
 
@@ -31,7 +31,7 @@ altsir.split(',', 2); // Array [ "Dac'aterizezi", " Pe o planetă" ]
 
 Folosirea unui regex pentru a extrage subșiruri.
 
-```js
+```javascript
 var sir = 'Gina ;Răzvan; Andrei ; Angela';
 var reg = /\s*;\s*/; // dacă întâlnești oricare dintre situațiile spațiu punct și virgulă și spațiu
 var arr = sir.split(reg); // taie după oricare dintre potriviri
@@ -40,7 +40,7 @@ console.log(arr); // Array [ "Gina", "Răzvan", "Andrei", "Angela" ]
 
 Folosirea unui regex cu paranteze pentru a extrage.
 
-```js
+```javascript
 var sir = 'Obiectivul 1 este atins. Dar ce este la 2 poate întârzia.';
 var reg = /(\d)/;
 console.log(sir.split(reg)); // Array [ "Obiectivul ", "1", " este atins. Dar ce este la ", "2", " poate întârzia." ]
@@ -48,7 +48,7 @@ console.log(sir.split(reg)); // Array [ "Obiectivul ", "1", " este atins. Dar ce
 
 Simpatică este inversarea caracterelor dintr-un șir. Pur și simplu, generezi un array dintr-un cuvânt nemenționând la delimitator vreun caracter, apoi aplici un reverse() (vezi Array.proptotype.reverse), după care faci un join (vezi Array.prototype.join).
 
-```js
+```javascript
 var sir = 'Abracadabra';
 var inversat = sir.split('').reverse().join();
 console.log(inversat); // a,r,b,a,d,a,c,a,r,b,A

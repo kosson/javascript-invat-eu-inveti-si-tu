@@ -41,7 +41,7 @@ Atenție, folosirea unui aceluiași identificator pentru o cheie, nu va crea una
 
 Lucrul cel mai folositor în cazul `Map` este posibilitatea de folosi funcțiile și obiectele ca și chei ale map-ului. Acest lucru nu este posibil în cazul obiectelor clasice pentru că avem toatea cheile exprimate ca și stringuri.
 
-```js
+```javascript
 var bibliotecaTest = new Map();
 
 bibliotecaTest.set(() => 10 + 1, 11);
@@ -66,7 +66,7 @@ bibliotecaTest.size; // 2
 
 Adaugă un element nou la un Map, adică o pereche cheie - valoare.
 
-```js
+```javascript
 var colectie = new Map();
 
 colectie.set('ceva', 'valoare');
@@ -81,7 +81,7 @@ colectie.get('ceva'); // 100
 
 Este evident că folosind delete se poate șterge o pereche, atenție întreaga pereche. Dacă dorești să verifici existența unei chei, vei folosi `has()` pentru a face interogarea asupra map-ului.
 
-```js
+```javascript
 var colectie = new Map();
 
 colectie.set('ceva', 'valoare');
@@ -100,7 +100,7 @@ Metoda este cât se poate de clară: șterge toate perechile din `Map`.
 
 Metoda returnează un obiect Iterator care conține perechi cheie - valoare pentru fiecare element din obiectul Map.
 
-```js
+```javascript
 var colectie = new Map();
 
 colectie.set('ceva', 'o valoare');
@@ -128,7 +128,7 @@ Callback-ul este invocat cu trei argumente:
 
 `forEach` execută o funcție vizitând fiecare element, dar nu va returna nicio valoare.
 
-```js
+```javascript
 // vezi ce este în fiecare element al Map-ului
 var colectie = new Map([['ceva', 10],['altceva', 'ceva text'],['x', {}]]);
 function ceEste(value, key, map){
@@ -143,7 +143,7 @@ Fiecare element într-o buclă este un array format din cheie, care este primul 
 
 Este o metodă care returnează un nou obiect iterator care conține cheile pentru fiecare element din obiectul Map în ordinea inserării.
 
-```js
+```javascript
 var colectie = new Map();
 
 colectie.set('ceva', 'o valoare');

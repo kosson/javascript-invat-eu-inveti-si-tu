@@ -9,7 +9,7 @@ Metoda primește doi parametri:
 
 Este returnat un obiect nou care are prototipul setat la obiectul care a fost menționat.
 
-```js
+```javascript
 var obiect = Object.create(null); // are drept efect crearea unui obiect nou.
 // Object.getPrototypeOf(produs2) => null. Atenție! Prototipul este null
 
@@ -20,7 +20,7 @@ var obiect = Object.create(Object.prototype);
 
 Adăugarea proprietăților în obiectul nou creat se poate face pasând cel de-al doilea parametru:
 
-```js
+```javascript
 var obiect = Object.create(Object.prototype, {
   oProprietate : {writable: true, configurable: true, value: 'ceva'},
   oMetoda : {
@@ -33,7 +33,7 @@ var obiect = Object.create(Object.prototype, {
 
 ## Cazul unui constructor
 
-```js
+```javascript
 function Constructor() {};
 
 var object = new Constructor();
@@ -43,7 +43,7 @@ var object = Object.create(Constructor.prototype);
 
 Din start, nicio proprietate nu este nici `writable`, nici `enumerable` și nici `configurable`:
 
-```js
+```javascript
 var obi = Object.create({},{
   x : {value: 1000}
 });
@@ -66,7 +66,7 @@ var obi = Object.create({},{
 
 Cu ajutorul lui `Object.create` poți face legătura directă la prototipul unui obiect. Este șablonul propus de Kyle Simpson - Object Linked To Other Objects
 
-```js
+```javascript
 var Foo = {};
 
 var Bar = Object.create(Foo);

@@ -4,7 +4,7 @@ Metoda returnează un nou șir care a incorporat modificări a unor părți care
 
 Pe scurt, ai un șir, faci o căutare după un alt șir sau RegExp și înlocuiești ceea ce ai găsit cu un alt șir sau rezultatul unei funcții.
 
-```js
+```javascript
 var continut = "Eu am fost trimis în lume";
 var deinlocuit = "parasutat";
 
@@ -15,7 +15,7 @@ console.log(noulcontinut); // Eu am fost parasutat în lume
 
 replace() poate folosi un regex pentru a face o înlocuire.
 
-```js
+```javascript
 var continut = "Acesta este un text demonstrativ";
 var noulContinut = continut.replace(/\w{4,}/ig, '****');
 console.log(noulContinut); // **** **** un **** ****
@@ -23,7 +23,7 @@ console.log(noulContinut); // **** **** un **** ****
 
 Un exemplu util ar fi căutarea și înlocuirea într-o sursă html a unui tag și înlocuirea cu un altul.
 
-```js
+```javascript
 var sursa = '<html><head></head><body><p>Lorem ipsum <span>ceva</span> mai mult</p></body></html>';
 var modificat = sursa.replace(/<span>(.*)<\/span>/ig, '<strong>$1</strong>');
 console.log(modificat);
@@ -44,7 +44,7 @@ console.log(modificat3);
 
 ##### Folosirea regexurilor pentru a inversa două cuvinte
 
-```js
+```javascript
 var re = /(\w+)\s(\w+)/;
 var str = 'Nume Prenume';
 var newstr = str.replace(re, '$2, $1'); // observă faptul că poți modela șirul creat (a fost pusă o virgulă)
@@ -55,7 +55,7 @@ Pentru a înțelege ce este cu $1 și $2, vezi capitolul dedicat **Expresiilor R
 
 ##### Folosirea regexurilor pentru a transforma intern un șir (ex: borderTop în border-top; exemplu oferit de MDN)
 
-```js
+```javascript
 function styleHyphenFormat(propertyName) {
 
   // transformarea șirului în lowercase
@@ -85,7 +85,7 @@ Argumentele pe care le poate lua o funcție sunt după cum urmează:
 
 Mai jos este exemplul propus de Mozilla Developer Network pentru  [replace()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) .
 
-```js
+```javascript
 function replacer(match, p1, p2, p3, offset, string) {
   // p1 is nondigits, p2 digits, and p3 non-alphanumerics
   return [p1, p2, p3].join(' - ');
@@ -96,7 +96,7 @@ console.log(newString); // abc - 12345 - #$*%
 
 Un alt exemplu oferit de MDN este cel al transformării gradelor Celsius în grade Fahrenheit.
 
-```js
+```javascript
 function f2c(x) {
 
   function convert(str, p1, offset, s) {
@@ -123,7 +123,7 @@ console.log(Math.floor(nr)); // 121
 Am putea presupune că avem un dispozitiv, o funcție, etc., care produce semnale sau chiar scrie fragmente de text care să indice o stare.
 Exemplul de mai jos este preluat de la MDN, dar este adaptat.
 
-```js
+```javascript
 // va prelua un șir
 // va genera un array, care va converti informația brută din șir în informație descrisă
 var sir = "0100111010001";

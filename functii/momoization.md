@@ -2,7 +2,7 @@
 
 Construirea unei funcții care să țină minte valorile computate anterior. Ori de câte ori o funcție ajunge la un rezultat îl introduce în argumente. Astfel, ori de câte ori apare o invocare cu un același set de argumente, se va returna rezultatul fără a se mai face computația.
 
-```js
+```javascript
 function cautaCeva(valoare){
   if(!cautaCeva.rezultate){
     cautaCeva.rezultate = {}; // construiești o „memorie” a rezultatelor

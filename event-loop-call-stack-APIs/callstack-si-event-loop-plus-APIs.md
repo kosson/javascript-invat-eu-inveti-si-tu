@@ -22,7 +22,7 @@ Funcțiile în JavaScript permit argumente care la rândul lor sunt funcții. Nu
 
 Pentru programarea execuției unui callback după ce întreg programul a fost executat și stiva este goală se poate forța cu un setTimeout având al doilea argument 0.
 
-```js
+```javascript
 setTimeout(function cb(){
   console.log('după');
 }, 0);

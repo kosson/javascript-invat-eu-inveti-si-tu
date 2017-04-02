@@ -8,9 +8,9 @@ Pentru scopul de învățare a acestei lucrări, vom lua contact cu unul de baz�
 
 Aici puteți introduce fragmentele de cod pentru a urmări rezultatele și pentru a experimenta din curiozitate.
 
-Un alt instrument de test pentru cod este și Node.js, care odată instalat, poate fi utilizat ca un REPL foarte capabil. Acesta se folosește apelând comanda nodejs în Terminal. Odată apelată comada, se deschide consola Node.js. Nu uita, ca să o închizi dai de două ori CTRL + C.
+Un alt instrument de test pentru cod este și Node.js, care odată instalat, poate fi utilizat ca un REPL foarte capabil. Acesta se folosește apelând comanda nodejs în Terminal. Odată apelată comanda, se deschide consola Node.js. Nu uita, ca să o închizi dai de două ori CTRL + C.
 
-Pe lângă acestea mai există o suită de instrumente online pentru evaluarea codului JavaScript, care mai de care mai utile. Câteva exemple: repl.it, jsbin.com ori jsfiddle.net. La ce bune acestea? Vă oferă posibilitatea de a schița rapid cod pentru a fi testat.
+Pe lângă acestea mai există o suită de instrumente online pentru evaluarea codului JavaScript, care mai de care mai utile. Câteva exemple: repl.it, jsbin.com, jsfiddle.net sau codepen.io. La ce bune acestea? Vă oferă posibilitatea de a schița rapid cod pentru a fi testat.
 
 ## Locuitorii tărâmului
 

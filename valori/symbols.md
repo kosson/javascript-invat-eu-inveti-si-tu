@@ -6,7 +6,7 @@ Poate fi folosit ca și identificator al proprietăților unui obiect. Sintaxa e
 
 ATENȚIE! De fiecare dată când descriptorul este același, pentru două simboluri diferite, se vor crea două simboluri diferite.
 
-```js
+```javascript
 var simbol1 = Symbol('ceva');
 var simbol2 = Symbol('ceva');
 
@@ -18,7 +18,7 @@ ATENȚIE! Un symbol nu se va crea folosind `new`. Această încercare va avea dr
 Ca și string și number vine cu propriul obiect ambalaj `Symbols`.
 Se aseamănă cu String.,
 
-```js
+```javascript
 var simbolNou = Symbol();
 typeof simbolNou; // "symbol"
 ```
@@ -29,13 +29,13 @@ Există două metode prin care poți adăuga un `Symbol` în registrul global:
 - `Symbol.for(key)` și
 - `Symbol.keyFor(symbol)`
 
-```js
+```javascript
 Symbol.for('test') === Symbol.for('test'); // true
 ```
 
 Simbolurile pot fi privite ca niște etichete distincte care pot fi setate și accesate. Aceste etichete sunt autodescriptive, adică ceea ce introduci, șirul de caractere introdus, este și descrierea sa.
 
-```js
+```javascript
 let totem = Symbol.for("ursul carpatin");
 Symbol.keyFor(totem);
 ```
@@ -44,7 +44,7 @@ Unul dintre simbolurile folosite extensiv este `Symbol.iterator`. Acesta este fo
 
 ## Boxingul - „împachetarea” într-un obiect
 
-```js
+```javascript
 var x = Symbol('totem');
 typeof x; // "symbol"
 var ob = Object(x);

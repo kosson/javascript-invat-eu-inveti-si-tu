@@ -79,7 +79,7 @@ Cele două funcții realizează un binding explicit a funcției cu un nou contex
 
 Poți invoca rapid prin evaluarea `truthy` sau `falsy` a unei expresii.
 
-```js
+```javascript
 var testVal = 200;
 testVal >= 150 && console.log("Acest mesaj va apărea dacă evaluarea lui testVal este truthy");            // Acest mesaj va apărea dacă evaluarea lui testVal este truthy
 testVal >= 150 || console.log("Acest mesaj va apărea doar dacă evaluarea din left-hand-side este true");  // true
@@ -90,7 +90,7 @@ testVal >= 150 || console.log("Acest mesaj va apărea doar dacă evaluarea din l
 
 Un alt caz este apelarea unui callback:
 
-```js
+```javascript
 function tester(callback){
   callback && callback();
 };

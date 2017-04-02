@@ -4,7 +4,7 @@ Trebuie reținut faptul că în JS mai totul este un obiect.
 
 Pentru a acoperi câteva concepte importante ale programării orientate pe obiecte, vom imagina o aplicație care preia câteva informații dintr-un array din care afișează pe ecran ultimele 5 câte una la 2 secunde.
 
-```js
+```javascript
 var domeniulMeu = domeniulMeu || {};
 domeniulMeu.Date = domeniulMeu.Data || {};
 domeniulMeu.Date.evenimente = ['ceva important', 'mondenități', 'eveniment politic'];

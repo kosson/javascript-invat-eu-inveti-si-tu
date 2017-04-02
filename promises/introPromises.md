@@ -14,7 +14,7 @@ Pentru a construi o promisune se va folosi constructorul Promise căruia îi pas
 
 La apelarea cu new, constructorul Promise creează un obiect care are o metodă `then`. Metoda `then` primește două funcții callback: `success` și `failure`. Callback-ul success este invocat dacă promisiunea se rezolvă cu succes, adică dacă funcția resolve este invocată pentru acea promisiune. În caz contrar, se invocă error.
 
-```js
+```javascript
 let promisiune = new Promise((resolve, reject) => {
 
   // scrii cod care face ceva și apoi condiționezi rezolvarea

@@ -2,14 +2,14 @@
 
 Metoda este folosită pentru a vedea dacă valoarea pasată este un array.
 
-```js
+```javascript
 var test = ['unu', 'doi', 'trei', 'patru'];
 Array.isArray(test); // true
 ```
 
 Returnează true dacă valoarea pasată este array și false dacă nu.
 
-```js
+```javascript
 Array.isArray([]);
 Array.isArray([1]);
 Array.isArray(new Array());

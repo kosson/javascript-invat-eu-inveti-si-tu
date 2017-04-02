@@ -40,7 +40,7 @@ Closure este atunci când o FUNCȚIE ține minte scope-ul lexical chiar și atun
 
 Simplist poți spune că un closure se formează atunci când o funcție returnează o alta pe care a găzduit-o sau când există o referință externă la funcția internă. Acest lucru înseamnă că această funcție poate fi invocată la un moment viitor.
 
-```js
+```javascript
 function closureEx(){
   var a = 'ceva';
   function logger(valoare){
@@ -53,7 +53,7 @@ closureEx();
 
 Returnarea unei funcții care va deveni valoarea unei variabile.
 
-```js
+```javascript
 function closureEx(){
   var a = 'ceva';
   return function(valoare){
@@ -68,7 +68,7 @@ cheama.toString();        // "function (valoare){ console.log(a);}"
 
 La nevoie, se poate executa funcția returnată fără a mai fi asignată.
 
-```js
+```javascript
 closureEx()();
 ```
 
@@ -107,7 +107,7 @@ Un closure, are acces la:
 
 ### La ce avem acces:
 
-```js
+```javascript
 var extern = 1000;
 
 function gazda(par){
@@ -136,7 +136,7 @@ Closure-urile întâlnite în practica curentă se fac prin returnarea unei func
 
 ### Closure fără a returna
 
-```js
+```javascript
 function faCeva(){
   var interna = 10;
   function plasa(val){
@@ -153,7 +153,7 @@ Pentru ca un closure să se formeze nu este neapărat nevoie să se facă un `re
 
 Execuția funcției interne se va face din extern, nu prin execuția containerului.
 
-```js
+```javascript
 var externa = 'ceva extern';
 var referintaCatreIntern;
 
@@ -179,7 +179,7 @@ referintaCatreIntern(container());
 
 Cazul cel mai simplu este al unei funcții returnate care păstrează referințele către toți identificatorii din propriul scope, dar și scope-ul părinte. Aici se observă cât de intim conceptul de closure este legat de cel al scope-ului (lexical environment) creat la momentul procesării codului sursă (**function code**).
 
-```js
+```javascript
 function gazda(ceva){
   return function(altceva){
     console.log(this);
@@ -196,7 +196,7 @@ faAltceva(0);                     // "x și 0"
 
 Un caz ceva mai elaborat este cel al creării de obiecte noi folosind constructori.
 
-```js
+```javascript
 function Lansare(data){
   var altitudine = 0;
   const viteza = 11;
@@ -236,7 +236,7 @@ Reține faptul că în cazul în care este nevoie poți atribui metoda unui obie
 
 Pentru a înțelege exemplul de mai jos, nu uita faptul că funcțiile în JavaScript sunt obiecte și că, orice funcție în JS, poate face referință la variabile definite în scope-ul extern.
 
-```js
+```javascript
 function unObiect(){
   var oValoare;
   return {
@@ -256,7 +256,7 @@ La invocarea lui `unObiect`, s-a returnat obiectul care are trei closure-uri (se
 
 Asemănător, se pot declara variabile care să fie referințe către funcții declarate în interiorul unei funcții gazde.
 
-```js
+```javascript
 var set, get, tip;
 function gazda(){
   var interna = 1000;
@@ -283,7 +283,7 @@ John Resig aduce acest caz de closure format la crearea unui obiect pe baza unei
 
 Funcțiile cu rol de constructori pot defini întern metodele, iar acestea devin niște metode tip „accessor” sau „getter”, care te ajută să ajungi din scope-ul extern la valorile din constructor.
 
-```js
+```javascript
 function Sablon(){
   var cantitate = 10;
 
@@ -314,7 +314,7 @@ Trebuie reținut faptul că pentru funcțiile din contructor, `this` este obiect
 
 Exemplu de referințe către obiecte care nu sunt un closure (prezentat de Kyle Simpson):
 
-```js
+```javascript
 var obiect = (function(){
   var o = {test: "test"};
   return {obj: o} // obj ține o referință către obiectul o
@@ -330,7 +330,7 @@ Este baza lui MODULE PATTERN prin care se realizează încapsularea și/sau ascu
 
 Cu ajutorul closure-urilor se poate scrie cod care să ruleze într-un mediu izolat, adică într-un closure. Acest closure, acest model de incapsulare a funcționalităților, durează câtă vreme rulează aplicația și oferă o zonă privată, care poate memora o stare. Un exemplu este o funcție anonimă executată imediat.
 
-```js
+```javascript
 // exemplu de closure anonim
 (function () {
 	// toate variabilele și funcțiile se află doar în acest scope
@@ -340,7 +340,7 @@ Cu ajutorul closure-urilor se poate scrie cod care să ruleze într-un mediu izo
 
 Pornind de la acest model, se poat rula cod extern:
 
-```js
+```javascript
 (function($, Mootools){
   // acum ai acces la globalele jQuery ca prescurtarea $ și la Mootools
 }(jQuery, Mootools));
@@ -353,7 +353,7 @@ Pornind de la acest model, se poat rula cod extern:
 Este considerată a fi o eroare crearea de closure-uri în bucle. De exemplu, în cazul buclelor cu for, bindingul se va face pe ultima valoare stabilită și aceasta va fi returnată.
 Pentru a soluționa problema, se va introduce bucla în funcția returnată:
 
-```js
+```javascript
 var colectie = ["Gino", "Rahan", "Mario"];
 function faCeva(nume, unArray){
     for(var i = 0; i < unArray.length; i++){

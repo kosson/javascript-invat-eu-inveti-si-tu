@@ -34,7 +34,7 @@ Sunt funcții care iau alte funcții drept argumente și returnează alte funcț
 
 Un exemplu de compunere (Bluebird),
 
-```js
+```javascript
 function compunere (a, b) { // ia două funcții a și b
   return function (c) {     // returnează o funcție care ia un argument folosit pentru una din funcții, și care la rândul său returnează
     return a(b(c));         // rezultatul evaluării lui a aplicată rezultatului evaluări lui b care ia ca argument c.

@@ -2,7 +2,7 @@
 
 Este o metodă statică a lui Math care rotunjește superior o valoare.
 
-```js
+```javascript
 Math.ceil(.73); // 1
 Math.ceil(12.0003); // 13
 ```

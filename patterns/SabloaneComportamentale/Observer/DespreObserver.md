@@ -4,7 +4,7 @@ Permite unui obiect (cunoscut și sub numele de abonat) să „observe” alt ob
 
 ## Metoda push
 
-```js
+```javascript
 var Observable = function (){
     this.subscribers = [];
 }

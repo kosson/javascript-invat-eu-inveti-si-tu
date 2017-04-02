@@ -9,7 +9,7 @@ Este o funcție Constructor existentă în limbaj.
 
 Crearea de array-uri de dimensiuni prestabilite:
 
-```js
+```javascript
 var prestabilit = Array(5); // este echivalent cu [,,,,]
 ```
 

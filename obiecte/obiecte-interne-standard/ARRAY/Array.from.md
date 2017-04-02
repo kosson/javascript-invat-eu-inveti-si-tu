@@ -5,7 +5,7 @@ Obiectele din care se creează array-urile trebuie să aibe o lungime și elemen
 
 ## Aplicarea pe `arguments`
 
-```js
+```javascript
 function sparge() {
   return Array.from(arguments);
 }
@@ -20,7 +20,7 @@ Array.from("foo");
 
 ## Aplicarea pe string-uri
 
-```js
+```javascript
 Array.from("foo");
 // ["f", "o", "o"]
 ```
@@ -33,7 +33,7 @@ Array.from("foo");
 
 Cu Array.from() nu se poate face slice(), dar poți să indici ce sunt părțile: dice!
 
-```js
+```javascript
 function ceEste(){
   return Array.from(arguments, valoare => typeof valoare);
 };
@@ -42,7 +42,7 @@ ceEste("ceva", null, true, undefined, NaN, 23);
 
 Polyfill - ul pentru ES5 arată astfel:
 
-```js
+```javascript
 function transforma (){
   return Array.prototype.slice.call(arguments);
 }
@@ -53,7 +53,7 @@ transforma('a', 'b'); // <- ['a', 'b']
 
 iar forma și mai scurtă:
 
-```js
+```javascript
 function transforma(){
   return [].slice.call(arguments);
 };
@@ -61,7 +61,7 @@ function transforma(){
 
 Un operator nou introdus de ECMAScript 2015 care face același lucru. Este vorba despre operatorul spread. Acest operator folosește protocolul de iterare ceea ce înseamnă că obiectele pe care dorim să le transformăm, trebuie să aibe implementat @@iterator prin intermediul lui Symbol.iterator. `arguments` are deja implementat protocolul de iterare în ECMAScript 2015.
 
-```js
+```javascript
 function transforma(){
   return [...arguments];
 };
@@ -72,14 +72,14 @@ ATENȚIE! Operatorul spread se bazează pe existența implementării protocolulu
 
 De exemplu, jQuery la momentul redactării acestui material, nu are implementat protocolul de iterare, dar produce o structură „array-like”:
 
-```js
+```javascript
 Array.from($('div')); // în unele cazuri: Array.from(jQuery('div'));
 ```
 # Constituirea unei colecții de elemente DOM
 
 Acest lucru este posibil pentru că `NodeList` permite protocolul de iterare. Efectul este convertirea unui `NodeList` într-un Array.
 
-```js
+```javascript
 var divuri = Array.from(document.querySelectorAll('div'));
 
 // ca alternativă folosim operatorul spread

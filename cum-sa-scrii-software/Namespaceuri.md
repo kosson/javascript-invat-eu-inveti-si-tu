@@ -4,7 +4,7 @@ Pentru a evita coliziuni cu numele date unor constructori sau funcții care apar
 
 ## Constituirea unor „namespaceuri” pentru propriile obiecte
 
-```js
+```javascript
 var zonaMea = zonaMea || {}; // constituirea zonei în care va trăi obiectul creat
 
 zonaMea.primulObi = zonaMea.primulObi || {};

@@ -216,7 +216,7 @@ Prototipul obiectului șablon poate fi modificat pentru ca toate obiectele moșt
 
 În final, avem exemplul propus de Kyle Simpson care este ceva mai elaborat.
 
-```js
+```javascript
 function Foo(who){
   this.me = who;
 }

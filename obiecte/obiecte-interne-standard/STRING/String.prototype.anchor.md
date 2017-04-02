@@ -2,7 +2,7 @@
 
 Pasezi acestei funcții un string care va deveni numele atributului unui tag anchor în DOM.
 
-```js
+```javascript
 var continut = "Ceva";
 document.body.innerHTML = continut.anchor('numele_meu');
 ```

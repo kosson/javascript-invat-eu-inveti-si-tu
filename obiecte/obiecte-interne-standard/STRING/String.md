@@ -37,7 +37,7 @@ Caracterele speciale vor putea fi menționate în string-uri folosindu-se notaț
 
 ### Folosind constructorul: `new String()`
 
-```js
+```javascript
 var str = new String("test");
 ```
 
@@ -59,7 +59,7 @@ Numărul de index al ultimului caracter se poate afla prin determinarea lungimii
 
 Poate fi aflată prin invocarea proprietății `.length` direct pe șir:
 
-```js
+```javascript
 'cevatext'.length; // 8
 ```
 

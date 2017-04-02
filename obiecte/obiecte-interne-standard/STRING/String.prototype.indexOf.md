@@ -10,7 +10,7 @@ Este returnat `-1` dacă fragmentul nu este găsit. Atenție, dacă o parte a fr
 
 ## Cazuistică indexOf()
 
-```js
+```javascript
 // Caracterul sau fragmentul a fost identificat și se returnează valoarea de index al primei apariții în string
 'cevatext'.indexOf('x'); // 6
 
@@ -39,6 +39,6 @@ if(colectie.indexOf('ș') !== 0){
 
 Poți verifica rapid dacă o secvență de text există într-un șir:
 
-```js
+```javascript
 'Rosinante era o mârțoagă, dar și identificatorul emis de un transponder'.indexOf('era o ') !== -1; // true
 ```

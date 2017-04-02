@@ -64,7 +64,7 @@ console.log(y); // Array [ 0, 1, 2, 3, 4 ]
 
 Pentru a exemplifica mai adânc (se va folosi closure-ul) efectele hostingului folosim o funcție care are drept scop încărcarea unui array cu funcții (nu uita, o funcție este o valoare care poate fi pasată drept argument). Acest array va fi `mapat` pentru a executa fiecare dintre ele. Se dorește obținerea unei serii de numere naturale.
 
-```js
+```javascript
 var apeluri = [];
 
 for (var x = 0; x < 5; x++){
@@ -83,7 +83,7 @@ Dar ceea ce este de sesizat, este că rulând oricare dintre funcțiile din arra
 
 Folosind în locul lui `var`, `let`, vom limita variabila la scope-ul blocului de cod în care a fost declarată.
 
-```js
+```javascript
 var apeluri = [];
 
 for (let x = 0; x < 5; x++){
