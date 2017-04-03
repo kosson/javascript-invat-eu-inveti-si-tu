@@ -2,9 +2,9 @@
 
 ## Introducere - labirintul cu mai multe porți de intrare
 
-Vom lucra foarte mult cu secvențe de cod pe care vei dori să le testezi pentru a vedea efectul imediat și astfel pentru a consolida ceea ce înveți. În ceea ce privește instrumentarul de bază, veți auzi cel mai adesea acronimul REPL care înseamnă `read–eval–print loop`, adică un instrument software, care preia fragmentul tău de cod, îl evaluează (îl rulează) și îți oferă rezultatul. La o simplă căutare online după cheia JavaScript REPL, veți găsi și o grămadă de instrumente online cu ajutorul cărora puteți să testați codul.
+Vom lucra foarte mult cu secvențe de cod pe care vei dori să le testezi pentru a vedea efectul imediat și astfel pentru a consolida ceea ce înveți. În ceea ce privește instrumentarul de bază, veți auzi cel mai adesea acronimul REPL care înseamnă `read–eval–print loop` (citește-evaluează-afișează), adică un instrument software, care preia fragmentul tău de cod, îl evaluează (îl rulează) și îți oferă rezultatul. La o simplă căutare online după cheia JavaScript REPL, veți găsi și o grămadă de instrumente online cu ajutorul cărora puteți să testați codul.
 
-Pentru scopul de învățare a acestei lucrări, vom lua contact cu unul de bază: consola web. Cel mai simplu este în această consolă web pe care o accesați din browserul pe care-l folosiți. Am ales pentru acest manual browserul Firefox. Pentru a accesa consola web, pur și simplu apăsați tasta F12 și apoi alegeți Console.
+Pentru scopul de învățare al acestei lucrări, vom lua contact cu unul de bază: consola web. Cel mai simplu este în această consolă web pe care o accesați din browserul pe care-l folosiți. Am ales pentru acest manual browserul Firefox. Pentru a accesa consola web, pur și simplu apăsați tasta F12 și apoi alegeți Console.
 
 Aici puteți introduce fragmentele de cod pentru a urmări rezultatele și pentru a experimenta din curiozitate.
 
