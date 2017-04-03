@@ -22,6 +22,24 @@ Primitivele sunt blocurile constructive. La ce mă refer este faptul că avem ne
 
 Deci, avem primitivele cu care putem introduce date brute în evaluări: cifre, text și valori de adevăr.
 
+### Variabile
+
+Primitivele despre care discutam mai sus trebuie să fie luate cumva în evidență. Să presupunem că avem un instrument de măsurători a gradului de poluare, care are 2 senzori: unul pentru emisii de azot iar altul pentru numărul de particule. Acest post de măsurare emite datele culese în flux continuu, iar datele culese de senzori sunt numere întregi. Întrebarea este următoarea: cum separăm noi ce emite un senzor de celălalt atâta vreme cât pe „firul” de comunicații vine un șuvoi neîntrerupt de numere? Răspunsul logic ar fi să punem câte o etichetă pentru fiecare număr care să indice numele senzorului, nu?
+
+```text
+azot: 142.23
+azot: 141.89
+part: 12
+```
+
+Ce observăm? Eticheta este partea fixă. Este ancora noastră pentru a lega inteligibil numerele de proveniența lor, de senzor. Eticheta rămâne ca o ancoră iar valorile vor varia în timp. Deci, asta este o variabilă. Este o etichetă care identifică o valoare care variază în timp.
+
+În JavaScript are un cuvânt dedicat care indică că urmează identificatorul pentru o variabilă:
+
+```javascript
+var x = 10;
+```
+
 ### Obiecte
 
 Când folosim browserul web al sistemului de operare, cel mai mare locatar este obiectul global iar acesta este `window`. Curioasă din fire, vei deschide repede browserul, vei apăsa F12 și în linia consolei vei scrie `window.` (`window` urmat de punct). De îndată ce ai scris numele obiectului global, vor „țâșni” toate proprietățile acestui obiect... obiectul care oferă tot ce spune standardul că ar trebui să fie. În Node.js chiar se numește `global`. Dacă ești curiozitatea personificată, având Node.js instalat pe sistem deja, deschizi un Terminal sau Command Prompt și inițiezi o sesiune de nodejs. Scrie `global` și vei vedea o descriere amănunțită a acestui obiect.

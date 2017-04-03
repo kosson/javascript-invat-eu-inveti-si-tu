@@ -7,13 +7,13 @@ Orice funcție în JavaScript returnează o valoare. Folosind `return` obții re
 - funcția va ieși din execuție când ajunge la return.
 - return înseamnă returnarea unei valori codului care a invocat funcția.
 - orice funcție returnează o valoare chiar dacă nu este folosit return.
-- funcțiile care nu returnează o valoare, returnează `undefined`
+- funcțiile care nu returnează o valoare, returnează `undefined`.
 - valorile returnate pot fi stocate în variabile.
 
 Termină execuția unei funcții și specifică ca o valoare care trebuie returnată apelantului funcției.
 
 ```javascript
-function ex(){
+function ex () {
   //... cod
   return oExpresie;
 };
@@ -25,7 +25,7 @@ Excepția apare în cazul constructorilor, care returnează valoarea presetată 
 Atenție, poți încheia execuția unei funcții pur și simplu dând comanda simplă `return`. Ceea ce va fi returnat este `undefined`.
 
 ```javascript
-function ex(){
+function ex () {
   //... cod
   return;
 };

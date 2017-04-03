@@ -9,7 +9,7 @@ Dacă declari o variabilă în corpul unei declarații if, această variabilă v
 ```javascript
 "use strict";
 if(true){
-  function x(){console.log('bau')};
+  function x () { console.log('bau') };
   x();
 };
 ```

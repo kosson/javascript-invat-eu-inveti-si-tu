@@ -43,6 +43,10 @@ Există câteva situații legate de modul de redactare a codului sursă care are
 2. Prin declararea variabilelor cu `let` și `const` în interiorul unui bloc de cod delimitat de acolade `{}`.
 3. Prin crearea blocului `Catch`.
 
+## Blocuri de cod
+
+TODO: Scrie despre blocurile de cod.
+
 ## Spune standardul
 
 Lexical environment este asociat cu structura lexicală a codului așa cum o dictează următoarele situații:
