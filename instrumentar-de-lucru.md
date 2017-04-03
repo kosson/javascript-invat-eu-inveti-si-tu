@@ -2,7 +2,7 @@
 
 ## Introducere - labirintul cu mai multe porți de intrare
 
-Vom lucra foarte mult cu secvențe de cod pe care vei dori să le testezi pentru a vedea efectul imediat și astfel pentru a consolida ceea ce înveți. În ceea ce privește instrumentarul de bază, veți auzi cel mai adesea acronimul REPL care înseamnă `read–eval–print loop` (citește-evaluează-afișează), adică un instrument software, care preia fragmentul tău de cod, îl evaluează (îl rulează) și îți oferă rezultatul. La o simplă căutare online după cheia JavaScript REPL, veți găsi și o grămadă de instrumente online cu ajutorul cărora puteți să testați codul.
+Vom lucra foarte mult cu secvențe de cod pe care vei dori să le testezi pentru a vedea efectul imediat și astfel pentru a consolida ceea ce înveți. În ceea ce privește instrumentarul de bază, veți auzi cel mai adesea acronimul REPL care înseamnă `read–eval–print loop` (o buclă citește-evaluează-afișează), adică un instrument software, care preia fragmentul tău de cod, îl evaluează (îl rulează) și îți oferă rezultatul. La o simplă căutare online după cheia JavaScript REPL, veți găsi și o grămadă de instrumente online cu ajutorul cărora puteți să testați codul.
 
 Pentru scopul de învățare al acestei lucrări, vom lua contact cu unul de bază: consola web. Cel mai simplu este în această consolă web pe care o accesați din browserul pe care-l folosiți. Am ales pentru acest manual browserul Firefox. Pentru a accesa consola web, pur și simplu apăsați tasta F12 și apoi alegeți Console.
 
@@ -64,7 +64,9 @@ Pentru a putea pătrunde aspectele de funcționare fără nici o altă întârzi
 
 Sonda despre care doresc să vorbim este un obiect cu care JavaScript vine în propriul bagaj și pe care-l vom folosi ca pe un instrument de investigare în codul pe care-l executăm. Este vorba despre `Console`. Acesta este instrumentul primar pentru inspectarea codului în vederea îndreptării erorilor sau pentru a sonda cine, ce conține sau cum arată. Browserul expune `console` ca proprietate a obiectului global `window` și putem avea acces la el introducând în consola browserului `window.console`. Dar cum în practică rădăcina `window` este ignorată, vom apela direct obiectul scriind în consolă `console.` (console punct). Acum vei vedea și ce funcționalități oferă în lista derulantă care a apărut.
 
-Pentru a detecta valori sau pentru a inspecta anumite situații, cel mai ades vom folosi `console.log(expresie)` și / sau `console.dir()` iar atunci când avem nevoie de o afișare rapidă a felului cum se execută o funcție, vom folosi `console.trace()` - are ca efect afișarea stivei de apeluri făcute până la momentul în care s-a executat console.trace().
+Pentru a detecta valori sau pentru a inspecta anumite situații, cel mai adesea vom folosi `console.log(expresie)` și / sau `console.dir()`, iar atunci când avem nevoie de o afișare rapidă a felului cum se execută o funcție, vom folosi `console.trace()` - are ca efect afișarea stivei de apeluri făcute până la momentul în care s-a executat console.trace().
+
+Se înțelege faptul că aceste fragmente de cod cu rol de sondă, vor fi plasate în interiorul codului scris, fix în locurile unde vrei să investighezi ce se întâmplă.
 
 ## Citirea cărții de identitate a locuitorilor
 
