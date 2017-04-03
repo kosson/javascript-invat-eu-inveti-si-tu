@@ -34,7 +34,7 @@ part: 12
 
 Ce observăm? Eticheta este partea fixă. Este ancora noastră pentru a lega inteligibil numerele de proveniența lor, de senzor. Eticheta rămâne ca o ancoră iar valorile vor varia în timp. Deci, asta este o variabilă. Este o etichetă care identifică o valoare care variază în timp.
 
-În JavaScript există un cuvânt dedicat care indică că urmează identificatorul pentru o variabilă:
+În JavaScript există un cuvânt dedicat care indică faptul că urmează identificatorul pentru o variabilă:
 
 ```javascript
 var x = 10;
