@@ -114,17 +114,30 @@ Operatorul este poziționat înaintea operandului.
 
 ## Operatorul `delete`
 
-Folosindu-l poți șterge un element dintr-un array sau o proprietate a unui obiect.
+Folosindu-l poți șterge un element dintr-un array sau o proprietate a unui obiect sau chiar obiectul cu totul.
 Returnează `true` când a reușit să șteargă și `false` când nu.
 
 ```javascript
 var obi = {a: 1, b: 2, 1: 10};
 delete obi.a; // true
 delete obi[10]; // true
+delete obi;
 ```
 
-Atenție, valorile asignate unui identificator declarat cu `var`, `const` și `let`, nu pot fi șterse cu `delete`.
-`delete` se poate folosi și cu array-urile, dar ceea ce se va petrece este că valoarea de la index va fi ștearsă, nu și indexul.
+Atenție, valorile asignate unui identificator declarat cu `var`, `const` și `let`, nu pot fi șterse cu `delete`. Atenție, există o singură excepție. Dacă variabila nu a fost declarată explicit, aceasta poate fi ștearsă.
+
+```javascript
+x = 10; delete x; // true
+```
+
+`delete` se poate folosi și cu array-urile, dar ceea ce se va petrece este că valoarea de la index va fi ștearsă, nu și indexul. Pe cale de consecință, proprietatea `length` a array-ului nu va fi afectată.
+
+```javascript
+var colectie = ['ceva', 'altceva'];
+delete colectie[1];
+colectie.length; // 2
+colectie[1]; // undefined
+```
 
 Cu `delete` nu se pot șterge decât proprietățile care chiar aparțin unui obiect, nu și cele de pe lanțul prototipal.
 Încercarea de a șterge o proprietate care nu există va returna `true` iar obiectul nu va fi afectat.

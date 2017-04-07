@@ -8,7 +8,7 @@ Este pentru voi, cei care lucrați în biblioteci și în alte instituții de me
 
 Speranța mea se îndreaptă către cei care vor reuși să stăpânească limbajul într-atât de bine, încât să intre în etapa creativă fără întârziere. Nu este îndeajuns să folosești ceea ce îți este oferit de ceilalți. Pur și simplu este nevoie să poți rezolva problemele reale cu care te confrunți, fără a încerca adaptarea soluțiilor altora. Nu te îndemn să reinventezi roata, ci să o înțelegi pentru a reuși să faci un vehicul.
 
-Mai dedic acest material celor care trăiesc în solitudine sau încarcerați, celor cărora viața nu le-a fost ușoară și tuturor celor care având timp la îndemână, ar dori să încerce ceva deosebit, ceva ce le-ar aduce satisfacții mari și care i-ar apropia de un tărâm magic cu infinite posibilități.
+Mai dedic acest material celor care trăiesc în solitudine sau sunt privați de libertate, celor cărora viața nu le-a fost ușoară și tuturor celor care având timp la îndemână, ar dori să încerce ceva deosebit, ceva ce le-ar aduce satisfacții mari și care i-ar apropia de un tărâm magic cu infinite posibilități.
 
 ## O resursă pentru a înțelege ECMAScript, adică JavaScript
 
@@ -152,7 +152,7 @@ Acestea sunt utile pentru a documenta codul. Sunt două moduri de a introduce co
 
 #### Spațiile albe
 
-Sunt considerate a fi spații albe următoarele: `tab` (`\t` un spațiu cu o anumită întindere), `space` (spațiu), `non-breakable space` (spațiu care nu poate fi fracționat), `line tabulation` (sau vertical tab - `\v` - referindu-se la mișcarea pe verticală a liniilor), `form feed` (se referă la trecerea pe ceea ce este înțeles a fi o pagină nouă `\f`).
+Sunt considerate a fi spații albe următoarele: `tab` (`\t` *tabulator orizontal*, fiind un spațiu cu o anumită întindere), `space` (spațiu), `non-breakable space` (spațiu care nu poate fi fracționat), `line tabulation` (sau vertical tab - `\v` - referindu-se la mișcarea pe verticală a liniilor), `form feed` (se referă la trecerea pe ceea ce este înțeles a fi o pagină nouă `\f`).
 
 ### Recunoașterea structurilor lexicale proprii - faza 1
 
@@ -180,23 +180,128 @@ Aceste declarații și instrucțiuni sunt:
 - instrucțiunile `continue`, `break`, `throw`,
 - și `return`.
 
-#### Operatori
+#### Operatori (***operators***)
 
 Sunt caractere sau combinații de caractere care au rolul de a stabili o relație între doi operanzi. Este exact ca în matematică. Rolul operatorilor este de a ajunge la un rezultat în urma „evaluării”. De exemplu, când ai expresia `1 > 0;`, operatorul de comparație `>` va oferi rezultatul, care este o valoare boolean de `true`. În esență, putem spune că majoritatea rezultatelor atunci când scriem cod, provin din astfel de evaluări.
 
-#### Expresiile
+De regulă operanzii stabilesc o evaluare a expresiilor de la stânga la dreapta. Putem verbaliza, de exemplu `1 + 1` ca „unu plus unu”, ceea ce înseamnă că am citit enunțul de la stânga la dreapta. De ce insist atât de mult pe acest aspect? Pentru că avem un operator - egalul (`=`), care este citit de la dreapta la stânga. Spre exemplu, în enunțul `a = 1`, citim: „valoarea 1 este atribuită variabilei a”. Operatorul egal împarte cei doi operanzi în expresii din partea stângă (***left-hand-side***) și expresii din partea dreaptă (***right-hand-side***).
 
-Continuăm cu o precizare foarte importantă. Atunci când codul sursă este rulat pentru a obține un rezultat, de fapt, ceea ce se petrece este o sesiune de evaluări ale expresiilor care se reduc la o valoare după rezolvarea lor condiționată de diverșii operatori. Totul, dar totul se reduce, de fapt, la a evalua expresii rezolvând operațiunile și ajungând la valori care sunt necesare altor expresii, care, la rândul lor așteptau cuminți ca evaluarea precedentă să se încheie pentru a avea și ele valorile de care aveau nevoie.
+#### Enunțuri (***statements***)
+
+Un enunț este o sarcină exprimată prin combinația de operanzi, operatori și / sau gruparea acestora. Este echivalentul unei propoziții în limbaj uman. Și astfel, ajungem la concluzia că un program nu este decât o listă de enunțuri.
+
+Cel mai simplu enunț:
+
+```javascript
+3;
+```
+
+Dicționarele explicative spun: **regulă după care se face un calcul sau se aplică o construcție matematică; executare a unui calcul.** (DEX 09).
+
+Cel mai simplu enunț, care nu este prea des folosit pentru că nu are utilitate, dar care este bun pentru a ilustra, este cel al unei simple expresii.
+
+```javascript
+a + 1; // enunț al expresiei (expression statement)
+```
+
+În schimb, există un enunț al celei mai utile expresii întâlnite în întreg limbajul: enunțul expresiei de apelare (***call expression***). Chiar dacă nu am învățat nimic despre funcții, ține minte că apelarea acestora este un enunț al unei expresii.
+
+```javascript
+alert('salut');
+```
+
+**Reține**: Enunțurile sunt încheiate cu punct și virgulă. Există o excepție notabilă explicată deja.
+
+#### Expresiile (***expressions***)
+
+Când spui că o îmbrățișare este o expresie a iubirii, putem stabili că o expresie este un proces de materializare, care oferă la final ceva concret.
+
+O expresie este un fragment de cod care produce o valoare atunci când este evaluată. Este o combinație rezolvabilă de operatori și operanzi.
+
+##### Pentru curiosul din tine
+
+În Backus Naur Form (BNF), aceasta fiind o notație care formalizează sintaxa unui limbaj de programare indiferent care ar fi el, o expresie ***este definită ca*** un „termen”, care poate fi la rândul său urmat de alt termen și așa mai departe (așa arată formalizarea BNF `expression ::=  term { "|" term }` - ::= înseamnă „este definit ca”, iar | înseamnă „și”).
+
+##### Definiția dicționarului
+
+Dicționarele explicative spun că o expresie este un **grup de numere, litere etc. legate între ele prin simboluri de operații matematice (adunare, înmulțire etc.)** (DEX 98) sau **formulă care exprimă raporturi matematice** (NODEX 2002).
+
+##### Categorii de expresii
+
+JavaScript are următoarele categorii de expresii:
+
+- aritmetice, care se rezumă la un număr. Este și cazul folosirii operatorilor aritmetici;
+- de șiruri de caractere, care se rezumă chiar la o înșiruire de caractere. Este și cazul folosirii operatorilor pe șiruri;
+- logice, care se rezumă ori la `true` ori la `false`;
+- expresii de bază cum ar fi cuvintele cheie sau expresiile de uz general și
+- expresiile din partea stângă a operatorului de atribuire (`=`), adică la ce trebuie să se lege evaluarea a ceea ce este în partea dreaptă.
+
+Cea mai simplă expresie este o valoare literală sau o variabilă.
+
+```javascript
+1;      // expresie de valoare literală
+var a;  // expresie de variabilă
+```
+
+După cum spuneam, combinarea operanzilor cu operatorii creează la rândul lor expresii.
+
+```javascript
+x = 1 + 1;  // expresie de atribuire a unei expresii aritmetice
+```
+
+În exemplul dat avem o literă, care ține locul unei valori care va apărea la un moment dat și pe care tehnic o numim variabilă.
+
+Aceasta este adunată cu o valoare de sine stătătoare numită **valoare literală**. De ce se numește **literală**? Pentru că nu este valoarea unei variabile, ci pur și simplu se reprezintă pe sine.
+
+Că veni vorba de matematică, îți aduci aminte că îl foloseam pe celebrul „x” la regula de trei simplă sau la ecuația de gradul I. De ce? Pentru că încă nu cunoșteam valoarea a cărui loc o ținea litera.
+
+În cazul expresiei de atribuire, expresia aritmetică din dreapta semnului egal va fi evaluată la valoarea 2, care va sfârși prin a fi atribuită variabilei x.
+
+**Reține **: Expresiile sunt evaluate după reguli. Evaluarea expresiilor conduce la un rezultat.
+
+Este ca în matematică când respectam regulile matematice ale priorității operatorilor. Mai ții minte? Mai întâi ce-i în paranteze; dacă ai înmulțiri sau împărțiri, acestea primează, apoi adunările și scăderile... hai, că încet, încet îți aduci aminte. Nu uita că rezolvarea expresiilor se face de la stânga la dreapta.
+
+O mică mențiune: în cazul programării acoladele și parantezele pătrate pe care le foloseam în matematică pentru a separa expresiile imbricate, sunt numai paranteze rotunde; `{1 + [2 - (2 * 3)]}` în programare este scris astfel: `1 + (2 - (2 * 3))`.
+
+Combinarea operanzilor prin intermediul operatorilor constituie o sarcină care trebuie îndeplinită la fel ca în matematică când enunțul matematic trebuie rezolvat.
+
+**Regulă de aur**: nu expresia este tratată ca operand, ci rezultatul evaluării sale.
+
+```javascript
+// un enunț format din mai multe expresii
+1 + 1 * (5 - 1); // 5
+```
+
+Hai să ne uităm la cea de sus. Începem de la stânga spre dreapta să facem evaluarea expresiei. Buuuun! Și avem: 1 plus 1 egal? Stop joc! Cel de-al doilea unu (cel din dreapta operatorului plus) este implicat într-o operațiune pe care va trebui să o rezolvăm mai întâi pentru că așa spune prioritatea operatorului ori (`*`). Pentru moment, lăsăm în suspans prima operațiune de adunare și sărim să facem înmulțirea. Surpriză majoră: 1 este înmulțit cu o altă expresie care este între parantezele rotunde. Deci, abandonăm și înmulțirea și facem operațiunea dintre parantezele rotunde pentru a ajunge la o valoare. Gata! Avem valoarea `4`. Perfect, acum că avem valoarea putem face înmulțirea: `1 * 4`. În urma evaluării ajungem la valoarea `4`, care permite evaluarea primei operațiuni de la care am plecat: `1 + 4`. Ajungem la rezultatul `5`. Hai că nu a fost greu, doar nițică matematică... știu, de mate nu scăpăm, dar nu ne lăsăm.
+
+Continuăm cu o precizare foarte importantă pentru a întări ceea ce am rememorat. Atunci când codul sursă este rulat pentru a obține un rezultat, de fapt, ceea ce se petrece este o sesiune de evaluări ale expresiilor care se reduc la o valoare după rezolvarea lor condiționată de diverșii operatori. Totul, dar totul se reduce, de fapt, la a evalua expresii rezolvând **operațiunile** și ajungând la **valori** care sunt necesare altor **expresii**, care, la rândul lor așteptau cuminți ca evaluarea precedentă să se încheie pentru a avea și ele valorile de care aveau nevoie.
 
 #### Instrucțiunile
 
-Instrucțiunile sunt parte a expresilor (`expressions`). Este obsevabil că cel mai adesea veți vedea că o expresie este o instrucțiune. În JavaScript, sunt permise expresii care nu sunt neapărat instrucțiuni: `1 + 1;`
+Instrucțiunile sunt parte a expresiilor (`expressions`). Este observabil că cel mai adesea veți vedea că o expresie este o instrucțiune. În JavaScript, sunt permise expresii care nu sunt neapărat instrucțiuni. De exemplu, `1 + 1;`
 
 **JavaScript este un limbaj de programare pentru care este de importanță vitală felul în care este redactat codul sursă.**
 
 Acest aranjament de scriere a codului, succesiunea în care sunt introduse instrucțiunile imprimă diferite efecte la momentul evaluării sale.
 
-Rețineți faptul că modul în care redactezi codul are efect direct asupra funcționării programului. Nu uita faptul că poți scrie instrucțiunile pe mai multe linii și astfel îmbunătățești lizibilitatea programului. Ba mai mult, poți indenta (pui spații înaintea fragmentului de cod și ca efect vizual se vor deplasa spre dreapta).
+Rețineți faptul că modul în care redactezi codul are efect direct asupra funcționării programului. Nu uita faptul că poți scrie instrucțiunile pe mai multe linii și astfel îmbunătățești lizibilitatea programului. Ba mai mult, poți indenta (pui spații înaintea fragmentului de cod și ca efect vizual se vor deplasa spre dreapta). Despre indentare spune Marele Dicționar pentru Neologisme din 2000: „plasare a programelor pe linii, pentru scrierea cât mai clară a acestora”.
+
+#### Blocurile de cod
+
+În JavaScript poți declara un bloc de cod foarte simplu deschizând acolade. Scrii codul între acolade și poți considera că acest cod aparține unui bloc de cod distinct.
+
+```javascript
+{ var ceva = 'Salut!' }
+```
+
+Cel mai adesea vei vedea blocurile de cod ca parte a unor sintaxe mai elaborate cum ar fi deciziile ori ca parte a funcției, chiar indicând corpul funcției.
+
+```javascript
+if (true) {
+  console.log('Salut');
+};
+function facCeva () { return 'Salutare!' };
+```
 
 #### Despre identificatori
 
@@ -240,7 +345,7 @@ Am precizat câțiva termeni deja care fac parte dintr-un adevărat idiom pe car
 
 **Termenii noi nu trebuie să te descurajeze.**
 
-Fac parte din efortul de a înțelege și chiar dacă apar chiar de la început, vor fi descriși pe parcurs și vei înțelege ce se ascunde în spatele lor. Am spus eu mai sus despre **_obiecte intrinseci_**. Pentru moment înțelege că obiectele sunt niște structuri de date și dacă-ți vine mai la îndemână poți imagina obiectele precum niște fructe de rodie. În interior sunt bobițele care pot fi asociate proprietăților.
+Fac parte din efortul de a înțelege și chiar dacă apar chiar de la început, vor fi descriși pe parcurs și vei înțelege ce se ascunde în spatele lor pe deplin. Am spus eu mai sus despre **_obiecte intrinseci_**. Pentru moment înțelege că obiectele sunt niște structuri de date și dacă-ți vine mai la îndemână poți imagina obiectele precum niște fructe de rodie. În interior sunt bobițele care pot fi asociate proprietăților.
 
 Este nevoie să ne aplecăm asupra textului standardului pentru a înțelege ce se întâmplă.
 
@@ -254,9 +359,7 @@ Această structură se constituie la momentul executării codului.
 
 Structura eliptică ca o bandă care se rotește continuu imaginează o „buclă” care se rotește (rulează) permanent câtă vreme este rulat întregul cod în care apar „evenimente” (fragmente de cod care trebuie rulate). Pe suprafața sferei sunt disponibile „obiectele intrinseci” reprezentate ca structuri hexagonale și care sunt acolo pentru a oferi funcționalități ciorchinilor din zona centrală.
 
-Atenție, pentru fiecare „context de execuție în efect", adică bucata de cod care este evaluată la momentul în care bagi capul în „căpița de cod care se execută", se creează câte o nouă înregistrare pentru cum arată tărâmul. Este ca și o foaie de observație în spital. Când apare o modificare în starea unui pacient este actualizată foaia de observație.
-
-Un tărâm este constituit dintr-un set de obiecte interne, obiectul global pentru tărâmul la care ne referim, cadrul lexical creat de însăși felul în care este redactat codul („lexical environment") și elemente care au capacitatea de a crea șabloane. Toate tărâmurile care sunt create sunt evidențiate de o înregistrare specială numită de standard `Realm Record`. Din toată această mică listă reține faptul că JavaScript vine cu câteva lucruri din start care împreună cu programul scris de tine construiesc un tărâm.
+Un tărâm este constituit dintr-un set de obiecte interne, obiectul global pentru tărâmul la care ne referim, cadrul lexical creat de însăși felul în care este redactat codul („lexical environment") și elemente care au capacitatea de a crea șabloane. Toate tărâmurile care sunt create sunt evidențiate de o înregistrare specială numită de standard `Realm Record`. Din toată această mică listă reține faptul că JavaScript vine cu câteva lucruri din start, care împreună cu programul scris de tine construiesc un tărâm.
 
 **Moment Zen**: un program JavaScript este de un grup de obiecte care comunică între ele.
 
@@ -277,9 +380,58 @@ Avem șase primitive:
 
 După cum se observă, fiecare primitivă constă din două elemente: sintaxa și semantica. Sintaxa implică „codarea" printr-un cuvând din limbajul natural, care în cazul JavaScript este limba engleză, iar semantica indică conceptul reprezentat.
 
+### Variabile pe scurt
+
+Care este funcția variabilelor în economia unui program? Acesta este întrebarea care intuiește un răspuns. Ca și oamenii care au nevoie să-și aducă aminte lucruri, la fel și software-ul are nevoie de o „memorie” proprie pe care să o folosească pentru a ține pentru propriul uz diferite valori sau stări.
+
+```javascript
+var x = 1;
+```
+
+Ba mai mult, are nevoie de „a prinde” valorile returnate din anumite procesări sau evaluări a expresiilor.
+
+```javascript
+var prindValoarea = 2 + 1;
+```
+
+JavaScript folosește trei cuvinte cheie pentru acest scop: `var`, `let` și `const`. Pot părea cam multe la prima vedere pentru o aceeași funcționalitate, dar fiecare are specializarea sa. Până la actualizarea recentă de standard a existat doar `var`.
+
+Ceea ce observăm atunci când am definit o variabilă este că am folosit un cuvânt cheie `var` urmat de un nume care va identifica unic „legătura” către o valoare. După atribuirea valorii, însăși numele acelei variabile devine o expresie care poate fi folosită apoi în operațiuni diverse.
+
+```javascript
+var ceva = 10;
+ceva * 2; // 20
+```
+
+Ai observat? `ceva` are capacitatea de a fi operand.
+
+În plus, poți folosi o singură dată cuvântul cheie și apoi să declari câte variabile vrei separate prin virgulă. Chiar este practica cea mai eficientă.
+
+```javascript
+var a = 10, b = true, x, y, z;
+```
+
+Pentru a citi repede codul, practica pune fiecare declarație pe o linie separată.
+
+```javascript
+var a = 10,
+    b = true,
+    x, y, z;
+```
+
+Închei cu o precizare. Chiar dacă vei întâlni adesea comparația unei variabile cu o cutie sau cu un vas care „găzduiește” o valoare, aceasta nu este cea corectă. Întotdeauna imaginează-ți o variabilă ca pe o legătură dintre o etichetă și valoarea sa. Pentru a-ți imagina acest lucru, gândește-te la o baliză legată de o greutate de pe fundul apei cu un lanț. Baliza este inscripționată cu numele obiectului de pe fundul apei. Obiectul legat prin lanț este valoarea pentru care s-a făcut balizarea.
+
+Atunci când definești o variabilă care nu trimite la nicio valoare, îi va fi legată automat una și aceasta este `undefined`.
+
 ### Funcțiile pe scurt
 
-Funcțiile sunt un ***tip de obiecte***. Deci, tot niște rodii. Ha ha! În JS acestea sunt de tip `callable` (în rom. *apelabile*), adică niște rodii pentru care se poate iniția un apel pentru a le executa.
+Funcțiile sunt bucăți de program „ambalate” ca valori. Au și ele un nume ca și variabilele și pot evaluate în expresii.
+
+```javascript
+function faCeva () { return 'Salve!' };
+```
+
+Funcțiile sunt un ***tip de obiecte***. Deci, tot niște rodii. Ha ha! În JS acestea sunt de tip `callable` (în rom. *apelabile*), adică niște rodii pentru care se poate iniția un apel pentru a executa bucata de program conținută.
 
 Ce înseamnă a le executa? Pur și simplu motorul se va uita între acolade, va compila codul, va face recensământul identificatorilor și îl va evalua returnând un rezultat.
 
@@ -287,7 +439,11 @@ Pentru că lucrurile simple sunt plicticoase, mai completăm cu faptul că func�
 
 Mai adăugăm că ECMAScript, adică JavaScript are niște obiecte cu care vine el din start (`built-in objects`). Deci, din start browserul ca și instrument care aplică standardul ECMAScript, vine cu propria lădiță de rodii.
 
-Sintetic, acesta este cadrul general.
+### Cum se rulează software-ul scris în JavaScript?
+
+Ce înseamnă că un software scris în JavaScript se execută?
+Codul sursă JS este procesat de fiecare dată când este rulat. Acest lucru înseamnă că sursa este citită de sus în jos enunț cu enunț, iar pentru fiecare dintre aceste linii se face o „interpretare” a ceea ce înseamnă.
+Pentru JavaScript se întâmplă că sursa este parcursă înainte de a fi rulată pentru a fi „compilată”, asta însemnând că motorul JavaScript va seta cadrul în care va rula codul... va constitui mediile lexicale, le va popula cu identificatori și așa mai departe.
 
 ## Resurse
 
@@ -295,5 +451,7 @@ Sintetic, acesta este cadrul general.
 Simpson, Kyle. [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS)
 Haverbeke, Marijn. [Eloquent JavaScript](http://eloquentjavascript.net/)
 Brookshear, J. Glenn. [Computer science - An overview](https://www.amazon.com/Computer-Science-Overview-Global/dp/1292061162)
+Ce este notația BNF [What is BNF notation?](http://cui.unige.ch/db-research/Enseignement/analyseinfo/AboutBNF.html)
+Backus–Naur form [Backus–Naur form](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form)
 
 [1]: http://www.teora.ro/cgi-bin/teora/romania/mbshop.cgi?database=01&action=view_product&productID=%20823&category= "Brookshear, J. Glenn. Introducere în informatică. Editura Teora. 1998. Titlul original: Computer science - An overview, Fifth Edition"
