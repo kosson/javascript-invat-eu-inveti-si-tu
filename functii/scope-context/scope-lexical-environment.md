@@ -110,10 +110,10 @@ Un mediu lexical (scope) este un registru constituit la momentul scrierii codulu
 
 ```javascript
 var ceva = 1;
-var faCeva = function redau(){
+var faCeva = function redau () {
   var altceva = 10;
   console.log(altceva);
-  var prelucrez = function adunare(){
+  var prelucrez = function adunare () {
     return ceva + altceva;
   };
 };
@@ -128,7 +128,7 @@ După cum spuneam, mediul lexical se stabilește chiar și la nivelul `catch` di
 Scope-ul nu se realizează la nivel de bloc în JavaScript pentru declarațiile `for`, `while`, `if` și `switch`.
 
 ```javascript
-function faCeva (){
+function faCeva () {
   if(!oVar){
     var oVar = 30;
   }

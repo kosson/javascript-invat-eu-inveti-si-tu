@@ -1,4 +1,4 @@
-# String.prototype.substr()
+# `String.prototype.substr()`
 
 Metoda returnează un subșir de caractere începând cu locația specificată de un număr ce reprezintă indexul. Se poate introduce cel de-al doilea argument, care setează limita până la care se vor extrage caractere. Atenție, această limită nu presupune că va fi luat în subșir și caracterul care se află la acest index.
 
@@ -34,3 +34,5 @@ str.substring(11, 14); // => "rin"
 str.slice(11, 14); // => "rin"
 str.substring(11, 3); // => "te de st"
 ```
+
+Dacă al doilea argument nu este menționat, se va extrage tot restul șirului începând cu poziția specificată de primul argument.

@@ -1,6 +1,6 @@
-# String.prototype.match
+# `String.prototype.match`
 
-Faci o căutare într-un string după un Regex. Regexurile sunt șabloane care spun ce trebuie găsit într-un șir de caractere.
+Faci o căutare într-un string după un șablon RegEx.
 
 ```javascript
 var continut = 'Acesta este un text demonstrativ versiunea 0.0.1';
@@ -10,4 +10,4 @@ var ceAgasit = continut.match(reg);
 console.log(ceAgasit); // Array [ "demonstrativ versiunea 0.0", "versiunea 0.0", ".0" ]
 ```
 
-A fost generat acest array pentru că regexul conține criterii de căutare grupate prin `()`.
+A fost generat acest array pentru că RegEx-ul conține criterii de căutare grupate prin `()`.

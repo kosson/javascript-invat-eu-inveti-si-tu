@@ -2,7 +2,7 @@
 
 Metoda pur și simplu sparge șirul construind un array cu fragmentele șirului. Poate accepta doi parametri: un separator și o limită. Această limită este, de fapt un număr care menționează de câte ori să se facă „tăierea” șirului. ATENȚIE! Operațiunea inversă este `concat()`.
 
-Metoda returnează un array de substringuri care au fost „tăiate” acolo unde a fost găsit separatorul, dar separatorul este „șters” din subșirul care este introdus în array.
+Metoda returnează un array de sub-stringuri care au fost „tăiate” acolo unde a fost găsit separatorul, dar separatorul este „șters” din subșirul care este introdus în array.
 
 Separatorul este un caracter sau o **expresie regulată**.
 
@@ -17,7 +17,7 @@ var arr = "unu,doi,trei,patru,cinci".split(",");
 console.log(arr); // Array [ "unu", "doi", "trei", "patru", "cinci" ]
 ```
 
-Dacă separatorul este o expresie regulată care conține paranteze, atunci, ori de câte ori se pace regăsirea după criteriile menționate de regex, rezultatele (plus cele undefined), dictate de paranteze, vor fi incluse în array-ul rezultat.
+Dacă separatorul este o expresie regulată care conține paranteze, atunci, ori de câte ori se face regăsirea după criteriile menționate de RegEx, rezultatele (plus cele `undefined`), dictate de paranteze, vor fi incluse în array-ul rezultat.
 
 ```javascript
 var unsir = 'Acesta este un șir de test'
@@ -38,7 +38,7 @@ var arr = sir.split(reg); // taie după oricare dintre potriviri
 console.log(arr); // Array [ "Gina", "Răzvan", "Andrei", "Angela" ]
 ```
 
-Folosirea unui regex cu paranteze pentru a extrage.
+Folosirea unui RegEx cu paranteze pentru a extrage.
 
 ```javascript
 var sir = 'Obiectivul 1 este atins. Dar ce este la 2 poate întârzia.';

@@ -1,4 +1,4 @@
-# Array.prototype.slice()
+# `Array.prototype.slice()`
 
 **Nu afectează array-ul!**
 

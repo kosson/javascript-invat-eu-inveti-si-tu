@@ -7,5 +7,14 @@
   </head>
   <body>
     <p>Exemplu pentru folosirea depanatorului.</p>
+    <div>
+      <p id="identificator">Acesta este un paragraf!</p>
+    </div>
   </body>
+  <script>
+    var x = document.getElementById('identificator');
+    x.onclick = function () {
+      alert('am fost apasat');
+    };
+  </script>
 </html>

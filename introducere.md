@@ -30,7 +30,7 @@ Este posibil ca multe dintre interpretările mele sau felul în care explic să 
 
 Limbajul adoptat este unul dedicat celui care dorește să înțeleagă fenomenul și să ajungă la contextualizare rapidă a anumitor concepte sau abstractizări cu un prag mai ridicat. Pentru a realiza cât mai multe punți între subiectele care au o legătură directă, am ales să repet în anumite puncte cheie câteva informații necesare în defavoarea unor trimiteri seci care să aibă ca efect cât mai puține salturi între segmentele de cunoștințe.
 
-Materialele pot servi și ca date prelucrabile pentru un posibil sistem de învățare dinamic și adaptat pe subiect. În acest sens, unele materiale includ secțiuni intitulate „dependințe cognitive" sau „alonje". Mai toate subiectele tratate conțin o secțiune intitulată „mantre", care are scopul de a realiza liste de „atribute". Acestea descriu aspectele cele mai importante.
+Materialele pot servi și ca date prelucrabile pentru un posibil sistem de învățare dinamic și adaptat pe subiect. În acest sens, unele materiale includ secțiuni intitulate „dependințe cognitive" sau „alonje". Mai toate subiectele tratate conțin o secțiune intitulată „mantre", care are scopul de a rememora și enumera caracteristicile, atributele și efectele cele mai importante.
 
 Pentru că de curând a apărut noul standard ECMAScript 6, care introduce noi structuri sintactice, am preferat să le introduc în economia explicațiilor. Astfel, veți vedea că în majoritatea cazurilor sunt oferite sintaxele alternative conform ultimelor specificații, care stau alăturat celor familiare din ECMAScript 5.
 
@@ -60,11 +60,11 @@ Este ca o colecție destructurată cu înțeles doar pentru om, care așteaptă 
 
 ## Anti-introducere
 
-JavaScript a pornit ca motorul dinamicii paginilor web, a prins viteză și a ajuns să devină un limbaj de programare cu uz general. Chiar textul standardului declară ECMAScript ca fiind un limbaj de programare general. Acest lucru înseamnă că poate fi folosit la mult mai multe lucruri în afara intențiilor sale originare. Avantajele folosirii JS pornesc de la server (NodeJs), până la aplicațiile rulate în browserul web al utilizatorului.
+JavaScript a pornit ca motorul dinamicii paginilor web, a prins viteză și a ajuns să devină un limbaj de programare cu uz general. Chiar textul standardului declară ECMAScript ca fiind un limbaj de programare general. Acest lucru înseamnă că poate fi folosit la mult mai multe lucruri în afara intențiilor sale originare. Avantajele folosirii JS pornesc de la server (Node.js), până la aplicațiile rulate în browserul web al utilizatorului.
 
 Când vorbim de JavaScript, de fapt vorbim despre o implementare, adică de respectarea tuturor regulilor pe care le impune standardul ECMAScript - <http://www.ecma-international.org/memento/TC39.htm>.
 
-Programarea, ca și activitate, ar fi util să fie înțeleasă ca o limbă străină nouă, pe care ai nevoie să o înveți pentru a comunica cu un străin - computerul. De aceea, se numește și limbaj. ECMAScript, Javascript sau JS ca și limbaj are o gramatică proprie cu toate regulile sale, de la modul în care înșiri caracterele, până la modul în care faci enunțurile pentru a avea sens și pentru un computer atunci când le evaluează.
+Programarea, ca și activitate, ar fi util să fie înțeleasă ca o limbă străină nouă, pe care ai nevoie să o înveți pentru a comunica cu un străin - computerul. De aceea, se numește și limbaj. ECMAScript, JavaScript sau JS ca și limbaj are o gramatică proprie cu toate regulile sale, de la modul în care înșiri caracterele, până la modul în care faci enunțurile pentru a avea sens și pentru un computer atunci când le evaluează.
 
 Vă va ajuta să înțelegeți că scrierea unui fragment de cod este precum scrierea unei fraze foarte lungi constituită din propoziții separate prin punct și virgulă. Dar această frază este forma cristalizată a unui algoritm. Să lămurim câteva lucruri de la bun început.
 
@@ -104,15 +104,21 @@ Caracterele folosite pentru a scrie cod respectă standardul de codare Unicode. 
 
 #### Caracterele cu rol special
 
-Există câteva caractere care necesită chiar acum la început de drum o atenție specială. Acestea sunt `'` (ghilimele simple), `"` (ghilimele duble), `\n` (end of line), `\r` (carriage return), `\t` (tab), `\` (slash) și `/` (backslash).
+Există câteva caractere care necesită chiar acum, la început de drum, o atenție specială. Acestea sunt `'` (ghilimele simple), `"` (ghilimele duble), `\n` (end of line), `\r` (carriage return), `\t` (tab), `\` (slash) și `/` (backslash).
 
 JavaScript este un limbaj de programare folosit la manipularea șirurilor de caractere indiferent ce reprezintă pentru noi oamenii.
 
-Caracterele de mai sus și combinațiile lor au un înțeles special pentru motorul de JavaScript, dar atunci când ele însele sunt necesare ca și caractere, fie că fac parte dintr-un text analizat, fie că se dorește compunerea unuia într-o manieră dinamică, aceste caractere trebuie să fie precedate de backslash (`\`). În cazul ghilimelelor, ca bună practică, se vor folosi ghilimele simple pentru declararea șirurilor de caractere pentru că, fiind un limbaj strâns legat de markup-ul paginilor web, ar putea cuprinde ghilimele duble ca parte a fragmentelor de pagină web construite dinamic.
+În cazul ghilimelelor, ca bună practică, se vor folosi ghilimele simple pentru declararea șirurilor de caractere pentru că, fiind un limbaj strâns legat de markup-ul paginilor web, ar putea cuprinde ghilimele duble ca parte a fragmentelor de pagină web construite dinamic.
 
-Acoladele `{}` au rolul de a indica mediul în care se va executa codul în JavaScript. Cel mai ades veți vedea că indică blocurile de cod ale funcțiilor. Între acolade veți introduce liste de instrucțiuni și expresii specifice JavaScript separate prin punct și virgulă `;`.
+Acoladele `{}` au rolul de a indica mediul în care se va executa codul în JavaScript. Cel mai adesea veți vedea că indică blocurile de cod ale funcțiilor. Între acolade veți introduce liste de instrucțiuni și expresii specifice JavaScript separate prin punct și virgulă `;`. Acoladele și parantezele rotunde împreună cu punct și virgulă pot fi considerate adevărate separatoare, care să împartă codul în calupuri ușor de urmărit vizual, dar și logic.
 
 Acoladele mai au și un rol special: delimitează spații cu un rol special. Creează niște „grădini private” pentru care doar o parte din cod are acces.
+
+##### Caractere care au nevoie de ajutor pentru a fi „văzute”
+
+Caracterele de mai sus și combinațiile lor au un înțeles special pentru motorul de JavaScript, dar atunci când ele însele sunt necesare ca și caractere, fie că fac parte dintr-un text analizat, fie că se dorește compunerea unuia într-o manieră dinamică, aceste caractere trebuie să fie precedate de backslash (`\`).
+
+De exemplu, ghilimele duble și simple: `\"` și `\'` și chiar backslash-ul însuși: `\\`
 
 ### Atomi lexicali
 
@@ -120,7 +126,7 @@ Toate elementele lexicografice care constituie codul în sine, cu excepția spa�
 
 Acești **atomi lexicali** (token-ii) sunt rezultatul parcurgerii unui fragment de cod (codul sursă) asupra căruia se aplică regulile lexicale specifice gramaticii pe care o impune standardul ECMAScript.
 
-Ca să-ți vină ușor să înțelegi, îți poți imagina un giuvaergiu care dintr-un maldăr de pietre prețioase (codul sursă), ia una câte una (fragmente de cod), pentru a-i identifica caracteristicile și în final pentru a le pune pe fiecare după sortare în cutiuțele pregătite special.
+Ca să-ți vină ușor să înțelegi, îți poți imagina un giuvaergiu care dintr-un maldăr de pietre prețioase (codul sursă), ia una câte una (fragmente de cod), pentru a-i identifica caracteristicile și în final pentru a le pune pe fiecare după sortare în cutiuțele pregătite special iar la final le asamblează într-o diademă deosebită.
 
 Trebuie să te avertizez de faptul că toate cuvintele speciale folosite de JavaScript sunt în limba engleză. Fondul lexical este cel al limbii engleze.
 
@@ -132,9 +138,11 @@ Textul sursă sau codul sursă poate fi de două tipuri: `Script` sau un `Module
 
 Spune standardul că mai întâi textul codului este parcurs pentru a-l „converti într-o succesiune de elemente de input" folosindu-se regulile lexicale. Aceste elemente de input sunt:
 
-#### Token-uri
+#### Token-uri - atomi
 
 Ceea ce rezultă în urma aplicării regulilor de identificare a componentelor ce formează fragmentele „inteligibile” pentru computer din șirul de text de intrare. Dacă-ți vine mai ușor este ca o analiză gramaticală în care identifici părțile de propoziție, ce sunt acestea din punct de vedere al părților de vorbire și așa mai departe.
+
+Atomii sunt de mai multe tipuri: cuvintele cheie, operatorii, comentariile, identificatorii și valorile literale.
 
 #### Line terminators - semnele capetelor de rând
 
@@ -158,7 +166,9 @@ Sunt considerate a fi spații albe următoarele: `tab` (`\t` *tabulator orizonta
 
 Imediat după această fază, această succesiune de elemente de input mai este parcursă încă o dată, aplicându-se din nou regulile gramaticale pentru a identifica ce este ce în text, care sunt identificatorii, cuvintele rezervate limbajului, etc.
 
-ECMAScript are un set de cuvinte rezervate care nu pot fi folosite decât în scopul pentru care au fost rezervate.
+#### Cuvinte cheie
+
+ECMAScript are un set de cuvinte rezervate care nu pot fi folosite decât în scopul pentru care au fost rezervate. Cuvintele cheie sunt un tip de atomi și se scriu întotdeauna fără majuscule.
 
 Le vom enumera aici cu traducerea lor pentru a vă familiariza la un prim contact: `break` (**_întrerupe_** cu sensul de _ieși din execuție_), `do` (**_fă_** cu sensul de _continuă ce faci_), `in` (**_în_** cu sensul _din_), `typeof` (**_de tipul_**), `case` (**_cazul_** cu sensul _în cazul_), `else` (**_altfel_** cu sensul de _în caz contrar_), `instanceof` (**_instanță a lui_**), `var` (**_variabilă_**), `catch` (**_prinde_**), `export` (**_exportă_**), `new` (**_nou_** cu sensul de _instanțiază un nou obiect_), `void` (**_golește_** cu sensul _golește de valoare_), `class` (**_clasă_**), `extends` (**_extinde_**), `return` (**_returnează_**), `while` (**_cât timp_**), `const` (**_constantă_**), `finally` (**_încheie_**), `super` (**super**), `with` (**_cu_**), `continue` (**_continuă_**), `for` (**_pentru_** cu sensul _evaluând următoarea(le) expresie(i) pentru fiecare element din_), `switch` (**_schimbă_** cu sensul _mergi pe ramura_), `yield` (**_produ_**), `debugger` (**_depanare_** cu sensul _activează depanatorul_), `function` (**_funcție_**), `this` (**_acesta_**), `default` (**_inițial_**), `if` (**_dacă_**), `throw` (**_aruncă_** cu sensul de a _scoate la lumină erorile_), `delete` (**_șterge_**), `import` (**_importă_**), `try` (**_încearcă_**), `await` (**_așteaptă_** cu sensul de _în așteptare_).
 
@@ -365,7 +375,7 @@ Un tărâm este constituit dintr-un set de obiecte interne, obiectul global pent
 
 Obiectele acestea sunt niște colecții de proprietăți iar pentru fiecare dintre proprietăți există atribute care determină cum se pot folosi acestea. Proprietățile pot fi considerate ca niște recipiente care conțin la rândul lor **valori primitive**, **funcții** sau chiar alte **obiecte**. Dacă urmăm imaginea rodiei, proprietățile pot fi bobițele, care la rândul lor conțin sâmburele, care este chiar valoarea.
 
-Am mai introdus câteva cuvinte noi. Hai să le lămurim. Primitivele sunt ca niște blocuri elementare de lucru. Sunt chiar datele, forma primară de reprezentare a lor. Funcțiile sunt miniprograme în programul mare. Obiectele, am stabilit: rodii! :).
+Am mai introdus câteva cuvinte noi. Hai să le lămurim. Primitivele sunt ca niște blocuri elementare de lucru. Sunt chiar datele, forma primară de reprezentare a lor. Funcțiile sunt mini-programe în programul mare. Obiectele, am stabilit: rodii! :).
 
 ### Primitive pe scurt
 
@@ -378,7 +388,44 @@ Avem șase primitive:
 - `Number`. „Număr” și
 - `Symbol`. „Simbol”.
 
-După cum se observă, fiecare primitivă constă din două elemente: sintaxa și semantica. Sintaxa implică „codarea" printr-un cuvând din limbajul natural, care în cazul JavaScript este limba engleză, iar semantica indică conceptul reprezentat.
+După cum se observă, fiecare primitivă este expresia a două elemente: sintaxa și semantica. Sintaxa implică „codarea" printr-un cuvânt din limbajul natural, care în cazul JavaScript este limba engleză, iar semantica indică conceptul reprezentat.
+
+#### Valorile literale
+
+Am vorbit mai devreme despre aceste valori. Valorile literale sunt de fapt datele cu care lucrează ECMAScript. Literalele sunt tipurile de date.
+
+Valorile literale sunt tipuri de date care pot fi definite fără să fie ceva instanțiat în mod special sau să creezi vreun obiect special pentru a lucra cu ele.
+
+Haideți să le trecem în revistă tipurile de literale:
+
+- String: `'ceva';` (cu ghilimele simple) și `"altceva";` (cu ghilimele duble),
+- Boolean: `true;` sau `false;`,
+- Număr: `3;`, `3.1415;`, un binar `0b1101;`, un hexazecimal `0x00F`, un octal `0o324`,
+- Array: `[];`, un array care include două literale de tip număr `[2,7];` sau care include un literal număr și unul string `['ceva', 2];`,
+- Obiect: `{};` - obiect literal gol sau obiect literal care are un literal string și unui număr numite primo și secundo: `{primo: 'ceva', secundo: 3};`,
+- Regular Expression: `/ceva/;`,
+- Funcție: `function () {};`,
+- Funcție cu nume: `function faCeva () {};`,
+- Null: `null;`,
+- Undefined: `undefined;`
+- template string: <code>&#96;</code>`un text ${variabila}`<code>&#96;</code>`;`
+
+Pentru cei foarte curioși vom explora nițel și diferența dintre valorile literale declarate simplu și cele instanțiate folosind constructorul corespondent lor.
+
+##### Cazul șirurilor
+
+Pentru a vedea și diferențele vom „stoca” în variabile.
+
+```javascript
+var a = 'ceva'; // string literal identificat prin a
+var b = new String('ceva'); // string creat cu ajutorul constructorului
+typeof a; "string"
+typeof b; "object"
+```
+
+La suprafață a și b conțin același lucru, dar în adâncime sunt două tipuri diferite pentru motivul că s-au „născut” altfel.
+
+Toate aceste valori literale le putem identifica prin „introducerea” lor într-o variabilă.
 
 ### Variabile pe scurt
 
