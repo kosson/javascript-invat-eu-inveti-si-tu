@@ -101,7 +101,7 @@ Ca postfix, va returna mai întâi valoarea și abia apoi va opera scăderea une
 
 ## Operatorul bitwise not `~`
 
-Operatorul inversează toți biții valorii operandului și returnează un număr.
+Operatorul inversează toți biții care reprezintă valoarea operandului și returnează un număr.
 
 ```javascript
 ~'0xDF'; // -224 (+'0xDF' este 223)

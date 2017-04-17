@@ -92,29 +92,32 @@ ECMAScript, ES5, ES6, JavaScript, JS, ECMAScript 2017, toate, fiecare vorbesc de
 
 Standardul ECMAScript 2016 este un „limbaj de programare" cu aplicativitate largă. Inițial ECMAScript a fost dezvoltat ca un limbaj de scriptare, dar a evoluat în unul care este aplicabil la o paletă foarte largă de aplicații.
 
-JavaScript este un limbaj creat de Brendan Eich în perioada când lucra la compania Netscape. Numele corect este ECMAScript și este rezultatul unui efort colaborativ care a pornit în 1996, un an mai târziu fiind publicată prima ediție. În aprilie 1998 devine standardul internațional ISO/IEC 16262.
+JavaScript este un limbaj de programare creat de Brendan Eich în perioada când lucra la compania Netscape. Numele corect este ECMAScript și este rezultatul unui efort colaborativ care a pornit în 1996, un an mai târziu fiind publicată prima ediție. În aprilie 1998 devine standardul internațional ISO/IEC 16262.
+
+Orice limbaj de programare este caracterizat de o sintaxă proprie (un set de reguli care îmbină cuvintele astfel încât să le înțeleagă compilatorul), un înțeles al combinațiilor de cuvinte (semantică) care să reflecte ceea ce intenționezi cu programul și un set de cuvinte pe care compilatorul să le înțeleagă a fi ale limbajului de programare (vocabular sau cuvintele cheie).
 
 Pentru a face o anatomie, vom porni privind la cele mai mici componente precum un fizician din domeniul particulelor, la componentele unui atom.
 
+![De la problemă la atomi lexicali](problema-atomiLexicali.svg.png)
+
 ### Caracterele folosite
 
-Oricât ar părea de bizar, cuvintele cu care scriem comenzi, sunt compuse din litere. Aceste litere, pentru computer nu sunt decât coduri în baza căruia reprezintă un caracter pe ecran.
-
-Caracterele folosite pentru a scrie cod respectă standardul de codare Unicode. Pentru fiecare caracter există un punct de cod specific UTF16.
+Cuvintele cu care scriem instrucțiuni, sunt compuse din litere. Aceste litere, pentru computer nu sunt decât coduri în baza căruia reprezintă un caracter pe ecran.
+Caracterele folosite pentru a scrie cod respectă standardul de codare Unicode. Pentru fiecare caracter există un punct de cod specific UTF16, care, de fapt este o valoare numerică. Reține faptul că toate caracterele de lucru pentru un computer nu sunt decât un cod numeric.
 
 #### Caracterele cu rol special
 
-Există câteva caractere care necesită chiar acum, la început de drum, o atenție specială. Acestea sunt `'` (ghilimele simple), `"` (ghilimele duble), `\n` (end of line), `\r` (carriage return), `\t` (tab), `\` (slash) și `/` (backslash).
+JavaScript este un limbaj de programare folosit îndeosebi la manipularea șirurilor de caractere indiferent ce reprezintă pentru noi oamenii.
 
-JavaScript este un limbaj de programare folosit la manipularea șirurilor de caractere indiferent ce reprezintă pentru noi oamenii.
+Există câteva caractere care necesită chiar acum, la început de drum, o atenție specială. Acestea sunt `'` (ghilimele simple), `"` (ghilimele duble), `\n` (*new line* - linie nouă), `\r` (*carriage return* - retur de car), `\t` (tabulator orizontal), `\v` (tabulator vertical), `\b` (*backspace* - înapoi spre stânga cu ștergerea unui caracter), `\f` (*form feed* - salt pagină nouă la dispozitivul de imprimare), `\` (slash) și `/` (backslash).
 
 În cazul ghilimelelor, ca bună practică, se vor folosi ghilimele simple pentru declararea șirurilor de caractere pentru că, fiind un limbaj strâns legat de markup-ul paginilor web, ar putea cuprinde ghilimele duble ca parte a fragmentelor de pagină web construite dinamic.
 
-Acoladele `{}` au rolul de a indica mediul în care se va executa codul în JavaScript. Cel mai adesea veți vedea că indică blocurile de cod ale funcțiilor. Între acolade veți introduce liste de instrucțiuni și expresii specifice JavaScript separate prin punct și virgulă `;`. Acoladele și parantezele rotunde împreună cu punct și virgulă pot fi considerate adevărate separatoare, care să împartă codul în calupuri ușor de urmărit vizual, dar și logic.
+Acoladele `{}` au rolul de a indica mediul în care se va executa codul în JavaScript. Cel mai adesea veți vedea că indică **blocurile de cod ale funcțiilor**. Între acolade veți introduce liste de instrucțiuni și expresii specifice JavaScript separate prin punct și virgulă `;`. Acoladele și parantezele rotunde împreună cu punct și virgulă pot fi considerate adevărate **separatoare**, care împart codul în calupuri ușor de urmărit vizual, dar și logic.
 
-Acoladele mai au și un rol special: delimitează spații cu un rol special. Creează niște „grădini private” pentru care doar o parte din cod are acces.
+Acoladele mai au și un rol special: delimitează spații cu un rol special. Creează niște „grădini private” care sunt **blocuri de cod** la care accesul se poate face doar dacă ești în acea grădină.
 
-##### Caractere care au nevoie de ajutor pentru a fi „văzute”
+##### Caractere care au nevoie de ajutor pentru a fi „văzute” folosind secvențe excape
 
 Caracterele de mai sus și combinațiile lor au un înțeles special pentru motorul de JavaScript, dar atunci când ele însele sunt necesare ca și caractere, fie că fac parte dintr-un text analizat, fie că se dorește compunerea unuia într-o manieră dinamică, aceste caractere trebuie să fie precedate de backslash (`\`).
 
@@ -166,9 +169,9 @@ Sunt considerate a fi spații albe următoarele: `tab` (`\t` *tabulator orizonta
 
 Imediat după această fază, această succesiune de elemente de input mai este parcursă încă o dată, aplicându-se din nou regulile gramaticale pentru a identifica ce este ce în text, care sunt identificatorii, cuvintele rezervate limbajului, etc.
 
-#### Cuvinte cheie
+#### Cuvinte cheie - vocabularul limbajului
 
-ECMAScript are un set de cuvinte rezervate care nu pot fi folosite decât în scopul pentru care au fost rezervate. Cuvintele cheie sunt un tip de atomi și se scriu întotdeauna fără majuscule.
+ECMAScript are un set de cuvinte rezervate care nu pot fi folosite decât în scopul pentru care au fost rezervate. Cuvintele cheie sunt unul din tipurile de atomi și se scriu întotdeauna fără majuscule.
 
 Le vom enumera aici cu traducerea lor pentru a vă familiariza la un prim contact: `break` (**_întrerupe_** cu sensul de _ieși din execuție_), `do` (**_fă_** cu sensul de _continuă ce faci_), `in` (**_în_** cu sensul _din_), `typeof` (**_de tipul_**), `case` (**_cazul_** cu sensul _în cazul_), `else` (**_altfel_** cu sensul de _în caz contrar_), `instanceof` (**_instanță a lui_**), `var` (**_variabilă_**), `catch` (**_prinde_**), `export` (**_exportă_**), `new` (**_nou_** cu sensul de _instanțiază un nou obiect_), `void` (**_golește_** cu sensul _golește de valoare_), `class` (**_clasă_**), `extends` (**_extinde_**), `return` (**_returnează_**), `while` (**_cât timp_**), `const` (**_constantă_**), `finally` (**_încheie_**), `super` (**super**), `with` (**_cu_**), `continue` (**_continuă_**), `for` (**_pentru_** cu sensul _evaluând următoarea(le) expresie(i) pentru fiecare element din_), `switch` (**_schimbă_** cu sensul _mergi pe ramura_), `yield` (**_produ_**), `debugger` (**_depanare_** cu sensul _activează depanatorul_), `function` (**_funcție_**), `this` (**_acesta_**), `default` (**_inițial_**), `if` (**_dacă_**), `throw` (**_aruncă_** cu sensul de a _scoate la lumină erorile_), `delete` (**_șterge_**), `import` (**_importă_**), `try` (**_încearcă_**), `await` (**_așteaptă_** cu sensul de _în așteptare_).
 
@@ -194,7 +197,7 @@ Aceste declarații și instrucțiuni sunt:
 
 Sunt caractere sau combinații de caractere care au rolul de a stabili o relație între doi operanzi. Este exact ca în matematică. Rolul operatorilor este de a ajunge la un rezultat în urma „evaluării”. De exemplu, când ai expresia `1 > 0;`, operatorul de comparație `>` va oferi rezultatul, care este o valoare boolean de `true`. În esență, putem spune că majoritatea rezultatelor atunci când scriem cod, provin din astfel de evaluări.
 
-De regulă operanzii stabilesc o evaluare a expresiilor de la stânga la dreapta. Putem verbaliza, de exemplu `1 + 1` ca „unu plus unu”, ceea ce înseamnă că am citit enunțul de la stânga la dreapta. De ce insist atât de mult pe acest aspect? Pentru că avem un operator - egalul (`=`), care este citit de la dreapta la stânga. Spre exemplu, în enunțul `a = 1`, citim: „valoarea 1 este atribuită variabilei a”. Operatorul egal împarte cei doi operanzi în expresii din partea stângă (***left-hand-side***) și expresii din partea dreaptă (***right-hand-side***).
+De regulă, operanzii stabilesc o evaluare a expresiilor de la stânga la dreapta. Putem verbaliza, de exemplu `1 + 1` ca „unu plus unu”, ceea ce înseamnă că am citit enunțul de la stânga la dreapta. De ce insist atât de mult pe acest aspect? Pentru că avem un operator - egalul (`=`), care este citit de la dreapta la stânga. Spre exemplu, în enunțul `a = 1`, citim: „valoarea 1 este atribuită variabilei a”. Operatorul egal împarte cei doi operanzi în expresii din partea stângă (***left-hand-side***) și expresii din partea dreaptă (***right-hand-side***).
 
 #### Enunțuri (***statements***)
 
@@ -226,7 +229,12 @@ alert('salut');
 
 Când spui că o îmbrățișare este o expresie a iubirii, putem stabili că o expresie este un proces de materializare, care oferă la final ceva concret.
 
-O expresie este un fragment de cod care produce o valoare atunci când este evaluată. Este o combinație rezolvabilă de operatori și operanzi.
+O expresie este un fragment de cod care produce o valoare atunci când este evaluată. Expresia indică computerului cum trebuie să prelucreze anumite valori. Este o combinație rezolvabilă de operatori și operanzi. Expresiile mai complexe cer folosirea unor semne grafice care să indice motorului unde se încheie acestea. Aceste semne grafice sunt separatorii.
+
+##### Separatorii
+
+Sunt folosiți pentru a demarca fragmentele cu înțeles pentru compilator. De exemplu, cel mai simplu separator este un spațiu (un spațiu este și el un caracter) sau un TAB, care sunt folosite pentru a despărți cuvintele între ele. Un alt separator este punct și virgulă, care este ca punctul în limbaj natural.
+Enter-ul pe care-l dai pentru a trece pe o nouă linie, este, de fapt tot un separator. Instrucțiunile pot fi grupate în JavaScript în blocuri care sunt „separate” de restul codului prin acolade.
 
 ##### Pentru curiosul din tine
 
@@ -261,7 +269,7 @@ x = 1 + 1;  // expresie de atribuire a unei expresii aritmetice
 
 În exemplul dat avem o literă, care ține locul unei valori care va apărea la un moment dat și pe care tehnic o numim variabilă.
 
-Aceasta este adunată cu o valoare de sine stătătoare numită **valoare literală**. De ce se numește **literală**? Pentru că nu este valoarea unei variabile, ci pur și simplu se reprezintă pe sine.
+Aceasta este adunată cu o valoare de sine stătătoare numită **valoare literală**. De ce se numește **literală**? Pentru că nu este valoarea unei variabile, ci pur și simplu se reprezintă pe sine, prin literele care consituie unitatea ce reprezintă o valoare.
 
 Că veni vorba de matematică, îți aduci aminte că îl foloseam pe celebrul „x” la regula de trei simplă sau la ecuația de gradul I. De ce? Pentru că încă nu cunoșteam valoarea a cărui loc o ținea litera.
 
@@ -288,7 +296,9 @@ Continuăm cu o precizare foarte importantă pentru a întări ceea ce am rememo
 
 #### Instrucțiunile
 
-Instrucțiunile sunt parte a expresiilor (`expressions`). Este observabil că cel mai adesea veți vedea că o expresie este o instrucțiune. În JavaScript, sunt permise expresii care nu sunt neapărat instrucțiuni. De exemplu, `1 + 1;`
+O instrucțiune este o linie de cod încheiată prin separatorul punct și virgulă. Poate fi o expresie, invocarea unei funcții sau a unei metode sau pur și simplu o declarație. O instrucțiune este un pas al unui algoritm. Instrucțiunile vor fi executate în ordinea în care au fost scrise.
+
+Instrucțiunile sunt parte a expresiilor (`expressions`). Cel mai adesea veți vedea că o expresie este echivalentul unei instrucțiuni. În JavaScript, sunt permise expresii care nu sunt neapărat instrucțiuni. De exemplu, `1 + 1;`
 
 **JavaScript este un limbaj de programare pentru care este de importanță vitală felul în care este redactat codul sursă.**
 
@@ -296,9 +306,18 @@ Acest aranjament de scriere a codului, succesiunea în care sunt introduse instr
 
 Rețineți faptul că modul în care redactezi codul are efect direct asupra funcționării programului. Nu uita faptul că poți scrie instrucțiunile pe mai multe linii și astfel îmbunătățești lizibilitatea programului. Ba mai mult, poți indenta (pui spații înaintea fragmentului de cod și ca efect vizual se vor deplasa spre dreapta). Despre indentare spune Marele Dicționar pentru Neologisme din 2000: „plasare a programelor pe linii, pentru scrierea cât mai clară a acestora”.
 
+#### Declarațiile
+
+Folosind cuvintele cheie ale limbajului faci declarații, care de fapt ceea ce menționează este tipul datelor cu care vei lucra în programul tău. Un exemplu foarte simplu este declararea unei variabile: `var x = 10;`.
+Un program JavaScript este o colecție de declarații de variabile și funcții.
+
 #### Blocurile de cod
 
-În JavaScript poți declara un bloc de cod foarte simplu deschizând acolade. Scrii codul între acolade și poți considera că acest cod aparține unui bloc de cod distinct.
+Blocurile sunt grupuri de instrucțiuni. Are o parte declarativă și o parte de execuție.
+
+În JavaScript poți declara un bloc de cod foarte simplu deschizând acolade. Scrii codul între acolade și poți considera că acest cod aparține unui bloc de cod distinct. Blocurile au rolul de a grupa una sau mai multe instrucțiuni sau pot conține instrucțiuni formate din mai multe alte instrucțiuni.
+
+Gruparea declarațiilor într-un bloc, se comportă ca **o unitate de cod** menită să evalueze expresii, să apeleze funcții și metode, să afișeze rezultate și să returneze rezultate.
 
 ```javascript
 { var ceva = 'Salut!' }
@@ -312,6 +331,8 @@ if (true) {
 };
 function facCeva () { return 'Salutare!' };
 ```
+
+Partea cea mai valoroasă în gruparea cu ajutorul blocurilor este că se realizează și o separație a fragmentelor de cod în cadrul programului. Aici mă refer la faptul că declararea unei variabile are ca „domeniu de existență”, adică există doar pentru acel bloc de cod.
 
 #### Despre identificatori
 
@@ -495,10 +516,19 @@ Pentru JavaScript se întâmplă că sursa este parcursă înainte de a fi rulat
 ## Resurse
 
 [ECMAScript® 2017 Language Specification](https://tc39.github.io/ecma262/)
+
 Simpson, Kyle. [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS)
+
 Haverbeke, Marijn. [Eloquent JavaScript](http://eloquentjavascript.net/)
+
 Brookshear, J. Glenn. [Computer science - An overview](https://www.amazon.com/Computer-Science-Overview-Global/dp/1292061162)
+
 Ce este notația BNF [What is BNF notation?](http://cui.unige.ch/db-research/Enseignement/analyseinfo/AboutBNF.html)
+
 Backus–Naur form [Backus–Naur form](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form)
+
+A brief history of JavaScript [A brief history of JavaScript](https://auth0.com/blog/a-brief-history-of-javascript/)
+
+ViewSource 2015 - Allen Wirfs-Bock [ViewSource 2015 - Allen Wirfs-Bock](https://www.youtube.com/watch?v=_oqkhslhNQU)
 
 [1]: http://www.teora.ro/cgi-bin/teora/romania/mbshop.cgi?database=01&action=view_product&productID=%20823&category= "Brookshear, J. Glenn. Introducere în informatică. Editura Teora. 1998. Titlul original: Computer science - An overview, Fifth Edition"

@@ -9,9 +9,7 @@ Cel mai des țintite de evenimente sunt: Element, document, window dar și alte 
 Evenimentele țintesc obiecte pentru a semnala că ceva s-a întâmplat, precum activitate nouă pe rețea sau o interacțiune din partea utilizatorului. Aceste obiecte implementează interfața `EventTarget`. Evenimentele la rândul lor sunt obiecte care implementează interfața `Event`.
 
 ```javascript
-// cel mai simplu exemplu
 obiect.addEventListener("aparDate", prelucreazaDatele);
-
 prelucreazaDatele(eveniment){
   // ceva cod
 };
