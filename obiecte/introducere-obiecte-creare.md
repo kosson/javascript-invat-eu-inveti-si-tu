@@ -1,14 +1,37 @@
 # Obiecte
 
-Standardul spune că obiectele sunt „colecții de zero sau mai multe proprietăți fiecare având atribute care determină cum poate fi folosită”. Un obiect are un singur obiect prototip.
+Standardul spune că obiectele sunt „colecții de zero sau mai multe proprietăți fiecare având atribute care determină cum poate fi folosită”. Un obiect are un singur obiect cu rol de prototip.
 
-JavaScript vine din start cu câteva obiecte care se numesc „built-in object” pe care le putem înțelege ca obiecte interne limbajului la care ai acces din start. Atenție, `obiectul global` esteIf the name is an alphanumeric string conforming to the same rules as names of variables, there’s a simplified syntax for accessing the values: parte a obiectelor interne preexistente.
+## Componența obiectelor
+
+Obiectele au **proprietăți** și **metode**.
+Proprietățile sunt valori cum ar fi numere, boolean-uri sau șiruri de caractere. Proprietățile ***sunt ceva***.
+Metodele ***fac ceva***. Metodele sunt de fapt niște funcții. Toate funcțiile definite în obiectul global, de fapt, devin automat metode ale lui `window` în cazul browserelor.
+
+```javascript
+// un object literal
+var obi = {
+  a: 10,
+  b: 20
+};
+```
+
+Moment Zen: Obiectele pot fi considerate ca array-uri asociative pentru că poți accesa valoarea folosind notația cu paranteze drepte: `obi['b']`.
+
+## Categorii de obiecte
 
 De fapt, în standard obiectele chiar sunt categorisite astfel:
 - „Ordinary object” au comportamentul comun pentru toate obiectele în JavaScript
 - „Exotic object” au comportamentul comun pentru obiectele în JS, dar cu mici diferențe
 - „Standard objects” sunt toate obiectele JS iar cele „ordinary” și cele „exotice” sunt parte a celor standard
 - „Built-in objects” - toate obiectele standard fac parte din obiectele built-in
+
+
+## Obiecte built-in
+
+JavaScript vine din start cu câteva obiecte care se numesc „built-in object” pe care le putem înțelege ca obiecte interne limbajului la care ai acces din start. Atenție, `obiectul global` este parte a obiectelor interne preexistente.
+
+## Moștenirea prototipală
 
 ***JavaScript este un limbaj bazat pe moștenire prototipală - prototypal inheritance***
 

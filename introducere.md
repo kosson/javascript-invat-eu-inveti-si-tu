@@ -137,17 +137,17 @@ Trebuie să te avertizez de faptul că toate cuvintele speciale folosite de Java
 
 Textul sursă sau codul sursă poate fi de două tipuri: `Script` sau un `Module`. Codul pe care-l scrii poate fi redactat pe mai multe linii pentru că pentru JavaScript **_spațiile_**, **_taburile_** și **_line breaks_**-urile sunt _spații albe_ și nu semnale care să indice un curs de acțiune.
 
-### Elemente de input - faza 0
+### Elemente de input
 
-Spune standardul că mai întâi textul codului este parcurs pentru a-l „converti într-o succesiune de elemente de input" folosindu-se regulile lexicale. Aceste elemente de input sunt:
+Spune standardul că mai întâi textul codului este parcurs pentru a-l „converti într-o succesiune de elemente de input" folosindu-se regulile lexicale. Aceste elemente de input sunt atomii lexicali, semnele de încheiere a rândului și spațiile albe.
 
 #### Token-uri - atomi
 
 Ceea ce rezultă în urma aplicării regulilor de identificare a componentelor ce formează fragmentele „inteligibile” pentru computer din șirul de text de intrare. Dacă-ți vine mai ușor este ca o analiză gramaticală în care identifici părțile de propoziție, ce sunt acestea din punct de vedere al părților de vorbire și așa mai departe.
 
-Atomii sunt de mai multe tipuri: cuvintele cheie, operatorii, comentariile, identificatorii și valorile literale.
+Atomii sunt de mai multe tipuri: cuvintele cheie, operatorii, identificatorii și valorile literale.
 
-#### Line terminators - semnele capetelor de rând
+#### Line terminators - semnele de închiere a rândurilor
 
  - `line-feed` - *mergi pe line nouă* (`\n`, abreviat LF sau NL un caracter special care marchează faptul că motorul trebuie să continue citirea de pe o nouă linie de cod: `print("ceva\ncapat");`),
  - `carriage return` ( `\r` abreviat CR) - *trage înapoi tamburul* (un caracter special care spune motorului că trebuie să se întoarcă pe linia curentă pentru o operațiune pe șirul de caractere al rândului. Acest caracter este o reminiscență a utilizării vechilor mașini de scris, care migrând la cele electronice, încă aveau nevoie de un caracter special care să spună mecanismelor electromecanice să se întoarcă pe același rând: `print("ceva\rcapat"); // "ceva
@@ -165,7 +165,7 @@ Acestea sunt utile pentru a documenta codul. Sunt două moduri de a introduce co
 
 Sunt considerate a fi spații albe următoarele: `tab` (`\t` *tabulator orizontal*, fiind un spațiu cu o anumită întindere), `space` (spațiu), `non-breakable space` (spațiu care nu poate fi fracționat), `line tabulation` (sau vertical tab - `\v` - referindu-se la mișcarea pe verticală a liniilor), `form feed` (se referă la trecerea pe ceea ce este înțeles a fi o pagină nouă `\f`).
 
-### Recunoașterea structurilor lexicale proprii - faza 1
+### Recunoașterea structurilor lexicale proprii
 
 Imediat după această fază, această succesiune de elemente de input mai este parcursă încă o dată, aplicându-se din nou regulile gramaticale pentru a identifica ce este ce în text, care sunt identificatorii, cuvintele rezervate limbajului, etc.
 
@@ -394,22 +394,30 @@ Un tărâm este constituit dintr-un set de obiecte interne, obiectul global pent
 
 **Moment Zen**: un program JavaScript este de un grup de obiecte care comunică între ele.
 
-Obiectele acestea sunt niște colecții de proprietăți iar pentru fiecare dintre proprietăți există atribute care determină cum se pot folosi acestea. Proprietățile pot fi considerate ca niște recipiente care conțin la rândul lor **valori primitive**, **funcții** sau chiar alte **obiecte**. Dacă urmăm imaginea rodiei, proprietățile pot fi bobițele, care la rândul lor conțin sâmburele, care este chiar valoarea.
+Obiectele acestea sunt niște colecții de proprietăți iar pentru fiecare dintre proprietăți există atribute care determină cum se pot folosi acestea. Proprietățile pot fi considerate ca niște recipiente care conțin la rândul lor **valori**, **funcții** sau chiar alte **obiecte**. Dacă urmăm imaginea rodiei, proprietățile pot fi bobițele, care la rândul lor conțin sâmburele, care este chiar valoarea.
 
 Am mai introdus câteva cuvinte noi. Hai să le lămurim. Primitivele sunt ca niște blocuri elementare de lucru. Sunt chiar datele, forma primară de reprezentare a lor. Funcțiile sunt mini-programe în programul mare. Obiectele, am stabilit: rodii! :).
 
-### Primitive pe scurt
+### Tipurile de date - language types
 
-Avem șase primitive:
+Spune standardul că aceste tipuri ale limbajului (referindu-se la valori) sunt direct manipulabile de către programator.
 
-- `Boolean`. Este denumită după cercetătorul Boole și are două stări: `true`  adevărat sau `false` - fals,
+- `Undefined`. „Nedefinit” este o valoare în sine chiar dacă pare foarte straniu; „orice variabilă care nu are o valoare asignată are valoarea `undefined`” (ECMA-262),
 - `Null`. Da, o valoare nulă este considerată o valoare,
-- `Undefined`. „Nedefinit” este o valoare în sine chiar dacă pare foarte straniu,
+- `Boolean`. Este denumită după cercetătorul Boole și are două stări: `true`  adevărat sau `false` - fals,
 - `String`. „Șir de caractere” este succesiunea de caractere care formează un text,
-- `Number`. „Număr” și
-- `Symbol`. „Simbol”.
+- `Number`. „Număr” reprezintă valori reprezentate pe 64 de biți în virgulă mobilă (format al standardului IEEE 754‐2008),
+- `Object`. „Obiect” este o colecție de proprietăți; o proprietate are o cheie de acces către valoarea sa care poate fi o valoare de tip string sau Symbol. Ține minte că un șir gol este o cheie validă. „Numele unei proprietăți” este cheiea unei proprietăți care este valoare string.
+- `Symbol`. „Simbol” este o valoare care nu este string și care poate fi utilizată drept cheie a unui Obiect și
 
-După cum se observă, fiecare primitivă este expresia a două elemente: sintaxa și semantica. Sintaxa implică „codarea" printr-un cuvânt din limbajul natural, care în cazul JavaScript este limba engleză, iar semantica indică conceptul reprezentat.
+
+După cum se observă, fiecare tip este expresia a două elemente: sintaxa și semantica. Sintaxa implică „codarea" printr-un cuvânt din limbajul natural, care în cazul JavaScript este limba engleză, iar semantica indică conceptul reprezentat.
+
+**Spune standardul**: „O valoare a limbajului ECMAScript este o valoare caracterizată de un tip al limbajului ECMAScript”.
+
+În ceea ce privește numerele, la un moment dat, te vei lovi de apariția unei valori ciudate numite `NaN` (este prescurtarea de la **Not a Number**) și este reprezentarea unui număr în virgulă mobilă mai special.
+
+Mai avem introdus de curând numărul special `Infinity` și infinitate negativă `-Infinity`.
 
 #### Valorile literale
 
@@ -516,6 +524,8 @@ Pentru JavaScript se întâmplă că sursa este parcursă înainte de a fi rulat
 ## Resurse
 
 [ECMAScript® 2017 Language Specification](https://tc39.github.io/ecma262/)
+
+[Standard ECMA-262 ECMAScript® 2016 Language Specification](http://www.ecma-international.org/publications/standards/Ecma-262.htm)
 
 Simpson, Kyle. [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS)
 

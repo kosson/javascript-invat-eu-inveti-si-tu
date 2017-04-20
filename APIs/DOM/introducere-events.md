@@ -148,7 +148,7 @@ Aici intervin cele două modele pentru a înțelege. A existat un moment când N
 
 ### MODELUL CURENT
 
-Pentru armonizare, W3C a fost de acord ca cele două modele să coexiste după următorul scenariu: orice eveniment se declanșează, mai întâi este capturat și este declanșat în toți copii (dacă aceștia au event handlere - receptori), până când ajunge la cel vizat (`target element`), după care face „bubbling”, adică se ridică din nou către gazdă.
+Pentru armonizare, W3C a fost de acord ca cele două modele să coexiste după următorul scenariu: orice eveniment se declanșează, mai întâi de orice este capturat și este declanșat în toți copii (dacă aceștia au event handlere - receptori cu true), până când ajunge la cel vizat (`target element`), după care face „bubbling”, adică se ridică din nou către gazdă.
 
 ```text
                  | |  / \
@@ -189,13 +189,21 @@ Condiții: utilizatorul dă click pe elementul copil.
 </script>
 ```
 
-Având în minte modelul W3C, evenimentul `click` mai întâi este capturat. De se se întâmplă acest lucru? Pentru că motorul se va uita mai întâi pe ramurile DOM părinte ale elementului care a fost acționat pentru a găsi dacă este vreunul dintre acestea în modul `capture`.
+Având în minte modelul W3C, evenimentul `click` mai întâi de orice este capturat.
+
+Apoi motorul se va uita mai întâi pe ramurile DOM părinte ale elementului care a fost acționat pentru a găsi dacă este vreunul dintre acestea în modul `capture`.
 În cazul nostru, chiar dacă elementul acționat este în faza de `bubbling` după cum indică cu false receptorul de eveniment - addEventListener, elementul părinte la care se uită mai întâi și mai întâi motorul este în faza de `capture`.
 Efectul acestui aranjament este că se va executa mai întâi funcția de la părinte: `arataDetaliiGazda()`.
 
 Deci, evenimentul va porni de la părinte și se va propaga către copil executând toate callback-urile pentru receptoarele setate la `capture` pentru evenimentul `click`.
 
 Ajungând la copil, evenimentul va executa callback-ul pentru copil și evenimentul va intra în faza de bubbling, executând în orine către părinte toate callback-urile pentru care al treilea paramentru este setat la `false`.
+
+### Container false (bubbling), copilul false (bubbling)
+
+Evenimentul `click` pornește în faza de capturing.
+
+Apoi motorul se uita dacă există vreun părinte pornind de la elementul care a fost acționat și care are capturing-ul activat prin `true`. În cazul nostru nu. Pentru că nu există niciun `onclick` listener în capture la vreun părinte, mototul pornește să facă bubbling de la elementul acționat către container. Astfel, este apelat `arataDetaliiCopil()` urmată de `arataDetaliiGazda()`.
 
 ## Resurse
 

@@ -2,8 +2,6 @@
 
 This este un obiect pasat automat unei funcții și care se formează în funcție de contextul de execuție. `this` este strict legat de „locul” în care a fost apelată, nu de „locul” unde a fost declarată.
 
-Închipuiește-ți cum este făcută vata de zahăr. Funcția este persoana care plimbă bățul pe circumferința vasului care conține zahărul. Bățul este `this`, cel care strânge toate filamentele de zahăr existente în vas. Este un mijloc de a colecta vata de zahăr iar în cazul nostru identificatorii unui obiect context care face parte din contextul de execuție.
-
 ## Spune standardul
 
 `this` se leagă de evaluarea codului, adică la momentul evaluării codului `this` este rezultatul operațiunii abstracte `ResolveThisBinging()`. Se leagă strâns de Lexical Environment pentru `contextul de execuție curent` - `current execution context`.

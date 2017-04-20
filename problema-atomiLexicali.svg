@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="27.115963mm"
+   height="143.526mm"
+   viewBox="0 0 27.115963 143.526"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.1 15371"
+   sodipodi:docname="problema-atomiLexicali.svg"
+   inkscape:export-filename="/home/nicolaie/Documents/problema-atomiLexicali.svg.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
+  <title
+     id="title9447">problema-atomi lexicali</title>
+  <defs
+     id="defs2">
+    <marker
+       inkscape:stockid="Arrow1Send"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Send"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path8895"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#ff6600;fill-opacity:1;fill-rule:evenodd;stroke:#808000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.2,0,0,-0.2,-1.2,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="-63.566324"
+     inkscape:cy="260.56498"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="983"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <sodipodi:guide
+       position="13.607143,109.6131"
+       orientation="1,0"
+       id="guide9449"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>problema-atomi lexicali</dc:title>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by-sa/4.0/" />
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Nicolaie Constantinescu</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>CC-BY-SA</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Kosson</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:language>Romanian</dc:language>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>algoritmi</rdf:li>
+            <rdf:li>text sursă</rdf:li>
+            <rdf:li>atomi lexicali</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by-sa/4.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#ShareAlike" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-34.218749,-9.7033224)">
+    <path
+       style="fill:#ff6600;stroke:#808000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Send)"
+       d="m 47.825892,9.927083 -0.0875,122.086307"
+       id="path9180"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <circle
+       style="fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:1.01455629;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path8690"
+       cx="47.366135"
+       cy="26.914877"
+       r="9.6842861" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:6.61458302px;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="39.823189"
+       y="27.799318"
+       id="text8694"><tspan
+         sodipodi:role="line"
+         id="tspan8692"
+         x="39.823189"
+         y="27.799318"
+         style="font-size:3.17499995px;fill:#ffffff;stroke-width:0.26458332">problemă</tspan></text>
+    <circle
+       r="9.6842861"
+       cy="54.117046"
+       cx="46.996269"
+       id="circle8732"
+       style="fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:1.01455629;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:6.61458349px;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="40.37962"
+       y="54.992962"
+       id="text8694-9"><tspan
+         sodipodi:role="line"
+         id="tspan8692-3"
+         x="40.37962"
+         y="54.992962"
+         style="font-size:3.17499995px;fill:#ffffff;stroke-width:0.26458332">algoritm</tspan></text>
+    <circle
+       r="10.984503"
+       cy="26.914877"
+       cx="47.366138"
+       id="circle8752"
+       style="fill:none;fill-opacity:1;stroke:#ff6600;stroke-width:1.15077126;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <circle
+       r="10.984503"
+       cy="54.117046"
+       cx="46.996269"
+       id="circle8752-1"
+       style="fill:none;fill-opacity:1;stroke:#ff9955;stroke-width:1.15077126;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <circle
+       style="fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:1.01455629;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="circle8769"
+       cx="47.167702"
+       cy="81.638474"
+       r="9.6842861" />
+    <text
+       id="text8773"
+       y="71.920677"
+       x="47.537289"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:6.61458349px;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-size:3.17499995px;text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.26458332"
+         y="71.920677"
+         x="47.537289"
+         id="tspan8771"
+         sodipodi:role="line"
+         dy="5">soluție</tspan><tspan
+         style="font-size:3.17499995px;text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.26458332"
+         y="80.459694"
+         x="47.537289"
+         sodipodi:role="line"
+         id="tspan8777">tehnică</tspan><tspan
+         style="font-size:3.17499995px;text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.26458332"
+         y="88.998703"
+         x="47.537289"
+         sodipodi:role="line"
+         id="tspan8781" /><tspan
+         style="font-size:3.17499995px;text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.26458332"
+         y="95.613289"
+         x="47.537289"
+         sodipodi:role="line"
+         id="tspan8785" /></text>
+    <circle
+       style="fill:none;fill-opacity:1;stroke:#ff9955;stroke-width:1.15077126;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="circle8775"
+       cx="47.167702"
+       cy="81.638474"
+       r="10.984503" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:6.61458349px;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="47.24728"
+       y="78.315636"
+       id="text8694-9-9"><tspan
+         sodipodi:role="line"
+         id="tspan8692-3-4"
+         x="47.24728"
+         y="78.315636"
+         style="font-size:3.17499995px;text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.26458332"
+         dy="5">=</tspan><tspan
+         sodipodi:role="line"
+         x="47.24728"
+         y="86.854652"
+         style="font-size:3.17499995px;text-align:center;text-anchor:middle;fill:#ffffff;stroke-width:0.26458332"
+         id="tspan8827">program</tspan></text>
+    <circle
+       r="9.6842861"
+       cy="109.67496"
+       cx="47.813988"
+       id="circle8732-7"
+       style="fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:1.01455629;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:6.61458349px;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="39.985008"
+       y="110.8672"
+       id="text8694-9-8"><tspan
+         sodipodi:role="line"
+         id="tspan8692-3-45"
+         x="39.985008"
+         y="110.8672"
+         style="font-size:3.17499995px;fill:#ffffff;stroke-width:0.26458332">text sursă</tspan></text>
+    <circle
+       r="10.984503"
+       cy="109.67496"
+       cx="47.813988"
+       id="circle8752-1-0"
+       style="fill:none;fill-opacity:1;stroke:#ff9955;stroke-width:1.15077126;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:6.61458302px;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff6600;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="48.620586"
+       y="145.77173"
+       id="text9424"><tspan
+         sodipodi:role="line"
+         id="tspan9422"
+         x="48.620586"
+         y="145.77173"
+         style="font-size:7.76111126px;text-align:center;text-anchor:middle;fill:#ff6600;stroke-width:0.26458332"
+         dy="0">atomi</tspan><tspan
+         sodipodi:role="line"
+         x="48.620586"
+         y="153.11943"
+         style="font-size:7.76111126px;text-align:center;text-anchor:middle;fill:#ff6600;stroke-width:0.26458332"
+         id="tspan9426">lexicali</tspan></text>
+  </g>
+</svg>
