@@ -2,7 +2,7 @@
 
 ## Introducere
 
-DOM este acronimul de la Document Object Model. DOM este un API (Application Programming Interface) pentru documentele HTML și XML.
+DOM este acronimul de la Document Object Model. DOM este un API (Application Programming Interface) pentru documentele HTML și XML. DOM-ul trebuie văzut ca un liant între tagurile HTML și JavaScript, fiind astfel permisă interacțiunea cu pagina.
 
 Standardul spune că „programatorii pot redacta documente, pot parcurge structura lor și pot adăuga, modifica sau șterge elementele și conținutul acestora”.
 
