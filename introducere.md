@@ -175,13 +175,13 @@ ECMAScript are un set de cuvinte rezervate care nu pot fi folosite decât în sc
 
 Le vom enumera aici cu traducerea lor pentru a vă familiariza la un prim contact: `break` (**_întrerupe_** cu sensul de _ieși din execuție_), `do` (**_fă_** cu sensul de _continuă ce faci_), `in` (**_în_** cu sensul _din_), `typeof` (**_de tipul_**), `case` (**_cazul_** cu sensul _în cazul_), `else` (**_altfel_** cu sensul de _în caz contrar_), `instanceof` (**_instanță a lui_**), `var` (**_variabilă_**), `catch` (**_prinde_**), `export` (**_exportă_**), `new` (**_nou_** cu sensul de _instanțiază un nou obiect_), `void` (**_golește_** cu sensul _golește de valoare_), `class` (**_clasă_**), `extends` (**_extinde_**), `return` (**_returnează_**), `while` (**_cât timp_**), `const` (**_constantă_**), `finally` (**_încheie_**), `super` (**super**), `with` (**_cu_**), `continue` (**_continuă_**), `for` (**_pentru_** cu sensul _evaluând următoarea(le) expresie(i) pentru fiecare element din_), `switch` (**_schimbă_** cu sensul _mergi pe ramura_), `yield` (**_produ_**), `debugger` (**_depanare_** cu sensul _activează depanatorul_), `function` (**_funcție_**), `this` (**_acesta_**), `default` (**_inițial_**), `if` (**_dacă_**), `throw` (**_aruncă_** cu sensul de a _scoate la lumină erorile_), `delete` (**_șterge_**), `import` (**_importă_**), `try` (**_încearcă_**), `await` (**_așteaptă_** cu sensul de _în așteptare_).
 
-Cuvintele rezervate poartă în sine o acțiune. Ele numesc o acțiune pentru computerul nostru, un curs de acțiune pe care trebuie să-l urmeze.
+Cuvintele rezervate poartă în sine o acțiune. Ele numesc o acțiune pentru computerul nostru, un curs de acțiune pe care trebuie să-l urmeze. Instruiesc computerul în a face ceva și de aici încolo putem vorbi despre unele dintre ele ca instrucțiuni.
 
-Buna practică spune ca toate expresiile (liniile de cod cu instrucțiuni) în JavaScript trebuie să fie încheiate prin punct și virgulă (`;`), chiar dacă motoarele care implementează ECMAScript la momentul evaluării codului, introduc automat prin mecanismul de **_automatic semicolon insertion_** acest caracter. Da, motoarele permit anumite facilități celor grăbiți sau celor care chiar aleg aceasta practică înadins. Eu personal, mă feresc și pun semnele de punctuație pentru că astfel, codul devine lizibil și poți folosi însăși codul pentru a-l prelucra (știi sigur că un enunț s-a încheiat după `;`).
+Buna practică spune ca toate exprimările intenției programatorului, hai să le numim **enunțuri** (liniile de cod cu instrucțiuni), în JavaScript trebuie să fie încheiate prin punct și virgulă (`;`), chiar dacă motoarele care implementează ECMAScript la momentul evaluării codului, introduc automat prin mecanismul de **_automatic semicolon insertion_** acest caracter. Da, motoarele permit anumite facilități celor grăbiți sau celor care chiar aleg aceasta practică înadins. Personal, mă feresc și pun semnele de punctuație pentru că astfel, codul devine lizibil și poți folosi însăși codul pentru a-l prelucra (știi sigur că un enunț s-a încheiat după `;`).
 
 #### Automatic semicolon insertion - introducerea automată a lui punct și virgulă
 
-Enunțurile (_statements_) în JavaScript trebuie să se termine cu punct și virgulă, iar acolo unde semnul grafic nu a fost scris de programator, codul se supune mecanismului ASI - Automatic Semicolon Insertion:
+În JavaScript, enunțurile (_statements_), care sunt echivalentul propozițiilor din limbajul nostru de zi cu zi, trebuie să se termine cu punct și virgulă, iar acolo unde semnul grafic nu a fost scris de programator, codul se supune mecanismului ASI - ***Automatic Semicolon Insertion***:
 
 Aceste declarații și instrucțiuni sunt:
 
@@ -189,7 +189,7 @@ Aceste declarații și instrucțiuni sunt:
 - declarații de variabile: `var`, `let`, `const`,
 - declarațiile de module: `import`, `export`,
 - declararea expresiilor,
-- debugger,
+- declararea intenției de a folosi depanatorul de cod (debugger),
 - instrucțiunile `continue`, `break`, `throw`,
 - și `return`.
 
@@ -227,18 +227,22 @@ alert('salut');
 
 #### Expresiile (***expressions***)
 
-Când spui că o îmbrățișare este o expresie a iubirii, putem stabili că o expresie este un proces de materializare, care oferă la final ceva concret.
+O expresie este un fragment de cod, mai exact un compus de operanzi și operatori, care produce o valoare atunci când este evaluat.
 
-O expresie este un fragment de cod care produce o valoare atunci când este evaluată. Expresia indică computerului cum trebuie să prelucreze anumite valori. Este o combinație rezolvabilă de operatori și operanzi. Expresiile mai complexe cer folosirea unor semne grafice care să indice motorului unde se încheie acestea. Aceste semne grafice sunt separatorii.
+Este o combinație rezolvabilă de operatori și operanzi. Expresiile mai complexe cer folosirea unor semne grafice care să indice motorului unde se încheie acestea. Aceste semne grafice sunt separatorii.
+
+##### Pentru curiosul din tine
+
+Odată, demult într-o altă galaxie, în anii 60 odată cu apariția limbajului de programare ALGOL, a debutat un efort colaborativ de formalizare a sintaxei limbajelor de programare. Acest colectiv a produs o formă de exprimare sintactică numită Bakus Naur.
+
+În Backus Naur Form (BNF), aceasta fiind o notație care formalizează sintaxa unui limbaj de programare indiferent care ar fi el, o expresie ***este definită ca*** un „termen”, care poate fi la rândul său urmat de alt termen și așa mai departe. Așa arată formalizarea BNF: `expression ::=  term { "|" term }`. Simbolul `::=` înseamnă „este definit ca”, iar <code>&#124;</code> (caracterul *pipe*) înseamnă „ȘI-ul” logic.
 
 ##### Separatorii
 
 Sunt folosiți pentru a demarca fragmentele cu înțeles pentru compilator. De exemplu, cel mai simplu separator este un spațiu (un spațiu este și el un caracter) sau un TAB, care sunt folosite pentru a despărți cuvintele între ele. Un alt separator este punct și virgulă, care este ca punctul în limbaj natural.
-Enter-ul pe care-l dai pentru a trece pe o nouă linie, este, de fapt tot un separator. Instrucțiunile pot fi grupate în JavaScript în blocuri care sunt „separate” de restul codului prin acolade.
+Enter-ul pe care-l dai pentru a trece pe o nouă linie, de fapt este tot un separator.
 
-##### Pentru curiosul din tine
-
-În Backus Naur Form (BNF), aceasta fiind o notație care formalizează sintaxa unui limbaj de programare indiferent care ar fi el, o expresie ***este definită ca*** un „termen”, care poate fi la rândul său urmat de alt termen și așa mai departe (așa arată formalizarea BNF `expression ::=  term { "|" term }` - ::= înseamnă „este definit ca”, iar | înseamnă „și”).
+Instrucțiunile pot fi grupate în JavaScript în blocuri care sunt „separate” de restul codului prin acolade.
 
 ##### Definiția dicționarului
 

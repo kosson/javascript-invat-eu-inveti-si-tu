@@ -182,6 +182,10 @@ Este specificat să se ignore majusculele și să se facă căutare la nivel glo
 | `0` | Identifică un caracter NUL ||
 | `\w` | Identifică orice caracter din setul de bază Latin și majusculele, incluzând și underscore. | Echivalent cu `[A-Za-z0-9_]` |
 | `\W` | Este negarea identificării cu `\w`. Identifică orice caracter care nu este un caracter dintr-un posibil cuvânt format cu Latine. De exemplu, /\W/ identifică „%” din 50%. | Echivalent cu setul de negare `[^A-Za-z0-9_]` |
+| `\cX` | Unde `X` este un caracter de la A la Z, fiind un caracter de control. | |
+| `\xhh` | Unde hh sunt coduri de caracter iar fiecare h este un digit hexazecimal. | |
+| `\xhhhh` | Unde hhhh sunt coduri de caracter iar fiecare h este un digit hexazecimal. | |
+| `\u{hhhh}` | Unde hhhh sunt coduri de caracter iar fiecare h este un digit hexazecimal pentru un caracter Unicode. Funcționează numai când fanionul pentru Unicode este menționat | |
 
 ### Seturi de caractere
 
@@ -285,9 +289,15 @@ Am descris deja pe scurt comportamentul lui `+`, `?` și `*`.
 |:-|:-|:-|
 |{1,n}|{0,1}|{0,n}|
 
-Cum să le ții minte? Păi, pentru `+`, ține minte că adaugi ceva la ceva ce există deja, deci trebuie să existe cel puțin o dată șirul potrivit și continui cu șablonul la infinit, mai exect, până la epuizarea resursei de șir. Pentru `*` gândește-te ca la big-bang: din nimic, din 0 la infinit orice; deci șirul poate să existe sau nu. Cât despre `?`, pur și simplu este ca un „if”: bre! exiști sau nu?! Deci, potrivește dacă există, dacă nu, GHINION.
+**Cum să le ții minte?**
 
-Acum că știm cum să folosim seturile, le putem atașa cuantificatori pentru a atinge căutări ceva mai rafinate. Un set de tipul `/[A-Z][a-z]+/g`, va găsi toate mumele de persoane dintr-un șir: `Ana, George și emi`. Ultimul este intenționat scris fără majusculă pentru a face diferența.
+Păi, pentru `+`, ține minte că adaugi ceva la ceva ce există deja, deci trebuie să existe cel puțin o dată șirul potrivit și continui cu șablonul la infinit, mai exact, până la epuizarea resursei de șir; are un caracter expansiv precum porcul: va mânca toată mâncarea indiferent că e satisfăcută foamea sau nu.
+
+Pentru `*` gândește-te ca la Big-Bang: din nimic, din 0 la infinit orice; deci șirul poate să existe sau nu.
+
+Cât despre `?`, pur și simplu este ca un „if”: bre! exiști sau nu?! Deci, potrivește dacă există, dacă nu, GHINION.
+
+Acum că știm cum să folosim seturile, le putem atașa cuantificatori pentru a atinge căutări ceva mai rafinate. Un set de tipul `/[A-Z][a-z]+/g`, va găsi toate numele de persoane dintr-un șir: `Ana, George și emi`. Ultimul este intenționat scris fără majusculă pentru a face diferența.
 
 ```javascript
 var sir = 'Ana, George și emi';
@@ -295,7 +305,29 @@ var cautare = sir.match(/[A-Z][a-z]+/g);
 console.dir(cautare); // [Ana, George]
 ```
 
-Cuantificatorul `?` de exemplu poți căuta apariția membrilor unei familii de cuvinte știind că au o parte comună. De exemplu, cuvântul `pământean` face parte din familia de cuvinte a lui `pământ`.
+Dacă dorești să potrivești fragmente de taguri XML sau HTML, nu te lăsa păcălit de un șablon simplist precum `<.+>`. Acesta va funcționa aducând toate caracterele posibile care pot fi potrivite cu punctul și abia după aceea la ultima croșetă din întreg șirul, va încheia. E clar, plusul se comportă expansiv (greedy).
+
+```javascript
+var sir = '<div><p>Un <cite>citat.</cite></p></div>plus ceva';
+var sablon = /<.+>/;
+console.log(sir.match(sablon));
+// ["<div><p>Un <cite>citat.</cite></p></div>"]
+```
+
+Acest lucru se petrece pentru că punctul consideră prima croșetă care în gândirea noastră ar trebui să închidă parcurgerea șirului drept un caracter oarecare și va vontinua cu toate celelalte până când va ajunge la poziția de după ultimul caracter. Abia atunci motorul RegExp va privi ultimul caracter și-l va compara cu cel din regex pentru a vedea dacă este ce caută pentru a satisface șablonul. Dacă mai sunt alte caractere diferite de `>`, pur și simplu se va întoarce înapoi pe cărare și la primul caracter `>` va returna ca potrivire. Operațiunea de a merge înapoi pe șir pentru a satisface căutarea se numește `backtracking` (back înseamnă „înapoi” și tracking „a urma”). După ce a făcut backtracking, va returna „nerăbdător” ceea ce a găsit.
+
+Cum transformi comportamentul expansiv (greedy) într-unul autosuficient? Adaugi imediat după plus cuantificatorul `?`
+
+```javascript
+var sir = '<p>Un <cite>citat.</cite></p>';
+var sablon = /<.+?>/;
+console.log(sir.match(sablon));
+// ["<p>"]
+```
+
+Asta totuși nu rezolvă problema backtracking-ului care va taxa performanța motorului RegExp. Următorul șablon evită această taxare îndeplinind aceeași funcție: `[^>+>]`. La o folosire simplă, backtracking-ul nu se simt, dar atunci când potrivirea se face pe ciclurile unei bucle, induce întârziere.
+
+Cuantificatorul `?` de exemplu, permite căutarea apariției membrilor unei familii de cuvinte știind că au o parte comună. Cuvântul `pământean` face parte din familia de cuvinte a lui `pământ`.
 
 ```javascript
 var sir = 'Un pământean apăru în prag. Era negru pământ.';
@@ -325,7 +357,7 @@ console.log(sir.match(sablon));
 
 Ceea ce se mai observă este că metacaracterul `?` este unul care implică comportamentul expansiv (greedy). De ce? Pentru că spune motorului că musai trebuie să potrivească șablonul ca mai apoi să se dea bătut dacă acesta are corespondent în string. Pentru a face șablonul autosuficient (lazzy), ar trebui să mai pui un metacaracter `?` după primul.
 
-Cuantificatorul `*` este combinația anteriorilor.
+Cuantificatorul `*` este combinația anteriorilor. Este și el un cuantificator expansiv încercând să consume întreaga resursă de șir.
 
 Mai poți specifica de câte ori poate să apară un anumit caracter menționând imediat după acesta între acolade de câte ori.
 
@@ -456,6 +488,16 @@ La ce ar folosi să știm asta? Ia gândește-te că dorești să prelucrezi fra
 
 ## Grupare pentru a construi șabloane elaborate: propoziții
 
+Gruparea permite formarea de expresii secundare, care pot fi tratate ca o unitate.
+
+| Caracter | Semnificație |
+|:---------|:-------------|
+| `(x)` | Identifică x și ține minte ce a găsit. Acestea sunt numite grupuri de captură. Subșirurile descoperite pot fi reapelate din array-ul rezultatelor sau din proprietățile predefinite ale obiectului RegExp ($1, ..., $9). Atenție, folosirea grupurilor penalizează performanța. Dacă nu este nevoie de un apel la substringurile descoperite, mai bine se face identificarea fără paranteze. |
+| `\n` | n este un număr întreg pozitiv |
+| `(?:x)` | Îl identifică pe x, dar nu-l ține minte, nu-l „capturează”. |
+| `x(?=y)` | Spune că `x` nu va fi returnat la potrivire dacă nu este urmat de `y`. Această procedură se numește în engleză „lookahead” - privește înainte. De exemplu în `Ion Amariei`, șablonul `Ion(?=Amariei)`, va returna doar dacă Ion este urmat de Amariei. |
+| `x(?!y)` | Este fix inversul `lookahead`-ului. Șabloul va potrivi doar dacă x nu este urmat de y. |
+
 Grupurile arată ca niște rețete în care ingredientele indică modul în care se va face regăsirea. Grupurile permit o mai bună „țintire” a subșirurilor dorite. Să spunem că ai trei secvențe de caractere despărțite de spații și dorești să le regăsești. În loc să faci reguli care să potriveastă ceea ce sunt, ai putea face grupuri care să cuprindă ceea ce nu sunt.
 
 ```javascript
@@ -466,7 +508,7 @@ console.log(cautare);
 // ["Un posibil fragment.", "Un", "posibil", "fragment."]
 ```
 
-Explicația evaluării regexului construit în exemplu este următoarea. În șirul propus, dorim să extragem primele trei cuvinte. Pentru aceasta, voi crea primul grupaj - `(\S+)` - de caractere a primului cuvânt spunând așa: selectează-mi toate caracterele care nu sunt spații, dacă există cel puțin unu. Apoi punem în șablon un spațiu pur și simplu fără a-l marca cu `\s` și purcedem la identificarea celui de-al doilea grupaj - `(\S*)` - care spune așa: selectează-mi toate caracterele care nu sunt spații indiferent ce caractere `*` pornind de la 0 la n. De fapt, ceea ce dorim este să testăm dacă există un cuvânt între alte două. De aceea testăm cu `*` pentru că oferă posibilitatea să nu existe cuvântul „intern”. Apoi urmează cel de-al doilea spațiu și aici facem o limitare la o identificare limitată pentru spațiu; poate să fie sau nu. Este doar în cazul în care avem cuvântul „intern”, în cazul nostru *posibil*. Încă nu este îndeajuns și precizăm cu `\b` că aceasta este limita căutării pentru secvența de dinaintea ultimului cuvânt. De la limită avem ultimul grup `(\S+)`, care spune: extrage tot ce nu este spațiu dacă am cel puțin un caracter non-spațiu.
+Explicația evaluării regexului construit în exemplu este următoarea. În șirul propus, dorim să extragem primele trei cuvinte. Pentru aceasta, voi crea primul grupaj - `(\S+)` - de caractere a primului cuvânt spunând așa: selectează-mi toate caracterele care nu sunt spații, dacă există cel puțin unu. Apoi punem în șablon un spațiu pur și simplu fără a-l marca cu `\s` și purcedem la identificarea celui de-al doilea grupaj - `(\S*)` - care spune așa: selectează-mi toate caracterele care nu sunt spații indiferent de caractere pornind de la 0 la n. De fapt, ceea ce dorim este să testăm dacă există un cuvânt între alte două. De aceea testăm cu `*` pentru că oferă posibilitatea să nu existe cuvântul „intern”. Apoi urmează cel de-al doilea spațiu și aici facem o limitare la o identificare limitată pentru spațiu; poate să fie sau nu. Este doar în cazul în care avem cuvântul „intern”, în cazul nostru *posibil*. Încă nu este îndeajuns și precizăm cu `\b` că aceasta este limita căutării pentru secvența de dinaintea ultimului cuvânt. De la limită avem ultimul grup `(\S+)`, care spune: extrage tot ce nu este spațiu dacă am cel puțin un caracter non-spațiu.
 
 Ce se întâmplă când ai doar două cuvinte și nu trei așa cum ai dori.
 
@@ -477,23 +519,15 @@ var cautare = sablon.exec(sir);
 console.dir(cautare);
 // ["Un fragment", "Un", "", "fragment"]
 ```
-### Grupare și referențiere
+### Gruparea și captura
 
-Gruparea permite formarea de expresii secundare, care pot fi tratate ca o unitate.
-
-| Caracter | Semnificație |
-|:---------|:-------------|
-| `(x)` | Identifică x și ține minte ce a găsit. Acestea sunt numite grupuri de captură. Subșirurile descoperite pot fi reapelate din array-ul rezultatelor sau din proprietățile predefinite ale obiectului RegExp ($1, ..., $9). Atenție, folosirea grupurilor penalizează performanța. Dacă nu este nevoie de un apel la substringurile descoperite, mai bine se face identificarea fără paranteze. |
-| `\n` | n este un număr întreg pozitiv |
-| `(?:x)` | Îl identifică pe x, dar nu-l ține minte, nu-l „capturează”. |
-
-Gruparea permite și așa-zisa „capturare” a rezultatelor grupurilor pentru a fi utilizate ulterior.
+Gruparea permite și așa-zisa „capturare”, de fapt o memorizare a rezultatelor grupurilor pentru a fi utilizate ulterior.
 
 Grupurile care să nu captureze rezultatele sunt de preferat.
 
-Avantajul grupării este că le poți aplica repetiții. În mod normal, repetițiile se aplică unui singur caracter aflat la stânga metacaracterului.
+Avantajul grupării este că le poți aplica repetiții. În mod normal, repetițiile se aplică unui singur caracter sau set de caractere aflat la stânga metacaracterului.
 
-Ca exemplu, putem construi un regex care să identifice o adresă web incluzând și protocolul.
+Prin grupare putem construi un regex care să identifice o adresă web incluzând și protocolul.
 
 ```javascript
 var adrese = '<a href = "http://www.kosson.ro">Un site interesant</a><link rel="stylesheet" href="https://cloudshare.io/main.css">';
@@ -519,18 +553,60 @@ Pentru că în cazul prezentat care tratează cazul cuvintelor compuse metacarac
 
 Tot din acest exemplu mai învățăm ceva despre metacaracterul `?`. Poate fi tratat ca un buton on/off pentru caracterul sau grupul sau setul după care stă.
 
-### Grupuri care fac captură și cele care nu fac
+### Backreferencing
 
-Să presupunem că avem de parcurs un fragment XHTML, care este un soi de XML (Extended Markup Language). Știm deja că XML-ul are o regulă strictă care spune că tagurile deschise trebuie închise, iar în cazul nostru: `<cite>Un citat</cite>`.
+Gruparea activează un mecanism de memorizare care ține minte șirul de caractere pentru secvența șablonului dintre parantezele rotunde. Mecanismul de memorizare poate fi anulat la nevoie. Nu uita faptul că memorizarea (***backreference***) taxează ca și resurse. Dacă nu ai nevoie de ea, anuleaz-o. De exemplu, în `bună(stare)?`, fragmentul memorizat, la momentul extragerii din șir va fi `stare`. Pentru a renunța la memorizare pui imediat după deschiderea parantezei rotunde a grupului sintaxa specială semnul întrebării și două puncte: `?:`. Astfel, șablonul va deveni `bună(?:stare)?`. Sintaxa `?:` spune motorului să nu folosească capturarea, memorizarea.
 
-## Backreferencing
+Totuși, la ce ar fi bună memorarea fragmentelor de șir prin acest mecanism?
+Poți folosi acest mecanism atunci când dorești să cauți și să înlocuiești secvențe de text.
 
-Gruparea permite o tehnică de apelare a grupului numită `backreferencing`. În cazul regexurilor, fiecărui grup îi sunt asignate numere de la stânga la dreapta începând cu 1. Se pot referenția aceste grupuri cu backslash număr.
+Să presupunem că avem de parcurs un fragment XHTML, care este un soi de XML (Extended Markup Language) și avem de modificat ceva. Știm deja că XML-ul are o regulă strictă care spune că tagurile deschise trebuie închise, iar în cazul nostru: `<cite>Un citat</cite>`.
+
+Fiecărui grup îi sunt asignate numere de la stânga la dreapta începând cu 1. Se pot referenția aceste grupuri cu backslash număr, de exemplu `\1`.
 
 ```javascript
-var sir = "Dorel era UN mare băiețel DE fel.";
-var cautare = sir.match(/(?:[A-Z])(?:[A-Z])\2\1/g);
-console.log(cautare);
+var sir = '<p>Un <cite>citat.</cite></p><snan>ceva</span>';
+var sablon = /<([A-z][A-z0-9]*)[^>]*>.*?<\/\1>/;
+console.log(sir.match(sablon));
+// ["<p>Un <cite>citat.</cite></p>","p"]
+```
+
+Odată stabilit un backreference, poate fi folosit ori de câte ori se dorește.
+
+```javascript
+var sir = 'Acuma: ah ha ahaha axa';
+var sablon = /([a-x])h\1h\1/i;
+console.log(sir.match(sablon));
+// ["ahaha","a"]
+```
+
+Un alt exemplu util ar fi depistarea cuvintelor care apar de două ori din diverse erori de scriere.
+
+```javascript
+var sir = 'am scris scris dublat';
+var sablon = /\b(\w+)\s+\1\b/;
+console.log(sir.match(sablon));
+// [Array] ["scris scris","scris"]
+```
+
+## Lookahead pozitiv și negativ
+
+Am menționat deja că un șablon `a(?=b)` indică motorului RegExp faptul că trebuie să avanseze pe șir pentru a satisface potrivirea lui a urmat imediat de b așa cum avem acum.
+Un lookup negativ este construirea unui șablon care să nege potrivirea imediată a caracterului: `a(?!b)`. RegExp va fi instruit să caute orice a dar care să nu fie urmat de b.
+
+```javascript
+var sir = 'abece';
+var sablon = /a(?=b)/;
+console.log(sir.match(sablon));
+// ["a"]
+```
+
+Fii atent că un lookahead nu creează un backreference.
+
+```javascript
+var sir = 'abac car'
+var sablon = /(?!a)c/;
+console.log(sir.match(sir));
 ```
 
 ## Căutări cu șabloane folosite de metodele String
@@ -570,6 +646,8 @@ var ceva = 'caut ceva';
 ceva.replace('caut', 'am'); // "am ceva"
 ceva.replace(/caut/g, 'vreau'); // "vreau ceva"
 ```
+
+Se mai pot folosi expresiile regulate și cu metoda `split` a obiectului String.
 
 ## Referințe
 
