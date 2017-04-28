@@ -4,13 +4,22 @@ Metoda face o căutare pentru a găsi un fragment de text specificat. Returneaz�
 
 ```javascript
 var unText = 'Acesta este o poveste cu 0 pitici';
-var ac = /este o Poveste/ig;
-var rezultat = ac.exec(unText); //Array [ "este o poveste" ]
+var sablon = /este o Poveste/ig;
+var rezultat = sablon.exec(unText); //Array [ "este o poveste" ]
 rezultat.index; // 7
 ```
 
-Array-ul returnat în momentul regăsirii conține o altă proprietate importantă în afară de indexul la care s-a găsit șirul după șablon: `input`. Input conține întreg șirul în care s-a făcut potrivirea.
+Este returnat un array care conține următoarele chei:
+- 0: 'este o poveste',
+- index: 7,
+- input: 'Acesta este o poveste cu 0 pitici',
+- length: 1
 
-```javascript
-console.dir(rezultat);
-```
+Prima cheie, de la index 0 are drept valoare șirul tuturor caracterelor potrivite.
+Cheia `index` indică unde a apărut subșirul potrivit pentru prima oară.
+
+Rezultatul array-ului returnat este determinat de ceea ce este căutat, de felul în care este structurat șablonul.
+
+Ceea ce nu variază este ceea valoarea cheii `input`, care permite accesul la șirul analizat.
+
+Mai există o informație importantă și aceasta este lungimea array-ului.

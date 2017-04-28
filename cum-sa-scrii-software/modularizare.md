@@ -1,6 +1,6 @@
 # Modularizarea codului
 
-Pentru a înțelege mai simplu modularizarea ar fi necesar să înțelegem fiecare componentă ca o valoare. Aceste valori la rândul lor pot fi puse împreună într-un singur obiect sau pot fi incapsulate frin efectele pe care le are un closure.
+Pentru a înțelege mai simplu modularizarea ar fi necesar să înțelegem fiecare componentă ca o valoare. Aceste valori la rândul lor pot fi puse împreună într-un singur obiect sau pot fi incapsulate prin efectele pe care le are un closure.
 
 Modulele sunt colecții de funcții care au elemente ce țin de zona internă pe care ar trebui să le percepem a fi private și elemente externe, care permit interacțiunea.
 
@@ -83,3 +83,5 @@ console.log(window.UnModul);
 
 // poți trimite orice obiect pentru a lucra cu el.
 ```
+
+Folosind ECMAScript 2017, fișierele JavaScript devin ele însele module care pot fi încărcate cu `import`/`export`. La momentul scrierii acestui material doar browserul Chrome are suport.
