@@ -2,7 +2,7 @@
 
 ## Pentru voi!
 
-Dedic acest efort copiilor mei, copiilor tuturor celor care vor citi materialele și vouă, celor curioși, care veți învăța mai întâi prin a înțelege.
+Dedic acest efort copiilor și vouă, celor curioși, care veți învăța mai întâi prin a înțelege.
 
 Este pentru voi, cei care lucrați în biblioteci și în alte instituții de memorie. Motivul pentru care vi se adresează vouă este nevoia unei noi abordări a practicii în contactul permanent cu informația și cu reprezentările atât de bogate ale acesteia.
 

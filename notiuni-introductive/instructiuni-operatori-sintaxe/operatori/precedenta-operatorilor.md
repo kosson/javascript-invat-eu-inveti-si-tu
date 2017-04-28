@@ -1,8 +1,19 @@
 # Precedența operatorilor
 
+Ce sunt operatorii?
+Sunt valorile care intră în evaluarea unei expresii.
+Ce sunt operanzii?
+Sunt semne grafice care indică ce operațiune se va efectua la momentul evaluării. Aceste semne grafice sunt semnele operațiunilor matematice, aceștia fiind o parte din ei.
+
+Să ne amintim că expresiile sunt constituite din înșiruirea de operanzi și operatori.
+
+În programare există două mari categorii de operatori: operatorii unari și cei binari. Operatorii unari sunt acei operatori care se aplică unui singur operand. Operatorii binari sunt cei care implică doi operatori.
+
 Ca și în cazul matematicii, operatorii au o anumită ordine, o anumită întâietate la evaluare a unora față de alții. Ne aducem aminte de la aritmetică că înmulțirea se face înaintea adunării și a scăderii.
 
-Și în cazul limbajelor de programare avem de-a face cu operatori care vor determina cum ca fi evaluat codul din stânga operatorului cu cel din dreapta operatorului.
+Până acum v-am obișnuit cu unul care este indispensabil, cel care atribuire a valorilor `=` (semnul egal). Este operatorul care pur și simplu face legătura dintre valoare și numele sub care poate fi regăsită.
+
+Haideți să pornim încetișor să vedem despre ce este vorba și pentru asta vom reveni la cele mai simple concepte ale operațiunilor matematice. Da, știu, mate, dar promit că nu doare. Hai să vedem care-i treaba cu asociativitatea.
 
 ## Asociativitatea operatorilor
 
