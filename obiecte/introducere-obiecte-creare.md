@@ -16,7 +16,7 @@ var obi = {
 };
 ```
 
-Moment Zen: Obiectele pot fi considerate ca array-uri asociative pentru că poți accesa valoarea folosind notația cu paranteze drepte: `obi['b']`.
+**Moment Zen**: Obiectele pot fi considerate ca array-uri asociative pentru că poți accesa valoarea folosind notația cu paranteze drepte: `obi['b']`.
 
 ## Categorii de obiecte
 

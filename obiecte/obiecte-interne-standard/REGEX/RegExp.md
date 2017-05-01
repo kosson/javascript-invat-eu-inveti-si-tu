@@ -9,16 +9,20 @@ RegExp înseamnă **expresii regulate** dar ne vom referi la construcțiile de �
 **Spune standardul**:
 *Forma și funcționalitatea expresiilor regulate este modelată după cele oferite de limbajul de programare Perl 5*.
 
-Aș dori să continui prin a vă seta mental pentru felul în care trebuie abordat lucrul cu șabloanele construite cu RegExp. Trebuie conștientizat din prima că RegExp lucrează la nivel de caracter individual, apoi seturi de caractere, grupuri și combinațiile dintre acestea. Dar concentrarea voastră trebuie să pornească de la conștientizarea importanței unui singur caracter. Un singur caracter face diferența între a regăsi ceea ce cauți într-un șir sau nu.
+Continuăm prin setarea metală necesară pentru lucrul cu șabloanele construite cu `RegExp`.
+Trebuie conștientizat din prima că `RegExp` lucrează la nivel de caracter individual, apoi seturi de caractere, grupuri și combinațiile dintre acestea. Dar concentrarea voastră trebuie să pornească de la conștientizarea importanței cruciale pe care o are un singur caracter, fie că acesta este „vizibil” sau „invizibil” (spațiile albe, taburile).
 
-Un mic antrenament de atenție înainte de a lucra. Caracterul `?` la regexuri pune condiția strictă ca un șablon menționat înaintea sa să existe sau nu. De exemplu, `x?`, se va traduce: caracterul `x` poate să fie întâlnit și dacă da, ia-l în considerare, dar este acceptabil și dacă acesta nu există. Și acum, focalizare maximă. Următorul regex <code><u> </u>?</code> te poate da peste cap dacă nu ești atent. Pur și simplu testează dacă există un spațiu sau nu. Liniuța am pus-o eu pentru a marca spațiul pentru că nu am alt mijloc să-l marchez aici. Vezi? De accea trebuie cu multă atenție lucrat.
+**Un singur caracter face diferența între a regăsi ceea ce cauți într-un șir sau nu**.
 
-Câteva precizări privind termenii folosiți în limba română. Pentru englezescul „pattern” am ales `șablon` pentru că semantic implică înțelesul cel mai bun iar pentru operațiunea în sine de căutare în șir am folosit interșanjabil „a potrivi”, cu sensul de a potrivi în șir șablonul sau „a regăsi”, cu sensul operațiunii de identificare în șir atunci când explicația redă operațiunea din punctul de vedere al motorului RegExp.
+Un mic antrenament de atenție înainte de a lucra. Caracterul `?` la regexuri pune condiția strictă ca un șablon menționat înaintea sa să existe sau nu. De exemplu, `x?`, se va traduce: caracterul `x` poate să fie întâlnit și dacă da, include-l în rezultat, dar este acceptabil și dacă acesta nu există.
+Și acum, focalizare maximă. Următorul regex valid <code><u> </u>?</code> te poate da peste cap dacă nu ești atent. Pur și simplu testează dacă există un spațiu sau nu pentru că înaintea semnului întrebării era un spațiu nedetectabil celor care abia s-au apucat de lucru pe șiruri de caractere. Liniuța am pus-o eu pentru a marca spațiul pentru că nu am alt mijloc vizual prin care să-l marchez aici. Vezi? De accea trebuie lucrat cu multă atenție.
+
+Câteva precizări privind termenii folosiți în limba română. Pentru englezescul „pattern” am ales `șablon` pentru că semantic implică înțelesul cel mai bun, iar pentru operațiunea în sine de căutare în șir am folosit interșanjabil „a potrivi”, cu sensul de a potrivi în șir șablonul sau „a regăsi”, cu sensul operațiunii de identificare în șir atunci când explicația redă operațiunea din punctul de vedere al motorului `RegExp`. Regexurile mai au niște litere care succed șablonul. Acestea în limba engleză sunt numite „flags”, dar pentru limba română le-am tradus ca fanioane pentru că semnalizează un anumit comportament pe care motorul de interpretare trebuie să-l adopte.
 
 **Spune standardul**:
-*Un șablon este evaluată („este compilată”) la o valoare rezultată dintr-o procedură internă*.
+*Un șablon este evaluat („este compilat”) la o valoare rezultată dintr-o procedură internă*.
 
-Șirurile de caractere în JavaScript sunt înșiruiri de secvențe de 16 biți denumite tehnic `unități de cod` (code unit) ce reprezintă, de fapt, un singur caracter. RegExp se așteaptă să lucreze cu unități de cod pe 16 biți, care reprezintă un singur caracter. Totuși începând cu ECMAScript 6, există un fanion dedicat, care semnalizează RegExp că va avea de lucru cu un șir de caractere Unicode - `u`. De fapt, îi este indicat motorului faptul că trebuie să lucreze la nivel de caractere și nu la nivel de `code unit`.
+Șirurile de caractere în JavaScript sunt înșiruiri de secvențe de 16 biți denumite tehnic `unități de cod` (code unit) ce reprezintă, de fapt, un singur caracter. `RegExp` se așteaptă să lucreze cu unități de cod pe 16 biți, care reprezintă un singur caracter. Totuși începând cu ECMAScript 6, există un fanion dedicat, care semnalizează `RegExp` că va avea de lucru cu un șir de caractere Unicode - `u`. De fapt, îi este indicat motorului faptul că trebuie să lucreze la nivel de caractere și nu la nivel de `code unit`.
 
 ```javascript
 let exemplu = '𝒥';
@@ -30,23 +34,31 @@ console.log(/^.$/.test(exemplu)); // false, nu se face potrivirea
 console.log(/^.$/u.test(exemplu)); // true, fanionul este ridicat pentru Unicode
 ```
 
-Expresiile regulate sunt șabloane folosite pentru a căuta combinații de caractere în șiruri. Dacă vrei să lucrezi direct pentru a face experimente, poți folosi instrumentul online RegExr accesibil de la următorul link: http://www.regexr.com/. Tot aici găsești și foarte multă documentație. Pentru JavaScript vezi și https://regexper.com/, care face o treabă foarte faină reprezentând cu hărți vizuale construcția șablonului.
+Expresiile regulate sunt șabloane folosite pentru a căuta combinații de caractere în șiruri. Dacă vrei să lucrezi direct pentru a face experimente, poți folosi instrumentul online **RegExr** accesibil de la următorul link: http://www.regexr.com/. Tot aici găsești și foarte multă documentație. Pentru JavaScript vezi și https://regexper.com/, care face o treabă foarte faină reprezentând cu hărți vizuale construcția șablonului.
 
 ## Detalii de funcționare a motorului de RegExp
 
-Motorul RegExp este unul regex-directed, fiind o implementare „eager” (motor „nerăbdător” să ofere o potrivire). Am menționat aceast lucru pentru că acest motor, la momentul evaluării, returnează fragmentul care s-a potrivit cu cel mai din stânga fragment, cât mai aproate de începutul șirului chiar dacă ar fi fost disponibilă o variantă mai apropiată de împlinirea tuturor criteriilor șablonului în cuprinsul său. Reține acest aspect de funcționare. Te va ajuta să înțelegi mai bine problemele care apar în utilizare pentru care nu există nicio rațiune.
+Motorul `RegExp`, tehnic vorbind este unul ***regex-directed***, adică șablonul ocupă rolul central, fiind o implementare „eager” ceea ce înseamnă că are un motor foarte „nerăbdător” să ofere un rezultat.
+
+Am menționat aceast lucru pentru că acest motor, la momentul evaluării, returnează fragmentul care s-a potrivit cu cel mai din stânga fragment din șir, adică care se află cât mai aproate de începutul șirului chiar dacă ar fi fost disponibilă o variantă mai apropiată de împlinirea tuturor criteriilor șablonului în cuprinsul său. Reține acest aspect de funcționare. Te va ajuta să înțelegi mai bine problemele care apar în utilizare pentru care nu există nicio rațiune.
 
 Aplicarea regexului va porni prin „consumarea” șirului de caractere pornind de la primul încercând toate variantele șablonului chiar din acest punct. Dacă toate variantele au fost epuizate, va mai „consuma” încă un caracter și având acum două va încerca din nou toate combinațiile până când un fragment se va potrivi. Acela va fi și punctul de oprire. Ține în minte că fragmentul poate fi parte a unui cuvânt compus sau a unei formule pentru care nu a fost gândit șablonul. De aceea tipul motorului este „nerăbdător” - pur și simplu raportează prima potrivire indiferent de context.
 
-## Metacaractere
+## Metacaracterele
 
-Regex-urile fac uz de 11 caractere cu o însemnătate deosebită atunci când vine vorba de evaluarea unui șablon. Acestea sunt: **«backslash»** `\`, **«carret»** `^`, **«dollar»** `$`, **«punctul»** `.`, **«parantezele dreapte»** `[` și `]`, **«paranteze rotunde»** `(` și `)`, **«pipe»** <code>&#124;</code>, **«semnul întrebării»** `?`, **«semnul plus»** `+`. Aceste caractere au o valoare deosebită și pentru motorul JavaScript, fiind operatori ai limbajului, dar în același timp apar și în textele pe care le prelucrăm pentru că totuși fac parte și din limbajul natural. În cazul construcțiilor de șabloane, pentru a introduce aceste caractere în evaluare, vor trebui precedate cu **«backslash»** `\`.
+Regex-urile fac uz de 11 caractere cu o însemnătate deosebită atunci când vine vorba de evaluarea unui șablon. Acestea sunt: **«backslash»** `\`, **«carret»** `^`, **«dollar»** `$`, **«punctul»** `.`, **«parantezele dreapte»** `[]`, **«parantezele rotunde»** `()`, **caracterul «pipe»** <code>&#124;</code>, **«semnul întrebării»** `?` și **«simbolul plus»** `+`.
+
+Aceste caractere au o valoare deosebită și pentru motorul JavaScript, fiind operatori ai limbajului, dar în același timp apar și în textele pe care le prelucrăm pentru că totuși fac parte și din limbajul natural. În cazul construcțiilor de șabloane, pentru a introduce aceste caractere în evaluare, vor trebui precedate cu **«backslash»** `\`.
 
 În afară de cele menționate mai sus, mai este o pereche de caractere, care capătă înțeles special și intră în evaluare doar dacă apar într-o anumită ordine cu un anumit conținut intern. Este vorba despre **«acolade»** `{` și `}`. Fac sens pentru RegExp, dacă apar în astfel de construcții care cuantifică numărul caracterelor care trebuie căutate: `x{1,3}` - menționează de câte ori se va repeta caracterul `x`.
 
-## Obiectul RegExp
+## Obiectul `RegExp`
 
-Creează un obiect pentru o expresie regulată cu scopul de a realiza găsi o secvență de caractere.
+`RegExp` este un obiect intern al JavaScript.
+
+Pentru a crea un obiect regex, ai două alternative. Prima este aceea de a folosi un constructor, iar cea de-a doua folosind notația literală.
+
+Constructorul `RegExp` creează un obiect pentru o expresie regulată cu scopul de a realiza găsi o secvență de caractere.
 
 ```javascript
 var ceCaut = /xy/i,
@@ -54,6 +66,22 @@ var ceCaut = /xy/i,
 console.log(cheieObiect.test('xyz')); // true
 console.log(ceCaut.test('xyz'));  // true
 ```
+
+Obiectul `RegExp` se poate crea prin introducerea directă a șablonului ca expresie:
+
+```javascript
+/xyz/i; // sau cu identificator:
+var exempluDeRegExp = /ab+c/g;
+```
+
+Crearea folosind constructorul acceptă ca prim argument șablonul, iar ca al doilea, un fanion sau mai multe:
+
+```javascript
+new RegExp('/xyz/', 'i');
+new RegExp(/xyz/, 'i'); // sintaxă alternativă
+```
+
+Folosirea funcției constructor are ca efect compilarea la momentul rulării. Se va folosi constructorul atunci când se știe că șablonul se va modifica sau când nu cunoști expresia regulată, unul din cazuri ar fi construirea acesteia în mod dinamic prin acțiunea utilizatorului.
 
 După cum se observă, sintaxa este: `/pattern/flags`.
 
@@ -72,82 +100,65 @@ sablon.lastIndex = 2;
 sablon.test(sirCaractere); // true
 ```
 
-## Flags - fanioane
+### Flags - fanioane
 
-### Fanionul `i` - ignore case
+#### Fanionul `i` - ignore case
 
 Toate șabloanele de căutare construite cu RegExp sunt „atente” la caracterele introduse, făcându-se distincție clară între minuscule și majuscule. Explicația este simplă: codul de caracter nu este același.
 
 În cazul în care au un text în care nu știi cum a fost introdus textul, fiind posibile erori sau chiar intrări ale aceleași sintagme, care nu este uniformizată în ceea ce privește caracterele, acest fanion permite regăsirea fragmentului de text indiferent de lipsa uniformității.
 
-### Fanionul `m` - multiline
+#### Fanionul `m` - multiline
 
 Este un fanion care va indica motorului JavaScript ca la căutarea după șablon, fiecare nouă linie de text va fi tratat pur și simplu ca un nou șir de caractere.
 
 Să spunem că un fragment de text începe cu un caracter ales de tine sau un șablon RegExp construit de tine. Fără fanion, JavaScript va testa dacă întregul șir de caractere va începe cu acel caracter căutat, dar dacă este pus fanionul, va căuta linie cu linie în întreg șirul până când va găsi acea linie care începe cu acel caracter.
 
-### Fanionul `g` - global
+#### Fanionul `g` - global
 
 Fără acest fanion, va fi returnată doar prima potrivire care se face.
 Folosind fanionul, se va face potrivire pe tot ce seamănă cu secvența șablonul.
 
-## Crearea obiectului RegExp
+### Proprietăți ale obiectului `RegExp`
 
-Există două feluri prin care se poate crea un obiect RegExp: notația literală și prin constructor.
+Aceste proprietăți sunt foarte utile atunci când dorești să afli starea în care se află obiectul regex la un anumit moment dat.
 
-Obiectul `RegExp` se poate crea prin introducerea directă a șablonului:
-
-```javascript
-/xyz/i; // sau
-var exempluDeRegExp = /ab+c/g;
-```
-
-sau folosind constructorul care acceptă ca prim argument șablonul iar ca al doilea fanionul sau fanioanele dorite:
-
-```javascript
-new RegExp('/xyz/', 'i');
-new RegExp(/xyz/, 'i');
-```
-
-Folosirea funcției constructor are ca efect compilarea la momentul rulării. Se va folosi constructorul atunci când se știe că șablonul se va modifica sau când nu cunoști expresia regulată, unul din cazuri ar fi construirea acesteia în mod dinamic prin acțiunea utilizatorului.
-
-## Proprietăți ale obiectului RegExp.
-
-- `RegExp.prototype.constructor` - function RegExp()
-- `RegExp.prototype.flags` - returnează un string cu fanioanele (flags) pentru obiectul curent
-- `RegExp.prototype.global` - dacă fanionul `g` a fost ridicat, valoarea este `true`.
-- `RegExp.prototype.ignoreCase` - dacă fanionul `i` a fost ridicat, valoarea este `true`.
-- `RegExp.prototype.multiline` - dacă fanionul `m` a fost ridicat, valoarea este `true`.
+- `RegExp.prototype.constructor` - returnează funcția obiect: function RegExp()
+- `RegExp.prototype.flags` - returnează un string cu fanioanele setate pentru obiectul curent
+- `RegExp.prototype.global` - dacă fanionul `g` a fost introdus, valoarea este `true`.
+- `RegExp.prototype.ignoreCase` - dacă fanionul `i` a fost introdus, valoarea este `true`.
+- `RegExp.prototype.multiline` - dacă fanionul `m` a fost introdus, valoarea este `true`.
 - `RegExp.prototype.source` returnează varianta text a obiectului.
-- `RegExp.prototype.sticky` - dacă fanionul `y` a fost ridicat, valoarea este `true`.
-- `RegExp.prototype.unicode` - dacă fanionul `u` a fost ridicat, valoarea este `true`.
+- `RegExp.prototype.sticky` - dacă fanionul `y` a fost introdus, valoarea este `true`.
+- `RegExp.prototype.unicode` - dacă fanionul `u` a fost introdus, valoarea este `true`.
 
 ## Mantre
 
-- Șirul este imuabil (nu va fi modificat).
-- Șirul este „consumat” (cu sensul de procesare) de RegExp de la stânga la dreapta.
+- **Șirul este imuabil** (nu va fi modificat).
+- **Șirul este „consumat”** (cu sensul de procesare) de `RegExp` de la stânga la dreapta.
 - Din moment ce un caracter a fost „consumat”, acesta nu mai este folosit.
 - Expresiile regulate în JavaScript sunt obiecte.
-- RegExp în JavaScript avansează caracter cu caracter, iar când a fost găsit un șir care se potrivește, caracterul este „consumat” deodată regex trecând la caracterul următor (dacă regex este global).
+- `RegExp` în JavaScript avansează caracter cu caracter, iar când a fost găsit un șir care se potrivește, caracterul este „consumat” trecându-se la caracterul următor (dacă regex este global).
+- Folosirea funcției constructor are ca efect compilarea la momentul rulării.
 - Metacaracterele pot impune un comportament **greedy** (*expansive*: consumă tot șirul) sau **lazy** (*autosuficient*: oprește-te imediat după prima potrivire) în ceea ce privește consumarea resursei de șir.
 - șabloanele sunt folosite cu metodele `exec` și `test` ale obiectului RegExp.
 - șabloanele sunt folosite cu metodele `match`, `replace`, `search` și `split` ale lui String.
 
 ### Expresii simple
 
-Cel mai simplu exemplu este al unui șir exact (direct match), care să fie căutat în alt șir - `/abc/`
+Cel mai simplu exemplu este al unui șir exact (*direct match*), care să fie căutat în alt șir - `/abc/`
 
 ```javascript
-"sa fie: abcd".match(/abc/); // Array ["abc"]
+"sa fie: abcd".match(/abc/); // ["abc"]
 ```
 
-Exemplul unui șir în care un anume caracter se repetă - `/ab*c/` : a este urmat de 0 sau mai mulți b
+Exemplul unui șir în care un anume caracter se repetă - `/ab*c/` : a este urmat de 0 sau mai mulți b.
 
 ```javascript
 var sir = "sa fie: abbbc";
 var reg = /ab*c/;
 var gasit = sir.match(reg);
-console.log(gasit); // Array ["abbbc"]
+console.log(gasit); // ["abbbc"]
 ```
 
 ### Expresii care oferă alternative `|`
@@ -160,19 +171,41 @@ var identificate = paginaWeb.match(/area|a|link|script|source/ig);
 console.log(identificate);
 ```
 
-Este specificat să se ignore majusculele și să se facă căutare la nivel global. Fără specificarea lui g, ar fi returnat doar prima potrivire.
+Este specificat să se ignore majusculele și să se facă căutare la nivel global. Fără specificarea fanionului `g`, s-ar fi returnat doar prima potrivire.
 
 ### Caracterele speciale din expresiile regulate - metacaractere
 
+Acestea sunt caracterele care fac totul posibil. Sunt un set restrâns, dar care au flexibilitatea de a regăsi orice fragment.
+
+Mai întâi avem posibilitatea de a restrânde aria de căutare în șirul de caractere menționând anumite limite.
+
+#### Limite
+
 | Caracter | Semnificație |
 |:---------|:-------------|
-| `\` «backslash» | indică faptul că următorul caracter are înțeles special pentru sistem (numite și „metacaractere”). Dacă caracterul este special este de înțeles pentru sistem că acesta trebuie tratat ca oricare altul fără a-l interpreta. `/a*/` înseamnă caută un a, care poate fi urmat de mai mulți a, dar `/a\*/` înseamnă caută chiar `a*`. Însuși backslashul trebuie să i se facă „escaping” pentru a fi tratat ca orice caracter simplu: `/\\/` - caută un `\`. |
-| `^` «carret» | indică faptul că se dorește căutarea cu primele caractere ale șirului. Dacă stegulețul pentru multiline este prezent (true), atunci căutarea se va face și după caracterul `line break`, adică pe următoarea linie. De exemplu `/^A/` nu va găsi nimic în „un A”, dar îl găsește pe A în „Anul viitor”. `^` are un înțeles diferit atunci când apare ca fiind primul caracter dintr-un șablon de caractere (vezi mai jos). |
+| `^` «carret» | Acest caracter se numește **carret** și identifică unde începe șirul. Dacă stegulețul pentru multiline este setat, se face identificare și imediat după caracterul de line break. De exemplu, `/^X/` nu identifică X-ul din „este un X”, dar identifică pe X în „X este”.  În interiorul seturilor, are rolul de a specifica ce nu va fi considerat la căutare `[^c-f]`, însemnând „fă căutarea, dar omite setul specificat de caractere”. Dacă stegulețul pentru multiline este prezent (true), atunci căutarea se va face și după caracterul `line break`, adică pe următoarea linie. De exemplu `/^A/` nu va găsi nimic în „un A”, dar îl găsește pe A în „Anul viitor”. `^` are un înțeles diferit atunci când apare ca fiind primul caracter dintr-un șablon de caractere (vezi mai jos). |
 | `$` «dollar» | indică că se dorește căutarea pe caracterele chiar de dinaintea finalizării șirului. Dacă stegulețul pentru multiline este prezent (true), atunci căutarea se va face imediat înainte de caracterul `line break`. De exemplu, `/t$/` nu îl găsește pe „t” în „etern”, dar îl găsește în „dorit”. |
+| `\b` | Caracterul «word border» marchează limitele de căutare aplicate unui șir, acestea fiind strict restricționate la secvența reprezentată de șablon. Indică granița strictă. De exemplu, în `"saturn".match(/\bs/); // [ "s" ]` este limita superioară, iar `"saturn".match(/urn\b/); // [ "urn" ]`|
+| `\B` | Este opusul lui `\b` potrivind fragmentul care este regăsit prin șablon dar care poate fi poziția ***dintre*** două caractere ce pot forma un cuvânt ori poziția dintre două caractere care nu pot forma un cuvânt.|
+
+Apoi putem interoga de câte ori apare un anumit caracter sau putem spune motorului de câte ori un caracter apar sau dacă apare au ba.
+
+#### Cuantificatori
+
+| Caracter | Semnificație |
+|:---------|:-------------|
 | `*` «asterix» | [**cunoscut ca și „cuantificator”**] indică că va face o căutare după expresia de dinaintea lui de 0 sau mai multe ori. Este echivalentul lui `{0,}`. De exemplu, `/au*/` găsește în „auuu, ce doare”, în „am găsit aur” și în „el a plecat” |
 | `+` | [**cunoscut ca și „cuantificator”**] precizează că se va face căutarea după expresia anterioară de una sau mai multe ori. Este echivalentul lui `{1,}`. De exemplu, `/a+/` va găsi în „casa” și în „aaaaau!”. |
 | `?` | [**cunoscut ca și „cuantificator”**] Menționează faptul că se va face căutare după expresia anterioară. Rezultatul poate fi 0 sau poate apărea o singură dată. Este echivalentul lui {0,1}. `"știință".match(/n?ță?/); // [ "nță" ]` `"gablonț".match(/n?ță?/); // [ "nț" ]` `"țeavă".match(/n?ță?/); // [ "ț" ]`. Dacă se folosește imediat după cuantificatori (*, +, ?, ori {}), transformă cuantificatorul într-unul non-greedy (adică cât mai puține caractere posibil), opus comportamentului natural (găsirea a cât mai multe caractere posibil). De exemplu, `"caractere 1437675".match(/\d+/gui); // [ "1437675" ]`. Dar combinând cu ? înseamnă caută numere întregi, și adu-le rând pe rând în array-ul rezultatelor: `"caractere 1437675".match(/\d+?/gui); // [ "1", "4", "3", "7", "6", "7", "5" ]`. Acest lucru se întâmplă pentru că șirul numerelor este consumat de la stânga la dreapta iar expresia se limitează la fiecare cifră oprindu-se, apoi reia căutarea de la șirul rămas și tot așa. |
 | `.` | Punctul indică o identificare a tuturor caracterelor (litere, simboluri, numere), dar fără caracterul newline (`\n`). De multe ori este asemănat unui wildcard cu care poți substitui orice(nu și new lines). Adevăratul wildcard totuși este  setul **[\s\S]** - identifică tot ce este whitespace și tot ce nu este whitespace, pe scurt, orice. Un exemplu pentru a înțelege: `"acuma mai multe mere a anemice cam anapoda a".match(/.a/); // [ "ma" ]`. Dacă activezi globalul, vei avea `// [ "ma", "ma", " a", " a", "ca", " a", "na", "da", " a" ]`. Ceea ce este observabil este faptul că, în cazul menționat aduce litera a și una înaintea ei, dacă aceasta a fost găsită într-un cuvânt. Ordinea o dă poziția punctului. Dacă era așezat după caracterul căutat aveam `[ "ac", "a ", "ai", "a ", "an", "am", "an", "ap", "a " ]` |
+
+Apoi avem o paletă foarte expresivă de caractere care pur și simplu țin locul celor din alfabet sau spațiilor goale indiferent care ar fi acelea. Aici permutările posibile fac posibile orice combinații imaginabile.
+
+#### Metacaractere locțiitor
+
+| Caracter | Semnificație |
+|:---------|:-------------|
+| `\` «backslash» | indică faptul că următorul caracter are înțeles special pentru sistem (numite și „metacaractere”). Dacă caracterul este special este de înțeles pentru sistem că acesta trebuie tratat ca oricare altul fără a-l interpreta. `/a*/` înseamnă caută un a, care poate fi urmat de mai mulți a, dar `/a\*/` înseamnă caută chiar `a*`. Însuși backslashul trebuie să i se facă „escaping” pentru a fi tratat ca orice caracter simplu: `/\\/` - caută un `\`. |
 | `\d` | Specifică un caracter numeric, un digit |
 | `\D` | Caută tot ce nu este digit și aduce un șir dacă șirul original începe cu caractere începând cu primul digit. Atenție, dacă șirul original începe cu un digit nu este adus niciun rezultat. De exemplu, `"saturn4 23".match(/\D/); // Array [ "s" ]` și `"saturn4 23".match(/\D+/); // Array [ "saturn" ]` |
 | `\s` | Identifică un singur spațiu gol, incluzând spațiu, tab, form feed, line feed și alte spații din schema Unicod. De exemplu, `"ana are mere".match(/\s\w*/)` identifică `Array [ " are" ]`, deci, primul cuvânt de după primul spațiu |
@@ -183,7 +216,6 @@ Este specificat să se ignore majusculele și să se facă căutare la nivel glo
 | `\n` | Identifică un new line |
 | `\v` | Identifică un tab vertical |
 | `\f` | Identifică un form feed |
-| `\b` | Identifică o limită pentru un cuvânt - «word border» |
 | `[\b]` | Identifică caracterul backspace și nu trebuie confundat cu `\b` |
 | `0` | Identifică un caracter NUL |
 | `\w` | Identifică orice caracter din setul de bază Latin și majusculele, incluzând și underscore. |
@@ -192,6 +224,9 @@ Este specificat să se ignore majusculele și să se facă căutare la nivel glo
 | `\xhh` | Unde hh sunt coduri de caracter iar fiecare h este un digit hexazecimal. |
 | `\xhhhh` | Unde hhhh sunt coduri de caracter iar fiecare h este un digit hexazecimal. |
 | `\u{hhhh}` | Unde hhhh sunt coduri de caracter iar fiecare h este un digit hexazecimal pentru un caracter Unicode. Funcționează numai când fanionul pentru Unicode este menționat |
+
+
+Este posibilă și gruparea caracterelor atunci când este necesară o construcție mai elaborată.
 
 ### Seturi de caractere
 
@@ -206,18 +241,9 @@ Este specificat să se ignore majusculele și să se facă căutare la nivel glo
 |:---------|:-------------|
 | `a`<code>&#124;</code>`b` | Îl identifică, fie pe a, fie pe b |
 
-### Limite
+## Seturi de caractere (*ranges*)
 
-| Caracter | Semnificație |
-|:---------|:-------------|
-| `^` | Acest caracter se numește **carret** și identifică unde începe șirul. Dacă stegulețul pentru multiline este setat, se face identificare și imediat după caracterul de line break. De exemplu, `/^X/` nu identifică X-ul din „este un X”, dar identifică pe X în „X este”.  În interiorul seturilor, are rolul de a specifica ce nu va fi considerat la căutare `[^c-f]`, însemnând „fă căutarea, dar omite setul specificat de caractere”|
-| `$` | Identifică finalul șirului. Dacă stegulețul pentru multiline este setat, se face identificare imediat înainte de caracterul line break. |
-| `\b` | Caracterul backslash marchează limitele de căutare aplicate unui șir, acestea fiind strict restricționate la secvența reprezentată de șablon. Indică granița strictă. De exemplu, în `"saturn".match(/\bs/); // [ "s" ]` este limita superioară, iar `"saturn".match(/urn\b/); // [ "urn" ]` |
-| `\B` | Este opusul lui `\b` potrivind fragmentul care este regăsit prin șablon dar care poate fi poziția ***dintre*** două caractere ce pot forma un cuvânt ori poziția dintre două caractere care nu pot forma un cuvânt.|
-
-## Seturi de caractere (ranges)
-
-Într-un set poți specifica caracterele care să permită o regăsirea mult mai rapidă după niște criterii care să ofere o mai mare flexibilitate. În alte lucrări mai sunt denumite și clase. Noi vom folosi set.
+Într-un set poți specifica caracterele care să permită o regăsirea mult mai rapidă după niște criterii care să ofere o mai mare flexibilitate. În alte lucrări mai sunt denumite și **clase**. Noi vom folosi termenul de **set**.
 
 **Moment ZEN**: Ordinea caracterelor dintr-un set nu contează.
 
@@ -235,7 +261,7 @@ Regex-ul permite folosirea unui caracter special, linia, care va specifica limit
 
 ### Metacaracterele în seturi
 
-În cazul seturilor sunt doar câteva din metacaracterele care îți joacă rolul lor. Acestea sunt `[]`, care indică setul în sine, backslash `\`, carret `^` și hyphen `-`. Restul caracterelor sunt simple caractere care nu au niciun înțeles specific pentru RegExp. Pentru ca matacaracterele să fie incluse au nevoie să fie precedate de backslash (escape sequence). Poți să le introduci și direct doar dacă nu vor ocupa o poziție care să activeze înțelesul lor de metacaracter. De exemplu: `/[a^]/`.
+În cazul seturilor sunt doar câteva din metacaracterele care îți joacă rolul lor. Acestea sunt `[]`, care indică setul în sine, backslash `\`, carret `^` și hyphen `-`. Restul sunt simple caractere care nu au niciun înțeles specific pentru `RegExp`. Pentru ca matacaracterele să fie incluse au nevoie să fie precedate de backslash (escape sequence). Poți să le introduci și direct doar dacă nu vor ocupa o poziție care să activeze înțelesul lor de metacaracter. De exemplu: `/[a^]/`.
 
 ```javascript
 var sir = "^Am scris \a^.";
@@ -270,13 +296,14 @@ Seturile de caractere pot fi negate în sensul că se va face potrivire după to
 
 Pentru a nega folosirea setului, pur și simplu pui caracterul `^` la început: `[^c-f]`, cu înțelesul de ocolește partea șirului care conține acest set de caractere.
 
-Există o nuanță semantică pe care trebuie să o lămurim. Când ai un șablon de genul `/al[^i] doilea/`, înțelesul corect este „«al» care poate fi urmat de orice caracter, dar nu și «i»”. De ce este relevantă precizarea? Pentru că în locul acelui «i», care nu este permis poate fi un spațiu, iar spațiul va fi returnat ca partea potrivirii. Negarea poate fi înțeleasă ca un wildcard care elimină anumite caractere indezirabile, dar care poate fi orice altceva plus invizibilele.
+Există o nuanță semantică pe care trebuie să o lămurim. Când ai un șablon de genul `/al[^i] doilea/`, înțelesul corect este **al** care poate fi urmat de orice caracter, dar nu și **i**. De ce este relevantă precizarea? Pentru că în locul acelui **i**, care nu este permis poate fi un spațiu, iar spațiul va fi returnat ca partea potrivirii. Negarea poate fi înțeleasă ca un wildcard care elimină anumite caractere indezirabile, dar care poate fi orice altceva plus invizibilele.
 
 La ce ar fi utilă o astfel de opțiune? De exemplu, pentru a elimina anumite caractere de control pe care le folosești pentru a demarca fragmente de text, taguri, etc. Sau mai poți avea cazul în care dorești să corectezi numele de fișiere pentru a nu conține caractere altele decât cele din setul Latin, ș.a.m.d.
 
 ### Prescurtările pentru seturi
 
 Deja le știm:
+
 - `[0-9]`     : `\d`,
 - `[^\d]`     : `\D`
 - `[A-Za-z]`  : `\w`,
@@ -291,15 +318,15 @@ Reține faptul că prescurtările se pot folosi și în interiorul seturilor: `[
 
 Am descris deja pe scurt comportamentul lui `+`, `?` și `*`.
 
-|`+`|`?`|`*`|
-|:-|:-|:-|
-|{1,n}|{0,1}|{0,n}|
+| `+` | `?` | `*` |
+|:--|:--|:--|
+| {1,n} | {0,1} | {0,n} |
 
 **Cum să le ții minte?**
 
-Păi, pentru `+`, ține minte că adaugi ceva la ceva ce există deja, deci trebuie să existe cel puțin o dată șirul potrivit și continui cu șablonul la infinit, mai exact, până la epuizarea resursei de șir; are un caracter expansiv precum porcul: va mânca toată mâncarea indiferent că e satisfăcută foamea sau nu.
+Pentru `+`, ține minte că adaugi ceva la ceva ce există deja, deci trebuie să existe cel puțin o dată șirul sau caracterul potrivit și continui cu șablonul la infinit, mai exact, până la epuizarea resursei de șir; are un caracter expansiv precum omida vorace, care va mânca toată păstaia indiferent că e satisfăcută foamea sau nu.
 
-Pentru `*` gândește-te ca la Big-Bang: din nimic, din 0 la infinit orice; deci șirul poate să existe sau nu.
+Pentru `*`, gândește-te ca la Big-Bang: din nimic, din 0 la infinit orice; deci șirul poate să existe sau nu.
 
 Cât despre `?`, pur și simplu este ca un „if”: bre! exiști sau nu?! Deci, potrivește dacă există, dacă nu, GHINION.
 
@@ -490,7 +517,7 @@ Te-ai fi gândit că potrivirea se face direct pe prima potrivire, care în exem
 
 Pentru a limita efectul expansiv, în loc de a folosi punctul pentru a potrivi orice caracter, mai bine faci un set de caractere care să fie potrivite. Pentru a potrivi cu adevărat toate eventualitățile poți înlocui șablonul propus cu `/"[^"\r\n]*"/` - orice caractere aflate între ghilimele duble, dar care la rândul lor nu sunt ghilimele duble și nici new lines sau carriage return.
 
-La ce ar folosi să știm asta? Ia gândește-te că dorești să prelucrezi fragmente de JSON.
+La ce ar folosi să știm asta? Ia gândește-te că dorești să prelucrezi fragmente de JSON (date codate folosind schema JavaScript Object Notation).
 
 ## Grupare pentru a construi șabloane elaborate: propoziții
 

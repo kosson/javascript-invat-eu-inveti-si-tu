@@ -218,7 +218,8 @@ Pentru a testa dacă o proprietate există se poate folosi operatorul `in`. Prob
 ```javascript
 'altaProprietate' in obiect; // true
 // din nefericire in se uită și în prototip
-'toString' in obiect; // true -> e foarte rău pentru că se uită și în Object.prototype.
+'toString' in obiect; // true -> e foarte rău
+// pentru că se uită și în Object.prototype.
 'proprietate' in obiect; // true
 ```
 
@@ -232,10 +233,32 @@ obiect.hasOwnProperty('proprietate'); // false
 obiect.hasOwnProperty('toString'); // false
 ```
 
+#### Radiografierea obiectelor cu `getOwnPropertyNames()`
+
+Această metodă poate fi utilizată pentru a extrage informațiile care descriu un obiect. Mă refer la faptul că uneori avem nevoie să aflăm tot ce se poate afla despre un obiect pentru a ne face o idee generală despre ce oferă.
+
+Să vedem cum am putea obține toate informațiile despre un obiect.
+
+```javascript
+console.log(Object.getOwnPropertyNames(window));
+```
+
+La momentul redactării acestui material, o astfel de interogare a returnat un array cu 904 chei reprezentând toate proprietățile și metodele obiectului `window` al browserului.
+
+Putem merge mai departe pentru a separa care sunt metodele. Această procedură nu poate fi aplicată pe obiectul global `window`, dar funcționează pe oricare obiect, fie el global sau nu.
+
+```javascript
+console.log(Object.getOwnPropertyNames(String).filter(function(p){
+  return typeof String[p] === 'function';
+}));
+```
+
+Pentru obiecte care nu sunt foarte stufoase, se poate folosi cu succes și `console.dir(nume_obiect)`.
+
 #### Testare cu `for...in`
 
 Dacă folosești un `for...in` vei obține toate cheile, adică și pe cele din prototip. Deci, nu funcționează corect.
-De ce se întâmplă acest lucru? Pentru că sunt luate în considerare și proprietățile moștenite prin prototip, care sunt setate ca `enumerable`. Motivul pentru care proprietățile lui Object nu apar este că acestea nu sunt `enumerable`.
+De ce se întâmplă acest lucru? Pentru că sunt luate în considerare și proprietățile moștenite prin prototip, care sunt setate ca `enumerable`. Motivul pentru care proprietățile lui `Object` nu apar este că acestea nu sunt `enumerable`.
 
 ```javascript
 for (key in obiect) console.log(key);
@@ -263,8 +286,8 @@ Object.keys(obiect); // Array [ "altaProprietate", "artefact" ]
 ### Obținerea valorii asociate unei proprietăți
 
 Se poate opta pentru una din două modalități posibile de a face acest lucru:
-- folosind operatorul cu punct
-- folosind operatorul cu paranteză pătrată
+- folosind **operatorul cu punct**
+- folosind **operatorul cu paranteză pătrată**
 
 Operatorul cu punct nu poate fi folosit pentru că avem de a face cu diverse chei care ar putea avea asociate diferite tipuri de date.
 

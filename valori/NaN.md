@@ -15,13 +15,18 @@ typeof NaN; // number
 Și ceva foarte simpatic la verificarea egalității lui `NaN` cu el însuși.
 
 ```javascript
+NaN == NaN; // false
 NaN === NaN; // false
 ```
 
-Există chiar și o metodă care verifică o valoare dacă este NaN.
+Pentru că nu ne putem baza pe stabilirea adevărului folosind operatorii `==` și `===`, este nevoie de o funcție care să stabilească exact dacă o valoare este NaN sau nu.
+Există chiar și o metodă membră a obiectului `window`, care verifică o valoare dacă este NaN.
 
 ```javascript
 isNaN(NaN); // true
 isNan(5); // false
 isNaN('salut'); // true
 ```
+
+Metoda `isNaN` este membră și a obiectului `Number` începând cu ECMAScript 2015.
+Metoda este utilă și pentru a verifica dacă este returnat NaN în cazul în care lucrezi cu expresii aritmetice.

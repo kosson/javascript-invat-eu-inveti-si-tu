@@ -18,9 +18,9 @@ Am dorit să vă iau cu mine în această călătorie pentru că îmi doresc să
 
 Ținta este realizarea unui material de învățare pentru limbajul de programare JavaScript, care să fie eficient în înțelegerea aspectelor dificil de pătruns. Și, acestea nu sunt puține.
 
-Sunt cuprinse experiențe și note strânse după ce am citit și am vizionat multe alte lucrări dedicate acestui limbaj de programare. Acesta nu este primul limbaj de programare pe care l-am folosit pentru a rezolva cerințe punctuale. Am început pe vremuri să învăț Pascal dintr-o carte xeroxată, deh, pe vremea aia nu erau nici computere prea multe, iar cartea tehnică în limba română rară... hmmm... ca și acum, parcă. Apoi am trecut prin BASIC folosind primul meu calculator, un HC (o clonă Zilog) și apoi m-am reapucat de programare din nou odată cu avântul Internetului în anii 2000. PHP-ul a fost experiența de programare care m-a pregătit pentru JavaScript și de aici împreună cu voi ce va urma. Nu te abandona gândului că trebui să fi avut experiență în computere înainte. O minimă familiaritate cu utilizarea lor este îndeajuns.
+Sunt cuprinse experiențe și note strânse după ce am citit și am vizionat multe alte lucrări dedicate acestui limbaj de programare. Acesta nu este primul limbaj de programare pe care l-am folosit pentru a rezolva cerințe punctuale. Am început pe vremuri să învăț Pascal dintr-o carte xeroxată, deh, pe vremea aia nu erau nici computere prea multe, iar cartea tehnică în limba română rară... hmmm... ca și acum, parcă. Apoi am trecut prin BASIC folosind primul meu calculator, un HC (o clonă Zilog) și apoi m-am reapucat de programare din nou odată cu avântul Internetului în anii 2000. PHP-ul a fost experiența de programare care m-a pregătit pentru JavaScript și de aici împreună cu voi ce va urma. Nu te abandona gândului că trebuie să fi avut experiență în computere înainte. O minimă familiaritate cu utilizarea lor este îndeajuns.
 
-Ceea ce am realizat după un efort de câțiva ani de acumulare personală, este faptul că nu există materiale de învățare în domeniul programării care să explice și cu ajutor vizual extins concepte și situații pe care anumite abstractizări ale unui limbaj le expune celor nefamiliarizați.
+Ceea ce am realizat după un efort de câțiva ani de acumulare personală, este faptul că nu există materiale de învățare prea multe în domeniul programării care să explice și cu ajutor vizual extins concepte și situații pe care anumite abstractizări ale unui limbaj le expune celor nefamiliarizați. Vizualizare de cele mai multe ori înseamnă să te filmezi cum scrii cod pe care îl povestești. Am mai văzut o clasă de materiale bogat ilustrate intitulate Head First, dar parcă stilul de ilustrarea nu este cel pe care-l caut. Această lucrare dorește să ofere îndeajuns de mult suport vizual cât să realizeze scopul de învățare.
 
 Acesta este și un efort de a lărgi baza de acces în limba română către un nou instrument de expresie: programarea. Chiar dacă limbajul de programare își găsește expresia în limba engleză, nu există niciun motiv să nu pornești pentru că există o barieră de limbă. Nu amâna pentru momentul când vei învăța engleza. Toate instrucțiunile vor fi traduse ca înțeles și voi puncta acolo unde este necesară lămurirea termenilor din limba engleză. Restul motivelor le puteți bănui cu ușurință.
 
@@ -72,7 +72,7 @@ Ai o problemă pe care dorești să o rezolvi și în acest sens, creezi **pași
 
 Succesiunea tuturor pașilor identificați de tine se numește **algoritm**.
 
-Transpunerea unui algoritm într-o soluție tehnică, se numește **program**.
+Transpunerea unui algoritm într-o soluție tehnică, se numește **program**, care este o succesiune de **instrucțiuni** pe care computerul le înțelege.
 
 Pentru a scrie un program, alegi un limbaj de programare, iar în cazul nostru, am ales deja: ECMAScript, adică JavaScript.
 
@@ -117,7 +117,7 @@ Acoladele `{}` au rolul de a indica mediul în care se va executa codul în Java
 
 Acoladele mai au și un rol special: delimitează spații cu un rol special. Creează niște „grădini private” care sunt **blocuri de cod** la care accesul se poate face doar dacă ești în acea grădină.
 
-##### Caractere care au nevoie de ajutor pentru a fi „văzute” folosind secvențe excape
+##### Caractere care au nevoie de ajutor pentru a fi „văzute” folosind ***secvențe excape***
 
 Caracterele de mai sus și combinațiile lor au un înțeles special pentru motorul de JavaScript, dar atunci când ele însele sunt necesare ca și caractere, fie că fac parte dintr-un text analizat, fie că se dorește compunerea unuia într-o manieră dinamică, aceste caractere trebuie să fie precedate de backslash (`\`).
 
@@ -406,20 +406,19 @@ Am mai introdus câteva cuvinte noi. Hai să le lămurim. Primitivele sunt ca ni
 
 Spune standardul că aceste tipuri ale limbajului (referindu-se la valori) sunt direct manipulabile de către programator.
 
-- `Undefined`. „Nedefinit” este o valoare în sine chiar dacă pare foarte straniu; „orice variabilă care nu are o valoare asignată are valoarea `undefined`” (ECMA-262),
-- `Null`. Da, o valoare nulă este considerată o valoare,
-- `Boolean`. Este denumită după cercetătorul Boole și are două stări: `true`  adevărat sau `false` - fals,
-- `String`. „Șir de caractere” este succesiunea de caractere care formează un text,
-- `Number`. „Număr” reprezintă valori reprezentate pe 64 de biți în virgulă mobilă (format al standardului IEEE 754‐2008),
+- `undefined`. „Nedefinit” este o valoare în sine chiar dacă pare foarte straniu; „orice variabilă care nu are o valoare asignată are valoarea `undefined`” (ECMA-262). De fapt exprimă starea de dinaintea legării identificatorului la o valoare.
+- `null`. Da, o valoare nulă este considerată o valoare.
+- `boolean`. Este denumită după cercetătorul Boole și are două stări: `true`  adevărat sau `false` - fals,
+- `string`. „Șir de caractere” este succesiunea de caractere care formează un text,
+- `number`. „Număr” reprezintă valori reprezentate pe 64 de biți în virgulă mobilă (format al standardului IEEE 754‐2008),
 - `Object`. „Obiect” este o colecție de proprietăți; o proprietate are o cheie de acces către valoarea sa care poate fi o valoare de tip string sau Symbol. Ține minte că un șir gol este o cheie validă. „Numele unei proprietăți” este cheiea unei proprietăți care este valoare string.
 - `Symbol`. „Simbol” este o valoare care nu este string și care poate fi utilizată drept cheie a unui Obiect și
-
 
 După cum se observă, fiecare tip este expresia a două elemente: sintaxa și semantica. Sintaxa implică „codarea" printr-un cuvânt din limbajul natural, care în cazul JavaScript este limba engleză, iar semantica indică conceptul reprezentat.
 
 **Spune standardul**: „O valoare a limbajului ECMAScript este o valoare caracterizată de un tip al limbajului ECMAScript”.
 
-În ceea ce privește numerele, la un moment dat, te vei lovi de apariția unei valori ciudate numite `NaN` (este prescurtarea de la **Not a Number**) și este reprezentarea unui număr în virgulă mobilă mai special.
+În ceea ce privește numerele, la un moment dat, te vei lovi de apariția unei valori ciudate numite `NaN` (este prescurtarea de la **Not a Number**) și este reprezentarea unui număr în virgulă mobilă mai special. JavaScript îl folosește mai mult pentru a indica o stare a unui calcul care avea intenția să ajungă la un număr, dar pentru diverse motive, nu s-a finalizat corespunzător. Rezultatul este ceva non-numeric.
 
 Mai avem introdus de curând numărul special `Infinity` și infinitate negativă `-Infinity`.
 
