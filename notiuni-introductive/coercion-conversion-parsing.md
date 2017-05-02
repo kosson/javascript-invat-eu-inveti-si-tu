@@ -1,4 +1,4 @@
-# Introducere
+# Coercion - transformare
 
 Coercion în limba engleză înseamnă constrângere. Ceea ce se petrece este o „transformare” pe care o face un operator asupra unei valori date în încercarea de a face operațiunea. Vom folosi termenul de transformare pentru a înțelege rapid ceea ce se petrece.
 
@@ -60,85 +60,76 @@ parseInt('101',2); // 5
 
 ## Egalități cu ==
 
-Reprezentarea a fost reprodusă după materialul de la http://dorey.github.io/JavaScript-Equality-Table/
-
-
-|           |`true`|`false`|`1`| `0` | `-1` |`"true"`|`"false"`|`"1"`|`"0"`|`"-1"`|`""`|`null`|`undefined`|`Infinity`|`-Infinity`|`[]`|`{}`|`[[]]`|`[0]`|`[1]`|`NaN`|
-|:--------- |:---- |:----- |:- |:--- |:---- |:------ |:------- |:--- |:--- |:---- |:-- |:---- |:--------- |:-------- |:--------- |:-- |:-- |:---- |:--- |:--- |:--- |
-|`true`     |  X   |       | X |     |      |        |         |  X  |     |      |    |      |           |          |           |    |    |      |     |  X  |     |
-|`false`    |      |   X   |   |  X  |      |        |         |     |  X  |      | X  |      |           |          |           | X  |    |  X   |  X  |     |     |
-|  `1`      |  X   |       | X |     |      |        |         |  X  |     |      |    |      |           |          |           |    |    |      |     |  X  |     |
-|  `0`      |      |   X   |   |  X  |      |        |         |     |  X  |      | X  |      |           |          |           | X  |    |  X   |  X  |     |     |
-|  `-1`     |      |       |   |     |   X  |        |         |     |     |  X   |    |      |           |          |           |    |    |      |     |     |     |
-|`"true"`   |      |       |   |     |      |    X   |         |     |     |      |    |      |           |          |           |    |    |      |     |     |     |
-|`"false"`  |      |       |   |     |      |        |    X    |     |     |      |    |      |           |          |           |    |    |      |     |     |     |
-|`"1"`      |  X   |       | X |     |      |        |         |  X  |     |      |    |      |           |          |           |    |    |      |     |  X  |     |
-|`"0"`      |      |   X   |   |  X  |      |        |         |     |  X  |      |    |      |           |          |           |    |    |      |  X  |     |     |
-|`"-1"`     |      |       |   |     |  X   |        |         |     |     |  X   |    |      |           |          |           |    |    |      |     |     |     |
-|`""`       |      |   X   |   |  X  |      |        |         |     |     |      | X  |      |           |          |           |  X |    |  X   |     |     |     |
-|`null`     |      |       |   |     |      |        |         |     |     |      |    |   X  |    X      |          |           |    |    |      |     |     |     |
-|`undefined`|      |       |   |     |      |        |         |     |     |      |    |   X  |    X      |          |           |    |    |      |     |     |     |
-|`Infinity` |      |       |   |     |      |        |         |     |     |      |    |      |           |     X    |           |    |    |      |     |     |     |
-|`-Infinity`|      |       |   |     |      |        |         |     |     |      |    |      |           |          |     X     |    |    |      |     |     |     |
-|`[]`       |      |   X   |   |  X  |      |        |         |     |     |      |  X |      |           |          |           |    |    |      |     |     |     |
-|`{}`       |      |       |   |     |      |        |         |     |     |      |    |      |           |          |           |    |    |      |     |     |     |
-|`[[]]`     |      |   X   |   |  X  |      |        |         |     |     |      |  X |      |           |          |           |    |    |      |     |     |     |
-|`[0]`      |      |   X   |   |  X  |      |        |         |     |  X  |      |    |      |           |          |           |    |    |      |     |     |     |
-|`[1]`      |  X   |       | X |     |      |        |         |  X  |     |      |    |      |           |          |           |    |    |      |     |     |     |
-|`NaN`      |      |       |   |     |      |        |         |     |     |      |    |      |           |          |           |    |    |      |     |     |     |
+|            |`true`|`false`|`1`| `0` | `-1` |`"true"`|`"false"`|`"1"`|`"0"`|`"-1"`|`""`|`null`|`undefined`|`Infinity`|`-Infinity`|`[]`|`{}`|`[[]]`|`[0]`|`[1]`|
+|:---------- |:---- |:----- |:- |:--- |:---- |:------ |:------- |:--- |:--- |:---- |:-- |:---- |:--------- |:-------- |:--------- |:-- |:-- |:---- |:--- |:--- |
+| `true`     |  X   |       | X |     |      |        |         |  X  |     |      |    |      |           |          |           |    |    |      |     |  X  |
+| `false`    |      |   X   |   |  X  |      |        |         |     |  X  |      | X  |      |           |          |           | X  |    |  X   |  X  |     |
+|  `1`       |  X   |       | X |     |      |        |         |  X  |     |      |    |      |           |          |           |    |    |      |     |  X  |
+|  `0`       |      |   X   |   |  X  |      |        |         |     |  X  |      | X  |      |           |          |           | X  |    |  X   |  X  |     |
+|  `-1`      |      |       |   |     |   X  |        |         |     |     |  X   |    |      |           |          |           |    |    |      |     |     |
+| `"true"`   |      |       |   |     |      |    X   |         |     |     |      |    |      |           |          |           |    |    |      |     |     |
+| `"false"`  |      |       |   |     |      |        |    X    |     |     |      |    |      |           |          |           |    |    |      |     |     |
+| `"1"`      |  X   |       | X |     |      |        |         |  X  |     |      |    |      |           |          |           |    |    |      |     |  X  |
+| `"0"`      |      |   X   |   |  X  |      |        |         |     |  X  |      |    |      |           |          |           |    |    |      |  X  |     |
+| `"-1"`     |      |       |   |     |  X   |        |         |     |     |  X   |    |      |           |          |           |    |    |      |     |     |
+| `""`       |      |   X   |   |  X  |      |        |         |     |     |      | X  |      |           |          |           |  X |    |  X   |     |     |
+| `null`     |      |       |   |     |      |        |         |     |     |      |    |   X  |    X      |          |           |    |    |      |     |     |
+| `undefined`|      |       |   |     |      |        |         |     |     |      |    |   X  |    X      |          |           |    |    |      |     |     |
+| `Infinity` |      |       |   |     |      |        |         |     |     |      |    |      |           |     X    |           |    |    |      |     |     |
+| `-Infinity`|      |       |   |     |      |        |         |     |     |      |    |      |           |          |     X     |    |    |      |     |     |
+| `[]`       |      |   X   |   |  X  |      |        |         |     |     |      |  X |      |           |          |           |    |    |      |     |     |
+| `{}`       |      |       |   |     |      |        |         |     |     |      |    |      |           |          |           |    |    |      |     |     |
+| `[[]]`     |      |   X   |   |  X  |      |        |         |     |     |      |  X |      |           |          |           |    |    |      |     |     |
+| `[0]`      |      |   X   |   |  X  |      |        |         |     |  X  |      |    |      |           |          |           |    |    |      |     |     |
+| `[1]`      |  X   |       | X |     |      |        |         |  X  |     |      |    |      |           |          |           |    |    |      |     |     |
 
 ## Egalități cu ===
 
-Reproducere a materialului de la http://dorey.github.io/JavaScript-Equality-Table/
+|            |`true`|`false`|`1`| `0` | `-1` |`"true"`|`"false"`|`"1"`|`"0"`|`"-1"`|`""`|`null`|`undefined`|`Infinity`|`-Infinity`|
+|:---------- |:---- |:----- |:- |:--- |:---- |:------ |:------- |:--- |:--- |:---- |:-- |:---- |:--------- |:-------- |:--------- |
+| `true`     |  X   |       |   |     |      |        |         |     |     |      |    |      |           |          |           |
+| `false`    |      |   X   |   |     |      |        |         |     |     |      |    |      |           |          |           |
+|  `1`       |      |       | X |     |      |        |         |     |     |      |    |      |           |          |           |
+|  `0`       |      |       |   |  X  |      |        |         |     |     |      |    |      |           |          |           |
+|  `-1`      |      |       |   |     |   X  |        |         |     |     |      |    |      |           |          |           |
+| `"true"`   |      |       |   |     |      |    X   |         |     |     |      |    |      |           |          |           |
+| `"false"`  |      |       |   |     |      |        |    X    |     |     |      |    |      |           |          |           |
+| `"1"`      |      |       |   |     |      |        |         |  X  |     |      |    |      |           |          |           |
+| `"0"`      |      |       |   |     |      |        |         |     |  X  |      |    |      |           |          |           |
+| `"-1"`     |      |       |   |     |      |        |         |     |     |  X   |    |      |           |          |           |
+| `""`       |      |       |   |     |      |        |         |     |     |      | X  |      |           |          |           |
+| `null`     |      |       |   |     |      |        |         |     |     |      |    |   X  |           |          |           |
+| `undefined`|      |       |   |     |      |        |         |     |     |      |    |      |    X      |          |           |
+| `Infinity` |      |       |   |     |      |        |         |     |     |      |    |      |           |     X    |           |
+| `-Infinity`|      |       |   |     |      |        |         |     |     |      |    |      |           |          |     X     |
 
-|           |`true`|`false`|`1`| `0` | `-1` |`"true"`|`"false"`|`"1"`|`"0"`|`"-1"`|`""`|`null`|`undefined`|`Infinity`|`-Infinity`|`[]`|`{}`|`[[]]`|`[0]`|`[1]`|`NaN`|
-|:--------- |:---- |:----- |:- |:--- |:---- |:------ |:------- |:--- |:--- |:---- |:-- |:---- |:--------- |:-------- |:--------- |:-- |:-- |:---- |:--- |:--- |:--- |
-|`true`     |  X   |       |   |     |      |        |         |     |     |      |    |      |           |          |           |    |    |      |     |     |     |
-|`false`    |      |   X   |   |     |      |        |         |     |     |      |    |      |           |          |           |    |    |      |     |     |     |
-|  `1`      |      |       | X |     |      |        |         |     |     |      |    |      |           |          |           |    |    |      |     |     |     |
-|  `0`      |      |       |   |  X  |      |        |         |     |     |      |    |      |           |          |           |    |    |      |     |     |     |
-|  `-1`     |      |       |   |     |   X  |        |         |     |     |      |    |      |           |          |           |    |    |      |     |     |     |
-|`"true"`   |      |       |   |     |      |    X   |         |     |     |      |    |      |           |          |           |    |    |      |     |     |     |
-|`"false"`  |      |       |   |     |      |        |    X    |     |     |      |    |      |           |          |           |    |    |      |     |     |     |
-|`"1"`      |      |       |   |     |      |        |         |  X  |     |      |    |      |           |          |           |    |    |      |     |     |     |
-|`"0"`      |      |       |   |     |      |        |         |     |  X  |      |    |      |           |          |           |    |    |      |     |     |     |
-|`"-1"`     |      |       |   |     |      |        |         |     |     |  X   |    |      |           |          |           |    |    |      |     |     |     |
-|`""`       |      |       |   |     |      |        |         |     |     |      | X  |      |           |          |           |    |    |      |     |     |     |
-|`null`     |      |       |   |     |      |        |         |     |     |      |    |   X  |           |          |           |    |    |      |     |     |     |
-|`undefined`|      |       |   |     |      |        |         |     |     |      |    |      |    X      |          |           |    |    |      |     |     |     |
-|`Infinity` |      |       |   |     |      |        |         |     |     |      |    |      |           |     X    |           |    |    |      |     |     |     |
-|`-Infinity`|      |       |   |     |      |        |         |     |     |      |    |      |           |          |     X     |    |    |      |     |     |     |
-|`[]`       |      |       |   |     |      |        |         |     |     |      |    |      |           |          |           |    |    |      |     |     |     |
-|`{}`       |      |       |   |     |      |        |         |     |     |      |    |      |           |          |           |    |    |      |     |     |     |
-|`[[]]`     |      |       |   |     |      |        |         |     |     |      |    |      |           |          |           |    |    |      |     |     |     |
-|`[0]`      |      |       |   |     |      |        |         |     |     |      |    |      |           |          |           |    |    |      |     |     |     |
-|`[1]`      |      |       |   |     |      |        |         |     |     |      |    |      |           |          |           |    |    |      |     |     |     |
-|`NaN`      |      |       |   |     |      |        |         |     |     |      |    |      |           |          |           |    |    |      |     |     |     |
 
 ## Evaluarea condiției if
 
-Reproducere după materialul de la http://dorey.github.io/JavaScript-Equality-Table/
+|           `true`/`false`                   |
+|:-------------------------------------------|
+| if (true) { /* executes */ }`              |
+| `if (false) { /* does not execute */ }`    |
+| `if (1) { /* executes */ }`                |
+| `if (0) { /* does not execute */ }`        |
+| `if (-1) { /* executes */ }`               |
+| `if (-1) { /* executes */ }`               |
+| `if ("false") { /* executes */ }`          |
+| `if ("1") { /* executes */ }`              |
+| `if ("0") { /* executes */ }`              |
+| `if ("-1") { /* executes */ }`             |
+| `if ("") { /* does not execute */ }`       |
+| `if (null) { /* does not execute */ }`     |
+| `if (undefined) { /* does not execute */ }`|
+| `if (Infinity) { /* executes */ }`         |
+| `if (-Infinity) { /* executes */ }`        |
+| `if ([]) { /* executes */ }`               |
+| `if ({}) { /* executes */ }`               |
+| `if ([[]]) { /* executes */ }`             |
+| `if ([0]) { /* executes */ }`              |
+| `if ([1]) { /* executes */ }`              |
+| `if (NaN) { /* does not execute */ }`      |
 
-|           `true`/`false`                  |
-|:------------------------------------------|
-|if (true) { /* executes */ }`              |
-|`if (false) { /* does not execute */ }`    |
-|`if (1) { /* executes */ }`                |
-|`if (0) { /* does not execute */ }`        |
-|`if (-1) { /* executes */ }`               |
-|if (-1) { /* executes */ }`                |
-|if ("false") { /* executes */ }`           |
-|`if ("1") { /* executes */ }`              |
-|`if ("0") { /* executes */ }`              |
-|`if ("-1") { /* executes */ }`             |
-|`if ("") { /* does not execute */ }`       |
-|`if (null) { /* does not execute */ }`     |
-|`if (undefined) { /* does not execute */ }`|
-|`if (Infinity) { /* executes */ }`         |
-|`if (-Infinity) { /* executes */ }`        |
-|`if ([]) { /* executes */ }`               |
-|`if ({}) { /* executes */ }`               |
-|`if ([[]]) { /* executes */ }`             |
-|`if ([0]) { /* executes */ }`              |
-|`if ([1]) { /* executes */ }`              |
-|`if (NaN) { /* does not execute */ }`      |
+## Resurse
+
+Reprezentarea egalităților a fost reprodusă după materialul de la http://dorey.github.io/JavaScript-Equality-Table/
