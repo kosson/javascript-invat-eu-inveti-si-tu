@@ -1,4 +1,40 @@
-# Template Literals
+# Literals
+
+Literalele următoare sunt rezervate:
+
+## Literal `null`
+
+Avem unul singur și acesta este cuvântul rezervat `null`
+
+## Literale `boolean`
+
+Avem cele două variante `true` și `false`.
+
+## Literale numerice
+
+Sunt cifrele redactate ca atare, dar și punctul care delimitează fracțiile.
+Mai sunt exponenții: `e` sau `E`.
+Semnul plus și minus care să indice care valoare de pe axa numerelor.
+Întregii binari precum `0b`.
+Digiții binari clasici: `0` și `1`.
+Valori octale: `0o` sau `0O`.
+Întregi hexa: `0x` sau `0X`.
+
+## Literale pentru șiruri de caractere
+
+`'`, '"', `\b`, `\f`, `\r`, `\n`, `\t`, `\v`.
+
+Pentru digiții zecimali: `x`, `u`.
+
+Pentru hexa: `x`.
+
+Secvențe de escape pentru UNICODE: `u` sau `u{ }`
+
+## Template Literal Lexical Components
+
+\` `ceva text ${numeIdentificator}` \`
+
+## Template Literals
 
 Începând cu ECMAScript 2015, stringurile literale pot fi numite și „șabloane literale”. Șabloanele literale oferă posibilitatea de a introduce text pus între semne backticks (\`text\`) în care se poate interpola rezultatul evaluării unei expresii folosind constructul `${oVariabilaSauExpresie}`.
 
@@ -35,7 +71,7 @@ console.log(altaParte); // Ce voi face este să unesc o parte de text
 var ceva = etichetare`Un text`;
 ```
 
-`etichetare` este o funcție care este apelată cu datele template-ului literal care este procesat. Funcția primește datele din template ca bucăți individuale și trebuie să le combine pentru a creea rezultatul. Primul argument este chiar un array iar cel de-al doilea este un `rest arguments`.
+În acest caz, `etichetare` este o funcție care este apelată cu datele template-ului literal care este procesat. Funcția primește datele din template ca bucăți individuale și trebuie să le combine pentru a creea rezultatul. Primul argument este chiar un array iar cel de-al doilea este un `rest arguments`.
 
 ```javascript
 let atribut = 'foarte bun',
@@ -45,13 +81,14 @@ let atribut = 'foarte bun',
 function eticheta(corp, ...inputuri){
   console.log(corp, inputuri);
 };
-
-//Array [ "Un text ", " cu ", "% suspans pentru ", " emoții." ] Array [ "foarte bun", "100", "23.0000" ]
+// ["Un text ", " cu ", "% suspans pentru ", " emoții." ]
+// [ "foarte bun", "100", "23.0000" ]
 ```
 
 Funcția `etichetare` primește următoarele argumente:
+
 - un array identificat prin `corp` care conține următoarele:
-  - șirul de caractere de dinaintea primei înlocuiri (în cazul în care se ăncepe cu o înlocuire acesta este un șir gol `""`),
+  - șirul de caractere de dinaintea primei înlocuiri (în cazul în care se începe cu o înlocuire acesta este un șir gol `""`),
   - șirul de caractere de după prima înlocuire,
   - și în continuare șirurile de după fiecare înlocuire dacă ar mai fi.
 - și un array `inputuri`, care conține valorile care vor fi evaluate pentru a fi inserate în șablon

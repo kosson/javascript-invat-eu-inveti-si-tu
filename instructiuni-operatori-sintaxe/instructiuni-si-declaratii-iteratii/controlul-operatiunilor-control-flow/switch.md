@@ -1,0 +1,1 @@
+# Instrucțiunea `switch`

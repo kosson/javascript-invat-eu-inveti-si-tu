@@ -1,4 +1,4 @@
-# Instrucțiunea `if`
+# Instrucțiunea `if...else`
 
 Reține faptul că if nu este o expresie. Este o instrucțiune!
 
