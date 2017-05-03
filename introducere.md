@@ -189,8 +189,8 @@ Aceste declarații și instrucțiuni sunt:
 - declarații de variabile: `var`, `let`, `const`,
 - declarațiile de module: `import`, `export`,
 - declararea expresiilor,
-- declararea intenției de a folosi depanatorul de cod (debugger),
-- instrucțiunile `continue`, `break`, `throw`,
+- declararea intenției de a folosi depanatorul de cod (`debugger`),
+- instrucțiunile `continue`, `break`, `throw`
 - și `return`.
 
 #### Operatori (***operators***)
@@ -203,7 +203,7 @@ De regulă, operanzii stabilesc o evaluare a expresiilor de la stânga la dreapt
 
 Un enunț este o sarcină exprimată prin combinația de operanzi, operatori și / sau gruparea acestora. Este echivalentul unei propoziții în limbaj uman. Și astfel, ajungem la concluzia că un program nu este decât o listă de enunțuri.
 
-Cel mai simplu enunț:
+Cel mai simplu enunț este introducerea unei valori literale (literal înseamnă că menționezi prin caractere valoarea - cifre pentru numerale și șiruri de caractere între ghilimele pentru text):
 
 ```javascript
 3;
@@ -258,7 +258,7 @@ JavaScript are următoarele categorii de expresii:
 - expresii de bază cum ar fi cuvintele cheie sau expresiile de uz general și
 - expresiile din partea stângă a operatorului de atribuire (`=`), adică la ce trebuie să se lege evaluarea a ceea ce este în partea dreaptă.
 
-Cea mai simplă expresie este o valoare literală sau o variabilă.
+Cea mai simplă expresie este o `valoare literală` ori o variabilă, dacă dorești.
 
 ```javascript
 1;      // expresie de valoare literală
@@ -273,7 +273,7 @@ x = 1 + 1;  // expresie de atribuire a unei expresii aritmetice
 
 În exemplul dat avem o literă, care ține locul unei valori care va apărea la un moment dat și pe care tehnic o numim variabilă.
 
-Aceasta este adunată cu o valoare de sine stătătoare numită **valoare literală**. De ce se numește **literală**? Pentru că nu este valoarea unei variabile, ci pur și simplu se reprezintă pe sine, prin literele care consituie unitatea ce reprezintă o valoare.
+Aceasta este adunată cu o valoare de sine stătătoare numită **valoare literală**. Am lămurit deja mai sus că o valoare literală este pur și simplu valoarea introdusă direct prin reprezentarea sa literală, adică cifre pentru valori numerice și caractere între ghilimele pentru text. De ce este nevoie de o precizare de acest fel? Pentru că de nu ai pune între ghilimele textul, mototul nostru de JavaScript ar înțelege că faci o referință către un identificator al unei variabile, constante, funcții sau obiect. Reține acest aspect care ține de „ortografia” JavaScript. Nu uita că `var ceva = "altceva";` este o variabilă care identifică valoarea text `"altceva"`, ceea ce este complet diferit de `var ceva = altceva;`, care transformă variabila ceva într-o referință către identificatorul `altceva`, care poate fi o altă variabilă, o funcție sau un obiect.
 
 Că veni vorba de matematică, îți aduci aminte că îl foloseam pe celebrul „x” la regula de trei simplă sau la ecuația de gradul I. De ce? Pentru că încă nu cunoșteam valoarea a cărui loc o ținea litera.
 
@@ -287,16 +287,20 @@ O mică mențiune: în cazul programării acoladele și parantezele pătrate pe 
 
 Combinarea operanzilor prin intermediul operatorilor constituie o sarcină care trebuie îndeplinită la fel ca în matematică când enunțul matematic trebuie rezolvat.
 
-**Regulă de aur**: nu expresia este tratată ca operand, ci rezultatul evaluării sale.
+**Moment ZEN**: O expresie nu va fi tratată niciodată ca operand, ci **rezultatul evaluării sale**.
 
 ```javascript
 // un enunț format din mai multe expresii
 1 + 1 * (5 - 1); // 5
 ```
 
-Hai să ne uităm la cea de sus. Începem de la stânga spre dreapta să facem evaluarea expresiei. Buuuun! Și avem: 1 plus 1 egal? Stop joc! Cel de-al doilea unu (cel din dreapta operatorului plus) este implicat într-o operațiune pe care va trebui să o rezolvăm mai întâi pentru că așa spune prioritatea operatorului ori (`*`). Pentru moment, lăsăm în suspans prima operațiune de adunare și sărim să facem înmulțirea. Surpriză majoră: 1 este înmulțit cu o altă expresie care este între parantezele rotunde. Deci, abandonăm și înmulțirea și facem operațiunea dintre parantezele rotunde pentru a ajunge la o valoare. Gata! Avem valoarea `4`. Perfect, acum că avem valoarea putem face înmulțirea: `1 * 4`. În urma evaluării ajungem la valoarea `4`, care permite evaluarea primei operațiuni de la care am plecat: `1 + 4`. Ajungem la rezultatul `5`. Hai că nu a fost greu, doar nițică matematică... știu, de mate nu scăpăm, dar nu ne lăsăm.
+Stai, stai puțin. Pe parcursul acestei călătorii de descoperire și autodescoperire, voi jalona conținutul cu astfel de momente ZEN, care vor fi propoziții cu o sarcină precisă: să fie chintesența informației analizată defalcat. Cine ajunge să simtă că o lumină pătrunde de dincolo de cuvinte, poate să considere că a mai făcut un pas spre iluminarea în JavaScript.
+
+Să revenim focalizându-ne pe enunțul de mai sus. Începem de la stânga spre dreapta să facem evaluarea expresiei. Buuuun! Și avem: 1 plus 1 egal? Stop joc! Cel de-al doilea unu (cel din dreapta operatorului plus) este implicat într-o operațiune pe care va trebui să o rezolvăm mai întâi pentru că așa spune prioritatea operatorului ori (`*`). Pentru moment, lăsăm în suspans prima operațiune de adunare și sărim să facem înmulțirea. Surpriză majoră: 1 este înmulțit cu o altă expresie care este între parantezele rotunde. Deci, abandonăm și înmulțirea și facem operațiunea dintre parantezele rotunde pentru a ajunge la o valoare. Gata! Avem valoarea `4`. Perfect, acum că avem valoarea putem face înmulțirea: `1 * 4`. În urma evaluării ajungem la valoarea `4`, care permite evaluarea primei operațiuni de la care am plecat: `1 + 4`. Ajungem la rezultatul `5`. Hai că nu a fost greu, doar nițică matematică... știu, de mate nu scăpăm, dar nu ne lăsăm.
 
 Continuăm cu o precizare foarte importantă pentru a întări ceea ce am rememorat. Atunci când codul sursă este rulat pentru a obține un rezultat, de fapt, ceea ce se petrece este o sesiune de evaluări ale expresiilor care se reduc la o valoare după rezolvarea lor condiționată de diverșii operatori. Totul, dar totul se reduce, de fapt, la a evalua expresii rezolvând **operațiunile** și ajungând la **valori** care sunt necesare altor **expresii**, care, la rândul lor așteptau cuminți ca evaluarea precedentă să se încheie pentru a avea și ele valorile de care aveau nevoie.
+
+Dacă ai amețit, e perfect normal. Respiră de cinci ori foarte adânc cu ochii închiși concentrându-te adânc la fiecare respirație. Acum citește din nou.
 
 #### Instrucțiunile
 
@@ -404,15 +408,17 @@ Am mai introdus câteva cuvinte noi. Hai să le lămurim. Primitivele sunt ca ni
 
 ### Tipurile de date - language types
 
+În JavaScript valorile sunt de două feluri: **primitive** și **obiecte**. Valorile primitive nu pot fi transformate în sensul că o valoare numerică 3 va fi întotdeauna 3.
+
 Spune standardul că aceste tipuri ale limbajului (referindu-se la valori) sunt direct manipulabile de către programator.
 
-- `undefined`. „Nedefinit” este o valoare în sine chiar dacă pare foarte straniu; „orice variabilă care nu are o valoare asignată are valoarea `undefined`” (ECMA-262). De fapt exprimă starea de dinaintea legării identificatorului la o valoare.
+- `undefined`. „Nedefinit” este o valoare în sine chiar dacă pare foarte straniu; „orice variabilă care nu are o valoare asignată are valoarea `undefined`” (ECMA-262). De fapt exprimă starea de dinaintea legării identificatorului la o valoare (las că-ți explic povestea asta mai încolo).
 - `null`. Da, o valoare nulă este considerată o valoare.
 - `boolean`. Este denumită după cercetătorul Boole și are două stări: `true`  adevărat sau `false` - fals,
 - `string`. „Șir de caractere” este succesiunea de caractere care formează un text,
 - `number`. „Număr” reprezintă valori reprezentate pe 64 de biți în virgulă mobilă (format al standardului IEEE 754‐2008),
 - `Object`. „Obiect” este o colecție de proprietăți; o proprietate are o cheie de acces către valoarea sa care poate fi o valoare de tip string sau Symbol. Ține minte că un șir gol este o cheie validă. „Numele unei proprietăți” este cheiea unei proprietăți care este valoare string.
-- `Symbol`. „Simbol” este o valoare care nu este string și care poate fi utilizată drept cheie a unui Obiect și
+- `Symbol`. Este o valoare care nu este string dar care poate fi utilizată drept cheie a unui Obiect.
 
 După cum se observă, fiecare tip este expresia a două elemente: sintaxa și semantica. Sintaxa implică „codarea" printr-un cuvânt din limbajul natural, care în cazul JavaScript este limba engleză, iar semantica indică conceptul reprezentat.
 

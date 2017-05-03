@@ -1,7 +1,7 @@
 # Valorile primare în JavaScript
 
 Valorile primare în JavaScript formează nucleul lucrului cu datele.
-Valorile sunt expresii. De fapt, expresiile sunt o posibilă reprezentare a valorii.
+Valorile sunt expresii. De fapt, expresiile sunt o posibilă reprezentare a valorii pentru că sunt reduse la o valoare.
 
 Aceste valori sunt cele pe care diferitele structuri de prelucrare sau de stocare permanentă ori temporară, le vor organiza și manipula. Sunt baza structurilor de date, dacă vrei, atomii substanței cu care lucrăm în programare.
 
