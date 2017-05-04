@@ -84,4 +84,38 @@ console.log(window.UnModul);
 // poți trimite orice obiect pentru a lucra cu el.
 ```
 
-Folosind ECMAScript 2017, fișierele JavaScript devin ele însele module care pot fi încărcate cu `import`/`export`. La momentul scrierii acestui material doar browserul Chrome are suport.
+## Import / Export
+
+Folosind ECMAScript 2017, fișierele JavaScript devin ele însele module care pot fi încărcate cu `import`/`export`.
+
+```html
+<script type="module">
+  import {facSiEuCeva} from './utilitare.js';
+  facSiEuCeva('importat', 'cu', 'succes');
+</script>
+```
+
+Pentru a se putea face importul, trebuie ca fișierul utilitare.js să exporte ceva.
+
+```javascript
+export function facSiEuCeva (a, b, c) {
+  let text = `${a} ${b} ${c}`;
+  console.log(text);
+};
+```
+
+În acest moment toate căile de acces trebuie specificate de la rădăcină atunci când faci declarațiile de import. Căile relative nu pot fi utilizate la import.
+
+```javascript
+import {facCeva} from 'https://www.orice.ro/utilitate.js';
+import {facCeva} from '/utilitare/faceCevaSiEl.js';
+import {facCeva} from './faceCevaSiEl.js';
+import {facCeva} from '../faceCevaSiEl.js';
+```
+
+Pentru cazul în care browserul nu este încă pregătit, se va adopta o declarație de script care să ofere o rezolvare către un fișier concatenat cuprinzând toate scripturile.
+
+```html
+<script type="module" src="modul.js"></script>
+<script nomodule src="toateModuleleIntrUnu.js"></script>
+```
