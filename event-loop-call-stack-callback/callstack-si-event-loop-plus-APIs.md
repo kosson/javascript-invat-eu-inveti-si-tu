@@ -2,6 +2,10 @@
 
 Comportamentul asincron este permis de relația dintre runtime-ul JavaScript, stiva de apeluri și API-urile web. Fiecare dintre aceste componente reprezintă tot atâtea fire de execuție.
 
+## Mediul de execuție - execution environment
+
+DOM-ul (este în sine o microplatformă), interpretorul, componenta de networking și toate celelalte părți componente ale unui browser alcătuiesc mediul de execuție.
+
 ## Stiva apelurilor - CALLSTACK
 
 Contextul de execuție este un mecanism pentru a ține evidența evaluării codului la momentul în care acesta este rulat.
@@ -31,5 +35,3 @@ Acest material a fost inspirat de prezetarea lui Philip Roberts: [What the heck 
 [Wikipedia Call stack](https://en.wikipedia.org/wiki/Call_stack)
 
 [Concurrency model and Event Loop](https://developer.mozilla.org/en/docs/Web/JavaScript/EventLoop)
-
-[Philip Roberts: What the heck is the event loop anyway? | JSConf EU 2014 ](https://www.youtube.com/watch?v=8aGhZQkoFbQ "")

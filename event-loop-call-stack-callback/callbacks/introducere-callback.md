@@ -1,55 +1,64 @@
-# Ce sunt callback-urile?
+# Callback-uri
 
-Un callback este o secvență de cod executabilă care este pasată ca argument unei funcții. Aceasta este „apelată” - „called back” de către funcție la un moment ulterior.
+Un **callback** este o secvență de cod executabilă, care este pasată ca argument unei funcții. Adu-ți aminte de faptul că o funcție este o valoare care poate fi pasată ca argument. Funcțiile care primesc alte funcții ca valori sunt **funcții de nivel înalt**.
 
-## Dependințe cognitive:
+În limba română am putea aproxima denumirea ca **apeluri ulterioare**. Funcția ca valoare este pasată ca argument și este „apelată ulterior” (called back) de către funcția care este în execuție deja.
 
-- scope
-- this
-- closures
-
-Este o funcție care este executată ca răspuns la un eveniment. Ori de câte ori o funcție este construită pentru a fi apelată ulterior, fie de browser, fie de o altă parte a codului, aceasta se numește `callback`.
-
-Un callback este o funcție (un obiect, de fapt), care este pasată ca argument unei alte funcții și care este invocată atunci când se ajunge la un rezultat. Pe scurt, rezultatul funcției nu este întors celui care a invocat-o, ci este preluat de callback și acesta are rolul de a returna ceva.
+De regulă, este o funcție care este executată ca răspuns la un eveniment. Ori de câte ori o funcție este creată pentru a fi apelată ulterior, fie de browser, fie de o altă parte a codului, aceasta se numește `callback`. Atunci când funcția care are drept parametru callback-ul ajunge la un rezultat, invocă execuția acestuia pasând callback-ului taman rezultatul la care a ajuns. Abia callback-ul are rolul de a returna ceva.
 
 În programarea funcțională, acest mod de a propaga rezultatul se numește „continuation-passing style” (CPS). Returnarea rezultatului dintr-o funcție se numește „direct style”.
 
-```javascript
-// exemplificare direct style versus continuation-passing style
+În continuare vom face o exemplificare **direct style** versus **continuation-passing style**
 
-function adunare(a, b){
-  return a + b;                      // direct style
+```javascript
+// direct style
+function adunare (a, b) {
+  return a + b; // direct style
+}; adunare (1, 2); // 3
+```
+
+Modalitatea sincronă de a prelucra rezultatul folosind stilul **continuation-passing**. Declari o funcție care face prelucrările necesare pe datele primite prin argumente. În interiorul funcției este invocată funcția callback, care a fost primită ca valoare a ultimului argument. Acestei funcții îi este pasată rezultatul tuturor prelucrărilor.
+
+```javascript
+function adunare (a, b, faAdunarea) {
+  var x = a + b;
+  faAdunarea (x);
 };
 
-// adunare ca operațiune sincronă
-function adunare(a, b, faAdunarea){
-  faAdunarea(a + b);                // continuation-passing style
-};                                  //se va returna o valoare abia după ce callback-ul și-a încheiat execuția
-
-adunare(1, 2, function(rezultat){  // callbackul primește un singur argument, care reflectă evaluarea operațiunii a+b
+// execută pasând un callback
+adunare (1, 2, function(rezultat) {
+  // callbackul primește un argument, ca evaluare a operațiunii a+b
   console.log('Rezultatul este: ' + rezultat);
-});
+}); // Rezultatul este: 3
+```
 
+La invocarea funcției, fii sigur că ultimul argument pasat este o funcție care primește un unic argument. În acest moment, este executată funcția de bază. Aceasta primește la primele argumente valorile de lucru iar ultimul fiind funcția callback. Încă o dată îți reamintesc că în JavaScript funcțiile sunt de nivel înalt, acceptând funcții ca valori de lucru direct ca argumente. Aceasta este și explicația pentru care callback-urile funcționează.
+
+Mai există cazul în care callback-urile funcționează asincron.
+Pentru a simula asincronicitatea, se va folosi metoda `setTimeout` oferită de obiectul global.
+
+```javascript
 // adunarea ca operațiune asincronă
 function adunareAsinc(a, b, callback){
-  setTimeout(function(){ // simularea asincronicității
-    callback(a+b);
-  },3000);
+  setTimeout(function(){
+    //simularea asincronicității
+    callback(a + b);
+  }, 3000);
 };
 
 console.log('inainte');
-adunareAsinc(1, 2, function(rezultat){  // callbackul primește un singur argument, care reflectă evaluarea operațiunii a+b
+adunareAsinc(1, 2, function(rezultat){
   console.log('Rezultat: ' + rezultat);
 });
 console.log('după');
 // mesajul rezultatului apare în consolă după
 ```
 
-Atenție! funcția adunareAsincrona nu va mai aștepta la execuție să se declanșeze execuția callbackului și va relua execuția mai departe și abia după ce setTimeout va fi terminat, după cele 3 secunde, abia atunci va fi executat și callback-ul. După ce timpul se va fi scurs, execuția callback-ului returnează rezultatul. Menținerea contextului se face datorită closure-ului.
+Atenție! funcția `adunareAsincrona` nu va mai aștepta la execuție să se declanșeze execuția callbackului și va relua execuția mai departe și abia după ce `setTimeout` va fi terminat, după cele 3 secunde, abia atunci va fi executat și callback-ul. După ce timpul se va fi scurs, execuția callback-ului returnează rezultatul. Menținerea contextului se face datorită closure-ului.
 
 ## Anatomie
 
-Pentru fiecare pas al animației, calbackul pasat lui setInterval face closure pe valorile elementTinta și increment și astfel, fiind accesibile ca niște variabile care pot fi accesate dar având valorile modificate.
+Pentru fiecare pas al animației, calbackul pasat lui `setInterval` face closure pe valorile `elementTinta` și increment și astfel, fiind accesibile ca niște variabile care pot fi accesate dar având valorile modificate.
 
 ```html
 <div id="element">Un nod de text</div>
@@ -126,3 +135,9 @@ Atenție, în Node, primul argument al unui callback va fi întotdeauna un obiec
 - Ieși din funcție cât se poate de repede cu `return`, `continue` sau `break`.
 - Creează funcții cu nume pentru callback-uri pasând rezultatele intermediare ca argumente.
 - Modularizează codul împărțindu-l în funcții mici, reutilizabil ori de câte ori acest lucru este posibil.
+
+## Dependințe cognitive:
+
+- scope
+- this
+- closures
