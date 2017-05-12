@@ -4,7 +4,25 @@ Un **callback** este o secvență de cod executabilă, care este pasată ca argu
 
 În limba română am putea aproxima denumirea ca **apeluri ulterioare**. Funcția ca valoare este pasată ca argument și este „apelată ulterior” (called back) de către funcția care este în execuție deja.
 
-De regulă, este o funcție care este executată ca răspuns la un eveniment. Ori de câte ori o funcție este creată pentru a fi apelată ulterior, fie de browser, fie de o altă parte a codului, aceasta se numește `callback`. Atunci când funcția care are drept parametru callback-ul ajunge la un rezultat, invocă execuția acestuia pasând callback-ului taman rezultatul la care a ajuns. Abia callback-ul are rolul de a returna ceva.
+## De ce avem nevoie de funcții callback?
+
+Cel mai bine se leagă lucrurile care au o poveste. Iar pentru a înțelege povestea callback-ului, ne vom închipui o întâmplare dintr-un restaurant cu un client care dorește să hrănească zece nevoiași, dar are doar ingredientele.
+
+Ne aflăm într-un restaurant. În momentul în care vine chelnerul să ia comanda, nu ai mâncarea și nici cine să-ți gătească, dar ai ingredientele. Știu, pare ciudat, dar așa e personajul poveștii iar politica restaurantului permite acest lucru.
+Și zice el politicos chelnerului: „Vreau ca iscusitul vostru bucătar să facă o budincă gătită cu aceste ouă, șunca și brânza asta... de capră. După care vreau porționeze tava în zece”. Chelnerul ia comanda și dispare.
+Bucătarul preia comanda, trece pe la client și ia ingredientele aduse. Prin măiestria sa rezultă o mândrețe de budincă pe care o dă clientului, nu înainte de a o porționa în 10 așa cum ai precizat la final. Iată ce a realizat cu trei ingrediente și munca făcută de un bucătar.
+
+## Scenariul!!!
+
+O funcție este declarată, dar are un mic secret. Să spunem că este **funcția de bază**. Acesta este un termen arbitrar, care ne va ajuta să înțelegem mai bine relația cu o altă funcție. Este funcția callback. Acesta este definită de utilizator, care are drept scop preluarea rezultatelor funcției de bază ca material de lucru pentru
+
+TODO: Refă acest paragraf - de cel care folosește rezultatele funcției de bază. Unul dintre argumente este de fapt o funcție, care va fi apelată la rândul ei în interior. Această funcție „ascunsă” într-un argument se numește callback.
+
+
+
+**Moment ZEN**: Callback-ul este o funcție care este executată ca răspuns la un eveniment.
+
+Atunci când funcția care are drept parametru callback-ul ajunge la un rezultat, invocă execuția acestuia pasând callback-ului taman rezultatul la care a ajuns. Abia callback-ul are rolul de a returna ceva.
 
 În programarea funcțională, acest mod de a propaga rezultatul se numește „continuation-passing style” (CPS). Returnarea rezultatului dintr-o funcție se numește „direct style”.
 
@@ -17,7 +35,7 @@ function adunare (a, b) {
 }; adunare (1, 2); // 3
 ```
 
-Modalitatea sincronă de a prelucra rezultatul folosind stilul **continuation-passing**. Declari o funcție care face prelucrările necesare pe datele primite prin argumente. În interiorul funcției este invocată funcția callback, care a fost primită ca valoare a ultimului argument. Acestei funcții îi este pasată rezultatul tuturor prelucrărilor.
+Modalitatea sincronă de a prelucra rezultatul folosind stilul **continuation-passing**. Declari o funcție care face prelucrările necesare pe datele primite prin argumente. În interiorul funcției este invocată funcția callback, care a fost primită ca valoare a ultimului argument. Acestei funcții îi este pasat rezultatul tuturor prelucrărilor din funcția de bază.
 
 ```javascript
 function adunare (a, b, faAdunarea) {
@@ -32,7 +50,7 @@ adunare (1, 2, function(rezultat) {
 }); // Rezultatul este: 3
 ```
 
-La invocarea funcției, fii sigur că ultimul argument pasat este o funcție care primește un unic argument. În acest moment, este executată funcția de bază. Aceasta primește la primele argumente valorile de lucru iar ultimul fiind funcția callback. Încă o dată îți reamintesc că în JavaScript funcțiile sunt de nivel înalt, acceptând funcții ca valori de lucru direct ca argumente. Aceasta este și explicația pentru care callback-urile funcționează.
+La invocarea funcției, fii sigur că ultimul argument pasat este o funcție care primește un unic argument. În acest moment, este invocată funcția de bază. Aceasta primește la primele argumente valorile de lucru iar ultimul, de regulă, fiind funcția callback. Încă o dată îți reamintesc că în JavaScript funcțiile sunt de nivel înalt, acceptând alte funcții ca valori de lucru prin argumente. Aceasta este și explicația pentru care callback-urile funcționează.
 
 Mai există cazul în care callback-urile funcționează asincron.
 Pentru a simula asincronicitatea, se va folosi metoda `setTimeout` oferită de obiectul global.
@@ -134,7 +152,7 @@ Atenție, în Node, primul argument al unui callback va fi întotdeauna un obiec
 
 - Ieși din funcție cât se poate de repede cu `return`, `continue` sau `break`.
 - Creează funcții cu nume pentru callback-uri pasând rezultatele intermediare ca argumente.
-- Modularizează codul împărțindu-l în funcții mici, reutilizabil ori de câte ori acest lucru este posibil.
+- Modularizează codul împărțindu-l în funcții mici, făcându-l reutilizabil ori de câte ori acest lucru este posibil.
 
 ## Dependințe cognitive:
 
