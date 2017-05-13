@@ -1,3 +1,8 @@
+# Singleton
+
+Este un model cu ajutorul căruia instanțiezi un obiect unic la un moment anume.
+Îi spune Singleton (pe filieră Java) pentru că, ipotetic, nu poți să ai decât o singură instanță a acestui obiect.
+
 ## Dependințe cognitive
 - funcții
 - this
@@ -5,9 +10,6 @@
 - clojure
 - IIFE
 - Revealing Module Pattern
-
-Îi spune Singleton (pe filieră Java) pentru că, ipotetic, nu poți să ai decât o singură instanță a acestui obiect.
-În JavaScript toate obiectele sunt Singleton pentru că JavaScript nu are clase.
 
 ## Mantre
 
@@ -20,108 +22,57 @@
 - Modificarea concomitentă a valorilor, va duce la suprascrierea valorilor.
 - are o instanțiere întârziată, adică va fi folosit atunci când va fi nevoie de acesta, când va fi instanțiat.
 
-În Javascript, Singleton-urile folosesc la crearea unui namespace distinct care izolează codul implementării de global scope oferind un singur punct de intrare pentru funcții.
+În Javascript, Singleton-urile folosesc la crearea unui spațiu distinct (namespace), care izolează codul implementării de *global scope*. Pentru acest obiect este oferit un singur punct de intrare către metode.
 
-Un Singleton este doar o structură.
-
-```javascript
-var VehiculSpatial = {
-  id: '',
-  functie: '',
-  an: '',
-  prezentare: function(){
-    return this.id + " " + this.an;
-  }
-};
-
-VehiculSpatial.id = 'Santinel';
-VehiculSpatial.functie = 'satelit';
-VehiculSpatial.an = 2015;
-console.log(VehiculSpatial.prezentare());
-```
-
-Structura simplă de mai sus poate fi extinsă prin adăugare de membri și metode private prin încapsularea declarațiilor de variabile și funcții într-un clojure.
-
-```javascript
-var unSingleton = function(){
-  /**
-   * ZONA PRIVATA
-   */
-  var oVariabilaPrivata = 'ceva care nu poate fi accesat din afara';
-
-  function arataVariabila(){
-    console.log(oVariabilaPrivata);
-  };
-
-  /**
-   * ZONA PUBLICĂ
-   */
-  return {
-
-    metodaPublica: function(){
-      arataVariabila();
-    }
-
-    publicVar: 'publicul poate vedea asta';
-  };
-};
-
-var unSingle = unSingleton();
-unSingle.metodaPublica();         // ceva care nu poate fi accesat din afara
-console.log(unSingle.publicVar);  // publicul poate vedea asta
-```
-
-Codul de instanțiere al unui Singleton se poate pune într-o altă funcție constructor după cum urmează:
+Un Singleton este doar o structură. Pentru a înțelege cum funcționează, cel mai simplu ar fi să analizăm cum funcționează. Avem o zonă privată și o zonă publică. Zona publică se comportă ca punct de intrare către zona internă.
 
 ### 1. declară un IIFE
+
+Pornim prin a construi un modul în sine folosind un IIFE. Acesta creează propriu mediu lexical, ceea ce oferă izolarea de care avem nevoie ca mai apoi să limităm la ceea ce este nevoie accesul din exterior.
 
 ```javascript
 var unSingleton = (function (){})();
 ```
 
-### 2. declară o funcție init care, de fapt cuprinde Singleton-ul
-
-Pe scurt:
-1. Faci o referință către o funcție anonimă.
-2. Funcția anonimă are o metodă init ce returnează un obiect care poartă tot ce este public (atribute și metode).
-3. În funcție mai este o variabilă care va ține instanța Singleton-ului.
-4. La final, funcția returnează un obiect cu o metodă care odată apelată ulterior, va încărca variabila cu o instanță a Singleton-ului, dacă aceasta nu există deja. Aceeași metodă, după instanțiere, returnează variabila purtătoare a instanței.
-5. Ajungi la atributele și metodele Singleton prin apelarea funcției returnate, care la rândul său returnează Singleton-ul instațiat deja.
+În interiorul funcției IFFE, declari o variabilă care va fi referința către obiectul generat la momentul când acesta va fi creat.
 
 ```javascript
 var unSingleton = (function (){
-
-  var activ;                    // poarta instanta de Singleton
-
-  function init (){             // returnează obiectul care este Singleton-ul
-
-    var _proprietatePrivata = 10;
-
-    var metodaPublica = function (){
-      console.log('Salutare!');
-    }
-
-    // se returnează obiectul
-    return {
-      metodaPublica: metodaPublica,
-      proprietatePublica: 'ceva'
-    };
-
-  };
-
-  return {
-    getInstance: function (){   // metoda care obține instanța obiectului Singleton
-      if(!activ){               // verifica daca activ poarta instanta
-        activ = init();         // daca nu, instanțiază obiectul Singleton
-      }
-      return activ;             // returnează instanța
-    }
-  };
-
+  var obiectul;
 })();
+```
 
-// apelarea metodei publice
-unSingleton.getInstance().metodaPublica();
+### 2. declară o funcție care propriu-zis are misiunea de a creea obiectul.
+
+În interiorul funcției vor fi create toate metodele și toate proprietățile obiectului viitor și va fi returnat acest obiect care poate fi considerat un adevărat API.
+
+```javascript
+var unSingleton = (function (){
+  var obiectul;
+  function generator () {
+    // tot ce are nevoie obiectul
+    return {};
+  };
+})();
+```
+
+După ce dotezi funcția cu tot ce crezi că ar nevoie obiectului final, vei face un return unui obiect literal care are o unică metodă.
+Rolul metodei este să testeze dacă obiectul a fost instanțiat testând valoarea variabilei definite inițial. Dacă valoarea este „undefined”, înseamnă că obiectul încă nu a fost instanțiat niciodată, nu a fost cerut până acum și va fi creat chiar acum. Acest lucru se va face prin atribuirea valorii evaluate prin invocarea funcției `generator`.
+Dacă obiectul a fost creat deja, pur și simplu va fi returnat.
+
+```javascript
+var unSingleton = (function (){
+  var obiectul;
+  function generator () {
+    // tot ce are nevoie obiectul
+  };
+  return {
+    if(!obiectul) {
+      obiectul = generator();
+    }
+    return obiectul;
+  };
+})();
 ```
 
 ## Folosirea în practică
@@ -130,44 +81,30 @@ Atunci când un singur obiect este necesar pentru a coordona șabloanele întreg
 
 ```javascript
 var TestSingleton = (function (){
-
+  var obiectul;                       // tine instanta de Singleton la instanțierea cu  new
   function Singleton(inputs) {        // inputs: e obiect de configurare pentru asemanator cu { name: 'ceva', pointX: 5}
-
     inputs = inputs || {};            // seteaza cu un obiect gol daca nu ai obiect de configurare
-
     this.name = 'TestSingleton';      // parametru intern: name
     this.coordX = inputs.coordX || 0; // valoare pentru coordonata X
     this.coordY = inputs.coordY || 0; // valoare pentru coordonata Y
   };
-
-  var instance;                       // tine instanta de Singleton la instanțierea cu  new
-
   var asaZiseAtribSiMetodeStatice = {
-
     name: 'TestSingleton',
-    getInstance: function (options){
-
-      if (instance === undefined){
-        instance = new Singleton(options);
-      }
-
-      return instance;
+    creeaza: function (valoriDinAfara){
+      if (obiectul === undefined){
+        obiectul = new Singleton(valoriDinAfara);
+      };
+      return obiectul;
     }
   };
-
   return asaZiseAtribSiMetodeStatice;
-
 })();
 
-var singletonTest = TestSingleton.getInstance({
+var singletonTest = TestSingleton.creeaza({
   coordX: 10, coordY: 20
 });
 
 console.log(singletonTest.coordX); // afiseaza 10
 ```
 
-În cazul folosirii Node, datorită modului în care se face caching-ul, pentru a beneficia de un Singleton este îndejuns să faci:
-
-`module.exports = numeFuncție()`
-sau
-`module.exports = new numeFunctie()`
+În cazul folosirii Node, datorită modului în care se face caching-ul, pentru a genera un Singleton este îndejuns să faci: `module.exports = numeFuncție()` sau `module.exports = new numeFunctie()`
