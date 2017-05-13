@@ -14,11 +14,11 @@
 - folosit pentru a „conserva” starea unei aplicații și apoi accesa această stare în întreaga aplicație
 - este folosit doar la momentul instanțierii, iar după, poate fi doar actualizat
 - creează un namespace distinct
-- are instanțiere întârziată - când este nevoie, de fapt
+- are instanțiere întârziată
 - obiectul este unic în întreaga aplicație
 - e o interfață globală constantă pentru toți cei care au nevoie să-l folosească
 - Modificarea concomitentă a valorilor, va duce la suprascrierea valorilor.
-- are o instanțiere întârziată, adică va fi folosit atunci când va fi nevoie de acesta.
+- are o instanțiere întârziată, adică va fi folosit atunci când va fi nevoie de acesta, când va fi instanțiat.
 
 În Javascript, Singleton-urile folosesc la crearea unui namespace distinct care izolează codul implementării de global scope oferind un singur punct de intrare pentru funcții.
 

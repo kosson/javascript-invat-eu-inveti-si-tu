@@ -6,7 +6,7 @@ Un **callback** este o secvență de cod executabilă, care este pasată ca argu
 
 ## De ce avem nevoie de funcții callback?
 
-Cel mai bine se leagă lucrurile care au o poveste. Iar pentru a înțelege povestea callback-ului, ne vom închipui o întâmplare dintr-un restaurant cu un client care dorește să hrănească zece nevoiași, dar are doar ingredientele.
+Cel mai bine se leagă lucrurile care au o poveste. Dar pentru a înțelege povestea callback-ului, ne vom închipui o întâmplare dintr-un restaurant cu un client care dorește să hrănească zece nevoiași, dar are doar ingredientele.
 
 Ne aflăm într-un restaurant. În momentul în care vine chelnerul să ia comanda, nu ai mâncarea și nici cine să-ți gătească, dar ai ingredientele. Știu, pare ciudat, dar așa e personajul poveștii iar politica restaurantului permite acest lucru.
 Și zice el politicos chelnerului: „Vreau ca iscusitul vostru bucătar să facă o budincă gătită cu aceste ouă, șunca și brânza asta... de capră. După care vreau porționeze tava în zece”. Chelnerul ia comanda și dispare.
@@ -14,15 +14,9 @@ Bucătarul preia comanda, trece pe la client și ia ingredientele aduse. Prin m�
 
 ## Scenariul!!!
 
-O funcție este declarată, dar are un mic secret. Să spunem că este **funcția de bază**. Acesta este un termen arbitrar, care ne va ajuta să înțelegem mai bine relația cu o altă funcție. Este funcția callback. Acesta este definită de utilizator, care are drept scop preluarea rezultatelor funcției de bază ca material de lucru pentru
-
-TODO: Refă acest paragraf - de cel care folosește rezultatele funcției de bază. Unul dintre argumente este de fapt o funcție, care va fi apelată la rândul ei în interior. Această funcție „ascunsă” într-un argument se numește callback.
-
-
+O funcție este declarată. Să o poreclim **funcția de bază**. Acesta este un termen arbitrar, care ne va ajuta să înțelegem mai bine relația cu o altă funcție: callback-ul. Funcția de bază este definită de utilizator cu scopul de a prelucra datele oferite la invocare. Funcția de bază are un mic secret. Primește funcția callback ca argument și după ce a terminat toate prelucrările, o execută la final pasându-i rezultatul evaluărilor din funcția de bază.
 
 **Moment ZEN**: Callback-ul este o funcție care este executată ca răspuns la un eveniment.
-
-Atunci când funcția care are drept parametru callback-ul ajunge la un rezultat, invocă execuția acestuia pasând callback-ului taman rezultatul la care a ajuns. Abia callback-ul are rolul de a returna ceva.
 
 În programarea funcțională, acest mod de a propaga rezultatul se numește „continuation-passing style” (CPS). Returnarea rezultatului dintr-o funcție se numește „direct style”.
 
