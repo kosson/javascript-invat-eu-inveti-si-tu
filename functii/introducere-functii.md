@@ -1,12 +1,14 @@
 # Funcții în ECMAScript
 
-Funcțiile sunt unitățile de execuție a codului JavaScript. O funcție poate fi percepută ca un subprogram, ca o subrutină. Veți mai întâlni în alte lucrări și denumirea de „proceduri”. Cel mai sănătos mod de a privi activitatea și efectele unei funcții este gândind întotdeauna că o funcție este un set de instrucțiuni care se aplică unui set de date primit ca argumente. Aplicarea unei funcții argumentelor sale produce un nou mediu lexical, un nou scope în care se fac legături între identificatori și valori.
+Funcțiile sunt unitățile de execuție a codului JavaScript. O funcție poate fi percepută ca un subprogram, ca o subrutină. Veți mai întâlni în alte lucrări și denumirea de „proceduri”. Cel mai sănătos mod de a privi activitatea și efectele unei funcții este gândind întotdeauna că o funcție este un set de instrucțiuni care se aplică unui set de date primit ca argumente. De faci asta? Pentru că în interiorul funcției vei prelucra datele primite și la final vei dori să oferi rezultatele la care ai ajuns. Aplicarea unei funcții argumentelor sale produce un nou mediu lexical, un nou scope în care se fac legături între identificatori și valori.
 
 Ca și obișnuință, ar fi cel mai util să gândești că funcția „cutare” se aplică pe „cutare și cutare”. Mult timp am gândit altfel: funcția „primește” pentru că, într-adevăr, introduci niște argumente. Nu este greșit, dar pentru o iluminare rapidă în domeniul funcțiilor, cel mai bine este să gândești în termenii aplicării sale pe argumente.
 
-**Mecanisme magice**: Declararea unei funcții are ca efect magic „urcarea” ( în jargonul limbajului se numește **hoising** ) în „capul codului”. Capul codului se referă la prezența unei declarații în registrul inventar al mediului lexical existent. Magia rezidă în faptul că poți invoca o funcție înainte ca aceasta să fie declarată. Superciudățel, nu?!
+**Moment Zen**: O funcție, de fapt, „se aplică” argumentelor pasate care sunt valori, le va prelucra și le va oferi apelantului prin returnare.
 
-O perspectivă simpatică ar fi dacă-ți închipui o funcție ca pe un caracter dintr-un joc de strategie pe care dai click și-l pui să facă ceva. Când ai nevoie să „producă” mâncare îl pui să facă o fermă. Îl trimiți după lemne ca să aibă cu ce și așa mai departe. Dacă ajunge la un punct de pe hartă unde concurează cu alte caractere pentru o resursă, pur și simplu așteaptă cuminte să-i vină rândul la „tufă” sau la „minerit aur”. Îmediat ce termină treaba, caracterul nostru nu are inițiativă, așteaptă să fie chemat cu un click să facă ceva.
+**Mecanisme magice**: Declararea unei funcții are ca efect magic „urcarea” ( în jargonul limbajului se numește **hoising** ) în „capul codului”. Capul codului se referă la prezența unei declarații în registrul inventar al mediului lexical existent. Magia rezidă din faptul că poți invoca o funcție înainte ca aceasta să fie declarată. Superciudățel, nu?!
+
+O perspectivă simpatică ar fi dacă-ți închipui o funcție ca pe un caracter dintr-un joc de strategie pe care dai click și-l pui să facă ceva. Când ai nevoie să „producă” mâncare îl pui să facă o fermă. Îl trimiți după lemne ca să aibă cu ce și așa mai departe. Dacă ajunge la un punct de pe hartă unde concurează cu alte caractere pentru o resursă, pur și simplu așteaptă cuminte să-i vină rândul la „tufa cu fructe” sau la „minerit aur”. Îmediat ce termină treaba, caracterul nostru nu are inițiativă, așteaptă să fie chemat cu un click să facă ceva.
 Așa sunt și funcțiile ca și comportament.
 
 O funcție este declarată folosind cuvântul cheie `function` urmat de un șir de caractere, care este numele funcției urmate de paranteze rotunde.
@@ -42,8 +44,6 @@ Un moment de un calm asemănător este utilizarea operatorului `void`, care gole
 void 1; // undefined
 void (function ki(){return 'prana';})(); // undefined
 ```
-
-**Moment Zen**: O funcție, de fapt, „se aplică” argumentelor pasate.
 
 Nimic din conținutul unei funcții nu produce niciun rezultat până când funcția nu este apelată și evaluată.
 
