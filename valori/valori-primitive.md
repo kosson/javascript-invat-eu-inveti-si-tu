@@ -1,11 +1,22 @@
-# Valorile primare în JavaScript
+# Valorile primitive în JavaScript
 
-Valorile primare în JavaScript formează nucleul lucrului cu datele.
+Valorile primitive în JavaScript formează nucleul lucrului cu datele.
 Valorile sunt expresii. De fapt, expresiile sunt o posibilă reprezentare a valorii pentru că sunt reduse la o valoare.
+
+Primitivele sunt valori în sine și sunt egale cu ele însele.
+
+```javascript
+10 === 10; // true
+'ceva' === 'ceva'; // true
+// prin contrast, un array,
+[] === []; // false
+// sau un obiect generat de o funcție
+(function () {}) === (function () {}); // false
+```
 
 Aceste valori sunt cele pe care diferitele structuri de prelucrare sau de stocare permanentă ori temporară, le vor organiza și manipula. Sunt baza structurilor de date, dacă vrei, atomii substanței cu care lucrăm în programare.
 
-JavaScript are șase valori primare:
+JavaScript are șase valori primitive:
 
 - `Boolean`,
 - `Number`,
@@ -39,9 +50,9 @@ Veți observa mai departe, când veți studia array-urile câteva similarități
 - Obiectele wrapper corespondente nu au același comportament cu primara în sine atunci când se fac comparații.
 - Setarea și apelarea proprietăților pentru o primară, are ca efect crearea obiectului wrapper.
 
-## Împachetarea primarelor
+## Împachetarea primitivelor
 
-Există și constructori care „împachetează” primarele în obiectul corespondent.
+Există și constructori care „împachetează” primitivele în obiectul corespondent.
 
 De exemplu:
 
@@ -57,7 +68,7 @@ Constructorii sunt utili pentru metodele tip utilitar pe care le pun la dispozi�
 "ceva".toUpperCase(); // "CEVA"
 ```
 
-Ceea ce s-a întâmplat este că `ceva` a fost „împachetat” în obiectul corespondent primarei. Acest obiect are în prototipul său metoda `toUpperCase()`.
+Ceea ce s-a întâmplat este că `ceva` a fost „împachetat” în obiectul corespondent primitivei. Acest obiect are în prototipul său metoda `toUpperCase()`.
 
 ## NaN - Not a Number
 

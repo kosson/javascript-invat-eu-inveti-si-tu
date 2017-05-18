@@ -406,11 +406,13 @@ Am putea spune foarte simplu că un identificator este numele unei valori, iar i
 
 ## Detalii suplimentare despre JavaScript pentru curioși și avansați
 
-JavaScript are un runtime cu un singur fir de execuție. Acest lucru implică existența unei stive unice pentru apeluri (callstack).
+Introduc aceste informații pentru că la un moment dat, vă veți aduce aminte că există chiar la început și pentru că multora dintre voi vă place să vedeți cam cât de adâncă este vizuina iepurelui înainte de a plonja. Sau pentru că sunteți curioși și vă plac provocările.
 
-JavaScript este un limbaj de programare bazat pe evenimente (***event driven***).
+JavaScript are un runtime cu un singur fir de execuție. Acest lucru implică existența unei stive unice pentru apeluri (callstack). Acesta este un fel de registru de intrări - ieșiri.
 
-John Resig (JQuery) spune că JavaScript este o relație între funcții, closure-uri și obiecte, care conduce la înțelegerea cu adevărat a acestui limbaj de programare dinamic.
+JavaScript este un limbaj de programare bazat pe evenimente (***event driven***). De aici natura dinamică și originile sale privind dinamicitatea paginilor web.
+
+John Resig (creatorul bibliotecii de cod JQuery) spune că JavaScript este o relație între funcții, closure-uri și obiecte, care conduce la înțelegerea cu adevărat a acestui limbaj de programare dinamic. Nu privi cu suspiciune.  Programatorii numesc o colecție de surse de cod bibliotecă.
 
 Motoarele JavaScript au o structură ceva mai complexă. Au o stivă de apeluri cu tot atâtea contexte de execuție, au un event loop - o buclă care capturează evenimente și mai au și o coadă de așteptare a callback-urilor (funcții care se execută când funcția gazdă și-a încheiat execuția), plus API-urile web.
 
@@ -457,9 +459,13 @@ Am mai introdus câteva cuvinte noi. Hai să le lămurim. Primitivele sunt ca ni
 
 ### Tipurile de date - *language types*
 
-În JavaScript valorile sunt de două feluri: **primitive** și **obiecte**. Valorile primitive nu pot fi transformate în sensul că o valoare numerică 3 va fi întotdeauna 3.
+În JavaScript valorile sunt de două feluri: **primitive** și **obiecte**.
 
-Spune standardul că aceste tipuri ale limbajului (referindu-se la valori) sunt direct manipulabile de către programator.
+Valorile primitive nu pot fi transformate în sensul că o valoare numerică 3 va fi întotdeauna 3. În plus, o *primitivă* nu are metode atașate. Pur și simplu nu pot avea și pe cale de consecință nici nu pot fi modificate, nu suferă mutații
+
+**Moment ZEN**: Primitivele permit accesarea directă a valorilor, iar obiectele pot fi accesate printr-o referință.
+
+Dar să vedem toate valori le cu care putem opera. Spune standardul că aceste tipuri ale limbajului (referindu-se la valori) sunt direct manipulabile de către programator.
 
 - `undefined`. „Nedefinit” este o valoare în sine chiar dacă pare foarte straniu; „orice variabilă care nu are o valoare asignată are valoarea `undefined`” (ECMA-262). De fapt exprimă starea de dinaintea legării identificatorului la o valoare (las că-ți explic povestea asta mai încolo).
 - `null`. Da, o valoare nulă este considerată o valoare și este utilă când vrei să pornești de la zero barat. Chiar asta e: zero barat... ce să mai, o nulitate.
@@ -485,34 +491,32 @@ Valorile literale sunt tipuri de date care pot fi definite fără să fie ceva i
 
 Haideți să le trecem în revistă tipurile de literale sau cum scriem valorile:
 
-- String: `'ceva';` (cu ghilimele simple) și `"altceva";` (cu ghilimele duble),
-- Boolean: `true;` sau `false;`,
-- Număr: `3;`, `3.1415;`, un binar `0b1101;`, un hexazecimal `0x00F`, un octal `0o324`,
-- Array: `[];`; iată un array care include două literale de tip număr: `[2,7];` sau care include un literal string și unul număr `['ceva', 2];`,
-- Obiect: `{};` - obiect literal gol sau obiect literal care are un literal string și unui număr numite `primo` și `secundo`: `{primo: 'ceva', secundo: 3};`,
-- Regular Expression: `/ceva/;`,
-- Funcție: `function () {};`,
-- Funcție cu nume: `function faCeva () {};`,
-- Null: `null;`,
-- Undefined: `undefined;`
-- template string: <code>&#96;</code>`un text ${variabila}`<code>&#96;</code>`;`
+- **String**: `'ceva';` (cu ghilimele simple) și `"altceva";` (cu ghilimele duble),
+- **Boolean**: `true;` sau `false;`,
+- **Număr**: `3;`, `3.1415;`, un binar `0b1101;`, un hexazecimal `0x00F`, un octal `0o324`,
+- **Array**: `[];`; iată un array care include două literale de tip număr: `[2,7];` sau care include un literal string și unul număr `['ceva', 2];`,
+- **Obiect**: `{};` - obiect literal gol sau obiect literal care are un literal string și unui număr numite `primo` și `secundo`: `{primo: 'ceva', secundo: 3};`,
+- **Regular Expression**: `/ceva/;`,
+- **Funcție**: `function () {};`,
+- **Funcție cu nume**: `function faCeva () {};`,
+- **Null**: `null;`,
+- **Undefined**: `undefined;`
+- **template string**: <code>&#96;</code>`un text ${variabila}`<code>&#96;</code>`;`
 
 Pentru cei foarte curioși vom explora nițel și diferența dintre valorile literale declarate simplu și cele instanțiate folosind constructorul corespondent lor.
 
-##### Cazul șirurilor
-
-Pentru a vedea și diferențele vom „stoca” în variabile.
+Vom prezenta doar cazul șirurilor. Pentru a vedea și diferențele vom „stoca” în variabile rezultatele evaluărilor.
 
 ```javascript
 var a = 'ceva'; // string literal identificat prin a
 var b = new String('ceva'); // string creat cu ajutorul constructorului
-typeof a; "string"
-typeof b; "object"
+typeof a; // "string"
+typeof b; // "object"
 ```
 
-La suprafață a și b conțin același lucru, dar în adâncime sunt două tipuri diferite pentru motivul că s-au „născut” altfel.
+La suprafață `a` și `b` conțin același lucru, dar în adâncime sunt două tipuri diferite pentru motivul că s-au „născut” altfel.
 
-Toate aceste valori literale le putem identifica prin „introducerea” lor într-o variabilă.
+Toate aceste valori literale le putem identifica prin „introducerea” lor într-o variabilă, rețetă folosită și de noi.
 
 ### Variabile pe scurt
 
@@ -525,10 +529,10 @@ var x = 1;
 Ba mai mult, are nevoie de „a prinde” valorile returnate din anumite procesări sau evaluări a expresiilor.
 
 ```javascript
-var prindValoarea = 2 + 1;
+var identificValoarea = 2 + 1;
 ```
 
-JavaScript folosește trei cuvinte cheie pentru acest scop: `var`, `let` și `const`. Pot părea cam multe la prima vedere pentru o aceeași funcționalitate, dar fiecare are specializarea sa. Până la actualizarea recentă de standard a existat doar `var`.
+JavaScript folosește trei cuvinte cheie pentru acest scop: `var`, `let` și `const`. Pot părea cam multe la prima vedere pentru o aceeași funcționalitate, dar fiecare are specializarea sa. Până la actualizarea recentă de standard a existat doar `var`. Unii spun că în curând nu va mai fi nevoie să mai folosim `var`.
 
 Ceea ce observăm atunci când am definit o variabilă este că am folosit un cuvânt cheie `var` urmat de un nume care va identifica unic „legătura” către o valoare. După atribuirea valorii, însăși numele acelei variabile devine o expresie care poate fi folosită apoi în operațiuni diverse.
 
@@ -553,7 +557,7 @@ var a = 10,
     x, y, z;
 ```
 
-Închei cu o precizare. Chiar dacă vei întâlni adesea comparația unei variabile cu o cutie sau cu un vas care „găzduiește” o valoare, aceasta nu este cea corectă. Întotdeauna imaginează-ți o variabilă ca pe o legătură dintre o etichetă și valoarea sa. Pentru a-ți imagina acest lucru, gândește-te la o baliză legată de o greutate de pe fundul apei cu un lanț. Baliza este inscripționată cu numele obiectului de pe fundul apei. Obiectul legat prin lanț este valoarea pentru care s-a făcut balizarea.
+Închei cu o precizare. Chiar dacă vei întâlni adesea comparația unei variabile cu o cutie sau cu un vas care „găzduiește” o valoare, aceasta este doar o convenție. Cel mai de folos ar fi să-ți imaginezi o variabilă ca pe o legătură dintre o etichetă (identificator) și un obiect de care este atașată (valoarea). Îți mai amintești imaginea cu fanioanele?
 
 Atunci când definești o variabilă care nu trimite la nicio valoare, îi va fi legată automat una și aceasta este `undefined`.
 
@@ -565,7 +569,7 @@ Funcțiile sunt bucăți de program „ambalate” ca valori. Au și ele un nume
 function faCeva () { return 'Salve!' };
 ```
 
-Funcțiile sunt un ***tip de obiecte***. Deci, tot niște rodii. Ha ha! În JS acestea sunt de tip `callable` (în rom. *apelabile*), adică niște rodii pentru care se poate iniția un apel pentru a executa bucata de program conținută.
+Funcțiile sunt un ***tip de obiecte***. Deci, tot niște rodii. Ha ha! În JS acestea sunt de tip `callable` (în rom. *apelabile*), adică niște rodii pentru care se poate iniția un apel pentru a executa bucata de program conținută. Ce le face deosebite față de celelalte obiecte este că au două proprietăți specifice: `constructor` și `call`.
 
 Ce înseamnă a le executa? Pur și simplu motorul se va uita între acolade, va compila codul, va face recensământul identificatorilor și îl va evalua returnând un rezultat.
 
