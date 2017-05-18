@@ -258,7 +258,7 @@ Cea mai simplă expresie este o `valoare literală` scrisă direct, ori o variab
 
 ```javascript
 1;      // expresie de valoare literală
-var a;  // expresie de variabilă
+var x;  // expresie de variabilă
 ```
 
 După cum spuneam, combinarea operanzilor cu operatorii creează la rândul lor expresii.
