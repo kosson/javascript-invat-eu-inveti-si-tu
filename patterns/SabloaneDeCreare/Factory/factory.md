@@ -77,8 +77,8 @@ var libx = (function (window) {
     var obiect;
     function creator () {
       var _injFactory = new injectorFactory();
-      function afiseazaGanduri () {
-        var gand = _injFactory.creeaza().gand;
+      function afiseazaGanduri (gand) {
+        var gand = _injFactory.creeaza(gand);
         return gand;
       };
       return {
