@@ -233,7 +233,7 @@ O mică paranteză utilă pentru curiozitatea ta. Sunt convins că te-ai întreb
 
 Odată, demult prin anii 60, odată cu apariția limbajului de programare ALGOL, a debutat un efort colaborativ de formalizare a sintaxei limbajelor de programare. Rezultatul a fost o formă de exprimare sintactică cunoscută acum sub titulatura de **Bakus Naur**.
 
-În **Backus Naur Form** (BNF), notația care formalizează sintaxa unui limbaj de programare indiferent care ar fi el, o expresie ***este definită ca*** un „termen”, care poate fi la rândul său urmat de alt termen și așa mai departe. Așa arată formalizarea BNF: `expression ::=  term { "|" term }`. Simbolul `::=` înseamnă „este definit ca”, iar <code>&#124;</code> (caracterul *pipe*) înseamnă „ȘI-ul” logic.
+Conform **Backus Naur Form** (BNF), notația care formalizează sintaxa unui limbaj de programare indiferent care ar fi el, o expresie ***este definită ca*** un „termen”, care poate fi la rândul său urmat de alt termen și așa mai departe. Așa arată formalizarea BNF: `expression ::=  term { "|" term }`. Simbolul `::=` înseamnă „este definit ca”, iar <code>&#124;</code> (caracterul *pipe*) înseamnă „ȘI-ul” logic.
 
 Expresiile mai complexe cer folosirea unor semne grafice care să indice motorului unde se încheie acestea. Aceste semne grafice sunt **separatorii**.
 
@@ -390,7 +390,7 @@ Declararea variabilelor și a funcțiilor se leagă organic de conceptul identif
 
 **Moment ZEN**: identificatorii sunt denumirile după care putem accesa valorile.
 
-Adu-ți aminte că scopul pentru care scriem software este pentru a manipula valori care au efecte în manipularea anumitor resurse.
+Adu-ți aminte că scopul pentru care scriem software este pentru a manipula valori. Operațiunile au efecte în manipularea anumitor resurse.
 
 ![Identificatoriii pot fi percepuți ca fanioane](Identificatori.jpg "Identificatori ca niște fanioane")
 
@@ -424,27 +424,30 @@ Vorbim despre o adevărată lume, chiar despre un **tărâm** special.
 
 Textul standardului ECMAScript oferă cea mai bună perspectivă atunci când vine vorba despre un program JavaScript care este privit la lucru. Voi parafraza și cita acolo unde este necesar textul standardului pentru a contura un cadru cât mai complet.
 
-Urmând firul unei adevărate geneze, standardul menționează chiar termenul de „realm" - **tărâm**: „înainte de a fi evaluat, tot codul ECMAScript trebuie asociat unui tărâm. Conceptual, un tărâm constă dintr-un set de **obiecte intrinseci** (***built-in***), un **mediu global** (***global environment***) și tot **codul ECMAScript** care este încărcat în cadrul «scope-ul» acelui mediu global, precum și alte stări și resurse asociate”. Acesta este cel mai valoros citat al standardului pentru că este ca o fotografie a planetei JavaScript de pe orbită.
+Urmând firul unei adevărate geneze, standardul menționează chiar termenul de „realm" - **tărâm**: „înainte de a fi evaluat, tot codul ECMAScript trebuie asociat unui tărâm. Conceptual, un tărâm constă dintr-un set de **obiecte interne** (***built-in***), un **mediu global** (***global environment***) și tot **codul ECMAScript** care este încărcat în cadrul «scope-ul» acelui mediu global, precum și alte stări și resurse asociate”. Acesta este cel mai valoros citat al standardului pentru că este ca o fotografie a planetei JavaScript de pe orbită.
 
 Am precizat câțiva termeni deja care fac parte dintr-un adevărat idiom pe care-l impune limbajul. Comunitatea de programatori în JS au propriul limbaj de comunicare, uneori un jargon din care se strecoară în uzul de zi cu zi câte un termen, de exemplu cum este „scope", care formal în ECMAScript se numește „lexical environment". Pentru că deja am intrat într-o mini descriere a limbajului, mai adaug faptul că JavaScript prin varietatea de stiluri dezvoltate în timp, s-au creat chiar dialecte așa cum este TypeScript. Dar asta este o discuție lungă și nu mai zăbovim aici.
 
 **Termenii noi nu trebuie să te descurajeze.**
 
-Fac parte din efortul de a înțelege și chiar dacă apar chiar de la început, vor fi descriși pe parcurs și vei înțelege ce se ascunde în spatele lor pe deplin. Am spus eu mai sus despre ***obiecte intrinseci***. Pentru moment înțelege că obiectele sunt niște structuri de date și dacă-ți vine mai la îndemână poți imagina obiectele precum niște fructe de rodie. În interior sunt bobițele care pot fi asociate proprietăților.
+Fac parte din efortul de a înțelege și chiar dacă apar chiar de la început, vor fi descriși pe parcurs și vei înțelege ce se ascunde în spatele lor pe deplin. Am spus eu mai sus despre ***obiecte interne***. Pentru moment înțelege că obiectele sunt niște structuri de date și dacă-ți vine mai la îndemână poți imagina obiectele precum niște fructe de rodie. În interior sunt bobițele care pot fi asociate proprietăților.
 
 Este nevoie să ne aplecăm asupra textului standardului pentru a înțelege ce se întâmplă.
 
-Standardul spune că producătorul browserului trebuie să pună la dispoziție toate mecanismele necesare genezei unui nou tărâm (**realm**), care constă dintr-o zonă ce include totul, iar **totul** însemnând ceea ce am enumerat mai sus: obiectele intrinseci, codul ECMAScript plus „alte stări și resurse asociate".
+Standardul spune că producătorul browserului trebuie să pună la dispoziție toate mecanismele necesare genezei unui nou tărâm (**realm**), care constă dintr-o zonă ce include totul, iar **totul** însemnând ceea ce am enumerat mai sus: obiectele interne, codul ECMAScript plus „alte stări și resurse asociate".
 
 ![Tărâm](Realm.jpg)
 
-Am ilustrat acest tărâm ca pe o sferă de activitate (**obiectul global**) în care găsești în zona centrală codul reprezentat de ciorchini de obiecte și date ce stabilesc relații strânse (valori, obiecte și funcții).
+Am ilustrat acest tărâm ca pe o sferă dinamică (**obiectul global**) în care găsești în zona centrală codul reprezentat de ciorchini de obiecte și date ce stabilesc relații strânse (valori, obiecte și funcții).
 
-Această structură se constituie la momentul executării codului.
+Această structură se constituie la momentul executării codului. După cum bine ai intuit, există un obiect central care este contextul în care codul nostru JavaScript, programul nostru este evaluat. Acest obiect generic este pus la dispoziție din start fără niciun apel sau vreo declarație specifică.
 
-Structura eliptică reprezentată precum o bandă care se rotește continuu imaginează un proces care rulează permanent (*event loop*) în care apar „evenimente” (fragmente de cod care trebuie rulate în funcție de evenimentul care le declanșează). Pe suprafața sferei sunt disponibile „obiectele interne” pe care JavaScript le pune la dispoziție din start și care sunt reprezentate ca structuri hexagonale. Acestea oferă funcționalități ciorchinilor din zona centrală.
+**Moment ZEN**: Toate obiectele și funcțiile unui program sunt membri ai obiectului global.
 
-Un tărâm este constituit dintr-un set de obiecte interne, obiectul global pentru tărâmul la care ne referim, cadrul lexical creat de însăși felul în care este redactat codul („lexical environment") și elemente care au capacitatea de a crea șabloane. Toate tărâmurile care sunt create sunt evidențiate de o înregistrare specială numită de standard `Realm Record`. Din toată această mică listă reține faptul că JavaScript vine cu câteva obiecte din start, care împreună cu programul scris de tine construiesc „un tărâm” - Realm.
+Pe suprafața sferei sunt disponibile „obiectele interne” ale obiectului global pe care JavaScript le pune la dispoziție din start și care sunt reprezentate ca structuri hexagonale. Acestea oferă funcționalități ciorchinilor din zona centrală, care reprezintă funcțiile și obiectele introduse de noi la evaluarea coului sursă.
+Structura eliptică reprezentată precum o bandă care se rotește continuu imaginează o activitate antrenată de execuția programului cunoscută ca *event loop* (bucla evenimentelor), în care apariția unui eveniment declanșează executarea unor fragmente de cod rulate în funcție de evenimentul declanșator.
+
+Un **tărâm** este constituit din **obiectul global** pentru tărâmul la care ne referim, un set de **obiecte interne** și cadrul lexical creat de însăși felul în care este redactat codul („lexical environment"). Toate tărâmurile care sunt create sunt evidențiate de o înregistrare specială numită de standard `Realm Record`. Din toată această mică listă reține faptul că JavaScript vine cu câteva obiecte din start, care împreună cu programul scris de tine construiesc „un tărâm” - Realm.
 
 **Moment Zen**: un program JavaScript este de un grup de obiecte care comunică între ele.
 
@@ -452,41 +455,41 @@ Obiectele acestea sunt niște colecții de proprietăți iar pentru fiecare dint
 
 Am mai introdus câteva cuvinte noi. Hai să le lămurim. Primitivele sunt ca niște blocuri elementare de lucru. Sunt chiar datele, forma primară de reprezentare a lor. Funcțiile sunt mini-programe în programul mare. Obiectele, am stabilit: rodii! :).
 
-### Tipurile de date - language types
+### Tipurile de date - *language types*
 
 În JavaScript valorile sunt de două feluri: **primitive** și **obiecte**. Valorile primitive nu pot fi transformate în sensul că o valoare numerică 3 va fi întotdeauna 3.
 
 Spune standardul că aceste tipuri ale limbajului (referindu-se la valori) sunt direct manipulabile de către programator.
 
 - `undefined`. „Nedefinit” este o valoare în sine chiar dacă pare foarte straniu; „orice variabilă care nu are o valoare asignată are valoarea `undefined`” (ECMA-262). De fapt exprimă starea de dinaintea legării identificatorului la o valoare (las că-ți explic povestea asta mai încolo).
-- `null`. Da, o valoare nulă este considerată o valoare.
+- `null`. Da, o valoare nulă este considerată o valoare și este utilă când vrei să pornești de la zero barat. Chiar asta e: zero barat... ce să mai, o nulitate.
 - `boolean`. Este denumită după cercetătorul Boole și are două stări: `true`  adevărat sau `false` - fals,
 - `string`. „Șir de caractere” este succesiunea de caractere care formează un text,
 - `number`. „Număr” reprezintă valori reprezentate pe 64 de biți în virgulă mobilă (format al standardului IEEE 754‐2008),
-- `Object`. „Obiect” este o colecție de proprietăți; o proprietate are o cheie de acces către valoarea sa care poate fi o valoare de tip string sau Symbol. Ține minte că un șir gol este o cheie validă. „Numele unei proprietăți” este cheiea unei proprietăți care este valoare string.
-- `Symbol`. Este o valoare care nu este string dar care poate fi utilizată drept cheie a unui Obiect.
+- `Object`. „Obiect” este o colecție de proprietăți; o proprietate are o cheie de acces către valoarea sa care poate fi o valoare de tip string sau Symbol. Ține minte că un șir gol este o cheie validă. „Numele unei proprietăți” este cheiea unei proprietăți care este o valoare string.
+- `Symbol`. Este o valoare care nu este string dar care poate fi utilizată drept cheie a unui Obiect. Este foarte utilă atunci când dorești să treci de barierele cheilor convenționale ale obiectelor, care te forțează să folosești un șir de caractere.
 
 După cum se observă, fiecare tip este expresia a două elemente: sintaxa și semantica. Sintaxa implică „codarea" printr-un cuvânt din limbajul natural, care în cazul JavaScript este limba engleză, iar semantica indică conceptul reprezentat.
 
 **Spune standardul**: „O valoare a limbajului ECMAScript este o valoare caracterizată de un tip al limbajului ECMAScript”.
 
-În ceea ce privește numerele, la un moment dat, te vei lovi de apariția unei valori ciudate numite `NaN` (este prescurtarea de la **Not a Number**) și este reprezentarea unui număr în virgulă mobilă mai special. JavaScript îl folosește mai mult pentru a indica o stare a unui calcul care avea intenția să ajungă la un număr, dar pentru diverse motive, nu s-a finalizat corespunzător. Rezultatul este ceva non-numeric.
+În ceea ce privește numerele, la un moment dat, te vei lovi de apariția unei valori ciudate numite `NaN` (este prescurtarea de la **Not a Number**) și este reprezentarea unui număr în virgulă mobilă mai special. JavaScript îl folosește mai mult pentru a indica o stare a unui calcul care avea intenția să ajungă la un număr, dar din diverse motive, nu s-a finalizat corespunzător. Rezultatul este ceva non-numeric.
 
-Mai avem introdus de curând numărul special `Infinity` și infinitate negativă `-Infinity`.
+Mai avem introdus de curând (noul standard), numărul special `Infinity` și infinitate negativă `-Infinity`.
 
 #### Valorile literale
 
-Am vorbit mai devreme despre aceste valori. Valorile literale sunt de fapt exprimarea în scris a datelor cu care lucrează ECMAScript. Literalele sunt tipurile de date.
+Am vorbit mai devreme despre aceste valori. Valorile literale sunt de fapt exprimarea în scris a datelor cu care lucrează ECMAScript. Literalele sunt tipurile de date cu care lucrăm. Se numesc literale pentru fără a folosi caractere nu am putea spune computerului ce vrem să folosim. Păi dacă nu scrii `3`, cum altfel să știe compul că vrei să-i dai ca operand valoarea trei. Logic!
 
 Valorile literale sunt tipuri de date care pot fi definite fără să fie ceva instanțiat în mod special sau să creezi vreun obiect special pentru a lucra cu ele.
 
-Haideți să le trecem în revistă tipurile de literale:
+Haideți să le trecem în revistă tipurile de literale sau cum scriem valorile:
 
 - String: `'ceva';` (cu ghilimele simple) și `"altceva";` (cu ghilimele duble),
 - Boolean: `true;` sau `false;`,
 - Număr: `3;`, `3.1415;`, un binar `0b1101;`, un hexazecimal `0x00F`, un octal `0o324`,
-- Array: `[];`, un array care include două literale de tip număr `[2,7];` sau care include un literal număr și unul string `['ceva', 2];`,
-- Obiect: `{};` - obiect literal gol sau obiect literal care are un literal string și unui număr numite primo și secundo: `{primo: 'ceva', secundo: 3};`,
+- Array: `[];`; iată un array care include două literale de tip număr: `[2,7];` sau care include un literal string și unul număr `['ceva', 2];`,
+- Obiect: `{};` - obiect literal gol sau obiect literal care are un literal string și unui număr numite `primo` și `secundo`: `{primo: 'ceva', secundo: 3};`,
 - Regular Expression: `/ceva/;`,
 - Funcție: `function () {};`,
 - Funcție cu nume: `function faCeva () {};`,
