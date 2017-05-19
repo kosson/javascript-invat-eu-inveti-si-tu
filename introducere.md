@@ -410,11 +410,11 @@ Introduc aceste informații pentru că la un moment dat, vă veți aduce aminte 
 
 JavaScript are un runtime cu un singur fir de execuție. Acest lucru implică existența unei stive unice pentru apeluri (callstack). Acesta este un fel de registru de intrări - ieșiri.
 
-JavaScript este un limbaj de programare bazat pe evenimente (***event driven***). De aici natura dinamică și originile sale privind dinamicitatea paginilor web.
+JavaScript este un limbaj de programare bazat pe evenimente (***event driven***). De aici natura dinamică și originile sale privind dinamicitatea paginilor web. De exemplu, când dai click pe un buton, acest eveniment determină un anumit comportament.
 
-John Resig (creatorul bibliotecii de cod JQuery) spune că JavaScript este o relație între funcții, closure-uri și obiecte, care conduce la înțelegerea cu adevărat a acestui limbaj de programare dinamic. Nu privi cu suspiciune.  Programatorii numesc o colecție de surse de cod bibliotecă.
+John Resig (creatorul bibliotecii de cod JQuery) spune că JavaScript este o relație între funcții, closure-uri și obiecte, care conduce la înțelegerea cu adevărat a acestui limbaj de programare dinamic. Programatorii numesc o colecție de surse de cod bibliotecă.
 
-Motoarele JavaScript au o structură ceva mai complexă. Au o stivă de apeluri cu tot atâtea contexte de execuție, au un event loop - o buclă care capturează evenimente și mai au și o coadă de așteptare a callback-urilor (funcții care se execută când funcția gazdă și-a încheiat execuția), plus API-urile web.
+Motoarele JavaScript au o structură ceva mai complexă. Au o stivă de apeluri cu tot atâtea contexte de execuție (când rulezi o funcție, de exemplu, se creează un context în care aceasta este apelată), au un event loop - o buclă care capturează evenimente și mai au și o coadă de așteptare a callback-urilor (funcții care se execută când funcția gazdă și-a încheiat execuția), plus API-urile web.
 
 JavaScript nu poate face decât un singur lucru la un moment dat, dar pentru că runtime-ul JS nu este singur, ci mai avem și bucla, dar și [API-urile web](https://www.w3.org/TR/html5/webappapis.html#webappapis), se poate rula cod asincron, ceea ce înseamnă că un eveniment, nu va bloca firul de execuție pentru că nu și-a terminat treaba. Toate aceste lucruri suplimentare care există în browser, de fapt înseamnă tot atâtea fire de execuție și asta înseamnă că poți să te apropii de ceea ce ar fi un mediu care execută mai multe treburi deodată fără să se creeze blocaje.
 
@@ -432,7 +432,9 @@ Am precizat câțiva termeni deja care fac parte dintr-un adevărat idiom pe car
 
 **Termenii noi nu trebuie să te descurajeze.**
 
-Fac parte din efortul de a înțelege și chiar dacă apar chiar de la început, vor fi descriși pe parcurs și vei înțelege ce se ascunde în spatele lor pe deplin. Am spus eu mai sus despre ***obiecte interne***. Pentru moment înțelege că obiectele sunt niște structuri de date și dacă-ți vine mai la îndemână poți imagina obiectele precum niște fructe de rodie. În interior sunt bobițele care pot fi asociate proprietăților.
+Fac parte din efortul de a înțelege și chiar dacă apar chiar de la început, vor fi descriși pe parcurs și vei înțelege ce se ascunde în spatele lor pe deplin. Am spus eu mai sus despre ***obiecte interne***.
+
+Pentru moment înțelege că obiectele sunt niște structuri de date și dacă-ți vine mai la îndemână poți imagina obiectele precum niște fructe de rodie. În interior sunt bobițele care pot fi asociate proprietăților. Chestia superfaină cu obiectele este că acestea pot moșteni de la obiectele în interiorul cărora au fost create; nu uita că tot codul nostru rulează în interiorul obiectului global - sfera mare. Pe cale de consecință, toate entitățile create de noi, fie că sunt funcții, fie că sunt obiecte, vor moșteni automat metode și proprietăți de la obiectul global.
 
 Este nevoie să ne aplecăm asupra textului standardului pentru a înțelege ce se întâmplă.
 
@@ -485,7 +487,7 @@ Mai avem introdus de curând (noul standard), numărul special `Infinity` și in
 
 #### Valorile literale
 
-Am vorbit mai devreme despre aceste valori. Valorile literale sunt de fapt exprimarea în scris a datelor cu care lucrează ECMAScript. Literalele sunt tipurile de date cu care lucrăm. Se numesc literale pentru fără a folosi caractere nu am putea spune computerului ce vrem să folosim. Păi dacă nu scrii `3`, cum altfel să știe compul că vrei să-i dai ca operand valoarea trei. Logic!
+Am vorbit mai devreme despre aceste valori. Valorile literale sunt de fapt exprimarea în scris a datelor cu care lucrează ECMAScript. Literalele sunt tipurile de date cu care lucrăm. Se numesc literale pentru fără a folosi caractere nu am putea spune computerului ce vrem să folosim. Păi dacă nu scrii `3`, cum altfel să știe compul că vrei să-i dai ca operand valoarea trei? Logic!
 
 Valorile literale sunt tipuri de date care pot fi definite fără să fie ceva instanțiat în mod special sau să creezi vreun obiect special pentru a lucra cu ele.
 
