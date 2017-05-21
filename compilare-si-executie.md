@@ -1,13 +1,19 @@
 # Compilare și execuție
 
+**Moment ZEN**: codul JavaScript este compilat la momentul execuției.
+
 Motorul de JavaScript când încarcă codul sursă, face două treceri peste cod:
 
-1. Este faza unei așa-zise compilării, când citește codul sursă linie cu linie, îl transformă în atomi lexicali (`tokens`), face recensământul identificatorilor și inițializează cu `undefined`. În cazul funcțiilor, abia la momentul apelării lor se va proceda la constituirea unui mediu lexical propriu acelei funcții în care vor fi sub evidență identificatorii găsiți în corpul funcției.
+1. Este faza unei așa-zise compilării, când citește codul sursă linie cu linie (*parsing*), îl transformă în atomi lexicali (`tokens`), face recensământul identificatorilor și inițializează cu `undefined` și se constituie un Arbore Sintactic Abstract - Abstract Syntax Tree. După constituirea AST, codul este transformat într-o formă numită bytecode (înșiruirea de 0 și 1 pe care computerul o înțelege). În cazul funcțiilor, abia la momentul apelării lor se va proceda la constituirea unui mediu lexical propriu acelei funcții în care vor fi sub evidență identificatorii găsiți în corpul funcției.
 2. Este faza de execuție. Identificatorii capătă valori iar expresiile sunt evaluate.
+
+Trebuie specificat faptul că operațiunile nu decurg liniar, ci într-un mod care să permită cei mai buni timpi de execuție. Adică, se face puțin, parsing, urmat de compilare, rulare, optimizare și reoptimizare, apoi se mai ia un fragment și se repetă pașii și tot așa pentru a realiza per global cei mai buni timpi de rulare pentru cod. Pentru că acest comportament este cel real și actual, spunem că JavaScript beneficiază de compilare în timp real - JIT (Just In Time). Înțelegerea modului în care funcținează JIT-ul, conduce la o execuție performantă a codului.
+
+Ceea ce trebuie adăugat ca detaliu important este faptul că spre deosebire de C și C++, unde trebuie să eliberezi memoria de variabilele setate, un fel de a duce gunoiul la pubelă după ce ai lucrat, în JavaScript, **garbage collecting**, căci așa se numește în programare, este făcut automat.
 
 ## Faza de compilare
 
-În faza de compilare codul este parcurs linie cu linie.
+În faza de compilare codul este parcurs linie cu linie. Există o fază preliminară numită parsare a codului, moment în care codul sursă este procesat pentru a produce o formă care să poată fi folosită de interpretor. Abia apoi urmează o fază de compilare care este cuplată și cu o fază de optimizare a rezultatelor.
 
 ### Momentul 0: declararea variabilelor și a funcțiilor și recensământul identificatorilor
 
@@ -112,3 +118,5 @@ La invocarea funcției se creează un nou obiect scope care moștenește proprie
 ## Referințe
 
 [Arindam Paul - JavaScript VM internals, EventLoop, Async and ScopeChains](https://www.youtube.com/watch?v=QyUFheng6J0 "Este un material fantastic pentru a înțelege mai bine faza de compilare și cea de execuție")
+
+[Lin Clark - An Abridged Cartoon Introduction To WebAssembly](https://www.smashingmagazine.com/2017/05/abridged-cartoon-introduction-webassembly/)

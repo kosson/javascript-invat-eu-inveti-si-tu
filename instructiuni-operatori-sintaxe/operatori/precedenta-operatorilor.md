@@ -1,12 +1,5 @@
 # Precedența operatorilor
 
-Ce sunt operanzii?
-Sunt valorile care intră în evaluarea unei expresii.
-Ce sunt operatorii?
-Sunt semne grafice care indică ce operațiune se va efectua la momentul evaluării. Aceste semne grafice sunt semnele operațiunilor matematice, cele care compară valori și așa mai departe.
-
-Să ne amintim că expresiile sunt constituite din înșiruirea de operanzi și operatori.
-
 În programare există două mari categorii de operatori: operatorii unari și cei binari. Operatorii unari sunt acei operatori care se aplică unui singur operand. Operatorii binari sunt cei care implică doi operatori.
 
 Ca și în cazul matematicii, operatorii au o anumită ordine, o anumită întâietate la evaluare a unora față de alții. Ne aducem aminte de la aritmetică că înmulțirea se face înaintea adunării și a scăderii.
@@ -47,11 +40,15 @@ Ceea ce se petrece este asignarea valorii 1 lui y, iar y este asignat lui x.
 
 Modul în care se face evaluarea codului depinde în mod direct de precedența operatorilor și a felului cum aceștia decid, de fapt, valoarea finală. Precedența este ordinea în care se vor executa operațiunile. Orice limbaj de programare are o tabelă de precedență.
 
+Vom porni de la cel mai important către cei cu prioritatea cea mai redusă.
+
 ## Operator de grupare
+
+Acesta este cel mai important operator, fiind cel mai ridicat ca rang.
 
 | Ordin de precedență | Operator | trad. în rom. | sensul de evaluare | poziționare operanzi |
 |:-- |:-- |:-- |:-- |:-- |
-|20|Grouping|accesarea membrilor|fără sens de evaluare| __ `(__)` __ |
+|20|Grouping|grupare|fără sens de evaluare| __ `(__)` __ |
 
 ## Operatori de apel și instanțiere
 
@@ -128,8 +125,8 @@ Modul în care se face evaluarea codului depinde în mod direct de precedența o
 | Ordin de precedență | Operator | trad. în rom. | sensul de evaluare | poziționare operanzi |
 |:--|:--|:--|:--|:--|
 |9|bitwise AND|AND pe biți|stânga-spre-dreapta| __ `&` __ |
-|7|bitwise OR|OR pe biți|stânga-spre-dreapta| __ <code>&#124;</code> __ |
 |8|bitwise XOR|XOR pe biți|stânga-spre-dreapta| __ `^` __ |
+|7|bitwise OR|OR pe biți|stânga-spre-dreapta| __ <code>&#124;</code> __ |
 
 ## Operatori logici
 
@@ -166,7 +163,7 @@ Modul în care se face evaluarea codului depinde în mod direct de precedența o
 
 | Ordin de precedență | Operator | trad. în rom. | sensul de evaluare | poziționare operanzi |
 |:--|:--|:--|:--|:--|
-|0|comma|virgula|stânga-spre-dreapta| __ `,` __ |
-|1|spread|dispersie|nu există un sens| `...` __ |
 |2|yield|produ|dreapta-spre-stânga| `yield` __ |
 |2|yield*|produ|dreapta-spre-stânga| `yield*` __ |
+|1|spread|dispersie|nu există un sens| `...` __ |
+|0|comma|virgula|stânga-spre-dreapta| __ `,` __ |
