@@ -1,5 +1,7 @@
 # Funcții în ECMAScript
 
+**Moment ZEN**: În JavaScript funcțiile sunt valori.
+
 Funcțiile sunt unitățile de execuție a codului JavaScript. O funcție poate fi percepută ca un subprogram, ca o subrutină. Veți mai întâlni în alte lucrări și denumirea de „proceduri”. Cel mai sănătos mod de a privi activitatea și efectele unei funcții este gândind întotdeauna că o funcție este un set de instrucțiuni care se aplică unui set de date primit ca argumente. De faci asta? Pentru că în interiorul funcției vei prelucra datele primite și la final vei dori să oferi rezultatele la care ai ajuns. Aplicarea unei funcții argumentelor sale produce un nou mediu lexical, un nou scope în care se fac legături între identificatori și valori.
 
 Ca și obișnuință, ar fi cel mai util să gândești că funcția „cutare” se aplică pe „cutare și cutare”. Mult timp am gândit altfel: funcția „primește” pentru că, într-adevăr, introduci niște argumente. Nu este greșit, dar pentru o iluminare rapidă în domeniul funcțiilor, cel mai bine este să gândești în termenii aplicării sale pe argumente.
