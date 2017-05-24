@@ -1,4 +1,4 @@
-# Compoziție și decompoziție
+# Compunere și descompunere
 
 O practică de programare curentă este de a construi componente din fragmente mai mici. Deciziile pe care le ei pentru a „sparge” o componentă în constituiente, se numește „factoring”. Acest termen este împrumutat de la operațiunea matematică de factorizare.
 
@@ -50,6 +50,24 @@ Compunerea obiectelor se poate face și pentru obiectele care pot forma mixin-ur
 let unu = {x: 10}, doi = {a: 'doi'};
 let mixinObi = {unu, doi};
 console.log(mixinObi);
+```
+
+**Moment ZEN**: Atunci când două funcții sau obiecte se compun, spunem că împărtășesc aceeași stare.
+
+Ultima versiunea a standardului chiar oferă mecanismul prin care un *obiect stare* poate fi „împărtășit” altuia construit. Este vorba despre metoda `assign` a obiectului intern `Object`.
+
+```javascript
+const operatiuniSpatiu = (vehicul) => {
+  let stare = {
+    vehicul,
+    natiune: 'Rusia',
+    ajustare: function () {
+      return this.vehicul + ' ' + this.natiune;
+    }
+  };
+  return Object.assign({}, stare);
+};
+operatiuniSpatiu('satelit').ajustare();
 ```
 
 ## Decomposition - descompunerea

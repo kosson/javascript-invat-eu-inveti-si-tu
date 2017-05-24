@@ -62,6 +62,8 @@ Textul în dimensiunea lui digitală este o colecție de date în sine. El se ag
 
 Textul este o colecție destructurată cu înțeles doar pentru om, care așteaptă un agent software care să o reordoneze și interconecteze cu alte surse pentru a oferi o nouă dimensiune valorică. De fapt, acesta este și scopul final pentru care învățăm programare: **extragerea valorii indiferent de formă și destinație pentru a ajunge la noi înțelesuri**.
 
+Pentru că acest material țintește pe cei care lucrează în domeniul umanioarelor, pentru că urmărește un salt la un nou nivel al celor care doresc să stăpânească arta de a manipula date, vă invit să faceți un efort de a înțelege forma și formatele acestora. Cel mai ades veți vedea că exemplele vor fi create folosind HTML5, care este la rândul său văr bun cu XML-ul pe baza căruia multe dintre datele domeniilor noastre sunt „împachetate” și distribuite. De multe ori, de cele mai multe ori vom folosi pentru „împachetare”, transmitere și manipulare formatul JSON, care este un subset chiar a limbajului de programare JavaScript.
+
 ## Anti-introducere
 
 JavaScript sau ECMAScript (titlul standardului) a pornit ca motorul dinamicii paginilor web, a prins viteză și a ajuns să devină un limbaj de programare cu uz general. Acest lucru înseamnă că poate fi folosit la mult mai multe lucruri în afara intențiilor sale originare. Avantajele folosirii JS pornesc de la server (Node.js), până la aplicațiile rulate în browserul web al utilizatorului.
@@ -135,6 +137,8 @@ Caracterele de mai sus și combinațiile lor au un înțeles special pentru moto
 
 De exemplu, ghilimele duble și simple: `\"` și `\'` și chiar backslash-ul însuși: `\\` au nevoie să fie precedate de backslash ceea ce numim secvență de escape sau pe românește îi spui computerului: prietene, caracterul precedat de backslash, te rog să nu-l interpretezi la valoarea sa specială pentru limbajul de programare.
 
+JavaScript este un limbaj de programare **case sensitive**, adică ține cont dacă scrii cu majuscule. Pe scurt, șirul de caractere `ceva` este fundamental diferit de șirul de caractere `Ceva`.
+
 ### Textul sursă
 
 Textul sursă sau **codul sursă** poate fi de două tipuri: `Script` sau un `Module`.
@@ -157,7 +161,7 @@ Ceea ce rezultă în urma aplicării regulilor de identificare a componentelor c
 
 Atomii sunt de mai multe tipuri: **cuvintele cheie**, **operatorii**, **identificatorii** și **valorile literale**.
 
-Trebuie să te avertizez de faptul că toate cuvintele speciale folosite de JavaScript sunt în limba engleză. Fondul lexical este cel al limbii engleze.
+Trebuie să te avertizez de faptul că toate **cuvintele speciale** folosite de JavaScript sunt în limba engleză. Fondul lexical este cel al limbii engleze.
 
 #### Line terminators - semnele de încheiere a rândurilor
 
@@ -173,13 +177,15 @@ Pentru a înțelege mai bine, accesați și materialul explicativ de la https://
 
 Acestea sunt utile pentru a documenta codul. Sunt două moduri de a introduce comentarii. Se poate folosi dublu slash `// comentariu` sau atunci când ai nevoie de comentarii pe mai multe linii `/* comentariu */`.
 
-#### Spațiile albe
+#### Spațiile albe - whitespace
+
+Acestea sunt caracterele „invizibile” cum ar fi spațiul, tasta space, pentru a separa vizual anumite fragmente de cod. Cel mai adesea sunt folosite spațiile (introduse de tasta SPACE) pentru a separa cuvintele pentru a da înțelesul semantic al acestora și taburile pentru a introduce „pauze” vizuale pe ecran cu scopul de a crește gradul de înțelegere și lizibilitate.
 
 Sunt considerate a fi spații albe următoarele: `tab` (`\t` *tabulator orizontal*, fiind un spațiu cu o anumită întindere), `space` (spațiu), `non-breakable space` (spațiu care nu poate fi fracționat), `line tabulation` (sau vertical tab - `\v` - referindu-se la mișcarea pe verticală a liniilor), `form feed` (se referă la trecerea pe ceea ce este înțeles a fi o pagină nouă `\f`).
 
 ### Structurile lexicale proprii și recunoașterea lor
 
-Imediat după faza de constituire a **elementelor de input**, aceastea mai sunt parcurse încă o dată, aplicându-se din nou regulile gramaticale pentru a identifica cine și ce funcție îndeplinește: care sunt **identificatorii**, **cuvintele rezervate** limbajului, etc.
+Imediat după faza de constituire a **elementelor de input**, acestea mai sunt parcurse încă o dată, aplicându-se din nou regulile gramaticale pentru a identifica cine și ce funcție îndeplinește: care sunt **identificatorii**, **cuvintele rezervate** limbajului, etc.
 
 Să analizăm împreună ce conțin elementele de intrare.
 
@@ -195,6 +201,8 @@ Ele numesc un curs de acțiune pentru computerul nostru a-și realiza sarcina. P
 
 Buna practică spune că toate exprimările intenției programatorului, hai să le numim **enunțuri** (liniile de cod cu instrucțiuni - *statements*), în JavaScript trebuie să fie încheiate prin punct și virgulă (`;`), chiar dacă motoarele care implementează ECMAScript, la momentul evaluării codului, introduc automat prin mecanismul de **automatic semicolon insertion** acest caracter.
 Da, da. Programatorii sunt creaturi comode și motoarele permit anumite facilități, care aleg această practică înadins. Personal, mă feresc și pun semnele de punctuație pentru că astfel, codul devine lizibil, ochii deprind automatisme de citire și de aici și o mai mare eficiență.
+
+Bine, bine. Da' care-i treaba cu **momentele ZEN**? Pe parcursul acestei călătorii de descoperire și autodescoperire, voi jalona conținutul cu astfel de momente, care vor fi propoziții sau fraze cu o sarcină precisă: să fie chintesența informației analizată defalcat. De ce moment ZEN? Pentru că este ca un exercițiu de meditație, care conduce la identificarea cu informația prin asimilarea ei.
 
 #### Automatic semicolon insertion - introducerea automată a lui punct și virgulă
 
@@ -218,7 +226,7 @@ Pentru a ajunge la un rezultat avem nevoie mai întâi de niște valori, de niș
 
 Sunt caractere sau combinații de caractere care au rolul de a stabili o relație între doi operanzi. Este exact ca în matematică. Rolul operatorilor este de a ajunge la un rezultat în urma „evaluării”. De exemplu, când ai expresia `1 > 0;`, operatorul de comparație `>` va oferi rezultatul, care este o valoare boolean `true` (ești încă aici? nu te-am pierdut, nu?!).
 
-![George Boole este creatorul logicii matematice moderne și a algebrei booleene](George_Boole_color.jpg)
+![George Boole](George_Boole_color.jpg "George Boole este creatorul logicii matematice moderne și a algebrei booleene")
 
 În esență, putem spune că majoritatea rezultatelor atunci când scriem cod, provin din astfel de evaluări. Ăăă, cum **boolean**, prietene? Da, e o valoare care testează adevărul și poartă numele de boolean în cinstea cercetătorului George Boole. El a dezvoltat o întreagă ramură a algebrei, care a impulsionat progresul în direcția creării computerelor. Nu uita că într-un computer, la nivelul cel mai de jos, totul este 1 și 0, adevărat sau fals, adevărat ȘI fals, adevărat NU fals. Hahaha...
 
@@ -226,8 +234,7 @@ De cele mai multe ori, operatorii stabilesc o evaluare a expresiilor de la stân
 
 #### Expresiile (***expressions***)
 
-O expresie este o combinație rezolvabilă de operatori și operanzi.
-Asta înseamnă că la momentul evaluării combinației, aceasta se va finaliza cu obținerea unei valori.
+O expresie este o combinație rezolvabilă de operatori și operanzi. Finalizarea rezolvării unei expresii se numește **evaluare**. Asta înseamnă că la momentul evaluării combinației, aceasta se va finaliza cu obținerea unei valori.
 
 Dicționarele explicative spun că o expresie este un **grup de numere, litere etc. legate între ele prin simboluri de operații matematice (adunare, înmulțire etc.)** (DEX 98) sau **formulă care exprimă raporturi matematice** (NODEX 2002).
 
@@ -263,7 +270,7 @@ Cea mai simplă expresie este o `valoare literală` scrisă direct, ori o variab
 var x;  // expresie de variabilă
 ```
 
-După cum spuneam, combinarea operanzilor cu operatorii creează la rândul lor expresii.
+După cum spuneam, combinarea operanzilor cu operatorii creează la rândul lor expresii. E necesară o mică precizare. Valorile de lucru sunt de două feluri. Cele care sunt fixe, care așa cum le-ai scris, așa rămân. Mai sunt numite și **literale**. Și valorile care se pot modifica în funcție de dinamica programului și care se numesc **variabile**, care pornesc de la o valoare dată sau nu.
 
 ```javascript
 var x = 1 + 1;  // expresie de atribuire a unei expresii aritmetice
@@ -273,13 +280,15 @@ var x = 1 + 1;  // expresie de atribuire a unei expresii aritmetice
 
 **Moment ZEN**: Tot ce este în partea dreaptă a egalului, este o valoare.
 
-Aceasta este adunată cu o valoare de sine stătătoare numită **valoare literală**. Am lămurit deja mai sus că o valoare literală este pur și simplu valoarea introdusă direct prin reprezentarea sa literală, adică cifre pentru numerale și caractere între ghilimele pentru text. De ce este nevoie de o precizare de acest fel? Pentru că de nu ai pune între ghilimele textul, motorul nostru de JavaScript ar înțelege că faci o referință către un identificator al unei variabile, constante, funcții sau obiect. Reține acest aspect foarte important.
+Aceasta este adunată cu o valoare de sine stătătoare numită **valoare literală**. Am lămurit deja mai sus că o valoare literală este pur și simplu valoarea introdusă direct prin reprezentarea sa literală, adică cifre pentru numerale și caractere între ghilimele pentru text. Deci, ca să indici computerului că folosești o variabilă care este inițializată cu valoarea trei vei scrie cifra: `var trei = 3;`. Ce se întâmplă când îl pui pe trei între ghilimele? Da, ai intuit perfect, se transformă în text: `var text = '3';`.
+
+Mai sunt și altele, dar le vom lămuri pe parcurs. De ce este nevoie de o precizare de acest fel? Pentru că de nu ai pune între ghilimele textul, motorul nostru de JavaScript ar înțelege că faci o referință către un identificator al unei variabile, constante, funcții sau obiect. Reține acest aspect foarte important. Pe scurt, cifrele sunt evidente în sine, iar textul trebuie între ghilimele simple sau duble.
 
 **Moment ZEN**: Dacă textul din partea dreaptă nu este între ghilimele, acesta este o referință către o altă valoare.
 
 Adu-ți mereu aminte că `var ceva = "altceva";` este o variabilă care identifică valoarea text `"altceva"`, ceea ce este complet diferit de `var ceva = altceva;`, care transformă variabila cu identificatorul `ceva` într-o referință către identificatorul `altceva`. Acesta poate fi o altă variabilă, o funcție sau un obiect.
 
-**Moment ZEN**: Expresiile sunt evaluate după reguli. Evaluarea expresiilor conduce la un rezultat.
+**Moment ZEN**: Expresiile sunt evaluate după reguli.
 
 Este ca în matematică când respectam regulile dictate de prioritatea operatorilor. Mai ții minte? Mai întâi ce-i în paranteze; dacă ai înmulțiri sau împărțiri, acestea primează, apoi adunările și scăderile...
 
@@ -288,8 +297,6 @@ Este ca în matematică când respectam regulile dictate de prioritatea operator
 O mică mențiune: în cazul programării acoladele și parantezele pătrate pe care le foloseam în matematică pentru a separa expresiile imbricate, sunt numai paranteze rotunde. De exemplu, pentru expresia: `{1 + [2 - (2 * 3)]}` din notația convențională matematică, în programare este scris astfel: `1 + (2 - (2 * 3))`.
 
 **Moment ZEN**: O expresie nu va fi tratată niciodată ca operand, ci **rezultatul evaluării sale**.
-
-Bine, bine. Da' care-i treaba cu **momentele ZEN**? Pe parcursul acestei călătorii de descoperire și autodescoperire, voi jalona conținutul cu astfel de momente, care vor fi propoziții sau fraze cu o sarcină precisă: să fie chintesența informației analizată defalcat. De ce moment ZEN? Pentru că este ca un exercițiu de meditație, care conduce la identificarea cu informația prin asimilarea ei.
 
 ```javascript
 // un enunț format din mai multe expresii
@@ -300,11 +307,19 @@ Să revenim focalizându-ne pe enunțul de mai sus. Începem de la stânga spre 
 
 Continuăm cu o precizare foarte importantă pentru a întări ceea ce am rememorat. Atunci când codul sursă este rulat pentru a obține un rezultat, de fapt, ceea ce se petrece este o întreagă succesiune de evaluări a expresiilor care se reduc la o valori rând pe rând prin evaluarea condiționată de diverșii operatori. Totul, dar totul se reduce la o valoare. De fapt, evaluăm expresii rezolvând **operațiunile** și ajungând la **valori** care sunt necesare altor **expresii**. Acestea, la rândul lor așteptau cuminți ca evaluarea precedentă să se încheie pentru a avea și ele valorile de care aveau nevoie și așa mai departe.
 
+##### Tratarea expresilor ceva mai „nefirești” - coercion
+
+JavaScript este un limbaj de programare care oferă o flexibilitate fantastică. În ceea ce privește operanzii, aceștia pot fi chiar de tipuri diferite iar JavaScript este forțat să ofere totuși un răspuns. Hai să ne uităm la următoarea expresie: `true + 10;` pe care o dăm motorului JavaScript spre evaluare. Ce crezi că se va întâmpla pentru că în acest moment operezi cu o valoare boolean și un număr?
+
+JavaScript va recurge la un mecanism de coerciție (în limba engleză **coercion**) asupra valorilor și în acest caz, va „transforma” valoarea boolean în echivalentul său numeric, adică 1. Da, da, `true` este 1, iar `false` este 0.
+
+Bun, acum a fost rezolvată dilema. Se va face evaluarea care va avea drept rezultat valoarea 11. Nebunie, nu?! Mai încolo vom introduce o tabele după care se fac aceste transformări, aceste coerciții asupra valorilor în cazul unor expresii „nefirești”.
+
 Dacă ai amețit, e perfect normal. Respiră de cinci ori foarte adânc cu ochii închiși concentrându-te adânc la fiecare respirație. Dacă nimic nu se leagă, mergi într-un parc. Eu te aștept aici.
 
 #### Enunțuri (***statements***)
 
-Este echivalentul unei propoziții în limbaj uman.
+Este echivalentul unei propoziții în limbaj uman. Componentele unui enunț pot fi **valori**, **operatori**, **expresii**, **cuvinte cheie** și **comentarii**.
 
 **Moment ZEN**: Un program este o listă de enunțuri.
 

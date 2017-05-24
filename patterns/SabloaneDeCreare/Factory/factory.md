@@ -4,27 +4,45 @@ Este un șablon folosit pentru a simplifica crearea obiectelor.
 Folosit și la crearea de obiecte în baza unor necesități.
 Este o funcție care creează și returnează un obiect.
 
+**Moment Zen**: Un factory este o funcție.
+
+## Dependințe cognitive
+
+- funcții
+- closures
+
 ## Mantre
+
+ - JavaScript nu are clase
  - creează și returnează un obiect
- - se comportă precum o interfață
+ - factory se comportă precum o interfață
+
+Cel mai simplu exemplu este o funcție care preia niște date prin argumente, are niște date interne și la final este returnat un obiect care oferă acces la mediul lexical al funcției pentru care s-a făcut un closure la momentul returnării.
 
 ```javascript
 var persoana = function(nume, prenume){
+  var _ceva = 10;
   return {
     nume: nume,
     prenume: prenume,
-    salutare: function(nume){
-      return "Salut sunt " + this.nume;
+    salutare: function(porecla){
+      return 'Salut sunt ' + porecla + ' pentru ' + this.nume + ' ' + this.prenume + ' și sunt de nota ' + _ceva;
     }
   }
 };
+var instanta = persoana('Ion', 'Vintilă');
+instanta.salutare('Mordor75');
 ```
 
 Este util pentru că se comportă ca o interfață. Poți genera o sumedenie de obiecte care să folosească același „tipar”.
 
+Este observabil că putem folosi date din două surse. Una este obiectul returnat folosind `this.proprietate`, dar pentru că se creează un closure pe mediul lexical creat de funcția care returnează obiectul, putem accesa din metodele obiectului returnat, direct valori din funcție.
+
 ## Disecția unui factory
 
-Mai întâi, hai să creăm un cadru de test. Pentru asta vom folosi o pagină HTML, CSS pentru efectul vizual și un fișier JS cu tot codul de test.
+TODO: Termină de corectat codul secțiunii disecția unui factory.
+
+Mai întâi, hai să creăm un cadru de test. Pentru asta vom folosi o pagină HTML, CSS pentru a lucra cu ceva palpabil și un fișier JS cu tot codul de test.
 
 ```html
 <!DOCTYPE html>
