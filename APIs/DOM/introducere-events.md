@@ -208,3 +208,5 @@ Apoi motorul se uita dacă există vreun părinte pornind de la elementul care a
 ## Resurse
 
 https://quirksmode.org/js/events_order.html
+
+[3.1. Event dispatch and DOM event flow](https://www.w3.org/TR/DOM-Level-3-Events/#event-flow)

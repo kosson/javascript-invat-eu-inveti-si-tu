@@ -16,7 +16,7 @@ var obi = {
 };
 ```
 
-**Moment Zen**: Obiectele pot fi considerate ca array-uri asociative pentru că poți accesa valoarea folosind notația cu paranteze drepte: `obi['b']`.
+**Moment ZEN**: Obiectele pot fi considerate ca array-uri asociative pentru că poți accesa valoarea folosind notația cu paranteze drepte: `obi['b']`.
 
 ## Categorii de obiecte
 
@@ -52,6 +52,8 @@ Obiectele sunt structuri care își pot modifica structura chiar dacă identitat
 ```javascript
 var obi = {a: 10}; obi['a']; // 10
 ```
+
+Folosirea moștenirii prototipale nu este încurajată pentru că introduce o ierarhie, o taxonomie prealabilă în aplicație, care este posibil să intre în conflict cu realitățile. În contextul programării funcționale, este încurajată compoziția obiectelor opusă mecanismului de moștenire.
 
 ## Mantre
 

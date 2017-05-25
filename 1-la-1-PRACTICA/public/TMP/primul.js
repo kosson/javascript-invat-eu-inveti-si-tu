@@ -6,6 +6,7 @@ var libx = (function (window) {
     this.gand.setAttribute('class','bun');       // atașezi clasa bun
     this.gand.appendChild(document.createTextNode("Gandul bun")); // ceva text
     loc.appendChild(this.gand);  // adaugă nodul copil la elementul ancoră
+    return loc;
   },
   fragmentRau = function () {
     var loc = document.getElementById('repetitor');
@@ -13,6 +14,7 @@ var libx = (function (window) {
     this.gand.setAttribute('class','rau');
     this.gand.appendChild(document.createTextNode("Gandul rau"));
     loc.appendChild(this.gand);
+    return loc;
   },
   injectorFactory = function () {
     this.creeaza = function (gand) {
@@ -47,11 +49,22 @@ var libx = (function (window) {
     };
   })();
   /* IMPLEMENTAREA aplicației */
-  window.document.ready(function () {
-    var ancora = document.getElementByTag('body');
-    ancora.click(function(e){
-      var distribuitorSingleton = distribuitorGanduri.creeaza();
-      distribuitorGanduri.afiseazaGanduri();
-    });
-  });
+  document.onreadystatechange = function () {
+    var ancora = null;
+    if (document.readyState === "complete") {
+      ancora = document.getElementById('container');
+      ancora.onclick = function () {
+          var distribuitorSingleton = distribuitorGanduri.creeaza();
+          console.log(distribuitorSingleton);
+          distribuitorGanduri.afiseazaGanduri();
+      };
+      // onclick este obiect și este null
+
+      // ancora.addEventListener("click", function (e) {
+      //   e.target.textContent = "click count: " + e.detail;
+      //   var distribuitorSingleton = distribuitorGanduri.creeaza();
+      //   distribuitorGanduri.afiseazaGanduri();
+      // }, false);
+    };
+  };
 })(window);
