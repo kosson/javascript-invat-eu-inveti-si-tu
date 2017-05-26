@@ -1,6 +1,5 @@
-var libx = (function (window) {
   /* FACTORY */
-  var fragmentBun = function () {
+  var fragmentBun = function fragBun () {
     var loc = document.getElementById('repetitor'); // ancorare în DOM
     this.gand = document.createElement('p');     // creezi elem p
     this.gand.setAttribute('class','bun');       // atașezi clasa bun
@@ -8,7 +7,7 @@ var libx = (function (window) {
     loc.appendChild(this.gand);  // adaugă nodul copil la elementul ancoră
     return loc;
   },
-  fragmentRau = function () {
+  fragmentRau = function fragRau () {
     var loc = document.getElementById('repetitor');
     this.gand = document.createElement('p');
     this.gand.setAttribute('class','rau');
@@ -16,7 +15,7 @@ var libx = (function (window) {
     loc.appendChild(this.gand);
     return loc;
   },
-  injectorFactory = function () {
+  ganduriFactory = function injector () {
     this.creeaza = function (gand) {
       if (gand === 'bun') {
         return new fragmentBun();
@@ -26,45 +25,40 @@ var libx = (function (window) {
     };
   };
   /* Cuplajul cu SINGLETON */
-  var distribuitorGanduri = (function () {
-    var obiect;
+  var distribuitorGanduri = ( function spuffer () {
+    var obiect = null;
+
     function creator () {
-      var _injFactory = new injectorFactory();
-      function afiseazaGanduri () {
-        var gand = _injFactory.creeaza().gand;
-        return gand;
+      var generatorGanduri = new ganduriFactory();
+      function afiseazaGandul (gand) {
+        return generatorGanduri.creeaza(gand);
       };
       return {
-        afiseazaGanduri: afiseazaGanduri
+        afiseazaGandul
       };
     };
+
     return {
-      creeaza: function () {
-        if(!obiect) {
+      ignition: function builder () {
+        if (obiect === null) {
           obiect = creator();
+          return obiect;
         } else {
           return obiect;
-        };
+        }
       }
     };
   })();
+
   /* IMPLEMENTAREA aplicației */
   document.onreadystatechange = function () {
-    var ancora = null;
     if (document.readyState === "complete") {
-      ancora = document.getElementById('container');
-      ancora.onclick = function () {
-          var distribuitorSingleton = distribuitorGanduri.creeaza();
-          console.log(distribuitorSingleton);
-          distribuitorGanduri.afiseazaGanduri();
-      };
-      // onclick este obiect și este null
-
-      // ancora.addEventListener("click", function (e) {
-      //   e.target.textContent = "click count: " + e.detail;
-      //   var distribuitorSingleton = distribuitorGanduri.creeaza();
-      //   distribuitorGanduri.afiseazaGanduri();
-      // }, false);
-    };
+      var ancora = document.getElementsByTagName('body')[0];
+      console.log(ancora);
+      ancora.addEventListener('click', function () {
+        var instanta = distribuitorGanduri.ignition();
+        var culegeGandul = prompt('Ce gând ai? Bun sau rău?');
+        instanta.afiseazaGandul(culegeGandul);
+      });
+    }
   };
-})(window);

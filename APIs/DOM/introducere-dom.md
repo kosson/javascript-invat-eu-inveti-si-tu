@@ -8,11 +8,19 @@ Standardul spune că „programatorii pot redacta documente, pot parcurge struct
 
 Să vedem ce înseamnă „document” în cazul acestui API. Standardul spune că termenul de „document” este utilizat în sens larg și se leagă de capacitatea XML-ului de a „reprezenta diferite tipuri de informație care pot fi stocate în diferite sisteme și mare parte dintre acestea vor fi văzute în mod tradițional ca date și nu ca documente”. Următoarea precizare este fundamentală pentru a înțelege relația dintre date, informație și reprezentarea acestora. Zice standardul: **[...] XML prezintă aceste date ca documente iar DOM-ul poate fi utilizat pentru a gestiona aceste date**.
 
-Standardul (DOM Core) spune că „prezintă documentele ca o ierarhie de obiecte Node care implementează alte interfețe mai specializate”. Hai să lămurim nițel care-i treaba cu interfețele astea. Sunt de fapt niște abstracțiuni implementate la nivel de browser, fiecare producăror de browser așa cum crede mai bine și au drept scop punerea la dispoziție de metode și proprietăți pentru a manipula diferite reprezentări de date.
+Standardul (DOM Core) spune că „prezintă documentele ca o ierarhie de obiecte Node care implementează alte interfețe mai specializate”. Hai să lămurim nițel care-i treaba cu interfețele astea. Sunt de fapt niște abstracțiuni implementate la nivel de browser de către fiecare producător de browser așa cum crede mai bine și au drept scop punerea la dispoziție de metode și proprietăți pentru a manipula diferite reprezentări de date.
+
+## Ce sunt nodurile?
+
+Nodul este un nume dat oricărui tip de obiect din ierarhia DOM. Nodurile pot fi obiectele native ale DOM cum ar fi `document` sau `document.body`, dar poate fi foarte bine și reprezentarea ca obiect a unui tag de HTML.
+
+Nodurile pot fi de mai multe tipuri: noduri document, noduri text, noduri elemente, etc. Fiecare obiect nod al DOM-ului are o proprietate `nodeType`.
 
 ## Lucrul cu DOM
 
-Fiecare obiect nod al DOM-ului are o proprietate `nodeType` care conține un cod sub forma unui număr care identifică tipul nodului. Elementele comune au valoarea 1, o valoare pe care o poartă constanta ca proprietate `document.ELEMENT_NODE`.
+DOM-ul este de fapt o ierahie, un arbore de noduri. Fiecare dintre aceste noduri are un nod părinte, unul sau mai multe copil și unul sau mai multe pe același nivel ca și el.
+
+Fiecare `nodeType` conține un cod sub forma unui număr care identifică tipul nodului. Elementele comune au valoarea 1, o valoare pe care o poartă constanta ca proprietate `document.ELEMENT_NODE`.
 
 ```javascript
 elementIdentificat.nodeType === 3;

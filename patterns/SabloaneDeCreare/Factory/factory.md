@@ -40,8 +40,6 @@ Este observabil că putem folosi date din două surse. Una este obiectul returna
 
 ## Disecția unui factory
 
-TODO: Termină de corectat codul secțiunii disecția unui factory.
-
 Mai întâi, hai să creăm un cadru de test. Pentru asta vom folosi o pagină HTML, CSS pentru a lucra cu ceva palpabil și un fișier JS cu tot codul de test.
 
 ```html
@@ -65,65 +63,68 @@ Mai întâi, hai să creăm un cadru de test. Pentru asta vom folosi o pagină H
 Fișierul nostru de javascript va fi încărcat ca sursă externă.
 
 ```javascript
-var libx = (function (window) {
-  /* FACTORY */
-  var fragmentBun = function () {
-    var loc = document.getElementById('repetitor'); // ancorare în DOM
-    this.gand = document.createElement('p');     // creezi elem p
-    this.gand.setAttribute('class','bun');       // atașezi clasa bun
-    this.gand.appendChild(document.createTextNode("Gandul bun")); // ceva text
-    loc.appendChild(this.gand);  // adaugă nodul copil la elementul ancoră
-    return loc;
-  },
-  fragmentRau = function () {
-    var loc = document.getElementById('repetitor');
-    this.gand = document.createElement('p');
-    this.gand.setAttribute('class','rau');
-    this.gand.appendChild(document.createTextNode("Gandul rau"));
-    loc.appendChild(this.gand);
-    return loc;
-  },
-  injectorFactory = function () {
-    this.creeaza = function (gand) {
-      if (gand === 'bun') {
-        return new fragmentBun();
-      } else {
-        return new fragmentRau();
-      };
+/* FACTORY */
+var fragmentBun = function fragBun () {
+  var loc = document.getElementById('repetitor'); // ancorare în DOM
+  this.gand = document.createElement('p');     // creezi elem p
+  this.gand.setAttribute('class','bun');       // atașezi clasa bun
+  this.gand.appendChild(document.createTextNode("Gandul bun")); // ceva text
+  loc.appendChild(this.gand);  // adaugă nodul copil la elementul ancoră
+  return loc;
+},
+fragmentRau = function fragRau () {
+  var loc = document.getElementById('repetitor');
+  this.gand = document.createElement('p');
+  this.gand.setAttribute('class','rau');
+  this.gand.appendChild(document.createTextNode("Gandul rau"));
+  loc.appendChild(this.gand);
+  return loc;
+},
+ganduriFactory = function injector () {
+  this.creeaza = function (gand) {
+    if (gand === 'bun') {
+      return new fragmentBun();
+    } else {
+      return new fragmentRau();
     };
   };
-  /* Cuplajul cu SINGLETON */
-  var distribuitorGanduri = (function () {
-    var obiect;
-    function creator () {
-      var _injFactory = new injectorFactory();
-      function afiseazaGanduri (gand) {
-        var gand = _injFactory.creeaza(gand);
-        return gand;
-      };
-      return {
-        afiseazaGanduri: afiseazaGanduri
-      };
+};
+/* Cuplajul cu SINGLETON */
+var distribuitorGanduri = ( function spuffer () {
+  var obiect = null;
+
+  function creator () {
+    var generatorGanduri = new ganduriFactory();
+    function afiseazaGandul (gand) {
+      return generatorGanduri.creeaza(gand);
     };
     return {
-      creeaza: function () {
-        if(!obiect) {
-          obiect = creator();
-        } else {
-          return obiect;
-        };
-      }
+      afiseazaGandul
     };
-  })();
-  /* IMPLEMENTAREA aplicației */
-  document.onreadystatechange = function () {
-    if (document.readyState === "complete") {
-      var ancora = document.getElementsByTagName('body');
-      ancora.click(function(e){
-        var distribuitorSingleton = distribuitorGanduri.creeaza();
-        distribuitorGanduri.afiseazaGanduri();
-      });
+  };
+
+  return {
+    ignition: function builder () {
+      if (obiect === null) {
+        obiect = creator();
+        return obiect;
+      } else {
+        return obiect;
+      }
     }
   };
-})(window);
+})();
+
+/* IMPLEMENTAREA aplicației */
+document.onreadystatechange = function () {
+  if (document.readyState === "complete") {
+    var ancora = document.getElementsByTagName('body')[0];
+    console.log(ancora);
+    ancora.addEventListener('click', function () {
+      var instanta = distribuitorGanduri.ignition();
+      var culegeGandul = prompt('Ce gând ai? Bun sau rău?');
+      instanta.afiseazaGandul(culegeGandul);
+    });
+  }
+};
 ```

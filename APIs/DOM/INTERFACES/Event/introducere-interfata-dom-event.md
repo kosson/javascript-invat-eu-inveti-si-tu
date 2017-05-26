@@ -89,3 +89,4 @@ Returnează timpul la care a apărut evenimentul.
 [DOM: Living Standard, 9 mai, 2017](https://dom.spec.whatwg.org)
 [MDN - Event.eventPhase](https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase)
 [2.2. Interface Event](https://dom.spec.whatwg.org/#interface-event)
+[MDN - Event](https://developer.mozilla.org/en-US/docs/Web/API/Event)
