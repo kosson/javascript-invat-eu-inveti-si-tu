@@ -122,7 +122,7 @@ document.onreadystatechange = function () {
     console.log(ancora);
     ancora.addEventListener('click', function () {
       var instanta = distribuitorGanduri.ignition();
-      var culegeGandul = prompt('Ce gând ai? Bun sau rău?');
+      var culegeGandul = prompt('Ce gând ai? „bun” sau „rau”?');
       instanta.afiseazaGandul(culegeGandul);
     });
   }
