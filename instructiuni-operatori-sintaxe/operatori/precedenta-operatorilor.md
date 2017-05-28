@@ -1,6 +1,6 @@
 # Precedența operatorilor
 
-În programare există două mari categorii de operatori: operatorii unari și cei binari. Operatorii unari sunt acei operatori care se aplică unui singur operand. Operatorii binari sunt cei care implică doi operatori.
+În programare există două mari categorii de operatori: operatorii **unari** și cei **binari**. Operatorii unari sunt acei operatori care se aplică unui singur operand. Operatorii binari sunt cei care implică doi operatori.
 
 Ca și în cazul matematicii, operatorii au o anumită ordine, o anumită întâietate la evaluare a unora față de alții. Ne aducem aminte de la aritmetică că înmulțirea se face înaintea adunării și a scăderii.
 
@@ -56,7 +56,7 @@ Acesta este cel mai important operator, fiind cel mai ridicat ca rang.
 |:-- |:-- |:-- |:-- |:-- |
 |19|Member Access|accesarea membrilor|stânga-spre-dreapta| __ `.` __ |
 |19|Computed Member Access|accesarea membrilor dar în același timp computarea valorii expresiei|stânga-spre-dreapta| __ `[__]` |
-|19|new (with arguments)|invocare a funcțiilor cu new|fără sens de evaluare| `new` __ `(__)` |
+|19|new (with arguments)|invocare a funcțiilor cu new și cu argumente|dreapta-spre-stânga| `new` __ `(__)` |
 |18|function call|apelul funcțiilor|stânga-spre-dreapta| __ `(...)`|
 |18|new (without arguments)|invocare a funcțiilor cu new|dreapta-spre-stânga| `new` __ |
 

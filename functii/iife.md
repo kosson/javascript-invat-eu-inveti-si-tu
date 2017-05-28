@@ -50,8 +50,8 @@ var y = ((nume, profesie) => {
 var x = "ceva";
 
 (function(){
-    var x = "ceva ascuns";
-    console.log(x);
+  var x = "ceva ascuns";
+  console.log(x);
 })();
 
 console.log(x);
@@ -59,59 +59,93 @@ console.log(x);
 // => 'ceva'
 ```
 
-Când folosești?
+## Când folosești?
 
 - atunci când dorești să ascunzi funcționalități fără a lăsa nicio urmă în GLOBAL sau LOCAL SCOPE
 - atunci când construiești Șabloane Modul.
 
-### Ce este?
-Este o **_funcție exprimată_** (function expression) Este o funcție exprimată pentru că o îmbraci în paranteze.
+### Ce este un IIFE pentru limbaj?
 
-### Bună practică:
+Este o **expresie de funcție** (*function expression*). Este o funcție exprimată pentru că o îmbraci în paranteze, ceea ce grupează toate expresiile iar în cazul nostru avem una singură: funcția.
 
-1. fă o variabilă care să referențieze IIFE-ul. Nu-l lăsa anomim. Beneficiul este că va apărea în call-stack (stiva de execuție).
+### Construcții cu IIFE - uri
+
+#### Execuția unui funcții fără a returna nimic
+
+Să pornim cu cel mai simplu exemplu, dar, din capul locului, buna practică spune să declarăm o variabilă care să referențieze IIFE-ul. Nu-l lăsa anomim. Beneficiul este că va apărea în call-stack (stiva de execuție) atunci când din diferite motive codul dă erori.
+Cel mai simplu exemplu este cel al unei funcții care se autoexecută instant pentru că motorul are nevoie să atribuie identificatorului valoarea evaluată a funcției. Îți readuc aminte că toate funcțiile sunt valori și că operatorul `()` declanșează execuția funcției ceea ce conduce la evaluarea tuturor expresiilor din interior. Și nu te las să uiți faptul că, de fapt, un IIFE este rezultatul evaluării expresiei din partea dreaptă a operatorului egal.
 
 ```javascript
-var x = "ceva";
-
 var iife = (function(){
-    var x = "ceva ascuns";
-    console.log(x);
+  var x = "ceva ascuns";
+  console.log(x);
 })();
-
-console.log(x);
+console.log(iife); // undefined
 ```
 
-IIFE-urile pot primi valori pentru că, de fapt, sunt apeluri de funcție:
+De ce valoarea finală a identificatorului este `undefined`? Da, ai intuit bine, funcția s-a executat fără a returna nimic. Și-a produs efectele și atât. Nu a returnat nicio valoare.
+
+#### Execuția unei funcții care primește valori din exterior prin argumente fără a returna
+
+IIFE-urile pot primi valori pentru că, de fapt, este un apel al unei funcții care se aplică unor posibile argumente. Aceasta este baza pentru înțelegerea modularității codului JavaScript. Folosirea IIFE-urilor este o practică comună pentru foarte multe biblioteci de cod.
 
 ```javascript
 var x = "ceva";
-
 var iife = (function(x){
   console.log(x);           // ceva
   var x = "ceva ascuns";    // ceva ascuns
   console.log(x);
 })(x);
-
-console.log(x);             // ceva
 ```
 
-Foarte interesant este cazul în care în IIFE ai marea partea a funcțiilor care trebuie să rămână private, dar ai nevoie să expui câteva în global (de fapt, Șablonul Modul - Module Pattern). Kyle Simpson trimite obiectul window în IIFE și îl denumește în parametru `global`. Pentru a expune ceva din IIFE folosește mai apoi `global.ceva`.
+Foarte interesant este cazul în care în IIFE ai marea partea a funcțiilor care trebuie să rămână private, dar ai nevoie să expui câteva în global (de fapt, este modelul șablonului *Modul* - **Module Pattern**). Poți trimite obiectul window în IIFE și îl denumește în parametru `global`. Pentru a expune ceva din IIFE folosește mai apoi `global.ceva`.
 
 ```javascript
 var y = "ceva din global";
-
 var iife = (function(global){
   console.log(global.y);    // ceva din global
   global.y = "ceva ascuns care a modificat in global";
 })(window);
-
-console.log(y);             // ceva ascuns care a modificat in global
+console.log(y); // ceva ascuns care a modificat in global
 ```
 
-## Practici
+Este o practică comună pasarea obiectului global ca argument unui IIFE pentru a fi accesibil în interiorul funcției fără a folosi obiectul `window`, ceea ce face codul să fie independent de mediul browserului.
 
-Este o practică comună pasarea obiectului global ca argument unui IIFE pentru a fi accesibil în interiorul funcției fără a folosi obiectul window, ceea ce face codul să fie independent de mediul browserului.
+#### Pasarea unui obiect de lucru ca argument sau a unuia gol dacă nu există deja
+
+Există cazul în care fie ai nevoie să lucrezi cu un obiect populat deja și pe care să-l prelucrezi intern, fie dacă acest obiect nu există și dorești crearea unuia gol pe care să-l folosești intern.
+
+```javascript
+var obiect;
+var iife = (function (obi) {
+  obi['spot'] = true;
+  return obi;
+})(obiect || (obiect = {}));
+console.log(iife); // {"spot":true}
+```
+
+#### Sunt acceptate mai multe niveluri de impricare
+
+Dacă este necesar, IIFE-urile pot conține alte IIFE-uri în caz de necesitate.
+
+```javascript
+var racheta;
+(function (racheta) {
+  var propulsor = racheta.propulsor;
+  (function (propulsor) {
+    var amestec = (function () {
+      function Valva (oxidant) {
+        this.oxidant = oxidant;
+      };
+      Valva.prototype.injecteaza = function () {
+        console.log('Injectez ' + this.oxidant);
+      };
+      return Valva;
+    })();
+    propulsor.amestec = amestec;
+  })(racheta.propulsor || (racheta.propulsor = {}));
+})(racheta || (racheta = {}));
+```
 
 ## Studiu de caz combinat cu un clojure
 
@@ -122,12 +156,11 @@ function afiseazaFructele(fructe){
       console.log( fructe[i] );
     }, i * 1000 );
   }
-}
-
+};
 afiseazaFructele(["mar", "banană", "pere", "struguri"]);
-
 // va afișa undefined de patru ori
 ```
+
 Acest lucru se întâmplă pentru că execuția celor patru iterații este foarte rapidă, mai rapidă decât răspunsul lui `setTimeout` care începe cu o secundă. Pentru că un clojure, care face o referință către variabila care ține valoarea, va face o referință către i, care deja este 4 datorită vitezei de execuție comparativ cu cea a timeout-ului.
 
 Pentru a rezolva comportamentul, este nevoie de a fi creat un nou scope pentru fiecare funcție împlicată în buclă și de o variabilă, care să țină minte valoarea lui i.
