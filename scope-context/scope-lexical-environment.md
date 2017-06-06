@@ -17,7 +17,7 @@ Mediul lexical sau scope-ul poate fi foarte ușor înțeles ca un „registru in
 
 În demersul nostru, vom folosi interșanjabil următoarele: „mediu lexical”, „scope” și „lexical scope”. Toate au același sens. Termenul standardului este „mediu lexical”, dar în practica de zi cu zi veți întâlni denumirea de scope. Deja sunteți familiari cu ea de la întâlnirea cu debugger-ul când lucram cu Global Scope și Function Scope. De cele mai multe ori vă veți întâlni în diferite alte lucrări despre JavaScript cu ambele variante.
 
-Mediul lexical nu este ceva nou, de curând adăugat limbajelor de programare. Rădăcinile conceptului și alicativitatea sa vin chiar de la începutul deceniului șase al secolului trecut.
+Mediul lexical nu este ceva nou, de curând adăugat limbajelor de programare. Rădăcinile conceptului și aplicativitatea sa vin chiar de la începutul deceniului șase al secolului trecut.
 
 > „Este porțiunea de cod sursă pentru care este disponibilă o legătură între un nume și o entitate” (definiție pentru limbajul de programare ALGOL 60, 1960).
 
