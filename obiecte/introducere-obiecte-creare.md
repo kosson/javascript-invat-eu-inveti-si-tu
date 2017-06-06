@@ -1,12 +1,12 @@
 # Obiecte
 
-Standardul spune că obiectele sunt „colecții de zero sau mai multe proprietăți fiecare având atribute care determină cum poate fi folosită”. Atunci când un obiect este creat, toate caracteristicile sale sunt moștenite de la un alt obiect cu rol de prototip. Și oricât ar părea de ciudat, pentru că un prototip este un obiect, acesta la rândul lui are un prototip. E ca un lanț care are drept limită superioară obiectul `Object`.
+Standardul spune că obiectele sunt „colecții de zero sau mai multe proprietăți fiecare având atribute care determină cum poate fi folosită”. Atunci când un obiect este creat, toate caracteristicile sale sunt moștenite de la un alt obiect cu rol de prototip. Să nu vi se pară ciudat că un prototip este un obiect, iar acesta la rândul lui are un prototip. E ca un lanț care are drept limită superioară obiectul intern `Object`.
 
 ## Componența obiectelor
 
 Obiectele au **proprietăți** și **metode**.
-Proprietățile sunt valori cum ar fi numere, boolean-uri sau șiruri de caractere. Proprietățile ***sunt ceva***.
-Metodele ***fac ceva***. Metodele sunt de fapt niște funcții. Toate funcțiile definite în obiectul global, de fapt, devin automat metode ale lui `window` în cazul browserelor.
+Proprietățile sunt valori primitive - numere, boolean-uri sau șiruri de caractere. Proprietățile ***sunt ceva***.
+Metodele ***fac ceva***. Metodele sunt de fapt niște funcții. Un aspect care vă va face viața ușoară odată înțeles este acela că toate funcțiile definite în obiectul global, de fapt, devin automat metode ale acestuia, adică lui `window` în cazul browserelor.
 
 ```javascript
 // un object literal
@@ -20,26 +20,31 @@ var obi = {
 
 ## Categorii de obiecte
 
-De fapt, în standard obiectele chiar sunt categorisite astfel:
-- „Ordinary object” (*obiecte simple*) au comportamentul comun pentru toate obiectele în JavaScript
-- „Exotic object” (*obiecte exotice*) au comportamentul comun pentru obiectele în JS, dar cu mici diferențe
-- „Standard objects” (*obiecte standard*) sunt toate obiectele JS iar cele „ordinary” și cele „exotice” sunt parte a obiectelor standard
-- „Built-in objects” (*obiecte interne*); toate obiectele standard fac parte din obiectele built-in
-
+În textul standardului, obiectele chiar sunt categorisite astfel:
+- „Ordinary object” (*obiecte comune*), care au comportamentul comun tuturor obiectelor în JavaScript.
+- „Exotic object” (*obiecte exotice*), care au comportamentul comun obiectelor în JS, dar cu mici diferențe.
+- „Standard objects” (*obiecte standard*) sunt toate obiectele JS. Obiectele „ordinary” și cele „exotice” fac parte din setul obiectelor standard.
+- „Built-in objects” (*obiecte interne*) sunt toate obiectele pe care le expune din start motorul de JavaScript. Toate obiectele comune (*ordinary*) fac parte din setul celor interne.
 
 ## Obiecte interne (*built-in*)
 
-JavaScript vine din start cu câteva obiecte care se numesc „built-in object” pe care le putem înțelege ca **obiecte interne** limbajului la care ai acces din start fără să faci ceva. Atenție, `obiectul global` este parte a obiectelor interne preexistente.
+Am menționat că JavaScript vine din start cu obiectele care se numesc „built-in object” și pe care le-am tradus ca **obiecte interne** limbajului. Pentru a avea acces la ele nu-i nevoie să faci ceva. Pur și simplu ele sunt acolo deja, gata de a fi folosite. Există un detaliu pe care aș dori să-l remarcați cu atenție. `Obiectul global` este parte a obiectelor interne. Am putea concluziona că obiectul global plus obiectele standard constituie setul mare al celor interne. O distincție pe care trebuie să o fi realizat deja este că obiectul global nu este containerul tuturor obiectelor oricât de tentant ar fi să-l gândim astfel. Dar este „containerul” dacă vrei să-l închipui astfel a întregului cod pe care-l scrii tu și a entităților care se formează la momentul evaluării acestuia.
 
 ## Moștenirea prototipală
 
 ***JavaScript este un limbaj bazat pe moștenire prototipală - prototypal inheritance***
 
-În JavaScript neexistând clase (cod care se comportă ca un plan pentru construcția obiectelor), pentru a reutiliza cod, se creează obiecte care se bazează pe cele existente prin exploatarea unui lanț prototipal.
+În alte limbaje de programare așa cum este Java, de exemplu, pentru a genera un obiect ai nevoie de un fragment de cod care are rolul de plan de construcție pentru viitoarele obiecte. Pur și simplu este o secvență de cod care descrie care sunt valorile și tipul lor pentru proprietățile viitorului obiect. Care sunt metodele și dacă proprietățile și valorile sunt accesibile pentru întreg codul sau o prate sau în întregime sunt „ascunse”, sunt „protejate”. Această secvență de cod specifică se numește clasă. Semnatic înseamnă că definești o clasă de obiecte care vor fi create în baza „planului”. Unul din rolurile principale pe care clasele îl joacă este acela de a nu defini de fiecare dată „planul” de câte ori ai nevoie să construiești un obiect. În fapt, vorbim de conceptul de refolosire inteligentă a codului din dorința de a nu ne repeta.
 
-Astfel, între aceste obiecte se creează o legătură. Această legătură se numește „legătură prototipală”. Aceste legături realizează „moștenirea prototipală” - `prototypal inheritance`. Obiectul preexistent constituie prototipul pentru cel nou creat care poate adăuga noi membri, noi comportamente. Mai trebuie adăugat că, de fapt, vorbim despre o *delegare* pe lanțul prototipal format. Acest lucru înseamnă că atunci când ceri o proprietate care nu există, delegi solicitarea către prototip să o analizeze și să servească o valoare sau să delege mai sus cererea dacă mai există un obiect prototip părinte.
+**Moment ZEN**: În JavaScript nu există clase!
 
-Unul din motivele pentru care ai folosi aceast lanț prototipal este acela de a realiza șabloane care structurează funcționalități prin ascunderea sau relevarea anumitor detalii. Acest lucru este posibil prin introducerea de funcții în prototip. Avantajul major al acestui lucru este că funcția este creată o singură dată.
+În ciuda introducerii unei sintaxe care seamănă cu obișnuințele de programare ale altor limbaje, de fapt nu este decât un aranjament sintactic, care ascunde o implementare specifică JavaScript. Dacă vei crede că existența sintaxei `class` implică și un comportament intern care să se plieze cu ceea ce știi din alte limbaje de programare, te afli într-o adâncă eroare.
+
+Pentru a reutiliza cod, se creează obiecte care se bazează pe cele existente prin exploatarea unui lanț prototipal care se formează între obiecte și care poate fi interogat prin proprietatea oricărui obiect `__proto__`.
+
+Astfel, între obiecte se creează această legătură numită „legătură prototipală”. Aceste legături realizează „moștenirea prototipală” - `prototypal inheritance`. Obiectul preexistent constituie prototipul pentru cel nou creat care poate adăuga noi membri, noi comportamente. Mai trebuie adăugat că, de fapt, vorbim despre o *delegare* pe lanțul prototipal format. Acest lucru înseamnă că atunci când ceri o proprietate care nu există, delegi solicitarea către prototip să o analizeze și să servească o valoare sau să delege mai sus cererea dacă mai există un obiect prototip părinte.
+
+Unul din motivele pentru care ai folosi aceast lanț prototipal este acela de a realiza șabloane care structurează funcționalități prin ascunderea sau relevarea anumitor detalii. Acest lucru este posibil prin introducerea de funcții în prototip. Avantajul major al acestui lucru este că funcția este creată o singură dată în obiectul prototip.
 
 Un avantaj extraordinar pe care-l oferă moștenirea prototipală este că odată cu modificarea obiectului prototip, toate funcționalitățile noi vor fi disponibile tuturor celor care le moștenesc.
 
