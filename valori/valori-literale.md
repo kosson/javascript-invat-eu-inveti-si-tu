@@ -1,18 +1,18 @@
 # Valorile literale
 
-Valorile literale sunt cele care sunt oferite în mod direct programului, fiind menționate prin reprezentarea lor literală mijlocită de caracterele aferente. Pe scurt, valoarea trei, ca să fie un număr pentru limbajul de programare, trebuie să fie introdusă folosind caracterul 3. Corect? De aici și denumirea lor. Literalele pur și simplu îți oferă mecanismul cel mai simplu pentru a crea valori.
+Valorile literale sunt cele care sunt oferite în mod direct programului, fiind declarate prin însuși caracterul corespondent. Pe scurt, valoarea trei, ca să fie înțeleasă ca număr pentru computer, trebuie să fie introdusă folosind caracterul 3 a setului de caractere latin. Corect? De aici și denumirea lor de literale. Literalele oferă mecanismul cel mai simplu pentru a crea valori.
 
 ```javascript
-3;      // spuffff! iaca trei
+3;      // spuf! iaca trei
 'trei'; // zbang! iaca text
 ```
 
 Știu la ce te gândești!
 Te întrebi pe bună dreptate cum face diferența motorul JavaScript între **identificatori** și **valorile literale** de tip șir de caractere. Ambele sunt șiruri de caractere, nu? Da! Dar pentru ca un șir de caractere să devină un literal, acesta are nevoie să fie încadrat între ghilimele simple sau duble: `var ceva = 'ceva';`. Dacă ar fi menționat fără ghilimele, ar fi o legătură realizată de un identificator la un alt identificator; `var ceva = altceva;`.
 
-Acum, o situație interesantă pe care sunt sigur că ai sesizat-o. De ce pentru literalele cifre, nu este nevoie de ghilimele. Răspunsul vine din limitele pentru scrierea identificatorilor. Aceștia nu pot fi scriși începând cu cifre. Cââât de simplu! Și de aici e opțiunea simplă a motorului care face diferența fără a fi necesare ghilimele. Atenție, dacă pui o cifră între ghilimele, ceea ce este posibil, aceasta nu mai este un număr și un simplu caracter.
+Acum, o situație interesantă pe care sunt sigur că ai sesizat-o. De ce pentru literalele cifre, nu este nevoie de ghilimele. Răspunsul vine din limitele pentru scrierea identificatorilor. Aceștia nu au coie să înceapă cu o cifră. Cââât de simplu! Și de aici e opțiunea simplă a motorului care face diferența fără a fi necesare ghilimele. Atenție, dacă pui o cifră între ghilimele, ceea ce este perfect ok, aceasta nu mai este un număr și un simplu caracter.
 
-Literalele următoare sunt rezervate de sistem pentru sine. Că să fiu mai clar, aceste cuvinte ale limbii engleze sunt rezervate de JavaScript pentru a le recunoaște și înțelege ca valori.
+Literalele următoare, ca și nume, sunt rezervate de sistem pentru sine să înțeleagă că despre acele valori speciale vorbești. Că să fiu mai clar, aceste cuvinte ale limbii engleze sunt rezervate de JavaScript pentru a le recunoaște și a le înțelege valoarea.
 
 ### Literal `null`
 
@@ -21,6 +21,8 @@ Avem unul singur și acesta este cuvântul rezervat `null`
 ### Literale `boolean`
 
 Avem cele două variante `true` și `false`.
+
+Acum vom purcede la a împușca doi iepuri deodată. La ce mă refer este la faptul că în afară de a declara valori literale, valorile pot fi create instanțiidu-se obiectul corespondent tipului de valoare. Ești în ceață? Hai să o lămurim. JavaScript este un limbaj orietat pe obiecte. Am lămurit treaba asta mai demult, dar este necesar să o repetăm pentru a înțelege. Din start sunt disponibile niște obiecte interne pe care limbajul le generează automat. Printre aceste obiecte, se află și cele care permit crearea de valori prin instanțierea lor. Un exemplu scurt și trecem mai departe. Dacă dorim să introducem valoarea trei, valoarea literală pur și simplu permite să declari caracterul `3;`. Corect? Simplu! Dar pentru că există un obiect intern corespondent, ai putea să generezi aceeași valoare instanțiind `new Number('3');`
 
 ### Literale numerice
 

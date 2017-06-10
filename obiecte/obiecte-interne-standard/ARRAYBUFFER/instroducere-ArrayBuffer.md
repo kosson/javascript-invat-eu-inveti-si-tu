@@ -1,5 +1,5 @@
-# ArrayBuffer
-
+# `ArrayBuffer
+`
 Acest obiect este folosit pentru a reprezenta un buffer de date brute în format binar care are o dimensiune prestabilită. Conținutul unui `ArrayBuffer` nu poate fi manipulat direct fiind necesar un obiect `typed array` sau un `data view`, care oferă reprezentarea într-un anume format. Alegerea formatului permite operațiunile de scriere-citire a conținutului bufferului.
 
 ```javascript

@@ -1,4 +1,4 @@
-# Number.EPSILON
+# `Number.EPSILON`
 
 Reprezintă valoarea cea mai mică dintre două numere care pot fi reprezentate.
 

@@ -1,8 +1,8 @@
-# Map
+# `Map`
 
 Obiectul Map este o colecție chei - valori. Acceptă valori primitive și obiecte și respectă protocolul iterabil ceea ce înseamnă că poți folosi și operatorii `spread`.
 
-Obiectele în JavaScript au fost folosite pentru a stoca perechi de chei - valori. Din nefericire, o astfel de mulțime gestionată prin obiecte este pur și simplu poluată de chei - valori moștenite prin mecanismul prototipal. Singura metodă de a contracara acest lucru era să întrerupi moștenirea prin `var map = Object.create(null);`. Efectul este crearea unui obiect care nu mai moștenea din prototip nimic păstrând o izolare benefică pentru scopul depozitării de chei - valori proprii.
+Istoric vorbind, obiectele în JavaScript au fost folosite pentru a stoca perechi de chei - valori. Din nefericire, o astfel de mulțime gestionată prin obiecte este pur și simplu poluată de chei - valori moștenite prin mecanismul prototipal. Singura metodă de a contracara acest lucru era să întrerupi moștenirea prin `var map = Object.create(null);`. Efectul este crearea unui obiect care nu mai moștenea din prototip nimic păstrând o izolare benefică pentru scopul depozitării de chei - valori proprii.
 
 Spre deosebire de obiectul clasic, într-un Map poți introduce orice valoare, de la primitive, la obiecte iar cheile nu vor mai fi limitate la stringuri.
 
