@@ -1,8 +1,51 @@
 # `Map`
 
+Este un obiect intern introdus de ECMAScript 2015 care oferă o structură simplă de chei - valori care permite iterarea elementelor dar în ordinea în care acestea au fost introduse.
+
 Obiectul Map este o colecție chei - valori. Acceptă valori primitive și obiecte și respectă protocolul iterabil ceea ce înseamnă că poți folosi și operatorii `spread`.
 
-Istoric vorbind, obiectele în JavaScript au fost folosite pentru a stoca perechi de chei - valori. Din nefericire, o astfel de mulțime gestionată prin obiecte este pur și simplu poluată de chei - valori moștenite prin mecanismul prototipal. Singura metodă de a contracara acest lucru era să întrerupi moștenirea prin `var map = Object.create(null);`. Efectul este crearea unui obiect care nu mai moștenea din prototip nimic păstrând o izolare benefică pentru scopul depozitării de chei - valori proprii.
+Înainte de introducerea lui Map, obiectele Object erau folosite pentru a stoca chei - valori.
+
+Pentru lucrul cu o structură simplă de date în care unei chei reprezentate de un string îi corespundea o valoare sau o metodă, obiectele simple se pretează cu succes.
+Lucrurile încep să se complice atunci când era nevoie să introduci structuri mai complexe ca valori așa cum sunt obiectele (așa-numitele hash-map-uri).
+Din nefericire, o astfel de mulțime gestionată prin obiecte este pur și simplu poluată de chei - valori moștenite prin mecanismul prototipal. Singura metodă de a contracara acest lucru era să întrerupi moștenirea prin `var map = Object.create(null);`. Efectul este crearea unui obiect care nu mai moștenea din prototip nimic păstrând o izolare benefică pentru scopul depozitării de chei - valori proprii.
+
+Un exemplu de folosire cu forțarea la limită a obiectelor.
+
+```javascript
+var obi = {};
+
+function adauga(numeCheie, valoare){
+  obi[numeCheie] = valoare;
+};
+
+function scoate(numeCheie){
+  return obi[numeCheie];
+};
+
+adauga('primul', {a: 'element', b: true});
+adauga('alDoilea', {x: 10, y: function(){return this.a}});
+console.log(obi);   // Object { primul: Object, alDoilea: Object }
+scoate('alDoilea'); // Object { x: 10, y: .y() }
+```
+
+Problema aici este că obiectul va avea și proprietățile care nu-i aparțin în mod direct, dar care sunt moștenite prototipal. O simplă verificare cu `obi.__proto__` va indica acest lucru.
+O posibilă soluție pe genunchi ar fi crearea unui obiect căruia să-i fie tăiată moștenirea.
+
+```javascript
+let obi = Object.create(null); // lanțul prototipal este întrerupt
+```
+
+Dar chiar și așa, un alt neajuns este că toate cheile obiectului vor fi mereu stringuri.
+
+Folosirea lui `Map` rezolvă aceste probleme oferind și metodele necesare pentru a gestiona datele din colecție.
+
+```javascript
+var obi = new Map();
+obi.set('unobj', {a: 'element', b: true});
+obi.set('alDoilea', {x: 10, y: function(){return this.a}});
+obi.set(new Date(), 'data la această proprietate a fost accesată');
+```
 
 Spre deosebire de obiectul clasic, într-un Map poți introduce orice valoare, de la primitive, la obiecte iar cheile nu vor mai fi limitate la stringuri.
 

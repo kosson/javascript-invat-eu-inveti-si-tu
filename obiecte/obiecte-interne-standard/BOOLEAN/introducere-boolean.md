@@ -1,5 +1,6 @@
-# Obiectul Boolean
+# `Boolean`
 
+Este un constructor.
 Este un obiect de „împachetare” a unei valori pasate, care va fi evaluată la în funcție de natura sa, la `true` sau `false`.
 
 Proprietatea `length` a lui Boolean este 1.

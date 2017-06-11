@@ -1,5 +1,7 @@
 # Valorile primitive în JavaScript
 
+Valorile primitive sunt *tipuri* (**built-in types**) de date ale limbajului.
+
 Valorile primitive în JavaScript formează nucleul lucrului cu datele.
 Valorile sunt expresii. De fapt, expresiile sunt o posibilă reprezentare a valorii pentru că sunt reduse la o valoare.
 

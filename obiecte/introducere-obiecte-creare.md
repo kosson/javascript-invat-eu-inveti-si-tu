@@ -1,11 +1,25 @@
 # Obiecte
 
-Standardul spune că obiectele sunt „colecții de zero sau mai multe proprietăți fiecare având atribute care determină cum poate fi folosită”. Atunci când un obiect este creat, toate caracteristicile sale sunt moștenite de la un alt obiect cu rol de prototip. Să nu vi se pară ciudat că un prototip este un obiect, iar acesta la rândul lui are un prototip. E ca un lanț care are drept limită superioară obiectul intern `Object`.
+**Un obiect este un membru al tipului built-in Object** a limbajului.
+
+Pentru a realiza natura limbajului de programare JavaScript vom cita standardul care spune că *ECMAScript este bazat pe obiecte: limbajul de bază și toate funcționalitățile sunt oferite de obiecte iar un program ECMAScript este un ciorchine de obiecte care comunică*.
+
+Standardul spune că obiectele sunt „colecții de zero sau mai multe proprietăți fiecare având atribute care determină cum poate fi folosită”. Standardul însuși spune că proprietățile trebuie înțelese ca niște *containere care pot conține alte obiecte, valori primitive sau funcții*.
+
+Atunci când un obiect este creat, toate caracteristicile sale sunt moștenite de la un alt obiect cu rol de prototip. Să nu vi se pară ciudat că un prototip este un obiect, iar acesta la rândul lui are un prototip. E ca un lanț care are drept limită superioară obiectul intern `Object`.
+
+Pentru că ești nerăbdătoare am să-ți dau două indicii privind crearea obiectelor. Poți folosi notația literală folosind acoladele ca în `{a:1}` sau poți apela cu operatorul `new` funcții cu rol de constructor. Aceste două metode sunt și cele mai des întâlnite. Am menționat constructorii.
+
+## Ce sunt constructorii?
+
+Pur și simplu niște funcții care au o proprietate numită `prototype` folosită pentru a implementa moștenirea prototipală și pentru a avea acces la proprietăți pe care obiectul creat la apelarare funcției constructor le pune la dispoziție. Ceea ce mai trebuie să știi din start despre constructori este că la apelare, generează obiectul și apoi execută codul; nu uita că este totuși o funcție. Execuția codului dintr-un constructor are ca efect asignarea proprietăților inițiale ale obiectului nou creat.
+
+**Spune standardul**: *Fiecare obiect creat de un constructor are o referință implicită (numită prototipul obiectului) către valoarea proprității «prototype» a constructorului*.
 
 ## Componența obiectelor
 
 Obiectele au **proprietăți** și **metode**.
-Proprietățile sunt valori primitive - numere, boolean-uri sau șiruri de caractere. Proprietățile ***sunt ceva***.
+Proprietățile sunt valori primitive - numere, boolean-uri, șiruri de caractere, funcții sau chiar obiecte. Proprietățile ***sunt ceva***.
 Metodele ***fac ceva***. Metodele sunt de fapt niște funcții. Un aspect care vă va face viața ușoară odată înțeles este acela că toate funcțiile definite în obiectul global, de fapt, devin automat metode ale acestuia, adică lui `window` în cazul browserelor.
 
 Hai să facem un obiect. Vă mai aduceți aminte de la valorile literale că cel mai simplu este folosirea obiectelor literale.
@@ -29,6 +43,20 @@ console.log(obi); // {"unu":1,"este":true}
 
 **Moment ZEN**: Obiectele pot fi considerate ca array-uri asociative pentru că poți accesa valoarea folosind notația cu paranteze drepte: `obi['b']`.
 
+Proprietățile pot fi adăugate dinamic unui obiect deja existent fără a fi nevoie să mergi la constructorul său și să le adaugi acolo.
+
+```javascript
+function Constructorul () {
+  this.ceva = 1;
+};
+var obi = new Constructorul();
+console.log(obi); // {"ceva":1}
+obi.altceva = 10;
+console.log(obi); // {"ceva":1,"altceva":10}
+```
+
+Acest mod de a adăuga proprități noi fără a interveni asupra constructorului este unic și este o marcă a JavaScript-ului.
+
 ## Categorii de obiecte
 
 În textul standardului, obiectele chiar sunt categorisite astfel:
@@ -45,7 +73,9 @@ Am menționat că JavaScript vine din start cu obiectele care se numesc „built
 
 ***JavaScript este un limbaj bazat pe moștenire prototipală - prototypal inheritance***
 
-În alte limbaje de programare așa cum este Java, de exemplu, pentru a genera un obiect ai nevoie de un fragment de cod care are rolul de plan de construcție pentru viitoarele obiecte. Pur și simplu este o secvență de cod care descrie care sunt valorile și tipul lor pentru proprietățile viitorului obiect. Care sunt metodele și dacă proprietățile și valorile sunt accesibile pentru întreg codul sau o prate sau în întregime sunt „ascunse”, sunt „protejate”. Această secvență de cod specifică se numește clasă. Semnatic înseamnă că definești o clasă de obiecte care vor fi create în baza „planului”. Unul din rolurile principale pe care clasele îl joacă este acela de a nu defini de fiecare dată „planul” de câte ori ai nevoie să construiești un obiect. În fapt, vorbim de conceptul de refolosire inteligentă a codului din dorința de a nu ne repeta.
+În alte limbaje de programare așa cum este Java, de exemplu, pentru a genera un obiect ai nevoie de un fragment de cod care are rolul de plan de construcție pentru viitoarele obiecte. Pur și simplu este o secvență de cod care descrie care sunt valorile și tipul lor pentru proprietățile viitorului obiect.
+
+Această secvență de cod explică dacă metodele și proprietățile sunt accesibile pentru întreg codul sau o parte ori sunt „ascunse”, iar o parte sunt „protejate”. Aceasta este o clasă. Semnatic înseamnă că definești o clasă de obiecte care vor fi create în baza „planului”. Unul din rolurile principale pe care clasele îl joacă este acela de a nu defini de fiecare dată „planul” de câte ori ai nevoie să construiești un obiect. În fapt, vorbim de conceptul de refolosire inteligentă a codului din dorința de a nu ne repeta.
 
 **Moment ZEN**: În JavaScript nu există clase!
 
