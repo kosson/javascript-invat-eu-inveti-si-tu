@@ -7,7 +7,6 @@ Transducerii sunt o modalitate de a opera pe colecții de valori pentru a produc
 
 Ținta ar fi de a găsi o cale de compunere pentru a construi algoritmi de transformare
 
-
 Operațiuni precum `map`, `filter` sau `reverse` pot fi traduse în termenii unui `reduce`.
 
 ## Resurse online

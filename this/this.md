@@ -1,13 +1,29 @@
 # `this`
 
+TODO: restructurează informația la this pentru că este nițel haotică
+
 This este un obiect pasat automat unei funcții și care se formează în funcție de contextul de execuție. `this` este strict legat de „locul” în care a fost apelată, nu de „locul” unde a fost declarată.
 
-## Spune standardul
-
+**Spune standardul**:
 `this` se leagă de evaluarea codului, adică la momentul evaluării codului `this` este rezultatul operațiunii abstracte `ResolveThisBinging()`. Se leagă strâns de Lexical Environment pentru `contextul de execuție curent` - `current execution context`.
 
 ## Mantre
 
+TODO: sortează mantrele la this
+
+- Prin `this`, de fapt accesezi starea obiectului cu care lucrezi.
+- Legătura la obiectul reprezentat de cuvântul cheie `this` se realizează la momentul execuției codului, nu la momentul scrierii lui.
+- **this** este o referință către contextul de execuție curent în timp ce funcția se execută.
+- `this` nu se referă în niciun caz la **lexical scope**.
+- `this` este un binding pentru fiecare invocare a unei funcții care se bazează pe de-antregul pe call-site.
+- Funcțiile și obiectele sunt REFERENȚIATE, nu sunt deținute atunci când atribui IDENTIFICATORUL într-o expresie sau ca valoarea a unei metode.
+- Call-site (locul din cod unde este apelată o funcție) determină formarea lui `this`.
+- Modul de invocare influiențează felul în care obiectul este constituit (către care face referință `this`).
+- Toate funcțiile au la dispoziția lor un set de utilități preexistent, care poate fi apelat prin `[[Prototype]]`. Cele mai evidente sunt `call()` și `apply()`.
+- Atunci când există un obiect-context (folosit de o funcție prin apelare cu `apply()` sau `call()`), regula de bază a binding-ului spune că obiectul-context va fi cel la care se face bindingul `this`.
+- În contextul de execuție tot ce este cu `this.ceva` devine membru al obiectului generat.
+  - Bindingul primar se face la obiectul global.
+- Bindingul implicit se face la contextul de execuție al unei funcții sau al unei metode.
 - o funcție poate fi invocată în patru moduri: (1) ca funcție (this e window); (2) ca metodă (this e obiectul); (3) ca și constructor (this e obiectul abia construit); (4) cu `apply()` și `call()` (this e primul obiect introdus).
 - `this` este cuvânt cheie rezervat.
 - `this` este o referință la obiectul care se creează în funcție de contextul de execuție.
@@ -51,22 +67,6 @@ Folosit pentru a lua un obiect și pentru a-i îmbogăți și/sau prelucra valor
 - Function.prototype.apply()
 - Function.prototype.bind()
 - Function.prototype.call()
-
-## Mantre
-
-- Prin `this`, de fapt accesezi starea obiectului cu care lucrezi.
-- Legătura la obiectul reprezentat de cuvântul cheie `this` se realizează la momentul execuției codului, nu la momentul scrierii lui.
-- **this** este o referință către contextul de execuție curent în timp ce funcția se execută.
-- `this` nu se referă în niciun caz la **lexical scope**.
-- `this` este un binding pentru fiecare invocare a unei funcții care se bazează pe de-antregul pe call-site.
-- Funcțiile și obiectele sunt REFERENȚIATE, nu sunt deținute atunci când atribui IDENTIFICATORUL într-o expresie sau ca valoarea a unei metode.
-- Call-site (locul din cod unde este apelată o funcție) determină formarea lui `this`.
-- Modul de invocare influiențează felul în care obiectul este constituit (către care face referință `this`).
-- Toate funcțiile au la dispoziția lor un set de utilități preexistent, care poate fi apelat prin `[[Prototype]]`. Cele mai evidente sunt `call()` și `apply()`.
-- Atunci când există un obiect-context (folosit de o funcție prin apelare cu `apply()` sau `call()`), regula de bază a binding-ului spune că obiectul-context va fi cel la care se face bindingul `this`.
-- În contextul de execuție tot ce este cu `this.ceva` devine membru al obiectului generat.
-  - Bindingul primar se face la obiectul global.
-- Bindingul implicit se face la contextul de execuție al unei funcții sau al unei metode.
 
 ## Mică anatomie pentru `this`
 
@@ -799,6 +799,52 @@ ciao.prototype.urare = function(){
 
 var intalnire = new ciao('Grigoraș');
 intalnire.urare(); // Ciao Grigoraș
+```
+
+### `forEach` după felul în care se face binding-ul la `this`
+
+În cazul fat arrows, this este legat de mediul lexical al obiectului. `forEach` nu alunecă în global.
+
+```javascript
+this.array.forEach((el) => {
+  if(true){
+    this.prelucrat.push(++el);
+  };
+});
+```
+Pentru a realiza acelasi lucru, înainte de ES6 erau mai multe rețete.
+
+#### Prima: constituirea unei punți lexicale
+
+Este vorba despre legendara soluție `var self = this;`.
+
+```javascript
+var self = this;
+this.array.forEach(function (el) => {
+  if(true){
+    self.prelucrat.push(++el);
+  };
+});
+```
+
+#### A doua: pasarea lui `this` ca al doilea parametru lui `forEach`
+
+```javascript
+this.array.forEach(function (el) => {
+  if(true){
+    this.prelucrat.push(++el);
+  };
+}, this);
+```
+
+#### A treia este un bind(this) pentru a forța execuția în contextul necesare
+
+```javascript
+this.array.forEach(function (el) => {
+  if(true){
+    this.prelucrat.push(++el);
+  };
+}, bind(this));
 ```
 
 ### Lucruri la care să fii atent
