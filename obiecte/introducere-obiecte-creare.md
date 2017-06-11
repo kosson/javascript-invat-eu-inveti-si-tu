@@ -8,12 +8,23 @@ Obiectele au **proprietăți** și **metode**.
 Proprietățile sunt valori primitive - numere, boolean-uri sau șiruri de caractere. Proprietățile ***sunt ceva***.
 Metodele ***fac ceva***. Metodele sunt de fapt niște funcții. Un aspect care vă va face viața ușoară odată înțeles este acela că toate funcțiile definite în obiectul global, de fapt, devin automat metode ale acestuia, adică lui `window` în cazul browserelor.
 
+Hai să facem un obiect. Vă mai aduceți aminte de la valorile literale că cel mai simplu este folosirea obiectelor literale.
+
 ```javascript
 // un object literal
-var obi = {
-  a: 10,
-  b: 20
-};
+var obi = {a: 10, b: 20};
+```
+
+Începând cu ECMAScript 2015 se poate folosi și notația prescurtată.
+
+```javascript
+var unu = 1, este = true;
+// în loc de
+var obi = {unu: unu, este: este};
+// putem scrie mai concis
+var obi = {unu, este};
+// efectul este același
+console.log(obi); // {"unu":1,"este":true}
 ```
 
 **Moment ZEN**: Obiectele pot fi considerate ca array-uri asociative pentru că poți accesa valoarea folosind notația cu paranteze drepte: `obi['b']`.
@@ -28,7 +39,7 @@ var obi = {
 
 ## Obiecte interne (*built-in*)
 
-Am menționat că JavaScript vine din start cu obiectele care se numesc „built-in object” și pe care le-am tradus ca **obiecte interne** limbajului. Pentru a avea acces la ele nu-i nevoie să faci ceva. Pur și simplu ele sunt acolo deja, gata de a fi folosite. Există un detaliu pe care aș dori să-l remarcați cu atenție. `Obiectul global` este parte a obiectelor interne. Am putea concluziona că obiectul global plus obiectele standard constituie setul mare al celor interne. O distincție pe care trebuie să o fi realizat deja este că obiectul global nu este containerul tuturor obiectelor oricât de tentant ar fi să-l gândim astfel. Dar este „containerul” dacă vrei să-l închipui astfel a întregului cod pe care-l scrii tu și a entităților care se formează la momentul evaluării acestuia.
+Am menționat că JavaScript vine din start cu obiectele care se numesc „built-in object” și pe care le-am tradus ca **obiecte interne** limbajului. Pentru a avea acces la ele nu-i nevoie să faci ceva. Pur și simplu ele sunt acolo deja, gata de a fi folosite. Există un detaliu pe care aș dori să-l remarcați cu atenție. `Obiectul global` este parte a obiectelor interne. Am putea concluziona că `obiectul global` plus `obiectele standard` constituie setul mare al celor `interne`. O distincție pe care trebuie să o fi realizat deja este că obiectul global nu este containerul tuturor obiectelor oricât de tentant ar fi să-l gândim astfel. Dar este „containerul” dacă vrei să-l închipui astfel a întregului cod pe care-l scrii tu și al entităților care se formează la momentul evaluării acestuia.
 
 ## Moștenirea prototipală
 

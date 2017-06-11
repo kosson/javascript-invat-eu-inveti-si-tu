@@ -207,6 +207,10 @@ Bine, bine. Da' care-i treaba cu **momentele ZEN**? Pe parcursul acestei călăt
 #### Automatic semicolon insertion - introducerea automată a lui punct și virgulă
 
 În JavaScript, enunțurile (_statements_), care sunt echivalentul propozițiilor din limbajul nostru de zi cu zi, trebuie să se termine cu punct și virgulă, iar acolo unde semnul grafic nu a fost scris de programator, codul se supune mecanismului ASI - ***Automatic Semicolon Insertion***, care introduce de la sine putere semnul grafic.
+Reguli de introducere:
+- imediat înaintea acoladei de închidere `}`
+- atunci când șirul de token-uri nu poate fi tratat unitar `x - y`, de exemplu.
+- imediat după operatorii și sintagmele care nu mai permit altă dezvoltare la nivelul expresiei sau a programului: sufixurile de operare `++` și `--`; `continue`, `break`, `return`, `yield` și `yield*` și `module`.
 
 Declarațiile și instrucțiunile beneficiare sunt:
 
