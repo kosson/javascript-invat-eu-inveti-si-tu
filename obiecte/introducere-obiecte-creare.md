@@ -15,6 +15,7 @@ Pentru că ești nerăbdătoare am să-ți dau două indicii privind crearea obi
 Pur și simplu niște funcții care au o proprietate numită `prototype` folosită pentru a implementa moștenirea prototipală și pentru a avea acces la proprietăți pe care obiectul creat la apelarare funcției constructor le pune la dispoziție. Ceea ce mai trebuie să știi din start despre constructori este că la apelare, generează obiectul și apoi execută codul; nu uita că este totuși o funcție. Execuția codului dintr-un constructor are ca efect asignarea proprietăților inițiale ale obiectului nou creat.
 
 **Spune standardul**: *Fiecare obiect creat de un constructor are o referință implicită (numită prototipul obiectului) către valoarea proprității «prototype» a constructorului*.
+Mai mult de atât fiecare `prototype` poate avea drept referință un alt `prototype`, realizându-se ceea ce se numește *lanț prototipal*. Modul de funcționare a lanțului prototipal se bazează pe un mecanism de delegare atunci când se caută o proprietate a unui obiect. De exemplu, dacă cauți o proprietate într-un obiect iar ea nu este a obiectului, există o bună șansă să fie moștenită prin lanțul prototipal de la constructorul pe baza căruia a fost instanțiat așa că se face căutarea mai departe din obiect în obiect până când proprietatea este găsită sau nu.
 
 ## Componența obiectelor
 

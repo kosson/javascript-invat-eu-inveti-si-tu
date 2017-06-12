@@ -1,6 +1,14 @@
-# Array-uri - tablouri, vectori
+# `Array` - tablouri, vectori
 
-Această structură capabilă să țină valori este cel mai folosit atunci când suntem confruntați cu nevoia de a prelucra fragmente de date sau pentru a „memora” temporar valori utile unui anumit context în care se execută codul.
+Este un obiect intern care are și rol de contructor.
+
+Array-urile sunt o bornă centrală a programării indiferent de limbaj. Acestea permit stocarea temporară a unor valori într-o formă ușor accesibilă folosind indecși, dar cel mai important aspect este bogăția metodelor puse la dispoziție de obiectul intern Array pentru a prelucra, aranja, rearanja, filtra elementele conținute de array-uri.
+
+Ori de câte ori veți lucra cu valori simple (scalare), veți folosi cu siguranță array-urile.
+
+Array-urile mai pot fi folosite și ca structuri de „depozitare” a obiectelor. Spre exemplu, poți constitui un registru pentru elemente DOM cărora le asociezi câte un API.
+
+Această structură capabilă să țină valori este cea mai folosită atunci când suntem confruntați cu nevoia de a prelucra fragmente de date sau pentru a „memora” temporar valori utile unui anumit context în care se execută codul.
 
 Array-ul este cel mai des întâlnit mecanism de a „prelua” date care vin ca efect al evaluării unei funcții, de exemplu.
 
@@ -176,12 +184,24 @@ Structura lanțului ar fi: `arrayLike` --> `Object.prototype` --> `null`.
 
 ## Mantre
 
-- Array-urile sunt **obiecte** și poți adăuga proprietăți în array folosind notația dot `var a = [1,2]; a.i = 23; a.i // 23`. Valorile sunt adăugate indiferent că array-ul are un index numeric prestabilit. Ele sunt acolo.
-- Orice obiect Array are o proprietate `length`
+- Atunci când `Array` este apelat ca funcție și nu ca un constructor, va creea și va inițializa un nou obiect `Array`.
+- Are metodă internă `@@iterator`.
+- `Array`-urile sunt **obiecte** și poți adăuga proprietăți în array folosind notația dot `var a = [1,2]; a.i = 23; a.i // 23`. Valorile sunt adăugate indiferent că array-ul are un index numeric prestabilit. Ele sunt acolo.
+- Orice obiect `Array` are o proprietate `length`
 -cheia unei proprietăți al unui array se numește `index` al unui array (valorile dintre paranteze pătrate sunt convertite la string)
 -o proprietate într-un array care este identificată printr-un index este numită `element`
 -`Array` este un obiect intern limbajului JavaScript. Acesta este folosit pentru crearea array-urilor
--Array este un obiect iterabil pentru că obiectul prototip are o metodă @@iterator (precum String, TypedArray, Map și Set).
+-`Array` este un obiect iterabil pentru că obiectul prototip are o metodă @@iterator (precum String, TypedArray, Map și Set).
+
+Crearea de array-uri de dimensiuni prestabilite:
+
+```javascript
+var presetat = Array(3); // [,,]
+```
+
+Are ca efect crearea unui array cu elemente goale.
+
+![](operatiuniArrayuri.svg)
 
 ## Crearea array-urilor
 
@@ -536,3 +556,6 @@ console.log(x, restop); // 1 și Array [ 2, 3 ]
 ```
 
 Tot ce generează un array, folosindu-se această sintaxă, se poate transforma în legături la identificatori, adică valorile array-ului se pot asigna unor variabile ce sunt elementele unui alt array.
+
+## Resurse
+[MDN Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array?redirectlocale=en-US&redirectslug=JavaScript%2FReference%2FGlobal_Objects%2FArray)

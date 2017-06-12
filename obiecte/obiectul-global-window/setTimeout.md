@@ -1,4 +1,4 @@
-# setTimeout
+# `setTimeout`
 
 Este o metodă a obiectului `window`, care execută o funcție după ce timpul menționat în al doilea parametru introdus a expirat.
 

@@ -1,4 +1,42 @@
-# Obiecte interne standard
+# Obiecte interne standard - ECMAScript Standard Built-in Objects
+
+Privitor la subiectul acestor obiecte, am ales să traduc „standard built-in” ca obiecte interne standard pentru că reflectă cel mai bine realitatea.
+
+Începem povestea obiectelor interne în momentul în care un „script” ori un „modul” își începe execuția, moment în care deja există deja disponibile un set de obiecte. Standardul menționează faptul că obiectele interne standard sunt entități ECMAScript (4.2 ECMAScript Overview - https://tc39.github.io/ecma262/#sec-intro).
+Unul este obiectul global, ca parte a mediului lexical format iar altele sunt accesibile ca proprietăți ale obiectului global. Unele sunt accesibile ca proprietăți ale altor obiecte built-in.
+
+## Mică anatomie
+
+Obiectele interne standard sunt de fapt funcții care pot fi invocate. Adu-ți mereu aminte faptul că funcțiile sunt numite de standard ca „funcții obiect”, pentru că, de fapt, **funcțiile sunt obiecte**.
+
+Pentru a vedea natura acestor obiecte interne, ne vom ajuta de operatorul `typeof` pentru a *sonda* aceste entități.
+
+```javascript
+typeof window; // "object"
+typeof Object; // "function"
+typeof Array; // "function"
+```
+
+Ceea ce se observă este faptul că obiectele interne sunt funcții, care au caracteristicile unui obiect. Acum urmează o parte mai interesantă ca un mic mister egiptean și care va elucida misterul care stă în spatele disponibilității proprietăților și metodelor unui obiect intern standard. Să spunem că avem un șir de caractere, de exemplu propoziția simplă: „eu învăț”.
+Deschidem o consolă și introducem între ghilimele valoarea literală, atenție valoarea literală. Bun! În acest moment avem doar valoarea literală a șirului de caractere. Nimic ciudat, nimic anormal, dar așa cum e, e inutil. Ca să apucăm acest șir de caractere, să-l legăm la un identificator.
+
+```javascript
+var x = 'eu învăț';
+typeof x; // "string"
+```
+
+Dacă investigăm tipul valorii identificată prin x, motorul va răspunde cu `string`. Și acum vom produce o minune. Vom accesa o proprietate disponibilă doar obiectelor `String`. Și te vei întreba pe bună dreptate: cum se poate întâmpla să ai acces la proprietățile și metodele unui obiect când tu operezi cu o valoare literală?
+Rezolvarea misterului vine din faptul că de îndată ce pui punctul, care este un operator destinat accesării membrilor unui obiect, valoarea noastră este deîndată „împachetată” (wrapped) în obiectul corespunzător tipului său de valoare și, minune, devine un obiect.
+
+```javascript
+x.length; // 8
+// x a devenit obiect String
+x.constructor; // function String()
+```
+
+Putem chiar interoga care este constructorul obiectului și vom afla că este funcția obiect String. Dar imediat ce s-a încheiat operațiunea, imediat ce s-a invocat metoda și a fost returnat rezultatul, se face o despachetare.
+
+## Structură
 
 O structură a acestor obiecte este oferită chiar de standardul ECMAScript care le subîmparte pe următoarele linii de funcționalitate:
 
@@ -45,12 +83,6 @@ Dacă nu este prevăzut altfel, toate funcțiile interne și toți constructorii
 Standardul spune că fiecare funcție internă și fiecare constructor oferit de motor are obiectul prototipal al lui Function, care este valoarea inițială a expresiei Function.prototype. Această valoarea va fi valoarea slotului intern [[Prototype]] și este o simplă funcție. Acest lucru se întâmplă pentru că Function nu are o metodă internă `[[Construct]]`.
 
 În ceea ce privește oricare obiect care servește drept prototip, are ca valoare pe cea pe care o are `Object.prototype`, cu excepția obiectului prototip a lui Object.
-
-## Obiectul global
-
-Pentru DOM al HTML, obiectul global este proprietatea `window` a obiectului global, care este obiectul global în sine.
-
-`eval()` este o proprietate a obiectului global.
 
 # Resurse
 
