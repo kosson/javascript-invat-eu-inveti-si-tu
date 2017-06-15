@@ -2,13 +2,17 @@
 
 Coercion în limba engleză înseamnă constrângere. Ceea ce se petrece este o „transformare” pe care o face un operator asupra unei valori date în încercarea de a face operațiunea. Vom folosi termenul de transformare pentru a înțelege rapid ceea ce se petrece.
 
-Ține minte faptul că unii operatori, cum ar fi plus, mai întâi face o transformare a valorii operandului la echivalentul numeric și abia apoi se face operațiunea matematică.
+**Moment ZEN**: Totul în JavaScript este evaluat în final la o valoare boolean, fie ceva care poate fi considerată a fi o valoare **adevărată**, fie ceva care poate fi considerat a fi o valoare **falsă** - truthy și falsey, cum ar zice în engleză.
+
+Unii operatori, cum ar fi plus, mai întâi fac o transformare a valorii operandului la echivalentul numeric și abia apoi face operațiunea matematică.
+
+Un caz interesant este cel al operatorului unar de negare: `!`.
 
 ## Transformarea unui șir de caractere
 
-Uneori datele vin ca șiruri de caracte, chiar și cele numerice. Atunci când ai nevoie să faci o operațiune matematică, ai nevoie de un mecanism care să le transforme din forma lor textuală în cea numerică, de care este nevoie.
+Uneori datele vin ca șiruri de caractere, chiar și cele numerice. Atunci când ai nevoie să faci o operațiune matematică, ai nevoie de un mecanism care să le transforme din forma lor textuală în cea numerică, de care este nevoie.
 
-Cea mai simplă transformare este aceea de a pune minus sau plus înaintea unui șir de caractere. Exemple sunt oferite la descrierea operatorilor unari.
+Cea mai simplă transformare este aceea de a pune minus sau plus înaintea unui șir de caractere. Exemplele sunt oferite la descrierea operatorilor unari.
 
 ```javascript
 +'10'; // 10
@@ -17,11 +21,12 @@ Cea mai simplă transformare este aceea de a pune minus sau plus înaintea unui 
 -null; // -0
 ```
 
-Chiar în cazul operațiunilor matematice se fac transformările de care este nevoie.
+În cazul tuturor operațiunilor matematice se fac transformările de care este nevoie.
 
 ```javascript
 2 * "3"; //
 ```
+
 Dacă am aplica același raționament pentru operatorul plus, vom remarca ceva interesant. Rezultatul nu va fi o transformare a șirului la număr, ci va rezulta o concatenare a celor doi operanzi ca și când ar fi amândoi șiruri de caractere.
 
 ```javascript
@@ -44,7 +49,7 @@ Uneori este nevoie să se facă transformarea unui număr în caracter sau într
 10 + ''; // "10"
 ```
 
-Sau mai rapid folosind obiectul intern `String` prin apelare directă. Aici nu mai vorbim despre coercion, ci despre o conversie a tipului de dată.
+Sau mai rapid folosind obiectul intern `String` prin apelare directă. Aici nu mai vorbim despre coercion, ci despre o conversie a tipului de valoare.
 
 ```javascript
 String(10); // "10"
@@ -106,29 +111,29 @@ parseInt('101',2); // 5
 
 ## Evaluarea condiției if
 
-|           `true`/`false`                   |
-|:-------------------------------------------|
-| if (true) { /* executes */ }`              |
-| `if (false) { /* does not execute */ }`    |
-| `if (1) { /* executes */ }`                |
-| `if (0) { /* does not execute */ }`        |
-| `if (-1) { /* executes */ }`               |
-| `if (-1) { /* executes */ }`               |
-| `if ("false") { /* executes */ }`          |
-| `if ("1") { /* executes */ }`              |
-| `if ("0") { /* executes */ }`              |
-| `if ("-1") { /* executes */ }`             |
-| `if ("") { /* does not execute */ }`       |
-| `if (null) { /* does not execute */ }`     |
-| `if (undefined) { /* does not execute */ }`|
-| `if (Infinity) { /* executes */ }`         |
-| `if (-Infinity) { /* executes */ }`        |
-| `if ([]) { /* executes */ }`               |
-| `if ({}) { /* executes */ }`               |
-| `if ([[]]) { /* executes */ }`             |
-| `if ([0]) { /* executes */ }`              |
-| `if ([1]) { /* executes */ }`              |
-| `if (NaN) { /* does not execute */ }`      |
+|           `true`/`false`                        |
+|:------------------------------------------------|
+| if (true) { /* execută codul */ }`              |
+| `if (false) { /* nu execută codul */ }`         |
+| `if (1) { /* execută codul */ }`                |
+| `if (0) { /* nu execută codul */ }`             |
+| `if (-1) { /* execută codul */ }`               |
+| `if (-1) { /* execută codul */ }`               |
+| `if ("false") { /* execută codul */ }`          |
+| `if ("1") { /* execută codul */ }`              |
+| `if ("0") { /* execută codul */ }`              |
+| `if ("-1") { /* execută codul */ }`             |
+| `if ("") { /* nu execută codul */ }`            |
+| `if (null) { /* nu execută codul */ }`          |
+| `if (undefined) { /* nu execută codul */ }`     |
+| `if (Infinity) { /* execută codul */ }`         |
+| `if (-Infinity) { /* execută codul */ }`        |
+| `if ([]) { /* execută codul */ }`               |
+| `if ({}) { /* execută codul */ }`               |
+| `if ([[]]) { /* execută codul */ }`             |
+| `if ([0]) { /* execută codul */ }`              |
+| `if ([1]) { /* execută codul */ }`              |
+| `if (NaN) { /* nu execută codul */ }`           |
 
 ## Resurse
 

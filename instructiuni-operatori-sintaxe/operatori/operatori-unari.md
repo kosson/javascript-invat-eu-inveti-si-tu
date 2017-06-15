@@ -6,7 +6,7 @@ Acest tip de operator se pune înainte sau după operator.
 
 ## Operatorul plus `+`
 
-Mai întâi de toate încearcă o transformare a operandului într-un număr. Dacă operandul nu poate fi convertit, operatorul va returna `NaN`.
+Mai întâi de toate, acest operator încearcă o transformare a operandului într-un număr. Dacă operandul nu poate fi convertit, operatorul va returna `NaN` în cazul în care valoarea nu poate fi folosită la adunare.
 
 ```javascript
 +10; // 10
@@ -30,9 +30,30 @@ După cum este observabil, dacă un obiect are o metodă `valueOf` care returnea
 10 + 1.1; // 11.1
 ```
 
+Acest operator mai este folosit și pentru a face concatenări, adică să construiașscă șiruri de caractere mai mari din fragmente mai mici. Semnalul pentru motorul JavaScript că se dorește o concatenare este acela că valoarea din stânga nu este o valoare numerică. Pe cea din dreapta sa va încerca să o transforme într-una numerică pentru că acesta este comportamentul său implicit. Deci, dacă valoarea din stânga nu este un număr, ci orice altceva, va încerca o concatenare.
+
+```javascript
+'ceva' + 1; // "ceva1"
+true + 1; // 2
+true + true; // 2
+true + false; // 1
+[] + true; // true
+[] + []; // '' un șir gol
+{} + 1; // 1
+```
+
+După cum se observă, dacă valoarea din stânga a fost evaluată la o valoare numerică aproximativă, adică din `true` în 1, operațiunea matematică se desfășoară corect. Pentru a verifica cum vor fi evaluate valorile, consultați și tabelele de transformare. Ceea ce va încerca motorul de JavaScript este să facă o transformare a valorii din dreapta operatorului plus, fie într-o valoare primitivă, fie într-un număr, fie într-un șir de caractere.
+
+```javascript
++('1'+'2'); //12
+typeof +('1'+'2'); // "number"
+```
+
+După cum putem observa operatorul plus poate transforma expresii întregi într-un număr.
+
 ## Operatorul minus `-`
 
-La fel ca plus încearcă mai întâi o conversie a operandului la număr.
+La fel ca operatorul plus și acest operator încearcă mai întâi o conversie a operandului la o valoare număr.
 
 Minus precedă operandul convertind tipurile de date care nu sunt numere. Spre deosebire de operatorul plus, operatorul minus mai face ceva în plus: neagă rezultatul evaluării.
 
@@ -50,7 +71,7 @@ Minus precedă operandul convertind tipurile de date care nu sunt numere. Spre d
 
 ## Operatorul logic de negare `!`
 
-Încearcă mai întâi de toate o conversie a operandului la o valoare `Boolean`.
+Încearcă mai întâi de toate o conversie a operandului la o valoare `Boolean`. Adu-ți mereu aminte faptul că în JavaScript toate expresiile pot fi evaluate la o valoare boolean. Absolut toate expresiile.
 
 ```javascript
 !true; // false

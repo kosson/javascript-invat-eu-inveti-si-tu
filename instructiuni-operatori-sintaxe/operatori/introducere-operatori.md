@@ -13,3 +13,7 @@ Sunt semne grafice care indică ce operațiune se va efectua la momentul evaluă
 Să ne amintim că expresiile sunt constituite din înșiruirea de operanzi și operatori.
 
 **Moment ZEN**: Un program JavaScript este evaluarea unui set de expresii, care pentru a fi „rezolvate”, mai întâi trebuie să rezolvi din aproape în aproapte toate celelalte expresii mai mici.
+
+## Resurse
+
+http://www.jsfuck.com/

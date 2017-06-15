@@ -207,7 +207,9 @@ Bine, bine. Da' care-i treaba cu **momentele ZEN**? Pe parcursul acestei călăt
 #### Automatic semicolon insertion - introducerea automată a lui punct și virgulă
 
 În JavaScript, enunțurile (_statements_), care sunt echivalentul propozițiilor din limbajul nostru de zi cu zi, trebuie să se termine cu punct și virgulă, iar acolo unde semnul grafic nu a fost scris de programator, codul se supune mecanismului ASI - ***Automatic Semicolon Insertion***, care introduce de la sine putere semnul grafic.
+
 Reguli de introducere:
+
 - imediat înaintea acoladei de închidere `}`
 - atunci când șirul de token-uri nu poate fi tratat unitar `x - y`, de exemplu.
 - imediat după operatorii și sintagmele care nu mai permit altă dezvoltare la nivelul expresiei sau a programului: sufixurile de operare `++` și `--`; `continue`, `break`, `return`, `yield` și `yield*` și `module`.
@@ -274,7 +276,7 @@ Cea mai simplă expresie este o `valoare literală` scrisă direct, ori o variab
 var x;  // expresie de variabilă
 ```
 
-După cum spuneam, combinarea operanzilor cu operatorii creează la rândul lor expresii. E necesară o mică precizare. Valorile de lucru sunt de două feluri. Cele care sunt fixe, care așa cum le-ai scris, așa rămân. Mai sunt numite și **literale**. Și valorile care se pot modifica în funcție de dinamica programului și care se numesc **variabile**, care pornesc de la o valoare dată sau nu.
+După cum spuneam, combinarea operanzilor cu operatorii, creează expresii. Este necesară o mică precizare. Valorile de lucru sunt de două feluri. Cele care sunt fixe, care așa cum le-ai scris, așa rămân. Mai sunt numite și **literale**. Și valorile care se pot modifica în funcție de dinamica programului și care se numesc **variabile**, care pornesc de la o valoare dată sau nu.
 
 ```javascript
 var x = 1 + 1;  // expresie de atribuire a unei expresii aritmetice
