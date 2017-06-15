@@ -21,7 +21,7 @@ Tipul de valori `Undefined` nu poate să conțină decât o singură valoare: `u
 
 Cu `Boolean` lucrurile se schimbă, acest tip putând avea două valori: `true` sau `false`.
 
-Tipul `String` este folosit pentru a reprezenta date textuale, fiind de fapt, un set de valori întregi pe 16 biți. Fiecare valoare este considerată a fi „un element”. Un element este valoarea unui „code unit” din schema de codate a caracterelor UTF-16.
+Tipul `String` este folosit pentru a reprezenta date textuale, fiind de fapt, un set de valori de numere întregi cu o reprezentare binară pe 16 biți. Fiecare valoare este considerată a fi „un element”. Un element este valoarea unui „code unit” din schema de codare a caracterelor UTF-16.
 
 Tipul `Symbol` este un set de valori care nu sunt pot fi considerate șiruri, dar care pot fi folosite ca și chei ale unei proprietăți dintr-un obiect.
 În cazul lui `Symbol`, fiecare valoare este unică și nu poate fi modificată („immutable”), dar fiecare valoare la rândul ei are o valoare asociată folosită pentru a descrie simbolul, care este `undefined` sau un șir de caractere. Un Symbol cu care te vei întâlni foarte des este `@@iterator` și care este o referință către o metodă care returnează un obiect iterator pentru un obiect pe care-l folosești. Formula `for...of` face apel automat la această metodă.
@@ -41,10 +41,12 @@ Atenție, fiecare obiect trebuie să aibe seturi cheie - valoare care să fie un
 
 ## Datele: agregarea și prelucrarea lor
 
+Pentru a oferi o perspectivă mai largă vom lărgi puțin perspectiva pentru a oferi un context tipurilor de valori.
 Orice limbaj de programare are nevoie de structuri care să permită stocarea și manipularea facilă a datelor.
-Javascript permite manipularea datelor la nivelul unor structuri stabilite formal în limbaj precum array-urile și obiectele. Cele mai simple structuri de date sunt însăși șirurile de caractere, care se supun metodelor de prelucrare a datelor specifice unui array.
-Pentru a înțelege mai bine, imaginați-vă că sunteți în poziția unei funcții care produce niște rezultate. Dacă acele rezultate nu ar fi „încărcate” într-o structură capabilă să le preia, acestea s-ar pierde.
+Javascript permite manipularea datelor la nivelul unor structuri stabilite formal în limbaj precum array-urile și obiectele. Însă cele mai simple structuri de date sunt însăși șirurile de caractere, care se supun metodelor de prelucrare a datelor specifice unui array.
+Cele mai utile structuri de prelucrare a datelor sunt funcțiile. Pe acestea vă veți sprijini atunci când veți porni la manipularea valorilor. Din punct de vedere al preluării, imaginați-vă că sunteți în poziția unei funcții care produce niște rezultate. Dacă acele rezultate nu ar fi „salvate” într-o structură capabilă să le preia, acestea s-ar pierde.
 
-Obiectele pot fi transformate în array-uri dacă acest lucru servește procesării datelor conținute. De cele mai multe ori, varietatea și flexibilitatea metodelor obiectelor interne limbajului vă vor oferi și soluțiile de prelucrare.
+Obiectele pot fi transformate în array-uri dacă acest lucru servește procesării datelor conținute. De cele mai multe ori, varietatea și flexibilitatea metodelor obiectelor interne limbajului, vă vor oferi și soluțiile de prelucrare.
 
-Cel mai des vor fi folosite array-urile și obiectele care seamănă cu array-urile (adică care oferă suport parțial metodelor care pot fi aplicate în mod tradițional asupra array-urilor).
+Cel mai des vor fi folosite array-urile și obiectele, care seamănă cu array-urile (adică care oferă suport parțial metodelor care pot fi aplicate în mod tradițional asupra array-urilor).
+Aceste structuri vor folosi datele ca valori prezentate deja.

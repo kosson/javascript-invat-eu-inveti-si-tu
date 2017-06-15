@@ -16,6 +16,8 @@ Array-ul este cel mai des întâlnit mecanism de a „prelua” date care vin ca
 
 În comunitatea profesională array-ul mai este întâlnit și sub denumirea de listă sau vector.
 
+**Spune standardul**: Valorarea slotului intern [\[Prototype]] a contructorului Array este obiectul prototype a obiectul intern Function. **Obiectul prototype al lui `Function` este în sine un obiect-funcție intern**.
+
 ## Descriere
 
 Array-urile conțin mai multe valori numite `elemente` care sunt ordonate cu niște chei numite indecși de pornesc numărătoarea de la 0.

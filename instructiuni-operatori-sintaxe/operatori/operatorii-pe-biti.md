@@ -1,6 +1,8 @@
 # Operatorii de lucru pe biți - bitwise
 
-Acești operatori sunt ceva mai speciali și este posibil să nu vă întâlniți niciodată în practică cu ei. Nu-i vom trata mai prejos pentru că este posibil să aveți nevoie de a manipula valori chiar la nivelul cel mai de jos al reprezentării acestora. Peste tot pe unde vă veți uita pe net, veți găsi următorul exemplu de utilitate, care are ca scop obținerea canalelor de roșu, verde și albastru pentru o culoare în hexa.
+Acești operatori sunt ceva mai speciali și este posibil să vă întâlniți rar în practică cu ei. Este posibil să aveți nevoie de a manipula valori chiar la nivelul cel mai de jos al reprezentării acestora și pentru acest lucru acești operatori sunt foarte importanți.
+
+Primul contact cu acești operatori este exemplul care are ca scop obținerea canalelor de roșu, verde și albastru pentru o culoare a cărei valoare o ai în notație hexazecimal.
 
 ```javascript
 var hex = 'ffaadd';
@@ -36,7 +38,7 @@ De exemplu, 27.
 6 / 2 = 3 * 2   + 0;
 3 / 2 = 1 * 2   + 1;
 
-Pornind de jos reconstituim valoarea binară: 11011.
+Pornind de jos reconstituim valoarea binară: **11011**.
 
 11011
 43210 - reprezentând puterea la care ridici 2
@@ -56,10 +58,28 @@ Mai trebuie menționat un lucru foarte important. Atunci când vine vorba de luc
 
 ## Not `~`
 
-Va nega toți biții care reprezintă un număr.
+Va nega toți biții care reprezintă un număr. Acest operator are comportamentul unui mic algoritm. Ceea ce face este să ia numărul întreg pozitiv, îi adaugă o unitate și îi schimbă semnul.
 
 ```javascript
+console.log(~-2); // 1
+console.log(~0); // -1
 ~30; // -31
+```
+
+Folosirea succesivă a operatorului NOT poate servi ca mecanism rapid de trunchiere a numerelor. Este preferabil ca viteză folosirii lui `Math.trunc()` sau `Math.floor()`.
+
+```javascript
+console.log(~~4.3245); // 4
+console.log(~~-34.23); // -34
+```
+
+Poți să-l folosești și pentru a determina dacă un element este într-un array sau nu.
+
+```javascript
+if(~elemente.indexOf('ceva')) {
+  // dacă e -1 spune evaluarea, înseamnă că nu e
+  // dacă e 0, atunci elementul este.
+};
 ```
 
 ## And `&`
@@ -75,12 +95,19 @@ parseInt('1010', 2); // 10
 
 ## Or `|`
 
-Operatorul va converti valorile în corespondent binar și va returna un număr binar pentru care va lua pozitie cu poziție din fiecare binar al numerelor reprezentate și dacă una este 1, acesta va fi luat în considerare pentru a compune noul binar.
+Operatorul va converti valorile în corespondent binar și va returna un număr binar pentru care va lua poziție cu poziție din fiecare binar al numerelor reprezentate și dacă una este 1, acesta va fi luat în considerare pentru a compune noul binar.
 
 ```javascript
 10 | 20; // (11110) este returnat 30
 //  1010
 // 10100
+```
+
+Poate fi folosit cu succes pentru a trunchia numerele cu virgulă.
+
+```javascript
+var x = 49.345;
+x | 0; // 49
 ```
 
 ## XOR (eXclusive OR)
@@ -117,6 +144,13 @@ Efectul operatorului indiferent de sensul său este să transforme valoarea înt
 parseInt('100', 2); // 4
 ```
 
+Poți trunchia valori cu virgulă.
+
+```javascript
+var x = 49.345;
+x >> 0; // 49
+```
+
 ### Deplasare pe biți spre dreapta `>>`
 
 În cazul deplasării spre dreapta, avem o mică mențiune privind semnul pentru că cel mai din stânga bit, dă semnul numărului întreg reprezentat pe cei 32 de biți. Pentru că biții se vor mișca spre dreapta, bitul semnificativ, care dă semnul își va păstra poziția propagându-se și pentru noul întreg reprezentat.
@@ -128,4 +162,18 @@ parseInt('100', 2); // 4
 32 >> 4; // 2
 ```
 
+Poți trunchia valori cu virgulă.
+
+```javascript
+var x = 49.345;
+x << 0; // 49
+```
+
 ### Deplasare pe biți spre dreapta prin completare cu zerouri la stânga și atribuire `>>>`
+
+Poți trunchia valori cu virgulă.
+
+```javascript
+var x = 49.345;
+x >>> 0; // 49
+```

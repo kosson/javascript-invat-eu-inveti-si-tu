@@ -8,14 +8,16 @@ Atunci când `Function` este apelat ca funcție și nu ca un constructor, este c
 
 Constructorul lui Function este în sine un obiect funcție built-in.
 
-Obiectul prototype a lui Function este el în sine un built-in function object dar care nu poate fi constructor (nu are metoda internă [[Construct]]). Acest obiect nu are la rândul său o proprietate `property`.
+**Obiectul prototype al lui `Function` este în sine un obiect-funcție intern**.
+
+`Function` nu poate fi constructor (nu are metoda internă [\[Construct]]). Acest obiect nu are la rândul său o proprietate `property`.
 
 ## Spune standardul
 
 Funcțiile create folosind `Function.prototype.bind()` au următoarele sloturi interne:
-- \[[BoundTargetFunction]] care este obiectul funcție împachetat,
-- \[[BoundThis]] fiind valoarea care este pasată întotdeauna ca this atunci când este apelată funcția împachetată.
-- \[[BoundArguments]] este o listă de valori a cărei valori sunt folosite ca prime argumente pentru funcția împachetată apelată.
+- [\[BoundTargetFunction]] care este obiectul funcție împachetat,
+- [\[BoundThis]] fiind valoarea care este pasată întotdeauna ca this atunci când este apelată funcția împachetată.
+- [\[BoundArguments]] este o listă de valori a cărei valori sunt folosite ca prime argumente pentru funcția împachetată apelată.
 
 Nu au proprietatea `prototype` obiectele funcții care sunt create prin `Function.prototype.bind` sau care au fost create prin evaluarea definirii unei simple metode (care nu este `Generator`) sau funcțiile arrow.
 

@@ -1,6 +1,6 @@
 # Obiecte interne standard - ECMAScript Standard Built-in Objects
 
-Privitor la subiectul acestor obiecte, am ales să traduc „standard built-in” ca obiecte interne standard pentru că reflectă cel mai bine realitatea.
+Privitor la subiectul acestor obiecte, am ales să traduc „standard built-in” ca **obiecte interne standard** pentru că reflectă cel mai bine realitatea.
 
 Începem povestea obiectelor interne în momentul în care un „script” ori un „modul” își începe execuția, moment în care deja există deja disponibile un set de obiecte. Standardul menționează faptul că obiectele interne standard sunt entități ECMAScript (4.2 ECMAScript Overview - https://tc39.github.io/ecma262/#sec-intro).
 Unul este obiectul global, ca parte a mediului lexical format iar altele sunt accesibile ca proprietăți ale obiectului global. Unele sunt accesibile ca proprietăți ale altor obiecte built-in.

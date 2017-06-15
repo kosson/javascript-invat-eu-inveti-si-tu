@@ -313,7 +313,11 @@ Continuăm cu o precizare foarte importantă pentru a întări ceea ce am rememo
 
 ##### Tratarea expresilor ceva mai „nefirești” - coercion
 
-JavaScript este un limbaj de programare care oferă o flexibilitate fantastică. În ceea ce privește operanzii, aceștia pot fi chiar de tipuri diferite iar JavaScript este forțat să ofere totuși un răspuns. Hai să ne uităm la următoarea expresie: `true + 10;` pe care o dăm motorului JavaScript spre evaluare. Ce crezi că se va întâmpla pentru că în acest moment operezi cu o valoare boolean și un număr?
+JavaScript este un limbaj de programare care oferă o flexibilitate fantastică. În ceea ce privește operanzii, aceștia pot fi chiar de tipuri diferite iar JavaScript este forțat să ofere totuși un răspuns.
+
+**Moment ZEN**: Totul în JavaScript este evaluat în final la o valoare boolean, fie ceva care poate fi considerată a fi o valoare **adevărată**, fie ceva care poate fi considerat a fi o valoare **falsă** - truthy și falsey, cum ar zice în engleză.
+
+Hai să ne uităm la următoarea expresie: `true + 10;` pe care o dăm motorului JavaScript spre evaluare. Ce crezi că se va întâmpla pentru că în acest moment operezi cu o valoare boolean și un număr?
 
 JavaScript va recurge la un mecanism de coerciție (în limba engleză **coercion**) asupra valorilor și în acest caz, va „transforma” valoarea boolean în echivalentul său numeric, adică 1. Da, da, `true` este 1, iar `false` este 0.
 
@@ -478,7 +482,7 @@ Structura eliptică reprezentată precum o bandă care se rotește continuu imag
 
 Un **tărâm** este constituit din **obiectul global** pentru tărâmul la care ne referim, un set de **obiecte interne** și cadrul lexical creat de însăși felul în care este redactat codul („lexical environment"). Toate tărâmurile care sunt create sunt evidențiate de o înregistrare specială numită de standard `Realm Record`. Din toată această mică listă reține faptul că JavaScript vine cu câteva obiecte din start, care împreună cu programul scris de tine construiesc „un tărâm” - Realm.
 
-**Moment Zen**: un program JavaScript este de un grup de obiecte care comunică între ele.
+**Moment ZEN**: un program JavaScript este de un grup de obiecte care comunică între ele.
 
 Obiectele acestea sunt niște colecții de proprietăți iar pentru fiecare dintre proprietăți există atribute care determină cum se pot folosi acestea. Proprietățile pot fi considerate ca niște recipiente care conțin la rândul lor **valori**, **funcții** sau chiar alte **obiecte**. Dacă urmăm imaginea rodiei, proprietățile pot fi bobițele, care la rândul lor conțin sâmburele, care este chiar valoarea.
 
@@ -553,7 +557,9 @@ Care este funcția variabilelor în economia unui program? Acesta este întrebar
 var x = 1;
 ```
 
-Ba mai mult, are nevoie de „a prinde” valorile returnate din anumite procesări sau evaluări a expresiilor.
+**Moment ZEN**: JavaScript este un limbaj redactat dinamic (*dynamically typed language*), ceea ce înseamnă că nu trebuie să specifici tipul de valoare al variabilei așa cum în alte limbaje este cerut: `int x = 1`.
+
+Variabilele sunt mai ales necesare pentru „a prinde” valorile returnate din anumite procesări sau evaluări ale expresiilor.
 
 ```javascript
 var identificValoarea = 2 + 1;
