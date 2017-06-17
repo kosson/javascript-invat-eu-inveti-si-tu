@@ -1,4 +1,8 @@
-# Protocoale de iterare
+# Iterații
+
+Dicționarul explicativ ne dă o definiție foarte utilă: „repetare a unui anumit procedeu de calcul, prin aplicarea lui la rezultatul calculului din etapa precedentă”.
+
+## Protocoale de iterare
 
 ECMAScript 2015 a introdus un nou mecanism de parcurgere a datelor numit **iterare**.
 
