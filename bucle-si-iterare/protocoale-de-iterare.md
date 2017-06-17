@@ -2,8 +2,6 @@
 
 ECMAScript 2015 a introdus un nou mecanism de parcurgere a datelor numit **iterare**.
 
-Iterarea trebuie văzută ca o bandă de asamblare robotizată ( TODO: ilustrează principiul ).
-
 Ce înseamnă **iterare**?
 Atunci când rezultatul unui pas devine valoarea de start pentru următorul, atunci vorbim despre iterare.
 
@@ -38,7 +36,7 @@ Permite obiectelor să-și definească sau să-și particularizeze comportamentu
 - `TypedArray`,
 - `arguments`
 
-Pentru a fi iterabil, un obiect trebuie să implementeze metoda `@@iterator`, ceea ce înseamnă că obiectul (sau unul din obiectele din lanțul prototipal), trebuie să aibe o proprietate cu o cheie `Symbol.iterator`, care să aibe drept valoare o funcție fără argumente ce returnează un obiect. Acest obiect returnat se conformează lui `iterator protocol`.
+Pentru a fi iterabil, un obiect trebuie să implementeze metoda `@@iterator`, ceea ce înseamnă că obiectul (sau unul din obiectele din lanțul prototipal), trebuie să aibe o proprietate cu o cheie `Symbol.iterator`, care să aibă drept valoare o funcție fără argumente ce returnează un obiect. Acest obiect returnat se conformează lui `iterator protocol`.
 
 Exemplu pe `String` care este un exemplu de obiect iterabil construit în limbaj.
 

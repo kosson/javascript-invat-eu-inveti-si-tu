@@ -30,10 +30,28 @@ JavaScript are șase valori primitive:
 Atunci când nu ești sigur de valoarea reprezentată de un identificator, există un operator la îndemână care să te ajute să verifici ce este: `typeof`.
 
 ```javascript
-typeof 10; // number
+var a = 10,
+    b = 'ceva',
+    c = true,
+    d = undefined,
+    e = Symbol('descriere'),
+    f = null;
+typeof a; // number
+typeof b; // string
+typeof c; // boolean
+typeof d; // undefined
+typeof e; // symbol
+typeof f; // object
 ```
 
 Atenție! `typeof null`, returnează `object`. Acest lucru se întâmplă pentru că standardul ECMAScript spune că `null` este un tip distinct în sine.
+
+Simbolurile au fost introduse de ES6. Pentru a crea un simbol se va folosi constructorul `Symbol` apelându-l ca pe o funcție, nu cu `new`. De fapt, chiar standardul spune că nu trebuie folosit cu `new`.
+
+```javascript
+var simbol = Symbol('o descriere');
+typeof simbol; //"symbol"
+```
 
 Valorile primitive și obiectele au proprietăți și metode. Primitivele beneficiază de acestea prin „împachetarea” valorii în obiectul corespondent pentru că pentru fiecare primitivă există un obiect intern. Împachetarea (wrapping-ul) se face fără știrea sau intervenția utilizatorului și astfel, pare că și primitivele au metode.
 
@@ -51,31 +69,3 @@ Veți observa mai departe, când veți studia array-urile câteva similarități
 
 - Obiectele wrapper corespondente nu au același comportament cu primara în sine atunci când se fac comparații.
 - Setarea și apelarea proprietăților pentru o primară, are ca efect crearea obiectului wrapper.
-
-## Împachetarea primitivelor
-
-Există și constructori care „împachetează” primitivele în obiectul corespondent.
-
-De exemplu:
-
-```javascript
-var sir = new String('ceva');
-typeof sir;     // "object"
-typeof 'ceva';  // "string"
-```
-
-Constructorii sunt utili pentru metodele tip utilitar pe care le pun la dispoziție.
-
-```javascript
-"ceva".toUpperCase(); // "CEVA"
-```
-
-Ceea ce s-a întâmplat este că `ceva` a fost „împachetat” în obiectul corespondent primitivei. Acest obiect are în prototipul său metoda `toUpperCase()`.
-
-## NaN - Not a Number
-
-Dacă încerci o operațiune matematică cu două tipuri de date diferite dintre care una nu poate fi „convertită” la număr, va fi returnată valoarea de eroare NaN.
-
-```javascript
-3 * 'trei'; // NaN
-```
