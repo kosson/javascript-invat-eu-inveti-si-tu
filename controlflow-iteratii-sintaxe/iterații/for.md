@@ -19,9 +19,11 @@ Expresiile opționale conțin:
 - **un comparator**, care ia valoarea din contor și o compară cu o altă valoare, de regulă dimensiunea unui array adusă prin proprietatea `array.length`.
 - **un incrementor/decrementor**
 
+Privind la expresiile folosite pentru a face funcțional un for, nu poți să nu privești la expresia `do...while` și să nu te întrebi, de ce nu ai folosi-o în continuare pe aceasta. Singura diferență este că la `do...while`, inițializarea sau contorul ca expresie stă afară înainte iar condiția sau comparatorul este în argumente iar blocul are la final expresia de incrementare. Răspunsul este legat de concizia pe care o oferă `for`. Este pur și simplu mai ușor de urmărit.
+
 De cele mai multe ori vei întâlni în cod numele identificatorului variabilei pentru contor ca fiind litera `i`. Acesta vine ca prescurtare la termnul *index* și este larg utilizat. Atenție, nu este necesar să se folosească `i`. Poți numi variabila cum dorești.
 
-În cazul în care se decide omiterea comparatorului, se va crea o buclă infinită, care poate fi întreruptă folosind comanda `break`.
+În cazul în care se decide omiterea comparatorului, se va crea o buclă infinită, care poate fi întreruptă doar folosind comanda `break`.
 
 ```javascript
 for (var x = 0; ; x++) {
@@ -35,7 +37,7 @@ Pot fi omise toate cele trei expresii opționale, dar vor trebui tratate în blo
 ```javascript
 console.time("start");
 var x = 0;
-for(;;){
+for (;;) {
   console.log(x);
   // dacă nu introduci decizia
   // ai o buclă infinită
@@ -45,9 +47,15 @@ for(;;){
 console.timeEnd("final");
 ```
 
+Motivul pentru care bucla este una infinită este că blocul de condiție va vi evaluat la `undefined`, care este transformat într-un „falsy”, ceea ce conduce la execuția infinită.
+
+## Declararea variabilelor în `for`
+
 Declararea unei variabile într-un `for`, are ca efect, declararea unei variabile în funcția în care rulează bucla.
 
 Pentru cei ingrijorați de blocul delimitat de acolade. Doresc să vă liniștesc temerile. În acest moment, conform standardului un bloc de cod `for` nu creează un scope (mediu lexical separat). Ține minte că doar funcțiile creează unul.
+
+Totuși, declararea variabilelor cu `let`, le va „lega” de blocul de execuție a lui `for`.
 
 ### Sari peste o iterație - iterare cu verificare
 
@@ -69,9 +77,11 @@ for (var x = 0; x < 10; x++) {
 
 ### Instrucțiunea `for` poate fi folosită și în lucrul cu șirurile de caractere
 
+Pur și simplu este cazul în care la un caracter poți adăuga un altul până când numărul lor va atinge limita specificată prin valoarea lui `length`.
+
 ```javascript
-for (var i = "a"; i !="aaaaaaaa"; i += "a") {
-  document.writeln("test");
+for (var i = "»"; i.length < 10; i += "~") {
+  console.log(i);
 }
 ```
 
@@ -102,3 +112,21 @@ Buclele cu `for` pot fi folosite pentru introducerea de elemente în DOM.
   </script>
 </html>
 ```
+
+## Folosirea lui for cu multiple variabile
+
+În enunțurile `for` se pot introduce mai multe variabile. Un exemplu pentru a căuta membri ai șirului lui Fibonacci implică declararea mai multor variabile inițiale iar apoi în expresia de incrementare, acestea sunt manipulate pentru a avansa.
+
+```javascript
+for(let temp, i = 0, j = 1; j < 4; temp = i, i = j, j = i + temp) {
+  console.log(j);
+};
+```
+
+![Ilustrație pentru ciclurile for](for-ilustratie-for-fibonacci.png)
+
+
+
+## Referințe
+
+Ethan Brown. Learning JavaScript

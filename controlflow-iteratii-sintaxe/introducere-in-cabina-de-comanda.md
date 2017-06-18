@@ -29,12 +29,14 @@ Uneori ai nevoie să verifici valoare cu valoare un set de parametri obținut de
 
 Această repetiție a unui set de instrucțiuni verificând permanent o anumită valoare de adevăr se numește iterare și este foarte folositoare în programare pentru a prelucra seturi de date parcurgându-le element cu element. Instrumentarul iterării este compus din instrucțiunile `do...while`, `for...in`, `for...of`, `for` și `while`.
 
-Astfel de structuri de iterare pot fi numite și bucle. De ce? Pentru că pur și simplu intră ca o placă de pickup stricată într-o buclă care nu poate fi ruptă decât atunci când anumite condiții sunt întrunite... bineînțeles că cineva trebuie să ridice acul pickup-ului căci altfel înnebunim aici cu toții.
+Astfel de structuri de iterare pot fi numite și bucle. De ce? Pentru că pur și simplu intră ca o placă de pickup într-o buclă care nu poate fi ruptă decât atunci când anumite condiții sunt întrunite... bineînțeles că cineva trebuie să ridice acul pickup-ului; altfel înnebunim aici cu toții.
 
-Concluzionând, avem patru comenzi cu care poți schimba în orice moment cursul acțiunilor:
+Concluzionând, avem patru enunțuri care se comportă precum niște comenzi de salt cu care poți schimba în orice moment cursul acțiunilor:
 - `break`: conduce la ieșirea prematură dintr-o buclă
 - `continue`: produce o săritură peste o iterație a unei bucle dacă o anumită condiție a fost împlinită
 - `return`: iese imediat din execuția unei funcții
 - `throw`: indică o excepție, care va fi capturată de un gestionar pentru astfel de evenimente nedorite.
+
+Acestor enunțuri li se mai spun de salt pentru că modifică sensul de execuție a codului; dintr-un punct al codului se face un salt în altul.
 
 Pentru că ne-am familiarizat deja cu mare parte din trusa oferită de limbaj, vom intra în câteva detalii importante pentru fiecare dintre acestea cu dorința de a le înțelege în profunzime.

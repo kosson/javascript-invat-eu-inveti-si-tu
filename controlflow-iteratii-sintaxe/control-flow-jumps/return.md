@@ -1,6 +1,7 @@
 # Comanda `return`
 
 Orice funcție în JavaScript returnează o valoare. Folosind `return` obții rezultatul evaluării funcției.
+Poate fi utilizat și pentru a ieși din execuția unei funcții dacă o anumită condiție a fost întrunită.
 
 ## Mantre
 
