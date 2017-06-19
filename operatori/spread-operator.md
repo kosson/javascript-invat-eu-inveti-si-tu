@@ -12,7 +12,7 @@ function ex(primul, ...multiAltii){
 }; ex(1, 2, 3, 4, 5); // Primul argument 1 și un array: 2,3,4,5
 ```
 
-Operatorul spread permite „desfacerea” (destructurarea) unui array în elementele sale componente luate independent pentru a fi pasate unei funcții.
+Operatorul spread permite „desfacerea” unui array în elementele sale componente luate independent pentru a fi pasate unei funcții.
 
 ```javascript
 var colectie = ['cooperare', 'independență', 'acceptare'];

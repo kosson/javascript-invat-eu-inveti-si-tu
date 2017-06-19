@@ -373,7 +373,7 @@ var {unu = 10, doi = 100} = {unu: 1000};
 console.log(unu); // 1000
 ```
 
-Se pot suprascrie valorile unor variable cu valorile proprietăților unui obiect prin destructurare.
+Se pot suprascrie valorile unor variable cu valorile proprietăților unui obiect prin mecanismul de destructurare (*destructuring assignment*).
 
 ```javascript
 var obi = {

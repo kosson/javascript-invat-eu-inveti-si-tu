@@ -15,7 +15,7 @@ este echivalent cu
 new String("test").length;
 ```
 
-Crearea unui wrapper object pentru o valoare primară, nu este o practică recomandabilă.
+Crearea unui *wrapper object* pentru o valoare primară, nu este o practică recomandabilă.
 
 ```javascript
 var sir = new String('ceva'); // nu se recomandă
@@ -24,6 +24,8 @@ typeof 'ceva';  // "string"
 ```
 
 ## String ca obiect iterabil
+
+Un șir de caractere poate fi tratat ca un obiect iterabil pentru că obiectul de ambalaj pentru o valoare primară de tip string, este un obiect care are protocolul de iterare, ceea ce-l transformă într-o colecție iterabilă. 
 
 ```javescript
 var someString = "hi";

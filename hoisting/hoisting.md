@@ -1,6 +1,6 @@
-# Hoisting - ridicarea în „capul codului”
+# Hoisting - ridicarea în „capul blocului”
 
-Hoistingul trebuie privit ca pe un instrument care ia identificatorii și îi face omniprezenți pentru blocul de cod în care au fost declarați.
+Hoistingul trebuie privit ca un comportament al motorului JavaScript, care ia identificatorii și îi face omniprezenți pentru blocul de cod în care au fost declarați poziționându-i în „capul blocului” de cod.
 
 Această omniprezență permite disponibilitatea variabilelor și a funcțiilor înainte ca acestea să capete și valorile lor.
 

@@ -12,7 +12,13 @@ Sunt semne grafice care indică ce operațiune se va efectua la momentul evaluă
 
 Să ne amintim că expresiile sunt constituite din înșiruirea de operanzi și operatori.
 
-**Moment ZEN**: Un program JavaScript este evaluarea unui set de expresii, care pentru a fi „rezolvate”, mai întâi trebuie să rezolvi din aproape în aproapte toate celelalte expresii mai mici.
+**Moment ZEN**: Un program JavaScript este evaluarea unui set de expresii, care pentru a fi „rezolvate”, mai întâi trebuie să rezolvi din aproape în aproape toate celelalte expresii mai mici.
+
+## Valorile truthy și falsy
+
+Javascript operează cu diferite tipuri de valori, dar toate acestea sunt evaluate de către motorul JavaScript pentru a le reduce la un corespondent boolean, adică dacă pot fi reduse la `true` și sunt *truthy* (adevărate) sau la `false`, numite *falsy* (falsități).
+
+Valorile pe care JavaScript le consideră a fi în categoria falsităților (*falsy*) sunt: `false`, `0`, `''` (un șir de caractere vid), `NaN` (Not-a-Number), `undefined` și `null`. Orice altceva este considerat a fi *truthy*.
 
 ## Resurse
 

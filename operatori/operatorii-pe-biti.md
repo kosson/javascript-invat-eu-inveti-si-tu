@@ -25,36 +25,42 @@ Ce înseamnă baza 10? Hai să vedem. Cum putem reprezenta un număr, de exemplu
 
 Dar acest sistem de numerație nu este singurul cunoscut de omenire.
 
-Un altul este sistemul hexazecimal, a cărui bază este 16 și care este folosit în reprezentarea multor valori în programare. Simbolurile folosite sunt:
+Un altul este sistemul hexazecimal, al cărui bază este 16 și care este folosit în reprezentarea mai multor valori în programare. Simbolurile folosite sunt:
 
 `0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F`, unde literele țin locul astfel: `A` = 10, `B` = 11, `C` = 12, `D` = 13, `E` = 14, `F` = 15.
 
-Cel cu care vom lucra folosind operatorii bitwise, este sistemul binar, care reprezintă valorile prin șiruri de `0` și `1`. Computerul nu pricepe altceva decât stările logice 0 și 1. Întrebarea corectă este cum am putea reprezenta un număr zecimal în echivalentul său binar? Pentru a face acest lucru trebuie să împarți numărul zecimal la doi succesiv.
+Cel cu care vom lucra folosind operatorii bitwise, este sistemul binar, care reprezintă valorile prin șiruri de `0` și `1`. Computerul la nivelul de bază, nu pricepe altceva decât stările logice 0 și 1.
+În JavaScript poți reprezenta un număr în formatul său binar cu formula `0b` urmată de succesiunea binară.
+
+Întrebarea corectă este cum ajungi la reprezentarea un număr zecimal în echivalentul său binar? Pentru a face acest lucru trebuie să împarți numărul zecimal la doi succesiv până când restul este 0 sau 1.
 
 De exemplu, 27.
 
-27 / 2 = 13 * 2 + 1;
-13 / 2 = 6 * 2  + 1;
-6 / 2 = 3 * 2   + 0;
-3 / 2 = 1 * 2   + 1;
+27 / 2 = 13 * 2 + **1**;
+13 / 2 = 6 * 2  + **1**;
+6 / 2 = 3 * 2   + **0**;
+3 / 2 = **1** * 2   + **1**;
 
 Pornind de jos reconstituim valoarea binară: **11011**.
 
 11011
-43210 - reprezentând puterea la care ridici 2
+43210 - reprezentând exponentul puterii la care ridici 2
 
 Verificarea:
 
 1`*`2<sup>4</sup> `+` 1`*`2<sup>3</sup> `+` 0 `+` 1`*`2<sup>1</sup> `+` 1`*`2<sup>0</sup> `=` 16 + 8 + 0 + 2 + 1 = 27.
 
-În cazul nostru vom folosi un sistem care operează cu secvențe de 32 de biți. Aceste șiruri de biți reprezintă datele într-un calculator. Transformările în și din biți se fac în spatele scenei cu ajutorul unor algoritmi de codificare.
+```javascript
+0b11011; // 27
+```
 
+În cazul nostru vom folosi un sistem care operează cu secvențe de 32 de biți. Aceste șiruri de biți reprezintă datele într-un calculator. Transformările în și din biți se fac în spatele scenei cu ajutorul unor algoritmi de codificare.
 
 Acești operatori vor fi folosiți pe valori care sunt numere întregi pe 32 de biți. De fapt la momentul când se folosesc acești operatori, se face o conversie la un număr pe 32 de biți și abia apoi se face operațiunea.
 
 Sistemul actual de reprezentare a numerelor întregi pentru sistemele de calcul existente este numit **complement față de doi** a unui număr pentru care se poate memora și semnul (are bit de semn: bitul cel mai semnificativ este fie 1 însemnând că valoarea este pozitivă, fie 0 care înseamnă că valoarea este negativă). **Complement față de doi** înseamnă că valoarea maximă reprezentată merge pe axa pozitivă dar și pe cea negativă. În JavaScript avem o plajă de la -2147483648 la 2147483647.
 
-Mai trebuie menționat un lucru foarte important. Atunci când vine vorba de lucrul cu valori numerice în JavaScript, acestea sunt de tip float, nu integer
+Mai trebuie menționat un lucru foarte important. Atunci când vine vorba de lucrul cu valori numerice în JavaScript, acestea sunt de tip float, nu integer.
 
 ## Not `~`
 
@@ -64,6 +70,8 @@ Va nega toți biții care reprezintă un număr. Acest operator are comportament
 console.log(~-2); // 1
 console.log(~0); // -1
 ~30; // -31
+// lucru direct pe valori binare
+console.log(~0b11011); // -28
 ```
 
 Folosirea succesivă a operatorului NOT poate servi ca mecanism rapid de trunchiere a numerelor. Este preferabil ca viteză folosirii lui `Math.trunc()` sau `Math.floor()`.
@@ -144,6 +152,8 @@ Efectul operatorului indiferent de sensul său este să transforme valoarea înt
 parseInt('100', 2); // 4
 ```
 
+Se observă că a face un singur left shift este echivalent cu înmulțirea valorii zecimale cu doi.
+
 Poți trunchia valori cu virgulă.
 
 ```javascript
@@ -161,6 +171,8 @@ x >> 0; // 49
 16 >> 4; // 1
 32 >> 4; // 2
 ```
+
+Se observă că a face un singur right shift este echivalent cu înpărțirea valorii zecimale cu doi și rotunjirea rezultatului la pragul inferior.
 
 Poți trunchia valori cu virgulă.
 

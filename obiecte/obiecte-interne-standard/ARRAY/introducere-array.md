@@ -1,6 +1,6 @@
 # `Array` - tablouri, vectori
 
-Este un obiect intern care are și rol de contructor.
+Este un obiect intern care are și rol de constructor.
 
 Array-urile sunt o bornă centrală a programării indiferent de limbaj. Acestea permit stocarea temporară a unor valori într-o formă ușor accesibilă folosind indecși, dar cel mai important aspect este bogăția metodelor puse la dispoziție de obiectul intern Array pentru a prelucra, aranja, rearanja, filtra elementele conținute de array-uri.
 
@@ -514,6 +514,16 @@ console.log(unu, doi); // 'unu' 'doi'
 var unu, doi, trei;
 [unu, doi, trei] = [1, 2, 3];
 console.log(unu, doi, trei); // 1 2 3
+```
+
+### Inversarea indentificatorilor
+
+Destructurarea poate fi folosită cu succes pentru a inversa valorile între două variabile.
+
+```javascript
+var x = 10, y = 20;
+[x, y] = [y, x];
+console.log(x, y);
 ```
 
 ### Potrivirea unu-la-unu cu unu array returnat

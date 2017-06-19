@@ -136,13 +136,13 @@ Secvențe de escape pentru UNICODE: `u` sau `u{ }`
 
 ### Template Literal
 
-Începând cu ECMAScript 2015 avem un mod suplimentar de a lucra cu fragmente de text și acesta este numit template literal - „șabloane literale”. Chestia extraordinară este că permite introducerea de valori variabile folosind secvența `${identificator}`. Fragmentul de text, să-l numim corect **sir de caractere** este pus între semnele backticks (\`text\`). Acestea spun motorului că se pot interpola rezultate ale evaluării unei expresii folosind dollar și acolade: `${oVariabilaSauExpresie}`.
+Începând cu ECMAScript 2015 avem un mod suplimentar de a lucra cu fragmente de text și acesta este numit template literal - „șabloane literale”. Chestia extraordinară este că permite introducerea de expresii care pot fi evaluate folosind secvența `${identificator sau expresie}`. Fragmentul de text, să-l numim corect **sir de caractere** este pus între semnele backticks (\`text\`). Acestea spun motorului că se pot interpola rezultate ale evaluării unei expresii folosind dollar și acolade: `${oVariabilaSauExpresie}`.
 
 ```javascript
 var ceva = `ceva text ${numeIdentificator}`;
 ```
 
-Înainte să existe această opțiune, interpolarea se făcea prin plasarea fragmentelor de text între ghilimele fiind nevoie de o concatenare cu operatorul plus.
+Șabloanele de șiruri de caractere sunt un pas evolutiv important acă ne gândim la faptul că până acum trebuia să apelăm la concatenare pentru a introduce într-un șir de caractere rezultatul evaluării unor expresii.
 
 ```javascript
 var a = 5, b = 10;

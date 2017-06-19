@@ -100,7 +100,9 @@ Acesta este cel mai important operator, fiind cel mai ridicat ca rang.
 |12|bitwise right shift|deplasare pe biți spre dreapta|»»»| `__ >> __` |
 |12|bitwise unsigned right shift|deplasare pe biți spre dreapta prin completare cu zerouri la stânga și atribuire|»»»| `__ >>> __` |
 
-## Operatori de comparație
+## Operatori de relație
+
+Sunt numiți astfel pentru că este evaluată relația unui operator față de celălalt.
 
 | Rang | Operator | trad. în rom. | sens evaluare | poziționare operanzi |
 |:--|:--|:--|:--|:--|
@@ -131,14 +133,16 @@ Acesta este cel mai important operator, fiind cel mai ridicat ca rang.
 
 | Rang | Operator | trad. în rom. | sens evaluare | poziționare operanzi |
 |:--|:--|:--|:--|:--|
-|6|logic AND|AND logic|»»»| `__ && __` |
-|5|logic OR|OR logic|»»»| `__` <code>&#124;&#124;</code> `__` |
+|6|logic AND|AND logic (conjuncția matematică)|»»»| `__ && __` |
+|5|logic OR|OR logic (disjuncția matematică) numit și OR inclusiv pentru că în cazul în care ambii operanzi sunt `true`, rezultatul evaluării va fi `true`|»»»| `__` <code>&#124;&#124;</code> `__` |
 
 ## Operatorii condiționali - operatorul ternar
 
 | Rang | Operator | trad. în rom. | sens evaluare | poziționare operanzi |
 |:--|:--|:--|:--|:--|
 |4|equal|egal|«««| `__ ? __ : __` |
+
+Acest operator este echivalentul unui enunț `if...else`. Avantajul operatorului ternar este acela că este o expresie care poate fi combinată cu alte expresii ceea ce constituie un avantaj față de rigiditatea enunțului `if...else`.
 
 ## Atribuire împreună cu operațiuni urmate de atribuire.
 

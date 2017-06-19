@@ -68,7 +68,7 @@ var obi = new Map([
   [1, 'unu'], [x, 'altceva'], ['ex', true]
 ]);
 console.log([...obi]); // Array [ Array[2], Array[2], Array[2] ]
-// extragi valori folosind destructurarea și string tempaltes
+// extragi valori folosind destructurarea și string templates
 for(let [cheie, valoare] of obi){
   console.log(`${cheie}: ${valoare}`);
 }; // => 1: unu => ceva: altceva => ex: true

@@ -137,7 +137,7 @@ Caracterele de mai sus și combinațiile lor au un înțeles special pentru moto
 
 De exemplu, ghilimele duble și simple: `\"` și `\'` și chiar backslash-ul însuși: `\\` au nevoie să fie precedate de backslash ceea ce numim secvență de escape sau pe românește îi spui computerului: prietene, caracterul precedat de backslash, te rog să nu-l interpretezi la valoarea sa specială pentru limbajul de programare.
 
-JavaScript este un limbaj de programare **case sensitive**, adică ține cont dacă scrii cu majuscule. Pe scurt, șirul de caractere `ceva` este fundamental diferit de șirul de caractere `Ceva`.
+JavaScript este un limbaj de programare **case sensitive**, adică ține cont dacă scrii folosind majuscule. Pe scurt, șirul de caractere `ceva` este fundamental diferit de șirul de caractere `Ceva`.
 
 ### Textul sursă
 
@@ -620,17 +620,19 @@ Atunci când definești o variabilă care nu trimite la nicio valoare, îi va fi
 
 ### Funcțiile pe scurt
 
-Funcțiile sunt bucăți de program „ambalate” ca valori. Au și ele un nume ca și variabilele și pot evaluate în expresii.
+Funcțiile sunt bucăți de program „ambalate” ca valori. Au și ele un nume ca și variabilele și pot evaluate în expresii. Te poți gândi la ele ca la programe mai mici în programul mare.
 
 ```javascript
 function faCeva () { return 'Salve!' };
 ```
 
-Funcțiile sunt un ***tip de obiecte***. Deci, tot niște rodii. Ha ha! În JS acestea sunt de tip `callable` (în rom. *apelabile*), adică niște rodii pentru care se poate iniția un apel pentru a executa bucata de program conținută. Ce le face deosebite față de celelalte obiecte este că au două proprietăți specifice: `constructor` și `call`.
+Funcțiile sunt un ***tip de obiecte***. Deci, tot niște rodii. Ha ha! În JS acestea sunt de tip `callable` (în rom. *apelabile*), adică niște rodii pentru care se poate iniția un apel pentru a executa bucata de program conținută. Reține faptul că termenii „a apela”, „a invoca”, „a invoca” și „a rula” o funcție sunt interșanjabili și înseamnă același lucru: execută codul din funcție. Ce le face deosebite față de celelalte obiecte este că au două proprietăți specifice: `constructor` și `call`.
+
+**Moment ZEN**: formula de apelare a unei funcții este o expresie, care după cum bine știm, va fi evaluată, adică codul din funcție va fi executat.
 
 Ce înseamnă a le executa? Pur și simplu motorul se va uita între acolade, va compila codul, va face recensământul identificatorilor și îl va evalua returnând un rezultat.
 
-Pentru că lucrurile simple sunt plicticoase, mai completăm cu faptul că funcțiile care sunt proprietăți ale unui obiect, sunt numite **metode** ale acestuia. Nu te lăsa intimidat de noua etichetă: metodă. Funcția rămâne funcție fără a fi atinsă în niciun fel de faptul că „face parte” a unui obiect. Poți să-ți închipui funcția ca fiind separată de obiect, dar execuția ei va fi legată de contextul acelui obiect.
+Pentru că lucrurile simple sunt plicticoase, mai completăm cu faptul că funcțiile care sunt proprietăți ale unui obiect, sunt numite **metode** ale acestuia. Nu te lăsa intimidat de noua etichetă: *metodă*. Funcția rămâne funcție fără a fi atinsă în niciun fel de faptul că „face parte” a unui obiect. Poți să-ți închipui funcția ca fiind separată de obiect, dar execuția ei va fi legată de contextul acelui obiect.
 
 Mai adăugăm că ECMAScript, adică JavaScript are niște obiecte cu care vine el din start (`built-in objects`). Deci, din start browserul ca și instrument care aplică standardul ECMAScript, vine cu propria lădiță de rodii.
 

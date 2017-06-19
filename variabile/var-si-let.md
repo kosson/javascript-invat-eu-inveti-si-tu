@@ -1,8 +1,8 @@
 # Folosirea lui `var` și `let`
 
-Identificatorii declarați cu `var` beneficiază de mecanismul de hoisting prin care sunt aduși în „capul codului” (scope-ului).
+Identificatorii declarați cu `var` beneficiază de mecanismul de hoisting prin care sunt aduși în „capul blocului” de cod și implicit a mediul lexical format.
 
-`let` oferă scoping la nivel de bloc de cod - `{}`.
+Începând cu ES6 a fost adăugat `let`, care în comparație cu `var`, este legat la nivelul blocului de cod delimitat prin `{}`.
 
 În cazul declarațiilor `let`, acestea nu sunt ridicate (`hoisted`) la vârful blocului. Din acest motiv, cel mai bine este ca declarațiile let să fie puse în capul blocului în mod voluntar pentru a fi disponibile în întreg blocul. O atenție deosebită trebuie dată blocurilor de decizie sau cele de ciclare a unor array-uri.
 
@@ -35,7 +35,7 @@ function teste(){
 
 ## Block-scoping în cazul buclelor
 
-Unul din efectele directe ale hoisting-ului este efectul produs în cazul buclelor. Ceea ce se întâmplă este că variabila folosită drept contor, este ridicată prin hoisting iar efectul este că la finalul fiecărei iterații, valoarea variabilei contor este incrementată. Dar, atenție, nu este memorată separat pentru fiecare iterare. Execuția lui for s-a încheiat cu efectul că x încă există, memorând ultima valoare.
+Unul din efectele directe ale hoisting-ului este efectul produs în cazul buclelor. Ceea ce se întâmplă este că variabila folosită drept contor, este ridicată prin hoisting iar efectul este că la finalul fiecărei iterații, valoarea variabilei contor este incrementată. Dar, atenție, nu este memorată separat pentru fiecare iterare. Execuția lui `for` s-a încheiat cu efectul că x încă există, memorând ultima valoare.
 
 ```javascript
 // var x, y = [];

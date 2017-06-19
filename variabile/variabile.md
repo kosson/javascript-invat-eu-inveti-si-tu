@@ -47,7 +47,7 @@ Aceeași demonstație se poate realiza prin pasarea valorii ca argument al unei 
 Poți trage cu ochiul repede la funcții să afli mai multe, dar pentru moment este îndeajuns cât să ne putem descurca.
 Știu că pe moment e cam multișor de înghițit, dar am pus astfel baze importante pentru viitor.
 
-## Izolarea variabilelor în propriul lor scope
+## Izolarea variabilelor în propriul lor mediu lexical - scope
 
 Folosim funcțiile aici pentru că acestea au o proprietate extraordinară care face ca aceste exemple să funcționeze: creează propriul mediu lexical. Supertare! Bine, începând cu ES6, simpla declarare a blocului de cod prin acolade `{}` creează un mediu lexical (scope). E foarte importantă această caracteristică pentru că de ea ține felul în care izolăm, combinăm și punem execuția unei funcții într-un anumit context.
 
@@ -89,9 +89,9 @@ Funcția `x` creează un mediul lexical (un scope) în care se va afla valoarea 
 })(); // 15
 ```
 
-**Moment ZEN**: Variabilele sunt identificatori pentru valori.
+**Moment ZEN**: Variabilele sunt legături ale identificatorilor la valorile lor.
 
-Nu folosiți niciodată cuvintele rezervate ale limbajului drept nume pentru variabile. Efectul va fi apariția unei erori.
+Nu folosiți niciodată cuvintele rezervate ale limbajului drept nume pentru variabile. Se va solda cu apariția unei erori.
 
 Reține și faptul că JavaScript face diferența dintre majuscule și minuscule. Astfel, `oVariabila` nu este echivalentul lui `ovariabila`. Sunt două variabile diferite din punctul de vedere al JavaScript.
 
@@ -116,7 +116,7 @@ function ex(){
 };
 ```
 
-**Sfatul lui Crockford**: declară toate variabile în capul funcției atunci când folosești `var`.
+Buna practică spune ca atunci când folosești var pentru a declara variabile, pune-le pe toate imediat ce ai deschis blocul de cod. Astfel, le vei face omniprezente pentru acea zonă de cod și va fi mai ușor de operat cu ele.
 
 ### Standardul spune
 
@@ -128,7 +128,7 @@ Numele de `let` vine din matematică însemnând: `fie`: fie x un număr cu valo
 
 ### Standardul spune
 
-Declarațiile `let` și `const` definesc variabilele care sunt în mediul lexical, adică scope-ul contextului de execuție curent (running execution context). Variabilele sunt create atunci când mediul lexical este instanțiat, dar nu vor fi accesate nicicum până când **_lexical binding_** este evaluat. Valorea este asignată atunci când este evaluat acest **lexical binding**, nu la momentul declarării lor. Dacă o declarație cu `let` nu are o valoare de inițializare, este asignat `undefined` la momentul în care este evaluat, adică la momentul când se face `lexical binding` și se completează așa-numitul „Registru de mediu".
+Declarațiile `let` și `const` definesc variabilele care sunt în mediul lexical, adică scope-ul contextului de execuție curent (running execution context). Variabilele sunt create atunci când mediul lexical este instanțiat, dar nu vor fi accesate nicicum până când **_lexical binding_** este evaluat. Valoarea este asignată atunci când este evaluat acest **lexical binding**, nu la momentul declarării lor. Dacă o declarație cu `let` nu are o valoare de inițializare, este asignat `undefined` la momentul în care este evaluat, adică la momentul când se face `lexical binding` și se completează așa-numitul „Registru de mediu".
 
 ## Mantre
 
@@ -156,6 +156,38 @@ console.log( y = (x = y,z) ); // evaluează la 3
 // x va fi 2 pentru că va primi valoarea pe care o are y // y va fi 3 pentru că evaluarea unei înșiruiri delimitate de virgulă returnează ultima valoare din înșiruire.
 
 Am menționat faptul că variabilele locale sunt stocate în scope, care poate fi perceput ca un obiect la al cărui membri ai access. Atunci când în execuție interpretorul caută o proprietate în obiectul scope curent. Dacă nu o găsește, atunci interpretorul va văuta mai sus în obiectul scope părinte și tot așa până când nu mai există un alt obiect părinte. Această secvență de obiecte scope se numește **scope chain**. Atenție, scope-ul se formează la momentul declarări, nu la momentul execuției.
+
+## Destructurarea obiectelor sau destructuring assignment
+
+ES6 introduce posibilitatea de a transfera valorile cheilor unor variabile care trebuie să respecte o singură cerință: numele identificatorilor să fie aceleași cu cele ale proprietăților. Dacă vrem să privim obiectele ca pe niște depozite de valori identificate prin numele cheilor, atunci cu siguranță că asignarea prin destructurare va fi o binecuvântare.
+
+```javascript
+var obi = {a: 4, b: true, c: function y(){return 'salut'}};
+var {b, c} = obi;
+console.log(a); // undefined
+console.log(b); // true
+console.log(c()); // salut
+```
+
+La fel de bine ar merge și asignarea directă cu singura condiție ca expresia să fie în interiorul unui operator de grupare.
+
+```javascript
+({a,b,c} = obi);
+```
+
+Dacă nu este introdus între paranteze rotunde, motorul JavaScript va considera acoladele ca un bloc de cod distinct.
+Destructurarea funcționează foarte bine și în cazul array-urilor. În acest caz nu mai este necesară respectarea parității numelor ientificatorilor cu cea a cheilor pentru că nu mai avem chei. Potrivirea se va face în ordinea elementelor din array.
+
+```javascript
+var arr = [1, true, function y () {return 'salut'}, 10, 20];
+var [nr, bool, igrec, ...valori] = arr;
+console.log(nr); // 1
+console.log(bool); // true
+console.log(igrec()); // salut
+console.log(valori); //[Array] [10,20]
+```
+
+Folosind operatorul spread (...), putem introduce restul valorilor din array într-un array cu identificator prestabilit. 
 
 ## Stări confuze
 
