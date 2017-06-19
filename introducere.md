@@ -311,9 +311,11 @@ O mică mențiune: în cazul programării acoladele și parantezele pătrate pe 
 
 Să revenim focalizându-ne pe enunțul de mai sus. Începem de la stânga spre dreapta să facem evaluarea expresiei. Buuuun! Și avem: 1 plus 1 egal? Stop joc! Cel de-al doilea unu (cel din dreapta operatorului plus) este implicat într-o operațiune pe care va trebui să o rezolvăm mai întâi pentru că așa spune prioritatea operatorului ori (`*`). Pentru moment, lăsăm în suspans prima operațiune de adunare și sărim să facem înmulțirea. Surpriză majoră: 1 este înmulțit cu o altă expresie care este între parantezele rotunde. Deci, abandonăm și înmulțirea și facem operațiunea dintre parantezele rotunde pentru a ajunge la o valoare. Gata! Avem valoarea `4`. Perfect, acum că avem valoarea, putem face înmulțirea: `1 * 4`. În urma evaluării ajungem la valoarea `4`. Acum este permisă evaluarea primei operațiuni de la care am plecat: `1 + 4`. Ajungem la rezultatul `5`. Hai că nu a fost greu, doar nițică matematică... știu, de mate nu scăpăm, dar nu ne lăsăm.
 
+**Moment ZEN**: Pentru că expresiile sunt evaluate la o valoare, o expresie poate fi combinată cu altă expresie pentru a forma o expresie mai complexă și așa mai departe.
+
 Continuăm cu o precizare foarte importantă pentru a întări ceea ce am rememorat. Atunci când codul sursă este rulat pentru a obține un rezultat, de fapt, ceea ce se petrece este o întreagă succesiune de evaluări a expresiilor care se reduc la o valori rând pe rând prin evaluarea condiționată de diverșii operatori. Totul, dar totul se reduce la o valoare. De fapt, evaluăm expresii rezolvând **operațiunile** și ajungând la **valori** care sunt necesare altor **expresii**. Acestea, la rândul lor așteptau cuminți ca evaluarea precedentă să se încheie pentru a avea și ele valorile de care aveau nevoie și așa mai departe.
 
-##### Tratarea expresilor ceva mai „nefirești” - coercion
+##### Tratarea expresilor cu operanzi diferiți - transformarea (coercion)
 
 JavaScript este un limbaj de programare care oferă o flexibilitate fantastică. În ceea ce privește operanzii, aceștia pot fi chiar de tipuri diferite iar JavaScript este forțat să ofere totuși un răspuns.
 
@@ -321,9 +323,11 @@ JavaScript este un limbaj de programare care oferă o flexibilitate fantastică.
 
 Hai să ne uităm la următoarea expresie: `true + 10;` pe care o dăm motorului JavaScript spre evaluare. Ce crezi că se va întâmpla pentru că în acest moment operezi cu o valoare boolean și un număr?
 
-JavaScript va recurge la un mecanism de coerciție (în limba engleză **coercion**) asupra valorilor și în acest caz, va „transforma” valoarea boolean în echivalentul său numeric, adică 1. Da, da, `true` este 1, iar `false` este 0.
+JavaScript va recurge la un mecanism de transformare (în limba engleză **coercion**) aplicat valorilor și în acest caz, va „transforma” valoarea boolean în echivalentul său numeric, adică 1. Da, da, `true` este 1, iar `false` este 0.
 
-Bun, acum a fost rezolvată dilema. Se va face evaluarea care va avea drept rezultat valoarea 11. Nebunie, nu?! Mai încolo vom introduce o tabele după care se fac aceste transformări, aceste coerciții asupra valorilor în cazul unor expresii „nefirești”.
+Bun, acum a fost rezolvată dilema. Se va face evaluarea care va avea drept rezultat valoarea 11. Nebunie, nu?! Vom trata mai atent aceste „transformări”.
+
+Pentru că expresiile sunt evaluate la o valoare, acestea pot fi asignate unor variabile, constante sau proprietăți ale unui obiect: `var ceva = 2 + 2;`.
 
 Dacă ai amețit, e perfect normal. Respiră de cinci ori foarte adânc cu ochii închiși concentrându-te adânc la fiecare respirație. Dacă nimic nu se leagă, mergi într-un parc. Eu te aștept aici.
 
@@ -341,7 +345,7 @@ Cel mai simplu enunț este introducerea unei **valori literale** (literal însea
 
 Dicționarele explicative spun că un enunț este o **regulă după care se face un calcul sau se aplică o construcție matematică; executare a unui calcul.** (DEX 09).
 
-Cel mai simplu enunț, care nu este folosit pentru că nu are utilitate, dar care este bun pentru a ilustra, este cel al unei simple expresii.
+Cel mai simplu enunț, care nu este folosit pentru că nu are utilitate, dar care este bun pentru a ilustra, este cel al unei simple expresii. Deocamdată înțelege expresia ca pe o combinație de operanzi și operatori care evaluată oferă o valoare.
 
 ```javascript
 a + 1; // enunțul unei expresii (expression statement)
@@ -349,13 +353,22 @@ a + 1; // enunțul unei expresii (expression statement)
 
 Crede-mă, nu vreau să te zăpăcesc, dar o expresie poate fi în același timp un enunț așa cum avem cazul simplu de mai sus. O expresie este un enunț care este evaluat întotdeauna la o valoare. Enunțul este ca fraza din analiza gramaticală cu diferența în cazul nostru că nu se termină cu punct, ci cu punct și virgulă.
 
-Exemplul oferit nu este cel mai util. În schimb, există un enunț al celei mai utile expresii întâlnite în întreg limbajul: *enunțul expresiei de apelare* al unei funcții (***call expression***). Chiar dacă nu am învățat nimic despre funcții, ține minte că apelarea acestora este nimic mai mult decât un enunț al unei expresii, dar care declanșează executarea acelei funcții. Nu te las așa în suspans... consideră un obiect în JavaScript ca pe un pistol iar gloanțele lui ca pe niște proprietăți. Folosind această imagine, o funcție este un cartuș care a fost pușcat iar apelul funcției este trăgaciul. Apăsând trăgaciul (apelezi funcția), puști capsa cartușului și iese glonțul pe țeavă (funcția returnează un rezultat celui care a apelat-o). Cam militaristă comparația, dar e târziu în noapte și asta mi-a venit la îndemână pe ecranul minții.
+Exemplul oferit nu este cel mai util. În schimb, există un enunț al celei mai utile expresii întâlnite în întreg limbajul: *enunțul expresiei de apelare* al unei funcții (***call expression***): `făCeva();`. Chiar dacă nu am învățat nimic despre funcții, ține minte că apelarea acestora este nimic mai mult decât **un enunț al unei expresii**, dar care declanșează executarea acelei funcții. Nu te las așa în suspans... consideră un obiect în JavaScript ca pe un pistol iar gloanțele lui ca pe niște proprietăți. Folosind această imagine, o funcție este un cartuș care a fost pușcat iar apelul funcției este trăgaciul. Apăsând trăgaciul (apelezi funcția), puști capsa cartușului și iese glonțul pe țeavă (funcția returnează un rezultat celui care a apelat-o). Cam militaristă comparația, dar e târziu în noapte și asta mi-a venit la îndemână pe ecranul minții.
 
 ```javascript
 alert('salut');
 ```
 
-Ei, abia acum te-am zăpăcit. Nu?
+Ei, abia acum te-am zăpăcit. Nu?!
+
+Hai să facem o mică „analiză gramaticală” pe „text” dacă tot știm în acest moment ce sunt expresiile și ce sunt enunțurile.
+
+```javascript
+var x;  // enunț declarativ - declaration statement
+x = 2 * 3;
+```
+
+Pe prima linie avem un enunț declarativ pentru variabila x. Pe a doua linie avem două expresii. Una a înmulțirii și alta a asignării valorii rezultate.
 
 **Moment ZEN**: Enunțurile sunt încheiate cu punct și virgulă cu excepția notabilă aplicată prin mecanismul ASI.
 
@@ -372,13 +385,13 @@ Vei vedea mai târziu cât de utile sunt în cazul scrierii enunțurilor care co
 
 #### Instrucțiunile
 
-O instrucțiune este o linie din codul sursă încheiată prin separatorul punct și virgulă. Poate fi o expresie, invocarea unei funcții, a unei metode sau pur și simplu o declarație. O instrucțiune este un pas al unui algoritm. Instrucțiunile vor fi executate în ordinea în care au fost scrise.
+O instrucțiune poate fi o expresie, invocarea unei funcții, a unei metode sau pur și simplu o declarație. O instrucțiune este un pas al unui algoritm. Instrucțiunile vor fi executate în ordinea în care au fost scrise.
 
 ```javascript
 if (sentimente = true) { console.log('Caută-mă tu!') };
 ```
 
-Instrucțiunile sunt parte a expresiilor. Cel mai adesea veți vedea că o expresie este echivalentul unei instrucțiuni. În JavaScript, sunt permise expresii care nu sunt neapărat instrucțiuni. De exemplu, `1 + 1;`
+Instrucțiunile sunt parte a expresiilor. Cel mai adesea veți vedea că o expresie este chiar o instrucțiune. În JavaScript, sunt permise expresii care nu sunt neapărat instrucțiuni. De exemplu, `1 + 1;`
 
 **JavaScript este un limbaj de programare pentru care este de importanță vitală felul în care este redactat codul sursă.**
 
@@ -401,9 +414,7 @@ Un program JavaScript este o colecție de declarații de variabile și funcții.
 
 #### Blocurile de cod
 
-Blocurile sunt grupuri de instrucțiuni. Are o parte declarativă și o parte de execuție.
-
-În JavaScript poți declara un bloc de cod foarte simplu deschizând acolade. Scrii codul între acolade și poți considera că acest cod aparține unui bloc de cod distinct. Blocurile au rolul de a grupa una sau mai multe instrucțiuni.
+Blocurile grupează enunțurile. În JavaScript poți declara un bloc de cod foarte simplu deschizând acolade. Scrii codul între acolade și poți considera că acest cod aparține unui bloc de cod distinct. Blocurile au rolul de a grupa una sau mai multe enunțuri.
 
 Gruparea declarațiilor într-un bloc, se comportă ca **o unitate de cod** menită să evalueze expresii, să apeleze funcții și metode, să afișeze rezultate și să returneze rezultate.
 
