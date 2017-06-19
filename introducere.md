@@ -347,9 +347,9 @@ Cel mai simplu enunț, care nu este folosit pentru că nu are utilitate, dar car
 a + 1; // enunțul unei expresii (expression statement)
 ```
 
-Crede-mă, nu vreau să te zăpăcesc, dar o expresie poate fi în același timp un enunț așa cum avem cazul simplu de mai sus.
+Crede-mă, nu vreau să te zăpăcesc, dar o expresie poate fi în același timp un enunț așa cum avem cazul simplu de mai sus. O expresie este un enunț care este evaluat întotdeauna la o valoare. Enunțul este ca fraza din analiza gramaticală cu diferența în cazul nostru că nu se termină cu punct, ci cu punct și virgulă.
 
-Exemplul oferit nu este cel mai util. În schimb, există un enunț al celei mai utile expresii întâlnite în întreg limbajul: enunțul expresiei de apelare a unei funcții (***call expression***). Chiar dacă nu am învățat nimic despre funcții, ține minte că apelarea acestora este nimic mai mult decât un enunț al unei expresii, dar care declanșează executarea acelei funcții.
+Exemplul oferit nu este cel mai util. În schimb, există un enunț al celei mai utile expresii întâlnite în întreg limbajul: *enunțul expresiei de apelare* al unei funcții (***call expression***). Chiar dacă nu am învățat nimic despre funcții, ține minte că apelarea acestora este nimic mai mult decât un enunț al unei expresii, dar care declanșează executarea acelei funcții. Nu te las așa în suspans... consideră un obiect în JavaScript ca pe un pistol iar gloanțele lui ca pe niște proprietăți. Folosind această imagine, o funcție este un cartuș care a fost pușcat iar apelul funcției este trăgaciul. Apăsând trăgaciul (apelezi funcția), puști capsa cartușului și iese glonțul pe țeavă (funcția returnează un rezultat celui care a apelat-o). Cam militaristă comparația, dar e târziu în noapte și asta mi-a venit la îndemână pe ecranul minții.
 
 ```javascript
 alert('salut');
@@ -359,12 +359,23 @@ Ei, abia acum te-am zăpăcit. Nu?
 
 **Moment ZEN**: Enunțurile sunt încheiate cu punct și virgulă cu excepția notabilă aplicată prin mecanismul ASI.
 
+Enunțurile pot sta singure sau pot fi adunate într-un bloc distinct. Acest bloc distinct se numește în limba engleză **block statements** și se înțelege în limba română a fi un set de enunțuri grupate într-un bloc delimitat de acolade.
+
+```javascript
+{
+  var mesaj = 'Salut!';
+  console.log(mesaj);
+}
+```
+
+Vei vedea mai târziu cât de utile sunt în cazul scrierii enunțurilor care controlează execuția codului, cum ar fi deciziile prin `if...else` sau buclele, cum ar fi `while(expresie){bloc de enunțuri}`.
+
 #### Instrucțiunile
 
 O instrucțiune este o linie din codul sursă încheiată prin separatorul punct și virgulă. Poate fi o expresie, invocarea unei funcții, a unei metode sau pur și simplu o declarație. O instrucțiune este un pas al unui algoritm. Instrucțiunile vor fi executate în ordinea în care au fost scrise.
 
 ```javascript
-if (sentimente = true) { console.log('Caută-mă tu!'); };
+if (sentimente = true) { console.log('Caută-mă tu!') };
 ```
 
 Instrucțiunile sunt parte a expresiilor. Cel mai adesea veți vedea că o expresie este echivalentul unei instrucțiuni. În JavaScript, sunt permise expresii care nu sunt neapărat instrucțiuni. De exemplu, `1 + 1;`

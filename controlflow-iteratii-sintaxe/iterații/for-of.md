@@ -3,6 +3,8 @@
 ES6 a introdus această nouă structură de iterare împreună cu două concepte importante: iterable și iterator.
 Intenția a fost de a oferi un instrument superior de ciclare, superior celor oferite de ES5: `for...in` și `for...each`.
 
+Poți folosi `for...of` dacă nu ai nevoie să lucrezi și cu indexurile elementelor componente ale colecției. Dacă ai nevoie de localizare pentru a adresa exact un element, vei folosi un clasic `for`.
+
 Ori de câte ori un obiect trebuie să fie iterat, metoda `@@iterator` este apelată fără argumente.
 Iteratorul care este returnat este folosit pentru a obține valorile care trebuie iterate.
 
@@ -21,7 +23,7 @@ for (let i of colectie) {
 };
 ```
 
-Este un operator folosit pentru cicla array-uri, dar cel mai bine se aplică pe obiecte „iterable” precum `Array`, `Map`, `Set`.
+Domeniul de aplicativitate este acela al obiectelor „iterable” precum `Array`, `Map`, `Set`.
 
 ```javascript
 for (var x of arr){
@@ -49,4 +51,4 @@ for (let x of '\u{13165}\u{13189}\u{13197}'){
 ```
 
 Te vei întreba de ce să folosești `for...of` dacă ai deja la îndemână `for...in`?
-Construcția `for...in` ia în considerare toate proprietățile care au atributul `enumerable` activat. 
+Construcția `for...in` ia în considerare toate proprietățile care au atributul `enumerable` activat.

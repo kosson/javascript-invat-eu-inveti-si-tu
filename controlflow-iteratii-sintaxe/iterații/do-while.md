@@ -8,5 +8,5 @@ Spre deosebire de `while`, evaluarea expresiei care determină execuția codului
 var oValoare = ~~(Math.random() * 10);
 do {
   console.log(oValoare);
-} while (oValoare > 5);
+} while (oValoare > 5); // 5
 ```

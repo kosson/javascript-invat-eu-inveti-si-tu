@@ -1,10 +1,10 @@
 # for... in
 
-Declarația iterează proprietățile unui obiect care este enumerabil iar pentru fiecare dintre proprietățile iterate, se poate executa cod.
+Declarația iterează proprietățile unui obiect, cele care sunt setate ca `enumerabile`, iar pentru fiecare dintre valorile proprietăților iterate, se poate aplica o funcție sau se poate executa cod.
 
 ## Iterarea cheilor proprii, dar și cele din constructor
 
-Trebuie reținut faptul că iterarea folosind `for...in` ia în calcul și cheile contructorului.
+Trebuie reținut faptul că iterarea folosind `for...in` ia în calcul și cheile contructorului. Pentru izolarea iterării doar pe cheile proprii ale obiectului fără cele moștenite, se va folosi verificarea cu metoda `hasOwnProperty`.
 
 ```javascript
 let prop;
@@ -23,15 +23,11 @@ for(prop in ceva){
     console.log(prop + ': ' + ceva[prop]);
   };
 };
-
-/*
-spuf: 1000
-proprietate: 10
-proprietate2: 11
- */
 ```
 
-## Parcurgerea cheilor unui obiect.
+În cazul instanțierii cu `new`, tot ce este declarat în `this`, va fi inclus în iterațiile cu `for...in`.
+
+## Parcurgerea cheilor care aparțin strict obiectului.
 
 ```javascript
 var obj = {name: 'Ionel', varsta: 23, meserie: 'zugrav', creativ: true};

@@ -20,8 +20,30 @@ Dacă declari o variabilă în corpul unei declarații if, această variabilă v
 
 ```javascript
 "use strict";
-if(true){
+if (true) {
   function x () { console.log('bau') };
   x();
+};
+```
+
+Dacă tot am lămurit povestea enunțului `if...else`, am să mai adaug un lucru legat de redactarea codului în sine. Veți vedea atunci când veți investiga cod scris de alți programatori, faptul că uneori enunțurile (*statements*) nu sunt introduse într-un bloc delimitat de acoloade (*block statements*) așa cum am redactat în cazurile prezentate. Uneori veți vedea enunțurile redactate ca și cum ar atârna în gol, dar să știți că în diversitatea pe care o oferă JavaScript, acest mod de redactare a codului este permis.
+
+```javascript
+if (true) console.log('e adevarat');
+// sau
+if (true)
+  console.log('e bine și așa');
+// sau
+let a = false;
+if (a === true) {
+  console.log('și așa');
+} else
+  console.log('e false');
+// sau
+let b = true;
+if (b === true)
+  console.log('și așa');
+else {
+  console.log('e false');
 };
 ```
