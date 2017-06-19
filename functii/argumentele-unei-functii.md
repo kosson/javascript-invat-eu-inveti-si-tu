@@ -347,6 +347,22 @@ function exemplu(una, alta = una + 2, cateva = alta + ' mere'){
 exemplu(2); // Array [ 4, "4 mere" ]
 ```
 
+## Destructurarea argumentelor
+
+Mecanismul de destructurare funcționează foarte bine și în cazul argumentelor. Dacă dorim, valorile proprietăților unui obiect por deveni valorile care sunt pasate unei funcții.
+
+```javascript
+function test({a, b}) {
+  return `${a} și ${b}`;
+};
+var obi = {
+  a: 10, b: true
+};
+test(obi); //"10 și true"
+```
+
+Același model funcționează perfect și dacă în locul obiectului ar fi un array.
+
 ## `arguments` ca instrument de prelucrare a unui obiect
 
 Dacă trimitem unei funcții un argument care are drept valoare un obiect, putem constitui un alt obiect subset pe care să-l returnăm.
