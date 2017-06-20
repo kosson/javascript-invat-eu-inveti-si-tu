@@ -1,6 +1,8 @@
 # `this`
 
-TODO: restructurează informația la this pentru că este nițel haotică
+În JavaScript, vorbim despre obiecte. Funcțiile sunt niște obiecte speciale în sensul că pot fi apelate, ceea ce conduce la executarea codului. Dar reține faptul că tot niște obiecte sunt. Și acum să ne gândim la o funcție ca la o persoană care privește bolta celestă într-o noapte înstelată. Cum ar putea povesti despre toate constelațiile văzute? Cum le-ar putea referenția printr-o singură expresie? Hai, nu e greu, am zis deja... da, da, ai remarcat perfect: **bolta cerească**! Persoana care întrupează o funcție privește **bolta cerească** ca identificator pentru contextul în care constelațiile strălucesc doar pentru ea. Așa este și cuvântul cu înțeles special `this`. Este legătura cu obiectul în al cărui context a fost invocată funcția, iar pentru funcția apelată care tocmai a creat un obiect, `this` este o proprietate pe care nu o poate modifica, dar prin care poate accesa proprietăți și metode ale obiectului în contextul căruia a fost apelată.
+
+Pentru a avea un prim contact cu `this` poți încerca în consola browserului să scrii `this.window`. Va fi returnat chiar obiectul global `Window`. De ce s-a întâmplat acest lucru? Pentru că obiectul global ține o referință către sine. În cazul browserelor aceasta este `window`.
 
 This este un obiect pasat automat unei funcții și care se formează în funcție de contextul de execuție. `this` este strict legat de „locul” în care a fost apelată, nu de „locul” unde a fost declarată.
 
