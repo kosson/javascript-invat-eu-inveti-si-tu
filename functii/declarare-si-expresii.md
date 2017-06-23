@@ -60,6 +60,10 @@ ex = function ex () {};
 ex; // răspunde cu function ex()
 ```
 
+**Moment ZEN**: Orice altceva ce nu începe cu `function` este o expresie.
+
+TODO: refa tot capitolul că e varză!
+
 Buna practică de coding în JavaScript spune că numirea funcției este obligatorie.
 
 ```javascript
@@ -173,53 +177,22 @@ var anonima = function(){};
 ### C. funcție exprimată cu identificator (**named function expression**).
 
 ```javascript
-var test = function ceva(){};
+var test = function ceva(){ return 'salut'; };
+test(); // salut
+ceva(); // ReferenceError: ceva is not defined
 ```
 
-### A. DECLARAREA unei funcții cu nume (named function declaration)
-
-#### Q&A
-
-**Întrebare**: Cum DECLARI o funcție în scope (perimetru)?
-**Răspuns**:
-
-```javascript
-  function ceva(){};
-  // funcției i se dă un identificator în perimetrul (scope) în care există, cu numele ceva
-```
-*Orice altceva ce nu începe cu `function` este o expresie.*
+În cazul acestor funcții trebuie remarcat faptul că identificatorul variabilei este cel care trebuie folosit pentru a invoca funcția.
 
 
-**Întrebare**: Cum INVOCI o funcție?
-**Răspuns**:
 
-```javascript
-ceva();
-```
-
-### B. Funcție EXPRIMATĂ (function expression):
-
-```javascript
-function ceva(){};
-```
-
-În acest caz funcția este declarată perimetrului (scope)
-
-#### Q&A
-
-**Întrebare**: De ce se numește exprimată?
-**Răspuns**: Pentru că invocând-o ajungi la un rezultat, la o valoare (fie aceasta un boolean, număr, șir, obiect).
-
-```javascript
-function ceva(){ return "o valoare" };
-```
-
-### C. Funcție EXPRIMATĂ ANONIMĂ (anonymous function expression)
+### Expresie de funcție anonimă (anonymous function expression)
 
 ```javascript
 var anonima = function(){};
 ```
-Atenție, nu permite recursivitate.
+
+Atenție, astfel de funcții nu permit recursivitatea. Înțelegerea funcțiilor anonime se leagă profund de faptul că funcțiile sunt valori și că aceste valori pot fi folosite precum oricare altă valoare în JavaScript.
 
 ### D. Funcție EXPRIMATĂ CU IDENTIFICATOR (named function expression):
 
