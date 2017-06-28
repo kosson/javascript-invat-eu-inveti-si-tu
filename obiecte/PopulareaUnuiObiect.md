@@ -105,7 +105,7 @@ var cheie = newObj['oCheie'];   // Accesează proprietățile
 ## Populare folosind `Object.defineProperty()`
 
 ```javascript
-var newObj = {};              // Creează obiectul
+var newObj = {}; // Creează obiectul literal
 
 Object.defineProperty(newObj, 'numeCheieNoua', {
   value: 'Salutare',
@@ -118,7 +118,7 @@ Object.defineProperty(newObj, 'numeCheieNoua', {
 Exemplul de mai sus ar putea fi rescris astfel:
 
 ```javascript
-var newObj = {};              // Creează obiectul
+var newObj = {};  // Creează obiectul literal
 
 var defProp = function(obiect, cheie, valoare){
   config.value = valoare;
@@ -126,7 +126,7 @@ var defProp = function(obiect, cheie, valoare){
 };
 
 defProp(newObj, 'oCheieNoua', 'Santinel');  // creează o proprietate
-defProp(newObj, 'oAltaCheieNoua', 'an');    // mai adaugă o proprietate
+defProp(newObj, 'oAltaCheieNoua', 'an');    // adaugă o proprietate
 
 ```
 

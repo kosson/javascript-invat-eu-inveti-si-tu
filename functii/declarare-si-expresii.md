@@ -109,29 +109,26 @@ Eroarea apare pentru că se face „legătura” dintre identificator și funcț
 })(); // fac ceva!
 ```
 
-Acest sfat poate fi vizualizat ca un pescar care dimineața întinde toate plasele.
-
 Încă ceva: introducerea unei instrucțiuni de declarare între paranteze, o transformă în expresie.
 
 ```javascript
 (function faCeva () {});
 ```
 
-### B. Expresie pentru definirea unei funcții
+### B. Expresie pentru definirea unei funcții (en. function expression)
 
-Sunt funcțiile care sunt parte a unei alte instrucțiuni (`statement`).
+Sunt funcțiile care sunt parte a unui enunț (`statement`).
 
-Funcțiile create ca parte a unei expresii, adică a căror expresie literală, se va afla în partea dreaptă a unei expresii, se numesc **function expressions**.
+Funcțiile create ca parte a unui enunț, adică a căror expresie literală, se va afla în partea dreaptă a unei expresii, se numesc **function expressions**.
 Tot function expressions sunt și funcțiile care sunt pasate ca argumente.
-GRAMATICA CARE EXPLICĂ: Un **function expression** trebuie întotdeauna încheiat cu `;`. Punct și virgulă indică că motorul JavaScript trebuie să evalueze expresia din stânga egalului și să o atribuie indentificatorului din stânga.
 
 ```javascript
-var functie = function(){};
-functie(function(){});      // callback-urile sunt function expressions.
+var functie = function(){};// function expression
+functie(function(){});     // callback-urile sunt function expression.
 functie(function(){
-  return function(){};      // funcțiile returnate tot function expressions sunt.
+  return function(){};     // funcțiile returnate tot function expression sunt.
 });
-(function functie(){})();   // chiar și în cazul unui IFFE, tot despre un function expression vorbim.
+(function functie(){})();  // În cazul unui IFFE, tot un function expression avem.
 ```
 
 Expresiile de funcții pot fi pasate ca valori altor funcții ca parametri. Aceste funcții vor putea fi executate din interiorul funcției cărora au fost pasate.
@@ -183,8 +180,6 @@ ceva(); // ReferenceError: ceva is not defined
 ```
 
 În cazul acestor funcții trebuie remarcat faptul că identificatorul variabilei este cel care trebuie folosit pentru a invoca funcția.
-
-
 
 ### Expresie de funcție anonimă (anonymous function expression)
 

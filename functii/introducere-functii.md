@@ -1,7 +1,7 @@
 # Funcții în ECMAScript
 
 O perspectivă simpatică ar fi dacă-ți închipui o funcție ca pe un caracter dintr-un joc de strategie pe care dai click și-l pui să facă ceva. Când ai nevoie să „producă” mâncare îl pui să facă o fermă. Îl trimiți după lemne ca să aibă cu ce și așa mai departe. Dacă ajunge la un punct de pe hartă unde concurează cu alte caractere pentru o resursă, pur și simplu așteaptă cuminte să-i vină rândul la „tufa cu fructe” sau la „minerit aur”. Îmediat ce termină treaba, caracterul nostru nu are inițiativă, așteaptă să fie chemat cu un click să facă ceva.
-Așa sunt și funcțiile ca și comportament.
+În tușe foarte groase așa sunt și funcțiile ca și comportament.
 
 O funcție este declarată folosind cuvântul cheie `function` urmat de un șir de caractere, care este numele funcției urmate de paranteze rotunde. Între paranteze sunt declarate valori care constituie argumentele funcției (acestea formează așa-numitul antet), urmate apoi de acolade. Acoladele delimitează **blocul de cod** ce va fi executat la invocarea funcției.
 
@@ -12,7 +12,13 @@ function faCeva(arg1, arg2){
 }; faCeva(1, 3); //4
 ```
 
-Funcțiile sunt unitățile de execuție a codului JavaScript. O funcție poate fi percepută ca un subprogram, ca o subrutină. Veți mai întâlni în alte lucrări și denumirea de „proceduri”. Cel mai sănătos mod de a privi activitatea și efectele unei funcții este gândind întotdeauna că o funcție este un set de instrucțiuni care se aplică unui set de date primit ca argumente. De ce să faci asta? Pentru că în interiorul funcției vei prelucra datele primite și la final vei dori să oferi rezultatele la care ai ajuns.
+**Moment ZEN**: O funcție este un obiect foarte special.
+
+Veți întâlni funcțiile la orice pas și în combinații diferite ca parte a unor expresii ale unui enunț sau ca declarații directe. Veți mai întâlni funcțiile ca valori care sunt pasate ca argumente unei alte funcții și le veți vedea la treabă ca și constructori de obiecte.
+
+## Unități de execuție
+
+Funcțiile sunt unitățile de execuție ale codului JavaScript. O funcție poate fi percepută ca un subprogram, ca o subrutină. Veți mai întâlni în alte lucrări și denumirea de „proceduri”. Cel mai sănătos mod de a privi activitatea și efectele unei funcții este gândind întotdeauna că o funcție este un set de instrucțiuni care se aplică unui set de date primit ca argumente. De ce să faci asta? Pentru că în interiorul funcției vei prelucra datele primite și la final vei dori să oferi rezultatele la care ai ajuns.
 
 Aplicarea unei funcții argumentelor sale produce un nou mediu lexical, un nou scope în care se fac legături între identificatori și valori.
 
@@ -58,9 +64,9 @@ Nimic din conținutul unei funcții nu produce niciun rezultat până când func
 
 La momentul apelării (a invocării), funcția evaluează codul său intern și returnează un rezultat pe baza operațiunilor specificate în **codul funcției**. De fapt, ar trebui să pornim de la 0 și să spunem că mai întâi de toate o funcție este o expresie pe care motorul JavaScript are nevoie să o evalueze, dar această expresie are în componența ei alte expresii care la rândul lor au nevoie să fie evaluate pentru ca funcția să poată fi evaluată. Deci, se vor evalua expresiile până când se va ajunge la valorile de care funcția are nevoie să se execute.
 
-Această concluzie vă va ajuta să înțelegeți mai repede ce sunt și cum funcționează un „closure”.
+Această concluzie vă va ajuta să înțelegeți mai repede ce sunt și cum funcționează un „closure”, adică o funcție returnată dintr-alta și care ține minte mediul lexical al celei care a găzduit-o la momentul execuției. Nițel confuz? Nu-i nicio problemă, le vom lămuri încet.
 
-Rețineți și faptul că o funcție evaluată este diferită de fiecare dată. Evaluarea unei funcții nu este echivalente evaluării aceleiași funcții.
+În contextul faptului știut că o funcție este o valoare, funcția evaluată (reducerea sa la o valoare) este diferită de valoarea pe care o reprezintă în forma sa literală.
 
 ```javascript
 var faCeva = function () {return 10;};
@@ -272,6 +278,61 @@ function f(a, b, ...args){
 ```
 
 Valorile primelor două argumente pasate vor fi potrivite cu cei doi parametri menționați: a și b
+
+## Funcțiile sunt obiecte speciale care pot construi obiecte
+
+Am avut câteva momente ZEN în care am conștientizat faptul că funcțiile, de fapt sunt obiecte care diferit de obiectele normale, pot fi apelate. Acest comportament suplimentar oferă posibilitatea de a „construi” pur și simplu obiecte cu ajutorul funcțiilor. Cum realizăm acest lucru? Vom declara o funcție, care conform convențiilor de scriere a funcțiilor constructor va avea identificatorul începând cu majusculă și după ce am declarat-o, ca să creăm un obiect, o vom apela așa cum facem în cazul oricărei invocări pentru o funcție, cu singura diferență că va fi precedată de operatorul `new`. Acest operator îi comunică motorului JavaScript faptul că funcția apelată va genera un obiect.
+
+```javascript
+function Ceva () {
+  this.valoare = 'text';
+};
+var obi = new Ceva();
+typeof obi; // object
+obi.valoare; // "text"
+```
+
+### Accesarea și setarea valorilor unui obiect generat de o funcție cu rol de contructor - getteri și setteri
+
+Uneori este necesar să protejezi anumite valori ale unui obiect pe care-l generezi folosind o funcție constructor. Partea foarte frumoasă este că însăși funcția constructor permite introducerea unor mecanisme de acces și setare a valorilor din obiectul rezultat. Acest lucru se realizează prin funcții specializate care poartă denumirea de accesori și sunt cunoscuți ca fiind getteri (de la englezescul `get`, care înseamnă a obține o valoare) și setteri (de la englezescul `set`, care înseamnă a introduce o valoare).
+
+Până la ECMAScript 5, getterii și setterii erau nimic mai mult decât două funcții special croite pentru a introduce și scoate valori.
+
+```javascript
+function FaUnObiect (sunetPrimit) {
+  var sunet = sunetPrimit; // setare cu o valoare inițială
+  this.getSunet = function () {
+    return sunet;
+  };
+  this.setSunet = function (zgomot) {
+    sunet = zgomot;
+  };
+};
+var obi = new FaUnObiect('zbang');
+obi.getSunet(); // "zbang"
+obi.setSunet('poc');
+obi.getSunet(); // "poc"
+```
+
+Ceea ce este observabil este faptul că `valoare` nu este accesibil direct, ci numai prin intermediul celor două funcții specializate.
+
+ECMAScript 5 simplifică lucrurile din punct de vedere sintactic și reduce verbozitatea codului. În locul unei funcții cu rol de constructor, se poate lucra direct cu obiectul la momentul declarării sale.
+
+```javascript
+var obi = {
+  get sunet() {
+    return this.valoare;
+  },
+  set sunet(zgomot) {
+    this.valoare = zgomot;
+  }
+};
+obi.sunet; // undefined
+obi.sunet = 'paf';
+obi.sunet; // "paf"
+```
+
+În cazul nostru, `valoare` este partea ascunsă a obiectului, care poate fi manipulată doar prin metodele specializate.
 
 ## Anatomie
 

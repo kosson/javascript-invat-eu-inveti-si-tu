@@ -36,28 +36,48 @@ TODO: sortează mantrele la this
 - în cazul funcțiilor`this` nu este o referință către funcția în sine. Reține faptul că unei funcții îi sunt pasate tacit `this` și `arguments`.
 - `this` NU ESTE O REFERINȚĂ CĂTRE SCOPE-ul LEXICAL AL FUNCȚIEI.
 
-Legătura (binding-ul) la `this` DEPINDE DE OBIECTUL specificat la call-site.
+## Cum se stabilește legătura la `this`
+
+Legătura (termenul în engleză fiind `binding`) la `this` DEPINDE DE OBIECTUL specificat la call-site.
 
 ```javascript
 function faCeva (){
-  console.log(this);      // Răspunde cu obiectul context Object { actiune: faCeva() }
-  console.log(this.ceva); // răspunde cu undefined pentru că obiectul context nu are o proprietatea ceva
+  console.log(this);      // (1)
+  console.log(this.ceva); // (2)
 };
 
 var obj = {
   faCeva: faCeva
 };
 
-// ES6, dacă ai denumit cheia metodei la fel cu numele funcției,
-// se poate menționa simplu numele
 var obj = {
-  faCeva
+  faCeva // (3)
 };
 
-obj.faCeva(); // this este chiar obiectul menționat la stânga metodei
+obj.faCeva(); // (4)
 ```
 
-Folosit pentru a lua un obiect și pentru a-i îmbogăți și/sau prelucra valorile membrilor după care poate fi returnat și folosit mai departe.
+(1) Răspunde cu obiectul context Object { actiune: faCeva() }.
+(2) Răspunde cu undefined pentru că obiectul context nu are o proprietatea ceva.
+(3) Începând cu ES6, dacă ai denumit cheia metodei la fel cu numele funcției, se poate menționa simplu numele.
+(4) this este chiar obiectul menționat la stânga metodei
+
+Hai să vedem un exemplu în care legătura la `this` se pierde. Este cazul în care avem o funcție care este definită și apelată în interiorul unei metode.
+
+```javascript
+var obi = {
+  ceva: 'text',
+  faceva: function () {
+    function interna () {
+      return this.ceva;
+    };
+    return interna();
+  },
+};
+obi.faceva(); // undefined
+```
+
+Apelarea funcției `interna`, nu realizează o legătură pentru `this` la obiectul în care este definită metoda `faceva`.
 
 ## Dependințe cognitive
 
@@ -72,7 +92,9 @@ Folosit pentru a lua un obiect și pentru a-i îmbogăți și/sau prelucra valor
 
 ## Mică anatomie pentru `this`
 
-Cazul funcțiilor simple. Ceea ce se va observa rapid este faptul că în cazul folosirii lui var pentru declarații, obiectul `this` va fi însuși obiectul global. Am introdus cazul funcțiilor simple pentru că au, de fapt un context de execuție, acesta fiind obiectul global a cărui proprietăți pot fi accesate prin legătura pe care o face obiectul this.
+### Cazul funcțiilor simple
+
+Ceea ce se va observa rapid este faptul că în cazul folosirii lui var pentru declarații, obiectul `this` va fi însuși obiectul global. Am introdus cazul funcțiilor simple pentru că au, de fapt un context de execuție, acesta fiind obiectul global a cărui proprietăți pot fi accesate prin legătura pe care o face obiectul this.
 
 ```javascript
 var x = 10;

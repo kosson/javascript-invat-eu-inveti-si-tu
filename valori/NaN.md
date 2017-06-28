@@ -20,12 +20,15 @@ NaN === NaN; // false
 ```
 
 Pentru că nu ne putem baza pe stabilirea adevărului folosind operatorii `==` și `===`, este nevoie de o funcție care să stabilească exact dacă o valoare este NaN sau nu.
-Există chiar și o metodă membră a obiectului `window`, care verifică o valoare dacă este NaN.
+Există chiar și o metodă membră a obiectului `Number`, care verifică o valoare dacă este NaN. Această metodă poate fi accesată direct sau folosind operatorul de adresare cu punct `Number.isNaN`.
 
 ```javascript
 isNaN(NaN); // true
+Number.isNaN(NaN); // true
 isNan(5); // false
-isNaN('salut'); // true
+isNaN('salut'); // true - ciudat, nu?
+Number.isNaN('salut'); // false - acum corect
+'salut' == NaN; // false - ciudat, nu?
 ```
 
 Metoda `isNaN` este membră și a obiectului `Number` începând cu ECMAScript 2015.
