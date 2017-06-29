@@ -14,3 +14,5 @@ Ce o face specială pe această metodă este faptul că poți seta atributele pr
 Proprietățile introduce într-un obiect prin atribuire vor apărea în prelucrările cu `for...in` sau la numărarea cheilor cu `Object.keys`.
 
 `Object.defineProperty` aduce ceva foarte util: granularitate la introducerea unei noi proprietăți. Din start orice valoare introdusă prin definirea unei proprietăți cu ajutorul lui `Object.defineProperty`, nu poate fi modificată în contrast cu cele introduse prin asignare.
+
+TODO: Termină de scris Object.defineProperty în paralel cu Object.create.

@@ -26,9 +26,11 @@ Ca și obișnuință, ar fi cel mai util să gândești că funcția se aplică 
 
 **Moment Zen**: O funcție, de fapt, „se aplică” argumentelor pasate care sunt valori, le va prelucra și le va oferi apelantului prin returnare.
 
-**O funcție este un obiect apelabil**. O funcție care este asociată unui obiect prin intermediul unei proprietăți, este numită *metodă*.
+## Funcțiile sunt valori
 
-**Moment ZEN**: Funcțiile sunt valori.
+**Moment Zen**: Funcțiile sunt valori în sine care pot fi referențiate printr-un identificator (variabilă).
+
+## Mecanisme magice
 
 **Mecanisme magice**: Declararea unei funcții are ca efect declanșarea **hoising**-ului. Declarația este introdusă în registrul inventar al mediului lexical existent. Magia rezidă din faptul că poți invoca o funcție înainte ca aceasta să fie declarată. Superciudățel, nu?!
 
@@ -43,6 +45,8 @@ var x = 100, y = 'ceva';
 
 Motivul pentru care există funcțiile este acela al reutilizări în diferite scenarii. De ce? Pentru că ar fi o nebunie să scrii aceeași secvență de cod de 1000 de ori, dacă în diferite părți ale codului este nevoie de un „tratament” identic al unor seturi de valori diferite.
 
+## Apelare, referențiere și golirea de valoare
+
 Înainte de a merge mai departe, trebuie să facem o diferență clară între apelare și referențiere. O funcție este apelată prin scrierea identificatorului urmat de `()` iar referențierea este doar introducerea identificatorului ceea ce va returna funcția ca valoare, adică chiar conținutul său. Acest lucru se întâmplă pentru că o funcție este o valoare, de fapt.
 
 Și acum, vom face un exercițiu Zen și vom privi la exemplul perfect de funcție, care se poate executa, dar a cărei esență este golul, nedefinitul.
@@ -53,6 +57,8 @@ Motivul pentru care există funcțiile este acela al reutilizări în diferite s
 (() => {})(); // undefined
 ```
 
+## Funcția ca valoare poate fi redusă la nimic cu `void`
+
 Un moment de un calm asemănător este utilizarea operatorului `void`, care golește de valoare orice expresie care a fost evaluată pe care o precedă.
 
 ```javascript
@@ -60,7 +66,9 @@ void 1; // undefined
 void (function ki(){return 'energie';})(); // undefined
 ```
 
-Nimic din conținutul unei funcții nu produce niciun rezultat până când funcția nu este apelată și evaluată.
+## Apelare = invocare = rulare totul este evaluare!
+
+Nimic din conținutul unei funcții nu produce niciun rezultat până când funcția nu este apelată și evaluată. Apelare, invocare și rulare sunt sinonime și înseamnă același lucru: momentul de inițiere a evaluării codului dintre acolade.
 
 La momentul apelării (a invocării), funcția evaluează codul său intern și returnează un rezultat pe baza operațiunilor specificate în **codul funcției**. De fapt, ar trebui să pornim de la 0 și să spunem că mai întâi de toate o funcție este o expresie pe care motorul JavaScript are nevoie să o evalueze, dar această expresie are în componența ei alte expresii care la rândul lor au nevoie să fie evaluate pentru ca funcția să poată fi evaluată. Deci, se vor evalua expresiile până când se va ajunge la valorile de care funcția are nevoie să se execute.
 
@@ -121,13 +129,19 @@ var x = (y) => () => y; x(1)(); // 1; același lucru cu bloc
 var a = (b) => () => { return b; }; a(2)(); // 2
 ```
 
+## Funcțiile ca obiecte
+
 **Moment Zen**: Funcțiile sunt obiecte!
 
-Standardul le numește chiar `function objects`. O funcție produce o instanță a unui function object. În JavaScript, funcțiile au metode.
-Funcțiile sunt obiecte first-class. Pot fi pasate ca argumente altor funcții și pot fi returnate din funcții.
-Funcțiile în JavaScript sunt de ***ordin înalt***, adică pot fi pasate ca valori și pot primi ca argumente alte funcții, dar acest lucru tot de faptul că sunt first class ține.
+Standardul le numește chiar `function objects`. O funcție produce o instanță a unui **function object**, fapt care conduce la concluzia logică că în JavaScript, funcțiile au metode. Fain, nu?! Da hai să-ți mai spui una. Standardul le poreclește `callable objects`.
 
-**Moment Zen**: Funcțiile sunt valori în sine care pot fi referențiate printr-un identificator (variabilă).
+**O funcție este un obiect apelabil**. O funcție care este asociată unui obiect prin intermediul unei proprietăți, este numită *metodă*.
+
+Funcțiile sunt **obiecte first-class**, adică pot fi pasate ca argumente altor funcții și pot fi returnate din funcții.
+Funcțiile în JavaScript sunt de ***ordin înalt***, adică pot fi pasate ca valori și pot primi ca argumente alte funcții, dar acest lucru tot de faptul că sunt **first class** ține.
+
+
+## Funcțiile moștenesc
 
 Funcțiile moștenesc din `Function.prototype`.
 
