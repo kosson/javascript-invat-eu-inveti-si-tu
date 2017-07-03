@@ -1,4 +1,6 @@
-# strict mode
+# Rularea codului sub `strict mode`
+
+A fost adăugat odată cu ES5 și are rolul de a modifica comportamentul motoarelor JavaScript în ceea ce privește gestionarea erorilor.
 
 Pentru a face codul ceva puțin tolerant la erori, `'use strict';` pragma se poate pune în capul fișierului sau a unei funcții.
 
