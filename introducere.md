@@ -26,7 +26,7 @@ Acesta este și un efort de a lărgi baza de acces în limba română către un 
 
 Este posibil ca multe dintre interpretările mele sau felul în care explic să nu fie cel canonic, cel predat în școală sau în mediile academice dedicate. Nu este o lucrare orientată către comunitatea de cercetare a domeniului calculatoarelor. Audiența include și pe aceștia, dar baza o constituie cei care au nevoie de o ușă deschisă pentru a prinde curaj să scrie primele programe, pentru „a prinde gustul", pentru a realiza un potențial pe care doar îl intuiau.
 
-Ținta este de a căuta cea mai bună asamblare a cunoștințelor în dozele cele mai echilibrate pentru ca doritorii să ajungă la un nivelul cel mai bun de înțelegere. Finalitatea este dobândirea încrederii pentru a scrie ușor cod funcțional și de a lucra cu diferitele biblioteci de cod existente.
+Ținta este de a căuta cea mai bună asamblare a cunoștințelor în dozele cele mai echilibrate pentru ca doritorii să ajungă la nivelul cel mai bun de înțelegere. Finalitatea este dobândirea încrederii pentru a scrie ușor cod funcțional și pentru a lucra cu diferitele biblioteci de cod existente.
 
 Limbajul adoptat este unul dedicat celui care dorește să înțeleagă fenomenul și să ajungă la contextualizare rapidă a anumitor concepte sau abstractizări cu un prag mai ridicat. Pentru a realiza cât mai multe punți între subiectele care au o legătură directă, am ales să repet în anumite puncte cheie câteva informații necesare în defavoarea unor trimiteri seci care să aibă ca efect cât mai puține salturi între segmentele de cunoștințe.
 
@@ -44,7 +44,7 @@ Dacă veți căuta instrumentul perfect pentru a învăța, această lucrare nu 
 
 ### Astăzi întrebarea este `cum`, nu `de ce`
 
-Pentru că această lucrare se adresează și specialiștilor din științele informării și prin extensie tuturor celor din domeniul umanioarelor digitale, accentuez faptul că nu mai poate fi despărțită nevoia de a dobândi noi abilități, de cerința de a le pune în practică. Ceea ce doresc să subliniez este că aproape toate serviciile moderne ale unei instituții de memorie sau de cercetare nu mai pot fi gândite fără o formă sau alta de prelucrare a datelor și informațiilor, fie că este remodelare, regărire după șabloane sau prezentarea lor către comunitate ori interconectarea lor cu alte seturi ori sisteme.
+Pentru că această lucrare se adresează și specialiștilor din științele informării și prin extensie tuturor celor din domeniul umanioarelor digitale, accentuez faptul că nu mai poate fi despărțită nevoia de a dobândi noi abilități, de cerința de a le pune în practică. Ceea ce doresc să subliniez este că aproape toate serviciile moderne ale unei instituții de memorie sau de cercetare nu mai pot fi gândite fără o formă sau alta de prelucrare a datelor și informațiilor, fie că este remodelare, regăsire după șabloane sau prezentarea lor către comunitate ori interconectarea cu alte seturi ori sisteme de gestiune.
 
 Întrebarea pentru toți profesioniștii domeniului este în acest moment **cum**? Cum să învăț să gestionez date, cum să le manipulez, cum să le prezint pentru a fi mai ușor de înțeles celor care au nevoie de ele. Cum să transform catalogul meu, cum să interconectez baze de date europene și globale la acesta, cum să convertesc dintr-un format în altul, dar mai ales cum să exploatez colecția pentru a o face și mai atractivă din perspectiva unui instrument de lucru care să devină permanență... obișnuință!? Cum să transform instrumentul creat de mine într-un serviciu continuu?
 
@@ -60,7 +60,7 @@ Voi încheia pledoaria pentru acest nou drum cu o afirmație care se va dovedi a
 
 Textul în dimensiunea lui digitală este o colecție de date în sine. El se agregă și poate fi jalonat pentru a crea structuri inteligibile pentru om cât și pentru mașină.
 
-Textul este o colecție destructurată cu înțeles doar pentru om, care așteaptă un agent software care să o reordoneze și interconecteze cu alte surse pentru a oferi o nouă dimensiune valorică. De fapt, acesta este și scopul final pentru care învățăm programare: **extragerea valorii indiferent de formă și destinație pentru a ajunge la noi înțelesuri**.
+Textul este o colecție structurată de caractere cu înțeles doar pentru om, care așteaptă un agent software pentru a o reordona și interconecta cu alte surse cu scopul de a oferi o nouă dimensiune valorică. De fapt, acesta este și scopul final pentru care învățăm programare: **extragerea valorii indiferent de formă și destinație pentru a ajunge la noi înțelesuri**.
 
 Pentru că acest material țintește pe cei care lucrează în domeniul umanioarelor, pentru că urmărește un salt la un nou nivel al celor care doresc să stăpânească arta de a manipula date, vă invit să faceți un efort de a înțelege forma și formatele acestora. Cel mai ades veți vedea că exemplele vor fi create folosind HTML5, care este la rândul său văr bun cu XML-ul pe baza căruia multe dintre datele domeniilor noastre sunt „împachetate” și distribuite. De multe ori, de cele mai multe ori vom folosi pentru „împachetare”, transmitere și manipulare formatul JSON, care este un subset chiar a limbajului de programare JavaScript.
 
@@ -106,24 +106,26 @@ JavaScript este un limbaj de programare creat de Brendan Eich în perioada când
 
 Orice limbaj de programare este caracterizat de o sintaxă proprie (un set de reguli care îmbină cuvintele astfel încât să le înțeleagă compilatorul), un înțeles al combinațiilor de cuvinte (semantică) care să reflecte ceea ce intenționezi cu programul și un set de cuvinte pe care compilatorul să le înțeleagă a fi ale limbajului de programare (vocabular sau cuvintele cheie).
 
-Pentru a face o anatomie, vom construi tărâmul JavaScript de la cele mai mici componente precum un fizician din domeniul particulelor pornește de la componentele unei substanțe, de la atomi și mai jos de la componentele atomului.
+Pentru a face o anatomie, vom construi tărâmul JavaScript de la cele mai mici componente precum un fizician din domeniul particulelor pornește de la componentele unei substanțe, de la atomi și și mai jos de la componentele atomului.
 
 ### Caracterele folosite
 
-Mergând pe aceeași analogie cu cea a domeniului fizicii particulelor, am putea spune că **atomii** limbajului de programare, adică fragmentele de text care fac sens pentru computer, sunt formați din **protoni**, adică caractere care împreună formează cuvintele cu înțeles pentru limbajul de programare și **neutroni**, adică caractere care joacă un rol special.
+Mergând pe aceeași analogie cu cea a domeniului fizicii particulelor, am putea spune că **atomii** limbajului de programare, adică fragmentele de text care fac sens pentru computer, sunt formați din **protoni**, adică caractere care împreună formează cuvintele cu înțeles pentru limbajul de programare și **neutroni**, adică caractere care joacă un rol special. Să ne intrăm deja în rolul de programator.
 
-Ești în fața editorului de text preferat gata să redactezi primul tău program.
+Ești în fața editorului de text preferat gata să redactezi primul tău program. În fereastra editorului, pentru a te face înțeles computerului vei redacta codul prin înșiruirea de caractere în cuvinte, sintagme, enunțuri și așa mai departe.
 
-Literele, pentru computer nu sunt decât niște coduri alfanumerice în baza căruia sunt capabile să afișeze caracterul pe ecran, care este asociat acelui cod.
-Caracterele folosite pentru a scrie codul sursă respectă standardul internațional Unicode, care asociază anumite secvențe alfanumerice pentru diferite seturi de caractere (Latin, Chirilic, etc.). Mai exact, fiecare secvență alfanumerică de codare se numește *punct de cod specific UTF16* (Unicode Transformation Format). Reține faptul că toate caracterele de lucru pentru un computer sunt coduri convenite la nivel internațional.
+Literele, pentru computer nu sunt decât niște coduri alfanumerice în baza căruia sunt capabile să afișeze un anume caracter pe ecran.
+Caracterele folosite pentru a scrie codul sursă ca și reprezentare alfanumerică, ca și codare, respectă standardul internațional Unicode, care asociază coduri individuale pentru fiecare caracter aparținând diferitelor seturi de caractere cu care poate fi redactat codul nostru sursă (Latin, Chirilic, etc.). Mai exact, fiecare secvență alfanumerică de codare se numește *punct de cod specific UTF16* (Unicode Transformation Format). Reține faptul că toate caracterele de lucru pentru un computer sunt pur și simplu coduri convenite la nivel internațional.
 
 #### Caracterele cu rol special
 
-JavaScript este un limbaj de programare folosit îndeosebi la manipularea șirurilor de caractere indiferent ce reprezintă pentru noi oamenii.
+JavaScript este un limbaj de programare folosit îndeosebi la manipularea șirurilor de caractere indiferent ce reprezintă acestea pentru noi oamenii.
 
 Există câteva caractere care necesită chiar acum, la început de drum, o atenție specială. Acestea sunt: `'` (**ghilimele simple**), `"` (**ghilimele duble**), `\n` (***new line*** - **linie nouă**), `\r` (***carriage return*** - **retur de car**), `\t` (**tabulator orizontal**, acest caracter apare când apeși tasta TAB), `\v` (**tabulator vertical**), `\b` (***backspace*** - **înapoi spre stânga cu ștergerea unui caracter**), `\f` (***form feed*** - **salt pagină nouă la dispozitivul de imprimare**), `\`(**slash**) și `/` (**backslash**).
 
-De ce necesită o atenție specială? Pentru că intră în componența șirurilor de caractere de lucru. Le vom întâlni în analiza textelor și vor crea probleme prin obținerea unor rezultate neașteptate dacă acum, la acest moment de început, nu le dăm cea mai mare atenție. Să trecem în continuare prin câteva cazuri fără de care nu poți scrie cod care să și funcționeze corect.
+De ce necesită o atenție specială? Pentru că intră în componența șirurilor de caractere de lucru. Le vom întâlni în analiza textelor și vor crea probleme prin obținerea unor rezultate neașteptate dacă acum, la acest moment de început, nu le dăm cea mai mare atenție. De ce sunt speciale? Pentru că aceste caractere au însemnătate și pentru text, dacă acestea fac parte dintr-un fragment de text analizat din care fac parte și fac sens în economia lui, dar în egală măsură au valoare și pentru motorul JavaScript la momentu analizei codul sursă.
+
+Să trecem în continuare prin câteva cazuri fără de care nu poți scrie cod care să și funcționeze corect.
 
 În cazul ghilimelelor, ca bună practică, se vor folosi ghilimele simple pentru declararea șirurilor de caractere pentru că, fiind un limbaj strâns legat de markup-ul paginilor web, ar putea cuprinde ghilimele duble ca parte a fragmentelor de pagină web construite dinamic.
 
@@ -133,15 +135,15 @@ Acoladele mai au și un rol special: delimitează spații cu un rol special. Cre
 
 ##### Caractere care au nevoie de ajutor pentru a fi „văzute” folosind ***secvențe excape***
 
-Caracterele de mai sus și combinațiile lor au un înțeles special pentru motorul de JavaScript, dar atunci când ele însele sunt necesare ca și caractere, fie că fac parte dintr-un text analizat, fie că se dorește compunerea unuia într-o manieră dinamică, aceste caractere trebuie să fie precedate de backslash (`\`).
+Caracterele de mai sus și combinațiile lor au un înțeles special și pentru motorul JavaScript, dar atunci când ele însele sunt necesare ca și caractere, fie că fac parte dintr-un text analizat, fie că se dorește compunerea unuia într-o manieră dinamică, aceste caractere trebuie să fie precedate de caracterul special backslash (`\`).
 
-De exemplu, ghilimele duble și simple: `\"` și `\'` și chiar backslash-ul însuși: `\\` au nevoie să fie precedate de backslash ceea ce numim secvență de escape sau pe românește îi spui computerului: prietene, caracterul precedat de backslash, te rog să nu-l interpretezi la valoarea sa specială pentru limbajul de programare.
+De exemplu, ghilimele duble și simple: `\"` și `\'` și chiar backslash-ul însuși: `\\` au nevoie să fie precedate de backslash ceea ce numim **secvență de escape** sau pe românește îi spui computerului: prietene, caracterul precedat de backslash, te rog să nu-l interpretezi la valoarea sa specială pentru limbajul de programare, ci consideră-l parte a fragmentului de text analizat.
 
-JavaScript este un limbaj de programare **case sensitive**, adică ține cont dacă scrii folosind majuscule. Pe scurt, șirul de caractere `ceva` este fundamental diferit de șirul de caractere `Ceva`.
+JavaScript este un limbaj de programare **case sensitive**, adică ține cont dacă scrii folosind majuscule. Pe scurt, șirul de caractere `ceva` este fundamental diferit de șirul de caractere `Ceva`. Și să-ți spun un mic secret de ce este diferit. Mai ții minte când mai sus spuneam că fiecare caracter pentru computer este un număr? În cazul nostru codul din spatele lui `c` mic este diferit de codul din spatele lui `C` ca majusculă.
 
 ### Textul sursă
 
-Textul sursă sau **codul sursă** poate fi de două tipuri: `Script` sau un `Module`.
+Textul sursă sau **codul sursă** poate fi de două tipuri: `Script` (un script) sau un `Module` (modul). Acesta este codul scris de tine în editorul preferat și pe care l-ai salvat apoi cu extensia `.js`: `ceva.js`.
 
 Codul pe care-l scrii poate fi redactat pe mai multe linii deoarece pentru JavaScript **_spațiile_**, **_taburile_** și **_line breaks_**-urile (trecerile pe linie nouă) sunt pur și simplu considerate a fi **spații albe** care nu au puterea să influiențeze evaluarea codului în niciun fel.
 
@@ -151,11 +153,11 @@ Spune standardul că mai întâi textul codului sursă este parcurs pentru a-l �
 
 #### Atomi lexicali
 
-Toate elementele lexicografice care constituie codul în sine, cu excepția spațiilor și a comentariilor, se numesc `token-uri`, adică `atomi lexicali`.
+Toate elementele lexicografice care constituie codul în sine, cu excepția spațiilor și a comentariilor, se numesc `token-uri`, adică pe românește `atomi lexicali`.
 
-Acești **atomi lexicali** (token-ii) sunt rezultatul parcurgerii unui fragment de cod (codul sursă) asupra căruia se aplică regulile lexicale specifice gramaticii pe care o impune standardul ECMAScript.
+Acești **atomi lexicali** (`token`-ii) sunt rezultatul parcurgerii unui fragment de cod (codul sursă) căruia i se aplică regulile lexicale specifice gramaticii impuse de standardul ECMAScript.
 
-Ca să-ți vină ușor să înțelegi, îți poți imagina un giuvaergiu care dintr-un maldăr de pietre prețioase (codul sursă), ia una câte una (fragmente de cod), pentru a-i identifica caracteristicile și în final pentru a le pune pe fiecare după sortare în cutiuțele pregătite special pentru a le asambla într-o diademă deosebită (programul nostru executat).
+Ca să-ți vină ușor să înțelegi, îți poți imagina un giuvaergiu care dintr-un maldăr de pietre prețioase (codul sursă), ia una câte una (fragmente de cod), pentru a-i identifica caracteristicile și în final pentru a le pune pe fiecare după sortare în cutiuțele pregătite special pentru a le asambla într-o diademă deosebită (programul nostru care tocmai a făcut ceva spectaculos).
 
 Ceea ce rezultă în urma aplicării regulilor de identificare a componentelor ce formează fragmentele „inteligibile” pentru computer din șirul de text de intrare. Dacă-ți vine mai ușor este ca o analiză gramaticală în care identifici părțile de propoziție, ce sunt acestea din punct de vedere al părților de vorbire și așa mai departe.
 
@@ -309,7 +311,7 @@ O mică mențiune: în cazul programării acoladele și parantezele pătrate pe 
 1 + 1 * (5 - 1); // 5
 ```
 
-Să revenim focalizându-ne pe enunțul de mai sus. Începem de la stânga spre dreapta să facem evaluarea expresiei. Buuuun! Și avem: 1 plus 1 egal? Stop joc! Cel de-al doilea unu (cel din dreapta operatorului plus) este implicat într-o operațiune pe care va trebui să o rezolvăm mai întâi pentru că așa spune prioritatea operatorului ori (`*`). Pentru moment, lăsăm în suspans prima operațiune de adunare și sărim să facem înmulțirea. Surpriză majoră: 1 este înmulțit cu o altă expresie care este între parantezele rotunde. Deci, abandonăm și înmulțirea și facem operațiunea dintre parantezele rotunde pentru a ajunge la o valoare. Gata! Avem valoarea `4`. Perfect, acum că avem valoarea, putem face înmulțirea: `1 * 4`. În urma evaluării ajungem la valoarea `4`. Acum este permisă evaluarea primei operațiuni de la care am plecat: `1 + 4`. Ajungem la rezultatul `5`. Hai că nu a fost greu, doar nițică matematică... știu, de mate nu scăpăm, dar nu ne lăsăm.
+Să revenim, focalizându-ne pe enunțul de mai sus. Începem de la stânga spre dreapta să facem evaluarea expresiei. Buuuun! Și avem: 1 plus 1 egal? Stop joc! Cel de-al doilea unu (cel din dreapta operatorului plus) este implicat într-o operațiune pe care va trebui să o rezolvăm mai întâi pentru că așa spune prioritatea operatorului ori (`*`). Pentru moment, lăsăm în suspans prima operațiune de adunare și sărim să facem înmulțirea. Surpriză majoră: 1 este înmulțit cu o altă expresie care este între parantezele rotunde. Deci, abandonăm și înmulțirea și facem operațiunea dintre parantezele rotunde pentru a ajunge la o valoare. Gata! Avem valoarea `4`. Perfect, acum că avem valoarea, putem face înmulțirea: `1 * 4`. În urma evaluării ajungem la valoarea `4`. Acum este permisă evaluarea primei operațiuni de la care am plecat: `1 + 4`. Ajungem la rezultatul `5`. Hai că nu a fost greu, doar nițică matematică... știu, de mate nu scăpăm, dar nu ne lăsăm.
 
 **Moment ZEN**: Pentru că expresiile sunt evaluate la o valoare, o expresie poate fi combinată cu altă expresie pentru a forma o expresie mai complexă și așa mai departe.
 

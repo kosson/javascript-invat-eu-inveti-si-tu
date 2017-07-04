@@ -1,4 +1,4 @@
-# Object.getPrototypeOf()
+# `Object.getPrototypeOf()`
 
 Returnează un obiect sau null și indică obiectul care oferă proprietăți care sunt moștenite și de cel asupra căruia se face interogarea cu `getPrototypeOf`. `null` indică faptul că obiectul curent nu moștenește nicio proprietate.
 

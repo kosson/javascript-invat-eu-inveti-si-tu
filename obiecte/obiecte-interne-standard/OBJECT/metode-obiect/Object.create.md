@@ -10,12 +10,40 @@ Metoda primește doi parametri:
 Este returnat un obiect nou care are prototipul setat la obiectul care a fost menționat.
 
 ```javascript
-var obiect = Object.create(null); // spuf! un obiect nou
+var obiect = Object.create(null);
+// spuf! un obiect nou fără moștenire
 var obiect = {};
+// zbang! alt obiect, dar care are moștenire
 // declararea unui obiect cu forma literală este
 // echivalent cu expresia de mai jos:
 var obiect = Object.create(Object.prototype);
 ```
+
+## Modificarea moștenirii
+
+```javascript
+var obi = {x: 'ceva'};
+var o = Object.create(obi);
+o.__proto__; // { x: "ceva" }
+```
+
+## Crearea unei clone de obiecte folosind Object.create()
+
+O astfel de construcție este posibilă, dar nu este recomandtă pentru că necesită o complexitate care cu greu își va găsi reflexia în practică.
+
+```javascript
+let obi = {
+  prima: 10,
+  aDoua: function(){console.log("Salut!");}
+};
+
+var obi2 = Object.create(
+  Object.getPrototypeOf(obi),
+  Object.getOwnPropertyDescriptors(obi)
+);
+```
+
+## Definire proprietăți cu set și get
 
 Adăugarea proprietăților în obiectul nou creat se poate face pasând cel de-al doilea parametru. Acesta este un obiect de configurare a cărui chei vor deveni proprietățile obiectului nostru, iar fiecare cheie are ca valoare câte un obiect descriptor cu setările pentru valoarea viitoarei proprietăți.
 
@@ -81,20 +109,4 @@ Cu ajutorul lui `Object.create` poți face legătura directă la prototipul unui
 var Foo = {};
 var Bar = Object.create(Foo);
 var Far = Object.create(Bar);
-```
-
-## Crearea unei clone de obiecte folosind Object.create()
-
-O astfel de construcție este posibilă, dar nu este recomandtă pentru că necesită o complexitate care cu greu își va găsi reflexia în practică.
-
-```javascript
-let obi = {
-  prima: 10,
-  aDoua: function(){console.log("Salut!");}
-};
-
-var obi2 = Object.create(
-  Object.getPrototypeOf(obi),
-  Object.getOwnPropertyDescriptors(obi)
-);
 ```

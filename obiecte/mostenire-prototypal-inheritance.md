@@ -1,14 +1,44 @@
 # Moștenirea prototipală
 
-JavaScript nu are un mecanism clasic de moștenire așa cum este așteptat în cazul tipic al moștenirii unei clase copil a caracteristicilor clasei părinte. O copiere a caracteristicilor, după care nu mai există nicio relație la instanțierea într-un obiect, nu există în JavaScript. Mereu va exista o legătură în Javascript între obiecte.
+***JavaScript este un limbaj bazat pe moștenire prototipală - prototypal inheritance***
+
+În alte limbaje de programare așa cum este Java, de exemplu, pentru a genera un obiect ai nevoie de un fragment de cod care are rolul de plan de construcție pentru viitoarele obiecte. Pur și simplu este o secvență de cod care descrie care sunt valorile și tipul lor pentru proprietățile viitorului obiect.
+
+**Moment ZEN**: În JavaScript nu există clase!
+
+În ciuda introducerii unei sintaxe care seamănă cu obișnuințele de programare ale altor limbaje, de fapt nu este decât un aranjament sintactic, care ascunde o implementare specifică JavaScript. Dacă vei crede că existența sintaxei `class` implică și un comportament intern care să se plieze cu ceea ce știi din alte limbaje de programare, te afli într-o adâncă eroare.
+
+Pentru a reutiliza cod, se creează obiecte care se bazează pe cele existente prin exploatarea unui lanț prototipal care se formează între obiecte și care poate fi interogat prin proprietatea oricărui obiect `__proto__`.
+
+Astfel, între obiecte se creează această legătură numită „legătură prototipală”. Aceste legături realizează „moștenirea prototipală” - `prototypal inheritance`. Obiectul preexistent constituie prototipul pentru cel nou creat care poate adăuga noi membri, noi comportamente. Mai trebuie adăugat că, de fapt, vorbim despre o *delegare* pe lanțul prototipal format. Acest lucru înseamnă că atunci când ceri o proprietate care nu există, delegi solicitarea către prototip să o analizeze și să servească o valoare sau să delege mai sus cererea dacă mai există un obiect prototip părinte.
+
+Unul din motivele pentru care ai folosi aceast lanț prototipal este acela de a realiza șabloane care structurează funcționalități prin ascunderea sau relevarea anumitor detalii. Acest lucru este posibil prin introducerea de funcții în prototip. Avantajul major al acestui lucru este că funcția este creată o singură dată în obiectul prototip.
+
+Un avantaj extraordinar pe care-l oferă moștenirea prototipală este că odată cu modificarea obiectului prototip, toate funcționalitățile noi vor fi disponibile tuturor celor care le moștenesc.
+
+Două obiecte care conțin fix aceiași membri, nu sunt identice; au identități diferite și acest lucru le face unice.
+
+```javascript
+var a = {0: 'ceva'},
+    b = {0: 'ceva'};
+a === b; // false
+```
+
+Obiectele sunt structuri care pot fi modificate chiar dacă identitatea rămâne neschimbată și spunem că din acest motiv pot suferi „mutații”. Același comportament îl au și array-urile. Și mai este un lucru pe care obiectele îl împărtășesc cu array-urile. Membrii unui obiect pot fi accesați prin folosirea parantezelor drepte.
+
+```javascript
+var obi = {a: 10}; obi['a']; // 10
+```
+
+Folosirea moștenirii prototipale introduce o ierarhie, o taxonomie prealabilă în aplicație, care este posibil să intre în conflict cu realitățile ulterioare. Acest mod de a scrie cod nu este încurajat în contextul actual care se orientează mai degrabă către programarea funcțională. În contextul programării funcționale, este încurajată compoziția obiectelor opusă mecanismului de moștenire.
 
 De fapt, se poate vorbi de o „delegare comportamentală” și nu de o moștenire în sensul clasic. Obiectele stabilesc legături prototipale prin care se pot face delegări pe lanțul prototipal.
 
 ## Spune standardul
 
-Toate obiectele comune au „un slot intern” numit `[[Prototype]]`.
+Toate **obiectele ordinare** au „un slot intern” numit `[[Prototype]]`.
 
-Valoarea acestui slot poate fi `null` sau un obiect care realizează moștenirea prototipală.
+Valoarea acestui slot poate fi `null` sau un obiect care va oferi tuturor descendenților funcționalități și valori.
 
 `Object.getPrototypeOf()` returnează valoarea din proprietatea internă `[[Prototype]]` iar `Object.setPrototypeOf()` o schimbă.
 
@@ -34,21 +64,20 @@ Legătura cu `[[Prototype]]` este aceea că în cazul unui `[[Extensible]]` cu v
 
 ## Moștenirea prototipală cu exemple
 
-### Prototip gol
+### Prototip gol, care nu moștenește
 
-Crearea unui obiect al cărui prototip este gol.
+Crearea unui obiect al cărui prototip este gol. Gol înseamnă că nu va moșteni nicio proprietate de la obiectul prototip pe care `Object.prototype` îl oferă.
 
 ```javascript
-let matrita = Object.create({}, {ceva: {value: 1}});
-
+let obiect = Object.create({}, {ceva: {value: 1}});
 Object.getPrototypeOf(obiect); // Object {  } prototipul este gol
 
-// Obiectele care vor fi create în baza lui matrita, var avea un prototip gol
+// Obiectele care vor fi create în baza lui obiect,
+// vor avea un prototip gol
 var obiect2 = Object.create(
-  Object.getPrototypeOf(matrita),
-  Object.getOwnPropertyDescriptors(matrita)
+  Object.getPrototypeOf(obiect),
+  Object.getOwnPropertyDescriptors(obiect)
 );
-
 Object.getPrototypeOf(obiect2); // Object {  } prototipul este gol
 ```
 

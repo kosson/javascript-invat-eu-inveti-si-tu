@@ -70,42 +70,6 @@ Acest mod de a adăuga proprități noi fără a interveni asupra constructorulu
 
 Am menționat că JavaScript vine din start cu obiectele care se numesc „built-in object” și pe care le-am tradus ca **obiecte interne** limbajului. Pentru a avea acces la ele nu-i nevoie să faci ceva. Pur și simplu ele sunt acolo deja, gata de a fi folosite. Există un detaliu pe care aș dori să-l remarcați cu atenție. `Obiectul global` este parte a obiectelor interne. Am putea concluziona că `obiectul global` plus `obiectele standard` constituie setul mare al celor `interne`. O distincție pe care trebuie să o fi realizat deja este că obiectul global nu este containerul tuturor obiectelor oricât de tentant ar fi să-l gândim astfel. Dar este „containerul” dacă vrei să-l închipui astfel a întregului cod pe care-l scrii tu și al entităților care se formează la momentul evaluării acestuia.
 
-## Moștenirea prototipală
-
-***JavaScript este un limbaj bazat pe moștenire prototipală - prototypal inheritance***
-
-În alte limbaje de programare așa cum este Java, de exemplu, pentru a genera un obiect ai nevoie de un fragment de cod care are rolul de plan de construcție pentru viitoarele obiecte. Pur și simplu este o secvență de cod care descrie care sunt valorile și tipul lor pentru proprietățile viitorului obiect.
-
-Această secvență de cod explică dacă metodele și proprietățile sunt accesibile pentru întreg codul sau o parte ori sunt „ascunse”, iar o parte sunt „protejate”. Aceasta este o clasă. Semnatic înseamnă că definești o clasă de obiecte care vor fi create în baza „planului”. Unul din rolurile principale pe care clasele îl joacă este acela de a nu defini de fiecare dată „planul” de câte ori ai nevoie să construiești un obiect. În fapt, vorbim de conceptul de refolosire inteligentă a codului din dorința de a nu ne repeta.
-
-**Moment ZEN**: În JavaScript nu există clase!
-
-În ciuda introducerii unei sintaxe care seamănă cu obișnuințele de programare ale altor limbaje, de fapt nu este decât un aranjament sintactic, care ascunde o implementare specifică JavaScript. Dacă vei crede că existența sintaxei `class` implică și un comportament intern care să se plieze cu ceea ce știi din alte limbaje de programare, te afli într-o adâncă eroare.
-
-Pentru a reutiliza cod, se creează obiecte care se bazează pe cele existente prin exploatarea unui lanț prototipal care se formează între obiecte și care poate fi interogat prin proprietatea oricărui obiect `__proto__`.
-
-Astfel, între obiecte se creează această legătură numită „legătură prototipală”. Aceste legături realizează „moștenirea prototipală” - `prototypal inheritance`. Obiectul preexistent constituie prototipul pentru cel nou creat care poate adăuga noi membri, noi comportamente. Mai trebuie adăugat că, de fapt, vorbim despre o *delegare* pe lanțul prototipal format. Acest lucru înseamnă că atunci când ceri o proprietate care nu există, delegi solicitarea către prototip să o analizeze și să servească o valoare sau să delege mai sus cererea dacă mai există un obiect prototip părinte.
-
-Unul din motivele pentru care ai folosi aceast lanț prototipal este acela de a realiza șabloane care structurează funcționalități prin ascunderea sau relevarea anumitor detalii. Acest lucru este posibil prin introducerea de funcții în prototip. Avantajul major al acestui lucru este că funcția este creată o singură dată în obiectul prototip.
-
-Un avantaj extraordinar pe care-l oferă moștenirea prototipală este că odată cu modificarea obiectului prototip, toate funcționalitățile noi vor fi disponibile tuturor celor care le moștenesc.
-
-Două obiecte care conțin fix aceiași membri, nu sunt identice; au identități diferite și acest lucru le face unice.
-
-```javascript
-var a = {0: 'ceva'},
-    b = {0: 'ceva'};
-a === b; // false
-```
-
-Obiectele sunt structuri care își pot modifica structura chiar dacă identitatea rămâne neschimbată și spunem că pot suferi mutații. Același comportament îl au și array-urile. Și mai este un lucru pe care obiectele îl împărtășesc cu array-urile. Membrii unui obiect pot fi accesați prin folosirea parantezelor drepte.
-
-```javascript
-var obi = {a: 10}; obi['a']; // 10
-```
-
-Folosirea moștenirii prototipale introduce o ierarhie, o taxonomie prealabilă în aplicație, care este posibil să intre în conflict cu realitățile ulterioare. Acest mod de a scrie cod nu este încurajat în contextul actual care se orientează mai degrabă către programarea funcțională. În contextul programării funcționale, este încurajată compoziția obiectelor opusă mecanismului de moștenire.
-
 ## Mantre
 
 - ECMAScript vine cu obiectele sale din start care se numesc obiecte `built-in` în care este inclus și `global object` - obiectul global.
@@ -407,34 +371,6 @@ obiect.getCantitate(); // 11
 
 Pentru a ajunge la cantitate este nevoie de metode de acces („accessors”). Acesta este și unul din cazurile de realizare a unui closure.
 
-## Cazuistică de realizare a obiectelor cu `new` și introducerea de metode direct în prototip
-
-Un exemplu ceva mai dezvoltat.
-
-```javascript
-function Foo(who){
-  this.me = who;
-}
-
-Foo.prototype.identify = function(){
-  return "I'm " + this.me;
-}
-
-var a1 = new Foo("a1");
-var a2 = new Foo("a2");
-
-a2.speak = function(){
-  alert("Hello, " + this.identify() + ".");
-};
-
-a1.constructor === Foo;
-a1.constructor === a2.constructor;
-a1.__proto__ === Foo.prototype;
-a1.__proto__ === a2.__proto_;
-```
-
-!["Moștenire clasică cu new"](Prototype.svg)
-
 ### Crearea unui obiect printr-o declarație literală
 
 Un obiect poate fi creat foarte simplu folosind acoladele:
@@ -469,14 +405,16 @@ Este o metodă a lui `Object` introdusă de ES5.
 Permite atribuirea directă a unui prototip unui obiect eliberând prototipul de legătura cu, constructorul.
 
 ```javascript
-var obiect;
-
-obiect = Object.create(null);   // pasarea lui null conduce la crearea unui obiect nou
-
+var obiect = Object.create(null);
+// pasarea lui null conduce la
+// crearea unui obiect nou fără
+// legătură prototipală
 obiect = {};
-// declararea unui obiect cu forma literală este echivalent cu expresia de mai jos care are același efect:
+// echivalent cu
 obiect = Object.create(Object.prototype);
 ```
+
+Echivalența este evidentă pentru că un obiect literal este un obiect ordinar care stabilește imediat o legătură la obiectul prototip a lui Object identificat prin Object.prototype.
 
 Construirea unui prototip care să stea la baza unui nou obiect construit.
 
