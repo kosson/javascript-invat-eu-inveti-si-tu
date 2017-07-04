@@ -471,7 +471,7 @@ Acesta este cel mai valoros citat al standardului pentru că este ca o fotografi
 
 Am precizat câțiva termeni deja care fac parte dintr-un adevărat idiom pe care-l impune limbajul. Comunitatea de programatori în JS au propriul limbaj de comunicare, uneori un jargon din care se strecoară în uzul de zi cu zi câte un termen, de exemplu cum este „scope", care formal în ECMAScript se numește „lexical environment" - tradus în română: *mediu lexical*.
 
-Pentru că deja am intrat într-o mini descriere a limbajului, voi continua adaugând faptul că de la JavaScript prin varietatea de stiluri dezvoltate în timp, s-au distins chiar dialecte așa cum este TypeScript. Dar asta este o discuție lungă și nu mai zăbovim aici.
+Pentru că deja am intrat într-o mini descriere a limbajului, voi continua adaugând faptul că de la JavaScript prin varietatea de stiluri dezvoltate în timp, s-au distins chiar dialecte așa cum este TypeScript sau CoffeeScript. Dar asta este o discuție lungă și nu mai zăbovim aici. Adaug doar că există aproape 300 de limbaje care sunt compilate la final în JavaScript.
 
 **Termenii noi nu trebuie să te descurajeze**. Fac parte din efortul de a înțelege și chiar dacă apar chiar de la început, vor fi descriși pe parcurs și vei înțelege ce se ascunde în spatele lor pe deplin. Înțelegerea unui limbaj de programare este ca un desen al unei rețele de noduri care comunică între ele. Am reflectat mult la balansul pe care trebuie să-l realizez în materialul pe care tocmai îl citești. Dacă aș fi urmat manualele clasice, acest desen complex (matematicieni îl numesc *graf*) ar fi trebuit pur și simplu să explodeze în fața ta deodată și cel mai dificil lucru mi-a fost să caut o cale prin care să te ghidez cât mai lin fără șocurile unei ascensiuni dificile ale unei curbe de învățare pe care eu însumi am urmat-o și tare mult am transpirat. Să revenim.
 
@@ -507,21 +507,24 @@ Structura este deja gata de a fi utilizată fără a interveni mai mult decât d
 
 #### Când se formează un `Realm`, tărâmul? Geneză à la carte
 
-Recomand maximă atenție acestei secțiuni pentru că indiferent cât de complex pare ca informație, are darul prin povestea sa să vă lămurească chiar de la bun început cum se formează întreg universul JavaScript, cum se compune și din ce este constituit `Realm`-ul ECMAScript, adică `Tărâmul`. Vei vedea cum se naște lanțul moștenirii folosind prototipurile, care sunt obiectele interne (așa-numitele `intrinsics`), cum apare obiectul prototip pentru toate obiectele subsecvente (chiar am putea să-l numim obiectul arhetip de la care toate moștesc) și cum apar obiectele care sunt indispensabile pentru a avea mediul gata pregătit pentru a rula propriul nostru cod.
+Recomand maximă atenție acestei secțiuni pentru că indiferent cât de complex pare ca informație, are darul prin povestea sa să vă lămurească chiar de la bun început cum se formează întreg universul JavaScript, cum se compune și din ce este constituit `Realm`-ul ECMAScript, adică `Tărâmul`. Vei vedea cum se naște lanțul moștenirii folosind prototipurile, care sunt obiectele interne (așa-numitele `intrinsics`), cum apare *obiectul prototip* pentru toate obiectele subsecvente (chiar am putea să-l numim obiectul arhetip de la care toate moștesc) și cum apar obiectele care sunt indispensabile pentru a avea mediul gata pregătit pentru a rula propriul nostru cod.
 
 Pentru a înțelege geneza unui Tărâm în JavaScript, vom apela la textul standardului, care la punctul `8.2.1 Create Realm` spune că orice motor JavaScript, va rula o operațiune internă a cărei rezultat este apariția unui `Realm`. Pașii, adică algoritmul urmat pentru crearea unui `Realm` aduc informații foarte importante, care o dată înțelese, mai departe va fi ușor de înțeles întreg limbajul. Hai să enumerăm și noi pașii algoritmului `CreateRealm()`, pentru că este ca și cum am asista la geneza universului JavaScript, aaadică, a `Tărâmului` JavaScript.
 
 Și acum, povestea. Cui nu-i place o poveste bună despre începuturi: Universul, Soarele, planetele și tot ce mișcă în lumea materială. Vom ambala într-o poveste părțile algoritmice, care aplicate conduc la apariția unui `Tărâm` - `Realm`. Povestea pornește pe când nimic nu exista. Familiar? :). În cazul nostru, este `momentul` acela când încă nu am deschis browserul sau un tab nou :)... Odată deschis, Demiurgul inițiază geneza unui `Tărâm` în care codul nostru sau cel accesat de la un server poate să-și înceapă evaluarea.
 
-`CreateRealm()` !!! spuse Demiurgul și dictă materiei (motorul JavaScript):
+![](Hieronymus_Bosch_-_The_Garden_of_Earthly_Delights_-_The_exterior_(shutters).jpg "Hieronymus Bosch - The Garden of Earthly Delights - The exterior. Resursă în Public Domain de la: https://en.wikipedia.org/wiki/The_Garden_of_Earthly_Delights#/media/File:Hieronymus_Bosch_-_The_Garden_of_Earthly_Delights_-_The_exterior_(shutters).jpg")
 
-1. Din *neant* va fi constituită o nouă înregistrare prin care să identificăm noului tărâm. Numele ei este `realmRec`. Tipologic vorbind, `realmRec` este un nou `Realm Record`”. Un `Realm Record` trebuie înțeles ca un container, ca un obiect descriptiv în care vom avea mai multe proprietăți asociate noului `Realm`. Să-l gândim ca pe un obiect care încă nu este populat. Pentru că este gol, neîmplinindu-și menirea, Demiurgul spune: `CreateIntrinsics(realmRec)`!!!
+`CreateRealm()` !!! spuse **Demiurgul** și dictă materiei (motorul JavaScript):
 
-##### Crearea obiectelor intrinseci - `intrinsics`
+1. Din *neant* va fi constituită o nouă înregistrare prin care să identificăm noului tărâm. Numele ei este `realmRec`. Tipologic vorbind, `realmRec` este un nou `Realm Record`”. Un `Realm Record` trebuie înțeles ca un container, ca un obiect descriptiv în care vom avea mai multe proprietăți asociate noului `Realm`. Să-l gândim ca pe un obiect care încă nu este populat.
+Hai că pe `Realm` l-am lămurit a fi `Tărâmul`, dar pe bună dreptate mă vei întreba ce este `Record` din combinația `Realm Record`. Record, în traducere românească ar fi o „înregistrare” cu sensul de „mijloc de ținere a unei evidențe”. Standardul vine și ne lămurește la 6.2.1 că un `Record` este un tip de valoare ce „constă dintr-unul sau mai multe câmpuri care poartă o denumire”. Și încă o mențiune foarte prețioasă pentru a înțelege notațiile folosite mai departe: „numele câmpurilor sunt întotdeauna încadrate între paranteze pătrate duble, de exemplu [\[Value]]”.
 
-Înainte de acest pas, să lămurim nițel termenii. Standardul expune denumirea de `intrinsics` pentru toate entitățile care sunt create înainte de a rula propriul cod de care are nevoie codul tău pentru a rula. În limba română traducerea implică trei sinonime: intrinseci, interioare, proprii. Pentru că termenul intrinsec este cel mai apropiat și ca fonetică, îl vom utiliza și noi în acest material.
+Pentru că acum `Tărâmul` este gol, neîmplinindu-și menirea, **Demiurgul** spune: `CreateIntrinsics(realmRec)`!!! Porunca sa vine ca al doilea pas al comenzii primare `CreateRealm()`. Această comadă de inițiere este întreruptă temporar pentru a obține un rezultat din invocarea `CreateIntrinsics(realmRec)`. Ține minte: `CreateRealm()` nu s-a încheiat.
 
-2. Porunca Demiurgului `CreateIntrinsics` ia noul obiect creat, `realmRec` și îl supune unei proceduri numită «`CreateIntrinsics()`» pentru a-l înzestra cu proprietăți utile. Tehnic vorbind, pur și simplu, este pasat obiectul `realmRec` procedurii `CreateIntrinsics` obținându-se «`CreateIntrinsics(realmRec)`». Acest pas al genezei este cel mai important, pentru că, urmând firul algoritmului `CreateIntrinsics(realmRec)`, vom asista la maiestuoasa naștere a tuturor entităților ECMAScript relevante și care sunt necesare pentru a rula codul propriu. Să urmărim pașii algoritmului intern `CreateIntrinsics(realmRec)`:
+Înainte de acest pas al doilea, care de fapt este o altă comandă, să lămurim nițel termenii. Standardul ne expune denumirea de `intrinsics` pentru toate entitățile care sunt create înainte de a rula propriul cod și de care are nevoie  pentru a fi evaluat. În limba română traducerea implică trei sinonime: intrinseci, interioare, proprii. Pentru că termenul de **intrinsec** este cel mai apropiat și ca fonetică, îl vom utiliza și noi în acest material.
+
+2. Porunca Demiurgului `CreateIntrinsics` ia noul obiect creat, `realmRec`, care tocmai a fost creat și îl supune unei proceduri numită «`CreateIntrinsics()`» pentru a-l înzestra cu proprietăți utile. Tehnic vorbind, pur și simplu, este pasat obiectul `realmRec` procedurii `CreateIntrinsics` obținându-se «`CreateIntrinsics(realmRec)`». Acest pas al genezei este cel mai important, pentru că, urmând firul algoritmului `CreateIntrinsics(realmRec)`, vom asista la maiestuoasa naștere a tuturor entităților ECMAScript relevante și care sunt necesare pentru a rula codul propriu. Să urmărim pașii algoritmului intern `CreateIntrinsics(realmRec)`:
   2.1 „Fie «intrinsics» un `Record`”. Identificatorul `intrinsics` va face legătra la Record prin care se înțelege o valoare sau un set de valori. În acest moment ne putem imagina `intrinsics` ca un container, gata să fie mobilată cu proprietățile necesare. Acest container va fi populat în următorii pași cu ceea ce standardul numește `entități` JavaScript: obiectele intrinseci, de fapt.
   2.2 Se va crea în obiectul descriptiv al noului nostru tărâm un câmp identificat prin `realmRec.[[Intrinsics]]`. Acest câmp - `[[Intrinsics]]` poate fi privit ca un slot în care se va „conecta” obiectul `intrinsics` abia creat. Ce s-a întâmplat este că obiectul `intrinsics` a devenit parte a containerului `realmRec`.
   2.3 Acum urmează un pas crucial. Ești pregătit? Algoritmul nostru va crea obiectului care va fi prototipul tuturor celorlalte care vor urma a fi create prin evaluarea codului nostru. Zice textul genezei: fie ca identificatorul `objProto` să aibă drept valoare un nou obiect ordinar. Demiurgul prunci: `ObjectCreate(null)`. Și astfel, prin evaluarea tuturor pașilor procedurii `ObjectCreate(null)` apăru un obiect ordinar, care nu va avea un alt obiect (argumentul `null` indică acest fapt), care să-i fie părinte, fiind cel arhetipal, cel care va fi prototipul tuturor celorlalte care vor fi generate prin evaluarea codului scris de tine. Concluzia simplă este că în acest moment s-a născut obiectul prototip zero, arhetipul tuturor celorlalte. Arhetipul este un obiect ordinar.
@@ -534,15 +537,31 @@ Pentru a înțelege geneza unui Tărâm în JavaScript, vom apela la textul stan
   2.10 Ca parte o obiectului `intrinsics` intră obiectul-funcție cu rol de prototip pentru funcții identificat ca `intrinsics.[[%FunctionPrototype%]]`.
   2.11 Demiurgul face o verificare pentru `objProto` folosind obiectul-funcție de verificare creat la pasul 2.5 și adaugă rezultatul evaluării ca proprietate chiar la obiectul-funcție creat la 2.5.
   2.12 Acest pas este dictat de rezultatul împlinirii comenzii `AddRestrictedFunctionProperties(funcProto, realmRec)`, care are drept scop adăugarea unor proprietăți fundamentale obiectelor-funcție prin adăugarea a două proprietăți în obiectul-funcție cu rol de prototip al tuturor funcțiilor: posibilitatea de a fi invocate (`caller`) și `arguments`, care este o colecție a tuturor argumentelor pe care o funcție le poate primi. Pe scurt, proprietatea care face funcțiile apelabile și cea care le face capabile de a ține evidența argumentelor primite sunt adăugate în obiectul-funcție cu rol de prototip.
-  2.13 Obiectului `intrinsics` i se adaugă restul de proprietăți care sunt obiecte și obiecte-funcție intrinseci.
-  2.14 Obiectul `intrinsics` este creat pe deplin și gata de a primi viață prin aportul adus de codul propriu.
+  2.13 Obiectului `intrinsics` i se adaugă restul de proprietăți care sunt obiecte și obiecte-funcție intrinseci:
+    - Obiecte fundamentale pentru rularea codului: `Object`, `Function`, `Boolean`, `Symbol` și `Error`;
+    - Obiecte pentru procesarea textelor: `String`, `RegExp`;
+    - Obiecte pentru reprezentarea și manipularea numerelor și datelor calendaristice: `Math`, `Number`, `Date`;
+    - Obiecte pentru manipularea datelor structurate: `DataView`, `JSON`, `ArrayBuffer`;
+    - Obiecte pentru manipularea colecțiilor indexate automat: `Array` și familia sa;
+    - Obiecte pentru manipularea colecțiilor indexate cu ajutorul cheilor: `Map`, `Set`;
+    - Obiecte pentru controlul operațiilor abstracte: `funcțiile generator` și `Promise`;
+    - Obiectele cu reflexie: `Proxy` și `Reflect`.
+
+    2.14 Obiectul `intrinsics` este creat pe deplin și gata de a primi viață prin aportul adus de codul propriu.
+
+În acest moment, obiectul `intrinsics` este întregit și pregătit pentru a prelua creația noastră - codul sursă scris de noi pe care-l vom evalua. Dar nu am terminat. Abia suntem la pasul 2 al Genezei noastre. Odată create obiectele intrinseci, vom continua cu întregirea și finalizarea obiectului `realmRec`.
 
 3. Este setată proprietatea `realmRec.[[GlobalObject]]`, care inițial are valorea `undefined`.
 4. Este setată proprietatea `realmRec.[[GlobalEnv]]`, care inițial are valorea `undefined`.
 5. Proprietatea `realmRec.[[TemplateMap]]` este setată ca o listă goală.
-6. Este încheiată geneza `Tărâmului` prin reurnarea obiectului `realmRec`.
+6. Este încheiată geneza `Tărâmului` prin returnarea obiectului `realmRec`.
 
-#### Obiectul global - sfera galbenă
+Acum Geneza unui `Tărâm` s-a încheiat. Demiurgul se odihnește pentru că mai are să creeze întreaga natură a tărâmului nostru. În cazul nostru „natura” se numește `obiectul global` și este locul în care va sta codul nostru pentru a fi rulat și evaluat.
+Poți să-ți imaginezi `obiectul global` în acest moment precum „Grădina deliciilor pământene” a lui Hyeronimous Bosch, dar fără bestiar și oameni.
+
+Spre deosebire de orice alt mit al Genezei așa cum le cunoști, tot bestiarul care va popula `obiectul global` (natura) va fi creat de noi, semizeii :D.
+
+#### Obiectul global
 
 Acest obiect generic - obiectul global este pus la dispoziție din start fără niciun apel sau vreo declarație specifică. Doar deschizi browserul și el deja există. Ai să mă întrebi curios: când se formează obiectul global, dacă spui matale că el există deja. Aici lămurirea vine de la textul standardului, care spune cristal că obiectul global „este creat înainte de intrarea controlului în orice context de execuție”. Concluzionând, el preexistă momentului de debut al evaluării codului nostru. Știu te-am făcut foarte curioasă... hai să-ți mai zic așa o chestie să se uite mâțu'n leuștean: însuși obiectul global care oferă funcționalități codului scris de noi, are nevoie de un mâner, de o etichetă, de propriul său identificator prin care să putem face referință la el însuși și la proprietățile sale. În cazul browserelor, dacă deschizi consola (aici ai să lucrezi cel mai mult timp, iar în următorul capitol, chiar te pun să te distrezi nițel acolo), și scrii `window`, care este identificatorul obiectului global, și: BUM! Apare ca din senin o listă parcă nesfârșită de funcționalități gata să le folosești în codul tău. Curioasă rău!? Bine. Sunt peste 900 de elemente gata de a fi folosite.
 Nu te speria, nu trebuie să le memorezi, să le știi pe toate... totul va veni natural pe măsură ce nevoia te împinge de la spate.
@@ -557,7 +576,15 @@ Demiurgul tună: `SetRealmGlobalObject ( realmRec, globalObj, thisValue )`.
 
 1. Verifică dacă identificatorul `globalObj` este setat la valoarea `undefined` iar dacă da, urmează următoarea secvență:
   a. atribuie identificatorului `intrinsics`, valoarea lui `realmRec.[[intrinsics]]`.
-  b. atribuie identificatorului `globalObj` rezultatul operațiunii `ObjectCreate` căreia îi trimitem drept prim parametru `intrinsics.[[%ObjectPrototype%]]`. Acesta, dacă-ți mai aduci aminte este un obiect ordinar, care este arhetipul prototipului tuturor obiectelor (prototype este setat la null).
+  b. atribuie identificatorului `globalObj` rezultatul operațiunii `ObjectCreate` căreia îi trimitem drept prim parametru `intrinsics.[[%ObjectPrototype%]]`. Acesta, dacă-ți mai aduci aminte este un obiect ordinar, care este arhetipul prototipului tuturor obiectelor (prototype este setat la null). Acesta va deveni valoarea lui `globalObj`.
+2. Este verificat dacă valoarea lui `globalObj` chiar este un obiect.
+3. Aceste pas este foarte important prin precizările pe care le aduce. Pur și simplu, pe scurt valoarea lui `this` va fi setată la valoarea lui `globalObj`. Dar hai să o luăm cu începutul. Mai întâi de toate este verificată valoarea identificatorului `thisValue`, iar dacă aceasta este `undefined`, se va face legătura între `thisValue` și valoarea lui `globalObj`.
+4. Se va seta ca valoarea identificatorului `realmRec.[[GlobalObject]]` să fie valoarea identificată de `globalObj`.
+5. Este pasul la care este creat mediul lexical propriu pentru *obiectul global*. Acesta este identificat prin `newGlobalEnv` și este rezultatul operațiunii `NewGlobalEnvironment(globalObj, thisValue)`. Reținem din pașii oprațiunii `NewGlobalEnvironment` faptul că mediul lexical extern al obiectului global este setat la `null`, adică nu mai există altul mai sus. Obiectul pasat va fi considerat obiectul care va constitui registrul mediului lexical format, adică locul unde vor fi introduse legăturile dintre identificatori și valorile lor.
+6. Identificatorul `realmRec.[[GlobalEnv]]` primește drept valoare obiectul lui `newGlobalEnv`. Și în acest chip, se vor fi completat și proprietățile obiectului `intrinsics` schimbându-și valoarea de la `undefined` la cele desemnate aici.
+7. Obiectul `realmRec` este returnat cu aceste îmbogățiri.
+
+Trebuie precizat un detaliu foarte important. Fiecare dezvoltator de motor  JavaScript alege care va fi obiectul prototip al obiectului global.
 
 **Moment ZEN**: Toate obiectele și funcțiile unui program sunt membri ai obiectului global.
 
@@ -737,3 +764,5 @@ ViewSource 2015 - Allen Wirfs-Bock [ViewSource 2015 - Allen Wirfs-Bock](https://
 
 https://en.wikipedia.org/wiki/George_Boole
 https://en.wikipedia.org/wiki/George_Boole#/media/File:George_Boole_color.jpg
+
+[List of languages that compile to JS, Jeremy Ashkenas, jashkenas/coffeescript git repo](https://github.com/jashkenas/coffeescript/wiki/List-of-languages-that-compile-to-JS)
