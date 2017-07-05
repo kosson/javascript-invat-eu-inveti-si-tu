@@ -528,7 +528,7 @@ Textul standardului ECMAScript oferă cea mai bună perspectivă atunci când vi
 
 Urmând firul unei adevărate geneze, standardul menționează chiar termenul de „realm" - **tărâm**: „înainte de a fi evaluat, tot codul ECMAScript trebuie asociat unui tărâm”.
 
-> Un tărâm constă dintr-un set de **obiecte interne** (în englezește li se spune ***built-in*** și mot-a-mot ar fi tradus ca *construite-intern*), un **mediu global** (***global environment***) și tot **codul ECMAScript** care este încărcat în cadrul «interiorul (pe englezește *scope*)» acelui mediu global, precum și alte stări și resurse asociate”.
+> Un tărâm constă dintr-un set de **obiecte interne** (în englezește li se spune ***built-in*** și mot-a-mot ar fi tradus *construite-intern*), un **mediu global** (***global environment***) și tot **codul ECMAScript** care este încărcat în cadrul «interiorul (pe englezește *scope*)» acelui mediu global, precum și alte stări și resurse asociate”.
 
 Acesta este cel mai valoros citat al standardului pentru că este ca o fotografie a planetei JavaScript de pe orbită. Este fotografia `Tărâmului` nostru.
 
