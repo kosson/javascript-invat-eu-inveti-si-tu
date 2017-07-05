@@ -136,23 +136,24 @@ Secvențe de escape pentru UNICODE: `u` sau `u{ }`
 
 ### Template Literal
 
-Începând cu ECMAScript 2015 avem un mod suplimentar de a lucra cu fragmente de text și acesta este numit template literal - „șabloane literale”. Chestia extraordinară este că permite introducerea de expresii care pot fi evaluate folosind secvența `${identificator sau expresie}`. Fragmentul de text, să-l numim corect **sir de caractere** este pus între semnele backticks (\`text\`). Acestea spun motorului că se pot interpola rezultate ale evaluării unei expresii folosind dollar și acolade: `${oVariabilaSauExpresie}`.
+Începând cu ECMAScript 2015 avem un mod suplimentar de a lucra cu fragmente de text și acesta este numit **template literal** - „șabloane literale”. Chestia extraordinară este că permite introducerea de expresii care pot fi evaluate folosind secvența `${identificator sau expresie}` și lucrul cu fragmente de text pe mai multe rânduri. Pentru a construi un template string punem tot textul nostru între două <code>&#96;</code>, care este caracterul pentru reprezentarea **accentului grav** (grave accent, în engleză). Acest caracter mai este denumit în limba engleză și **backtick**.
+
+Acestea este semnul distinct care spune motorului JavaScript că se pot interpola rezultate ale evaluării unei expresii folosind combinațiea dollar-acolade precum în: `${oVariabilaSauExpresie}`.
 
 ```javascript
 var ceva = `ceva text ${numeIdentificator}`;
 ```
 
-Șabloanele de șiruri de caractere sunt un pas evolutiv important acă ne gândim la faptul că până acum trebuia să apelăm la concatenare pentru a introduce într-un șir de caractere rezultatul evaluării unor expresii.
+*Șabloanele literale* (template literal) sunt un pas evolutiv important dacă ne gândim la faptul că până acum trebuia să apelăm la concatenare pentru a introduce într-un șir de caractere rezultatul evaluării unor expresii. Acest lucru introduce un nivel suplimentar de calcul pentru că mototul JS trebuia mai întâi să analizeze dacă nu cumva este vorba despre o adunare. Așa, folosind *șabloanele literale*, lucrurile sunt clare.
 
 ```javascript
 var a = 5, b = 10;
-
 console.log("Cinsprezece este suma " + (a + b) + " și\nnu " + (2 * a + b) + ".");
 // este echivalent cu:
 console.log(`Cinsprezece este suma ${a + b} și\nnu ${2 * a + b}.`);
 ```
 
-O formă și mai avansată de șabloane literale este cea numită `tagged template literals` - literale șablon cu etichetă. Un simplu exemplu:
+O formă și mai avansată de *șabloane literale* (template literal) este cea numită `tagged template literals` - **literale șablon cu etichetă**. Un simplu exemplu:
 
 ```javascript
 var a = 0.5, b = 10;
@@ -194,7 +195,7 @@ var transmutare = inlocuieste`Un text ${atribut} cu ${procent} încântare.`;
 console.log(transmutare);
 ```
 
-Există și un exemplu mai elaborat care permite introducerea unui șablon ca argument al unei funcții cu fiecare loc de substituire numerotat, iar aceasta, la rândul ei returnează o alta care va accepta drept argumente valorile ce vor completa șablonul.
+Există un exemplu și mai elaborat care permite introducerea unui șablon ca argument al unei funcții cu fiecare loc de substituire numerotat, iar aceasta, la rândul său, returnează o alta care va accepta drept argumente valorile ce vor completa șablonul.
 
 ```javascript
 function zetar (sablon, ...chei) {

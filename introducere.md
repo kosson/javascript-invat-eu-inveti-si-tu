@@ -121,31 +121,74 @@ Caracterele folosite pentru a scrie codul sursă ca și reprezentare alfanumeric
 
 JavaScript este un limbaj de programare folosit îndeosebi la manipularea șirurilor de caractere indiferent ce reprezintă acestea pentru noi oamenii.
 
-Există câteva caractere care necesită chiar acum, la început de drum, o atenție specială. Acestea sunt: `'` (**ghilimele simple**), `"` (**ghilimele duble**), `\n` (***new line*** - **linie nouă**), `\r` (***carriage return*** - **retur de car**), `\t` (**tabulator orizontal**, acest caracter apare când apeși tasta TAB), `\v` (**tabulator vertical**), `\b` (***backspace*** - **înapoi spre stânga cu ștergerea unui caracter**), `\f` (***form feed*** - **salt pagină nouă la dispozitivul de imprimare**), `\`(**slash**) și `/` (**backslash**).
+Există câteva caractere care necesită chiar acum, la început de drum, o atenție specială. Acestea sunt: `'` (**ghilimele simple**), `"` (**ghilimele duble**), `\n` (***new line*** - **linie nouă**), `\r` (***carriage return*** - **retur de car**), `\t` (**tabulator orizontal**, acest caracter apare când apeși tasta TAB), `\v` (**tabulator vertical**), `\b` (***backspace*** - **înapoi spre stânga cu ștergerea unui caracter**), `\f` (***form feed*** - **salt pagină nouă la dispozitivul de imprimare**), `/`(**slash**) și `\` (**backslash**).
 
-De ce necesită o atenție specială? Pentru că intră în componența șirurilor de caractere de lucru. Le vom întâlni în analiza textelor și vor crea probleme prin obținerea unor rezultate neașteptate dacă acum, la acest moment de început, nu le dăm cea mai mare atenție. De ce sunt speciale? Pentru că aceste caractere au însemnătate și pentru text, dacă acestea fac parte dintr-un fragment de text analizat din care fac parte și fac sens în economia lui, dar în egală măsură au valoare și pentru motorul JavaScript la momentu analizei codul sursă.
+De ce necesită o atenție specială? Pentru că intră în componența șirurilor de caractere de lucru. Le vom întâlni în analiza textelor și vor crea probleme prin obținerea unor rezultate neașteptate dacă acum, la acest moment de început, nu le dăm cea mai mare atenție. De ce sunt speciale? Pentru că aceste caractere au însemnătate și pentru text, dacă acestea fac parte dintr-un fragment de text analizat din care fac parte și fac sens în economia lui, dar în egală măsură au valoare și pentru motorul JavaScript la momentul analizei codul sursă.
+
+Un exemplu pentru a înțelege efectele acestor caractere cu rol de semnal pentru motorul care interpretează codul JavaScript. Să spunem că avem următorul fragment de text pe care dorim să-l prelucrăm cu un program.
+
+> Acesta este un text demonstrativ care va enumera caracterele cu înțeles special pentru JavaScript. Problema apare când în text folosim 'citat în engleză cu ghilimele simple', poate "un citat în engleză între ghilimele duble", poate folosim un slash: /, ori un backslash \ sau vorbim despre carriage return \n sau despre new line \n, etc.
+
+Acum avem o problemă. Dacă am introduce acest text într-o variabilă în vederea prelucrării, folosind ghilimelele simple, să zicem, motorul JavaScript, la momentul în care va citi conținutul variabilei, va întâlni primul caracter ghilimele simple și va considera că acolo se închide fragmentul de text pentru analiză.
+
+```javascript
+var textDeAnalizat = '';
+// între ghilimele simple
+// intră textul exemplu
+```
+
+Ceea ce se va întâmpla este că restul, pur și simplu va fi trunchiat și ignorat ca ceva neinteligibil. De aceea este nevoie să marcăm în text aceste caractere cu însemnătate specială printr-un **caracter de exceptare** (în engleză *escape sequence*), care să semnaleze motorului faptul că acel caracter face parte din text și nu este un semnal adresat lui ca un semnal că trebuie să facă o anumită operațiune. **Caracterul de exceptare este un backslash** care se aplică înaintea caracterelor cu înțeles special. Da, da, chiar și în cazul lui backslash pui un backslash înainte pentru ca JavaScript să-l considere un caracter al resursei text și nu un semnal. Pe românește îi spui computerului: prietene, caracterul precedat de backslash, te rog să nu-l interpretezi la valoarea sa specială pentru limbajul de programare, ci consideră-l parte a fragmentului de text analizat.
+
+```javascript
+var textDeAnalizat = 'Acesta este un text demonstrativ care va enumera caracterele cu înțeles special pentru JavaScript. Problema apare când în text folosim ' citat în engleză cu ghilimele simple', poate "un citat în engleză între ghilimele duble", poate folosim un slash: /, ori un backslash \ sau vorbim despre carriage return \r sau despre new line \n, etc.';
+```
+
+Dacă veți încerca exemplul de mai sus în `Console` (deschide browserul preferat, apasă F12, mergi în tabul Console), adică dacă veți pune acest fragment în Console, chiar veți genera și o eroare de sintaxă pentru că toate caracterele acelea cu rol special pentru JavaScript, au darul să creeze erori dacă sunt întâlnite în fragmentele de text pe care le alegeți pentru a lucra cu ele. Hai, poți spune că ai întrat bine în pâine: ai aflat ce-i o variabilă și că aceasta poate ține fragmente de text și ai experimentat puțin și cu instrumentul care-ți va fi cel mai bun prieten de acum înainte: *Console*.
+
+Cum ar arăta exemplul nostru corectat?
+
+```javascript
+var textDeAnalizat = 'Acesta este un text demonstrativ care va enumera caracterele cu înțeles special pentru JavaScript. Problema apare când în text folosim \' citat în engleză cu ghilimele simple\', poate "un citat în engleză între ghilimele duble", poate folosim un slash: /, ori un backslash \ sau vorbim despre carriage return \r sau despre new line \n, etc.';
+```
+
+Acum, că nu avem nicio eroare, aflându-te în Console, pur și simplu apelează numele variabilei pentru a vedea textul și ce-a mai rămas din el (pur și simplu scrii numele variabilei `textDeAnalizat` și dai ENTER).
+
+Am corectat doar până la `\r` pe care l-am lăsat așa înadins. Pune așa fragmentul și vezi ce se întâmplă. Da, combinația `\r` pur și simplu a dispărut din text. De ce? Pentru că indică faptul că în cazul în care se va trimite la imprimată acel text, el fa fi tăiat de dinaintea lui `\r` și reluat pe următoarea linie. Asta înseamnă retur de car, adică capul de imprimare trece pe o nouă linie. Uneori, citind literatură de specialitate veți mai vedea și secvența CR/LF (Carriage return/Line feed), care este aceeași comandă trimisă unei imprimante: pune capul de imprimare (carriage) la capul liniei (adică la stânga - imprimarea caracterelor se face de la stânga la dreapta) și ridică pagina cu o linie, adică cu un rând (line feed).
+
+Acum corectează tu textul fiid aflat în Console. Ca să aduci în vizor variabila, chemi din istoricul operațiunilor linia în care introduceai textul în variabilă (apăsarea de două ori a tastei săgeată sus ar trebui să aducă în linia de comadă variabila) și pur și simplu corectează `\r` adăugându-i un backslash în față chiar lângă cel existent deja și dă ENTER. Variabila va fi rescrisă ca și conținut și apelându-i numele încă o dată vei vedea la locul său combinația `\r`.
+
+Ce ai mai observat? Că am omis să pun backslash la combinația `\n`. Acest lucru a produs un efect interesant: `\n` a dispărut din text, dar restul textului a trecut pe o linie nouă. Acesta este efectul `new line`, dacă nu are backslash în față. Dă comandă computerului să înlocuiască combinația `\n` cu o rupere a textului afișat pe o nouă linie de ecran.
 
 Să trecem în continuare prin câteva cazuri fără de care nu poți scrie cod care să și funcționeze corect.
 
+Cazul ghilimelelor. În JavaScript, fragmentele de text pot fi introduse în variabile folosind două tipuri de ghilimele care marchează modul de redactare a citatelor în limba engleză, adică ghilimele simple și ghilimele duble. Ai observat și tu că nu am insistat la exemplul analizat asupra combinației tipurilor de ghilimele. De ce? Pentru că atunci când avem un caz simplu în care avem un text introdus ca resursă de lucru într-o variabilă în interiorul ghilimelelor simple, vom avea grijă ca doar ghilimelelor simple din text ca parte a sa, să fie **exceptate**. Ghilimelele duble nu au nevoie de **exceptare**, dar buna practică spune ca toate aceste caractere cu înțeles special să fie **exceptate**. Eu am fost mai leneș la exemplificare pentru că m-am bazat pe mecanismul de lucru al JavaScript și anume că în cazul în care în text am doar ghilimele duble pot să le las fără a le **excepta** cu backslash.
+
 În cazul ghilimelelor, ca bună practică, se vor folosi ghilimele simple pentru declararea șirurilor de caractere pentru că, fiind un limbaj strâns legat de markup-ul paginilor web, ar putea cuprinde ghilimele duble ca parte a fragmentelor de pagină web construite dinamic.
 
-Acoladele `{}` au rolul de a indica mediul în care se va executa codul în JavaScript. Cel mai adesea veți vedea că indică **blocurile de cod ale funcțiilor**. Între acolade veți introduce liste de instrucțiuni și expresii specifice JavaScript separate prin punct și virgulă `;`. Acoladele și parantezele rotunde împreună cu punct și virgulă pot fi considerate adevărate **separatoare**, care împart codul în calupuri ușor de urmărit vizual, dar și logic.
+```javascript
+var fragmentHTML = '<a href = "http://ceva.ro">Siteul Ceva.ro</a>';
+```
+
+Exemplul cu fragmentul de cod HTML este exemplificarea perfectă cu imbricarea acceptată a unor perechi de ghilimele duble între ghilimelele simple care delimitează resursa de text.
+
+### Separatoarele sintactice pentru delimitarea fragmentelor de cod
+
+Se pune întrebarea: cum știe JavaScript să citească corect codul sursă, care este la rândul său un text pentru a face inteligibile unitățile sale funcționale, cele care produc înțeles pentru computer. În acest sens, nu numai JavaScript, ci toate limbajele de programare folosesc ceea ce se cheamă **separatoare**. Poți să ți le imaginezi precum separatoarele colorate din dosare, care fragmentează vizual părțile componente ale conținutului. Să vedem care sunt acestea.
+
+Acoladele `{}` au rolul de a indica mediul în care se va executa codul în JavaScript. Cel mai adesea veți vedea că indică **blocurile de cod ale funcțiilor**. Între acolade veți introduce liste de instrucțiuni și expresii specifice JavaScript separate prin punct și virgulă `;`. Acoladele și parantezele rotunde împreună cu punct și virgulă împart codul în calupuri ușor de urmărit vizual, dar mai mult de atât oferă „sens”, face „lizibil” codul și pentru computer prin *separarea* fragmentelor componente.
 
 Acoladele mai au și un rol special: delimitează spații cu un rol special. Creează niște „grădini private” care sunt **blocuri de cod** la care accesul se poate face doar dacă ești în acea grădină.
 
-##### Caractere care au nevoie de ajutor pentru a fi „văzute” folosind ***secvențe excape***
-
-Caracterele de mai sus și combinațiile lor au un înțeles special și pentru motorul JavaScript, dar atunci când ele însele sunt necesare ca și caractere, fie că fac parte dintr-un text analizat, fie că se dorește compunerea unuia într-o manieră dinamică, aceste caractere trebuie să fie precedate de caracterul special backslash (`\`).
-
-De exemplu, ghilimele duble și simple: `\"` și `\'` și chiar backslash-ul însuși: `\\` au nevoie să fie precedate de backslash ceea ce numim **secvență de escape** sau pe românește îi spui computerului: prietene, caracterul precedat de backslash, te rog să nu-l interpretezi la valoarea sa specială pentru limbajul de programare, ci consideră-l parte a fragmentului de text analizat.
+### JavaScript este un limbaj atent la diferența între majuscule și minuscule
 
 JavaScript este un limbaj de programare **case sensitive**, adică ține cont dacă scrii folosind majuscule. Pe scurt, șirul de caractere `ceva` este fundamental diferit de șirul de caractere `Ceva`. Și să-ți spun un mic secret de ce este diferit. Mai ții minte când mai sus spuneam că fiecare caracter pentru computer este un număr? În cazul nostru codul din spatele lui `c` mic este diferit de codul din spatele lui `C` ca majusculă.
 
-### Textul sursă
+### Textul sursă / cod sursă
 
-Textul sursă sau **codul sursă** poate fi de două tipuri: `Script` (un script) sau un `Module` (modul). Acesta este codul scris de tine în editorul preferat și pe care l-ai salvat apoi cu extensia `.js`: `ceva.js`.
+Vorbeam mai devreme despre codul sursă, despre textul pe care-l introduci tu într-un fișier și pe care-l consideră computerul a fi codul sursă pentru programul creat. După felul în care este *consumat* de motorul JavaScript, textul sursă sau **codul sursă** poate fi de două tipuri: `Script` (un script) sau un `Module` (modul).
+Codul sursă, sau mai simplu **sursa** este scrisă de tine în editorul preferat, pe care ai salvat-o ca fișier cu extensia `.js`: `ceva.js`.
 
-Codul pe care-l scrii poate fi redactat pe mai multe linii deoarece pentru JavaScript **_spațiile_**, **_taburile_** și **_line breaks_**-urile (trecerile pe linie nouă) sunt pur și simplu considerate a fi **spații albe** care nu au puterea să influiențeze evaluarea codului în niciun fel.
+Codul pe care-l scrii poate fi redactat pe mai multe linii deoarece pentru JavaScript **spațiile**, **taburile** și **line breaks**-urile (trecerile pe linie nouă) sunt pur și simplu considerate a fi **spații albe** care nu au puterea să influiențeze evaluarea codului în niciun fel.
 
 ### Elemente de input - elemente de intrare în vederea evaluării
 
@@ -155,7 +198,7 @@ Spune standardul că mai întâi textul codului sursă este parcurs pentru a-l �
 
 Toate elementele lexicografice care constituie codul în sine, cu excepția spațiilor și a comentariilor, se numesc `token-uri`, adică pe românește `atomi lexicali`.
 
-Acești **atomi lexicali** (`token`-ii) sunt rezultatul parcurgerii unui fragment de cod (codul sursă) căruia i se aplică regulile lexicale specifice gramaticii impuse de standardul ECMAScript.
+Acești **atomi lexicali** (*token*-ii) sunt rezultatul parcurgerii unui fragment de cod (codul sursă) căruia i se aplică regulile lexicale specifice gramaticii impuse de standardul ECMAScript.
 
 Ca să-ți vină ușor să înțelegi, îți poți imagina un giuvaergiu care dintr-un maldăr de pietre prețioase (codul sursă), ia una câte una (fragmente de cod), pentru a-i identifica caracteristicile și în final pentru a le pune pe fiecare după sortare în cutiuțele pregătite special pentru a le asambla într-o diademă deosebită (programul nostru care tocmai a făcut ceva spectaculos).
 
@@ -165,13 +208,19 @@ Atomii sunt de mai multe tipuri: **cuvintele cheie**, **operatorii**, **identifi
 
 Trebuie să te avertizez de faptul că toate **cuvintele speciale** folosite de JavaScript sunt în limba engleză. Fondul lexical este cel al limbii engleze.
 
-#### Line terminators - semnele de încheiere a rândurilor
+#### Line terminators - combinațiile semnal pentru încheierea rândurilor
 
- - `line-feed` - *mergi pe line nouă* (`\n`, abreviat LF sau NL un caracter special care marchează faptul că motorul trebuie să continue citirea de pe o nouă linie de cod: `print("ceva\ncapat");`),
- - `carriage return` ( `\r` abreviat CR) - *trage înapoi tamburul* (un caracter special care spune motorului că trebuie să se întoarcă pe linia curentă pentru o operațiune pe șirul de caractere al rândului. Acest caracter este o reminiscență a utilizării vechilor mașini de scris, care migrând la cele electronice, încă aveau nevoie de un caracter special care să spună mecanismelor electromecanice să se întoarcă pe același rând: `print("ceva\rcapat"); // "ceva
-capat"`),
- - `line separator`: uneori este `\n`, iar alte ori în funcție de sistemul de operare este `\r\n`.
- - `paragraph separator` depinde de sistemul de operare. De exemplu, pe Windows ai un CR urmat de un LF (*line feed*).
+Ne-am mai întâlnit cu aceste combinații de caractere atunci când am explorat caracterele cu rol special. Vom suplimenta informațiile pe care le avem deja prin detalii privind natura și comportamentul fiecărei combinații în parte după cum urmează:
+
+**line-feed** s-ar traduce în română ca o comandă: *mergi pe line nouă* este combinația de caractere `\n`, abreviat uneori ca LF (prescurtare de la *Line Feed*) sau NL (prescurtare de la *New Line*). Acesta este un caracter special (combinația dintre cele două caractere `\` și litera `n` este considerat în acest caz un singur caracter), care marchează faptul că motorul trebuie să continue afișarea saur prelucrarea aplicată unui fragment de text începând cu o nouă linie pe ecran. Hai, rulează în Console următorul fragment pentru a vedea cu ochii tăi ce se petrece: `print("ceva\ncapat");`. Fragmentul `ceva` a rămas pe o linie în timp ce fragmentul `capăt` a ajuns pe o nouă linie sub cel anterior.
+
+**carriage return ** este reprezentat prin combinația `\r` și mai este întâlnit ca abrevierea CR - *carriage return*). Se comportă ca o comandă directă care spune: *trage înapoi carul de imprimare* și începe să imprimi textul începând cu o nouă linie. Acest caracter este o reminiscență a utilizării vechilor mașini de scris, care migrând la cele electronice, încă aveau nevoie de un caracter special care să spună mecanismelor electromecanice să se întoarcă pe același rând și apoi „săltând” pagina de imprimare cu un rând: `print("ceva\rcapat");`. Efectul este vizibil, dacă fragmentul care conține caracterul special ar fi trimis către o imprimantă. S-ar produce aceeași rupere ca în cazul caracterului special `\n` numai că de această dată pe hîrtia imprimată. Efectul în Console este că `\r` dispare din text iar cele două cuvinte vor fi lipite. Efectul vizibil pe ecran este alipirea fragmenteleor de text acolo unde era `\r`. Caracterul s-a păstrat și în limbajele de programare cu toate că îl veți întâlni mai rar în cazul conținutului unor fișiere precum cele cu extensia TXT mai vechi. Dacă ești curios, poți replica acest lucru salvând din LibreOffice ca txt cu menționarea formatului ASCII. Da, știu, este greu de crezut, dar nu am avut UTF dintodeauna. Ce-i UTF? Citește în contiuare și vei afla minunea care o oferă acest standard de codare a caracterelor.
+
+![](CR.example.screenshot.libreoffice.png)
+
+**line separator**: uneori este reprezentat prin combinația de caractere `\n`, iar alte ori în funcție de sistemul de operare este `\r\n`. Efectul este trecerea pe o nouă linie a textului.
+
+**paragraph separator** este o combinație de caractere care depinde de sistemul de operare utilizat. De exemplu, pe Windows ai un CR urmat de un LF (*line feed*).
 
 Pentru a înțelege mai bine, accesați și materialul explicativ de la https://en.wikipedia.org/wiki/Typewriter și https://en.wikipedia.org/wiki/Newline.
 
@@ -185,13 +234,13 @@ Acestea sunt caracterele „invizibile” cum ar fi spațiul, tasta space, pentr
 
 Sunt considerate a fi spații albe următoarele: `tab` (`\t` *tabulator orizontal*, fiind un spațiu cu o anumită întindere), `space` (spațiu), `non-breakable space` (spațiu care nu poate fi fracționat), `line tabulation` (sau vertical tab - `\v` - referindu-se la mișcarea pe verticală a liniilor), `form feed` (se referă la trecerea pe ceea ce este înțeles a fi o pagină nouă `\f`).
 
-### Structurile lexicale proprii și recunoașterea lor
+## Structurile lexicale proprii JavaScript și recunoașterea lor
 
 Imediat după faza de constituire a **elementelor de input**, acestea mai sunt parcurse încă o dată, aplicându-se din nou regulile gramaticale pentru a identifica cine și ce funcție îndeplinește: care sunt **identificatorii**, **cuvintele rezervate** limbajului, etc.
 
 Să analizăm împreună ce conțin elementele de intrare.
 
-#### Cuvintele cheie sau vocabularul limbajului
+### Cuvintele cheie sau vocabularul limbajului
 
 ECMAScript are un set de **cuvinte rezervate** din limba engleză, care nu pot fi folosite decât în scopul pentru care au fost rezervate. Cuvintele cheie sunt unul din tipurile de **atomi lexicali** și se scriu întotdeauna fără majuscule.
 
@@ -206,17 +255,17 @@ Da, da. Programatorii sunt creaturi comode și motoarele permit anumite facilit�
 
 Bine, bine. Da' care-i treaba cu **momentele ZEN**? Pe parcursul acestei călătorii de descoperire și autodescoperire, voi jalona conținutul cu astfel de momente, care vor fi propoziții sau fraze cu o sarcină precisă: să fie chintesența informației analizată defalcat. De ce moment ZEN? Pentru că este ca un exercițiu de meditație, care conduce la identificarea cu informația prin asimilarea ei.
 
-#### Automatic semicolon insertion - introducerea automată a lui punct și virgulă
+### Automatic semicolon insertion - introducerea automată a lui punct și virgulă
 
-În JavaScript, enunțurile (_statements_), care sunt echivalentul propozițiilor din limbajul nostru de zi cu zi, trebuie să se termine cu punct și virgulă, iar acolo unde semnul grafic nu a fost scris de programator, codul se supune mecanismului ASI - ***Automatic Semicolon Insertion***, care introduce de la sine putere semnul grafic.
+În JavaScript, enunțurile (*statements*), care sunt echivalentul propozițiilor din limbajul nostru de zi cu zi, trebuie să se termine cu punct și virgulă, iar acolo unde semnul grafic nu a fost scris de programator, codul se supune mecanismului ASI - **Automatic Semicolon Insertion**, care introduce de la sine putere semnul grafic.
 
 Reguli de introducere:
 
-- imediat înaintea acoladei de închidere `}`
-- atunci când șirul de token-uri nu poate fi tratat unitar `x - y`, de exemplu.
-- imediat după operatorii și sintagmele care nu mai permit altă dezvoltare la nivelul expresiei sau a programului: sufixurile de operare `++` și `--`; `continue`, `break`, `return`, `yield` și `yield*` și `module`.
+- imediat înaintea acoladei de închidere `}`,
+- atunci când șirul de token-uri nu poate fi tratat unitar `x - y`, de exemplu,
+- imediat după operatorii și sintagmele care nu mai permit altă dezvoltare la nivelul expresiei sau a programului: sufixurile de operare `++` și `--` și cuvintele cheie `continue`, `break`, `return`, `yield` și `yield*` și `module`.
 
-Declarațiile și instrucțiunile beneficiare sunt:
+Declarațiile și instrucțiunile beneficiare ale acestui mecanism sunt:
 
 - instrucțiuni simple,
 - declarații de variabile: `var`, `let`, `const`,
@@ -226,21 +275,23 @@ Declarațiile și instrucțiunile beneficiare sunt:
 - instrucțiunile `continue`, `break`, `throw`
 - și `return`.
 
-#### Operanzii
+Există mai multe ciurente de opinii care au condus la diferite stiluri de redactare a codului sursă. Veți întâlni foarte mult cod scris fără punct și virgulă care să marcheze finalitatea enunțului. Unii consideră acest lucru acceptabil, dar vă invit în partea cealaltă, a celor care scriu foarte corect codul și care vor pune întotdeauna punct și virgulă la încheierea unui enunț după cum ne-a intrat în sânge ca atunci când încheiem o propoziție în scris să punem punct.
+
+### Operanzii
 
 Pentru a ajunge la un rezultat avem nevoie mai întâi de niște valori, de niște date cu care să lucrăm. Operanzii, ca denumire, vine din matematică. Mda, știu, nu scăpăm... Nu te descuraja așa ușor, pur și simplu programarea este o dezvoltare a matematicii și de acolo își trage și denumirile pentru „chestiile” cu care operăm. Am zis operăm, nu?! Păi ce poți face cu niște operanzi altceva în afară de a opera cu ele? Ce? Nu știu. O adunare, o înmulțire... mai multe operațiuni, unele grupate cu paranteze. Hai că mai vedem ce și cum putem combina în expresiile formate.
 
-#### Operatorii (***operators***)
+### Operatorii (***operators***)
 
 Sunt caractere sau combinații de caractere care au rolul de a stabili o relație între doi operanzi. Este exact ca în matematică. Rolul operatorilor este de a ajunge la un rezultat în urma „evaluării”. De exemplu, când ai expresia `1 > 0;`, operatorul de comparație `>` va oferi rezultatul, care este o valoare boolean `true` (ești încă aici? nu te-am pierdut, nu?!).
 
-![George Boole](George_Boole_color.jpg "George Boole este creatorul logicii matematice moderne și a algebrei booleene")
+![George Boole](George_Boole_color.jpg "George Boole, matematician, 1815-1864. Este creatorul logicii matematice moderne și a algebrei booleene. Resursă aflată în Domeniu public accesibilă la https://commons.wikimedia.org/wiki/File:George_Boole_color.jpg")
 
 În esență, putem spune că majoritatea rezultatelor atunci când scriem cod, provin din astfel de evaluări. Ăăă, cum **boolean**, prietene? Da, e o valoare care testează adevărul și poartă numele de boolean în cinstea cercetătorului George Boole. El a dezvoltat o întreagă ramură a algebrei, care a impulsionat progresul în direcția creării computerelor. Nu uita că într-un computer, la nivelul cel mai de jos, totul este 1 și 0, adevărat sau fals, adevărat ȘI fals, adevărat NU fals. Hahaha...
 
 De cele mai multe ori, operatorii stabilesc o evaluare a expresiilor de la stânga la dreapta. Putem verbaliza, de exemplu `1 + 1` ca „unu plus unu”, ceea ce înseamnă că am citit enunțul de la stânga la dreapta. Am spus de cele mai multe ori pentru că avem și cazurile când un operator, de exemplu ***egal*** (`=`), care este citit de la dreapta la stânga. Spre exemplu, în enunțul `a = 1`, citim: „valoarea 1 este atribuită variabilei a”. Operatorul egal împarte cei doi operanzi în expresii aflate în partea stângă (***left-hand-side***) și expresii aflate în partea dreaptă (***right-hand-side***).
 
-#### Expresiile (***expressions***)
+### Expresiile (***expressions***)
 
 O expresie este o combinație rezolvabilă de operatori și operanzi. Finalizarea rezolvării unei expresii se numește **evaluare**. Asta înseamnă că la momentul evaluării combinației, aceasta se va finaliza cu obținerea unei valori.
 
@@ -254,14 +305,14 @@ Conform **Backus Naur Form** (BNF), notația care formalizează sintaxa unui lim
 
 Expresiile mai complexe cer folosirea unor semne grafice care să indice motorului unde se încheie acestea. Aceste semne grafice sunt **separatorii**.
 
-##### Separatorii
+#### Separatorii
 
-Sunt folosiți pentru a separa fragmentele cu înțeles pentru compilator. De exemplu, cel mai simplu separator este un spațiu (adu-ți mereu aminte că un spațiu este și el un caracter) sau un TAB, care sunt folosite pentru a despărți cuvintele între ele. Un alt separator este punct și virgulă, care este ca punctul din limbajul natural.
+I-am amintit mai sus. Sunt folosiți pentru **a separa** fragmentele cu înțeles pentru compilator. De exemplu, cel mai simplu separator este un spațiu (adu-ți mereu aminte că un spațiu este și el un caracter) sau un TAB, care sunt folosite pentru a despărți cuvintele între ele. Un alt separator este punct și virgulă, care este ca punctul din limbajul natural.
 Enter-ul pe care-l dai pentru a trece pe o nouă linie, de fapt este tot un separator.
 
 Instrucțiunile pot fi grupate în JavaScript în blocuri care sunt „separate” de restul codului prin acolade.
 
-##### Categorii de expresii
+#### Categorii de expresii
 
 JavaScript are următoarele categorii de expresii:
 
@@ -317,7 +368,7 @@ Să revenim, focalizându-ne pe enunțul de mai sus. Începem de la stânga spre
 
 Continuăm cu o precizare foarte importantă pentru a întări ceea ce am rememorat. Atunci când codul sursă este rulat pentru a obține un rezultat, de fapt, ceea ce se petrece este o întreagă succesiune de evaluări a expresiilor care se reduc la o valori rând pe rând prin evaluarea condiționată de diverșii operatori. Totul, dar totul se reduce la o valoare. De fapt, evaluăm expresii rezolvând **operațiunile** și ajungând la **valori** care sunt necesare altor **expresii**. Acestea, la rândul lor așteptau cuminți ca evaluarea precedentă să se încheie pentru a avea și ele valorile de care aveau nevoie și așa mai departe.
 
-##### Tratarea expresilor cu operanzi diferiți - transformarea (coercion)
+#### Tratarea expresilor cu operanzi diferiți - transformarea (coercion)
 
 JavaScript este un limbaj de programare care oferă o flexibilitate fantastică. În ceea ce privește operanzii, aceștia pot fi chiar de tipuri diferite iar JavaScript este forțat să ofere totuși un răspuns.
 
@@ -333,7 +384,7 @@ Pentru că expresiile sunt evaluate la o valoare, acestea pot fi asignate unor v
 
 Dacă ai amețit, e perfect normal. Respiră de cinci ori foarte adânc cu ochii închiși concentrându-te adânc la fiecare respirație. Dacă nimic nu se leagă, mergi într-un parc. Eu te aștept aici.
 
-#### Enunțuri (***statements***)
+### Enunțuri (***statements***)
 
 Este echivalentul unei propoziții în limbaj uman. Componentele unui enunț pot fi **valori**, **operatori**, **expresii**, **cuvinte cheie** și **comentarii**.
 
@@ -385,7 +436,7 @@ Enunțurile pot sta singure sau pot fi adunate într-un bloc distinct. Acest blo
 
 Vei vedea mai târziu cât de utile sunt în cazul scrierii enunțurilor care controlează execuția codului, cum ar fi deciziile prin `if...else` sau buclele, cum ar fi `while(expresie){bloc de enunțuri}`.
 
-#### Instrucțiunile
+### Instrucțiunile
 
 O instrucțiune poate fi o expresie, invocarea unei funcții, a unei metode sau pur și simplu o declarație. O instrucțiune este un pas al unui algoritm. Instrucțiunile vor fi executate în ordinea în care au fost scrise.
 
@@ -409,12 +460,12 @@ if (sentimente = true) {
 
 Ba mai mult, poți indenta (pui spații înaintea fragmentului de cod și ca efect vizual se vor deplasa spre dreapta). Despre indentare spune *Marele Dicționar pentru Neologisme* din 2000: „plasare a programelor pe linii, pentru scrierea cât mai clară a acestora”.
 
-#### Declarațiile
+### Declarațiile
 
 Folosind cuvintele cheie ale limbajului faci declarații, care de fapt ceea ce menționează este tipul datelor cu care vei lucra în programul tău. Un exemplu foarte simplu este declararea unei variabile: `var x = 10;`.
 Un program JavaScript este o colecție de declarații de variabile și funcții.
 
-#### Blocurile de cod
+### Blocurile de cod
 
 Blocurile grupează enunțurile. În JavaScript poți declara un bloc de cod foarte simplu deschizând acolade. Scrii codul între acolade și poți considera că acest cod aparține unui bloc de cod distinct. Blocurile au rolul de a grupa una sau mai multe enunțuri.
 
@@ -495,7 +546,7 @@ Acum că am lămurit în mare despre ce este vorba cu obiectele, avem nevoie să
 
 ![Tărâm](Realm.jpg)
 
-### Tărâmul sub lupă
+### Tărâmul de sub lupă
 
 Un **tărâm** este constituit din **obiectul global** pentru tărâmul la care ne referim, un set de **obiecte interne** și cadrul lexical creat de însăși felul în care este redactat codul („lexical environment"). Toate tărâmurile care sunt create sunt evidențiate de o înregistrare specială numită de standard `Realm Record`. Din toată această mică listă reține faptul că JavaScript vine cu câteva obiecte din start, care împreună cu programul scris de tine construiesc „un tărâm” - Realm.
 
@@ -656,7 +707,7 @@ Haideți să le trecem în revistă tipurile de literale sau cum scriem valorile
 - **Funcție cu nume**: `function faCeva () {};`,
 - **Null**: `null;`,
 - **Undefined**: `undefined;`
-- **template string**: <code>&#96;</code>`un text ${variabila}`<code>&#96;</code>`;`
+- **template string**: <code>&#96;</code>`un text ${variabila}`<code>&#96;</code>. Observă că pentru a construi un template string am pus tot textul nostru între două <code>&#96;</code>, care este caracterul pentru reprezentarea accentului grav (grave accent, în engleză).
 
 Pentru cei foarte curioși vom explora nițel și diferența dintre valorile literale declarate simplu și cele instanțiate folosind constructorul corespondent lor.
 
