@@ -100,7 +100,11 @@ Am identificat o definiție a ceea ce este un limbaj de programare și vom debut
 > <cite><a href="http://www.teora.ro/cgi-bin/teora/romania/mbshop.cgi?database=01&amp;action=view_product&amp;productID=%20823&amp;category=" title="Brookshear, J. Glenn. Introducere în informatică. Editura Teora. 1998\. Titlul original: Computer science - An overview, Fifth Edition">J. Glenn Brookshear.1998</a>
 > </cite>
 
+<img src="limbajDeProgramare.png" alt="Drawing" style="width: 350px;"/>
+
 Standardul ECMAScript 2016 este un „limbaj de programare" cu aplicativitate largă. Inițial ECMAScript a fost dezvoltat ca un limbaj de scriptare (fragmente de cod de mici dimensiuni cu aplicativitate strictă pentru a dinamiza paginile web), dar a evoluat într-unul care este aplicabil de la pagini web la roboți.
+
+![](FluxDeLaProblemaLaAplicare.png)
 
 JavaScript este un limbaj de programare creat de Brendan Eich în perioada când lucra la compania Netscape. ECMAScript, adică numele standardului în baza căruia avem JavaScript, este rezultatul unui efort colaborativ care a pornit în 1996, un an mai târziu fiind publicată prima ediție. În aprilie 1998 devine standardul internațional ISO/IEC 16262.
 
@@ -200,6 +204,8 @@ Toate elementele lexicografice care constituie codul în sine, cu excepția spa�
 
 Acești **atomi lexicali** (*token*-ii) sunt rezultatul parcurgerii unui fragment de cod (codul sursă) căruia i se aplică regulile lexicale specifice gramaticii impuse de standardul ECMAScript.
 
+<img src="AtomiiLexicali.png" width="350px">
+
 Ca să-ți vină ușor să înțelegi, îți poți imagina un giuvaergiu care dintr-un maldăr de pietre prețioase (codul sursă), ia una câte una (fragmente de cod), pentru a-i identifica caracteristicile și în final pentru a le pune pe fiecare după sortare în cutiuțele pregătite special pentru a le asambla într-o diademă deosebită (programul nostru care tocmai a făcut ceva spectaculos).
 
 Ceea ce rezultă în urma aplicării regulilor de identificare a componentelor ce formează fragmentele „inteligibile” pentru computer din șirul de text de intrare. Dacă-ți vine mai ușor este ca o analiză gramaticală în care identifici părțile de propoziție, ce sunt acestea din punct de vedere al părților de vorbire și așa mai departe.
@@ -233,6 +239,8 @@ Acestea sunt utile pentru a documenta codul. Sunt două moduri de a introduce co
 Acestea sunt caracterele „invizibile” cum ar fi spațiul, tasta space, pentru a separa vizual anumite fragmente de cod. Cel mai adesea sunt folosite spațiile (introduse de tasta SPACE) pentru a separa cuvintele pentru a da înțelesul semantic al acestora și taburile pentru a introduce „pauze” vizuale pe ecran cu scopul de a crește gradul de înțelegere și lizibilitate.
 
 Sunt considerate a fi spații albe următoarele: `tab` (`\t` *tabulator orizontal*, fiind un spațiu cu o anumită întindere), `space` (spațiu), `non-breakable space` (spațiu care nu poate fi fracționat), `line tabulation` (sau vertical tab - `\v` - referindu-se la mișcarea pe verticală a liniilor), `form feed` (se referă la trecerea pe ceea ce este înțeles a fi o pagină nouă `\f`).
+
+<img src="TextSursa.png">
 
 ## Structurile lexicale proprii JavaScript și recunoașterea lor
 
@@ -280,6 +288,8 @@ Există mai multe ciurente de opinii care au condus la diferite stiluri de redac
 ### Operanzii
 
 Pentru a ajunge la un rezultat avem nevoie mai întâi de niște valori, de niște date cu care să lucrăm. Operanzii, ca denumire, vine din matematică. Mda, știu, nu scăpăm... Nu te descuraja așa ușor, pur și simplu programarea este o dezvoltare a matematicii și de acolo își trage și denumirile pentru „chestiile” cu care operăm. Am zis operăm, nu?! Păi ce poți face cu niște operanzi altceva în afară de a opera cu ele? Ce? Nu știu. O adunare, o înmulțire... mai multe operațiuni, unele grupate cu paranteze. Hai că mai vedem ce și cum putem combina în expresiile formate.
+
+<img src="OperanziSiOperator.png" width="300px">
 
 ### Operatorii (***operators***)
 
@@ -406,6 +416,8 @@ a + 1; // enunțul unei expresii (expression statement)
 
 Crede-mă, nu vreau să te zăpăcesc, dar o expresie poate fi în același timp un enunț așa cum avem cazul simplu de mai sus. O expresie este un enunț care este evaluat întotdeauna la o valoare. Enunțul este ca fraza din analiza gramaticală cu diferența în cazul nostru că nu se termină cu punct, ci cu punct și virgulă.
 
+<img src="EnuntExpresie.png" width="350px">
+
 Exemplul oferit nu este cel mai util. În schimb, există un enunț al celei mai utile expresii întâlnite în întreg limbajul: *enunțul expresiei de apelare* al unei funcții (***call expression***): `făCeva();`. Chiar dacă nu am învățat nimic despre funcții, ține minte că apelarea acestora este nimic mai mult decât **un enunț al unei expresii**, dar care declanșează executarea acelei funcții. Nu te las așa în suspans... consideră un obiect în JavaScript ca pe un pistol iar gloanțele lui ca pe niște proprietăți. Folosind această imagine, o funcție este un cartuș care a fost pușcat iar apelul funcției este trăgaciul. Apăsând trăgaciul (apelezi funcția), puști capsa cartușului și iese glonțul pe țeavă (funcția returnează un rezultat celui care a apelat-o). Cam militaristă comparația, dar e târziu în noapte și asta mi-a venit la îndemână pe ecranul minții.
 
 ```javascript
@@ -496,13 +508,11 @@ Declararea variabilelor și a funcțiilor se leagă organic de conceptul identif
 
 Adu-ți aminte că scopul pentru care scriem software este pentru a manipula valori. Operațiunile au efecte în manipularea anumitor resurse.
 
-![Identificatoriii pot fi percepuți ca fanioane](Identificatori.jpg "Identificatori ca niște fanioane")
+![Identificatoriii pot fi percepuți ca fanioane](IdentificatoriIsland.png "Identificatori ca niște fanioane")
 
 Reperele de mai sus sunt identificatorii, care odată înțeleși, vor permite accesul la ceea ce înseamnă variabilele ca și concept.
 
 Să ne imaginăm că avem o hartă imaginară pe care avem marcate prin fanioane diferite locații. Locațiile reprezintă valorile pentru care avem nevoie de un nume, de un toponim. De exemplu, pentru orașul (percepem orașul ca fiind valoarea) din centrul regiunii Moldova avem numele Bacău, care este identificatorul. Adică, identificăm orașul ca valoare administrativă cu un toponim.
-
-![Identificatori pot fi interpretați ca toponime](IndicatoriToponimic.jpg "Identificatorii ca toponime")
 
 Putem să ne închipuim că identificatorii sunt toponime ale „tărâmului" JavaScript. Identificatorii pot fi orice secvență de caractere care poate să înceapă cu semnul dollar `$`, sau cu liniuță jos `_` (*underscore*) urmate de orice puncte de cod codate numeric respectând schema de codare a caracterelor UTF16.
 
@@ -577,6 +587,8 @@ Pentru că acum `Tărâmul` este gol, neîmplinindu-și menirea, **Demiurgul** s
 
 Înainte de acest pas al doilea, care de fapt este o altă comandă, să lămurim nițel termenii. Standardul ne expune denumirea de `intrinsics` pentru toate entitățile care sunt create înainte de a rula propriul cod și de care are nevoie  pentru a fi evaluat. În limba română traducerea implică trei sinonime: intrinseci, interioare, proprii. Pentru că termenul de **intrinsec** este cel mai apropiat și ca fonetică, îl vom utiliza și noi în acest material.
 
+<img src="realmRec.png">
+
 2. Porunca Demiurgului `CreateIntrinsics` ia noul obiect creat, `realmRec`, care tocmai a fost creat și îl supune unei proceduri numită «`CreateIntrinsics()`» pentru a-l înzestra cu proprietăți utile. Tehnic vorbind, pur și simplu, este pasat obiectul `realmRec` procedurii `CreateIntrinsics` obținându-se «`CreateIntrinsics(realmRec)`». Acest pas al genezei este cel mai important, pentru că, urmând firul algoritmului `CreateIntrinsics(realmRec)`, vom asista la maiestuoasa naștere a tuturor entităților ECMAScript relevante și care sunt necesare pentru a rula codul propriu. Să urmărim pașii algoritmului intern `CreateIntrinsics(realmRec)`:
   2.1 „Fie «intrinsics» un `Record`”. Identificatorul `intrinsics` va face legătra la Record prin care se înțelege o valoare sau un set de valori. În acest moment ne putem imagina `intrinsics` ca un container, gata să fie mobilată cu proprietățile necesare. Acest container va fi populat în următorii pași cu ceea ce standardul numește `entități` JavaScript: obiectele intrinseci, de fapt.
   2.2 Se va crea în obiectul descriptiv al noului nostru tărâm un câmp identificat prin `realmRec.[[Intrinsics]]`. Acest câmp - `[[Intrinsics]]` poate fi privit ca un slot în care se va „conecta” obiectul `intrinsics` abia creat. Ce s-a întâmplat este că obiectul `intrinsics` a devenit parte a containerului `realmRec`.
@@ -590,6 +602,9 @@ Pentru că acum `Tărâmul` este gol, neîmplinindu-și menirea, **Demiurgul** s
   2.10 Ca parte o obiectului `intrinsics` intră obiectul-funcție cu rol de prototip pentru funcții identificat ca `intrinsics.[[%FunctionPrototype%]]`.
   2.11 Demiurgul face o verificare pentru `objProto` folosind obiectul-funcție de verificare creat la pasul 2.5 și adaugă rezultatul evaluării ca proprietate chiar la obiectul-funcție creat la 2.5.
   2.12 Acest pas este dictat de rezultatul împlinirii comenzii `AddRestrictedFunctionProperties(funcProto, realmRec)`, care are drept scop adăugarea unor proprietăți fundamentale obiectelor-funcție prin adăugarea a două proprietăți în obiectul-funcție cu rol de prototip al tuturor funcțiilor: posibilitatea de a fi invocate (`caller`) și `arguments`, care este o colecție a tuturor argumentelor pe care o funcție le poate primi. Pe scurt, proprietatea care face funcțiile apelabile și cea care le face capabile de a ține evidența argumentelor primite sunt adăugate în obiectul-funcție cu rol de prototip.
+
+  <img src="intrinsics.png">
+
   2.13 Obiectului `intrinsics` i se adaugă restul de proprietăți care sunt obiecte și obiecte-funcție intrinseci:
     - Obiecte fundamentale pentru rularea codului: `Object`, `Function`, `Boolean`, `Symbol` și `Error`;
     - Obiecte pentru procesarea textelor: `String`, `RegExp`;
@@ -599,6 +614,7 @@ Pentru că acum `Tărâmul` este gol, neîmplinindu-și menirea, **Demiurgul** s
     - Obiecte pentru manipularea colecțiilor indexate cu ajutorul cheilor: `Map`, `Set`;
     - Obiecte pentru controlul operațiilor abstracte: `funcțiile generator` și `Promise`;
     - Obiectele cu reflexie: `Proxy` și `Reflect`.
+    ![](ObiecteFundamentale.png)
 
     2.14 Obiectul `intrinsics` este creat pe deplin și gata de a primi viață prin aportul adus de codul propriu.
 
@@ -692,6 +708,8 @@ Mai avem introdus de curând (noul standard), numărul special `Infinity` și in
 #### Valorile literale
 
 Am vorbit mai devreme despre aceste valori. Valorile literale sunt de fapt exprimarea în scris a datelor cu care lucrează ECMAScript. Literalele sunt tipurile de date cu care lucrăm. Se numesc literale pentru fără a folosi caractere nu am putea spune computerului ce vrem să folosim. Păi dacă nu scrii `3`, cum altfel să știe compul că vrei să-i dai ca operand valoarea trei? Logic!
+
+<img src="LiteralValue.png" width="350px">
 
 Valorile literale sunt tipuri de date care pot fi definite fără să fie ceva instanțiat în mod special sau să creezi vreun obiect special pentru a lucra cu ele.
 
