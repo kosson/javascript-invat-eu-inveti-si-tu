@@ -1,4 +1,4 @@
-# String.raw()
+# `String.raw()`
 
 Este o metodă foarte utilă în lucrul cu șabloanele de text de tipul `${...}`.
 

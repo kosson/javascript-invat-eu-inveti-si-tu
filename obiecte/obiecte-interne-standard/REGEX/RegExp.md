@@ -1,15 +1,15 @@
 # RegExp
 
+RegExp este prescurtarea de la **Regular Expressions** și putem traduce în limba română ca **expresii regulate**, dar ne vom referi la construcțiile de șabloane pentru căutarea unui anumit fragment ca fiind regex-uri.
+
 Scopul folosirii regex-urilor este acela de a ***formula*** șabloane («patterns») prin care să **privim** succesiunea de caractere care este un șir pentru a extrage fragmentele utile, pentru a ști unde se află și pentru a lua decizii mai departe pe baza acestor informații.
 
-RegExp înseamnă **expresii regulate** dar ne vom referi la construcțiile de șabloane ca fiind regex-uri.
-
-**Moment ZEN**: un șir de caractere poate fi un sunet, un cuvânt, mai multe, o propoziție, o frază sau o carte întreagă, un document hipertext accesat la distanță... cam tot ce este reprezentat cu ajutorul caracterelor.
+**Moment ZEN**: un șir de caractere poate fi un cuvânt, mai multe, o propoziție, o frază sau o carte întreagă, un document hipertext accesat la distanță... cam tot ce este reprezentat cu ajutorul caracterelor.
 
 **Spune standardul**:
 *Forma și funcționalitatea expresiilor regulate este modelată după cele oferite de limbajul de programare Perl 5*.
 
-Continuăm prin setarea metală necesară pentru lucrul cu șabloanele construite cu `RegExp`.
+Continuăm prin setarea mentală necesară pentru lucrul cu șabloanele construite cu `RegExp`.
 Trebuie conștientizat din prima că `RegExp` lucrează la nivel de caracter individual, apoi seturi de caractere, grupuri și combinațiile dintre acestea. Dar concentrarea voastră trebuie să pornească de la conștientizarea importanței cruciale pe care o are un singur caracter, fie că acesta este „vizibil” sau „invizibil” (spațiile albe, taburile).
 
 **Un singur caracter face diferența între a regăsi ceea ce cauți într-un șir sau nu**.
@@ -26,10 +26,13 @@ Câteva precizări privind termenii folosiți în limba română. Pentru engleze
 
 ```javascript
 let exemplu = '𝒥';
+console.log(exemplu.length);
+// lungimea textului este 2
+// nu 1 așa cum te-ai fi așteptat
+// pentru că avem un singur caracter
 
-console.log(exemplu.length); // lungimea textului este 2
-
-// testează pentru potrivirea cu orice caracter /^.$/
+// șablonul este /^.$/ ceea ce înseamnă
+// orice caracter aflat în setul mare UTF.
 console.log(/^.$/.test(exemplu)); // false, nu se face potrivirea
 console.log(/^.$/u.test(exemplu)); // true, fanionul este ridicat pentru Unicode
 ```
@@ -390,7 +393,7 @@ console.log(sir.match(sablon));
 
 Ceea ce se mai observă este că metacaracterul `?` este unul care implică comportamentul expansiv (greedy). De ce? Pentru că spune motorului că musai trebuie să potrivească șablonul ca mai apoi să se dea bătut dacă acesta are corespondent în string. Pentru a face șablonul autosuficient (lazzy), ar trebui să mai pui un metacaracter `?` după primul.
 
-Cuantificatorul `*` este combinația anteriorilor. Este și el un cuantificator expansiv încercând să consume întreaga resursă de șir.
+Cuantificatorul `*` este combinația celor dinainte. Este și el un cuantificator expansiv încercând să consume întreaga resursă de șir.
 
 Mai poți specifica de câte ori poate să apară un anumit caracter menționând imediat după acesta între acolade de câte ori.
 

@@ -620,7 +620,7 @@ Pentru că acum `Tărâmul` este gol, neîmplinindu-și menirea, **Demiurgul** s
 În acest moment, obiectul `intrinsics` este întregit și pregătit pentru a prelua creația noastră - codul sursă scris de noi pe care-l vom evalua. Dar nu am terminat. Abia suntem la pasul 2 al Genezei noastre. Odată create obiectele intrinseci, vom continua cu întregirea și finalizarea obiectului `realmRec`.
 
 3. Este setată proprietatea `realmRec.[[GlobalObject]]`, care inițial are valorea `undefined`.
-4. Este setată proprietatea `realmRec.[[GlobalEnv]]`, care inițial are valorea `undefined`.
+4. Este setată proprietatea `realmRec.[[GlobalEnv]]`, care inițial are valoarea `undefined`.
 5. Proprietatea `realmRec.[[TemplateMap]]` este setată ca o listă goală.
 6. Este încheiată geneza `Tărâmului` prin returnarea obiectului `realmRec`.
 
@@ -640,7 +640,7 @@ După ce un `Tărâm` s-a format, următorul în linia creației este obiectul g
 
 Urmărirea pașilor de formare a Obiectului Global aduce multiple lămuriri asupra mecanismelor de formare a lui `this` și multe clarificări privind moștenirea. Pentru a înțelege pașii acestui algoritm, trebuie să fi trecut prin pașii de formare a unui `Tărâm`. Altfel, nu vei înțelege de unde vin anumiți identificatori și proprietăți ale obiectului `intrinsics` sau cine este `realmRec`.
 
-Demiurgul tună: `SetRealmGlobalObject ( realmRec, globalObj, thisValue )`.
+**Demiurgul** tună: `SetRealmGlobalObject ( realmRec, globalObj, thisValue )` !!!.
 
 1. Verifică dacă identificatorul `globalObj` este setat la valoarea `undefined` iar dacă da, urmează următoarea secvență:
   a. atribuie identificatorului `intrinsics`, valoarea lui `realmRec.[[intrinsics]]`.

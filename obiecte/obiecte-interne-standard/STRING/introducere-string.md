@@ -1,6 +1,6 @@
-# Obiectul intern String
+# Obiectul intern `String`
 
-Este un constructor pentru string-uri.
+Este un constructor pentru șiruri de caractere, în engleză „strings”.
 
 Stăpânirea consolidată prin practică a șirurilor de caractere va permite manipularea datelor de tip `.txt, .csv, .json, etc.`. Combinarea lucrului pe șiruri de caractere cu lucrul pe array-uri, va permite transformări dintr-un format în altul, de manipulare la transformare, de îmbogățire și de segmentare a datelor.
 
@@ -71,7 +71,7 @@ Poate fi aflată prin invocarea proprietății `.length` direct pe șir:
 
 Este esențială înțelegerea indexului pentru că acesta poate fi considerat ca o adresă a caracterului. Închipuiește-ți că ești în fața unui perete, pe care sunt înșiruite tablouri, numai că în loc de eticheta cu autorul sau descrierea conținutului, este numărul de inventar care pornește de la 0.
 
-Metodele indexOf() și lastIndexOf() pot fi utilizate pentru căutarea unui substring într-un string. `indexOf("substring")` returnează valoarea indexului de la care începe substringul pasat ca argument.
+Metodele `indexOf()` și `lastIndexOf()` pot fi utilizate pentru căutarea unui substring într-un string. `indexOf("substring")` returnează valoarea indexului de la care începe substringul pasat ca argument.
 `indexOf()` și `lastIndexOf()` pot primi un al doilea parametru care indică indexul de la care să pornească căutarea. Dacă al doilea parametru nu este menționat, căutarea se va face de la index 0. Dacă nu este este găsit substringul, va fi returnată valoarea -1.
 
 ### Lucrul direct pe caractere și fragmente
