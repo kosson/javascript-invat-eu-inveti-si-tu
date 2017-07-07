@@ -627,7 +627,8 @@ Pentru că acum `Tărâmul` este gol, neîmplinindu-și menirea, **Demiurgul** s
     - Obiecte pentru manipularea colecțiilor indexate cu ajutorul cheilor: `Map`, `Set`;
     - Obiecte pentru controlul operațiilor abstracte: `funcțiile generator` și `Promise`;
     - Obiectele cu reflexie: `Proxy` și `Reflect`.
-    ![](ObiecteFundamentale.png)
+
+![](ObiecteFundamentale.png)
 
 2.14 Obiectul `intrinsics` este creat pe deplin și gata de a primi viață prin aportul adus de codul propriu.
 
