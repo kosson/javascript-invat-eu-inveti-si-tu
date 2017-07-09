@@ -66,6 +66,22 @@ Pentru că acest material țintește pe cei care lucrează în domeniul umanioar
 
 ## Anti-introducere
 
+La începutul secolului 20 al mileniului trecut, matematicianul Gottlob Frege a căutat „un limbaj al gândului pur”, care să poată fi folosit pentru a prezenta demonstrațiile matematice fără a se apela în vreun fel la mecanismele intuiției, ci doar cele ale logicii. Ceea ce căuta Gottlob Frege era o sintaxă care să fie precisă ea în sine pe care să o poți folosi fără a o interpreta. De fapt, acesta a fost pasul către realizarea visului lui Gottfried Leibniz de a găsi un set de reguli stricte pentru procesarea simbolurilor, ceea ce el numea „limbajul gândurilor” ca reducere a ideilor la un set de concepte nucleu, care prin combinare, să ofere expresivitatea tuturor ideilor indiferent de complexitatea lor. Pentru asta Leibnitz ar fi avut nevoie de o anumită algebră cu ajutorul căreia să poată reduce orice propoziție la o valoare de adevăr. Contribuțiile sale în algebra logicii sub forma operatorilor logici au fost completate un secol mai târziu de Gottlob Frege.
+
+<figure>
+  <img src="Young_frege.jpg" width="200px" alt="Imagine aflată în Domeniul Public; accesibilă la https://upload.wikimedia.org/wikipedia/commons/9/99/Young_frege.jpg">
+  <figcaption>Gottlob Frege, 8 November 1848 – 26 July 1925</figcaption>
+</figure>
+
+George Boole este figura care dezvoltă un set limitat al „legilor gândului”, în fapt o aritmetică care să permită reducerea expresiilor, fie la „adevărat”, fie la „fals”. Cu introducerea operațiunilor logice `and`, notat cu `∧`, în română `ȘI`, `or`, notat cu `∨`, în română `SAU` și `not`, notat cu `¬`, se poate vorbi despre algebra Booleană ca fundament al domeniului computației moderne. Gottlob Frege face un pas înainte și în căutările sale pentru a descoperi un limbaj formal artificial cu o sintaxă care să nu necesite interpretare, va completa în mod fericit algebra booleană introducând cuantificatori noi precum `∀` însemnând `oricare` sau cu sensul de `tot` sau `∃` însemnând `fie`, `există`, `pentru o parte`. Deodată cu aceste cunoștințe acumulate, domeniul matematicii era pe drumul de a formaliza un limbaj exact de care avea nevoie pentru a algoritmiza demonstrațiile și astfel logica matematică a căpătat noile mijloace de expresie. Am menționat deja termenul de algoritm. Un algoritm (combinația dintre latinul `algorismus` în onoarea matematicianului persan Muḥammad ibn Mūsā al-Khwārizmī și grecescul `arithmos`, care înseamnă număr) este o metodă care urmărește o rezolvare pas cu pas a unei probleme. Un exemplu antic de algoritm este metoda lui Euclid de a calcula cel mai mare divizor comun.
+Mai târziu, mult mai târziu, în 1936, matematicianul Alan Mathison Turing propune o mașină de calcul automată, care propunea stocarea algoritmilor ca programe. Din acest moment evoluția domeniului computerelor a accelerat până la nivelul actual.
+
+Efortul de a învăța un limbaj de programare este răsplătit prin însușirea unui set de reguli formalizat cu ajutorul căruia să poți manipula date, informații și să extinzi gândul în lumea materială dacă dorești. Câștigul este cel al căruia care are la îndemână instrumentarul al cărui aplicare poate părea a fi cel mai apropiat lucru de magie.
+
+>Orice tehnologie îndeajuns de avansată nu se poate distinge de magie. (Arthur C. Clarke)
+
+## Mică anatomie a limbajului
+
 JavaScript sau ECMAScript (titlul standardului) a pornit ca motorul dinamicii paginilor web, a prins viteză și a ajuns să devină un limbaj de programare cu uz general. Acest lucru înseamnă că poate fi folosit la mult mai multe lucruri în afara intențiilor sale originare. Avantajele folosirii JS pornesc de la server (Node.js), până la aplicațiile rulate în browserul web al utilizatorului.
 
 Când vorbim de JavaScript, de fapt vorbim despre o implementare, adică de respectarea tuturor regulilor pe care le impune standardul ECMAScript - <http://www.ecma-international.org/memento/TC39.htm>.
@@ -90,9 +106,7 @@ Aaa, eram să uit. De ceva vreme a ieșit o nouă versiune a standardului. Comun
 
 ECMAScript, ES5, ES6, JavaScript, JS, ECMAScript 2017, toate, fiecare vorbesc de aceeași realitate: limbajul de programare ECMAScript.
 
-## Mică anatomie a limbajului
-
-Această parte este necesară pentru a înțelege componentele care, puse cap la cap, formează limbajul de programare JavaScript. Vom pune sub microscop atomii, moleculele și însăși substanța din care este alcătuit tărâmul ECMAScript.
+Vom pune sub microscop atomii, moleculele și însăși substanța din care este alcătuit tărâmul ECMAScript.
 
 Am identificat o definiție a ceea ce este un limbaj de programare și vom debuta cu ea pentru a vă oferi imaginea completă de la bun început.
 
@@ -297,7 +311,7 @@ Sunt caractere sau combinații de caractere care au rolul de a stabili o relați
 
 ![George Boole](George_Boole_color.jpg "George Boole, matematician, 1815-1864. Este creatorul logicii matematice moderne și a algebrei booleene. Resursă aflată în Domeniu public accesibilă la https://commons.wikimedia.org/wiki/File:George_Boole_color.jpg")
 
-În esență, putem spune că majoritatea rezultatelor atunci când scriem cod, provin din astfel de evaluări. Ăăă, cum **boolean**, prietene? Da, e o valoare care testează adevărul și poartă numele de boolean în cinstea cercetătorului George Boole. El a dezvoltat o întreagă ramură a algebrei, care a impulsionat progresul în direcția creării computerelor. Nu uita că într-un computer, la nivelul cel mai de jos, totul este 1 și 0, adevărat sau fals, adevărat ȘI fals, adevărat NU fals. Hahaha...
+În esență, putem spune că majoritatea rezultatelor atunci când scriem cod, provin din astfel de evaluări. Ăăă, cum **boolean**, prietene? Da, e o valoare care testează adevărul și poartă numele de boolean în memoria cercetătorului George Boole care a dezvoltat algebra booleană. Nu uita că într-un computer, la nivelul cel mai de jos, totul este 1 și 0, `adevărat` **sau** `fals`, `adevărat` **ȘI** `fals`, `adevărat` **NU** `fals`. Hahaha... Apropo de Boole și de operatori. Tot de la Boole avem și regula comutativității pentru adunare `x + y = y + x` și regula distributivității `z(x + y) = zx + zy`.
 
 De cele mai multe ori, operatorii stabilesc o evaluare a expresiilor de la stânga la dreapta. Putem verbaliza, de exemplu `1 + 1` ca „unu plus unu”, ceea ce înseamnă că am citit enunțul de la stânga la dreapta. Am spus de cele mai multe ori pentru că avem și cazurile când un operator, de exemplu ***egal*** (`=`), care este citit de la dreapta la stânga. Spre exemplu, în enunțul `a = 1`, citim: „valoarea 1 este atribuită variabilei a”. Operatorul egal împarte cei doi operanzi în expresii aflate în partea stângă (***left-hand-side***) și expresii aflate în partea dreaptă (***right-hand-side***).
 
@@ -851,3 +865,5 @@ https://en.wikipedia.org/wiki/George_Boole
 https://en.wikipedia.org/wiki/George_Boole#/media/File:George_Boole_color.jpg
 
 [List of languages that compile to JS, Jeremy Ashkenas, jashkenas/coffeescript git repo](https://github.com/jashkenas/coffeescript/wiki/List-of-languages-that-compile-to-JS)
+
+Tedre, Matti. The Science of Computing. CRC Press. 2015.
