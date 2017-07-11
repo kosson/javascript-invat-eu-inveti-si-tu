@@ -76,7 +76,7 @@ La începutul secolului 20 al mileniului trecut, matematicianul Gottlob Frege a 
 George Boole este figura care dezvoltă un set limitat al „legilor gândului”, în fapt o aritmetică care să permită reducerea expresiilor, fie la „adevărat”, fie la „fals”. Cu introducerea operațiunilor logice `and`, notat cu `∧`, în română `ȘI`, `or`, notat cu `∨`, în română `SAU` și `not`, notat cu `¬`, se poate vorbi despre algebra Booleană ca fundament al domeniului computației moderne. Gottlob Frege face un pas înainte și în căutările sale pentru a descoperi un limbaj formal artificial cu o sintaxă care să nu necesite interpretare, va completa în mod fericit algebra booleană introducând cuantificatori noi precum `∀` însemnând `oricare` sau cu sensul de `tot` sau `∃` însemnând `fie`, `există`, `pentru o parte`. Deodată cu aceste cunoștințe acumulate, domeniul matematicii era pe drumul de a formaliza un limbaj exact de care avea nevoie pentru a algoritmiza demonstrațiile și astfel logica matematică a căpătat noile mijloace de expresie. Am menționat deja termenul de algoritm. Un algoritm (combinația dintre latinul `algorismus` în onoarea matematicianului persan Muḥammad ibn Mūsā al-Khwārizmī și grecescul `arithmos`, care înseamnă număr) este o metodă care urmărește o rezolvare pas cu pas a unei probleme. Un exemplu antic de algoritm este metoda lui Euclid de a calcula cel mai mare divizor comun.
 Mai târziu, mult mai târziu, în 1936, matematicianul Alan Mathison Turing propune o mașină de calcul automată, care propunea stocarea algoritmilor ca programe, iar în 1937, Claude E. Shannon aplica logica booleană pe circuitele electronice. Din acest moment evoluția domeniului computerelor a accelerat până la nivelul actual.
 
-Efortul de a învăța un limbaj de programare este răsplătit prin însușirea unui set de reguli formalizat cu ajutorul căruia să poți manipula date, informații și să extinzi gândul în lumea materială dacă dorești. Câștigul este cel al căruia care are la îndemână instrumentarul al cărui aplicare poate părea a fi cel mai apropiat lucru de magie.
+Efortul de a învăța un limbaj de programare este răsplătit prin însușirea unui set de reguli formalizat cu ajutorul căruia să poți manipula date, informații și să extinzi gândul în lumea materială dacă dorești. Câștigul este cel al căruia care are la îndemână instrumentarul a cărui aplicare poate părea a fi cel mai apropiat lucru de magie.
 
 >Orice tehnologie îndeajuns de avansată nu se poate distinge de magie. (Arthur C. Clarke)
 
@@ -91,6 +91,8 @@ Programarea, ca și activitate, ar fi util să fie înțeleasă ca o limbă str�
 Vă va ajuta să înțelegeți că scrierea unui fragment de cod este precum scrierea unei fraze foarte lungi constituită din propoziții separate prin punct și virgulă. Dar această frază este forma cristalizată a unui algoritm. Să lămurim câteva lucruri de la bun început.
 
 Ai o problemă pe care dorești să o rezolvi și în acest sens, creezi **pașii necesari**. Nu te sfii să scrii acești pași pe o coală de hârtie. Adevărata programare începe de la faza de creion și hârtie. În plus, este dovedit ștințific că soluțiile se văd din lucrul cu obiecte, din interacțiunea gândurilor cu lumea fizică.
+
+![](FluxDeLaProblemaLaAplicare.png)
 
 Succesiunea tuturor pașilor identificați de tine se numește **algoritm**.
 
@@ -117,8 +119,6 @@ Am identificat o definiție a ceea ce este un limbaj de programare și vom debut
 <img src="limbajDeProgramare.png" alt="Drawing" style="width: 350px;"/>
 
 Standardul ECMAScript 2016 este un „limbaj de programare" cu aplicativitate largă. Inițial ECMAScript a fost dezvoltat ca un limbaj de scriptare (fragmente de cod de mici dimensiuni cu aplicativitate strictă pentru a dinamiza paginile web), dar a evoluat într-unul care este aplicabil de la pagini web la roboți.
-
-![](FluxDeLaProblemaLaAplicare.png)
 
 JavaScript este un limbaj de programare creat de Brendan Eich în perioada când lucra la compania Netscape. ECMAScript, adică numele standardului în baza căruia avem JavaScript, este rezultatul unui efort colaborativ care a pornit în 1996, un an mai târziu fiind publicată prima ediție. În aprilie 1998 devine standardul internațional ISO/IEC 16262.
 
