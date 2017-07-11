@@ -116,7 +116,7 @@ Am identificat o definiție a ceea ce este un limbaj de programare și vom debut
 > <cite><a href="http://www.teora.ro/cgi-bin/teora/romania/mbshop.cgi?database=01&amp;action=view_product&amp;productID=%20823&amp;category=" title="Brookshear, J. Glenn. Introducere în informatică. Editura Teora. 1998\. Titlul original: Computer science - An overview, Fifth Edition">J. Glenn Brookshear.1998</a>
 > </cite>
 
-<img src="limbajDeProgramare.png" alt="Drawing" style="width: 350px;"/>
+<img src="limbajDeProgramare.png" alt="Drawing" style="width: 300px;"/>
 
 Standardul ECMAScript 2016 este un „limbaj de programare" cu aplicativitate largă. Inițial ECMAScript a fost dezvoltat ca un limbaj de scriptare (fragmente de cod de mici dimensiuni cu aplicativitate strictă pentru a dinamiza paginile web), dar a evoluat într-unul care este aplicabil de la pagini web la roboți.
 

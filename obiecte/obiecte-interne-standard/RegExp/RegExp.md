@@ -1,8 +1,8 @@
 # RegExp
 
-RegExp este prescurtarea de la **Regular Expressions** și putem traduce în limba română ca **expresii regulate**, dar ne vom referi la construcțiile de șabloane pentru căutarea unui anumit fragment ca fiind regex-uri.
+Am stabilit deja din tot ce-am povestit până acum că textul este o resursă digitală care poate fi exploatată și în care poți face căutări după anumite fragmente cheie. Poți să-ți imaginezi `RegExp`-ul ca pe un motor de căutare în care introduci cheile de căutare după anumite reguli. Și de aici și denumirea de `regular expressions`, de unde `RegExp`. Am putea să spunem că facem căutări în texte după *șabloane construite după anumite reguli*, dar ne vom referi la aceste construcții numindu-le șabloane sau regex-uri. Pentru englezescul „pattern” am ales `șablon` pentru că semantic exprimă cel mai bine scopul fragmentului după care facem căutarea, iar pentru operațiunea în sine de căutare am folosit interșanjabil „a potrivi”, cu sensul de a potrivi în șir șablonul sau „a regăsi”, cu sensul operațiunii de identificare în șir atunci când explicația redă operațiunea din punctul de vedere al motorului `RegExp`.
 
-Scopul folosirii regex-urilor este acela de a ***formula*** șabloane («patterns») prin care să **privim** succesiunea de caractere care este un șir pentru a extrage fragmentele utile, pentru a ști unde se află și pentru a lua decizii mai departe pe baza acestor informații.
+Scopul folosirii regex-urilor este acela de a **privi** succesiunea de caractere care este un șir, pentru a extrage fragmentele utile cu scopul de a descoperi unde se află în corpul unui text.
 
 **Moment ZEN**: un șir de caractere poate fi un cuvânt, mai multe, o propoziție, o frază sau o carte întreagă, un document hipertext accesat la distanță... cam tot ce este reprezentat cu ajutorul caracterelor.
 
@@ -12,12 +12,15 @@ Scopul folosirii regex-urilor este acela de a ***formula*** șabloane («pattern
 Continuăm prin setarea mentală necesară pentru lucrul cu șabloanele construite cu `RegExp`.
 Trebuie conștientizat din prima că `RegExp` lucrează la nivel de caracter individual, apoi seturi de caractere, grupuri și combinațiile dintre acestea. Dar concentrarea voastră trebuie să pornească de la conștientizarea importanței cruciale pe care o are un singur caracter, fie că acesta este „vizibil” sau „invizibil” (spațiile albe, taburile).
 
-**Un singur caracter face diferența între a regăsi ceea ce cauți într-un șir sau nu**.
+**Moment ZEN**: Un singur caracter face diferența între a regăsi ceea ce cauți într-un șir sau nu.
 
-Un mic antrenament de atenție înainte de a lucra. Caracterul `?` la regexuri pune condiția strictă ca un șablon menționat înaintea sa să existe sau nu. De exemplu, `x?`, se va traduce: caracterul `x` poate să fie întâlnit și dacă da, include-l în rezultat, dar este acceptabil și dacă acesta nu există.
-Și acum, focalizare maximă. Următorul regex valid <code><u> </u>?</code> te poate da peste cap dacă nu ești atent. Pur și simplu testează dacă există un spațiu sau nu pentru că înaintea semnului întrebării era un spațiu nedetectabil celor care abia s-au apucat de lucru pe șiruri de caractere. Liniuța am pus-o eu pentru a marca spațiul pentru că nu am alt mijloc vizual prin care să-l marchez aici. Vezi? De accea trebuie lucrat cu multă atenție.
+## Un mic antrenament de atenție înainte de a lucra.
 
-Câteva precizări privind termenii folosiți în limba română. Pentru englezescul „pattern” am ales `șablon` pentru că semantic implică înțelesul cel mai bun, iar pentru operațiunea în sine de căutare în șir am folosit interșanjabil „a potrivi”, cu sensul de a potrivi în șir șablonul sau „a regăsi”, cu sensul operațiunii de identificare în șir atunci când explicația redă operațiunea din punctul de vedere al motorului `RegExp`. Regexurile mai au niște litere care succed șablonul. Acestea în limba engleză sunt numite „flags”, dar pentru limba română le-am tradus ca fanioane pentru că semnalizează un anumit comportament pe care motorul de interpretare trebuie să-l adopte.
+Caracterul `?` la regexuri pune condiția strictă ca un șablon menționat înaintea sa să existe sau nu. De exemplu, `x?`, se va traduce: caracterul `x` poate să fie întâlnit sau nu, dar dacă îl găsești, include-l în rezultat.
+
+Și acum, focalizare maximă. Următorul regex este unul valid și solicită atenția ta ca și detector de caractere: <code><span style='color: red'>_</span>?</code> (spațiu și semnul întrebării, aici l-am folosit pe underscore să-ți marchez faptul că este un spațiu) te poate da peste cap dacă nu ești atent. Pur și simplu testează dacă există un spațiu sau nu pentru că înaintea semnului întrebării era un spațiu nedetectabil celor care abia s-au apucat de lucru pe șiruri de caractere. Vezi? De accea trebuie lucrat cu multă atenție.
+
+Regexurile mai au niște litere care succed șablonul. Acestea în limba engleză sunt numite „flags”, dar pentru limba română le-am tradus ca fanioane pentru că semnalizează un anumit comportament pe care motorul de interpretare trebuie să-l adopte.
 
 **Spune standardul**:
 *Un șablon este evaluat („este compilat”) la o valoare rezultată dintr-o procedură internă*.
