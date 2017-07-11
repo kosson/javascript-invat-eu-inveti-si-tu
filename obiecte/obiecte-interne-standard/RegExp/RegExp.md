@@ -25,7 +25,7 @@ Regexurile mai au niște litere care succed șablonul. Acestea în limba englez�
 **Spune standardul**:
 *Un șablon este evaluat („este compilat”) la o valoare rezultată dintr-o procedură internă*.
 
-Șirurile de caractere în JavaScript sunt înșiruiri de secvențe de 16 biți denumite tehnic `unități de cod` (code unit) ce reprezintă, de fapt, un singur caracter. `RegExp` se așteaptă să lucreze cu unități de cod pe 16 biți, care reprezintă un singur caracter. Totuși începând cu ECMAScript 6, există un fanion dedicat, care semnalizează `RegExp` că va avea de lucru cu un șir de caractere Unicode - `u`. De fapt, îi este indicat motorului faptul că trebuie să lucreze la nivel de caractere și nu la nivel de `code unit`.
+Șirurile de caractere în JavaScript sunt înșiruiri de secvențe de 16 biți denumite tehnic `unități de cod` (code unit) ce reprezintă, de fapt, un singur caracter. `RegExp` se așteaptă să lucreze cu unități de cod pe 16 biți, care reprezintă un singur caracter. Totuși, începând cu ECMAScript 6, există un fanion dedicat, care semnalizează `RegExp` că va avea de lucru cu un șir de caractere Unicode - `u`. De fapt, îi este indicat motorului faptul că trebuie să lucreze la nivel de caractere și nu la nivel de `code unit`.
 
 ```javascript
 let exemplu = '𝒥';
@@ -44,11 +44,11 @@ Expresiile regulate sunt șabloane folosite pentru a căuta combinații de carac
 
 ## Detalii de funcționare a motorului de RegExp
 
-Motorul `RegExp`, tehnic vorbind este unul ***regex-directed***, adică șablonul ocupă rolul central, fiind o implementare „eager” ceea ce înseamnă că are un motor foarte „nerăbdător” să ofere un rezultat.
+Motorul `RegExp`, tehnic vorbind, este unul ***regex-directed***, adică șablonul ocupă rolul central, fiind o implementare „eager” ceea ce înseamnă că are un motor foarte „nerăbdător” să ofere un rezultat.
 
 Am menționat aceast lucru pentru că acest motor, la momentul evaluării, returnează fragmentul care s-a potrivit cu cel mai din stânga fragment din șir, adică care se află cât mai aproape de începutul șirului, chiar dacă ar fi fost disponibilă o variantă mai apropiată de împlinirea tuturor criteriilor șablonului în corpul său. Reține acest aspect de funcționare. Te va ajuta să înțelegi mai bine problemele care apar în utilizare pentru care nu există nicio rațiune.
 
-Aplicarea regexului va porni prin „consumarea” șirului de caractere pornind de la primul încercând toate variantele șablonului chiar din acest punct. Dacă toate variantele au fost epuizate, va mai „consuma” încă un caracter și având acum două va încerca din nou toate combinațiile până când un fragment se va potrivi. Acela va fi și punctul de oprire. Ține în minte că fragmentul poate fi parte a unui cuvânt compus sau a unei formule pentru care nu a fost gândit șablonul. De aceea tipul motorului este „nerăbdător” - pur și simplu raportează prima potrivire indiferent de context.
+Aplicarea regex-ului va porni prin „consumarea” șirului de caractere pornind de la primul încercând toate variantele șablonului chiar din acest punct. Dacă toate variantele au fost epuizate, va mai „consuma” încă un caracter și având acum două va încerca din nou toate combinațiile până când un fragment se va potrivi. Acela va fi și punctul de oprire. Ține în minte că fragmentul poate fi parte a unui cuvânt compus sau a unei formule pentru care nu a fost gândit șablonul. De aceea tipul motorului este „nerăbdător” - pur și simplu raportează prima potrivire indiferent de context.
 
 ## Metacaracterele
 
