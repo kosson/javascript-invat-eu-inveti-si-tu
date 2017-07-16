@@ -1,8 +1,32 @@
 # Symbols
 
-Este un tip de date introdus de ECMAScript 2015. Un `Symbol` este unic și nu poate fi modificat (este „immutable”). Acest nou tip de date nu este nici obiect și nici șir de caractere (string). Este ceva cu totul și cu totul nou.
+Este un tip de date introdus de ECMAScript 2015. Un `Symbol` este unic și nu poate fi modificat (este „immutable”). Un simbol este creat la apelarea funcției intrinseci `Symbol()`.
 
-Poate fi folosit ca și identificator al proprietăților unui obiect. Sintaxa este `Symbol([descriere])`, unde descriere este un șir de caractere, care poate fi folosit în scopuri de depanare.
+```javascript
+var unSimbol = Symbol();
+```
+
+Acest nou tip de date nu este nici obiect și nici șir de caractere (string). Este ceva cu totul și cu totul nou. Simbolurile sunt folosite pentru a crea și pentru a utiliza proprietăți ale unui obiect care oferă siguranța că nu vor intra vreodată în conflict cu cele ale altor biblioteci de cod.
+
+```javascript
+var obi = {};
+var simbolSigur = Symbol('oProprietateUnică');
+obi[simbolSigur] = true;
+console.log(obi[simbolSigur]);
+```
+
+Ca și în cazul arrayurilor, proprietățile ale căror cheie este un simbol, li se pot accesa valorile folosind notația cu paranteze drepte. Folosirea notației cu punct, va returna `undefined`.
+
+Se observă că în sintaxa folosită `Symbol('descriere')` este introdus un șir de caractere care poate fi folosit în scopuri de depanare.
+
+```javascript
+simbolSigur.toString(); // "Symbol(oProprietateUnică)"
+```
+
+```javascript
+let totem = Symbol.for("ursul carpatin");
+Symbol.keyFor(totem);
+```
 
 ATENȚIE! De fiecare dată când descriptorul este același, pentru două simboluri diferite, se vor crea două simboluri diferite.
 
@@ -16,7 +40,7 @@ Symbol('ceva') === Symbol('ceva');
 ATENȚIE! Un symbol nu se va crea folosind `new`. Această încercare va avea drept rezultat afișarea unei erori: `TypeError`.
 
 Ca și string și number vine cu propriul obiect ambalaj `Symbols`.
-Se aseamănă cu String.,
+Se aseamănă cu String.
 
 ```javascript
 var simbolNou = Symbol();
@@ -31,13 +55,6 @@ Există două metode prin care poți adăuga un `Symbol` în registrul global:
 
 ```javascript
 Symbol.for('test') === Symbol.for('test'); // true
-```
-
-Simbolurile pot fi privite ca niște etichete distincte care pot fi setate și accesate. Aceste etichete sunt autodescriptive, adică ceea ce introduci, șirul de caractere introdus, este și descrierea sa.
-
-```javascript
-let totem = Symbol.for("ursul carpatin");
-Symbol.keyFor(totem);
 ```
 
 Unul dintre simbolurile folosite extensiv este `Symbol.iterator`. Acesta este folosit pentru a defini metoda `@@iterator` pentru metodele aplicate obiectelor care implementează protocolul de iterare (acest protocol de care vei auzi în mod repetate este un set de reguli pe care trebuie să le respecte un obiect pentru a deveni iterabil).
