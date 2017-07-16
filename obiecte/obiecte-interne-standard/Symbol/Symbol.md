@@ -28,3 +28,7 @@ console.log(Symbol('ceva') === Symbol('ceva')); // false
 ## Unde folosim simboluri?
 
 Pentru a avea chei cu adevărat unice pentru proprietățile unui obiect și oriunde avem nevoie de identificatori unici.
+
+## Simboluri interne folosite de JavaScript
+
+Începând cu ECMAScript 5, motorul JavaScript folosește o suită de simboluri interne pe care standardul le numește „well known” - bine cunoscute.
