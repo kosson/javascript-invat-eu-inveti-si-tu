@@ -31,9 +31,9 @@ Tipul `String` este folosit pentru a reprezenta date textuale, fiind de fapt, un
 
 ## `Symbol`
 
-Tipul `Symbol` este un set de valori care nu sunt pot fi considerate șiruri, dar care pot fi folosite ca și chei ale unei proprietăți a unui obiect.
+Tipul `Symbol` este un set de valori care nu sunt pot fi considerate a fi șiruri, dar care pot fi folosite ca și chei ale unei proprietăți într-un obiect.
 
-În cazul lui `Symbol`, fiecare valoare este unică și nu poate fi modificată („immutable”), dar fiecare valoare la rândul ei poate avea o valoare asociată folosită pentru a descrie simbolul, care este `undefined` sau un șir de caractere. Un `Symbol` cu care te vei întâlni foarte des este `@@iterator` și care este o referință către o metodă care returnează un obiect iterator pentru un obiect pe care-l folosești. Formula `for...of` face apel automat la această metodă.
+În cazul lui `Symbol`, fiecare valoare care reprezintă simbolul, este unică și nu poate fi modificată (este „immutable”), dar fiecare valoare la rândul ei poate avea o valoare asociată folosită pentru a descrie simbolul, care este `undefined` sau un șir de caractere. Un `Symbol` cu care te vei întâlni foarte des este `@@iterator` și care este o referință către o metodă care returnează un obiect iterator pentru un obiect pe care-l folosești. Formula `for...of` face apel automat la această metodă.
 
 ## `Number`
 

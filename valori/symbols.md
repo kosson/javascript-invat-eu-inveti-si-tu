@@ -1,8 +1,8 @@
 # Symbols
 
-Este un tip de date introdus de ECMAScript 2015. Un symbol este unic și nu poate fi modificat (immutable).
+Este un tip de date introdus de ECMAScript 2015. Un `Symbol` este unic și nu poate fi modificat (este „immutable”). Acest nou tip de date nu este nici obiect și nici șir de caractere (string). Este ceva cu totul și cu totul nou.
 
-Poate fi folosit ca și identificator al proprietăților unui obiect. Sintaxa este `Symbol([descriptor])`, unde descriere este un șir de caractere, care poate fi folosit în scopuri de debugging.
+Poate fi folosit ca și identificator al proprietăților unui obiect. Sintaxa este `Symbol([descriere])`, unde descriere este un șir de caractere, care poate fi folosit în scopuri de depanare.
 
 ATENȚIE! De fiecare dată când descriptorul este același, pentru două simboluri diferite, se vor crea două simboluri diferite.
 
