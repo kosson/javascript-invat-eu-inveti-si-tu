@@ -1,6 +1,6 @@
 # Operatorul spread (`...`)
 
-Este un operator nou introdus de ECMAScript 2015.
+Este un operator nou introdus de ECMAScript 2015. Acest operator foarte util funcționează pentru toate obiectele care au implementat protocolul de iterare, adică Symbol-ul intern `@@iterator` (dacă arunci o privire la obiectul intern Symbol găsești că este o proprietate statică).
 
 **Parametrii rest** se deosebesc de **operatorul spread**.
 

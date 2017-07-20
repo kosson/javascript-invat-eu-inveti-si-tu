@@ -1,10 +1,71 @@
-# Symbol
+# `Symbol()`
 
-Symbol este o proprietate a obiectului global. Nu trebuie folosit cu `new` iar la apelarea ca funcție, va returna o nouă valoare symbol. Dacă i se pasează un argument care nu este undefined, acest argument va fi un șir de caractere care va avea rolul de descriptor pentru noul simbol creat.
+Symbol este o proprietate a obiectului global. Nu trebuie folosit cu `new` pentru că nu este un constructor de obiecte. Pur și simplu nu permite sintaxa `new Symbol()`. Dacă i se pasează un argument care nu este undefined, acest argument va fi un șir de caractere care va avea rolul de descriptor pentru noul simbol creat.
 
-Pe scurt, un simbol este un șir de caractere, care este asociat cheii unei proprietăți a unui obiect.
+`Symbol()` este o funcție care returnează o valoare de tipul symbol. Pe scurt, un simbol este un șir de caractere, care este asociat cheii unei proprietăți a unui obiect. Toate simbolurile sunt evidențiate prin intermediul unui **registru global de simboluri**.
 
-Evaluarea funcției `Symbol()` este o valoare de tip `symbol`.
+Symbol are totuși o serie de proprietăți care oferă acces la membrii acestui obiect intern, are proprietăți statice, care îți permit să investighezi registrul global de simboluri, care este constituit înainte de a se începe evaluarea codului.
+
+Standardul lămurește (19.4.1The Symbol Constructor) faptul că atunci când se constituie registrul simbolurilor, care este o listă de elemente, care fiecare, individual, este un „Record”, ceea ce decriptat înseamnă că avem de-a face cu un obiect. Da, fiecare simbol este, de fapt, câte un obiect care are două proprietăți:
+
+- cheia pentru prima proprietate este `[[Key]]` și are drept valoare un șir de caractere necesar pentru a identifica la nivel global simbolul respectiv și
+- a doua proprietate care are drept cheie `[[Symbol]]`, care are drept valoare un **simbol** ce poate fi accesat din oricare tărâm.
+
+## Well-Known Symbols - „simboluri binecunoscute”
+
+Standardul indică o serie de simboluri pe care le atașează atributul de „binecunoscute”. În spatele fiecărui astfel de simbol „binecunoscut” se află algoritmi (acești algoritmi sunt interni motorului de JavaScript) care au anumite efecte. Am putea spune că, de fapt, aceste simboluri identifică proprietăți care oferă „funcționalități binecunoscute” pentru obiectele interne. Mai pe scurt, unele obiecte interne JavaScript, au niște proprietăți ale căror chei sunt simboluri. Ce se ascunde în spatele lor este un algoritm, care oferă o funcție sau un anume comportament la momentul când tu, ca programator, le invoci.
+
+Un lucru foarte important pe care-l menționează standardul este acela că „valorile simbolurilor binecunoscute sunt comune tuturor tărâmurilor”.
+
+Prin ce se disting *simbolurile binecunoscute* de celelalte? Prin faptul că sunt referențiate printr-o notație specială folosită doar în textul standardului. Acesta este formată din numele simbolului, care este stabilit de standard, precedat de o pereche de ampresand: `@@iterator`, de exemplu. Pentru cazul utilizării de zi cu zi, aceste simboluri binecunoscute sunt parte a obiectului cu rol de prototip pentru obiectele interne `Object`, `Array` și `String` cu excepția unuia singur care este operatorul `instanceof`.
+
+### Symbol.hasInstance
+
+Acesta este cazul operatorului `instanceof` prin care putem afla dacă un anumit obiect este o instanță a celui pentru care se face investigația.
+
+### Symbol.isConcatSpreadable
+
+Aceasta este o valoare boolean. Ceea ce indică ea este dacă un obiect poate fi transformat într-un array ce conține proprietățile sale atunci când se invocă `concat` pe un array existent. Adu-ți aminte că un array este la rândul său un obiect, de fapt. Acest simbol dă girul că obiectul poate fi tratat ca un array căruia urmează să i se adauge noi elemente.
+
+### Symbol.iterator
+
+Acest simbol este mijlocul prin care se aplează iteratorul pentru un anumit obiect. Este binecunoscută apelarea iteratorului atunci când se folosește `for...of`.
+
+### Symbol.match
+
+Este simbolul care pune în funcțiune algoritmii responsabili cu realizarea unei căutări într-un șir de caractere după un șablon. Este apelabil prin invocarea metodei `match()` pusă la dispoziție de obiectul intern RegExp.
+
+### Symbol.replace
+
+Este simbolul care pune în funcțiune algoritmii responsabili cu realizarea unei înlocuiri a unui fragment dintr-un șir care se potrivește cu un șablon. Este apelabil prin invocarea metodei `replace()` pe care obiectul intern RegExp o oferă.
+
+### Symbol.search
+
+Este mecanismul declanțat la căutarea într-un șir după un șablon atunci când este apelată metoda `search()` a lui RegExp.
+
+### Symbol.species
+
+Este o valoare implicată în crearea de obiecte derivate.
+
+### Symbol.split
+
+Este algoritmul care se pune în mișcare la apelarea metodei `split()` pe care obiectul intern String o pune la dispoziție.
+
+### Symbol.toPrimitive
+
+Un simbol utilizat pentru a converti un obiect la o primitivă. Standardul îl menționează, dar încă nu există aplicații practice.
+
+### Symbol.toStringTag
+
+Este algoritmul implicat de metoda `toString` a obiectului intern `Object`.
+
+### Symbol.unscopables
+
+Sunt proprietățile care sunt excluse de la folosirea lui `width`.
+
+## Lucrul cu symbol-urile
+
+Evaluarea funcției `Symbol()` este o valoare de tip `symbol`. Adu-ți aminte mereu faptul că simbolurile sunt tipuri de date primare.
 
 ```javascript
 var unSimbol = Symbol('simbol01');
@@ -28,6 +89,8 @@ console.log(Symbol('ceva') === Symbol('ceva')); // false
 ## Unde folosim simboluri?
 
 Pentru a avea chei cu adevărat unice pentru proprietățile unui obiect și oriunde avem nevoie de identificatori unici.
+
+Valorile de acest tip pot fi folosite pentru a face anumite proprietăți ale unui obiect să fie anonime. Astfel, se poate realiza trecerea unor proprietăți într-o zonă „privată”.
 
 ## Simboluri interne folosite de JavaScript
 

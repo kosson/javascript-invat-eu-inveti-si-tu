@@ -71,7 +71,7 @@ Unicode oferă codare pentru peste 1 milion de caractere / ideograme / simboluri
 
 Ca și curiozitate ar fi de adăugat că Emoji-urile, simboluri folosite de companiile de telecomunicații japoneze, au fost introduse în Unicode începând cu 2010 și sunt prezente în sistemele de operare moderne. Ce înseamnă asta? Că poți scie cu Emoji-uri mesajele pe care dorești să le transmiți celor apropiați.
 
-Închei cu o singură sugestie. Dacă dorești să afli câte code point-uri folosește un anumit caracter, folosește proprietatea `length` pe respectivul caracter: `'😁'.length; // 2`. În cazul acesta sunt folosite două „code point-uri”.
+Închei cu o singură sugestie. Dacă dorești să afli câte code point-uri folosește un anumit caracter, folosește proprietatea `length` pe respectivul caracter: `'😁'.length; // 2`. În cazul acesta sunt folosite două „code point-uri”. Pont: caracterul folosește două „code point”? Atunci este „surogate pair”.
 
 ## Resurse
 
