@@ -1,6 +1,8 @@
 # Codarea caracterelor - Unicode
 
-Computerele nu înțeleg cuvintele noastre, nici măcar caracterele pe care le folosim noi pentru a compune cuvintele. Ceea ce înțeleg mașinile noastre de calcul este o secvență de 0 și 1, dar ca să existe un nivel unde să ne putem întâlni cu ele pentru a stabili comunicarea, au fost create sisteme de reprezentare, de codare alfanumerică a caracterelor pentru ca acestea să aibe un echivalent numeric inteligibil pentru computere. Pentru a înțelege modul de reprezentare numeric al caracterelor din setul Unicode, este nevoie să fie înțeleasă reprezentare hexazecimală a numerelor. Pentru aceasta va trebui să facem o mică incursiune în felul în care „codăm” noi oamenii cantitățile. Este foarte important pentru aduce explicații despre cum este realizată puntea dintre un simbol, adică un caracter inteligibil pentru noi, cu o valoare pe care computerul o înțelege.
+Computerele nu înțeleg cuvintele noastre, nici măcar caracterele pe care le folosim noi pentru a compune cuvintele. Ceea ce înțeleg mașinile noastre de calcul este o secvență de 0 și 1, dar ca să existe un nivel unde să ne putem întâlni cu ele pentru a stabili comunicarea, au fost create sisteme de reprezentare, de codare alfanumerică a caracterelor pentru ca acestea să aibe un echivalent numeric inteligibil pentru computere. Ceea ce pare inteligibil pentru noi oamenii, adică textele pe care le redactăm sunt înșiruiri de litere, digiți pentru cifre sau anumite simboluri pentru a reprezenta valori numerice. Toate acestea au o „umbră” numerică în sistemul de calcul.
+
+Pentru a înțelege modul de reprezentare numeric al caracterelor din setul Unicode, este nevoie să fie înțeleasă reprezentare hexazecimală a numerelor. Pentru aceasta va trebui să facem o mică incursiune în felul în care „codăm” noi oamenii **cantitățile**. Este foarte important pentru aduce explicații despre cum este realizată puntea dintre un simbol, adică un caracter inteligibil pentru noi, cu o valoare pe care computerul o înțelege.
 
 Câteva informații privind sintemele de numerație, care se vor dovedi foarte utile. Zi de zi lucrăm cu diferite cantități, cu seturi de obiecte, cu grămezi de obiecte și toate acestea au nevoie de o reprezentare. Pentru orice folosim sistemul zecimal de reprezentare, care are caractere ce codează cantitățile pornind de la 0, la 9. Noi le numim cifre. Pentru a reprezenta cantități mai mari de 9, se va folosi o combinație a cifrelor poziționându-le de la dreapta spre stânga poziționând câte o cifră în fiecare ordin: al `unităților`, `zecilor`, `sutelor`, ș.a.m.d. Și acum trebuie să realizăm că, de fapt, ordinele din reprezentarea unui număr natural, codează seturi de cantități, mai puțin unitățile care indică un singur set cuprizânt tot atâtea obiecte câte indică cifra.
 
@@ -57,13 +59,19 @@ Istoric vorbind, Unicode a pornit de la setul ASCII, care l-a precedat.
 Ce oferă standardul Unicode? Pentru fiecare caracter este specificată o valoare numerică numită de standard `code point` și un nume unic.
 Unicode formatează reprezentarea numerică ca numere pe 32 de biți (UTF-32), pe 16 biți (UTF-16) și pe 8 biți (UTF-8). Versiunea pe 8 biți este utilizată pe scară largă pentru a realiza compatibilitatea cu standardul vechi ASCII.
 
-JavaScript folosește caracterele codate UTF-16.
+JavaScript folosește caracterele codate UTF-16. Acest lucru înseamnă că există un set de 65535 de „code point-uri” oferite pentru a lucra cu ele în limbajul nostru de programare. Dacă este nevoie să lucrezi cu caractere care sunt reprezentate numeric peste limita celor 16 biți, acest lucru este posibil printr-un artificiu numit „surogate pairs” - *perechi înlocuitoare* și care adaugă alte 2048 de code point-uri.
 
 Te vei întreba de ce studiem noi acum Unicode-ul? Răspunsul este pentru că programele tale sunt coduri sursă, care este text simplu. Standardul aduce lămuriri asupra ceea ce este textul simplu: „o secvență pură de coduri de caractere”.
 
 Am menționat deja faptul că toate caracterele sunt codate numeric. Standardul aduce o precizare importantă și anume că domeniul de numere întregi folosite pentru a coda caracterele limbilor lumii se numește „codespace”. Un singur număr întreg al acestui set se numește „code point”. Un caracter care este reprezentat printr-un număr întreg din „codespace” spunem despre el că este „encoded character”, adică un caracter codat. În acest moment putem afirma că o mașină de calcul, adică un computer poate procesa simboluri.
 
-Cum se scriu aceste „code points”? Practica este de a le scrie astfel: „U+” care este urmat de o secvență hexazedimală care reprezintă valoarea numerică.
+Cum se scriu aceste „code points”? Practica este de a le scrie astfel: „U+” care este urmat de o secvență hexazecimală care reprezintă valoarea numerică.
+
+Unicode oferă codare pentru peste 1 milion de caractere / ideograme / simboluri / emoji-uri. Toate aceste „code point-uri” se întind pe o scală de la **U+0000** până la **U+10FFFF**, care este structurată pe „niveluri” (**planes**). Din cele 17 niveluri existente, pentru nevoile noastre de programare în acest moment avem nevoie doar de cel de bază care se numește **Basic Multilingual Plane**, care se întinde pe intervalul de la **U+0000** la **U+FFFF**. Acest interval acopră majoritatea caracterelor și simbolurilor necesare pentru lucrul de zi cu zi.
+
+Ca și curiozitate ar fi de adăugat că Emoji-urile, simboluri folosite de companiile de telecomunicații japoneze, au fost introduse în Unicode începând cu 2010 și sunt prezente în sistemele de operare moderne. Ce înseamnă asta? Că poți scie cu Emoji-uri mesajele pe care dorești să le transmiți celor apropiați.
+
+Închei cu o singură sugestie. Dacă dorești să afli câte code point-uri folosește un anumit caracter, folosește proprietatea `length` pe respectivul caracter: `'😁'.length; // 2`. În cazul acesta sunt folosite două „code point-uri”.
 
 ## Resurse
 
