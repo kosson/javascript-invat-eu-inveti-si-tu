@@ -530,7 +530,11 @@ Să ne imaginăm că avem o hartă imaginară pe care avem marcate prin fanioane
 
 Putem să ne închipuim că identificatorii sunt toponime ale „tărâmului" JavaScript. Identificatorii pot fi orice secvență de caractere care poate să înceapă cu semnul dollar `$`, sau cu liniuță jos `_` (*underscore*) urmate de orice puncte de cod codate numeric respectând schema de codare a caracterelor UTF16.
 
-Am putea spune foarte simplu că un identificator este numele unei valori, iar identificatorul este o înșiruire de caractere.
+```javascript
+var mâncare = 'vinete coapte';
+```
+
+Am putea spune foarte simplu că un identificator este numele unei valori, iar identificatorul este o înșiruire de caractere. După cum observi, identificatorii poți fi cuvinte românești cu diacritice. De ce? Pentru că un computer se uită la reprezentarea numerică a caracterelor iar numerele din spatele fiecărui caracter în parte ce alcătuiește numele identificatorului face parte din setul de numere acceptat de UTF16. Vom insista mai mult pe această corespondență numerică pentru că, mai târziu, vom vedea că stă la baza multor operațiuni pe șiruri. Înțelegerea acestui aspect este o cheie foarte importantă.
 
 ## Perspectivă peste tărâmul JavaScript
 

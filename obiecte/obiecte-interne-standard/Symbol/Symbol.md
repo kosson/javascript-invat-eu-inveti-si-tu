@@ -1,15 +1,65 @@
 # `Symbol()`
 
+Cel mai bine învățăm din povești iar trecutul limbajului de programare JavaScript oferă câteva interesante, care au orientat dezvoltarea limbajului către introducerea unui nou tip de valori primare așa cum sunt simbolurile. Legenda spune că de îndată ce JavaScript nu a mai fost tratat ca pe un mijloc de a dinamiza paginile web care erau statice prin interacțiune, programatorii au început dezvoltarea de biblioteci de cod. Aceste biblioteci de cod includeau propriile obiecte, care „se întâlneau” cu obiectele provenite din utilizarea altor biblioteci de cod. Inevitabil propritățile unui obiect intrau în coliziune cu proprietățile altor obiecte în cazul în care propritățile aveau același nume. Pentru a evita astfel de coliziuni, se aplau la diverse mecanisme de protejare a propriilor obiecte pentru a fi sigure în utilizare. Dar odată cu apariția lui `Symbol` mare parte din aceste probleme vor dispărea.
+
 Symbol este o proprietate a obiectului global. Nu trebuie folosit cu `new` pentru că nu este un constructor de obiecte. Pur și simplu nu permite sintaxa `new Symbol()`. Dacă i se pasează un argument care nu este undefined, acest argument va fi un șir de caractere care va avea rolul de descriptor pentru noul simbol creat.
 
 `Symbol()` este o funcție care returnează o valoare de tipul symbol. Pe scurt, un simbol este un șir de caractere, care este asociat cheii unei proprietăți a unui obiect. Toate simbolurile sunt evidențiate prin intermediul unui **registru global de simboluri**.
+
+Symbol nu este chiar o creație ECMAScript, ci este un concept folosit și în alte limbaje de programre. Am aflat că în List toți identificatorii sunt considetați a fi identificatori. Până la simboluri, toți identificatorii din JavaScript sunt șiruri de caractere. Totuși, dacă ții morțiș, poți converti un simbol la un șir de caractere folosind metoda `toString`.
+
+```javascript
+var piatră = Symbol('onix');
+typeof piatră; // "symbol"
+typeof piatră.toString(); // "string"
+```
 
 Symbol are totuși o serie de proprietăți care oferă acces la membrii acestui obiect intern, are proprietăți statice, care îți permit să investighezi registrul global de simboluri, care este constituit înainte de a se începe evaluarea codului.
 
 Standardul lămurește (19.4.1The Symbol Constructor) faptul că atunci când se constituie registrul simbolurilor, care este o listă de elemente, care fiecare, individual, este un „Record”, ceea ce decriptat înseamnă că avem de-a face cu un obiect. Da, fiecare simbol este, de fapt, câte un obiect care are două proprietăți:
 
-- cheia pentru prima proprietate este `[[Key]]` și are drept valoare un șir de caractere necesar pentru a identifica la nivel global simbolul respectiv și
+- cheia pentru prima proprietate este `[[Key]]` și are drept valoare un șir de caractere necesar identificării la nivel global a simbolului respectiv și
 - a doua proprietate care are drept cheie `[[Symbol]]`, care are drept valoare un **simbol** ce poate fi accesat din oricare tărâm.
+
+Folosim simbolurile pentru a avea chei cu adevărat unice pentru proprietățile unui obiect și oriunde avem nevoie de identificatori unici. Simbolurile sunt ca niște fulgi de nea. Nu există asemănare a unuia cu altul.
+
+Valorile de acest tip pot fi folosite pentru a face anumite proprietăți ale unui obiect să fie anonime. Astfel, se poate realiza trecerea unor proprietăți într-o zonă „privată”, care să fie disponibilă doar obiectului pentru care s-au creat aceste proprietăți. După cum am observat, există deja construite astfel de proprietăți în obiectele interne ale JavaScript.
+
+Îndeajuns cu teoria. Cel mai rapid scenariu de utilizare este cel de a crea un simbol și de a-l utiliza ca proprietate.
+
+```javascript
+var unSimbol = Symbol('oDescriere');
+this[unSimbol] = function () {
+  console.log('fac ceva');
+};
+```
+
+Ceea ce tocmai s-a întâmplat este că s-a creat un simbol, care este o valoare ce va sta „ascunsă” și care poate fi referențiată doar prin identificatorul variabilei și prin apelarea metodei `getOwnPropertySymbols()`. Am spus că stă „ascunsă” pentru că este non-enumerabilă, ceea ce înseamnă că nu „iese la numărătoarea” cu `for...in`, prin sondarea cu `Object.getOwnPropertyNames(obiect)` sau prin interogarea obiectului cu `Object.keys(obiect)`.
+
+Un detaliu foarte important este acela că proprietățile pentru care cheile sunt simboluri nu pot fi accesate decât prin folosirea sintaxei cu paranteze drepte.
+
+```javascript
+var obi = {},
+    propPrivata = Symbol('stauPitita');
+
+obi[propPrivata] = "ceva privat";
+obi[propPrivata]; // "ceva privat"
+console.log(Object.getOwnPropertyNames(obi)); //=> []
+console.log(Object.getOwnPropertySymbols(obi)); // [Symbol(stauPitita)]
+console.log(Reflect.ownKeys(obi)); // [Symbol(stauPitita)]
+```
+
+Se observă faptul că simbolurile ies la iveală prin interogarea cu `Object.getOwnPropertySymbols(obiect)`, fiind generat un array cu acestea, dar mai există o metodă a obiectului intern Reflect: `Reflect.ownKeys(obiect)`.
+
+## Metode de acces la registrul simbolurilor
+
+Metodele `Symbol.for()` și `Symbol.keyFor()` pot accesa valorile din registrul simbolurilor. După cum am văzut anterior, registrul simbolurilor este creat înainte de evaluarea codului JavaScript și este o listă de obiecte care există în motor și care nu poate fi accesată direct. Aceste două metode sunt singurii mediatori dintre procesul de rulare a codului (*runtime*) și registrul simbolurilor.
+
+### Symbol.for()
+
+Invocarea lui `Symbol.for("stringDeId")` aduce o valoare simbol din registrul simbolurilor.
+
+### Symbol.keyFor()
 
 ## Well-Known Symbols - „simboluri binecunoscute”
 
@@ -86,12 +136,10 @@ Pentru că un simbol este unic și nu poate fi modificat.
 console.log(Symbol('ceva') === Symbol('ceva')); // false
 ```
 
-## Unde folosim simboluri?
-
-Pentru a avea chei cu adevărat unice pentru proprietățile unui obiect și oriunde avem nevoie de identificatori unici.
-
-Valorile de acest tip pot fi folosite pentru a face anumite proprietăți ale unui obiect să fie anonime. Astfel, se poate realiza trecerea unor proprietăți într-o zonă „privată”.
-
 ## Simboluri interne folosite de JavaScript
 
-Începând cu ECMAScript 5, motorul JavaScript folosește o suită de simboluri interne pe care standardul le numește „well known” - bine cunoscute.
+Începând cu ECMAScript 5, motorul JavaScript folosește o suită de simboluri interne pe care standardul le numește „well-known” - bine cunoscute.
+
+## Referințe
+
+https://hacks.mozilla.org/2015/06/es6-in-depth-symbols/

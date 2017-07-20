@@ -1,4 +1,4 @@
-# Object.getOwnPropertyNames
+# `Object.getOwnPropertyNames(obiectul)`
 
 Metoda returnează un array al tuturor proprietăților indiferent că acestea sunt enumerabile sau nu.
 

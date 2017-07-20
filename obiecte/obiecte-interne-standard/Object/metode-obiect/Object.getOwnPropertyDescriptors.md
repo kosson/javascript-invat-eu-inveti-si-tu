@@ -1,4 +1,4 @@
-# `Object.getOwnPropertyDescriptors`
+# `Object.getOwnPropertyDescriptors(obiectul)`
 
 Metoda este introdusă de versiunea standardului ECMAScript din 2017.
 
