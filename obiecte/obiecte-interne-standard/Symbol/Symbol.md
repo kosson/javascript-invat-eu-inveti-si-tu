@@ -6,7 +6,7 @@ Symbol este o proprietate a obiectului global. Nu trebuie folosit cu `new` pentr
 
 `Symbol()` este o funcție care returnează o valoare de tipul symbol. Pe scurt, un simbol este un șir de caractere, care este asociat cheii unei proprietăți a unui obiect. Toate simbolurile sunt evidențiate prin intermediul unui **registru global de simboluri**.
 
-Symbol nu este chiar o creație ECMAScript, ci este un concept folosit și în alte limbaje de programre. Am aflat că în List toți identificatorii sunt considetați a fi identificatori. Până la simboluri, toți identificatorii din JavaScript sunt șiruri de caractere. Totuși, dacă ții morțiș, poți converti un simbol la un șir de caractere folosind metoda `toString`.
+Symbol nu este chiar o creație ECMAScript, ci este un concept folosit și în alte limbaje de programre. Am aflat că în limbajul de programare Lisp, toți identificatorii sunt considetați a fi simboluri. Până la apariția simbolurilor, toți identificatorii din JavaScript erau exclusiv șiruri de caractere. Totuși, dacă ții morțiș, poți converti un simbol la un șir de caractere folosind metoda `toString`.
 
 ```javascript
 var piatră = Symbol('onix');
@@ -16,7 +16,7 @@ typeof piatră.toString(); // "string"
 
 Symbol are totuși o serie de proprietăți care oferă acces la membrii acestui obiect intern, are proprietăți statice, care îți permit să investighezi registrul global de simboluri, care este constituit înainte de a se începe evaluarea codului.
 
-Standardul lămurește (19.4.1The Symbol Constructor) faptul că atunci când se constituie registrul simbolurilor, care este o listă de elemente, care fiecare, individual, este un „Record”, ceea ce decriptat înseamnă că avem de-a face cu un obiect. Da, fiecare simbol este, de fapt, câte un obiect care are două proprietăți:
+Standardul lămurește faptul că atunci când se constituie registrul simbolurilor, care este o listă de elemente, care fiecare, individual, este un „Record”, ceea ce decriptat înseamnă că avem de-a face cu un obiect (19.4.1 The Symbol Constructor). Da, fiecare simbol este, de fapt, câte un obiect care are două proprietăți:
 
 - cheia pentru prima proprietate este `[[Key]]` și are drept valoare un șir de caractere necesar identificării la nivel global a simbolului respectiv și
 - a doua proprietate care are drept cheie `[[Symbol]]`, care are drept valoare un **simbol** ce poate fi accesat din oricare tărâm.
@@ -25,7 +25,7 @@ Folosim simbolurile pentru a avea chei cu adevărat unice pentru proprietățile
 
 Valorile de acest tip pot fi folosite pentru a face anumite proprietăți ale unui obiect să fie anonime. Astfel, se poate realiza trecerea unor proprietăți într-o zonă „privată”, care să fie disponibilă doar obiectului pentru care s-au creat aceste proprietăți. După cum am observat, există deja construite astfel de proprietăți în obiectele interne ale JavaScript.
 
-Îndeajuns cu teoria. Cel mai rapid scenariu de utilizare este cel de a crea un simbol și de a-l utiliza ca proprietate.
+Îndeajuns cu teoria. Cel mai rapid scenariu de utilizare este al unui simbol utilizat ca proprietate a unui obiect.
 
 ```javascript
 var unSimbol = Symbol('oDescriere');
@@ -55,9 +55,15 @@ Se observă faptul că simbolurile ies la iveală prin interogarea cu `Object.ge
 
 Metodele `Symbol.for()` și `Symbol.keyFor()` pot accesa valorile din registrul simbolurilor. După cum am văzut anterior, registrul simbolurilor este creat înainte de evaluarea codului JavaScript și este o listă de obiecte care există în motor și care nu poate fi accesată direct. Aceste două metode sunt singurii mediatori dintre procesul de rulare a codului (*runtime*) și registrul simbolurilor.
 
-### Symbol.for()
+### `Symbol.for(cheieSimbol)`
 
-Invocarea lui `Symbol.for("stringDeId")` aduce o valoare simbol din registrul simbolurilor.
+Invocarea lui `Symbol.for("stringDeId")` introduce un simbol în registrul simbolurilor. La o invocare ulterioară cu aceeași valoare string la argument, aduce același simbol setat prima dată.
+
+```javascript
+let primo = Symbol.for('unu');
+let secundo = Symbol.for('unu');
+primo == secundo;
+```
 
 ### Symbol.keyFor()
 
