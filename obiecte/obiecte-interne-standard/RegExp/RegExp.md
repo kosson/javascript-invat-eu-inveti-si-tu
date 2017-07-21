@@ -125,7 +125,7 @@ Să spunem că un fragment de text începe cu un caracter ales de tine sau un ș
 Fără acest fanion, va fi returnată doar prima potrivire care se face.
 Folosind fanionul, se va face potrivire pe tot ce seamănă cu secvența șablonul.
 
-### Proprietăți ale obiectului `RegExp`
+### Proprietăți ale obiectului prototip a lui `RegExp`
 
 Aceste proprietăți sunt foarte utile atunci când dorești să afli starea în care se află obiectul regex la un anumit moment dat.
 
@@ -263,7 +263,7 @@ console.dir(cautare);
 
 Fără niciun fanion specificat, se va face regărirea primului caracter din set, când acesta este întâlnit în șir. Căutarea se va opri aici. Folosirea fanionului `g`, va avea ca efect căutarea în întreg șirul după fiecare caracter din setul specificat.
 
-Regex-ul permite folosirea unui caracter special, linia, care va specifica limitele setului. Un bun exemplu este căutarea prin întreg setul de caractere de la a la z: `[a-z]` sau majusculele `[A-Z]` ori cifrele `[0-9]`. Caracterul liniuță spune Regex-ului să constituie un ***set***. O mică precizare pentru a elimina confuziile: pentru a face potrivire după însăși caracterul `-`, trebuie precedate de backslash. Atenție, potrivirea se va face după un singur caracter din acel set, nu după toate sau mai simplu, este răspunsul la întrebarea: caracterul la care mă uit se regăsește în acest set?
+Regex-ul permite folosirea unui caracter special, linia, care va specifica limitele setului. Un bun exemplu este căutarea prin întreg setul de caractere de la a la z: `[a-z]` sau majusculele `[A-Z]` ori cifrele `[0-9]`. Caracterul liniuță spune RegExp-ului să constituie un ***set***. O mică precizare pentru a elimina confuziile: pentru a face potrivire după însăși caracterul `-`, trebuie precedate de backslash. Atenție, potrivirea se va face după un singur caracter din acel set, nu după toate sau mai simplu, este răspunsul la întrebarea: caracterul la care mă uit se regăsește în acest set?
 
 ### Metacaracterele în seturi
 
@@ -355,7 +355,7 @@ console.log(sir.match(sablon));
 
 Acest lucru se petrece pentru că punctul consideră prima croșetă care în gândirea noastră ar trebui să închidă parcurgerea șirului drept un caracter oarecare și va vontinua cu toate celelalte până când va ajunge la poziția de după ultimul caracter. Abia atunci motorul RegExp va privi ultimul caracter și-l va compara cu cel din regex pentru a vedea dacă este ce caută pentru a satisface șablonul. Dacă mai sunt alte caractere diferite de `>`, pur și simplu se va întoarce înapoi pe cărare și la primul caracter `>` va returna ca potrivire. Operațiunea de a merge înapoi pe șir pentru a satisface căutarea se numește `backtracking` (back înseamnă „înapoi” și tracking „a urma”). După ce a făcut backtracking, va returna „nerăbdător” ceea ce a găsit.
 
-Cum transformi comportamentul expansiv (greedy) într-unul autosuficient? Adaugi imediat după plus cuantificatorul `?`
+Cum transformi comportamentul expansiv (**greedy**) într-unul autosuficient? Adaugi imediat după plus cuantificatorul `?`
 
 ```javascript
 var sir = '<p>Un <cite>citat.</cite></p>';
@@ -374,7 +374,7 @@ var cautare = sir.match(/pământ?/gi);
 console.dir(cautare); // apare de 2 ori
 ```
 
-De fapt, nu e chiar atât de inteligent regex-ul, ci doar spune că acea combinație de caractere trebuie să apară în șir cuantificându-se de câte ori apare indiferent ce precede sau cu ce continuă.
+De fapt, nu e chiar atât de inteligent RegExp-ul, ci doar spune că acea combinație de caractere trebuie să apară în șir numărându-se de câte ori apare indiferent ce precede sau cu ce continuă.
 
 Un strop de inteligență ar fi să introduci alternative într-un grup, care, la rândul său să existe sau nu.
 
@@ -394,7 +394,7 @@ console.log(sir.match(sablon));
 // ["octombrie","oct"]
 ```
 
-Ceea ce se mai observă este că metacaracterul `?` este unul care implică comportamentul expansiv (greedy). De ce? Pentru că spune motorului că musai trebuie să potrivească șablonul ca mai apoi să se dea bătut dacă acesta are corespondent în string. Pentru a face șablonul autosuficient (lazzy), ar trebui să mai pui un metacaracter `?` după primul.
+Ceea ce se mai observă este că metacaracterul `?` este unul care implică comportamentul expansiv (**greedy**). De ce? Pentru că spune motorului că musai trebuie să potrivească șablonul ca mai apoi să se dea bătut dacă acesta are corespondent în string. Pentru a face șablonul autosuficient (**lazzy**), ar trebui să mai pui un metacaracter `?` după primul.
 
 Cuantificatorul `*` este combinația celor dinainte. Este și el un cuantificator expansiv încercând să consume întreaga resursă de șir.
 
@@ -608,7 +608,7 @@ obi;
 
 Acesta este un caz foarte simplu în care dacă avem elemente de același fel acestea se vor suprascrie în obiect.
 
-### Backreferencing
+### Backreferencing - căutare înapoi cu un pas
 
 Gruparea activează un mecanism de memorizare care ține minte șirul de caractere pentru secvența șablonului dintre parantezele rotunde. Mecanismul de memorizare poate fi anulat la nevoie. Nu uita faptul că memorizarea (***backreference***) taxează ca și resurse. Dacă nu ai nevoie de ea, anuleaz-o. De exemplu, în `bună(stare)?`, fragmentul memorizat, la momentul extragerii din șir va fi `stare`. Pentru a renunța la memorizare pui imediat după deschiderea parantezei rotunde a grupului sintaxa specială semnul întrebării și două puncte: `?:`. Astfel, șablonul va deveni `bună(?:stare)?`. Sintaxa `?:` spune motorului să nu folosească capturarea, memorizarea.
 
@@ -644,7 +644,7 @@ console.log(sir.match(sablon));
 // [Array] ["scris scris","scris"]
 ```
 
-## Lookahead pozitiv și negativ
+## Lookahead pozitiv și negativ - căutarea cu anticipare
 
 Am menționat deja că un șablon `a(?=b)` indică motorului RegExp faptul că trebuie să avanseze pe șir pentru a satisface potrivirea lui a urmat imediat de `b` așa cum avem acum.
 
@@ -669,7 +669,7 @@ console.log(sir.match(sir));
 
 Șabloanele regex fac casă bună cu anumite metodele ale obiectului intern String.
 
-### Căutarea cu `search`
+### Căutarea folosind metoda `search(șablon)`
 
 Metoda specializată acceptă drept argument un șablon regex pentru a face căutări.
 
@@ -680,7 +680,7 @@ ceva.search(/orice/); // 14
 
 Este returnat indexul la care apare pentru prima dată combinația specificată de șablon. De ce nu a luat în considerare și primul cuvânt? Pentru că litera o este o majusculă care are nevoie de alt șablon. Prima secvență care se potrivește perfect este la indexul 4 al șirului.
 
-### Căutare cu `match`
+### Căutarea folosind metoda `match(șablon)`
 
 Rezultatul unei căutări pe șir cu metoda `match` a obiectului intern `String`.
 
@@ -693,9 +693,9 @@ console.dir(potriviri);
 Rezultatul este un array, care are valoarea 14 pentru `index` și la `input` întreg șirul.
 Dacă este activat fanionul `g`, regăsirea se va face pe tot șirul în toate combinațiile posibile și se va completa array-ul cu toate aceste variante.
 
-### Înlocuiri simple de șiruri - `replace`
+### Înlocuirea unui șir folosind metoda `replace(șablon, înlocuitor)`
 
-Adeseori regex-urile sunt cuplate cu metoda replace a obiectului intern `String`.
+Adeseori regex-urile sunt cuplate cu metoda `replace` a obiectului intern `String`.
 
 ```javascript
 var ceva = 'caut ceva';

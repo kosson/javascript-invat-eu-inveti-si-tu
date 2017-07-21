@@ -25,10 +25,10 @@ var obi = {a: 1, b: 2};
 
 ## Operatorul `instanceof`
 
-Acest operator testează dacă în lanțul prototipal al unui obiect se află proprietatea `prototype` a unui constructor.
+Acest operator testează dacă în lanțul prototipal al unui obiect se află proprietatea `prototype` a unui constructor. Începând cu ECMAScript 6, operatorul `instanceof` este o prescurtare care apelează metoda `hasInstance` a constructorului `Symbol`. Toate funcțiile au o metodă `Symbol.hasInstance` cu ajutorul căreia se poate verifica dacă un anume obiect este sau nu o instanță a acelei funcții.
 
 ```javascript
-function EX(){};
+function EX () {};
 var obiX = new EX();
 
 Object.getPrototypeOf(obiX); // prototype este Object
@@ -50,8 +50,9 @@ Dacă este nevoie poți seta proprietatea `prototype` la un obiect diferit de ce
 EX.prototype = {};
 ```
 
-Nu uita că portotipul unui obiect se mai poate seta și cu `Object.setPrototypeOf(obiectul)`.
+Adu-ți mereu aminte că prototipul unui obiect se mai poate seta și cu `Object.setPrototypeOf(obiectul)`.
 
 ## Mantre
 
 - Un obiect literal are prototype `undefined`. Cu toate acestea la interogare cu instanceof trimite la Object.
+- `instanceof` este o prescurtare care apelează metoda `hasInstance` a constructorului `Symbol`.

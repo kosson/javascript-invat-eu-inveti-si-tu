@@ -159,13 +159,43 @@ Prin ce se disting *simbolurile binecunoscute* de celelalte? Prin faptul că sun
 
 Acesta este cazul operatorului `instanceof` prin care putem afla dacă un anumit obiect este o instanță a celui pentru care se face investigația.
 
+```javascript
+var obi = {x: true};
+obi instanceof Object; // true
+// echivalent cu
+Object[Symbol.hasInstance](obi);
+```
+
+Concluzia este că operatorul `instanceof` începând cu ECMAScript 6 a devenit o prescurtare către metoda `hasInstance` a lui `Symbol`. În acest caz, toate funcțiile în JavaScript vor avea o metodă `Symbol.hasInstance` prin care se poate testa dacă un obiecte este sau nu o instanță a acesteia. Această metodă este chiar în obiectul prototip al lui `Function` (`Function.prototype`), ceea ce face ca toate funcțiile să o moștenească. Proprietatea `Symbol.hasInstance` este non-writable, nonconfigurable și nonenumerable pentru a se asigura faptul că nu va fi suprascrisă dintr-o eroare. Totuși, fii foarte atent că prin utilizarea metodei `Object.defineProperty()`, poți modifica fără probleme `Symbol.hasInstance`.
+
 ### `Symbol.isConcatSpreadable`
 
-Aceasta este o valoare boolean. Ceea ce indică ea este dacă un obiect poate fi transformat într-un array ce conține proprietățile sale atunci când se invocă `concat` pe un array existent. Adu-ți aminte că un array este la rândul său un obiect, de fapt. Acest simbol dă girul că obiectul poate fi tratat ca un array căruia urmează să i se adauge noi elemente.
+Aceasta este o valoare boolean. Ceea ce indică ea este dacă un obiect poate fi transformat într-un array ce conține proprietățile sale atunci când se invocă `concat` pe un array existent. Adu-ți aminte că un array este la rândul său un obiect, de fapt. Acest simbol dă girul că obiectul poate fi tratat ca un array căruia urmează să se adauge ca elemente noi la un array pe care se face `concat`-ul.
+
+```javascript
+var obiSimulandUnArray = {
+  0: "unu",
+  1: "doi",
+  length: 2,
+  [Symbol.isConcatSpreadable]: true
+};
+// obiSimulandUnArray are acum comportament de array
+var numaram = ["zero"].concat(obiSimulandUnArray);
+console.log(numaram); // [ "zero", "unu", "doi" ]
+```
 
 ### `Symbol.iterator`
 
 Acest simbol este mijlocul prin care se aplează iteratorul pentru un anumit obiect. Este binecunoscută apelarea iteratorului atunci când se folosește `for...of`.
+
+### Expunerea metodelor prin care se realizează interacțiuni cu textul
+
+Există patru metode a constructorului `Symbol`, care permit o posibilă interacțiune și mai intimă cu modul în care sunt exploatate textele folosind regex-urile. Pentru a înțelege ce oferă metodele lui Symbol, să trecem în revistă metodele utilizate de obiectul intern `RegExp`.
+
+- `match(șablonRegExp)` prin care se verifică dacă un șir de caractere este identic cu cel menționat prin șablonul regex-ului.
+- `replace(șablonRegExp, șirDeÎnlocuire)` prin care se caută un fragment identic cu cel menționat de regex, iar atunci când este găsit, se face înlocuirea sa cu șirul de caractere introdus ca al doilea argument.
+- `search(șablonRegExp)` localizează un fragment menționat prin șablonul regex-ului în interiorul unui text.
+- `split(șablonRegExp)` „sparge” un șir de caractere într-un array pe baza potrivirii după un șablon menționat prin regex.
 
 ### `Symbol.match`
 
@@ -179,13 +209,13 @@ Este simbolul care pune în funcțiune algoritmii responsabili cu realizarea une
 
 Este mecanismul declanțat la căutarea într-un șir după un șablon atunci când este apelată metoda `search()` a lui RegExp.
 
-### `Symbol.species`
-
-Este o valoare implicată în crearea de obiecte derivate.
-
 ### `Symbol.split`
 
 Este algoritmul care se pune în mișcare la apelarea metodei `split()` pe care obiectul intern String o pune la dispoziție.
+
+### `Symbol.species`
+
+Este o valoare implicată în crearea de obiecte derivate.
 
 ### `Symbol.toPrimitive`
 
