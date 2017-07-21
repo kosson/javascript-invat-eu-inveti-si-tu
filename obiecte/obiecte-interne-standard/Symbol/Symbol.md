@@ -51,15 +51,73 @@ console.log(Reflect.ownKeys(obi)); // [Symbol(stauPitita)]
 
 Se observă faptul că simbolurile ies la iveală prin interogarea cu `Object.getOwnPropertySymbols(obiect)`, fiind generat un array cu acestea, dar mai există o metodă a obiectului intern Reflect: `Reflect.ownKeys(obiect)`.
 
+## Folosirea la „nume computate” pentru proprietăți
+
+Am văzut anterior că simbolurile sunt create și introduce ca nume ale proprietăților în cazul în care folosim sintaxa cu paranteză dreaptă pentru a adăuga ulterior proprietăți unui obiect existent.
+
+Alternativ, se pot crea toate simbolurile și se poate construi obiectul din start punându-le ca nume de proprietăți, fiecare la locul lui.
+
+```javascript
+var piatraRoșie = Symbol("zăpadă");
+var piatraVânătă = Symbol("mătase");
+var obiect = {
+  [piatraRoșie]: "Un hematit",
+  [piatraVânătă]: "Sulfat de cupru"
+};
+obiect[piatraRoșie]; // "Un hematit"
+```
+
+## Simbolurile pot fi folosite cu `Object.defineProperty()` și `Object.defineProperties()`
+
+Chiar dacă folosim simboluri pentru numele proprietăților acest lucru nu afectează modul de lucru în cazul în care se dorește „modelarea” propriu-zisă a proprietății din punct de vedere al atributelor.
+
+Pentru „modelarea” unei singure proprietăți folosim `Object.defineProperty()`. Să presupunem că avem un obiect cu o proprietate deja, pe care dorim să o setăm în așa fel încât să nu poată fi modificată.
+
+```javascript
+var simbol0 = Symbol('rață'),
+    animale = {
+      [simbol0]: "mac mac"
+    };
+Object.defineProperty(animale, simbol0, {writable: false});
+```
+
+Și acum dorim să introducem în același obiect o proprietate nou nouță dar cu atributelele proprietății configurate după necesitățile proprii. Să spunem că nu dorim ca valoarea să poată fi editată. În acest sens, mai întâi vom crea un nou simbol.
+
+```javascript
+var simbol1 = Symbol('cal');
+Object.defineProperties(animale, {
+  [simbol1]: {
+    value: 'nihaha',
+    writable: false
+  }
+});
+console.log(animale[simbol0]); //=> mac mac
+console.log(animale[simbol1]); //=> nihaha
+```
+
+## Registrul global pentru simboluri
+
+Registrul acesta trebuie înțels ca un mediu partajat pentru întreg codul. Ca un fel de obiect global pentru simboluri.
+
+Registrul global pentru symbols ține evidența acestora folosindu-se de o cheie numită, evident `key`. Această cheie va fi folosită și ca descriere atunci când simbolurile care sunt create sunt introduse în registrul global (este cel care acționează peste tot la momentul rulării codului).
+
+Există două metode prin care poți adăuga un `Symbol` în registrul global:
+- `Symbol.for(key)` și
+- `Symbol.keyFor(symbol)`
+
+```javascript
+Symbol.for('test') === Symbol.for('test'); // true
+```
+
+Unul dintre simbolurile folosite extensiv este `Symbol.iterator`. Acesta este folosit pentru a defini metoda `@@iterator` pentru metodele aplicate obiectelor care implementează protocolul de iterare (acest protocol de care vei auzi în mod repetate este un set de reguli pe care trebuie să le respecte un obiect pentru a deveni iterabil).
+
 ## Metode de acces la registrul simbolurilor
 
 Metodele `Symbol.for()` și `Symbol.keyFor()` pot accesa valorile din registrul simbolurilor. După cum am văzut anterior, registrul simbolurilor este creat înainte de evaluarea codului JavaScript și este o listă de obiecte care există în motor și care nu poate fi accesată direct. Aceste două metode sunt singurii mediatori dintre procesul de rulare a codului (*runtime*) și registrul simbolurilor.
 
-### `Symbol.for(cheieSimbol)`
+## Folosirea aceluiași simbol pentru întreg codul rulat: `Symbol.for('numeSimbol')`
 
-Această metodă aduce un simbol din registrul simbolurilor.
-
-Invocarea lui `Symbol.for("stringDeId")` introduce un simbol în registrul simbolurilor (comportament în Firefox). La o invocare ulterioară cu aceeași valoare string la argument, aduce același simbol setat prima dată.
+Această metodă aduce un simbol din registrul simbolurilor. Invocarea lui `Symbol.for("stringDeId")` introduce un simbol în registrul simbolurilor dacă acesta nu există și apoi îl returnează imediat. La o invocare ulterioară cu aceeași valoare string la argument, aduce același simbol setat prima dată.
 
 ```javascript
 let primo = Symbol.for('unu');
@@ -67,7 +125,27 @@ let secundo = Symbol.for('unu');
 primo == secundo;
 ```
 
-### Symbol.keyFor()
+Diferite părți ale codului rulat pot folosi același simbol pentru a reprezenta un identificator unic. Pentru a genera simboluri care să fie disponibile întregului cod, se va folosi `Symbol.for()`. Această metodă acceptă un singur parametru, care va fi identificatorul pentru simbolul nou creat.
+
+```javascript
+let solidM = Symbol.for('metal');
+let lichidM = Symbol.for('metal');
+let rezultate = {
+  [solidM]: "oxid de fier"
+};
+console.log(rezultate[solidM]); // oxid de fier
+rezultate[lichidM] = "vapor de mercur";
+console.log(rezultate[lichidM]); // vapor de mercur
+console.log(rezultate[solidM]); // vapor de mercur
+```
+
+Identificatorul pentru ambele proprietăți ale obiectului este același simbol. Setarea oricărei proprietăți cu oricare dintre identificatorii care trimit către același simbol se soldează cu returnarea aceleiași valori. Aceasta este cea care a fost introdusă ultima având drept identificator unul care trimite la același simbol. În cazul nostru, oricare dintre proprietăți identificate prin variabilele ce trimit la același simbol, se comportă precum un alias.
+
+Încheiem povestea lui `Symbol.for()` prin a întări faptul că prima dată când este folosit, se constituie un nou simbol în registrul dedicat lor, iar la invocarea acesteia încă o dată, este obținut același simbol. Nu este creat unul nou. Variabilele care își atribuie același simbol se comportă precum aliasuri unul pentru altul.
+
+### `Symbol.keyFor('nume cheie')`
+
+Folosind această metodă se obține numele cheii unui simbol care există deja în registru.
 
 ## Well-Known Symbols - „simboluri binecunoscute”
 
@@ -77,47 +155,47 @@ Un lucru foarte important pe care-l menționează standardul este acela că „v
 
 Prin ce se disting *simbolurile binecunoscute* de celelalte? Prin faptul că sunt referențiate printr-o notație specială folosită doar în textul standardului. Acesta este formată din numele simbolului, care este stabilit de standard, precedat de o pereche de ampresand: `@@iterator`, de exemplu. Pentru cazul utilizării de zi cu zi, aceste simboluri binecunoscute sunt parte a obiectului cu rol de prototip pentru obiectele interne `Object`, `Array` și `String` cu excepția unuia singur care este operatorul `instanceof`.
 
-### Symbol.hasInstance
+### `Symbol.hasInstance`
 
 Acesta este cazul operatorului `instanceof` prin care putem afla dacă un anumit obiect este o instanță a celui pentru care se face investigația.
 
-### Symbol.isConcatSpreadable
+### `Symbol.isConcatSpreadable`
 
 Aceasta este o valoare boolean. Ceea ce indică ea este dacă un obiect poate fi transformat într-un array ce conține proprietățile sale atunci când se invocă `concat` pe un array existent. Adu-ți aminte că un array este la rândul său un obiect, de fapt. Acest simbol dă girul că obiectul poate fi tratat ca un array căruia urmează să i se adauge noi elemente.
 
-### Symbol.iterator
+### `Symbol.iterator`
 
 Acest simbol este mijlocul prin care se aplează iteratorul pentru un anumit obiect. Este binecunoscută apelarea iteratorului atunci când se folosește `for...of`.
 
-### Symbol.match
+### `Symbol.match`
 
 Este simbolul care pune în funcțiune algoritmii responsabili cu realizarea unei căutări într-un șir de caractere după un șablon. Este apelabil prin invocarea metodei `match()` pusă la dispoziție de obiectul intern RegExp.
 
-### Symbol.replace
+### `Symbol.replace`
 
 Este simbolul care pune în funcțiune algoritmii responsabili cu realizarea unei înlocuiri a unui fragment dintr-un șir care se potrivește cu un șablon. Este apelabil prin invocarea metodei `replace()` pe care obiectul intern RegExp o oferă.
 
-### Symbol.search
+### `Symbol.search`
 
 Este mecanismul declanțat la căutarea într-un șir după un șablon atunci când este apelată metoda `search()` a lui RegExp.
 
-### Symbol.species
+### `Symbol.species`
 
 Este o valoare implicată în crearea de obiecte derivate.
 
-### Symbol.split
+### `Symbol.split`
 
 Este algoritmul care se pune în mișcare la apelarea metodei `split()` pe care obiectul intern String o pune la dispoziție.
 
-### Symbol.toPrimitive
+### `Symbol.toPrimitive`
 
 Un simbol utilizat pentru a converti un obiect la o primitivă. Standardul îl menționează, dar încă nu există aplicații practice.
 
-### Symbol.toStringTag
+### `Symbol.toStringTag`
 
 Este algoritmul implicat de metoda `toString` a obiectului intern `Object`.
 
-### Symbol.unscopables
+### `Symbol.unscopables`
 
 Sunt proprietățile care sunt excluse de la folosirea lui `width`.
 
@@ -143,10 +221,6 @@ Pentru că un simbol este unic și nu poate fi modificat.
 ```javascript
 console.log(Symbol('ceva') === Symbol('ceva')); // false
 ```
-
-## Simboluri interne folosite de JavaScript
-
-Începând cu ECMAScript 5, motorul JavaScript folosește o suită de simboluri interne pe care standardul le numește „well-known” - bine cunoscute.
 
 ## Referințe
 

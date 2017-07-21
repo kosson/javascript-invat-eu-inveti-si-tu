@@ -58,68 +58,6 @@ var simbol2 = Symbol('ceva');
 Symbol('ceva') === Symbol('ceva');
 ```
 
-## Registrul global pentru simboluri
-
-Registrul global pentru symbols ține evidența acestora folosindu-se de o cheie numită, evident `key`. Această cheie va fi folosită și ca descriere atunci când simbolurile care sunt create sunt introduse în registrul global (este cel care acționează peste tot la momentul rulării codului).
-
-Există două metode prin care poți adăuga un `Symbol` în registrul global:
-- `Symbol.for(key)` și
-- `Symbol.keyFor(symbol)`
-
-```javascript
-Symbol.for('test') === Symbol.for('test'); // true
-```
-
-Unul dintre simbolurile folosite extensiv este `Symbol.iterator`. Acesta este folosit pentru a defini metoda `@@iterator` pentru metodele aplicate obiectelor care implementează protocolul de iterare (acest protocol de care vei auzi în mod repetate este un set de reguli pe care trebuie să le respecte un obiect pentru a deveni iterabil).
-
-## Folosirea la „nume computate” pentru proprietăți
-
-Am văzut anterior că simbolurile sunt create și introduce ca nume ale proprietăților în cazul în care folosim sintaxa cu paranteză dreaptă pentru a adăuga ulterior proprietăți unui obiect existent.
-
-Alternativ, se pot crea toate simbolurile și se poate construi obiectul din start punându-le ca nume de proprietăți, fiecare la locul lui.
-
-```javascript
-var piatraRoșie = Symbol("zăpadă");
-var piatraVânătă = Symbol("mătase");
-var obiect = {
-  [piatraRoșie]: "Un hematit",
-  [piatraVânătă]: "Sulfat de cupru"
-};
-obiect[piatraRoșie]; // "Un hematit"
-```
-
-## Simbolurile pot fi folosite cu `Object.defineProperty()` și `Object.defineProperties()`
-
-Chiar dacă folosim simboluri pentru numele proprietăților acest lucru nu afectează modul de lucru în cazul în care se dorește „modelarea” propriu-zisă a proprietății din punct de vedere al atributelor.
-
-Pentru „modelarea” unei singure proprietăți folosim `Object.defineProperty()`. Să presupunem că avem un obiect cu o proprietate deja, pe care dorim să o setăm în așa fel încât să nu poată fi modificată.
-
-```javascript
-var simbol0 = Symbol('rață'),
-    animale = {
-      [simbol0]: "mac mac"
-    };
-Object.defineProperty(animale, simbol0, {writable: false});
-```
-
-Și acum dorim să introducem în același obiect o proprietate nou nouță dar cu atributelele proprietății configurate după necesitățile proprii. Să spunem că nu dorim ca valoarea să poată fi editată. În acest sens, mai întâi vom crea un nou simbol.
-
-```javascript
-var simbol1 = Symbol('cal');
-Object.defineProperties(animale, {
-  [simbol1]: {
-    value: 'nihaha',
-    writable: false
-  }
-});
-console.log(animale[simbol0]); //=> mac mac
-console.log(animale[simbol1]); //=> nihaha
-```
-
-## Folosirea aceluiași simbol pentru întreg codul rulat
-
-
-
 ## Simboluri construite deja în limbaj
 
 ### Symbol.iterator
