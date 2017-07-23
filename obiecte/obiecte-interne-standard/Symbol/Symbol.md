@@ -6,7 +6,7 @@ Cel mai bine învățăm din povești iar trecutul limbajului de programare Java
 
 `Symbol()` este o funcție care returnează o valoare de tipul symbol. Adu-ți aminte mereu faptul că un simbol este o valoare primară. A fost introdusă de ECMAScript 6. Pe scurt, un simbol este asociat cheii unei proprietăți a unui obiect. Evidența simbolurilor este ținută prin intermediul unui **registru global de simboluri**.
 
-Symbol nu este chiar o creație ECMAScript, ci este un concept folosit și în alte limbaje de programare. Am aflat că în limbajul de programare Lisp, toți identificatorii sunt considetați a fi simboluri. Până la apariția simbolurilor, toți identificatorii din JavaScript erau exclusiv șiruri de caractere. Dacă ții morțiș, poți converti un simbol la un șir de caractere folosind metoda `toString`.
+Symbol nu este chiar o creație ECMAScript, ci este un concept folosit și în alte limbaje de programare. Am aflat că în limbajul de programare Lisp, toți identificatorii sunt considerați a fi simboluri. Până la apariția simbolurilor, toți identificatorii din JavaScript erau exclusiv șiruri de caractere. Dacă ții morțiș, poți converti un simbol la un șir de caractere folosind metoda `toString()` moștenită automat.
 
 ```javascript
 var piatră = Symbol('onix');
