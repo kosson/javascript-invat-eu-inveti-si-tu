@@ -1,5 +1,9 @@
 # Numere
 
+Valorile numerice în JavaScript sunt reflectate în formatul binar, iar JavaScript folosește un număr limitat de biți pentru a reprezenta numerele. O valoarea numerică în JavaScript este de 64 de biți ceea ce oferă o dimensiune de 2 la puterea 68, adică aproximativ 18 cvintilioane. Dintre acestea, trebuie folosite o parte pentru a reprezenta numerele pe axa negativă și iarăși o parte trebuie folosite pentru a marca semnul minus ce indică faptul că un număr e la stânga lui 0.
+Reprezentarea numerelor în JavaScript respectă standardul IEEE 754.
+Numerele întregi pot fi reprezentate cu o acuratețe de 53 de biți. Concluzia este că JavaScript poate reprezenta numere întregi chiar dacă nu are un tip de primară `integer` așa cum are, de exemplu, Java.
+
 Sunt date numerice. Aceste pot fi numere întregi sau zecimale.
 
 ```javascript
@@ -7,8 +11,8 @@ typeof 5;     // "number"
 typeof 10.1;  // "number"
 ```
 
-Reprezentarea numerelor în JavaScript respectă standardul IEEE 754.
-Numerele întregi pot fi reprezentate cu o acuratețe de 53 de biți. Concluzia este că JavaScript poate reprezenta numere întregi chiar dacă nu are un tip de primară `integer` așa cum are, de exemplu, Java.
+Numerele fracționare sunt scrise folosind notația cu punct.
+
 
 Atenție la coercion (*constrângere*):
 
@@ -27,7 +31,7 @@ Numerele pot fi și octale (în bază 8) sau hexazecimale (în baza 16).
 0xDF; // 223 (hexa)
 ```
 
-Numere cu exponent sau **notația științifică** a numerelor.
+Numerele foarte mari pot fi reprezentate cu ajutorul unui exponent, adică folosind  **notația științifică** a numerelor.
 
 ```javascript
 3E3; // 3000
@@ -67,10 +71,10 @@ Această metodă poate fi regăsită și ca membră a obiectului `Number`, fiind
 
 ## Metoda `parseFloat()` - obiectul global
 
-Dacă primul caracter nu poate fi convertit la număr, atunci este returnat NaN.
+Dacă primul caracter nu poate fi convertit la număr, atunci este returnat `NaN`.
 
 ```javascript
 parseFloat('3.1415');
 ```
 
-Această metodă face membru și a obiectului `Number` începând cu ECMAScript 2015.
+Această metodă este membru și a obiectului `Number` începând cu ECMAScript 2015.
