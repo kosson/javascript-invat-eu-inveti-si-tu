@@ -209,7 +209,7 @@ Este simbolul care pune în funcțiune algoritmii responsabili cu realizarea une
 
 ### `Symbol.search`
 
-Este mecanismul declanțat la căutarea într-un șir după un șablon atunci când este apelată metoda `search()` a lui RegExp.
+Este mecanismul declanșat la căutarea într-un șir după un șablon atunci când este apelată metoda `search()` a lui RegExp.
 
 ### `Symbol.split`
 
@@ -217,7 +217,21 @@ Este algoritmul care se pune în mișcare la apelarea metodei `split()` pe care 
 
 ### `Symbol.species`
 
-Este o valoare implicată în crearea de obiecte derivate.
+Este o valoare implicată în crearea de obiecte derivate. Următoarele tipuri de obiecte interne au definite intern `Symbol.species`.
+
+- Array,
+- ArrayBuffer,
+- Map,
+- Promise,
+- RegExp,
+- Set,
+- Typed arrays
+
+Toate aceste obiecte interne folosesc simbolul „well-known” `Symbol.species` pentru a returna pe `this`. Acest lucru mai implică un lucru: această proprietate va returna funcția constructor.
+
+```javascript
+Array[Symbol.species]; // function Array()
+```
 
 ### `Symbol.toPrimitive`
 

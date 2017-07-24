@@ -63,3 +63,13 @@ Obiectele pot fi transformate în array-uri dacă acest lucru servește procesă
 
 Cel mai des vor fi folosite array-urile și obiectele, care seamănă cu array-urile (adică care oferă suport parțial metodelor care pot fi aplicate în mod tradițional asupra array-urilor).
 Aceste structuri vor folosi datele ca valori prezentate deja.
+
+## Valorile ca „cetățeni de primă-clasă” - first-class citizens
+
+În JavaScript, valorile care pot fi asignate unor variabile, care pot fi trimise funcțiilor ca argumente și care pot fi returnate dintr-o funcție, se numesc valori „first-class”. Funcțiile în JavaScript sunt valori de primă clasă.
+
+![](firstclasscitizen.png)
+
+Faptul că funcțiile pot fi considerate valori în sine, putând fi pasate, returnate și asignate, fac din limbajul de programare JavaScript unul foarte expresiv și unic în felul său.
+
+De curând au fost introduse clasele în limbaj, acestea fiind considerate și ele de primă clasă.

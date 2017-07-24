@@ -133,4 +133,20 @@ var singletonTest = TestSingleton.creeaza({
 console.log(singletonTest.coordX); // afiseaza 10
 ```
 
-În cazul folosirii Node, datorită modului în care se face caching-ul, pentru a genera un Singleton este îndejuns să faci: `module.exports = numeFuncție()` sau `module.exports = new numeFunctie()`
+În cazul folosirii Node, datorită modului în care se face caching-ul, pentru a genera un Singleton este îndejuns să faci: `module.exports = numeFuncție()` sau `module.exports = new numeFunctie()`.
+
+## Singleton cu `class`
+
+Datorită faptului că în JavaScript, o clasă este o valoare „first-class” ca și o funcție, cu ajutorul acestora se pot construi mai rapid Singleton-uri.
+
+```javascript
+let avion = new class {
+  constructor(indicativ){
+    this.id = indicativ;
+  };
+  transmite () {
+    console.log(this.id);
+  };
+}('IAR 99');
+avion.id
+```
