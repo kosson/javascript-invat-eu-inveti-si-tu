@@ -47,7 +47,7 @@ Te vei întreba pe bună dreptate care este legătura cu programarea și cu deme
 
 Și acum vestea pentru care ne-am pregătit privind la sistemele de numerație: codurile numerice care stau în spatele fiecărui caracter codat Unicode este un număr hexazecimal.
 
-Da, vorbim de un efort de standardizare la nivel global strâns sub marca înregistrată Unicode. Standardul Unicode se definește ca un „sistem de codare a caracterelor proiectat să suporte schimbul la nivel global, procesarea și afișarea textelor scrise ale diferitelor limbi și a disciplinelor tehnice ale lumii moderne”.
+Da, vorbim de un efort de standardizare la nivel global sub marca înregistrată Unicode. Standardul Unicode se definește ca un „sistem de codare a caracterelor proiectat să suporte schimbul la nivel global, procesarea și afișarea textelor scrise ale diferitelor limbi și a disciplinelor tehnice ale lumii moderne”.
 
 Standardul Unicode este format din **specificațiile nucleu**, **Hărțile de coduri**, **Anexele Standardului Unicode** și **Baza de date a caracterelor Unicode**. Unicode respectă punct cu punct, de fapt se identifică cu standardul ISO/IEC 10646:2012 - Universal Coded Character Set (UCS).
 
@@ -61,7 +61,7 @@ Unicode formatează reprezentarea numerică ca numere pe 32 de biți (UTF-32), p
 
 JavaScript folosește caracterele codate UTF-16. Acest lucru înseamnă că există un set de 65535 de „code point-uri” oferite pentru a lucra cu ele în limbajul nostru de programare. Dacă este nevoie să lucrezi cu caractere care sunt reprezentate numeric peste limita celor 16 biți, acest lucru este posibil printr-un artificiu numit „surogate pairs” - *perechi înlocuitoare* și care adaugă alte 2048 de code point-uri.
 
-Te vei întreba de ce studiem noi acum Unicode-ul? Răspunsul este pentru că programele tale sunt coduri sursă, care este text simplu. Standardul aduce lămuriri asupra ceea ce este textul simplu: „o secvență pură de coduri de caractere”.
+Te vei întreba de ce studiem noi acum Unicode-ul? Răspunsul este pentru că programele tale sunt coduri sursă, care este text simplu. Standardul aduce lămuriri asupra ceea ce este textul simplu: „o secvență pură de coduri de caractere”. JavaScript și-a îmbunătățit suportul pentru Unicode începând cu ECMAScript 6.
 
 Am menționat deja faptul că toate caracterele sunt codate numeric. Standardul aduce o precizare importantă și anume că domeniul de numere întregi folosite pentru a coda caracterele limbilor lumii se numește „codespace”. Un singur număr întreg al acestui set se numește „code point”. Un caracter care este reprezentat printr-un număr întreg din „codespace” spunem despre el că este „encoded character”, adică un caracter codat. În acest moment putem afirma că o mașină de calcul, adică un computer poate procesa simboluri.
 

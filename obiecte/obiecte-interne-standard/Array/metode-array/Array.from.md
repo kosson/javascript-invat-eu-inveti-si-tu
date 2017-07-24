@@ -1,6 +1,6 @@
-# Array.from() - ECMAScript 2015
+# `Array.from()` - ECMAScript 2015
 
-Creează o instanță new Array` din orice obiect care arată ca un array sau care iterabil.
+Creează o instanță `new Array` din orice obiect care arată ca un array sau care iterabil.
 Obiectele din care se creează array-urile trebuie să aibe o lungime și elemente indexate.
 
 ## Aplicarea pe `arguments`
@@ -8,10 +8,8 @@ Obiectele din care se creează array-urile trebuie să aibe o lungime și elemen
 ```javascript
 function sparge() {
   return Array.from(arguments);
-}
-
-sparge(1, 2, 3);
-// [1, 2, 3]
+};
+sparge(1, 2, 3); // [1, 2, 3]
 
 // String
 Array.from("foo");
@@ -25,13 +23,13 @@ Array.from("foo");
 // ["f", "o", "o"]
 ```
 
-`Array.from()` are trei argumente:
+`Array.from()` poate avea trei argumente:
 
 - obiectul iterabil pe care vrei să-l transformi
 - o funcție de mapping, care să fie apelată pentru fiecare dintre elementele din input
 - `this` necesar la apelarea funcției de mapare.
 
-Cu Array.from() nu se poate face slice(), dar poți să indici ce sunt părțile: dice!
+Cu `Array.from()` nu se poate face `slice()`, dar poți să indici ce sunt părțile: dice!
 
 ```javascript
 function ceEste(){
@@ -40,7 +38,7 @@ function ceEste(){
 ceEste("ceva", null, true, undefined, NaN, 23);
 ```
 
-Polyfill - ul pentru ES5 arată astfel:
+Polyfill-ul pentru ES5 arată astfel:
 
 ```javascript
 function transforma (){
@@ -49,9 +47,7 @@ function transforma (){
 transforma('a', 'b'); // <- ['a', 'b']
 ```
 
-###  [].slice.call(arguments)
-
-iar forma și mai scurtă:
+### `[].slice.call(arguments)`
 
 ```javascript
 function transforma(){
@@ -59,7 +55,7 @@ function transforma(){
 };
 ```
 
-Un operator nou introdus de ECMAScript 2015 care face același lucru. Este vorba despre operatorul spread. Acest operator folosește protocolul de iterare ceea ce înseamnă că obiectele pe care dorim să le transformăm, trebuie să aibe implementat @@iterator prin intermediul lui Symbol.iterator. `arguments` are deja implementat protocolul de iterare în ECMAScript 2015.
+Un operator nou introdus de ECMAScript 2015 care face același lucru. Este vorba despre operatorul spread. Acest operator folosește protocolul de iterare ceea ce înseamnă că obiectele pe care dorim să le transformăm, trebuie să aibe implementat @@iterator prin intermediul lui `Symbol.iterator`. `arguments` are deja implementat protocolul de iterare în ECMAScript 2015.
 
 ```javascript
 function transforma(){
@@ -75,6 +71,7 @@ De exemplu, jQuery la momentul redactării acestui material, nu are implementat 
 ```javascript
 Array.from($('div')); // în unele cazuri: Array.from(jQuery('div'));
 ```
+
 # Constituirea unei colecții de elemente DOM
 
 Acest lucru este posibil pentru că `NodeList` permite protocolul de iterare. Efectul este convertirea unui `NodeList` într-un Array.

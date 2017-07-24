@@ -70,7 +70,8 @@ Crearea unui obiect al cărui prototip este gol. Gol înseamnă că nu va moște
 
 ```javascript
 let obiect = Object.create({}, {ceva: {value: 1}});
-Object.getPrototypeOf(obiect); // Object {  } prototipul este gol
+Object.getPrototypeOf(obiect);
+// Object {  } prototipul este gol
 
 // Obiectele care vor fi create în baza lui obiect,
 // vor avea un prototip gol
@@ -78,7 +79,8 @@ var obiect2 = Object.create(
   Object.getPrototypeOf(obiect),
   Object.getOwnPropertyDescriptors(obiect)
 );
-Object.getPrototypeOf(obiect2); // Object {  } prototipul este gol
+Object.getPrototypeOf(obiect2);
+// Object {  } prototipul este gol
 ```
 
 ### Crearea unui obiect literal
@@ -120,7 +122,7 @@ super.numeMetodaDinPrototip() // varianta ES6
 
 ### Cazul constructorilor
 
-Pentru a realiza tu un prototip după care vei contrui alte obiecte ce vor „moșteni” proprietăți, te vei folosi de o funcție. În `this` al funcției vei introduce proprietățile pe care dorești să fie moștenite mai departe. Este cazul constructorului.
+Pentru a realiza un prototip, după care vei construi alte obiecte ce vor „moșteni” proprietăți, te vei folosi de o funcție. În `this` al funcției vei introduce proprietățile pe care dorești să le transmiți mai departe prin mecanismul moștenirii. Este cazul constructorului.
 
 ```javascript
 let Matrita = function(){
@@ -153,7 +155,7 @@ SuntUnContructor.prototype.oFunctie = function oFunctie(){
 
 Acest exemplu arată cum practica de zi cu zi oferă exemple de atribuire a unor funcții chiar în constructor.
 
-Crockford indică faptul că în practică mai sunt întâlnite și situații „nebune”, când se înlocuiește prototipul unui obiect funcție cu on obiect creat din apelarea cu `new` a unei funcții constructor. Mergând pe exemplul de mai sus în completare, vom avea:
+Crockford indică faptul că în practică mai sunt întâlnite și situații „nebune”, când se înlocuiește prototipul unui obiect funcție cu un obiect creat din apelarea cu `new` a unei funcții constructor. Mergând pe exemplul de mai sus în completare, vom avea:
 
 ```javascript
 function UnConstructorNou(){ this.oValoare = 1000; };
@@ -165,7 +167,7 @@ UnConstructorNou.prototype.propNoua = function(){
 
 ### Introducerea de proprietăți în prototipul unui obiect gol - obiect literal
 
-Acesta este cazul simplu de moștenire care se poate realiza. Dacă avem un obiect, folosești metoda create a obiectului intern Object.
+Acesta este cazul simplu de moștenire care se poate realiza. Dacă avem un obiect, folosești metoda `create` a obiectului intern `Object`.
 
 ```javascript
 let obiect = {};
@@ -205,13 +207,12 @@ function BenziDesenate(titlu){
 };
 
 let rahan = new BenziDesenate("Rahan");
-
-console.log(rahan.identificare()); // Acum citești Rahan, care este de aventuri
+console.log(rahan.identificare());
+// Acum citești Rahan, care este de aventuri
 
 BenziDesenate.prototype.apreciere = function () {
   return `Sunt un mare fan ${this.titlu}`;
 };
-
 rahan.apreciere();
 ```
 
