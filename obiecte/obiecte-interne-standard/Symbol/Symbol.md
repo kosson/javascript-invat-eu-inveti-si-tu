@@ -197,6 +197,8 @@ Există patru metode a constructorului `Symbol`, care permit o posibilă interac
 - `search(șablonRegExp)` localizează un fragment menționat prin șablonul regex-ului în interiorul unui text.
 - `split(șablonRegExp)` „sparge” un șir de caractere într-un array pe baza potrivirii după un șablon menționat prin regex.
 
+Ceea ce oferă aceste metode este posibilitatea de a modifica felul în care se face căutarea definind, de fapt redefinind metodele care folosesc șabloane regex să se comporte ca metodele originale de la care se așteaptă să existe un regex, dar de fapt să existe o altă implementare de căutare.
+
 ### `Symbol.match`
 
 Este simbolul care pune în funcțiune algoritmii responsabili cu realizarea unei căutări într-un șir de caractere după un șablon. Este apelabil prin invocarea metodei `match()` pusă la dispoziție de obiectul intern RegExp.
@@ -219,11 +221,22 @@ Este o valoare implicată în crearea de obiecte derivate.
 
 ### `Symbol.toPrimitive`
 
-Un simbol utilizat pentru a converti un obiect la o primitivă. Standardul îl menționează, dar încă nu există aplicații practice.
+Un simbol utilizat pentru a converti un obiect la o primitivă. Standardul îl menționează, dar încă nu există aplicații practice. Metoda este definită în prototipul fiecărui obiect și se comportă ca o rețetă care indică cum trebuie tratat obiectul dacă se dorește transformarea sa într-o primitivă. Un posibil model de utilizare a metodei este acela de a identifica tipul datelor.
 
 ### `Symbol.toStringTag`
 
-Este algoritmul implicat de metoda `toString` a obiectului intern `Object`.
+Este algoritmul implicat de metoda `toString` a obiectului intern `Object`. Acest simbol aduce la iveală o proprietate a fiecărui obiect atunci când este invocat `Object.prototype.toString.call()`. De exemplu, pentru un array, invocarea acestei metode aduce valoarea `Array`, care aparține proprietății `Symbol.toStringTag`.
+Poți folosi `Symbol.toStringTag` pentru a defini propriile valori.
+
+```javascript
+function Ceva (valoare) {
+  this.valoare = valoare;
+};
+Ceva.prototype[Symbol.toStringTag] = "Ceva";
+var test = new Ceva('ciuca');
+console.log(test.toString()); // [object Ceva]
+console.log(Object.prototype.toString.call(test)); // [object Ceva]
+```
 
 ### `Symbol.unscopables`
 
@@ -255,3 +268,4 @@ console.log(Symbol('ceva') === Symbol('ceva')); // false
 ## Referințe
 
 https://hacks.mozilla.org/2015/06/es6-in-depth-symbols/
+Zakas, Nicholas C. Understanding ECMAScript 6: The Definitive Guide for JavaScript Developers.
