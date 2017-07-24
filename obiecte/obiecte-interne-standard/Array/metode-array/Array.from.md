@@ -67,14 +67,7 @@ function ceEste(){
 ceEste("ceva", null, true, undefined, NaN, 23);
 ```
 
-Polyfill-ul pentru ES5 arată astfel:
-
-```javascript
-function transforma (){
-  return Array.prototype.slice.call(arguments);
-}
-transforma('a', 'b'); // <- ['a', 'b']
-```
+Deja am introdus cu acest exemplu posibilitatea de a aplica câte o funcție pe fiecare element.
 
 ## Mapping pe fiecare element
 
@@ -83,3 +76,37 @@ transforma('a', 'b'); // <- ['a', 'b']
 - obiectul iterabil pe care vrei să-l transformi
 - o funcție de mapping, care să fie apelată pentru fiecare dintre elementele din input
 - `this` necesar la apelarea funcției de mapare.
+
+Putem imagina cu ușurință un scenariu în care, pentru fiecare element care va intra în viitorul array, se aplică o funcție care are capacitatea de a transforma elementul în altceva și mai util. Putem transforma elementele unui array existent aducându-le informații suplimentare.
+
+```javascript
+var linii = ['o linie', 'alta'];
+var arr = Array.from(linii, (value) => `<p>${value}</p>`);
+console.log(arr); // [ '<p>o linie</p>', '<p>alta</p>' ]
+```
+
+Efectul transformativ nu se aplică doar la nivelul elementelor unui array, ci și pe obiecte. În exemplul următor vom îmbina mai multe tehnici și vom împleti mai multe tehnici de prelucrare pentru a obține un rezultat mai aproape de lucrul de zi cu zi. Să ne imaginăm că dorim să facem un colorizator de cod pentru scripturi de JavaScript. Ca să ținem din scurt, vom lua doar două elemente, care, de fapt sunt două cuvinte cheie din JavaScript și în funcție de ceea ce fac, le vom colora construind un fragment HTML pentru a fi afișat.
+
+```javascript
+var colectie = {
+  unu: "red",
+  doi: "green",
+  alternativ (val) {
+    let htmlFragment = ``;
+    if (val === "var") {
+      htmlFragment += `<p style="color: ${this.unu}">${val}</p>\n`;
+    } else {
+      htmlFragment += `<p style="color: ${this.doi}">${val}</p>\n`;
+    };
+    return htmlFragment;
+  }
+};
+var rezervate = ['var', 'typeof'];
+
+function transforma (valori) {
+  return Array.from(valori, colectie.alternativ, colectie);
+};
+var transformate = transforma(rezervate);
+console.log(transformate.join(''));
+// ["<p style="color: red">var</p>", "<p style="color: green">typeof</p>"]
+```
