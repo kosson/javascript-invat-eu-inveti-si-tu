@@ -1,4 +1,4 @@
-# Array.prototype.indexOf()
+# `Array.prototype.indexOf()`
 
 Returnează primul index pentru primul element care se potrivește cu cel căutat.
 **Dacă nu este găsit, este returnat `-1`**.

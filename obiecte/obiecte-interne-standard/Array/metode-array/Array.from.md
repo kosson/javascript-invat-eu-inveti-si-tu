@@ -71,11 +71,11 @@ Deja am introdus cu acest exemplu posibilitatea de a aplica câte o funcție pe 
 
 ## Mapping pe fiecare element
 
-`Array.from()` poate avea trei argumente:
+`Array.from()` poate avea trei argumente în ordinea menționării:
 
 - obiectul iterabil pe care vrei să-l transformi
 - o funcție de mapping, care să fie apelată pentru fiecare dintre elementele din input
-- `this` necesar la apelarea funcției de mapare.
+- și obiectul `this` necesar la apelarea funcției de mapare.
 
 Putem imagina cu ușurință un scenariu în care, pentru fiecare element care va intra în viitorul array, se aplică o funcție care are capacitatea de a transforma elementul în altceva și mai util. Putem transforma elementele unui array existent aducându-le informații suplimentare.
 
@@ -110,3 +110,7 @@ var transformate = transforma(rezervate);
 console.log(transformate.join(''));
 // ["<p style="color: red">var</p>", "<p style="color: green">typeof</p>"]
 ```
+
+Ceea ce este observabil este că în momentul în care te-ai decis să folosești o metodă din obiectul parcurs, va trebui să pasezi ca al treilea argument și referința pentru obiect ca fiind `this`.
+
+Oricare obiect care are proprietatea `Symbol.iterator` poate fi convertit într-un array. 

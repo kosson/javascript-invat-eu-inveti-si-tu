@@ -1,4 +1,4 @@
-# Array.prototype.fill()
+# `Array.prototype.fill()`
 
 Umple un array cu o valoare fixă specificată pornind de la un index menționat până la alt index ce marchează limita dar nu o include.
 

@@ -1,6 +1,6 @@
 # Numere
 
-Valorile numerice în JavaScript sunt reflectate în formatul binar, iar JavaScript folosește un număr limitat de biți pentru a reprezenta numerele. O valoarea numerică în JavaScript este de 64 de biți ceea ce oferă o dimensiune de 2 la puterea 68, adică aproximativ 18 cvintilioane. Dintre acestea, trebuie folosite o parte pentru a reprezenta numerele pe axa negativă și iarăși o parte trebuie folosite pentru a marca semnul minus ce indică faptul că un număr e la stânga lui 0.
+Valorile numerice în JavaScript sunt reflectate în formatul binar, iar JavaScript folosește un număr limitat de biți pentru a reprezenta numerele. O valoarea numerică în JavaScript este de 64 de biți ceea ce oferă o dimensiune de 2 la puterea 64, adică aproximativ 18 cvintilioane. Dintre acestea, trebuie folosite o parte pentru a reprezenta numerele pe axa negativă și iarăși o parte trebuie folosite pentru a marca semnul minus ce indică faptul că un număr e la stânga lui 0.
 Reprezentarea numerelor în JavaScript respectă standardul IEEE 754.
 Numerele întregi pot fi reprezentate cu o acuratețe de 53 de biți. Concluzia este că JavaScript poate reprezenta numere întregi chiar dacă nu are un tip de primară `integer` așa cum are, de exemplu, Java.
 
@@ -13,8 +13,7 @@ typeof 10.1;  // "number"
 
 Numerele fracționare sunt scrise folosind notația cu punct.
 
-
-Atenție la coercion (*constrângere*):
+Atenție la mecanismul automat de transformare (*coercion*):
 
 ```javascript
 3 + 1;    // 4
@@ -48,7 +47,7 @@ Este 3 ori 10 la puterea a treia. Puterea poate fi specificată cu un număr neg
 
 Obiectul global oferă două metode foarte importante pentru lucrul cu valori numerice.
 
-## Metoda `parseInt()` - obiectul global
+## Metoda `parseInt()` din obiectul global
 
 Această metodă primește un argument de tip șir și returnează un număr întreg într-o anumită bază, dacă aceasta este menționată prin cel de-al doilea argument acceptat.
 Dacă primul argument nu este un caracter șir, orice este, va fi convertit la șir mai întâi și apoi la număr. Dacă sunt introduse spații acestea vor fi complet ignorate. Dacă la convertire se ajunge la o valoare care nu este numerică, este returnat `NaN`, iar dacă primul caracter nu poate fi convertit într-un număr, tot NaN este returnat.
@@ -69,7 +68,7 @@ Dacă șirul începe cu orice altceva, se presupune că rădăcina este 10 (zeci
 
 Această metodă poate fi regăsită și ca membră a obiectului `Number`, fiind introdusă odată cu ECMAScript 2015.
 
-## Metoda `parseFloat()` - obiectul global
+## Metoda `parseFloat()` din obiectul global
 
 Dacă primul caracter nu poate fi convertit la număr, atunci este returnat `NaN`.
 
