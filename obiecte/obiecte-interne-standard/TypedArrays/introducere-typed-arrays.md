@@ -1,6 +1,6 @@
 # Typed arrays
 
-Sunt un tip special de array-uri menite să lucreze doar cu array-uri numerice.
+Sunt un tip special de array-uri menite să lucreze doar cu array-uri numerice. Pentru a folosi aceste array-uri ai nevoie de un *array buffer* pentru a stoca datele. Un *array buffer* este o alocare de memorie în care se pot introduce un anumit număr de bytes.
 
 Își are originile în necesitatea de a avea o structură de date care să poată fi computată rapid. A venit ca o solicitare a WebGL, o adaptare pentru reprezentări 3D într-un element `canvas`.
 
@@ -19,3 +19,31 @@ Typed arrays permit stocarea și manipularea mai multor tipuri numerice:
 
 Logica este următoarea. Știm că orice număr în JavaScript are o reprezentare pe 64 de biți. În cazul în care avem un număr de doar 8 biți, restul de 56 ar sta inocupați și astfel, o mare risipă.
 Typed arrays sunt instrumentul care adresează această problemă.
+
+Pentru a crea un *array buffer* se va folosi constructorul `ArrayBuffer`.
+
+```javascript
+var tampon = new ArrayBuffer(4);
+// alocă-mi un spațiu de 4 bytes în memorie
+```
+
+Un lucru care trebuie ținut mereu minte este acela că un array buffer va fi exact de dimeniunea specificată în bytes inițial. Nu poate fi extins.
+
+Pentru a verifica câți bytes sunt în alocarea de memorie constituită cu `ArrayBuffer`, se va folosi proprietatea `byteLength`.
+
+```javascript
+console.log(tampon.byteLength); // 4
+```
+
+## Folosirea lui `slice()`
+
+Metoda funcționează exact la fel ca și în cazul array-urilor clasice.
+
+```javascript
+var tampon2 = tampon.slice(2, 3);
+console.log(tampon2.byteLength); // 1
+```
+
+## Manipularea datelor din `ArrayBuffer`
+
+Singura metodă de a lucra cu datele din zonele tampon create în memorie este de a crea așa-numitele „views” (perspective).
