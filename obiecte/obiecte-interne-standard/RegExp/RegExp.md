@@ -191,7 +191,7 @@ Mai întâi avem posibilitatea de a restrânde aria de căutare în șirul de ca
 |:---------|:-------------|
 | `^` «carret» | Acest caracter se numește **carret** și identifică unde începe șirul. Dacă stegulețul pentru multiline este setat, se face identificare și imediat după caracterul de line break. De exemplu, `/^X/` nu identifică X-ul din „este un X”, dar identifică pe X în „X este”.  În interiorul seturilor, are rolul de a specifica ce nu va fi considerat la căutare `[^c-f]`, însemnând „fă căutarea, dar omite setul specificat de caractere”. Dacă stegulețul pentru multiline este prezent (true), atunci căutarea se va face și după caracterul `line break`, adică pe următoarea linie. De exemplu `/^A/` nu va găsi nimic în „un A”, dar îl găsește pe A în „Anul viitor”. `^` are un înțeles diferit atunci când apare ca fiind primul caracter dintr-un șablon de caractere (vezi mai jos). |
 | `$` «dollar» | indică că se dorește căutarea pe caracterele chiar de dinaintea finalizării șirului. Dacă stegulețul pentru multiline este prezent (true), atunci căutarea se va face imediat înainte de caracterul `line break`. De exemplu, `/t$/` nu îl găsește pe „t” în „etern”, dar îl găsește în „dorit”. |
-| `\b` | Caracterul «word border» marchează limitele de căutare aplicate unui șir, acestea fiind strict restricționate la secvența reprezentată de șablon. Indică granița strictă. De exemplu, în `"saturn".match(/\bs/); // [ "s" ]` este limita superioară, iar `"saturn".match(/urn\b/); // [ "urn" ]`|
+| `\b` | Caracterul «word border» marchează limitele de căutare aplicate unui șir, acestea fiind strict restricționate la secvența reprezentată de șablon. Indică granița strictă. De exemplu, în `"saturn".match(/\bs/); // [ "s" ]` este limita superioară, iar `"saturn".match(/urn\b/); // [ "urn" ]` indică limita inferioară a șirului.|
 | `\B` | Este opusul lui `\b` potrivind fragmentul care este regăsit prin șablon dar care poate fi poziția ***dintre*** două caractere ce pot forma un cuvânt ori poziția dintre două caractere care nu pot forma un cuvânt.|
 
 Apoi putem interoga de câte ori apare un anumit caracter sau putem spune motorului de câte ori un caracter apar sau dacă apare au ba.
@@ -203,7 +203,7 @@ Apoi putem interoga de câte ori apare un anumit caracter sau putem spune motoru
 | `*` «asterix» | [**cunoscut ca și „cuantificator”**] indică că va face o căutare după expresia de dinaintea lui de 0 sau mai multe ori. Este echivalentul lui `{0,}`. De exemplu, `/au*/` găsește și în „auuu, ce doare”, în „am găsit aur” |
 | `+` | [**cunoscut ca și „cuantificator”**] precizează că se va face căutarea după expresia anterioară de una sau mai multe ori. Este echivalentul lui `{1,}`. De exemplu, `/a+/` va găsi în „casa” și în „aaaaau!”. |
 | `?` | [**cunoscut ca și „cuantificator”**] Menționează faptul că se va face căutare după expresia anterioară. Rezultatul poate fi 0 sau poate apărea o singură dată. Este echivalentul lui {0,1}. `"știință".match(/n?ță?/); // [ "nță" ]` `"gablonț".match(/n?ță?/); // [ "nț" ]` `"țeavă".match(/n?ță?/); // [ "ț" ]`. Dacă se folosește imediat după cuantificatori (*, +, ?, ori {}), transformă cuantificatorul într-unul non-greedy (adică cât mai puține caractere posibil), opus comportamentului natural (găsirea a cât mai multe caractere posibil). De exemplu, `"caractere 1437675".match(/\d+/gui); // [ "1437675" ]`. Dar combinând cu ? înseamnă caută numere întregi, și adu-le rând pe rând în array-ul rezultatelor: `"caractere 1437675".match(/\d+?/gui); // [ "1", "4", "3", "7", "6", "7", "5" ]`. Acest lucru se întâmplă pentru că șirul numerelor este consumat de la stânga la dreapta iar expresia se limitează la fiecare cifră oprindu-se, apoi reia căutarea de la șirul rămas și tot așa. |
-| `.` | Punctul indică o identificare a tuturor caracterelor (litere, simboluri, numere), dar fără caracterul newline (`\n`). De multe ori este asemănat unui wildcard cu care poți substitui orice(nu și new lines). Adevăratul wildcard totuși este  setul **[\s\S]** - identifică tot ce este whitespace și tot ce nu este whitespace, pe scurt, orice. Un exemplu pentru a înțelege: `"acuma mai multe mere a anemice cam anapoda a".match(/.a/); // [ "ma" ]`. Dacă activezi globalul, vei avea `// [ "ma", "ma", " a", " a", "ca", " a", "na", "da", " a" ]`. Ceea ce este observabil este faptul că, în cazul menționat aduce litera a și una înaintea ei, dacă aceasta a fost găsită într-un cuvânt. Ordinea o dă poziția punctului. Dacă era așezat după caracterul căutat aveam `[ "ac", "a ", "ai", "a ", "an", "am", "an", "ap", "a " ]` |
+| `.` | Punctul identifică toate caracterele posibile (litere, simboluri, numere), dar fără caracterul newline (`\n`). De multe ori este asemănat unui wildcard cu care poți substitui orice(nu și new lines). Adevăratul wildcard totuși este  setul **[\s\S]** - identifică tot ce este whitespace și tot ce nu este whitespace, pe scurt, orice. Un exemplu pentru a înțelege: `"acuma mai multe mere a anemice cam anapoda a".match(/.a/); // [ "ma" ]`. Dacă activezi globalul, vei avea `// [ "ma", "ma", " a", " a", "ca", " a", "na", "da", " a" ]`. Ceea ce este observabil este faptul că, în cazul menționat aduce litera a și una înaintea ei, dacă aceasta a fost găsită într-un cuvânt. Ordinea o dă poziția punctului. Dacă era așezat după caracterul căutat aveam `[ "ac", "a ", "ai", "a ", "an", "am", "an", "ap", "a " ]` |
 
 Apoi avem o paletă foarte expresivă de caractere care pur și simplu țin locul celor din alfabet sau spațiilor goale indiferent care ar fi acelea. Aici permutările posibile fac posibile orice combinații imaginabile.
 
@@ -213,10 +213,10 @@ Apoi avem o paletă foarte expresivă de caractere care pur și simplu țin locu
 |:---------|:-------------|
 | `\` «backslash» | indică faptul că următorul caracter are înțeles special pentru sistem (numite și „metacaractere”). Dacă caracterul este special este de înțeles pentru sistem că acesta trebuie tratat ca oricare altul fără a-l interpreta. `/a*/` înseamnă caută un a, care poate fi urmat de mai mulți a, dar `/a\*/` înseamnă caută chiar `a*`. Însuși backslashul trebuie să i se facă „escaping” pentru a fi tratat ca orice caracter simplu: `/\\/` - caută un `\`. |
 | `\d` | Specifică un caracter numeric, un digit |
-| `\D` | Caută tot ce nu este digit și aduce un șir dacă șirul original începe cu caractere începând cu primul digit. Atenție, dacă șirul original începe cu un digit nu este adus niciun rezultat. De exemplu, `"saturn4 23".match(/\D/); // Array [ "s" ]` și `"saturn4 23".match(/\D+/); // Array [ "saturn" ]` |
-| `\s` | Identifică un singur spațiu gol, incluzând spațiu, tab, form feed, line feed și alte spații din schema Unicode. De exemplu, `"ana are mere".match(/\s\w*/)` identifică `Array [ " are" ]`, deci, primul cuvânt de după primul spațiu |
-| `\S` | Identifică orice caracter, dar nu și un spațiu gol. De exemplu, `"ana are mere".match(/\S\w*/);` identifică `Array [ "ana" ]`. |
-| `[\s\S]` | Identifică orice caracter, fie el spațiu sau nu. Este un adevărat wildcard - locțiitor de orice. De exemplu, `"acuma mai multe mere a anemice cam anapoda a".match(/\s\S/)` identifică primul „m” de după primul spațiu. Adăugarea flagului g are darul de a aduce toate literele imediat de după spațiu `Array [ " m", " m", " m", " a", " a", " c", " a", " a" ]`, iar adăugarea cuantificatorului `+`, aduce în array toate cuvintele din șir: `"acuma mai multe mere a anemice cam anapoda a".match(/\s\S+/g); // [ " mai", " multe", " mere", " a", " anemice", " cam", " anapoda", " a" ]` |
+| `\D` | Caută tot ce nu este digit și aduce un șir dacă șirul original începe cu caractere începând cu primul digit. Atenție, dacă șirul original începe cu un digit nu este adus niciun rezultat. De exemplu, `"saturn4 23".match(/\D/); // ["s"]` și `"saturn4 23".match(/\D+/); // ["saturn"]` |
+| `\s` | Identifică un singur spațiu gol, incluzând spațiu, tab, form feed, line feed și alte spații din schema Unicode. De exemplu, `"ana are mere".match(/\s\w*/)` identifică `[" are"]`, deci, primul cuvânt de după primul spațiu |
+| `\S` | Identifică orice caracter, dar nu și un spațiu gol. De exemplu, `"ana are mere".match(/\S\w*/);` identifică `["ana"]`.|
+| `[\s\S]` | Identifică cu adevărat orice caracter, fie el spațiu sau nu. Este un adevărat wildcard - locțiitor de orice. De exemplu, `"acuma mai multe mere a anemice cam anapoda a".match(/\s\S/)` identifică primul „m” de după primul spațiu. Adăugarea flagului g are darul de a aduce toate literele imediat de după spațiu `[" m"," m"," m"," a"," a"," c"," a"," a" ]`, iar adăugarea cuantificatorului `+`, aduce în array toate cuvintele din șir: `"acuma mai multe mere a anemice cam anapoda a".match(/\s\S+/g); // [" mai"," multe"," mere"," a"," anemice"," cam"," anapoda"," a" ]`|
 | `\t` | Identifică un tab orizontal |
 | `\r` | Identifică un carriage return |
 | `\n` | Identifică un new line |
@@ -236,10 +236,14 @@ Este posibilă și gruparea caracterelor atunci când este necesară o construc�
 
 ### Seturi de caractere
 
+Acestea sunt cunoscute și sub denumirea de clase de caractere, dar cel mai apropiat de o simplă înțelegere a funcționalității este aceea de set. Întregul set este evaluat doar la un unic caracter, care se găsește în set. Setul poate fi înțeles ca totalitatea caracterelor care rând pe rând, vor fi luate în considerare la momentul căutării în șir.
+
 | Caracter | Semnificație |
 |:---------|:-------------|
-| `[abc]` sau `[a-c]` | Este un set de caractere. Identificările se fac după oricare dintre caractere |
+| `[abc]` sau `[a-c]` | Este un set de caractere. Identificările se fac după oricare dintre caractere: ori a, ori b, ori c. |
 | `[^abc]` sau `[^a-c]` | Este un set de caractere negat. Identificările se fac după oricare dintre caractere mai puțin cele precizate astfel |
+
+Nu se vor face nicioadată potriviri după două din set sau mai multe. Doar unul singul la o unică operațiune de căutare. Este ca și cum ai un locaș în care poate intra dor o singură piesă cu profil pătrat și ai o pungă cu mai multe fragmente unice, care ar putea constitui tot atâția candidați. Când vine vorba să fie atașat în locaș fragmentul care corespunde, motorul scotocește în pungă și scoate rând pe rând câte un fragment până când îl găsește pe cel căutat. Sau nu!
 
 ### Alternative
 
@@ -334,7 +338,7 @@ Pentru `+`, ține minte că adaugi ceva la ceva ce există deja, deci trebuie s�
 
 Pentru `*`, gândește-te ca la Big-Bang: din nimic, din 0 la infinit orice; deci șirul poate să existe sau nu.
 
-Cât despre `?`, pur și simplu este ca un „if”: bre! exiști sau nu?! Deci, potrivește dacă există, dacă nu, GHINION.
+Cât despre `?`, pur și simplu este ca un „if”: bre! exiști sau nu?! Deci, potrivește dacă există, dacă nu, se trece mai departe, la următoarea regulă a șablonului.
 
 Acum că știm cum să folosim seturile, le putem atașa cuantificatori pentru a atinge căutări ceva mai rafinate. Un set de tipul `/[A-Z][a-z]+/g`, va găsi toate numele de persoane dintr-un șir: `Ana, George și emi`. Ultimul este intenționat scris fără majusculă pentru a face diferența.
 
@@ -344,7 +348,9 @@ var cautare = sir.match(/[A-Z][a-z]+/g);
 console.dir(cautare); // [Ana, George]
 ```
 
-Dacă dorești să potrivești fragmente de taguri XML sau HTML, nu te lăsa păcălit de un șablon simplist precum `<.+>`. Acesta va funcționa aducând toate caracterele posibile care pot fi potrivite cu punctul și abia după aceea la ultima croșetă din întreg șirul, va încheia. E clar, plusul se comportă expansiv (greedy).
+Dacă dorești să potrivești fragmente de taguri XML sau HTML, nu te lăsa păcălit de un șablon simplist precum `<.+>`. La ceea ce mă refer când spun fragmente de taguri sunt cazurile când poate dorești să extragi tagul cu toate atributele specificate. De exemplu, `<p style="color: red">`.
+
+Șablonul menționat are în intenție returnarea primului tag, cel care deschide și va funcționa aducând toate caracterele posibile care pot fi potrivite cu punctul, adică orice caracter (mai puțin `\n`) până când va întâlni ultima croșetă de închidere din șir, aceasta fiind și regula cu care se încheie șablonul regex. Este evident comportamentul expansiv (greedy) al plusului în șabloanele regex.
 
 ```javascript
 var sir = '<div><p>Un <cite>citat.</cite></p></div>plus ceva';
@@ -353,20 +359,26 @@ console.log(sir.match(sablon));
 // ["<div><p>Un <cite>citat.</cite></p></div>"]
 ```
 
-Acest lucru se petrece pentru că punctul consideră prima croșetă care în gândirea noastră ar trebui să închidă parcurgerea șirului drept un caracter oarecare și va vontinua cu toate celelalte până când va ajunge la poziția de după ultimul caracter. Abia atunci motorul RegExp va privi ultimul caracter și-l va compara cu cel din regex pentru a vedea dacă este ce caută pentru a satisface șablonul. Dacă mai sunt alte caractere diferite de `>`, pur și simplu se va întoarce înapoi pe cărare și la primul caracter `>` va returna ca potrivire. Operațiunea de a merge înapoi pe șir pentru a satisface căutarea se numește `backtracking` (back înseamnă „înapoi” și tracking „a urma”). După ce a făcut backtracking, va returna „nerăbdător” ceea ce a găsit.
+Acest lucru se petrece pentru că punctul ia în considerare prima croșetă drept reper de pornire pentru căutare, continuând cu toate celelalte caractere întâlnite, până când va ajunge la poziția de după ultimul caracter din șir. Este ca și cum tragi cu un pistol la țintă, iar glonțul lovește ținta, trece prin ea, trece și se oprește în perete. În cazul nostru, va trece și prin caracterele suplimentare, pe care le-am pus pentru acest exemplu: `plus ceva`.
 
-Cum transformi comportamentul expansiv (**greedy**) într-unul autosuficient? Adaugi imediat după plus cuantificatorul `?`
+Abia atunci motorul RegExp va privi ultimul caracter și-l va compara cu cel din regex pentru a vedea dacă este ce caută pentru a satisface șablonul. Supriza pentru motor este că ultimul caracter nu este cel specificat în șablon și va face cale întoarsă până ce va da de primul carater care se potrivește cu cel specificat în șablon după plus. În cazul nostru `>` pe care-l va returna ca potrivire.
+
+Operațiunea de a merge înapoi pe șir pentru a satisface căutarea se numește `backtracking` (back înseamnă „înapoi” și tracking „a urma”). Sau „a face cale-ntoarsă”. După ce a făcut backtracking, va returna „nerăbdător” ceea ce a găsit.
+
+Cum transformi comportamentul expansiv (**greedy**) într-unul autosuficient (**lazzy**)? Adaugi imediat după plus cuantificatorul `?`.
 
 ```javascript
-var sir = '<p>Un <cite>citat.</cite></p>';
+var sir = '<div><p>Un <cite>citat.</cite></p></div>plus ceva';
 var sablon = /<.+?>/;
 console.log(sir.match(sablon));
-// ["<p>"]
+// [ '<div>',
+//  index: 0,
+//  input: '<div><p>Un <cite>citat.</cite></p></div>plus ceva' ]
 ```
 
-Asta totuși nu rezolvă problema backtracking-ului care va taxa performanța motorului RegExp. Următorul șablon evită această taxare îndeplinind aceeași funcție: `[^>+>]`. La o folosire simplă, backtracking-ul nu se simt, dar atunci când potrivirea se face pe ciclurile unei bucle, induce întârziere.
+Asta totuși nu rezolvă problema backtracking-ului, care totuși se va face, va taxa performanța motorului RegExp. La o folosire simplă, backtracking-ul nu se simte ca taxare de performanță, dar atunci când potrivirea se face pe ciclurile unei bucle, induce o întârziere.
 
-Cuantificatorul `?` de exemplu, permite căutarea apariției membrilor unei familii de cuvinte știind că au o parte comună. Cuvântul `pământean` face parte din familia de cuvinte a lui `pământ`.
+Cuantificatorul `?`, de exemplu, permite căutarea apariției membrilor unei familii de cuvinte știind că au o parte comună. Cuvântul `pământean` face parte din familia de cuvinte a lui `pământ`.
 
 ```javascript
 var sir = 'Un pământean apăru în prag. Era negru pământ.';
@@ -423,19 +435,29 @@ console.dir(cautare); // 2 potriviri
 
 ### Ancorare
 
-Ancorele sunt menite a poziționa procesul de căutare înainte sau între caractere. Metacaracterul carret `^`, poziționează procedura de potrivire chiar la poziția de dinaintea primului caracter al șirului. De exemplu, `/^a/` va potrivi corect în șirul `agrar` pentru că avem caracterul `a`, care chiar deschide șirul.
+Ancorele sunt menite a poziționa procesul de căutare înainte sau între caractere. Metacaracterul carret `^`, poziționează procedura de căutare chiar la poziția de dinaintea primului caracter al șirului. De exemplu, `/^a/` va potrivi corect în șirul `agrar` pentru că avem caracterul `a`, care deschide șirul în acest caz.
 
-Similar este comportamentul metacaracterului `$` care marchează limita imediat de după ultimul caracter al șirului. De exemplu, `/r$/`, va potrivi corect caracterul `r` din șir.
+Similar este comportamentul metacaracterului `$`, care marchează limita imediat de după ultimul caracter al șirului. De exemplu, `/r$/`, va potrivi corect caracterul `r` dintr-un șir ca „dar”.
 
-În cazul în care avem șiruri care conțin new line, de exemplu, `am găsit\nocomoară`, carret va potrivi înaintea lui a din deschiderea șirului, dat și pe o imediat de după `\n`. Dollar va potrivi imediat înaintea lui `\n` și imediat după `ă` de la finalul întregului șir.
+În cazul în care avem șiruri care conțin o rupere printr-un *new line*, de exemplu, `am găsit\nocomoară`, *carret* (`^`), va potrivi înaintea lui caracterul **a** din deschiderea șirului, dar și pe **o** imediat de după `\n`. Dollar va potrivi imediat înaintea lui `\n` și imediat după `ă` de la finalul întregului șir.
 
-**Moment Zen**: Ancorele marchează o poziție, nu un caracter. `^` și `$` sunt doar poziții cu dimensiune 0.
+**Moment Zen**: Ancorele marchează o poziție, nu un caracter. `^` și `$` sunt doar poziții cu dimensiune 0, adică de dinaintea și de după șirul real.
 
 Fii atent că motorul de RegExp va evalua un șablon de genul `^a` căutând să potrivească ambele. Și carret-ul, și pe a. Deci numai în combinația asta se va face o potrivire. Atenție, dacă în șir este atins un new line, acesta este potrivit de carret.
 
 ### Ambele limite
 
-Regexurile fac uz de două caractere pentru a indica „granițele” căutării. Limita începutului șirului de caractere este marcată de caracterul carret `^`, iar limita încheierii șirului marcată prin caracterul dollar `$`.
+Regexurile fac uz de două caractere pentru a indica „granițele” căutării. Limita începutului șirului de caractere este marcată de metacaracterul *carret* prin `^`, iar limita încheierii șirului marcată prin metacaracterul dollar `$`.
+
+Cel mai simplu caz de utilizarea a ambelor limite este pentru a testa dacă un fișier sau șir este vid, adică dacă nu conține absolut nimic.
+
+```javascript
+var sablon = /^$/;
+sablon.test('');
+// true
+```
+
+Un caz ceva mai elaborat este cel al precizării limitelor de căutare.
 
 ```javascript
 var sir = 'Unu la cap, iar la fine unu';
