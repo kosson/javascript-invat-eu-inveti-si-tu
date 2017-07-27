@@ -4,11 +4,11 @@ Este un obiect intern introdus de ECMAScript 2015 care oferă o structură simpl
 
 Obiectul Map este o colecție chei - valori. Acceptă valori primitive și obiecte și respectă protocolul iterabil ceea ce înseamnă că poți folosi și operatorii `spread`.
 
-Înainte de introducerea lui Map, obiectele Object erau folosite pentru a stoca chei - valori.
+Înainte de introducerea lui Map, obiectele simple erau folosite pentru a stoca chei - valori.
 
 Pentru lucrul cu o structură simplă de date în care unei chei reprezentate de un string îi corespundea o valoare sau o metodă, obiectele simple se pretează cu succes.
 Lucrurile încep să se complice atunci când era nevoie să introduci structuri mai complexe ca valori așa cum sunt obiectele (așa-numitele hash-map-uri).
-Din nefericire, o astfel de mulțime gestionată prin obiecte este pur și simplu poluată de chei - valori moștenite prin mecanismul prototipal. Singura metodă de a contracara acest lucru era să întrerupi moștenirea prin `var map = Object.create(null);`. Efectul este crearea unui obiect care nu mai moștenea din prototip nimic păstrând o izolare benefică pentru scopul depozitării de chei - valori proprii.
+Din nefericire, o astfel de mulțime gestionată prin obiecte este pur și simplu poluată de **chei - valori** moștenite prin mecanismul prototipal. Singura metodă de a contracara acest lucru era să întrerupi moștenirea prin `var map = Object.create(null);`. Efectul este crearea unui obiect care nu mai moștenește din prototip nimic păstrând o izolare benefică pentru scopul depozitării de chei - valori proprii.
 
 Un exemplu de folosire cu forțarea la limită a obiectelor.
 
@@ -30,7 +30,7 @@ scoate('alDoilea'); // Object { x: 10, y: .y() }
 ```
 
 Problema aici este că obiectul va avea și proprietățile care nu-i aparțin în mod direct, dar care sunt moștenite prototipal. O simplă verificare cu `obi.__proto__` va indica acest lucru.
-O posibilă soluție pe genunchi ar fi crearea unui obiect căruia să-i fie tăiată moștenirea.
+O posibilă soluție pe genunchi, ar fi crearea unui obiect căruia să-i fie tăiată moștenirea.
 
 ```javascript
 let obi = Object.create(null); // lanțul prototipal este întrerupt
@@ -47,7 +47,7 @@ obi.set('alDoilea', {x: 10, y: function(){return this.a}});
 obi.set(new Date(), 'data la această proprietate a fost accesată');
 ```
 
-Spre deosebire de obiectul clasic, într-un Map poți introduce orice valoare, de la primitive, la obiecte iar cheile nu vor mai fi limitate la stringuri.
+Spre deosebire de obiectul clasic, într-un Map poți introduce orice valoare, de la primitive, la obiecte iar cheile nu vor mai fi limitate la șiruri de caractere.
 
 Se va instanția cu new: `new Map([interable])`. Obiectul care va constitui colecția trebuie să fie o colecție iterabilă.
 
