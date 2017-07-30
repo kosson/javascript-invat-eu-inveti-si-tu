@@ -1,33 +1,40 @@
 # RegExp
 
-Am stabilit deja din tot ce-am povestit până acum că textul este o resursă digitală care poate fi exploatată și în care poți face căutări după anumite fragmente cheie. Poți să-ți imaginezi `RegExp`-ul ca pe un motor de căutare în care introduci cheile de căutare după anumite reguli. Și de aici și denumirea de `regular expressions`, de unde `RegExp`. Am putea să spunem că facem căutări în texte după *șabloane construite după anumite reguli*, dar ne vom referi la aceste construcții numindu-le șabloane sau regex-uri. Pentru englezescul „pattern” am ales `șablon` pentru că semantic exprimă cel mai bine scopul fragmentului după care facem căutarea, iar pentru operațiunea în sine de căutare am folosit interșanjabil „a potrivi”, cu sensul de a potrivi în șir șablonul sau „a regăsi”, cu sensul operațiunii de identificare în șir atunci când explicația redă operațiunea din punctul de vedere al motorului `RegExp`.
+Am stabilit deja din tot ce-am povestit până acum că textul este o resursă digitală care poate fi exploatată și în care poți face căutări după anumite fragmente cheie. Poți să-ți imaginezi `RegExp`-ul ca pe un motor de căutare în care introduci cheile de căutare după anumite reguli. Și de aici și denumirea de `regular expressions` în limba engleză -`RegExp`. Facem căutări în texte după *șabloane construite după anumite reguli*, dar ne vom referi la aceste construcții numindu-le șabloane sau regex-uri. Pentru englezescul „pattern” am ales `șablon` pentru că semantic exprimă cel mai bine scopul fragmentului după care facem căutarea, iar pentru operațiunea în sine de căutare am folosit interșanjabil „a potrivi”, cu sensul de a potrivi în șir șablonul sau „a căuta”, cu sensul operațiunii de identificare în șir atunci când explicația redă operațiunea din punctul de vedere al motorului `RegExp`.
 
-Scopul folosirii regex-urilor este acela de a **privi** succesiunea de caractere care este un șir, pentru a extrage fragmentele utile cu scopul de a descoperi unde se află în corpul unui text.
+Scopul folosirii regex-urilor este acela de a **constitui** un filtru prin care trecem o succesiune de caractere.
 
 **Moment ZEN**: un șir de caractere poate fi un cuvânt, mai multe, o propoziție, o frază sau o carte întreagă, un document hipertext accesat la distanță... cam tot ce este reprezentat cu ajutorul caracterelor.
 
 **Spune standardul**:
-*Forma și funcționalitatea expresiilor regulate este modelată după cele oferite de limbajul de programare Perl 5*.
+*Forma și funcționalitatea expresiilor regulate sunt modelate după cele oferite de limbajul de programare Perl 5*.
 
-Continuăm prin setarea mentală necesară pentru lucrul cu șabloanele construite cu `RegExp`.
-Trebuie conștientizat din prima că `RegExp` lucrează la nivel de caracter individual, apoi seturi de caractere, grupuri și combinațiile dintre acestea. Dar concentrarea voastră trebuie să pornească de la conștientizarea importanței cruciale pe care o are un singur caracter, fie că acesta este „vizibil” sau „invizibil” (spațiile albe, taburile). Vă mai amintiți de faptul că JavaScript lucrează cu setul de caractere codat după standardul Unicode?!
+Continuăm prin a ne transpune în starea necesară pentru lucrul cu șabloanele construite cu `RegExp`.
+Trebuie conștientizat din prima că `RegExp` lucrează la nivel de caracter individual, apoi seturi de caractere, grupuri și combinațiile dintre acestea. Dar starea necesară pornește de la conștientizarea importanței cruciale pe care o are un singur caracter, fie că acesta este „vizibil” sau „invizibil” (spațiile albe, taburile). Vă mai amintiți de faptul că JavaScript lucrează cu setul de caractere codat după standardul Unicode?! Amintiți-vă acest detaliu ca pe o melodie de fundal atunci când lucrazi cu text.
 
-**Moment ZEN**: Un singur caracter face diferența între a regăsi ceea ce cauți într-un șir sau nu.
+**Moment ZEN**: Un singur caracter face diferența între a găsi ceea ce cauți într-un șir sau nu.
 
-Caracterele speciale din expresiile regulate se numesc metacaractere și sunt părțile componente ale regulilor după care facem căutarea. Sunt un set restrâns, dar care au flexibilitatea de a regăsi orice fragment.
+Caracterele speciale din expresiile regulate se numesc *metacaractere* și sunt părțile componente ale regulilor după care facem căutarea. Sunt un set restrâns, dar au flexibilitatea de a construi expresii foarte diverse și flexibile. Aici, cel mai bun exemplu la care vă puteți gândi este introducerea greșită a unei chei de căutare, după care dinamic vi se face o sugestie de corectură. În spatele unui astfel de comportament poate sta RegExp-ul.
+
+**Moment ZEN**: O expresie regulată este o expresie care trebuie să fie evaluată.
 
 ## Un mic antrenament de atenție înainte de a lucra.
 
-Caracterul `?` la regexuri pune condiția strictă ca un șablon menționat înaintea sa să existe sau nu. De exemplu, `x?`, se va traduce: caracterul `x` poate să fie întâlnit sau nu, dar dacă îl găsești, include-l în rezultat.
+Caracterul `?` la regexuri pune condiția strictă ca un șablon menționat înaintea sa să existe sau nu. De exemplu, `x?`, se va traduce: caracterul `x` poate să fie existe în șirul de caractere analizat sau nu, dar dacă îl găsești, include-l în rezultat.
 
-Și acum, focalizare maximă. Următorul regex este unul valid și solicită atenția ta ca și detector de caractere: <code><span style='color: red'>_</span>?</code> (spațiu și semnul întrebării, aici l-am folosit pe underscore să-ți marchez faptul că este un spațiu) te poate da peste cap dacă nu ești atent. Pur și simplu testează dacă există un spațiu sau nu pentru că înaintea semnului întrebării era un spațiu nedetectabil celor care abia s-au apucat de lucru pe șiruri de caractere. Vezi? De accea trebuie lucrat cu multă atenție.
+Ce înseamnă a include în rezutat?
+Motorul RegExp indică succesiunea caracterelor, de câte ori li se permite să apară, de câte ori pot să se repete și așa mai departe. Acest model, acest șablon făurit de programator, este o descriere a ceea ce căutăm într-un șir de caractere și a tuturor variațiunilor posibile, ori a deviațiilor acceptate pentru întregul model sau pentru părți din acesta. Ținând cont de aceste aspecte, motorul parcurge caracter după caracter întreg șirul dat spre analiză. Ori de câte ori un caracter se potrivește tipului sau succesiunii, acesta este introdus într-un rezultat. Abia după ce a găsit un șir care să potrivească exact cu regulile șablonului, motorul va renunța la căutare și dacă s-a făcut o potrivire iar șirul de caractere nu a fost epuizat, restul este ignorat. Acesta este comportamentul implicit al motorului. Acest comportament poate fi modificat în funcție de regulile incluse în șablon.
+
+Și acum, focalizare maximă.
+
+Următorul regex este unul valid și solicită atenția ta ca și detector de caractere: <code><span style='color: red'>_</span>?</code> (spațiu și semnul întrebării, aici l-am folosit pe underscore să-ți marchez faptul că este un spațiu) te poate da peste cap dacă nu ești atent. Pur și simplu testează dacă există un spațiu sau nu pentru că înaintea semnului întrebării era un spațiu nedetectabil celor care abia s-au apucat de lucru pe șiruri de caractere. Vezi? De aceea trebuie lucrat cu multă atenție.
 
 Regexurile mai au niște litere care succed șablonul. Acestea în limba engleză sunt numite „flags”, dar pentru limba română le-am tradus ca fanioane pentru că semnalizează un anumit comportament pe care motorul de interpretare trebuie să-l adopte.
 
 **Spune standardul**:
 *Un șablon este evaluat („este compilat”) la o valoare rezultată dintr-o procedură internă*.
 
-Șirurile de caractere în JavaScript sunt înșiruiri de secvențe de 16 biți denumite tehnic `unități de cod` (code unit) ce reprezintă, de fapt, un singur caracter. `RegExp` se așteaptă să lucreze cu unități de cod pe 16 biți, care reprezintă un singur caracter. Totuși, începând cu ECMAScript 6, există un fanion dedicat, care semnalizează `RegExp` că va avea de lucru cu un șir de caractere Unicode - `u`. De fapt, îi este indicat motorului faptul că trebuie să lucreze la nivel de caractere și nu la nivel de `code unit`.
+Șirurile de caractere în JavaScript sunt secvențe de 16 biți denumite tehnic `unități de cod` (*code unit*) ce reprezintă, de fapt, un singur caracter. `RegExp` se așteaptă să lucreze cu unități de cod pe 16 biți, care reprezintă un singur caracter. Totuși, începând cu ECMAScript 6, există un fanion dedicat, care semnalizează motorului `RegExp` că va avea de lucru cu un șir de caractere Unicode - `u`. De fapt, îi este indicat motorului faptul că trebuie să lucreze la nivel de caractere și nu la nivel de `code unit`.
 
 ```javascript
 let exemplu = '𝒥';
@@ -38,19 +45,21 @@ console.log(exemplu.length);
 
 // șablonul este /^.$/ ceea ce înseamnă
 // orice caracter aflat în setul mare UTF.
-console.log(/^.$/.test(exemplu)); // false, nu se face potrivirea
-console.log(/^.$/u.test(exemplu)); // true, fanionul este ridicat pentru Unicode
+console.log(/^.$/.test(exemplu));
+// false, nu se face potrivirea
+console.log(/^.$/u.test(exemplu));
+// true, având fanionul Unicode
 ```
 
 Expresiile regulate sunt șabloane folosite pentru a căuta combinații de caractere în șiruri. Dacă vrei să lucrezi direct pentru a face experimente, poți folosi instrumentul online **RegExr** accesibil de la următorul link: http://www.regexr.com/. Tot aici găsești și foarte multă documentație. Pentru JavaScript vezi și https://regexper.com/, care face o treabă foarte faină reprezentând cu hărți vizuale construcția șablonului.
 
-## Detalii de funcționare a motorului de RegExp
+## Detalii de funcționare ale motorului RegExp
 
-Motorul `RegExp`, tehnic vorbind, este unul ***regex-directed***, adică șablonul ocupă rolul central, fiind o implementare „eager” ceea ce înseamnă că are un motor foarte „nerăbdător” să ofere un rezultat.
+Tehnic vorbind, motorul `RegExp` este unul ***regex-directed***, adică șablonul ocupă rolul central. Motorul este o implementare „eager” ceea ce înseamnă că este un motor foarte „nerăbdător” să ofere un rezultat. Dacă s-a format rezultatul respectându-se regulile, restul de resursă de text este ignorat.
 
-Am menționat aceast lucru pentru că acest motor, la momentul evaluării, returnează fragmentul care s-a potrivit cu cel mai din stânga fragment din șir, adică care se află cât mai aproape de începutul șirului, chiar dacă ar fi fost disponibilă o variantă mai apropiată de împlinirea tuturor criteriilor șablonului în corpul său. Reține acest aspect de funcționare. Te va ajuta să înțelegi mai bine problemele care apar în utilizare pentru care nu există nicio rațiune.
+Am menționat aceast lucru pentru că acest motor, la momentul evaluării, returnează rezultatul potrivirii cu cel mai din stânga fragment din șirul de caractere, adică care se află cât mai aproape de începutul șirului, chiar dacă ar fi fost disponibilă o variantă mai apropiată de împlinirea tuturor criteriilor șablonului în corpul său. Reține acest aspect de funcționare. Te va ajuta să înțelegi mai bine problemele care apar în utilizare pentru care, aparent, nu există nicio rațiune.
 
-Aplicarea regex-ului va porni prin „consumarea” șirului de caractere pornind de la primul încercând toate variantele șablonului chiar din acest punct. Dacă toate variantele au fost epuizate, va mai „consuma” încă un caracter și având acum două va încerca din nou toate combinațiile până când un fragment se va potrivi. Acela va fi și punctul de oprire. Ține în minte că fragmentul poate fi parte a unui cuvânt compus sau a unei formule pentru care nu a fost gândit șablonul. De aceea tipul motorului este „nerăbdător” - pur și simplu raportează prima potrivire indiferent de context.
+Aplicarea șablonului va porni prin „consumarea” șirului de caractere pornind de la primul încercându-se toate variantele șablonului chiar din acest punct. Dacă toate variantele au fost epuizate, va mai „consuma” încă un caracter și având acum două va încerca din nou toate combinațiile până când un fragment se va potrivi. Acela va fi și punctul de oprire. Ține minte că fragmentul poate fi parte a unui cuvânt compus sau a unei formule pentru care nu a fost gândit șablonul. De aceea tipul motorului este „nerăbdător” - pur și simplu raportează prima potrivire indiferent de context.
 
 ## Metacaracterele
 

@@ -101,4 +101,4 @@ Standardul menționează faptul că aceste funcții se pot aplica pe URI-uri car
 
 #### `Array()`
 
-TODO: Completează!
+TODO: Completează! Fa o frumoasă reprezentare grafică a tuturor constructorilor! RE-PE-DE!
