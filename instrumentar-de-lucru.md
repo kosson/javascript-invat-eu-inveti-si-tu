@@ -1,4 +1,4 @@
-# Instrumentar
+# Instrumentar sau cum gustul vine mâncând
 
 ## Introducere - labirintul cu mai multe porți de intrare
 
