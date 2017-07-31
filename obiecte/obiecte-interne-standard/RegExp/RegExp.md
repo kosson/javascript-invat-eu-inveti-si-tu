@@ -73,49 +73,39 @@ Aceste caractere au o valoare deosebită și pentru motorul JavaScript, fiind op
 
 `RegExp` este un obiect intern al JavaScript.
 
-Pentru a crea un obiect regex, ai două alternative. Prima este aceea de a folosi un constructor, iar cea de-a doua folosind notația literală.
-
-Constructorul `RegExp` creează un obiect pentru o expresie regulată cu scopul de a realiza găsi o secvență de caractere.
+Cel mai ades se va genera un obiect `RegExp` prin introducerea directă a șablonului ca expresie literală:
 
 ```javascript
-var ceCaut = /xy/i,
-    cheieObiect = new RegExp('xy','g');
-console.log(cheieObiect.test('xyz')); // true
-console.log(ceCaut.test('xyz'));  // true
+var exempluDeRegExp = /ab+c/g;
 ```
 
-Obiectul `RegExp` se poate crea prin introducerea directă a șablonului ca expresie:
+Pentru a crea un obiect regex, ai două alternative. Prima este aceea deja indicată prin folosirea unui constructor, iar cea de-a doua este cea care implică instanțierea constructorului cu `new`.
 
 ```javascript
-/xyz/i; // sau cu identificator:
-var exempluDeRegExp = /ab+c/g;
+var cheieObiect = new RegExp('xy','g');
+console.log(cheieObiect.test('xyz')); // true
 ```
 
 Crearea folosind constructorul acceptă ca prim argument șablonul, iar ca al doilea, un fanion sau mai multe:
 
 ```javascript
 new RegExp('/xyz/', 'i');
-new RegExp(/xyz/, 'i'); // sintaxă alternativă
+new RegExp(/xyz/, 'i');
+// sintaxă alternativă
 ```
 
-Folosirea funcției constructor are ca efect compilarea la momentul rulării. Se va folosi constructorul atunci când se știe că șablonul se va modifica sau când nu cunoști expresia regulată, unul din cazuri ar fi construirea acesteia în mod dinamic prin acțiunea utilizatorului.
+Folosirea funcției constructor are ca efect compilarea la momentul rulării. Se va folosi constructorul atunci când se știe că șablonul se va modifica sau când nu cunoști expresia regulată, caz în care acesta se construiește dinamic prin acțiunea utilizatorului.
 
 După cum se observă, sintaxa este: `/pattern/flags`.
 
 `pattern`: este textul expresiei regulate.
 `flags`:
-- `g` - global match;
-- `i` - ignore case;
-- `m` - multiline - tratează caracterele ^ și $ ca și când ar lucra pe mai multe linii (adică potrivirea pe începutul și finalul fiecărei linii delimitate de \n și \r, nu numai la începutul și finalul întregului șir de caractere);
-- `u` - unicode - tratează secvența ca puncte de cod în unicode;
-- `y` - sticky face potrivirea numai după indexul indicat prin proprietatea `lastIndex` a expresiei regulate în șir.
+- `g` - **global match**;
+- `i` - **ignore case**;
+- `m` - **multiline** - implică folosirea limitelor ^ și $ pentru o resursă text pe mai multe linii;
+- `u` - **unicode** - tratează secvența ca *puncte de cod* Unicode;
+- `y` - **sticky** face potrivirea numai după indexul indicat prin proprietatea `lastIndex` a expresiei regulate în șir.
 
-```javascript
-var sirCaractere = 'A fost odată',
-    sablon = /fost/y;
-sablon.lastIndex = 2;
-sablon.test(sirCaractere); // true
-```
 
 ### Flags - fanioane
 
@@ -135,6 +125,15 @@ Să spunem că un fragment de text începe cu un caracter ales de tine sau un ș
 
 Fără acest fanion, va fi returnată doar prima potrivire care se face.
 Folosind fanionul, se va face potrivire pe tot ce seamănă cu secvența șablonul.
+
+#### Fanionul `y` - sticky
+
+```javascript
+var sirCaractere = 'A fost odată',
+    sablon = /fost/y;
+sablon.lastIndex = 2;
+sablon.test(sirCaractere); // true
+```
 
 ### Proprietăți ale obiectului prototip a lui `RegExp`
 
@@ -161,21 +160,12 @@ Aceste proprietăți sunt foarte utile atunci când dorești să afli starea în
 - șabloanele sunt folosite cu metodele `exec` și `test` ale obiectului RegExp.
 - șabloanele sunt folosite cu metodele `match`, `replace`, `search` și `split` ale lui String.
 
-### Expresii simple
+### Potrivirea caracter cu caracter
 
-Cel mai simplu exemplu este al unui șir exact (*direct match*), care să fie căutat în alt șir - `/abc/`
+Cel mai simplu exemplu este cel al unui șir exact (*direct match*), care să fie căutat în alt șir - `/abc/`
 
 ```javascript
 "sa fie: abcd".match(/abc/); // ["abc"]
-```
-
-Exemplul unui șir în care un anume caracter se repetă - `/ab*c/` : a este urmat de 0 sau mai mulți b.
-
-```javascript
-var sir = "sa fie: abbbc";
-var reg = /ab*c/;
-var gasit = sir.match(reg);
-console.log(gasit); // ["abbbc"]
 ```
 
 #### Limite

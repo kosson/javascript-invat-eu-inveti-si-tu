@@ -138,8 +138,10 @@ Mergând pe aceeași analogie cu cea a domeniului fizicii particulelor, am putea
 
 Ești în fața editorului de text preferat gata să redactezi primul tău program. În fereastra editorului, pentru a te face înțeles computerului vei redacta codul prin înșiruirea de caractere în cuvinte, sintagme, enunțuri și așa mai departe.
 
+<img src="CeEsteUnSir.png" width="350px">
+
 Literele, pentru computer nu sunt decât niște coduri alfanumerice în baza căruia sunt capabile să afișeze un anume caracter pe ecran.
-Caracterele folosite pentru a scrie codul sursă ca și reprezentare alfanumerică, ca și codare, respectă standardul internațional Unicode, care asociază coduri individuale pentru fiecare caracter aparținând diferitelor seturi de caractere cu care poate fi redactat codul nostru sursă (Latin, Chirilic, etc.). Mai exact, fiecare secvență alfanumerică de codare se numește *punct de cod specific UTF16* (Unicode Transformation Format). Reține faptul că toate caracterele de lucru pentru un computer sunt pur și simplu coduri convenite la nivel internațional.
+Caracterele folosite pentru a scrie codul sursă ca și reprezentare alfanumerică, ca și codare, respectă standardul internațional Unicode, care asociază coduri individuale pentru fiecare (Latin, Chirilic, etc.). Mai exact, fiecare secvență alfanumerică de codare se numește *punct de cod specific UTF16* (Unicode Transformation Format). Reține faptul că toate caracterele de lucru pentru un computer sunt pur și simplu coduri convenite la nivel internațional.
 
 #### Caracterele cu rol special
 
