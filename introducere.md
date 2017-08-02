@@ -232,7 +232,7 @@ Trebuie să te avertizez de faptul că toate **cuvintele speciale** folosite de 
 
 Ne-am mai întâlnit cu aceste combinații de caractere atunci când am explorat caracterele cu rol special. Vom suplimenta informațiile pe care le avem deja prin detalii privind natura și comportamentul fiecărei combinații în parte după cum urmează:
 
-**line-feed** s-ar traduce în română ca o comandă: *mergi pe line nouă* este combinația de caractere `\n`, abreviat uneori ca LF (prescurtare de la *Line Feed*) sau NL (prescurtare de la *New Line*). Acesta este un caracter special (combinația dintre cele două caractere `\` și litera `n` este considerat în acest caz un singur caracter), care marchează faptul că motorul trebuie să continue afișarea saur prelucrarea aplicată unui fragment de text începând cu o nouă linie pe ecran. Hai, rulează în Console următorul fragment pentru a vedea cu ochii tăi ce se petrece: `print("ceva\ncapat");`. Fragmentul `ceva` a rămas pe o linie în timp ce fragmentul `capăt` a ajuns pe o nouă linie sub cel anterior.
+**line-feed** s-ar traduce în română ca o comandă: *mergi pe line nouă* este combinația de caractere `\n`, abreviat uneori ca LF (prescurtare de la *Line Feed*) sau NL (prescurtare de la *New Line*). Acesta este un caracter special (combinația dintre cele două caractere `\` și litera `n` este considerat în acest caz un singur caracter), care marchează faptul că motorul trebuie să continue afișarea sau prelucrarea aplicată unui fragment de text începând cu o nouă linie pe ecran. Hai, rulează în Console următorul fragment pentru a vedea cu ochii tăi ce se petrece: `print("ceva\ncapat");`. Fragmentul `ceva` a rămas pe o linie în timp ce fragmentul `capăt` a ajuns pe o nouă linie sub cel anterior.
 
 **carriage return** este reprezentat prin combinația `\r` și mai este întâlnit ca abrevierea CR - *carriage return*). Se comportă ca o comandă directă care spune: *trage înapoi carul de imprimare* și începe să imprimi textul începând cu o nouă linie. Acest caracter este o reminiscență a utilizării vechilor mașini de scris, care migrând la cele electronice, încă aveau nevoie de un caracter special care să spună mecanismelor electromecanice să se întoarcă pe același rând și apoi „săltând” pagina de imprimare cu un rând: `print("ceva\rcapat");`. Efectul este vizibil, dacă fragmentul care conține caracterul special ar fi trimis către o imprimantă. S-ar produce aceeași rupere ca în cazul caracterului special `\n` numai că de această dată pe hîrtia imprimată. Efectul în Console este că `\r` dispare din text iar cele două cuvinte vor fi lipite. Efectul vizibil pe ecran este alipirea fragmentelor de text acolo unde era `\r`. Caracterul s-a păstrat și în limbajele de programare cu toate că îl veți întâlni mai rar în cazul conținutului unor fișiere precum cele cu extensia TXT mai vechi. Dacă ești curios, poți replica acest lucru salvând din LibreOffice ca txt cu menționarea formatului ASCII. Da, știu, este greu de crezut, dar nu am avut UTF dintodeauna. Ce-i UTF? Citește în continuare și vei afla minunea care o oferă acest standard de codare a caracterelor.
 
@@ -266,7 +266,7 @@ Să analizăm împreună ce conțin elementele de intrare.
 
 ECMAScript are un set de **cuvinte rezervate** din limba engleză, care nu pot fi folosite decât în scopul pentru care au fost rezervate. Cuvintele cheie sunt unul din tipurile de **atomi lexicali** și se scriu întotdeauna fără majuscule.
 
-Le vom enumera aici cu traducerea lor pentru a vă familiariza la un prim contact: `break` (**_întrerupe_** cu sensul de _ieși din execuție_), `do` (**_fă_** cu sensul de _continuă ce faci_), `in` (**_în_** cu sensul _din_), `typeof` (**_de tipul_**), `case` (**_cazul_** cu sensul _în cazul_), `else` (**_altfel_** cu sensul de _în caz contrar_), `instanceof` (**_instanță a lui_**), `var` (**_variabilă_**), `catch` (**_prinde_**), `export` (**_exportă_**), `new` (**_nou_** cu sensul de _instanțiază un nou obiect_), `void` (**_golește_** cu sensul _golește de valoare_), `class` (**_clasă_**), `extends` (**_extinde_**), `return` (**_returnează_**), `while` (**_cât timp_**), `const` (**_constantă_**), `finally` (**_încheie_**), `super` (**super**), `with` (**_cu_**), `continue` (**_continuă_**), `for` (**_pentru_** cu sensul _evaluând următoarea(le) expresie(i) pentru fiecare element din_), `switch` (**_schimbă_** cu sensul _mergi pe ramura_), `yield` (**_produ_**), `debugger` (**_depanare_** cu sensul _activează depanatorul_), `function` (**_funcție_**), `this` (**_acesta_**), `default` (**_inițial_**), `if` (**_dacă_**), `throw` (**_aruncă_** cu sensul de a _scoate la lumină erorile_), `delete` (**_șterge_**), `import` (**_importă_**), `try` (**_încearcă_**), `await` (**_așteaptă_** cu sensul de _în așteptare_).
+Le vom enumera aici cu traducerea lor pentru a vă familiariza la un prim contact: `break` (**întrerupe** cu sensul de _ieși din execuție_), `do` (**fă** cu sensul de _continuă ce faci_), `in` (**în** cu sensul _din_), `typeof` (**de tipul**), `case` (**cazul** cu sensul _în cazul_), `else` (**altfel** cu sensul de _în caz contrar_), `instanceof` (**instanță a lui**), `var` (**variabilă**), `catch` (**prinde**), `export` (**exportă**), `new` (**nou** cu sensul de _instanțiază un nou obiect_), `void` (**golește** cu sensul _golește de valoare_), `class` (**clasă**), `extends` (**extinde**), `return` (**returnează**), `while` (**cât timp**), `const` (**constantă**), `finally` (**încheie**), `super` (**super**), `with` (**cu**), `continue` (**continuă**), `for` (**pentru** cu sensul _evaluând următoarea(le) expresie(i) pentru fiecare element din_), `switch` (**schimbă** cu sensul _mergi pe ramura_), `yield` (**produ** cu sensul de **dă-mi valori**, `debugger` (**depanare** cu sensul _activează depanatorul_), `function` (**funcție**), `this` (**acesta** cu sensul de **obiectul meu necesar ca și context**), `default` (**inițial**), `if` (**dacă**), `throw` (**aruncă** cu sensul de a _scoate la lumină erorile_), `delete` (**șterge**), `import` (**importă**), `try` (**încearcă**), `await` (**așteaptă** cu sensul de _în așteptare_).
 
 **Moment ZEN**: Cuvintele rezervate poartă în sine o acțiune.
 
@@ -301,7 +301,7 @@ Există mai multe ciurente de opinii care au condus la diferite stiluri de redac
 
 ### Operanzii
 
-Pentru a ajunge la un rezultat avem nevoie mai întâi de niște valori, de niște date cu care să lucrăm. Operanzii, ca denumire, vine din matematică. Mda, știu, nu scăpăm... Nu te descuraja așa ușor, pur și simplu programarea este o dezvoltare a matematicii și de acolo își trage și denumirile pentru „chestiile” cu care operăm. Am zis operăm, nu?! Păi ce poți face cu niște operanzi altceva în afară de a opera cu ele? Ce? Nu știu. O adunare, o înmulțire... mai multe operațiuni, unele grupate cu paranteze. Hai că mai vedem ce și cum putem combina în expresiile formate.
+Pentru a ajunge la un rezultat avem nevoie mai întâi de niște valori, de niște date cu care să lucrăm. Operanzii, ca denumire, vin din matematică. Mda, știu, nu scăpăm... Nu te descuraja așa ușor, pur și simplu programarea este o dezvoltare a matematicii și de acolo își trage și denumirile pentru „chestiile” cu care operăm. Am zis operăm, nu?! Păi ce poți face cu niște operanzi altceva în afară de a opera cu ele? Ce? Nu știu. O adunare, o înmulțire... mai multe operațiuni, unele grupate cu paranteze. Hai că mai vedem ce și cum putem combina în expresiile formate.
 
 <img src="OperanziSiOperator.png" width="300px">
 
@@ -313,7 +313,7 @@ Sunt caractere sau combinații de caractere care au rolul de a stabili o relați
 
 În esență, putem spune că majoritatea rezultatelor atunci când scriem cod, provin din astfel de evaluări. Ăăă, cum **boolean**, prietene? Da, e o valoare care testează adevărul și poartă numele de boolean în memoria cercetătorului George Boole care a dezvoltat algebra booleană. Nu uita că într-un computer, la nivelul cel mai de jos, totul este 1 și 0, `adevărat` **sau** `fals`, `adevărat` **ȘI** `fals`, `adevărat` **NU** `fals`. Hahaha... Apropo de Boole și de operatori. Tot de la Boole avem și regula comutativității pentru adunare `x + y = y + x` și regula distributivității `z(x + y) = zx + zy`.
 
-De cele mai multe ori, operatorii stabilesc o evaluare a expresiilor de la stânga la dreapta. Putem verbaliza, de exemplu `1 + 1` ca „unu plus unu”, ceea ce înseamnă că am citit enunțul de la stânga la dreapta. Am spus de cele mai multe ori pentru că avem și cazurile când un operator, de exemplu ***egal*** (`=`), care este citit de la dreapta la stânga. Spre exemplu, în enunțul `a = 1`, citim: „valoarea 1 este atribuită variabilei a”. Operatorul egal împarte cei doi operanzi în expresii aflate în partea stângă (***left-hand-side***) și expresii aflate în partea dreaptă (***right-hand-side***).
+De cele mai multe ori, operatorii stabilesc o evaluare a expresiilor de la stânga la dreapta. Putem verbaliza, de exemplu `1 + 1` ca „unu plus unu”, ceea ce înseamnă că am citit enunțul de la stânga la dreapta. Am spus de cele mai multe ori, pentru că avem și cazurile când un operator, de exemplu ***egal*** (`=`), care este interpretat la evaluarea codului de la dreapta la stânga. De exemplu, în enunțul `a = 1`, citim: „valoarea 1 este atribuită variabilei a”. Operatorul egal împarte cei doi operanzi în expresii aflate în partea stângă (***left-hand-side***) și expresii aflate în partea dreaptă (***right-hand-side***).
 
 ### Expresiile (***expressions***)
 
@@ -329,14 +329,14 @@ Conform **Backus Naur Form** (BNF), notația care formalizează sintaxa unui lim
 
 Expresiile mai complexe cer folosirea unor semne grafice care să indice motorului unde se încheie acestea. Aceste semne grafice sunt **separatorii**.
 
-#### Separatorii
+### Separatorii
 
 I-am amintit mai sus. Sunt folosiți pentru **a separa** fragmentele cu înțeles pentru compilator. De exemplu, cel mai simplu separator este un spațiu (adu-ți mereu aminte că un spațiu este și el un caracter) sau un TAB, care sunt folosite pentru a despărți cuvintele între ele. Un alt separator este punct și virgulă, care este ca punctul din limbajul natural.
 Enter-ul pe care-l dai pentru a trece pe o nouă linie, de fapt este tot un separator.
 
 Instrucțiunile pot fi grupate în JavaScript în blocuri care sunt „separate” de restul codului prin acolade.
 
-#### Categorii de expresii
+### Categorii de expresii
 
 JavaScript are următoarele categorii de expresii:
 
@@ -356,7 +356,8 @@ var x;  // expresie de variabilă
 După cum spuneam, combinarea operanzilor cu operatorii, creează expresii. Este necesară o mică precizare. Valorile de lucru sunt de două feluri. Cele care sunt fixe, care așa cum le-ai scris, așa rămân. Mai sunt numite și **literale**. Și valorile care se pot modifica în funcție de dinamica programului și care se numesc **variabile**, care pornesc de la o valoare dată sau nu.
 
 ```javascript
-var x = 1 + 1;  // expresie de atribuire a unei expresii aritmetice
+var x = 1 + 1;
+// expresie de atribuire a unei expresii aritmetice
 ```
 
 În exemplul dat, avem litera `x`, care ține locul unei valori ce va apărea în urma evaluării expresiei `1 + 1`. Tehnic, `x` este definit prin cuvântul special `var` ca fiind o variabilă. Litera `x` o numim identificator al variabilei. E ca o etichetă pe un borcănel (variabila) a cărui conținut se va schimba când expresia din partea dreaptă a egalului va fi evaluată la executarea codului.
@@ -392,7 +393,7 @@ Să revenim, focalizându-ne pe enunțul de mai sus. Începem de la stânga spre
 
 Continuăm cu o precizare foarte importantă pentru a întări ceea ce am rememorat. Atunci când codul sursă este rulat pentru a obține un rezultat, de fapt, ceea ce se petrece este o întreagă succesiune de evaluări ale expresiilor, care se reduc la o valori rând pe rând prin evaluarea condiționată de diverșii operatori. Totul, dar totul se reduce la o valoare. De fapt, evaluăm expresii rezolvând **operațiunile** și ajungând la **valori** care sunt necesare altor **expresii**. Acestea, la rândul lor așteptau cuminți ca evaluarea precedentă să se încheie pentru a avea și ele valorile de care aveau nevoie și așa mai departe.
 
-#### Tratarea expresilor cu operanzi diferiți - transformarea (coercion)
+### Tratarea expresilor cu operanzi diferiți - transformarea (coercion)
 
 JavaScript este un limbaj de programare care oferă o flexibilitate fantastică. În ceea ce privește operanzii, aceștia pot fi chiar de tipuri diferite iar JavaScript este forțat să ofere totuși un răspuns.
 
