@@ -220,9 +220,9 @@ Acești **atomi lexicali** (*token*-ii) sunt rezultatul parcurgerii unui fragmen
 
 <img src="AtomiiLexicali.png" width="350px">
 
-Ca să-ți vină ușor să înțelegi, îți poți imagina un giuvaergiu care dintr-un maldăr de pietre prețioase (codul sursă), ia una câte una (fragmente de cod), pentru a-i identifica caracteristicile și în final pentru a le pune pe fiecare după sortare în cutiuțele pregătite special pentru a le asambla într-o diademă deosebită (programul nostru care tocmai a făcut ceva spectaculos).
+Ca să-ți vină ușor să înțelegi, îți poți imagina un giuvaergiu, care dintr-un maldăr de pietre prețioase (codul sursă), ia una câte una (fragmente de cod), pentru a-i identifica caracteristicile și în final pentru a le pune pe fiecare după sortare în cutiuțele pregătite special înaintea asamblării într-o diademă deosebită (programul nostru care tocmai a făcut ceva spectaculos).
 
-Ceea ce rezultă în urma aplicării regulilor de identificare a componentelor ce formează fragmentele „inteligibile” pentru computer din șirul de text de intrare. Dacă-ți vine mai ușor este ca o analiză gramaticală în care identifici părțile de propoziție, ce sunt acestea din punct de vedere al părților de vorbire și așa mai departe.
+Rezultatul apare în urma aplicării regulilor de identificare a componentelor ce formează fragmentele „inteligibile” pentru computer din șirul de text de intrare. Dacă-ți vine mai ușor este ca o analiză gramaticală în care identifici părțile de propoziție, ce sunt acestea din punct de vedere al părților de vorbire și așa mai departe.
 
 Atomii sunt de mai multe tipuri: **cuvintele cheie**, **operatorii**, **identificatorii** și **valorile literale**.
 
@@ -234,7 +234,7 @@ Ne-am mai întâlnit cu aceste combinații de caractere atunci când am explorat
 
 **line-feed** s-ar traduce în română ca o comandă: *mergi pe line nouă* este combinația de caractere `\n`, abreviat uneori ca LF (prescurtare de la *Line Feed*) sau NL (prescurtare de la *New Line*). Acesta este un caracter special (combinația dintre cele două caractere `\` și litera `n` este considerat în acest caz un singur caracter), care marchează faptul că motorul trebuie să continue afișarea sau prelucrarea aplicată unui fragment de text începând cu o nouă linie pe ecran. Hai, rulează în Console următorul fragment pentru a vedea cu ochii tăi ce se petrece: `print("ceva\ncapat");`. Fragmentul `ceva` a rămas pe o linie în timp ce fragmentul `capăt` a ajuns pe o nouă linie sub cel anterior.
 
-**carriage return** este reprezentat prin combinația `\r` și mai este întâlnit ca abrevierea CR - *carriage return*). Se comportă ca o comandă directă care spune: *trage înapoi carul de imprimare* și începe să imprimi textul începând cu o nouă linie. Acest caracter este o reminiscență a utilizării vechilor mașini de scris, care migrând la cele electronice, încă aveau nevoie de un caracter special care să spună mecanismelor electromecanice să se întoarcă pe același rând și apoi „săltând” pagina de imprimare cu un rând: `print("ceva\rcapat");`. Efectul este vizibil, dacă fragmentul care conține caracterul special ar fi trimis către o imprimantă. S-ar produce aceeași rupere ca în cazul caracterului special `\n` numai că de această dată pe hîrtia imprimată. Efectul în Console este că `\r` dispare din text iar cele două cuvinte vor fi lipite. Efectul vizibil pe ecran este alipirea fragmentelor de text acolo unde era `\r`. Caracterul s-a păstrat și în limbajele de programare cu toate că îl veți întâlni mai rar în cazul conținutului unor fișiere precum cele cu extensia TXT mai vechi. Dacă ești curios, poți replica acest lucru salvând din LibreOffice ca txt cu menționarea formatului ASCII. Da, știu, este greu de crezut, dar nu am avut UTF dintodeauna. Ce-i UTF? Citește în continuare și vei afla minunea care o oferă acest standard de codare a caracterelor.
+**carriage return** este reprezentat prin combinația `\r` și mai este întâlnit ca abrevierea CR - *carriage return*). Se comportă ca o comandă directă care spune: *trage înapoi carul de imprimare* și începe să imprimi textul începând cu o nouă linie. Acest caracter este o reminiscență a utilizării vechilor mașini de scris, care migrând la cele electronice, încă aveau nevoie de un caracter special care să spună mecanismelor electromecanice să se întoarcă pe același rând și apoi „săltând” pagina de imprimare cu un rând: `print("ceva\rcapat");`. Efectul este vizibil, dacă fragmentul care conține caracterul special ar fi trimis către o imprimantă. S-ar produce aceeași rupere ca în cazul caracterului special `\n` numai că de această dată pe hîrtia imprimată. Efectul în Console este că `\r` dispare din text iar cele două cuvinte vor fi lipite. Efectul vizibil pe ecran este alipirea fragmentelor de text acolo unde era `\r`. Caracterul s-a păstrat și în limbajele de programare cu toate că îl veți întâlni mai rar în cazul conținutului unor fișiere precum cele cu extensia TXT mai vechi. Dacă ești curios, poți replica acest lucru salvând din LibreOffice ca txt cu menționarea formatului ASCII. Da, știu, este greu de crezut, dar nu am avut UTF dintodeauna. Ce-i UTF? Citește în continuare și vei afla minunea pe care o oferă acest standard de codare a caracterelor.
 
 ![](CR.example.screenshot.libreoffice.png)
 
@@ -273,7 +273,7 @@ Le vom enumera aici cu traducerea lor pentru a vă familiariza la un prim contac
 Ele inițiază un curs de acțiune pentru îndeplinirea unei sarcini. Pur și simplu, instruiesc computerul în a face ceva, iar de aici încolo putem vorbi despre unele dintre ele ca instrucțiuni, cu sensul de comenzi ferme.
 
 Buna practică spune că toate exprimările intenției programatorului, hai să le numim **enunțuri** (iar liniile de cod cu instrucțiuni - *statements*), în JavaScript trebuie să fie încheiate prin punct și virgulă (`;`), chiar dacă motoarele care implementează ECMAScript, la momentul evaluării codului, introduc automat prin mecanismul de **automatic semicolon insertion** acest caracter.
-Da, da. Programatorii sunt creaturi comode și motoarele permit anumite facilități, care aleg această practică înadins. Personal, mă feresc și pun semnele de punctuație pentru că astfel, codul devine lizibil, ochii deprind automatisme de citire și de aici și o mai mare eficiență.
+Da, da. Programatorii sunt creaturi comode și motoarele permit anumite facilități. Unii aleg această practică înadins. Personal, mă feresc și pun semnele de punctuație pentru că astfel, codul devine lizibil, ochii deprind automatisme de citire și de aici și o mai mare eficiență.
 
 Bine, bine. Da' care-i treaba cu **momentele ZEN**? Pe parcursul acestei călătorii de descoperire și autodescoperire, voi jalona conținutul cu astfel de momente, care vor fi propoziții sau fraze cu o sarcină precisă: să fie chintesența informației analizată defalcat. De ce moment ZEN? Pentru că este ca un exercițiu de meditație, care conduce la identificarea cu informația prin asimilarea ei.
 
@@ -311,7 +311,7 @@ Sunt caractere sau combinații de caractere care au rolul de a stabili o relați
 
 ![George Boole](George_Boole_color.jpg "George Boole, matematician, 1815-1864. Este creatorul logicii matematice moderne și a algebrei booleene. Resursă aflată în Domeniu public accesibilă la https://commons.wikimedia.org/wiki/File:George_Boole_color.jpg")
 
-În esență, putem spune că majoritatea rezultatelor atunci când scriem cod, provin din astfel de evaluări. Ăăă, cum **boolean**, prietene? Da, e o valoare care testează adevărul și poartă numele de boolean în memoria cercetătorului George Boole care a dezvoltat algebra booleană. Nu uita că într-un computer, la nivelul cel mai de jos, totul este 1 și 0, `adevărat` **sau** `fals`, `adevărat` **ȘI** `fals`, `adevărat` **NU** `fals`. Hahaha... Apropo de Boole și de operatori. Tot de la Boole avem și regula comutativității pentru adunare `x + y = y + x` și regula distributivității `z(x + y) = zx + zy`.
+În esență, putem spune că majoritatea rezultatelor, atunci când scriem cod, provin din astfel de evaluări. Ăăă, cum **boolean**, prietene? Da. E o valoare care testează adevărul și poartă numele de boolean în memoria cercetătorului George Boole, care a dezvoltat algebra booleană. Nu uita că într-un computer, la nivelul cel mai de jos, totul este 1 și 0, `adevărat` **sau** `fals`, `adevărat` **ȘI** `fals`, `adevărat` **NU** `fals`. Hahaha... Apropo de Boole și de operatori. Tot de la Boole avem și regula comutativității pentru adunare `x + y = y + x` și regula distributivității `z(x + y) = zx + zy`.
 
 De cele mai multe ori, operatorii stabilesc o evaluare a expresiilor de la stânga la dreapta. Putem verbaliza, de exemplu `1 + 1` ca „unu plus unu”, ceea ce înseamnă că am citit enunțul de la stânga la dreapta. Am spus de cele mai multe ori, pentru că avem și cazurile când un operator, de exemplu ***egal*** (`=`), care este interpretat la evaluarea codului de la dreapta la stânga. De exemplu, în enunțul `a = 1`, citim: „valoarea 1 este atribuită variabilei a”. Operatorul egal împarte cei doi operanzi în expresii aflate în partea stângă (***left-hand-side***) și expresii aflate în partea dreaptă (***right-hand-side***).
 
@@ -323,7 +323,7 @@ Dicționarele explicative spun că o expresie este un **grup de numere, litere e
 
 O mică paranteză utilă pentru curiozitatea ta. Sunt convins că te-ai întrebat cum s-a ajuns la forma actuală de scriere a codului. Am găsit un răspuns.
 
-Odată, demult prin anii 60, odată cu apariția limbajului de programare ALGOL, a debutat un efort colaborativ de formalizare a sintaxei limbajelor de programare. Rezultatul a fost o formă de exprimare sintactică cunoscută acum sub titulatura de **Backus Naur**.
+Odată, demult, prin anii 60, la apariția limbajului de programare ALGOL, a debutat un efort colaborativ de formalizare a sintaxei limbajelor de programare. Rezultatul a fost o formă de exprimare sintactică cunoscută acum sub titulatura de **Backus Naur**.
 
 Conform **Backus Naur Form** (BNF), notația care formalizează sintaxa unui limbaj de programare indiferent care ar fi el, o expresie ***este definită ca*** un „termen”, care poate fi la rândul său urmat de alt termen și așa mai departe. Așa arată formalizarea BNF: `expression ::=  term { "|" term }`. Simbolul `::=` înseamnă „este definit ca”, iar <code>&#124;</code> (caracterul *pipe*) înseamnă „ȘI-ul” logic.
 
@@ -489,7 +489,7 @@ Ba mai mult, poți indenta (pui spații înaintea fragmentului de cod și ca efe
 
 ### Declarațiile
 
-Folosind cuvintele cheie ale limbajului faci declarații, care de fapt ceea ce menționează este tipul datelor cu care vei lucra în programul tău. Un exemplu foarte simplu este declararea unei variabile: `var x = 10;`.
+Folosind cuvintele cheie ale limbajului faci declarații, care, de fapt, ceea ce menționează este tipul datelor cu care vei lucra în programul tău. Un exemplu foarte simplu este declararea unei variabile: `var x = 10;`.
 Un program JavaScript este o colecție de declarații de variabile și funcții.
 
 ### Blocurile de cod
@@ -513,8 +513,6 @@ function facCeva () { return 'Salutare!'; };
 
 Partea cea mai valoroasă în gruparea cu ajutorul blocurilor este că se realizează și o separare a fragmentelor de cod în cadrul programului. Aici mă refer la faptul că declararea unei variabile va avea ca „domeniu de existență” acel bloc de cod.
 
-Aceasta a fost mica lecție de anatomie aplicată codului sursă JavaScript pentru a înțelege foarte bine și cele mai mici părți ale sale.
-
 ## Despre identificatori
 
 Declararea variabilelor și a funcțiilor se leagă organic de conceptul identificatorilor. O mică introducere în ceea ce reprezintă identificatorii deja am făcut, dar acesta este cel mai potrivit moment să explorăm mai mult ceea ce înseamnă.
@@ -537,6 +535,8 @@ var mâncare = 'vinete coapte';
 
 Am putea spune foarte simplu că un identificator este numele unei valori, iar identificatorul este o înșiruire de caractere. După cum observi, identificatorii poți fi cuvinte românești cu diacritice. De ce? Pentru că un computer se uită la reprezentarea numerică a caracterelor iar numerele din spatele fiecărui caracter în parte ce alcătuiește numele identificatorului face parte din setul de numere acceptat de UTF16. Vom insista mai mult pe această corespondență numerică pentru că, mai târziu, vom vedea că stă la baza multor operațiuni pe șiruri. Înțelegerea acestui aspect este o cheie foarte importantă.
 
+Aceasta a fost mica lecție de anatomie aplicată codului sursă JavaScript pentru a înțelege foarte bine și cele mai mici părți ale sale.
+
 ## Perspectivă peste tărâmul JavaScript
 
 Atunci când am pornit la scrierea acestei cărți nu am avut nevoia să văd de pe orbită cum arată planeta JavaScript, dar pe măsură ce am avansat, am realizat că este nevoie să privești mai întâi din spațiu pentru a înțelege valoarea tuturor entităților și relațiilor pe care le stabilesc acestea la nivelul solului.
@@ -555,11 +555,11 @@ Am precizat câțiva termeni deja care fac parte dintr-un adevărat idiom pe car
 
 Pentru că deja am intrat într-o mini descriere a limbajului, voi continua adaugând faptul că de la JavaScript prin varietatea de stiluri dezvoltate în timp, s-au distins chiar dialecte așa cum este TypeScript sau CoffeeScript. Dar asta este o discuție lungă și nu mai zăbovim aici. Adaug doar că există aproape 300 de limbaje care sunt compilate la final în JavaScript.
 
-**Termenii noi nu trebuie să te descurajeze**. Fac parte din efortul de a înțelege și chiar dacă apar chiar de la început, vor fi descriși pe parcurs și vei înțelege ce se ascunde în spatele lor pe deplin. Înțelegerea unui limbaj de programare este ca un desen al unei rețele de noduri care comunică între ele. Am reflectat mult la balansul pe care trebuie să-l realizez în materialul pe care tocmai îl citești. Dacă aș fi urmat manualele clasice, acest desen complex (matematicieni îl numesc *graf*) ar fi trebuit pur și simplu să explodeze în fața ta deodată și cel mai dificil lucru mi-a fost să caut o cale prin care să te ghidez cât mai lin fără șocurile unei ascensiuni dificile ale unei curbe de învățare pe care eu însumi am urmat-o și tare mult am transpirat. Să revenim.
+**Termenii noi nu trebuie să te descurajeze**. Fac parte din efortul de a înțelege și chiar dacă apar de la început, vor fi descriși pe parcurs și vei înțelege ce se ascunde în spatele lor pe deplin. Înțelegerea unui limbaj de programare este ca un desen al unei rețele de noduri care comunică între ele. Am reflectat mult la balansul pe care trebuie să-l realizez în materialul pe care tocmai îl citești. Dacă aș fi urmat manualele clasice, acest desen complex (matematicieni îl numesc *graf*) ar fi trebuit pur și simplu să explodeze în fața ta deodată și cel mai dificil lucru mi-a fost să caut o cale prin care să te ghidez cât mai lin fără șocurile unei ascensiuni dificile ale unei curbe de învățare pe care eu însumi am urmat-o și tare mult am transpirat. Să revenim.
 
 Am spus eu mai sus despre ***obiecte interne***.
 
-Pentru moment înțelege că *obiectele sunt niște structuri de date* și dacă-ți vine mai la îndemână, poți asocia obiectele cu niște fructe de rodie. În interior sunt bobițele care pot fi considerate a fi proprietățile obiectului nostru. Hai să o iau ceva mai academic acum... Un obiect în JavaScript este o colecție de date și de acțiuni care pot fi invocate. Pentru că datele servesc acțiunilor și invers, această interacțiune trebuia să fie găzduită de un concept. Acesta este cel de obiect. De ce obiect? Pentru că noi oamenii avem nevoie să copiem realitatea naturală și să organizăm cunoașterea după tiparul material. Iar cel mai facil model la care ne putem referi este cel al obiectelor. Obiectele în natură au proprietăți și expun privirii noastre acțiuni (curg, emit sunete, apucă alte obiecte, etc.). Așa și în cazul obiectelor din domeniul programării: colecții de proprietăți, fie că sunt date, fie că sunt acțiuni.
+Pentru moment înțelege că *obiectele sunt niște structuri de date* și dacă-ți vine mai la îndemână, poți asocia obiectele cu niște fructe de rodie. În interior sunt bobițele care pot fi considerate a fi proprietățile obiectului nostru. Hai să o iau ceva mai academic acum... Un obiect în JavaScript este o colecție de date și de acțiuni care pot fi invocate. Pentru că datele servesc acțiunilor și invers, această interacțiune trebuia să fie găzduită de un concept. Acesta este cel de obiect. De ce obiect? Pentru că noi oamenii avem nevoie să copiem realitatea naturală și să organizăm cunoașterea după tiparul material. Iar cel mai facil model la care ne putem referi este cel al obiectelor. Obiectele în natură au proprietăți și expun privirii noastre acțiuni (curg, emit sunete, apucă alte obiecte, etc.). Așa și în cazul obiectelor din domeniul programării: sunt colecții de proprietăți, fie că sunt date, fie că sunt acțiuni.
 
 Obiectele acestea ca niște colecții de proprietăți pot fi considerate drept recipiente care conțin la rândul lor **valori**, **funcții** sau chiar alte **obiecte**. Dacă urmăm imaginea rodiei, proprietățile pot fi bobițele, care la rândul lor conțin sâmburele, care este chiar valoarea.
 
