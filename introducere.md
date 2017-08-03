@@ -44,7 +44,7 @@ Te invit să citești pentru a înțelege. Oferă-ți timp așa cum ai proceda c
 
 **Ai nevoie de timp**!
 
-Dacă poți, caută un loc fără distrageri. Focalizează-te înainte de a te apuca de lucru și ori de câte ori întâlnești greutăți în înțelegere, respiră adânc, cu ochii închiși eliminând toate gândurile parazite ce nu țin de efortul tău de învățare. Inspiră și expiră de cinci ori, fiind foarte atent doar la respirație și nimic altceva. Dacă tot nu înțelegi ceea ce citești, desprinde-te! E semnul că e nevoie de o pauză ca mintea ta să prelucreze tot ce ai acumulat până la momentul blocajului. Întoarce-te fără amânare și fii răbdător cu tine, cu erorile pe care le faci. Fii răbdător, ai nevoie de timp!
+Dacă poți, caută un loc fără distrageri. Focalizează-te înainte de a te apuca de lucru și ori de câte ori întâlnești greutăți în înțelegere, respiră adânc, cu ochii închiși eliminând toate gândurile. Inspiră și expiră de cinci ori, fiind foarte atent doar la respirație și nimic altceva. Dacă tot nu înțelegi ceea ce citești, desprinde-te! E semnul că e nevoie de o pauză ca mintea ta să prelucreze tot ce ai acumulat până la momentul blocajului. Întoarce-te fără amânare și fii răbdător cu tine, cu erorile pe care le faci. Fii răbdător, ai nevoie de timp!
 
 **Moment ZEN**: Programarea începe de la creion, hârtie și liniște.
 
@@ -104,7 +104,7 @@ Transpunerea unui algoritm într-o soluție tehnică, se numește **program**, c
 
 Pentru a scrie un program, alegi un limbaj de programare, iar în cazul nostru, am ales deja: ECMAScript, adică JavaScript.
 
-Mai adaug doar că o transpunere a unui algoritm într-un program constituie, de fapt, o transpunere într-un **limbaj formal** (regulile sale interne îl formalizează).
+Mai adaug doar că o transpunere a unui algoritm într-un program este o transpunere într-un **limbaj formal** (regulile sale interne îl formalizează).
 
 Gata, începem! Avem nevoie de o privire generală asupra limbajului.
 
@@ -270,9 +270,9 @@ Le vom enumera aici cu traducerea lor pentru a vă familiariza la un prim contac
 
 **Moment ZEN**: Cuvintele rezervate poartă în sine o acțiune.
 
-Ele numesc un curs de acțiune pentru computerul nostru pentru a-și realiza sarcina. Pur și simplu, instruiesc computerul în a face ceva, iar de aici încolo putem vorbi despre unele dintre ele ca instrucțiuni, cu sensul de comenzi ferme.
+Ele inițiază un curs de acțiune pentru îndeplinirea unei sarcini. Pur și simplu, instruiesc computerul în a face ceva, iar de aici încolo putem vorbi despre unele dintre ele ca instrucțiuni, cu sensul de comenzi ferme.
 
-Buna practică spune că toate exprimările intenției programatorului, hai să le numim **enunțuri** (liniile de cod cu instrucțiuni - *statements*), în JavaScript trebuie să fie încheiate prin punct și virgulă (`;`), chiar dacă motoarele care implementează ECMAScript, la momentul evaluării codului, introduc automat prin mecanismul de **automatic semicolon insertion** acest caracter.
+Buna practică spune că toate exprimările intenției programatorului, hai să le numim **enunțuri** (iar liniile de cod cu instrucțiuni - *statements*), în JavaScript trebuie să fie încheiate prin punct și virgulă (`;`), chiar dacă motoarele care implementează ECMAScript, la momentul evaluării codului, introduc automat prin mecanismul de **automatic semicolon insertion** acest caracter.
 Da, da. Programatorii sunt creaturi comode și motoarele permit anumite facilități, care aleg această practică înadins. Personal, mă feresc și pun semnele de punctuație pentru că astfel, codul devine lizibil, ochii deprind automatisme de citire și de aici și o mai mare eficiență.
 
 Bine, bine. Da' care-i treaba cu **momentele ZEN**? Pe parcursul acestei călătorii de descoperire și autodescoperire, voi jalona conținutul cu astfel de momente, care vor fi propoziții sau fraze cu o sarcină precisă: să fie chintesența informației analizată defalcat. De ce moment ZEN? Pentru că este ca un exercițiu de meditație, care conduce la identificarea cu informația prin asimilarea ei.
@@ -297,7 +297,7 @@ Declarațiile și instrucțiunile beneficiare ale acestui mecanism sunt:
 - instrucțiunile `continue`, `break`, `throw`
 - și `return`.
 
-Există mai multe ciurente de opinii care au condus la diferite stiluri de redactare a codului sursă. Veți întâlni foarte mult cod scris fără punct și virgulă care să marcheze finalitatea enunțului. Unii consideră acest lucru acceptabil, dar vă invit în partea cealaltă, a celor care scriu foarte corect codul și care vor pune întotdeauna punct și virgulă la încheierea unui enunț după cum ne-a intrat în sânge ca atunci când încheiem o propoziție în scris să punem punct.
+Există mai multe curente de opinii care au condus la diferite stiluri de redactare a codului sursă. Veți întâlni foarte mult cod scris fără punct și virgulă care să marcheze finalitatea enunțului. Unii consideră acest lucru acceptabil, dar vă invit în partea cealaltă, a celor care scriu foarte corect codul și care vor pune întotdeauna punct și virgulă la încheierea unui enunț după cum ne-a intrat în sânge ca atunci când încheiem o propoziție în scris să punem punct.
 
 ### Operanzii
 
@@ -323,7 +323,7 @@ Dicționarele explicative spun că o expresie este un **grup de numere, litere e
 
 O mică paranteză utilă pentru curiozitatea ta. Sunt convins că te-ai întrebat cum s-a ajuns la forma actuală de scriere a codului. Am găsit un răspuns.
 
-Odată, demult prin anii 60, odată cu apariția limbajului de programare ALGOL, a debutat un efort colaborativ de formalizare a sintaxei limbajelor de programare. Rezultatul a fost o formă de exprimare sintactică cunoscută acum sub titulatura de **Bakus Naur**.
+Odată, demult prin anii 60, odată cu apariția limbajului de programare ALGOL, a debutat un efort colaborativ de formalizare a sintaxei limbajelor de programare. Rezultatul a fost o formă de exprimare sintactică cunoscută acum sub titulatura de **Backus Naur**.
 
 Conform **Backus Naur Form** (BNF), notația care formalizează sintaxa unui limbaj de programare indiferent care ar fi el, o expresie ***este definită ca*** un „termen”, care poate fi la rândul său urmat de alt termen și așa mai departe. Așa arată formalizarea BNF: `expression ::=  term { "|" term }`. Simbolul `::=` înseamnă „este definit ca”, iar <code>&#124;</code> (caracterul *pipe*) înseamnă „ȘI-ul” logic.
 
@@ -333,8 +333,6 @@ Expresiile mai complexe cer folosirea unor semne grafice care să indice motorul
 
 I-am amintit mai sus. Sunt folosiți pentru **a separa** fragmentele cu înțeles pentru compilator. De exemplu, cel mai simplu separator este un spațiu (adu-ți mereu aminte că un spațiu este și el un caracter) sau un TAB, care sunt folosite pentru a despărți cuvintele între ele. Un alt separator este punct și virgulă, care este ca punctul din limbajul natural.
 Enter-ul pe care-l dai pentru a trece pe o nouă linie, de fapt este tot un separator.
-
-Instrucțiunile pot fi grupate în JavaScript în blocuri care sunt „separate” de restul codului prin acolade.
 
 ### Categorii de expresii
 
@@ -374,9 +372,9 @@ Adu-ți mereu aminte că `var ceva = "altceva";` este o variabilă care identifi
 
 **Moment ZEN**: Expresiile sunt evaluate după reguli.
 
-Este ca în matematică când respectam regulile dictate de prioritatea operatorilor. Mai ții minte? Mai întâi ce-i în paranteze; dacă ai înmulțiri sau împărțiri, acestea primează, apoi adunările și scăderile...
+Revenim acum la matematică, la momentul când respectam regulile dictate de prioritatea operatorilor. Mai ții minte? Mai întâi ce-i în paranteze; dacă ai înmulțiri sau împărțiri, acestea primează, apoi adunările și scăderile...
 
-**Moment ZEN**: Evaluarea, adică rezolvarea expresiilor se face de la stânga la dreapta.
+**Moment ZEN**: Citirea expresiilor se face de la stânga la dreapta.
 
 O mică mențiune: în cazul programării acoladele și parantezele pătrate pe care le foloseam în matematică pentru a separa expresiile imbricate, sunt numai paranteze rotunde. De exemplu, pentru expresia: `{1 + [2 - (2 * 3)]}` din notația convențională matematică, în programare este scris astfel: `1 + (2 - (2 * 3))`.
 
@@ -387,7 +385,7 @@ O mică mențiune: în cazul programării acoladele și parantezele pătrate pe 
 1 + 1 * (5 - 1); // 5
 ```
 
-Să revenim, focalizându-ne pe enunțul de mai sus. Începem de la stânga spre dreapta să facem evaluarea expresiei. Buuuun! Și avem: 1 plus 1 egal? Stop joc! Cel de-al doilea unu (cel din dreapta operatorului plus) este implicat într-o operațiune pe care va trebui să o rezolvăm mai întâi pentru că așa spune prioritatea operatorului ori (`*`). Pentru moment, lăsăm în suspans prima operațiune de adunare și sărim să facem înmulțirea. Surpriză majoră: 1 este înmulțit cu o altă expresie care este între parantezele rotunde. Deci, abandonăm și înmulțirea și facem operațiunea dintre parantezele rotunde pentru a ajunge la o valoare. Gata! Avem valoarea `4`. Perfect, acum că avem valoarea, putem face înmulțirea: `1 * 4`. În urma evaluării ajungem la valoarea `4`. Acum este permisă evaluarea primei operațiuni de la care am plecat: `1 + 4`. Ajungem la rezultatul `5`. Hai că nu a fost greu, doar nițică matematică... știu, de mate nu scăpăm, dar nu ne lăsăm.
+Ne focalizăm pe enunțul de mai sus. Începem de la stânga spre dreapta să facem evaluarea expresiei. Buuuun! Și avem: 1 plus 1 egal? Stop joc! Cel de-al doilea unu (cel din dreapta operatorului plus) este implicat într-o operațiune pe care va trebui să o rezolvăm mai întâi pentru că așa spune prioritatea operatorului ori (`*`). Pentru moment, lăsăm în suspans prima operațiune de adunare și sărim să facem înmulțirea. Surpriză majoră: 1 este înmulțit cu o altă expresie care este între parantezele rotunde. Deci, abandonăm și înmulțirea și facem operațiunea dintre parantezele rotunde pentru a ajunge la o valoare. Gata! Avem valoarea `4`. Perfect, acum că avem valoarea, putem face înmulțirea: `1 * 4`. În urma evaluării ajungem la valoarea `4`. Acum este permisă evaluarea primei operațiuni de la care am plecat: `1 + 4`. Ajungem la rezultatul `5`. Hai că nu a fost greu, doar nițică matematică... știu, de mate nu scăpăm, dar nu ne lăsăm.
 
 **Moment ZEN**: Pentru că expresiile sunt evaluate la o valoare, o expresie poate fi combinată cu altă expresie pentru a forma o expresie mai complexă și așa mai departe.
 
@@ -473,6 +471,8 @@ if (sentimente = true) { console.log('Caută-mă tu!') };
 
 Instrucțiunile sunt parte a expresiilor. Cel mai adesea veți vedea că o expresie este chiar o instrucțiune. În JavaScript, sunt permise expresii care nu sunt neapărat instrucțiuni. De exemplu, `1 + 1;`
 
+Instrucțiunile pot fi grupate în JavaScript în blocuri care sunt „separate” de restul codului prin acolade.
+
 **JavaScript este un limbaj de programare pentru care este de importanță vitală felul în care este redactat codul sursă.**
 
 Acest aranjament de scriere a codului, succesiunea în care sunt introduse instrucțiunile imprimă diferite efecte la momentul evaluării.
@@ -519,7 +519,7 @@ Aceasta a fost mica lecție de anatomie aplicată codului sursă JavaScript pent
 
 Declararea variabilelor și a funcțiilor se leagă organic de conceptul identificatorilor. O mică introducere în ceea ce reprezintă identificatorii deja am făcut, dar acesta este cel mai potrivit moment să explorăm mai mult ceea ce înseamnă.
 
-**Moment ZEN**: identificatorii sunt denumirile după care putem accesa valorile.
+**Moment ZEN**: Identificatorii sunt denumirile după care putem accesa valorile.
 
 Adu-ți aminte că scopul pentru care scriem software este pentru a manipula valori. Operațiunile au efecte în manipularea anumitor resurse.
 
