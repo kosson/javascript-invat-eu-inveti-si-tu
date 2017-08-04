@@ -583,7 +583,7 @@ Un **tărâm** este constituit din **obiectul global** pentru tărâmul la care 
 
 Se înțelege clar faptul că pentru a evalua codul propriu mai întâi trebuie să fie creat un `Tărâm`, care va fi asociat codului propriu la momentul în care debutează evaluarea.
 
-Am ilustrat tărâmul JavaScript ca o sferă dinamică (**obiectul global**), în care găsești în zona centrală codul scris de programatori reprezentat de ciorchinii de obiecte și date ce stabilesc relații strânse (valori, obiecte și funcții).
+Am ilustrat **obiectul global** JavaScript ca pe o sferă dinamică, în care găsești în zona centrală codul scris de programatori reprezentat de ciorchinii de obiecte și date ce stabilesc relații strânse (valori, obiecte și funcții).
 
 Structura este deja gata de a fi utilizată fără a interveni mai mult decât deschiderea browserului. Chiorchinii din zona centrală se constituie la momentul executării codului. După cum bine ai intuit, obiectul global formează contextul în care codul nostru JavaScript, programul nostru este evaluat. Am spus *evaluat*! Reține mereu ca o mantră internă când te apuci de scris JavaScript: tot codul pe care-l scriu va fi evaluat ca un set de expresii, care va fi redus la valorile finale.
 
@@ -604,13 +604,13 @@ Hai că pe `Realm` l-am lămurit a fi `Tărâmul`, dar pe bună dreptate mă vei
 
 Pentru că acum `Tărâmul` este gol, neîmplinindu-și menirea, **Demiurgul** spune: `CreateIntrinsics(realmRec)`!!! Porunca sa vine ca al doilea pas al comenzii primare `CreateRealm()`. Această comadă de inițiere este întreruptă temporar pentru a obține un rezultat din invocarea `CreateIntrinsics(realmRec)`. Ține minte: `CreateRealm()` nu s-a încheiat.
 
-Înainte de acest pas al doilea, care de fapt este o altă comandă, să lămurim nițel termenii. Standardul ne expune denumirea de `intrinsics` pentru toate entitățile care sunt create înainte de a rula propriul cod și de care are nevoie  pentru a fi evaluat. În limba română traducerea implică trei sinonime: intrinseci, interioare, proprii. Pentru că termenul de **intrinsec** este cel mai apropiat și ca fonetică, îl vom utiliza și noi în acest material.
+Înainte de acest pas al doilea, care de fapt este o altă comandă, să lămurim nițel termenii. Standardul ne impune denumirea de `intrinsics` pentru toate entitățile care sunt create înainte de a rula propriul cod având nevoie  pentru a fi evaluat. În limba română traducerea implică trei sinonime: intrinseci, interioare, proprii. Pentru că termenul de **intrinsec** este cel mai apropiat și ca fonetică, îl vom utiliza și noi în acest material.
 
 <img src="realmRec.png">
 
 2. Porunca Demiurgului `CreateIntrinsics` ia noul obiect creat, `realmRec`, care tocmai a fost creat și îl supune unei proceduri numită «`CreateIntrinsics()`» pentru a-l înzestra cu proprietăți utile. Tehnic vorbind, pur și simplu, este pasat obiectul `realmRec` procedurii `CreateIntrinsics` obținându-se «`CreateIntrinsics(realmRec)`». Acest pas al genezei este cel mai important, pentru că, urmând firul algoritmului `CreateIntrinsics(realmRec)`, vom asista la maiestuoasa naștere a tuturor entităților ECMAScript relevante și care sunt necesare pentru a rula codul propriu. Să urmărim pașii algoritmului intern `CreateIntrinsics(realmRec)`:
 
-2.1 „Fie «intrinsics» un `Record`”. Identificatorul `intrinsics` va face legătra la Record prin care se înțelege o valoare sau un set de valori. În acest moment ne putem imagina `intrinsics` ca un container, gata să fie mobilată cu proprietățile necesare. Acest container va fi populat în următorii pași cu ceea ce standardul numește `entități` JavaScript: obiectele intrinseci, de fapt.
+2.1 „Fie «intrinsics» un `Record`”. Identificatorul `intrinsics` va face legătura la Record prin care se înțelege o valoare sau un set de valori. În acest moment ne putem imagina `intrinsics` ca un container, gata să fie mobilată cu proprietățile necesare. Acest container va fi populat în următorii pași cu ceea ce standardul numește `entități` JavaScript: obiectele intrinseci, de fapt.
 
 2.2 Se va crea în obiectul descriptiv al noului nostru tărâm un câmp identificat prin `realmRec.[[Intrinsics]]`. Acest câmp - `[[Intrinsics]]` poate fi privit ca un slot în care se va „conecta” obiectul `intrinsics` abia creat. Ce s-a întâmplat este că obiectul `intrinsics` a devenit parte a containerului `realmRec`.
 
