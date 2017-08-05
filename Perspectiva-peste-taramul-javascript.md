@@ -301,7 +301,7 @@ Ce înseamnă a le executa? Pur și simplu motorul se va uita între acolade, va
 
 Pentru că lucrurile simple sunt plicticoase, mai completăm cu faptul că funcțiile care sunt proprietăți ale unui obiect, sunt numite **metode** ale acestuia. Nu te lăsa intimidat de noua etichetă: *metodă*. Funcția rămâne funcție fără a fi atinsă în niciun fel de faptul că „face parte” a unui obiect. Poți să-ți închipui funcția ca fiind separată de obiect, dar execuția ei va fi legată de contextul acelui obiect.
 
-Mai adăugăm că ECMAScript, adică JavaScript are niște obiecte cu care vine el din start (`built-in objects`). Deci, din start browserul ca și instrument care aplică standardul ECMAScript, vine cu propria lădiță de rodii.
+Mai adăugăm că ECMAScript, adică JavaScript are niște obiecte cu care vine el din start (`built-in objects`). Deci, din start, browserul ca și instrument care aplică standardul ECMAScript, vine cu propria lădiță de rodii.
 
 ### Cum se rulează software-ul scris în JavaScript?
 
