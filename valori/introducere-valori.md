@@ -1,6 +1,8 @@
 # Valorile în JavaScript
 
-Valorile sunt datele pe care un programator le poate manipula în JavaScript. Valorile sunt de anumite tipuri pentru că valorile ca tipologie sunt diferite.
+Valorile sunt datele pe care un programator le poate manipula în JavaScript. Valorile ca tipologie sunt diferite.
+
+## Valorile în JavaScript
 
 Limbajul de programare ECMAScript, adică JavaScript-ul nostru are câteva valori care sunt **tipuri ale limbajului**, cum le spune standardul. Ce înseamnă că sunt tipuri ale limbajului? Simplu, sunt acele valori pe care un programator le poate manipula folosind limbajul de programare ECMAScript.
 

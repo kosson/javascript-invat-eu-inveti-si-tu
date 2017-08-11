@@ -58,20 +58,20 @@ Pentru a înțelege geneza unui Tărâm în JavaScript, vom apela la textul stan
 
 ![](Hieronymus_Bosch_-_The_Garden_of_Earthly_Delights_-_The_exterior_(shutters).jpg "Hieronymus Bosch - The Garden of Earthly Delights - The exterior. Resursă în Public Domain de la: https://en.wikipedia.org/wiki/The_Garden_of_Earthly_Delights#/media/File:Hieronymus_Bosch_-_The_Garden_of_Earthly_Delights_-_The_exterior_(shutters).jpg")
 
-`CreateRealm()` !!! spuse **Demiurgul** și dictă materiei (motorul JavaScript):
+CreateRealm() !!! spuse Demiurgul. Demiurgul nostru este  motorul JavaScript, care pentru construirea tărâmului va pune la dispoziție algoritmi interni și resursele necesare creării unui Tărâm.
 
 <aside>Prima etapă: planul</aside>
 
 1. Din *neant* va fi constituită o nouă înregistrare prin care să identificăm noului tărâm. Numele înregistrării este `realmRec`. Tipologic vorbind, `realmRec` este un nou `Realm Record`”. Un `Realm Record` trebuie înțeles ca o fișă descriptivă în care vom avea mai multe câmpuri ce descriu noul `Realm`.
-În acest moment nu avem de-a face cu însăși creația, ci mai degrabă cu eșafodajul acesteia. După cum observi, s-a creat abia o înregistrare, o descriere, un plan contructiv, nu și tot ce va popula acest tărâm.
+În acest moment nu avem de-a face cu însăși creația, ci mai degrabă cu eșafodajul acesteia. După cum observi, s-a creat abia o înregistrare, o descriere, un plan constructiv, nu și tot ce va popula acest tărâm.
 Record, în traducere românească ar fi o „înregistrare” cu sensul de mijloc pentru ținerea unei evidențe. Standardul vine și ne lămurește la 6.2.1 că un `Record` este un tip de valoare ce „constă dintr-unul sau mai multe câmpuri care poartă o denumire”. Și încă o mențiune foarte prețioasă oferită de standard pentru a înțelege notațiile folosite mai departe: „numele câmpurilor sunt întotdeauna încadrate între paranteze pătrate duble, de exemplu [\[Value]]”.
-Prima etapă se încheie aici. Ce avem până acum? Doar un plan arhitectural având o înregistrare centrală intitulală „realmRec”. Înregistrarea nu este creația, este intenția Demiurgului.
+Prima etapă se încheie aici. Ce avem până acum? Doar un plan arhitectural având o înregistrare centrală intitulală „realmRec”. Înregistrarea indică faptul că mai întâi se constituie un plan arhitectural pe care motorul, pardon, Demiurgului îl va folosi pentru a împlini geneza.
 
 <aside>A doua etapă</aside>
 
-Pentru că acum `Tărâmul` este gol, neîmplinindu-și menirea, **Demiurgul** spune: `CreateIntrinsics(realmRec)`!!! Porunca sa vine ca pas subsidiar al comenzii primare `CreateRealm()`. Această comandă de inițiere este întreruptă temporar pentru a obține un rezultat din invocarea `CreateIntrinsics(realmRec)`. Ține minte: `CreateRealm()` nu s-a încheiat.
+Pentru că acum `Tărâmul` nu are încă substanță, **Demiurgul** spune: `CreateIntrinsics(realmRec)`!!! Porunca sa vine ca pas intern al comenzii primare `CreateRealm()`. Această comandă de inițiere este întreruptă temporar pentru a obține un rezultat din invocarea `CreateIntrinsics(realmRec)`. Ține minte: `CreateRealm()` nu s-a încheiat.
 
-Înainte de acest pas al doilea, care de fapt este o altă comandă, să lămurim nițel termenii. Standardul ne impune denumirea de `intrinsics` pentru toate entitățile care sunt create înainte de a rula propriul cod. În limba română traducerea termenului implică trei sinonime: intrinseci, interioare, proprii. Pentru că termenul de **intrinsec** este cel mai apropiat și ca fonetică, îl vom utiliza și noi în acest material. Acum îți revelez necesitatea asimilării procesului de naștere a tărâmului JavaScript. Codul propriu are nevoie de obiectele intrinseci pentru a putea fi evaluat. Cunoașterea modului în care au apărut aceste obiecte intrinseci și relațiile pe care le formează cu alte elemente din „Realm”, o consider indispensabilă pentru înțelegerea deplină a acestui limbaj de programare.„
+Înainte de acest pas al doilea, care de fapt este o altă comandă, să lămurim nițel termenii. Standardul ne impune denumirea de `intrinsics` pentru toate entitățile care sunt create înainte de a rula propriul cod. În limba română traducerea termenului implică trei sinonime: intrinseci, interioare, proprii. Pentru că termenul de **intrinsec** este cel mai apropiat și ca fonetică, îl vom utiliza și noi în acest material. Acum se dezvăluie necesitatea asimilării procesului de naștere a tărâmului JavaScript. Codul propriu are nevoie de obiectele intrinseci pentru a putea fi evaluat. Cunoașterea modului în care au apărut aceste obiecte intrinseci și relațiile pe care le formează cu alte elemente din „Realm”, o consider indispensabilă pentru înțelegerea deplină a acestui limbaj de programare.„
 
 <img src="realmRec.png">
 
@@ -81,38 +81,70 @@ Pentru că acum `Tărâmul` este gol, neîmplinindu-și menirea, **Demiurgul** s
 
 2.2 Câmpul `[\[Intrinsics]]` al înregistrării „realmRec” (realmRec.[\[Intrinsics]]) va fi setat cu înregistrarea identificată prin „intrinsics”. Ce s-a întâmplat este că planul nostru s-a îmbogățit cu o nouă înregistrare (Record). Sper că ai observat să am folosit un punct care indică adresa câmpului `[\[Intrinsics]]`. Poți citi „câmpul cutare a lui realmRec”. Așa se va face și adresarea proprietăților din obiecte.
 
+##### Nașterea obiectului prototipal
+
 2.3 Acum urmează un pas crucial. Ești pregătit? Algoritmul nostru va crea obiectului care va fi prototipul tuturor celorlalte care vor urma. Zice textul genezei: fie ca identificatorul `objProto` să aibă drept valoare un nou obiect ordinar. Pentru a construi obiectul ordinar de care avem nevoie, Demiurgul prunci: `ObjectCreate(null)`. Astfel, prin evaluarea tuturor pașilor procedurii `ObjectCreate(null)` va apărea un obiect ordinar, care va juca rolul de părinte al tuturor din perspectiva moștenirii (argumentul `null` indică acest fapt). Acest obiect va fi prototipul tuturor celorlalte, care vor fi generate prin evaluarea codului scris de tine. Concluzia simplă este că în acest moment s-a născut obiectul prototip zero, arhetipul tuturor celorlalte. Arhetipul este un obiect ordinar. Aici ar urma să inițiem o discuție care să lămurească ce-i cu moștenirea. Singurul aspect relevant pe moment este acela că atunci când lucrezi cu obiecte, inevitabil ai nevoie să „împrumuți” funcționalități ale altor obiecte evitând astfel necesitatea de a le crea de fiecare dată când ai nevoie de ele. Pe asta se și bazează modul în care funcționează întregul ecosistem JavaScript. Funcționalitățile necesare prelucrărilor de date sunt „împrumutate” de la obiectele intrinseci sau de la alte obiecte proprii. Deci, este necesar un mecanism care să permită moștenirea.
 
-2.4 Obiectul prototip abia creat devine proprietate a obiectului `intrinsics`, fiind identificat prin `intrinsics.[[%ObjectPrototype%]]`.
+2.4 Obiectul prototip abia creat devine proprietate a obiectului `intrinsics`, fiind identificat prin `intrinsics.[[%ObjectPrototype%]]`. Acesta este un moment aniversar. Tocmai s-a născut primul obiect. Obiectul simplu cu rol de prototip.
 
-2.5 Am avansat îndeajuns de mult cu geneza pentru a constitui un prim mecanism de raportare a erorilor. Zis și făcut. În acest moment, avem nevoie de o funcție care să existe deja pentru a verifica mai târziu erorile în folosirea tipurilor de date. Acest mecanism se bazează pe executarea unei funcții obiect anonime din familia entităților `intrinsics` și care este definită o singură dată pentru un `Realm`. Toate instrucțiunile care vor testa o stare de excepție poartă identificatorul %ThrowTypeError%, dar pentru acest moment al genezei, toți pașii pe care îi va face %ThrowTypeError% vor fi atribuiți identificatorul `throwerSteps`. Pe scurt, avem un identificator pe numele său `throwerSteps`, care trimite la pașii pe care-i urmează `%ThrowTypeError%` atunci când este apelată.
+2.5 Am avansat îndeajuns de mult cu geneza pentru a constitui un prim mecanism de raportare a erorilor. Zis și făcut. Pentru a realiza acest instrument, avem nevoie de ceva care să reacționeze la o stare de eroare semnalând-o. Instrumentul care este cel mai potrivit este funcția. O funcție, cam în orice limbaj de programare este ca un subprgrămel apelabil. În acest moment, avem nevoie să creăm o funcție care să fie disponibilă oricând pentru semnalarea erorilor. Spuneam că în JavaScript totul este obiect. Funcțiile nu sunt o excepție și din acest motiv sunt numite funcții obiect.
+Pentru a raporta erori avem nevoie de o funcție specializată care este definită o singură dată pentru un `Realm`. Toate instrucțiunile care vor testa o stare de excepție poartă identificatorul %ThrowTypeError%, dar pentru acest moment al genezei, toți pașii pe care îi va face %ThrowTypeError% vor fi atribuiți identificatorul `throwerSteps`.
 
-2.6 Demiurgul a privit și a înțeles că nu este îndeajuns să „captureze” algoritmul prin care se `aruncă` (în engleză: `throw`) erorile... de fapt în limbajul de programare se referă la excepții. De ce excepții? Pentru că semantic chiar asta înseamnă, că a apărut o excepție de la regulile limbajului. Adu-ți mereu aminte că un limbaj de programare este ca și gramatica un set de reguli prin care urmărim, în cazul nostru, o bună comunicare cu mașina. Să revenim la momentul când Demiurgul va lua pașii algoritmici capturați prin identificatorul `throwerSteps` și îi va folosi dictând o nouă poruncă: `CreateBuiltinFunction(realmRec, throwerSteps, null)`. Această poruncă, de fapt o operațiune abstractă ia trei argumente: înregistrarea de tărâm, care în cazul nostru este referențiată prin identificatorul `realmRec`, pașii algoritmici, care în cazul nostru au fost plasați sub identificatorul `throwerSteps` și obiectul prototip, care în cazul nostru nu este necesar, fiind setat la `null`. Ceea ce oferă înapoi pe baza acestor ingrediente, este un obiect-funcție intern (în engleză `built-in function object`). Încă nu ai realizat ce minune s-a întâmplat? Tocmai s-a creat o primă funcție în micul nostru univers, pardon, `Tărâm`. Această funcție când va fi apelată, va urma pașii algoritmului atribuit mai sus lui `throwerSteps`. Ceea ce mai trebuie observat este faptul că această funcție-internă spre deosebire de altele, fiind prima, nu are prototip... al treilea argument după cum bine observi este `null`. Pentru că am creat această primă funcție-internă, va trebui să o atribuim unui identificator pentru a o putea referenția. În acest sens, standardul numește identificatorul `thrower`. Funcția internă anonimă care face parte din elemetele intrinseci este o funcție-obiect care este definită o singură dată pentru câte un tărâm.
+2.6 Demiurgul a privit și a înțeles că nu este îndeajuns să „captureze” algoritmul prin care se `aruncă` (în engleză: `throw`) erorile... de fapt în limbajul de programare se referă la excepții. De ce excepții? Pentru că semantic chiar asta înseamnă: a apărut o excepție de la regulile limbajului. Adu-ți mereu aminte că un limbaj de programare este ca și gramatica un set de reguli prin care urmărim, în cazul nostru, o bună comunicare cu mașina.
 
-2.7 Introducem funcția de verificare identificată prin `thrower` ca valoare a slotului containerului `intrinsics` la `intrinsics.[[%ThrowTypeError%]]`.
+Să revenim la momentul când Demiurgul va lua pașii algoritmici capturați prin identificatorul `throwerSteps` și îi va folosi dictând: `CreateBuiltinFunction(realmRec, throwerSteps, null)`. Această poruncă, de fapt o operațiune abstractă ia trei argumente: înregistrarea de tărâm, care în cazul nostru este referențiată prin identificatorul `realmRec`, pașii algoritmici, care în cazul nostru au fost plasați sub identificatorul `throwerSteps` și obiectul prototip, care în cazul nostru nu este necesar, fiind setat la `null`. Ceea ce oferă înapoi pe baza acestor ingrediente, este un obiect-funcție intern (în engleză `built-in function object`).
 
-2.8 Mai sus am pus un identificator pe un algoritm, acum vom pune un identificator pe un algoritm care nu are niciun pas, în esență care nu face nimic. Identificatorul acestuia este `noSteps`.
+Încă nu ai realizat ce minune s-a întâmplat? Tocmai s-a creat o primă funcție în micul nostru univers, pardon, `Tărâm`. Această funcție când va fi apelată, va urma pașii algoritmului atribuit mai sus lui `throwerSteps`. Ceea ce mai trebuie observat este faptul că această funcție-internă spre deosebire de altele, fiind prima, nu are prototip... al treilea argument după cum bine observi este `null`.
 
-2.9 Este creat identificatorul `funcProto` pentru a-i atribui obiectul rezultat din evaluarea lui `CreateBuiltinFunction(realmRec, noSteps, objProto)`. Ce se întâmplă este că obiectul `realmRec` atât cât este el în acest moment, este trimis împreună cu o secvență algoritmică vidă și cu obiectul prototip zero - arhetipul pentru a se crea modelul arhetipal al obiectului care va juca rolul de prototip pentru funcții. De fapt, acest obiect este un obiect-funcție intern, dar care nu se execută pentru că nu există specificat niciun pas prin `noSteps`. Dacă am face o disecție acestui obiect-funcție care tocmai a devenit obiectul prototip al oricărei funcții, vom găsi că ține minte cărui `Tărâm` aparține, are un obiect prototip, care este obiectul ordinar creat mai sus și identificat prin `objProto` și că acest obiect-funcție cu rol de prototip este extensibil.
+Pentru că a fost creată această primă funcție-internă, va trebui să fie atribuită unui identificator pentru a o putea apela când avem nevoie. În acest sens, standardul o atribuie identificatorul `thrower`. Funcția internă anonimă care face parte din elemetele intrinseci este o funcție-obiect care este definită o singură dată pentru un tărâm.
 
-2.10 Ca parte o obiectului `intrinsics` intră obiectul-funcție cu rol de prototip pentru funcții identificat ca `intrinsics.[[%FunctionPrototype%]]`.
+2.7 Funcția de verificare identificată prin thrower va fi de acum înainte valoarea lui intrinsics.[[%ThrowTypeError%]].
 
-2.11 Demiurgul face o verificare pentru `objProto` folosind obiectul-funcție de verificare creat la pasul 2.5 și adaugă rezultatul evaluării ca proprietate chiar la obiectul-funcție creat la 2.5.
+2.8 Mai sus, a fost pus un identificator pe un algoritm. Acum se va pune un identificator pe un algoritm care nu are niciun pas, care în esență care nu face nimic. Identificatorul acestuia este `noSteps`.
 
-2.12 Acest pas este dictat de rezultatul împlinirii comenzii `AddRestrictedFunctionProperties(funcProto, realmRec)`, care are drept scop adăugarea unor proprietăți fundamentale obiectelor-funcție prin adăugarea a două proprietăți în obiectul-funcție cu rol de prototip al tuturor funcțiilor: posibilitatea de a fi invocate (`caller`) și `arguments`, care este o colecție a tuturor argumentelor pe care o funcție le poate primi. Pe scurt, proprietatea care face funcțiile apelabile și cea care le face capabile de a ține evidența argumentelor primite sunt adăugate în obiectul-funcție cu rol de prototip.
+##### Se naște prima funcție - I
 
-  <img src="intrinsics.png">
+Această funcție, mai corect obiect-funcție va fi mama tuturor funcțiilor pentru că de la ea vor moșteni toate cele care vor fi declarate și executate ulterior.
 
-2.13 Obiectului `intrinsics` i se adaugă restul de proprietăți care sunt obiecte și obiecte-funcție intrinseci:
+Mai întâi îi vom face un prototip
 
-    - Obiecte fundamentale pentru rularea codului: `Object`, `Function`, `Boolean`, `Symbol` și `Error`;
-    - Obiecte pentru procesarea textelor: `String`, `RegExp`;
-    - Obiecte pentru reprezentarea și manipularea numerelor și datelor calendaristice: `Math`, `Number`, `Date`;
-    - Obiecte pentru manipularea datelor structurate: `DataView`, `JSON`, `ArrayBuffer`;
-    - Obiecte pentru manipularea colecțiilor indexate automat: `Array` și familia sa;
-    - Obiecte pentru manipularea colecțiilor indexate cu ajutorul cheilor: `Map`, `Set`;
-    - Obiecte pentru controlul operațiilor abstracte: `funcțiile generator` și `Promise`;
-    - Obiectele cu reflexie: `Proxy` și `Reflect`.
+Mai întâi de toate, pentru că o funcție este totuși un obiect, ceva mai special, dar un obiect fără tăgadă, se va construi un obiect care să joace rolul de obiect prototip pentru funcție. Orice obiect, după cum am aflat anterior, moștenește de la un altul.
+
+2.9 Este creat identificatorul funcProto. Acesta va face referință la obiectul rezultat din operațiunea abstractă  CreateBuiltinFunction(realmRec, noSteps, objProto). Am folosit această operațiune și mai sus când am construit mecanismul de verificare.
+
+Cum se fabrică obiectul prototip?
+
+înregistrarea realmRec este trimis ca prim argument,
+o secvență algoritmică vidă (noSteps) constituie al doilea, argument. Este și logic, obiectul-funcție returnat nu dorim să facă nimic, nu va fi apelat,
+referința către obiectul prototip zero objProto.
+
+Este returnată funcția-obiect internă ca rezultat al lui CreateBuiltinFunction. Dacă am face o disecție acestui obiect-funcție care tocmai a devenit prototipul oricărei funcții care va fi creată de acum încolo, vom găsi următoarele:
+are o înregistrare care ține minte cărui Tărâm aparține,
+are referința către obiectul prototip universal creat anterior identificat prin objProto
+are o mențiune ce indică că acest obiect-funcție este extensibil, adică i se pot adăuga proprietăți noi,
+are un câmp comun care indică dacă este un Script sau Module, dar este setat la null pentru că nu este cazul
+și o listă de proprietăți setate la undefined pentru că acelea aparțin altor funcții-obiect ce vor apărea în viitor.
+
+În acest moment s-a constituit obiectul prototip al tuturor funcțiilor. Acesta nu mai este un obiect ordinar, ci este un obiect-funcție. Reține faptul că acest obiect-funcție intern este unul extensibil. Astfel, s-a născut și mecanismul de moștenire ce va asigura transmiterea tuturor caracteristicilor prototipului în mod automat tuturor copiilor.
+
+2.10 Obiectul-funcție intern tocmai creat va fi identificat din acest moment ca `intrinsics.[[%FunctionPrototype%]]`.
+
+2.11 Abia acum Demiurgul va seta obiectul prototip pentru funcția necesară verificării excepțiilor cu valoarea `objProto`.
+
+2.12 Crearea primei noastre funcții-obiect nu s-a încheiat. Te vei întreba de ce. Răspunsul este că așa cum arată ea în acest moment, nu-și atinge scopul. Te vei întreba care-i scopul unei funcții? Simplu. Acela de a fi apelată, adică de a fi chemată pentru a-i fi evaluat codul pe care-l poartă și care-i dau unicitatea și, funcționalitatea. Deci, trebuie să facem funcția noastră apelabilă. Comanda `AddRestrictedFunctionProperties(funcProto, realmRec)` adaugă două proprietăți: posibilitatea de a fi invocate (`caller`) și `arguments`, care este o colecție a tuturor argumentelor pe care o funcție le poate primi. Pe scurt, proprietatea care face funcțiile apelabile și cea care le face capabile de a ține evidența argumentelor primite sunt adăugate primului nostru obiect-funcție.
+
+<img src="intrinsics.png">
+
+2.13 Înregistrării `intrinsics` i se adaugă restul de proprietăți care sunt obiecte și obiecte-funcție intrinseci:
+
+- Obiecte fundamentale pentru rularea codului: `Object`, `Function`, `Boolean`, `Symbol` și `Error`;
+- Obiecte pentru procesarea textelor: `String`, `RegExp`;
+- Obiecte pentru reprezentarea și manipularea numerelor și datelor calendaristice: `Math`, `Number`, `Date`;
+- Obiecte pentru manipularea datelor structurate: `DataView`, `JSON`, `ArrayBuffer`;
+- Obiecte pentru manipularea colecțiilor indexate automat: `Array` și familia sa;
+- Obiecte pentru manipularea colecțiilor indexate cu ajutorul cheilor: `Map`, `Set`;
+- Obiecte pentru controlul operațiilor abstracte: `funcțiile generator` și `Promise`;
+- Obiectele cu reflexie: `Proxy` și `Reflect`.
 
 ![](ObiecteFundamentale.png)
 

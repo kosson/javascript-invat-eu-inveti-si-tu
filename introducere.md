@@ -130,6 +130,11 @@ Orice limbaj de programare este caracterizat de o sintaxă proprie (un set de re
 
 Pentru a face o anatomie, vom construi tărâmul JavaScript de la cele mai mici componente precum un fizician din domeniul particulelor pornește de la componentele unei substanțe, de la atomi și și mai jos de la componentele atomului.
 
+### Date, date, date
+
+Scrierea unui program are drept țintă manipularea unor date pentru a le transforma în diverse scopuri.
+Datele pe care un computer le poate manipula au o structură și dezvoltă o adevărată ierarhie pe măsură ce urmărim felul în care sunt reprezentate într-un computer. Cea mai mică unitate de date este bitul - digitul binar, care poate fi 0 sau 1 (în lb. engleză „bits”). Urcând o treaptă mai sus, avem caracterele despre care știm că sunt reprezentări pe 16 biți codate după standardul UTF (în lb. engleză „characters”). Pășind încă o treaptă ajungem la câmpuri de date (în lb. engleză „fields”). Mai multe câmpuri de date puse împreună formează o înregistrare (în lb. engleză „record”). O înregistrare specifică este gruparea a mai multor câmpuri înrudite. Cel mai bun exemplu este o înregistrare de catalog bibliografic indiferent de formatul de reprezentare. Câmpurile unei singure înregistrări sunt în relație directă cu aceeași entitate pe care o descriu; căreia îi aparțin. Grupareare mai multor înregistrări înrudite, care fac parte din același tip se numește fișier (în lb. engleză „file”). Totuși un fișier poate strânge date diferite după scheme diferite. Nu este obligatoriu ca toate datele să fie structurate identic sau să conțină aceleași date. Fișierele sunt organizate pe mediul de stocare ca secvențe de 8 biți numite în limba engleză „bytes”. Ultimul stadiu de ordonare a datelor este baza de date organizată pe tabele. Tabelele conțin înregistrări, care la rândul lor conțin câmpurile de date.
+
 ### Caracterele folosite
 
 E timpul să intrăm deja în rolul de programator.
