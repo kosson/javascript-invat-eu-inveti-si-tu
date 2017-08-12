@@ -87,12 +87,14 @@ Pentru că acum `Tărâmul` nu are încă substanță, **Demiurgul** spune: `Cre
 
 2.4 Obiectul prototip abia creat devine proprietate a obiectului `intrinsics`, fiind identificat prin `intrinsics.[[%ObjectPrototype%]]`. Acesta este un moment aniversar. Tocmai s-a născut primul obiect. Obiectul simplu cu rol de prototip.
 
+##### Mecanismului de semnalizare a erorilor - I
+
 2.5 Am avansat îndeajuns de mult cu geneza pentru a constitui un prim mecanism de raportare a erorilor. Zis și făcut. Pentru a realiza acest instrument, avem nevoie de ceva care să reacționeze la o stare de eroare semnalând-o. Instrumentul care este cel mai potrivit este funcția. O funcție, cam în orice limbaj de programare este ca un subprgrămel apelabil. În acest moment, avem nevoie să creăm o funcție care să fie disponibilă oricând pentru semnalarea erorilor. Spuneam că în JavaScript totul este obiect. Funcțiile nu sunt o excepție și din acest motiv sunt numite funcții obiect.
 Pentru a raporta erori avem nevoie de o funcție specializată care este definită o singură dată pentru un `Realm`. Toate instrucțiunile care vor testa o stare de excepție poartă identificatorul %ThrowTypeError%, dar pentru acest moment al genezei, toți pașii pe care îi va face %ThrowTypeError% vor fi atribuiți identificatorul `throwerSteps`.
 
 2.6 Demiurgul a privit și a înțeles că nu este îndeajuns să „captureze” algoritmul prin care se `aruncă` (în engleză: `throw`) erorile... de fapt în limbajul de programare se referă la excepții. De ce excepții? Pentru că semantic chiar asta înseamnă: a apărut o excepție de la regulile limbajului. Adu-ți mereu aminte că un limbaj de programare este ca și gramatica un set de reguli prin care urmărim, în cazul nostru, o bună comunicare cu mașina.
 
-Să revenim la momentul când Demiurgul va lua pașii algoritmici capturați prin identificatorul `throwerSteps` și îi va folosi dictând: `CreateBuiltinFunction(realmRec, throwerSteps, null)`. Această poruncă, de fapt o operațiune abstractă ia trei argumente: înregistrarea de tărâm, care în cazul nostru este referențiată prin identificatorul `realmRec`, pașii algoritmici, care în cazul nostru au fost plasați sub identificatorul `throwerSteps` și obiectul prototip, care în cazul nostru nu este necesar, fiind setat la `null`. Ceea ce oferă înapoi pe baza acestor ingrediente, este un obiect-funcție intern (în engleză `built-in function object`).
+Să revenim la momentul când Demiurgul va lua pașii algoritmici capturați prin identificatorul `throwerSteps` și îi va folosi dictând: `CreateBuiltinFunction(realmRec, throwerSteps, null)`. Avem trei argumente: înregistrarea de tărâm, care în cazul nostru este referențiată prin identificatorul `realmRec`, pașii algoritmici, care în cazul nostru au fost plasați sub identificatorul `throwerSteps` și obiectul prototip, care în cazul nostru nu este necesar, fiind setat la `null`. Ceea ce oferă înapoi pe baza acestor ingrediente, este un obiect-funcție intern (în engleză `built-in function object`).
 
 Încă nu ai realizat ce minune s-a întâmplat? Tocmai s-a creat o primă funcție în micul nostru univers, pardon, `Tărâm`. Această funcție când va fi apelată, va urma pașii algoritmului atribuit mai sus lui `throwerSteps`. Ceea ce mai trebuie observat este faptul că această funcție-internă spre deosebire de altele, fiind prima, nu are prototip... al treilea argument după cum bine observi este `null`.
 
@@ -102,36 +104,44 @@ Pentru că a fost creată această primă funcție-internă, va trebui să fie a
 
 2.8 Mai sus, a fost pus un identificator pe un algoritm. Acum se va pune un identificator pe un algoritm care nu are niciun pas, care în esență care nu face nimic. Identificatorul acestuia este `noSteps`.
 
-##### Se naște prima funcție - I
+##### Se naște obiectul prototip al funcțiilor
 
-Această funcție, mai corect obiect-funcție va fi mama tuturor funcțiilor pentru că de la ea vor moșteni toate cele care vor fi declarate și executate ulterior.
+Această funcție, mai corect acest obiect-funcție intern, va fi mama tuturor funcțiilor pentru că de la ea vor moșteni toate cele care vor fi declarate și executate ulterior.
 
-Mai întâi îi vom face un prototip
+**Mai întâi îi vom face un prototip**
 
 Mai întâi de toate, pentru că o funcție este totuși un obiect, ceva mai special, dar un obiect fără tăgadă, se va construi un obiect care să joace rolul de obiect prototip pentru funcție. Orice obiect, după cum am aflat anterior, moștenește de la un altul.
 
 2.9 Este creat identificatorul funcProto. Acesta va face referință la obiectul rezultat din operațiunea abstractă  CreateBuiltinFunction(realmRec, noSteps, objProto). Am folosit această operațiune și mai sus când am construit mecanismul de verificare.
 
-Cum se fabrică obiectul prototip?
+**Cum se fabrică obiectul prototip?**
 
-înregistrarea realmRec este trimis ca prim argument,
-o secvență algoritmică vidă (noSteps) constituie al doilea, argument. Este și logic, obiectul-funcție returnat nu dorim să facă nimic, nu va fi apelat,
-referința către obiectul prototip zero objProto.
+- înregistrarea realmRec este trimisă ca prim argument,
+- o secvență algoritmică vidă (noSteps) constituie al doilea, argument. Este și logic, obiectul-funcție returnat nu dorim să facă nimic, nu va fi apelat,
+- referința către obiectul prototip zero `objProto`.
 
 Este returnată funcția-obiect internă ca rezultat al lui CreateBuiltinFunction. Dacă am face o disecție acestui obiect-funcție care tocmai a devenit prototipul oricărei funcții care va fi creată de acum încolo, vom găsi următoarele:
-are o înregistrare care ține minte cărui Tărâm aparține,
-are referința către obiectul prototip universal creat anterior identificat prin objProto
-are o mențiune ce indică că acest obiect-funcție este extensibil, adică i se pot adăuga proprietăți noi,
-are un câmp comun care indică dacă este un Script sau Module, dar este setat la null pentru că nu este cazul
-și o listă de proprietăți setate la undefined pentru că acelea aparțin altor funcții-obiect ce vor apărea în viitor.
+- are o înregistrare care ține minte cărui *Tărâm* aparține,
+- are referința către obiectul prototip universal creat anterior identificat prin `objProto`
+- are o mențiune ce indică că acest obiect-funcție este extensibil, adică i se pot adăuga proprietăți noi,
+- are un câmp comun care indică dacă este un Script sau Module, dar este setat la null pentru că nu este cazul
+- și o listă de proprietăți setate la undefined pentru că acelea aparțin altor funcții-obiect ce vor apărea în viitor.
 
-În acest moment s-a constituit obiectul prototip al tuturor funcțiilor. Acesta nu mai este un obiect ordinar, ci este un obiect-funcție. Reține faptul că acest obiect-funcție intern este unul extensibil. Astfel, s-a născut și mecanismul de moștenire ce va asigura transmiterea tuturor caracteristicilor prototipului în mod automat tuturor copiilor.
+În acest moment s-a constituit obiectul prototip al tuturor funcțiilor. Acesta nu mai este un obiect ordinar, ci este un obiect-funcție. Reține faptul că acest obiect-funcție intern este unul extensibil. Astfel, s-a născut și mecanismul de moștenire ce va asigura transmiterea tuturor caracteristicilor prototipului în mod automat tuturor copiilor. Acum, dacă avem prototipul, îl vom referenția mereu cu identificatorul creat la început: `funcProto`.
 
-2.10 Obiectul-funcție intern tocmai creat va fi identificat din acest moment ca `intrinsics.[[%FunctionPrototype%]]`.
+2.10 Obiectul-funcție intern cu rol de obiect prototip pentru toate funcțiile care tocmai a fost creat va fi identificat din acest moment ca `intrinsics.[[%FunctionPrototype%]]`.
 
-2.11 Abia acum Demiurgul va seta obiectul prototip pentru funcția necesară verificării excepțiilor cu valoarea `objProto`.
+##### Mecanismului de semnalizare a erorilor - II
 
-2.12 Crearea primei noastre funcții-obiect nu s-a încheiat. Te vei întreba de ce. Răspunsul este că așa cum arată ea în acest moment, nu-și atinge scopul. Te vei întreba care-i scopul unei funcții? Simplu. Acela de a fi apelată, adică de a fi chemată pentru a-i fi evaluat codul pe care-l poartă și care-i dau unicitatea și, funcționalitatea. Deci, trebuie să facem funcția noastră apelabilă. Comanda `AddRestrictedFunctionProperties(funcProto, realmRec)` adaugă două proprietăți: posibilitatea de a fi invocate (`caller`) și `arguments`, care este o colecție a tuturor argumentelor pe care o funcție le poate primi. Pe scurt, proprietatea care face funcțiile apelabile și cea care le face capabile de a ține evidența argumentelor primite sunt adăugate primului nostru obiect-funcție.
+2.11  Pentru că există acum prototipul pentru toate funcțiile, Demiurgul va încheia construcția funcției de afișare a erorilor dotând-o cu obiectul prototip prin setarea legăturii la identificatorul `objProto`.
+
+##### Finalizarea construcției obiectului prototip
+
+2.12 Crearea prototipului funcțiilor-obiect nu s-a încheiat. Te vei întreba de ce. Răspunsul este că așa cum arată ea în acest moment, nu-și atinge scopul. Te vei întreba care-i scopul unei funcții? Simplu. Acela de a fi apelată, adică de a fi chemată pentru a-i fi evaluat codul pe care-l poartă și care-i dau unicitatea și, funcționalitatea. Deci, trebuie să facem funcția noastră apelabilă. Comanda abstractă `AddRestrictedFunctionProperties(funcProto, realmRec)` adaugă două proprietăți obiectului-funcție tocmai creat:
+- `caller` ce oferă mecanismul de a fi invocate și
+- `arguments`, care este o colecție a tuturor argumentelor pe care o funcție le poate primi.
+
+Pe scurt, proprietatea care face funcțiile apelabile și cea care le face capabile de a ține evidența argumentelor primite sunt adăugate prototipului.
 
 <img src="intrinsics.png">
 
@@ -146,19 +156,25 @@ Este returnată funcția-obiect internă ca rezultat al lui CreateBuiltinFunctio
 - Obiecte pentru controlul operațiilor abstracte: `funcțiile generator` și `Promise`;
 - Obiectele cu reflexie: `Proxy` și `Reflect`.
 
+Revelator este faptul că toate, dar toate aceste entități sunt create folosind aceeași comandă abstractă, pe care, Demiurgul a folosit-o de două ori până acum: CreateBuiltinFunction(realmRec, <steps>, <prototype>, <slots>);
+
 ![](ObiecteFundamentale.png)
 
-2.14 Obiectul `intrinsics` este creat pe deplin și gata de a primi viață prin aportul adus de codul propriu.
+2.14 Înregistrarea `intrinsics` este deplin formată și a fost deja returnată ca ultim pas al comenzii abstracte `CreateIntrinsics (realmRec)`.
 
-În acest moment, obiectul `intrinsics` este întregit și pregătit pentru a prelua creația noastră - codul sursă scris de noi pe care-l vom evalua. Dar nu am terminat. Abia suntem la pasul 2 al Genezei noastre. Odată create obiectele intrinseci, vom continua cu întregirea și finalizarea obiectului `realmRec`.
+În acest moment, toate entitățile lui `intrinsics` sunt pregătite pentru a contribui la evaluarea codul sursă scris de noi de îndată ce motorul îl va executa.
 
-3. Este setată proprietatea `realmRec.[[GlobalObject]]`, care inițial are valorea `undefined`.
+**Nu am terminat.**
+
+Abia suntem la pasul 2 al Genezei noastre. Odată create obiectele intrinseci, vom continua cu întregirea și finalizarea obiectului `realmRec`.
+
+3. Este setată proprietatea `realmRec.[[GlobalObject]]`, care inițial are valoarea `undefined`.
 4. Este setată proprietatea `realmRec.[[GlobalEnv]]`, care inițial are valoarea `undefined`.
 5. Proprietatea `realmRec.[[TemplateMap]]` este setată ca o listă goală.
 6. Este încheiată geneza `Tărâmului` prin returnarea obiectului `realmRec`.
 
-Acum Geneza unui `Tărâm` s-a încheiat. Demiurgul se odihnește pentru că mai are să creeze întreaga natură a tărâmului nostru. În cazul nostru „natura” se numește `obiectul global` și este locul în care va sta codul nostru pentru a fi rulat și evaluat.
-Poți să-ți imaginezi `obiectul global` în acest moment precum „Grădina deliciilor pământene” a lui Hyeronimous Bosch, dar fără bestiar și oameni.
+Acum, Geneza unui `Tărâm` s-a încheiat. Demiurgul se odihnește pentru că mai are să creeze întreaga natură a tărâmului nostru. În cazul nostru „natura” se numește `obiectul global` și este locul în care va sta codul nostru pentru a fi rulat și evaluat.
+Poți să-ți imaginezi `obiectul global` în acest moment precum „Grădina deliciilor pământene” a lui Hieronymus Bosch, dar fără bestiar și oameni.
 
 Spre deosebire de orice alt mit al Genezei așa cum le cunoști, tot bestiarul care va popula `obiectul global` (natura) va fi creat de noi, semizeii :D.
 
@@ -169,27 +185,52 @@ Nu te speria, nu trebuie să le memorezi, să le știi pe toate... totul va veni
 
 **Geneza Obiectului Global**
 
-După ce un `Tărâm` s-a format, următorul în linia creației este obiectul global. Acesta la momentul creării unui `Realm` are asociată valoarea `undefined`, dar imediat ce sunt atașate proprietățile `[[GlobalEnv]]` și `[[TemplateMap]]` la `realmRec`, debutează în forță crearea obiectului global prin rularea unui algoritm abstract intitulat: `SetRealmGlobalObject ( realmRec, globalObj, thisValue )`.
+După ce un `Tărâm` s-a format, următorul în linia creației este obiectul global. Acesta la momentul creării unui `Realm` are asociată valoarea `undefined`, dar imediat ce sunt atașate proprietățile `[[GlobalEnv]]` și `[[TemplateMap]]` la `realmRec`, debutează în forță crearea obiectului global.
 
 Urmărirea pașilor de formare a **Obiectului Global** aduce multiple lămuriri asupra mecanismelor de formare a lui `this` și multe clarificări privind moștenirea. Pentru a înțelege pașii acestui algoritm, trebuie să fi trecut prin pașii de formare a unui `Tărâm`. Altfel, nu vei înțelege de unde vin anumiți identificatori și proprietăți ale obiectului `intrinsics` sau cine este `realmRec`.
 
 **Demiurgul** tună: `SetRealmGlobalObject ( realmRec, globalObj, thisValue )` !!!.
 
-1. Verifică dacă identificatorul `globalObj` este setat la valoarea `undefined`, iar dacă da, urmează următoarea secvență:
-  a. atribuie identificatorului `intrinsics`, valoarea lui `realmRec.[[intrinsics]]`.
-  b. atribuie identificatorului `globalObj` rezultatul operațiunii `ObjectCreate` căreia îi trimitem drept prim parametru `intrinsics.[[%ObjectPrototype%]]`. Acesta, dacă-ți mai aduci aminte este un obiect ordinar, care este arhetipul prototipului tuturor obiectelor (prototype este setat la null). Acesta va deveni valoarea lui `globalObj`.
+1. Verifică dacă identificatorul `globalObj` este setat la valoarea `undefined`. Obiectul global chiar este setat în acest moment la valoarea `undefined`. Dacă te uiți la ultimii pași ai creării Tărâmului, vei vedea că unul din pași, chiar asta face.  Dacă iar dacă da, urmează următoarea secvență:
+  a. atribuie identificatorului `intrinsics`, valoarea lui `realmRec.[[intrinsics]]`, care este chiar înregistrarea intrinsics generată la crearea Tărâmului. Asta ce înseamnă? Că toate obiectele interne JavaScript vor întra în etapa de creere a obiectului global.
+  b. atribuie identificatorului `globalObj` rezultatul operațiunii `ObjectCreate` căreia îi trimitem drept prim parametru `intrinsics.[[%ObjectPrototype%]]`. Acesta, dacă-ți mai aduci aminte este un obiect ordinar, care stă la baza construcției tuturor obiectelor prototip. Am văzut deja cazul constituirii obiectului prototip al funcțiilor. Acesta va deveni valoarea lui `globalObj`. Ceea ce tocmai s-a întâmplat este că obiectul care joacă rolul de obiect prototip al obiectului global va moșteni toate proprietățile obiectului ordinar creat la formarea Tărâmului (pentru detalii vezi 9.1 Ordinary Object Internal Methods and Internal Slots, ECMAScript® 2018 Language Specification).
 2. Este verificat dacă valoarea lui `globalObj` chiar este un obiect.
 3. Aceste pas este foarte important prin precizările pe care le aduce. Pur și simplu, pe scurt valoarea lui `this` va fi setată la valoarea lui `globalObj`. Dar hai să o luăm cu începutul. Mai întâi de toate este verificată valoarea identificatorului `thisValue`, iar dacă aceasta este `undefined`, se va face legătura între `thisValue` și valoarea lui `globalObj`.
+
+Ceea ce tocmai s-a petrecut este că obiectul prototip al obiectului global a devenit valoarea this. Reformulând, se poate spune că obiectul prototip al obiectului global poate fi referit și cu this.
+
 4. Se va seta ca valoarea identificatorului `realmRec.[[GlobalObject]]` să fie valoarea identificată de `globalObj`.
 5. Este pasul la care este creat mediul lexical propriu pentru *obiectul global*. Acesta este identificat prin `newGlobalEnv` și este rezultatul operațiunii `NewGlobalEnvironment(globalObj, thisValue)`. Reținem din pașii operațiunii `NewGlobalEnvironment` faptul că mediul lexical extern al obiectului global este setat la `null`, adică nu mai există altul mai sus. Obiectul pasat va fi considerat obiectul care va constitui registrul mediului lexical format, adică locul unde vor fi introduse legăturile dintre identificatori și valorile lor.
 6. Identificatorul `realmRec.[[GlobalEnv]]` primește drept valoare obiectul lui `newGlobalEnv`. Și în acest chip, se vor fi completat și proprietățile obiectului `intrinsics` schimbându-și valoarea de la `undefined` la cele desemnate aici.
-7. Obiectul `realmRec` este returnat cu aceste îmbogățiri.
+7. Înregistrarea `realmRec`  este returnată cu aceste completări importante.
 
-Trebuie precizat un detaliu foarte important. Fiecare dezvoltator de motor  JavaScript alege care va fi obiectul prototip al obiectului global.
+Trebuie precizat un detaliu foarte important. Fiecare dezvoltator de motor JavaScript alege care va fi obiectul prototip al obiectului global.
 
-**Moment ZEN**: Toate obiectele și funcțiile unui program sunt membri ai obiectului global.
+**Moment ZEN**: Toate obiectele și funcțiile unui program sunt membri ai obiectului global dacă nu vor fi izolate cu intenție.
 
-Pe suprafața sferei obiectului global sunt dispuse spre a rezolva diferite cerințe „obiectele interne” asociate obiectului global pe care JavaScript le pune la dispoziție din start și care sunt reprezentate ca structuri hexagonale în imaginea creată. Am spus aici că *obiectele interne* sunt asociate celui global. Acest lucru este corect pentru că *obiectele interne* nu aparțin obiectului global. Standardul spune foarte clar că „ECMAScript definește o colecție de obiecte interne care întregesc definiția de «entități ECMAScript»” (4.2 ECMAScript Overview).
+Crearea obiectului global s-a încheiat, dar mai este necesar să fie făcut un pas: stabilirea de identificatori pentru toate proprietățile obiectului global. Acest pas este făcut prin rularea comencii abstracte `SetDefaultGlobalBindings (realmRec)`. Cine sunt proprietățile obiectului global? Acestea sunt precizate de standard și vom preciza și noi câteva:
+
+- Proprietăți valorice:
+  - Infinity,
+  - NaN,
+  - undefined
+
+- Funcții:
+  - eval(cevaCod),
+  - isFinite(număr),
+  - isNan(număr),
+  - parseFloat(cifre),
+  - parseInt(cifre, rădăcină),
+  - funcții de gestionare a URI-urilor,
+  - funcții cu rol de constructori (Array(), Boolean(), etc.).
+
+- Alte proprietăți:
+  - Atomics,
+  - JSON,
+  - Math,
+  - Reflect.
+
+Pe suprafața sferei obiectului global sunt dispuse spre a rezolva diferite cerințe proprietățile obiectului global pe care JavaScript le pune la dispoziție din start și care sunt reprezentate ca structuri hexagonale în imaginea creată. Cele care sunt *obiectele interne* sunt asociate celui global. Acest lucru este corect pentru că *obiectele interne* nu aparțin obiectului global. Standardul spune foarte clar că „ECMAScript definește o colecție de obiecte interne care întregesc definiția de «entități ECMAScript»” (4.2 ECMAScript Overview).
 
 ### JavaScript este de un grup de obiecte care comunică între ele.
 
