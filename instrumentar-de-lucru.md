@@ -52,7 +52,7 @@ Acum că avem la îndemână un robot, poți să-ți imaginezi o metodă ca pe u
 
 ![Ilustrare a unui obiect](IlustratieObiectCaRobotelCodat-Obiect-reprezentare.png "Un roboțel este un obiect")
 
-Codul complet pentru un obiect este o listă de perechi cheie - valoare.
+Codul complet pentru un obiect este o listă de perechi cheie - valoare. Cum adică cheie - valoare? Adică o cheie, adică un fragment de text, identifică o valoare: `ceva: 10`. Pentru cheia `ceva`, am valoarea 10.
 
 ```javascript
 var robotel = {

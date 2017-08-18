@@ -120,7 +120,7 @@ Buna practică spune ca atunci când folosești var pentru a declara variabile, 
 
 ### Standardul spune
 
-Un enunț `var` declară variabile care au drept `scope` contextul de execuție curent. Variabilele `var` sunt create atunci când este instanțiat mediul lexical care le conține dar la momentul în care sunt create li se asignează valoarea `undefined`. Asignarea valorii se face la momentul execuției, nu la momentul creării.
+Un enunț `var` declară variabile care sunt în *aria de efect* al contextului de execuție curent. Variabilele `var` sunt create atunci când este instanțiat mediul lexical care le conține, dar la momentul în care sunt create, li se asignează valoarea `undefined`. Asignarea valorii se face la momentul execuției, nu la momentul creării. Valoarea este asignată la momentul execuției codului, nu la momentul declarării.
 
 ## `let` și `const`
 
@@ -128,7 +128,7 @@ Numele de `let` vine din matematică însemnând: `fie`: fie x un număr cu valo
 
 ### Standardul spune
 
-Declarațiile `let` și `const` definesc variabilele care sunt în mediul lexical, adică scope-ul contextului de execuție curent (running execution context). Variabilele sunt create atunci când mediul lexical este instanțiat, dar nu vor fi accesate nicicum până când **_lexical binding_** este evaluat. Valoarea este asignată atunci când este evaluat acest **lexical binding**, nu la momentul declarării lor. Dacă o declarație cu `let` nu are o valoare de inițializare, este asignat `undefined` la momentul în care este evaluat, adică la momentul când se face `lexical binding` și se completează așa-numitul „Registru de mediu".
+Declarațiile `let` și `const` definesc variabilele care aparțin mediului lexical al contextului de execuție curent. Variabilele sunt create atunci când mediul lexical este instanțiat, dar nu vor fi accesate nicicum până când nu sunt evaluate legăturile la valori (**lexical binding**). Valoarea este asignată atunci când este evaluat acest **lexical binding**, nu la momentul declarării lor. Dacă o declarație cu `let` nu are o valoare de inițializare, este asignat `undefined` la momentul în care este evaluat, adică la momentul când se face `lexical binding` și se completează așa-numitul „Registru de mediu".
 
 ## Mantre
 
@@ -187,7 +187,7 @@ console.log(igrec()); // salut
 console.log(valori); //[Array] [10,20]
 ```
 
-Folosind operatorul spread (...), putem introduce restul valorilor din array într-un array cu identificator prestabilit. 
+Folosind operatorul spread (...), putem introduce restul valorilor din array într-un array cu identificator prestabilit.
 
 ## Stări confuze
 

@@ -87,7 +87,7 @@ Pentru că acum `Tărâmul` nu are încă substanță, **Demiurgul** spune: `Cre
 
 2.4 Obiectul prototip abia creat devine proprietate a obiectului `intrinsics`, fiind identificat prin `intrinsics.[[%ObjectPrototype%]]`. Acesta este un moment aniversar. Tocmai s-a născut primul obiect. Obiectul simplu cu rol de prototip.
 
-##### Mecanismului de semnalizare a erorilor - I
+##### Semnalizarea erorilor - I
 
 2.5 Am avansat îndeajuns de mult cu geneza pentru a constitui un prim mecanism de raportare a erorilor. Zis și făcut. Pentru a realiza acest instrument, avem nevoie de ceva care să reacționeze la o stare de eroare semnalând-o. Instrumentul care este cel mai potrivit este funcția. O funcție, cam în orice limbaj de programare este ca un subprgrămel apelabil. În acest moment, avem nevoie să creăm o funcție care să fie disponibilă oricând pentru semnalarea erorilor. Spuneam că în JavaScript totul este obiect. Funcțiile nu sunt o excepție și din acest motiv sunt numite funcții obiect.
 Pentru a raporta erori avem nevoie de o funcție specializată care este definită o singură dată pentru un `Realm`. Toate instrucțiunile care vor testa o stare de excepție poartă identificatorul %ThrowTypeError%, dar pentru acest moment al genezei, toți pașii pe care îi va face %ThrowTypeError% vor fi atribuiți identificatorul `throwerSteps`.
@@ -131,7 +131,7 @@ Este returnată funcția-obiect internă ca rezultat al lui CreateBuiltinFunctio
 
 2.10 Obiectul-funcție intern cu rol de obiect prototip pentru toate funcțiile care tocmai a fost creat va fi identificat din acest moment ca `intrinsics.[[%FunctionPrototype%]]`.
 
-##### Mecanismului de semnalizare a erorilor - II
+##### Semnalizarea erorilor - II
 
 2.11  Pentru că există acum prototipul pentru toate funcțiile, Demiurgul va încheia construcția funcției de afișare a erorilor dotând-o cu obiectul prototip prin setarea legăturii la identificatorul `objProto`.
 

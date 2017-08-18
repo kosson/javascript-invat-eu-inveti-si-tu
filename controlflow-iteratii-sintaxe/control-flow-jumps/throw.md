@@ -1,8 +1,6 @@
-# Comanda `throw`
+# Enunțul `throw`
 
-Această comandă indică faptul că există o excepție, o stare de eroare, care trebuie să fie instrumentată de o funcție dedicată cu tratarea acestora (exception handler).
-
-Înainte de a lămuri comanda `throw`, o vom traduce în limba română cu termenul de „a raporta”.
+Indică faptul că există o excepție de la regulile sintactice ale limbajului, o stare de eroare, care trebuie să fie instrumentată de o funcție dedicată cu tratarea acestora (*exception handler*). Pe `twrow` am putea să-l asimilăm următoarelor sensuri în limba română: a scoate erorile la lumină sau a semnaliza erorile când acestea apar sau chiar a raporta. Voi folosi interșanjabil acești termeni în această lucrare.
 
 ```javascript
 function ix(condition){

@@ -1,6 +1,6 @@
-  # Instrucțiunea `continue`
+  # Enunțul `continue`
 
-Instrucțiunea este folosită pentru a sări pur și simplu peste un pas în timpul executării unei bucle.
+Este folosit pentru a sări pur și simplu peste un pas în timpul executării unei bucle.
 
 Să presupunem că ciclezi peste o serie de numere, iar atunci când pică unul de nu întrunește o anume condiție, vrei să se întâmple ceva, și să treci la următorul pas de ciclare.
 

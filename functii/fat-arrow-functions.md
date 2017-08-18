@@ -1,21 +1,63 @@
-# Funcții ***fat arrow***
+# Funcții *fat arrow*
 
 Acest nou tip de funcții au fost introduse de ECMAScript 2015.
 
-Semnul care dă și denumirea de fat arrow este `=>` ceea ce înseamnă că funcția returnează rezultatul evaluării codului din funcție.
+Semnul care dă și denumirea de fat arrow este `=>` ceea ce înseamnă că funcția returnează rezultatul evaluării codului din funcție, adică a expresiei. Corpul funcției este numit și „concis”, ceea ce implică faptul că doar expresiile pot constitui corpul funcției.
+Adu-ți aminte mereu faptul că în cazul unui bloc de cod, trebuie să scrii `return` pentru a scoate ceva din funcție. Doar în cazul expresiilor simple, precum un literal, beneficiem de un return implicit.
 
-Sunt soluția perfectă pentru funcțiile anonime, care la rândul lor sunt cel mai des folosite ca și callback-uri. De fapt, asta a fost și gândirea din spatele deciziei de a introduce această sintaxă.
+Sunt considerate a fi soluția perfectă pentru funcțiile anonime, care la rândul lor sunt cel mai des folosite ca și callback-uri. De fapt, asta a fost și gândirea din spatele deciziei de a introduce această sintaxă. Există totuși cazul în care o funcție arrow, capătă un nume:
 
-Funcțiile fat arrows la momentul execuție preia `this` și `arguments` de la mediul lexical găzduitor. Nu creează legăturile proprii la `this` sau la `arguments`, ci, pur și simplu, le folosește pe cele ale gazdei.
+```javascript
+var faCeva = x => x * 2;
+faCeva.name; "faCeva"
+```
+
+Funcțiile fat arrows la momentul execuției preiau `this` și `arguments` de la mediul lexical găzduitor. Nu creează legăturile proprii la `this` sau la `arguments`, ci, pur și simplu, le folosește pe cele ale gazdei. La ce bun acest lucru? În primul rând la evitarea problemelor de referențiere a lui `this` și evitarea folosirii utilitarului `bind` pentru a fixa totuți o referință către this.
+
+```javascript
+var o = {
+  info: 'pi',
+  iese: function scoate() {
+    setTimeout ( () => console.log(this.info) );
+  }
+};
+o.iese(); // pi
+
+// versus vechea rutină
+
+var obi = {
+  info: 'pi',
+  iese: function iese() {
+    setTimeout ( function () {
+      console.log(this.info);
+    }.bind(this), 1000);
+  }
+};
+obi.iese(); // pi
+
+// versus și mai vechea rutină
+// cu puntea lexicală urâtă self = this
+
+var ob = {
+  info: 'pi',
+  iese: function iese() {
+    var self = this;
+    setTimeout ( function () {
+      console.log(self.info);
+    }, 1000);
+  }
+};
+ob.iese(); // pi
+```
 
 Drept corp al funcției poate fi direct o expresie ce trebuie evaluată sau blocuri de cod convenționale ca în cazul funcțiilor declarate prin cuvântul cheie `function`.
 
-Formule sintactice achivalente:
+Formule sintactice echivalente:
 
 ```javascript
 var oriDoi = (valoare) => valoare * valoare;
 // este echivalent cu
-var oriDoi = (valoare) => {return valoare * valoare};
+var oriDoi = (valoare) => { return valoare * valoare };
 ```
 
 Cel mai clar exemplu pe care l-am găsit și care „a aprins lumina” este cel oferit de Reg “raganwald” Braithwaite în ***JavaScript Allongé, the "Six" Edition***.
@@ -39,6 +81,8 @@ Funcțiile ***fat-arrow*** își au originile în expresiile lambda ale program�
 ## Mantre
 
 - Fat arrow sunt funcții.
+- În cazul unui bloc de cod, trebuie menționat return; acesta nu mai este implicit.
+- Ceea ce se returnează este evaluarea unei expresii, nu a unui enunț.
 - Funcțiile fat arrows sunt legate la scope-ul lexical. Nu mai este nevoie de trucul `var self = this` pentru a accesa contextul.
 - Nu au funcție internă [[Construct]] și astfel, nu pot crea obiecte cu `new`.
 - Nu exisă `this`, nici `arguments` și nici `super` sau `new.target`. Valorile pentru `this`, `super`, `arguments` și `new target` sunt luate de la funcția în interiorul căreia este definit fat arrow-ul.
@@ -51,7 +95,7 @@ Funcțiile ***fat-arrow*** își au originile în expresiile lambda ale program�
 
 Un **fat arrow** este o funcție foarte simplă care nu poate fi folosită ca și constructor și care nu are propriul `this` și nici `arguments`.
 
-Aceste funcții nu au nume.
+Aceste funcții nu au nume. Dacă ții neapărat, poți totuși să legi un identificator la ele precum în: `var x = () => 10;`.
 
 ```javascript
 (function faCeva (ceva) {
@@ -118,13 +162,13 @@ Dacă este nevoie de mai multe expresii, nu numai să returnezi ceva simplu:
 } ); // Array [ 3, 8, 15 ]
 ```
 
-Pentru a returna un obiect:
+Pentru a returna un obiect trebuie întotdeauna să introduci obiectul dorit a fi returnat între paranteze rotunde. Acest lucru este necesar pentru că altfel perechea de acolade ar fi considerată un bloc de cod.
 
 ```javascript
 [1,2,3].map( (numar, index) => ({numar: numar, indexul: index}) );
 ```
 
-Arrow functions fac bindingul la contextul lexical stabilit.
+Arrow functions fac bindingul la contextul lexical intenționat de programator. Acest lucru este binevenit în lucrul cu DOM-ul.
 
 ```html
 <button type="button" name="button" id="test">Testeaza this</button>
@@ -143,7 +187,7 @@ Arrow functions fac bindingul la contextul lexical stabilit.
 
 ## Se aplică `call()`, `apply()` și `bind()`
 
-Nu trebuie uitat faptul că fat arrows sunt funcții iar acestea moștenesc metodele lui `Function`.
+Adu-ți mereu aminte că fat arrows sunt funcții, iar acestea moștenesc metodele lui `Function`. În concluzie, metodele lui Function sunt disponibile.
 
 ```javascript
 var x = (unu, doi) => unu + doi;
@@ -155,7 +199,7 @@ maLegLaObiectNull(); // 3
 
 ## Recursivitate
 
-Fat arrows pot fi utilizate recursiv dacă sunt declarate ca o expresie. Nu uita faptul că mediul lexical stabilit de funcția gazdă cuprinde funcția **fat arrow**.
+Fat arrows pot fi utilizate recursiv dacă sunt declarate ca o expresie. Mediul lexical stabilit de funcția gazdă cuprinde funcția **fat arrow**.
 
 ```javascript
 var faOScadere = (valoare) => {
@@ -165,6 +209,29 @@ var faOScadere = (valoare) => {
 }; faOScadere(5);
 ```
 
+Sunt câteva cazuri de utilizare a „fat arrows” care necesită un ochi ager și atenție.
+
+Să presupunem că pentru un motiv sau altul, ai nevoie să returnezi un enunț cum este „try {...} catch(error) {...}”. Cum faci? Pentru că sintaxa unui fat arrow este foarte concisă și nu prea permite variații. Singura metodă ar fi să introduci enunțul într-un bloc de acolade, care, după cum bine știm marchează limitele unui bloc de cod.
+
+```javascript
+var facCeva = () => { try {...} catch(error) {...} };
+```
+
+De la Kyle Simpson am prins câteva informații privind obișnuințele de programare din jurul funcțiilor arrow functions, iar una mai interesantă implică scrierea corpului concis al funcției ca o înșiruire de expresii separate prin operatorul virgulă.
+
+```javascript
+((oValPosibilă, altăValPosibilă) => (
+    oValPosibilă = 10,
+    altăValPosibilă = 5,
+    oValPosibilă * altăValPosibilă
+  )
+)(); // 30
+```
+
+Magia rezidă din faptul că poți declara variabilele prin introducerea lor ca argumente care nu vor primi valoarea.
+
 ## Referințe
 
 [Reg “raganwald” Braithwaite , JavaScript Allongé, the "Six" Edition](https://leanpub.com/javascriptallongesix)
+
+[You Don't Know JS: ES6 & Beyond](https://github.com/getify/You-Dont-Know-JS/tree/master/es6%20%26%20beyond)
