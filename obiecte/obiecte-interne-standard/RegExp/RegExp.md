@@ -398,17 +398,19 @@ sablon.test('10am'); // true
 
 #### Negarea setului
 
-Seturile de caractere pot fi negate în sensul că se va face potrivire după toate caracterele posibile, mai puțin cele din set. Atenție! Spre deosebire de punct `.`, care are în intenție potrivirea tuturor caracterelor, folosirea unui set negat va potrivi și caracterele invizibile cum sunt *line breaks*, de exemplu.
+Seturile de caractere pot fi negate în sensul că se va face potrivire după toate caracterele posibile, mai puțin cele specificate în set. Atenție! Spre deosebire de punct `.`, care are în intenție potrivirea tuturor caracterelor, folosirea unui set negat va lua în considerare și caracterele invizibile cum sunt *line breaks*, de exemplu.
 
 Pentru a nega folosirea setului, pur și simplu pui caracterul `^` la început: `[^c-f]`, cu înțelesul de ocolește partea șirului care conține acest set de caractere. Carret trebuie pus chiar la început imediat după paranteza pătrată dacă dorim negarea. Dacă este în altă poziție, pur și simplu e și el parte a setului de caractere.
 
-Există o nuanță semantică pe care trebuie să o lămurim. Când ai un șablon de genul `/al[^i] doilea/`, înțelesul corect este **al** care poate fi urmat de orice caracter, dar nu și **i**. De ce este relevantă precizarea? Pentru că în locul acelui **i**, care nu este permis poate fi un spațiu, iar spațiul va fi returnat ca partea potrivirii. Negarea poate fi înțeleasă ca un wildcard care elimină anumite caractere indezirabile, dar care poate fi orice altceva plus invizibilele.
+Există o nuanță semantică pe care trebuie să o lămurim. Când ai un șablon de genul `/al[^i] doilea/`, înțelesul corect este **al** care poate fi urmat de orice caracter, dar nu și de **i**. De ce este relevantă precizarea? Pentru că în locul acelui **i**, care nu este permis poate fi un spațiu, iar spațiul va fi returnat ca partea potrivirii. Negarea poate fi înțeleasă ca un wildcard care elimină anumite caractere sau combinații de caractere indezirabile (vezi grupările), dar care poate fi orice altceva plus setul invizibilelor.
 
 La ce ar fi utilă o astfel de opțiune? De exemplu, pentru a elimina anumite caractere de control pe care le folosești pentru a demarca fragmente de text, taguri, etc. Sau mai poți avea cazul în care dorești să corectezi numele de fișiere pentru a nu conține caractere altele decât cele din setul Latin, ș.a.m.d.
 
+Ai putea folosi negările pentru a marca tot ceea ce NU vrei să intre în componența subșirului care ar putea fi găsit. Îți poți închipui un marker negru cu care s-au acoperit anumite caractere sau fragmente întregi dintr-un text al unui document secret.
+
 #### Prescurtările pentru seturi
 
-Deja le știm:
+Acestea pot fi rezumate astfel:
 
 - `[0-9]`     : `\d`,
 - `[^\d]`     : `\D`
