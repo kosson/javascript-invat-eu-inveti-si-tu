@@ -133,18 +133,18 @@ Pentru a face o anatomie, vom construi tărâmul JavaScript de la cele mai mici 
 ### Date, date, date
 
 Scrierea unui program are drept țintă manipularea unor date pentru a le transforma în diverse scopuri.
-Datele pe care un computer le poate manipula au o structură și dezvoltă o adevărată ierarhie pe măsură ce urmărim felul în care sunt reprezentate într-un computer. Cea mai mică unitate de date este bitul - digitul binar, care poate fi 0 sau 1 (în lb. engleză „bits”). Urcând o treaptă mai sus, avem caracterele despre care știm că sunt reprezentări pe 16 biți codate după standardul UTF (în lb. engleză „characters”). Pășind încă o treaptă ajungem la câmpuri de date (în lb. engleză „fields”). Mai multe câmpuri de date puse împreună formează o înregistrare (în lb. engleză „record”). O înregistrare specifică este gruparea a mai multor câmpuri înrudite. Cel mai bun exemplu este o înregistrare de catalog bibliografic indiferent de formatul de reprezentare. Câmpurile unei singure înregistrări sunt în relație directă cu aceeași entitate pe care o descriu; căreia îi aparțin. Grupareare mai multor înregistrări înrudite, care fac parte din același tip se numește fișier (în lb. engleză „file”). Totuși un fișier poate strânge date diferite după scheme diferite. Nu este obligatoriu ca toate datele să fie structurate identic sau să conțină aceleași date. Fișierele sunt organizate pe mediul de stocare ca secvențe de 8 biți numite în limba engleză „bytes”. Ultimul stadiu de ordonare a datelor este baza de date organizată pe tabele. Tabelele conțin înregistrări, care la rândul lor conțin câmpurile de date.
+Datele pe care un computer le poate manipula au o structură și dezvoltă o adevărată ierarhie pe măsură ce urmărim felul în care sunt reprezentate într-un computer. Cea mai mică unitate de date este bitul - digitul binar, care poate fi 0 sau 1 (în lb. engleză „bits”). Urcând o treaptă mai sus, avem caracterele despre care știm că sunt reprezentări pe 16 biți codate după standardul UTF (în lb. engleză „characters”). Pășind încă o treaptă ajungem la câmpuri de date (în lb. engleză „fields”). Mai multe câmpuri de date puse împreună formează o înregistrare (în lb. engleză „record”). O înregistrare specifică este gruparea a mai multor câmpuri înrudite. Cel mai bun exemplu este o înregistrare de catalog bibliografic indiferent de formatul de reprezentare. Toate câmpurile unei înregistrări unice sunt în relație directă cu aceeași entitate pe care o descriu; căreia îi aparțin. Gruparea mai multor înregistrări înrudite, care sunt de același tip se numește fișier (în lb. engleză „file”). Totuși un fișier poate strânge date diferite după scheme diferite. Nu este obligatoriu ca toate datele să fie structurate identic sau să conțină aceleași date. Fișierele sunt organizate pe mediul de stocare ca secvențe de 8 biți numite în limba engleză „bytes”. Ultimul stadiu de ordonare a datelor este baza de date organizată pe tabele. Tabelele conțin înregistrări, care la rândul lor conțin câmpurile de date.
 
 ### Caracterele folosite
 
-E timpul să intrăm deja în rolul de programator.
+E timpul să intrăm în rolul de programator.
 
-Ești în fața editorului de text preferat gata să redactezi primul tău program. În fereastra editorului, pentru a te face înțeles computerului vei redacta codul prin înșiruirea de caractere în cuvinte, sintagme, enunțuri și așa mai departe.
+Ești în fața editorului de text preferat gata să redactezi primul tău program. În fereastra editorului, pentru a te face înțeles computerului, vei redacta codul prin înșiruirea de caractere în cuvinte, sintagme, enunțuri și așa mai departe.
 
 <img src="CeEsteUnSir.png" width="350px">
 
-Literele, pentru computer nu sunt decât niște coduri alfanumerice în baza căruia sunt capabile să afișeze un anume caracter pe ecran.
-Caracterele folosite pentru a scrie codul sursă ca și reprezentare alfanumerică, ca și codare, respectă standardul internațional Unicode, care asociază coduri individuale pentru fiecare (Latin, Chirilic, etc.). Mai exact, fiecare secvență alfanumerică de codare se numește *punct de cod specific UTF16* (Unicode Transformation Format). Reține faptul că toate caracterele de lucru pentru un computer sunt pur și simplu coduri convenite la nivel internațional.
+Literele, pentru computer, nu sunt decât niște coduri alfanumerice în baza cărora poate afișa un anumit caracter pe ecran.
+Caracterele folosite pentru a scrie codul sursă ca și codare, respectă standardul internațional Unicode, care asociază coduri alfanumerice individuale pentru fiecare (Latin, Chirilic, etc.). Mai exact, fiecare secvență alfanumerică de codare se numește *punct de cod specific UTF16* (Unicode Transformation Format). Reține faptul că toate caracterele de lucru pentru un computer sunt pur și simplu coduri convenite la nivel internațional.
 
 #### Caracterele cu rol special
 
@@ -152,9 +152,9 @@ JavaScript este un limbaj de programare folosit îndeosebi la manipularea șirur
 
 Există câteva caractere care necesită chiar acum, la început de drum, o atenție specială. Acestea sunt: `'` (**ghilimele simple**), `"` (**ghilimele duble**), `\n` (***new line*** - **linie nouă**), `\r` (***carriage return*** - **retur de car**), `\t` (**tabulator orizontal**, acest caracter apare când apeși tasta TAB), `\v` (**tabulator vertical**), `\b` (***backspace*** - **înapoi spre stânga cu ștergerea unui caracter**), `\f` (***form feed*** - **salt pagină nouă la dispozitivul de imprimare**), `/`(**slash**) și `\` (**backslash**).
 
-De ce necesită o atenție specială? Pentru că intră în componența șirurilor de caractere de lucru. Le vom întâlni în analiza textelor și vor crea probleme prin obținerea unor rezultate neașteptate dacă acum, la acest moment de început, nu le dăm cea mai mare atenție. De ce sunt speciale? Pentru că aceste caractere au însemnătate și pentru text, dacă acestea fac parte dintr-un fragment de text analizat din care fac parte și fac sens în economia lui, dar în egală măsură au valoare și pentru motorul JavaScript la momentul analizei codul sursă.
+De ce necesită o atenție specială? Pentru că intră în componența șirurilor de caractere de lucru. Le vom întâlni în analiza textelor și vor crea probleme prin obținerea unor rezultate neașteptate dacă acum, la acest moment de început, nu le dăm cea mai mare atenție. De ce sunt speciale? Pentru că aceste caractere au însemnătate pentru înțelegerea textului, dacă acestea fac parte dintr-un fragment de text, dar în egală măsură au valoare și pentru motorul JavaScript la momentul analizei codul sursă.
 
-Un exemplu pentru a înțelege efectele acestor caractere cu rol de semnal pentru motorul care interpretează codul JavaScript. Să spunem că avem următorul fragment de text pe care dorim să-l prelucrăm cu un program.
+Să spunem că avem următorul fragment de text pe care dorim să-l prelucrăm cu un program.
 
 > Acesta este un text demonstrativ care va enumera caracterele cu înțeles special pentru JavaScript. Problema apare când în text folosim 'citat în engleză cu ghilimele simple', poate "un citat în engleză între ghilimele duble", poate folosim un slash: /, ori un backslash \ sau vorbim despre carriage return \r sau despre new line \n, etc.
 
@@ -219,7 +219,7 @@ Spune standardul că mai întâi textul codului sursă este parcurs pentru a-l �
 
 #### Atomi lexicali
 
-Toate elementele lexicografice care constituie codul în sine, cu excepția spațiilor și a comentariilor, se numesc `token-uri`, adică pe românește `atomi lexicali`.
+Toate elementele lexicografice care constituie codul în sine, cu excepția spațiilor albe și a comentariilor, se numesc `token-uri`, adică, am zis eu pe românește `atomi lexicali`.
 
 Acești **atomi lexicali** (*token*-ii) sunt rezultatul parcurgerii unui fragment de cod (codul sursă) căruia i se aplică regulile lexicale specifice gramaticii impuse de standardul ECMAScript.
 
@@ -229,11 +229,13 @@ Ca să-ți vină ușor să înțelegi, îți poți imagina un giuvaergiu, care d
 
 Rezultatul apare în urma aplicării regulilor de identificare a componentelor ce formează fragmentele „inteligibile” pentru computer din șirul de text de intrare. Dacă-ți vine mai ușor este ca o analiză gramaticală în care identifici părțile de propoziție, ce sunt acestea din punct de vedere al părților de vorbire și așa mai departe.
 
-Atomii sunt de mai multe tipuri: **cuvintele cheie**, **operatorii**, **identificatorii** și **valorile literale**.
+Atomii sunt de mai multe tipuri: **cuvintele rezervate limbajului**, **operatorii**, **identificatorii**, **valorile literale** și **template**-urile (fragmente de text mai lungi afișate pe mai multe linii).
 
-Trebuie să te avertizez de faptul că toate **cuvintele speciale** folosite de JavaScript sunt în limba engleză. Fondul lexical este cel al limbii engleze.
+Trebuie să te avertizez de faptul că toate **cuvintele rezervate** folosite de JavaScript sunt în limba engleză. Fondul lexical este cel al limbii engleze.
 
 #### Line terminators - combinațiile semnal pentru încheierea rândurilor
+
+Capetele de rând sunt folosite pentru a mări lizibilitatea codului și pentru a separa atomii lexicali unii de ceilalți. În general, între doi atomi lexicali stă un capăt de rând.
 
 Ne-am mai întâlnit cu aceste combinații de caractere atunci când am explorat caracterele cu rol special. Vom suplimenta informațiile pe care le avem deja prin detalii privind natura și comportamentul fiecărei combinații în parte după cum urmează:
 
@@ -251,7 +253,8 @@ Pentru a înțelege mai bine, accesați și materialul explicativ de la https://
 
 #### Comentariile
 
-Acestea sunt utile pentru a documenta codul. Sunt două moduri de a introduce comentarii. Se poate folosi dublu slash `// comentariu` sau atunci când ai nevoie de comentarii pe mai multe linii `/* comentariu */`.
+Acestea sunt utile pentru a documenta codul. La momentul executării codului, comentariile nu sunt luate în considerare, fiind supuse aceluiași tratament precum spațiile albe. Aceste sunt utile doar pentru noi cu scopul de a documenta codul. Sunt două moduri de a introduce comentarii. Se poate folosi dublu slash `// comentariu` sau atunci când ai nevoie de comentarii pe mai multe linii `/* comentariu */`.
+Dacă un comentariu pe mai multe linii se extinde pe mai mult de una, acesta va fi considerat în întregime ca un line terminator.
 
 #### Spațiile albe - whitespace
 
@@ -261,13 +264,11 @@ Sunt considerate a fi spații albe următoarele: `tab` (`\t` *tabulator orizonta
 
 <img src="TextSursa.png">
 
-## Structurile lexicale proprii JavaScript și recunoașterea lor
-
 Imediat după faza de constituire a **elementelor de input**, acestea mai sunt parcurse încă o dată, aplicându-se din nou regulile gramaticale pentru a identifica cine și ce funcție îndeplinește: care sunt **identificatorii**, **cuvintele rezervate** limbajului, etc.
 
 Să analizăm împreună ce conțin elementele de intrare.
 
-### Cuvintele cheie sau vocabularul limbajului
+### Cuvintele cheie
 
 ECMAScript are un set de **cuvinte rezervate** din limba engleză, care nu pot fi folosite decât în scopul pentru care au fost rezervate. Cuvintele cheie sunt unul din tipurile de **atomi lexicali** și se scriu întotdeauna fără majuscule.
 
@@ -466,31 +467,42 @@ Enunțurile pot sta singure sau pot fi adunate într-un bloc distinct. Acest blo
 
 Vei vedea mai târziu cât de utile sunt în cazul scrierii enunțurilor care controlează execuția codului, cum ar fi deciziile prin `if...else` sau buclele, cum ar fi `while(expresie){bloc de enunțuri}`.
 
-### Instrucțiunile
+Este nevoie acum să punem ordine în ideile pe care le-am explorat cu privire la enunțuri.
 
-O instrucțiune poate fi o expresie, invocarea unei funcții, a unei metode sau pur și simplu o declarație. O instrucțiune este un pas al unui algoritm. Instrucțiunile vor fi executate în ordinea în care au fost scrise.
+Care sunt enunțurile în JavaScript?
 
-```javascript
-if (sentimente = true) { console.log('Caută-mă tu!') };
-```
+- enunțul blocurilor de cod `{...}`,
+- enunțul declarațiilor de variabile și constante `let x = 10; const y = 9.8;`,
+- enunțuri goale. Pur și simplu nu ai nimic, dar un terminator: `;`,
+- enunțul unei expresii,
+- enunțul `if`,
+- enunțul `break`,
+- enunțul `continue`,
+- enunțul `return`,
+- enunțul `with`,
+- enunțul `switch`,
+- enunțul `throw`,
+- enunțul `try` și
+- enunțul `debugger`.
 
-Instrucțiunile sunt parte a expresiilor. Cel mai adesea veți vedea că o expresie este chiar o instrucțiune. În JavaScript, sunt permise expresii care nu sunt neapărat instrucțiuni. De exemplu, `1 + 1;`
+Mai sunt un set care se numesc „enunțuri ale iterabilelor”:
 
-Instrucțiunile pot fi grupate în JavaScript în blocuri care sunt „separate” de restul codului prin acolade.
+- `do...while`,
+- `while`,
+- `for`,
+- `for-in`,
+- `for-of`.
 
-**JavaScript este un limbaj de programare pentru care este de importanță vitală felul în care este redactat codul sursă.**
+Ce nu poate constitui un enunț al unei expresii? Orice începe cu:
 
-Acest aranjament de scriere a codului, succesiunea în care sunt introduse instrucțiunile imprimă diferite efecte la momentul evaluării.
+- `{`,
+- `function`,
+- `async`,
+- `function`,
+- `class`,
+- `let [`.
 
-Modul în care redactezi codul are efect direct asupra funcționării programului. Nu uita faptul că poți scrie instrucțiunile pe mai multe linii și astfel îmbunătățești lizibilitatea programului.
-
-```javascript
-if (sentimente = true) {
-  console.log('Caută-mă tu!');
-};
-```
-
-Ba mai mult, poți indenta (pui spații înaintea fragmentului de cod și ca efect vizual se vor deplasa spre dreapta). Despre indentare spune *Marele Dicționar pentru Neologisme* din 2000: „plasare a programelor pe linii, pentru scrierea cât mai clară a acestora”.
+Enunțurile pot fi indentate (pui spații albe înaintea fragmentului de cod și ca efect vizual se vor deplasa spre dreapta). Despre indentare spune *Marele Dicționar pentru Neologisme* din 2000: „plasare a programelor pe linii, pentru scrierea cât mai clară a acestora”.
 
 ### Declarațiile
 

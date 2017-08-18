@@ -4,7 +4,7 @@ Computerele nu înțeleg cuvintele noastre, nici măcar caracterele pe care le f
 
 Pentru a înțelege modul de reprezentare numeric al caracterelor din setul Unicode, este nevoie să fie înțeleasă reprezentare hexazecimală a numerelor. Pentru aceasta va trebui să facem o mică incursiune în felul în care „codăm” noi oamenii **cantitățile**. Este foarte important pentru aduce explicații despre cum este realizată puntea dintre un simbol, adică un caracter inteligibil pentru noi, cu o valoare pe care computerul o înțelege.
 
-Câteva informații privind sintemele de numerație, care se vor dovedi foarte utile. Zi de zi lucrăm cu diferite cantități, cu seturi de obiecte, cu grămezi de obiecte și toate acestea au nevoie de o reprezentare. Pentru orice folosim sistemul zecimal de reprezentare, care are caractere ce codează cantitățile pornind de la 0, la 9. Noi le numim cifre. Pentru a reprezenta cantități mai mari de 9, se va folosi o combinație a cifrelor poziționându-le de la dreapta spre stânga poziționând câte o cifră în fiecare ordin: al `unităților`, `zecilor`, `sutelor`, ș.a.m.d. Și acum trebuie să realizăm că, de fapt, ordinele din reprezentarea unui număr natural, codează seturi de cantități, mai puțin unitățile care indică un singur set cuprizânt tot atâtea obiecte câte indică cifra.
+Câteva informații privind sintemele de numerație, care se vor dovedi foarte utile. Zi de zi lucrăm cu diferite cantități, cu seturi de obiecte, cu grămezi de obiecte și toate acestea au nevoie de o reprezentare. Pentru orice folosim sistemul zecimal de reprezentare, care are caractere ce codează cantitățile pornind de la 0, la 9. Noi le numim cifre. Pentru a reprezenta cantități mai mari de 9, se va folosi o combinație a cifrelor poziționându-le de la dreapta spre stânga poziționând câte o cifră în fiecare ordin: al `unităților`, `zecilor`, `sutelor`, ș.a.m.d. Și acum trebuie să realizăm că, de fapt, ordinele din reprezentarea unui număr natural, codează seturi de cantități, mai puțin unitățile care indică un singur set cuprizând tot atâtea obiecte câte indică cifra.
 
 |Numărul: 243|ordinul sutelor| ordinul zecilor| ordinul unităților|
 |:--|:--|:---|:--|
@@ -12,7 +12,7 @@ Câteva informații privind sintemele de numerație, care se vor dovedi foarte u
 |Explicație:|2 seturi a câte o sută de membri; mai scurt 2 X 100|4 seturi a câte zece membri; mai scurt 4 X 10|un singur set al unităților format din trei membri|
 |Exponent:|10<sup>2</sup> X 2 (<code>10<sup>2</sup> = 10 X 10 = 100</code>)|10<sup>1</sup> X 4 (<code>10<sup>1</sup> = 10 X 1 = 10</code>)|10<sup>0</sup> X 3 (<code>10<sup>0</sup> = 10 X 0 = 1</code>)|
 
-Dacă ai încerca să-i explici unui extraterestru cum codăm noi cantitățile, pe scurt, i-ai spune: dispunem câte un simbol, care codează o cantitate, de la dreapta spre stânga și pentru fiecare poziție pe care avansăm, simbolul este înmulțit cu 10 pentru că, de fapt printr-un singur simbol explicăm câte seturi sunt pentru acel ordin de magnitudine.
+Dacă ai încerca să-i explici unui extraterestru cum codăm noi cantitățile, pe scurt, i-ai spune: dispunem câte un simbol, care codează o cantitate. Dispunem simbolurile de la dreapta spre stânga și pentru fiecare poziție pe care avansăm, simbolul este înmulțit cu 10 pentru că, de fapt, printr-un singur simbol explicăm câte seturi sunt pentru acel ordin de magnitudine.
 
 Putem spune că am folosit un sistem de codare al cantităților având baza de referință zece. Adică măsura după care se numără totul este valoarea 10.
 

@@ -1,4 +1,4 @@
-# `Array` - tablouri, vectori
+# Array - tablouri, vectori
 
 Este un obiect intern care are și rol de constructor.
 
@@ -568,6 +568,20 @@ console.log(x, restop); // 1 și Array [ 2, 3 ]
 ```
 
 Tot ce generează un array, folosindu-se această sintaxă, se poate transforma în legături la identificatori, adică valorile array-ului se pot asigna unor variabile ce sunt elementele unui alt array.
+
+## Curiozități
+
+### [] egal cu ![]
+
+```javascript
+[] == ![] // este true
+```
+
+Funcționează pentru că operatorul `!` face o conversie la Boolean și dacă conversia este evaluată la valoarea `true`, cea la care se reduce un obiect. Aceasta va fi inversată la `false` care este interpretat de operatorul `==` ca 0.
+
+Explicații:
+- https://www.ecma-international.org/ecma-262/#sec-logical-not-operator
+- https://www.ecma-international.org/ecma-262/#sec-abstract-equality-comparison
 
 ## Resurse
 [MDN Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array?redirectlocale=en-US&redirectslug=JavaScript%2FReference%2FGlobal_Objects%2FArray)

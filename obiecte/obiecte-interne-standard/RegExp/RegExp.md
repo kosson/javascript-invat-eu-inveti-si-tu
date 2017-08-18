@@ -128,6 +128,8 @@ Folosind fanionul, se va face potrivire pe tot ce seamănă cu secvența șablon
 
 #### Fanionul `y` - sticky
 
+Se mai numește și **modul lipicios** (*sticky* în limba română înseamnă lipicios). Ceea ce se petrece în cazul acestui fanion este că se vor face căutările de la indexul menționat de proprietatea `lastIndex`.
+
 ```javascript
 var sirCaractere = 'A fost odată',
     sablon = /fost/y;

@@ -1,6 +1,6 @@
 # Valorile literale
 
-Valorile literale sunt cele care sunt oferite în mod direct programului, fiind declarate prin însuși caracterul corespondent. Pe scurt, valoarea trei, ca să fie înțeleasă ca număr pentru computer, trebuie să fie introdusă folosind caracterul 3 a setului de caractere latin. Corect? De aici și denumirea lor de literale. Literalele oferă mecanismul cel mai simplu pentru a crea valori.
+Valorile literale sunt valorile oferite în mod direct programului, fiind declarate prin însuși caracterul(ele) corespondent(e). Pe scurt, valoarea trei, ca să fie înțeleasă ca număr pentru computer, trebuie să fie introdusă folosind caracterul 3 a setului de caractere latin. Corect? De aici și denumirea lor de literale. Literalele oferă mecanismul cel mai simplu pentru a crea valori.
 
 ```javascript
 3;      // spuf! iaca trei
@@ -34,7 +34,8 @@ typeof bool; // "object"
 
 ### Literale numerice
 
-În cazul în care avem valori zecimale, acestea pot fi reprezentate și dacă încep cu 0. Important este că cifra care urmează să nu fie sub 8 pentru că altfel este interpretat ca fiind un octal.
+Literalele numerice sunt caracterele a căror interpretare conduce la o valoare numerică. O valoare numerică exprimată printr-un literal va fi întotdeauna rotunjită atunci când se evaluează valoarea numerică.
+În cazul în care avem valori zecimale, acestea pot fi reprezentate și dacă încep cu 0. Important este că cifra care urmează să nu fie sub 8 pentru căci în acest caz este interpretat ca fiind un octal.
 
 Care sunt numerele pe care le poți introduce ca literale.
 
@@ -53,7 +54,9 @@ var unHexa = 0x24443AD; console.log(unHexa); //38028205
 Odată cu valorile numerice poți menționa și exponenții: `e` sau `E`.
 Poți scrie semnul minus care să indice cu care valoare de pe axa numerelor se operează: `-10` și `10`, de exemplu.
 
-## Literale șir
+## Literale șir de caractere
+
+Standardul spune că un șir de caractere literal este „șirul constituit din zero sau mai multe puncte de cod Unicode cuprinse între ghilimele simple sau duble”.
 
 Sunt pur și simplu siruri de caractere care pot fi introduse în mod direct cu ajutorul ghilimelelor.
 
@@ -134,7 +137,7 @@ Acestea sunt: `'` (ghilimele simple), '"' (ghilmele duble), `\b`, `\f`, `\r`, `\
 Pentru digiții zecimali este marcajul care indică că următoarea secvență de caractere este un număr zecimal: `x`, `u`. Pentru valorile hexazecimale este `x`.
 Secvențe de escape pentru UNICODE: `u` sau `u{ }`
 
-### Template Literal
+## Template Literal - text șablon
 
 Începând cu ECMAScript 2015 avem un mod suplimentar de a lucra cu fragmente de text și acesta este numit **template literal** - „șabloane literale”. Chestia extraordinară este că permite introducerea de expresii care pot fi evaluate folosind secvența `${identificator sau expresie}` și lucrul cu fragmente de text pe mai multe rânduri. Pentru a construi un template string punem tot textul nostru între două <code>&#96;</code>, care este caracterul pentru reprezentarea **accentului grav** (grave accent, în engleză). Acest caracter mai este denumit în limba engleză și **backtick**.
 

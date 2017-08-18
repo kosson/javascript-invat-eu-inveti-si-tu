@@ -1,9 +1,24 @@
-# `for...of`
+# Enunțul `for...of`
 
-ES6 a introdus această nouă structură de iterare împreună cu două concepte importante: iterable și iterator.
-Intenția a fost de a oferi un instrument superior de ciclare, superior celor oferite de ES5: `for...in` și `for...each`.
+ES6 a introdus această nouă structură de iterare împreună cu două concepte importante: iterable și iterator. Intenția a fost de a oferi un instrument superior de ciclare, superior celor oferite de ES5: `for...in` și `for...each`.
 
-Poți folosi `for...of` dacă nu ai nevoie să lucrezi și cu indexurile elementelor componente ale colecției. Dacă ai nevoie de localizare pentru a adresa exact un element, vei folosi un clasic `for`.
+Poți folosi enunțul `for...of` dacă nu ai nevoie să lucrezi și cu indexurile elementelor componente ale colecției. Dacă ai nevoie de localizare pentru a adresa exact un element, vei folosi un clasic `for`.
+
+## Mică anatomie
+
+Este numit de standard un **enunț de iterare**.
+
+Formele canonice ale enunțurilor for...of sunt:
+
+- `for ( expresieManaStângă of expresieDeAtribuire ) enunț`,
+- `for ( var expresieLegatăDeIndentificator of expresieDeAtribuire ) enunț,
+- `for ( declarațieDeExpresie ) enunț.
+
+DeclarațiaDeExpresie poate fi un `let` sau un `const`.
+
+Forma canonică a enunțului este: `for ( expresieManaStângă of expresieDeAtribuire ) enunț`.
+
+## Lucru
 
 Ori de câte ori un obiect trebuie să fie iterat, metoda `@@iterator` este apelată fără argumente.
 Iteratorul care este returnat este folosit pentru a obține valorile care trebuie iterate.

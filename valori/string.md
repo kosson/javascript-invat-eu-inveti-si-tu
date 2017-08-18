@@ -1,4 +1,4 @@
-# `String` - șir
+# `String` - șiruri de caractere
 
 ## Mantre
 

@@ -1,8 +1,23 @@
-# for... in
+# Enunțul `for... in`
 
-Declarația iterează proprietățile unui obiect, cele care sunt setate ca `enumerabile`, iar pentru fiecare dintre valorile proprietăților iterate, se poate aplica o funcție sau se poate executa cod.
+Iterează proprietățile unui obiect, cele care sunt setate ca `enumerabile`, iar pentru fiecare dintre valorile proprietăților iterate, se poate aplica o funcție sau se poate executa cod.
 
-## Iterarea cheilor proprii, dar și cele din constructor
+## Spune standardul
+
+„Enumerarea proprietăților obiectului țintă include enumerarea proprietăților prototipului sau și a prototipului prototipului și așa mai departe recursiv”.
+
+## Mică anatomie
+
+Este numit de standard un **enunț de iterare**.
+Formele canonice ale enunțurilor for...in sunt:
+
+- `for ( expresieManaStângă in expresie ) enunț`,
+- `for ( var expresieLegatăDeIndentificator in expresie ) enunț,
+- `for ( declarațieDeExpresie ) enunț.
+
+DeclarațiaDeExpresie poate fi un `let` sau un `const`.
+
+## Iterarea cheilor proprii, dar și a celor din constructor
 
 Trebuie reținut faptul că iterarea folosind `for...in` ia în calcul și cheile contructorului. Pentru izolarea iterării doar pe cheile proprii ale obiectului fără cele moștenite, se va folosi verificarea cu metoda `hasOwnProperty`.
 
@@ -44,7 +59,6 @@ for (var prop in obj) {
  * zugrav
  * true
  */
-
 ```
 
 Funcționează și cu array-urile pentru că, de fapt și array-urile sunt tratate ca niște obiecte.

@@ -1,6 +1,6 @@
-# Comanda `debugger`
+# Enunțul `debugger`
 
-Această comandă invocă orice funcționalitate de debugging pe care o are browserul setând un break-point.
+Invocă orice funcționalitate în scopul depanării pe care o are browserul setând un break-point (puncte de oprire pentru inspectarea codului).
 
 ```javascript
 function faCeva () {

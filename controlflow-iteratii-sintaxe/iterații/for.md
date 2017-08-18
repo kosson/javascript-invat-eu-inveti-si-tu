@@ -1,6 +1,6 @@
-## Instrucțiunea `for`
+## Enunțul `for`
 
-Această instrucțiune, numită de standard `IterationStatement`, creează o buclă care produce un set de rezultate sau parcurge o structură de date existentă.
+Aceast enunț, numit de standard `IterationStatement`, creează o buclă care produce un set de rezultate sau parcurge o structură de date existentă.
 
 Această buclă va fi creată ținându-se cont de câteva expresii opționale care se introduc între paranteze, așa-numitul **bloc de inițializare**, fiind urmate de un **bloc de execuție**, care conține codul ce va fi executat pentru fiecare pas al buclei.
 
@@ -75,7 +75,7 @@ for (var x = 0; x < 10; x++) {
 
 În exemplul prezentat am ajuns la 5, care este afișat în browser. Consola sare peste afișarea lui 5.
 
-### Instrucțiunea `for` poate fi folosită și în lucrul cu șirurile de caractere
+### Enunțul `for` poate fi folosit și în lucrul cu șirurile de caractere
 
 Pur și simplu este cazul în care la un caracter poți adăuga un altul până când numărul lor va atinge limita specificată prin valoarea lui `length`.
 
