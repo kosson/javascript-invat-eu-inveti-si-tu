@@ -4,7 +4,9 @@ Identificatorii declarați cu `var` beneficiază de mecanismul de hoisting prin 
 
 Începând cu ES6 a fost adăugat `let`, care în comparație cu `var`, este legat la nivelul blocului de cod delimitat prin `{}`.
 
-În cazul declarațiilor `let`, acestea nu sunt ridicate (`hoisted`) la vârful blocului. Din acest motiv, cel mai bine este ca declarațiile let să fie puse în capul blocului în mod voluntar pentru a fi disponibile în întreg blocul. O atenție deosebită trebuie dată blocurilor de decizie sau cele de ciclare a unor array-uri.
+În cazul declarațiilor `let`, acestea nu sunt ridicate (`hoisted`) la vârful blocului. Din acest motiv, cel mai bine este ca declarațiile let să fie puse în capul blocului în mod voluntar pentru a fi disponibile în întreg blocul. Aici există o explicație foarte bună pe care Kyle Simpson o face în a înțelege diferențele dintre cele două. În cazurile în care vizual erau decalarate variabile care erau menite a fi folosite pentru enunțuri precum `for` sau `if`, dar care în subsidiar spuneau celorlalți programatori să nu le folosească dincolo de aceste enunțuri, `let` este cea mai bună abordare, dar dacă dorești ca o variabilă să fie cu adevărat disponibilă întregului cod, atunci continuă să folosești `var` pentru că va fi omniprezent pentru acel cod, fie el funcție, etc. Partea neplăcută a lui `let` este că, atunci când nu este declarat chiar de la început, această variabilă nu va fi omniprezentă, ci doar la momentul la care se va ajunge cu execuția. Ce înseamnă acest lucru? Înseamnă că va fi distant în timp, va fi disponibil mai târziu, la momentul la care controlul programului ajunge la ea, nu de la bun început așa cum este cazul lui `var`. Chiar există și un termen pentru acest lucru în limba engleză menționat de standard: Temporal Dead Zone (Zona de Timp Moartă ar fi traducerea în lb. română), fiind perioada de timp cât nu este disponibilă.
+
+O atenție deosebită trebuie dată blocurilor de decizie sau cele de ciclare a unor array-uri.
 
 Un exemplu foarte simplu pentru a face diferența dintre modul cum acționează `var` și cum acționează `let`.
 
@@ -145,8 +147,19 @@ Dacă un identificator a fost definit deja în scope, dacă se va declara o vari
 
 ## Bune practici
 
-Folosește `const` pentru toate valorile pentru care nu se așteaptă nicio modificare și `let` în cazul în care știi clar că vor surveni modificări. Folosește `var` când ai nevoie de mecanismul de hoisting.
+Folosește `const` pentru toate valorile pentru care nu se așteaptă nicio modificare și `let` în cazul în care știi clar că vor surveni modificări.
+Folosește `var` când ai nevoie de mecanismul de hoisting (omniprezența în cod), dar și pentru momentele când ai nevoie să o redeclari. Cu alte cuvinte, folosește `var` atunci când ai nevoie de o valoare în mai multe medii lexicale diferite, care eventual sunt înlănțuite (*scope chaining*).
 
-Declară toate variabilele necesare în capul codului / funcției în ordinea necesităților de accesare a valorilor.
+Declară toate variabilele necesare în capul codului / funcției în ordinea necesităților de accesare a valorilor. În cazul folosirii blocurilor de cod, care sunt permise odată cu ES6, pune toate declarațiile de variabile cu `let` chiar de la bun început pentru a evita TDZ- Temporal Dead Zone.
+
+```javascript
+function facCeva() {
+  // cod util
+  { let ceva = 10, altceva = ++ceva;
+    // cod înscris unui
+    // bloc dedicat
+  }
+};
+```
 
 În bucle folosește întotdeauna `let` ori `const` pentru a crea pentru fiecare iterație propria legătură identificator - valoare. În cazul lui `var`, vei avea acces mereu doar la ultima valoare dată de ultima iterare.

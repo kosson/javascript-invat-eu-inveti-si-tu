@@ -1,10 +1,19 @@
 # `const`
 
-Este adăugat de ECMAScript 2015 (ES6). Sunt variabile care nu pot fi reasignate altor valori. Asta înseamnă că nu poți asigna alt conținut, dar, atenție mare, poți să-l modifici pe cel existent. Dacă atribui un obiect unei variabile, poți să-l modifici.
+Este o variabilă ca nu poate fi reasignată. A fost adăugat de ECMAScript 2015 (ES6). În alți termeni este o variabilă unică pentru un program. Nu poți să o redeclari. Atenție, nu se referă la valoare, ci doar la atribuire. Nu asocia ideea de constantă cu valoarea asignată. E o capcană. În subsidiar asta înseamnă că poți modifica ceea ce există în cazul obiectelor, dar nu poți asigna alt obiect aceleiași constante.
+
+```javascript
+const ceva = ['unu','doi'];
+const ceva = []; // SyntaxError: redeclaration of const ceva
+ceva[1] = 'bum';
+console.log(ceva[1]); // "bum"
+```
+
+Dacă se dorește atingerea imutabilității, se va folosi utilitarul `var ceva = Object.freeze(['unu','doi'])`, care, cu adevărat are capacitatea de a face obiectul unul care nu poate fi modificat.
 
 Ca și variabilele declarate cu `let`, cele declarate prin `const` sunt limitate la blocul de cod delimitat prin acolade `{}`. Asta înseamnă că, de îndată ce execuția s-a încheiat pentru un anume bloc, variabilele declarate prin `const` nu vor mai fi disponibile.
 
-Declarațiile cu `const` nu beneficiază de mecanismul de hoisting.
+Declarațiile cu `const` nu beneficiază de mecanismul de hoisting. Nu sunt disponibile decât codului de după declararea sa.
 
 Poate fi folosit pentru a identifica setări precum URL-uri, accesse la baze de date, etc.
 

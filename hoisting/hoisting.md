@@ -1,7 +1,6 @@
 # Hoisting - ridicarea în „capul blocului”
 
-Hoistingul trebuie privit ca un comportament al motorului JavaScript, care ia identificatorii și îi face omniprezenți pentru blocul de cod în care au fost declarați poziționându-i în „capul blocului” de cod.
-
+Hoistingul trebuie privit ca un comportament al motorului JavaScript, care ia identificatorii și îi face omniprezenți pentru blocul de cod în care au fost declarați poziționându-i în „capul blocului” de cod. Atașarea unui varibile la mediul lexical al unei funcții în interiorul căreia a fost declarată la momentul compilării este cel mai rapid exemplu de „hoisting” - de ridicare. Hoisting ca și termen sau procedură nu există în standard. Este mai degrabă o explicație pentru comportamentul motorului la momentul compilării vis-a-vis de ceea ce se petrece cu identificatorii la momentul compilării.
 Această omniprezență permite disponibilitatea variabilelor și a funcțiilor înainte ca acestea să capete și valorile lor.
 
 Acest lucru se petrece deoarece mai întâi de a fi executat programul, codul sursă trece printr-o fază de compilare în care motorul JavaScript se uită să vadă mai întâi de toate care sunt identificatorii. Apoi motorul trece la execuție, moment în care toți identificatorii primesc și valorile.
@@ -41,10 +40,9 @@ Cel mai evident exemplu este să scrii o funcție care să returneze după ce ai
 ## Mantre
 
 - JavaScript creează un **scope lexical**.
-- Hoistingul este o conceptualizare menită a înțelege felul în care JavaScript funcționează. ATENȚIE! este doar un model, nu trebuie a se înțelege că este mecanica reală a limbajului.
+- „Săltarea” - oistingul se face la momentul compilării, nu la faza de execuție.
 - Declararea variabilelor și funcțiilor este „săltată" - hoisted la vârful scope-ului funcțional indiferent de poziția lor în cod.
 - Funcțiile sunt săltate înaintea variabilelor.
-- Hoistingul se face la momentul compilării, nu la faza de execuție.
 - Variabila primește valoarea `undefined`. Pentru că se întâmplă acest lucru, cel mai bine este să declari variabilele în capul funcției și de preferat într-o singură declarație var.
 - Hoistingul are un rol funamental în cazurile de recursiviate și recursivitate mutuală (o funcție o cheamă pe alta până când o condiție rupe lanțul).
 - Folosirea noului cuvânt cheie `let` pentru a declara variabilele, are ca efect limitarea scope-ului la nivelul blocului `{}` (block scoping).
@@ -54,16 +52,13 @@ Cel mai evident exemplu este să scrii o funcție care să returneze după ce ai
 
 ```javascript
 unu(1);
-
 function unu(ceva){
     if(ceva > 20) return ceva;  // verifica valoarea sa nu fie mai mare de 20
     return doi(ceva + 2);       // 7+2
 };
-
 function doi(ceva){
     return trei(ceva) + 1;      // 7
 };
-
 function trei(ceva){
     return unu(ceva*2);         // 6
 };
@@ -84,3 +79,41 @@ function trei(ceva){
 - trei invocă unu cu valoarea 18*2 = 36
 - la 36 se adaugă valoarea din stivă 3
 - Rezultat returnat: 39.
+
+## Marcajul sintactic și hoisting-ul
+
+Să examinăm cazurile în care declarăm variabile în interiorul unor enunțuri precum `if` sau `for`. De ce facem acest lucru când suntem perfect conștienți că aceste variabile vor fi disponibile întregului cod, nu doar blocului decizional sau buclei `for`? Răspunsul rezidă din necesitatea umană de a semnala celorlalți programatori faptul că acele variabile, acei identificatori nu trebuie folosiți în altă parte în afara zonei în intenție pentru care au fost declarați.
+
+```javascript
+if (x == undefined) {
+  var ceva = 10;
+  // se întâmplă ceva
+};
+
+// sau
+
+for (var i = 0; i < 100; i++) {
+  // ce se va întâmpla la fiecare iterare
+};
+```
+
+Felul de a declara, ca și loc în care facem declararea, implică faptul că semnalizăm cui vrem noi să „aparțină” fiecare variabilă definită.
+
+Concluzia este că hoistingul este doar o explicație oferită pentru felul în care este constituit mediul lexical la momentul complilării și comportamentul vis-a-vis de inventarierea identificatorilor.
+
+Ceva s-a întâmplat între timp odată cu apariția versiunii ES6. Folosirea lui `let`, forțează la nivelul compilatorului ca variabila declarată să fie atașată doar enunțului respectiv.
+
+```javascript
+if (x == undefined) {
+  let ceva = 10;
+  // se întâmplă ceva
+};
+
+// sau
+
+for (let i = 0; i < 100; i++) {
+  // ce se va întâmpla la fiecare iterare
+};
+```
+
+Încercarea de a accesa varibilele declarate cu `let` în afara enunțurilor, se va solda cu o eroare.

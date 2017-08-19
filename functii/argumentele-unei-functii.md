@@ -4,7 +4,7 @@ Pe scurt, argumentele sunt ceea ce pasezi funcțiilor. Numărul de argumente pas
 
 Fiecare argument trebuie pasat funcției în ordinea corectă pentru că valoarea sa se va „lega” de numele desemnat de programator între parantezele rotunde.
 
-Mai jos este dat un exemplu care ilustrează afirmația: ***o funcție este o rutină aplicată pe argumentele sale***. Exemplul se bazează pe funcționalitatea metodei `apply()` oferită prin moștenire (`Function.prototype.apply`).
+Mai jos este dat un exemplu care ilustrează afirmația: ***o funcție este o rutină aplicată pe argumentele sale***. Exemplul se bazează pe funcționalitatea metodei `apply()` oferită prin moștenire din prototip (`Function.prototype.apply()`).
 
 ```javascript
 function oFunctie(x, y, z) {
@@ -17,8 +17,9 @@ oFunctie.apply(null, argumentele); // argumentele sunt aplicate literalmente fun
 
 Acest exemplu ilustrează în adâncime ceea ce se petrece cu argumentele unei funcții. Am folosit soluția practică `Array.prototype.slice.call(arguments)` pentru a transforma obiectul `arguments` într-un array.
 
-Se mai pot obține valorile direct, folosindu-se noua sintaxă ES6: `...argumente`.
+## Sintaxa spread
 
+Se mai pot obține valorile direct, folosindu-se noua sintaxă ES6: `...argumente`.
 Pentru că am menționat ***sintaxa spread*** introdusă de ES6, hai să vedem același exemplu, dar folosind această nouă sintaxă:
 
 ```javascript
@@ -101,7 +102,7 @@ console.log(window.trei);
 
 ## Transformarea lui `arguments` într-un array
 
-Se folosește metoda `slice()` a lui Array:
+De multe ori se ivește necesitatea de a avea obiectul `arguments`, care seamănă cu un array să fie chiar un array. Pentru acest lucru se folosea utilitarul slice de la obiectul intern Array, care era invocat în contextul obiectului `arguments`.
 
 ```javascript
 function convertireArgs(a, b){
@@ -114,6 +115,17 @@ function convertireArgs(a, b){
   var arr = [...arguments];
 };
 ```
+
+Uneori era nevoie să trimiți obiectul argumentelor altei funcții pe care o apelai din cea care primea datele și le avea în `arguments`.
+
+```javascript
+function convertireArgs(a, b){
+  var arr = Array.prototype.slice.call(arguments);
+  preiaSiPrelucreaza.apply(null, arr);
+};
+```
+
+Fă o vizită operatorului `...` (rest / spread) pentru mai multe exemple și lucruri potențial foarte utile pentru a înțelege simplitatea oferită prin abstractizarea pe care ES6 a introdus-o cu astfel de sintaxe.
 
 ## Câte argumente sunt?
 
@@ -224,7 +236,7 @@ test();
 
 ## Parametri pot avea valori inițiale
 
-Odată cu apariția noii versiuni a standardului ES6, parametrii pot avea valori inițiale ceea ce făcea ca invocarea cu acești parametri să fie opțională. În ES5, acest lucru se putea face folosind operatorul `||`.
+Odată cu apariția noii versiuni a standardului ES6, parametrii pot avea valori inițiale ceea ce făcea ca invocarea cu acești parametri să fie opțională. În ES5, acest lucru se putea face folosind operatorul `||`. În acest caz, nu se puteau pasa valori care evaluate de operatorul `||` se reduceau la o falsitate.
 
 ```javascript
 function faUnBloc(inaltime, latime, lungime, timpCoacere){
@@ -236,7 +248,7 @@ function faUnBloc(inaltime, latime, lungime, timpCoacere){
 faUnBloc('','',150,0); // 100 80 150 85000
 ```
 
-În cazul acestei abordări, există o eroare indusă de comportamentul de evaluare a motorului de JS, care nu poate fi corectată decât dacă se va verifica și tipul argumentului. În exemplul de mai sus, pentru ultima valoare, care este una validă pentru timp (`0`), motorul a redus-o la o valoare `falsy` și a preferat valoarea inițială.
+Pentru cei care vor să fie ultracorecți, idiomul de setare a unei valori default ar fi trebuit să fie acesta: `inaltime = inaltime !== undefined ? x : 100`. În acest mod poți pasa și valori care s-ar reduce la o valoarea falsey, precum 0, undefined sau null. Mai este o posibilitate care se reduce la testarea tipului valorii pasate pentru a determina valoarea defaul în funcție de rezultat. În exemplul de mai sus, pentru ultima valoare, care este una validă pentru timp (`0`), motorul a redus-o la o valoare `falsey` și a preferat valoarea inițială.
 
 ```javascript
 function masoaraTimp(timpCoacere, rasuceste){
@@ -252,8 +264,11 @@ masoaraTimp(0); // Mai coc! Comportamentul este corect de această dată.
 masoaraTimp(150000); // Răsucesc!
 ```
 
-În exemplul oferit mai sus, această verificare a existenței unei valori este des întâlnită în practica de zi cu zi a codului conform ES5. Este un șablon des întâlnit.
-ES6 permite introducerea valorilor inițiale direct în zona argumentelor.
+În exemplul oferit mai sus, această verificare a existenței unei valori este des întâlnită în practica de zi cu zi a codului conform ES5. Este un șablon des întâlnit. Poate fi considerat idiomul preferat pentru valorile default. Acesta reflectă o manieră imperativă în ceea ce privește setarea valorilor default.
+
+## Default values începând cu ES6
+
+ES6 permite introducerea valorilor inițiale direct în zona argumentelor transformând un obicei imperativ la o abordare declarativă chiar din zona argumentelor, în headerul funcției. Atenție, sunt permise numai expresii, nu și enunțuri.
 
 ```javascript
 function masoaraTimp(timpCoacere = 85000, rasuceste = function(){ alert('') }){
@@ -273,10 +288,26 @@ function demoArgs(unu, doi = 2){
 
 `console.log(doi === arguments[1]);` returnează `false` pentru că doar un singur argument a fost pasat funcției. Acest lucru poate fi demonstrat prin valoarea `1` data lui `arguments.length`, iar în acest moment `arguments[1]` va fi `undefined`, ceea ce este și firesc pentru că doar un singur argument a fost pasat.
 
-Reține faptul că `arguments` reflectă starea inițială și că trebuie să fie numai valori primitive, chiar dacă acestea sunt rezultatul evaluării unei alte funcții - trebuie să invoci funcție, nu să pasezi o referință către aceasta.
+Reține faptul că `arguments` reflectă starea inițială și că trebuie să fie numai valori primitive, chiar dacă acestea sunt rezultatul evaluării unei alte funcții (care este o expresie) - trebuie să invoci funcție, nu să pasezi o referință către aceasta.
 
 ```javascript
+function doi() { return 2; };
 function demoArgs (unu, doi = doi()) {};
+```
+
+Mai există un lucru care trebuie reținut în cazul asignării unei funcții unui parametru. Această funcție nu va fi invocată înainte de a fi apelată însăși funcția în sine. Pe scurt, expresia de funcție nu este evaluată până în momentul în care chiar este nevoie de valoarea la care se reduce. Dacă apelezi funcția cu un argument, iarăși, funcția nu va fi apelată și expresia astfel evaluată pentru că a fost primită valoarea așteptată. Dacă se invocă fără argument, ei bine, doar atunci va fi invocată funcția.
+
+O utilitate imediată și cu un impact imediat este aceea de a trimite o eroare în cazul în care funcția chiar are nevoie să primească o valoare la parametru.
+
+```javascript
+function atentionare() {
+  throw "Prietene, pasează valoarea";
+};
+function faCeva( a = atentionare() ) {
+  console.log(a);
+};
+faCeva(); // Error: Prietene, pasează valoarea
+faCeva('ceva'); // "ceva"
 ```
 
 ### Parametrare presetată cu argumente ca modificatori

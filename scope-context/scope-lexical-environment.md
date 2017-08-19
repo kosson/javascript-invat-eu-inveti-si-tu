@@ -1,10 +1,11 @@
-![](InsulaObiectelor01.jpg "Mediul lexical")
-
 # Lexical environment - scope
 
 ## Introducere
 
 Povesteam anterior că în ceea ce privește limbajul de programare JavaScript, felul în care este redactat textul, adică codul sursă, este crucial. De ce?
+
+**Întrebare**: Când se formează scope?
+**Răspuns**: La faza de compilare.
 
 Pentru că JavaScript interpretează locul declarațiilor de obiecte, de funcții și variabile ca fiind semnalul că trebuie să genereze niște planuri cu anumite separări între ele.
 
@@ -15,9 +16,9 @@ Spre exemplu, grinzile din lemn, cuiele și caielele vor constitui subansamblul 
 Astfel, după ordonare, despre fiecare material de construcție se va ști cărui „subansamblu” aparține. Aceste „subansambluri”, hai să le numim de acum **medii lexicale** (în limba engleză, textul standardului îl numește **lexical environment**) sau **scope** (tradus în română scope ar fi zonă, domeniu în care ceva are efect). *Mediile* acestea au atributul de lexical pentru că sunt generate după apariția lor în „firul narativ” al codului, în funcție de punctuație și semne.
 Mediul lexical sau scope-ul poate fi foarte ușor înțeles ca un „registru inventar” al tuturor identificatorilor care au valori „legate” de aceștia.
 
-În demersul nostru, vom folosi interșanjabil următoarele: „mediu lexical”, „scope” și „lexical scope”. Toate au același sens. Termenul standardului este „mediu lexical”, dar în practica de zi cu zi veți întâlni denumirea de scope. Deja sunteți familiari cu ea de la întâlnirea cu debugger-ul când lucram cu Global Scope și Function Scope. De cele mai multe ori vă veți întâlni în diferite alte lucrări despre JavaScript cu ambele variante.
+În demersul nostru, vom folosi interșanjabil următoarele: „mediu lexical”, „scope” și „lexical scope”. Toate numesc același lucru. Termenul standardului este „mediu lexical”, dar în practica de zi cu zi veți întâlni denumirea de scope. Deja sunteți familiari cu ea de la întâlnirea cu debugger-ul când lucram cu *Global Scope* și *Function Scope*. De cele mai multe ori vă veți întâlni în diferite alte lucrări despre JavaScript cu ambele variante.
 
-Mediul lexical nu este ceva nou, de curând adăugat limbajelor de programare. Rădăcinile conceptului și aplicativitatea sa vin chiar de la începutul deceniului șase al secolului trecut.
+Mediul lexical nu este ceva nou, de curând adăugat limbajelor de programare. Rădăcinile conceptului și domeniul de aplicare vin chiar de la începutul deceniului șase al secolului trecut.
 
 > „Este porțiunea de cod sursă pentru care este disponibilă o legătură între un nume și o entitate” (definiție pentru limbajul de programare ALGOL 60, 1960).
 
@@ -59,19 +60,19 @@ Pentru a oferi cea mai corectă imagine a *mediului lexical*, voi folosi textul 
 
 ## Spune standardul
 
-(1) Codul sursă este o structură lexicală.
-(2) Când rulăm codul, acesta întră într-un proces de evaluare.
-(3) Evaluarea structurii lexicale a codului sursă produce un lexical environment.
-(4) Spunem că în acest moment că *mediul lexical* este asociat cu *anumite structuri sintactice* ale codului ECMAScript.
-(5) Structurile sintactice cărora le sunt asociate medii lexicale sunt: declarațiile de funcții, o declarare a unui bloc de cod prin acolade și condiția *Catch* a instrucțiunii *Try*.
-(6) De câte ori rulezi codul, acesta este evaluat și de se va crea mediul lexical tot de atâtea ori.
-(7) Un *mediu lexical* constă dintr-o **înregistrare de mediu** (în engleză, *Environment Record* ) și o referință la un mediu lexical de pe un strat superior. Referința poate avea valoarea **null**, dacă un strat extern nu există. Înregistrarea de mediu este un inventar a tuturor legăturilor identificatorilor și spunem că este asociat mediului lexical
-(8) Mediul lexical este folosit pentru a defini asocieri ale identificatorilor cu variabile și funcții. Reține o mică diferență: mediul lexical permite definirea legăturilor iar înregistrarea de mediu ține evidența legăturilor realizate.
-(9) Din punctul de vedere al standardului, un mediu lexical este *pur un mecanism al specificației*, care va fi implementat de motorul JavaScript.
+* (1) Codul sursă este o structură lexicală.
+* (2) Când rulăm codul, acesta întră într-un proces de evaluare.
+* (3) Evaluarea structurii lexicale a codului sursă produce un lexical environment.
+* (4) Spunem că în acest moment că *mediul lexical* este asociat cu *anumite structuri sintactice* ale codului ECMAScript.
+* (5) Structurile sintactice cărora le sunt asociate medii lexicale sunt: declarațiile de funcții, o declarare a unui bloc de cod prin acolade și condiția *Catch* a instrucțiunii *Try*.
+* (6) De câte ori rulezi codul, acesta este evaluat și de se va crea mediul lexical tot de atâtea ori.
+* (7) Un *mediu lexical* constă dintr-o **înregistrare de mediu** (în engleză, *Environment Record* ) și o referință la un mediu lexical de pe un strat superior. Referința poate avea valoarea **null**, dacă un strat extern nu există. Înregistrarea de mediu este un inventar a tuturor legăturilor identificatorilor și spunem că este asociat mediului lexical
+* (8) Mediul lexical este folosit pentru a defini asocieri ale identificatorilor cu variabile și funcții. Reține o mică diferență: mediul lexical permite definirea legăturilor iar înregistrarea de mediu ține evidența legăturilor realizate.
+* (9) Din punctul de vedere al standardului, un mediu lexical este *pur un mecanism al specificației*, care va fi implementat de motorul JavaScript.
 
 ### Detaliile mediului lexical și despre registrul descriptiv al mediului lexical
 
-Adu-ți aminte de obiectul global. Da, cel care vine din start la momentul în care tu începi să rulezi codul sursă propriu. Acest obiect global are și el la rândul său asociat un mediu, care se numește invariabil **global environment** - **mediu global**. Reține faptul că pe măsură ce codul ECMAScript este rulat, se pot adăuga sau se pot modifica proprietăți în obiectul global, ceea ce va avea ca efect și modificarea dinamică a **mediului global**.
+Adu-ți aminte de obiectul global. Da, cel care vine din start la momentul în care tu începi să rulezi codul sursă propriu. Acest obiect global are și el la rândul său asociat un mediu, care se numește invariabil **global environment** - **mediu global**. Reține faptul că pe măsură ce codul ECMAScript este rulat, se pot adăuga sau se pot modifica proprietăți în **obiectul global**, ceea ce va avea ca efect și modificarea dinamică a **mediului global**.
 
 Mediul lexical 0, cel după care nu mai există niciun alt strat superior, de fapt, cel global, este un spațiu comun tuturor elementelor unui program, care urmează să fie evaluate.
 
@@ -80,7 +81,7 @@ Valorile lui **lexical environment** și a lui **environment record** sunt mecan
 Un **lexical environment** este un **tip al specificațiilor standardului**, care este utilizat pentru a defini asocierea `identificatorilor` cu variabilele și funcțiile specifice pe baza structurii lexicale de organizare pe niveluri (imbricare - în engleză: „nesting”) a codului.
 Un **lexical environment** constă dintr-un „environment record” (un domeniu declarativ pentru toate valorile legate de un identificator) și o **referință** la un „lexical environment extern”, dacă există unul.
 
-Un **environment record** (descriere de mediu sau harta mediului) este un mecanism prin care este ținută evidența legăturilor realizate prin identificatori. Acest conectări se formează la momentul evaluării codului susrsă și implicit la constituirea **mediului lexical**. Se mai poate spune că este **registrul inventar** al **mediului lexical**. Traducem aceasta ca fiind înregistrarea descriptivă aferentă mediului lexical constituit. Vă puteți închipui o fișă de evidență care ține socoteala cui, ce îi este atribuit.
+Un **environment record** (descriere de mediu sau harta mediului) este un mecanism prin care este ținută evidența legăturilor realizate prin identificatori. Acest conectări se formează la momentul evaluării codului sursă și implicit la constituirea **mediului lexical**. Se mai poate spune că este **registrul inventar** al **mediului lexical**. Traducem aceasta ca fiind înregistrarea descriptivă aferentă mediului lexical constituit. Vă puteți închipui o fișă de evidență care ține socoteala cui, ce îi este atribuit.
 
 Câte medii lexicale (**lexical environments**) se pot stabili:
 
@@ -98,7 +99,11 @@ Câte medii lexicale (**lexical environments**) se pot stabili:
 
 Fiecare obiect **environment record** este legat de un obiect numit **binding object**. Un obiect **environment record** are drept sarcină să lege șirurile de caractere care sunt numele identificatorilor proprietăților obiectului pentru care se stabilește acest **environment record**. Cheile proprietăți care nu sunt numere nu vor fi considerate în obiectul **environment record**. În setul legăturilor (bindings) sunt incluse deopotrivă proprietățile moștenite, cât și cele proprii indiferent de setarea atributului „enumerable”. Setul identificatorilor legați de environment record poate varia în funcție de șteregerea sau adăugarea proprietăților și sunt considerate a fi „legături schimbătoare” - ***mutable bindings***.
 
-Toate legăturile din obiectul environment records se pot schimba pe parcursul execuției.
+Toate legăturile din obiectul **environment records** se pot schimba pe parcursul execuției.
+
+## Block scope
+
+
 
 ## Lexical environment în practică
 
@@ -198,7 +203,7 @@ Motorul JavaScript atunci când este pus să evalueze o funcție, consultă mai 
 
 Acest lexical environment este în strânsă legătură cu diferite structuri de cod cum ar fi blocurile de cod delimitate în mod obișnuit de acolade: `{}`. Începând cu versiunea ES6 - „block scoping” este posibil ori de câte ori încadrezi enunțuri între acolade, anterior fiind limitat doar la funcții. În mod tradițional, funcțiile au fost singurele mecanisme care generau un mediu lexical propriu și astfel permiteau și ideea de „spații private” pentru date și funcționalități ce nu trebuie expuse. Puteți să vă închipuiți funcțiile în contextul mediului lexical realizat ca pe niște grădini private din interiorul cărora poți privi „lumea” de afară, dar invers niciodată.
 
-Înainte de ES6 block scope-ul se realiza doar printr-un IIFE (Immediately-invoked function expression), care produce propriul său lexical scope izolat de restul codului.
+Înainte de ES6 **block scope**-ul se realiza doar printr-un IIFE (Immediately-invoked function expression), care produce propriul său lexical scope izolat de restul codului.
 
 ```javascript
 // cele două stiluri de a scrie IIFE-uri
@@ -206,7 +211,7 @@ Acest lexical environment este în strânsă legătură cu diferite structuri de
 (function () { … }()); // stilul Douglas Crockford
 ```
 
-În ES6 pur și simplu ai nevoie doar de acolade și declarare folosind `let`.
+În ES6 pur și simplu ai nevoie doar de acolade și folosirea lui `let` pentru declararea variabilelor.
 
 ```javascript
 {
@@ -274,15 +279,6 @@ Ultimul element din **scope chain** este Obiectul Global.
 ## Alonjă
 
 Constituie baza pentru înțelegerea closure-urilor.
-
-## Q\&A
-
-**Întrebare**: Când se formează scope?
-**Răspuns**: La faza de compilare.
-
-Iată cum arată scope-ul ca reprezentare și ca arie în care are efect o variabilă sau o funcție.
-
-![Scope in JavaScript](scopes.svg "Scope în Javascript")
 
 ## Resurse
 

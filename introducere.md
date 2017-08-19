@@ -497,8 +497,7 @@ Ce nu poate constitui un enunț al unei expresii? Orice începe cu:
 
 - `{`,
 - `function`,
-- `async`,
-- `function`,
+- `async function`,
 - `class`,
 - `let [`.
 

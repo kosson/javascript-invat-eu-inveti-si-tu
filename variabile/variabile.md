@@ -116,7 +116,19 @@ function ex(){
 };
 ```
 
-Buna practică spune ca atunci când folosești var pentru a declara variabile, pune-le pe toate imediat ce ai deschis blocul de cod. Astfel, le vei face omniprezente pentru acea zonă de cod și va fi mai ușor de operat cu ele.
+Buna practică spune ca atunci când folosești var pentru a declara variabile, pune-le pe toate imediat ce ai deschis blocul de cod. Astfel, le vei face omniprezente pentru acea zonă de cod și va fi mai ușor de operat cu ele. Un alt sfat foarte bun spune că cel mai decent pentru a ușura comunicarea cu ceilalți programatori care vor inspecta codul tău mai târziu este să faci declararea variabilelor cât mai aproape de locul în care vor fi utilizate. Alt sfat important este ca variabilele în cazul unei secvențe mari de cod să fie redeclarate mai jos în cazul în care vor fi folosite iar în loc de a folosi referința deja creată. De ce? Pentru a nu-l fugări pe colegul tău pe tot codul înapoi și să facă muncă de detective pentru a afla unde a fost declarată. Bineînțeles că vei face și un mic comentariu în care explici de ce ai ales redeclararea. Atenție, acest lucru nu este pobil atunci când folosești `let`. Aceste sfaturi de la Kyle Simpson vin, din experiența sa de zi cu zi și bazat pe aceasta, mai oferă un motiv pentru care ar trebui apreciat `var` în contrast cu `let`. Acest exemplu este inițializarea condițională a unui set de variabile, care în funcție de test se vor reinițializa la valorile corespondente bateriei respective de teste. Acest lucru nu este permis în cazul lui `let` pentru că `let` permite declararea o singură dată.
+
+```javascript
+function facCeva() {
+  if ( // condiție ) {
+    var a = 0;
+    var b = true;
+  } else if ( // altă cond.) {
+    var a = 10;
+    var b = false;
+  }
+};
+```
 
 ### Standardul spune
 

@@ -21,8 +21,8 @@ Dacă una dintre condiții nu este întrunită, întreaga evaluare este false ia
 
 Folosirea acestui operator spune firului de execuție că cel puțin una dintre condiții trebuie să fie satisfăcută.
 
-În cazul lui OR, JavaScript evaluează doar primul operand iar dacă acesta este *truthy*, nu va mai fi evaluat și cel de-al doilea operand. Evaluarea este pur și simplu scurt-circuitată pentru eficiență.
-Atenție la cazul în care poate ai dori evaluarea celui de-al doilea operand. Acest lucru nu se va întâmpla câtă vreme primul este *truthy*. Poate fi considerat acest comportament și ca un mecanism selectiv de incrementare a unei variabile, de exemplu. Depinde de necesități.
+În cazul lui OR, JavaScript evaluează doar primul operand iar dacă acesta este *truthy*, nu va mai fi evaluat și cel de-al doilea operand. Evaluarea este pur și simplu scurt-circuitată pentru eficiență. Același mecanism este aplicat și în cazul lui AND (`&&`). În cazul lui OR, dacă valoarea primului operand se reduce la ceva fals, atunci este returnată valoarea celui de-al doilea operand.
+Atenție la cazul în care poate ai dori evaluarea celui de-al doilea operand. Acest lucru nu se va întâmpla câtă vreme primul este *truthy*. Poate fi considerat acest comportament și ca un mecanism selectiv de incrementare a unei variabile, de exemplu.
 
 ```javascript
 var x = false, y = 0;
@@ -30,8 +30,7 @@ x || y++;
 console.log(y);
 ```
 
-Același mecanism este aplicat și în cazul lui AND (`&&`).
-Acest comportament permite o uzanță des întâlnită în programare pentru inițializarea unui obiect dacă acesta nu există deja.
+Acest comportament permite o uzanță des întâlnită în programare pentru inițializarea unui obiect dacă acesta nu există deja. Acest idiom este întâlnit și în codul în care se dorește dotarea unei funcții cu valori pentru parametri chiar de la bun început.
 
 ```javascript
 const obi = obi || {nume: "obiect important"};

@@ -1,10 +1,13 @@
-# Operatorul spread (`...`)
+# Operatorul `...`
 
+Acest operator produce confuzie pentru că se numește diferit în funcție de ce este pus să facă.
 Este un operator nou introdus de ECMAScript 2015. Acest operator foarte util funcționează pentru toate obiectele care au implementat protocolul de iterare, adică Symbol-ul intern `@@iterator` (dacă arunci o privire la obiectul intern Symbol găsești că este o proprietate statică).
 
 **Parametrii rest** se deosebesc de **operatorul spread**.
 
-Parametrii rest permit agregarea mai multor argumente independente dintr-un array într-o listă separată prin virgule.
+## Parametrii rest
+
+Parametrii rest permit agregarea mai multor argumente independente, care nu au fost atribuite unor argumente deja existente într-un array.
 
 ```javascript
 function ex(primul, ...multiAltii){
@@ -12,7 +15,46 @@ function ex(primul, ...multiAltii){
 }; ex(1, 2, 3, 4, 5); // Primul argument 1 și un array: 2,3,4,5
 ```
 
-Operatorul spread permite „desfacerea” unui array în elementele sale componente luate independent pentru a fi pasate unei funcții.
+Adu-ți mereu aminte faptul că lista de parametri este într-un context care permite atribuirea valorilor (*assignment context*). Operatorul `...` folosit într-un context de asignare, strânge valorile într-un array.
+
+Din motive de semantică, unii programatori preferă să numească acest operator „gather”, care în limba română s-ar traduce „adună”. Semnatic vorbind implică faptul că strânge, adună toți parametrii care nu sunt asignați deja, dar care au venit prin invocarea funcției și creează din ei un array adevărat.
+
+```javascript
+function faCeva (...argumentele) {
+  // dacă vreau să apelez alta functie
+  // voi putea folosi cealaltă posibilă
+  // acțiune ca operator spread, de desfacere
+  facAltceva(...argumentele);
+};
+```
+
+Aici mai este o utilitate faină. Dacă la apelarea din interior mai dorești să adaugi valori, pur și simplu le pui înaintea operatorului spread. În cazul anterior, trebuia să procedezi la un unshift după ce transformasei deja obiectul arguments într-un array.
+
+```javascript
+function faCeva (...argumentele) {
+  facAltceva('valoare', ...argumentele);
+}; // varianta elegantă declarativă
+
+// versus practica antică, imperativă
+function faAltceva () {
+  var arr = [].slice.call(arguments);
+  arr.unshift('valoare');
+  facDiferit.apply(null, arr);
+};
+```
+
+Atenție aici la o chestie care ar putea părea banală, dar care face mult sens pentru practica de zi cu zi să fie amintită.
+Dacă folosești un rest parameter, împreună cu alte argumente care vor fi pasate individual, asigură-te că cele individuale stau primele iar rest-ul este la final.
+
+```javascript
+function faCeva (a, b = true, ...argumentele) {
+  facAltceva('valoare', ...argumentele);
+};
+```
+
+## Operatorul spread
+
+Operatorul spread permite „desfacerea” (*spread* în limba română înseamnă a desface) unui array în elementele sale componente luate independent pentru a fi pasate unei funcții. Acest lucru se întâmplă atunci când la invocarea unei funcții, nu la declarare, este pasat un array pe care-l dorim desfăcut și asimilat obiectului arguments.
 
 ```javascript
 var colectie = ['cooperare', 'independență', 'acceptare'];
@@ -56,6 +98,19 @@ Adăugarea elementelor unui array înaintea celor dintr-un array care are nevoie
 
 ```javascript
 primulArray.unshift(...alDoileaArray);
+```
+
+Sau atunci când ai mai multe array-uri și dorești să le combini.
+
+```javascript
+var ab = ["a","b"];
+var bc = ["c","d"];
+var abcde = [].concat(ab, bc, ["e"]);
+//  [ "a", "b", "c", "d", "e" ]
+
+// mai simplu
+
+abcde = [...ab,...bc,'e'];
 ```
 
 ## Introducerea elementelor unui array printre elementele unuia existent
