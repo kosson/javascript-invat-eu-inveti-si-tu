@@ -1,7 +1,17 @@
 # Operatorul `...`
 
 Acest operator produce confuzie pentru că se numește diferit în funcție de ce este pus să facă.
-Este un operator nou introdus de ECMAScript 2015. Acest operator foarte util funcționează pentru toate obiectele care au implementat protocolul de iterare, adică Symbol-ul intern `@@iterator` (dacă arunci o privire la obiectul intern Symbol găsești că este o proprietate statică).
+Este un operator nou introdus de ECMAScript 2015. Acest operator foarte util funcționează pentru toate obiectele care au implementat protocolul de iterare, adică Symbol-ul intern `@@iterator` (dacă arunci o privire la obiectul intern Symbol găsești că este o proprietate statică). Deci, tot ce este iterabil, poate fi folosit cu acest operator. Șirurile de caractere și array-urile sunt iterabile, adică intern au implementat protocolul de iterare.
+
+Exemplul cel mai facil pentru o mică încălzire este să iei un șir de caractere și să-l transformi într-un array al caracterelor sale.
+
+```javascript
+var sir = "Am ceva";
+var arr = [...sir];
+// [ "A", "m", " ", "c", "e", "v", "a" ]
+// inainte de acest operator apelam la split
+var arr2 = sir.split("");
+```
 
 **Parametrii rest** se deosebesc de **operatorul spread**.
 
@@ -17,7 +27,7 @@ function ex(primul, ...multiAltii){
 
 Adu-ți mereu aminte faptul că lista de parametri este într-un context care permite atribuirea valorilor (*assignment context*). Operatorul `...` folosit într-un context de asignare, strânge valorile într-un array.
 
-Din motive de semantică, unii programatori preferă să numească acest operator „gather”, care în limba română s-ar traduce „adună”. Semnatic vorbind implică faptul că strânge, adună toți parametrii care nu sunt asignați deja, dar care au venit prin invocarea funcției și creează din ei un array adevărat.
+Din motive de semantică, unii programatori preferă să numească acest operator „gather”, care în limba română s-ar traduce „adună”. Semnantic vorbind implică faptul că strânge, adună toți parametrii care nu sunt asignați deja, dar care au venit prin invocarea funcției și creează din ei un array adevărat.
 
 ```javascript
 function faCeva (...argumentele) {

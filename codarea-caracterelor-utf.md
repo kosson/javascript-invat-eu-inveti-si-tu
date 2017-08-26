@@ -4,7 +4,7 @@ Computerele nu înțeleg cuvintele noastre, nici măcar caracterele pe care le f
 
 Pentru a înțelege modul de reprezentare numeric al caracterelor din setul Unicode, este nevoie să fie înțeleasă reprezentare hexazecimală a numerelor. Pentru aceasta va trebui să facem o mică incursiune în felul în care „codăm” noi oamenii **cantitățile**. Este foarte important pentru aduce explicații despre cum este realizată puntea dintre un simbol, adică un caracter inteligibil pentru noi, cu o valoare pe care computerul o înțelege.
 
-Câteva informații privind sintemele de numerație, care se vor dovedi foarte utile. Zi de zi lucrăm cu diferite cantități, cu seturi de obiecte, cu grămezi de obiecte și toate acestea au nevoie de o reprezentare. Pentru orice folosim sistemul zecimal de reprezentare, care are caractere ce codează cantitățile pornind de la 0, la 9. Noi le numim cifre. Pentru a reprezenta cantități mai mari de 9, se va folosi o combinație a cifrelor poziționându-le de la dreapta spre stânga poziționând câte o cifră în fiecare ordin: al `unităților`, `zecilor`, `sutelor`, ș.a.m.d. Și acum trebuie să realizăm că, de fapt, ordinele din reprezentarea unui număr natural, codează seturi de cantități, mai puțin unitățile care indică un singur set cuprizând tot atâtea obiecte câte indică cifra.
+Câteva informații privind sistemele de numerație, care se vor dovedi foarte utile. Zi de zi lucrăm cu diferite cantități, cu seturi de obiecte, cu grămezi de obiecte și toate acestea au nevoie de o reprezentare. Pentru orice folosim sistemul zecimal de reprezentare, care are caractere ce codează cantitățile pornind de la 0, la 9. Noi le numim cifre. Pentru a reprezenta cantități mai mari de 9, se va folosi o combinație a cifrelor poziționându-le de la dreapta spre stânga poziționând câte o cifră în fiecare ordin: al `unităților`, `zecilor`, `sutelor`, ș.a.m.d. Și acum trebuie să realizăm că, de fapt, ordinele din reprezentarea unui număr natural, codează seturi de cantități, mai puțin unitățile care indică un singur set cuprizând tot atâtea obiecte câte indică cifra.
 
 |Numărul: 243|ordinul sutelor| ordinul zecilor| ordinul unităților|
 |:--|:--|:---|:--|
@@ -33,13 +33,13 @@ Să pornim de la termenul hexazecimal. Acesta este o compunere între hexa, care
 
 |Hexazecimal:|0|1|2|3|4|5|6|7|8|9|A|B|C|D|E|F|
 |:--|:--|:--|:--|:--|:--|:--|:--|:--|:--|:--|:--|:--|:--|:--|:--|:--|
-|Hexazecimal:|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|
+|Zecimal:|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|
 
 Baza numerică este 16 iar valorile cele mai uzitate sunt cele până la 16^4.
 
 |Baza|16<sup>4</sup>|16<sup>3</sup>|16<sup>2</sup>|16<sup>1</sup>|16<sup>0</sup>|
 |:-|:-|:-|:-|:-|:-|
-|Baza|65536|4096|256|16|1|
+|Valoarea|65536|4096|256|16|1|
 
 Că tot am lucrat cu valoarea 243 în zecimal, cum arată transformată în hexa și care ar fi avantajul. Cum ajungi la valoarea hexazecimală? Privim atent valoarea zecimală și observăm că s-ar situa între valoarea exprimată de 16<sup>1</sup> (16) și 16<sup>2</sup> (256). Următorul pas ar fi să împărțim 243 la 16 și obținem valoarea de 15,18. Deci, 243 ar fi 16 x 15,18. Privim la 15 și vedem că se codează cu litera F. 15 X 16 este 240, care scăzut din 243 oferă valoarea 3. În hexa, 3 se codează chiar 3. Deci valoarea noastră în hexa este `F3`. Ca să verificăm, ne uităm la valoarea pe care o codează `F` și aceasta este 15, dar poziția lui F este asociată lui 16<sup>1</sup> care este 16. Deci vom obține valoarea 240 din 15 X 16. Apoi mai avem valoarea 3, care este pe poziția lui 16<sup>0</sup> care este egal cu 1. Deci avem 240 + 3 X 1 = 243. După tot acest parcurs, mai subliniez înainte de a continua, avantajul major al utilizării codării numerelor folosind notația hexazecimală: posibilitatea de a reprezenta cu mai puține cifre valori foarte mari. De exemplu, un număr zecimal mai mare: `19425` are reprezentarea hexazecimală `4BE1`.
 

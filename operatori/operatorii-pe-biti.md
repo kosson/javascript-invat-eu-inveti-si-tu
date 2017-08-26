@@ -64,7 +64,13 @@ Mai trebuie menționat un lucru foarte important. Atunci când vine vorba de luc
 
 ## Not `~`
 
-Va nega toți biții care reprezintă un număr. Acest operator are comportamentul unui mic algoritm. Ceea ce face este să ia numărul întreg pozitiv, îi adaugă o unitate și îi schimbă semnul.
+Este un operator unar care inversează toți biții operandului și returnează un număr.
+
+```javascript
+~'0xDF'; // -224 (+'0xDF' este 223)
+```
+
+Acest operator are comportamentul unui mic algoritm. Ceea ce face este să ia numărul întreg pozitiv, îi adaugă o unitate și îi schimbă semnul.
 
 ```javascript
 console.log(~-2); // 1

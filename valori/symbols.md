@@ -2,7 +2,7 @@
 
 Este un tip de date introdus de ECMAScript 2015. Un simbol este o valoare primitivă care diferă de celelalte prin faptul că nu are o reprezentare literală. Cum testezi că este o primitivă? Simplu: `typeof` răspunde cu `"symbol"`.
 
-Un `Symbol` este unic și nu poate fi modificat (este „immutable”). Un simbol este creat la apelarea funcției intrinseci `Symbol()`. Standardul spune că `Symbol()` ar fi un constructor, dar acesta spre deosebire de restul constructorilor, nu poate instanția obiecte prin sintaxa cu `new`.
+Un `Symbol` este unic și nu poate fi modificat (este „immutable”). Un simbol este creat la apelarea funcției intrinseci `Symbol()`. Standardul spune că `Symbol()` ar fi un constructor, dar acesta spre deosebire de restul constructorilor, nu poate instanția obiecte prin sintaxa cu `new`. Pentru a crea un simbol se va folosi constructorul Symbol apelându-l ca pe o funcție.
 
 ```javascript
 var unSimbol = Symbol();
@@ -36,7 +36,7 @@ console.log(obi[unSimbol]);
 
 Ca și în cazul array-urilor, proprietățile ale căror cheie este un simbol, li se pot accesa valorile folosind notația cu paranteze drepte. Folosirea notației cu punct, va returna `undefined`.
 
-## Introdu descrierea simbolului
+## Introdu descrierea simbolului!
 
 Se observă că în sintaxa folosită `Symbol('descriere')` este introdus un șir de caractere care poate fi folosit în scopuri de depanare.
 

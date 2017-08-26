@@ -1,18 +1,20 @@
 # Closures
 
-O funcție definită în interiorul unei funcții container, creează un closure.
+O funcție definită în interiorul unei funcții container, generează un closure.
 
 Este o funcție internă care „fotografiază și stochează” mediul lexical în care a fost declarată și pe care îl folosește pentru a utiliza tot ce este necesar să se execute. Mai exact, un closure este efectul evaluării unei funcții interne atunci când s-a pornit execuția funcției gazdă.
 
 **Moment Zen**: Closure-urile cuplează funcțiile cu mediile peste care face closure-uri.
 
-Îți poți închipui un pescar (funcția internă), care stând în barca sa pe mare (funcția gazdă) aruncă un prostovol (closure) peste un banc de pești (identificatorii existenți din contextul de execuție la momentul evaluării). Poți să-ți imaginezi și un cățel într-o cutie. Cutia fiind funcția gazdă iar cățelul fiind funcția internă. Cățelul cunoaște cutia și are acces la toate obiectele din interiorul său.
+Îți poți închipui un pescar (funcția internă), care stând în barca sa pe mare (funcția gazdă) aruncă un prostovol (closure) peste un banc de pești (identificatorii existenți din contextul de execuție la momentul evaluării).
 
 Un closure menține accesul la toate variabilele care erau „în scope” la momentul definirii funcției. Putem spune că o funcție din interiorul altei funcții este o funcție ***privată***, care are acces la argumentele și variabilele gazdei.
 
 **Moment Zen**: Toate closure-urile - funcțiile din aceeași gazdă - împărtășesc același mediu.
 
 Acest comportament al closure-urilor este perfect pentru a „ascunde” date, pentru a le face private.
+
+TODO: cel mai bine ar fi sa aduci aici exemplul de la for cu let ?! Sa-l pui aici ca o completare târzie a lui let? Chiar așa: numește astfel de completari cu informația deja prezentată ca și „completări târzii”. Încearcă... e nevoie de așa ceva pentru că nu le poți da toată informația deodată. Unde se completează mai târziu ar fi bine să se facă o punte înapoi cu fragmentul introductiv.
 
 Cel mai simplu și mai elegant exemplu este oferit de sintaxa modernă **fat arrow** pentru a ilustra un closure. Acest exemplu concis este prezentat de Reg “raganwald” Braithwaite în lucrarea sa „JavaScript Allongé, the "Six" Edition” și îl vom diseca la rândul nostru pentru a vedea cum se leagă cunoștințele dobândite de la **mediul lexical**, **funcții** și **compilare și execuție**.
 
@@ -22,7 +24,7 @@ Cel mai simplu și mai elegant exemplu este oferit de sintaxa modernă **fat arr
 
 Ceea ce avem mai sus este o expresie a unei funcții care este executată pe argumentul din prima paranteză iar rezultatul evaluării va fi o funcție care se va executa pe al doilea parametru.
 
-Contras avem: `(expresie)(argument)(argument)`. JavaScript va vedea a doua pereche de paranteze și va decide că perechile de paranteze `(expresie)(argument)` trebuie evaluate.
+Avem o formă contrasă: `(expresie)(argument)(argument)`. JavaScript va vedea a doua pereche de paranteze și va decide că perechile de paranteze `(expresie)(argument)` trebuie evaluate.
 Pornind la execuție, va evalua ce-i în prima paranteză căutând expresia de funcție care este declarată. O găsește iar aceasta arată astfel: `(x) => ...`. Acum pasul următor este să construiască „registrul inventar” al mediul lexical: `{x: 5, ...}`. S-a ajuns la faza returnării, dar, ce să vezi? Rezultatul returnării este o altă expresie, care, conform modului de operare al JavaScript, trebuie evaluată, dar care se aplică pe argumentul din a treia pereche de paranteze, adică `10`. Deci, va trebuie evaluată expresia `((y) => x)(10);`. În acest moment, „registrul inventar” al acestei funcții este `{y: 10, ...}` plus registrul inventar al funcției gazdă `{x: 5, ...}`. Variabila `x` pare să nu mai existe în noul mediu lexical stabilit. Și totuși ea există pentru că tocmai a fost returnată. Variabila `x` nu a fost pasată **explicit** celei de-a doua funcții și este una „detașată” dar acesibilă.
 Referința către variabila `x` este menținută pentru că funcția internă, cea care trebuie returnată în cazul nostru pur și simplu are nevoie de ea pentru a se executa, pentru a fi evaluată. De aceea există.
 
@@ -109,7 +111,6 @@ Un closure, are acces la:
 
 ```javascript
 var extern = 1000;
-
 function gazda(par){
   var interna = 100;
   return function(){
@@ -119,14 +120,13 @@ function gazda(par){
     );
   };
 };
-
 var dupa = 10000;
-
 var init = gazda('ceva');
 typeof init; // => "function"
-init(); // this este: [object Window]; extern gazdei: 1000; interna gazdei: 100; cea proprie: 10; dupa: 10000; parametru: ceva
-var tip = init(); // typeof tip => "undefined"
-
+init();
+// this este: [object Window];
+// extern gazdei: 1000; interna gazdei: 100;
+// cea proprie: 10; dupa: 10000; parametru: ceva
 init.__proto__.constructor // => function Function()
 ```
 
@@ -156,22 +156,18 @@ Execuția funcției interne se va face din extern, nu prin execuția containerul
 ```javascript
 var externa = 'ceva extern';
 var referintaCatreIntern;
-
 function container(){
   var valContainer = 'ceva din container';
-
   function interna(){
     console.log('Am acces la ' + externa + ' și la ' + valContainer);
   };
-
   // încarci referința către funcția internă în variabila din afara containerului.
   referintaCatreIntern = interna;
 };
-
 container();            // se creează closure-ul
 referintaCatreIntern(); // Am acces la ceva extern și la ceva din container
-
-// din interiorul funcției interne poți executa funcția container; este echivalentul seriei de execuție de mai sus
+// din interiorul funcției interne poți executa funcția container;
+// este echivalentul seriei de execuție de mai sus
 referintaCatreIntern(container());
 ```
 
@@ -186,15 +182,13 @@ function gazda(ceva){
     return ceva + ' și ' + altceva;
   };
 };
-
 let faCeva = gazda("Lică");
 faCeva ("Ionel salută colegii!"); // "Lică și Ionel salută colegii!"
-
 let faAltceva = gazda("x");
 faAltceva(0);                     // "x și 0"
 ```
 
-Un caz ceva mai elaborat este cel al creării de obiecte noi folosind constructori.
+### Crerea de obiecte noi folosind constructori.
 
 ```javascript
 function Lansare(data){

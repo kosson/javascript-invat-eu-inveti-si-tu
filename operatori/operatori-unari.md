@@ -38,7 +38,7 @@ După cum este observabil, dacă un obiect are o metodă `valueOf` care returnea
 10 + 1.1; // 11.1
 ```
 
-Acest operator mai este folosit și pentru a face concatenări, adică să construiașscă șiruri de caractere mai mari din fragmente mai mici. Semnalul pentru motorul JavaScript că se dorește o concatenare este acela că valoarea din stânga nu este o valoare numerică. Pe cea din dreapta sa va încerca să o transforme într-una numerică pentru că acesta este comportamentul său implicit. Deci, dacă valoarea din stânga nu este un număr, ci orice altceva, va încerca o concatenare.
+Acest operator mai este folosit și pentru a face concatenări, adică să construiască șiruri de caractere mai mari din fragmente mai mici. Semnalul pentru motorul JavaScript că se dorește o concatenare este acela că valoarea din stânga nu este o valoare numerică. Pe cea din dreapta sa va încerca să o transforme într-una numerică pentru că acesta este comportamentul său implicit. Deci, dacă valoarea din stânga nu este un număr, ci orice altceva, va încerca o concatenare.
 
 ```javascript
 'ceva' + 1; // "ceva1"

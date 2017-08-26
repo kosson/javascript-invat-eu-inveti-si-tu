@@ -47,7 +47,7 @@ for (;;) {
 console.timeEnd("final");
 ```
 
-Motivul pentru care bucla este una infinită este că blocul de condiție va vi evaluat la `undefined`, care este transformat într-un „falsy”, ceea ce conduce la execuția infinită.
+Motivul pentru care bucla este una infinită este că blocul de condiție va fi evaluat la `undefined`, care este transformat într-un „falsey”, ceea ce conduce la execuția infinită.
 
 ## Declararea variabilelor în `for`
 
@@ -55,7 +55,35 @@ Declararea unei variabile într-un `for`, are ca efect, declararea unei variabil
 
 Pentru cei ingrijorați de blocul delimitat de acolade. Doresc să vă liniștesc temerile. În acest moment, conform standardului un bloc de cod `for` nu creează un scope (mediu lexical separat). Ține minte că doar funcțiile creează unul.
 
-Totuși, declararea variabilelor cu `let`, le va „lega” de blocul de execuție a lui `for`.
+### Păstrarea vie a mediului lexical per fiecare iterație
+
+Declararea variabilelor cu `let` la contor, le va „lega” de blocul de execuție a lui `for` per fiecare iterație. Aici vorbim despre avantajul folosirii lui `let` în cazul constituirii de closure-uri. Mai fin spus, se leagă de necesitarea ca funcțiile care au fost definite în corpul enunțului `for` să păstreze viu mediul lexical existent la momentul unei singure iterații.
+
+```javascript
+var colectie = [];
+for (let i = 0; i < 5; i++) {
+  var valDeIterație = 10;
+  colectie.push(function ruleazaMa () {
+    console.log(`Iterația ${i} și ${valDeIterație++}`);
+  });
+};
+colectie[0](); // Iterația 0 și 10
+colectie[1](); // Iterația 1 și 11
+```
+
+În cazul folosirii lui `var`, în exemplul nostru am fi rămas cu valoarea ultimei iterații.
+
+```javascript
+var colectie = [];
+for (var i = 0; i < 5; i++) {
+  var valDeIterație = 10;
+  colectie.push(function ruleazaMa () {
+    console.log(`Iterația ${i} și ${valDeIterație++}`);
+  });
+};
+colectie[0](); // Iterația 5 și 10
+colectie[1](); // Iterația 5 și 11
+```
 
 ### Sari peste o iterație - iterare cu verificare
 
