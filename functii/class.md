@@ -1,4 +1,4 @@
-# Declarația `class`
+# Definirea unei clase
 
 JavaScript nu are clase așa cum sunt înțelese acestea în alte limbaje de programare. Mă refer la scenariul clasic în care se creează o clasă care reprezintă un plan de construcție pentru viitoarele obiecte care vor fi instanțiate pe baza acestuia. Sintaxa care folosește cuvântul rezervat `class` a fost introdusă în limbaj pentru a le oferi celor noi veniți un punct de conexiune familiar cu ceea ce deja cunosc din alte limbaje.
 
@@ -16,15 +16,15 @@ class Test {
 };
 let unTest = new Test('Salut!');
 // câteva verificări
-console.log(unTest instanceof Test); // true
-console.log(unTest instanceof Object); // true
+console.log(unTest instanceof Test);    // true
+console.log(unTest instanceof Object);  // true
 console.log(typeof Test); // function
 console.log(typeof Test.prototype.ecou); // function
 ```
 
 Instanțierea se face folosind operatorul `new`. Atenție, obiectul prototype al clasei va fi read-only. Nu se comportă ca în cazul funcțiilor din modelul clasic în care poți adăuga ulterior în obiectul prototype.
 
-Aplicând toate regulile claselor, `Test` poate fi rescris folosindu-se un IFEE.
+Aplicând toate regulile claselor, `Test` poate fi rescris folosindu-se un IIFE (Immediately Invoked Function Execution).
 
 ```javascript
 var Test = (
@@ -221,7 +221,7 @@ Este observabil cu cât efort s-a realizat acest lucru.
 Mai întâi am executat funcția Stramos în contextul lui Copil pasându-i `this`, care este obiectul `this` propriu lui Copil pentru a seta corect contextul de execuție, adică în interiorul lui Copil. Au fost pasate atributele așteptate de Stramos.
 A trebuit să „rescriem” obiectul prototip al lui Copil setându-l artificial la cel pe care dorim să-l moștenim folosind această posibilitate oferită prin `Object.create`. A mai trebuit să facem un pas suplimentar setând ca proprietatea constructor să trimită totuși înapoi la `Copil` pentru a consolida originea sa.
 
-În cazul claselor, mare parte din aceste operațiuni complexe sunt rezolvate prin introducerea sintagmei `extends` în declarația funcției care dorești să die o derivare a alteia. Prototipul este setat automat și poți accesa constructorul folosind metoda `super()`. Pentru a reține mai ușor, `super()` are rolul de a apela constructorul părintelui.
+În cazul claselor, mare parte din aceste operațiuni complexe sunt rezolvate prin introducerea sintagmei `extends` în declarația funcției care dorești să fie o derivare a alteia. Prototipul este setat automat și poți accesa constructorul folosind metoda `super()`. Pentru a reține mai ușor, `super()` are rolul de a apela constructorul părintelui.
 În clasele derivate `super()` trebuie apelat înainte de a folosi `this` în constructor pentru că `super()` este cel care-l setează.
 
 

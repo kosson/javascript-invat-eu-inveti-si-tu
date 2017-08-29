@@ -2,7 +2,7 @@
 
 Acest nou tip de funcții au fost introduse de ECMAScript 2015. Este tot un obiect-funcție.
 
-Semnul care dă și denumirea de fat arrow este `=>` ceea ce înseamnă că funcția returnează rezultatul evaluării codului din funcție, adică a expresiei. Corpul funcției este numit și „concis”, ceea ce implică faptul că doar expresiile pot constitui corpul funcției.
+Semnul care dă și denumirea de fat arrow este un egal urmat de semnul mai mare ca: `=>`, ceea ce trimite vizual la ideea că funcția returnează rezultatul evaluării codului din funcție, adică a expresiei. Corpul funcției este numit și „concis”, ceea ce implică faptul că doar expresiile pot constitui corpul funcției.
 Adu-ți aminte mereu faptul că în cazul unui bloc de cod, trebuie să scrii `return` pentru a scoate ceva din funcție. Doar în cazul expresiilor simple, precum un literal, beneficiem de un return implicit.
 
 Sunt considerate a fi soluția perfectă pentru funcțiile anonime, care la rândul lor sunt cel mai des folosite ca și callback-uri. De fapt, asta a fost și gândirea din spatele deciziei de a introduce această sintaxă. Există totuși cazul în care o funcție arrow, capătă un nume:
@@ -203,7 +203,7 @@ var maLegLaObiectNull = x.bind(null, 1, 2);
 maLegLaObiectNull(); // 3
 ```
 
-Dar în același timp, adu-ți mereu aminte că legătura la `this` este cea la mediul lexical gazdă pentru funcția fat arrow pentru că un fat arrow nu formează this. Dacă vei avea un fat arrow într-un fat arrow, `this`-ul va fi cel al obiectului gazdă al primului fat arrow. Un truc ar fi ca primul fat arrow să aibe trept corp concis o expresie de funcție normală, care, după cum bine știm formează propriul mediu lexical. Și astfel, cumva vom putea spune că al doilea fat arrow se va lega la mediul lexical (`this`-ul) al gazdei care este tot un fat arrow. Face sens?!
+Dar în același timp, adu-ți mereu aminte că legătura la `this` este cea la mediul lexical gazdă pentru funcția fat arrow pentru că un fat arrow nu formează this. Dacă vei avea un fat arrow într-un fat arrow, `this`-ul va fi cel al obiectului gazdă al primului fat arrow. Un truc ar fi ca primul fat arrow să aibe drept corp concis o expresie de funcție normală, care, după cum bine știm formează propriul mediu lexical. Și astfel, cumva vom putea spune că al doilea fat arrow se va lega la mediul lexical (`this`-ul) al gazdei care este tot un fat arrow. Face sens?!
 
 ```javascript
 var ceva = () => function obPlus(primeste) {

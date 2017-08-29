@@ -76,7 +76,7 @@ var obiNou = {
 Dacă ai un obiect literal, poți să-i pui numele proprietății o valoare string oferită de o variabilă, de fapt orice expresie validă care poate fi evaluată:
 
 ```javascript
-var prop = 'identitificator';
+var prop = 'identificator';
 var comp = 'primul';
 var obi = {
   [prop]: 189439,
@@ -195,7 +195,7 @@ obiect.ceva = 10;
 obiect.ceva = 'un ceva';
 obiect.colectie // "un ceva, 10"
 
-delete obiect.ceva; /true
+delete obiect.ceva; //true
 obiect // Object { colectie: Array[2] }
 ```
 

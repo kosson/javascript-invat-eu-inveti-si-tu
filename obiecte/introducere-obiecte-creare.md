@@ -2,13 +2,21 @@
 
 **Un obiect este un membru al tipului built-in Object** a limbajului.
 
-Pentru a realiza natura limbajului de programare JavaScript vom cita standardul care spune că *ECMAScript este bazat pe obiecte: limbajul de bază și toate funcționalitățile sunt oferite de obiecte iar un program ECMAScript este un ciorchine de obiecte care comunică*.
+Pentru a realiza natura limbajului de programare JavaScript, care este unul orientate pe obiecte, vom cita standardul care spune:
 
-Standardul spune că obiectele sunt „colecții de zero sau mai multe proprietăți fiecare având atribute care determină cum poate fi folosită”. Standardul însuși spune că proprietățile trebuie înțelese ca niște *containere care pot conține alte obiecte, valori primitive sau funcții*.
+> ECMAScript este bazat pe obiecte: limbajul de bază și toate funcționalitățile sunt oferite de obiecte iar un program ECMAScript este un ciorchine de obiecte care comunică.
+
+Standardul spune că obiectele sunt
+
+> colecții de zero sau mai multe proprietăți fiecare având atribute care determină cum poate fi folosită.
+
+Proprietățile trebuie înțelese ca niște
+
+> containere care pot conține alte obiecte, valori primitive sau funcții.
 
 Atunci când un obiect este creat, toate caracteristicile sale sunt moștenite de la un alt obiect cu rol de prototip. Să nu vi se pară ciudat că un prototip este un obiect, iar acesta la rândul lui are un prototip. E ca un lanț care are drept limită superioară obiectul intern `Object`.
 
-Pentru că ești nerăbdătoare am să-ți dau două indicii privind crearea obiectelor. Poți folosi notația literală folosind acoladele ca în `{a:1}` sau poți apela cu operatorul `new` funcții cu rol de constructor. Aceste două metode sunt și cele mai des întâlnite. Am menționat constructorii.
+Pentru că ești nerăbdătoare am să-ți dau două indicii privind crearea obiectelor. Poți folosi notația literală folosind acoladele ca în `{a:1}` sau poți apela cu operatorul `new` funcții cu rol de constructor. Aceste două metode sunt și cele mai des întâlnite. Am menționat constructorii deja?
 
 ## Ce sunt constructorii?
 
@@ -23,7 +31,7 @@ Obiectele au **proprietăți** și **metode**.
 Proprietățile sunt valori primitive - numere, boolean-uri, șiruri de caractere, funcții sau chiar obiecte. Proprietățile ***sunt ceva***.
 Metodele ***fac ceva***. Metodele sunt de fapt niște funcții. Un aspect care vă va face viața ușoară odată înțeles este acela că toate funcțiile definite în obiectul global, de fapt, devin automat metode ale acestuia, adică lui `window` în cazul browserelor.
 
-Hai să facem un obiect. Vă mai aduceți aminte de la valorile literale că cel mai simplu este folosirea obiectelor literale.
+Hai să facem un obiect. Vă mai aduceți aminte de la valori că valoarea obiect poate fi exprimată literal prin precizarea pur și simplu a unei perechi de acolade.
 
 ```javascript
 // un object literal
@@ -60,7 +68,8 @@ Acest mod de a adăuga proprități noi fără a interveni asupra constructorulu
 
 ## Categorii de obiecte
 
-În textul standardului, obiectele chiar sunt categorisite astfel:
+În textul standardului, obiectele se încadrează următoarelor categorii:
+
 - „Ordinary object” (*obiecte comune*), care au comportamentul comun tuturor obiectelor în JavaScript.
 - „Exotic object” (*obiecte exotice*), care au comportamentul comun obiectelor în JS, dar cu mici diferențe.
 - „Standard objects” (*obiecte standard*) sunt toate obiectele JS. Obiectele „ordinary” și cele „exotice” fac parte din setul obiectelor standard.
@@ -68,7 +77,7 @@ Acest mod de a adăuga proprități noi fără a interveni asupra constructorulu
 
 ## Obiecte interne (*built-in*)
 
-Am menționat că JavaScript vine din start cu obiectele care se numesc „built-in object” și pe care le-am tradus ca **obiecte interne** limbajului. Pentru a avea acces la ele nu-i nevoie să faci ceva. Pur și simplu ele sunt acolo deja, gata de a fi folosite. Există un detaliu pe care aș dori să-l remarcați cu atenție. `Obiectul global` este parte a obiectelor interne. Am putea concluziona că `obiectul global` plus `obiectele standard` constituie setul mare al celor `interne`. O distincție pe care trebuie să o fi realizat deja este că obiectul global nu este containerul tuturor obiectelor oricât de tentant ar fi să-l gândim astfel. Dar este „containerul” dacă vrei să-l închipui astfel a întregului cod pe care-l scrii tu și al entităților care se formează la momentul evaluării acestuia.
+Am menționat că JavaScript vine din start cu obiectele care se numesc „built-in object” și pe care le-am tradus ca **obiecte interne** limbajului. Pentru a avea acces la ele nu-i nevoie să faci ceva. Pur și simplu ele sunt acolo deja, gata de a fi folosite. Există un detaliu pe care aș dori să-l remarcați cu atenție. `Obiectul global` este parte a obiectelor interne. Am putea concluziona că `obiectul global` plus `obiectele standard` constituie setul mare al celor `interne`. O distincție pe care trebuie să o fi realizat deja este că obiectul global nu este containerul tuturor obiectelor oricât de tentant ar fi să-l gândim astfel. Dar este „containerul”, dacă vrei să-l închipui astfel, al întregului cod pe care-l scrii tu și al entităților care se formează la momentul evaluării acestuia.
 
 ## Mantre
 
@@ -96,7 +105,7 @@ Am menționat că JavaScript vine din start cu obiectele care se numesc „built
 - `this` este un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
 - Obiectele pot moșteni alte proprietăți direct din alte obiecte.
 - Când introduci o proprietate nouă într-un obiect care generează prototipul pentru alte obiecte, obiectele legate prin lanțul prototipal, vor moșteni noile proprietăți.
-- [[Prototype]], adică proprietatea `prototype` este o legătură internă, care se stabilește de la un obiect la altul. Pentru aflarea prototipului se apelează la __proto__ (dunder-dunder proto) sau se va folosi `Object.getPrototypeOf(obiect)`.
+- [[Prototype]], adică proprietatea `prototype` este o legătură internă, care se stabilește de la un obiect la altul. Pentru aflarea prototipului se apelează `Object.getPrototypeOf(obiect)`.
 - Un obiect literal are prototype `undefined`. Cu toate acestea la interogare cu instanceof trimite la Object.
 - Legătura prototipală se obține legătura prin `Object.create()` și are două efecte:
   1. **creează un obiect**,
@@ -142,6 +151,8 @@ const webObi = {
 
 Atributele sunt folosite pentru a defini și a explica starea proprietăților unui obiect.
 
+<img src="ProprietatePentruDate.png" width="300">
+
 Atributele unei proprietăți folosite pentru date.
 
 |Numele atributului|Valoare|Descriere|
@@ -152,6 +163,8 @@ Atributele unei proprietăți folosite pentru date.
 |`configurable`|Boolean|Dacă este setat la `false`, orice încercare de a modifica atributele, de a șterge proprietate, va fi destinată eșecului. Tot ce permite este modificarea lui `value` și setarea lui `writable` la `false`.|
 
 Atributele unei proprități de tip Accessor
+
+<img src="ProprietateAccesor.png" width="300">
 
 |Numele atributului|Valoare|Descriere|
 |:-----------------|:------|:--------|

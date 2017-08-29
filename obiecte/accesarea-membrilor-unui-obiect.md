@@ -1,7 +1,3 @@
-## Mantre
-
-- În obiecte numele proprietăților sunt stringuri sau simboluri.
-
 ## Accesarea proprietăților unui obiect
 
 Se face în două feluri:
@@ -42,3 +38,7 @@ var obi = {
 };
 obi;
 ```
+
+## Mantre
+
+- În obiecte numele proprietăților sunt stringuri sau simboluri.

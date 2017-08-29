@@ -17,9 +17,9 @@ oFunctie.apply(null, argumentele); // argumentele sunt aplicate literalmente fun
 
 Acest exemplu ilustrează în adâncime ceea ce se petrece cu argumentele unei funcții. Am folosit soluția practică `Array.prototype.slice.call(arguments)` pentru a transforma obiectul `arguments` într-un array.
 
-## Sintaxa spread
+## Operatorul spread
 
-Se mai pot obține valorile direct, folosindu-se noua sintaxă ES6: `...argumente`.
+Se mai pot obține valorile direct, folosindu-se noua sintaxă ES6 folosind operatorul trei puncte: `...argumente`.
 Pentru că am menționat ***sintaxa spread*** introdusă de ES6, hai să vedem același exemplu, dar folosind această nouă sintaxă:
 
 ```javascript

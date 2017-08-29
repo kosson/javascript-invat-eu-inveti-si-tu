@@ -52,7 +52,7 @@ Declararea unei funcții este doar o variantă prescurtată pentru declarația `
 function ex () {};
 // în spate, se expandează, în:
 var ex = function ex () {}; // se face hoisting!
-// apoi se expandează în;
+// apoi se expandează în:
 var ex = undefined;
 // apoi se face asignarea:
 ex = function ex () {};
@@ -128,7 +128,7 @@ functie(function(){});     // callback-urile sunt function expression.
 functie(function(){
   return function(){};     // funcțiile returnate tot function expression sunt.
 });
-(function functie(){})();  // În cazul unui IFFE, tot un function expression avem.
+(function functie(){})();  // În cazul unui IIFE, tot un function expression avem.
 ```
 
 Expresiile de funcții pot fi pasate ca valori altor funcții ca parametri. Aceste funcții vor putea fi executate din interiorul funcției cărora au fost pasate.
