@@ -173,7 +173,7 @@ referintaCatreIntern(container());
 
 ### Variabile „private” și accesarea acestora.
 
-Cazul cel mai simplu este al unei funcții returnate care păstrează referințele către toți identificatorii din propriul scope, dar și scope-ul părinte. Aici se observă cât de intim conceptul de closure este legat de cel al scope-ului (lexical environment) creat la momentul procesării codului sursă (**function code**).
+Cazul cel mai simplu este al unei funcții returnate care păstrează referințele către toți identificatorii din propriul scope, dar și scope-ul părinte. Aici se observă cât de intim conceptul de closure este legat de cel al scope-ului (lexical environment) creat la momentul compilării codului sursă (**function code**).
 
 ```javascript
 function gazda(ceva){

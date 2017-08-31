@@ -2,7 +2,7 @@
 
 IIFE permite invocarea imediată a unei funcții anonime fără a salva o referință. Permite crearea de spații de cod executabile separat de global scope.
 
-Un IIFE este folosit pentru a crea un scope și pentru a incapsula module.
+Un IIFE este folosit pentru a crea un scope și pentru a încapsula module.
 
 Scopul parantezelor, adică a operatorului de grupare, este de a transforma definirea funcției într-o expresie. Acest lucru se întâmplă pentru că în JavaScript tot ce este între paranteze este tratat ca o expresie. A doua pereche de paranteze face ca funcția să fie executată imediat.
 

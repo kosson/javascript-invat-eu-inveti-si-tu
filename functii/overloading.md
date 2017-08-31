@@ -1,4 +1,4 @@
-Tuturor funcțiilor le este pasat parametrul `arguments`.
+Toate funcțiile au acces la datele din obiectul `arguments`.
 
 ## Mantre
 
