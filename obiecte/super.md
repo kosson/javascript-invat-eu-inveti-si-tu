@@ -8,8 +8,6 @@ ES6 definește metodele obiectelor ca niște funcții care are au o proprietate 
 
 Orice referință la `super` folosește proprietatea internă `[[HomeObject]]` pentru a determina pașii următori cum ar fi `Object.getPrototypeOf()` asupra valorii stocate de `[[HomeObject]]` cu scopul de a obține, de fapt prototipul.
 
-Un exemplu de utilizare simplu este:
-
 ```javascript
 var obi1 = {
   faceva(){

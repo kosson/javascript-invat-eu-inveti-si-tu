@@ -1,6 +1,6 @@
 # Obiecte
 
-**Un obiect este un membru al tipului built-in Object** a limbajului.
+**Un obiect este un membru al tipului built-in Object** al limbajului.
 
 Pentru a realiza natura limbajului de programare JavaScript, care este unul orientate pe obiecte, vom cita standardul care spune:
 
@@ -20,9 +20,18 @@ Pentru că ești nerăbdătoare am să-ți dau două indicii privind crearea obi
 
 ## Ce sunt constructorii?
 
-Pur și simplu niște funcții care au o proprietate numită `prototype` folosită pentru a implementa moștenirea prototipală și pentru a avea acces la proprietăți pe care obiectul creat la apelarare funcției constructor le pune la dispoziție. Ceea ce mai trebuie să știi din start despre constructori este că la apelare, generează obiectul și apoi execută codul; nu uita că este totuși o funcție. Execuția codului dintr-un constructor are ca efect asignarea proprietăților inițiale ale obiectului nou creat.
+Sunt funcții-obiect. Să detaliem.
 
-**Spune standardul**: *Fiecare obiect creat de un constructor are o referință implicită (numită prototipul obiectului) către valoarea proprității «prototype» a constructorului*.
+După cum am văzut în capitolul dedicat genezei Tărâmului, atunci când s-au format **intrinsics**, a fost creat și obiectul prototip al tuturor obiectelor, care o fracțiune mai târziu a fost folosit pentru crearea obiectului-funcție ce va juca rolul de prototip al tuturor funcțiilor.
+
+JavaScript este un univers al obiectelor care sunt generate de constructori sau prin folosirea notației literale așa cum deja am văzut la capitolul dedicat valorilor. Dacă avem deja o ideea despre notația literală, trebuie să lămurim natura constructorilor. Aceștia sunt pur și simplu niște funcții care au o proprietate numită `prototype`. Această proprietate este un obiect care prin însăși existența sa face posibilă moștenirea prototipală. De ce există această proprietate în funcția-obiect care este constructorul? Pentru că în cazul apelării folosind operatorul `new`, se va genera legătura prototipală.
+
+Este astfel asigurat accesul la proprietăți pe care obiectul creat la apelararea funcției constructor cu operatorul `new` le pune la dispoziție de la bun început fără a fi fost setate la nomentul creării.
+
+Ceea ce mai trebuie să știi din start despre constructori este că la apelarea cu operatorul `new`, generează obiectul și apoi execută codul; nu uita că este totuși o funcție. Execuția codului dintr-un constructor are ca efect asignarea proprietăților inițiale ale obiectului nou creat. Invocarea unui constructor fără operatorul `new` are efecte diferite pentru fiecare dintre aceștia.
+
+**Spune standardul**: *Fiecare obiect creat de un constructor are o referință implicită (numită prototipul obiectului) către valoarea proprietății «prototype» a constructorului*.
+
 Mai mult de atât fiecare `prototype` poate avea drept referință un alt `prototype`, realizându-se ceea ce se numește *lanț prototipal*. Modul de funcționare a lanțului prototipal se bazează pe un mecanism de delegare atunci când se caută o proprietate a unui obiect. De exemplu, dacă cauți o proprietate într-un obiect iar ea nu este a obiectului, există o bună șansă să fie moștenită prin lanțul prototipal de la constructorul pe baza căruia a fost instanțiat așa că se face căutarea mai departe din obiect în obiect până când proprietatea este găsită sau nu.
 
 ## Componența obiectelor

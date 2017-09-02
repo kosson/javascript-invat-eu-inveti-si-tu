@@ -1,5 +1,6 @@
 # Iterații
 
+Partea cea mai valoroasă a programării este aceea că poate prelua un set de date pe care le poate parcurge element cu element, aplicând transformări sau căutări după anumite criterii, cu scopul de a obține un anumit rezultat dorit.
 Dicționarul explicativ ne dă o definiție foarte utilă: „repetare a unui anumit procedeu de calcul, prin aplicarea lui la rezultatul calculului din etapa precedentă”.
 
 ## Protocoale de iterare

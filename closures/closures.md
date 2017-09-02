@@ -1,6 +1,9 @@
 # Closures
 
-O funcție definită în interiorul unei funcții container, generează un closure.
+O funcție definită în interiorul unei funcții container, generează un closure. Am să pornesc de la traducerea acestui termen cât mai fidel acțiunii.
+
+Funcțiile sunt valori! Pot fi pasate ca valori altor funcții și pot fi returnate de funcții ca valori. Te vei întreba pe bună dreptate care este utilitatea acestui aspect? Răspunsul vine tot din necesitatea de a manipula valori, dar care aparțin unor medii lexicale diferite, a celor care există la locul declarării funcției care face closure.
+
 
 Este o funcție internă care „fotografiază și stochează” mediul lexical în care a fost declarată și pe care îl folosește pentru a utiliza tot ce este necesar să se execute. Mai exact, un closure este efectul evaluării unei funcții interne atunci când s-a pornit execuția funcției gazdă.
 

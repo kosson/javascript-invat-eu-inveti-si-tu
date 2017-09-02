@@ -6,7 +6,7 @@ Un lucru trebuie să-ți spun din prima: tu ești cel care descrie tot procesul 
 
 Pentru a te bucura de rolul tău, te poftesc să pășești în cabina de comandă a JavaScript-ului.
 
-Mai întâi avem declarațiile de variabile și funcții. Acestea trebuie privite ca pe o enumerare instrumentelor de măsură și control. Controlul operațiunilor pot fi foarte bine întreruptoarele iar iterațiile, toate procedurile repetate din timpul zborului. Pe scurt, ai un tablou de bord foarte bogat pentru a face transformări ale datelor... unii spun că este singurul lucru apropiat de magie.
+Mai întâi avem declarațiile de variabile și funcții. Acestea trebuie privite ca pe o enumerare instrumentelor de măsură și control. Controlul operațiunilor pot fi foarte bine întreruptoarele iar iterațiile, toate procedurile repetate din timpul zborului. Pe scurt, ai un tablou de bord foarte bogat pentru a aplica transformări datelor... unii spun că este singurul lucru apropiat de magie.
 
 Îți propun să studiem tabloul de bord pentru a vedea ce instrumente avem la dispoziție.
 

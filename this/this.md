@@ -11,8 +11,6 @@ This este un obiect pasat automat unei funcții și care se formează în funcț
 
 ## Mantre
 
-TODO: sortează mantrele la this
-
 - Prin `this`, de fapt accesezi starea obiectului cu care lucrezi.
 - Legătura la obiectul reprezentat de cuvântul cheie `this` se realizează la momentul execuției codului, nu la momentul scrierii lui.
 - **this** este o referință către contextul de execuție curent în timp ce funcția se execută.
@@ -183,7 +181,13 @@ Dorel();
 // Sunt constructorul Dorel (afișat o singură dată)
 ```
 
-#### `setInterval(this.ego(), 1000);` - pierderea contextului de execuție prin încheierea execuției în sine.
+#### Pierderea contextului de execuție
+
+Există cazuri în care sunt folosite funcții ale motorului JavaScript, care mai sunt numite în comunitate și utilitate. Unul dintre acestea folosit pe scară largă este `setInterval()` cu scopul de a mima anumite comportamente în lucrul cu evenimentele.
+
+```javascript
+`setInterval(this.ego(), 1000);
+```
 
 Efectul execuției:
 * Mesajul este afișat o singură dată,
@@ -198,7 +202,11 @@ Acest lucru se întâmplă pentru că `setInterval()` interpretează `this.ego` 
 
 REȚINE: **`this` al unui callback indică întotdeauna către obiectul global. Pentru a fixa `this` la funcția gazdă se va folosi `call()`, `apply()` sau `bind()`**.
 
-#### `setInterval(function(){this.ego()}, 1000);` - menținerea legăturii la contextul de execuție corect
+#### Menținerea legăturii la contextul de execuție corect
+
+Acest lucru se realizează cu ajutorul unei funcții, care are darul de a face un close over pentru mediul lexical corect: `setInterval(function(){this.ego()}, 1000);`.
+
+Făcând uz de ceea ce tocmai am aflat, vom putea actualiza corect.
 
 ```javascript
 var Dorel = function dorel(){
@@ -289,7 +297,7 @@ function faceva(){
 faceva(); // 2
 ```
 
-### 2. Binding implicit sau *atașat*
+### 2. Binding implicit numit și *atașat*
 
 Îi spun *atașat* pentru că binding-ul se face la obiectul în care este invocată funcția (call site), ca metodă.
 Bindingul implicit constă într-o funcție pe care o „împrumuți” contextului unui obiect.
@@ -301,13 +309,11 @@ var obiectLiteral = {
   ceva: 2,
   metoda: faceva
 };
-
 function faceva(){
   this.test = 1001; // introduce în obj test
   this.ceva = 50;   // modifica existent
   console.log( this.ceva ); // 50
-}
-
+};
 obiectLiteral.metoda();
 console.log(obiectLiteral.test); // 1001
 console.log(obiectLiteral.ceva); // 50
@@ -334,8 +340,8 @@ var obiectLiteral2 = {
 
 obiectLiteral2.metoda(); // altceva
 
-var proprietate = "valoarea proprietății obiectului global";  // prop. a obi. global
-var metoda = obiectLiteral.metoda;                            // metodă a obi. global
+var proprietate = "valoarea proprietății obiectului global";  // prop. a obi.global
+var metoda = obiectLiteral.metoda;                            // metodă a obi.global
 metoda(); // => valoarea proprietății obi. global; echivalent cu window.metoda()
 ```
 
@@ -360,7 +366,7 @@ Ceea ce s-a întâmplat, de fapt este că a fost „împrumutată” (invocată)
 
 ### 3. Binding explicit
 
-`call()` și `apply()` sunt utilități disponibile prin `[[Prototype]]` tuturor funcțiilor, care sunt de fapt la rândul lor obiecte (funcțiile sunt obiecte `Function`, care moștenesc metodele din prototipul său).
+Utilitarele `call()` și `apply()` sunt utilități disponibile prin `[[Prototype]]` tuturor funcțiilor, care sunt de fapt la rândul lor obiecte (funcțiile sunt obiecte `Function`, care moștenesc metodele din prototipul său).
 
 Bindingul explicit se realizează prin intermediul lui call() și apply(). Ambele iau ca prim parametru un obiect care va fi folosit pentru `this` și apoi va invoca funcția cu acel `this` deja specificat. Pentru că este afirmat în mod direct unde dorești să fie this, numim aceasta binding explicit.
 
@@ -372,15 +378,8 @@ Ceea ce permite acest mecanism, de fapt este posibilitatea de a scrie o funcție
 
 ```javascript
 var proprietate = "ceva din global"; // este proprietate a obiectului global
-
-var obiectLiteral = {
-  proprietate: "ceva"
-};
-
-var faceva = function maner(){
-  console.log(this.proprietate);
-}
-
+var obiectLiteral = { proprietate: "ceva" };
+var faceva = function maner () {console.log(this.proprietate);};
 faceva.call(obiectLiteral); // Spune: foloseste objectLiteral ca this. => ceva
 faceva(); // => ceva din global
 ```
@@ -396,14 +395,10 @@ var obiect = {
   metoda: function(unu, doi, trei){
     console.log(this.proprietate);
   }
-}
-
+};
 var proprietate = 4000;
-
 obiect.metoda(); // => 1000
-
 obiect.metoda.call(window); // 4000
-
 obiect.metoda.call(window, 1, 2, 3);
 obiect.metoda.apply(window, [1,2,3]); //acelasi lucru ca si call numai ca paseaza params ca array
 ```
@@ -414,7 +409,7 @@ Chiar și când se face un binding explicit, se poate pierde bindingul la `this`
 
 ##### Restabilirea contextului
 
-`apply()` și `call()` oferă posibilitatea de a specifica direct contextul dorit. O altă metodă este de a folosi arrow functions. Funcțiile săgeată - arrow function au drept caracteristică faptul că mențin legătura la `this` care exista la momentul definirii sale.
+Utilitarele `apply()` și `call()` oferă posibilitatea de a specifica direct contextul dorit. O altă metodă este de a folosi arrow functions. Funcțiile săgeată - arrow function au drept caracteristică faptul că mențin legătura la `this` care exista la momentul definirii sale.
 ATENȚIE! Dacă funcția arrow este definită într-un object literal, valoarea lui this pe care o referențiază arrow function este obiectul global `window`.
 
 ```javascript
@@ -530,7 +525,7 @@ var obiect = { a: 1000 };
 
 ### Evenimentele din API-ul browserului
 
-Să închipuim cazul unui obiect care are metode construite special pentru a gestiona o pagină sau un fragment de pagină web prin manipularea evenimentelor.
+Să ne imaginăm cazul unui obiect care are metode construite special pentru a gestiona o pagină sau un fragment de pagină web prin manipularea evenimentelor.
 
 ```javascript
 var obiExecutor = {
@@ -546,7 +541,7 @@ var obiExecutor = {
 
 Este nevoie de `bind(this)` pentru a păstra legătura la obiectul în cadrul căreia se execută metoda. Altfel, fără `bind(this)`, `this` se va stabili la obiectul DOM la care se atașează listener-ul (receptorul).
 
-`bind(this)` leagă înapoi `this` la obiectul a cărui metodă este. Dar pentru ca acest lucru să se întâmple, se va folosi operatorul de grupare pentru a „repoziționa” legătura `this` la obiectul părinte, nu a elementului DOM.
+Formula `bind(this)` leagă înapoi `this` la obiectul a cărui metodă este. Dar pentru ca acest lucru să se întâmple, se va folosi operatorul de grupare pentru a „repoziționa” legătura `this` la obiectul părinte, nu a elementului DOM.
 
 ```javascript
 var obiExecutor = {
@@ -590,13 +585,11 @@ var boundGetX = retrieveX.bind(modul);
 boundGetX(); // 81
 ```
 
-bind() va fi găsit în funcția __proto__ al oricărui obiect generat de o funcție alături de `call()` și `apply()` pentru că orice funcție este un obiect care are o legătură prototipală și astfel acces la obiectul `Function` (Function.prototype.apply(), Function.prototype.bind(), Function.prototype.call()).
+Utilitarul bind() ține de obiectul prototip al lui  Function: Function.prototype.bind().
 
-## 5. Binding cu `new` - constructori
+## 5. Binding cu `new` în cazul constructorilor
 
-Poți pune în fața oricărei funcții `new` și o transformi astfel într-un apel către un Constructor. Atenție, aici trebuie precizat faptul că JavaScript nu are clase.
-
-### Cum funcționează constructorii:
+Poți pune în fața oricărei funcții operatorul `new` și o transformi astfel într-un apel către un Constructor.
 
 ```javascript
 function SuntUnConstructor (){
@@ -633,7 +626,7 @@ console.log(obi.alfa); // 1
 
 Ceea ce va face la instanțiere este exact ceea ce a fost proiectată funcția la care se adaugă patru comportamente nevăzute.
 
-### Ce se întâmplă când pui cuvântul cheie rezervat `new` în fața oricărei funcții?
+### Ce se întâmplă când pui operatorul `new` în fața oricărei funcții?
 
 1. Se creează un obiect nou.
 2. Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu `new`. Se creează legătura prototipală.
@@ -861,7 +854,7 @@ this.array.forEach(function (el) => {
 }, this);
 ```
 
-#### A treia este un bind(this) pentru a forța execuția în contextul necesare
+#### A treia este un bind(this) pentru a forța execuția în contextul necesar
 
 ```javascript
 this.array.forEach(function (el) => {

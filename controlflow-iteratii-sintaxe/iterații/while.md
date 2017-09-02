@@ -10,7 +10,7 @@ while (x < 10) {
 };
 ```
 
-Remarcă faptul că testul condiției se face la începutul fiecărei iterații. Acest lucru înseamnă că în caz de valoare `false`, codul nu se va executa nici măcar pentru o singurî iterație.
+Remarcă faptul că testul condiției se face la începutul fiecărei iterații. Acest lucru înseamnă că în caz de valoare `false`, codul nu se va executa nici măcar pentru o singură iterație.
 
 While își are locul său, dar practica înclină către folosirea instrucțiunii `for` care în condiția de test permite introducerea a trei expresii. Evaluarea tuturor acestor trei expresii va determina continuarea iterării sau nu.
 
