@@ -35,7 +35,7 @@ Caută obiectul de la care moștenește proprietăți obiectul de lucru. Dacă v
 
 Metoda pe care o putem folosi și noi ca programatori este parte a obiectului global `Object` și este disponibilă prin mecanismul de moștenire tuturor obiectelor. Deci, ține minte că există `Object.getPrototypeOf(obiectPentruCareSeFaceInterogarea)`.
 
-### [[SetPrototypeOF]]
+### [[SetPrototypeOf]]
 
 ![](ObjectSetPrototypeOf-v-Symbol.png)
 
