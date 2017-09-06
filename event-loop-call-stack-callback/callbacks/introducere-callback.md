@@ -114,8 +114,7 @@ function arataMesajul(mesaj){
   setTimeout(function(){
     alert(mesaj);
   }, 3000);
-}
-
+};
 arataMesajul('funcția internă este chemată după trei secunde');
 ```
 
@@ -129,14 +128,12 @@ Un exemplu de folosire a callback-urilor în Node.js
 
 ```javascript
 var fs = require('fs');
-
 var callback = function faCeva(error, data){  // o practică bună este a numi funcțiile pentru a le vedea în stivă
   if(error){
     return callback(error, null);
   };
   // fă ceva cu datele
 };
-
 fs.readFile('date.csv', 'utf-8', callback);
 ```
 
@@ -147,6 +144,7 @@ Atenție, în Node, primul argument al unui callback va fi întotdeauna un obiec
 - Ieși din funcție cât se poate de repede cu `return`, `continue` sau `break`.
 - Creează funcții cu nume pentru callback-uri pasând rezultatele intermediare ca argumente.
 - Modularizează codul împărțindu-l în funcții mici, făcându-l reutilizabil ori de câte ori acest lucru este posibil.
+- În cazul folosirii callback-urilor împreună cu operatorul spread, callback-ul nu va mai fi poziționat ultimul, ci primul sau penultimul. Acest lucru se întâmplă pentru că sintaxa spread trebuie să fie ultimul argument introdus.
 
 ## Dependințe cognitive:
 

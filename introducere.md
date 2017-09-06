@@ -94,7 +94,7 @@ Programarea, ca și activitate, ar fi util să fie înțeleasă ca o limbă str�
 
 Vă va ajuta să înțelegeți că scrierea unui fragment de cod este precum scrierea unei fraze foarte lungi constituită din propoziții separate prin punct și virgulă. Dar această frază este forma cristalizată a unui algoritm. Să lămurim câteva lucruri de la bun început.
 
-Ai o problemă pe care dorești să o rezolvi și în acest sens, creezi **pașii necesari**. Nu te sfii să scrii acești pași pe o coală de hârtie. Adevărata programare începe de la faza de creion și hârtie. În plus, este dovedit ștințific că soluțiile se văd din lucrul cu obiecte, din interacțiunea gândurilor cu lumea fizică.
+Ai o problemă pe care dorești să o rezolvi și în acest sens, creezi **pașii necesari**. Nu te sfii să scrii acești pași pe o coală de hârtie. Adevărata programare începe de la faza de creion și hârtie. În plus, este dovedit științific că soluțiile se văd din lucrul cu obiecte, din interacțiunea gândurilor cu lumea fizică.
 
 ![](FluxDeLaProblemaLaAplicare.png)
 

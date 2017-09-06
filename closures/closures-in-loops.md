@@ -6,7 +6,7 @@ Această zonă a closure-urilor este una ce ține de problemele care apar atunci
 
 - funcții cu aspectele legate de mediul lexical pe care-l formează
 - closure-uri
-- instrucțiunea `for`.
+- enunțul `for`.
 
 ## Bucle buclucașe - iterări care produc closure-uri
 
@@ -39,7 +39,7 @@ for (i = 0; i <= 3; i++) {
 ```
 
 Să ne aducem aminte faptul că funcțiile sunt la rândul lor valori care pot fi introduse într-un array.
-Acum, efectul instrucțiunii `for` este că introduce într-un array declarații de funcții, care reprezintă fiecare câte o valoare. Pentru a fi limpede ceea ce tocmai s-a petrecut trebuie să ne aducem minte faptul că în cazul fiecărei funcții care face closure, aceasta face „o fotografie” a mediului în care a fost declarată pentru a se putea executa, iar în cazul nostru în „fotografie” se găsește și `i`.
+Acum, efectul instrucțiunii `for` este că introduce într-un array declarații de funcții, care reprezintă fiecare câte o valoare. Pentru a fi limpede ceea ce tocmai s-a petrecut trebuie să ne aducem minte faptul că în cazul fiecărei funcții care face closure, aceasta face „o fotografie” a mediului în care a fost declarată (de fapt, o legătură dinamică la mediul lexical în care a fost definită), pentru a se putea executa, iar în cazul nostru în „fotografie” se găsește și `i`.
 Buclucul vine la invocarea vreunei funcții din array pentru că valoarea lui `i`, după încheierea lui `for` rămâne 3. Când invoci funcția, ce să vezi, va găsi identificatorul, dar nu va mai găsi valoarea de la momentul introducerii în array, ci aceea de la finalul lui `for`.
 
 ### Menținerea valorilor de etapă
@@ -115,7 +115,7 @@ innerFunction face „enclosing” (circumscrie) variabila x.
 La momentul execuției sunt introduse în array-ul `funcs` trei referințe către funcția internă a lui init(), astfel, făcânduse un clojure pe funcția internă.
 
 ## run()
-la execuție, run(), va executa rând pe rând funcțiile din funcs[]. Toate returnează aceeași valoare, adică ultima rezultată din excuția buclei.
+La execuție, run(), va executa rând pe rând funcțiile din funcs[]. Toate returnează aceeași valoare, adică ultima rezultată din excuția buclei.
 
 ## PROBLEMA
 Variabilele din funcțiile interne cu același identificator (x în cazul nostru) sunt legate de aceeași variabilă cu cea din funcția container. Acest lucru se întâmplă pentru că variabilele au același scope stabilit de funcția container. Variabilele nu sunt block scoped, adică limitate la scope-ul creat de funcția internă.
@@ -124,31 +124,25 @@ Variabilele din funcțiile interne cu același identificator (x în cazul nostru
 ```javascript
 var data = [0, 1, 2];
 var funcs = [];
-
 function init() {
-    for (var i = 0; i < 3; i++) {
-
-        var x = data[i];
-        var innerFunc = function() {
-            var temp = x;
-            return function() {
-                return temp;
-            };
-        }();
-
-        funcs.push(innerFunc);
-    }
-}
-
+  for (var i = 0; i < 3; i++) {
+    var x = data[i];
+    var innerFunc = function() {
+      var temp = x;
+      return function() {
+        return temp;
+      };
+    }();
+    funcs.push(innerFunc);
+  }
+};
 function run() {
-    for (var i = 0; i < 3; i++) {
-        console.log(data[i] + ", " +  funcs[i]());
-    }
-}
-
+  for (var i = 0; i < 3; i++) {
+    console.log(data[i] + ", " +  funcs[i]());
+  }
+};
 init();
 run();
-
 // 0, 0
 // 1, 1
 // 2, 2

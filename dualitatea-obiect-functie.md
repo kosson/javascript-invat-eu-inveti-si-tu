@@ -64,7 +64,7 @@ Am reprezentat având ultima proprietate cu un semn interzis ceea ce trimite la 
 
 ![](ObjectGetOwnPropertySymbol.png)
 
-Rulând această metodă internă, fie obții valoarea `undefined` pentru că nu a fost găsită o astfel de proprietate, fie obții o descriere a acesteia în caz contrar. Descrierea aceasta, conform standardului este o înregistrare (Record). Am explicat în geneză ce este o înregistrate, un Record. În cazul nostru, **Property Descriptor** este un tip al specificației, care este ca specie un Record și conține toate informațiile privind o anumită proprietate a unui obiect; dacă poate fi scrisă (writable), dacă foate fi configurată (configurable), dacă este enumerabilă (enumerable), dacă are valoare deja (value) și în fine, dacă are proprietăți de accesare (accessor): get pentru obținerea valorii și set pentru a o seta.
+Rulând această metodă internă, fie obții valoarea `undefined` pentru că nu a fost găsită o astfel de proprietate, fie obții o descriere a acesteia în caz contrar. Descrierea aceasta, conform standardului este o înregistrare (Record). Am explicat în geneză ce este o înregistrare, un Record. În cazul nostru, **Property Descriptor** este un tip al specificației, care este ca specie un Record și conține toate informațiile privind o anumită proprietate a unui obiect; dacă poate fi scrisă (writable), dacă poate fi configurată (configurable), dacă este enumerabilă (enumerable), dacă are valoare deja (value) și în fine, dacă are proprietăți de accesare (accessor): get pentru obținerea valorii și set pentru a o seta.
 
 Am reprezentat această metodă internă ca un obiect care are proprietăți dintre care cea din mijloc, care are săgeată, se distinge ca fiind proprie acelui obiect. Acest lucru înseamnă că nu a fost moștenită.
 
@@ -248,3 +248,8 @@ Reprezentarea este o prescurtare a prea lungului `"strict mode";`
 Este un obiect. Dacă funcția va folosi `super`, acesta este obiectul la care va trimite `super`.
 
 Am reprezentat cu încadrarea unei căsuțe într-un cerc care desemnează un obiect.
+
+## Discuție
+
+Ce am aflat până în același moment?
+Știm că la baza oricărei funcții stă un obiect.
