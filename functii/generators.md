@@ -171,7 +171,7 @@ Metoda done, așa cum se observă aduce un obiect care are drept proprietatea `v
 Valorile pot fi iterate și printr-un `while` pentru a scoate valoarea din obiectul returnat de cursor. Pentru fiecare iterație testezi dacă done este true, adică dacă nu mai sunt obiecte de returnat. Aceasta va fi limita la care se va opri ciclarea.
 Formularea condiției: `!(let element = refIterator.next()).done`.
 Explicație:
-- creezi o referință către obiectul adus de fiecre yield: `let obi;`
+- creezi o referință către obiectul adus de fiecare yield: `let obi;`
 - `obi = refIterator.next()` aduce obiectul.
 - pui expresia între paranteze pentru a o evalua. Evaluarea este obiectul adus de cursor: `(obi = refIterator.next())`
 - Valoarea lui `done` o negi pentru toate obiectele returnate care au proprietate `value`, adică false va deveni true pentru ca bucla while să poată avansa.
@@ -201,7 +201,7 @@ function* emiteFormule(){
 };
 for(let obi of emiteFormule()){
   console.log(obi);
-}
+};
 // =>
 /*
 Salutare!
@@ -219,8 +219,7 @@ function* traduceri(){
   yield 'Ciao!';
   yield 'Konnichiwa!';
   yield 'Hello!';
-}
-
+};
 function* emiteFormule(){
   yield 'Formule de salut in mai multe limbi';
   yield* traduceri();
@@ -241,7 +240,7 @@ Hello!
  */
 ```
 
-O chestie foarte faină care ține de felul în care funcționează generatoarele, este că se pot construi bucle infinite fără a avea temerea că se va returna erori de către mediul în care programul rulează. Acest lucrue este pentru că indiferent de faptul că limita este la infinit, generarea valorilor este controlată prin `yield`. Se poate ușor închipui o listă cu bilete de ordine sau orice necesită o listă care să se prelungească la infinit.
+O chestie foarte faină care ține de felul în care funcționează generatoarele, este că se pot construi bucle infinite fără a avea temerea că se va returna erori de către mediul în care programul rulează. Acest lucru este pentru că indiferent de faptul că limita este la infinit, generarea valorilor este controlată prin `yield`. Se poate ușor închipui o listă cu bilete de ordine sau orice necesită o listă care să se prelungească la infinit.
 
 ### Parcurgerea DOM folosing o funcție generator.
 
@@ -282,7 +281,7 @@ console.log(afirm.value); // Cineva a primit o dudă
 
 ### Prin pasarea de argumente în metoda `next()`
 
-Nu pot fi pasate valori la prima apelare a lui next() pentru că metoda next(), de fpat primite o valoare unui yield care așteaptă. Dacă nu există vreun yield care să aștept, nici valoare nu are cui să-i fie pasată.
+Nu pot fi pasate valori la prima apelare a lui next() pentru că metoda next(), de fapt primite o valoare unui yield care așteaptă. Dacă nu există vreun yield care să aștept, nici valoare nu are cui să-i fie pasată.
 Valoarea pasată este folosită de generator ca valoare a întregii expresii yield în care a fost înghețat generatorul.
 
 ```javascript

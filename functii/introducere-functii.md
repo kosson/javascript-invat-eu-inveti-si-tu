@@ -22,13 +22,15 @@ Funcțiile sunt unitățile de execuție ale codului JavaScript. O funcție poat
 
 Aplicarea unei funcții argumentelor sale produce un nou mediu lexical, un nou scope în care se fac legături între identificatori și valori.
 
-Ca și obișnuință, ar fi cel mai util să gândești că funcția se aplică pe argumente. Mult timp am gândit altfel: funcția „primește” pentru că, într-adevăr, introduci niște argumente. Nu este greșit, dar pentru o iluminare rapidă în domeniul funcțiilor, cel mai bine este să gândești în termenii aplicării sale pe argumente.
+Ca și obișnuință, ar fi cel mai util să gândești că funcția se aplică pe argumente. Mult timp am gândit altfel: funcția „primește” pentru că, într-adevăr, introduci niște argumente. Nu este greșit, dar pentru o iluminare rapidă în domeniul funcțiilor, cel mai bine este să gândești în termenii aplicării sale pe argumente. În adâncime, trebuie înțeles că acest comportament este posibil pentru funcții pentru că pur și simplu sunt o-bi-ec-te.
 
 **Moment Zen**: O funcție, de fapt, „se aplică” argumentelor pasate care sunt valori, le va prelucra și le va oferi apelantului prin returnare.
 
 ## Funcțiile sunt valori
 
 **Moment Zen**: Funcțiile sunt valori în sine care pot fi referențiate printr-un identificator (variabilă).
+
+Funcțiile sunt cunoscute ca fiind de ordin înalt (higher order), ceea ce simplu înseamnă că sunt la rândul lor valori, că pot fi pasate altor funcții, că pot fi returnate ca rezultat al evaluării unei alte funcții, cam tot ce poți face cu oricare altă valoare. Acest aspect face din JavaScript un limbaj foarte potrivit pentru a lucra cu funcțiile într-o paradigmă numită în limba engleză „functional programming”.
 
 ## Mecanisme magice
 

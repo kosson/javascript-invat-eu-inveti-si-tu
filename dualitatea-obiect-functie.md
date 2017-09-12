@@ -230,7 +230,7 @@ Reprezentarea indică cele două posibile înregistrări.
 
 ![](FunctionThisModeSymbol.png)
 
-Este un slot care definește cum este interpretată legătura la `this`. Există trei  posibilități: lexical, strict și global. Lexical înseamnă că `this` va fi mediul lexical pentru care face o acoperire funcție. Strict înseamnă că `this` va respecta strict modul în care este invocată funcția, iar global se referă la momentul când valaorea lui `this` este `null`, ceea ce îl va seta pe `this` la obiectul global.
+Este un slot care definește cum este interpretată legătura la `this`. Există trei  posibilități: lexical, strict și global. Lexical înseamnă că `this` va fi mediul lexical pentru care face o acoperire funcție. Strict înseamnă că `this` va respecta strict modul în care este invocată funcția, iar global se referă la momentul când valoarea lui `this` este `null`, ceea ce îl va seta pe `this` la obiectul global.
 
 Reprezentarea grafică este grăitoare de la sine.
 
@@ -252,4 +252,4 @@ Am reprezentat cu încadrarea unei căsuțe într-un cerc care desemnează un ob
 ## Discuție
 
 Ce am aflat până în același moment?
-Știm că la baza oricărei funcții stă un obiect.
+Știm că la baza oricărei funcții stă un obiect. Peste acest obiect se adaugă propriile sloturi și cele două metode interne care transformă obiectul într-o funcție. Metoda `Call` permite ca obiectul funcție să permită evaluarea codului din corp. Metoda `Construct` este cea care dă posibilitatea unui obiect funcție să poată construi obiecte prin invocarea cu operatorul `new`.

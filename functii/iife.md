@@ -147,7 +147,7 @@ var racheta;
 })(racheta || (racheta = {}));
 ```
 
-## Studiu de caz combinat cu un clojure
+## Studiu de caz combinat cu un closure
 
 ```javascript
 function afiseazaFructele(fructe){

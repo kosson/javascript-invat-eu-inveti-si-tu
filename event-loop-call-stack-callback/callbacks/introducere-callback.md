@@ -1,16 +1,21 @@
 # Callback-uri
 
-Un **callback** este o secvență de cod executabilă, care este pasată ca argument unei funcții. Adu-ți aminte de faptul că o funcție este o valoare care poate fi pasată ca argument. Funcțiile care primesc alte funcții ca valori sunt **funcții de nivel înalt**.
+Un **callback** este o funcție, care este pasată ca argument unei funcții. Adu-ți aminte de faptul că o funcție este o valoare care poate fi pasată ca argument. Funcțiile care primesc alte funcții ca valori sunt **funcții de nivel înalt**.
 
-În limba română am putea aproxima denumirea ca **apeluri ulterioare**. Funcția ca valoare este pasată ca argument și este „apelată ulterior” (called back) de către funcția care este în execuție deja.
+În limba română am putea aproxima denumirea ca **apeluri ulterioare**. Funcția ca valoare este pasată ca argument și este „apelată ulterior” (în engleză: called back) de către funcția care este în execuție deja. Vom folosi varianta denumirii în limba engleză pentru a recunoaște în alte lucrări despre ce vorbim, dar și pentru simplitatea pe care o oferă un singur cuvânt.
+
+În concluzie, un callback este o convenție de folosire a funcțiilor, un model de utilizare dacă ți se pare mai ușor să înțelegi.
 
 ## De ce avem nevoie de funcții callback?
 
-Cel mai bine se leagă lucrurile care au o poveste. Dar pentru a înțelege povestea callback-ului, ne vom închipui o întâmplare dintr-un restaurant cu un client care dorește să hrănească zece nevoiași, dar are doar ingredientele.
+Modelul de lucru folosind funcții ce îndeplinesc o anumită sarcină după ce funcția container și-a încheiat sarcinile la rândul său, este o necesitate dictată de lucrul cu date care intră și ies din aplicațiile pe care le creăm. Exemplele sunt nenumărate: citirea unui fișier sau legarea la o bază de date. Sau exemple legate de lucrul cu evenimente în cadrul DOM atunci când dorim manipularea elementelor dintr-o pagină web.
 
-Ne aflăm într-un restaurant. În momentul în care vine chelnerul să ia comanda, nu ai mâncarea și nici cine să-ți gătească, dar ai ingredientele. Știu, pare ciudat, dar așa e personajul poveștii iar politica restaurantului permite acest lucru.
-Și zice el politicos chelnerului: „Vreau ca iscusitul vostru bucătar să facă o budincă gătită cu aceste ouă, șunca și brânza asta... de capră. După care vreau porționeze tava în zece”. Chelnerul ia comanda și dispare.
-Bucătarul preia comanda, trece pe la client și ia ingredientele aduse. Prin măiestria sa rezultă o mândrețe de budincă pe care o dă clientului, nu înainte de a o porționa în 10 așa cum ai precizat la final. Iată ce a realizat cu trei ingrediente și munca făcută de un bucătar.
+Callback-urile face ceva de mare ajutor în toate aceste scenarii de lucru: pur și simplu dau răgaz unei anumite sarcini să se termine înainte de a finaliza cu totul execuția unui program. Să ne imaginăm că dorim să descărcăm o imagine de la distanță, de undeva de pe net, la care vom atașa o legendă ce descrie conținutul. Textul legendei îl avem deja și se încarcă foarte repede, dar imaginea este ceva mai corpolentă și este nevoie de un timp de așteptare. Callback-ul însărcinat cu aducerea imaginii, va avea răgazul necesar să-și termine treaba în timp ce restul codului va genera containerul imaginii și va poziționa legenda fără a bloca firul de execuție. Când este gata descărcată și imaginea, aceasta va fi afișată și ea. Adu-ți mereu aminte de faptul că JavaScript rulează pe un singur fir de execuție. Sarcina unei anumite funcții care se execută, nu trebuie să blocheze firul de execuție.
+
+## Callback hell - iadul apelurilor
+
+Folosirea callback-urilor poate să se soldeze cu o serie de imbricări ale apelurilor ceea ce seamănă vizual cu o piramidă datorită indentării codului.
+Ca să eviți această situație neplăcută, nu imbrica funcțiile și folosește mecanismul de hoisting ca pe un avantaj. Trebuie să gestionezi erorile care apar în fiecare callback.
 
 ## Scenariul!!!
 
