@@ -169,6 +169,17 @@ console.log( y = (x = y,z) ); // evaluează la 3
 
 Am menționat faptul că variabilele locale sunt stocate în scope, care poate fi perceput ca un obiect la al cărui membri ai access. Atunci când în execuție interpretorul caută o proprietate în obiectul scope curent. Dacă nu o găsește, atunci interpretorul va văuta mai sus în obiectul scope părinte și tot așa până când nu mai există un alt obiect părinte. Această secvență de obiecte scope se numește **scope chain**. Atenție, scope-ul se formează la momentul declarării, nu la momentul execuției.
 
+## Folosirea unei variabile cu operatorul SAU
+
+Declararea unei variabile și asignarea acesteia cu o valoare, poate fi rafinată prin opțiunea pentru una din două valori. Pentru a realiza acest minicircuit, se va folosi operatorul logic SAU (`||`). După cum știm deja acesta evaluează expresia din partea stângă și dacă se reduce valoarea la adevăr, atunci nu va mai evalua expresia din dreapta.
+
+```javascript
+var expresia1 = 0, expresia2 = {a: 10};
+var x = expresia1 || expresia2;
+```
+
+S-a aplicat mecanismul de transformare, iar valoarea 0 a fost evaluată a fi `false`. Astfel, identificatorul *x* a fost legat la obiect.
+Ceea ce se întâmplă când expresia din stânga este evaluată la false, dar și cea din partea dreaptă la fel, este că identificatorul *x* va fi legat la valoarea expresiei din dreapta.
 
 ## Stări confuze
 

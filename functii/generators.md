@@ -1,6 +1,24 @@
 # Generators
 
-Sunt un nou tip de funcții introduse în ECMAScript 2015.
+Sunt un nou tip de funcții introduse în ECMAScript 2015. Acest nou tip de lucru cu funcțiile se bazează pe faptul că accesul la date se face cu ajutorul iteratoarelor. Datele noastre sunt obiecte iterator pe care le putem parcurge.
+
+```javascript
+var iterator = [1,2,3][Symbol.iterator](),
+    element;
+while( !(element = iterator.next()).done ) {
+  console.log(element.value);
+};
+```
+
+Odată cu ECMAScript 2015, beneficiem de enunțul `for..of`, care va face exact ce am realizat mai sus construind obiectul iterator.
+
+```javascript
+for(var x of [1,2,3]){
+  console.log(x);
+};
+```
+
+Parcurgerea se face automat, rezultatele fiind oferite la încheierea iterării. Ce te faci în momentul în care dorești să ai acces secvențial la valorile unei colecții? În acest caz, vom apela la funcțiile generator. Punerea unei steluțe după cuvântul cheie `function`, va semnala că avem de a face cu o funcție generator.
 
 Apelarea unui generator nu îl execută, ci doar este trimisă funcția în call-stack. De fapt, la executare este returnată o instanță a funcției.
 
@@ -111,9 +129,9 @@ ziCeva.throw('Auleu, ceva e rău.');
 // { value: undefined, done: true }
 ```
 
-## Scoaterea datelor dintr-un generator cu `for...of`
+## Scoaterea datelor dintr-un generator cu `for..of`
 
-Constructul `for...of` trece prin generator și returnează chiar valorile existente.
+Enunțul `for..of` trece prin generator și returnează chiar valorile existente.
 
 ```javascript
 function* emiteFormule(){
@@ -121,11 +139,9 @@ function* emiteFormule(){
   yield "Hai noroc!";
   yield "Noapte bună";
 };
-
 for(let salutare of emiteFormule()){
   console.log(salutare);
 };
-
 /*
 Salutare!
 Hai noroc!
@@ -133,7 +149,7 @@ Noapte bună
  */
 ```
 
-Se observă că o funcție generator se consumă cu o secvență `for...of`.
+Se observă că o funcție generator se consumă cu o secvență `for..of`.
 
 Funcționarea acestei funcții se bazează pe crearea unui obiect de tip `iterator`. De fapt, la apelarea funcției acest obiect se creează.
 Dacă creem o referință la funcție, putem parcurge valorile obiectului creat de invocare (obiectul de tip `iterator`) folosing un cursor. Un cursor este o funcție care te ajută să parcurgi un șir de valori. Poți să-ți imaginezi cursorul ca pe un creion cu care urmărești textul atunci când citești o pagină a unei cărți.
@@ -146,21 +162,21 @@ function* emiteFormule(){
   yield "Hai noroc!";
   yield "Noapte bună";
 };
-
-const refIterator = emiteFormule();  // în acest moment s-a creat un nou iterator
+const refIterator = emiteFormule();
+// în acest moment s-a creat un nou iterator
 
 const primaValoare = refIterator.next();
 console.log(typeof primaValoare);
-console.log(primaValoare);  // Object { value: "Salutare!", done: false }
+console.log(primaValoare);  // { value: "Salutare!", done: false }
 
 const aDouaValoare = refIterator.next();
-console.log(aDouaValoare);  // Object { value: "Hai noroc!", done: false }
+console.log(aDouaValoare);  // { value: "Hai noroc!", done: false }
 
 const aTreiaValoare = refIterator.next();
-console.log(aTreiaValoare); // Object { value: "Noapte bună", done: false }
+console.log(aTreiaValoare); // { value: "Noapte bună", done: false }
 
 const aPatraValoare = refIterator.next();
-refIterator.log(aPatraValoare); // Object { value: undefined, done: true }
+refIterator.log(aPatraValoare); // { value: undefined, done: true }
 ```
 
 Cursorul aduce valoarea iar funcția generator își suspendă execuția la momentul în care a adus valoarea cu `yield`.
