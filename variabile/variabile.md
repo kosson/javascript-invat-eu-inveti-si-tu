@@ -2,6 +2,13 @@
 
 ## Introducere
 
+Nu putem intra într-o discuție despre variabile fără puțin context istoric care să ne ajute să înțelegem mai bine anumite aspecte. Voi aduce spre cunoaștere câteva lucruri interesante despre activitatea cercetătorului Christopher Strachey, care a jucat un rol foarte important în fixarea semanticii limbajelor de programare. Este cunoscut prin notele de curs intitulate „Concepte fundamentale în limbajele de programare” (Fundamental Concepts in Programming Languages). Christopher Strachey este figura proeminentă a echipei care a creat limbajului de programare CPL (Combined Programming Language) în anii 60. Acest limbaj de programare este strămoșul limbajului de programare C și a fost influiențat de ALGOL60. Vă mai aduceți aminte când în introducere am povestit despre partea stângă (Left Hand Side) și partea din dreapta (Right Hand Side) a unei expresii. Strachey le numește L-value și R-value.
+În notele de curs apare, pe lângă sintaxa conform BNF și o expresie care asignează o valoare unui identificator: `let p = 3.5`. Am menționat aceste detalii pentru a vedea rădăcinile JavaScript, care sunt reactualizate parcă atunci când privim noile sintaxe introduse de versiunile noi ale standardului ECMAScript.
+
+Christopher Strachey indică faptul că există termeni concurenți pentru „identificator”, care a fost introdus de ALGOL60. Aceștia sunt „nume” (în lb. engleză `name`) și „referință” (în lb. engleză `reference`), care era folosit de alte limbaje de programare. Tot din lucrarea sa vom găsi clarificarea faptului că varibilele sunt „legate” de valori (**bound variable**). Acest lucru este important pentru a înțelege natura variabilelor, care în esență este o legătură dintre un identificator și o valoare. Variabilele care încă nu au asignată o valoare sunt „variabile libere”. În JavaScript, variabilele libere primesc automat valoarea `undefined`.
+
+## Natura variabilelor
+
 O variabilă este ceea ce spune însăși cuvântul: o zonă rezervată de care este nevoie pentru a „memora” o valoare. Această valoare poate să se modifice pe măsură ce codul se execută și de aici și denumirea de variabilă. Pentru a înțelege cât mai bine variabilele, amintiți-vă de identificatori și rolul acestora în „spațiul” creat de mediul lexical. După cum bine v-ați amintit, identificatorii sunt etichetele necesare variabilelor pentru a identifica „zona rezervată”. E ca o tăbliță cu numele stației de autobuz. Știm că stația se numește „Laborator” și identifică un spațiu în care va intra autobuzul din când în când.
 
 ## Declararea variabilelor
@@ -15,7 +22,6 @@ var $ceva = 'Hanna',
     un_nume = 'George'; // DA, poți face asta! :D
 let asteptValoarea01 = 100;
 const ᚠ = 'o rună'; // se poate pentru că folosim UTF16
-const 𓄿 = 'Horus'; // UTF16 din nou
 ```
 
 Magia atribuirii valorii identificatorului o face operatorul `=`. Ceea ce se întâmplă dincolo de cortină este că se alocă un spațiu în memoria computerului pentru a „reține" valoarea asignată. Asignarea valorii se poate face dintr-un singur pas (`var x = 1;`), declarând și atribuind imediat, sau mai întâi poți declara numele variabilei și abia la momentul oportun vei face atribuirea valorii. Atribuirea, când spunem acest cuvânt ar trebui să ne gândim la realizarea „legăturii” dintre identificator și valoarea pe care o individualizează.
@@ -120,10 +126,10 @@ Buna practică spune ca atunci când folosești var pentru a declara variabile, 
 
 ```javascript
 function facCeva() {
-  if ( // condiție ) {
+  if (conditie > 0) {
     var a = 0;
     var b = true;
-  } else if ( // altă cond.) {
+  } else if ( conditie < 100) {
     var a = 10;
     var b = false;
   }
@@ -146,7 +152,7 @@ Declarațiile `let` și `const` definesc variabilele care aparțin mediului lexi
 
 - Valorile primitive și obiectele au proprietăți și metode. Primitivele beneficiază de acestea prin „împachetarea" valorii în obiectul corespondent.
 - La momentul evaluării, variabilele sunt create când se constituie `lexical environment`-ul (scope), dar nu poate fi accesată până când nu se face legătura la valoare. La momentul creării, variabile declarate cu `var`, vor fi inițializate automat cu valoarea `undefined`.
-- Variabilele și funcțiile beneficiază de un proces al motorului JavaScript numit **_identifier lookup_**. Este necesar pentru a discrimina între variabilele din local scope dintr-o funcție și una din global scope.
+- Variabilele și funcțiile beneficiază de un proces al motorului JavaScript numit **identifier lookup**. Este necesar pentru a discrimina între variabilele din local scope dintr-o funcție și una din global scope.
 - La executarea codului JavaScript este nevoie de un loc unde să fie stocate variabilele locale. Acest loc este **obiectul scope** cunoscut și sub numele de **lexical environment**. Se poate percepe ca un obiect la a cărui membri ai acces, dar nu poți referenția obiectul în sine.
 - Dacă declari o variabilă în corpul unei declarații if, această variabilă va fi disponibilă și în afara blocului funcțional, fie că blocul a fost executat sau nu. Se întâmplă pentru că se face hoisting. Folosirea cuvântului cheie `let` atașează variabila de blocul funcțional.
 - Scope-ul unei variabile poate fi înțeles setul de linii de cod sursă pentru care este definit un identificator.
