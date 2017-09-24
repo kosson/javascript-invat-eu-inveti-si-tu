@@ -1,7 +1,6 @@
 # Funcții în ECMAScript
 
-O perspectivă simpatică ar fi dacă-ți închipui o funcție ca pe un caracter dintr-un joc de strategie pe care dai click și-l pui să facă ceva. Când ai nevoie să „producă” mâncare îl pui să facă o fermă. Îl trimiți după lemne ca să aibă cu ce și așa mai departe. Dacă ajunge la un punct de pe hartă unde concurează cu alte caractere pentru o resursă, pur și simplu așteaptă cuminte să-i vină rândul la „tufa cu fructe” sau la „minerit aur”. Îmediat ce termină treaba, caracterul nostru nu are inițiativă, așteaptă să fie chemat cu un click să facă ceva.
-În tușe foarte groase așa sunt și funcțiile ca și comportament.
+O perspectivă simpatică ar fi dacă-ți închipui o funcție ca pe o dronă dintr-un joc de strategie pe care dai clic și iese din bază ca să o pui să facă ceva. Când ai nevoie să producă mâncare, o pui să facă o fermă. O trimiți după lemne ca să aibă cu ce și așa mai departe. Dacă ajunge la un punct de pe hartă, unde concurează cu alte drone pentru o resursă, pur și simplu așteaptă cuminte să-i vină rândul la tufa cu fructe sau la minerit aur. Imediat ce termină treaba, drona nu are inițiativă și se retrage în bază fără să o mai vezi. În tușe foarte groase așa sunt și funcțiile ca și comportament.
 
 O funcție este declarată folosind cuvântul cheie `function` urmat de un șir de caractere, care este numele funcției urmate de paranteze rotunde. Între paranteze sunt declarate valori care constituie argumentele funcției (acestea formează așa-numitul antet), urmate apoi de acolade. Acoladele delimitează **blocul de cod** ce va fi executat la invocarea funcției.
 
@@ -18,7 +17,7 @@ Veți întâlni funcțiile la orice pas și în combinații diferite ca parte a 
 
 ## Unități de execuție
 
-Funcțiile sunt unitățile de execuție ale codului JavaScript. O funcție poate fi percepută ca un subprogram, ca o subrutină. Veți mai întâlni în alte lucrări și denumirea de „proceduri”. Cel mai sănătos mod de a privi activitatea și efectele unei funcții este gândind întotdeauna că o funcție este un set de instrucțiuni care se aplică unui set de date primit ca argumente. De ce să faci asta? Pentru că în interiorul funcției vei prelucra datele primite și la final vei dori să oferi rezultatele la care ai ajuns.
+Funcțiile sunt unitățile de execuție ale codului JavaScript. O funcție poate fi percepută ca un subprogram, ca o subrutină. Veți mai întâlni în alte lucrări și denumirea de „proceduri”. Cel mai sănătos mod de a privi activitatea și efectele unei funcții este gândind întotdeauna că o funcție este un set de instrucțiuni, care se aplică unui set de date primit ca argumente. De ce să faci asta? Pentru că în interiorul funcției vei prelucra datele primite și la final vei dori să oferi rezultatele la care ai ajuns.
 
 Aplicarea unei funcții argumentelor sale produce un nou mediu lexical, un nou scope în care se fac legături între identificatori și valori.
 
@@ -67,6 +66,7 @@ Funcția `intern()` are posibilitatea de a accesa proprietățile funcției gazd
 
 ## Mecanisme magice
 
+Am numit eu aceste acțiuni ale compilatorului la momentul când interpretează codul pentru că se petrec câteva lucruri cu adevărat uimitoare.
 **Mecanisme magice**: Declararea unei funcții are ca efect declanșarea **hoising**-ului. Declarația este introdusă în registrul inventar al mediului lexical existent. Magia rezidă din faptul că poți invoca o funcție înainte ca aceasta să fie declarată. Superciudățel, nu?! Psst! Secretul este legat de compilarea codului. Adu-ți mereu aminte că înainte de a fi rulat, codul este compilat.
 
 Am aflat mai devreme că la executarea unei funcții, aceasta creează și un mediu lexical propriu, dar mai e o chestie supertare: dacă într-un bloc de cod introduci o declarație sau o expresie, se va crea un nou scope pentru respectivul cod. Ciudățel și superinteresant, nu?
@@ -244,10 +244,17 @@ Funcțiile obiecte au sloturi interne și merită menționat `Realm`, care este 
 - Dacă definești o funcție în interiorul altei funcții, atunci funcția internă trebuie să fie recreată de fiecare dată când funcția externă este executată (acest lucru se întâmplă pentru că funcțiile, de fapt, sunt obiecte). Acest comportament trebuie evitat. Definește funcția în afară și referențiaz-o sau execut-o în context local prin call / apply / bind.
 - Orice funcție publică poate fi invocată cu `call()`, `apply()` sau `bind()`.
 
-## Parametri și argumente - parameters and arguments
+## Argumente și parametri
 
-Parametrii sunt variabile care fac parte din definirea funcției.
-Argumentele sunt valori pe care le trimitem funcției atunci când o invocăm.
+Argumentele sunt valori pe care le trimitem funcției atunci când o invocăm și care sunt atașate unor identificatori menționați deja la momentul declarării funcției.
+Pe scurt, argumentele sunt valorile pasate funcțiilor. Numărul de argumente pasate unei funcții se numește în jargonul programatorilor **arity**.
+
+Fiecare argument trebuie pasat funcției în ordinea corectă pentru că valoarea sa se va lega de numele desemnat de programator între parantezele rotunde. Aceste nume, de fapt identificatori, sunt taman parametrii de lucru ai funcțiilor.
+
+Profesorul Christopher Strachey spune:
+
+> Aplicarea unei funcții argumentelor sale implică evaluarea expresiei care o definește după ce au fost date valori variabilelor conectate la acestea din lista argumentelor.
+Astfel, valoarea-R a funcției conține două părți: o regulă pentru evaluarea expresiei și un mediu care să-i ofere variabilele libere.
 
 Ne amintim faptul că, de fapt, o funcție este aplicată argumentelor sale și că, la momentul apelării acesteia, se creează și un mediu lexical nou. În acest nou mediu lexical (inventarul identificatorilor), argumentele sunt variabile care identifică, de fapt, expresii ce vor fi „legate” de o valoare.
 

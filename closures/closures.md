@@ -1,23 +1,27 @@
 # Closures
 
-O funcție definită în interiorul unei funcții container, generează un closure. Am să pornesc de la traducerea acestui termen cât mai fidel acțiunii.
+O funcție definită în interiorul unei funcții container, generează un closure.
+
+Cum am putea traduce în română termenul de closure. Am avea următorii termeni în limba română cu care să explorăm o posibilă traducere: „încercuire”, „incintă”, „îngrăditură”, „ocol”, „împrejmuire”, „țarc”. După ce vom fi explorat mai mult, vom înțelege că este o caracteristică, un mecanism al limbajului de programare și astfel, am putea să ne gândim la acțiunea pe care o implică termenul de **closure**. Să o luăm încetișor. Primul lucru pe care-l știm despre funcții, este că acestea sunt acțiuni transformatoare asupra datelor pe care le primește, fie că aceste date sunt „injectate” în funcție prin argumente, fie că sunt disponibile „la liber” în mediul lexical unde a fost declarată. Trebuie să ne aducem mereu aminte de importanța redactării codului și unde declarăm funcțiile. Foarte important este și locul unde la apelăm pentru că de acolo este posibil să „injectăm” prin argumente date, care sunt doar în locul în care sunt apelate.
+O funcție declarată în mediul lexical global, va avea acces la toate proprietățile acestui obiect. Dacă o funcție, va fi declarată într-un bloc de cod sau într-o altă funcție, aceasta va avea acces la tot ce constituie mediul lexical format local de acel bloc de cod sau de funcție.
+Acum apare minunea: dacă declari o funcție în interiorul altei funcții și apoi o returnezi, variabila care va fi legată de rezultatul evaluării funcției gazdă, va fi funcția returnată, care, MAGIE! are acces încă la mediul lexical al gazdei, chiar dacă aceasta și-a încheiat execuția. Tu, fiind un curios, vei întreba pe bună dreptate: cum să mai fie disponibile datele unei funcții care și-a terminat execuția, când știm foarte bine că „dispar” (sunt trimise la gunoi). Răspunsul este unul simplu și plin de lumină: funcția noastră a returnat o altă funcție, care și ea la rândul ei are nevoie de date din mediul lexical înconjurător. Și cum acesta era al funcției gazde, acesta nu va dispărea, va supraviețui tocmai pentru a-i servi celei returnate.
+
+Profesorul Christopher Strachey spune:
+
+> Aplicarea unei funcții argumentelor sale implică evaluarea expresiei care o definește după ce au fost date valori variabilelor conectate la acestea din lista argumentelor.
+Astfel, valoarea-R a funcției conține două părți: o regulă pentru evaluarea expresiei și un mediu care să-i ofere variabilele libere. O valoare-R de acest tip va fi numită un closure. Nu este nicio problemă în reprezentarea regulii dintr-un closure ca fiind adresa unui fragment de program este suficient (i.e. punctul de acces pentru o subrutină). Cel mai direct mod de a reprezenta mediul este printr-un poinetr către un Free Variable List (FVL), care are câte o intrare pentru fiecare variabilă liberă a funcției. Această listă este formată atunci când funcția este definită inițial (mai exact atunci când expresia-λ care este funcția, este evaluată, de regulă la momentul definirii funcției) și în acest moment, fie valoarea-R, fie valoarea-L a oricăreia dintre variabilele libere este copiată în FVL.
 
 Funcțiile sunt valori! Pot fi pasate ca valori altor funcții și pot fi returnate de funcții ca valori. Te vei întreba pe bună dreptate care este utilitatea acestui aspect? Răspunsul vine tot din necesitatea de a manipula valori, dar care aparțin unor medii lexicale diferite, a celor care există la locul declarării funcției care face closure.
-
 
 Este o funcție internă care „fotografiază și stochează” mediul lexical în care a fost declarată și pe care îl folosește pentru a utiliza tot ce este necesar să se execute. Mai exact, un closure este efectul evaluării unei funcții interne atunci când s-a pornit execuția funcției gazdă.
 
 **Moment Zen**: Closure-urile cuplează funcțiile cu mediile peste care face closure-uri.
-
-Îți poți închipui un pescar (funcția internă), care stând în barca sa pe mare (funcția gazdă) aruncă un prostovol (closure) peste un banc de pești (identificatorii existenți din contextul de execuție la momentul evaluării).
 
 Un closure menține accesul la toate variabilele care erau „în scope” la momentul definirii funcției. Putem spune că o funcție din interiorul altei funcții este o funcție ***privată***, care are acces la argumentele și variabilele gazdei.
 
 **Moment Zen**: Toate closure-urile - funcțiile din aceeași gazdă - împărtășesc același mediu.
 
 Acest comportament al closure-urilor este perfect pentru a „ascunde” date, pentru a le face private.
-
-TODO: cel mai bine ar fi sa aduci aici exemplul de la for cu let ?! Sa-l pui aici ca o completare târzie a lui let? Chiar așa: numește astfel de completari cu informația deja prezentată ca și „completări târzii”. Încearcă... e nevoie de așa ceva pentru că nu le poți da toată informația deodată. Unde se completează mai târziu ar fi bine să se facă o punte înapoi cu fragmentul introductiv.
 
 Cel mai simplu și mai elegant exemplu este oferit de sintaxa modernă **fat arrow** pentru a ilustra un closure. Acest exemplu concis este prezentat de Reg “raganwald” Braithwaite în lucrarea sa „JavaScript Allongé, the "Six" Edition” și îl vom diseca la rândul nostru pentru a vedea cum se leagă cunoștințele dobândite de la **mediul lexical**, **funcții** și **compilare și execuție**.
 
@@ -28,7 +32,9 @@ Cel mai simplu și mai elegant exemplu este oferit de sintaxa modernă **fat arr
 Ceea ce avem mai sus este o expresie a unei funcții care este executată pe argumentul din prima paranteză iar rezultatul evaluării va fi o funcție care se va executa pe al doilea parametru.
 
 Avem o formă contrasă: `(expresie)(argument)(argument)`. JavaScript va vedea a doua pereche de paranteze și va decide că perechile de paranteze `(expresie)(argument)` trebuie evaluate.
-Pornind la execuție, va evalua ce-i în prima paranteză căutând expresia de funcție care este declarată. O găsește iar aceasta arată astfel: `(x) => ...`. Acum pasul următor este să construiască „registrul inventar” al mediul lexical: `{x: 5, ...}`. S-a ajuns la faza returnării, dar, ce să vezi? Rezultatul returnării este o altă expresie, care, conform modului de operare al JavaScript, trebuie evaluată, dar care se aplică pe argumentul din a treia pereche de paranteze, adică `10`. Deci, va trebuie evaluată expresia `((y) => x)(10);`. În acest moment, „registrul inventar” al acestei funcții este `{y: 10, ...}` plus registrul inventar al funcției gazdă `{x: 5, ...}`. Variabila `x` pare să nu mai existe în noul mediu lexical stabilit. Și totuși ea există pentru că tocmai a fost returnată. Variabila `x` nu a fost pasată **explicit** celei de-a doua funcții și este una „detașată” dar acesibilă.
+Pornind la execuție, va evalua ce-i în prima paranteză căutând expresia de funcție care este declarată. O găsește iar aceasta arată astfel: `(x) => ...`.
+
+Acum, pasul următor este să construiască „registrul inventar” al mediul lexical: `{x: 5, ...}`. S-a ajuns la faza returnării, dar, ce să vezi? Rezultatul returnării este o altă expresie, care, conform modului de operare al JavaScript, trebuie evaluată, dar care se aplică pe argumentul din a treia pereche de paranteze, adică `10`. Deci, va trebuie evaluată expresia `((y) => x)(10);`. În acest moment, „registrul inventar” al acestei funcții este `{y: 10, ...}` plus registrul inventar al funcției gazdă `{x: 5, ...}`. Variabila `x` pare să nu mai existe în noul mediu lexical stabilit. Și totuși ea există pentru că tocmai a fost returnată. Variabila `x` nu a fost pasată **explicit** celei de-a doua funcții și este una „detașată” dar acesibilă.
 Referința către variabila `x` este menținută pentru că funcția internă, cea care trebuie returnată în cazul nostru pur și simplu are nevoie de ea pentru a se executa, pentru a fi evaluată. De aceea există.
 
 **Moment Zen**: Funcțiile care nu păstrează referințe către variabile „detașate”, se numesc funcții **pure**. Funcțiile care păstrează astfel de referințe, se numesc **closures**.

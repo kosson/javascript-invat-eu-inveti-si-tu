@@ -1,8 +1,10 @@
 # Dualitatea obiect - funcție
 
-JavaScript este un limbaj care face uz extensiv de obiecte. În geneză, am văzut că exercitând pașii argoritmului intern CreateRealm(), care solicită rularea algoritmului CreateIntrinsics(realmRec), există ca pas crearea primului obiect al limbajului (prin apelarea algoritmului ObjectCreate(null)). Astfel, s-a născut obiectul prototipal, care va fi folosit pentru a forma și obiectul prototipal al funcțiilor.
+JavaScript este un limbaj care face uz extensiv de obiecte. În geneză, am văzut că exercitând pașii argoritmului intern CreateRealm(), care solicită rularea algoritmului CreateIntrinsics(realmRec), există ca pas distinct crearea primului obiect al limbajului (prin apelarea algoritmului `ObjectCreate(null)`). Astfel, s-a născut obiectul prototipal, care va fi folosit pentru a forma și obiectul prototipal al funcțiilor.
 
-Prin urmare, putem spune că obiectele și funcțiile - obiect alcătuiesc un system complementar ca și paradigmă. Unul nu poate fără celălalt. În lucrul de zi cu zi, nu ne vom lovi de necesitatea de a lucra cu sloturile interne ale celor două entități. Totuși, o bună cunoaștere a acestor amănunte intime privind obiectele și funcțiile, care se construiesc pe baza obiectelor, este o necesitate pentru a înțelege unitar și pentru a vedea nevoia de a asimila împreună obiectele și funcțiile. Această secțiune a materialului de învășare s-a născut din această necesitate. Am realizat după ce am redactat final capitolul dedicat funcțiilor și pe cel al obiectelor că ar fi o bizarerie să încerc o poziționare a unuia față de celălalt, mai ales că un cititor nefamiliarizat, se va lovi, cu siguranță de concepte pe care nu le-ar înțelege decât dacă le-ar fi știut dinainte. Astfel s-a născut această secțiune ca o conciliere și o aprofundare a unor concepte care vor crea premiza înțelegerii celor două în armonie.
+Prin urmare, putem spune că obiectele și funcțiile - obiect alcătuiesc un sistem complementar ca și paradigmă. Unul nu poate fără celălalt. În lucrul de zi cu zi, nu ne vom lovi de necesitatea de a lucra cu sloturile interne ale celor două entități.
+
+Totuși, o bună cunoaștere a acestor amănunte intime privind obiectele și funcțiile, care se construiesc pe baza obiectelor, este o necesitate. Această secțiune a materialului de învățare s-a născut din această necesitate. Am realizat după ce am redactat final capitolul dedicat funcțiilor și pe cel al obiectelor că ar fi o bizarerie să încerc o poziționare a unuia față de celălalt, mai ales că un cititor nefamiliarizat, se va lovi, cu siguranță de concepte pe care nu le-ar înțelege decât dacă le-ar fi știut dinainte. Astfel s-a născut această secțiune ca o conciliere și o aprofundare a unor concepte care vor crea premiza înțelegerii celor două în armonie.
 
 ## Sloturi
 
@@ -19,9 +21,9 @@ Câteva detalii foarte importante oferite chiar de standard. Secțiunea **6.1.7.
 
 *Metodele interne esențiale* sunt aplicabile tuturor obiectelor create sau manipulate de ECMAScript, mai daugă standardul la momentul în care introduce tabelul descriptiv al acestora. Și mai este o mențiune foarte importantă: *fiecare obiect trebuie să aibă algoritmi pentru toate metodele interne esențiale*.
 
-Reține faptul că toate aceste indicații sunt date celor care construiesc motoare JavaScript, fiind tot atâtea instrucțiuni privind algoritmii motorului, care au drept efect crearea entităților JavaScript cu care operăm noi. În mod normal, aceste detalii sunt lăsate în grija magicienilor C și C++, limbajele în care se programează motoarele JavaScript. Totuși, pentru că avem nevoie să înțelegem părțile cele mai importante ale anatomiei obiectelor și funcțiilor, ne vom sluji de aceste indicații pentru a face o hartă mentală a ceea ce se întâmplă când creăm obiecte și funcții, dar cel mai mare câștig va fi înțelegerea dualității obiect funcție reflectată și prin sintagma care descrie cel mai corect o funcție: **funcție - obiect**.
+Reține faptul că toate aceste indicații sunt date celor care construiesc motoare JavaScript, fiind tot atâtea instrucțiuni privind algoritmii motorului, care au drept efect crearea entităților JavaScript cu care operăm noi. În mod normal, aceste detalii sunt lăsate în grija magicienilor C și C++, limbajele în care se programează motoarele JavaScript. Totuși, pentru că avem nevoie să înțelegem părțile cele mai importante ale anatomiei obiectelor și funcțiilor, ne vom sluji de aceste indicații pentru a face o hartă mentală a ceea ce se întâmplă când creăm obiecte și funcții. Cel mai mare câștig va fi înțelegerea dualității obiect-funcție reflectată și prin sintagma standardului ce descrie cel mai corect o funcție: **funcție - obiect**.
 
-Pentru a înțelege, am constituit o hartă internă a obiectelor. Un obiect, l-am reprezentat ca pe un cerc cu trei linii înterioare, care simbolizează proprietățile și metodele. De jur împrejur am dispus fiecare **metodă internă** și slotul destinat obiectului prototip. Acestea stau în spatele formării entității ECMAScript pe care noi o numim obiect. Pe fiecare metodă internă am căutat că o reprezint grafic pentru a  adăuga și un reper vizual. Pentru a simplifica imaginea și a facilita înțelegerea, am renunțat la parantezele pătrate.
+Pentru a înțelege, am constituit o hartă internă a obiectelor. Un obiect, l-am reprezentat ca pe un cerc cu trei linii interioare, care simbolizează proprietățile și metodele. De jur împrejur am dispus fiecare **metodă internă** și slotul destinat obiectului prototip. Acestea stau în spatele formării entității ECMAScript pe care noi o numim obiect. Pe fiecare metodă internă am căutat că o reprezint grafic pentru a  adăuga și un reper vizual. Pentru a simplifica imaginea și a facilita înțelegerea, am renunțat la parantezele pătrate.
 
 ![](InternalSlotsObjects.png)
 
@@ -155,7 +157,7 @@ Noi avem acces la acest obiect prin `Object.prototype`.
 
 ![](FunctionCallSymbo.png)
 
-Standardul spune așa despre această metodă internă: *execută codul asociat cu acest obiect. Este invocat printr-o expresie de apelare a funcțiilor. Argumentele interne pentru metoda internă sunt o valoare `this` și o listă care conține argumentele pasate funcției prin expresia de apelare. Obiectele care implementează această metodă internă sunt «callable»»*.
+Standardul spune așa despre această metodă internă: *execută codul asociat cu acest obiect. Este invocat printr-o expresie de apelare a funcțiilor. Argumentele interne pentru metoda internă sunt o valoare `this` și o listă care conține argumentele pasate funcției prin expresia de apelare. Obiectele care implementează această metodă internă sunt «callable»*.
 
 Ce poate fi mai evident decât însuși textul standardului?
 
@@ -253,3 +255,22 @@ Am reprezentat cu încadrarea unei căsuțe într-un cerc care desemnează un ob
 
 Ce am aflat până în același moment?
 Știm că la baza oricărei funcții stă un obiect. Peste acest obiect se adaugă propriile sloturi și cele două metode interne care transformă obiectul într-o funcție. Metoda `Call` permite ca obiectul funcție să permită evaluarea codului din corp. Metoda `Construct` este cea care dă posibilitatea unui obiect funcție să poată construi obiecte prin invocarea cu operatorul `new`.
+
+Funcțiile sunt obiecte de „primă clasă” în JavaScript, ceea ce le permite să fie manipulate precum orice obiect, mai exact, precum orice valoare obiect.
+
+```javascript
+// Pot fi atribuite unui identificator:
+var funcție = function facCeva (x) { return x++; };
+var obiect = {x: 1};
+// Poți introduce valori
+funcție.test = 10;
+obiect.test = 10;
+// Pot fi trimise altei funcții ca argumente
+function facCeva (x, y) { return x + y; };
+function maiElaborat (a, valoare) { return valoare(a, 1); };
+var captura = maiElaborat(10, facCeva);
+// pot fi returnate din funcții ca orice valoare
+function iaOFuncție () {
+  return function () {};
+};
+```
