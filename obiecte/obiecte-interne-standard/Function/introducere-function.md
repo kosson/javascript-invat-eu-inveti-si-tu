@@ -71,7 +71,7 @@ Pentru parametrul listei de argumente se poate folosi și array-like-ul `argumen
 
 #### Mecanisme oferite de `apply()`.
 
-Obiectul pasat ca și context, în fapt cel care constituie `this`, este, de fapt **apelantul** funcției. Ceea ce permite acest mecanism, de fapt este posibilitatea de a scrie o funcție cu rol de metodă, care să poată fi folosită în alt obiect fără a fi necesară rescrierea metodei pentru un nou obiect.
+Obiectul pasat ca și context, în fapt cel care constituie `this`, este, de fapt **apelantul** funcției. Ceea ce permite acest mecanism, de fapt, este posibilitatea de a scrie o funcție cu rol de metodă, care să poată fi folosită în alt obiect fără a fi necesară rescrierea metodei pentru respectivul obiect dorit ca și context.
 
 Începând cu ECMAScript 5, array-ul argumentelor pasate este un obiect care are caracteristicile unui array: `arguments`.
 

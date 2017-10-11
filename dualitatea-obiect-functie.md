@@ -1,6 +1,6 @@
 # Dualitatea obiect - funcție
 
-JavaScript este un limbaj care face uz extensiv de obiecte. În geneză, am văzut că exercitând pașii argoritmului intern CreateRealm(), care solicită rularea algoritmului CreateIntrinsics(realmRec), există ca pas distinct crearea primului obiect al limbajului (prin apelarea algoritmului `ObjectCreate(null)`). Astfel, s-a născut obiectul prototipal, care va fi folosit pentru a forma și obiectul prototipal al funcțiilor.
+JavaScript este un limbaj care face uz extensiv de obiecte. În Geneză, am văzut că exercitând pașii argoritmului intern CreateRealm(), care solicită rularea algoritmului CreateIntrinsics(realmRec), există ca pas distinct crearea primului obiect al limbajului (prin apelarea algoritmului `ObjectCreate(null)`). Astfel, s-a născut obiectul prototipal, care va fi folosit pentru a forma și obiectul prototipal al funcțiilor.
 
 Prin urmare, putem spune că obiectele și funcțiile - obiect alcătuiesc un sistem complementar ca și paradigmă. Unul nu poate fără celălalt. În lucrul de zi cu zi, nu ne vom lovi de necesitatea de a lucra cu sloturile interne ale celor două entități.
 
@@ -19,7 +19,7 @@ Câteva detalii foarte importante oferite chiar de standard. Secțiunea **6.1.7.
 
 > Semanticile obiectelor în ECMAScript sunt specificate prin algoritmi care sunt numiți *metode interne*. Fiecare obiect în motorul ECMAScript este asociat cu un set de metode interne care definesc comportamentul în runtime. [...] Sloturile interne corespund stării interne care este asociată obiectelor și sunt folosite de diferiții algoritmi ai specificației ECMAScript. Sloturile interne nu sunt proprietăți ale obiectelor și nu sunt moștenite. [...] Dacă nu este specificat altfel, sloturile interne sunt alocate ca parte a procesului de creare a unor obiecte și nu pot fi adăugate dinamic unui obiect. [...] Metodele interne și sloturile interne sunt identificate în aceaste specificații folosind denumiri între paranteze pătrate duble [[]].
 
-*Metodele interne esențiale* sunt aplicabile tuturor obiectelor create sau manipulate de ECMAScript, mai daugă standardul la momentul în care introduce tabelul descriptiv al acestora. Și mai este o mențiune foarte importantă: *fiecare obiect trebuie să aibă algoritmi pentru toate metodele interne esențiale*.
+*Metodele interne esențiale* sunt aplicabile tuturor obiectelor create sau manipulate de ECMAScript, mai daugă standardul la momentul în care introduce tabelul descriptiv al acestora. Și mai este o mențiune foarte importantă: *fiecare obiect trebuie să aibă algoritmi pentru toate metodele interne esențiale*. Pentru claritate, pentru fiecare funcționalite deja existentă, care este deja gata să fie folosită de programatori, există un set de algoritmi corespondenți, care rulează în motor pentru a oferi aceste funcționalități.
 
 Reține faptul că toate aceste indicații sunt date celor care construiesc motoare JavaScript, fiind tot atâtea instrucțiuni privind algoritmii motorului, care au drept efect crearea entităților JavaScript cu care operăm noi. În mod normal, aceste detalii sunt lăsate în grija magicienilor C și C++, limbajele în care se programează motoarele JavaScript. Totuși, pentru că avem nevoie să înțelegem părțile cele mai importante ale anatomiei obiectelor și funcțiilor, ne vom sluji de aceste indicații pentru a face o hartă mentală a ceea ce se întâmplă când creăm obiecte și funcții. Cel mai mare câștig va fi înțelegerea dualității obiect-funcție reflectată și prin sintagma standardului ce descrie cel mai corect o funcție: **funcție - obiect**.
 
@@ -216,7 +216,7 @@ Am găsit că cel mai potrivit este să reprezint ca un bloc de cod.
 
 ![](FunctionRealmSymbol.png)
 
-Tipolog vorbind, acest slot va conține înregistrarea de Tărâm pentru respectiva funcție. Este Tărâmul în care a fost declarată funcția și care oferă acesteia toate obiectele intrinseci (intrinsics) necesare pentru evaluarea codului.
+Tipologic vorbind, acest slot va conține înregistrarea de Tărâm pentru respectiva funcție. Este Tărâmul în care a fost declarată funcția și care oferă acesteia toate obiectele intrinseci (intrinsics) necesare pentru evaluarea codului.
 
 Am găsit o reprezentare simpatică a doi munți care implică sensul unui Tărâm, a unui spațiu geografic.
 
