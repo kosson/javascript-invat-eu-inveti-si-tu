@@ -23,35 +23,37 @@ Câteva detalii foarte importante oferite chiar de standard. Secțiunea **6.1.7.
 
 Reține faptul că toate aceste indicații sunt date celor care construiesc motoare JavaScript, fiind tot atâtea instrucțiuni privind algoritmii motorului, care au drept efect crearea entităților JavaScript cu care operăm noi. În mod normal, aceste detalii sunt lăsate în grija magicienilor C și C++, limbajele în care se programează motoarele JavaScript. Totuși, pentru că avem nevoie să înțelegem părțile cele mai importante ale anatomiei obiectelor și funcțiilor, ne vom sluji de aceste indicații pentru a face o hartă mentală a ceea ce se întâmplă când creăm obiecte și funcții. Cel mai mare câștig va fi înțelegerea dualității obiect-funcție reflectată și prin sintagma standardului ce descrie cel mai corect o funcție: **funcție - obiect**.
 
-Pentru a înțelege, am constituit o hartă internă a obiectelor. Un obiect, l-am reprezentat ca pe un cerc cu trei linii interioare, care simbolizează proprietățile și metodele. De jur împrejur am dispus fiecare **metodă internă** și slotul destinat obiectului prototip. Acestea stau în spatele formării entității ECMAScript pe care noi o numim obiect. Pe fiecare metodă internă am căutat că o reprezint grafic pentru a  adăuga și un reper vizual. Pentru a simplifica imaginea și a facilita înțelegerea, am renunțat la parantezele pătrate.
+Pentru a înțelege, am constituit o hartă internă a obiectelor. Un obiect, l-am reprezentat ca pe un cerc cu trei linii interioare, care simbolizează proprietățile și metodele. De jur împrejur am dispus fiecare **metodă internă** și slotul destinat obiectului prototip. Acestea stau în spatele formării entității ECMAScript pe care noi o numim obiect. Pe fiecare metodă internă am căutat că o reprezint grafic pentru a  adăuga și un reper vizual. Pentru a simplifica imaginea și a facilita înțelegerea, am renunțat la parantezele pătrate care indică faptul că vorbim de sloturi interne existente doar la nivel de motor.
+
+Spuneam mai devreme că acești algoritmi interni aparțin motorului JavaScript, dar ca și programator, avem acces la ceea ce oferă prin expunerea lor ca și metode, fie a obiectelor interne `Function` sau `Object`, fie, ceva mai direct prin obiectul intern `Reflect`, a cărei existență se justifică chiar pentru a pune la îndemâna noastră o cale de acces către *metodele interne*.
 
 ![](InternalSlotsObjects.png)
 
 Să le luăm pe rând să vedem ce reprezintă fiecare.
 
-### [[GetPrototypeOf()]]
+### [\[GetPrototypeOf()]]
 
 ![](ObjectGetPrototypeOfSymbol.png)
 
 Caută obiectul de la care moștenește proprietăți obiectul de lucru. Dacă valoarea este deja setată la `null`, înseamnă că moștenirea este tăiată. Ca simbol l-am reprezentat precum două obiecte ca două cercuri dintre care cel mai mic din dreapta este cel de lucru, iar cel din stânga este cel a cărui identificator va fi returnat în urma operațiunii de interogare. Sensul de interogare este dat de sensul săgeții orientat către un posibil obiect candidat cu rol de prototip.
 
-Metoda pe care o putem folosi și noi ca programatori este parte a obiectului global `Object` și este disponibilă prin mecanismul de moștenire tuturor obiectelor. Deci, ține minte că există `Object.getPrototypeOf(obiectPentruCareSeFaceInterogarea)`.
+Metoda pe care o putem folosi și noi ca programatori este parte a obiectului global `Object` și este disponibilă prin mecanismul de moștenire tuturor obiectelor. Deci, ține minte că există `Object.getPrototypeOf(obiectPentruCareSeFaceInterogarea)`. Odată cu noua versiune a standardului, există și `Reflect.getPrototypeOf`, care permite folosirea directă a „metodelor interne”.
 
-### [[SetPrototypeOf]]
+### [\[SetPrototypeOf]]
 
 ![](ObjectSetPrototypeOf-v-Symbol.png)
 
 Această metodă internă asociază obiectul cu un alt obiect care oferă proprietăți ce se doresc a fi moștenite de obiectul nostru de lucru. Ca simbol îl copiază pe cel de la `GetPrototypeOf` cu diferența că semnul exclamării indică imperativul setării iar sensul săgeții este către obiectul de lucru.
 
-`Object` are o metodă care o pune la dispoziția programatorilor pentru a mima metoda internă.
+`Object` are o metodă care o pune la dispoziția programatorilor pentru a folosi metoda internă. Odată cu noua versiune a standardului, există și `Reflect.setPrototypeOf`, care permite folosirea directă a *metodelor interne*.
 
-### [[isExtensible()]]
+### [\[isExtensible()]]
 
 ![](ObjectIsExtensibleSymbol.png)
 
 Este o valoare Boolean, care indică posibilitatea de a extinde un obiect prin adăugarea unor proprietăți noi sau opusul. Am reprezentat algoritmul ca un obiect având o proprietate reprezentată cu o linie întrerupă ceea ce trimite la ideea că ar putea fi completat cu o nouă proprietate.
 
-`Object` are o metodă care o pune la dispoziția programatorilor pentru a mima metoda internă.
+`Object` are o metodă care o pune la dispoziția programatorilor pentru a folosi metoda internă. Este la îndemână și metoda pe care obiectul `Reflect` o pune la dispoziție: `Reflect.isExtensible`.
 
 ### [[PreventExtensions()]]
 
@@ -60,7 +62,7 @@ Este o valoare Boolean, care indică posibilitatea de a extinde un obiect prin a
 Este verificată posibilitatea de a adăuga proprietăți noi obiectului. Dacă la analiza obiectului se determină că obiectul poate fi extins, este returnată valoarea `true`.
 Am reprezentat având ultima proprietate cu un semn interzis ceea ce trimite la ideea că este imposibil a se mai adăuga ceva.
 
-`Object` are o metodă care o pune la dispoziția programatorilor pentru a mima metoda internă. Această metodă este `Object.isFrozen`.
+`Object` are o metodă care o pune la dispoziția programatorilor pentru a mima metoda internă. Această metodă este `Object.isFrozen`. Odată cu noul standard, obiectul intern `Reflect` pune la dispoziție `Reflect.preventExtensions`.
 
 ### [[GetOwnProperty]]
 
@@ -70,7 +72,7 @@ Rulând această metodă internă, fie obții valoarea `undefined` pentru că nu
 
 Am reprezentat această metodă internă ca un obiect care are proprietăți dintre care cea din mijloc, care are săgeată, se distinge ca fiind proprie acelui obiect. Acest lucru înseamnă că nu a fost moștenită.
 
-Această metodă internă are un echivalent și pentru uzul nostru al programatorilor. Metoda este pusă la dispoziție de obiectul prototype al lui Object: `Object.prototype.hasOwnProperty`.
+Această metodă internă are un echivalent și pentru uzul nostru al programatorilor. Metoda este pusă la dispoziție de obiectul prototype al lui Object: `Object.prototype.hasOwnProperty`. Dar, cel mai eficient este să folosim `Reflet.getOwnPropertyDescriptor`, care oferă acces direct la metoda internă.
 
 ### [[HasProperty]]
 
@@ -80,7 +82,7 @@ Este o metodă prin care este întrebat obiectul dacă are o anume proprietate, 
 
 Reprezentarea este un obiect în interiorul căruia o proprietate are atașat semnul întrebării.
 
-Proprietatea cea mai apropiată, care ne este pusă nouă la dispoziție este `Object.keys()`.
+Proprietatea cea mai apropiată, care ne este pusă nouă la dispoziție este `Object.keys()` sau și mai bine, folosirea operatorului `in`. Totuși, noua versiune a standardului, oferă acces direct la *metoda internă* prin intermediul `Reflect.has`.
 
 ### [[Get]]
 
@@ -90,7 +92,7 @@ Este o metodă internă cu ajutorul căreia obții valoarea unei proprietăți a
 
 Am simbolizat printr-un obiect în care o proprietate trimite la cererea get valoare sa. Această acțiune, această cerere am simbolizat-o prin săgeată orientată către dreapta.
 
-Cel mai aproape pentru noi ar fi `Object.values()`.
+Cel mai aproape pentru noi ar fi `Object.values()`. Dar, după cum te-am obișnuit, îți dau varianta de acces direct la această *metodă internă* întrupată în `Reflect.get`.
 
 ### [[Set]]
 
@@ -100,7 +102,7 @@ Este o metodă internă care poate fi folosită pentru a introduce o valoare pen
 
 Am simbolizat printr-o proprietate a cărei săgeată indică înspre interiorul obiectului.
 
-Cel mai aproape de noi este pur și simplu folosirea sintaxei cu punct sau cu paranteze drepte. Ceva mai întortocheat, ar fi `Object.defineProperty`.
+Cel mai aproape de noi este pur și simplu folosirea sintaxei cu punct sau cu paranteze drepte. Ceva mai întortocheat, ar fi `Object.defineProperty`. Accesul direct la această *metodă internă* îl oferă `Reflect.set`.
 
 ### [[Delete]]
 
@@ -110,7 +112,7 @@ Această metodă internă are drept scop eliminarea de proprietăți care nu mai
 
 Am simbolizat printr-un obiect în care o proprietate ce va fi anulată, va fi ștearsă din obiect. Ștergerea este reprezentată printr-un x peste o proprietate existentă.
 
-Pentru noi există operatorul delete care face acest lucru.
+Pentru noi există operatorul `delete` care face acest lucru. Dar dacă dorești acces direct la acestă metodă internă, poți folosi `Reflect.deleteProperty`.
 
 ### [[DefineOwnProperty]]
 
@@ -120,7 +122,7 @@ Este o metodă internă folosită pentru a crea o proprietate într-un obiect sa
 
 Am simbolizat această metodă internă printr-un obiect a cărei ultimă proprietate este în asteptarea definirii. Am folosit elementul sintactic două puncte pentru a reprezenta această stare.
 
-Pentru noi există `Object.defineProperty`.
+Pentru noi există `Object.defineProperty`. Pentru că știu că ești nerăbdătoare să folosești nemijlocit această metodă internă, îți prezint metoda oferită de Reflect: `Reflect.defineProperty`.
 
 ### [[OwnPropertyKeys]]
 
@@ -130,7 +132,7 @@ Această metodă internă returnează o listă (valoarea de tip **List**ă a sta
 
 Am reprezentat acest lucru printr-un obiect al cărui proprietăți proprii au câte un diamant atașat.
 
-Noi avem ca instrument `Object.getOwnPropertyNames`.
+Noi avem ca instrument `Object.getOwnPropertyNames`. Accesul direct la această metodă internă este asigurat de `Reflect.ownKeys`.
 
 ### [[Prototype]]
 
@@ -140,20 +142,22 @@ Ne-a mai rămas în acest moment slotul intern [[Prototype]]. Valoarea sa intern
 
 Am ales să reprezint visual printr-un simbol ce indică prin săgeata orientată spre dreapta că un obiect (cel din dreapta) moștenește proprietăți de la un alt obiect, în cazul nostru cel din dreapta. Am ales dimensiunea mai mare a celui din care se moștenește pentru a indica faptul că cel de la care se moștenește poate fi considerat un părinte a celui din dreapta, care poate fi văzut drept un copil.
 
+În ceea ce privește lucrul cu obiectul prototip, obiectul intern Reflect, oferă două metode foarte importante `Reflect.getPrototypeOf` și `Reflect.setPrototypeOf`. Prima returnează obiectul prototip pentru identificatorul unui obiect, iar a doua va seta drept prototip un obiect arbitrar.
+
 Și acum că am lămurit aceste aspecte privind obiectele, mai adăugăm cazul funcțiilor. Trebuie să ne aducem mereu aminte faptul că funcțiile sunt obiecte, ceva mai speciale, dar tot obiecte. Ce le face mai speciale? Faptul că pot fi apelate și că în baza lor pot fi create alte obiecte. Poate părea bizar, dar acest lucru este unul din aspectele cele mai interesante și mai utile ale limbajului de programare.
 
 Cum se realizează acest lucru?
-Pur și simplu mai adaugi la metodele interne deja enumerate la obiecte două în plus: [[Call]] și [[Construct]]. Le vom descrie imediat, dar dacă tot am pășit în lumea funcțiilor cu această mică introducere, hai să vedem și harta sloturilor interne și a proprietăților pentru funcții.
+Pur și simplu mai adaugi la metodele interne deja enumerate la obiecte două în plus: [\[Call]] și [\[Construct]]. Le vom descrie imediat, dar dacă tot am pășit în lumea funcțiilor cu această mică introducere, hai să vedem și harta sloturilor interne și a proprietăților pentru funcții.
 
 Noi avem acces la acest obiect prin `Object.prototype`.
 
 ![](InternalSlotsFunctions.png)
 
-În acest moment ar fi util să-ți imaginezi că în ADN-ul hărții funcțiilor stă înscrisă harta obiectelor. Pentru fiecare funcție va fi disponibil tot ce este disponibil obiectelor plus tot ce este înfățișat în noua hartă. Să pornim cu reluarea firului lăsat la [[Call]] și [[Construct]].
+În acest moment ar fi util să-ți imaginezi că în ADN-ul hărții funcțiilor stă înscrisă harta obiectelor. Pentru fiecare funcție va fi disponibil tot ce este disponibil obiectelor plus tot ce este înfățișat în noua hartă. Să pornim cu reluarea firului lăsat la [\[Call]] și [\[Construct]].
 
-În reprezentarea hărții pentru funcții am procedat la a nu menționa paramentrii pe care-i ia [[Call]] sau [[Construct]] pentru că vizual ar fi fost foarte aglomerat. Voi menționa forma completă la descrierea lor. Restul sunt sloturi, nu metode interne și nu au argumente.
+În reprezentarea hărții pentru funcții am procedat la a nu menționa paramentrii pe care-i ia [\[Call]] sau [\[Construct]] pentru că vizual ar fi fost foarte aglomerat. Voi menționa forma completă la descrierea lor. Restul sunt sloturi, nu metode interne și nu au argumente.
 
-### [[Call]](( thisArgument, argumentsList))
+### [\[Call]] (thisArgument, argumentsList)
 
 ![](FunctionCallSymbo.png)
 
@@ -173,7 +177,7 @@ Ca reprezentare simbolică am ales însăși expresia de apelare a unei funcții
 
 Reprezentarea este un cerc care simbolizează un obiect, dar care folosește o linie întreruptă ce indică faptul că acel obiect încă nu există. Există potențialul de a deveni obiect.
 
-Din acest moment, vom analiza doar sloturile unei funcții obiect. Am încheiat aici descrierea metodelor interne pentru obiecte și obiecte funcții.
+Din acest moment, vom analiza doar sloturile unei funcții obiect. Am încheiat aici descrierea metodelor interne pentru obiecte și obiecte funcții. Nu voi trece mai departe până când nu vă voi oferi și instrumentul util pe care `Reflect.construct` îl pune la dispoziție. Acesta este echivalentul folosirii operatorului `new`, dar cu avantajele unei funcții.
 
 ### [[Environment]]
 

@@ -73,39 +73,34 @@ Pentru a evita un astfel de comportament, ai putea gândi ca pentru fiecare obie
 var animal = {
   caracteristici: {}
 };
-
 var cal = Object.create(animal);
 cal.caracteristici = {picioare: 4};
-
 var cangur = Object.create(animal);
 cangur.caracteristici = {picioare: 2};
 ```
 
 Acest exemplu este limitat, pentru că în cazul în care setezi obiectul caracteristici în acest mod, îl vei rescrie ori de câte ori vei folosi o nouă instanțiere, care vine. La rândul său cu propriile-i caracteristici.
 
-Soluția este de a renunța la setarea completă a obiectului caracteristici și setarea specifică a fiecărei proprietăți a obiectului caracteristici pentru fiecare dintre posibilitățile contribuite de obiectele create.
+Soluția este de a renunța la setarea completă a obiectului `caracteristici` și setarea specifică a fiecărei proprietăți a obiectului `caracteristici` pentru fiecare dintre posibilitățile contribuite de obiectele create.
 
 ```javascript
 var animal = {
   caracteristici: {}
 };
-
 var cal = Object.create(animal);
 cal.caracteristici = {insusiri: {picioare: 4}};
-
 var cangur = Object.create(animal);
 cangur.caracteristici = {insusiri: {picioare: 2}};
 ```
 
 Astfel, nu se vor mai înregistra schimbări în obiectul care servește drept prototip. În schimb, obiectele create vor moșteni și vor accesa pe baza lanțului prototipal proprietăți ale obiectului care a oferit prototipul.
 
-Plus de asta Object permite crearea unui obiect specificând în mod direct atributele fiecărui membru prin pasarea unui obiect de configurare.
+Plus de asta `Object` permite crearea unui obiect specificând în mod direct atributele fiecărui membru prin pasarea unui obiect de configurare.
 
 ```javascript
 var animal = {
   caracteristici: {}
 };
-
 var cal    = Object.create(animal, {caracteristici: {writable: true, configurable: true, value: {picioare: 4}}});
 var cangur = Object.create(animal, {caracteristici: {writable: true, configurable: true, value: {picioare: 2}}});
 ```

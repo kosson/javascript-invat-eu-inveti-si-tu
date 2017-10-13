@@ -6,7 +6,6 @@ Această metodă returnează un string care reprezintă obiectul.
 let obi = {a: 10, b: 'ceva'};
 obi.toLocaleString(); // "[object Object]"
 obi.toString(); // "[object Object]"
-
 // dacă vrei să vezi și ce conține"[object Object]"
 obi.toSource(); // "({a:10, b:"ceva"})"
 ```

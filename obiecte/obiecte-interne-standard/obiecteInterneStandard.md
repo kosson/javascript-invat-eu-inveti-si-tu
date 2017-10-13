@@ -2,19 +2,19 @@
 
 Privitor la subiectul acestor obiecte, am ales să traduc „standard built-in” ca **obiecte interne standard** pentru că reflectă cel mai bine realitatea.
 
-Începem povestea obiectelor interne în momentul în care un „script” ori un „modul” își începe execuția, moment în care deja există deja disponibile un set de obiecte. Standardul menționează faptul că obiectele interne standard sunt entități ECMAScript (4.2 ECMAScript Overview - https://tc39.github.io/ecma262/#sec-intro).
-Unul este obiectul global, ca parte a mediului lexical format iar altele sunt accesibile ca proprietăți ale obiectului global. Unele sunt accesibile ca proprietăți ale altor obiecte built-in.
+Începem povestea obiectelor interne în momentul în care un „script” ori un „modul” își începe execuția. Codul nostru nu este rulat într-un vid deplin, ci deja există deja disponibile un set de obiecte puse la dispoziție de motor. Standardul menționează faptul că *obiectele interne standard* sunt **entități** ECMAScript (4.2 ECMAScript Overview - https://tc39.github.io/ecma262/#sec-intro).
+Unul este obiectul global, ca parte a mediului lexical format, iar altele sunt accesibile ca proprietăți ale obiectului global. Unele sunt accesibile ca proprietăți ale altor obiecte built-in.
 
 ## Mică anatomie
 
-Obiectele interne standard sunt de fapt funcții care pot fi invocate. Adu-ți mereu aminte faptul că funcțiile sunt numite de standard ca „funcții obiect”, pentru că, de fapt, **funcțiile sunt obiecte**.
+Obiectele interne standard sunt de fapt funcții care pot fi invocate. Adu-ți mereu aminte faptul că funcțiile sunt numite de standard „funcții obiect”, pentru că, de fapt, **funcțiile sunt obiecte**.
 
 Pentru a vedea natura acestor obiecte interne, ne vom ajuta de operatorul `typeof` pentru a *sonda* aceste entități.
 
 ```javascript
 typeof window; // "object"
 typeof Object; // "function"
-typeof Array; // "function"
+typeof Array;  // "function"
 ```
 
 Ceea ce se observă este faptul că obiectele interne sunt funcții, care au caracteristicile unui obiect. Acum urmează o parte mai interesantă ca un mic mister egiptean și care va elucida misterul care stă în spatele disponibilității proprietăților și metodelor unui obiect intern standard. Să spunem că avem un șir de caractere, de exemplu propoziția simplă: „eu învăț”.
@@ -26,7 +26,7 @@ typeof x; // "string"
 ```
 
 Dacă investigăm tipul valorii identificată prin x, motorul va răspunde cu `string`. Și acum vom produce o minune. Vom accesa o proprietate disponibilă doar obiectelor `String`. Și te vei întreba pe bună dreptate: cum se poate întâmpla să ai acces la proprietățile și metodele unui obiect când tu operezi cu o valoare literală?
-Rezolvarea misterului vine din faptul că de îndată ce pui punctul, care este un operator destinat accesării membrilor unui obiect, valoarea noastră este deîndată „împachetată” (wrapped) în obiectul corespunzător tipului său de valoare și, minune, devine un obiect.
+Rezolvarea misterului vine din faptul că de îndată ce pui punctul, care este un operator destinat accesării membrilor unui obiect, valoarea noastră este „împachetată” (wrapped) instant în obiectul corespunzător tipului său de valoare și, minune, devine un obiect.
 
 ```javascript
 x.length; // 8
@@ -67,7 +67,7 @@ Proprietățile constructor:
 - Uint8Array, Uint8ClampedArray, Uint16Array, Uint32Array, URIError,
 - WeakMap, WeakSet
 
-Dacă nu este prevăzut altfel, toate funcțiile interne și toți constructorii au acces la obiectul prototype al lui Function, care este valoarea lui `Function.prototype`.
+Dacă nu este prevăzut altfel, toate funcțiile interne și toți constructorii au acces la obiectul prototype al lui Function, care este obiectul la care ajungi prin referința `Function.prototype`.
 
 ## Mantre
 

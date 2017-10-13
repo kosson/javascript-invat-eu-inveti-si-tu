@@ -7,7 +7,7 @@ Poți să-ți imaginezi Reflect ca pe un instrument de investigare a diferitelor
 
 Cred că îți mai aduci aminte hărțile pe care le-am făcut la momentul în care explicam dualitatea obiect - funcție. Cu siguranță îți aduci bine aminte faptul că motorul JavaScript pune la bătaie o mulțime de „metode interne” care acționează ori de câte ori folosim câte-o metodă predefinită a vreunui obiect JavaScript.
 
-Reflect oferă o cale către aceste metode „de adâncime” ale motorului JavaScript. Gândește-te la cazul util în care un obiect are „tăiată” moștenirea, dar parcă ai avea nevoie de metodele pe care `Object` și le pune la dispoziție în prototipul său.
+Reflect oferă o cale către aceste metode „de adâncime” ale motorului JavaScript. Gândește-te la cazul util în care un obiect are „tăiată” moștenirea, dar parcă ai avea nevoie de metodele pe care `Object` ți le pune la dispoziție în prototipul său.
 
 ```javascript
 var obi = Object.create(null); // un obiect cu moștenirea tăiată
@@ -73,7 +73,7 @@ var obi = {a: 19, b: true};
 Reflect.deleteProperty(obi, 'b'); // true
 ```
 
-## Reflect.get(obiectulȚintă, numeProprietate, valoareThis)
+## Reflect.get(obiectulȚintă, numeProprietate, obiectulThis)
 
 Această metodă va returna valoarea existentă pentru o anumită proprietate a unui obiect.
 
@@ -135,7 +135,7 @@ Este o metodă prin care se blochează posibilitatea de a mai extinde un obiect.
 
 ## Reflect.set(obiectulȚintă, numeProprietate, valoarea, obiectulThis)
 
-Această metodă permite setarea unei proprietăți într-un obiect. Returnează o valaore Boolean, care indică dacă adăugarea proprietății s-a făcut sau a eșuat.
+Această metodă permite setarea unei proprietăți într-un obiect. Returnează o valoare Boolean, care indică dacă adăugarea proprietății s-a făcut sau a eșuat.
 
 ```javascript
 var obi = {};
@@ -164,4 +164,5 @@ Unul din avantajele utilizării `Reflect` este siguranța că nu folosești vers
 
 ## Referințe
 
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect
 https://www.keithcirkel.co.uk/metaprogramming-in-es6-part-2-reflect/

@@ -2,7 +2,7 @@
 
 Este o metodă pentru a seta prototipul (proprietatea internă [[Prototype]]) a unui obiect, la prototipul altui obiect.
 
-Este de dorit să fie evitată această practică în favoarea lui `Object.create()`.
+Este de dorit să fie evitată această practică în favoarea lui `Object.create()` din cauza lentorii introduse în rularea programului.
 
 `Object.setPrototypeOf()` primește doi parametri:
 - obiectul care are nevoie să schimbe prototipul
