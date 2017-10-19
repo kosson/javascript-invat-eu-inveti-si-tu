@@ -1,4 +1,4 @@
-# `Object.assign()`
+# `Object.assign`
 
 Această metodă este introdusă de ES6. Este replica oficială la practica curentă a mixin-urilor.
 

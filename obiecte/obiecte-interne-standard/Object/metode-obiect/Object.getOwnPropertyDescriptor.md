@@ -1,4 +1,4 @@
-# `Object.getOwnPropertyDescriptor()`
+# `Object.getOwnPropertyDescriptor`
 
 Metoda returnează un descriptor pentru o proprietate pe care o „deține” un obiect. O proprietate „deținută” de un obiect este una care este prezentă în obiect, nu e accesibilă prin delegare prototipală.
 

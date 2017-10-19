@@ -8,7 +8,7 @@ Atunci când `Function` este apelat ca funcție și nu ca un constructor, este c
 
 Constructorul lui Function este în sine un obiect funcție built-in.
 
-**Obiectul prototype al lui `Function` este în sine un obiect-funcție intern**.
+**Obiectul prototype al lui `Function` este în sine un obiect-funcție intern**. Acest lucru este încă acceptat pentru că trebuie asigurată compatibilitatea cu restul codului scris înainte de ECMAScript 2015.
 
 `Function` nu poate fi constructor (nu are metoda internă [\[Construct]]). Acest obiect nu are la rândul său o proprietate `property`.
 
@@ -63,9 +63,9 @@ Metoda primește două argumente:
 - o referință către un obiect, care devine și `this` pentru funcția apelată cu apply().
 - o listă de argumente organizată ca array sau ceva ce seamănă cu un array (`array-like`).
 
-Dacă nu este invocat `strict mode` (`"use strict";`), `null` și `undefined` în cazul primului argument, acesta va fi înlocuit cu obiectul global iar primitivele vor fi „învelite” în obiectul corespunzător (`boxing`).
+Dacă nu este invocat `strict mode` (`"use strict";`), `null` și `undefined` în cazul primului argument, acesta va fi înlocuit cu obiectul global, iar primitivele vor fi „învelite” în obiectul corespunzător (în limba engleză se zice `boxing`).
 
-Pentru parametrul listei de argumente se poate folosi și array-like-ul `arguments`, care este o variabilă locală a unei funcții. Astfel, poți pasa toate argumentele în obiectul apelat, care trebuie să gestioneze aceste argumente.
+Pentru parametrul listei de argumente se poate folosi și obiectul care seamănă ca un array: `arguments`, care este o variabilă locală a unei funcții. Astfel, poți pasa toate argumentele în obiectul apelat, care trebuie să gestioneze aceste argumente.
 
 Începând cu ECMAScript 5 se poate folosi orice obiect care este array-like pentru al doilea argument. Cazul cel mai util ar fi aplicațiile practice în lucrul cu API-ul DOM-ului. Aici ne gândim la obiectele `NodeList` ( [referința MDN](https://developer.mozilla.org/en-US/docs/Web/API/NodeList) ) returnate de `Node.childNodes` și `document.querySelectorAll`. ATENȚIE! NodeList nu sunt array-uri și nu se pot invoca metodele din prototipul lui Array.
 

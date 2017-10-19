@@ -1,4 +1,4 @@
-# Object.prototype.toString()
+# `Object.prototype.toString`
 
 Este o metodă folosită pentru a obține o reprezentare a obiectului ca un text.
 

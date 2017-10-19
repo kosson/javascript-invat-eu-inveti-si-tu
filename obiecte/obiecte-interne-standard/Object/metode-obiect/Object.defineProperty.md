@@ -1,4 +1,4 @@
-# `Object.defineProperty()`
+# `Object.defineProperty`
 
 Este o metodă prin care poți introduce o proprietate într-un obiect.
 

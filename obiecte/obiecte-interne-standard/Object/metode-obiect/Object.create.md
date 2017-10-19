@@ -1,11 +1,11 @@
-# `Object.create()`
+# `Object.create`
 
 Este o metodă propusă de Douglas Crockford. Aceasta creează un obiect nou cu un prototip și proprietăți specificate.
 Permite atribuirea directă a unui prototip unui obiect eliberând prototipul de legătura cu, constructorul.
 
 Metoda primește doi parametri:
 - obiectul la a cărui prototip se va lega obiectul nou creat
-- și al doilea, opțional poate primi propritățile pentru noul obiect, dacă un acest scenariu este urmărit de programator.
+- și al doilea, opțional poate primi proprietățile pentru noul obiect, dacă un acest scenariu este urmărit de programator.
 
 Este returnat un obiect nou care are prototipul setat la obiectul care a fost menționat.
 

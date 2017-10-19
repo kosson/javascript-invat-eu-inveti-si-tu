@@ -1,4 +1,4 @@
-# `Object.is()`
+# `Object.is`
 
 Compară două valori pentru a vedea dacă sunt egale. Nu este același lucru cu operatorii `==` și `===` care fac operațiuni de coerciție asupra operatorilor.
 

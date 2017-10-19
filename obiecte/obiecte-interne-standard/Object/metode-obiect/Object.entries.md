@@ -1,4 +1,4 @@
-# `Object.entries()`
+# `Object.entries`
 
 Este o metodă introdusă de ECMAScript 2017.
 

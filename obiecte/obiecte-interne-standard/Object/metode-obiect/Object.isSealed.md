@@ -1,4 +1,4 @@
-# Object.isSealed
+# `Object.isSealed`
 
 Folosind metoda afli dacă un obiect este sigilat sau nu. Returnează un boolean.
 

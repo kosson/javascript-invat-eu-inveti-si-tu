@@ -1,4 +1,4 @@
-# Object.prototype.isPrototypeOf
+# `Object.prototype.isPrototypeOf`
 
 Drept parametru este trimis obiectul pentru care se face verificarea în cazul obiectului investigat.
 Metoda returnează un boolean.
