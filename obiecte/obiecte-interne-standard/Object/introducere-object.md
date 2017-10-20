@@ -37,6 +37,8 @@ var obiect = new Object(true);
 var object = new Object(Boolean());
 ```
 
+![](ObjectMap.png)
+
 ## `Object.prototype.constructor`
 
 Indică funcția care stă la baza prototipului.

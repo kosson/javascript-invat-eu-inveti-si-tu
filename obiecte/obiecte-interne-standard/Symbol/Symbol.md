@@ -1,4 +1,4 @@
-# `Symbol()`
+# `Symbol`
 
 Cel mai bine învățăm din povești, iar trecutul limbajului de programare JavaScript oferă câteva interesante, care au orientat dezvoltarea limbajului către introducerea unui nou tip de valori primare așa cum sunt simbolurile. Legenda spune că de îndată ce JavaScript nu a mai fost tratat ca pe un mijloc de a dinamiza paginile web care erau statice prin interacțiune, programatorii au început dezvoltarea de biblioteci de cod. Aceste biblioteci de cod includeau propriile obiecte, care „se întâlneau” cu obiectele provenite din utilizarea altor biblioteci de cod. Inevitabil propritățile unui obiect intrau în coliziune cu proprietățile altor obiecte în cazul în care propritățile aveau același nume. Pentru a evita astfel de coliziuni, se apela la diverse mecanisme de protejare a propriilor obiecte pentru a fi sigure în utilizare. Dar odată cu apariția lui `Symbol` mare parte din aceste probleme vor dispărea.
 

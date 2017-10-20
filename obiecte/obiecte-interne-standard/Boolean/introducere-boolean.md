@@ -18,6 +18,8 @@ console.log(ceva); // Boolean { true }
 
 Buna practică spune că trebuie evitată folosirea constructorului (apelarea cu `new`), în cazul în care este nevoie de a transforma o valoare care nu este boolean la una. Se va folosi apelarea simplă ca funcție pentru acest lucru.
 
+![](BooleanMap.png)
+
 ## Metoda `Boolean.prototype.toString()`
 
 Această metodă returnează șirul de caractere corespondent valorii de adevăr: "true" și/sau "false".

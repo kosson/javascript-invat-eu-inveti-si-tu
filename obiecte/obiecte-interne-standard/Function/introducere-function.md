@@ -45,6 +45,8 @@ var functieNoua = new Function('...intrari', 'return intrari[0]');
 functieNoua('a','b','c','d'); // "a"
 ```
 
+![](FunctiiMap.png)
+
 ## Metode:
 
 - `Function.prototype.apply()`
