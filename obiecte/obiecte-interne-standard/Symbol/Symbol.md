@@ -20,6 +20,8 @@ typeof piatră.toString(); // "string"
 
 Symbol are totuși o serie de proprietăți care oferă acces la membrii acestui obiect intern, are proprietăți statice, care îți permit să investighezi registrul global de simboluri, care este constituit înainte de a se începe evaluarea codului.
 
+![](SymbolMap.png)
+
 Standardul lămurește faptul că atunci când se constituie registrul simbolurilor, care este o listă de elemente, care fiecare, individual, este un „Record”, ceea ce decriptat înseamnă că avem de-a face cu un obiect (19.4.1 The Symbol Constructor). Da, fiecare simbol este, de fapt, câte un obiect care are două proprietăți:
 
 - cheia pentru prima proprietate este `[[Key]]` și are drept valoare un șir de caractere necesar identificării la nivel global a simbolului respectiv și
