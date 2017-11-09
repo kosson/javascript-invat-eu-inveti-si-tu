@@ -1,4 +1,4 @@
-# Array.prototype.forEach()
+# `Array.prototype.forEach()`
 
 Execută o funcție pentru fiecare element din array.
 

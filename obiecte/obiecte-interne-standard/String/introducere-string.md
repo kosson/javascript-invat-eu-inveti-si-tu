@@ -35,6 +35,8 @@ Caracterele speciale vor putea fi menționate în string-uri folosindu-se notaț
 
 ## Crearea obiectelor String
 
+![](StrimgMap.png)
+
 ### Folosind constructorul: `new String()`
 
 ```javascript

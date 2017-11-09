@@ -54,7 +54,7 @@ Pentru că această lucrare se adresează și specialiștilor din științele in
 
 Întrebarea pentru toți profesioniștii domeniului este în acest moment **cum**? Cum să învăț să gestionez date, cum să le manipulez, cum să le prezint pentru a fi mai ușor de înțeles celor care au nevoie de ele. Cum să transform catalogul meu, cum să interconectez baze de date europene și globale la acesta, cum să convertesc dintr-un format în altul, dar mai ales cum să exploatez colecția pentru a o face și mai atractivă din perspectiva unui instrument de lucru care să devină permanență... obișnuință!? Cum să transform instrumentul creat de mine într-un serviciu continuu?
 
-Această carte dorește să ofere o cale prin care să fie dobândite cunoștințe în domeniul programării îndeajuns de avansate încât să permită o a doua natură celor care au nevoie să lucreze cu datele. Una din ținte este aceea de a explica cunoștințele necesare pentru a manipula, transforma, și a genera dinamic date, precum și care sunt bazele pentru a le încadra într-o formă de prezentare.
+Această carte dorește să ofere o cale prin care să fie dobândite cunoștințe în domeniul programării îndeajuns de avansate încât să permită o a doua natură celor care au nevoie să lucreze cu datele. Una din țintele acestei cărți este aceea de a explica cunoștințele necesare pentru a manipula, transforma și a genera dinamic date, precum și care sunt bazele pentru a le încadra într-o formă de prezentare.
 
 Această lucrare îți este adresată și ție specialistul în umanioare digitale - *digital humanities*. Îți va oferi cunoștințele necesare să pui cap la cap diferite scripturi pentru a eficientiza munca curentă, pentru a înțelege și oferi înțelesuri noi unor seturi de date discrete pe care vei ști să le pui cap la cap și să le exploatezi.
 
@@ -62,7 +62,7 @@ Această lucrare îți este adresată și ție specialistul în umanioare digita
 
 Voi încheia pledoaria pentru acest nou drum cu o afirmație care se va dovedi adevărată pe măsură ce veți descoperi bucuria de a lucra cu structuri de cod ce permit prelucrarea.
 
-Textul în dimensiunea lui digitală este o colecție de date în sine. El se agregă și poate fi jalonat pentru a crea structuri inteligibile pentru om cât și pentru mașină.
+Textul în dimensiunea lui digitală este o colecție de date în sine. El se agregă și poate fi jalonat pentru a crea structuri inteligibile pentru om, cât și pentru mașină.
 
 Textul este o colecție structurată de caractere cu înțeles doar pentru om, care așteaptă un agent software pentru a o reordona și interconecta cu alte surse cu scopul de a oferi o nouă dimensiune valorică. De fapt, acesta este și scopul final pentru care învățăm programare: **extragerea valorii indiferent de formă și destinație pentru a ajunge la noi înțelesuri**.
 
@@ -80,7 +80,7 @@ La începutul secolului 20 al mileniului trecut, matematicianul Gottlob Frege a 
 George Boole este figura care dezvoltă un set limitat al „legilor gândului”, în fapt o aritmetică care să permită reducerea expresiilor, fie la „adevărat”, fie la „fals”. Cu introducerea operațiunilor logice `and`, notat cu `∧`, în română `ȘI`, `or`, notat cu `∨`, în română `SAU` și `NOT`, notat cu `¬`, se poate vorbi despre algebra Booleană ca fundament al domeniului computației moderne. Gottlob Frege face un pas înainte și în căutările sale pentru a descoperi un limbaj formal artificial cu o sintaxă care să nu necesite interpretare, va completa în mod fericit algebra booleană introducând cuantificatori noi precum `∀` însemnând `oricare` sau cu sensul de `tot` sau `∃` însemnând `fie`, `există`, `pentru o parte`. Deodată cu aceste cunoștințe acumulate, domeniul matematicii era pe drumul de a formaliza un limbaj exact de care avea nevoie pentru a algoritmiza demonstrațiile și astfel logica matematică a căpătat noile mijloace de expresie. Am menționat deja termenul de algoritm. Un algoritm (combinația dintre latinul `algorismus` în onoarea matematicianului persan Muḥammad ibn Mūsā al-Khwārizmī și grecescul `arithmos`, care înseamnă număr) este o metodă care urmărește o rezolvare pas cu pas a unei probleme. Un exemplu antic de algoritm este metoda lui Euclid de a calcula cel mai mare divizor comun.
 Mai târziu, mult mai târziu, în 1936, matematicianul Alan Mathison Turing propune o mașină de calcul automată, care propunea stocarea algoritmilor ca programe, iar în 1937, Claude E. Shannon aplica logica booleană pe circuitele electronice. Din acest moment evoluția domeniului computerelor a accelerat până la nivelul actual.
 
-Efortul de a învăța un limbaj de programare este răsplătit prin însușirea unui set de reguli formalizat cu ajutorul căruia să poți manipula date, informații și să extinzi gândul în lumea materială dacă dorești. Câștigul este cel al căruia care are la îndemână instrumentarul a cărui aplicare poate părea a fi cel mai apropiat lucru de magie.
+Efortul de a învăța un limbaj de programare este răsplătit prin însușirea unui set de reguli formalizat cu ajutorul căruia să poți manipula date, informații și să extinzi gândul în lumea materială dacă dorești. Câștigul este al aceluia care are la îndemână instrumentarul a cărui aplicare poate părea a fi cel mai apropiat lucru de magie.
 
 >Orice tehnologie îndeajuns de avansată nu se poate distinge de magie. (Arthur C. Clarke)
 
@@ -128,7 +128,7 @@ JavaScript este un limbaj de programare creat de Brendan Eich în perioada când
 
 Orice limbaj de programare este caracterizat de o sintaxă proprie (un set de reguli care îmbină cuvintele astfel încât să le înțeleagă compilatorul), un înțeles al combinațiilor de cuvinte (semantică) care să reflecte ceea ce intenționezi cu programul și un set de cuvinte pe care compilatorul să le înțeleagă a fi ale limbajului de programare (vocabular sau cuvintele cheie).
 
-Pentru a face o anatomie, vom construi tărâmul JavaScript de la cele mai mici componente precum un fizician din domeniul particulelor pornește de la componentele unei substanțe, de la atomi și și mai jos de la componentele atomului.
+Pentru a face o anatomie, vom construi tărâmul JavaScript de la cele mai mici componente așa cum un fizician din domeniul particulelor pornește de la componentele unei substanțe, de la atomi și mai departe de la componentele atomului.
 
 ### Date, date, date
 
@@ -166,7 +166,7 @@ Ceea ce se va întâmpla este că restul, pur și simplu va fi trunchiat și ign
 var textDeAnalizat = 'Acesta este un text demonstrativ care va enumera caracterele cu înțeles special pentru JavaScript. Problema apare când în text folosim ' citat în engleză cu ghilimele simple', poate "un citat în engleză între ghilimele duble", poate folosim un slash: /, ori un backslash \ sau vorbim despre carriage return \r sau despre new line \n, etc.';
 ```
 
-Dacă veți încerca exemplul de mai sus în `Console` (deschide browserul preferat, apasă F12, mergi în tabul Console), adică dacă veți pune acest fragment în Console, chiar veți genera și o eroare de sintaxă pentru că toate caracterele acelea cu rol special pentru JavaScript, au darul să creeze erori dacă sunt întâlnite în fragmentele de text pe care le alegeți pentru a lucra cu ele. Hai, poți spune că ai întrat bine în pâine: ai aflat ce-i o variabilă și că aceasta poate ține fragmente de text și ai experimentat puțin și cu instrumentul care-ți va fi cel mai bun prieten de acum înainte: *Console*.
+Dacă veți încerca exemplul de mai sus în `Console` (deschide browserul preferat, apasă F12, mergi în tabul Console), adică dacă veți pune acest fragment în Console, chiar veți genera și o eroare de sintaxă pentru că toate caracterele acelea cu rol special pentru JavaScript, au darul să creeze erori dacă sunt întâlnite în fragmentele de text pe care le alegeți pentru a lucra cu ele. Hai, poți spune că ai intrat bine în pâine: ai aflat ce-i o variabilă și că aceasta poate ține fragmente de text și ai experimentat puțin și cu instrumentul care îți va fi cel mai bun prieten de acum înainte: *Console*.
 
 Cum ar arăta exemplul nostru corectat?
 
@@ -176,15 +176,15 @@ var textDeAnalizat = 'Acesta este un text demonstrativ care va enumera caractere
 
 Acum, că nu avem nicio eroare, aflându-te în Console, pur și simplu apelează numele variabilei pentru a vedea textul și ce-a mai rămas din el (pur și simplu scrii numele variabilei `textDeAnalizat` și dai ENTER).
 
-Am corectat doar până la `\r` pe care l-am lăsat așa înadins. Pune așa fragmentul și vezi ce se întâmplă. Da, combinația `\r` pur și simplu a dispărut din text. De ce? Pentru că indică faptul că în cazul în care se va trimite la imprimată acel text, el fa fi tăiat de dinaintea lui `\r` și reluat pe următoarea linie. Asta înseamnă retur de car, adică capul de imprimare trece pe o nouă linie. Uneori, citind literatură de specialitate veți mai vedea și secvența CR/LF (Carriage return/Line feed), care este aceeași comandă trimisă unei imprimante: pune capul de imprimare (carriage) la capul liniei (adică la stânga - imprimarea caracterelor se face de la stânga la dreapta) și ridică pagina cu o linie, adică cu un rând (line feed).
+Am corectat doar până la `\r` pe care l-am lăsat așa înadins. Pune așa fragmentul și vezi ce se întâmplă. Da, combinația `\r` pur și simplu a dispărut din text. De ce? Pentru că indică faptul că în cazul în care se va trimite la imprimată acel text, el va fi tăiat de dinaintea lui `\r` și reluat pe următoarea linie. Asta înseamnă retur de car, adică capul de imprimare trece pe o nouă linie. Uneori, citind literatură de specialitate veți mai vedea și secvența CR/LF (Carriage return/Line feed), care este aceeași comandă trimisă unei imprimante: pune capul de imprimare (carriage) la capul liniei (adică la stânga - imprimarea caracterelor se face de la stânga la dreapta) și ridică pagina cu o linie, adică cu un rând (line feed).
 
-Acum corectează tu textul fiind aflat în Console. Ca să aduci în vizor variabila, chemi din istoricul operațiunilor linia în care introduceai textul în variabilă (apăsarea de două ori a tastei săgeată sus ar trebui să aducă în linia de comadă variabila) și pur și simplu corectează `\r` adăugându-i un backslash în față chiar lângă cel existent deja și dă ENTER. Variabila va fi rescrisă ca și conținut și apelându-i numele încă o dată vei vedea la locul său combinația `\r`.
+Acum corectează tu textul fiind aflat în Console. Ca să aduci în vizor variabila, chemi din istoricul operațiunilor linia în care introduceai textul în variabilă (apăsarea de două ori a tastei săgeată sus ar trebui să aducă în linia de comandă variabila) și pur și simplu corectează `\r` adăugându-i un backslash în față chiar lângă cel existent deja și dă ENTER. Variabila va fi rescrisă ca și conținut. Apelându-i numele încă o dată vei vedea la locul său combinația `\r`.
 
 Ce ai mai observat? Că am omis să pun backslash la combinația `\n`. Acest lucru a produs un efect interesant: `\n` a dispărut din text, dar restul textului a trecut pe o linie nouă. Acesta este efectul `new line`, dacă nu are backslash în față. Dă comandă computerului să înlocuiască combinația `\n` cu o rupere a textului afișat pe o nouă linie de ecran.
 
 Să trecem în continuare prin câteva cazuri fără de care nu poți scrie cod care să și funcționeze corect.
 
-Cazul ghilimelelor. În JavaScript, fragmentele de text pot fi introduse în variabile folosind două tipuri de ghilimele care marchează modul de redactare a citatelor în limba engleză, adică ghilimele simple și ghilimele duble. Ai observat și tu că nu am insistat la exemplul analizat asupra combinației tipurilor de ghilimele. De ce? Pentru că atunci când avem un caz simplu în care avem un text introdus ca resursă de lucru într-o variabilă în interiorul ghilimelelor simple, vom avea grijă ca doar ghilimelelor simple din text ca parte a sa, să fie **exceptate**. Ghilimelele duble nu au nevoie de **exceptare**, dar buna practică spune ca toate aceste caractere cu înțeles special să fie **exceptate**. Eu am fost mai leneș la exemplificare pentru că m-am bazat pe mecanismul de lucru al JavaScript și anume că în cazul în care în text am doar ghilimele duble pot să le las fără a le **excepta** cu backslash.
+Cazul ghilimelelor. În JavaScript, fragmentele de text pot fi introduse în variabile folosind două tipuri de ghilimele care marchează modul de redactare a citatelor în limba engleză, adică ghilimele simple și ghilimele duble. Ai observat și tu că nu am insistat la exemplul analizat asupra combinației tipurilor de ghilimele. De ce? Pentru că atunci când avem un caz simplu în care avem un text introdus ca resursă de lucru într-o variabilă în interiorul ghilimelelor simple, vom avea grijă ca doar ghilimelelor simple din text ca parte a sa, să fie **exceptate**. Ghilimelele duble nu au nevoie de **exceptare**, dar buna practică spune ca toate aceste caractere cu înțeles special să fie **exceptate**. Eu am fost mai leneș la exemplificare pentru că m-am bazat pe mecanismul de lucru al JavaScript, și anume că în cazul în care în text am doar ghilimele duble pot să le las fără a le **excepta** cu backslash.
 
 În cazul ghilimelelor, ca bună practică, se vor folosi ghilimele simple pentru declararea șirurilor de caractere pentru că, fiind un limbaj strâns legat de markup-ul paginilor web, ar putea cuprinde ghilimele duble ca parte a fragmentelor de pagină web construite dinamic.
 
@@ -215,7 +215,7 @@ Codul pe care-l scrii poate fi redactat pe mai multe linii deoarece pentru JavaS
 
 ### Elemente de input - elemente de intrare în vederea evaluării
 
-Spune standardul că mai întâi textul codului sursă este parcurs pentru a-l „converti într-o succesiune de elemente de input" folosindu-se regulile lexicale. Aceste elemente de input sunt: **atomii lexicali**, **semnele de încheiere a rândului** și **spațiile albe**.
+Conform standardului mai întâi textul codului sursă este parcurs pentru a-l „converti într-o succesiune de elemente de input" folosindu-se regulile lexicale. Aceste elemente de input sunt: **atomii lexicali**, **semnele de încheiere a rândului** și **spațiile albe**.
 
 #### Atomi lexicali
 
@@ -254,7 +254,7 @@ Pentru a înțelege mai bine, accesați și materialul explicativ de la https://
 #### Comentariile
 
 Acestea sunt utile pentru a documenta codul. La momentul executării codului, comentariile nu sunt luate în considerare, fiind supuse aceluiași tratament precum spațiile albe. Aceste sunt utile doar pentru noi cu scopul de a documenta codul. Sunt două moduri de a introduce comentarii. Se poate folosi dublu slash `// comentariu` sau atunci când ai nevoie de comentarii pe mai multe linii `/* comentariu */`.
-Dacă un comentariu pe mai multe linii se extinde pe mai mult de una, acesta va fi considerat în întregime ca un line terminator.
+Dacă un comentariu pe mai multe linii se extinde pe mai mult de una, acesta va fi considerat în întregime ca un **line terminator**.
 
 #### Spațiile albe - whitespace
 
@@ -281,7 +281,7 @@ Ele inițiază un curs de acțiune pentru îndeplinirea unei sarcini. Pur și si
 Buna practică spune că toate exprimările intenției programatorului, hai să le numim **enunțuri** (iar liniile de cod cu instrucțiuni - *statements*), în JavaScript trebuie să fie încheiate prin punct și virgulă (`;`), chiar dacă motoarele care implementează ECMAScript, la momentul evaluării codului, introduc automat prin mecanismul de **automatic semicolon insertion** acest caracter.
 Da, da. Programatorii sunt creaturi comode și motoarele permit anumite facilități. Unii aleg această practică înadins. Personal, mă feresc și pun semnele de punctuație pentru că astfel, codul devine lizibil, ochii deprind automatisme de citire și de aici și o mai mare eficiență.
 
-Bine, bine. Da' care-i treaba cu **momentele ZEN**? Pe parcursul acestei călătorii de descoperire și autodescoperire, voi jalona conținutul cu astfel de momente, care vor fi propoziții sau fraze cu o sarcină precisă: să fie chintesența informației analizată defalcat. De ce moment ZEN? Pentru că este ca un exercițiu de meditație, care conduce la identificarea cu informația prin asimilarea ei.
+Bine, bine. Dar care este treaba cu **momentele ZEN**? Pe parcursul acestei călătorii de descoperire și autodescoperire, voi jalona conținutul cu astfel de momente, care vor fi propoziții sau fraze cu o sarcină precisă: să fie chintesența informației analizată defalcat. De ce moment ZEN? Pentru că este ca un exercițiu de meditație, care conduce la identificarea cu informația prin asimilarea ei.
 
 ### Automatic semicolon insertion - introducerea automată a lui punct și virgulă
 
@@ -338,7 +338,7 @@ Expresiile mai complexe cer folosirea unor semne grafice care să indice motorul
 ### Separatorii
 
 I-am amintit mai sus. Sunt folosiți pentru **a separa** fragmentele cu înțeles pentru compilator. De exemplu, cel mai simplu separator este un spațiu (adu-ți mereu aminte că un spațiu este și el un caracter) sau un TAB, care sunt folosite pentru a despărți cuvintele între ele. Un alt separator este punct și virgulă, care este ca punctul din limbajul natural.
-Enter-ul pe care-l dai pentru a trece pe o nouă linie, de fapt este tot un separator.
+Enter-ul pe care îl dai pentru a trece pe o nouă linie, de fapt este tot un separator.
 
 ### Categorii de expresii
 
@@ -397,7 +397,7 @@ Ne focalizăm pe enunțul de mai sus. Începem de la stânga spre dreapta să fa
 
 Continuăm cu o precizare foarte importantă pentru a întări ceea ce am rememorat. Atunci când codul sursă este rulat pentru a obține un rezultat, de fapt, ceea ce se petrece este o întreagă succesiune de evaluări ale expresiilor, care se reduc la o valori rând pe rând prin evaluarea condiționată de diverșii operatori. Totul, dar totul se reduce la o valoare. De fapt, evaluăm expresii rezolvând **operațiunile** și ajungând la **valori** care sunt necesare altor **expresii**. Acestea, la rândul lor așteptau cuminți ca evaluarea precedentă să se încheie pentru a avea și ele valorile de care aveau nevoie și așa mai departe.
 
-### Tratarea expresilor cu operanzi diferiți - transformarea (coercion)
+### Tratarea expresilor cu operanzi diferiți - transformarea (**coercion**)
 
 JavaScript este un limbaj de programare care oferă o flexibilitate fantastică. În ceea ce privește operanzii, aceștia pot fi chiar de tipuri diferite iar JavaScript este forțat să ofere totuși un răspuns.
 
@@ -485,7 +485,7 @@ Care sunt enunțurile în JavaScript?
 - enunțul `try` și
 - enunțul `debugger`.
 
-Mai sunt un set care se numesc „enunțuri ale iterabilelor”:
+Mai există un set care se numesc „enunțuri ale iterabilelor”:
 
 - `do...while`,
 - `while`,
@@ -549,7 +549,7 @@ Putem să ne închipuim că identificatorii sunt toponime ale „tărâmului" Ja
 var mâncare = 'vinete coapte';
 ```
 
-Am putea spune foarte simplu că un identificator este numele unei valori, iar identificatorul este o înșiruire de caractere. După cum observi, identificatorii poți fi cuvinte românești cu diacritice. De ce? Pentru că un computer se uită la reprezentarea numerică a caracterelor iar numerele din spatele fiecărui caracter în parte ce alcătuiește numele identificatorului face parte din setul de numere acceptat de UTF16. Vom insista mai mult pe această corespondență numerică pentru că, mai târziu, vom vedea că stă la baza multor operațiuni pe șiruri. Înțelegerea acestui aspect este o cheie foarte importantă.
+Am putea spune foarte simplu că un identificator este numele unei valori, iar identificatorul este o înșiruire de caractere. După cum observi, identificatorii pot fi cuvinte românești cu diacritice. De ce? Pentru că un computer se uită la reprezentarea numerică a caracterelor iar numerele din spatele fiecărui caracter în parte ce alcătuiește numele identificatorului face parte din setul de numere acceptat de UTF16. Vom insista mai mult pe această corespondență numerică pentru că, mai târziu, vom vedea că stă la baza multor operațiuni pe șiruri. Înțelegerea acestui aspect este o cheie foarte importantă.
 
 Aceasta a fost mica lecție de anatomie aplicată codului sursă JavaScript pentru a înțelege foarte bine și cele mai mici părți ale sale.
 

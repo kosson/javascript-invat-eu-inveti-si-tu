@@ -18,7 +18,7 @@ Mă voi întoarce pentru scurt timp la conceptele cheie cu care vom lucra în Ja
 
 ### Primitivele
 
-Primitivele sunt blocurile constructive. La ce mă refer este faptul că avem nevoie să lucrăm în mod curent cu numere, cu șiruri de caractere și cu valori de adevăr. Dar mai mult, în programare, mai este nevoie să exprimi și realități care se leagă în mod direct de felul cum este alocată memoria și mediul lexical pe care codul îl formează și astfel avem primitive precum valori nule (`null`), nedefinite [încă] (`undefined`).
+Primitivele sunt blocurile constructive. La ce mă refer este faptul că avem nevoie să lucrăm în mod curent cu numere, cu șiruri de caractere și cu valori de adevăr. Dar mai mult, în programare, mai este nevoie să exprimi și realități care se leagă în mod direct de felul cum este alocată memoria și mediul lexical pe care codul îl formează și astfel avem primitive, precum valorile nule (`null`), *nedefinite* încă (`undefined`).
 
 Deci, avem primitivele cu care putem introduce date brute în evaluări: cifre, text și valori de adevăr.
 
@@ -46,9 +46,9 @@ Când folosim browserul web al sistemului de operare, cel mai mare locatar este 
 
 De fapt, în JavaScript totul este o proprietate a unui obiect și sau o metodă a unuia. Vorbim despre o metodă atunci când o funcție joacă un rol activ în interiorul unui obiect.
 
-Și acum că tot am vorbit de obiecte anterior, vom depăși viziunea unei rodii pe care am propus-o în introducere pentru simplitate și vom folosi-o pe cea a unui robot. Un robot, chiar este un „obiect”. Hahaha!
+Și acum, că tot am vorbit de obiecte anterior, vom depăși viziunea unei rodii pe care am propus-o în introducere pentru simplitate și vom folosi-o pe cea a unui robot. Un robot, chiar este un „obiect”. Hahaha!
 
-Acum că avem la îndemână un robot, poți să-ți imaginezi o metodă ca pe un semnal transmis unui membru pentru a-l mișca. Hai să ne uităm nițel cam cum arată scris un mic robot care are o codiță ca mijloc de locomoție căruia îi dăm comanda să se miște.
+Acum că avem la îndemână un robot, poți să-ți imaginezi o metodă ca pe un semnal transmis unui membru pentru a-l mișca. Hai să ne uităm nițel cum arată scris un mic robot care are o codiță ca mijloc de locomoție căruia îi dăm comanda să se miște.
 
 ![Ilustrare a unui obiect](IlustratieObiectCaRobotelCodat-Obiect-reprezentare.png "Un roboțel este un obiect")
 
@@ -138,7 +138,7 @@ Pentru acest lucru deschide un fișier nou pe care-l vom numi `index.html`. Fiș
 
 Ai observat cum am făcut legătura cu fișierul JavaScript?
 
-Am folosit tag-ul special `script` (în HTML, informația este codată între niște secvențe de text numite taguri precum `<html>pagina web</html>`), care specifică prin atributul `src="primul.js"`, că va trebui să încarce și să ruleze acest fișier sursă de JavaScript.
+Am folosit tag-ul special `script` (în HTML, informația este codată între niște secvențe de text numite taguri precum `<html>pagina web</html>`), care specifică prin atributul `src="primul.js"`, va trebui să încarce și să ruleze acest fișier sursă de JavaScript.
 
 **Totul e pregătit? Ne lansăm!**
 

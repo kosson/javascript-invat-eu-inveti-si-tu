@@ -146,7 +146,7 @@ Acest operator este echivalentul unui enunț `if...else`. Avantajul operatorului
 
 ## Atribuire împreună cu operațiuni urmate de atribuire.
 
-| Rang | Operator | Explicație | sens evaluare | poziționare operanzi |Ex.|
+| Rang | Operator | Explicație | sens evaluare | poziționare operanzi |Echivalent cu|
 |:--|:--|:--|:--|:--|:--|
 |3|egal|atribuie valoarea din dreapta identificatorului din stânga|«««| `__ = __` |`x = 10`|
 |3|plus-egal|adună la valoarea curentă din stânga, valoarea precizată în dreapta|«««| `__ += __` |`x = x + y`|
@@ -168,5 +168,5 @@ Acest operator este echivalentul unui enunț `if...else`. Avantajul operatorului
 |:--|:--|:--|:--|:--|
 |2|yield|produ|«««| `yield __` |
 |2|yield*|produ|«««| `yield* __` |
-|1|spread|dispersie|nu există un sens| `... __` |
+|1|spread|desfă|nu există un sens| `... __` |
 |0|comma|virgula|»»»| `__ , __` |

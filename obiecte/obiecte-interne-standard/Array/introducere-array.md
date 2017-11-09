@@ -130,6 +130,8 @@ var arr = [1 + 2, 4, (2 - 1) + 2]; console.log(arr); // [ 3, 4, 3 ]
 ['a', 'b', 'c'] === ['a', 'b', 'c']; // false
 ```
 
+![](ArrayMap.png)
+
 ## Verificări
 
 Am indicat mai sus faptul că verificarea unui array cu `typeof` are drept rezultat tipul obiect. Deci este clară natura adâncă a acestui tip de structură. Ce ce ar mai fi foarte util de verificat în lucrul cu array-uri:

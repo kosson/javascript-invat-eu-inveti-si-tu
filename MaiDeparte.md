@@ -1,0 +1,3 @@
+# Mai departe...
+
+În acest moment, toate subiectele tratate în acest material au fost orientate către conturarea unei imagini de ansamblu asupra limbajului de programare ECMAScript, adică ceea ce toți programatorii cunosc a fi JavaScript.

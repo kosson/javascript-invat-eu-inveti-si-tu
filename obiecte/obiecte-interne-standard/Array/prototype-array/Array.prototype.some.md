@@ -1,4 +1,4 @@
-# Array.prototype.some()
+# `Array.prototype.some()`
 
 Acestă metodă verifică dacă fie și un singur element din array trece de testul impus de o funcție.
 

@@ -1,6 +1,6 @@
 # Codarea caracterelor - Unicode
 
-Computerele nu înțeleg cuvintele noastre, nici măcar caracterele pe care le folosim noi pentru a compune cuvintele. Ceea ce înțeleg mașinile noastre de calcul este o secvență de 0 și 1, dar ca să existe un nivel unde să ne putem întâlni cu ele pentru a stabili comunicarea, au fost create sisteme de reprezentare, de codare alfanumerică a caracterelor pentru ca acestea să aibe un echivalent numeric inteligibil pentru computere. Ceea ce pare inteligibil pentru noi oamenii, adică textele pe care le redactăm sunt înșiruiri de litere, digiți pentru cifre sau anumite simboluri pentru a reprezenta valori numerice. Toate acestea au o „umbră” numerică în sistemul de calcul.
+Computerele nu înțeleg cuvintele noastre, nici măcar caracterele pe care le folosim noi pentru a compune cuvintele. Ceea ce înțeleg mașinile noastre de calcul este o secvență de 0 și 1, dar ca să existe un nivel unde să ne putem întâlni cu ele pentru a stabili comunicarea, au fost create sisteme de reprezentare, de codare alfanumerică a caracterelor pentru ca acestea să aibe un echivalent numeric inteligibil pentru computere. Ceea ce pare inteligibil pentru noi oamenii, adică textele pe care le redactăm, sunt înșiruiri de litere, digiți pentru cifre sau anumite simboluri pentru a reprezenta valori numerice. Toate acestea au o „umbră” numerică în sistemul de calcul.
 
 Pentru a înțelege modul de reprezentare numeric al caracterelor din setul Unicode, este nevoie să fie înțeleasă reprezentare hexazecimală a numerelor. Pentru aceasta va trebui să facem o mică incursiune în felul în care „codăm” noi oamenii **cantitățile**. Este foarte important pentru aduce explicații despre cum este realizată puntea dintre un simbol, adică un caracter inteligibil pentru noi, cu o valoare pe care computerul o înțelege.
 
@@ -16,14 +16,14 @@ Dacă ai încerca să-i explici unui extraterestru cum codăm noi cantitățile,
 
 Putem spune că am folosit un sistem de codare al cantităților având baza de referință zece. Adică măsura după care se numără totul este valoarea 10.
 
-Sistemul zecimal este ceea ce folosim noi oamenii pentru că dintre toate sistemele de numerație folosite de omenire de-a lungul timpului, acesta a fost ales și înțeles de foarte mulți membri ai speciei noastre. O incursiune în istoria sistemelor de numerație este o aventură fascinantă despre care nici nu vă imaginați că v-ar putea delecta și ului.
+**Sistemul zecimal** este ceea ce folosim noi oamenii pentru că dintre toate sistemele de numerație folosite de omenire de-a lungul timpului, acesta a fost ales și înțeles de foarte mulți membri ai speciei noastre. O incursiune în istoria sistemelor de numerație este o aventură fascinantă despre care nici nu vă imaginați că v-ar putea delecta și ului.
 
 O combinație între sistemul binar închipuit de matematicianul Gottfried Leibnitz, și logica circuitului închis notat cu 1 și a celui deschis, notat cu 0, aplicat de Claude E. Shannon în domeniul electronicii, a condus la adoptarea sistemului binar (mai spunem că este în baza 2) pentru calculele făcute de computerele zilelor noastre. Acesta este nivelul cel mai de jos al reprezentării numerelor și nu îl folosim, noi oamenii în mod curent. Să urmărim un mic exemplu.
 
 |Baza|2<sup>7</sup>|2<sup>6</sup>|2<sup>5</sup>|2<sup>4</sup>|2<sup>3</sup>|2<sup>2</sup>|2<sup>1</sup>|2<sup>0</sup>|
 |:-|:-|:-|:-|:-|:-|:-|:-|:-|
-|Valoarea|128|64|32|16|8|4|2|1|
-|Număr: **243**|128|64|32|16|8|4|2|1|
+|Valori|128|64|32|16|8|4|2|1|
+|Număr: **243**|||||||||
 |Descompus|**128**|**64**|**32**|**16**|0|0|**2**|**1**|
 |Forma binară|1|1|1|1|0|0|1|1|
 

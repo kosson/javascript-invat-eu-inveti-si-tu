@@ -1,4 +1,4 @@
-# String.prototype.localeCompare()
+# `String.prototype.localeCompare()`
 
 Este o metodă care returnează un număr. Numărul reprezintă rezultatul comparării unui șir cu un altul.
 

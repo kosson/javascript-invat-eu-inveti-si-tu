@@ -1,4 +1,4 @@
-# String.prototype.normalize()
+# `String.prototype.normalize()`
 
 Această metodă normalizează secvențe care sunt diferite, dar pe care Unicode le vede echivalente sau compatibile și returnează o valoare normalizată.
 
@@ -12,7 +12,6 @@ Există patru forme de normalizare pe care Unicodul le oferă:
 ```javascript
 var sir = 'șțăî';
 var sirCodePoint = '\u0219';
-
 // Canonically-composed form (NFC)
 sir.normalize('NFC'); // 'șțăî'
 sirCodePoint.normalize('NFC'); // ș

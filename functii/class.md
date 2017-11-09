@@ -130,7 +130,7 @@ var obi = creatorDeCeva(
 );
 ```
 
-O aplicație practică a claselor este crearea din zbor a Singleton-urilor. Acest lucru se poate realiza prin aplicarea directă a lui `new` pe expresia de clasă.
+O aplicație practică a claselor este crearea din zbor a Singleton-urilor (acestea sunt obiecte care sunt unice în economia unei aplicații - un singur obiect de acest fel poate exista la un moment dat). Acest lucru se poate realiza prin aplicarea directă a lui `new` pe expresia de clasă.
 
 ```javascript
 let avion = new class {
@@ -170,7 +170,7 @@ obi['elem'] = 12; // val: 12
 Clasele pot fi extinse. Este indicată extinderea unei clase folosindu-se cuvântul cheie `extends`.
 
 ```javascript
-'use strict'
+'use strict';
 class Ceva {
   constructor(primo, secundo){
     this.ceva = 'o proprietate';
@@ -190,7 +190,7 @@ class Altceva extends Ceva {
 
 ## Clase derivate
 
-Derivarea obiectelor înainte de facilitățile pe care le pune la dispoziție noul standard ES6 era un proces laborios de creare a unui obiect și apoi crearea unui altuia căruia i se seta prototipul îmbogățit al primului.
+Derivarea obiectelor înainte de facilitățile pe care le pune la dispoziție noul standard ES6 era un proces laborios de creare a unui obiect și apoi crearea unui altuia căruia îi era setat prototipul îmbogățit al primului.
 
 ```javascript
 // PRIMUL OBIECT
@@ -224,13 +224,12 @@ A trebuit să „rescriem” obiectul prototip al lui Copil setându-l artificia
 În cazul claselor, mare parte din aceste operațiuni complexe sunt rezolvate prin introducerea sintagmei `extends` în declarația funcției care dorești să fie o derivare a alteia. Prototipul este setat automat și poți accesa constructorul folosind metoda `super()`. Pentru a reține mai ușor, `super()` are rolul de a apela constructorul părintelui.
 În clasele derivate `super()` trebuie apelat înainte de a folosi `this` în constructor pentru că `super()` este cel care-l setează.
 
-
 ```javascript
 class Stramos {
   constructor(val) {
     this.statica = val;
   };
-  oriDoi () {
+  oriDoi(){
     return this.statica * 2;
   };
 };
@@ -246,8 +245,7 @@ console.log(inmultire instanceof Stramos); // true
 ```
 
 Clasele care moștenesc de la altele, se numesc clase derivate. Adu-ți mereu aminte de faptul că pentru clasele derivate, în cazul în care dorești să folosești constructorul, trebuie să-l folosești în combinație cu super căruia îi pasezi argumentele pe care le treia constructorul.
-
-Dacă nu dorești să folosești constructoru, adică să formulezi o clasă derivată fără a menționa constructorul, `super()` este apelat automat cu toate argumentele necesare la momentul instanțierii clasei.
+Dacă nu dorești să folosești constructorul, adică să formulezi o clasă derivată fără a menționa constructorul, `super()` este apelat automat cu toate argumentele necesare la momentul instanțierii clasei.
 
 ## Moștenirea din obiectele interne prin clase derivate
 
