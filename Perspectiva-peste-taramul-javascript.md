@@ -30,7 +30,7 @@ Obiectele în sine nu ar putea fi prea utile dacă sunt doar niște pomelnice de
 
 **Moment ZEN**: Toate obiectele în JavaScript moștenesc de la părinți.
 
-Forța acestui limbaj de programare rezidă din faptul că obiectele noastre pot moșteni, adică pot folosi ca și cum ar fi ale lor acțiuni și date din obiectul global sau cel părinte. Hai să devenim mai atenți la cum denumim proprietățile din interiorul unui obiect și vom numi acțiunile *metode*, iar datele trebuie să le percepem ca valori pe care le introducem, modificăm și le transmitem unui alt obiect dacă e cazul. Metodele (adică acțiunile) sunt funcțiile în limbajul nostru de programare.
+Forța acestui limbaj de programare rezidă din faptul că obiectele noastre pot moșteni, adică pot folosi ca și cum ar fi ale lor acțiuni și date din obiectul global sau cel părinte. Să dăm atenție denumimirilor elementelor din interiorul unui obiect. Vom numi acțiunile *metode*, iar datele trebuie să le percepem ca proprietăți valorice pe care le introducem, modificăm și le transmitem unui alt obiect dacă e cazul. Metodele (adică acțiunile) sunt funcțiile în limbajul nostru de programare.
 
 Acum că am lămurit în mare despre ce este vorba cu obiectele, avem nevoie să ne aplecăm asupra textului standardului pentru a înțelege ce se întâmplă la momentul în care începem să folosim codul JavaScript cu instrumentele care permit exploatare lui. În mare parte, în acest moment acestea sunt browserele noastre, dar ritmul de diversificare crește și apar și multe alte utilizări, în alte zone ale sferei programării JavaScript.
 
@@ -54,7 +54,7 @@ Recomand maximă atenție acestei secțiuni pentru că indiferent cât de comple
 
 Pentru a înțelege geneza unui Tărâm în JavaScript, vom apela la textul standardului, care la punctul `8.2.1 Create Realm` spune că orice motor JavaScript, va rula o operațiune internă a cărei rezultat este apariția unui `Realm`. Pașii, adică algoritmul urmat pentru crearea unui `Realm` aduc informații foarte importante, care o dată înțelese, mai departe va fi ușor de înțeles întreg limbajul. Hai să enumerăm și noi pașii algoritmului `CreateRealm()`, pentru că este ca și cum am asista la geneza universului JavaScript, aaadică, a `Tărâmului` JavaScript.
 
-Și acum, povestea. Cui nu-i place o poveste bună despre începuturi? Universul, Soarele, planetele și tot ce mișcă în lumea materială. Vom ambala într-o poveste părțile algoritmice, care aplicate conduc la apariția unui `Tărâm` - `Realm`. Povestea pornește pe când nimic nu exista. Familiar? :). În cazul nostru, este `momentul` când încă nu am deschis browserul sau un tab nou :)... Odată deschis, **Demiurgul** inițiază geneza unui `Tărâm` în care codul nostru sau cel accesat de la un server poate să-și înceapă evaluarea. Textul standardului folosește stilul de redactare **camelcase** - denumirea în limba engleză. Îl vom folosi și noi și pe parcursul întregului material de învățare. S-ar putea să mai vedeți și formulări cu liniuță jos (în limba engleză se numește **underscore**). Veți vedea acest mod de a scrie mai multe cuvinte care denumesc o entitate: `acestaEsteUnIdentificator`. În limba română acest stil de scriere s-ar traduce **scriere cu cocoașe** și asta se observă din compunere pentru că fiecare cuvânt din interiorul sintagmei este alipit de cuvântul anterior, dar începe cu majusculă. Privind acest mod de scriere, fiecare majusculă produce o `cocoașă` și de aici ideea de a numi astfel de scriere **camelcase** - stilulCămilă :D. Trebuie să menționez că acest mod de redactare este la mare concurență cu scrierea cu liniuță jos (un_identificator).
+Și acum, povestea. Cui nu-i place o poveste bună despre începuturi? Universul, Soarele, planetele și tot ce mișcă în lumea materială. Vom ambala într-o poveste părțile algoritmice, care aplicate conduc la apariția unui `Tărâm` - `Realm`. Povestea pornește de când nimic nu exista. Familiar? :). În cazul nostru, este `momentul` când încă nu am deschis browserul sau un tab nou :)... Odată deschis, **Demiurgul** inițiază geneza unui `Tărâm` în care codul nostru sau cel accesat de la un server poate să-și înceapă evaluarea. Textul standardului folosește stilul de redactare **camelcase** - denumirea în limba engleză. Îl vom folosi și noi și pe parcursul întregului material de învățare. S-ar putea să mai vedeți și formulări cu liniuță jos (în limba engleză se numește **underscore**). Veți vedea acest mod de a scrie mai multe cuvinte care denumesc o entitate: `acestaEsteUnIdentificator`. În limba română acest stil de scriere s-ar traduce **scriere cu cocoașe** și asta se observă din compunere pentru că fiecare cuvânt din interiorul sintagmei este alipit de cuvântul anterior, dar începe cu majusculă. Privind acest mod de scriere, fiecare majusculă produce o `cocoașă` și de aici ideea de a numi astfel de scriere **camelcase** - stilulCămilă :D. Trebuie să menționez că acest mod de redactare este la mare concurență cu scrierea cu liniuță jos (un_identificator).
 
 ![](Hieronymus_Bosch_-_The_Garden_of_Earthly_Delights_-_The_exterior_(shutters).jpg "Hieronymus Bosch - The Garden of Earthly Delights - The exterior. Resursă în Public Domain de la: https://en.wikipedia.org/wiki/The_Garden_of_Earthly_Delights#/media/File:Hieronymus_Bosch_-_The_Garden_of_Earthly_Delights_-_The_exterior_(shutters).jpg")
 
@@ -83,16 +83,16 @@ Pentru că acum `Tărâmul` nu are încă substanță, **Demiurgul** spune: `Cre
 
 ##### Nașterea obiectului prototipal
 
-2.3 Acum urmează un pas crucial. Ești pregătit? Algoritmul nostru va crea obiectului care va fi prototipul tuturor celorlalte care vor urma. Zice textul genezei: fie ca identificatorul `objProto` să aibă drept valoare un nou obiect ordinar. Pentru a construi obiectul ordinar de care avem nevoie, Demiurgul prunci: `ObjectCreate(null)`. Astfel, prin evaluarea tuturor pașilor procedurii `ObjectCreate(null)` va apărea un obiect ordinar, care va juca rolul de părinte al tuturor din perspectiva moștenirii (argumentul `null` indică acest fapt). Acest obiect va fi prototipul tuturor celorlalte, care vor fi generate prin evaluarea codului scris de tine. Concluzia simplă este că în acest moment s-a născut obiectul prototip zero, arhetipul tuturor celorlalte. Arhetipul este un obiect ordinar. Aici ar urma să inițiem o discuție care să lămurească ce-i cu moștenirea. Singurul aspect relevant pe moment este acela că atunci când lucrezi cu obiecte, inevitabil ai nevoie să „împrumuți” funcționalități ale altor obiecte evitând astfel necesitatea de a le crea de fiecare dată când ai nevoie de ele. Pe asta se și bazează modul în care funcționează întregul ecosistem JavaScript. Funcționalitățile necesare prelucrărilor de date sunt „împrumutate” de la obiectele intrinseci sau de la alte obiecte proprii. Deci, este necesar un mecanism care să permită moștenirea.
+2.3 Acum urmează un pas crucial. Ești pregătit? Algoritmul nostru va crea obiectului care va fi prototipul tuturor celorlalte care vor urma. Zice textul genezei: fie ca identificatorul `objProto` să aibă drept valoare un nou obiect ordinar. Pentru a construi obiectul ordinar de care avem nevoie, Demiurgul prunci: `ObjectCreate(null)`. Astfel, prin evaluarea tuturor pașilor procedurii `ObjectCreate(null)` va apărea un obiect ordinar, care va juca rolul de părinte al tuturor din perspectiva moștenirii (argumentul `null` indică acest fapt). Acest obiect va fi prototipul tuturor celorlalte, care vor fi generate prin evaluarea codului scris de tine. Concluzia simplă este că în acest moment s-a născut obiectul prototip zero, arhetipul tuturor celorlalte. Arhetipul este un obiect ordinar. Aici ar urma să inițiem o discuție care să lămurească ce-i cu moștenirea. Singurul aspect relevant pe moment este acela că atunci când lucrezi cu obiecte, inevitabil ai nevoie să „împrumuți” funcționalități ale altor obiecte evitând astfel necesitatea de a le crea de fiecare dată când ai nevoie de ele. Pe asta se bazează modul în care funcționează întregul ecosistem JavaScript. Funcționalitățile necesare prelucrărilor de date sunt „împrumutate” de la obiectele intrinseci sau de la alte obiecte proprii. Deci, este necesar un mecanism care să permită moștenirea.
 
 2.4 Obiectul prototip abia creat devine proprietate a obiectului `intrinsics`, fiind identificat prin `intrinsics.[[%ObjectPrototype%]]`. Acesta este un moment aniversar. Tocmai s-a născut primul obiect. Obiectul simplu cu rol de prototip.
 
 ##### Semnalizarea erorilor - I
 
-2.5 Am avansat îndeajuns de mult cu geneza pentru a constitui un prim mecanism de raportare a erorilor. Zis și făcut. Pentru a realiza acest instrument, avem nevoie de ceva care să reacționeze la o stare de eroare semnalând-o. Instrumentul care este cel mai potrivit este funcția. O funcție, cam în orice limbaj de programare este ca un subprgrămel apelabil. În acest moment, avem nevoie să creăm o funcție care să fie disponibilă oricând pentru semnalarea erorilor. Spuneam că în JavaScript totul este obiect. Funcțiile nu sunt o excepție și din acest motiv sunt numite funcții obiect.
+2.5 Am avansat îndeajuns de mult cu geneza pentru a constitui un prim mecanism de raportare a erorilor. Zis și făcut. Pentru a realiza acest instrument, avem nevoie de ceva care să reacționeze la o stare de eroare, semnalând-o. Instrumentul care este cel mai potrivit este funcția. O funcție, cam în orice limbaj de programare este ca un subprgrămel apelabil. În acest moment, avem nevoie să creăm o funcție care să fie disponibilă oricând pentru semnalarea erorilor. Spuneam că în JavaScript totul este obiect. Funcțiile nu sunt o excepție și din acest motiv sunt numite funcții obiect.
 Pentru a raporta erori avem nevoie de o funcție specializată care este definită o singură dată pentru un `Realm`. Toate instrucțiunile care vor testa o stare de excepție poartă identificatorul %ThrowTypeError%, dar pentru acest moment al genezei, toți pașii pe care îi va face %ThrowTypeError% vor fi atribuiți identificatorul `throwerSteps`.
 
-2.6 Demiurgul a privit și a înțeles că nu este îndeajuns să „captureze” algoritmul prin care se `aruncă` (în engleză: `throw`) erorile... de fapt în limbajul de programare se referă la excepții. De ce excepții? Pentru că semantic chiar asta înseamnă: a apărut o excepție de la regulile limbajului. Adu-ți mereu aminte că un limbaj de programare este ca și gramatica un set de reguli prin care urmărim, în cazul nostru, o bună comunicare cu mașina.
+2.6 Demiurgul a privit și a înțeles că nu este îndeajuns să „captureze” algoritmul prin care se `aruncă` (în engleză: `throw`) erorile... de fapt în limbajul de programare se referă la excepții. De ce excepții? Pentru că semantic chiar asta înseamnă: a apărut o excepție de la regulile limbajului. Adu-ți mereu aminte că un limbaj de programare este asemenea gramaticii, un set de reguli prin care urmărim, în cazul nostru, o bună comunicare cu mașina.
 
 Să revenim la momentul când Demiurgul va lua pașii algoritmici capturați prin identificatorul `throwerSteps` și îi va folosi dictând: `CreateBuiltinFunction(realmRec, throwerSteps, null)`. Avem trei argumente: înregistrarea de tărâm, care în cazul nostru este referențiată prin identificatorul `realmRec`, pașii algoritmici, care în cazul nostru au fost plasați sub identificatorul `throwerSteps` și obiectul prototip, care în cazul nostru nu este necesar, fiind setat la `null`. Ceea ce oferă înapoi pe baza acestor ingrediente, este un obiect-funcție intern (în engleză `built-in function object`).
 
@@ -102,7 +102,7 @@ Pentru că a fost creată această primă funcție-internă, va trebui să fie a
 
 2.7 Funcția de verificare identificată prin thrower va fi de acum înainte valoarea lui intrinsics.[[%ThrowTypeError%]].
 
-2.8 Mai sus, a fost pus un identificator pe un algoritm. Acum se va pune un identificator pe un algoritm care nu are niciun pas, care în esență care nu face nimic. Identificatorul acestuia este `noSteps`.
+2.8 Mai sus, a fost pus un identificator pe un algoritm. Acum se va pune un identificator pe un algoritm care nu are niciun pas, care în esență nu face nimic. Identificatorul acestuia este `noSteps`.
 
 ##### Se naște obiectul prototip al funcțiilor
 
@@ -137,7 +137,7 @@ Este returnată funcția-obiect internă ca rezultat al lui CreateBuiltinFunctio
 
 ##### Finalizarea construcției obiectului prototip
 
-2.12 Crearea prototipului funcțiilor-obiect nu s-a încheiat. Te vei întreba de ce. Răspunsul este că așa cum arată ea în acest moment, nu-și atinge scopul. Te vei întreba care-i scopul unei funcții? Simplu. Acela de a fi apelată, adică de a fi chemată pentru a-i fi evaluat codul pe care-l poartă și care-i dau unicitatea și, funcționalitatea. Deci, trebuie să facem funcția noastră apelabilă. Comanda abstractă `AddRestrictedFunctionProperties(funcProto, realmRec)` adaugă două proprietăți obiectului-funcție tocmai creat:
+2.12 Crearea prototipului funcțiilor-obiect nu s-a încheiat. Te vei întreba de ce. Răspunsul este că în forma sa actuală, nu-și atinge scopul. Te vei întreba care-i scopul unei funcții? Simplu. Acela de a fi apelată, adică de a fi chemată pentru a-i fi evaluat codul pe care-l poartă și care-i dau unicitatea și funcționalitatea. Deci, trebuie să facem funcția noastră apelabilă. Comanda abstractă `AddRestrictedFunctionProperties(funcProto, realmRec)` adaugă două proprietăți obiectului-funcție tocmai creat:
 - `caller` ce oferă mecanismul de a fi invocate și
 - `arguments`, care este o colecție a tuturor argumentelor pe care o funcție le poate primi.
 
@@ -173,14 +173,14 @@ Abia suntem la pasul 2 al Genezei noastre. Odată create obiectele intrinseci, v
 5. Proprietatea `realmRec.[[TemplateMap]]` este setată ca o listă goală.
 6. Este încheiată geneza `Tărâmului` prin returnarea obiectului `realmRec`.
 
-Acum, Geneza unui `Tărâm` s-a încheiat. Demiurgul se odihnește pentru că mai are să creeze întreaga natură a tărâmului nostru. În cazul nostru „natura” se numește `obiectul global` și este locul în care va sta codul nostru pentru a fi rulat și evaluat.
-Poți să-ți imaginezi `obiectul global` în acest moment precum „Grădina deliciilor pământene” a lui Hieronymus Bosch, dar fără bestiar și oameni.
+Acum, Geneza unui `Tărâm` s-a încheiat. Demiurgul se odihnește înainte de a crea întreaga natură a tărâmului nostru. În cazul nostru „natura” se numește `obiectul global` și este locul în care va sta codul nostru pentru a fi rulat și evaluat.
+Poți să-ți imaginezi `obiectul global` în acest moment, precum „Grădina deliciilor pământene” a lui Hieronymus Bosch, dar fără bestiar și oameni.
 
 Spre deosebire de orice alt mit al Genezei așa cum le cunoști, tot bestiarul care va popula `obiectul global` (natura) va fi creat de noi, semizeii :D.
 
 #### Obiectul global
 
-Acest obiect generic - obiectul global este pus la dispoziție din start fără niciun apel sau vreo declarație specifică. Doar deschizi browserul și el deja există. Ai să mă întrebi curios: când se formează obiectul global, dacă spui matale că el există deja. Aici lămurirea vine de la textul standardului, care spune cristal că obiectul global „este creat înainte de intrarea controlului în orice context de execuție”. Concluzionând, el preexistă momentului de debut al evaluării codului nostru. Știu te-am făcut foarte curioasă... hai să-ți mai zic așa o chestie să se uite mâțu'n leuștean: însuși obiectul global care oferă funcționalități codului scris de noi, are nevoie de un mâner, de o etichetă, de propriul său identificator prin care să putem face referință la el însuși și la proprietățile sale. În cazul browserelor, dacă deschizi consola (aici ai să lucrezi cel mai mult timp, iar în următorul capitol, chiar te pun să te distrezi nițel acolo), și scrii `window`, care este identificatorul obiectului global, și: BUM! Apare ca din senin o listă parcă nesfârșită de funcționalități gata să le folosești în codul tău. Curioasă rău!? Bine. Sunt peste 900 de elemente gata de a fi folosite.
+Acest obiect generic - obiectul global este pus la dispoziție din start fără niciun apel sau vreo declarație specifică. Doar deschizi browserul și el deja există. Ai să mă întrebi curios: când se formează obiectul global, dacă spui că el există deja? Aici lămurirea vine de la textul standardului, care spune cristal că obiectul global „este creat înainte de intrarea controlului în orice context de execuție”. Concluzionând, el preexistă momentului de debut al evaluării codului nostru. Știu te-am făcut foarte curioasă... hai să-ți mai zic așa o chestie să se uite mâțu'n leuștean: însuși obiectul global care oferă funcționalități codului scris de noi, are nevoie de un mâner, de o etichetă, de propriul său identificator prin care să putem face referință la el însuși și la proprietățile sale. În cazul browserelor, dacă deschizi consola (aici ai să lucrezi cel mai mult timp, iar în următorul capitol, chiar te pun să te distrezi nițel acolo), și scrii `window`, care este identificatorul obiectului global, și: BUM! Apare ca din senin o listă parcă nesfârșită de funcționalități gata să le folosești în codul tău. Curioasă rău!? Bine. Sunt peste 900 de elemente gata de a fi folosite.
 Nu te speria, nu trebuie să le memorezi, să le știi pe toate... totul va veni natural pe măsură ce nevoia te împinge de la spate.
 
 **Geneza Obiectului Global**
@@ -192,7 +192,7 @@ Urmărirea pașilor de formare a **Obiectului Global** aduce multiple lămuriri 
 **Demiurgul** tună: `SetRealmGlobalObject ( realmRec, globalObj, thisValue )` !!!.
 
 1. Verifică dacă identificatorul `globalObj` este setat la valoarea `undefined`. Obiectul global chiar este setat în acest moment la valoarea `undefined`. Dacă te uiți la ultimii pași ai creării Tărâmului, vei vedea că unul din pași, chiar asta face.  Dacă iar dacă da, urmează următoarea secvență:
-  a. atribuie identificatorului `intrinsics`, valoarea lui `realmRec.[[intrinsics]]`, care este chiar înregistrarea intrinsics generată la crearea Tărâmului. Asta ce înseamnă? Că toate obiectele interne JavaScript vor întra în etapa de creere a obiectului global.
+  a. atribuie identificatorului `intrinsics`, valoarea lui `realmRec.[[intrinsics]]`, care este chiar înregistrarea intrinsics generată la crearea Tărâmului. Asta ce înseamnă? Că toate obiectele interne JavaScript vor intra în etapa de creere a obiectului global.
   b. atribuie identificatorului `globalObj` rezultatul operațiunii `ObjectCreate` căreia îi trimitem drept prim parametru `intrinsics.[[%ObjectPrototype%]]`. Acesta, dacă-ți mai aduci aminte este un obiect ordinar, care stă la baza construcției tuturor obiectelor prototip. Am văzut deja cazul constituirii obiectului prototip al funcțiilor. Acesta va deveni valoarea lui `globalObj`. Ceea ce tocmai s-a întâmplat este că obiectul care joacă rolul de obiect prototip al obiectului global va moșteni toate proprietățile obiectului ordinar creat la formarea Tărâmului (pentru detalii vezi 9.1 Ordinary Object Internal Methods and Internal Slots, ECMAScript® 2018 Language Specification).
 2. Este verificat dacă valoarea lui `globalObj` chiar este un obiect.
 3. Aceste pas este foarte important prin precizările pe care le aduce. Pur și simplu, pe scurt valoarea lui `this` va fi setată la valoarea lui `globalObj`. Dar hai să o luăm cu începutul. Mai întâi de toate este verificată valoarea identificatorului `thisValue`, iar dacă aceasta este `undefined`, se va face legătura între `thisValue` și valoarea lui `globalObj`.
@@ -208,33 +208,33 @@ Trebuie precizat un detaliu foarte important. Fiecare dezvoltator de motor JavaS
 
 **Moment ZEN**: Toate obiectele și funcțiile unui program sunt membri ai obiectului global dacă nu vor fi izolate cu intenție.
 
-Crearea obiectului global s-a încheiat, dar mai este necesar să fie făcut un pas: stabilirea de identificatori pentru toate proprietățile obiectului global. Acest pas este făcut prin rularea comencii abstracte `SetDefaultGlobalBindings (realmRec)`. Cine sunt proprietățile obiectului global? Acestea sunt precizate de standard și vom preciza și noi câteva:
+Crearea obiectului global s-a încheiat, dar mai este necesar să fie făcut un pas: stabilirea de identificatori pentru toate proprietățile obiectului global. Acest pas este făcut prin rularea comenzii abstracte `SetDefaultGlobalBindings (realmRec)`. Cine sunt proprietățile obiectului global? Acestea sunt precizate de standard și vom preciza și noi câteva:
 
 - Proprietăți valorice:
-  - Infinity,
-  - NaN,
-  - undefined
+  - `Infinity`,
+  - `NaN`,
+  - `undefined`
 
 - Funcții:
-  - eval(cevaCod),
-  - isFinite(număr),
-  - isNan(număr),
-  - parseFloat(cifre),
-  - parseInt(cifre, rădăcină),
+  - `eval(cevaCod)`,
+  - `isFinite(număr)`,
+  - `isNan(număr)`,
+  - `parseFloat(cifre)`,
+  - `parseInt(cifre, rădăcină)`,
   - funcții de gestionare a URI-urilor,
-  - funcții cu rol de constructori (Array(), Boolean(), etc.).
+  - funcții cu rol de constructori (`Array()`, `Boolean()`, etc.).
 
 - Alte proprietăți:
-  - Atomics,
-  - JSON,
-  - Math,
-  - Reflect.
+  - `Atomics`,
+  - `JSON`,
+  - `Math`,
+  - `Reflect`.
 
 Pe suprafața sferei obiectului global sunt dispuse spre a rezolva diferite cerințe proprietățile obiectului global pe care JavaScript le pune la dispoziție din start și care sunt reprezentate ca structuri hexagonale în imaginea creată. Cele care sunt *obiectele interne* sunt asociate celui global. Acest lucru este corect pentru că *obiectele interne* nu aparțin obiectului global. Standardul spune foarte clar că „ECMAScript definește o colecție de obiecte interne care întregesc definiția de «entități ECMAScript»” (4.2 ECMAScript Overview).
 
 ### JavaScript este de un grup de obiecte care comunică între ele.
 
-Toate eforturile acestui capitol au fost îndreptate către a susține această afirmație foarte importantă pentru înțelegerea modului de lucru în JavaScrip. Am văzut cum s-au constituit obiectele interne, am văzut chiar cum s-a constituit însuși mecanismul de moștenire și cum a apărut obiectul `this`, precum și mediul lexical inițial. În fapt este întreaga țesătură nevăzută, dar care poate fi sondată pentru ca obiectele, funcțiile și valorile codului propriu să poată fi evaluate.
+Toate eforturile acestui capitol au fost îndreptate pentru a susține această afirmație foarte importantă pentru înțelegerea modului de lucru în JavaScrip. Am văzut cum s-au constituit obiectele interne, am văzut cum s-a constituit însuși mecanismul de moștenire și cum a apărut obiectul `this`, precum și mediul lexical inițial. De fapt este întreaga țesătură nevăzută, dar care poate fi sondată pentru ca obiectele, funcțiile și valorile codului propriu să poată fi evaluate.
 
 Obiectele interne oferă funcționalități și date funcțiilor și obiectelor introduse de noi prin codul sursă, la momentul evaluării codului sursă. La execuția codului unele dintre datele și funcționalitățile obiectului global pot fi modificate. Asta uneori creează neplăceri pentru că în cadrul aceluiași obiect global este posibil să rulezi codurile sursă a mai multor programatori și fiecare dintre acestea să se aștepte ca proprietățile native ale obiectului global să fie nemodificate.
 
@@ -242,9 +242,9 @@ Obiectele interne oferă funcționalități și date funcțiilor și obiectelor 
 
 JavaScript este un limbaj de programare bazat pe evenimente (***event driven***). De aici natura dinamică și originile sale privind dinamicitatea paginilor web. De exemplu, când dai click pe un buton, acest eveniment determină un anumit comportament. Programele JavaScript care rulează pot iniția anumite acțiuni, pot aduce date externe, pot împinge date către anumite servicii web, pot prelucra streamuri de date, etc.
 
-Pentru ca toate acestea să se poată întâmpla, trebuie să existe un mecanism de gestiune a timpilor în care se întâmplă toat acest val de acțiuni.
+Pentru ca toate acestea să se poată întâmpla, trebuie să existe un mecanism de gestiune a timpilor, în care se întâmplă tot acest val de acțiuni.
 
-Acest mecanism existent la momentul execuției care se numește *bucla evenimentelor* sau *event loop* în limba engleză. Bucla evenimentelor este cu atât mai necesară cu cât ne acomodăm cu ideea că JavaScript are un singur fir de execuție. Ce înseamnă acest lucru? Dacă îți închipui toată activitatea codului ca pe un fir care leagă momentul începerii execuției, de cel al finalizării, pe acest fir se înșiră toate evaluările tuturor expresiilor, toate funcțiile executate, generarea obiectelor și și dispariția lor. Într-un cuvânt tot ce face programul se înșiră precum mărgelele într-un șirag. Nu există poasibilitatea de a rula în paralel nimic. Totul trebuie să găsească momentul oportun să se execute în limitele acestui fir. Momentul rulării întregului cod se numește runtime.
+Acest mecanism existent la momentul execuției se numește *bucla evenimentelor* sau *event loop* în limba engleză. Bucla evenimentelor este cu atât mai necesară cu cât ne acomodăm cu ideea că JavaScript are un singur fir de execuție. Ce înseamnă acest lucru? Dacă îți închipui toată activitatea codului ca pe un fir care leagă momentul începerii execuției, de cel al finalizării, pe acest fir se înșiră toate evaluările tuturor expresiilor, toate funcțiile executate, generarea obiectelor și și dispariția lor. Într-un cuvânt tot ce face programul se înșiră precum mărgelele într-un șirag. Nu există poasibilitatea de a rula în paralel nimic. Totul trebuie să găsească momentul oportun să se execute în limitele acestui fir. Momentul rulării întregului cod se numește runtime.
 
 Existența acestui fir unic de execuție implică necesitatea unui mecanism suplimentar care să fie capabil să țină evidența cui se execută, cine așteaptă terminarea altei execuții de care depinde și cine își reia execuția după ce a primit ce avea necesar să-și termine propria execuție. Vorbim aici de o adevărată stivă pentru apeluri, care se numește în engleză callstack. Acesta este un fel de registru de intrări - ieșiri.
 

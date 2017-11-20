@@ -1,4 +1,4 @@
-# Array.prototype.join()
+# `Array.prototype.join()`
 
 Nu afectează array-ul.
 

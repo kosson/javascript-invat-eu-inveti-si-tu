@@ -1,4 +1,6 @@
-# `Array.prototype.concat()` - nu afectează array-ul
+# `Array.prototype.concat()`
+
+Nu modifică structura array-ului.
 
 Realizează o „copie simplă” (*shallow copy*) formată din elementele array-ului asupra căruia se invocă metoda și elementele care se doresc a fi adăugate.
 

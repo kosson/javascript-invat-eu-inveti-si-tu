@@ -195,7 +195,7 @@ Același comportament este aplicat și funcțiilor după cum vom vedea pentru c�
 
 Există o notabilă excepție de la acest comportament al *hoisting*-ului - al omniprezenței identificatorilor. Acesta este dictat de modificările aduse standardului începând cu ES6. Regula standardului nou spune că variabilele declarate cu `let` în locul lui `var`, vor fi pironite de „locul” în cod unde au fost declarate. Acest nou comportament este încurajat ca practică și este menit să elimine toate problemele de înțelegere a mecanismului de „ridicare în capul codului” (hoisting). De fapt, a fost gândit să dea o mână de ajutor și celor care vin din zona de C și C++ pentru a le da familiaritate în felul în care funcționează codul. După toată balonarea și toată lauda pentru `let`, se pare că este destinat să-l înlocuiască pe `var` încet, încet.
 
-Mie îmi place `let` pentru că îmi mai simplifică din procesul de gândire a codului, dar și pentru faptul că tradus are o anumită melodie. Fii atent la următorul enunț: `let a = 10;`. Chiar tradus în română sună foarte fain, ca în matematică: „fie ca `a` să fie legat de valoarea 10”. E aproape de spusele unui magician, nu? Fain!
+Mie îmi place `let` pentru că îmi simplifică din procesul de gândire a codului, dar și pentru faptul că tradus are o anumită melodie. Fii atent la următorul enunț: `let a = 10;`. Chiar tradus în română sună foarte fain, ca în matematică: „fie ca `a` să fie legat de valoarea 10”. E aproape de spusele unui magician, nu? Fain!
 
 Să revenim. Hai să ne uităm la primul pas făcut cu debugger-ul și vom observa tocmai această „ridicare în capul codului” cu atribuirea valorii `undefined`. Dacă pui mouse-ul pe identificatorul `a` interoghezi valoarea.
 
@@ -230,7 +230,7 @@ Deci, în acest moment spunem că avem codul sursă compilat, adică au fost rec
 
 Evidențiatorul se află pe linia 7.
 
-Ciudat! Un salt enorm la momentul apelării funcției. De fapt, nu-i chiar atât de ciudat, dacă ce amintim pasul de mai sus: au fost recoltați identificatorii, li s-a dat valoarea de „undefined” temporar. A trecut faza de recensământ și a venit momentul când chiar își primesc valorile care au fost specificate de programator. Variabila `a` va primi valoarea sa de 10 și aceasta este deja acolo putând fi verificată dacă deschizi `this.Window`. Identificatorul funcției `faCeva` a fost legat și el de valoarea funcției, care, ce să vezi este însuși conținutul dintre acolade - corpul funcției.
+Ciudat! Un salt enorm la momentul apelării funcției. De fapt, nu-i chiar atât de ciudat, dacă ce amintim pasul de mai sus: au fost recoltați identificatorii, li s-a dat valoarea de „undefined” temporar. A trecut faza de recensământ și a venit momentul când își primesc valorile care au fost specificate de programator. Variabila `a` va primi valoarea sa de 10 și aceasta este deja acolo putând fi verificată dacă deschizi `this.Window`. Identificatorul funcției `faCeva` a fost legat și el de valoarea funcției, care, ce să vezi este însuși conținutul dintre acolade - corpul funcției.
 
 Am uitat să spun că asignarea valorii se face cu operatorul egal (`=`), care are scopul de a atribui valoarea de `10` lui `a`, ceea ce pentru motorul JavaScript este echivalentul stabilirii unei legături dintre identificatorul `a` și valoarea de `10`.
 
@@ -242,7 +242,7 @@ Un fragment de cod de întindere mică sau medie care face un lucru precis este 
 
 **Reține o chestie crucială: numele argumentelor devin variabile interne de lucru a funcției pe lângă cele declarate în interiorul acoladelor**.
 
-Urmează după un alt spațiu o pereche de acolade în care va fi introdus fragmentul de cod sursă care constituie corpul funcției. Cel mai simplu este să-ți imaginezi o funcție precum un motor care între parantezele rotunde primește combustibil (benzină, aer, NOS) iar între acolade sunt toate părțile sale componente.
+Urmează după un alt spațiu o pereche de acolade în care va fi introdus fragmentul de cod sursă care constituie corpul funcției. Cel mai simplu este să-ți imaginezi o funcție precum un motor care între parantezele rotunde primește combustibil (benzină, aer, NOS), iar între acolade sunt toate părțile sale componente.
 
 Sper că ai remarcat că fiecare enunț chiar și în interiorul funcției se încheie cu semnul de punctuație punct și virgulă.
 

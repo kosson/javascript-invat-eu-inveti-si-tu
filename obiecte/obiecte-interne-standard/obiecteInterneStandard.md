@@ -44,7 +44,7 @@ O structură a acestor obiecte este oferită chiar de standardul ECMAScript care
 - obiectele care reprezintă și manipulează valorile numerice includ `Math`, `Number` și `Date`,
 - obiectele care prelucrează șiruri de caractere includ `String` și `RegExp`,
 - obiecte care sunt de fapt colecții indexate de valori care includ `Array`, colecții cheie-valoare precum `Map` și `Set`,
-- obiecte care suprtă date structurate așa cum este obiectul `JSON`, `ArrayBuffer` și `DataView`,
+- obiecte care suportă date structurate așa cum este obiectul `JSON`, `ArrayBuffer` și `DataView`,
 - obiecte care oferă abstracțiuni de control așa cum sunt funcțiile generator și obiectele `Promise`,
 - obiecte care oferă reflexie așa cum sunt `Proxy` și `Reflect`.
 

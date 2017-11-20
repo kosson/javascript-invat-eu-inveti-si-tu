@@ -1,4 +1,4 @@
-# Array.prototype.values()
+# `Array.prototype.values()`
 
 Returnează un nou obiect `Array Iterator`, care conține valorile pentru fiecare index din array.
 La momentul redactării materialului spuportul este limitat. Doar Chrome.

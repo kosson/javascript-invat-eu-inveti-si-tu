@@ -5,7 +5,7 @@ O perspectivă simpatică ar fi dacă-ți închipui o funcție ca pe o dronă di
 O funcție este declarată folosind cuvântul cheie `function` urmat de un șir de caractere, care este numele funcției urmate de paranteze rotunde. Între paranteze sunt declarate valori care constituie argumentele funcției (acestea formează așa-numitul antet), urmate apoi de acolade. Acoladele delimitează **blocul de cod** ce va fi executat la invocarea funcției.
 
 ```javascript
-function faCeva(arg1, arg2){
+function faCeva (arg1, arg2) {
   var oValoare = arg1 + arg2;
   return oValoare;
 }; faCeva(1, 3); //4

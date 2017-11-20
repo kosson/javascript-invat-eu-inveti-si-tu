@@ -63,14 +63,14 @@ var listaDivuri = document.querySelectorAll('div'); // returnează NodeList
 var arrayDivuri = Array.prototype.slice.call(listaDivuri); // convertește NodeList în Array
 ```
 
-Pentru browserele care suportă ECMAScript 2015 se poate folosi operatorul Spread
+Se poate folosi operatorul spread.
 
 ```javascript
 var listaDivuri = document.querySelectorAll('div'); // returnează NodeList
 var arrayDivuri = [...listaDivuri]; // convertește NodeList în Array
 ```
 
-Se mai poate face conversiune și folosind `Array.from()`
+Se mai poate face conversiune și folosind `Array.from()`.
 
 ```javascript
 var listaDivuri = document.querySelectorAll('div'); // returnează NodeList

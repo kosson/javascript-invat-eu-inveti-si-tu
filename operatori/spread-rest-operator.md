@@ -1,7 +1,7 @@
-# Operatorul `...`
+# Operatorul rest/spread (`...`)
 
 Acest operator produce confuzie pentru că se numește diferit în funcție de ce este pus să facă.
-Este un operator nou introdus de ECMAScript 2015. Acest operator foarte util funcționează pentru toate obiectele care au implementat protocolul de iterare, adică Symbol-ul intern `@@iterator` (dacă arunci o privire la obiectul intern Symbol găsești că este o proprietate statică). Deci, tot ce este iterabil, poate fi folosit cu acest operator. Șirurile de caractere și array-urile sunt iterabile, adică intern au implementat protocolul de iterare.
+Este un operator nou introdus de ECMAScript 2015, fiind inspirat de CoffeeScript (operatorul *splats*), care la rândul său a fost adoptat din Ruby. Acest operator foarte util funcționează pentru toate obiectele care au implementat protocolul de iterare, adică Symbol-ul intern `@@iterator` (dacă arunci o privire la obiectul intern Symbol găsești că este o proprietate statică). Deci, tot ce este iterabil, poate fi folosit cu acest operator. Șirurile de caractere și array-urile sunt iterabile, adică intern au implementat protocolul de iterare.
 
 Exemplul cel mai facil pentru o mică încălzire este să iei un șir de caractere și să-l transformi într-un array al caracterelor sale.
 
@@ -15,7 +15,7 @@ var arr2 = sir.split("");
 
 **Parametrii rest** se deosebesc de **operatorul spread**.
 
-## Parametrii rest
+## Parametrii `rest`
 
 Parametrii rest permit agregarea mai multor argumente independente, care nu au fost atribuite unor argumente deja existente într-un array.
 
@@ -27,7 +27,7 @@ function ex(primul, ...multiAltii){
 
 Adu-ți mereu aminte faptul că lista de parametri este într-un context care permite atribuirea valorilor (*assignment context*). Operatorul `...` folosit într-un context de asignare, strânge valorile într-un array.
 
-Din motive de semantică, unii programatori preferă să numească acest operator „gather”, care în limba română s-ar traduce „adună”. Semnantic vorbind implică faptul că strânge, adună toți parametrii care nu sunt asignați deja, dar care au venit prin invocarea funcției și creează din ei un array adevărat.
+Din motive de semantică, unii programatori preferă să numească acest operator „gather”, care în limba română s-ar traduce „adună”. Semanntic vorbind implică faptul că strânge, adună toți parametrii care nu sunt asignați deja, dar care au venit prin invocarea funcției și creează din ei un array adevărat.
 
 ```javascript
 function faCeva (...argumentele) {
@@ -53,8 +53,8 @@ function faAltceva () {
 };
 ```
 
-Atenție aici la o chestie care ar putea părea banală, dar care face mult sens pentru practica de zi cu zi să fie amintită.
-Dacă folosești un rest parameter, împreună cu alte argumente care vor fi pasate individual, asigură-te că cele individuale stau primele iar rest-ul este la final.
+Atenție aici la o chestie care ar putea părea banală, dar care are mult sens pentru practica de zi cu zi să fie amintită.
+Dacă folosești un rest parameter, împreună cu alte argumente care vor fi pasate individual, asigură-te că cele individuale stau primele, iar `rest`-ul este la final.
 
 ```javascript
 function faCeva (a, b = true, ...argumentele) {
@@ -62,7 +62,7 @@ function faCeva (a, b = true, ...argumentele) {
 };
 ```
 
-## Operatorul spread
+## Operatorul `spread`
 
 Operatorul spread permite „desfacerea” (*spread* în limba română înseamnă a desface) unui array în elementele sale componente luate independent pentru a fi pasate unei funcții. Acest lucru se întâmplă atunci când la invocarea unei funcții, nu la declarare, este pasat un array pe care-l dorim desfăcut și asimilat obiectului arguments.
 
@@ -90,7 +90,7 @@ birou; // Array [ "lampă", "pixuri", "creioane", "scaun", "tușieră" ]
 ```
 
 Permite transformarea unor obiecte array-like precum `arguments` și `NodeList` în array-uri adevărate.
-Anterior existenței acestui operator, aceste transformări se făceau cu prin aplicarea lui `slice` cu un `call`:
+Anterior existenței acestui operator, aceste transformări se făceau prin aplicarea lui `slice` cu un `call`:
 
 ```javascript
 Array.prototype.slice.call();

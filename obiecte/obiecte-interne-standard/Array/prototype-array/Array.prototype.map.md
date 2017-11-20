@@ -1,4 +1,4 @@
-# Array.prototype.map()
+# `Array.prototype.map()`
 
 Metoda creează un nou array care cuprinde valorile rezultate din executarea unei funcții callback pentru fiecare dintre elementele unui array căruia i se aplică.
 Pentru fiecare element din array, se execută funcția iar rezultatul devine un element al unui nou array. `map()` împreună cu `filter()` și `reduce()` sunt baza programării funcționale (stil de programare bazat pe folosirea funcțiilor).
@@ -179,5 +179,3 @@ var colectie = stanga.map( (elem, index) => ({nume: elem, varsta: dreapta[index]
 console.log(JSON.stringify(colectie)); // [{"nume":"Ileana","varsta":21},{"nume":"Anca","varsta":43}]
 // s-au folosit paranteze pentru că altfel `{}` ar fi indicat blocul de cod
 ```
-
-### Aplicarea unei funcții pentru fiecare element dintr-un array

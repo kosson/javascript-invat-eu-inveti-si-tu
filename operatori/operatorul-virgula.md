@@ -1,4 +1,4 @@
-# Operatorul virgulă
+# Operatorul virgulă - comma
 
 Evaluarea se face de la stânga la dreapta. Vorbim despre asociativitate stângă. Evaluează operandul dinainte și cel de după. Va returna valoarea celui din RHS (***right hand side***), a celui din dreapta.
 

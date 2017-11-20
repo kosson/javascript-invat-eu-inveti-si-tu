@@ -128,6 +128,7 @@ Contextul de execuție este un mecanism pentru a ține evidența evaluării codu
 Un context de execuție conține tot ce este necesar pentru a urmări evoluția execuției și a codului său asociat. Tot înseamnă orice este caracteristic motorului care implementează ECMAScript și necesar urmăririi execuției codului.
 
 O stare are următoarele componente:
+
 - starea de execuție a codului, care este starea necesară pentru a executa, suspenda sau relua evaluarea codului asociat cu acest context de execuție
 - Function. Dacă contextul de execuție evaluează codul dintr-o funcție obiect, atunci valoarea acestei componente este chiar acea funcție obiect. Dacă contextul evaluează codul dintr-un **Script** sau dintr-un **Module**, atunci, valoarea componentei **Function** este `null`. Valoarea pentru Function în `running execution context` este numită și `active function object`.
 - Realm. Este registrul de tărâmuri (***Realm Record***) prin care codul asociat accesează resurse ECMAScript. Tărâmul asociat contextului de execuție este numit `current Realm Record`.
@@ -156,14 +157,14 @@ Conține:
 - this
 - stiva variabilelor
 - Outer environment (pentru cazul funcțiilor. Global env nu are outer env)
-- codul js
+- codul javascript
 
 ATENȚIE, toate acestea sunt create de motorul JavaScript.
 
 ## Mantre
 
-- Pentru orice program există un **global execution context** (activat spre exemplu când declari `<script>`)
-- Invocarea unei funcții generează un nou CONTEXT de EXECUȚIE. **Acesta nu este un obiect, ATENȚIE!**
+- Pentru orice program există un **global execution context** (activat spre exemplu când declari `<script>`).
+- Invocarea unei funcții generează un nou CONTEXT de EXECUȚIE. **Acesta nu este un obiect, ATENȚIE!**.
 - Un context de execuție are un „lexical environment” asociat, adică un scope, care conține toți identificatorii definiți în acel context.
 - Contextul de execuție este parte a scope-ului.
 - Contextul de execuție este constituit din TOT ce se întâmplă atunci când funcția se execută, adică toate variabilele și funcțiile. O variabilă este considerată a fi „în scope - in-scope", dacă este accesibilă în contextul de execuție curent.
@@ -173,8 +174,8 @@ ATENȚIE, toate acestea sunt create de motorul JavaScript.
 - Ori de câte ori este invocată o funcție, se creează un nou context execuție (TOT ce se întâmplă atunci când funcția se execută).
 - Variabilele și funcțiile care fac parte din contextul de execuție, sunt memorate în EXECUTION CONTEXT OBJECT, care este un obiect al motorului JavaScript.
 - contextul e execuție este parte a scope (format la faza de compilare).
-- Context este valoarea lui `this`
-- toate variabilele și funcțiile definite într-o funcție sunt considerate parte a contextului de execuție
+- Context este valoarea lui `this`.
+- toate variabilele și funcțiile definite într-o funcție sunt considerate parte a contextului de execuție.
 
 ### Cazul obiectelor
 
@@ -194,11 +195,10 @@ var obiect = {
 obiect.getThis() === obiect; // true
 ```
 
-Care ar fi contextul pentru funcția obiect.getThis()? Să investigăm:
+Care ar fi contextul pentru funcția `obiect.getThis()`? Să investigăm:
 
 ```javascript
 var getThis = obiect.getThis; // getThis este doar o referință către aceeași funcție
-
 getThis === obiect.getThis; // true
 getThis(); // window
 ```

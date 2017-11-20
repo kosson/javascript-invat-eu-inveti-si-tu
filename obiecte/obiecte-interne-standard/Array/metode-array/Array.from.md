@@ -85,7 +85,7 @@ var arr = Array.from(linii, (value) => `<p>${value}</p>`);
 console.log(arr); // [ '<p>o linie</p>', '<p>alta</p>' ]
 ```
 
-Efectul transformativ nu se aplică doar la nivelul elementelor unui array, ci și pe obiecte. În exemplul următor vom îmbina mai multe tehnici și vom împleti mai multe tehnici de prelucrare pentru a obține un rezultat mai aproape de lucrul de zi cu zi. Să ne imaginăm că dorim să facem un colorizator de cod pentru scripturi de JavaScript. Ca să ținem din scurt, vom lua doar două elemente, care, de fapt sunt două cuvinte cheie din JavaScript și în funcție de ceea ce fac, le vom colora construind un fragment HTML pentru a fi afișat.
+Efectul transformator nu se aplică doar la nivelul elementelor unui array, ci și pe obiecte. În exemplul următor vom îmbina mai multe tehnici și vom împleti mai multe tehnici de prelucrare pentru a obține un rezultat mai aproape de lucrul de zi cu zi. Să ne imaginăm că dorim să facem un colorizator de cod pentru scripturi de JavaScript. Ca să ținem din scurt, vom lua doar două elemente, care, de fapt sunt două cuvinte cheie din JavaScript și în funcție de ceea ce fac, le vom colora construind un fragment HTML pentru a fi afișat.
 
 ```javascript
 var colectie = {
@@ -113,4 +113,4 @@ console.log(transformate.join(''));
 
 Ceea ce este observabil este că în momentul în care te-ai decis să folosești o metodă din obiectul parcurs, va trebui să pasezi ca al treilea argument și referința pentru obiect ca fiind `this`.
 
-Oricare obiect care are proprietatea `Symbol.iterator` poate fi convertit într-un array. 
+Oricare obiect care are proprietatea `Symbol.iterator` poate fi convertit într-un array.

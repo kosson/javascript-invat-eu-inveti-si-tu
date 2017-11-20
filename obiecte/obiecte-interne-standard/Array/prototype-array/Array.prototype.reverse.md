@@ -1,4 +1,4 @@
-# Array.prototype.reverse() - afectează definitiv
+# `Array.prototype.reverse()` - afectează definitiv
 
 Inversează ordinea dintr-un array și returnează o referință către array-ul modificat definitiv.
 

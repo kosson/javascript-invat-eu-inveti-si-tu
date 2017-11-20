@@ -250,7 +250,7 @@ faCeva(); // undefined (e undefined pentru că JS creează automat variabila tok
 Aici este un element în plus. Funcția `faCeva` a fost declarată în global, ceea ce înseamnă că `scope`-ul său lexical se află în `global scope`.
 În cazul în care în global scope ar fi fost declarată valoarea token, la invocarea funcției în sine, nu ca metodă, valoarea acesteia ar fi fost adusă.
 
-Odată cu apariția noii versiuni ECMAScript, metodele au fost definite în mod formal. Standardul definește o metodă o funcție care au o proprietate internă `[[HomeObject]]`. Această proprietate conține obiectul căruia îi aparține metoda.
+Odată cu apariția noii versiuni ECMAScript, metodele au fost definite în mod formal. Standardul definește o metodă ca fiind o funcție care au o proprietate internă `[[HomeObject]]`. Această proprietate conține obiectul căruia îi aparține metoda.
 
 ```javascript
 var obi = {
@@ -260,6 +260,8 @@ var obi = {
   }
 }; obi.faCeva();
 ```
+
+Observați faptul că declararea metodei faCeva, nu mai folosește cuvântul cheie function urmat de două puncte, cheia de identificare în obiect fiind îndeajuns urmată de capul și corpul funcției.
 
 ## Metode interne ale obiectelor
 

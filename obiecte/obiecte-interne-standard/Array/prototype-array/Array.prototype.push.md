@@ -1,4 +1,4 @@
-# Array.prototype.push() - afectează definitiv
+# `Array.prototype.push()` - afectează definitiv
 
 Adaugă la finalul array-ului unu sau mai multe elemente.
 ATENȚIE! Returnează noul `length` al array-ului.
