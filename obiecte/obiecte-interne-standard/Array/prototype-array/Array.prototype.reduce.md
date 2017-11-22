@@ -44,7 +44,7 @@ Pentru a înțelege mai repede reduce, este util să privim la următoarea secve
 ['unu', 'doi', 'trei'].reduce(function(acumulator, elementulDeLucru, index){
   return acumulator;
 },{});
-// este returnată chiar valoarea de pornire {}
+// este returnată chiar valoarea de pornire: {}
 ```
 
 ## Mantre
@@ -315,3 +315,4 @@ function cautaSirLung(colectie){
 };
 cautaSirLung(colectie); // Object { index: 2, valoare: "telejurnal" }
 ```
+Malpractice statement ”, “ Policy screening plagiat ”
