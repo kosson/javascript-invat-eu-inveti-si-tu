@@ -438,7 +438,7 @@ A. Folosind `forEach()`
 
 B. Folosind `every()` se trece peste goluri.
 C. Folosind `some()` se trece peste goluri.
-D. Folosind `map()` se face un sal peste goluri, dar le păstrează în array-ul rezultat.
+D. Folosind `map()` se face un salt peste goluri, dar le păstrează în array-ul rezultat.
 
 ```javascript
 ['prima',, 1, 2].map(function(currentValue, index){
@@ -462,11 +462,12 @@ F. `join()` convertește golurile, iar valorile `undefined` și `null` la string
 ```
 G. `sort()` păstrează golurile.
 H. Bucla `for...in` listează cheile array-ului (acestea sunt un superset al indicilor array-ului).
-I. Folosirea lui `apply()`.
 
 ```javascript
 for (var key in ['prima',,1,2]){ console.log(key); }; // 0 2 3
 ```
+
+I. Folosirea lui `apply()`.
 
 ## Completarea unui array existent
 
@@ -495,7 +496,7 @@ colectie = colectie.sort(function(){return Math.random() - 0.5});
 colectie; // Array [ 3, 1, "doi", 2, "unu", "trei" ]
 ```
 
-## Destructurarea array-urilor
+## Destructurarea
 
 Destructurarea este un procedeu care are drept scop extragerea sau manipularea valorilor asignându-le unor variabile.
 
@@ -513,7 +514,7 @@ var unu, doi, trei;
 console.log(unu, doi, trei); // 1 2 3
 ```
 
-### Inversarea indentificatorilor
+### Inversarea valorilor
 
 Destructurarea poate fi folosită cu succes pentru a inversa valorile între două variabile.
 
@@ -539,14 +540,6 @@ console.log(x, y, z); // unu doi trei
 var x, y, z;
 [x = 1, y = 2, z = 3] = [1000];
 console.log(x, y, z); // 1000 2 3
-```
-
-### Inversare de valori
-
-```javascript
-var x = 10, y = 1000;
-[x, y] = [y, x];
-console.log(x, y); // 1000 10
 ```
 
 ### Folosirea cu `Regex`

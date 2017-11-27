@@ -380,7 +380,7 @@ exemplu(2); // Array [ 4, "4 mere" ]
 
 ## Destructurarea argumentelor
 
-Mecanismul de destructurare funcționează foarte bine și în cazul argumentelor. Dacă dorim, valorile proprietăților unui obiect por deveni valorile care sunt pasate unei funcții.
+Mecanismul de destructurare funcționează foarte bine și în cazul argumentelor. Dacă dorim, valorile proprietăților unui obiect pot deveni valorile care sunt pasate unei funcții.
 
 ```javascript
 function test({a, b}) {

@@ -6,7 +6,9 @@ Cum am putea traduce în română termenul de *closure*. Am avea următorii term
 
 O funcție declarată în mediul lexical global, va avea acces la toate proprietățile acestui obiect. Dacă o funcție, va fi declarată într-un bloc de cod sau într-o altă funcție, aceasta va avea acces la tot ce constituie mediul lexical format local de acel bloc de cod sau de funcție.
 
-Acum apare minunea: dacă declari o funcție în interiorul altei funcții, pe care o returnezi, vei avea acces la un set de date ce nu pot fi prelucrate direct.
+Acum apare minunea: dacă declari o funcție în interiorul altei funcții, pe care o returnezi, vei avea acces la un set de date ce nu pot fi prelucrate direct. Acesta este și motivul pentru care avem acest instrument foarte puternic care este closure-ul.
+
+Ascunderea unui set de date ce nu poate fi manipulat direct, care poate fi accesat la un moment dat sau dacă este nevoie cu o anumită întârzire, ori pur și simplu să știi că există o structură de date creată în anumite condiții, dar cu care poți interacționa, este ceea ce oferă closure-urile.
 
 Bineînțeles vei avea o variabilă-identificator căreia îi va fi asignat rezultatul evaluării funcției gazdă. Rezultatul va fi funcția returnată (**nu uita niciodată că mai întâi de toate, o funcție este o valoare în sine**), care, MAGIE! are acces încă la mediul lexical al funcției gazdă, chiar dacă aceasta și-a încheiat execuția.
 
@@ -16,19 +18,17 @@ Răspunsul este unul simplu și plin de lumină: funcția noastră a returnat o 
 
 Și cum acestea aparțineau funcției gazde, acestea nu vor fi colectate la gunoi, ci vor fi disponibile tocmai pentru a-i servi celei returnate.
 
-Profesorul Christopher Strachey spunea încă din octombrie 1967:
+Profesorul Christopher Strachey, cercetător britanic în domeniul sistemelor de calcul, spunea încă din octombrie 1967:
 
 > Aplicarea unei funcții argumentelor sale implică evaluarea expresiei care o definește după ce au fost date valori variabilelor conectate la acestea din lista argumentelor.
 
-> Astfel, valoarea-R a funcției conține două părți: o regulă pentru evaluarea expresiei și un mediu care să-i ofere variabilele libere. O valoare-R de acest tip va fi numită un closure. Nu este nicio problemă în reprezentarea regulii dintr-un closure ca fiind adresa unui fragment de program este suficient (i.e. punctul de acces pentru o subrutină). Cel mai direct mod de a reprezenta mediul este printr-un pointer (n.n. un pointer, este un indicator către o valoare) către un Free Variable List (FVL), care are câte o intrare pentru fiecare variabilă liberă a funcției. Această listă este formată atunci când funcția este definită inițial (mai exact atunci când expresia-λ care este funcția, este evaluată, de regulă la momentul definirii funcției) și în acest moment, fie valoarea-R, fie valoarea-L a oricăreia dintre variabilele libere este copiată în FVL.
+> Astfel, valoarea-R a funcției conține două părți: o regulă pentru evaluarea expresiei și un mediu care să-i ofere variabilele libere. O valoare-R de acest tip va fi numită un closure. Nu este nicio problemă în reprezentarea regulii dintr-un closure ca fiind adresa unui fragment de program ceea ce este suficient (i.e. punctul de acces pentru o subrutină). Cel mai direct mod de a reprezenta mediul este printr-un pointer (n.n. un pointer, este un indicator către o valoare) către un Free Variable List (FVL), care are câte o intrare pentru fiecare variabilă liberă a funcției. Această listă este formată atunci când funcția este definită inițial (mai exact atunci când expresia-λ care este funcția, este evaluată, de regulă la momentul definirii funcției) și în acest moment, fie valoarea-R, fie valoarea-L a oricăreia dintre variabilele libere este copiată în FVL.
 
-Funcțiile sunt valori! Pot fi pasate ca valori altor funcții și pot fi returnate de funcții ca valori. Te vei întreba pe bună dreptate care este utilitatea acestui aspect? Răspunsul vine tot din necesitatea de a manipula valori, dar care aparțin unor medii lexicale diferite, a celor care există la locul declarării funcției care face closure.
-
-Este o funcție internă care „fotografiază și stochează” mediul lexical în care a fost declarată și pe care îl folosește pentru a utiliza tot ce este necesar să se execute. Mai exact, un closure este efectul evaluării unei funcții interne atunci când s-a pornit execuția funcției gazdă.
+Funcțiile sunt valori! Pot fi pasate ca valori altor funcții și pot fi returnate de funcții ca valori. Te vei întreba pe bună dreptate care este utilitatea acestui aspect? Răspunsul vine tot din necesitatea de a manipula valori, dar care aparțin unor medii lexicale diferite, a celor care există în locul declarării funcției care face closure.
 
 **Moment Zen**: Closure-urile cuplează funcțiile cu mediile peste care face closure-uri.
 
-Un closure menține accesul la toate variabilele care erau „în scope” la momentul definirii funcției. Putem spune că o funcție din interiorul altei funcții este o funcție ***privată***, care are acces la argumentele și variabilele gazdei.
+Un closure menține accesul la toate variabilele care erau „în scope” la momentul definirii funcției. Putem spune că o funcție din interiorul altei funcții este o funcție ***privată***, cu acces la mediul lexical al gazdei.
 
 **Moment Zen**: Toate closure-urile - funcțiile din aceeași gazdă - împărtășesc același mediu.
 
@@ -43,18 +43,18 @@ Cel mai simplu și mai elegant exemplu este oferit de sintaxa modernă **fat arr
 Ceea ce avem mai sus este o expresie a unei funcții care este executată pe argumentul din prima paranteză iar rezultatul evaluării va fi o funcție care se va executa pe al doilea parametru.
 
 Avem o formă contrasă: `(expresie)(argument)(argument)`. JavaScript va vedea a doua pereche de paranteze și va decide că perechile de paranteze `(expresie)(argument)` trebuie evaluate.
-Pornind la execuție, va evalua ce-i în prima paranteză căutând expresia de funcție care este declarată. O găsește iar aceasta arată astfel: `(x) => ...`.
+Pornind execuția codului, motorul va evalua ce-i în prima paranteză căutând expresia de funcție care este declarată. O găsește iar aceasta arată astfel: `(x) => ...`.
 
 Acum, pasul următor este să construiască „registrul inventar” al mediul lexical: `{x: 5, ...}`. S-a ajuns la faza returnării, dar, ce să vezi? Rezultatul returnării este o altă expresie, care, conform modului de operare al JavaScript, trebuie evaluată, dar care se aplică pe argumentul din a treia pereche de paranteze, adică `10`. Deci, va trebuie evaluată expresia `((y) => x)(10);`. În acest moment, „registrul inventar” al acestei funcții este `{y: 10, ...}` plus registrul inventar al funcției gazdă `{x: 5, ...}`. Variabila `x` pare să nu mai existe în noul mediu lexical stabilit. Și totuși ea există pentru că tocmai a fost returnată. Variabila `x` nu a fost pasată **explicit** celei de-a doua funcții și este una „detașată” dar acesibilă.
 Referința către variabila `x` este menținută pentru că funcția internă, cea care trebuie returnată în cazul nostru pur și simplu are nevoie de ea pentru a se executa, pentru a fi evaluată. De aceea există.
 
 **Moment Zen**: Funcțiile care nu păstrează referințe către variabile „detașate”, se numesc funcții **pure**. Funcțiile care păstrează astfel de referințe, se numesc **closures**.
 
-Și acum vine o concluzie importantă: funcția gazdă este pură pentru că nu are referințe către variabile „detașate”, dar poate găzdui funcții care fac closure. Reține faptul că în cazul `(x) => (y) => x`, evaluarea se face funcției gazdă, care nu menține referințe la nicio variabilă „detașată”.
+Și acum vine o concluzie importantă: funcția gazdă este pură pentru că nu are referințe către variabile „detașate”, dar poate găzdui funcții care fac closure. Reține faptul că în cazul `(x) => (y) => x`, evaluarea se face funcției gazdă.
 
-Funcția definită și care face closure poate fi asignată unei variabile, pasată ca argument unei funcții sau poate fi returnată.
+Funcția definită și care face closure poate fi asignată unei variabile, pasată ca argument unei alte funcții sau poate fi returnată.
 
-**Efect**: Scope-ul existent (totalitatea identificatorilor) la momentul definirii funcției va fi accesibil câtă vreme există o referință către funcție. De fapt, closure-urile sunt un efect al modului în care lucrează motorul JavaScript pentru a realiza scope-urile (**lexical environment**). Fiecare funcție imbricată creează propriul scope la momentul evaluării. În cazul mai multor niveluri de adâncime, creându-se un lanț al scope-urilor, trebuie avut grijă la conflictele ce pot apărea atunci când doi identificatori poartă același nume.
+**Efect**: Scope-ul existent (totalitatea identificatorilor) la momentul definirii funcției va fi accesibil câtă vreme există o referință către funcția returnată care face closure-ul. De fapt, closure-urile sunt un efect al modului în care lucrează motorul JavaScript pentru a realiza scope-urile (**lexical environment**). Fiecare funcție imbricată creează propriul scope la momentul evaluării. În cazul mai multor niveluri de adâncime, creându-se un lanț al scope-urilor, trebuie avut grijă la conflictele ce pot apărea atunci când doi identificatori poartă același nume.
 
 Closure este atunci când o FUNCȚIE ține minte scope-ul lexical chiar și atunci când este executată în afara acelui scope lexical (Kyle Simpson).
 
@@ -198,7 +198,7 @@ Cazul cel mai simplu este al unei funcții returnate care păstrează referințe
 ```javascript
 function gazda(ceva){
   return function(altceva){
-    console.log(this);
+    console.log(this); // va fi Window
     return ceva + ' și ' + altceva;
   };
 };
@@ -210,8 +210,10 @@ faAltceva(0);                     // "x și 0"
 
 ### Crerea de obiecte noi folosind constructori.
 
+Înainte de a porni lucrul cu un exemplu, ar fi necesar să amintim getterii și setterii.
+
 ```javascript
-function Lansare(data){
+function Lansare (data) {
   var altitudine = 0;
   const viteza = 11;
   this.getAltitudine = function(){
@@ -230,16 +232,12 @@ aDouaLansare.setAltitudine(45000);
 aDouaLansare.getAltitudine(); // 24.06.2016 la altitudinea de 45000
 ```
 
-Pas cu pas:
+**Pas cu pas**:
 
-`new` execută Lansare().
-Este instanțiat un nou obiect pe care-l vor folosi metodele drept context (`this`).
-Când firul de execuție întră în `Lansare()` este creat automat o referință către lexical environment-ul (scope-ul) găsit. În exemplul nostru sunt doi identificatori, variabila `altitudine` și constanta `viteza`.
-De fiecare dată când este invocată o funcție cu rol de constructor, se creează un nou **lexical environment** (scope), care conține identificatorii pentru varibilele locale ale funcției contructorului.
-În timpul execuției cu `new` a funcției constructor `Lansare()`, se creează și cele două funcții (`getAltitudine` și `setAltitudine`), care devin proprietățile noului obiect creat (`primaLansare`). Respectând tipicul, funcțiile acestea vor păstra o referință a scope-ului în care au fost create, adică **lexical environment**-ul lui `Lansare`.
-Efectul final este că putem accesa funcțiile `getAltitudine` și `setAltitudine`, bineînțeles cu rolurile lor de metode ale noului obiect, dar care fac closure pe variabilele existente în `Lansare()`; altitudine și viteza. Cu alte cuvinte, țin în viață lexical environment-ul (scope-ul) lui Lansare.
-
-Pentru `aDouaLansare` întreg procesul se repetă cu repetarea la valorile default a variabilelor din Lansare. Metodele celor două obiecte generate vor fi diferite.
+1. `new` execută Lansare().
+2. Este instanțiat un nou obiect pe care-l vor folosi metodele drept context (`this`).
+3. Când firul de execuție întră în `Lansare()` este creată automat o referință către lexical environment-ul (scope-ul) găsit. În exemplul nostru sunt doi identificatori, variabila `altitudine` și constanta `viteza`. De fiecare dată când este invocată o funcție cu rol de constructor, se creează un nou **lexical environment** (scope), care conține identificatorii pentru varibilele locale ale funcției contructorului. În timpul execuției cu `new` a funcției constructor `Lansare()`, se creează și cele două funcții (`getAltitudine` și `setAltitudine`), care devin proprietățile noului obiect creat (`primaLansare`). Respectând tipicul, funcțiile acestea vor păstra o referință a scope-ului în care au fost declarate, adică **lexical environment**-ul lui `Lansare`. Efectul final este că putem accesa funcțiile `getAltitudine` și `setAltitudine`, bineînțeles cu rolurile lor de metode ale noului obiect, dar care fac closure pe variabilele existente în `Lansare()`: `altitudine` și `viteza`. Cu alte cuvinte, țin în viață lexical environment-ul (scope-ul) lui Lansare.
+4. Pentru `aDouaLansare` întreg procesul se repetă, dar cu valorile originale ale variabilelor din funcția constructor `Lansare`. Metodele celor două obiecte generate vor fi diferite.
 
 Trebuie remarcat faptul că în exemplul nostru metodele sunt rulate în **global execution context** iar scope-ul asociat, firesc este cel global.
 La execuția metodelor, acestea vor crea câte un context de execuție propriu care va fi adăugat la call-stack și care va dispărea din stack la momentul finalizării execuției lor. Executarea metodelor mai are ca efect crearea scope-ului propriu (**lexical environment**) și crearea referinței către scope-ul în care au fost create (Lansare), care era activ la crearea funcției. Accesarea variabilei altitudine se face prin căutarea mai întâi în propriul scope creat, care nu conține un identificator pe nume altitudine și mai apoi căutarea în scope-ul care exista la momentul creării, adică scope-ul lui Lansare, unde îl găsește și rezolvă aducând valoarea.
@@ -337,12 +335,12 @@ var obiect = (function(){
 console.log(obiect.obj.test); // => test
 ```
 
-## Utilitate imediată
+## Concluzii
 
 Closure-ul poate simula variabile private.
-Este baza lui MODULE PATTERN prin care se realizează încapsularea și/sau ascunderea datelor.
+Este baza șablonului tip modul (MODULE PATTERN) prin care se realizează încapsularea și/sau ascunderea datelor.
 
-Cu ajutorul closure-urilor se poate scrie cod care să ruleze într-un mediu izolat, adică într-un closure. Acest closure, acest model de incapsulare a funcționalităților, durează câtă vreme rulează aplicația și oferă o zonă privată, care poate memora o stare. Un exemplu este o funcție anonimă executată imediat.
+Cu ajutorul closure-urilor se poate scrie cod care să ruleze într-un mediu izolat. Closure-ul propune un model de incapsulare a funcționalităților, durează câtă vreme rulează aplicația și oferă o zonă privată, care poate memora o stare. Un exemplu este o funcție anonimă executată imediat.
 
 ```javascript
 // exemplu de closure anonim
@@ -409,3 +407,5 @@ Funcțiile de nivel înalt și closure-urile formează coloana vertebrală a pro
 ## Referințe
 
 [JavaScript Allongé, the "Six" Edition](https://leanpub.com/javascriptallongesix/read#closures)
+
+[JavaScript Getters and Setters](https://javascriptplayground.com/blog/2013/12/es5-getters-setters/)

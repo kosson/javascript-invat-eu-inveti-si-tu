@@ -4,7 +4,7 @@ Este o metodă introdusă de versiunea standardului ECMAScript 2015 și creează
 
 ## Aplicarea pe `arguments`
 
-Această metodă este un ajutor foarte util în lucrul cu obiectul asemănător unui array care este `arguments`. Înainte de această actualizare a standardului singura metodă de a transforma argumentele într-un array era aplicarea funcției slice astfel: `[].slice.call(arguments)`.
+Această metodă este un ajutor foarte util în lucrul cu obiectul asemănător unui array care este `arguments`. Vă mai aduceți aminte de arguments, de la funcții, fiind strucura de date care seamănă cu un array și în care sunt stocate valorile introduse ca parametri. Înainte de actualizarea standardului, singura metodă de a transforma argumentele într-un array era aplicarea funcției slice astfel: `[].slice.call(arguments)`.
 
 ```javascript
 function transforma(){

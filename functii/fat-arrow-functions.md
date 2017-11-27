@@ -135,7 +135,7 @@ var w = (...z) => z;
 w(2, 2); // Array [ 2, 2 ]
 ```
 
-O funcție declarată clasic:
+O funcție declarată clasic într-o prelucrare cu map():
 
 ```javascript
 [1,2,3].map(function (numar) { return numar * 2; });  // Array [ 2, 4, 6 ]
@@ -159,7 +159,7 @@ Că tot veni vorba de argumente, în cazul fat arrows sunt permise și **default
 var ceva = (a = 10 * 2) => ++a; // 21
 ```
 
-Dacă este nevoie de mai multe expresii, nu numai să returnezi ceva simplu:
+Dacă este nevoie de mai multe expresii, nu numai să returnezi ceva simplu, folosești acoladele:
 
 ```javascript
 [1,2,3].map( numar => {
@@ -168,13 +168,13 @@ Dacă este nevoie de mai multe expresii, nu numai să returnezi ceva simplu:
 }); // Array [ 3, 8, 15 ]
 ```
 
-Pentru a returna un obiect trebuie întotdeauna să introduci obiectul dorit a fi returnat între paranteze rotunde. Acest lucru este necesar pentru că altfel perechea de acolade ar fi considerată un bloc de cod.
+Pentru a returna un obiect trebuie întotdeauna să-l introduci între paranteze rotunde. Acest lucru este necesar pentru că altfel perechea de acolade ar fi considerată un bloc de cod.
 
 ```javascript
 [1,2,3].map( (numar, index) => ( {numar: numar, indexul: index} ) );
 ```
 
-Arrow functions fac bindingul la contextul lexical intenționat de programator. Acest lucru este binevenit în lucrul cu DOM-ul.
+Arrow functions fac bindingul la contextul lexical imaginat de programator. Acest lucru este binevenit în lucrul cu DOM-ul.
 
 ```html
 <button type="button" name="button" id="test">Testeaza this</button>
@@ -203,7 +203,7 @@ var maLegLaObiectNull = x.bind(null, 1, 2);
 maLegLaObiectNull(); // 3
 ```
 
-Dar în același timp, adu-ți mereu aminte că legătura la `this` este cea la mediul lexical gazdă pentru funcția fat arrow pentru că un fat arrow nu formează this. Dacă vei avea un fat arrow într-un fat arrow, `this`-ul va fi cel al obiectului gazdă al primului fat arrow. Un truc ar fi ca primul fat arrow să aibe drept corp concis o expresie de funcție normală, care, după cum bine știm formează propriul mediu lexical. Și astfel, cumva vom putea spune că al doilea fat arrow se va lega la mediul lexical (`this`-ul) al gazdei care este tot un fat arrow. Face sens?!
+Dar în același timp, adu-ți mereu aminte că legătura la `this` este cea la mediul lexical al gazdei pentru că un fat arrow nu formează this. Dacă vei avea un fat arrow într-un fat arrow, `this`-ul va fi cel al obiectului gazdă al primului fat arrow. Un truc ar fi ca primul fat arrow să aibe drept corp concis o expresie de funcție normală, care, după cum bine știm formează propriul mediu lexical. Și astfel, cumva vom putea spune că al doilea fat arrow se va lega la mediul lexical (`this`-ul) al gazdei care este tot un fat arrow. Face sens?!
 
 ```javascript
 var ceva = () => function obPlus(primeste) {
@@ -270,7 +270,7 @@ unArray.map( numeFuncție = valoare =>
 );
 ```
 
-Se observă cum numirea funcției callback care folosește un fat arrow, a permis referențierea mai târziu. Expresia de atribuire a fat arrow-ului se va solda cu atribuirea valorii evaluate în urma execuției fat arrow-ului, ceea ce constiuie un artificiu foarte elegant. Numele dat funcției mai servește și mecanismului de recursivitate la care s-a apelat ulterior.
+Se observă cum numirea funcției callback care folosește un fat arrow, a permis referențierea mai târziu. Expresia de atribuire a fat arrow-ului se va solda cu atribuirea valorii evaluate în urma execuției fat arrow-ului, ceea ce constituie un artificiu foarte elegant. Numele dat funcției mai servește și mecanismului de recursivitate la care s-a apelat ulterior.
 
 ## Referințe
 

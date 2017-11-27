@@ -131,7 +131,7 @@ functie(function(){
 (function functie(){})();  // În cazul unui IIFE, tot un function expression avem.
 ```
 
-Expresiile de funcții pot fi pasate ca valori altor funcții ca parametri. Aceste funcții vor putea fi executate din interiorul funcției cărora au fost pasate.
+Expresiile de funcții pot fi pasate ca valori altor funcții ca parametri. Aceste funcții vor putea fi executate din interiorul funcției căreia ia fost pasate.
 
 ```javascript
 let oActivitate = function ceva(){console.log("O valoare din funcția pasată");};
@@ -174,44 +174,24 @@ var anonima = function(){};
 ### C. funcție exprimată cu identificator (**named function expression**).
 
 ```javascript
-var test = function ceva(){ return 'salut'; };
+var test = function ceva () { return 'salut'; };
 test(); // salut
 ceva(); // ReferenceError: ceva is not defined
 ```
 
-În cazul acestor funcții trebuie remarcat faptul că identificatorul variabilei este cel care trebuie folosit pentru a invoca funcția.
+În cazul acestor funcții trebuie remarcat faptul că identificatorul variabilei este cel care trebuie folosit pentru a invoca funcția. În acest caz este declarată o variabilă test în scope.
 
-### Expresie de funcție anonimă (anonymous function expression)
+- Permite recursivitatea pentru că putem face referință la funcție chiar din interiorul ei.
+- Global scope nu este poluat
+- Autodocumentează codul în cel mai simplu mod posibil.
+
+### D. Expresie de funcție anonimă (anonymous function expression)
 
 ```javascript
 var anonima = function(){};
 ```
 
 Atenție, astfel de funcții nu permit recursivitatea. Înțelegerea funcțiilor anonime se leagă profund de faptul că funcțiile sunt valori și că aceste valori pot fi folosite precum oricare altă valoare în JavaScript.
-
-### D. Funcție EXPRIMATĂ CU IDENTIFICATOR (named function expression):
-
-```javascript
-var test = function ceva(){};
-```
-
-În acest caz este declarată o variabilă test în scope.
-Numele „ceva” este declarat în scope-ul propriu al funcției. ATENȚIE, nu în scope-ul în care a fost declarat test.
-
-De exemplu:
-
-```javascript
-var test = function ceva(){
-  console.log(typeof(ceva));
-  return "merge";
-};
-test(); // function merge
-ceva(); // ReferenceError: ceva is not defined
-```
-
-- Permite recursivitatea pentru că putem face referință la funcție chiar din interiorul ei.
-- Global scope nu este poluat
-- Autodocumentează codul în cel mai simplu mod posibil.
 
 ## Funcții lambda sau funcțiile de nivel înalt
 
@@ -243,7 +223,7 @@ Sunt folosite pentru:
 
 ```javascript
 var oFunctie = new Function('arg1', 'arg2', 'return arg1 + arg2;');
-oFunnctie(2, 4); // 6
+oFunctie(2, 4); // 6
 ```
 
 ### Alonje:
