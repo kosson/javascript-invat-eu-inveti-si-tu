@@ -1,4 +1,14 @@
-# Relația între stivă, event loop și API-uri pentru a permite asincronicitatea
+# Relația între stivă, event loop și API-uri
+
+Am amintit deja faptul că un programator se poate asemui unui pilot în carlingă, fiind cel responsabil de felul în care va fi executat planul de zbor. La momentul în care povesteam despre modul în care poți face salturi în cod după anumite condiții, spuneam că este necesară buna înțelegere a funcțiilor. Continuăm acum pentru că aceste cunoștințe le-ai dobândit. Există un concept fundamental pentru a înțelege în adâncime programarea în JavaScript și nu numai. Acesta este cel de **control**. Adeseori veți auzi, viziona sau citi despre faptul că o anumită funcție este executată de control sau acesta este redat unei funcții deja aflată în execuție.
+Limbajul nostru de programare are un set foarte important de funcții gata pentru a fi utilizate și mulți programatori numesc aceste funcții părți ale API-ului JavaScript. Ce este API? Este acronimul de la Application Programming Interface, care este un set de funcționalități pentru o anumită aplicație. Aceste funcționalități sunt puse la dispoziția unui programator pentru a folosi o aplicație ca parte dintr-o suită sau pur și simplu de a manipula date fără să fie nevoit să apeleze la vreo interfață. Poți asemui funcționalitățile expuse ale unui API precum manetele și butoanele unui cockpit. Nu trebuie să știi toate părțile componente ale avionului pentru a-l face să zboare. În plus, precum în cazul avioanelor, există un manual detaliat pentru fiecare intrument. Așa și JavaScript oferă câteva funcții. Una dintre ele am folosit-o deja pentru a sonda rezultatele execuției fragmentelor de cod: `console.log()`. Aceasta face parte din API-urile Web puse la dispoziție de fiecare browser. Pentru a vedea câte instrumente există, nu ar fi rău să aruncați o privire la documentația existentă pe Mozilla Developer Network, https://developer.mozilla.org/en-US/docs/Web/API.
+
+O funcție poate fi utilizată în cazul în care este pasată ca valoare a unui argument unei alteia pentru a fi executată de îndată ce a fost evaluat codul din corpul funcției care a primit-o. Acest rol este al unui apel ulterior, efectuat imediat ce funcția principală și-a terminat evaluarea corpului. În limba programatorilor acest rol are denumirea de **callback**. Poți să-l vezi pe ecranul minții ca pe o funcție pe care o scrii cu scopul de a o executa imediat ce o alta și-a încheiat execuția. Și mai simplu este ca și cum ai spune computerului: dacă ai terminat de făcut asta, nu încheia totuși până nu faci și asta.
+Vom dedica timp separat pentru a înțelege callback-urile, dar acum ne vom focaliza atenția chiar pe conceptul de timp. Pornim de la realitatea simplă că JavaScript are un singur fir de execuție. Aceasta este legea primă de evaluare a codului. Există o separare totuși a API-urilor limbajului de firul de execuție principal. Ceea ce doresc să subliniez este faptul că API-urile au propriile fire de execuție. Bun, acest lucru conduce la o realitate interesantă. Dacă programul nostru are un fir de execuție, dar folosește funcțiile unor API-uri, cum este gestionată legătura dintre acestea? Cum se execută? Nu se calcă în picioare? Care este mecanismul?
+Pentru a gestiona comportamentul complex al apelurilor și a timpilor de execuție, motorul de JavaScript are la dispoziție două mecanisme interne: stiva de apeluri și bucla de evenimente. Colaborarea celor două mecanisme permite rularea codului complex al oricărei aplicații JavaScript. Din acest motiv este necesară înțelegerea în adâncime a felului în care funcționează.
+Rularea unui program în propriul său fir de execuție, dar care nu face apeluri la funcții care fac parte din API-uri, este un program care va rula secvență cu secvență în ordinea intenționată de programator. Acest aspect descrie execuția ca fiind una sincronă. Aceste cazuri sunt rare, de cele mai multe ori se aplică framentelor de cod explicate într-un manual de programare. Realitatea unor mari aplicații ține de gestionarea mai multor fire de execuție; a celui principal al programului și a celor ale API-urilor. Înțelegerea aspectelor complexe la rularea într-un astfel de model ține de caracterul asincron al execuției. Marea majoritate a software-ului JavaScript scris este asincron.
+
+Îți voi da numai un singur exemplu elocvent. Gândește-te la faptul că vei dori manipularea unei pagini web, care, de fapt, este un arbore dinamic de noduri a ceea ce numim Document Object Model. La un moment dat, un utulizator, dă un click pe un element al paginii. Asociat elementului acționat prin click trebuie să ai un mecanism de ascultare și o funcție din program care să pornească execuția la momentul click-ului. Utilizatorului îi este returnat un rezultat la finalizarea execuției funcției acționate (în jargonul programării web se numește **event handler**). Toate acestea, fără să te simți copleșit se subscriu caracterului asincron al programelor JavaScript. Acest aspect este, de fapt, cel pentru care JavaScript are valoarea sa actuală.
 
 ## Bucla evenimentelor
 
@@ -11,7 +21,7 @@ Comportamentul asincron este permis de relația dintre runtime-ul JavaScript, st
 
 Să presupunem că avem o colecție de elemente pe care dorim să le iterăm și pentru fiecare element să-i aplicăm o funcție.
 
-```javascript
+```javascriptflattened is
 var colectie = ['unu', 'doi', 'trei'];
 function procesor (element) {
   console.log(element);
@@ -77,7 +87,7 @@ setTimeout (() => {
 console.log('Eu între timp m-am executat');
 ```
 
-Pe scurt ceea ce se întâmplă este că log-ul intern din callback-ul lui setTimeout, a fost deferit spre execuție cinci secunde mai târziu unui API intern motorului JavaScript în vreme ce codul care urma a setTimeout-ului a fost evaluat fără a mai aștepta finalizarea celui anterior. Este un fel de „valoarea vine, când vine”.
+Pe scurt ceea ce se întâmplă este că log-ul intern din callback-ul lui `setTimeout`, a fost deferit spre execuție cinci secunde mai târziu unui API intern motorului JavaScript în vreme ce codul care urma a `setTimeout`-ului a fost evaluat fără a mai aștepta finalizarea celui anterior. Este un fel de „valoarea vine, când vine”.
 
 Din nefericire, modelul asincronicității construit pe callback-uri conduce la un anumit fenomen de aglomerare în care vei folosi un callback în interiorul unui alt callback și așa mai departe pentru atingerea unui anumit model funcțional.
 
@@ -93,7 +103,20 @@ Când arunci privirea la ceea ce se petrece atunci când este rulat codul, imagi
 
 Evaluarea codului care se face într-un „context de execuție” în plină desfășurare, care se poate suspenda în momentul în care o altă funcție este apelată în interiorul celei care este deja în execuție. În acest moment special de întrerupere un alt context de execuție devine „context de execuție în efect” și astfel va purcede la evaluarea propriului cod. Mai târziu, codul suspendat poate redeveni la rândul său „contextul de execuție în efect” pentru că ceea ce l-a întrerupt s-a încheiat și să reia evaluarea codului de la momentul de unde s-a oprit. Această succesiune a contextelor de execuție în efect este gestionată cu ajutorul unei structuri de date speciale.
 
-Structura de date care ține evidența funcțiilor care sunt în execuție, se numește **stiva apelurilor** - **call stack**.
+Structura de date care ține evidența funcțiilor care sunt în execuție, se numește **stiva apelurilor** - **call stack**. Să analizăm următoarea secvență de cod foarte simplă:
+
+```javascript
+function faOri (x, y) {
+  return x * y;
+};
+function oriDoi (nr) {
+  var rez = faOri(nr, nr);
+  console.log(rez);
+};
+oriDoi(10);
+```
+
+![](CallStack.png)
 
 Funcțiile în JavaScript permit argumente care la rândul lor sunt funcții. Numim funcțiile care permit acest lucru funcții de ordin înalt (**higher order functions**). Unele funcții care intră ca argumente sunt gândite să aibe au un comportament special în sensul că așteaptă până la încheierea execuției funcției și din acel moment își încep execuția. Acestea se numesc callback-uri. Callback-urile au un caracter sincron (`[].foreach(callback`)) și la nevoie asincron (`websocket.connect(callback)`) în ceea ce privește execuția.
 

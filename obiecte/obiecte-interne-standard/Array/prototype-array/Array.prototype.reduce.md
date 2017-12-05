@@ -222,7 +222,7 @@ var total = [0, 1, 2, 3].reduce(function(a, b) {
 var plat = [[0, 1], [2, 3], [4, 5]].reduce(function(previousValue, currentValue) {
   return previousValue.concat(currentValue);
 }, []);
-// flattened is [0, 1, 2, 3, 4, 5]
+// aplatizat este: [0, 1, 2, 3, 4, 5]
 ```
 
 ```javascript
@@ -282,11 +282,11 @@ Condiții:
 
 ```javascript
 var colectie = ['ceva', 'altceva', 'telejurnal', 'agave'];
-function cautaSirLung(colectie){
+function cautaSirLung (colectie) {
   for(var i = 0, celMaiLung = ''; i < colectie.length; ++i){
     if(colectie[i].length > celMaiLung.length){
       celMaiLung = colectie[i];
-    }else{
+    } else {
       return celMaiLung;
     };
   };
