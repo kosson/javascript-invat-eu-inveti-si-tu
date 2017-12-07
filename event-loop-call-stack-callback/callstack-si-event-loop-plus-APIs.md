@@ -21,7 +21,7 @@ Comportamentul asincron este permis de relația dintre runtime-ul JavaScript, st
 
 Să presupunem că avem o colecție de elemente pe care dorim să le iterăm și pentru fiecare element să-i aplicăm o funcție.
 
-```javascriptflattened is
+```javascript
 var colectie = ['unu', 'doi', 'trei'];
 function procesor (element) {
   console.log(element);
