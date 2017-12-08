@@ -486,6 +486,30 @@ centru.faCeva();    // Object { fix: 10, faCeva: faCeva(), faAltceva: faAltceva(
 centru.faAltceva(); // Window → about:newtab // 1000
 ```
 
+Există un exemplu pe care Marius Schulz îl oferă în cursul privind `this` pe egghead.io care oferă o perspectivă asupra mecanismelor interne limbajului, dar care sunt ascunse elegant într-o simplitate care are adâncimi interesant de explorat.
+
+```javascript
+var colectie = [2, 4, 7, 9];
+var felia1 = colectie.slice(0,2);
+console.log(felia1); // 2, 4
+```
+
+Avem o colecție de cifre din care vom extrage o **felie** (slice în engleză). Ceea ce este interesat este că, de fapt am putea rescrie apelul la slice ca un binding pe obiectul colectie. Apelului, îi vom trimite și cei doi parametri necesari lui `slice` pentru a funcționa.
+
+```javascript
+var felia2 = colectie.slice.call(colectie, 0, 2);
+console.log(felia2);
+```
+
+Și dacă dorim să încercăm o grupare a parametrilor, vom folosi `apply()`:
+
+```javascript
+var felia3 = colectie.slice.apply(colectie, [0, 2]);
+console.log(felia3);
+```
+
+Fii foarte atent căci de vei pasa drept prim parametru lui call sau lui apply o valoare `null` sau `undefined`, motorul va lua drept obiect `this` pe obiectul global. Scriere codului sub regula `"use strict";` nu va mai fi permis un asemenea comportament.
+
 ## 4. Binding puternic (hard binding)
 
 Este modul în care te asiguri întotdeauna că `this` este predictibil și nu alunecă în global scope.
