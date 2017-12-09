@@ -55,7 +55,7 @@ Acest exemplu ilustrează în adâncime ceea ce se petrece cu argumentele unei f
 
 Am văzut deja mai sus metoda prin care putem transforma `arguments` într-un array, dar există și alte metode pentru a gestiona argumentele pasate unei funcții, dar și parametrii.
 
-Noua sintaxă ES6 a introdus operatorul trei puncte, care în funcție de cazul de utilizare, poate **colecta** într-un array argumentele, care nu au fost asociate cu un parametru sau la invocarea unei funcții, poate **desface** un array și fiecare valoare a acelui array va fi un argument trimis funcției.
+Noua sintaxă ES6 a introdus operatorul (trei puncte), care în funcție de cazul de utilizare, poate **colecta** într-un array argumentele, care nu au fost asociate cu un parametru sau la invocarea unei funcții, poate **desface** un array și fiecare valoare a acelui array va fi un argument trimis funcției.
 
 ```javascript
 // adunarea într-un array a argumentelor neasociate parametrilor
