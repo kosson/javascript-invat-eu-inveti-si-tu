@@ -1,10 +1,44 @@
 # Argumentele și parametrii funcțiilor
 
-Pe scurt, argumentele sunt ceea ce pasezi funcțiilor. Numărul de argumente pasate unei funcții se numește în jargonul programatorilor „arity”.
+Pe scurt, argumentele sunt ceea ce pasezi funcțiilor. Numărul de parametri menționați la declararea funcției, se numește în jargonul programatorilor „arity”. Poți chiar să întrebi o funcție câți parametri are prin utilizarea proprietății `length`.
 
-Fiecare argument trebuie pasat funcției în ordinea corectă pentru că valoarea sa se va „lega” de numele desemnat de programator între parantezele rotunde.
+```javascript
+function facCeva (x, y) {
+  return x + y;
+};
+facCeva.length; // 2
+```
+De fapt, poți să spui că arity, adică totalitatea parametrilor menționați între parantezele rotunde, anunță programatorii ce este de așteptat ca și număr de valori necesare funcției pentru a evalua codul. Dimensiunea acestui **arity** poate să fie raportată diferit în funcție de valorile pasate.
 
-Mai jos este dat un exemplu care ilustrează afirmația: ***o funcție este o rutină aplicată pe argumentele sale***. Exemplul se bazează pe funcționalitatea metodei `apply()` oferită prin moștenire din prototip (`Function.prototype.apply()`).
+```javascript
+function fac1 (x, y) {}; fac1.length; // 2
+function fac2 (x, y = 10) {}; fac2.length; // 1
+function fac3 ({x, y}) {}; fac3.length; // 1
+function fac4 (x, ...y) {}; fac4.length; // 1
+```
+
+Fiecare argument trebuie pasat funcției în ordinea corectă pentru că valoarea sa se va „lega” de numele desemnat de programator între parantezele rotunde. Aceste nume, de fapt identificatori, se numesc parametri. Ca să clarificăm, valorile pasate unei funcții se numesc argumente, iar identificatorii menționați între paranteze (în jargon i se spune headerul funcției), se numesc parametri. Acum că lucrurile sunt limpezite, trebuie să adăugăm faptul că o funcție poate primi mult mai mulțe argumente față de ceea ce este precizat ca și parametri. Valorile acestea nu se pierd în neant. Ele vor putea fi regăsite în obiectul special `arguments`.
+
+Toate aceste detalii sunt utile pentru că la un moment dat este necesară executarea unei funcții în funcție de numărul parametrilor săi. Poate să existe și cazul în care dorești un anumit parametru să stea întotdeauna pe ultima poziție pentru că, de fapt, acesta este la rândul său o funcție cu rol de callback.
+
+```javascript
+var x = 10, y = function init () { return `Salut, ${x}!` };
+function fac1 (x) { return ++x; };
+function fac2 (x, y) { return y() };
+if (fac1.length == 1) {
+  fac1(x);
+};
+// să presupunem că vrem y pe ultima poziție
+if (fac2.length == 2) {
+  fac2(undefined, y);
+}; // "Salut, 10!"
+```
+
+Amintește-ți mereu faptul că proprietatea `length` este una care doar poate fi citită. Este **read-only**. Și acum că am aflat cum că numărăm parametrii, sunt absolut convins că mă vei întreba cum să numărăm și argumentele. Nimic mai simplu: obiectul **arguments** are la rândul său o proprietate `length` care poate fi folosită pentru a afla câte argumente au fost paste funcției, de fapt - `arguments.length`.
+
+## O imagine în adâncime
+
+Mai jos este dat un exemplu care ilustrează afirmația: ***o funcție este o rutină aplicată pe argumentele sale***. Exemplul se bazează pe funcționalitatea metodei `apply()` oferită prin moștenire din obiectul prototip al lui Function. (`Function.prototype.apply()`).
 
 ```javascript
 function oFunctie(x, y, z) {
@@ -19,8 +53,19 @@ Acest exemplu ilustrează în adâncime ceea ce se petrece cu argumentele unei f
 
 ## Operatorul spread
 
-Se mai pot obține valorile direct, folosindu-se noua sintaxă ES6 folosind operatorul trei puncte: `...argumente`.
-Pentru că am menționat ***sintaxa spread*** introdusă de ES6, hai să vedem același exemplu, dar folosind această nouă sintaxă:
+Am văzut deja mai sus metoda prin care putem transforma `arguments` într-un array, dar există și alte metode pentru a gestiona argumentele pasate unei funcții, dar și parametrii.
+
+Noua sintaxă ES6 a introdus operatorul trei puncte, care în funcție de cazul de utilizare, poate **colecta** într-un array argumentele, care nu au fost asociate cu un parametru sau la invocarea unei funcții, poate **desface** un array și fiecare valoare a acelui array va fi un argument trimis funcției.
+
+```javascript
+// adunarea într-un array a argumentelor neasociate parametrilor
+function facCeva (x, y, ...z) {};
+// spargerea unui array în argumente necesare unei functii
+var colectie = [2, 4, 10];
+prelucrezNr(...colectie);
+```
+
+Știind acest lucruri despre ***sintaxa spread*** introdusă de ES6, hai să vedem același exemplu, dar folosind aceast nou operator:
 
 ```javascript
 function oFunctie (x, y, z) { console.log([].slice.call(arguments)); };
@@ -28,10 +73,10 @@ var argumente = [4, 5, 6];
 oFunctie(...argumente); // Array [ 4, 5, 6 ]
 ```
 
-Ceea se declară în interiorul funcției se numește **parametru**. Parametrii preiau valorile pasate prin intermediul argumentelor.
+Parametrii preiau valorile pasate prin intermediul argumentelor.
 
 ```javascript
-function demo(param1, param2){ return param1 + param2 };
+function demo (param1, param2) { return param1 + param2 };
 // parametrii sunt declarațiile din funcție
 demo(1, 2); // argumentele este ceea ce pasezi funcției la invocare.
 ```
