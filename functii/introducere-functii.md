@@ -31,6 +31,22 @@ Ca și obișnuință, ar fi cel mai util să gândești că funcția se aplică 
 
 Funcțiile sunt cunoscute ca fiind de ordin înalt (higher order), ceea ce simplu înseamnă că sunt la rândul lor valori, că pot fi pasate altor funcții, că pot fi returnate ca rezultat al evaluării unei alte funcții, cam tot ce poți face cu oricare altă valoare. Acest aspect face din JavaScript un limbaj foarte potrivit pentru a lucra cu funcțiile într-o paradigmă numită în limba engleză „functional programming”.
 
+## Funcțiile returnează rezultate
+
+Funcțiile în JavaScript trebuie să returneze un rezultat fără excepție. Chiar de la momentul declarării, funcțiile returnează ceva, iar acel ceva este valoarea `undefined`.
+
+```javascript
+function facCeva () {};
+function facAltceva () {
+  return;
+};
+function facLucruri () {
+  return undefined;
+};
+```
+
+Funcțiile prelucrează date care intră ca argumente și returnează un rezultat. De cele mai multe ori, acel rezultat este o colecție de date care au fost obținute în urma evaluării codului funcției. Este logic să dorim returnarea rezultatelor ca un array sau ca un obiect. Pe lângă faptul că putem returna array-uri și obiecte, mai pot fi returnate chiar alte funcțiie. Nu voi înceta să repet faptul că o funcție mai întâi de toate este ea însăși o valoare. Iar funcțiile în JavaScript au capabilitatea de a primi drept valori la argumente funcții și pot returna alte funcții. Acest aspect interesant al funcțiilor definește capacitatea acestora de a fi de ordin înalt. Returnarea datelor dintr-o funcție înseamnă și încheierea execuției acesteia.
+
 ## Anatomie
 
 Pentru că este absolut necesară înțelegerea mecanismelor interne pe care le pune la dispoziție o funcție în scopul prelucrării datelor și apoi pentru a le returna, vom examina o funcție pentru a avea o privire generală.
