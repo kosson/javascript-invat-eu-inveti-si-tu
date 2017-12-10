@@ -1,6 +1,6 @@
 # Invocarea funcțiilor
 
-La momentul începerii execuției codului, toate funcțiile deja există (vezi etapa de compilare) și sunt asociate identificatorului. Acest lucru este valabil doar pentru declarațiile de funcții (**function declaration**), nu pentru **expresiile de funcții**. **Function expression** și **arrow functions** nu fac parte din această secvență, acestea fiind create la momentul în care **execuția** ajunge la declararea lor.
+La momentul începerii execuției codului, toate funcțiile deja există (vezi etapa de compilare) și sunt asociate identificatorilor. Acest lucru este valabil doar pentru declarațiile de funcții (**function declaration**), nu pentru **expresiile de funcții**. **Function expression** și **arrow functions** nu fac parte din această secvență, acestea fiind create la momentul în care **execuția** ajunge la declararea lor.
 Este apelarea funcțiilor pentru a fi executate.
 Invocarea funcțiilor se face prin operatorul `()`.
 La invocare se creează un nou context de execuție, care ajunge în call-stack.
@@ -17,8 +17,8 @@ La invocare se creează un nou context de execuție, care ajunge în call-stack.
   - ca funcție invocată în mod direct;
   - ca metodă, fapt care leagă invocarea de un obiect;
   - ca și constructor prin care un nou obiect este generat;
-  - prin folosirea lui call() și apply().
-- La evaluarea funcției toate declarațiile dintre {} vor genera un `Environment Record`. Invocarea unei funcții creează un scope nou.
+  - prin folosirea lui `call()` și `apply()`.
+- La evaluarea funcției toate declarațiile dintre `{}` vor genera un `Environment Record`. Invocarea unei funcții creează un scope nou.
 - Contextul de execuție al unei funcții se modifică după „locul” în care a fost invocată.
 - Ori de câte ori o funcție este invocată se creează un nou context de execuție care este introdus în call-stack.
 - O funcție are acces și poate performa operațiuni asupra obiectului în interiorul căruia a fost invocată.

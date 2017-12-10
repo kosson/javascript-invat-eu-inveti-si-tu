@@ -243,7 +243,7 @@ Funcțiile obiecte au sloturi interne și merită menționat `Realm`, care este 
 - Funcțiile generează un mediu lexical propriu (scope).
 - Funcțiile care joacă rol de metode într-un obiect, de fapt nu aparțin obiectului, ci sunt doar invocate în contextul obiectului. Ceea ce „aparține” obiectului este, de fapt, referința către funcție. ATENȚIE! investighează mereu call-site-ul pentru a afla ce este în `this`.
 - Atunci când funcția este un callback, ține minte că tot o referință către funcție este (implicit assignment), nu este valoarea sa.
-- Dacă definești o funcție în interiorul altei funcții, atunci funcția internă trebuie să fie recreată de fiecare dată când funcția externă este executată (acest lucru se întâmplă pentru că funcțiile, de fapt, sunt obiecte). Acest comportament trebuie evitat. Definește funcția în afară și referențiaz-o sau execut-o în context local prin call / apply / bind.
+- Dacă definești o funcție în interiorul altei funcții, atunci funcția internă trebuie să fie recreată de fiecare dată când funcția externă este executată (acest lucru se întâmplă pentru că funcțiile, de fapt, sunt obiecte). Acest comportament trebuie evitat. Definește funcția în afară și referențiaz-o sau execut-o în context local prin `call()` / `apply()` / `bind()`.
 - Orice funcție publică poate fi invocată cu `call()`, `apply()` sau `bind()`.
 
 ## Argumente și parametri
@@ -302,20 +302,20 @@ La invocarea unei funcții sunt disponibile `this`, care formează contextul de 
 ES6 introduce un nou parametru: `rest` care permite reprezentarea unui număr nedefinit de argumente ca un array.
 
 ```javascript
-function operatiune(...argumente){
+function operatiune (...argumente) {
   console.log(argumente.length);
 };
 operatiune(23,145,83); // 3
 ```
 
 ```javascript
-function operatiune(a, b, ...valori){
+function operatiune (a, b, ...valori) {
   console.log(a, b, valori.length);
 };
 operatiune(2, 4, 20, 32, 110); // 2 4 3
 ```
 
-Diferențe dintre `arguments` și și arrayul produs prin efectul operatorului ... (`rest`).
+Diferențe dintre `arguments` și arrayul produs prin efectul operatorului `...` (`rest`).
 
 - parametrii rest sunt un array al celor cărora nu li s-a dat un nume.
 - array-ul rest poate fi folosit cu metode precum `forEach`, `sort`, `map` ori `sort`.
@@ -323,17 +323,17 @@ Diferențe dintre `arguments` și și arrayul produs prin efectul operatorului .
 
 ```javascript
 // emularea lui rest - exemplu oferit de Mozilla Developer Network
-function f(a, b){
+function f (a, b) {
   var args = Array.prototype.slice.call(arguments, f.length);
   // ...codul funcției mai departe
 }
 // este echivalent cu
-function f(a, b, ...args){
+function f (a, b, ...args) {
   // cod funcție.
 };
 ```
 
-Valorile primelor două argumente pasate vor fi potrivite cu cei doi parametri menționați: a și b
+Valorile primelor două argumente pasate vor fi potrivite cu cei doi parametri menționați: `a` și `b`.
 
 ## Funcțiile sunt obiecte speciale care pot „construi” alte obiecte
 
@@ -350,7 +350,7 @@ obi.valoare; // "text"
 
 ### Accesarea și setarea valorilor unui obiect generat de o funcție cu rol de contructor - getteri și setteri
 
-Uneori este necesar să protejezi anumite valori ale unui obiect pe care-l generezi folosind o funcție constructor. Partea foarte frumoasă este că însăși funcția constructor permite introducerea unor mecanisme de acces și setare a valorilor din obiectul rezultat. Acest lucru se realizează prin funcții specializate care poartă denumirea de accesori și sunt cunoscuți ca fiind getteri (de la englezescul `get`, care înseamnă a obține o valoare) și setteri (de la englezescul `set`, care înseamnă a introduce o valoare).
+Uneori este necesar să protejezi anumite valori ale unui obiect pe care-l generezi folosind o funcție constructor. Partea foarte frumoasă este că însăși funcția constructor permite introducerea unor mecanisme de acces și setare a valorilor din obiectul rezultat. Acest lucru se realizează prin funcții specializate care poartă denumirea de **accesori** și sunt cunoscuți ca fiind ***getteri*** (de la englezescul `get`, care înseamnă a obține o valoare) și ***setteri*** (de la englezescul `set`, care înseamnă a introduce o valoare).
 
 Până la ECMAScript 5, getterii și setterii erau nimic mai mult decât două funcții special croite pentru a introduce și scoate valori.
 
