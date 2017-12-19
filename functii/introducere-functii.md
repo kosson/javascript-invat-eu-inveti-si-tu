@@ -19,21 +19,37 @@ Veți întâlni funcțiile la orice pas și în combinații diferite ca parte a 
 
 Funcțiile sunt unitățile de execuție ale codului JavaScript. O funcție poate fi percepută ca un subprogram, ca o subrutină. Veți mai întâlni în alte lucrări și denumirea de „proceduri”. Cel mai sănătos mod de a privi activitatea și efectele unei funcții este gândind întotdeauna că o funcție este un set de instrucțiuni, care se aplică unui set de date primit ca argumente. De ce să faci asta? Pentru că în interiorul funcției vei prelucra datele primite și la final vei dori să oferi rezultatele la care ai ajuns.
 
-Aplicarea unei funcții argumentelor sale produce un nou mediu lexical, un nou scope în care se fac legături între identificatori și valori.
-
-Ca și obișnuință, ar fi cel mai util să gândești că funcția se aplică pe argumente. Mult timp am gândit altfel: funcția „primește” pentru că, într-adevăr, introduci niște argumente. Nu este greșit, dar pentru o iluminare rapidă în domeniul funcțiilor, cel mai bine este să gândești în termenii aplicării sale pe argumente. În adâncime, trebuie înțeles că acest comportament este posibil pentru funcții pentru că pur și simplu sunt o-bi-ec-te.
-
-**Moment Zen**: O funcție, de fapt, „se aplică” argumentelor pasate care sunt valori, le va prelucra și le va oferi apelantului prin returnare.
-
 ## Funcțiile sunt valori
 
 **Moment Zen**: Funcțiile sunt valori în sine care pot fi referențiate printr-un identificator (variabilă).
 
-Funcțiile sunt cunoscute ca fiind de ordin înalt (higher order), ceea ce simplu înseamnă că sunt la rândul lor valori, că pot fi pasate altor funcții, că pot fi returnate ca rezultat al evaluării unei alte funcții, cam tot ce poți face cu oricare altă valoare. Acest aspect face din JavaScript un limbaj foarte potrivit pentru a lucra cu funcțiile într-o paradigmă numită în limba engleză „functional programming”.
+Funcțiile sunt cunoscute ca fiind de ordin înalt (în engleză îi spune **higher order**), ceea ce simplu înseamnă că sunt la rândul lor valori, că pot fi pasate altor funcții, că pot fi returnate ca rezultat al evaluării unei alte funcții, cam tot ce poți face cu oricare altă valoare. Acest aspect face din JavaScript un limbaj foarte potrivit pentru a lucra cu funcțiile într-o paradigmă numită în limba engleză „functional programming”, adică **programare funcțională**.
 
-## Funcțiile returnează rezultate
+## Anatomie
 
-Funcțiile în JavaScript trebuie să returneze un rezultat fără excepție. Chiar de la momentul declarării, funcțiile returnează ceva, iar acel ceva este valoarea `undefined`.
+Pentru că este absolut necesară înțelegerea mecanismelor interne pe care le pune la dispoziție o funcție în scopul prelucrării datelor și apoi pentru a le returna, vom examina o funcție pentru a avea o privire generală.
+
+![](FunctiaLaMomentulExecutiei.png)
+
+Atunci când este invocată o funcție, se creează un nou mediu lexical propriu acelei funcții. Orice funcție va moșteni automat proprietățile și metodele obiectelor interne `Object` și `Function`. Îți mai aduci aminte de capitolul pe care l-am dedicat Genezei și apoi dualității funcție-obiect? Toate acele informații sunt necesare acum pentru a înțelege natura fascinantă a unei funcții. Dacă vei declara o funcție în consola unui browser, și apoi vei scrie numele funcției urmat de operatorul punct, vei vedea că apar deja proprietăți ale acesti valori care este funcția. Aceasta este și indicația că funcția ca și valoare a fost „împachetată” ca obiect, care imediat moștenește proprietăți de la cele două obiecte fundamentale `Object` și `Function`.
+
+Haideți să disecăm o funcție. Încă o dată: funcțiile sunt valori. Conștientizarea acestei afirmații este una crucială pentru înțelegerea în adâncime a limbajului de programare. Mai înainte de a fi executată și astfel, codul ECMAScript conținut să fie evaluat, aceasta este o valoare în sine. Știm deja că ne putem juca cum vrem noi cu o valoare, chiar o putem pasa ca unei alte funcții sau o putem returna dintr-o funcție.
+
+Pentru ilustrare, am compus o imagine cu simbolurile pe care le-am creat drept ilustrații la capitolul dedicat dualității funcție-obiect. După cum putem urmări, o funcție primește argumente, care devin parametrii de lucru. Aceștia sunt colectați într-o structură de date internă funcției numită **arguments** care este disponibilă la momentul evaluării codului intern.
+
+Aplicarea unei funcții argumentelor sale produce un nou **mediu lexical**, un nou **scope** așa cum mai este denumit în engleză. Acest mediu lexical este ca un registru în care se ține evidența legăturilor între identificatori și valori. În mediul lexica sunt disponibile și identificatorii și valorile primite ca argumente.
+
+Ca și obișnuință, ar fi cel mai util să gândești că funcția se aplică pe argumente, atunci când acestea există. Mult timp am gândit altfel: funcția este un fragment de cod care „primește” pentru că, într-adevăr, introduci niște argumente. Nu este greșit, dar pentru o iluminare rapidă în domeniul funcțiilor, cel mai bine este să gândești în termenii aplicării sale pe argumente primite. În adâncime, trebuie înțeles că acest comportament este posibil pentru funcții pentru că pur și simplu sunt o-bi-ec-te. Unele speciale pentru că pur și simplu pot executa codul din interior ori de câte ori se dorește.
+
+**Moment Zen**: O funcție, de fapt, „se aplică” argumentelor pasate care sunt valori, le va prelucra și le va oferi apelantului prin returnare.
+
+Mai observăm din imagine că unei funcții îi sunt puse la dispoziție două lanțuri de conectare cu obiectele în contextul cărora sunt executate. O scurtă paranteză aci. Spuneam din deschiderea lucrării că totul în JavaScript este un obiect. Chiar și o funcție, care este un obiect special, la momentul execuției sale lansată în urma unui apel, aceasta nu rulează așa în vid absolut. Există un obiect pe fundalul căruia aceasta lucrează. Vorbim despre un obiect context, cu care funcția noastră stabilește niște legături speciale. Una dintre legături este chiar la proprietățile obiectului context, care sunt adunate într-un borcan cu eticheta `this`, iar cealaltă este la mediul lexical format prin declararea variabilelor și a celorlalte funcții și obiecte ale programului. Pentru că vorbirăm de mediul lexical, o funcție, la momentul evaluării declanșată în urma unui apel, creează propriul său mediu lexical. Dacă un identificator necesar evaluării codului funcției, nu a fost găsit, se va proceda la o căutare „în afara” funcției, în mediul lexical exterior ei și așa mai departe până când se ajunge la mediul global. Această procedură se numește în limba engleză **scope lookup** și pentru faptul că din bula lexicală la funcției se caută în bula mai mare a mediului lexical ce înconjoară funcția, iar dacă există unul superior, va căuta și în acela, programatorii au numit acest lucru **scope chain**, cu o traducere în limba română: **căutare pe lanț**. De ce? Pentru că pur și simplu căutarea identificatorului străpunge bula mediului funcției, în cea mai mare ș.a.m.d. ca și cum ai parcurge verigile unui lanț.
+
+În afară de aceste două legături foarte importante pe care le strabilește o funcție: la `this` și cea la mediul lexical extern, mai este una foarte importantă prin care orice obiect, fie că este funcție sau obiect, primește niște puteri, niște caracteristici din prima. Ca și în domeniul geneticii, obiectele create în JavaScript, vor **moșteni** automat o serie de proprietăți și metode direct de la obiectele fundamentale și dacă se dorește, de la alte obiecte create de noi. Acest lucru se numește în programare **moștenire prototipală** și este baza unor prelucrări de date având deja la îndemână intrumente croite cu care să te ajuți. Poți să-ți închipui obiectele interne ale JavaScript precum lădițele cu scule dintr-un atelier auto. Sunt pline deja cu instrumente și piese, gata de a fi folosite. Funcțiile create de noi nu fac nicio excepție și moștenesc și ele. Acest lucru este mi-nu-nat. De ce? Pentru că nu numai că sunt utile atunci când le execuți, dar le poți manipula ca și date, ca și valori înainte de a fi executate.
+
+### Funcțiile returnează rezultate
+
+Funcțiile în JavaScript trebuie să returneze un rezultat fără excepție. Chiar de la momentul declarării, funcțiile returnează ceva, iar acel ceva este valoarea `undefined`. Următoarele enunțuri sunt echivalente ca rezultat.
 
 ```javascript
 function facCeva () {};
@@ -45,17 +61,9 @@ function facLucruri () {
 };
 ```
 
-Funcțiile prelucrează date care intră ca argumente și returnează un rezultat. De cele mai multe ori, acel rezultat este o colecție de date care au fost obținute în urma evaluării codului funcției. Este logic să dorim returnarea rezultatelor ca un array sau ca un obiect. Pe lângă faptul că putem returna array-uri și obiecte, mai pot fi returnate chiar alte funcțiie. Nu voi înceta să repet faptul că o funcție mai întâi de toate este ea însăși o valoare. Iar funcțiile în JavaScript au capabilitatea de a primi drept valori la argumente funcții și pot returna alte funcții. Acest aspect interesant al funcțiilor definește capacitatea acestora de a fi de ordin înalt. Returnarea datelor dintr-o funcție înseamnă și încheierea execuției acesteia.
+Funcțiile prelucrează date care intră ca argumente și returnează un rezultat. De cele mai multe ori, acel rezultat este o colecție de date care au fost obținute în urma evaluării codului funcției. Este logic să dorim returnarea rezultatelor ca un array sau ca un obiect. Pe lângă faptul că putem returna array-uri și obiecte, mai pot fi returnate chiar alte funcții. Nu voi înceta să repet faptul că o funcție mai întâi de toate este ea însăși o valoare. Iar funcțiile în JavaScript pot primi drept valori la argumente, alte funcții și pot returna mai apoi alte funcții. Acest aspect interesant al funcțiilor definește capacitatea acestora de a fi **de ordin înalt**. Returnarea datelor dintr-o funcție înseamnă și încheierea execuției acesteia și revenirea sa la starea de valoare. Poți să-ți imaginezi o funcție precum un bec, care în sine este o valoare, dar care alimentat, acesta transformă curentul electric în lumină și căldură, după care, la deshiderea circuitului redevine doar un bec.
 
-## Anatomie
-
-Pentru că este absolut necesară înțelegerea mecanismelor interne pe care le pune la dispoziție o funcție în scopul prelucrării datelor și apoi pentru a le returna, vom examina o funcție pentru a avea o privire generală.
-
-![](ModelulGeneralAlUneiFunctiiLaMomentulExecutiei.png)
-
-Atunci când este invocată o funcție, se creează un nou mediu lexical propriu acelei funcții. Orice funcție va moșteni automat proprietățile și metodele obiectelor interne `Object` și `Function`.
-
-Următorul exemplu expune o funcție care conține la rândul său o altă funcție. Acest scenariu este unul care introduce și conceptul de **closure**, care este o funcție internă ce „face o ancorarea” a mediului lexical în care a fost declarată și utilizându-l pentru a accesa tot ce este necesar să se execute și care există acolo unde a fost declarată.
+Următorul exemplu expune o funcție care conține la rândul său o altă funcție. Acest scenariu este unul care introduce și conceptul de **closure** (în limba română poți traduce ca **portiță** sau **breșă**), care este o funcție internă ce „face o ancorare” a mediului lexical în care a fost declarată. Acest lucru este absolu necesar pentru că funcția are nevoie de identificatorii necesari propriei execuții. Vom aprofunda **closure-urile**, dar pentru te știu fire curioasă, hai să privim la următoarea secvență de cod drept exemplu.
 
 ```javascript
 function ex(unu, doi){
@@ -74,12 +82,12 @@ function ex(unu, doi){
 console.log(window.trei);
 ```
 
-Codul sursă a acestei funcții este considerat a fi `Global code`.
+Codul sursă a acestei funcții este considerat a fi `Global code`, adică nu a fost „împachetat” în altă funcție sau într-un bloc de cod.
 Această funcție a fost declarată în primul mediu lexical (adică nu are părinte) pe care-l generează motorul JavaScript: `global environment` sau `global scope`. În cazul browserelor, acesta este obiectul global `window` cu toate proprietățile sale printre care și obiectele interne specifice JavaScript.
-Pentru a testa care este mediul lexical, se face un `console.log` pe `this`, care relevă cine este contextul în care funcția este evaluată. Contextul în cazul nostru este acest obiect window creat de browser.
+Pentru a testa care este mediul lexical, se face un `console.log` pe `this`, care relevă cine este contextul în care funcția este evaluată. Contextul în cazul nostru este acest obiect `window` creat de browser.
 Pentru că `this` este un identificator pentru contextul în care se face evaluarea, care la rândul său este un obiect, se pot introduce din interiorul funcției, la momentul evaluării, proprietăți noi cu valorile dorite: `this.trei = 3`. Chiar și după ce funcția a fost evaluată deja și nu mai este în execuție, proprietatea setată obiectului context, va exista în continuare. Poți verifica printr-o interogare simplă: `console.log(window.trei);`.
 Pentru ambele funcții `this` este obiectul global.
-Pe lângă `this`, funcția mai are acces la un obiect la momentul evaluării: `arguments`, care este un obiect ce seamnă cu un array, cuprinzând toate argumentele pasate funcției. Acesta poate fi accesat chiar și dintr-o funcție internă după sintaxa `numeFunctieGazda.arguments` dacă acest lucru este necesar sau direct fiecare parametru separat: `console.log(unu);`.
+Pe lângă `this`, funcția mai are acces la un obiect la momentul evaluării: `arguments`, care este un obiect ce seamănă cu un array. Acesta cuprinde toate argumentele pasate funcției. Poate fi accesat chiar și dintr-o funcție internă după sintaxa `numeFunctieGazda.arguments`, dacă acest lucru este necesar sau direct fiecare parametru separat: `console.log(unu);`.
 Funcția `intern()` are posibilitatea de a accesa proprietățile funcției gazdă pentru că la momentul evaluării face **o poză** cu toți identificatorii pe care-i are gazda în `Environment Record`. Această **poză** se numește **closure**.
 
 ## Mecanisme magice
@@ -87,7 +95,7 @@ Funcția `intern()` are posibilitatea de a accesa proprietățile funcției gazd
 Am numit eu aceste acțiuni ale compilatorului la momentul când interpretează codul pentru că se petrec câteva lucruri cu adevărat uimitoare.
 **Mecanisme magice**: Declararea unei funcții are ca efect declanșarea **hoising**-ului. Declarația este introdusă în registrul inventar al mediului lexical existent. Magia rezidă din faptul că poți invoca o funcție înainte ca aceasta să fie declarată. Superciudățel, nu?! Psst! Secretul este legat de compilarea codului. Adu-ți mereu aminte că înainte de a fi rulat, codul este compilat.
 
-Am aflat mai devreme că la executarea unei funcții, aceasta creează și un mediu lexical propriu, dar mai e o chestie supertare: dacă într-un bloc de cod introduci o declarație sau o expresie, se va crea un nou scope pentru respectivul cod. Ciudățel și superinteresant, nu?
+Am aflat mai devreme că la executarea unei funcții, aceasta creează și un mediu lexical propriu, dar mai e o chestie supertare: dacă într-un bloc de cod introduci o declarație sau o expresie, se va crea un nou scope pentru respectivul cod. Ciudățel și super-interesant, nu?
 
 ```javascript
 var x = 100, y = 'ceva';
@@ -136,7 +144,7 @@ Am introdus deja ultima noutate introdusă de standardului ES6: „fat arrow”.
 (() => 'ceva')(); // ceva
 ```
 
-După cum se observă, sintaxa aplicată este ceva mai specială: `() => 'ceva'`. Fat arows au nevoie de un eveniment care să declanșeze execuția. Pentru a face exemplul să funcționeze, am împachetat funcția într-o structură `()()`, ceea ce are drept efect executarea funcției dintre parantezele de grupare imediat ce a fost compilat codul. În comunitatea coderilor JavaScript aceste structuri care sunt executate imediat se numesc **Immediately Invoked Function Expressions** - expresii de funcții invocate imediat.
+După cum se observă, sintaxa aplicată este ceva mai specială: `() => 'ceva'`. Fat arows au nevoie de un eveniment care să declanșeze execuția. Pentru a face exemplul să funcționeze, am împachetat funcția într-o structură `()()`, ceea ce are drept efect executarea funcției dintre parantezele de grupare imediat ce a fost compilat codul. În comunitatea coderilor JavaScript aceste structuri care sunt executate imediat se numesc **Immediately Invoked Function Expressions** - expresii de funcții invocate imediat. Pe scurt: IIFE.
 
 Pentru că am deschis o fereastră în interiorul funcțiilor, trebuie menționat faptul că returnarea directă a unei expresii are drept efect returnarea valorii, dar dacă expresia este introdusă într-un bloc funcțional, va fi returnat `undefined`.
 
@@ -186,7 +194,7 @@ var x = (y) => () => y; x(1)(); // 1; același lucru cu bloc
 var a = (b) => () => { return b; }; a(2)(); // 2
 ```
 
-După cum ai observat, am ales să lucrez cu funcțiile fat arrow în ultimele exemple. Am făcut acest lucru pentru a vă obișnui cu ele și pentru a le integra în practica personală.
+După cum ai observat, am ales să lucrez cu funcțiile **fat arrow** în ultimele exemple. Am făcut acest lucru pentru a vă obișnui cu ele și pentru a le integra în practica personală. Feriți-vă să înlocuiți declararea funcțiilor în favoarea unei practici doar cu **fat arrow**. Fiecare are rolul ei și analiza caz cu caz, va releva buna practică.
 
 ## Funcțiile sunt obiecte!
 
@@ -196,33 +204,28 @@ Standardul le numește chiar `function objects`. O funcție produce o instanță
 
 **O funcție este un obiect apelabil**. O funcție care este asociată unui obiect prin intermediul unei proprietăți, este numită *metodă*.
 
-Funcțiile sunt **obiecte first-class**, adică pot fi pasate ca argumente altor funcții și pot fi returnate din funcții.
-Funcțiile în JavaScript sunt de ***ordin înalt***, adică pot fi pasate ca valori și pot primi ca argumente alte funcții, dar acest lucru tot de faptul că sunt **first class** ține.
+Funcțiile sunt **obiecte first-class**, adică pot fi pasate ca argumente altor funcții și pot fi returnate din funcții. Funcțiile în JavaScript sunt de ***ordin înalt***, adică pot fi pasate ca valori și pot primi ca argumente alte funcții, dar acest lucru tot de faptul că sunt **first class** ține.
 
 ## Funcțiile moștenesc
 
-Funcțiile moștenesc din `Function.prototype`.
+Funcțiile moștenesc din `Function.prototype` și `Object.prototype`, dar chiar și proprietăți directe ale lui `Object` și `Function`.
 
-**Moment Zen**: Funcțiile sunt efemere, fiind mecanismul prin care sunt preluate date, sunt prelucrate și apoi sunt returnate apelantului. După ce treaba s-a terminat „dispar” ca parte activă.
+**Moment Zen**: Funcțiile sunt efemere, fiind mecanismul prin care sunt preluate date, sunt prelucrate și apoi sunt returnate apelantului.
 
-Spre deosebire de restul obiectelor, funcțiile pot fi invocate.
+Spre deosebire de restul obiectelor, funcțiile pot fi invocate. Funcțiile sunt un subtip de obiecte numit tehnic „callable object” iar acest lucru înseamnă că pentru acea funcție, motorul care implementează standardul ECMAScript are o metodă internă `[[Call]]`, care permite apelarea funcției dar și recursivitatea. Am introdus termenul de recursivitate. Acesta se referă la capacitatea ca o funcție să se autoapeleze la momentul evaluării codului intern.
 
-Funcțiile sunt un subtip de obiecte numit tehnic „callable object” iar acest lucru înseamnă că pentru acea funcție, motorul care implementează standardul ECMAScript are o metodă internă `[[Call]]`, care permite apelarea funcției dar și recursivitatea.
-
-O funcție poate fi invocată chiar din interiorul său. O funcție care se apelează din interiorul său se numește funcție recursivă. Sunt trei modalități de a apela o funcție din interiorul ei:
+O funcție care se apelează din interiorul său se numește funcție recursivă. Sunt trei modalități de a apela o funcție din interiorul ei:
 - după numele său,
 - folosind `arguments.callee`, o proprietate a obiectului `arguments` care conține funcția `arguments.callee()`,
 - folosind un identificator din scope care trimite la funcție.
 
-Funcțiile care pot deveni constructori prin apelarea cu `new`, au, de fapt, o metodă internă `[[Construct]]` care permite ca acestea să „construiască” obiecte. Nu toate funcțiile au această metodă internă. `Arrow functions` nu au `[[Construct]]`.
+Funcțiile care pot deveni constructori prin apelarea cu `new`, au, de fapt, o metodă internă `[[Construct]]`, care permite ca acestea să „construiască” obiecte. Nu toate funcțiile au această metodă internă. `Arrow functions` nu au `[[Construct]]`.
 
 ## Spune standardul
 
-Funcțiile obiecte încapsulează cod parametrizat care ține minte mediul lexical („closed over”) și care permite evaluarea dinamică a codului.
-
-O funcție obiect este un obiect comun care are aceleași sloturi interne și aceleași metode interne ca orice alte obiecte comune.
-
-Codul dintr-o funcție obiect poate fi în „strict mode” sau nu. O funcție care rulează codul în strict mode se numește „strict function”. Cele care nu rulează în „strict function” se cheamă că sunt „non-strict function”.
+> Funcțiile obiecte încapsulează cod parametrizat care ține minte mediul lexical („closed over”) și care permite evaluarea dinamică a codului.
+> O funcție obiect este un obiect comun care are aceleași sloturi interne și aceleași metode interne ca orice alte obiecte comune.
+> Codul dintr-o funcție obiect poate fi în „strict mode” sau nu. O funcție care rulează codul în strict mode se numește „strict function”. Cele care nu rulează în „strict function” se cheamă că sunt „non-strict function”.
 
 Funcțiile obiecte au sloturi interne și merită menționat `Realm`, care este o înregistrare a tărâmului în care a fost creată funcția și care oferă un obiectele interne care au fost accesate la momentul evaluării funcției.
 
@@ -272,7 +275,7 @@ Fiecare argument trebuie pasat funcției în ordinea corectă pentru că valoare
 Profesorul Christopher Strachey spune:
 
 > Aplicarea unei funcții argumentelor sale implică evaluarea expresiei care o definește după ce au fost date valori variabilelor conectate la acestea din lista argumentelor.
-Astfel, valoarea-R a funcției conține două părți: o regulă pentru evaluarea expresiei și un mediu care să-i ofere variabilele libere.
+> Astfel, valoarea-R a funcției conține două părți: o regulă pentru evaluarea expresiei și un mediu care să-i ofere variabilele libere.
 
 Ne amintim faptul că, de fapt, o funcție este aplicată argumentelor sale și că, la momentul apelării acesteia, se creează și un mediu lexical nou. În acest nou mediu lexical (inventarul identificatorilor), argumentele sunt variabile care identifică, de fapt, expresii ce vor fi „legate” de o valoare.
 
@@ -281,7 +284,7 @@ Ne amintim faptul că, de fapt, o funcție este aplicată argumentelor sale și 
 ```
 
 Valoarea este obținută prin evaluare mai înainte ca funcția să se execute. Abia după această etapă, o funcție se aplică argumentelor sale.
-Acum începe executarea funcției pe argumentul al cărui valoare este 5. Următorul pas este generarea unui mediu lexical nou pentru funcție în care valoarea 5 este „legată” de variabila x. La final, valoarea variabilei x din scope-ul intern funcției, este returnată.
+Acum începe executarea funcției pe argumentul al cărui valoare este 5. Următorul pas este generarea unui mediu lexical nou pentru funcție în care valoarea 5 este „legată” de variabila `x`. La final, valoarea variabilei `x` din scope-ul intern funcției, este returnată.
 
 ```javascript
 // #1 Fără asignare
@@ -364,9 +367,9 @@ typeof obi; // object
 obi.valoare; // "text"
 ```
 
-### Accesarea și setarea valorilor unui obiect generat de o funcție cu rol de contructor - getteri și setteri
+### Accesarea și setarea valorilor unui obiect generat de o funcție cu rol de constructor - getteri și setteri
 
-Uneori este necesar să protejezi anumite valori ale unui obiect pe care-l generezi folosind o funcție constructor. Partea foarte frumoasă este că însăși funcția constructor permite introducerea unor mecanisme de acces și setare a valorilor din obiectul rezultat. Acest lucru se realizează prin funcții specializate care poartă denumirea de **accesori** și sunt cunoscuți ca fiind ***getteri*** (de la englezescul `get`, care înseamnă a obține o valoare) și ***setteri*** (de la englezescul `set`, care înseamnă a introduce o valoare).
+Uneori este necesar să protejezi anumite valori ale unui obiect pe care-l generezi folosind o funcție constructor. Partea foarte frumoasă este că însăși funcția constructor permite introducerea unor mecanisme de acces și setare a valorilor din obiectul rezultat. Acest lucru se realizează prin funcții specializate care poartă denumirea de **accesori** și sunt cunoscuți ca fiind **getteri** (de la englezescul `get`, care înseamnă a obține o valoare) și **setteri** (de la englezescul `set`, care înseamnă a introduce o valoare).
 
 Până la ECMAScript 5, getterii și setterii erau nimic mai mult decât două funcții special croite pentru a introduce și scoate valori.
 
