@@ -92,7 +92,7 @@ Funcția `intern()` are posibilitatea de a accesa proprietățile funcției gazd
 
 ## Mecanisme magice
 
-Am numit eu aceste acțiuni ale compilatorului la momentul când interpretează codul pentru că se petrec câteva lucruri cu adevărat uimitoare.
+Am numit eu **magice** aceste acțiuni ale compilatorului la momentul când interpretează codul pentru că se petrec câteva lucruri cu adevărat uimitoare.
 **Mecanisme magice**: Declararea unei funcții are ca efect declanșarea **hoising**-ului. Declarația este introdusă în registrul inventar al mediului lexical existent. Magia rezidă din faptul că poți invoca o funcție înainte ca aceasta să fie declarată. Superciudățel, nu?! Psst! Secretul este legat de compilarea codului. Adu-ți mereu aminte că înainte de a fi rulat, codul este compilat.
 
 Am aflat mai devreme că la executarea unei funcții, aceasta creează și un mediu lexical propriu, dar mai e o chestie supertare: dacă într-un bloc de cod introduci o declarație sau o expresie, se va crea un nou scope pentru respectivul cod. Ciudățel și super-interesant, nu?
@@ -104,7 +104,7 @@ var x = 100, y = 'ceva';
 
 ## Funcția ca valoare poate fi redusă la nimic cu void
 
-Utilizarea operatorului void, care precedă o expresie, o golește de valoare.
+Utilizarea operatorului `void`, care precedă o expresie, o golește de valoarea pe care o avea.
 
 ```javascript
 void 1; // undefined
@@ -318,7 +318,7 @@ La invocarea unei funcții sunt disponibile `this`, care formează contextul de 
 })(2, 3); // 5
 ```
 
-ES6 introduce un nou parametru: `rest` care permite reprezentarea unui număr nedefinit de argumente ca un array.
+ES6 introduce un nou mod de a introduce parametrii folosind operatorul trei puncte urmat de identificatorul unei structuri de date. Această nouă modalitate se numește `rest parameters` și permite preluarea ca argumente a unui număr necunoscut de argumente dintr-un array, de exemplu.
 
 ```javascript
 function operatiune (...argumente) {
@@ -334,25 +334,7 @@ function operatiune (a, b, ...valori) {
 operatiune(2, 4, 20, 32, 110); // 2 4 3
 ```
 
-Diferențe dintre `arguments` și arrayul produs prin efectul operatorului `...` (`rest`).
-
-- parametrii rest sunt un array al celor cărora nu li s-a dat un nume.
-- array-ul rest poate fi folosit cu metode precum `forEach`, `sort`, `map` ori `sort`.
-- `arguments` este un obiect care are proprietatea `callee`.
-
-```javascript
-// emularea lui rest - exemplu oferit de Mozilla Developer Network
-function f (a, b) {
-  var args = Array.prototype.slice.call(arguments, f.length);
-  // ...codul funcției mai departe
-}
-// este echivalent cu
-function f (a, b, ...args) {
-  // cod funcție.
-};
-```
-
-Valorile primelor două argumente pasate vor fi potrivite cu cei doi parametri menționați: `a` și `b`.
+Această nouă sintaxă o vom trata distinct. Poți face un salt dacă te mână curiozitatea.
 
 ## Funcțiile sunt obiecte speciale care pot „construi” alte obiecte
 
