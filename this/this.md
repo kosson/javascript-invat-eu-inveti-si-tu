@@ -43,20 +43,17 @@ function faCeva (){
   console.log(this);      // (1)
   console.log(this.ceva); // (2)
 };
-
 var obj = {
   faCeva: faCeva
 };
-
 var obj = {
   faCeva // (3)
 };
-
 obj.faCeva(); // (4)
 ```
 
 (1) Răspunde cu obiectul context Object { actiune: faCeva() }.
-(2) Răspunde cu undefined pentru că obiectul context nu are o proprietatea ceva.
+(2) Răspunde cu `undefined` pentru că obiectul context nu are o proprietatea ceva.
 (3) Începând cu ES6, dacă ai denumit cheia metodei la fel cu numele funcției, se poate menționa simplu numele.
 (4) this este chiar obiectul menționat la stânga metodei
 
@@ -157,7 +154,7 @@ function arataMiThis () {
 arataMiThis (); // true
 ```
 
-Atenție, nu contează dacă locul apelării este sub regula `"use strict";`, ci contează dacă funcția este sub această regulă. Am menționat acest aspect pentru că este posibil ca software-ul scris de tine să respecte `"use strict";`, dar să fie legat de software mai vechi (programatorii îi spun pe engleză **legacy**), care să nu fie sub regulă și astfel, fiind posibilă apariția unei serii de erori a căror sursă să fie chia această diferență.
+Atenție, nu contează dacă locul apelării este sub regula `"use strict";`, ci contează dacă funcția este sub această regulă. Am menționat acest aspect pentru că este posibil ca software-ul scris de tine să respecte `"use strict";`, dar să fie legat de software mai vechi (programatorii îi spun pe engleză **legacy**, adică **moștenit**), care să nu fie sub regulă și astfel, fiind posibilă apariția unei serii de erori a căror sursă să fie chia această diferență.
 Reține că pentru codul sub `"use strict";`, valoarea lui `this` este `undefined`.
 
 ## Cazurile lui `this`
@@ -261,8 +258,8 @@ Dorel();
 **Explicație**:
 
 Împachetând apelul către metoda obiectului într-o funcție, ne asigurăm că nu pierdem legătura la `this` pentru că executăm metoda în contexul dorit.
-Acest lucru se întâmplă pentru că funcția `setInterval` nu a fost declarată în interiorul funcției noastre (aici este cheia înțelegerii). Noi, am executat-o în contextul codului scris de noi, dar nu suntem noi cei care au scris funcția `setInterval`. Aceasta aparține obiectului global și va avea drept `this` pe acesta mereu. Trucul pentru a menține o legătură la obiectul pe care-l dorim noi a fi this este să pasăm delararea unei funcții drept prim parametru și this va fi scope-ul creat de funcția dorel așa cum ne-am dorit.
-La execuție, ceea ce se întâmplă este că împrumutăm funcționalitatea lui `setInterval`, dar contextul de execuție va fi setat la scope-ul și `this`-ul funcției `dorel` pentru care funcția callback face closure.
+Acest lucru se întâmplă pentru că funcția `setInterval` nu a fost declarată în interiorul funcției noastre (aici este cheia înțelegerii). Noi, am executat-o în contextul codului scris de noi, dar nu suntem noi cei care au scris funcția `setInterval`. Aceasta aparține obiectului global și va avea drept `this` pe acesta mereu. Trucul pentru a menține o legătură la obiectul pe care-l dorim noi a fi this este să pasăm delararea unei funcții drept prim parametru și `this` va fi scope-ul creat de funcția `dorel` așa cum ne-am dorit.
+La execuție, ceea ce se întâmplă este că împrumutăm funcționalitatea lui `setInterval`, dar contextul de execuție va fi setat la scope-ul și `this`-ul funcției `dorel` pentru care funcția callback face **closure**.
 `This`-ul este chiar `window`, cel care a fost primit automat la invocarea lui `dorel` și care a fost îmbogățit deja cu proprietatea `nume` și metoda `ego`. O altă soluție pe care o vom explora de îndată este legarea cu bind de obiectul care se dorește a fi contextul de execuție.
 
 ## Manifestarea legăturii la `this` în funcție de vecinătate
@@ -272,15 +269,11 @@ Atenție! Legătura la `this` se manifestă la cel mai apropiat membru al unui o
 ```javascript
 var token = 1000;
 var obi = { token: 10 };
-
 function faCeva () {
   console.log(this.token);
 };
-
 obi.faCeva = faCeva;
-
 obi.adancit = {altceva: faCeva, token: 10000}; // deci, faCeva, va primi implicit this, care este obiectul (adancit) membru a lui obi
-
 obi.faCeva();           // 10
 faCeva();               // 1000, dacă ai token declarat în global.
 obi.adancit.altceva();  // 10000
@@ -311,7 +304,7 @@ Dacă metoda este definită în lanțul prototipal al obiectului, `this` face re
 
 ```javascript
 var alfa = {
-  primo: function(){
+  primo: function () {
     return this.ceva + this.altceva;
   }
 };
@@ -343,11 +336,9 @@ Este prima regulă și este și cazul simplei invocării a funcției. Atunci câ
 
 ```javascript
 var test = 2;
-
 function faceva(){
   console.log(this.test); // this.test rezolvă la variabila globală test
-}
-
+};
 faceva(); // 2
 ```
 
@@ -380,20 +371,16 @@ Următoarea secvență de cod este asemănătoare.
 ```javascript
 var obiectLiteral = {
   proprietate: "ceva",
-  metoda: function(){
+  metoda: function () {
     console.log(this.proprietate);
   }
 };
-
 obiectLiteral.metoda(); // ceva
-
 var obiectLiteral2 = {
   proprietate: "altceva",
   metoda: obiectLiteral.metoda
-}
-
+};
 obiectLiteral2.metoda(); // altceva
-
 var proprietate = "valoarea proprietății obiectului global";  // prop. a obi.global
 var metoda = obiectLiteral.metoda;                            // metodă a obi.global
 metoda(); // => valoarea proprietății obi. global; echivalent cu window.metoda()
@@ -408,11 +395,8 @@ var obiectStudiu = {
     console.log(this.ceva);
   }
 };
-
 var ceva = 2002;
-
 var referinta = obiectStudiu.metoda; // e doar o referință, nu este valoarea funcției.
-
 referinta(); // 2002  call-site pentru care se aplică regula 1 - binding primar.
 ```
 
@@ -564,13 +548,10 @@ var activitate = function activ(date){
   console.log(this.a, date);
   return this.a + date;
 };
-
 // un obiect care oferă contextul de lucru pentru activitate()
 var obiect = { a: 1000 };
-
 // realizarea hard binding-ului
 var binding = activitate.bind(obiect);
-
 // folosirea șablonului cu date
 var rezultat = binding(4000); console.log(rezultat); // 5000
 ```

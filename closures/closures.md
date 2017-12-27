@@ -2,7 +2,7 @@
 
 O funcție definită în interiorul unei funcții container, generează un closure.
 
-Cum am putea traduce în română termenul de *closure*. Am avea următorii termeni în limba română cu care să explorăm o posibilă traducere: „încercuire”, „incintă”, „îngrăditură”, „ocol”, „împrejmuire”, „țarc”. După ce vom fi explorat mai mult, vom înțelege că este o caracteristică, un mecanism al limbajului de programare și astfel, am putea să ne gândim la acțiunea pe care o implică termenul de **closure**. Să o luăm încetișor. Primul lucru pe care-l știm despre funcții, este că acestea sunt acțiuni transformatoare asupra datelor pe care le primesc (aplicarea pe argumente de care am pomenit), fie că aceste date sunt „injectate” în funcție prin argumente, fie că sunt disponibile „la liber” în mediul lexical unde a fost declarată funcția. Trebuie să ne aducem mereu aminte de importanța redactării codului și în consecință de locul unde declarăm funcțiile. Foarte important este și locul de unde le apelăm pentru că de acolo este posibil să „injectăm” prin argumente date, care sunt necesare doar în locul în care este apelată funcția sau în obiectul în a cărui context a fost invocată.
+Cum am putea traduce în română termenul de *closure*. Am explorat deja la funcții posibile traduceri în limba română și pentru că ambii termeni identificați: **portiță** și  **breșă** nu sunt tocmai eleganți pentru uzul curent, am căzut de acord că vom folosi termenul în limba engleză. După ce vom fi explorat mai mult, vom înțelege că este o caracteristică, un mecanism al limbajului de programare și astfel, am putea să ne gândim la acțiunea pe care o implică termenul de **closure**. Să o luăm încetișor. Primul lucru pe care-l știm despre funcții, este că acestea sunt acțiuni transformatoare asupra datelor pe care le primesc (aplicarea pe argumente de care am pomenit), fie că aceste date sunt „injectate” în funcție prin argumente, fie că sunt disponibile „la liber” în mediul lexical unde a fost declarată funcția. Trebuie să ne aducem mereu aminte de importanța redactării codului și în consecință de locul unde declarăm funcțiile. Foarte important este și locul de unde le apelăm pentru că de acolo este posibil să „injectăm” prin argumente date, care sunt necesare doar în locul în care este apelată funcția sau în obiectul în a cărui context a fost invocată.
 
 O funcție declarată în mediul lexical global, va avea acces la toate proprietățile acestui obiect. Dacă o funcție, va fi declarată într-un bloc de cod sau într-o altă funcție, aceasta va avea acces la tot ce constituie mediul lexical format local de acel bloc de cod sau de funcție.
 
@@ -11,6 +11,33 @@ Acum apare minunea: dacă declari o funcție în interiorul altei funcții, pe c
 Ascunderea unui set de date ce nu poate fi manipulat direct, care poate fi accesat la un moment dat sau dacă este nevoie cu o anumită întârzire, ori pur și simplu să știi că există o structură de date creată în anumite condiții, dar cu care poți interacționa, este ceea ce oferă closure-urile.
 
 Bineînțeles vei avea o variabilă-identificator căreia îi va fi asignat rezultatul evaluării funcției gazdă. Rezultatul va fi funcția returnată (**nu uita niciodată că mai întâi de toate, o funcție este o valoare în sine**), care, MAGIE! are acces încă la mediul lexical al funcției gazdă, chiar dacă aceasta și-a încheiat execuția.
+
+![](ClosureVisual.png)
+
+```javascript
+var magic = true;
+function externa () {
+  console.log(this.magic); // 1000
+  var magic = 10;
+  function container () {
+    console.log(this.magic); // true
+    return function interna () {
+      console.log(this.magic); // true
+    };
+  };
+  return container();
+};
+//var internaScoasa = externa();
+//internaScoasa();
+
+var obi = {
+  magic: 1000,
+  indica: externa
+};
+
+var explorare = obi.indica();
+explorare();
+```
 
 Te vei întreba pe bună dreptate: cum să mai fie disponibile datele unei funcții care și-a terminat execuția, când știm foarte bine că „dispar” (sunt trimise la gunoi)?
 
