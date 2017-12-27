@@ -8,7 +8,7 @@ Standardul spune că „programatorii pot redacta documente, pot parcurge struct
 
 Să vedem ce înseamnă „document” în cazul acestui API. Standardul spune că termenul de „document” este utilizat în sens larg și se leagă de capacitatea XML-ului de a „reprezenta diferite tipuri de informație care pot fi stocate în diferite sisteme și mare parte dintre acestea vor fi văzute în mod tradițional ca date și nu ca documente”. Următoarea precizare este fundamentală pentru a înțelege relația dintre date, informație și reprezentarea acestora. Zice standardul: **[...] XML prezintă aceste date ca documente iar DOM-ul poate fi utilizat pentru a gestiona aceste date**.
 
-Standardul (DOM Core) spune că „prezintă documentele ca o ierarhie de obiecte Node care implementează alte interfețe mai specializate”. Hai să lămurim nițel care-i treaba cu interfețele astea. Sunt de fapt niște abstracțiuni implementate la nivel de browser de către fiecare producător de browser așa cum crede mai bine și au drept scop punerea la dispoziție de metode și proprietăți pentru a manipula diferite reprezentări de date.
+Standardul (DOM Core) spune că „prezintă documentele ca o ierarhie de obiecte Node care implementează alte interfețe mai specializate”. Hai să lămurim nițel care-i treaba cu interfețele astea. Sunt de fapt niște abstracțiuni implementate la nivel de browser de fiecare producător de browser așa cum crede mai bine și au drept scop punerea la dispoziție de metode și proprietăți pentru a manipula diferite reprezentări de date.
 
 ## Ce sunt nodurile?
 

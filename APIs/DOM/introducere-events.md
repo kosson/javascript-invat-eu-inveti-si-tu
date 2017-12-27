@@ -13,7 +13,7 @@
 
 ## Anatomie
 
-Browserul pentru a răspunde unui eveniment, mai întâi trebuie să „captureze” evenimentul iar această etapă se numește „înregistrarea evenimentului” - `event registration`. Mecanismul prin care se face acest lucru este acela al event handlers.
+Pentru a răspunde unui eveniment, browserul, mai întâi trebuie să „captureze” evenimentul iar această etapă se numește „înregistrarea evenimentului” - `event registration`. Mecanismul prin care se face acest lucru este acela al event handlers.
 
 Cel mai simplu event handler este cel pe care-l oferă un atribut pus direct în codul HTML.
 
@@ -120,48 +120,23 @@ Vom observa că proprietatea `target` a evenimentului, va avea valoarea elementu
 
 ## Două modele: captură (capture) și ridicarea la suprafață (bubbling)
 
-Să presupunem că avem două elemente unul fiind containerul celui de-al doilea. Ambele evenimente au același eveniment atașat: onclick. Ceea ce se întâmplă este că în cazul unui click pe elementul găzduit, se declanșează ambele evenimente, adică și onclick de la părinte.
+Să presupunem că avem două elemente unul fiind containerul celui de-al doilea. Ambele evenimente au același eveniment atașat: onclick. Ceea ce se întâmplă este că în cazul unui click pe elementul găzduit, se declanșează ambele evenimente, adică și `onclick` de la părinte.
 
 Întrebarea este următoarea: care event handler s-a executat primul?
 
 Aici intervin cele două modele pentru a înțelege. A existat un moment când Netscape și Microsoft nu au căzut de acord asupra unui model comun și asftel, s-au născut două modele diferite care coexistă. Cel al lui Netscape care spune că evenimentul elementului gazdă se va declanșa primul, numindu-se „capturing” și modelul Microsoft care spune că elementul găzduit, cel care a fost acționat primul se va declanșa primul, numindu-se „bubbling”.
 
-```text
-               | |
----------------| |-----------------
-| element1     | |                |
-|   -----------| |-----------     |
-|   |element2  \ /          |     |
-|   -------------------------     |
-|        Event CAPTURING          |
------------------------------------
+![](EventModelBubbling.png)
 
-               / \
----------------| |-----------------
-| element1     | |                |
-|   -----------| |-----------     |
-|   |element2  | |          |     |
-|   -------------------------     |
-|        Event BUBBLING           |
------------------------------------
-```
+![](EventModelCapturing.png)
 
 ### MODELUL CURENT
 
 Pentru armonizare, W3C a fost de acord ca cele două modele să coexiste după următorul scenariu: orice eveniment se declanșează, mai întâi de orice este capturat și este declanșat în toți copii (dacă aceștia au event handlere - receptori cu true), până când ajunge la cel vizat (`target element`), după care face „bubbling”, adică se ridică din nou către gazdă.
 
-```text
-                 | |  / \
------------------| |--| |-----------------
-| element1       | |  | |                |
-|   -------------| |--| |-----------     |
-|   |element2    \ /  | |          |     |
-|   --------------------------------     |
-|        W3C event model                 |
-------------------------------------------
-```
+![](EventModelW3CModel.png)
 
-Partea bună este că te poți decide singur când vei „înregistra” evenimentul, fie în faza de captură, fie în faza de bubbling folosind metoda `addEventListener`. Dacă cel de-al treilea argument este setat la true, atunci evenimentul va fi „înregistrat” la faza de captură, inversul indică faza de bubbling.
+Partea bună este că te poți decide singur când vei „înregistra” evenimentul, fie în faza de capturare, fie în faza de bubbling folosind metoda `addEventListener`. Dacă cel de-al treilea argument este setat la true, atunci evenimentul va fi „înregistrat” la faza de capturare, iar inversul indică faza de bubbling.
 
 ## Cazuistică
 

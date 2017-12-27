@@ -258,7 +258,7 @@ Funcțiile obiecte au sloturi interne și merită menționat `Realm`, care este 
 - În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype (`numeFunctie.prototype`), care la rândul său se leagă automat la `Object.prototype`.
 - Funcțiile sunt legate de obiectul prototip prin metoda `.constructor`.
 - Fiecare funcție are un obiect prototip diferit.
-- O funcție apelată cu `new` în fața sa este un constructor. De regulă, numele funcției care va fi constructor, se scrie cu literă mare.
+- O funcție apelată cu `new` în fața sa este un constructor. Numele funcției care va fi constructor, se scrie cu literă mare.
 - Funcțiile generează un mediu lexical propriu (scope).
 - Funcțiile care joacă rol de metode într-un obiect, de fapt nu aparțin obiectului, ci sunt doar invocate în contextul obiectului. Ceea ce „aparține” obiectului este, de fapt, referința către funcție. ATENȚIE! investighează mereu call-site-ul pentru a afla ce este în `this`.
 - Atunci când funcția este un callback, ține minte că tot o referință către funcție este (implicit assignment), nu este valoarea sa.
@@ -270,20 +270,20 @@ Funcțiile obiecte au sloturi interne și merită menționat `Realm`, care este 
 Argumentele sunt valori pe care le trimitem funcției atunci când o invocăm și care sunt atașate unor identificatori menționați deja la momentul declarării funcției.
 Pe scurt, argumentele sunt valorile pasate funcțiilor. Numărul de argumente pasate unei funcții se numește în jargonul programatorilor **arity**.
 
-Fiecare argument trebuie pasat funcției în ordinea corectă pentru că valoarea sa se va lega de numele desemnat de programator între parantezele rotunde. Aceste nume, de fapt identificatori, sunt taman parametrii de lucru ai funcțiilor.
+Fiecare argument trebuie pasat funcției în ordinea corectă pentru că valoarea sa se va lega de numele desemnat de programator între parantezele rotunde. Aceste nume, de fapt identificatori, sunt taman parametrii de lucru a funcțiilor.
 
 Profesorul Christopher Strachey spune:
 
 > Aplicarea unei funcții argumentelor sale implică evaluarea expresiei care o definește după ce au fost date valori variabilelor conectate la acestea din lista argumentelor.
 > Astfel, valoarea-R a funcției conține două părți: o regulă pentru evaluarea expresiei și un mediu care să-i ofere variabilele libere.
 
-Ne amintim faptul că, de fapt, o funcție este aplicată argumentelor sale și că, la momentul apelării acesteia, se creează și un mediu lexical nou. În acest nou mediu lexical (inventarul identificatorilor), argumentele sunt variabile care identifică, de fapt, expresii ce vor fi „legate” de o valoare.
+Ne amintim că, de fapt, o funcție este aplicată argumentelor sale și că, la momentul apelării acesteia, se creează și un mediu lexical nou. În acest nou mediu lexical (inventarul identificatorilor), argumentele sunt variabile care identifică, de fapt, expresii ce vor fi „legate” de o valoare.
 
 ```javascript
 ((x) => x)(2 + 3); // 5
 ```
 
-Valoarea este obținută prin evaluare mai înainte ca funcția să se execute. Abia după această etapă, o funcție se aplică argumentelor sale.
+Valoarea este obținută prin evaluare mai înainte ca funcția să se execute. Abia după această etapă, funcția se aplică valorii primite ca argument.
 Acum începe executarea funcției pe argumentul al cărui valoare este 5. Următorul pas este generarea unui mediu lexical nou pentru funcție în care valoarea 5 este „legată” de variabila `x`. La final, valoarea variabilei `x` din scope-ul intern funcției, este returnată.
 
 ```javascript
@@ -327,6 +327,8 @@ function operatiune (...argumente) {
 operatiune(23,145,83); // 3
 ```
 
+Un exemplu cu o mică variație.
+
 ```javascript
 function operatiune (a, b, ...valori) {
   console.log(a, b, valori.length);
@@ -334,7 +336,7 @@ function operatiune (a, b, ...valori) {
 operatiune(2, 4, 20, 32, 110); // 2 4 3
 ```
 
-Această nouă sintaxă o vom trata distinct. Poți face un salt dacă te mână curiozitatea.
+Această nouă sintaxă o vom trata distinct în curând. Poți face acum un salt dacă te mână curiozitatea.
 
 ## Funcțiile sunt obiecte speciale care pot „construi” alte obiecte
 
@@ -351,7 +353,7 @@ obi.valoare; // "text"
 
 ### Accesarea și setarea valorilor unui obiect generat de o funcție cu rol de constructor - getteri și setteri
 
-Uneori este necesar să protejezi anumite valori ale unui obiect pe care-l generezi folosind o funcție constructor. Partea foarte frumoasă este că însăși funcția constructor permite introducerea unor mecanisme de acces și setare a valorilor din obiectul rezultat. Acest lucru se realizează prin funcții specializate care poartă denumirea de **accesori** și sunt cunoscuți ca fiind **getteri** (de la englezescul `get`, care înseamnă a obține o valoare) și **setteri** (de la englezescul `set`, care înseamnă a introduce o valoare).
+Uneori este necesar să protejezi anumite valori ale unui obiect pe care-l generezi folosind o funcție constructor. Partea foarte frumoasă este că însăși funcția constructor permite introducerea unor mecanisme de acces și setare a valorilor din obiectul rezultat. Acest lucru se realizează prin funcții specializate care poartă denumirea de **accesori** și sunt cunoscuți ca fiind **getteri** (de la englezescul `get`, care înseamnă **a obține** o valoare) și **setteri** (de la englezescul `set`, care înseamnă a introduce o valoare).
 
 Până la ECMAScript 5, getterii și setterii erau nimic mai mult decât două funcții special croite pentru a introduce și scoate valori.
 
