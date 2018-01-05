@@ -8,33 +8,51 @@ Este o funcție care creează și returnează un obiect.
 
 ## Dependințe cognitive
 
+- obiecte
 - funcții
 - closures
 
 ## Mantre
 
  - JavaScript nu are clase
- - creează și returnează un obiect
- - factory se comportă precum o interfață
+ - Un factory (o fabrică de obiecte) creează și returnează câte un obiect la fiecare invocare
+ - Un factory se comportă precum o interfață
 
 Cel mai simplu exemplu este o funcție care preia niște date prin argumente, are niște date interne și la final este returnat un obiect care oferă acces la mediul lexical al funcției pentru care s-a făcut un closure la momentul returnării.
 
 ```javascript
-var persoana = function(nume, prenume){
+var persoana = function oPersoana (nume, prenume) {
   var _ceva = 10;
   return {
     nume: nume,
     prenume: prenume,
-    salutare: function(porecla){
+    salutare: function salut (porecla) {
       return 'Salut sunt ' + porecla + ' pentru ' + this.nume + ' ' + this.prenume + ' și sunt de nota ' + _ceva;
     }
   }
 };
 var instanta = persoana('Ion', 'Vintilă');
-instanta.salutare('Mordor75');
+instanta.salutare('Caloianu');
 ```
 
-Este util pentru că se comportă ca o interfață. Poți genera o sumedenie de obiecte care să folosească același „tipar”.
+Pentru că începând cu ES6 avem la îndemână prescurtarea sintaxei, vom rescrie exemplul de mai sus pentru a vedea diferențele.
+
+```javascript
+var persoana = function oPersoana (nume, prenume) {
+  var _ceva = 10;
+  return {
+    nume,
+    prenume,
+    salut (porecla) {
+      return 'Salut sunt ' + porecla + ' pentru ' + this.nume + ' ' + this.prenume + ' și sunt de nota ' + _ceva;
+    }
+  }
+};
+var instanta = persoana('Ion', 'Vintilă');
+instanta.salut('Caloianu');
+```
+
+Acest șablon este foarte util pentru că se comportă ca o interfață la un mecanism de generare a unor obiecte. Același „tipar” îl poți aplica pentru inițializarea unor obiecte în baza unor valori diferite de lucru.
 
 Este observabil că putem folosi date din două surse. Una este obiectul returnat folosind `this.proprietate`, dar pentru că se creează un closure pe mediul lexical creat de funcția care returnează obiectul, putem accesa din metodele obiectului returnat, direct valori din funcție.
 

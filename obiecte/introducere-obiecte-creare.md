@@ -32,13 +32,15 @@ Ceea ce mai trebuie să știi din start despre constructori este că la apelarea
 
 **Spune standardul**: *Fiecare obiect creat de un constructor are o referință implicită (numită prototipul obiectului) către valoarea proprietății «prototype» a constructorului*.
 
-Mai mult de atât fiecare `prototype` poate avea drept referință un alt `prototype`, realizându-se ceea ce se numește *lanț prototipal*. Modul de funcționare a lanțului prototipal se bazează pe un mecanism de delegare atunci când se caută o proprietate a unui obiect. De exemplu, dacă cauți o proprietate într-un obiect iar ea nu este a obiectului, există o bună șansă să fie moștenită prin lanțul prototipal de la constructorul pe baza căruia a fost instanțiat așa că se face căutarea mai departe din obiect în obiect până când proprietatea este găsită sau nu.
+Mai mult de atât fiecare `prototype` poate avea drept referință un alt `prototype`, realizându-se ceea ce se numește *lanț prototipal*. Modul de funcționare a lanțului prototipal se bazează pe un mecanism de delegare atunci când se caută o proprietate a unui obiect. De exemplu, dacă vei căuta o proprietate într-un obiect, iar aceasta nu aparține obiectului, există o bună șansă să fie moștenită prin lanțul prototipal de la constructorul pe baza căruia a fost instanțiat. Astfel, se face căutarea mai departe din obiect în obiect până când proprietatea este găsită sau nu.
+
+Există o întrebare simplă: cât timp „trăiește” un obiect?
 
 ## Componența obiectelor
 
 Obiectele au **proprietăți** și **metode**.
-Proprietățile sunt valori primitive - numere, boolean-uri, șiruri de caractere, funcții sau chiar obiecte. Proprietățile ***sunt ceva***.
-Metodele ***fac ceva***. Metodele sunt de fapt niște funcții. Un aspect care vă va face viața ușoară odată înțeles este acela că toate funcțiile definite în obiectul global, de fapt, devin automat metode ale acestuia, adică lui `window` în cazul browserelor.
+Proprietățile sunt valori primitive - numere, boolean-uri, șiruri de caractere, funcții sau chiar obiecte. Proprietățile **sunt ceva**.
+Metodele **fac ceva**. Metodele sunt de fapt niște funcții. Un aspect care vă va face viața ușoară odată înțeles este acela că toate funcțiile definite în obiectul global, de fapt, devin automat metode ale acestuia, adică lui `window` în cazul browserelor.
 
 Hai să facem un obiect. Vă mai aduceți aminte de la valori că valoarea obiect poate fi exprimată literal prin precizarea pur și simplu a unei perechi de acolade.
 
@@ -126,17 +128,42 @@ Am menționat că JavaScript vine din start cu obiectele care se numesc „built
 - Obiectele atunci când au metode, nu „dețin” sau „conțin” acele funcții, ci doar referințe către funcțiile pe post de metode. Funcțiile (metodele) nu fac parte din obiect; referința către acestea este parte a obiectului.
 - În obiecte numele proprietăților sunt întotdeauna stringuri.
 - Relațiile prototipale pot cauza probleme atunci când este nevoie de enumerarea proprietăților obiectelor. Douglas Crockford recomandă „ambalarea” conținutului buclei de ciclare într-o funcție de verificare `hasOwnPropery()`;
-- Dacă dorești „înghețarea” obiectelor pentru a nu fi modificate, se va folosi `Object.freeze()` iar în cazul Node.js, modulul `deep-freeze`.
+- Dacă dorești „înghețarea” obiectelor pentru a nu fi modificate, se va folosi `Object.freeze()`, iar în cazul Node.js, modulul `deep-freeze`.
 
 ## Crearea obiectelor
 
 Obiectele pot fi create în două feluri: prin declararea acestora sau prin construirea lor.
 
-1. `var newObj = new Object();` se respectă cele patru reguli: (1)crearea obiectului; (2)stabilirea lanțului prototipal; (3)bindingul lui `this` la noul obiect; (4)obiectul nou creat este returnat.
-2. `var newObj = Object.create(null);` prototype este setat la `null`. Supranumit `dict pattern`
+1. `var newObj = new Object();` se respectă cele patru reguli: (1) crearea obiectului; (2) stabilirea lanțului prototipal; (3) bindingul lui `this` la noul obiect; (4) obiectul nou creat este returnat.
+2. `var newObj = Object.create(null);` unde `prototype` este setat la `null`. Acest model este supranumit `dict pattern`.
 3. `var newObj = Object.create(Object.prototype);` echivalentă cu `var newObj = {}`.
 4. `var newObj = {};` echivalentă cu `new Object()`.
 5. `function x(){return{a:1}}; var y = x();`
+
+Mai există o modalitate de a crea obiecte care implică returnarea unui obiect la executarea unei funcții. Acest model, șablon, tipar, spune-i cum îți place pentru că englezii îi spun **pattern**, se comportă ca o mică făbricuță de făcut obiecte. De fiecare dată când o astfel de funcție va fi apelată, tot atâtea obiecte vor fi returnate.
+
+```javascript
+function Făbricuță (valoarea) {
+  // voi folosi notația prescurtată ES6 pentru a scrie obiectul
+  return {
+    a: 1,
+    valoarea
+  };
+};
+// inițiem două colecții ca să fie mai amuzant de urmărit
+// una cu valori pentru care se creează Obiectele
+// pentru că vom introduce valoarea fiecărui index într-un obiect
+// si a doua care va fi containerul în care încărcăm cu push
+// obiectele generate de Făbricuță
+var colTest = ["x", "y", "z"],
+    colObi = [];
+for (let i = 0; i < colTest.length; i++) {
+  colObi.push(Făbricuță(colTest[i]));
+};
+colObi[0];
+```
+
+Am făcut un pas important către înțelegerea unei perspective lărgite asupra limbajului, una în care datele sunt așezate și sunt structurate în diferitele tipuri de agregări necesare unor scenarii diferite aplicate la anumite momente ale execuției unui program.
 
 ## Crearea obiectelor cu valori deja computate
 

@@ -220,7 +220,7 @@ Am găsit că cel mai potrivit este să reprezint ca un bloc de cod.
 
 ![](FunctionRealmSymbol.png)
 
-Tipologic vorbind, acest slot va conține înregistrarea de Tărâm pentru respectiva funcție. Este Tărâmul în care a fost declarată funcția și care oferă acesteia toate obiectele intrinseci (intrinsics) necesare pentru evaluarea codului.
+Tipologic vorbind, acest slot va conține înregistrarea de `Tărâm` pentru respectiva funcție. Este Tărâmul în care a fost declarată funcția și care oferă acesteia toate obiectele intrinseci (intrinsics) necesare pentru evaluarea codului.
 
 Am găsit o reprezentare simpatică a doi munți care implică sensul unui Tărâm, a unui spațiu geografic.
 

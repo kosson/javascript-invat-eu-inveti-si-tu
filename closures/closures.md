@@ -90,7 +90,7 @@ Closure este atunci când o FUNCȚIE ține minte scope-ul lexical chiar și atun
 Simplist poți spune că un closure se formează atunci când o funcție returnează o alta pe care a găzduit-o sau când există o referință externă la funcția internă. Acest lucru înseamnă că această funcție poate fi invocată la un moment viitor.
 
 ```javascript
-function closureEx(){
+function closureEx () {
   var a = 'ceva';
   function logger(valoare){
     console.log(a);
@@ -103,7 +103,7 @@ closureEx();
 Returnarea unei funcții care va deveni valoarea unei variabile.
 
 ```javascript
-function closureEx(){
+function closureEx () {
   var a = 'ceva';
   return function(valoare){
     console.log(a);
@@ -421,9 +421,9 @@ var faCeva = function(bool){
 }; console.log(faCeva(true)); // 10
 ```
 
-## Alonjă
+## Alonje
 
-Mimarea variabilelor private.
+Înțelegerea closure-urilor oferă posibilitatea de mimare a variabilelor private.
 Înțelegerea modului în care se face closure vă va ajuta în înțelegerea lui **Revealing Module Pattern**.
 Înțelegerea șablonului **Module**.
 Closure-urile formează baza funcțională a callback-urilor și a temporizărilor. Ambele cazuri implică funcții care sunt apelate asincron la un moment nespecificat din viitor. De regulă, se folosesc astfel de funcții pentru accesarea datelor externe.
