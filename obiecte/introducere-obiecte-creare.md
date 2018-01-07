@@ -34,7 +34,7 @@ Ceea ce mai trebuie să știi din start despre constructori este că la apelarea
 
 Mai mult de atât fiecare `prototype` poate avea drept referință un alt `prototype`, realizându-se ceea ce se numește *lanț prototipal*. Modul de funcționare a lanțului prototipal se bazează pe un mecanism de delegare atunci când se caută o proprietate a unui obiect. De exemplu, dacă vei căuta o proprietate într-un obiect, iar aceasta nu aparține obiectului, există o bună șansă să fie moștenită prin lanțul prototipal de la constructorul pe baza căruia a fost instanțiat. Astfel, se face căutarea mai departe din obiect în obiect până când proprietatea este găsită sau nu.
 
-Există o întrebare simplă: cât timp „trăiește” un obiect?
+Există o întrebare simplă: cât timp „trăiește” un obiect? Un obiect trăiește atâta vreme cât există o referință către acesta.
 
 ## Componența obiectelor
 

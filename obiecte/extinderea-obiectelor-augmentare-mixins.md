@@ -51,7 +51,7 @@ function extinde (proprietati) {
   return obj;
 };
 ```
-În acest caz se creează un nou obiect cu `this` (de fapt, face o copie a lui însuși), la care bucla `for` adaugă proprietățile de la obiectul care se dorește a fi integrat. De fapt, din punct de vedere tehnic, se face o copie a referințelor către funcțiile și obiectele obiectului de integrat ca extindere a obiectului original.
+În acest caz se creează un nou obiect cu `this` (de fapt, face o copie a lui însuși), la care bucla `for` adaugă proprietățile de la obiectul care se dorește a fi integrat. De fapt, din punct de vedere tehnic, se face o copie a referințelor către funcțiile și obiectele obiectului de integrat, ca extindere a obiectului original.
 
 Dacă funcțiile definite de un mixin sunt destinate a fi folosite de un alt obiect, se pune întrebarea dacă nu ar fi mai simplă apelarea mixinului într-un `call()`.
 
