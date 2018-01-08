@@ -496,17 +496,15 @@ run();
 ```
 
 ![Ilustrație pentru Closures in loop](closuresInLoop.svg)
+
 #### init()
 `init()` ciclează de 3 ori iar `x` va rămâne după finalizarea buclei la valoarea `2`.
 innerFunction face „enclosing” (circumscrie) variabila x.
 La momentul execuției sunt introduse în array-ul `funcs` trei referințe către funcția internă a lui `init()`, astfel, făcându-se un clojure pe funcția internă.
 
-
-
-
 #### run()
 
-La execuție, `run()`, va executa rând pe rând funcțiile din `funcs[]`. Toate returnează aceeași valoare, adică ultima rezultată din excuția buclei.
+La execuție, `run()`, va executa rând pe rând funcțiile din `funcs[]`. Toate returnează aceeași valoare, adică ultima rezultată din execuția buclei.
 
 #### PROBLEMA
 
@@ -595,7 +593,6 @@ for(var index in functii){
 ```
 Diferența este că `emiteFunctii` este invocat pentru fiecare iterație. Ca efect se creează un scope nou, iar index este legat de acel scope, ceea ce înseamnă ca avem 5 scope-uri create.
 
-
 ## Alonjă
 
 Înțelegerea closure-urilor oferă posibilitatea de mimare a variabilelor private.
@@ -611,3 +608,5 @@ Funcțiile de nivel înalt și closure-urile formează coloana vertebrală a pro
 [JavaScript Allongé, the "Six" Edition](https://leanpub.com/javascriptallongesix/read#closures)
 
 [JavaScript Getters and Setters](https://javascriptplayground.com/blog/2013/12/es5-getters-setters/)
+
+[Javascript Closures](http://jibbering.com/faq/notes/closures/)
