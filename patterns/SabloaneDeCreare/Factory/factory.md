@@ -1,8 +1,6 @@
 # Factory
 
-Este un șablon folosit pentru a simplifica crearea obiectelor.
-Folosit și la crearea de obiecte în baza unor necesități.
-Este o funcție care creează și returnează un obiect.
+Este un șablon folosit pentru a simplifica crearea obiectelor. Este o funcție care creează și returnează un obiect.
 
 **Moment Zen**: Un factory este o funcție.
 

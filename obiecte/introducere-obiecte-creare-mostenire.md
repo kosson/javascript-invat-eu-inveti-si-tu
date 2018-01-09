@@ -18,7 +18,7 @@ Mai departe, părțile componente, mai exact proprietățile trebuie înțelese 
 
 Atunci când un obiect este creat, toate caracteristicile sale sunt moștenite de la un alt obiect cu rol de prototip. Să nu vi se pară ciudat că un prototip este un obiect, iar acesta la rândul lui are un prototip. E ca un lanț care are drept limită superioară obiectele interne `Object` și `Function`.
 
-Pentru că ești nerăbdătoare am să-ți dau două indicii privind crearea obiectelor. Poți folosi notația literală folosind acoladele ca în `var obiect = {a: 1}` sau poți apela cu operatorul `new` funcții cu rol de constructor. Aceste două metode sunt și cele mai des întâlnite. O regulă de scriere care este foarte utilă este aceea că toate valorile text, vor fi introduse în obiecte cu textul între ghilimele simple, iar restul valorilor așa cum sunt ele. Proprietățile se redactează precum listele, fiind delimitate prin virgulă.
+Pentru că ești nerăbdătoare am să-ți dau două indicii privind crearea obiectelor. Poți folosi notația literală folosind acoladele ca în `var obiect = {a: 1}` sau poți apela cu operatorul `new` funcții cu rol de constructor. Aceste două metode sunt și cel mai des întâlnite. O regulă de scriere care este foarte utilă este aceea că toate valorile text, vor fi introduse în obiecte cu textul între ghilimele simple, iar restul valorilor așa cum sunt ele. Proprietățile se redactează precum listele, fiind delimitate prin virgulă.
 
 ```javascript
 var obi = {
@@ -33,7 +33,7 @@ Am menționat constructorii deja?
 
 ## Ce sunt constructorii?
 
-Constructorii sunt niște funcții, care sunt făcute în așa fel ca la momentul execuției, să genereze un obiect. După cum am văzut în capitolul dedicat genezei Tărâmului, atunci când s-au format **intrinsics**, a fost creat și obiectul prototip al tuturor obiectelor, care o fracțiune mai târziu a fost folosit pentru crearea obiectului-funcție ce va juca rolul de prototip al tuturor funcțiilor. Un mic exemplu nu ar strica.
+Constructorii sunt niște funcții, care sunt redactate special ca la momentul execuției, să genereze un obiect. După cum am văzut în capitolul dedicat genezei Tărâmului, atunci când s-au format **intrinsics**, a fost creat și obiectul prototip al tuturor obiectelor, care o fracțiune mai târziu a fost folosit pentru crearea obiectului-funcție ce va juca rolul de prototip al tuturor funcțiilor. Un mic exemplu nu ar strica.
 
 ```javascript
 function MatrițăAvionVuiaI (tip = 'experimental', an = '1906') {
@@ -121,46 +121,32 @@ Object.getPrototypeOf(obi2);
 
 Celelalte proprietăți sunt: `Object.setPrototypeOf()` și `Object.isExtensible()`. Acestea pot fi consultate în detaliu, fiind descrise la obiectul intern fundamental `Object`.
 
-Aceste metode, de fapt, aceste **rețete** prestabilite, pot fi și ele alterate pentru că în gradul său de imensă flexibilitate, JavaScript permite chiar modificarea rețetelor originale (vezi obiectul intern `Reflect`). Este ca și cum ai modifica o carte de bucate așa cum vrei tu după necesitățile tale. Atingerea unui astfel de nivel implică un aspect negativ, iar acesta este pierderea compatibilității cu programale scrise de restul comunității. Închpuiește-ți ce s-ar întâmpla dacă aș modifica **rețeta** `Object.setPrototypeOf()`, dar alt programator dorește o interfațare cu software-ul scris de mine, fiind bun bazat că metoda lui Obiect respectă comportamentul așteptat prin standard? Ar fi un haos desăvârșit. Totuși, sunt moment când mici modificări îmbunătășesc performanța sau îmbogățesc programele.
+Aceste metode, de fapt, aceste **rețete** prestabilite, pot fi și ele alterate pentru că în gradul său de imensă flexibilitate, JavaScript permite chiar modificarea rețetelor originale (vezi obiectul intern `Reflect`). Este ca și cum ai modifica o carte de bucate așa cum vrei tu după necesitățile tale. Atingerea unui astfel de nivel implică un aspect negativ, iar acesta este pierderea compatibilității cu programele scrise de restul comunității. Închipuiește-ți ce s-ar întâmpla dacă aș modifica **rețeta** `Object.setPrototypeOf()`, dar alt programator dorește o interfațare cu software-ul scris de mine, fiind bun bazat că metoda lui Obiect respectă comportamentul așteptat prin standard? Ar fi un haos desăvârșit. Totuși, sunt momente când mici modificări îmbunătățesc performanța sau îmbogățesc programele.
 
 ## Mantre
 
 - ECMAScript vine cu obiectele sale din start care se numesc obiecte `built-in` în care este inclus și `global object` - obiectul global.
-- JavaScript nu are clase! Atenție, nu vă lăsați amăgiți de formula sintactică introdusă de ES6 pentru a face codul scris să pară că JavaScript are clase.
 - Totul în JavaScript are comportamentul unui obiect cu două excepții: `null` și `undefined`.
-- În clientul care rulează codul mai întâi de orice există obiectul window.
-- Obiectul window are o metodă numită Object [ function Object() ]. Motorul Javascript construiește automat metoda Obiect în obiectul window (window.Object returnează function `Object()`).
-- Toate obiectele în JavaScript descind din Object, adică își au originea în Object. Toate obiectele moștenesc metode și proprietăți din `Object.prototype`. Acestea pot fi suprascrise.
-- `Object.prototype` este un obiect în care poți adăuga propriile proprietăți și metode.
-- Modificările aduse obiectului `Object.prototype` se propagă către toate obiectele. Singura excepție este atunci când proprietățile și metodele supuse modificărilor nu sunt ele la rândul lor modificate mai departe în lanțul prototipal.
+- Toate obiectele în JavaScript descind din `Object`, adică își au originea în `Object`.
+- Toate obiectele moștenesc metode și proprietăți din `Object.prototype`, iar acestea pot fi suprascrise sau poți adăuga propriile proprietăți și metode.
 - În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype (numeFunctie.prototype). Acest obiect (prototype), este gol și este creat de constructorul lui `Object()`.
-- Funcțiile sunt legate de obiectul prototip prin metoda .constructor. Acest lucru înseamnă că poți afla în orice moment care este funcția care generează prototipul prin apelarea constructorului cu ***dunder-dunder-proto***: `obiect.__proto__.constructor`
 - Fiecare funcție obiect are un obiect prototip diferit.
-- Obiectele pot invoca orice funcție publică indiferent de lanțul prototipal.
 - Un obiect poate fi creat cu `new Object()`:
   1. acestă modalitate **nu va crea și constructor**.
   2. Accesarea `numeObiect.__proto__.constructor` răspunde cu `function Obiect()` la care s-a ajuns prin delegare.
-- O funcție apelată cu `new` în fața sa este un constructor:
-  1. Se creează un obiect nou.
-  2. Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu `new`. Se creează legătura prototipală.
-  3. Obiectul generat automat este pasat funcției cu rol de constructor ca fiind parametrul `this` și astfel, devine contextul de execuție al funcției constructor invocate.
-  4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), `this`, adică obiectul în sine va fi returnat automat.
-- `this` este un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută, iar pentru noile obiecte create este chiar noul obiect generat.
+- O funcție apelată cu `new` în fața sa este un constructor.
 - Obiectele pot moșteni alte proprietăți direct din alte obiecte.
 - Când introduci o proprietate nouă într-un obiect care generează prototipul pentru alte obiecte, obiectele legate prin lanțul prototipal, vor moșteni noile proprietăți.
-- [[Prototype]], adică proprietatea `prototype` este o legătură internă, care se stabilește de la un obiect la altul. Pentru aflarea prototipului se apelează `Object.getPrototypeOf(obiect)`.
-- Un obiect literal are prototype `undefined`. Cu toate acestea la interogare cu instanceof trimite la Object.
+- [\[Prototype]], adică proprietatea `prototype` este o legătură internă, care se stabilește de la un obiect la altul. Pentru aflarea prototipului se apelează `Object.getPrototypeOf(obiect)`.
+- Un obiect literal are prototype `undefined`. Cu toate acestea la interogare cu `instanceof` trimite la Object.
 - Legătura prototipală se poate obține și prin utilizarea metodei `Object.create()`, având două efecte:
   1. **creează un obiect**,
   2. **stabilește legătura prototipală**.
-- Legătura prototipală se obține și prin efectul al doilea al folosirii cuvântului cheie `new`.
 - Legătura prototipală creează un lanț de delegare pentru cazurile în care nu găsești o proprietate sau o metodă într-un anumit context de execuție.
-- Mecanismul pe care-l realizează `.prototype` este unul de delegare a cererii pentru referința unei proprietăți sau metode către un obiect mai sus pe lanțul prototipal către un alt obiect.
-- Obiecte cu un prototip și proprietăți prestabilite, se pot contrui cu `Object.create(obi, {exemplu: 'proprietate'})`. Astfel, se realizează o legătura prototipală la obiectul obi.
-- Obiectele atunci când au metode, nu „dețin” sau „conțin” acele funcții, ci doar referințe către funcțiile pe post de metode. Funcțiile (metodele) nu fac parte din obiect; referința către acestea este parte a obiectului.
-- În obiecte numele proprietăților sunt întotdeauna stringuri.
-- Relațiile prototipale pot cauza probleme atunci când este nevoie de enumerarea proprietăților obiectelor. Douglas Crockford recomandă „ambalarea” conținutului buclei de ciclare într-o funcție de verificare `hasOwnPropery()`;
-- Dacă dorești „înghețarea” obiectelor pentru a nu fi modificate, se va folosi `Object.freeze()`, iar în cazul Node.js, modulul `deep-freeze`.
+- Obiecte cu un prototip și proprietăți prestabilite, se pot contrui cu `Object.create(obi, {exemplu: 'proprietate'})`.
+- Metodele nu fac parte din obiect; referința către acestea este parte a obiectului.
+- Relațiile prototipale pot cauza probleme atunci când este nevoie de enumerarea proprietăților obiectelor.
+- Dacă dorești „înghețarea” obiectelor pentru a nu fi modificate, se va folosi `Object.freeze()`.
 
 ## Crearea obiectelor
 
@@ -173,13 +159,6 @@ Obiectele pot fi create în două feluri: prin declararea acestora sau prin cons
 5. `function x () { return {a: 1} }; var y = x();`. Prin returnarea unui obiect ca efect al execuției unei funcții.
 
 Toate variantele de mai jos au același efect: creează un obiect gol.
-
-```javascript
-var obi = new Object();
-var obi = Object.create(null);
-var obi = {};
-let obi = Object.create(Object.prototype);
-```
 
 Atenție, obiectele create cu `new` și cu `Object.create(null)` nu au constructor. Proprietatea `.constructor` va trimite la funcția la care a fost atașat prototype la momentul declarării. Am amintit de șablonul **dict**, o prescurtare de la dicționar. Câteva lămuriri sunt necesare. Acum câțiva ani, nu aveam la îndemână obiectele interne `Map` și `Set` iar programatorii trebuiau să găsească o alternativă pentru obiecte care să fie folosite precum un siloz, mai corect precum un dicționar pentru că ajuta și sintaza să pară ca unul (cuvânt cheie: valoare). Astfel, folosindu-se `Object.create(null)` puteai crea un obiect fără legătură prototipală ceea ce ar fi complicat lucrurile prin apariția multor alte valori moștenite în anumite scenarii. Ceea ce rămânea era o structură care putea fi folosită precum un **dicționar**.
 
@@ -755,22 +734,19 @@ Spuneam deja că, la nevoie, poți adăuga în prototipul funcției proprietăț
 function BenziDesenate(titlu){
   this.tip = "aventuri";
   this.titlu = titlu;
-  this.identificare = function(){
+  this.identificare = function dauID () {
     return `Acum citești ${titlu}, care este de ${this.tip}`
   };
 };
-
 let rahan = new BenziDesenate("Rahan");
 console.log(rahan.identificare());
-// Acum citești Rahan, care este de aventuri
-
 BenziDesenate.prototype.apreciere = function () {
   return `Sunt un mare fan ${this.titlu}`;
 };
 rahan.apreciere();
 ```
 
-Exemplul de mai sus este ceea ce Douglas Crockford numește moștenire „presudoclasică” și argumentează că ar fi o practică ce ar trebui evitată. Am menționat acest model pentru că este utilizat pe scară largă în aplicații. Mai mult, trebuie înțeles acest model dacă dorești să înțelegi noua sintaxă care introduce conceptul de clase în JavaScript.
+Exemplul de mai sus este ceea ce Douglas Crockford numește moștenire „presudoclasică” și argumentează că ar fi o practică ce ar trebui evitată. Am menționat acest model pentru că este întâlnit adesea în aplicații. Dacă dorești să înțelegi noua sintaxă care introduce conceptul de clase în JavaScript, acest model trebuie reținut. Ca și deficiență a acestui model este că ori de câte ori vei crea un obiect nou, funcția `dauID` va fi creată și ea, poluându-se memoria.
 
 Crockford indică faptul că în practică mai sunt întâlnite și situații „nebune”, când se înlocuiește prototipul unui obiect funcție cu un obiect creat din apelarea cu `new` a unei funcții constructor.
 
@@ -1045,20 +1021,20 @@ cerc1.arie(); //
 
 ## În JavaScript nu există clase!
 
-În ciuda introducerii unei sintaxe care seamănă cu obișnuințele de programare ale altor limbaje, de fapt nu este decât un aranjament sintactic, care ascunde o implementare specifică JavaScript. Dacă vei crede că existența sintaxei `class` implică și un comportament intern care să se plieze cu ceea ce știi din alte limbaje de programare, te afli într-o adâncă eroare. JavaScript este un limbaj de programare bazat pe obiecte care nu și-a bazat niciodată crearea acestora în baza unei clase care să aibă rol de plan constructiv după toate rigorile pe care alte limbaje de programare le cereau. Istoric vorbind, JavaScript nu a avut drept țintă crearea obiectelor în baza unor clase, dar mulți programatori obișnuiți cu această practică, au simțit nevoia să-și poată exprima propriile rutine de lucru forțând conceptul de clase și în JavaScript. Funcțiile, prin modul lor de lucru au oferit calea către implementarea claselor.
+În ciuda introducerii unei sintaxe care seamănă cu obișnuințele de programare din alte limbaje, de fapt nu este decât un aranjament sintactic, care ascunde o implementare specifică JavaScript. Dacă vei crede că existența sintaxei `class` implică și un comportament intern care să se plieze cu ceea ce știi din alte limbaje de programare, te afli într-o adâncă eroare. JavaScript este un limbaj de programare bazat pe obiecte care nu și-a bazat niciodată crearea acestora în baza unei clase. Istoric vorbind, JavaScript nu a avut drept țintă crearea obiectelor în baza unor clase, dar mulți programatori obișnuiți cu această practică, au simțit nevoia să-și poată exprima propriile rutine de lucru forțând conceptul de clase și în JavaScript. Funcțiile, prin modul lor de lucru au oferit calea către implementarea claselor.
 
-### Modul de a crea o clasă - studiu
+### Drumul către clase - studiu
 
 #### Funcție simplă
 
-Modelarea unei clase rudimentare se poate realiza prin introducerea de funcționalități și date în obiectul `this` al funcției.
+Modelarea unei clase rudimentare se poate realiza prin introducerea de funcționalități și date în obiectul `this` al unei funcții. Adu-ți aminte că la executarea unei funcții constructor folosind operatorul `new`, primul lucru pe care-l face motorul este să creeze un obiect în contextul căruia să execute corpul funcției.
 
 ```javascript
-function VehiculSpatial(identificator){
+function VehiculSpatial (identificator) {
   this.id = identificator;
   this.functie = '';
   this.an = '';
-  this.prezentare = function(){
+  this.prezentare = function afisez () {
     return this.id + " " + this.an;
   };
 };
@@ -1070,9 +1046,9 @@ console.log(Santinel.prezentare());
 // ori de câte ori este creat un nou obiect prin new
 ```
 
-Partea deficitară a unei astfel de soluții este că funcțiile care joacă rol de metode în obiectul `this` (obiectul context în care va rula funcția când va fi apelată cu new), vor fi recreate ori de câte ori este creat un nou obiect. Acces lucru conduce la probleme de performanță a codului poluându-se memoria cu aceeași funcție recreată ori de câte ori este instanțiat un nou obiect.
+Partea deficitară a unei astfel de soluții este că funcțiile care joacă rol de metode în obiectul `this` (obiectul context în care va rula funcția când va fi apelată cu new), vor fi recreate ori de câte ori este creat un nou obiect. Accest fapt implică probleme de performanță a codului poluându-se memoria cu aceeași funcție recreată ori de câte ori este instanțiat un nou obiect.
 
-### Funcție simplă care are metode adăugate direct la prototip
+#### Funcție simplă cu metode adăugate direct la prototip
 
 Modelarea unei clase rudimentare se poate realiza și prin introducerea de funcționalități și date în obiectul prototip al funcției. Astfel, prin mecanismul de moștenire prototipală, toate obiectele instanțiate cu `new`, vor beneficia de acces direct la toți membrii obiectului prototip.
 
@@ -1102,7 +1078,7 @@ var VehiculSpatial = {
   id: '',
   functie: '',
   an: '',
-  prezentare: function(){
+  prezentare: function descriu () {
     return this.id + " " + this.an;
   }
 };
@@ -1113,6 +1089,236 @@ console.log(VehiculSpatial.prezentare());
 ```
 
 Comparația cu o clasă este ușor forțată în acest caz pentru că oricine, oricând poate suprascrie valorile obiectului ceea ce conduce la o serie de probleme.
+
+### Sintaxa `class`
+
+Prin introducerea acestei sintaxe se intenționează crearea claselor pe baza moștenirii prototipale. Să observăm un prim exemplu.
+
+```javascript
+class Test {
+  constructor(val){
+    this.val = val; // proprietăți interne
+  };
+  // proprietăți în prototype:
+  ecou () {
+    console.log(this.val);
+  };
+};
+let unTest = new Test('Salut!');
+// câteva verificări
+console.log(unTest instanceof Test);    // true
+console.log(unTest instanceof Object);  // true
+console.log(typeof Test); // function
+console.log(typeof Test.prototype.ecou); // function
+```
+Echivalent lui `constructor(val){}`, este `function Test (val){ this.val = val }`. Urmează o listă a membrilor viitorului obiect care menționează direct identificatorul fără cuvântul cheie `function` și nici nu este folosită formula consacrată `Test.prototype.actiune`. Instanțierea se face folosind operatorul `new`. Atenție, obiectul prototype al clasei va fi protejat la scriere (**read-only**). Nu se comportă ca în cazul funcțiilor din modelul clasic în care poți adăuga ulterior în obiectul prototype.
+
+### Mantre
+
+- Spre deosebire de funcții, declarația de clasă nu beneficiază de mecanismul de hoisting indiferent că este o declarație sau o expresie de clasă. Deci, până când execuția nu ajunge la locul de declarare, clasa se află în Temporal Dead Zone (TDZ).
+- Tot codul din clasă rulează automat în `strict mode`.
+- Toate metodele create sunt automat non-enumerabile.
+- Apelarea constructorului fără `new` conduce la o stare de eroare.
+- Numele clasei nu trebuie folosit în interiorul acesteia pentru o reasignare. Conduce la eroare.
+- În cazul folosirii expresiilor de clasă, nu este necesară introducerea unui identificator după cuvântul cheie `class`.
+- `super()` setează legătura la `this` în cazul claselor derivate. Dacă folosești constructorul, adu-ți mereu aminte să invoci mai întâi de toate `super()`.
+- clasele permit moștenirea din toate obiectele built-in: `class ArraySpecial extends Array {}`.
+
+### Declarare și expresii de clase
+
+Ca și în cazul funcțiilor, clasele pot fi declarate, dar pot fi și expresii.
+
+#### Declarație de clasă
+
+```javascript
+class Plan {
+  constructor(extern){
+    this.ceva = extern;
+  };
+  ecou () {
+    console.log(this.ceva);
+  };
+};
+```
+
+Este util să menționăm faptul că în clase sunt acceptate „numele computate” pentru identificatorii proprietăților.
+
+```javascript
+var pentruOProprietate = 'metoda x';
+var OClasa = class {
+  constructor (ceva) {
+    this.interna = ceva;
+  };
+  [pentruOProprietate] () {
+    console.log(this.interna);
+  };
+};
+var Una = new OClasa('Inima');
+Una['metoda x'](); // Inima
+```
+
+#### Expresie de clasă
+
+Expresia pentru clase în JavaScript este una din modalitățile prin care se pot declara clasele. Similar funcțiilor, clasele pot să aibe nume sau nu. Dacă poartă nume, acesta este disponibil în blocul de cod al clasei. Testul cu `typeof` va fi întotdeauna `function`.
+
+```javascript
+var Plan = class {
+  constructor (extern) {
+    this.ceva = extern;
+  };
+  ecou () {
+    console.log(this.ceva);
+  };
+};
+```
+
+### Clasele ca valori de prim-rang
+
+Ca orice valoare de „primă-clasă”, și clasa poate fi pasată drept valoare unei funcții.
+
+```javascript
+function creatorDeCeva (ClasaMea) {
+  return new ClasaMea();
+};
+var obi = creatorDeCeva(
+  class {
+    ecou () {
+      console.log('bing-bang!');
+    }
+  };
+);
+```
+
+O aplicație practică a claselor este crearea din zbor a Singleton-urilor (acestea sunt obiecte care sunt unice în economia unei aplicații - un singur obiect de acest fel poate exista la un moment dat). Acest lucru se poate realiza prin aplicarea directă a lui `new` pe expresia de clasă.
+
+```javascript
+let avion = new class {
+  constructor(indicativ){
+    this.id = indicativ;
+  };
+  transmite () {
+    console.log(this.id);
+  };
+}('IAR 99');
+avion.id();
+```
+### Clasele permit proprietăți accesor
+
+Cu ajutorul accesorilor se poate comunica direct cu proprietățile obiectului instanțiat pe baza clasei.
+
+```javascript
+class AccesibilDeAfara {
+  constructor (valoare) {
+    this.val = valoare;
+  };
+  get elem () {
+    return this.val;
+  };
+  set elem (externa) {
+    this.val = externa;
+  };
+};
+var obi = new AccesibilDeAfara('miau');
+obi.elem; // val: miau
+obi['elem'] = 12; // val: 12
+```
+
+### Extinderea claselor
+
+Clasele pot fi extinse. Este indicată extinderea unei clase folosindu-se cuvântul cheie `extends`.
+
+```javascript
+'use strict';
+class Ceva {
+  constructor (primo, secundo) {
+    this.ceva = 'o proprietate';
+    this.altceva = 'alte proprietăți';
+    this.primo = primo;
+    this.secundo = secundo;
+  }
+}
+
+class Altceva extends Ceva {
+  constructor (terzo) {
+    super(primo, secundo);
+    this.ceva = 'Halal';
+  }
+}
+```
+
+### Clase derivate
+
+Derivarea obiectelor înainte de facilitățile pe care le pune la dispoziție noul standard ES6 era un proces laborios de creare a unui obiect și apoi crearea unui altuia căruia îi era setat prototipul îmbogățit al primului. Mai jos este modelul „istoric” comparat cu ceea ce propune `extends`.
+
+```javascript
+// PRIMUL OBIECT
+function Stramos (val) {
+  this.statica = val;
+};
+Stramos.prototype.oriDoi = function () {
+  return this.statica * 2;
+};
+
+// AL DOILEA
+function Copil (deinmultit) {
+  Stramos.call(this, deinmultit);
+};
+Copil.prototype = Object.create(Stramos.prototype, {
+  constructor: {
+    value: Copil,
+    enumerable: true,
+    writable: true,
+    configurable: true
+  }
+});
+var rezultat = new Copil(2);
+console.log(rezultat.oriDoi()); // 4
+```
+
+Este observabil cu cât efort s-a realizat acest lucru.
+Mai întâi am executat funcția Stramos în contextul lui Copil pasându-i `this`, care este obiectul `this` propriu lui `Copil` pentru a seta corect contextul de execuție, adică în interiorul lui `Copil`. Au fost pasate atributele așteptate de Stramos. A trebuit să „rescriem” obiectul prototip al lui Copil setându-l artificial la cel pe care dorim să-l moștenim folosind această posibilitate oferită prin `Object.create()`. A mai trebuit să facem un pas suplimentar setând ca proprietatea constructor să trimită totuși înapoi la `Copil` pentru a consolida originea sa.
+
+În cazul claselor, mare parte din aceste operațiuni complexe sunt rezolvate prin introducerea sintagmei `extends` în declarația funcției care dorești să fie o derivare a alteia. Prototipul este setat automat și poți accesa constructorul folosind metoda `super()`. Pentru a reține mai ușor, `super()` are rolul de a apela constructorul părintelui. În clasele derivate `super()` trebuie apelat înainte de a folosi `this` în constructor pentru că `super()` este cel care-l setează.
+
+```javascript
+class Stramos {
+  constructor (val) {
+    this.statica = val;
+  };
+  oriDoi () {
+    return this.statica * 2;
+  };
+};
+class Copil extends Stramos {
+  constructor (deinmultit) {
+    super(deinmultit);
+  };
+};
+var inmultire = new Copil(2);
+inmultire.oriDoi(); // 4
+console.log(inmultire instanceof Copil); // true
+console.log(inmultire instanceof Stramos); // true
+```
+
+Clasele care moștenesc de la altele, se numesc clase derivate. Adu-ți mereu aminte că pentru clasele derivate, în cazul în care dorești să folosești constructorul, trebuie să-l folosești în combinație cu `super` căruia îi pasezi argumentele pe care le preia constructorul. Dacă nu dorești să folosești constructorul, adică să formulezi o clasă derivată fără a menționa constructorul, `super()` este apelat automat cu toate argumentele necesare la momentul instanțierii clasei.
+
+### Moștenirea din obiectele interne prin clase derivate
+
+Clasele permit moștenirea din obiectele predefinite intern din JavaScript, ceea ce se poate dovedi foarte util atunci când vei dori niște funcționalități mai speciale pornind de la un obiect intern al limbajului.
+Acest lucru se realizează prin extinderea lor.
+
+```javascript
+class ArrayulMeu extends Array {
+  // deocamdată nimic
+};
+var unArraySpecial = new ArrayulMeu('ceva', 'altceva');
+console.log(unArraySpecial); //[ "ceva", "altceva" ]
+console.log(ArrayulMeu instanceof Array); // false
+```
+
+Toate metodele din obiectul prototip al lui Array sunt disponibile noului obiect creat în baza clasei care a derivat obiectul built-in. Responsabil pentru accesul la metodele din prototipul lui `Array` este un simbol `Symbol.species`, un simbol „binecunoscut” (**well-known**).
+
+`Symbol.species` definește o proprietate accesor, care returnează o funcție. Funcția este un constructor gata de a fi utilizat în locul constructorului.
 
 ## Tratarea obiectelor care seamănă cu array-uri
 
@@ -1142,6 +1348,7 @@ arrayLike.forEach(function(element){
   console.log(element);
 });
 ```
+
 Atenție, pentru că o țintire a elementelor de interes cu ajutorul lui querySelector poate fi confuză uneori, cel mai bine este să fie folosit atributul de selecție „data-ceva="formular"”.
 
 ```html
@@ -1165,7 +1372,7 @@ caAr.forEach(function(elem){
 });
 ```
 
-Elementele găsite sunt de fapt o colecție de noduri, care este dinamică în sensul că de fiecare dată când DOM-ul va suferi o modificare, se va actualiza și aceasta. În ES6 există o aceeași abordare: `arrayLike = Array.from(nodes)`. ES6 introduce un nou tip de obiecte iterabile - obiecte ale căror elemente pot fi extrase rând pe rând.
+Elementele găsite sunt de fapt o colecție de noduri, care este dinamică în sensul că, de fiecare dată când DOM-ul va suferi o modificare, se va actualiza și aceasta. În ES6 există o aceeași abordare: `arrayLike = Array.from(nodes)`. ES6 introduce un nou tip de obiecte iterabile - obiecte ale căror elemente pot fi extrase rând pe rând.
 
 ## Folosirea unui obiect ca un dicționar de valori (`map`)
 
@@ -1173,8 +1380,7 @@ JavaScript nu are structuri de date specifice unei „hărți” de valori - cee
 
 ### Moștenirea - o problemă
 
-Adică lanțul prototipal care se stabilește, poate afecta citirea proprietăților. Unele operațiuni, se uită la tot lanțul prototipal și „văd” proprietăți moștenite.
-Alte operațiuni accesează doar proprietățile pe care obiectul le are fără a se uita la cele moștenite. Atunci când folosești un obiect drept colecție (`map`), trebuie operat asupra lui cu mare atenție.
+Adică lanțul prototipal care se stabilește, poate afecta citirea proprietăților. Unele operațiuni, se uită la tot lanțul prototipal și „văd” proprietăți moștenite. Alte operațiuni accesează doar proprietățile pe care obiectul le are fără a se uita la cele moștenite. Atunci când folosești un obiect drept colecție (`map`), trebuie operat asupra lui cu mare atenție.
 
 ```javascript
 var matrita = {proprietate: 'ceva'};
