@@ -4,7 +4,7 @@
 
 Standardul spune că **un obiect este un membru al tipului built-in Object** al limbajului.
 
-Pentru a realiza natura limbajului de programare JavaScript, care este unul orientat pe obiecte, vom cita standardul din nou care aduce următoare lămurire:
+Pentru a realiza natura limbajului de programare JavaScript, care este unul orientat pe obiecte, vom cita standardul din nou care aduce următoarea lămurire:
 
 > ECMAScript este bazat pe obiecte: limbajul de bază și toate funcționalitățile sunt oferite de obiecte iar un program ECMAScript este un ciorchine de obiecte care comunică.
 
@@ -61,7 +61,7 @@ Obiectele au **proprietăți** și **metode**. Împreună formează membrii obie
 
 Proprietățile sunt valori primitive - numere, boolean-uri, șiruri de caractere, funcții sau chiar obiecte. Proprietățile **sunt ceva**! Prin contrast, metodele **fac ceva**. Metodele sunt de fapt niște funcții. Un aspect care vă va face viața ușoară odată înțeles este acela că toate funcțiile definite în obiectul global, de fapt, devin automat metode ale acestuia, adică lui `window` în cazul browserelor.
 
-Hai să facem un obiect. Vă mai aduceți aminte de la valori că valoarea obiect poate fi exprimată literal prin precizarea a unei perechi de acolade.
+Hai să facem un obiect. Vă mai aduceți aminte de la valori că obiectele pot fi exprimate literal prin precizarea unei simple perechi de acolade.
 
 ```javascript
 // un object literal
@@ -79,7 +79,7 @@ console.log(obi); // {"unu":1,"este":true}
 
 **Moment ZEN**: Obiectele pot fi considerate ca array-uri asociative pentru că poți accesa valoarea folosind notația cu paranteze drepte: `obi['b']`.
 
-Proprietățile pot fi adăugate dinamic unui obiect deja existent fără a fi nevoie să mergi la constructorul său și să le adaugi acolo. Am menționat deja un concept foarte important: constructor. Pe cât de pretențios sună, pe atât de simplă este misiunea sa: o funcție care să genereze un obiect. Vom trata distinct și în amănunt constructorii.
+Proprietățile pot fi adăugate dinamic unui obiect deja existent fără a fi nevoie să mergi la constructorul său pentru a le adauga acolo. Am menționat deja un concept foarte important: constructor. Pe cât de pretențios sună, pe atât de simplă este misiunea sa: o funcție care să genereze un obiect. Vom trata distinct și în amănunt constructorii.
 
 ```javascript
 function Constructorul () { this.ceva = 1; };
@@ -102,26 +102,15 @@ Acest mod de a adăuga proprietăți noi fără a interveni asupra constructorul
 
 ## Obiecte interne (*built-in*)
 
-Am menționat că JavaScript vine din start cu obiectele care se numesc „built-in object” și pe care le-am tradus ca **obiecte interne** limbajului. Pentru a avea acces la ele nu-i nevoie să faci ceva. Pur și simplu ele sunt acolo deja, gata de a fi folosite. Există un detaliu pe care aș dori să-l remarcați cu atenție. `Obiectul global` este parte a obiectelor interne. Am putea concluziona că `obiectul global` plus `obiectele standard` constituie setul mare al celor `interne`. O distincție pe care trebuie să o fi realizat deja este că obiectul global nu este containerul tuturor obiectelor oricât de tentant ar fi să-l gândim astfel. Dar este „containerul”, dacă vrei să-l închipui astfel, al întregului cod pe care-l scrii tu și al entităților care se formează la momentul evaluării acestuia.
+Am menționat că JavaScript vine din start cu obiectele care se numesc „built-in object”, pe care le-am tradus ca **obiecte interne** limbajului. Pentru a avea acces la ele nu-i nevoie să faci ceva. Pur și simplu ele sunt acolo deja, gata de a fi folosite. Există un detaliu pe care aș dori să-l remarcați cu atenție. `Obiectul global` este parte a obiectelor interne. Am putea concluziona că `obiectul global` plus `obiectele standard` constituie setul mare al celor `interne`. O nuanță pe care trebuie să o fi realizat deja este aceea că obiectul global nu este containerul tuturor obiectelor oricât de tentant ar fi să-l imaginăm astfel. Dar este „containerul”, dacă vrei să-l închipui astfel, al întregului cod pe care-l scrii tu și al entităților care se formează la momentul evaluării acestuia.
 
-### Metodele interne ale obiectelor în JavaScript
+### Metodele obiectelor interne
 
 Modul în înțelegem un obiect este determinat și de un set de algoritmi care sunt oferiți de orice motor care implementează standardul ECMAScript. Acești algoritmi sunt numiți `metode interne`. Metodele interne definesc comportamentul la momentul în care este rulat codul pentru acel obiect. Reține faptul că aceste metode interne cad în responsabilitatea celor care fac o implementare a unui motor de JavaScript. Reține acest aspect pentru a nu fi surprins când vei auzi sau citi discuții despre performanțele unui anume motor în comparație cu altul. Aceste metode interne, sunt toate procesele care se petrec în inima unui motor atunci când, de exemplu, apelezi o metodă a unui obiect intern cum ar fi `Object.create()` sau `String.split()`. Aceste adevărate biblioteci de cod scrise în alte limbaje de programare precum C++ sau Rust sunt, de fapt executanții „comenzilor” pe care noi le scriem în JavaScript. De aici și atributul pus acestui limbaj ca fiind de scripting. Un script fiind un set de instrucțiuni, care la momentul execuției angajează adevărate biblioteci de cod precompilate în limbaje de programare de nivel mai jos sau chiar binare, care comunică 1 și 0 direct cu mașina noastră. Am menționat acest lucru pentru a înțelege că noi operăm la un nivel foarte înalt, iar JavaScript poate fi perceput ca pe un rețetar ce se aplică într-un mediu dedicat interpretării respectivelor rețete.
 
-Câteva astfel de rețete oferite de limbajul nostru de programare care sunt utile lucrului cu obiecte.
+Câteva astfel de rețete oferite de limbajul nostru de programare care sunt utile lucrului cu obiecte. De exemplu, metoda `Object.getPrototypeOf()` returnează un obiect sau `null` și indică obiectul care oferă proprietățile moștenite, precum și pe cel asupra căruia se face interogarea cu `Object.getPrototypeOf(obiSursă)`. Returnarea lui `null` indică faptul că obiectul curent nu moștenește nicio proprietate. M-am oprit la această metodă pentru că obiectele prototip sunt pivoții pe care se realizează mecanismul de moștenire în JavaScript.
 
-### Metoda `Object.getPrototypeOf()`
-
-Returnează un obiect sau `null` și indică obiectul care oferă proprietățile moștenite, precum și pe cel asupra căruia se face interogarea cu `Object.getPrototypeOf(obiSursă)`. Returnarea lui `null` indică faptul că obiectul curent nu moștenește nicio proprietate.
-
-```javascript
-Object.getPrototypeOf(obi2);
-// Object { prop1: 10, prop2: obi.prop2() }
-```
-
-Celelalte proprietăți sunt: `Object.setPrototypeOf()` și `Object.isExtensible()`. Acestea pot fi consultate în detaliu, fiind descrise la obiectul intern fundamental `Object`.
-
-Aceste metode, de fapt, aceste **rețete** prestabilite, pot fi și ele alterate pentru că în gradul său de imensă flexibilitate, JavaScript permite chiar modificarea rețetelor originale (vezi obiectul intern `Reflect`). Este ca și cum ai modifica o carte de bucate așa cum vrei tu după necesitățile tale. Atingerea unui astfel de nivel implică un aspect negativ, iar acesta este pierderea compatibilității cu programele scrise de restul comunității. Închipuiește-ți ce s-ar întâmpla dacă aș modifica **rețeta** `Object.setPrototypeOf()`, dar alt programator dorește o interfațare cu software-ul scris de mine, fiind bun bazat că metoda lui Obiect respectă comportamentul așteptat prin standard? Ar fi un haos desăvârșit. Totuși, sunt momente când mici modificări îmbunătățesc performanța sau îmbogățesc programele.
+Aceste metode, de fapt, aceste **rețete** prestabilite, pot fi și ele alterate pentru că în flexibilitatea JavaScript permite chiar modificarea rețetelor originale (vezi obiectul intern `Reflect`). Este ca și cum ai modifica o carte de bucate așa cum vrei tu după necesitățile tale. Atingerea unui astfel de nivel implică un aspect negativ, iar acesta este pierderea compatibilității cu programele scrise de restul comunității. Închipuiește-ți ce s-ar întâmpla dacă aș modifica **rețeta** `Object.setPrototypeOf()`, dar alt programator dorește o interfațare cu software-ul scris de mine, fiind bun bazat că metoda lui `Obiect` respectă comportamentul așteptat prin standard? Ar fi un haos desăvârșit. Totuși, sunt momente când mici modificări îmbunătățesc performanța sau îmbogățesc programele.
 
 ## Mantre
 
@@ -143,7 +132,7 @@ Aceste metode, de fapt, aceste **rețete** prestabilite, pot fi și ele alterate
   1. **creează un obiect**,
   2. **stabilește legătura prototipală**.
 - Legătura prototipală creează un lanț de delegare pentru cazurile în care nu găsești o proprietate sau o metodă într-un anumit context de execuție.
-- Obiecte cu un prototip și proprietăți prestabilite, se pot contrui cu `Object.create(obi, {exemplu: 'proprietate'})`.
+- Obiectele cu un prototip și proprietăți prestabilite, se pot construi cu `Object.create(obi, {exemplu: 'proprietate'})`.
 - Metodele nu fac parte din obiect; referința către acestea este parte a obiectului.
 - Relațiile prototipale pot cauza probleme atunci când este nevoie de enumerarea proprietăților obiectelor.
 - Dacă dorești „înghețarea” obiectelor pentru a nu fi modificate, se va folosi `Object.freeze()`.
