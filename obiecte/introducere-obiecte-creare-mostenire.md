@@ -77,7 +77,7 @@ var obi = {unu, este}; // efectul este același
 console.log(obi); // {"unu":1,"este":true}
 ```
 
-**Moment ZEN**: Obiectele pot fi considerate ca array-uri asociative pentru că poți accesa valoarea folosind notația cu paranteze drepte: `obi['b']`.
+**Moment ZEN**: Obiectele pot fi privite ca array-uri asociative pentru că poți accesa valoarea folosind notația cu paranteze drepte: `obi['b']`.
 
 Proprietățile pot fi adăugate dinamic unui obiect deja existent fără a fi nevoie să mergi la constructorul său pentru a le adauga acolo. Am menționat deja un concept foarte important: constructor. Pe cât de pretențios sună, pe atât de simplă este misiunea sa: o funcție care să genereze un obiect. Vom trata distinct și în amănunt constructorii.
 
@@ -106,9 +106,9 @@ Am menționat că JavaScript vine din start cu obiectele care se numesc „built
 
 ### Metodele obiectelor interne
 
-Modul în înțelegem un obiect este determinat și de un set de algoritmi care sunt oferiți de orice motor care implementează standardul ECMAScript. Acești algoritmi sunt numiți `metode interne`. Metodele interne definesc comportamentul la momentul în care este rulat codul pentru acel obiect. Reține faptul că aceste metode interne cad în responsabilitatea celor care fac o implementare a unui motor de JavaScript. Reține acest aspect pentru a nu fi surprins când vei auzi sau citi discuții despre performanțele unui anume motor în comparație cu altul. Aceste metode interne, sunt toate procesele care se petrec în inima unui motor atunci când, de exemplu, apelezi o metodă a unui obiect intern cum ar fi `Object.create()` sau `String.split()`. Aceste adevărate biblioteci de cod scrise în alte limbaje de programare precum C++ sau Rust sunt, de fapt executanții „comenzilor” pe care noi le scriem în JavaScript. De aici și atributul pus acestui limbaj ca fiind de scripting. Un script fiind un set de instrucțiuni, care la momentul execuției angajează adevărate biblioteci de cod precompilate în limbaje de programare de nivel mai jos sau chiar binare, care comunică 1 și 0 direct cu mașina noastră. Am menționat acest lucru pentru a înțelege că noi operăm la un nivel foarte înalt, iar JavaScript poate fi perceput ca pe un rețetar ce se aplică într-un mediu dedicat interpretării respectivelor rețete.
+Modul în înțelegem un obiect este determinat și de un set de algoritmi care sunt oferiți de orice motor care implementează standardul ECMAScript. Acești algoritmi sunt numiți `metode interne`. Metodele interne definesc comportamentul la momentul în care este rulat codul pentru acel obiect. Reține faptul că aceste metode interne cad în responsabilitatea celor care fac implementarea unui motor de JavaScript. Reține acest aspect pentru a nu fi surprins când vei auzi sau citi discuții despre performanțele unui anume motor în comparație cu altul. Aceste metode interne, sunt toate procesele care se petrec în inima unui motor atunci când, de exemplu, apelezi o metodă a unui obiect intern cum ar fi `Object.create()` sau `String.split()`. Aceste adevărate biblioteci de cod scrise în alte limbaje de programare precum C++ sau Rust sunt, de fapt executanții „comenzilor” pe care noi le scriem în JavaScript. De aici și atributul pus acestui limbaj ca fiind de scripting. Un script fiind un set de instrucțiuni, care la momentul execuției angajează adevărate biblioteci de cod precompilate în limbaje de programare de nivel mai jos sau chiar binare, care comunică 1 și 0 direct cu mașina noastră. Am menționat acest lucru pentru a înțelege că noi operăm la un nivel foarte înalt, iar JavaScript poate fi perceput ca pe un rețetar ce se aplică într-un mediu dedicat interpretării respectivelor rețete.
 
-Câteva astfel de rețete oferite de limbajul nostru de programare care sunt utile lucrului cu obiecte. De exemplu, metoda `Object.getPrototypeOf()` returnează un obiect sau `null` și indică obiectul care oferă proprietățile moștenite, precum și pe cel asupra căruia se face interogarea cu `Object.getPrototypeOf(obiSursă)`. Returnarea lui `null` indică faptul că obiectul curent nu moștenește nicio proprietate. M-am oprit la această metodă pentru că obiectele prototip sunt pivoții pe care se realizează mecanismul de moștenire în JavaScript.
+Câteva astfel de rețete oferite de limbajul nostru de programare sunt foarte utile lucrului cu obiecte. De exemplu, metoda `Object.getPrototypeOf()` returnează un obiect sau `null` și indică obiectul care oferă proprietățile moștenite, precum și pe cel asupra căruia se face interogarea cu `Object.getPrototypeOf(obiSursă)`. Returnarea lui `null` indică faptul că obiectul curent nu moștenește nicio proprietate. M-am oprit la această metodă pentru că obiectele prototip sunt pivoții pe care se realizează mecanismul de moștenire în JavaScript.
 
 Aceste metode, de fapt, aceste **rețete** prestabilite, pot fi și ele alterate pentru că în flexibilitatea JavaScript permite chiar modificarea rețetelor originale (vezi obiectul intern `Reflect`). Este ca și cum ai modifica o carte de bucate așa cum vrei tu după necesitățile tale. Atingerea unui astfel de nivel implică un aspect negativ, iar acesta este pierderea compatibilității cu programele scrise de restul comunității. Închipuiește-ți ce s-ar întâmpla dacă aș modifica **rețeta** `Object.setPrototypeOf()`, dar alt programator dorește o interfațare cu software-ul scris de mine, fiind bun bazat că metoda lui `Obiect` respectă comportamentul așteptat prin standard? Ar fi un haos desăvârșit. Totuși, sunt momente când mici modificări îmbunătățesc performanța sau îmbogățesc programele.
 
@@ -141,11 +141,11 @@ Aceste metode, de fapt, aceste **rețete** prestabilite, pot fi și ele alterate
 
 Obiectele pot fi create în două feluri: prin declararea acestora sau prin construirea lor.
 
-1. `var ObiNou = new Object();` - se respectă cele patru reguli: (1) crearea obiectului; (2) stabilirea lanțului prototipal; (3) bindingul lui `this` la noul obiect; (4) obiectul nou creat este returnat. Este echivalent cu `var newObj = {}`.
+1. `var ObiNou = new Object();` la execuție cu `new` se respectă cele patru reguli: (1) crearea obiectului; (2) stabilirea lanțului prototipal; (3) legarea lui `this` la noul obiect; (4) obiectul nou creat este returnat. Sintaxa este echivalentă cu `var newObj = {}`.
 2. `var ObiNou = Object.create(null);`, unde `prototype` este setat la `null`. Acest model este supranumit `dict pattern`, adică șablonul de creare a unui dicționar.
-3. `var ObiNou = Object.create(Object.prototype);` echivalentă cu `var newObj = {}`.
-4. `var ObiNou = {};` echivalentă cu `new Object()`.
-5. `function x () { return {a: 1} }; var y = x();`. Prin returnarea unui obiect ca efect al execuției unei funcții.
+3. `var ObiNou = Object.create(Object.prototype);`, fiind echivalent sintaxei `var newObj = {}`.
+4. `var ObiNou = {};`, fiind echivalentă cu sintaxa `new Object()`.
+5. `function x () { return {a: 1} }; var y = x();`, returnează un obiect în urma execuției unei funcții.
 
 Toate variantele de mai jos au același efect: creează un obiect gol.
 
