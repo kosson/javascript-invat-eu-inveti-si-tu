@@ -147,9 +147,9 @@ Obiectele pot fi create în două feluri: prin declararea acestora sau prin cons
 4. `var ObiNou = {};`, fiind echivalentă cu sintaxa `new Object()`.
 5. `function x () { return {a: 1} }; var y = x();`, returnează un obiect în urma execuției unei funcții.
 
-Toate variantele de mai jos au același efect: creează un obiect gol.
+Toate variantele au același efect: creează un obiect gol.
 
-Atenție, obiectele create cu `new` și cu `Object.create(null)` nu au constructor. Proprietatea `.constructor` va trimite la funcția la care a fost atașat prototype la momentul declarării. Am amintit de șablonul **dict**, o prescurtare de la dicționar. Câteva lămuriri sunt necesare. Acum câțiva ani, nu aveam la îndemână obiectele interne `Map` și `Set` iar programatorii trebuiau să găsească o alternativă pentru obiecte care să fie folosite precum un siloz, mai corect precum un dicționar pentru că ajuta și sintaza să pară ca unul (cuvânt cheie: valoare). Astfel, folosindu-se `Object.create(null)` puteai crea un obiect fără legătură prototipală ceea ce ar fi complicat lucrurile prin apariția multor alte valori moștenite în anumite scenarii. Ceea ce rămânea era o structură care putea fi folosită precum un **dicționar**.
+Atenție, obiectele create cu `new` și cu `Object.create(null)` nu au constructor. Proprietatea `.constructor` va trimite la funcția la care a fost atașat prototype la momentul declarării. Am amintit de șablonul **dict**, o prescurtare de la dicționar. Câteva lămuriri sunt necesare. Acum câțiva ani, nu aveam la îndemână obiectele interne `Map` și `Set`, iar programatorii trebuiau să găsească o alternativă pentru obiecte care să fie folosite precum un siloz, mai corect precum un dicționar pentru că ajuta și sintaza să pară ca unul (cuvânt cheie: valoare). Astfel, folosindu-se `Object.create(null)` puteai crea un obiect fără legătură prototipală ceea ce ar fi complicat lucrurile prin apariția multor alte valori moștenite în anumite scenarii. Ceea ce rămânea era o structură care putea fi folosită precum un **dicționar**.
 
 Modalitatea de a crea obiecte care implică returnarea unui obiect la executarea unei funcții constituie un tipar foarte des întâlnit în practica de programare. Acest model, șablon, tipar, spune-i cum îți place pentru că englezii îi spun **pattern**, se comportă ca o mică făbricuță de făcut obiecte. De fiecare dată când o astfel de funcție va fi apelată, tot atâtea obiecte vor fi returnate.
 
@@ -166,8 +166,7 @@ function Făbricuță (valoarea) {
 // pentru că vom introduce valoarea fiecărui index într-un obiect
 // si a doua care va fi containerul în care încărcăm cu push
 // obiectele generate de Făbricuță
-var colTest = ["x", "y", "z"],
-    colObi = [];
+var colTest = ["x", "y", "z"], colObi = [];
 for (let i = 0; i < colTest.length; i++) {
   colObi.push(Făbricuță(colTest[i]));
 };
@@ -227,20 +226,18 @@ O funcție care este declarată într-un obiect sau care este referențiată de 
 ```javascript
 var obi = {
   jeton: 10,
-  faCeva: function faCeva () {
-    console.log(this.jeton);
-  }
+  faCeva: function faCeva () { console.log(this.jeton); }
 };
 obi.faCeva(); // 10
 ```
 
-Funcția identificată prin `faCeva` este o metodă a obiectului `obi`. Identificatorul `faCeva` este de fapt o referință către funcția ce afișează în consolă valoarea lui `jeton`. Sintagma `obi.faCeva` poate fi considerată o referință către funcție. Nu uita faptul că o funcție cu rol de metodă are setat `this` automat la obiectul a cărui metodă este sau a devenit. Am spus că „a devenit” ca posibil scenariu pentru că poți avea o funcție declarată în afara obiectului, dar pe care o asociezi unei proprietăți a unui obiect, cu scopul de a o face parte, de a face instrument de lucru pentru respectivul obiect. Folosirea unei funcții într-un obiect drept „metodă”, nu este decât apelarea unei funcții în cadrul obiectului. Nu se poate spune că obiectul „conține” funcția. Obiectul doar face o referință. Funcției cu rol de metodă i se pasează `this`, care este obiectul unde joacă rol de metodă.
+Funcția identificată prin `faCeva` este o metodă a obiectului `obi`. Identificatorul `faCeva` este de fapt o referință către funcția ce afișează în consolă valoarea lui `jeton`. Sintaxa `obi.faCeva` poate fi considerată o referință către funcție. Nu uita faptul că o funcție cu rol de metodă are setat `this` automat la obiectul a cărui metodă este sau a devenit. Am spus că „a devenit” ca posibil scenariu pentru că poți avea o funcție declarată în afara obiectului, dar pe care o asociezi unei proprietăți a unui obiect, cu scopul de a o face parte, de a face instrument de lucru pentru respectivul obiect. Folosirea unei funcții într-un obiect drept „metodă”, nu este decât apelarea unei funcții în cadrul obiectului. Nu se poate spune că obiectul „conține” funcția. Obiectul doar face o referință. Funcției cu rol de metodă i se pasează `this`, care este obiectul unde joacă rol de metodă.
 
 Modalitatea de a crea o metodă într-un obiect este perfect echivalentă cu următoarea alternativă.
 
 ```javascript
-var obi = { ceva: 10 };
-obi.faCeva = function faCeva () { console.log(this.ceva); };
+var obi = { jeton: 10 };
+obi.faCeva = function faCeva () { console.log(this.jeton); };
 obi.faCeva(); // 10
 faCeva(); // faCeva is not defined
 ```
@@ -248,9 +245,9 @@ faCeva(); // faCeva is not defined
 Dar și această alternativă este perfect identică cu următoarea:
 
 ```javascript
-var ceva = 1000;
+var jeton = 1000;
 var obi = { ceva: 10 };
-function faCeva () { console.log(this.ceva); };
+function faCeva () { console.log(this.jeton); };
 obi.faCeva = faCeva;
 obi.faCeva(); // 10
 faCeva(); // undefined
@@ -260,7 +257,7 @@ faCeva(); // undefined
 // sau 1000, dacă ai token declarat în global.
 ```
 
-Aici este un element în plus. Funcția `faCeva` a fost declarată în obiectul global, ceea ce înseamnă că `scope`-ul său lexical se află în `global scope`. În cazul în care în global scope ar fi fost declarată valoarea `ceva`, la invocarea funcției în sine, nu ca metodă, ar fi fost adusă valoarea acesteia.
+Aici este un element în plus. Funcția `faCeva` a fost declarată în obiectul global, ceea ce înseamnă că `scope`-ul său lexical se află în `global scope`. În cazul în care în global scope ar fi fost declarată valoarea `jeton`, la invocarea funcției în sine, nu ca metodă, ar fi fost adusă valoarea acesteia.
 
 Odată cu apariția noii versiuni ECMAScript, metodele au fost definite în mod formal. Standardul definește o metodă ca fiind **o funcție care are o proprietate internă `[[HomeObject]]`**. Această proprietate indică obiectul căruia îi aparține metoda. De curând a fost introdusă o simplificare a scrierii sintaxei:
 

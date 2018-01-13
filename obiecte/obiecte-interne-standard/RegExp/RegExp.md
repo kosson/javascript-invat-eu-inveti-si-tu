@@ -22,7 +22,7 @@ Caracterele speciale din expresiile regulate se numesc *metacaractere* și sunt 
 
 Caracterul `?` la regex-uri pune condiția strictă ca un șablon menționat înaintea sa să existe sau nu. De exemplu, `x?`, se va traduce: caracterul `x` poate să fie existe în șirul de caractere analizat sau nu, dar dacă îl găsești, include-l în rezultat.
 
-Ce înseamnă a include în rezutat?
+Ce înseamnă a include în rezultat?
 Motorul RegExp indică succesiunea caracterelor, de câte ori li se permite să apară, de câte ori pot să se repete și așa mai departe. Acest model, acest șablon făurit de programator, este o descriere a ceea ce căutăm într-un șir de caractere și a tuturor variațiunilor posibile, ori a deviațiilor acceptate pentru întregul model sau pentru părți din acesta. Ținând cont de aceste aspecte, motorul parcurge caracter după caracter întreg șirul dat spre analiză. Ori de câte ori un caracter se potrivește tipului sau succesiunii, acesta este introdus într-un rezultat. Abia după ce a găsit un șir care să potrivească exact cu regulile șablonului, motorul va renunța la căutare și dacă s-a făcut o potrivire iar șirul de caractere nu a fost epuizat, restul este ignorat. Acesta este comportamentul implicit al motorului. Acest comportament poate fi modificat în funcție de regulile incluse în șablon.
 
 Și acum, focalizare maximă.
