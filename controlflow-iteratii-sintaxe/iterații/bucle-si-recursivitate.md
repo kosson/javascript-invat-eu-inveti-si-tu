@@ -1,7 +1,7 @@
 ## Bucle
 
 Buclele sunt cel mai la îndemână instrument de a parcurge un set de date.
-Folosirea buclelor presupune utilizarea repetată a unei secvențe de instrucțiuni. Îi mai spunem ciclare sau iterare. În fapt, ceea ce se întâmplă este repetarea ritmică a unui set de instrucțiuni iar fiecare rezultat al fiecărei iterații este supus unui control.
+Folosirea buclelor presupune utilizarea repetată a unei secvențe de instrucțiuni. Îi mai spunem ciclare sau iterare. În fapt, ceea ce se întâmplă este repetarea ritmică a unui set de instrucțiuni. Fiecare rezultat al fiecărei iterații este supus unui control.
 
 ## Recursivitate
 

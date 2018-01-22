@@ -60,7 +60,7 @@ for (var i = 0; i < listă.length; i++) {
 };
 ```
 
-După parcurgerea array-ului sunt returnate rezultatele, dar dacă se mai dorește parcurgerea încă o dată, acest lucru nu este posibil decât dacă pornim din nou execuția codului. Dacă am dori să avem acces la rezultatele de etapă, acest lucru nu este posibil. În exemplul de mai sus, am folosit utilitarul `console.log` ca și funcție de prelucrare. Acesta nu ne ajută prea mult în afară de a vedea datele din array, în schimb, am putea introduce în exercițiul nostru o funcție, care să poată face o prelucrare mult mai complexă pentru fiecare valoare din array. Acest pas crește complexitatea exemplului nostru, dar și flexibilitatea în ceea ce privește multitudinea de opțiuni pe care o poți desfășura în cadrul unei funcții pe care o vei apela pentru fiecare element al listei noastre.
+După parcurgerea array-ului sunt returnate rezultatele, dar dacă se mai dorește parcurgerea încă o dată, acest lucru nu este posibil decât dacă pornim din nou execuția codului. Dacă am dori să avem acces la rezultatele de etapă, acest lucru nu este posibil. În exemplul de mai sus, am folosit utilitarul `console.log` ca și funcție de prelucrare. Acesta nu ne ajută prea mult în afară de a vedea datele din array, în schimb, am putea introduce în exercițiul nostru o funcție, care să poată face o prelucrare mult mai complexă pentru fiecare valoare din array. Acest pas crește complexitatea exemplului nostru, dar și flexibilitatea în ceea ce privește multitudinea de opțiuni pe care le poți efectua pentru că o funcție o poți apela pentru fiecare element al listei noastre.
 
 ```javascript
 function prelucrează (elementArray) {
