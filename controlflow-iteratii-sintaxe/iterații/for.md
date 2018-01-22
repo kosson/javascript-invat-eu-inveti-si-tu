@@ -19,7 +19,7 @@ Expresiile opționale conțin:
 - **un comparator**, care ia valoarea din contor și o compară cu o altă valoare, de regulă dimensiunea unui array adusă prin proprietatea `array.length`.
 - **un incrementor/decrementor**
 
-Privind la expresiile folosite pentru a face funcțional un for, nu poți să nu privești la expresia `do...while` și să nu te întrebi, de ce nu ai folosi-o în continuare pe aceasta. Singura diferență este că la `do...while`, inițializarea sau contorul ca expresie stă afară înainte iar condiția sau comparatorul este în argumente iar blocul are la final expresia de incrementare. Răspunsul este legat de concizia pe care o oferă `for`. Este pur și simplu mai ușor de urmărit.
+Privind la expresiile folosite pentru a face funcțional un for, nu poți să nu privești la expresia `do..while` și să nu te întrebi, de ce nu ai folosi-o în continuare pe aceasta. Singura diferență este că la `do..while`, inițializarea sau contorul ca expresie stă afară înainte iar condiția sau comparatorul este în argumente, iar blocul are la final expresia de incrementare. Răspunsul este legat de concizia pe care o oferă `for`. Este pur și simplu mai ușor de urmărit.
 
 De cele mai multe ori vei întâlni în cod numele identificatorului variabilei pentru contor ca fiind litera `i`. Acesta vine ca prescurtare la termenul *index* și este larg utilizat. Atenție, nu este necesar să se folosească `i`. Poți numi variabila cum dorești.
 
@@ -48,6 +48,30 @@ console.timeEnd("final");
 ```
 
 Motivul pentru care bucla este una infinită este că blocul de condiție va fi evaluat la `undefined`, care este transformat într-un „falsey”, ceea ce conduce la execuția infinită.
+
+## Scenariu de prelucrare a datelor cu `for`
+
+Să presupunem că avem nevoie să prelucrăm datele dintr-un array în care avem valori scalare. Nimic nu poate fi mai simplu: creăm o listă și apoi o parcurgem cu un enunț `for`, care permite prelucrarea unui array element cu element.
+
+```javascript
+var listă = [1, 2, 3];
+for (var i = 0; i < listă.length; i++) {
+  console.log(listă[i]);
+};
+```
+
+După parcurgerea array-ului sunt returnate rezultatele, dar dacă se mai dorește parcurgerea încă o dată, acest lucru nu este posibil decât dacă pornim din nou execuția codului. Dacă am dori să avem acces la rezultatele de etapă, acest lucru nu este posibil. În exemplul de mai sus, am folosit utilitarul `console.log` ca și funcție de prelucrare. Acesta nu ne ajută prea mult în afară de a vedea datele din array, în schimb, am putea introduce în exercițiul nostru o funcție, care să poată face o prelucrare mult mai complexă pentru fiecare valoare din array. Acest pas crește complexitatea exemplului nostru, dar și flexibilitatea în ceea ce privește multitudinea de opțiuni pe care o poți desfășura în cadrul unei funcții pe care o vei apela pentru fiecare element al listei noastre.
+
+```javascript
+function prelucrează (elementArray) {
+  return elementArray + 1;
+};
+for (var i = 0; i < listă.length; i++) {
+  prelucrează(listă[i]);
+}; // 4
+```
+
+Față de exemplul anterior, am avansat considerabil aplicând o funcție pe fiecare valoarea din listă. Da, o funcție croită după necesitățile noastre. Câteva lucruri care încă persistă: trecerea se face din nou o singură dată și nu avem acces la valorile de etapă. Soluția pentru aceste cazuri este legată de modul în care declarăm variabilele în enunțul `for`.
 
 ## Declararea variabilelor în `for`
 
@@ -141,7 +165,7 @@ Buclele cu `for` pot fi folosite pentru introducerea de elemente în DOM.
 </html>
 ```
 
-## Folosirea lui for cu multiple variabile
+## Folosirea lui `for` cu variabile multiple
 
 În enunțurile `for` se pot introduce mai multe variabile. Un exemplu pentru a căuta membri ai șirului lui Fibonacci implică declararea mai multor variabile inițiale iar apoi în expresia de incrementare, acestea sunt manipulate pentru a avansa.
 

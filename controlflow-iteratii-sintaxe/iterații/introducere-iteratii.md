@@ -31,9 +31,9 @@ Există două protocoale:
 
 ## Iterable
 
-Permite obiectelor să-și definească sau să-și particularizeze comportamentul la iterare: ce valori vor fi în bucla generată cu un construct `for...of`.
+Permite obiectelor să-și definească sau să-și particularizeze comportamentul la iterare: ce valori vor fi în bucla generată cu un construct `for..of`.
 
-`for...of` poate itera prin următoarele obiecte care respectă ***protocolul iterator***:
+`for..of` poate itera prin următoarele obiecte care respectă ***protocolul iterator***:
 - `Array`,
 - `Map`,
 - `Set`,
@@ -72,7 +72,7 @@ Te vei întreba la ce folosește această informație. Răspunsul este legat de 
 
 Aceste protocoale implementate cu ajutorul simbolurilor, permit parcurgerea, permit prelucrarea datelor care au fost introduse în valori ce moștenesc automat de la tipurile de obiecte interne corespondente. La ce mă refer este faptul că indiferent de natura datelor, că este text, că este un array, că este un „dicționar”, aceste aparent simple structuri, de îndată ce controlul motorului va începe execuția, vor fi „ambalate” automat în obiectul intern corespondent. Acesta este și motivul pentru care poți aplica metode ale obiectelor interne direct pe valoarea identificată de o variabilă. Pe lângă tot bagajul genetic cu care sunt dotate datele
 
-## Resurse de documentare
+## Resurse
 
 [MDN - Iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
 [Iterables and iterators](http://exploringjs.com/es6/ch_iteration.html)

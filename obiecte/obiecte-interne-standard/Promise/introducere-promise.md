@@ -15,6 +15,14 @@ var executaLaRezolvare = function(){return 'execut la rezolvare'};
 var promisune = new Promise(executaLaRezolvare);
 ```
 
+## Prelucrarea datelor - foaie de parcurs
+
+Pentru că odată cu promisiunile, ne apropiem de stadii avansate ale înțelegerii acestui limbaj de programare ca și instrument de prelucrare al datelor, vom parcurge un scenariu simplu de prelucrare pentru a ajunge în final să vedem care ar fi ajutorul pe care ni-l oferă lucrul cu promisiuni.
+
+### Soluțiile sincrone
+
+Din gama soluțiilor sincrone fac parte prelucrările de date cu enunțul `for` sau cu utilitarul `forEach`.
+
 ## Programare funcțională cu promisiuni
 
 ### Un `map` promisificat

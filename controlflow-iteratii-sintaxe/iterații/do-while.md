@@ -1,4 +1,4 @@
-## Enunțul `do...while`
+## Enunțul `do..while`
 
 Spre deosebire de `while`, evaluarea expresiei care determină execuția codului se face la final, ceea ce permite ca măcar o singură dată codul să fie executat.
 

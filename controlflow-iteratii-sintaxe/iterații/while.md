@@ -1,6 +1,6 @@
 ## Enunțul `while`
 
-While în JavaScript se traduce în limba română prin `câtă vreme`. Verbalizarea acestei comenzi ar fi „de câte ori evaluarea expresiei conduce la o valoare ce poate fi redusă la un boolean true, execută codul dintre acolade”.
+While în JavaScript se traduce în limba română prin `câtă vreme`. Verbalizarea acestei comenzi ar fi „de câte ori evaluarea expresiei conduce la o valoare ce poate fi redusă la un boolean `true`, execută codul dintre acolade”.
 
 ```javascript
 var x = 0;
@@ -14,9 +14,9 @@ Remarcă faptul că testul condiției se face la începutul fiecărei iterații.
 
 While își are locul său, dar practica înclină către folosirea instrucțiunii `for` care în condiția de test permite introducerea a trei expresii. Evaluarea tuturor acestor trei expresii va determina continuarea iterării sau nu.
 
-Folosește while acolo unde condiția de test este simplă.
+Folosește `while` acolo unde condiția de test este simplă.
 
-Când vorbim de simplă nu înseamnă să te limitezi la o singură expresie, cu poți avea una care să fie o combinație destul de elaborată care să exprime condiția.
+Când vorbim de simplă nu înseamnă să te limitezi la o singură expresie, ci poți avea una care să fie o combinație destul de elaborată ca și condiție.
 
 ```javascript
 var a = 5, b = 4;
