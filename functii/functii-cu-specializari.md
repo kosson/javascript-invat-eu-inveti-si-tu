@@ -48,8 +48,8 @@ Pe scurt, ai două valori care intră într-o combinație. Prima valoare va fi r
 
 ## Cum funcționează
 
-O funcție se aplică pe un argument: x și returnează altă funcție.
-Funcția returnată se aplică și ea pe un alt parametru: y, dar returnează parametrul gazdei, pe x. Deci, face un closing pe x-ul gazdei și memorizează propriul parametru, pe y.
+O funcție se aplică pe un argument: `x` și returnează altă funcție.
+Funcția returnată se aplică și ea pe un alt parametru: `y`, dar returnează parametrul gazdei, pe `x`. Deci, face un closing pe `x`-ul gazdei și memorează propriul parametru, pe `y`.
 
 ```javascript
 function K (x) {

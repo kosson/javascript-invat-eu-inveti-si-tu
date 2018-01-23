@@ -12,9 +12,7 @@ Pentru a rezolva mai elegant problema asincronicității dincolo de ce pot oferi
 
 Promisiunile nu sunt un concept nou în programare. Trevor Burnham menționează în lucrarea sa „Async JavaScript” faptul că la începuturile ideilor de organizare a resurselor în rețea, ceea ce numim acum Internet, exista un proiect care s-a numit Xanadu programat în C++ unde apare ideea de promisiuni. Mai apoi sub denumirea de  **deferred** își face apariția și în alte limbaje de programare. Wikipedia aduce o definiție și prin aceasta, în prim plan, câțiva termeni dintre care am lămurit câțiva, dar alții sunt relevanți pentru înțelegerea promisiunilor: *În domeniul informaticii, viitor («future»), promisiune («promise»), delay («întârziere») și deferred «amânare» se referă la constructuri folosite pentru a sincroniza execuția programului în unele limbaje de programare care permit execuția concurențială. Aceștia descriu un obiect care se comportă ca un proxy «mecanism de delegare» pentru un rezultat care, inițial este necunoscut pentru că, în mod curent computarea valorii sale nu este încă încheiată*. Conform autorilor Wikipediei și lui Trevor Burnham, termenii de **promisiune**, **deferred** și **future** sunt folosiți interșanjabil.
 
-Termenul de **promise** (promisiune) a fost propus în anul 1976, dar după adoptarea în Python, un pas a mai lipsit pentru a fi preluat ca practică și în JavaScript, dar ca „deferred” mai întâi, în 2007, prin biblioteca de cod **Dojo** (`dojo.Deferred`). Doi ani mai târziu apare specificația Promises/A în biblioteca de cod CommonJS. În același an apare și NodeJS. Merită menționat faptul că biblioteca de cod JQuerry, care motorizează foarte multe pagini web în acest moment, a introdus conceptul de promisiuni, dar cu nuanța **deferrend** asta însemnând că poți declanșa o promisiune în mod direct fără a mai apela un callback.
-
-
+Termenul de **promise** (promisiune) a fost propus în anul 1976, dar după adoptarea în Python, un pas a mai lipsit pentru a fi preluat ca practică și în JavaScript, dar ca „deferred” mai întâi, în 2007, prin biblioteca de cod **Dojo** (`dojo.Deferred`). Doi ani mai târziu apare specificația Promises/A în biblioteca de cod CommonJS. În același an apare și NodeJS. Merită menționat faptul că biblioteca de cod JQuerry, care motorizează foarte multe pagini web în acest moment, a introdus conceptul de promisiuni, dar cu nuanța **deferrend** asta însemnând că poți declanșa o promisiune în mod direct fără a mai apela un callback. Prin folosirea promisiunilor, intrăm în zona **soluțiilor asincrone**, care implică o înțelegerea prealabilă a modului în care funcționează *bucla evenimentelor* și a *callback-urilor*.
 
 ## Prelucrarea datelor - foaie de parcurs
 
@@ -29,7 +27,22 @@ listă.forEach(function(elementArray){
 listă.forEach(elementArray => console.log(elementArray)); // 1 2 3
 ```
 
-Prin folosirea promisiunilor, intrăm în zona **soluțiilor asincrone**, care implică o înțelegerea prealabilă a modului în care funcționează *bucla evenimentelor* și a *callback-urilor*.
+După cum am observat, am implicat în soluție o funcție cu rol de callback și deja am aflat că promisiunile sunt soluția la problemele pe care utilizarea acestora le ridică. Înainte de a rtece la modul de construcție al promisiunilor, ar fi cel mai nimerit să mai explorăm un model existent, care ar mai rezolva din problemele callback-uilor. Acesta se numește funcții **thunk**, care conform lucrării lui P.Z.Ingerman din 1961, care introduce conceptul, *este un fragment de cod care oferă o adresă*. În accepțiune modernă și în contextul JavaScript, un *thunk* este o funcție care încapsulează în același timp cod sincron și asincron, acceptă un singur argument, care este o funcție CPS (*continuation passing style* - vezi la callback-uri) și returnează o altă funcție sau chiar un alt thunk.
+Un thunk asincron este o funcție căreia îi pasezi un callback pentru a scoate o valoare. Hai să vedem mai întâi cum arată un thunk sincron și care este utilitatea sa.
+
+```javascript
+function numePrenume (nume, prenume) {
+  return `${nume} ${prenume}`;
+};
+var thunk = function () {
+  return numePrenume ('Ioana', 'Pavelescu');
+};
+thunk(); // Ioana Pavelescu
+```
+
+După cum observi, o expresie de funcție *thunk* are totul pentru a-ți oferi o valoare. Nu trebuie să introduci tu nicio valoare pentru a avea deja una la momentul execuției.
+
+Dar dincolo de operațiune în sine, am construit un soi de „referință” către o valoare computată la apelarea oriunde în cod a funcției `thunk` atunci când avem nevoie. Am numit funcția `thunk`, dar poate purta oricare alt nume. Mecanismul în sine este important de înțeles: accesul la o valoare computată care nu se schimbă pentru că este *hard-coded* (adică valorile sunt predefinite la apelarea lui `numePrenume`). Se mai petrece un lucru foarte important. Adu-ți aminte de faptul că o funcție pentru a se executa are nevoie de tot ce are ea nevoie în mediul lexical propriu sau în afara sa. Variabila `thunk` va fi, de fapt, o referință către o stare. Această referință va fi la dispoziția ta în întregul program.
 
 ## Constructorul
 
@@ -266,3 +279,5 @@ var listaPromisiunilor = mapPromisificat(lista, dublezLitere);
 [Eric Elliot. Master the JavaScript Interview: What is a Promise?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261)
 [Jecelyn Yeen. JavaScript Promises for Dummies](https://scotch.io/tutorials/javascript-promises-for-dummies)
 [Benjamin Diuguid. Asynchronous Adventures in JavaScript: Callbacks](https://medium.com/dailyjs/asynchronous-adventures-in-javascript-callbacks-39880f1b470e)
+[P.Z.Ingerman.Thunks: A Way of Compiling Procedure Statements with Some Comments on Procedure Declarations](http://archive.computerhistory.org/resources/text/algol/ACM_Algol_bulletin/1064045/frontmatter.pdf)
+[Thunks](https://github.com/thunks/thunks)

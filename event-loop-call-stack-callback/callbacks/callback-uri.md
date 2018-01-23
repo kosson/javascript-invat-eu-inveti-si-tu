@@ -8,7 +8,7 @@ var extragValoare = producValoare();
 ```
 
 Valoarea identificatorului `extragValoare` este tocmai rezultatul funcției. Ne putem închipui, ca înainte de evaluarea funcției prin apelarea sa, identificatorul era `undefined`, dar de îndată ce am obținut un rezultat prin executarea funcției, identificatorul nostru va avea o valoare. Acest exemplu este unul foarte simplu, dar hai să ne închipuim faptul că funcția noastră face ceva muuuuult mai mult. Să ne imaginăm că este o funcție care descarcă de pe internet o resursă de text sau o imagine, ori mai multe. Această operațiune, după cum îți poți imagina, va necesita ceva timp. Acum vine cheia problemei. Știind că avem un singur fir de execuție, operațiunea noastră are potențialul de a bloca temporar firul. În acest moment ai nevoie de un model de lucru care să-ți permită să execuți codul în continuare, fără niciun blocaj, dar în același timp să îndeplinești și sarcina aducerii resursei.
-În ajutorul nostru putem declara o funcție care să îndeplinească sarcina la un moment în care întregul context de execuției îi va permite rularea, adică va avea toate datele necesare. Această funcție este numită de practicieni **callback**, adică o funcție care va aștepta cuminte ca tot ce este necesar sie să fie disponibil și abia atunci se lansează în execuție. Vom vedea mai departe că, de curând, în noua versiune a standardului, mai este disponibil un alt mecanism numit *promisiune*. Deocamdată, să ne concentrăm pe callback-uri pentru că de ele ne vom lovi foarte des.
+În ajutorul nostru putem declara o funcție care să îndeplinească sarcina la un moment în care întregul context de execuției îi va permite rularea, adică va avea toate datele necesare. Această funcție este numită de practicieni **callback**, adică o funcție care va aștepta cuminte ca tot ce este necesar sie să fie disponibil și abia atunci se lansează în execuție. Vom vedea mai departe că, de curând, în noua versiune a standardului, mai este disponibil un alt mecanism numit *promisiune*, un model de gestiune asincron mult superior practicii callback-urilor. Deocamdată, să ne concentrăm pe callback-uri pentru că de ele ne vom lovi foarte des mai ales când vom utiliza cod scris de alții.
 
 Un **callback** este o funcție, care este pasată ca argument altei funcții. Adu-ți aminte de faptul că o funcție este o valoare care poate fi pasată ca argument. Funcțiile care primesc alte funcții ca valori sunt **funcții de nivel înalt**.
 
@@ -37,13 +37,15 @@ aducResursa('mar', function () {
 
 Totuși trebuie spus un lucru la care trebuie reflectat foarte adânc. Există momente când vei folosi biblioteci de cod externe, care vor prelua callback-ul pe care-l scrii, vor rula utilitarul în contextul aplicației lor, iar la final vor executa funcția scrisă de tine. Kyle Simpson pune această întrebare esențială pentru a verifica și pentru a fi sigur pe modul de execuție a callback-ului: ești sigur pe aplicația externă căreia îi pasezi callback-ul? Ai siguranța că va executa în parametrii doriți de tine codul din funcția pe care i-o pasezi ca și callback? Dacă nu ai scris tu întreaga aplicație, ai **încredere** să o folosești? Recomandarea este ca în momentul dobândirii abilităților de lucru cu promisiunile sau cu funcțiile async/await, să fie abandonată practica callback-urilor.
 
+Urmărirea callback-urilor este o sarcină dificilă și din acest motiv este nevoie de o alternativă.
+
 ## Explorarea unui scenariu
 
 O funcție este declarată. Să o poreclim **funcția de bază**. Acesta este un termen arbitrar, care ne va ajuta să înțelegem mai bine relația cu o altă funcție: callback-ul. Funcția de bază este definită de utilizator cu scopul de a prelucra datele oferite la invocare. Funcția de bază are un mic secret. Primește funcția callback ca argument și după ce a terminat toate prelucrările, o execută la final pasându-i rezultatul evaluărilor din funcția de bază.
 
 **Moment ZEN**: Callback-ul este o funcție care este executată ca răspuns la un eveniment.
 
-În programarea funcțională, acest mod de a propaga rezultatul se numește **continuation-passing style** (CPS). Returnarea rezultatului dintr-o funcție se numește **direct style**. Să-i spunem pe românește **abordare directă**.
+În programarea funcțională, acest mod de a propaga rezultatul se numește **continuation passing style** (CPS). Returnarea rezultatului dintr-o funcție se numește **direct style**. Să-i spunem pe românește **abordare directă**.
 
 În continuare vom face o exemplificare **direct style** versus **continuation-passing style**
 
