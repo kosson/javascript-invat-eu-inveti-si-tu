@@ -27,7 +27,13 @@ listă.forEach(function(elementArray){
 listă.forEach(elementArray => console.log(elementArray)); // 1 2 3
 ```
 
-După cum am observat, am implicat în soluție o funcție cu rol de callback și deja am aflat că promisiunile sunt soluția la problemele pe care utilizarea acestora le ridică. Înainte de a rtece la modul de construcție al promisiunilor, ar fi cel mai nimerit să mai explorăm un model existent, care ar mai rezolva din problemele callback-uilor. Acesta se numește funcții **thunk**, care conform lucrării lui P.Z.Ingerman din 1961, care introduce conceptul, *este un fragment de cod care oferă o adresă*. În accepțiune modernă și în contextul JavaScript, un *thunk* este o funcție care încapsulează în același timp cod sincron și asincron, acceptă un singur argument, care este o funcție CPS (*continuation passing style* - vezi la callback-uri) și returnează o altă funcție sau chiar un alt thunk.
+După cum am observat, am implicat în soluție o funcție cu rol de callback și deja am aflat că promisiunile sunt soluția la problemele pe care utilizarea acestora le ridică.
+
+### Fundamentul opțiunii pentru promisiuni
+
+Să răspundem la întrebarea: de ce avem nevoie de promisiuni? Răspuns: pentru că cedarea controlului unei părți terțe printr-un callback, nu mai este un răspuns adecvat nevoilor de precizie a rulării codului. Pur și simplu nu ne mai permitem luxul de a folosi callback-uri despre care știm puține lucruri privitor la cum vor fi executate, când, de câte ori, în câte locuri ale API-ului (de regulă folosești API-uri contruite de alții), ș.a.m.d.
+
+Ghidat de necesitatea de a înțelege bine și de explicațiile lui Kyle Simpson, vom explora un model de funcții existent, care ar mai rezolva din problemele callback-urilor. Acesta se numește funcții **thunk**, care conform lucrării lui P.Z.Ingerman din 1961, introduce conceptul, fiind în definiția sa *un fragment de cod care oferă o adresă*. În accepțiune modernă și în contextul JavaScript, un *thunk* este o funcție care încapsulează în același timp cod sincron și asincron, acceptă un singur argument, care este o funcție CPS (*continuation passing style* - vezi la callback-uri) și returnează o altă funcție sau chiar un alt thunk.
 Un thunk asincron este o funcție căreia îi pasezi un callback pentru a scoate o valoare. Hai să vedem mai întâi cum arată un thunk sincron și care este utilitatea sa.
 
 ```javascript
@@ -42,7 +48,11 @@ thunk(); // Ioana Pavelescu
 
 După cum observi, o expresie de funcție *thunk* are totul pentru a-ți oferi o valoare. Nu trebuie să introduci tu nicio valoare pentru a avea deja una la momentul execuției.
 
-Dar dincolo de operațiune în sine, am construit un soi de „referință” către o valoare computată la apelarea oriunde în cod a funcției `thunk` atunci când avem nevoie. Am numit funcția `thunk`, dar poate purta oricare alt nume. Mecanismul în sine este important de înțeles: accesul la o valoare computată care nu se schimbă pentru că este *hard-coded* (adică valorile sunt predefinite la apelarea lui `numePrenume`). Se mai petrece un lucru foarte important. Adu-ți aminte de faptul că o funcție pentru a se executa are nevoie de tot ce are ea nevoie în mediul lexical propriu sau în afara sa. Variabila `thunk` va fi, de fapt, o referință către o stare. Această referință va fi la dispoziția ta în întregul program.
+Dar dincolo de operațiune în sine, am construit un soi de „referință” către o valoare computată la apelarea oriunde în cod a funcției `thunk` atunci când avem nevoie. Am numit funcția `thunk`, dar poate purta oricare alt nume. Mecanismul în sine este important de înțeles: accesul la o valoare computată care nu se schimbă pentru că este *hard-coded* (adică valorile sunt predefinite la apelarea lui `numePrenume`). Se mai petrece un lucru foarte important. Adu-ți aminte de faptul că o funcție pentru a se executa are nevoie de tot ce are ea nevoie în mediul lexical propriu sau în afara sa. Variabila `thunk` va fi, de fapt, o referință către o stare ambalată într-un container. Această referință, acest container care ambalează o valoare, fie aceasta o funcție care returnează o valoare computată, va fi la dispoziția ta în întregul program.
+
+Kyle Simpson spune că aici ar trebui să fim atenți pentru că, de fapt, acesta este ideea principală a promisiunilor: un ambalaj peste o valoare. Referința către ambalaj poate fi utilizată în program.
+
+Un thunk asincron este o funcție care, spre deosebire de surata sincronă, are nevoie de o funcție callback care să-i fie pasată.
 
 ## Constructorul
 
