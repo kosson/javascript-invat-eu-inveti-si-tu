@@ -10,7 +10,7 @@ Pentru a rezolva mai elegant problema asincronicității dincolo de ce pot oferi
 
 ## Scurt istoric
 
-Promisiunile nu sunt un concept nou în programare. Trevor Burnham menționează în lucrarea sa „Async JavaScript” faptul că la începuturile ideilor de organizare a resurselor în rețea, ceea ce numim acum Internet, exista un proiect care s-a numit Xanadu programat în C++ unde apare ideea de promisiuni. Mai apoi sub denumirea de  **deferred** își face apariția și în alte limbaje de programare. Wikipedia aduce o definiție și prin aceasta, în prim plan, câțiva termeni dintre care am lămurit câțiva, dar alții sunt relevanți pentru înțelegerea promisiunilor: *În domeniul informaticii, viitor («future»), promisiune («promise»), delay («întârziere») și deferred «amânare» se referă la constructuri folosite pentru a sincroniza execuția programului în unele limbaje de programare care permit execuția concurențială. Aceștia descriu un obiect care se comportă ca un proxy «mecanism de delegare» pentru un rezultat care, inițial este necunoscut pentru că, în mod curent computarea valorii sale nu este încă încheiată*. Conform autorilor Wikipediei și lui Trevor Burnham, termenii de **promisiune**, **deferred** și **future** sunt folosiți interșanjabil.
+Promisiunile nu sunt un concept nou în programare. Trevor Burnham menționează în lucrarea sa „Async JavaScript” faptul că la începuturile ideilor de organizare a resurselor în rețea, ceea ce numim acum Internet, exista un proiect care s-a numit Xanadu programat în C++ unde apare ideea de promisiuni. Mai apoi sub denumirea de  **deferred** își face apariția și în alte limbaje de programare cum ar fi limbajul de programare E și apoi Python. Wikipedia aduce o definiție și prin aceasta, în prim plan, câțiva termeni dintre care am lămurit câțiva, dar alții sunt relevanți pentru înțelegerea promisiunilor: *În domeniul informaticii, viitor («future»), promisiune («promise»), delay («întârziere») și deferred «amânare» se referă la constructuri folosite pentru a sincroniza execuția programului în unele limbaje de programare care permit execuția concurențială. Aceștia descriu un obiect care se comportă ca un proxy «mecanism de delegare» pentru un rezultat care, inițial este necunoscut pentru că, în mod curent computarea valorii sale nu este încă încheiată*. Conform autorilor Wikipediei și lui Trevor Burnham, termenii de **promisiune**, **deferred** și **future** sunt folosiți interșanjabil.
 
 Termenul de **promise** (promisiune) a fost propus în anul 1976, dar după adoptarea în Python, un pas a mai lipsit pentru a fi preluat ca practică și în JavaScript, dar ca „deferred” mai întâi, în 2007, prin biblioteca de cod **Dojo** (`dojo.Deferred`). Doi ani mai târziu apare specificația Promises/A în biblioteca de cod CommonJS. În același an apare și NodeJS. Merită menționat faptul că biblioteca de cod JQuerry, care motorizează foarte multe pagini web în acest moment, a introdus conceptul de promisiuni, dar cu nuanța **deferrend** asta însemnând că poți declanșa o promisiune în mod direct fără a mai apela un callback. Prin folosirea promisiunilor, intrăm în zona **soluțiilor asincrone**, care implică o înțelegerea prealabilă a modului în care funcționează *bucla evenimentelor* și a *callback-urilor*.
 
@@ -33,8 +33,8 @@ După cum am observat, am implicat în soluție o funcție cu rol de callback ș
 
 Să răspundem la întrebarea: de ce avem nevoie de promisiuni? Răspuns: pentru că cedarea controlului unei părți terțe printr-un callback, nu mai este un răspuns adecvat nevoilor de precizie a rulării codului. Pur și simplu nu ne mai permitem luxul de a folosi callback-uri despre care știm puține lucruri privitor la cum vor fi executate, când, de câte ori, în câte locuri ale API-ului (de regulă folosești API-uri contruite de alții), ș.a.m.d.
 
-Ghidat de necesitatea de a înțelege bine și de explicațiile lui Kyle Simpson, vom explora un model de funcții existent, care ar mai rezolva din problemele callback-urilor. Acesta se numește funcții **thunk**, care conform lucrării lui P.Z.Ingerman din 1961, introduce conceptul, fiind în definiția sa *un fragment de cod care oferă o adresă*. În accepțiune modernă și în contextul JavaScript, un *thunk* este o funcție care încapsulează în același timp cod sincron și asincron, acceptă un singur argument, care este o funcție CPS (*continuation passing style* - vezi la callback-uri) și returnează o altă funcție sau chiar un alt thunk.
-Un thunk asincron este o funcție căreia îi pasezi un callback pentru a scoate o valoare. Hai să vedem mai întâi cum arată un thunk sincron și care este utilitatea sa.
+Ghidat de necesitatea de a înțelege bine și de explicațiile lui Kyle Simpson, vom explora un model de funcții existent, care ar mai rezolva din problemele callback-urilor. Acesta se numește funcții **thunk**, care conform lucrării lui P.Z.Ingerman din 1961, introduce conceptul, fiind în definiția sa *un fragment de cod care oferă o adresă*. În accepțiune modernă și în contextul pregătitor înțelegerii promisiunilor, un *thunk* este o funcție care încapsulează în același timp cod sincron și asincron, acceptă un singur argument, care este o funcție CPS (*continuation passing style* - vezi la callback-uri) și returnează o altă funcție sau chiar un alt *thunk*.
+Un *thunk* asincron este o funcție căreia îi pasezi un callback pentru a scoate o valoare. Hai să vedem mai întâi cum arată un thunk sincron și care este utilitatea sa.
 
 ```javascript
 function numePrenume (nume, prenume) {
@@ -52,14 +52,36 @@ Dar dincolo de operațiune în sine, am construit un soi de „referință” c�
 
 Kyle Simpson spune că aici ar trebui să fim atenți pentru că, de fapt, acesta este ideea principală a promisiunilor: un ambalaj peste o valoare. Referința către ambalaj poate fi utilizată în program.
 
-Un thunk asincron este o funcție care, spre deosebire de surata sincronă, are nevoie de o funcție callback care să-i fie pasată.
+Un thunk asincron este o funcție care, spre deosebire de surata sincronă, are nevoie de o funcție callback care să-i fie pasată. Pentru a simula asincronicitatea, în funcția returnată, vom folosi utilitarul `setTimeout`.
+
+```javascript
+function concatenare (nume, prenume, callback) {
+  setTimeout(function () {
+    callback(`${nume} ${prenume}`);
+  }, 3000);
+};
+
+var thunk = function (callbackApel) {
+  concatenare('Roxana', 'Nae', callbackApel);
+};
+
+thunk(function (numePrenume) {
+  console.log(numePrenume);
+});
+```
+
+Ceea ce tocmai am realizat este faptul că am creat un mecanism prin care inițiem un apel căruia îi pasăm un callback, care ne va returna mereu și mereu o valoare. Partea foarte valoroasă a poveștii este aceea că ceea ce se petrece în momentul în care este invocată funcția specializată este că datele în interiorul momentului de execuție pot să apară și la un moment dat, dacă ne gândim că am putea să le aducem de la un serviciu online. Cert este faptul că vom avea un răspuns la execuția lui `thunk`. Kyle Simpson explică foarte entuziast că ceea ce am realizat prin apelarea funcției asincrone, este că am ambalat operațiunile care se vor desfășura într-o bulă de timp izolată. Un timp de execuție de care nu va mai depinde nicio altă funcție, care până mai odinioară, când foloseam callback-urile, ar fi trebuit să aștepte. Aceasta este majora deficiență a practicii calback-urile: gestionarea timpului, care se concluzionează printr-o stare confuză dacă privești cine așteaptă după cine să termine. Acest lucru se petrece pentru că JavaScript are un singur fir de execuție care înseamnă o singură linie temporală.
+Este revoluționar să poți face un apel la o funcție pe care să o pasezi ca pe o valoare în codul tău și să obții valoarea de care ai nevoie. Chiar dacă nu am avut la îndemână aproape 20 de ani pentru a ajunge la concluziile lui Kyle, am să folosesc înțelepciunea dobândită pentru a vă spune și vouă că este mult mai bine să folosești promisiunile ca practică opusă callback-urilor.
+Înțelegerea funcțiilor *thunk* conduce la înțelegerea *promise-urilor* pentru că spune aceeași voce autorizată: *thunk-urile sunt promisiuni fără un API fățos*. Funcțiile *thunk* sunt o soluție mai bună față de callback-uri.
 
 ## Constructorul
 
 Promise este un constructor folosit pentru realizarea unor obiecte promisiuni folosite în operațiuni asincrone. Asta înseamnă că vei obține un obiect promisiune de fiecare dată când invoci cu operatorul `new`.
 
 ```javascript
-var executaLaRezolvare = function(){return 'execut la rezolvare'};
+var executaLaRezolvare = function () {
+  return 'execut la rezolvare';
+};
 var promisune = new Promise(executaLaRezolvare);
 ```
 
@@ -291,3 +313,4 @@ var listaPromisiunilor = mapPromisificat(lista, dublezLitere);
 [Benjamin Diuguid. Asynchronous Adventures in JavaScript: Callbacks](https://medium.com/dailyjs/asynchronous-adventures-in-javascript-callbacks-39880f1b470e)
 [P.Z.Ingerman.Thunks: A Way of Compiling Procedure Statements with Some Comments on Procedure Declarations](http://archive.computerhistory.org/resources/text/algol/ACM_Algol_bulletin/1064045/frontmatter.pdf)
 [Thunks](https://github.com/thunks/thunks)
+[Rethinking Asynchronous JavaScript: Thunks](https://frontendmasters.com/courses/rethinking-async-js/thunks/)

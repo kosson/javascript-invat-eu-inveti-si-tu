@@ -98,7 +98,7 @@ var iife = (function(x){
 })(x);
 ```
 
-Foarte interesant este cazul în care în IIFE ai marea partea a funcțiilor care trebuie să rămână private, dar ai nevoie să expui câteva în global (de fapt, este modelul șablonului *Modul* - **Module Pattern**). Poți trimite obiectul window în IIFE și îl denumește în parametru `global`. Pentru a expune ceva din IIFE folosește mai apoi `global.ceva`.
+Foarte interesant este cazul în care în IIFE ai marea parte a funcțiilor care trebuie să rămână private, dar ai nevoie să expui câteva în global (de fapt, este modelul șablonului *Modul* - **Module Pattern**). Poți trimite obiectul window în IIFE și îl denumește în parametru `global`. Pentru a expune ceva din IIFE folosește mai apoi `global.ceva`.
 
 ```javascript
 var y = "ceva din global";
@@ -161,10 +161,9 @@ afiseazaFructele(["mar", "banană", "pere", "struguri"]);
 // va afișa undefined de patru ori
 ```
 
-Acest lucru se întâmplă pentru că execuția celor patru iterații este foarte rapidă, mai rapidă decât răspunsul lui `setTimeout` care începe cu o secundă. Pentru că un clojure, care face o referință către variabila care ține valoarea, va face o referință către i, care deja este 4 datorită vitezei de execuție comparativ cu cea a timeout-ului.
+Acest lucru se întâmplă pentru că execuția celor patru iterații este foarte rapidă, mai rapidă decât răspunsul lui `setTimeout` care începe cu o secundă. Pentru că un clojure, care face o referință către variabila care ține valoarea, va face o referință către `i`, care deja este 4 datorită vitezei de execuție comparativ cu cea a timeout-ului.
 
-Pentru a rezolva comportamentul, este nevoie de a fi creat un nou scope pentru fiecare funcție împlicată în buclă și de o variabilă, care să țină minte valoarea lui i.
-
+Pentru a rezolva comportamentul, este nevoie de a fi creat un nou scope pentru fiecare funcție împlicată în buclă și de o variabilă, care să țină minte valoarea lui `i`.
 
 ```javascript
 function afiseazaFructele(fructe){

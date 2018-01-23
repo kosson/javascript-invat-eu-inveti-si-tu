@@ -819,39 +819,37 @@ Ceea ce se observă este că `new` are capacitatea de a suprascrie hard binding-
 
 ## Comportamentul lui `this` în cazul fat arrows
 
-Funcțiile arrow nu au propria valoare pentru parametrul `this`. Pur și simplu îl constituie la momentul creării acestora.
+Funcțiile arrow nu au propria valoare pentru parametrul `this`. Pur și simplu folosesc obiectul context ca fiind `this` și dacă rulează în altă funcție, vor folosi obiectul `this` constituit de acea funcție.
 Funcțiile fat arrows sunt legate de scope-ul lexical, asta însemnând că `this` va fi același ca și cel din blocul părintelui.
 
 ```javascript
 var nume = 'Auraș din Global Scope';
-
-function ciao(nume){
+function Ciao (nume) {
   this.nume = nume;
 };
 
-ciao.prototype.urare = function(){
-  setTimeout(function callback(){     // this care este pasat automat este cel al global scope (window)
+ciao.prototype.urare = function facUrare() {
+  setTimeout(function callback () {     // this care este pasat automat este cel al global scope (window)
     console.log('Ciao '+ this.nume);
-  }, 500);
+  }, 5000);
 };
 
-var intalnire = new ciao('Grigoras');
-intalnire.urare();ne
+var intalnire = new Ciao('Grigoraș');
+intalnire.urare();
 // Ciao undefined (asta daca nume nu este declarat în Global Scope)
 // Când este declarată o variabilă în global scope, va fi afișat în consolă: Ciao Auraș din Global Scope
 ```
 
-Pentru a face un binding la obiectul generat de ciao, se va face o legătură prin metoda `bind()`.
+Pentru a face conectarea la obiectul generat de `ciao`, se va face o legătură prin metoda `bind()`.
 
 ```javascript
 var nume = 'Auraș din Global Scope';
-
 function ciao(nume){
   this.nume = nume;
 };
 
-ciao.prototype.urare = function(){
-  setTimeout((function callback(){     // this care este pasat automat este cel al global scope (window)
+ciao.prototype.urare = function facUrare () {
+  setTimeout( (function callback () {     // this care este pasat automat este cel al global scope (window)
     console.log('Ciao '+ this.nume);
   }).bind(this), 500);
 };
