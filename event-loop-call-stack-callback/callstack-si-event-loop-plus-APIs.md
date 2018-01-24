@@ -12,7 +12,7 @@ Rularea unui program în propriul său fir de execuție, dar care nu face apelur
 
 ## Bucla evenimentelor
 
-Programarea bazată pe evenimente este o paradigmă înscrisă practicii de zi cu zi legat de manipularea DOM-ului (Document Object Model). Modelul bazat pe evenimente mai este cunoscut și ca un model de gestionare a tuturor solicitărilor de preluare a controlului, în engleză numit *concurency model*. Chiar despre asta este și vorba: despre gestionarea intereselor concurente la momentul evaluării codului.
+Programarea bazată pe evenimente este o paradigmă înscrisă practicii de zi cu zi legată tradițional de manipularea **DOM**-ului (*Document Object Model*). Modelul bazat pe evenimente mai este cunoscut și ca un model de gestiune a tuturor solicitărilor de preluare a controlului, în engleză numit *concurency model*. Chiar despre asta este și vorba: despre gestionarea intereselor concurente la momentul evaluării codului.
 În acest sens, este nevoie de un mecanism de gestiune a evenimentelor care să fie capabil să pună ordine. Îți poți închipui povestea concurențială precum o busculadă care s-a creat la poarta unui magazin de Black Friday. Din fericire, există ofițeri de securitatea care ordonează accesul. Bucla evenimentelor împreună cu stiva pot fi considerați agenții noștri de securitate.
 
 ## Asincronicitate
@@ -92,7 +92,7 @@ Din nefericire, modelul asincronicității construit pe callback-uri conduce la 
 
 ## Mediul de execuție - execution environment
 
-DOM-ul (este în sine o microplatformă), interpretorul, componenta de networking și toate celelalte părți componente ale unui browser alcătuiesc mediul de execuție.
+**DOM**-ul (este în sine o microplatformă), interpretorul, componenta de networking și toate celelalte părți componente ale unui browser alcătuiesc mediul de execuție.
 
 ## Stiva apelurilor - CALLSTACK
 
