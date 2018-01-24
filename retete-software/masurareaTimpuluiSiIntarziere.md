@@ -1,16 +1,25 @@
 # Noțiuni legate de cronometrare și întârziere
 
+În cazul în care codul pe care îl scrii are nevoie de mecanisme pentru a realiza întârzieri programate sau intervale de repetiție a unei operațiuni, motorul de JavaScript pune la dispoziție utilitare (API-uri) pentru a le realiza.
+
+## Dependințe cognitive
+
+- funcții
+- mediu lexical
+- closure-uri
+- callback-uri
+
 Atenție! Timerele/cronometrele lucrează și ele în același fir de execuție al JavaScript-ului.
 
 ```javascript
-let identificator = setTimeout(callback, 2000);
+let identificator = setTimeout(funcțieCallback, 2000);
 ```
 
 Utilitarul `setTimeout` inițiază un singur cronometru, care după ce intervalul s-a scurs, va invoca funcția. Utilitarul în sine returnează un identificator. Datorită identificatorului, vom putea întrerupe ciclul de măsurare a cronometrului.
 Timpul se măsoară în milisecunde, astfel că 2000 de milisecunde = 2 secunde. Pentru a opri, se folosește `clearTimeout(identificator)`.
 
 ```javascript
-let identificator = setInterval(callback, 2000);
+let identificator = setInterval(funcțieCallback, 2000);
 ```
 
 Diferența dintre `setTimeout` și `setInterval` este că `setInterval` apelează funcția la nesfârșit odată la intervalul de timp specificat, dacă nu este întreruptă execuția.

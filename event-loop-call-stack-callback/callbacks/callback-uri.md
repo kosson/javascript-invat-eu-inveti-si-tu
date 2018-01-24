@@ -1,5 +1,7 @@
 # Callback-uri
 
+Știm despre funcții că sunt valori care pot fi pasate ca oricare valoare. În spiritul acestei afirmații fundamentale putem realiza comunicarea intenției tale de prelucrare a datelor printr-o funcție unei alte părți software, care va lua funcția ta și o va face parte din propriile evaluări, iar la finalizarea acestora vei primi un rezultat. Este o relație simbiotică pe care o realizezi care se realizează pe încrederea acordată API-ului că îți va returna rezultatul pe care îl aștepți. Pentru că majoritatea codului unui API este cu sursă deschisă, poți investiga ce se petrece cu funcția pe care ai pasat-o, dar de cele mai multe ori tratezi un API ca pe o *cutie neagră* în care introduci date și care îți oferă înapoi alte date tratate în acord cu specificațiile. Să detaliem!
+
 Ce-ar fi să ne imaginăm un identificator ca pe un cârlig cu care extragem valori din funcții?!
 
 ```javascript
@@ -18,7 +20,7 @@ Un **callback** este o funcție, care este pasată ca argument altei funcții. A
 
 ## De ce avem nevoie de funcții callback?
 
-Modelul de lucru folosind funcții ce îndeplinesc o anumită sarcină după ce funcția container și-a încheiat sarcinile la rândul său, este o necesitate dictată de lucrul cu date care intră și ies din aplicațiile pe care le creăm. Exemplele sunt nenumărate: citirea unui fișier sau legarea la o bază de date. Multe exemple sunt legate de lucrul cu evenimente în cadrul DOM (Document Object Model) atunci când dorim manipularea elementelor dintr-o pagină web.
+Modelul de lucru folosind funcții ce îndeplinesc o anumită sarcină după ce funcția container și-a încheiat sarcinile la rândul său, este o necesitate dictată de lucrul cu date care intră și ies din aplicațiile pe care le creăm. Exemplele sunt nenumărate: citirea unui fișier sau legarea la o bază de date. Multe exemple sunt legate de lucrul cu evenimente în cadrul **DOM** (Document Object Model) atunci când dorim manipularea elementelor dintr-o pagină web.
 
 Callback-urile fac ceva de mare ajutor în toate aceste scenarii de lucru: pur și simplu dau răgaz unei anumite sarcini să se termine înainte de a finaliza cu totul execuția unui program. Să ne imaginăm că dorim să descărcăm o imagine de la distanță, de undeva de pe net, la care vom atașa o legendă ce descrie conținutul. Textul legendei îl avem deja și se încarcă foarte repede, dar imaginea este ceva mai corpolentă și este nevoie de un timp de așteptare. Callback-ul însărcinat cu aducerea imaginii, va avea răgazul necesar să-și termine treaba în timp ce restul codului va genera containerul imaginii și va poziționa legenda fără a bloca firul de execuție. Când este gata descărcată și imaginea, aceasta va fi afișată și ea. Adu-ți mereu aminte de faptul că JavaScript rulează pe un singur fir de execuție. Sarcina unei anumite funcții care se execută, nu trebuie să blocheze firul de execuție.
 
@@ -35,7 +37,7 @@ aducResursa('mar', function () {
 });
 ```
 
-Totuși trebuie spus un lucru la care trebuie reflectat foarte adânc. Există momente când vei folosi biblioteci de cod externe, care vor prelua callback-ul pe care-l scrii, vor rula utilitarul în contextul aplicației lor, iar la final vor executa funcția scrisă de tine. Kyle Simpson pune această întrebare esențială pentru a verifica și pentru a fi sigur pe modul de execuție a callback-ului: ești sigur pe aplicația externă căreia îi pasezi callback-ul? Ai siguranța că va executa în parametrii doriți de tine codul din funcția pe care i-o pasezi ca și callback? Dacă nu ai scris tu întreaga aplicație, ai **încredere** să o folosești? Recomandarea este ca în momentul dobândirii abilităților de lucru cu promisiunile sau cu funcțiile async/await, să fie abandonată practica callback-urilor.
+Totuși trebuie spus un lucru la care trebuie reflectat foarte adânc. Există momente când vei folosi biblioteci de cod externe, care vor prelua callback-ul pe care-l scrii, vor rula utilitarul în contextul aplicației lor, iar la final vor executa funcția scrisă de tine. Kyle Simpson pune această întrebare esențială pentru a verifica și pentru a fi sigur pe modul de execuție a callback-ului: ești sigur pe aplicația externă căreia îi pasezi callback-ul? Ai siguranța că va executa în parametrii doriți de tine codul din funcția pe care i-o pasezi ca și callback? Dacă nu ai scris tu întreaga aplicație, ai **încredere** să o folosești? Recomandarea este ca în momentul dobândirii abilităților de lucru cu **promisiunile** sau cu funcțiile **async/await**, să fie abandonată practica callback-urilor.
 
 Urmărirea callback-urilor este o sarcină dificilă și din acest motiv este nevoie de o alternativă.
 

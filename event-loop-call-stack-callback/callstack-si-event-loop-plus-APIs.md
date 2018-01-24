@@ -18,7 +18,6 @@ Programarea bazată pe evenimente este o paradigmă înscrisă practicii de zi c
 ## Asincronicitate
 
 Comportamentul asincron este permis de relația dintre runtime-ul JavaScript, stiva de apeluri și API-urile web. Fiecare dintre aceste componente reprezintă tot atâtea fire de execuție.
-
 Să presupunem că avem o colecție de elemente pe care dorim să le iterăm și pentru fiecare element să-i aplicăm o funcție.
 
 ```javascript
@@ -48,7 +47,7 @@ function afisare (element) {
 }; prelucrarePerElement (colectie, afisare);
 ```
 
-Lucrurile se simplifică drastic dacă folosim utilitarul `forEach` pus la dispoziție de obiectul global `Array`. Nu mai trebuie să creăm noi funcția de `prelucrarePerElement`.
+Lucrurile se simplifică drastic dacă folosim utilitarul `forEach` pus la dispoziție de prototipul obiectului intern fundamental `Array`. Nu mai trebuie să creăm noi funcția de `prelucrarePerElement`.
 
 ```javascript
 var colectie = ['unu', 'doi', 'trei'];
@@ -87,7 +86,7 @@ setTimeout (() => {
 console.log('Eu între timp m-am executat');
 ```
 
-Pe scurt ceea ce se întâmplă este că log-ul intern din callback-ul lui `setTimeout`, a fost deferit spre execuție cinci secunde mai târziu unui API intern motorului JavaScript în vreme ce codul care urma a `setTimeout`-ului a fost evaluat fără a mai aștepta finalizarea celui anterior. Este un fel de „valoarea vine, când vine”.
+Pe scurt ceea ce se întâmplă este că log-ul intern din callback-ul lui `setTimeout`, a fost *deferit* spre execuție cinci secunde mai târziu unui API intern motorului JavaScript în vreme ce codul care urma a `setTimeout`-ului a fost evaluat fără a mai aștepta finalizarea celui anterior. Este un fel de „valoarea vine, când vine”.
 
 Din nefericire, modelul asincronicității construit pe callback-uri conduce la un anumit fenomen de aglomerare în care vei folosi un callback în interiorul unui alt callback și așa mai departe pentru atingerea unui anumit model funcțional.
 
