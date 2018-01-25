@@ -1,20 +1,33 @@
 # Callback-uri
 
-Știm despre funcții că sunt valori care pot fi pasate ca oricare valoare. În spiritul acestei afirmații fundamentale putem realiza comunicarea intenției tale de prelucrare a datelor printr-o funcție unei alte părți software, care va lua funcția ta și o va face parte din propriile evaluări, iar la finalizarea acestora vei primi un rezultat. Este o relație simbiotică pe care o realizezi care se realizează pe încrederea acordată API-ului că îți va returna rezultatul pe care îl aștepți. Pentru că majoritatea codului unui API este cu sursă deschisă, poți investiga ce se petrece cu funcția pe care ai pasat-o, dar de cele mai multe ori tratezi un API ca pe o *cutie neagră* în care introduci date și care îți oferă înapoi alte date tratate în acord cu specificațiile. Să detaliem!
+Știm despre funcții că sunt valori care pot fi pasate ca oricare alta. În spiritul acestei afirmații fundamentale putem realiza comunicarea intenției de prelucrare a datelor printr-o funcție unei alte părți software, care va lua funcția ta și o va face parte din propriile evaluări, iar la finalizarea acestora vei primi un rezultat. Este o relație simbiotică pe care se realizează pe încrederea acordată API-ului că îți va returna rezultatul pe care îl aștepți. Pentru că majoritatea codului unui API este cu sursă deschisă, poți investiga ce se petrece cu funcția pe care ai pasat-o, dar de cele mai multe ori tratezi un API ca pe o *cutie neagră* în care introduci date și care îți oferă înapoi alte date tratate în acord cu specificațiile. Să detaliem!
+
+Callback-ul este o funcție care va porni evaluarea propriului cod când va avea toate datele necesare pe care i le va furniza contextul de execuție. Această funcție este numită de practicieni **callback**, adică o funcție care va aștepta cuminte ca tot ce îi este necesar și abia atunci se lansează în execuție. Vom vedea mai departe că recent, în noua versiune a standardului, mai este disponibil un alt mecanism numit *promisiune*, un model de gestiune asincron mult superior practicii callback-urilor. Deocamdată, să ne concentrăm pe callback-uri pentru că de ele ne vom lovi foarte des mai ales când vom utiliza cod scris de alții.
+
+Un **callback** este o funcție, care este pasată ca argument altei funcții. Adu-ți aminte de faptul că o funcție este o valoare care poate fi pasată ca argument. Funcțiile care primesc alte funcții ca valori sunt **funcții de nivel înalt**.
+
+În limba română am putea aproxima denumirea ca **apeluri ulterioare**. Funcția ca valoare este pasată ca argument și este „apelată ulterior” (în engleză: *called back*) de către funcția care este în execuție deja. Vom folosi varianta denumirii în limba engleză pentru a recunoaște în alte lucrări despre ce vorbim, dar și pentru simplitatea pe care o oferă un singur cuvânt.
 
 Ce-ar fi să ne imaginăm un identificator ca pe un cârlig cu care extragem valori din funcții?!
 
 ```javascript
 function producValoare () { return 2; };
 var extragValoare = producValoare();
+// extragValoare închipuiește-l ca pe un extractor de valoare
 ```
 
-Valoarea identificatorului `extragValoare` este tocmai rezultatul funcției. Ne putem închipui, ca înainte de evaluarea funcției prin apelarea sa, identificatorul era `undefined`, dar de îndată ce am obținut un rezultat prin executarea funcției, identificatorul nostru va avea o valoare. Acest exemplu este unul foarte simplu, dar hai să ne închipuim faptul că funcția noastră face ceva muuuuult mai mult. Să ne imaginăm că este o funcție care descarcă de pe internet o resursă de text sau o imagine, ori mai multe. Această operațiune, după cum îți poți imagina, va necesita ceva timp. Acum vine cheia problemei. Știind că avem un singur fir de execuție, operațiunea noastră are potențialul de a bloca temporar firul. În acest moment ai nevoie de un model de lucru care să-ți permită să execuți codul în continuare, fără niciun blocaj, dar în același timp să îndeplinești și sarcina aducerii resursei.
-În ajutorul nostru putem declara o funcție care să îndeplinească sarcina la un moment în care întregul context de execuției îi va permite rularea, adică va avea toate datele necesare. Această funcție este numită de practicieni **callback**, adică o funcție care va aștepta cuminte ca tot ce este necesar sie să fie disponibil și abia atunci se lansează în execuție. Vom vedea mai departe că, de curând, în noua versiune a standardului, mai este disponibil un alt mecanism numit *promisiune*, un model de gestiune asincron mult superior practicii callback-urilor. Deocamdată, să ne concentrăm pe callback-uri pentru că de ele ne vom lovi foarte des mai ales când vom utiliza cod scris de alții.
+Valoarea identificatorului `extragValoare` este tocmai rezultatul funcției. Ne putem închipui, că înainte de evaluarea funcției prin apelarea sa, identificatorul avea valaorea `undefined`, dar de îndată ce am obținut un rezultat prin evaluarea codului din corpul funcției, identificatorul nostru va avea o valoare.
 
-Un **callback** este o funcție, care este pasată ca argument altei funcții. Adu-ți aminte de faptul că o funcție este o valoare care poate fi pasată ca argument. Funcțiile care primesc alte funcții ca valori sunt **funcții de nivel înalt**.
+Acest exemplu este unul foarte simplu, dar hai să ne închipuim faptul că funcția noastră face ceva muuuuult mai mult. Să ne imaginăm că este o funcție care descarcă de pe internet o resursă de text sau o imagine, ori mai multe. Această operațiune, după cum îți poți imagina, va necesita ceva timp. Acum vine cheia problemei. Știind că avem un singur fir de execuție, operațiunea noastră are potențialul de a bloca temporar firul cât timp sunt căutate resursele și apoi aduse una câte una, etc.
 
-În limba română am putea aproxima denumirea ca **apeluri ulterioare**. Funcția ca valoare este pasată ca argument și este „apelată ulterior” (în engleză: *called back*) de către funcția care este în execuție deja. Vom folosi varianta denumirii în limba engleză pentru a recunoaște în alte lucrări despre ce vorbim, dar și pentru simplitatea pe care o oferă un singur cuvânt.
+```javascript
+// pseudo cod:
+aducDeLaServer('http://kosson.ro/ceva.csv', function (rezultat) {
+  console.log(rezultat.nume);
+});
+```
+
+În traducere liberă un astfel de eveniment (apelul funcției) spune controlului: eu, funcția `aducDeLaServer`, care tocmai am fost apelată, îmi voi întrerupe execuția (evaluarea codului meu intern) pentru a mă duce pe net să aduc resursa de la adresa web specificată de tine. Câtă vreme fac acest lucru, eu nu am să te întrerup și poți executa altceva, dar să știi că din momentul în care resursa de pe net a venit, te invit să *programezi* execuția funcției pe care ți-am pasat-o drept callback (de aici și explicația termenului de apel ulterior), prin introducerea ei în **bucla evenimentelor**. Când îi vine rândul, funcția callback va fi executată, iar controlul reia execuția funcției `aducDeLaServer`. Dacă nu mai e nimic de făcut încheie și execuția acesteia.
 
 În concluzie, un callback este o convenție de folosire a funcțiilor, un model de utilizare dacă ți se pare mai ușor să înțelegi.
 
@@ -72,21 +85,8 @@ adunare (1, 2, function(rezultat) {
 }); // Rezultatul este: 3
 ```
 
-Modul de a redacta codul de mai sus este foarte des întâlnit, dar produce confuzie pentru cei neacomodați cu acest stil de redactare a codului. O variantă mai curată ar fi să folosim identificatorul opus definirii funcției în argumente.
-
-```javascript
-function adunare (a, b, faAdunarea) {
-  var x = a + b;
-  faAdunarea (x);
-};
-function afișează (omega) {
- console.log( omega + 1 );
- console.log(this); // Window
-};
-adunare (1, 2, afișează);
-```
-
-La invocarea funcției, fii sigur că ultimul argument pasat este o funcție care primește un unic argument. În acest moment, este invocată funcția de bază. Aceasta primește la primele argumente valorile de lucru iar ultimul, de regulă, fiind funcția callback. Încă o dată îți reamintesc că în JavaScript funcțiile sunt de nivel înalt, acceptând alte funcții ca valori de lucru prin argumente. Aceasta este și explicația pentru care callback-urile funcționează. Ai observat ceva deja? Funcția cu rol de callback are drept valoare a obiectului `this` obiectul global. Chiar și când codul este izolat într-un IIFE, tot la obiectul global face referință.
+Modul de a redacta codul de mai sus este foarte des întâlnit, dar produce confuzie pentru cei neacomodați cu acest stil. O variantă mai curată ar fi să folosim un identificator sau o variabilă opusă ca practică unei definirii a unei funcții anonime ca ultim argument.
+La invocarea funcției, asigură-te că ultimul argument pasat este funcția callback și că aceasta are un argument, care va fi și rezultatul dorit la final. În acest moment, este invocată funcția de bază. Aceasta primește la primele argumente valorile de lucru, ultimul fiind funcția callback. Încă o dată îți reamintesc că în JavaScript funcțiile sunt de nivel înalt, acceptând alte funcții ca valori de lucru prin argumente. Aceasta este și explicația pentru care callback-urile funcționează.
 
 ```javascript
 (function () {
@@ -96,13 +96,14 @@ La invocarea funcției, fii sigur că ultimul argument pasat este o funcție car
   };
   function afișează (omega) {
    console.log( omega + 1 );
-   console.log(this); // Window
   };
   adunare (1, 2, afișează);
 })();
 ```
 
-Mai există cazul în care callback-urile funcționează asincron.
+Exemplul de mai sus este unul sincron, adică unul care nu a deferit execuția callback-ului unui moment viitor în timp pentru că `adunare` ar fi blocat firul de execuție. Pur și simplu, evaluarea decurge normal.
+
+Mai există cazul în care callback-urile funcționează *asincron*.
 Pentru a simula asincronicitatea, se va folosi metoda `setTimeout`, un API oferit de motor. Folosirea lui `setTimeout` implică fragmentarea în două calupuri de timp: cel al execuției API-ului și cel al execuției codului din corpul funcției callback, care se va petrece la un moment viitor specificat.
 
 ```javascript
@@ -121,11 +122,13 @@ console.log('după');
 // mesajul rezultatului apare în consolă după
 ```
 
+![Exemplificare asincronicitate folosind Nodejs](callbacksSiEventLoop.svg)
+
 Atenție! funcția `adunareAsincrona` nu va mai aștepta la execuție să se declanșeze execuția callbackului și va relua execuția mai departe și abia după ce `setTimeout` va fi terminat, după cele 3 secunde, abia atunci va fi executat și callback-ul. După ce timpul se va fi scurs, execuția callback-ului returnează rezultatul. Menținerea contextului se face datorită closure-ului.
 
-## Anatomie
+## Closure-uri făcute de callback-uri
 
-Pentru fiecare pas al animației, callback-ul pasat lui `setInterval` face closure pe valorile `elementTinta` și increment și astfel, fiind accesibile ca niște variabile care pot fi accesate dar având valorile modificate.
+Pentru fiecare pas al animației, callback-ul pasat lui `setInterval` face closure pe valorile `elementTinta` și `increment` și astfel, fiind accesibile ca niște variabile care pot fi accesate, dar având valorile modificate.
 
 ```html
 <div id="element">Un nod de text</div>
@@ -148,9 +151,7 @@ Pentru fiecare pas al animației, callback-ul pasat lui `setInterval` face closu
 </script>
 ```
 
-Reține faptul că de fiecare dată când intervalul presetat expiră, funcția care joacă rol de callback reactivează mediul lexical de la momentul creării. Closure-ul pe care-l face fiecare callback ține evidența la propriul set de variabile.
-
-![Exemplificare asincronicitate folosind Nodejs](callbacksSiEventLoop.svg)
+Reține faptul că de fiecare dată când intervalul presetat expiră, funcția care joacă rol de callback reactivează mediul lexical de la momentul creării. Closure-ul pe care-l face fiecare callback ține evidența propriului set de variabile.
 
 ## Mantre
 
