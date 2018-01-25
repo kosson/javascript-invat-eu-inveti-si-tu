@@ -101,10 +101,10 @@ La invocarea funcției, asigură-te că ultimul argument pasat este funcția cal
 })();
 ```
 
-Exemplul de mai sus este unul sincron, adică unul care nu a deferit execuția callback-ului unui moment viitor în timp pentru că `adunare` ar fi blocat firul de execuție. Pur și simplu, evaluarea decurge normal.
+Exemplul de mai sus este unul **sincron**, adică unul care nu a deferit execuția callback-ului unui moment viitor în timp pentru că `adunare` ar fi blocat firul de execuție. Pur și simplu, evaluarea decurge normal. Acestea sunt invocate înainte ca o funcție să returneze. Callback-urile sincrone sunt invocate în firul de execuție originar. Spre exemplu, la invocarea unui callback cu `forEach`, acesta va fi performat pentru fiecare dintre elementele listei.
 
-Mai există cazul în care callback-urile funcționează *asincron*.
-Pentru a simula asincronicitatea, se va folosi metoda `setTimeout`, un API oferit de motor. Folosirea lui `setTimeout` implică fragmentarea în două calupuri de timp: cel al execuției API-ului și cel al execuției codului din corpul funcției callback, care se va petrece la un moment viitor specificat.
+Mai există cazul în care callback-urile funcționează **asincron**.
+Pentru a simula asincronicitatea, vom folosi utilitarul `setTimeout`, un API oferit de motor. Folosirea lui `setTimeout` implică fragmentarea în două calupuri de timp: cel al execuției utilitarului și cel al execuției codului din corpul funcției callback, care se va petrece la un moment viitor specificat.
 
 ```javascript
 // adunarea ca operațiune asincronă
@@ -125,6 +125,16 @@ console.log('după');
 ![Exemplificare asincronicitate folosind Nodejs](callbacksSiEventLoop.svg)
 
 Atenție! funcția `adunareAsincrona` nu va mai aștepta la execuție să se declanșeze execuția callbackului și va relua execuția mai departe și abia după ce `setTimeout` va fi terminat, după cele 3 secunde, abia atunci va fi executat și callback-ul. După ce timpul se va fi scurs, execuția callback-ului returnează rezultatul. Menținerea contextului se face datorită closure-ului.
+
+### Callbackurile asincrone - deferred callback (invocare întârziată)
+
+Callback-ul este invocat după ce o funcție a returnat deja sau a returnat într-un alt fir de execuție al stivei.
+
+Callback-urile asincrone sunt folosite pe scară largă în API-urile legate de IO așa cum sunt socketurile, de exemplu (`socket.connet(callback)`). Ceea ce este de așteptat în cazul socket este ca atunci când connect returnează, callback-ul încă să nu fie invocat de vreme ce așteaptă să se facă conexiunea.
+
+Pot fi invocate de un alt fir de execuție (în cazul mecanismelor de invocare întârziată «deferral» bazate pe firul de execuție). În acest caz, o aplicație ar trebui să sincronizeze orice resurse accesează callback-ul. Aici este ridicată o problemă care ține și de modificarea stării aplicației, mai exact trebuie luat în calcul faptul că alte fire de execuție deja au modificat starea aplicației.
+
+„Amânarea” unui callback are ca efect „trecerea unei perioade” necesară stivei să ajungă înapoi la bucla centrală (event loop). Mai este un caz: cel al rulării într-un alt fir de execuție.
 
 ## Closure-uri făcute de callback-uri
 
@@ -202,28 +212,10 @@ Atenție, în NodeJS, primul argument al unui callback va fi întotdeauna un obi
 - Modularizează codul împărțindu-l în funcții mici, făcându-l reutilizabil ori de câte ori acest lucru este posibil.
 - În cazul folosirii callback-urilor împreună cu operatorul spread, callback-ul nu va mai fi poziționat ultimul, ci primul sau penultimul. Acest lucru se întâmplă pentru că sintaxa spread trebuie să fie ultimul argument introdus.
 
-## Callback-uri sincrone și asincrone
-
-### Callback-urile sincrone
-
-Acestea sunt invocate înainte ca o funcție să returneze. Putem spune că aplicația care primește callback-ul va rămâne în stivă.
-Callback-urile sincrone sunt invocate în firul de execuție originar.
-Spre exemplu, la invocarea unui callback cu `forEach`, acesta va fi performat pentru fiecare dintre elementele listei.
-
-### Callbackurile asincrone - deferred callback (invocare întârziată)
-
-Callback-ul este invocat după ce o funcție a returnat deja sau a returnat într-un alt fir de execuție al stivei.
-
-Callback-urile asincrone sunt folosite pe scară largă în API-urile legate de IO așa cum sunt socketurile, de exemplu (`socket.connet(callback)`). Ceea ce este de așteptat în cazul socket este ca atunci când connect returnează, callback-ul încă să nu fie invocat de vreme ce așteaptă să se facă conexiunea.
-
-Pot fi invocate de un alt fir de execuție (în cazul mecanismelor de invocare întârziată «deferral» bazate pe firul de execuție). În acest caz, o aplicație ar trebui să sincronizeze orice resurse accesează callback-ul. Aici este ridicată o problemă care ține și de modificarea stării aplicației, mai exact trebuie luat în calcul faptul că alte fire de execuție deja au modificat starea aplicației.
-
-„Amânarea” unui callback are ca efect „trecerea unei perioade” necesară stivei să ajungă înapoi la bucla centrală (event loop). Mai este un caz: cel al rulării într-un alt fir de execuție.
-
 ## Bună practică
 
 Din capul locului menționează dacă o funcție este asincronă sau nu la momentul definirii.
-Dacă un callback trebuie invocat cu întârziere, definește funcția să facă acest lucru.
+Dacă un callback trebuie invocat cu întârziere, definește funcția pentru a realiza acest lucru.
 În cazul folosirii callback-urilor, va trebui să capturezi erorile la fiecare pas pentru că utilizarea de callback-uri suferă pe partea de raportare a acestora. Acest aspect a fost rezolvat elegant în cazul folosirii promisiunilor.
 
 ## Dependințe cognitive:
