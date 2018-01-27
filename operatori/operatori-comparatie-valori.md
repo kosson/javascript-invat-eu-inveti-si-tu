@@ -1,10 +1,10 @@
-# Operatorii de comparație `<`, `>`, `<=`, `=>`
+# Operatorii de comparație
 
-Evaluarea acestor operatori conduce la un răspuns `true` sau `false`.
+Evaluarea acestor operatori conduce la un răspuns, fie `true`, fie `false`.
 
 ## Mai mare `>`, mai mic `<`
 
-Testează valorile după ordinul de mărime. `<` înseamnă testează valoarea din stânga să fie mai mică decât cea din dreapta. `>` este taman invers.
+Testează valorile după ordinul de mărime. Operatorul `<` înseamnă că testează valoarea din stânga dacă este mai mică decât cea din dreapta, iar operatorul `>` este taman invers.
 
 ```javascript
 5 > 3; // true
@@ -13,19 +13,20 @@ Testează valorile după ordinul de mărime. `<` înseamnă testează valoarea d
 
 ## Mai mare sau egal `>=`, mai mic sau egal `<=`
 
-Implică o verificare a valorilor în comparație una cu cealaltă, dar este acceptată ca true și cazul în care valorile sunt egale.
+Implică o verificare a valorilor în comparație una cu cealaltă, dar este acceptată ca `true` și cazul în care valorile sunt egale.
 
 ## Egalități `==` și `===`
 
-Uneori ai nevoie să verifici dacă valorile sunt identic la fel sau dacă verificarea este mai laxă.
+Uneori ai nevoie să verifici dacă valorile sunt identic la fel sau dacă verificarea se dorește a fi făcută prin reducerea la valorile de adevăr.
 
-O verificare ușoară poate fi făcută cu dublu egal. De exemplu:
+O verificare prin stabilirea valorilor de adevăr poate fi făcută cu dublu egal. De exemplu:
 
-```javscript
-5 == '5'; //true
+```javascript
+5 == '5'; // true
+'' == 0;  // true
 ```
 
-O verificare strictă se face cu triplu egal. Această verificare caută să vadă dacă și tipul valorilor este același.
+O verificare strictă, prin citirea tipului de valoare, se face cu triplu egal. Această verificare caută să vadă dacă și tipul valorilor este același.
 
 ```javascript
 5 === '5'; // false

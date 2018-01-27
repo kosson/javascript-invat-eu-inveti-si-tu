@@ -14,7 +14,7 @@ Acest operator returnează rezultatul ridicării la putere a primului operand la
 
 Este operatorul cu ajutorul căruia facem adunări. Adunăm expresii constituite din valori numerice.
 
-Există un caz în care operatorul plus este folosit pentru a concatena șiruri de caractere. Operațiunea în sine se numește concatenare și se întâmplă ori de câte ori unul din operanzii unei expresii este un șir text.
+Există un caz în care operatorul plus este folosit pentru a concatena șiruri de caractere. Operațiunea în sine se numește **concatenare** și se întâmplă ori de câte ori unul din operanzii unei expresii este un șir text.
 
 ```javascript
 var text = 2 + "8";
@@ -22,10 +22,12 @@ console.log(text); // 28
 typeof text; // "string"
 ```
 
-Uneori ai nevoie să transformi o valoare într-un șir de caractere. De cele mai multe ori este folosit acest truc pentru a constrânge, pentru a transforma valoarea primită de un parametru. Operatorul plus oferă prin natura sa această posibilitate. Singurul lucru pe care trebuie să-l faci este să  pui valoare pe care o dorești transformată în string într-o expresie în care pe mâna stângă ai un șir vid. Astfel, indiferent ce vine în partea dreaptă a operatorului, expresia după evaluare va oferi un șir de caractere.
+Uneori ai nevoie să transformi o valoare într-un șir de caractere. De cele mai multe ori este folosit acest truc pentru a *constrânge*, pentru a *transforma* valoarea primită de un parametru. Operatorul plus oferă prin natura sa această posibilitate. Singurul lucru pe care trebuie să-l faci este să pui valoarea pe care o dorești transformată în string într-o expresie în care în partea stângă ai un șir vid. Astfel, indiferent ce vine în partea dreaptă a operatorului, expresia după evaluare va oferi un șir de caractere.
 
 ```javascript
-'' + 2; // '2' (șirul vid este convertit la 0)
+var ceva = '' + 2; // '2' (șirul vid este convertit la 0)
+ceva; // '2'
+typeof ceva; // 'string'
 undefined + 100; // NaN
 ```
 

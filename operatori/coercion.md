@@ -6,6 +6,18 @@ Coercion în limba engleză înseamnă constrângere. Ceea ce se petrece este o 
 
 Unii operatori, cum ar fi, de exemplu, plus, mai întâi fac o transformare a valorii operandului la echivalentul numeric și abia apoi face operațiunea matematică.
 
+Cea mai simplă pentru a fi reținută este că valoarea `null` și un șir vid ('') vor fi transformate întotdeauna în `0`. Încă una: dacă am un șir de caractere care sunt cifrele ce reprezintă un număr, acesta va fi transformat chiar în număr.
+
+```javascript
+null + 2; // 2 (echivalent 0 + 2)
+3 - ''; // numărul 3 (operatorul minus a făcut transformarea)// string 3
+'23' > 1; // true
+```
+
+Sunt și alte transformări care se petrec, dar acestea sunt determinate de acțiunea operatorilor unari așa cum este `+` și `-`, de exemplu, când aceștia „se uită” la operandul din dreapta și în funcție de ce este în stânga încearcă să-l transforme pentru a obține ceva din acea expresie.
+
+Există câteva valori care vor fi întotdeauna reduse la `false` în evaluările expresiilor: `0` (ce poate fi mai evident?), `''` un șir vid, valoarea `undefined` și `NaN`, încheind cu faimosul `null`. Aici adăugăm o mențiune foarte utilă pe termen lung: restul valorilor se reduc la `truthy`.
+
 ## Transformarea unui șir de caractere
 
 Uneori datele vin ca șiruri de caractere, chiar și cele numerice. Atunci când ai nevoie să faci o operațiune matematică, ai nevoie de un mecanism care să le transforme din forma lor textuală în cea numerică, de care este nevoie.
