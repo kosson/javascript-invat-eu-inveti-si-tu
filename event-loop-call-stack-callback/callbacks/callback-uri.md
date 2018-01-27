@@ -130,7 +130,7 @@ Atenție! funcția `adunareAsincrona` nu va mai aștepta la execuție să se dec
 
 Callback-ul este invocat după ce o funcție a returnat deja sau a returnat într-un alt fir de execuție al stivei.
 
-Callback-urile asincrone sunt folosite pe scară largă în API-urile legate de IO așa cum sunt socketurile, de exemplu (`socket.connet(callback)`). Ceea ce este de așteptat în cazul socket este ca atunci când connect returnează, callback-ul încă să nu fie invocat de vreme ce așteaptă să se facă conexiunea.
+Callback-urile asincrone sunt folosite pe scară largă în API-urile legate de IO așa cum sunt `socket`-urile, de exemplu (`socket.connet(callback)`). Ceea ce este de așteptat în cazul `socket` este ca atunci când `connect` returnează, callback-ul încă să nu fie invocat de vreme ce așteaptă să se facă conexiunea.
 
 Pot fi invocate de un alt fir de execuție (în cazul mecanismelor de invocare întârziată «deferral» bazate pe firul de execuție). În acest caz, o aplicație ar trebui să sincronizeze orice resurse accesează callback-ul. Aici este ridicată o problemă care ține și de modificarea stării aplicației, mai exact trebuie luat în calcul faptul că alte fire de execuție deja au modificat starea aplicației.
 
@@ -210,7 +210,7 @@ Atenție, în NodeJS, primul argument al unui callback va fi întotdeauna un obi
 - Ieși din funcție cât se poate de repede cu `return`, `continue` sau `break`.
 - Creează funcții cu nume pentru callback-uri pasând rezultatele intermediare ca argumente.
 - Modularizează codul împărțindu-l în funcții mici, făcându-l reutilizabil ori de câte ori acest lucru este posibil.
-- În cazul folosirii callback-urilor împreună cu operatorul spread, callback-ul nu va mai fi poziționat ultimul, ci primul sau penultimul. Acest lucru se întâmplă pentru că sintaxa spread trebuie să fie ultimul argument introdus.
+- În cazul folosirii callback-urilor împreună cu operatorul spread (...), callback-ul nu va mai fi poziționat ultimul, ci primul sau penultimul. Acest lucru se întâmplă pentru că sintaxa spread trebuie să fie ultimul argument introdus.
 
 ## Bună practică
 

@@ -21,7 +21,7 @@ Un altul este sistemul hexazecimal, a cărui bază este 16 și care este folosit
 
 Cel cu care vom lucra folosind operatorii bitwise, este sistemul binar, care reprezintă valorile prin șiruri de `0` și `1`. Computerul nu pricepe altceva decât stările logice 0 și 1. Întrebarea corectă este cum am putea reprezenta un număr zecimal în echivalentul său binar? Pentru a face acest lucru trebuie să împarți numărul zecimal la doi succesiv.
 
-De exemplu, 27.
+De exemplu, 27:
 
 27 / 2 = 13 * 2 + 1;
 13 / 2 = 6 * 2  + 1;

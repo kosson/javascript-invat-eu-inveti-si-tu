@@ -2,6 +2,7 @@
 
 Un operator unar este un operator care aplică o operațiune asupra unui singur operand sau argument.
 Aceștia sunt:
+
 - `delete`,
 - `void`,
 - `typeof`,
@@ -25,6 +26,7 @@ Mai întâi de toate, acest operator încearcă o transformare a operandului în
 +false; // 0
 +null; // 0
 +'Infinity'; // Infinity
++'ceva'; // NaN
 +function(){}; // NaN
 +{a:10}; // NaN
 +{valueOf: function(){return '0xDF';}}; // 223
@@ -32,32 +34,33 @@ Mai întâi de toate, acest operator încearcă o transformare a operandului în
 -'ten'; // NaN
 ```
 
-După cum este observabil, dacă un obiect are o metodă `valueOf` care returnează o valoare numerică, operatorul va face evaluarea rezultatului.
+Încă nu am învățat despre obiecte, dar atunci când o vei face, reține că operatorul plus în cazul în care un obiect are o metodă `valueOf` ce returnează o valoare numerică, va face evaluarea metodei (o funcție într-un obiect se numește metodă) returnând rezultatului.
 
 ```javascript
 10 + 1.1; // 11.1
 ```
 
-Acest operator mai este folosit și pentru a face concatenări, adică să construiască șiruri de caractere mai mari din fragmente mai mici. Semnalul pentru motorul JavaScript că se dorește o concatenare este acela că valoarea din stânga nu este o valoare numerică. Pe cea din dreapta sa va încerca să o transforme într-una numerică pentru că acesta este comportamentul său implicit. Deci, dacă valoarea din stânga nu este un număr, ci orice altceva, va încerca o concatenare.
+Acest operator mai este folosit și pentru a face concatenări, adică să construiască șiruri de caractere mai mari din fragmente mai mici. Semnalul pentru motorul JavaScript că se dorește o concatenare este acela că valoarea din stânga nu este o valoare numerică. **Pe cea din dreapta sa va încerca să o transforme într-una numerică pentru că acesta este comportamentul său nativ**. Deci, dacă valoarea din stânga nu este un număr, ci orice altceva, va încerca o concatenare.
 
 ```javascript
-'ceva' + 1; // "ceva1"
-true + 1; // 2
-true + true; // 2
+'ceva' + 1;   // "ceva1"
+true + 1;     // 2
+true + true;  // 2
 true + false; // 1
-[] + true; // true
-[] + []; // '' un șir gol
-{} + 1; // 1
+[] + true;    // true (șirul, nu valoarea boolean)
+var x = [] + true; typeof x; // string
+[] + [];      // '' un șir vid
+{} + 1;       // 1
 ```
 
-După cum se observă, dacă valoarea din stânga a fost evaluată la o valoare numerică aproximativă, adică din `true` în 1, operațiunea matematică se desfășoară corect. Pentru a verifica cum vor fi evaluate valorile, consultați și tabelele de transformare. Ceea ce va încerca motorul de JavaScript este să facă o transformare a valorii din dreapta operatorului plus, fie într-o valoare primitivă, fie într-un număr, fie într-un șir de caractere.
+După cum se observă, dacă valoarea din stânga a fost evaluată la o valoare numerică aproximativă, adică din `true` în `1`, operațiunea matematică se desfășoară corect. Ceea ce va încerca motorul JavaScript la momentul evaluării codului, este să transforme valoarea din dreapta operatorului plus, fie într-o valoare primitivă, fie într-un număr, fie într-un șir de caractere.
 
 ```javascript
-+('1'+'2'); //12
++('1'+'2'); //12 (numărul, nu șirul)
 typeof +('1'+'2'); // "number"
 ```
 
-După cum putem observa operatorul plus poate transforma expresii întregi într-un număr.
+După cum putem observa operatorul plus poate evalua expresii întregi pe care le reduce la un număr.
 
 ## Operatorul minus `-`
 
@@ -66,61 +69,60 @@ La fel ca operatorul plus și acest operator încearcă mai întâi o conversie 
 Minus precedă operandul convertind tipurile de date care nu sunt numere. Spre deosebire de operatorul plus, operatorul minus mai face ceva în plus: neagă rezultatul evaluării.
 
 ```javascript
--12; // -12
--'12'; // -12
--'-10'; // 10
--true; // -1
--false; // -0
--null; // -0
+-12;      // -12
+-'12';    // -12
+-'-10';   // 10
+-true;    // -1
+-false;   // -0
+-null;    // -0
 -'Infinity'; // -Infinity
--'ceva'; // NaN
+-'ceva';  // NaN
 -{valueOf: function(){return '0xDF';}}; // -223
 ```
 
 ## Operatorul logic de negare `!`
 
-Încearcă mai întâi de toate o conversie a operandului la o valoare `Boolean`. Adu-ți mereu aminte faptul că în JavaScript toate expresiile pot fi evaluate la o valoare boolean. Absolut toate expresiile.
+Încearcă mai întâi de toate o conversie a operandului la o valoare `Boolean`. Adu-ți mereu aminte faptul că în JavaScript toate expresiile pot fi evaluate la o valoare boolean. **Absolut toate expresiile se reduc la a fi truthy sau falsy**.
 
 ```javascript
-!true; // false
-!false; // true
-!NaN; // true
-!0; //true
-!null; // true
+!true;      // false
+!false;     // true
+!NaN;       // true
+!0;         // true
+!null;      // true
 !undefined; // true
-!''; // true
-!23; // false
-!{}; // false
-!'salut'; // false
-!!'salut'; // true
+!'';        // true
+!23;        // false
+!{};        // false
+!'salut';   // false
+!!'salut';  // true
 ```
 
 ## Operatorul de incrementare `++`
 
-Adaugă o unitate la valoarea preexistentă a operandului și returnează rezultatul.
-
-Acest operator poate fi folosit ca prefix sau ca postfix.
+Adaugă o unitate la valoarea preexistentă a operandului și returnează rezultatul. Acest operator poate fi folosit ca **prefix** sau ca **postfix**.
 Ca prefix, operatorul va returna valoarea după incrementare.
 Ca postfix, va returna valoarea înaintea incrementării cu o unitate.
 
 Operațiunea de incrementare a unei valori se poate face prin adăugarea explicită a unei valori sau prin utilizarea operatorului `++` ca prefix sau sufix.
 
-Vom porni cu cea care produce un rezultat neașteptat pentru moment. Folosirea operatorului `++` ca sufix.
+Vom porni cu cea care produce un rezultat care de multe ori nedumerește. Folosirea operatorului `++` ca sufix.
 
 ```javascript
 var x = 1;
-x++; // 1
-x; // 2
+x++;  // după incrementare încă are valoarea 1
+x;    // abia la următoarea utilizarea a
+      // identificatorului acesta va indica noua valoare
 ```
 
-Te-ai fi așteptat ca la incrementare să fie returnat rezultatul 2. Ei bine, acest lucru nu s-a întâmplat pentru că valoarea a fost returnată și abia după aceea a fost incrementată.
+Te-ai fi așteptat ca la incrementare să fie returnat 2 fără dubiu. Ei bine, acest lucru nu s-a întâmplat pentru că valoarea a fost returnată la momentul când a fost evaluat de motor și abia după aceea a fost incrementată, dar la momentul în care evaluarea a trecut și de etapa de incrementare, deja ținea minte valoarea de dinaintea incrementării. Abia după ce mai „citim” - evaluăm o dată identificatorul `x`, acesta indică corect. Reține acest comportament pentru că acest tip de incrementare este folosită în mod curent la realizarea buclelor cu enunțul `for` când dorești să parcurgi o listă de valori. Cam așa arată: `for(var i = 0; i < listă.length; i++) { // operațiunea aplicată rând pe rând fiecărui element din listă}`. Îl vei mai folosi de multe ori și în calcule matematice. Nu înainte de a vedea comportamentul din poziția de prefix, încearcă să înveți sau pune o ancoră de memorie pe acest comportament pentru că uneori conduce la situații inexplicabile sau chiar erori - valoarea nu există nu pentru că nu a fost incrementată, ci pentru că nu a mai fost citit identificatorul o dată și alte multe asemenea.
+
+Când operatorul este folosit ca prefix, incrementarea se face înainte ca operatorul să returneze noua valoare.
 
 ```javascript
 var x = 1;
 ++x; // 2
 ```
-
-Când operatorul este folosit ca prefix, incrementarea se face înainte ca operatorul să returneze noua valoare.
 
 ## Operatorul de decrementare `--`
 

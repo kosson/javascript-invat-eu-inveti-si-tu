@@ -2,7 +2,7 @@
 
 Sunt clasicii operatori aritmetici cu care suntem obișnuiți de la clasele primare: adunare, scădere, înmulțire, împărțire, ridicarea la putere și modulo.
 
-## Exponent - **
+## Exponent `**`
 
 Acest operator returnează rezultatul ridicării la putere a primului operand la exponentul menționat de al doilea operator.
 
@@ -10,7 +10,7 @@ Acest operator returnează rezultatul ridicării la putere a primului operand la
 3 ** 2; // 9
 ```
 
-## Plus - +
+## Plus `+`
 
 Este operatorul cu ajutorul căruia facem adunări. Adunăm expresii constituite din valori numerice.
 
@@ -28,7 +28,7 @@ Uneori ai nevoie să transformi o valoare într-un șir de caractere. De cele ma
 ''+ 2; // '2'
 ```
 
-## Minus - „-”
+## Minus `-`
 
 Este operatorul cu care facem scăderi.
 Există situația în care dorești să precizezi că valoarea este pe axa negativă și în acest caz, minusul se va comporta precum un operator unar.
@@ -54,7 +54,7 @@ var rezult = 10 - -2; // 12
 
 Rezultatul va fi adunarea valorilor. Adu-ți aminte regula matematică care evaluează - cu - la plus.
 
-## Împărțire - „/”
+## Împărțire `/`
 
 ```javascript
 5 / 2; // 2.5
@@ -62,13 +62,13 @@ Rezultatul va fi adunarea valorilor. Adu-ți aminte regula matematică care eval
 
 Reține faptul că JavaScript desfășoară operațiuni matematice care pot avea drept rezultat numere fracționare (doubles).
 
-## Înmulțire - „*”
+## Înmulțire `*`
 
 ```javascript
 5 * 2; // 10
 ```
 
-## Restul împărțirii (modulo)
+## Restul împărțirii (modulo) `%`
 
 ```javascript
 9 % 2; // 1

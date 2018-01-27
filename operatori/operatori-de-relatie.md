@@ -4,19 +4,23 @@ Acești operatori compară operanții și returnează o valoare Boolean în func
 
 ## Operatorul `in`
 
-Prin acest operator testezi dacă o valoare există într-un obiect. În cazul array-urilor vorbim despre căutarea dacă un index cu valoarea specificată există. Reține, căutăm dacă există indexul, nu căutăm valoarea în sine.
+Dacă ești la început și încă nu știi nimic despre obiecte, poți sări peste acești operatori. Înțelegerea lor are sens mai târziu când vom lucra cu obiectele.
+
+Prin acest operator testezi dacă o valoare există într-un obiect. Încă nu am ajuns la obiecte, dar vom parcurge acești operatori pentru a-i avea tratați în același loc. Poți reveni în momentul în care este nevoie ceva mai târziu.
+
+Revenind, în cazul array-urilor vorbim despre căutarea unui index cu valoarea specificată. Reține următoarea nuanță aici: căutăm dacă există indexul, nu căutăm valoarea asociată acestuia.
 
 ```javascript
 2 in ['ceva', true, 3, 4]; // true
 ```
 
-Interesant este că și `length` va returna `true`. De ce? Pentru că este o proprietate directă a obiectului `Array` la care ai acces prin moștenire.
+Interesant este că și `length` va returna `true`. De ce? Pentru că este o proprietate a obiectului intern `Array` la care ți s-a oferit acces prin mecanismul moștenirii. Trebuie precizat că de îndată ce declari un array, valoarea acestuia este „învelită” în obiectul asociat, ceea ce are ca efect lucrul cu un obiect cu tipologia array, care moștenește toate proprietățile obiectului intern `Array`, printre acestea fiind și `length`. Da, acesta va testa dacă există și îl va detecta pentru că, de fapt, a fost moștenit.
 
 ```javascript
 'length' in [1, 2, 3, 4]; // true
 ```
 
-În cazul obiectelor se poate folosirea lui `in` este relevantă pentru a căuta după numele cheii.
+În cazul obiectelor declarate, folosirea lui `in` are sens pentru cazul în care cauți după numele cheii unei proprietăți.
 
 ```javascript
 var obi = {a: 1, b: 2};

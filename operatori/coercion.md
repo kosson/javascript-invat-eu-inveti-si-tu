@@ -1,12 +1,10 @@
 # Coercion - transformare
 
-Coercion în limba engleză înseamnă constrângere. Ceea ce se petrece este o „transformare” pe care o face un operator asupra unei valori date în încercarea de a face operațiunea. Vom folosi termenul de transformare pentru a înțelege rapid ceea ce se petrece.
+Coercion în limba engleză înseamnă constrângere. Ceea ce se petrece este o „transformare” pe care o face un operator asupra unei valori date în încercarea de a face evaluarea expresiei. Pe parcursul lucrării vom folosi interșanjabil termenul care exprimă ceea ce se petrece cu cel în limba engleză.
 
-**Moment ZEN**: Totul în JavaScript este evaluat în final la o valoare boolean, fie ceva care poate fi considerată a fi o valoare **adevărată**, fie ceva care poate fi considerat a fi o valoare **falsă** - truthy și falsy, cum ar zice în engleză.
+**Moment ZEN**: Totul în JavaScript este evaluat în final la o valoare boolean, fie ceva care poate fi considerată a fi o valoare **adevărată**, fie ceva care poate fi considerat a fi o valoare **falsă** - *truthy* și *falsy*, cum am spune în engleză.
 
-Unii operatori, cum ar fi plus, mai întâi fac o transformare a valorii operandului la echivalentul numeric și abia apoi face operațiunea matematică.
-
-Un caz interesant este cel al operatorului unar de negare: `!`.
+Unii operatori, cum ar fi, de exemplu, plus, mai întâi fac o transformare a valorii operandului la echivalentul numeric și abia apoi face operațiunea matematică.
 
 ## Transformarea unui șir de caractere
 
