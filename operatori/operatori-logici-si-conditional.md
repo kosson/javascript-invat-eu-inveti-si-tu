@@ -40,7 +40,7 @@ true && false;  // false
 true && true;   // true
 ```
 
-Atenție la cazul în care poate ai dori evaluarea celui de-al doilea operand. Acest lucru nu se va întâmpla câtă vreme primul este *truthy*. Poate fi considerat acest comportament și ca un mecanism selectiv de incrementare a unei variabile, de exemplu.
+Atenție la cazul în care poate ai dori evaluarea celui de-al doilea operand. Acest lucru nu se va întâmpla câtă vreme primul este *truthy*. Acest comportament poate fi considerat ca un mecanism selectiv de incrementare a unei variabile.
 
 ```javascript
 var x = false, y = 0;
@@ -55,3 +55,15 @@ const obi = obi || {nume: "obiect important"};
 ```
 
 În cazul nostru, obiectul `obi` ca operand este evaluat la o valoare `truthy` (toate obiectele la evaluare returnează `truthy`), dacă există deja, adică dacă a fost instanțiat. În acest caz literalul care instanția obiectul nu mai este evaluat.
+
+## Operatorul ternar
+
+Acest operator oferă posibilitatea analizei și reducerii expresiilor la valori boolene pentru a apuca diferite căi de acțiune. Spre deosebire de restul operatorilor care sunt fie unari, fie binari, acesta face evaluarea pentru trei operanzi.
+
+Are forma `expresie ? expresie pentru cazul true : expresie pentru cazul false`.
+
+Primul operand de dinaintea semnului întrebării este cel care condiționează evaluarea celor care stau la dreapta și la strânga semnului două puncte. În cazul în care condiția este evaluată la o valoare truthy, prima expresie de după semnul întrebării va fi evaluată. În caz contrar, cea de după semnul două puncte.
+
+```javascript
+variabilă = 10 ? variabilă++ : 'am doar' + variabilă;
+```

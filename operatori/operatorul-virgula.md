@@ -1,5 +1,7 @@
 # Operatorul virgulă - comma
 
+Folosirea acestui operator pentru acțiunea sa asupra operanzilor este rară și se poate apela la el atunci când se dorește forțarea evaluării tuturor expresiilor delimitate de acesta.
+
 Evaluarea se face de la stânga la dreapta. Vorbim despre asociativitate stângă. Evaluează operandul dinainte și cel de după. Va returna valoarea celui din RHS (***right hand side***), a celui din dreapta.
 
 ```javascript
@@ -15,12 +17,22 @@ Returnează valoarea ultimului de la dreapta.
 
 ```javascript
 1,2; // 2
-(15 - 1, 10 +3); // 13
+(15 - 1, 10 + 3); // 13
 (1 + 3, 4 - 2, 5 + 5); // 10
 (() => (2 + 2, 4 - 3))(); // 1; am folosit un fat arrow pentru a evalua
 ```
 
 Operatorul virgulă permite evaluarea multiplelor expresii într-o singură afirmație și este returnat rezultatul ultimei expresii.
+
+Un alt scenariu interesant ar fi în combinație cu operatorul de grupare.
+
+```javascript
+var ceva = 0;
+var ramanCuCeva = (ceva = '100', console.log('Interesant!'), 'a meu!');
+// console.log a fost executat la momentul inițializării
+console.log(ceva, ramanCuCeva);
+// 100 a meu!
+```
 
 ## Referințe
 

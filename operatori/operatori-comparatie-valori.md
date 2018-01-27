@@ -89,6 +89,7 @@ ceva !== altceva // true
 | `Infinity` |      |       |   |     |      |        |         |     |     |      |    |      |           |     X    |           |
 | `-Infinity`|      |       |   |     |      |        |         |     |     |      |    |      |           |          |     X     |
 
+
 ## Resurse
 
 Reprezentarea egalităților a fost reprodusă după materialul de la http://dorey.github.io/JavaScript-Equality-Table/

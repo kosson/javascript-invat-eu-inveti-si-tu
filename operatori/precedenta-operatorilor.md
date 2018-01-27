@@ -142,7 +142,7 @@ Sunt numiți astfel pentru că este evaluată relația unui operator față de c
 |:--|:--|:--|:--|:--|
 |4|equal|egal|«««| `__ ? __ : __` |
 
-Acest operator este echivalentul unui enunț `if...else`. Avantajul operatorului ternar este acela că este o expresie care poate fi combinată cu alte expresii ceea ce constituie un avantaj față de rigiditatea enunțului `if...else`.
+Acest operator este echivalentul unui enunț `if..else`. Avantajul operatorului ternar este acela că este o expresie care poate fi combinată cu alte expresii ceea ce constituie un avantaj față de rigiditatea enunțului `if..else`.
 
 ## Atribuire împreună cu operațiuni urmate de atribuire.
 
@@ -152,8 +152,8 @@ Acest operator este echivalentul unui enunț `if...else`. Avantajul operatorului
 |3|plus-egal|adună la valoarea curentă din stânga, valoarea precizată în dreapta|«««| `__ += __` |`x = x + y`|
 |3|minus-egal|scade la valoarea curentă din stânga, valoarea precizată în dreapta|«««| `__ -= __` |`x = x - y`|
 |3|putere-egal|ridică la putere valoarea curentă|«««| `__ **= __` |`x = x ** y`|
-|3|înmulțire-egal|înmulțește cu valoarea curentă|«««| __ `*=` __ |x = x * y|
-|3|împărțire-egal|împarte valoarea curentă din stânga|«««| __ `/=` __ |x = x / y|
+|3|înmulțire-egal|înmulțește cu valoarea curentă|«««| __ `*=` __ |`x = x * y`|
+|3|împărțire-egal|împarte valoarea curentă din stânga|«««| __ `/=` __ |`x = x / y`|
 |3|modulo-egal|modulo (aflarea restului de la împărțire) pe valoarea din stânga|«««| `__ %= __` |`x = x % y`|
 |3|left shift assignment|deplasare la stânga|«««| `__ <<= __` |`x = x <<= y`|
 |3|right shift assignment|deplasare la dreapta|«««| `__ =>> __` |`x = x =>> y`|
