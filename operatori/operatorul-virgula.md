@@ -34,6 +34,24 @@ console.log(ceva, ramanCuCeva);
 // 100 a meu!
 ```
 
+Acest operand face posibilă declararea mai multor variabile separate prin virgulă în aceeași expresie.
+
+```javascript
+var test = 10, ceva = true, obi = {};
+```
+
+Un alt loc în care vei mai întâlni operatorul, fiind foarte util este în blocul de inițializare a enunțului `for` atunci când este nevoie de mai multe expresii opționale, fie pentru contor, fie pentru incrementor/decrementor.
+
+```javascript
+var colecție = [];
+for(var i = 0, j = 5; i <= 5; i++, j--){
+  colecție[i] = j;
+};
+console.log(colecție); // [ 5, 4, 3, 2, 1, 0 ]
+```
+
+Și mai are o aplicativitate legată de argumentele pasate unei funcții. Acest operator, delimitează argumentele.
+
 ## Referințe
 
 [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators](Operatorul virgulă)

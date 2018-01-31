@@ -58,7 +58,7 @@ const obi = obi || {nume: "obiect important"};
 
 ## Operatorul ternar
 
-Acest operator oferă posibilitatea analizei și reducerii expresiilor la valori boolene pentru a apuca diferite căi de acțiune. Spre deosebire de restul operatorilor care sunt fie unari, fie binari, acesta face evaluarea pentru trei operanzi.
+Acest operator oferă posibilitatea analizei și reducerii expresiilor la valori boolene pentru a apuca diferite căi de acțiune. Spre deosebire de restul operatorilor care sunt fie unari, fie binari, acesta face evaluarea pentru trei operanzi. De aici îi vine și denumirea de operator ternar.
 
 Are forma `expresie ? expresie pentru cazul true : expresie pentru cazul false`.
 
@@ -66,4 +66,14 @@ Primul operand de dinaintea semnului întrebării este cel care condiționează 
 
 ```javascript
 variabilă = 10 ? variabilă++ : 'am doar' + variabilă;
+```
+
+Mulți programatori folosesc acest operator pe post de sintaxă prescurtată a enunțului `if..else`, dar recomandarea generală este contrară acestei practici prin folosirea directă a enunțului.
+
+Mai poți folosi operatorul ternar pentru inițializarea condiționată a unei variabile în funcție de o expresie.
+
+```javascript
+var x = true, y = 100;
+var z = x ? y : 'eroare de inițializare';
+console.log(z);
 ```
