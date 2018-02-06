@@ -12,16 +12,16 @@ Funcția care va fi executată poate avea trei argumente:
 Opțional se mai poate pasa o valoare care să reprezinte `this` la executarea callback-ului.
 
 Metoda nu poate fi înlănțuită (chainable).
-Spre deosebire de map() și reduce(), forEach() returnează întotdeauna ``undefined``.
+Spre deosebire de `map()` și `reduce()`, `forEach()` returnează întotdeauna `undefined`.
 
 ```javascript
-function logArrayElements(element, index, array) {
+function logElementeArray (element, index, array) {
   console.log('a[' + index + '] = ' + element);
 }
 
 // A se nota faptul că index 2 este sărit pentru că
 // nu există element la acea poziție în array.
-[2, 5, , 9].forEach(logArrayElements);
+[2, 5, , 9].forEach(logElementeArray);
 // logs:
 // a[0] = 2
 // a[1] = 5

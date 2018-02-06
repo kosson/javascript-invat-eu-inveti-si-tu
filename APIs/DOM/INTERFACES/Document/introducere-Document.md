@@ -7,7 +7,7 @@ Conținutul sunt nodurile din arborele stabilit de Document Object Model.
 
 Interfața `Document` oferă metodele și proprietățile care sunt comune tuturor documentelor posibile, fie acestea HTML, XML sau SVG.
 
-## Modelul de moștenire a interfeței `Document`
+## Modelul de moștenire al interfeței `Document`
 
 ```mermaid
 graph LR;

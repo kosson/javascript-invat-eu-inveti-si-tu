@@ -1,4 +1,4 @@
-# enunțul `debugger`
+# Enunțul `debugger`
 
 Pentru a crea un punct de oprire pentru analiza codului care produce erori, se poate introduce înainte de zona care face probleme.
 
@@ -10,4 +10,4 @@ function test(){
 };
 ```
 
-Efectul introucerii enunțului este că se pornește automat instrumentul de debugging al browserului.
+Efectul introducerii enunțului este că se pornește automat instrumentul de debugging al browserului.

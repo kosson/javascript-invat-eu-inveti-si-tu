@@ -1,8 +1,8 @@
 # EventTargets
 
-Este o interfață pe care o implementează obiecte care pot primi evenimente și care pot crea listeners („receptori”), care să execute cod la momentul în care a fost declanșat un eveniment.
+Este o interfață pe care o implementează obiectele pretabile la evenimente și care pot crea listeners („receptori”), care să execute cod la momentul în care a fost declanșat un eveniment.
 
-Cel mai des țintite de evenimente sunt: Element, document, window dar și alte API-uri precum XMLHttpRequest.
+Cel mai des țintite de evenimente sunt: `Element`, `document`, `window` dar și alte API-uri precum `XMLHttpRequest`.
 
 ## Spune [standardul](https://dom.spec.whatwg.org/#introduction-to-dom-events)
 
@@ -21,7 +21,7 @@ Cel mai ades vei vedea în cod evenimentele sub forma exemplul de mai jos:
 obiect.addEventListener("aparDate", function(date){ /*prelucrează date */ });
 ```
 
-Pentru a crea un eveniment folosești metoda `dispatchEvent`. Pentru asta mai întâi creezi un eveniment, care este un obiect, ține minte, și apoi îl „expediezi” (`dispatch`).
+Pentru a crea un eveniment folosești metoda `dispatchEvent`. Pentru asta, mai întâi creezi un eveniment, care este un obiect, ține minte, și apoi îl „expediezi” (în engleză i se spune `dispatch`).
 
 ```javascript
 var evenimentSpecial = new EvenimentSpecial("urlet", {"animal": "gorilă"});

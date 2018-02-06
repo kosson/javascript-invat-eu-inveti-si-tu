@@ -1,17 +1,19 @@
 # Iterații
 
 Partea cea mai valoroasă a programării este aceea că poate prelua un set de date pe care le poate parcurge element cu element, aplicând transformări sau căutări după anumite criterii, cu scopul de a obține un anumit rezultat dorit. Este ceea ce se poate înțelege prin ciclu, adică o mișcare repetitivă sau aplicarea repetată a unor proceduri pe elementele individuale ale unei colecții. De altfel, în practica de zi cu zi, veți auzi și de ciclare: *... ciclezi array-ul ăla și obții rezultatele*, ar suna un fragment de conversație din biroul unor programatori. Când vine vorba despre iterare, aceasta este tot o ciclare, dar care poate fi percepută că se face în baza unui protocol, cum este cazul JavaScript.
-Dicționarul explicativ ne dă o definiție foarte utilă: „repetare a unui anumit procedeu de calcul, prin aplicarea lui la rezultatul calculului din etapa precedentă”.
+Dicționarul explicativ ne dă o definiție foarte utilă: *repetare a unui anumit procedeu de calcul, prin aplicarea lui la rezultatul calculului din etapa precedentă*.
 
 ## Protocoale de iterare
 
-ECMAScript 2015 a introdus un nou mecanism de parcurgere a datelor numit **iterare**. Mai exact, protocol de iterare pentru că iterarea ca și concept este în ADN-ul programării.
+ECMAScript 2015 (ES6) a introdus un nou mecanism de parcurgere a datelor numit **iterare**. Mai exact, un **protocol de iterare** pentru că iterarea ca și concept este în ADN-ul programării.
 
-Ce înseamnă **iterare**?
+### Ce înseamnă **iterare**?
+
 Atunci când rezultatul unui pas devine valoarea de start pentru următorul, atunci vorbim despre iterare.
 
 În acest moment avem două concepte centrale care merită atenția noastră deplină:
-- **iterable** , care este o structură de date ce expune elementele pentru a fi accesate public. Face acest lucru implementând o metodă care returnează un obiect care se numește *iterator*, iar
+
+- **iterable** , care este structura de date ce expune elementele pentru a fi accesate public. Face acest lucru implementând o metodă care returnează un obiect numit *iterator* și
 - **iterator** fiind, de fapt, un pointer (în limba română ar fi tradus ca indicator, dar poți să ți-l închipui ca pe un semn de carte) pentru traversarea elementelor unei structuri de date.
 
 ## Cazuri în care se folosește iterarea
@@ -33,7 +35,8 @@ Există două protocoale:
 
 Permite obiectelor să-și definească sau să-și particularizeze comportamentul la iterare: ce valori vor fi în bucla generată cu un construct `for..of`.
 
-`for..of` poate itera prin următoarele obiecte care respectă ***protocolul iterator***:
+`for..of` poate itera prin următoarele obiecte care respectă **protocolul iterator**:
+
 - `Array`,
 - `Map`,
 - `Set`,
@@ -54,7 +57,7 @@ typeof unSir[Symbol.iterator]; // "function"
 
 De fapt, această metodă este o fabrică (**factory**) pentru iteratori..
 
-Ori de câte ori un obiect trebuie să fie iterat, este invocată metoda `@@iterator` fără nici un argument iar iteratorul returnat este folosit **pentru a obține valorile care trebuie iterate** mai departe.
+Ori de câte ori un obiect trebuie să fie iterat, este invocată metoda `@@iterator` fără nici un argument, iar iteratorul returnat este folosit **pentru a obține valorile care trebuie iterate** mai departe.
 
 ## Iterator
 

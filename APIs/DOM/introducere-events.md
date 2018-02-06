@@ -13,7 +13,7 @@
 
 ## Anatomie
 
-Pentru a răspunde unui eveniment, browserul, mai întâi trebuie să „captureze” evenimentul iar această etapă se numește „înregistrarea evenimentului” - `event registration`. Mecanismul prin care se face acest lucru este acela al event handlers.
+Pentru a răspunde unui eveniment, browserul, mai întâi trebuie să *captureze* evenimentul iar această etapă se numește „înregistrarea evenimentului” - `event registration`. Mecanismul prin care se face acest lucru este acela al event handlers.
 
 Cel mai simplu event handler este cel pe care-l oferă un atribut pus direct în codul HTML.
 
@@ -39,7 +39,7 @@ x.onclick = function () {
 };
 ```
 
-Am ajuns la modul în care vei folosi evenimentele la momentul scrierii codului dedicat. În mod curent vei „atașa” evenimente folosind metoda `addEventListener(numeEveniment, numeFunctie, true/false)`.
+Am ajuns la modul în care vei folosi evenimentele la momentul scrierii codului dedicat. În mod curent vei *atașa* evenimente folosind metoda `addEventListener(numeEveniment, numeFunctie, true/false)`.
 
 Să atașăm un eveniment unui buton.
 
@@ -67,11 +67,11 @@ elementApasat.addEventListener("click", faCeva, true);
 
 Câteva informații interesante apar în consolă la o inspecție a conținutului obiectului eveniment:
 
-- type, fiind tipul evenimentului, în cazul nostru click;
-- timestamp, fiind momentul la care a apărut evenimentul;
-- defaultPrevent, fiind un Boolean care dacă este „true” înseamnă că va împiedica comportamentul normal al elementului... gândește-te că e un buton care trebuie să facă un apel pentru a aduce date de undeva. Dacă este false, va face acel lucu, dacă nu, va avea un comportament deturnat în alt scop.
-- originalTarget, fiind elementul care a declanșat evenimentul.
-- target, fiind elementul țintit de eveniment.
+- `type`, fiind tipul evenimentului, în cazul nostru click;
+- `timestamp`, fiind momentul la care a apărut evenimentul;
+- `defaultPrevent`, fiind un Boolean care dacă este `true` înseamnă că va împiedica comportamentul normal al elementului... gândește-te că e un buton care trebuie să facă un apel pentru a aduce date de undeva. Dacă este `false`, va face acel lucu, dacă nu, va avea un comportament deturnat în alt scop.
+- `originalTarget`, fiind elementul care a declanșat evenimentul.
+- `target`, fiind elementul țintit de eveniment.
 
 Și acum câteva informații utile privind poziționarea elementului:
 
@@ -136,7 +136,7 @@ Pentru armonizare, W3C a fost de acord ca cele două modele să coexiste după u
 
 ![](EventModelW3CModel.png)
 
-Partea bună este că te poți decide singur când vei „înregistra” evenimentul, fie în faza de capturare, fie în faza de bubbling folosind metoda `addEventListener`. Dacă cel de-al treilea argument este setat la true, atunci evenimentul va fi „înregistrat” la faza de capturare, iar inversul indică faza de bubbling.
+Partea bună este că te poți decide singur când vei „înregistra” evenimentul, fie în faza de capturare, fie în faza de bubbling folosind metoda `addEventListener`. Dacă cel de-al treilea argument este setat la `true`, atunci evenimentul va fi „înregistrat” la faza de capturare, iar inversul indică faza de bubbling.
 
 ## Cazuistică
 
@@ -167,7 +167,7 @@ Condiții: utilizatorul dă click pe elementul copil.
 Având în minte modelul W3C, evenimentul `click` mai întâi de orice este capturat.
 
 Apoi motorul se va uita mai întâi pe ramurile DOM părinte ale elementului care a fost acționat pentru a găsi dacă este vreunul dintre acestea în modul `capture`.
-În cazul nostru, chiar dacă elementul acționat este în faza de `bubbling` după cum indică cu false receptorul de eveniment - addEventListener, elementul părinte la care se uită mai întâi și mai întâi motorul este în faza de `capture`.
+În cazul nostru, chiar dacă elementul acționat este în faza de `bubbling` după cum indică cu `false` receptorul de eveniment - addEventListener, elementul părinte la care se uită mai întâi și mai întâi motorul este în faza de `capture`.
 Efectul acestui aranjament este că se va executa mai întâi funcția de la părinte: `arataDetaliiGazda()`.
 
 Deci, evenimentul va porni de la părinte și se va propaga către copil executând toate callback-urile pentru receptoarele setate la `capture` pentru evenimentul `click`.

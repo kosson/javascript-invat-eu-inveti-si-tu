@@ -64,7 +64,7 @@ Hai să vedem și o integrare completă:
 </html>
 ```
 
-După încărcare, testează din consolă cu câteva apeluri:
+După încărcare, testează din consolă prin câteva apeluri:
 
 ```javascript
 adaugaClasa('#primul','atenție');
@@ -107,7 +107,7 @@ function eliminaClasa (elementele, clasa) {
 };
 ```
 
-Este aceeași funcție ca și la adăugarea clasei numai că la momentul parcurgerii colecției de elemente și modificarea element cu element, vom folosi un șablon RegExp pentru a face un `replace` acolo unde este identificat.
+Este aceeași funcție ca și la adăugarea clasei numai că la momentul parcurgerii colecției de elemente și modificarea element cu element, vom folosi un șablon **RegExp** pentru a face un `replace` acolo unde este identificat.
 
 Folosind noua metodă `remove` a lui `classList` ajung la următoarea simplificare a funcției de mai sus:
 

@@ -2,7 +2,7 @@
 
 ## Introducere
 
-DOM este acronimul de la Document Object Model. DOM este un API (Application Programming Interface) care oferă posibilitatea de a manipula documentele HTML și XML. DOM-ul trebuie văzut ca un liant între tagurile HTML și JavaScript, fiind astfel permisă interacțiunea cu pagina.
+DOM este acronimul de la **Document Object Model**. DOM este un API (Application Programming Interface) care oferă posibilitatea de a manipula documentele HTML și XML. DOM-ul trebuie văzut ca un liant între tagurile HTML și JavaScript, fiind astfel permisă interacțiunea cu pagina.
 
 Standardul spune că „programatorii pot redacta documente, pot parcurge structura lor și pot adăuga, modifica sau șterge elementele și conținutul acestora”.
 
@@ -14,7 +14,7 @@ Standardul (DOM Core) spune că „prezintă documentele ca o ierarhie de obiect
 
 Nodul este un nume dat oricărui tip de obiect din ierarhia DOM. Nodurile pot fi obiectele native ale DOM cum ar fi `document` sau `document.body`, dar poate fi foarte bine și reprezentarea ca obiect a unui tag de HTML.
 
-Fiecare obiect nod al DOM-ului are o proprietate `nodeType`. Acest nodeType indică tipul de care poate fi un nod: noduri document (`DOCUMENT_NODE` cu valoarea `1`), noduri text (`TEXT_NODE` cu valoarea `3`), adică caracterele unui text, noduri elemente (`ELEMENT_NODE` cu valoarea `1`) sau noduri de atribut (`ATTRIBUTE_NODE` cu valoarea `2`) așa cum sunt, de exemplu clasele specificate: `class="ceva"` sau `DOCUMENT_FRAGMENT_NODE`, ori `DOCUMENT_TYPE_NODE`. Aceste tipuri de noduri specificate prin constantele scrise cu majuscule poartă o valoare specifică fiecărui tip de nod. Pentru a afla valoarea constantelor se va apela numele constantei ca proprietate a obiectului `Node`: Node.ELEMENT_NODE // 1
+Fiecare obiect nod al DOM-ului are o proprietate `nodeType`. Acest nodeType indică tipul de care poate fi un nod: noduri document (`DOCUMENT_NODE` cu valoarea `1`), noduri text (`TEXT_NODE` cu valoarea `3`), adică caracterele unui text, noduri elemente (`ELEMENT_NODE` cu valoarea `1`) sau noduri de atribut (`ATTRIBUTE_NODE` cu valoarea `2`) așa cum sunt, de exemplu clasele specificate: `class="ceva"` sau `DOCUMENT_FRAGMENT_NODE`, ori `DOCUMENT_TYPE_NODE`. Aceste tipuri de noduri specificate prin constantele scrise cu majuscule poartă o valoare specifică fiecărui tip de nod. Pentru a afla valoarea constantelor se va apela numele constantei ca proprietate a obiectului `Node : Node.ELEMENT_NODE // 1`
 
 ## Lucrul cu DOM
 

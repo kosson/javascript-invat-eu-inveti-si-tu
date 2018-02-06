@@ -19,7 +19,7 @@ Expresiile opționale conțin:
 - **un comparator**, care ia valoarea din contor și o compară cu o altă valoare, de regulă dimensiunea unui array adusă prin proprietatea `array.length`.
 - **un incrementor/decrementor**
 
-Privind la expresiile folosite pentru a face funcțional un for, nu poți să nu privești la expresia `do..while` și să nu te întrebi, de ce nu ai folosi-o în continuare pe aceasta. Singura diferență este că la `do..while`, inițializarea sau contorul ca expresie stă afară înainte iar condiția sau comparatorul este în argumente, iar blocul are la final expresia de incrementare. Răspunsul este legat de concizia pe care o oferă `for`. Este pur și simplu mai ușor de urmărit.
+Privind la expresiile folosite pentru a face funcțional un `for`, nu poți să nu privești la expresia `do..while` și să nu te întrebi, de ce nu ai folosi-o în continuare pe aceasta. Singura diferență este că la `do..while`, inițializarea sau contorul ca expresie stă afară înainte, iar condiția sau comparatorul este în argumente, iar blocul are la final expresia de incrementare. Răspunsul este legat de concizia pe care o oferă `for`. Este pur și simplu mai ușor de urmărit.
 
 De cele mai multe ori vei întâlni în cod numele identificatorului variabilei pentru contor ca fiind litera `i`. Acesta vine ca prescurtare la termenul *index* și este larg utilizat. Atenție, nu este necesar să se folosească `i`. Poți numi variabila cum dorești.
 
@@ -60,7 +60,7 @@ for (var i = 0; i < listă.length; i++) {
 };
 ```
 
-După parcurgerea array-ului sunt returnate rezultatele, dar dacă se mai dorește parcurgerea încă o dată, acest lucru nu este posibil decât dacă pornim din nou execuția codului. Dacă am dori să avem acces la rezultatele de etapă, acest lucru nu este posibil. În exemplul de mai sus, am folosit utilitarul `console.log` ca și funcție de prelucrare. Acesta nu ne ajută prea mult în afară de a vedea datele din array, în schimb, am putea introduce în exercițiul nostru o funcție, care să poată face o prelucrare mult mai complexă pentru fiecare valoare din array. Acest pas crește complexitatea exemplului nostru, dar și flexibilitatea în ceea ce privește multitudinea de opțiuni pe care le poți efectua pentru că o funcție o poți apela pentru fiecare element al listei noastre.
+După parcurgerea array-ului sunt returnate rezultatele, dar dacă se mai dorește parcurgerea încă o dată, acest lucru nu este posibil decât dacă pornim din nou execuția codului. Dacă am dori să avem acces la rezultatele de etapă, acest lucru nu este posibil. În exemplul de mai sus, am folosit utilitarul `console.log` ca și funcție de prelucrare. Acesta nu ne ajută prea mult în afară de a vedea datele din array, în schimb, am putea introduce în exercițiul nostru o funcție, care să poată face o prelucrare mult mai complexă pentru fiecare valoare din array. Acest pas crește complexitatea exemplului nostru, dar și flexibilitatea în ceea ce privește multitudinea de prelucrări pe care le poți efectua.
 
 ```javascript
 function prelucrează (elementArray) {
@@ -81,7 +81,7 @@ Pentru cei ingrijorați de blocul delimitat de acolade. Doresc să vă liniștes
 
 ### Păstrarea vie a mediului lexical per fiecare iterație
 
-Declararea variabilelor cu `let` la contor, le va „lega” de blocul de execuție a lui `for` per fiecare iterație. Aici vorbim despre avantajul folosirii lui `let` în cazul constituirii de closure-uri. Mai fin spus, se leagă de necesitarea ca funcțiile care au fost definite în corpul enunțului `for` să păstreze viu mediul lexical existent la momentul unei singure iterații.
+Declararea variabilelor cu `let` la contor, le va „lega” de blocul de execuție a lui `for` pentru fiecare iterație. Aici vorbim despre avantajul folosirii lui `let` în cazul constituirii de *closure*-uri. Mai fin spus, se leagă de necesitarea ca funcțiile care au fost definite în corpul enunțului `for` să păstreze viu mediul lexical existent la momentul unei singure iterații.
 
 ```javascript
 var colectie = [];

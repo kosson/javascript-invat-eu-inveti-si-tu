@@ -10,4 +10,5 @@ Evenimentele din DOM oferă o reprezentare a ceea ce se petrece în browser cum 
 Acest eveniment este declanșat ori de câte ori butonul unui mouse, de regulă butonul stânga este apăsat și eliberat pe un singur element din pagina HTML.
 
 ## Resurse
+
 [UI Events. W3C Working Draft, 04 August 2016](https://www.w3.org/TR/DOM-Level-3-Events)

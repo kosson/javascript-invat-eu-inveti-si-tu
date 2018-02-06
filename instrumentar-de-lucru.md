@@ -98,8 +98,14 @@ Când nu este codul scris de tine, când ai îndoieli asupra unui identificator,
 
 ## Inspectarea codului la rulare și detectarea problemelor
 
-Pentru momentul în care folosești biblioteci de cod care nu-ți aparțin sau atunci când scrii cod care produce erori sau rezultate neașteptate, cel mai adesea vei folosi un instrument pe care oricare browser modern îl pune la dispoziție: <u>Debugger</u>-ul. Erorile de cod se numesc „bug-uri” (insecte deranjante), iar acest instrument ajută la identificarea fragmentului de cod care le produce.
-Vor fi îndeajuns de multe cazurile în care vei avea nevoie de acest instrument foarte util. În ciuda verbozității cu care am să însoțesc fiecare exemplu, fiecare situație, vei dori, pur și simplu să vezi cu ochii tăi cum funcționează.
+În spatele modului de tratare a problemelor apărute la evaluarea codului există o poveste simpatică care explică povestea conexiunii dintre informatică și lumea insectelor. În 1944 în timpul celui de-al Doilea Război Mondial, în America, la Harvard tocmai fusese dat în folosință Mark I (IBM Automatic Sequence Controlled Calculator), un computer proiectat de profesorului Howard Aiken și executat cu sprijinul IBM. Acesta era găzduit în Laboratorul de Cercetări în Fizică al Harvard, dar pentru perioada războiului a intrat în operațiunile Marinei americane. Grace Hopper, unul dintre ofițerii de marină, care lucra ca și programator, a găsit o molie în interiorul computerului. Aripile insectei moarte bloca instrumentul de citire a benzii de hărtie perforată și pentru că în limba engleză insectele sunt numite general *bugs*, prin eliminarea moliei moarte s-a produs primul **debugging** din istoria informaticii moderne.
+
+![Primul caz de „debugging” din istoria informaticii - Grace Hopper](H96566k.jpg)
+
+Pentru a rotunji povestea, profesorul Aiken a fost și cel care a ținut un curs la Harvard, care poate fi numit acum *de informatică* (*computer science*). Harvard Mark I a constituit primul contact pentru câteva generații de studenți.
+
+Refocalizând, pentru momentul când folosești biblioteci de cod care nu-ți aparțin sau atunci când scrii cod care produce erori sau rezultate neașteptate sau pentru propria curiozitate izvorâtă din necesitatea de a vedea cum se comportă codul la rulare, cel mai adesea vei folosi un instrument pe care oricare browser modern îl pune la dispoziție: **debugger**-ul. Erorile de cod se numesc **bug**-uri (insecte deranjante). Acest instrument ajută la identificarea fragmentului de cod care le produce sau ajută la urmărirea valorilor pe măsură ce avansează evaluarea codului.
+Vor fi îndeajuns de multe cazurile în care vei avea nevoie de debugger, de la depanare, la învățarea programării. În ciuda tuturor explicațiilor oferite în manual, vei dori să vezi cu ochii tăi cum funcționează.
 
 Debugger-ul am putea să-l traducem în română cu o transliterare unu-la-unu prin „operator de dezinsecție”, dar pentru a fi foarte eleganți îl vom denumi „depanator”. Depanatorul este un instrument care permite parcurgerea unui fragment de cod încărcat în browser pentru a-i vedea comportamentul și efectele.
 
@@ -364,3 +370,7 @@ Prin experimentarea modului de lucru cu Debugger-ul, de fapt am privit la micros
 Ceea ce am făcut totuși este o acomodare cu majoritatea conceptelor de lucru. Mi-a fost tare teamă să nu introduc subiectele care sunt menite să consolideze cunoștințe fără a avea deja o minimă experiență.
 
 Următorul pas este unul foarte important și țintește înțelegerea mediului lexical (***lexical environment***) sau mai pe scurt, așa cum este numit de programatori: scope.
+
+## Resurse
+
+(Photo of "first computer bug" (a moth))[https://en.wikipedia.org/wiki/Grace_Hopper#/media/File:H96566k.jpg]
