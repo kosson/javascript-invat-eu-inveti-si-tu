@@ -4,7 +4,7 @@ Aceast enunț, numit de standard `IterationStatement`, creează o buclă care pr
 
 Această buclă va fi creată ținându-se cont de câteva expresii opționale care se introduc între paranteze, așa-numitul **bloc de inițializare**, fiind urmate de un **bloc de execuție**, care conține codul ce va fi executat pentru fiecare pas al buclei.
 
-Oricare dintre *expresiile opționale* pot fi utilizate sau nu în blocul de inițializare.
+Oricare dintre *expresiile opționale* pot fi utilizate sau nu în blocul de inițializare. Mai jos avem un exemplu pentru care s-a optat plasarea variabilei cu rol de contor în afara blocului de inițializare. Sintaxa este perfect legitimă atâta vreme cât pui totuși un punct și virgulă care să delimiteze *locul* de expresia de comparare.
 
 ```javascript
 var x = 0;
@@ -13,22 +13,22 @@ for (; x < 5; x++) {
 };
 ```
 
-Expresiile opționale conțin:
+Expresiile opționale sunt separate prin punct și virgulă și se compun din următoarele:
 
-- **un contor**, care este o valoare ce va porni de la o anumită valoare prestabilită (standardul spune că este un LexicalDeclaration Expression).
+- **un contor**, care este o valoare ce va porni de la o anumită valoare prestabilită (standardul spune că este un `LexicalDeclaration Expression`).
 - **un comparator**, care ia valoarea din contor și o compară cu o altă valoare, de regulă dimensiunea unui array adusă prin proprietatea `array.length`.
 - **un incrementor/decrementor**
 
-Privind la expresiile folosite pentru a face funcțional un `for`, nu poți să nu privești la expresia `do..while` și să nu te întrebi, de ce nu ai folosi-o în continuare pe aceasta. Singura diferență este că la `do..while`, inițializarea sau contorul ca expresie stă afară înainte, iar condiția sau comparatorul este în argumente, iar blocul are la final expresia de incrementare. Răspunsul este legat de concizia pe care o oferă `for`. Este pur și simplu mai ușor de urmărit.
+Privind la expresiile folosite pentru a face funcțional un `for`, nu poți să nu privești la expresia `do..while` și să nu te întrebi, de ce nu ai folosi-o în continuare pe aceasta. Singura diferență este că la `do..while`, inițializarea sau contorul (ca expresie) stă în blocul de cod ce trebuie executat, iar condiția sau comparatorul este în **blocul expresiei de evaluat**. În cazul lui `for`, blocul are la final expresia de incrementare. Răspunsul este legat de concizia pe care o oferă `for`. Este pur și simplu mai ușor de urmărit.
 
-De cele mai multe ori vei întâlni în cod numele identificatorului variabilei pentru contor ca fiind litera `i`. Acesta vine ca prescurtare la termenul *index* și este larg utilizat. Atenție, nu este necesar să se folosească `i`. Poți numi variabila cum dorești.
+De cele mai multe ori vei întâlni în cod numele variabilei pentru contor ca fiind litera `i`. Acesta vine ca prescurtare la termenul *index* și este larg utilizat. Atenție, nu este necesar să se folosească `i`. Poți numi variabila cum dorești și din acest motiv pe parcursul lucrării acesteia voi folosi și alte litere sau chiar cuvinte. Adu-ți mereu aminte că nu este musai ca variabila să se cheme `i` sau `x` sau cumva anume. Câtă vreme sunt respectate regulile la denumirea unei variabile, totul e ok. Se pune o singură literă pentru concizie.
 
 În cazul în care se decide omiterea comparatorului, se va crea o buclă infinită, care poate fi întreruptă doar folosind comanda `break`.
 
 ```javascript
 for (var x = 0; ; x++) {
   console.log(x);
-  if (x > 5) break;
+  if (x > 5) { break };
 };
 ```
 
@@ -47,7 +47,7 @@ for (;;) {
 console.timeEnd("final");
 ```
 
-Motivul pentru care bucla este una infinită este că blocul de condiție va fi evaluat la `undefined`, care este transformat într-un „falsey”, ceea ce conduce la execuția infinită.
+Motivul pentru care bucla este una infinită este că blocul de condiție va fi evaluat la `undefined`, care este transformat într-un **falsey**, ceea ce conduce la execuția infinită.
 
 ## Scenariu de prelucrare a datelor cu `for`
 
@@ -111,7 +111,7 @@ colectie[1](); // Iterația 5 și 11
 
 ### Sari peste o iterație - iterare cu verificare
 
-În cazul în care este necesar, se poate face un `salt`, evitându-se execuția  unuia dintre pașii buclei.
+În cazul în care este necesar, se poate face un `salt`, evitându-se execuția unuia dintre pașii buclei.
 
 ```javascript
 for (var x = 0; x < 10; x++) {
@@ -125,7 +125,7 @@ for (var x = 0; x < 10; x++) {
 };
 ```
 
-În exemplul prezentat am ajuns la 5, care este afișat în browser. Consola sare peste afișarea lui 5.
+În exemplul prezentat am ajuns la 5, care este afișat în pagina web prin utilizarea utilitarului `writeln` (*write line*, care înseamnă scrie o linie), pus la dispoziție de browser. Consola sare peste afișarea lui 5.
 
 ### Enunțul `for` poate fi folosit și în lucrul cu șirurile de caractere
 
@@ -138,6 +138,8 @@ for (var i = "»"; i.length < 10; i += "~") {
 ```
 
 ### Folosirea lui `for` în lucrul cu Document Object Model - DOM
+
+TODO: Trebuie să gândești unde introduci detaliile privind DOM.
 
 Buclele cu `for` pot fi folosite pentru introducerea de elemente în DOM.
 
@@ -167,7 +169,7 @@ Buclele cu `for` pot fi folosite pentru introducerea de elemente în DOM.
 
 ## Folosirea lui `for` cu variabile multiple
 
-În enunțurile `for` se pot introduce mai multe variabile. Un exemplu pentru a căuta membri ai șirului lui Fibonacci implică declararea mai multor variabile inițiale iar apoi în expresia de incrementare, acestea sunt manipulate pentru a avansa.
+În enunțurile `for` se pot introduce mai multe variabile. Un exemplu pentru a căuta membri ai șirului lui Fibonacci implică declararea mai multor variabile inițiale. După aceea, în expresia de incrementare sunt manipulate pentru a avansa.
 
 ```javascript
 for(let temp, i = 0, j = 1; j < 4; temp = i, i = j, j = i + temp) {
@@ -176,8 +178,6 @@ for(let temp, i = 0, j = 1; j < 4; temp = i, i = j, j = i + temp) {
 ```
 
 ![Ilustrație pentru ciclurile for](for-ilustratie-for-fibonacci.png)
-
-
 
 ## Referințe
 

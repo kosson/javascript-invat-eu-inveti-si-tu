@@ -1,6 +1,6 @@
 # Valorile boolean
 
-Numele acestor valori ne aduce aminte de promotorul algebrei speciale care a făcut posibil saltul către mașinile de calcul actuale: George Boole.
+Numele acestor valori ne aduce aminte de George Boole, cercetătorul care a oferit o variantă algebrică de calcul al unor astfel de valori.
 
 Acestea sunt `true` și `false`.
 

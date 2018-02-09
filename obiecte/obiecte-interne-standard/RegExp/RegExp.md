@@ -9,8 +9,7 @@ Scopul folosirii regex-urilor este acela de a **constitui** un filtru prin care 
 **Spune standardul**:
 *Forma și funcționalitatea expresiilor regulate sunt modelate după cele oferite de limbajul de programare Perl 5*.
 
-Continuăm prin a ne transpune în starea necesară pentru lucrul cu șabloanele construite cu `RegExp`.
-Trebuie conștientizat din prima că `RegExp` lucrează la nivel de caracter individual, apoi seturi de caractere, grupuri și combinațiile dintre acestea. Dar starea necesară pornește de la conștientizarea importanței cruciale pe care o are un singur caracter, fie că acesta este „vizibil” sau „invizibil” (spațiile albe, taburile). Vă mai amintiți de faptul că JavaScript lucrează cu setul de caractere codat după standardul Unicode?! Amintiți-vă acest detaliu ca pe o melodie de fundal atunci când lucrați cu text.
+Continuăm prin a ne transpune în starea necesară pentru lucrul cu șabloanele construite cu `RegExp`. Trebuie conștientizat din prima că `RegExp` lucrează la nivel de caracter individual, apoi seturi de caractere, grupuri și combinațiile dintre acestea. Dar starea necesară pornește de la conștientizarea importanței cruciale pe care o are un singur caracter, fie că acesta este „vizibil” sau „invizibil” (spațiile albe, taburile). Vă mai amintiți de faptul că JavaScript lucrează cu setul de caractere codat după standardul Unicode?! Amintiți-vă acest detaliu ca pe o melodie de fundal atunci când lucrați cu text.
 
 **Moment ZEN**: Un singur caracter face diferența între a găsi ceea ce cauți într-un șir sau nu.
 
@@ -22,7 +21,8 @@ Caracterele speciale din expresiile regulate se numesc *metacaractere* și sunt 
 
 Caracterul `?` la regex-uri pune condiția strictă ca un șablon menționat înaintea sa să existe sau nu. De exemplu, `x?`, se va traduce: caracterul `x` poate să fie existe în șirul de caractere analizat sau nu, dar dacă îl găsești, include-l în rezultat.
 
-Ce înseamnă a include în rezultat?
+### Ce înseamnă a include în rezultat?
+
 Motorul RegExp indică succesiunea caracterelor, de câte ori li se permite să apară, de câte ori pot să se repete și așa mai departe. Acest model, acest șablon făurit de programator, este o descriere a ceea ce căutăm într-un șir de caractere și a tuturor variațiunilor posibile, ori a deviațiilor acceptate pentru întregul model sau pentru părți din acesta. Ținând cont de aceste aspecte, motorul parcurge caracter după caracter întreg șirul dat spre analiză. Ori de câte ori un caracter se potrivește tipului sau succesiunii, acesta este introdus într-un rezultat. Abia după ce a găsit un șir care să potrivească exact cu regulile șablonului, motorul va renunța la căutare și dacă s-a făcut o potrivire iar șirul de caractere nu a fost epuizat, restul este ignorat. Acesta este comportamentul implicit al motorului. Acest comportament poate fi modificat în funcție de regulile incluse în șablon.
 
 Și acum, focalizare maximă.
@@ -63,7 +63,17 @@ Aplicarea șablonului va porni prin „consumarea” șirului de caractere porni
 
 ## Metacaracterele
 
-Regex-urile fac uz de 11 caractere cu o însemnătate deosebită atunci când vine vorba de evaluarea unui șablon. Acestea sunt: **«backslash»** `\`, **«carret»** `^`, **«dollar»** `$`, **«punctul»** `.`, **«parantezele dreapte»** `[]`, **«parantezele rotunde»** `()`, **caracterul «pipe»** <code>&#124;</code>, **«semnul întrebării»** `?` și **«simbolul plus»** `+`.
+Regex-urile fac uz de 11 caractere cu o însemnătate deosebită atunci când vine vorba de evaluarea unui șablon. Acestea sunt:
+
+- **«backslash»** `\`,
+- **«carret»** `^`,
+- **«dollar»** `$`,
+- **«punctul»** `.`,
+- **«parantezele dreapte»** `[]`,
+- **«parantezele rotunde»** `()`,
+- **caracterul «pipe»** <code>&#124;</code>,
+- **«semnul întrebării»** `?` și
+- **«simbolul plus»** `+`.
 
 Aceste caractere au o valoare deosebită și pentru motorul JavaScript, fiind operatori ai limbajului, dar în același timp apar și în textele pe care le prelucrăm pentru că totuși fac parte și din limbajul natural. În cazul construcțiilor de șabloane, pentru a introduce aceste caractere în evaluare, vor trebui precedate cu **«backslash»** `\`.
 

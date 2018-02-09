@@ -21,7 +21,7 @@ Redactarea codului este un act de maximă responsabilitate pentru că ceea ce re
 Scenariul familiar pentru specialistul domeniului științelor informării se apropie de următorii pași pe care îi vom parcurge din nou și din nou, dar cu alte instrumente mereu mai evoluate, mai complexe. Chiar dacă încă nu ai ajuns la array-uri (putem traduce pentru moment array ca și înșiruire cu sensul de listă... în alte lucrări este numit și tablou sau vector), este îndeajuns să le privești precum un catalog tradițional de bibliotecă în care, fiecare sertar conține un element de array, adică datele care necesită prelucrarea.
 
 - se dorește parcurgerea unei structuri de date, fie aceasta un document XML (eXtended Markup Language), JSON (JavaScript Object Notation) sau pur și simplu un CSV (Comma Separated Values). Motivul este efectuarea unei modificări pentru un anumit element de date;
-- structura de date este *ciotârțită* în fragmentele ce vor fi supuse prelucrării, fie că acestea sunt elemente de pagină web, de document structurat XML sau rânduri dintr-un fișier de text, precum în cazul CSV-urilor. Adu-ți mereu aminte că la bază, toate datele sunt reprezentate de texte chioare, care prezintă marele avantaj al prelucrării textului înainte de orice;
+- structura de date este *ciopârțită* în fragmentele ce vor fi supuse prelucrării, fie că acestea sunt elemente de pagină web, de document structurat XML sau rânduri dintr-un fișier de text, precum în cazul CSV-urilor. Adu-ți mereu aminte că la bază, toate datele sunt reprezentate de texte chioare, care prezintă marele avantaj al prelucrării textului înainte de orice;
 - fiecare fragment va fi introdus ca element al unui array de suport cu scopul de a crea o structură dinamică menită să ofere cadrul de lucru la nivel atomic - elementele de date devin elemente de array.
 - la momentul *ciopârțirii* sau după, depinde de necesități, poți aplica un set arbitrar de operațiuni pe fiecare fragment în parte.
 
@@ -44,3 +44,5 @@ do {
 } while (index <= arrayCuFragmente.legth);
 // Array [ "#prima linie de text ", "#a doua linie de text" ]
 ```
+
+Privind codul scris dincolo de explicațiile oferite în comentarii, se observă în blocul de cod că am concatenat cu ajutorul operatorului plus caracterul diez pe care am dorit să-l atașăm fiecărui element din array. Fiecare element din array are o adresă de apel dacă vrei să numești așa sintaxa din cod `arrayCuFragmente[index]`. La index pornești de la 0 pentru că într-un array, primul element pornește de la adresa 0. Exact precum la catalog de la Clasa 0. După ce faci concatenarea, trebuie să avensezi la următorul index incrementând valoarea variabilei index. La `while` vei pune condiția necesară să fie calculată la ceva `truthy`. Dacă evaluarea e `truthy`, se mai execută codul din bloc pentru încă o dată.

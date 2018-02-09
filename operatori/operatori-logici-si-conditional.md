@@ -1,6 +1,77 @@
 # Operatorii logici
 
-Toate expresiile pot fi reduce la o valoare de adevăr, fie aceasta adevărată (`true`) sau falsă (`false`). Limbajul permite lucrul cu valorile de adevăr și falsitate pentru a decide un curs de evaluare sau pentru a proba anumite valori prin reducerea acestora la o concluzie înscrisă adevărului (și în engleză îi spunem *truthy*) sau falsității (în engleză îi spunem *falsey*).
+
+## Introducere
+
+Toate expresiile pot fi reduce la o valoare de adevăr, fie aceasta adevărată (`true`) sau falsă (`false`). Acest mod de lucru constituie o ramură a algebrei booleene introdusă de George Boole prima dată în lucrarea *The Mathematical Analysis of Logic* (*Analiza matematică a logicii*), 1847 cu o dezvoltare deplină în 1854 în lucrarea *An investigation of the Laws of Thought*. În loc de a opera cu numere așa cum facem în operațiunile aritmetice de bază (adunare și înmulțire), operațiunile booleene de bază sunt:
+
+- **conjuncția**, numită în engleză **AND** și în română **ȘI**, fiind *produsul logic* notat cu simbolul `∧` sau `∩`,
+- **disjuncția**, numită în engleză **OR**, fiind suma logică notată cu simbolul `∨` sau `∪` și
+- **negarea** sau **complementarea**, numită în engleză **NOT**, fiind notată cu simbolul `¬`.
+
+Ceea ce a permis algebra lui Boole este construcția de porți logice cu ajutorul circuitelor electronice imediat ce am avut la îndemână conceptul de **bit** ca unitate de codare a informației. În timp ce studia circuitele de basculare (gândește-te la un releu), în anii 30 ai secolului trecut, matematicianul și inginerul american Claude Elwood Shannon face o conexiune importantă între algebra Booleană și dispozitivele electromagnetice folosite pentru comutarea liniilor în trunchiurile de telefonie.
+
+![](7591110676_6efe75f4cc_o.jpg)
+
+Observațiile sale s-au concluzionat în teza *A Symbolic Analysis of Relay and Switching Circuits*. Shannon este și cel care ia termenul de **bit** de la John Tukey pentru a avea o unitate de măsură pentru informația dintr-un mesaj.
+
+![Claude Shannon, painted portrait - la théorie de l'information _1010155](ShannonMathematicalTheoryOfCommunicationExcerptBitDef.png "Instantaneu de Thierry Ehrmann luat pe 17 iulie, 2012. Imagine descoperită cu search.creativecommons.org pe Flikr. Licența este CC-BY")
+
+Acesta a fost saltul către aplicațiile practice în domeniul electronicii. Vom face o mică călătorie în aplicarea conceptului de bit, codat cu 0, dacă valoarea sa de adevăr este falsă și cu 1, dacă valoarea sa exprimă adevărul. Dacă vom cupla această informație cu cel mai simplu circuit electronic pe care toată lumea îl cunoaște, cel al unui bec care se aprinde acționând un întreruptor, vom putea să ne jucăm cu valori de adevăr stabilite prin aprinderea sau stingerea becului. Dacă întreruptorul este apăsat, curentul va circula și becul se va aprinde indicând valoarea 1 de adevăr. Acum că am stabilit cadrul, în onoarea lui George Boole și a lui Shannon, haide să aplicăm algebra booleană. Acest exercițiu este foarte valoros pentru înțelegerea mai departe a operatorilor booleani cu o mare alonjă către structurile de control al execuției prin intermediul cărora luăm decizii pentru cum se execută codul în funcție de valoarea de adevăr a unei expresii.
+
+## Operațiuni boolene
+
+Pentru că este absolut necesară înțelegerea operațiunilor boolene, vom constitui câteva tabele cu acestea. Să pornim de la o valoare booleană. Ce putem face cu aceasta? Cel mai simplu este să o negăm. Veți vedea că în multe lucrări, negarea unei valori boolene este marcată printr-un semn distinctiv, fie o linie deasupra valorii, fie un apostrof după valoare. Ce realizăm negând? 1 devine 0 și 0 devine 1.
+
+![](NOT-reprezentari.png)
+
+Am pus pentru exemplificare reprezentările des întâlnite ale complementării așa cum este des întâlnit în schemele electronice sau în teoria seturilor.
+
+A fost simplu, nu? Hai să ne uităm la următoarea operațiune: disjuncția sau adunarea logică. Vom porni de la reprezentare pentru că făcând socotelile, vom putea extrage un tabel de adevăruri pentru această operațiune.
+
+![](OR-reprezentare.png)
+
+Să o luăm băbește. Din acest moment, ceea ce este notat cu `a` în diagramă, vom considera a fi valoarea `false`, iar ceea ce este notat cu `b`, vom considera că este valoarea `true`. Ca să facă sens și mai mult, poți să-ți închipui că `true` este `ceva` (poate fi orice), iar `false` este `nimic`. Astfel, putem face operațiunile mentale mai ușoare. Pentru cele dintre voi care s-au jucat cu întreruptoare, vizual, se poate imagina un circuit simplu (ultimul de jos), care închid sau deschid un circuit pentru a alimenta un bec. Valorile de adevăr pot fi obținute apăsând și deschizând întreruptoarele.
+
+Și acum să facem calcule:
+
+- `nimic` (`false`) adunat cu `ceva` (`true`) egal `ceva` (`true`);
+- `ceva` (`true`) adunat cu `nimic` (`false`) egal `ceva` (`true`);
+- `ceva` (`true`) adunat cu `ceva` (`true`) egal `ceva` (`true`);
+- `nimic` (`false`) adunat cu `nimic` (`false`) egal `nimic` (`false`);
+
+Să facem un tabel pentru claritate:
+
+| a     | b     | a + b |
+| ----- | ----- | ----- |
+| false | true  | true  |
+| true  | false | true  |
+| true  | true  | true  |
+| false | false | false |
+
+Nu-i greu? Este chiar fascinant că poți face operațiuni cu niște abstracțiuni despre care știi doar că e `ceva` sau `nimic`. Fascinant, nu?
+
+Să avansăm cu operațiunea de conjuncție - AND.
+
+![](AND-reprezentare.png)
+
+Facem calculul și pentru că vorbim de o înmulțire, voi apela la ceea ce a rămas din școală de la înmulțirea cu 0. Vă mai aduceți aminte, nu? E simplu. Vom opera cu 0 și cu 1, corespondent lui `false` și `true`.
+
+- `0` (`false`) înmulțit cu `1` (`true`) egal `0` (`false`);
+- `0` (`false`) înmulțit cu `0` (`false`) egal `0` (`false`);
+- `1` (`true`) înmulțit cu `0` (`false`) egal `0` (`false`);
+- `1` (`true`) înmulțit cu `1` (`true`) egal `1` (`true`);
+
+Să constituim tabela de adevăr. Dacă te ajută să înțelegi, privește atent la circuitul realizat din cele două întrerupătoare. Singurul mod în care trece curentul este să apeși pe ambele întreruptoare, restul: nu trece nimic - `false`.
+
+| a     | b     | a * b |
+| ----- | ----- | ----- |
+| false | true  | false |
+| false | false | false |
+| true  | false | false |
+| true  | true  | true  |
+
+Aplicat la domeniul programării, valorile variabilelor sunt reduse la corespondentul lor de adevăr. Limbajul permite lucrul cu valorile de adevăr și falsitate pentru a decide un curs de evaluare sau pentru a proba anumite valori prin reducerea acestora la o concluzie înscrisă adevărului (și în engleză îi spunem *truthy*) sau falsității (în engleză îi spunem *falsey*).
 
 ## Operatorul de negare `!`
 
@@ -77,3 +148,10 @@ var x = true, y = 100;
 var z = x ? y : 'eroare de inițializare';
 console.log(z);
 ```
+
+## Resurse
+
+- [Algebră booleană, Wikipedia în limba română](https://ro.wikipedia.org/wiki/Algebr%C4%83_boolean%C4%83)
+- [Boolean algebra, Wikipedia în limba engleză](https://en.wikipedia.org/wiki/Boolean_algebra)
+- [Claude E. Shannon: A Goliath Amongst Giants](https://www.bell-labs.com/claude-shannon/)
+- [Claude Shannon, painted portrait - la théorie de l'information _1010155](https://www.flickr.com/photos/home_of_chaos/7591110676/in/album-72157630621527032/)
