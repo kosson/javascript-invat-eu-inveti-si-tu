@@ -17,7 +17,7 @@ Observațiile sale s-au concluzionat în teza *A Symbolic Analysis of Relay and 
 
 ![Claude Shannon, painted portrait - la théorie de l'information _1010155](ShannonMathematicalTheoryOfCommunicationExcerptBitDef.png "Instantaneu de Thierry Ehrmann luat pe 17 iulie, 2012. Imagine descoperită cu search.creativecommons.org pe Flikr. Licența este CC-BY")
 
-Acesta a fost saltul către aplicațiile practice în domeniul electronicii. Vom face o mică călătorie în aplicarea conceptului de bit, codat cu 0, dacă valoarea sa de adevăr este falsă și cu 1, dacă valoarea sa exprimă adevărul. Dacă vom cupla această informație cu cel mai simplu circuit electronic pe care toată lumea îl cunoaște, cel al unui bec care se aprinde acționând un întreruptor, vom putea să ne jucăm cu valori de adevăr stabilite prin aprinderea sau stingerea becului. Dacă întreruptorul este apăsat, curentul va circula și becul se va aprinde indicând valoarea 1 de adevăr. Acum că am stabilit cadrul, în onoarea lui George Boole și a lui Shannon, haide să aplicăm algebra booleană. Acest exercițiu este foarte valoros pentru înțelegerea mai departe a operatorilor booleani cu o mare alonjă către structurile de control al execuției prin intermediul cărora luăm decizii pentru cum se execută codul în funcție de valoarea de adevăr a unei expresii.
+Acesta a fost saltul către aplicațiile practice în domeniul electronicii. Vom face o mică călătorie în aplicarea conceptului de bit, codat cu 0, dacă valoarea sa de adevăr este falsă și cu 1, dacă valoarea sa exprimă adevărul. Dacă vom cupla această informație cu cel mai simplu circuit electronic pe care toată lumea îl cunoaște, cel al unui bec care se aprinde acționând un întreruptor, vom putea să ne jucăm cu valori de adevăr stabilite prin aprinderea sau stingerea becului. Dacă întreruptorul este apăsat, curentul va circula și becul se va aprinde indicând valoarea 1 de adevăr. Acum că am stabilit cadrul, în onoarea lui George Boole și a lui Shannon, haide să aplicăm algebra booleană. Acest exercițiu este foarte valoros pentru înțelegerea mai departe a operatorilor booleani cu o mare alonjă către structurile de control a execuției. Cu ajutorul acestora luăm decizii privind execuția codului în funcție de valoarea de adevăr a unei expresii.
 
 ## Operațiuni boolene
 
@@ -72,6 +72,22 @@ Să constituim tabela de adevăr. Dacă te ajută să înțelegi, privește aten
 | true  | true  | true  |
 
 Aplicat la domeniul programării, valorile variabilelor sunt reduse la corespondentul lor de adevăr. Limbajul permite lucrul cu valorile de adevăr și falsitate pentru a decide un curs de evaluare sau pentru a proba anumite valori prin reducerea acestora la o concluzie înscrisă adevărului (și în engleză îi spunem *truthy*) sau falsității (în engleză îi spunem *falsey*).
+
+## Legile lui De Morgan
+
+Pentru a vă adăuga încă un instrument util în viitoarele evaluări. Legile lui De Morgan sunt niște reguli simple de transformare care poartă numele matematicianului Augustus De Morgan:
+
+- negarea *disjuncției* (adunarea logică) este conjuncția (înmulțirea) negațiilor
+- negarea *conjuncției* este disjuncția negațiilor.
+
+> NOT(**true** OR **false**) <=> NOT **true** AND NOT **false**
+> NOT(**true** AND **false**) <=> NOT **true** OR NOT **false**
+
+Pentru noi specialiștii în științele informării, legile lui Morgan au o rezonanță familiară pentru că se aplică la căutarea în text folosindu-se operatorii Boolean.
+
+> NOT(**termen1** OR **termen2**) este același lucru precum (NOT **termen1**) AND (NOT **termen2**)
+
+Acestea fiind însușite, asimilarea operatorilor booleni va fi o floare la ureche după cum urmează.
 
 ## Operatorul de negare `!`
 
@@ -155,3 +171,5 @@ console.log(z);
 - [Boolean algebra, Wikipedia în limba engleză](https://en.wikipedia.org/wiki/Boolean_algebra)
 - [Claude E. Shannon: A Goliath Amongst Giants](https://www.bell-labs.com/claude-shannon/)
 - [Claude Shannon, painted portrait - la théorie de l'information _1010155](https://www.flickr.com/photos/home_of_chaos/7591110676/in/album-72157630621527032/)
+- [Logical conjunction](https://en.wikipedia.org/wiki/Logical_conjunction)
+- [Boolean algebra (structure)](https://en.wikipedia.org/wiki/Boolean_algebra_(structure))
