@@ -115,7 +115,15 @@ x;    // abia la următoarea utilizarea a
       // identificatorului acesta va indica noua valoare
 ```
 
-Te-ai fi așteptat ca la incrementare să fie returnat 2 fără dubiu. Ei bine, acest lucru nu s-a întâmplat pentru că valoarea a fost returnată la momentul când a fost evaluat de motor și abia după aceea a fost incrementată, dar la momentul în care evaluarea a trecut și de etapa de incrementare, deja ținea minte valoarea de dinaintea incrementării. Abia după ce mai „citim” - evaluăm o dată identificatorul `x`, acesta indică corect. Reține acest comportament pentru că acest tip de incrementare este folosită în mod curent la realizarea buclelor cu enunțul `for` când dorești să parcurgi o listă de valori. Cam așa arată: `for(var i = 0; i < listă.length; i++) { // operațiunea aplicată rând pe rând fiecărui element din listă}`. Îl vei mai folosi de multe ori și în calcule matematice. Nu înainte de a vedea comportamentul din poziția de prefix, încearcă să înveți sau pune o ancoră de memorie pe acest comportament pentru că uneori conduce la situații inexplicabile sau chiar erori - valoarea nu există nu pentru că nu a fost incrementată, ci pentru că nu a mai fost citit identificatorul o dată și alte multe asemenea.
+Te-ai fi așteptat ca la incrementare să fie returnat 2 fără dubiu.
+
+Acest lucru nu s-a întâmplat pentru că valoarea variabilei a fost returnată la momentul când a fost evaluat operatorul `++`, care returnează noua valoare.
+
+Acest moment în timp este foarte important de reținut pentru că este cel imediat ce *cursorul* motorului a trecut de identificator și a *dat peste* operatorul de incrementare. După ce a trecut *cursorul* și de operator, acesta returnează noua valoare, dar nu face și asignarea variabilei. Ceea ce s-a petrecut este că mediul de rulare reține în continuare valoarea anterioară, dar nu și pe cea nouă, cea actualizată. Abia după ce mai „citim” - **evaluăm** o dată identificatorul `x`, acesta indică valoarea actualizată.
+
+Reține acest comportament pentru că acest tip de incrementare este folosită în mod curent la realizarea buclelor cu enunțul `for`, când dorești să parcurgi o listă de valori. Cam așa arată: `for(var i = 0; i < listă.length; i++) { // operațiunea aplicată rând pe rând fiecărui element din listă}`. Îl vei mai folosi de multe ori și în calcule matematice.
+
+Înainte de a vedea comportamentul din poziția de prefix, pune o ancoră de memorie pe acest comportament pentru că uneori conduce la situații inexplicabile sau chiar erori - valoarea nu există, nu pentru că nu a fost incrementată, ci pentru că nu a mai fost evaluat (*citit*) identificatorul o dată și alte multe asemenea. Prima dată când vom folosi în vreo expresie respectiva variabilă, atunci valoarea va fi cea incrementată. Până atunci, motorul are memorie scurtă și în dinamica evaluării, până când nu va fi silit să citească din nou variabila, va folosi valaorea veche.
 
 Când operatorul este folosit ca prefix, incrementarea se face înainte ca operatorul să returneze noua valoare.
 
