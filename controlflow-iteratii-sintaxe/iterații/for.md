@@ -1,6 +1,15 @@
 ## Enunțul `for`
 
-Aceast enunț, numit de standard `IterationStatement`, creează o buclă care produce un set de rezultate sau parcurge o structură de date existentă.
+Aceast enunț, numit de standard `IterationStatement`, creează o buclă care produce un set de rezultate sau parcurge o structură de date existentă. Este enunțul cel mai des folosit pentru a genera serii de numere, pentru a parcurge liste de valori din array-uri, pentru a asocia valori din liste diferite și cam tot ce îți trece prin minte atunci când vine vorba de a lucra cu intervale de numere sau seturi de date în general.
+
+Înțelegerea iterațiilor cu `for` este pasul către înțelegerea unor instrumente mai puternice cum ar fi `Array.prototype.forEach()` și mai departe pentru `Array.prototype.map()`, `Array.prototype.reduce()`, `Array.prototype.filter()`. Aceste instrumente sunt una din țintele pe care le vizăm cu toate aceste cunoștințe pe care le acumulăm.
+
+## Despre intervale
+
+//TODO - termină de scris despre intervale numerice
+Vom porni de la o întrebare simplă.
+
+## Blocul de inițializare și blocul de execuție
 
 Această buclă va fi creată ținându-se cont de câteva expresii opționale care se introduc între paranteze, așa-numitul **bloc de inițializare**, fiind urmate de un **bloc de execuție**, care conține codul ce va fi executat pentru fiecare pas al buclei.
 
@@ -60,7 +69,7 @@ for (var i = 0; i < listă.length; i++) {
 };
 ```
 
-După parcurgerea array-ului sunt returnate rezultatele, dar dacă se mai dorește parcurgerea încă o dată, acest lucru nu este posibil decât dacă pornim din nou execuția codului. Dacă am dori să avem acces la rezultatele de etapă, acest lucru nu este posibil. În exemplul de mai sus, am folosit utilitarul `console.log` ca și funcție de prelucrare. Acesta nu ne ajută prea mult în afară de a vedea datele din array, în schimb, am putea introduce în exercițiul nostru o funcție, care să poată face o prelucrare mult mai complexă pentru fiecare valoare din array. Acest pas crește complexitatea exemplului nostru, dar și flexibilitatea în ceea ce privește multitudinea de prelucrări pe care le poți efectua.
+După parcurgerea array-ului sunt returnate rezultatele, dar dacă se mai dorește parcurgerea încă o dată, acest lucru nu este posibil decât dacă pornim din nou execuția codului. Dacă am dori să avem acces la rezultatele de etapă, acest lucru nu este posibil. În exemplul de mai sus, am folosit utilitarul `console.log()` ca și funcție de prelucrare. Acesta nu ne ajută prea mult în afară de a vedea datele din array, în schimb, am putea introduce în exercițiul nostru o funcție, care să poată face o prelucrare mult mai complexă pentru fiecare valoare din array. Acest pas crește complexitatea exemplului nostru, dar și flexibilitatea în ceea ce privește multitudinea de prelucrări pe care le poți efectua.
 
 ```javascript
 function prelucrează (elementArray) {
@@ -176,6 +185,10 @@ for(let temp, i = 0, j = 1; j < 4; temp = i, i = j, j = i + temp) {
   console.log(j);
 };
 ```
+
+## Mantre
+
+- toate expresiile din blocul de inițializare pot lipsi, dar trebuie să existe terminatoarele punct și virgulă.
 
 ![Ilustrație pentru ciclurile for](for-ilustratie-for-fibonacci.png)
 
