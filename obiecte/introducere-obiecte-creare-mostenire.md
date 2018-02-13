@@ -42,8 +42,11 @@ function MatrițăAvionVuiaI (tip = 'experimental', an = '1906') {
   this.distanțăMaximă = 0.012; // în kilometri
 };
 var VuiaI = new MatrițăAvionVuiaI();
-console.log(VuiaI); // { nume: 'Vuia 1', deschidereAripi: 4, 'distanțăMaximă': 0.012 }
+console.log(VuiaI);
+// { nume: 'Vuia 1', deschidereAripi: 4, 'distanțăMaximă': 0.012 }
 ```
+
+Atunci când un obiect este instanțiat folosindu-se operatorul `new` așa cum am făcut și noi în exemplu, se va genera automat o proprietate numită `constructor`, care indică funcția care a generat obiectul.
 
 JavaScript este un univers al obiectelor care sunt generate de constructori sau prin folosirea notației literale așa cum deja am văzut la capitolul dedicat valorilor. Dacă avem deja o ideea despre notația literală, trebuie să lămurim natura constructorilor. Aceștia sunt pur și simplu niște funcții care au o proprietate numită `prototype`. Această proprietate este un obiect care prin însăși existența sa face posibilă moștenirea prototipală. De ce există această proprietate în funcția-obiect care este constructorul? Pentru că în cazul apelării folosind operatorul `new`, se va genera legătura prototipală.
 

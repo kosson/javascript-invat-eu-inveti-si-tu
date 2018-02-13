@@ -1,6 +1,6 @@
 # Coercion - transformare
 
-Coercion în limba engleză înseamnă constrângere. Ceea ce se petrece este o „transformare” pe care o face un operator asupra unei valori date în încercarea de a face evaluarea expresiei. Pe parcursul lucrării vom folosi interșanjabil termenul care exprimă ceea ce se petrece cu cel în limba engleză.
+Coercion în limba engleză înseamnă constrângere. Ceea ce se petrece este o „transformare” pe care o face un operator asupra unei valori date la momentul evaluării expresiei. Pe parcursul lucrării vom folosi interșanjabil termenul care exprimă ceea ce se petrece cu cel în limba engleză.
 
 **Moment ZEN**: Totul în JavaScript este evaluat în final la o valoare boolean, fie ceva care poate fi considerată a fi o valoare **adevărată**, fie ceva care poate fi considerat a fi o valoare **falsă** - *truthy* și *falsy*, cum am spune în engleză.
 
@@ -102,28 +102,4 @@ Există o metodă prin care poți transforma un număr într-o bază la alegere.
 parseInt('101',2); // 5
 ```
 
-## Evaluarea condiției if
-
-|           `true`/`false`                        |
-|:------------------------------------------------|
-| if (true) { /* execută codul */ }`              |
-| `if (false) { /* nu execută codul */ }`         |
-| `if (1) { /* execută codul */ }`                |
-| `if (0) { /* nu execută codul */ }`             |
-| `if (-1) { /* execută codul */ }`               |
-| `if (-1) { /* execută codul */ }`               |
-| `if ("false") { /* execută codul */ }`          |
-| `if ("1") { /* execută codul */ }`              |
-| `if ("0") { /* execută codul */ }`              |
-| `if ("-1") { /* execută codul */ }`             |
-| `if ("") { /* nu execută codul */ }`            |
-| `if (null) { /* nu execută codul */ }`          |
-| `if (undefined) { /* nu execută codul */ }`     |
-| `if (Infinity) { /* execută codul */ }`         |
-| `if (-Infinity) { /* execută codul */ }`        |
-| `if ([]) { /* execută codul */ }`               |
-| `if ({}) { /* execută codul */ }`               |
-| `if ([[]]) { /* execută codul */ }`             |
-| `if ([0]) { /* execută codul */ }`              |
-| `if ([1]) { /* execută codul */ }`              |
-| `if (NaN) { /* nu execută codul */ }`           |
+În încheiere, atrag atenția asupra acestor transformări care se petrec automat la momentul evaluării expresiilor. Uneori, mecanismul de transformarea automată, dacă nu este înțeles pe deplin poate conduce la erori și situații aparent inexplicabile. Întelegerea coercion este strâns legată de înțelegerea operatorilor și efectelor pe care aceștia le au asupra operanzilor la momentul evaluării.
