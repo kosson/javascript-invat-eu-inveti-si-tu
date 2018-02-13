@@ -95,11 +95,12 @@ Acest operator este folosit atunci când dorești să inversezi evaluarea unei a
 
 ```javascript
 !1; // false
+!!10; // true
 ```
 
 Ceea ce s-a întâmplat este că motorul JS a văzut operatorul și a evaluat valoarea de adevăr a lui 1. Știm că pentru 1, valoarea de adevăr este `true`. Negat, aceasta va deveni `false`.
 
-La nevoie poți nega negația `!!true`.
+La nevoie poți nega negația `!!true`. Folosind acest operator pe orice valoare, spui motorului că dorești să folosești echivalentul boolean. Ca să folosești valoarea sa adevărată, mai trebuie să negi încă o dată expresia. Este un truc pe care coercion îl oferă pentru a folosi valoarea boolean a unei valori: `!!20; // true`
 
 ## Operatorul logic ȘI - `&&` (AND)
 

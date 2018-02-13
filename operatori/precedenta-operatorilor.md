@@ -1,8 +1,8 @@
 # Precedența operatorilor
 
-În programare există două mari categorii de operatori: operatorii **unari** și cei **binari**. Operatorii unari sunt acei operatori care se aplică unui singur operand. Operatorii binari sunt cei care implică doi operatori.
+În programare există două mari categorii de operatori: operatorii **unari** și cei **binari**. Operatorii unari sunt acei operatori care se aplică unui singur operand. Operatorii binari sunt cei care implică doi operanzi.
 
-Ca și în cazul matematicii, operatorii au o anumită ordine, o anumită întâietate la evaluare a unora față de alții. Ne aducem aminte de la aritmetică că înmulțirea se face înaintea adunării și a scăderii.
+Precum în matematică, operatorii au o anumită ordine, o anumită întâietate la evaluare a unora față de alții. Ne aducem aminte de la aritmetică că înmulțirea se face înaintea adunării și a scăderii.
 
 Până acum v-am obișnuit cu unul care este indispensabil, cel care atribuire a valorilor `=` (semnul egal). Este operatorul care pur și simplu face legătura dintre valoare și numele sub care poate fi regăsită.
 

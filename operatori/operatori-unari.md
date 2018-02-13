@@ -119,7 +119,7 @@ Te-ai fi așteptat ca la incrementare să fie returnat 2 fără dubiu.
 
 Acest lucru nu s-a întâmplat pentru că valoarea variabilei a fost returnată la momentul când a fost evaluat operatorul `++`, care returnează noua valoare.
 
-Acest moment în timp este foarte important de reținut pentru că este cel imediat ce *cursorul* motorului a trecut de identificator și a *dat peste* operatorul de incrementare. După ce a trecut *cursorul* și de operator, acesta returnează noua valoare, dar nu face și asignarea variabilei. Ceea ce s-a petrecut este că mediul de rulare reține în continuare valoarea anterioară, dar nu și pe cea nouă, cea actualizată. Abia după ce mai „citim” - **evaluăm** o dată identificatorul `x`, acesta indică valoarea actualizată.
+Acest moment în timp este foarte important de reținut pentru că este cel imediat ce *cursorul* motorului a trecut de identificator și a *dat peste* operatorul de incrementare. După ce a trecut *cursorul* și de operator, acesta returnează valoarea operandului, dar nu la valoarea incrementată. Ceea ce s-a petrecut este că mediul de rulare reține în continuare valoarea anterioară, dar nu și pe cea nouă, cea actualizată. Abia după ce mai „citim” - **evaluăm** o dată identificatorul `x`, acesta indică valoarea actualizată. În cazul utilizării ca prefix, operatorul face incrementarea și returnează valoarea actualizată.
 
 Reține acest comportament pentru că acest tip de incrementare este folosită în mod curent la realizarea buclelor cu enunțul `for`, când dorești să parcurgi o listă de valori. Cam așa arată: `for(var i = 0; i < listă.length; i++) { // operațiunea aplicată rând pe rând fiecărui element din listă}`. Îl vei mai folosi de multe ori și în calcule matematice.
 
@@ -148,7 +148,7 @@ Operatorul inversează toți biții care reprezintă valoarea operandului și re
 
 ## Operatorul `typeof`
 
-Returnează un șir de caractere care spune ce este operandul.
+Returnează un șir de caractere care spune ce tip este valoarea operandului.
 Operatorul este poziționat înaintea operandului.
 
 ## Operatorul `delete`

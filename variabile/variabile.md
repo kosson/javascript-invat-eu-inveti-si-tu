@@ -13,7 +13,7 @@ O variabilă este ceea ce spune însăși cuvântul: o zonă rezervată de care 
 
 ## Declararea variabilelor
 
-Pentru a declara o variabilă se va scrie `var variabila = 'ceva';`. În cazul în care sunt declarate mai multe variabile, se vor înșirui folosindu-se virgula, fără a mai specifica cuvântul cheie rezervat limbajului.
+Pentru a declara o variabilă se va scrie `var variabila = 'ceva';`. În cazul în care sunt declarate mai multe variabile, se vor înșirui folosindu-se operatorul virgula, fără a mai specifica cuvântul cheie rezervat limbajului.
 
 ```javascript
 var a, b = 'ceva', c = true; // declararea una după alta
@@ -32,6 +32,32 @@ x = 10; // poți verifica dacă s-a făcut atribuirea:
 x; // este returnat 10
 ```
 
+Ce se întâmplă atunci când un identificator devine valoarea unui altuia? În acel moment este copiată valoarea de la primul identificator. Modificarea valorii primului, nu va avea drept efect modificarea celui de-al doilea.
+
+```javascript
+let identificator1 = 10;
+let identificator2 = identificator1;
+identificator1 += 1;
+console.log(identificator2);
+```
+
+Acest comportament nu mai este aplicat și *valorilor complexe* (*obiecte compozite* în alte lucrări) așa cum sunt obiectele. Obiectele complexe sunt stocate prin crearea unei adrese în memorie unde pot fi găsite. Aceste adrese sunt similare celor din lumea fizică, unde pentru a ajunge la un prieten vei introduce în GPS o adresă din oraș. Ceea ce este important de a înțelege privitor la valorile complexe este că atunci când dorești copierea lor, se va face o copie la adresă, nicidecum nu se va duplica obiectul. Spunem că facem o copiere prin referință, nu prin valoare așa cum am făcut mai sus.
+
+```javascript
+let obi = {a: '1'};
+let obi2 = obi;
+console.log(obi2);
+```
+
+Chiar dacă am asignat o valoare de un anumit tip unei variable, poți în orice moment să asignezi o altă valoare de un alt tip, dacă acest pas este oportun.
+
+```javascript
+let a = 1;
+a = 'ceva';
+console.log(a);
+// "ceva"
+```
+
 În JavaScript, la momentul constituirii mediului lexical, se fac și legăturile dintre numele identificatorilor și valorile lor. Atunci când sunt folosite numele identificatorilor ca și expresii, acestea sunt evaluate prin returnarea valorii lor.
 
 ```javascript
@@ -42,7 +68,7 @@ a === b; // true
 
 De fapt, ceea ce am realizat este o copiere a variabilei `a` prin referință. Spunem că noua variabilă `b` face o trimitere către variabila deja existentă `a` care este legată la o valoare. În cazul nostru vorbim despre un obiect. Da, structura `{0: 10}` este un obiect foarte, foarte simplu.
 
-Aceeași demonstație se poate realiza prin pasarea valorii ca argument al unei funcții. Pentru exemplificare vom folosi un șablon des întâlnit în JavaScript care se aplică pentru a executa imediat o funcție fără a o apela după identificatorul său. Deci, îmbrăcăm funcția în `()();`, ceea ce va avea drept efect direct evaluarea funcției instant. În limbaj tehnic, aceast șablon de lucru se numește IIFE (Imediately Invoked Function Expression) - expresie de funcție invocabilă imediat. Și mai folosim ceva foarte util: metoda `log` a obiectului `Console`. Dar mai întâi, vă invit să priviți la exemplu pentru a crea ceva context și cu siguranță nedumerire.
+Aceeași demonstație se poate realiza prin pasarea valorii ca argument al unei funcții. Pentru exemplificare vom folosi un șablon des întâlnit în JavaScript, care se aplică pentru a executa imediat o funcție fără a o apela după identificatorul său. Deci, îmbrăcăm funcția în `()();`, ceea ce va avea drept efect direct evaluarea funcției instant. În limbaj tehnic, aceast șablon de lucru se numește IIFE (Imediately Invoked Function Expression) - **expresie de funcție invocabilă imediat**. Și mai folosim ceva foarte util: metoda `log` a obiectului `Console`. Dar mai întâi, vă invit să priviți la exemplu pentru a crea ceva context și cu siguranță nedumerire.
 
 ```javascript
 (function () {
@@ -55,7 +81,7 @@ Poți trage cu ochiul repede la funcții să afli mai multe, dar pentru moment e
 
 ## Izolarea variabilelor în propriul lor mediu lexical - scope
 
-Folosim funcțiile aici pentru că acestea au o proprietate extraordinară care face ca aceste exemple să funcționeze: creează propriul mediu lexical. Supertare! Bine, începând cu ES6, simpla declarare a blocului de cod prin acolade `{}` creează un mediu lexical (scope). E foarte importantă această caracteristică pentru că de ea ține felul în care izolăm, combinăm și punem execuția unei funcții într-un anumit context.
+Folosim funcțiile aici pentru că acestea au o proprietate extraordinară care face ca aceste exemple să funcționeze: creează propriul mediu lexical. Supertare! Bine, începând cu ES6, simpla declarare a blocului de cod prin acolade `{}` creează un mediu lexical (scope). E foarte importantă această caracteristică pentru că de ea ține modul în care izolăm, combinăm și punem execuția unei funcții într-un anumit context.
 
 ```javascript
 var a = {0: 10};
@@ -101,7 +127,7 @@ Nu folosiți niciodată cuvintele rezervate ale limbajului drept nume pentru var
 
 Reține și faptul că JavaScript face diferența dintre majuscule și minuscule. Astfel, `oVariabila` nu este echivalentul lui `ovariabila`. Sunt două variabile diferite din punctul de vedere al JavaScript.
 
-Javascript folosește trei cuvinte cheie specifice limbajului: `var`, `let` și `const`. `let` și `const` au fost adăugate în ES6 și sunt legate strict de blocul de cod delimitat prin acolade.
+Javascript folosește trei cuvinte cheie specifice limbajului: `var`, `let` și `const`. Declararea cu `let` și `const` a fost adăugată de versiunea ES6 a standardului și sunt legate strict de blocul de cod delimitat prin acolade.
 
 Cele trei moduri de a declara variabile au efect și asupra scope-ului.
 
@@ -142,7 +168,7 @@ Un enunț `var` declară variabile care sunt în *aria de efect* al contextului 
 
 ## `let` și `const`
 
-Numele de `let` vine din matematică însemnând: `fie`: fie x un număr cu valoarea 1. Definesc variabile în cel mai apropiat „mediu lexical" (scope), care poate fi global scope, un block `{}` sau o buclă precum `for`. Rolul lor este de a localiza la nivel de înregistrare în scope la nivel de `global`, `function` și block `{}`.
+Numele de `let` vine din matematică însemnând: `fie`: *fie x un număr cu valoarea 1*. Definesc variabile în cel mai apropiat „mediu lexical" (scope), care poate fi global scope, un block `{}` sau o buclă precum `for`. Rolul lor este de a localiza la nivel de înregistrare în scope la nivel de `global`, `function` și block `{}`.
 
 ### Standardul spune
 

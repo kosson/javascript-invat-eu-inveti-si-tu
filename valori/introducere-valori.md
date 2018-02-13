@@ -36,7 +36,7 @@ Aceste valori sunt cele pe care diferitele structuri de prelucrare sau de stocar
 (function () {}) === (function () {}); // false
 ```
 
-Atunci când nu ești sigur de valoarea reprezentată de un identificator, există un operator la îndemână care să te ajute să verifici ce este: `typeof`.
+Atunci când nu ești sigur de valoarea reprezentată de un identificator, există un operator la îndemână care să te ajute să verifici ce este: `typeof valoare`.
 
 ```javascript
 var a = 10,
