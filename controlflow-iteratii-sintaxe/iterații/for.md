@@ -139,19 +139,52 @@ for (var x = 0; x < 10; x++) {
 };
 ```
 
-În exemplul prezentat am ajuns la `5`, care este afișat în pagina web prin utilizarea utilitarului `writeln` (*write line*, care înseamnă scrie o linie), pus la dispoziție de browser. Consola sare peste afișarea lui 5.
-
-### Pași variabili
-
-TODO: Completează secțiunea
+În exemplul prezentat am ajuns la `5`, care este afișat în pagina web prin utilizarea utilitarului `writeln` (*write line*, care înseamnă *scrie o linie*), pus la dispoziție de browser. Consola sare peste afișarea lui 5.
 
 ### Întreruperea execuției unei bucle
 
-TODO: Completează secțiunea
+Uneori este nevoie ca atunci când o condiție internă buclei a fost atinsă, să oprim cu totul execuția buclei. Acest lucru se realizează cu `break`.
+
+```javascript
+for (let a = 0; a < 10; a++) {
+  console.log(`bucla ${a}`);
+  if (a > 0 && a % 3 === 0) {
+    break;
+  }
+};
+```
+
+### Pași diferiți și variabili
+
+Am văzut în exemple că pasul de incrementare a contorului este unu. Uneori ai nevoie ca pasul să fie diferit sau chiar variabil. Să presupunem că intervalul trebuie parcurs din 2 în 2.
+
+```javascript
+for (let a = 0; a < 10; a += 2) {
+  console.log(`bucla ${a}`);
+};
+```
+
+Poate vei avea nevoie ca incrementarea să se facă în funcție de o valoare externă care să dicteze câte iterații vei face.
+
+```javascript
+let variabil = 4;
+for (let x = 0; x <= 20; x += variabil) {
+  console.log(`bucla ${x}`);
+};
+```
 
 ### Bucle imbricate
 
-TODO: Completează secțiunea
+Să presupunem că dorești ca atunci când parcurgi un interval, pentru fiecare iterație, să mai parcurgi un interval pentru care să faci niște operațiuni. Utilitatea se dovedește atunci când ai nevoie să construiești structuri de date, care conțin la rândul lor alte fragmente de date. Sună complicat, dar în simplitatea sa pentru o buclă într-o altă buclă, am putea rezuma ceea ce se petrece astfel: pentru fiecare iterație din bucla principală, se fac x iterații în bucla internă.
+
+```javascript
+for (let x = 0; x <= 5; x++) {
+  console.log(`bucla principala: ${x}`);
+  for (let y = 0; y <= 2; y++) {
+    console.log(`bucla internă: ${y}`);
+  };
+};
+```
 
 ### Enunțul `for` poate fi folosit și în lucrul cu șirurile de caractere
 
@@ -164,8 +197,6 @@ for (var i = "»"; i.length < 10; i += "~") {
 ```
 
 ### Folosirea lui `for` în lucrul cu Document Object Model - DOM
-
-TODO: Trebuie să gândești unde introduci detaliile privind DOM.
 
 Buclele cu `for` pot fi folosite pentru introducerea de elemente în DOM.
 
