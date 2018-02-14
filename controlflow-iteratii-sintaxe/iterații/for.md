@@ -186,15 +186,39 @@ for (let x = 0; x <= 5; x++) {
 };
 ```
 
-### Enunțul `for` poate fi folosit și în lucrul cu șirurile de caractere
-
-Pur și simplu este cazul în care la un caracter poți adăuga un altul până când numărul lor va atinge limita specificată prin valoarea lui `length`.
+Utilitatea buclelor în alte bucle este de a crea array-uri multidimensionale, de exemplu. Și pentru că am menționat array-urile, structuri de date pe care încă nu le-am abordat structurat, în „manipularea” datelor conținute de acestea, `for` constituie un instrument de bază. Mai mult, `for` este adeseori folosit pentru a **împinge** date într-un array. La fiecare iterație este *alimentat* un array folosind metoda *push* cu rezultatul evaluării codului.
 
 ```javascript
-for (var i = "»"; i.length < 10; i += "~") {
+let lista = [];
+for (let x = 0; x <= 3; x++) {
+  // alimentez array-ul la fiecare iterație
+  lista.push(x);
+};
+console.log(lista); // Array [ 0, 1, 2, 3 ]
+console.log(lista.length); // 4
+```
+
+Un singur amănunt mai adaug la informațiile despre array-uri. În orice moment se poate afla dimensiunea unui array, dacă se apelează proprietatea `length`. În cazul exemplului nostru, lungimea este 4, adică are patru elemente. Este chiar intervalul închis [0, 3].
+
+### Enunțul `for` poate fi folosit și în lucrul cu șirurile de caractere
+
+Șirurile de caractere au caracteristici asemănătoare unui array. Deci, au proprietate care indică dimensiunea șirului de caractere.
+
+Putem avea cazul în care la un caracter poți adăuga un altul până când numărul lor va atinge limita specificată prin valoarea lui `length`.
+
+```javascript
+for (var i = "»"; i.length < 5; i += "~") {
   console.log(i);
 }
+/*
+»
+»~
+»~~
+»~~~
+ */
 ```
+
+În exemplul nostru, facem o adăugare a unui caracter la unul definit inițial.
 
 ### Folosirea lui `for` în lucrul cu Document Object Model - DOM
 
