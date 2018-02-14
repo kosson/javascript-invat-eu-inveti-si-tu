@@ -555,29 +555,18 @@ Aceasta a fost mica lecție de anatomie aplicată codului sursă JavaScript pent
 
 ## Resurse
 
-[ECMAScript® 2017 Language Specification](https://tc39.github.io/ecma262/)
-
-[Standard ECMA-262 ECMAScript® 2016 Language Specification](http://www.ecma-international.org/publications/standards/Ecma-262.htm)
-
-Simpson, Kyle. [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS)
-
-Haverbeke, Marijn. [Eloquent JavaScript](http://eloquentjavascript.net/)
-
-Brookshear, J. Glenn. [Computer science - An overview](https://www.amazon.com/Computer-Science-Overview-Global/dp/1292061162)
-
-Ce este notația BNF [What is BNF notation?](http://cui.unige.ch/db-research/Enseignement/analyseinfo/AboutBNF.html)
-
-Backus–Naur form [Backus–Naur form](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form)
-
-A brief history of JavaScript [A brief history of JavaScript](https://auth0.com/blog/a-brief-history-of-javascript/)
-
-ViewSource 2015 - Allen Wirfs-Bock [ViewSource 2015 - Allen Wirfs-Bock](https://www.youtube.com/watch?v=_oqkhslhNQU)
-
-[1]: http://www.teora.ro/cgi-bin/teora/romania/mbshop.cgi?database=01&action=view_product&productID=%20823&category= "Brookshear, J. Glenn. Introducere în informatică. Editura Teora. 1998. Titlul original: Computer science - An overview, Fifth Edition"
-
-https://en.wikipedia.org/wiki/George_Boole
-https://en.wikipedia.org/wiki/George_Boole#/media/File:George_Boole_color.jpg
-
-[List of languages that compile to JS, Jeremy Ashkenas, jashkenas/coffeescript git repo](https://github.com/jashkenas/coffeescript/wiki/List-of-languages-that-compile-to-JS)
-
-Tedre, Matti. The Science of Computing. CRC Press. 2015.
+- [ECMAScript® 2017 Language Specification](https://tc39.github.io/ecma262/)
+- [Standard ECMA-262 ECMAScript® 2016 Language Specification](http://www.ecma-international.org/publications/standards/Ecma-262.htm)
+- Simpson, Kyle. [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS)
+- Haverbeke, Marijn. [Eloquent JavaScript](http://eloquentjavascript.net/)
+- Brookshear, J. Glenn. [Computer science - An overview](https://www.amazon.com/Computer-Science-Overview-Global/dp/1292061162)
+- Ce este notația BNF [What is BNF notation?](http://cui.unige.ch/db-research/Enseignement/analyseinfo/AboutBNF.html)
+- Backus–Naur form [Backus–Naur form](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form)
+- A brief history of JavaScript [A brief history of JavaScript](https://auth0.com/blog/a-brief-history-of-javascript/)
+- ViewSource 2015 - Allen Wirfs-Bock [ViewSource 2015 - Allen Wirfs-Bock](https://www.youtube.com/watch?v=_oqkhslhNQU)
+- http://www.teora.ro/cgi-bin/teora/romania/mbshop.cgi?database=01&action=view_product&productID=%20823&category= "Brookshear, J. Glenn. Introducere în informatică. Editura Teora. 1998. Titlul original: Computer science - An overview, Fifth Edition"
+- https://en.wikipedia.org/wiki/George_Boole
+  - https://en.wikipedia.org/wiki/George_Boole#/media/File:George_Boole_color.jpg
+- [List of languages that compile to JS, Jeremy Ashkenas, jashkenas/coffeescript git repo](https://github.com/jashkenas/coffeescript/wiki/List-of-languages-that-compile-to-JS)
+- Tedre, Matti. The Science of Computing. CRC Press. 2015.
+- [Ashley Williams: If you wish to learn ES6/2015 from scratch, you must first invent the universe](https://www.youtube.com/watch?v=DN4yLZB1vUQ)

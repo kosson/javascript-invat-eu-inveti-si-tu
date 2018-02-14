@@ -121,6 +121,8 @@ TODO: Integrează mai bine materialul privind contextul de execuție.
 
 Contextul de execuție este un mecanism pentru a ține evidența evaluării codului la momentul în care acesta este rulat. La oricare moment în timp ceea ce rulează când arunci privirea se numește „running execution context” - contextul de execuție în efect sau care rulează, mai pe scurt **ce rulează pe moment**.
 
+Pentru fiecare funcție, motorul creează un obiect care *ține minte* toate referințele necesare executării. Este cazul closure-urilor. Motorul JavaScript (cazul V8) îl numește **obiect context**.
+
 ### Spune standardul
 
 În oricare moment există cel mult un singur context de execuție per agent, care execută cod.
@@ -286,9 +288,9 @@ faceva(2);                        // 12
 -   valiabila măsura va fi modificată în contextul local fiind înmulțită cu 2 și atribuită ei înseși
 -   valoarea măsurii este returnată în contextul de mai sus, adică valoarea 24.
 
-
 ## Referințe
 
-[Arindam Paul - JavaScript VM internals, EventLoop, Async and ScopeChains](https://www.youtube.com/watch?v=QyUFheng6J0 "Este un material fantastic pentru a înțelege mai bine faza de compilare și cea de execuție")
-
-[Lin Clark - An Abridged Cartoon Introduction To WebAssembly](https://www.smashingmagazine.com/2017/05/abridged-cartoon-introduction-webassembly/)
+- [Arindam Paul - JavaScript VM internals, EventLoop, Async and ScopeChains](https://www.youtube.com/watch?v=QyUFheng6J0 "Este un material fantastic pentru a înțelege mai bine faza de compilare și cea de execuție")
+- [Lin Clark - An Abridged Cartoon Introduction To WebAssembly](https://www.smashingmagazine.com/2017/05/abridged-cartoon-introduction-webassembly/)
+- [Franziska Hinkelmann: JavaScript engines - how do they even? | JSConf EU 2017](https://www.youtube.com/watch?v=p-iiEDtpy6I)
+- [Marja Hölttä: Parsing JavaScript - better lazy than eager? | JSConf EU 2017](https://www.youtube.com/watch?v=Fg7niTmNNLg)

@@ -4,14 +4,19 @@ Aceast enunț, numit de standard `IterationStatement`, creează o buclă care pr
 
 Înțelegerea iterațiilor cu `for` este pasul către înțelegerea unor instrumente mai puternice cum ar fi `Array.prototype.forEach()` și mai departe pentru `Array.prototype.map()`, `Array.prototype.reduce()`, `Array.prototype.filter()`. Aceste instrumente sunt una din țintele pe care le vizăm cu toate aceste cunoștințe pe care le acumulăm.
 
-## Despre intervale
-
-//TODO - termină de scris despre intervale numerice
-Vom porni de la o întrebare simplă.
-
 ## Blocul de inițializare și blocul de execuție
 
 Această buclă va fi creată ținându-se cont de câteva expresii opționale care se introduc între paranteze, așa-numitul **bloc de inițializare**, fiind urmate de un **bloc de execuție**, care conține codul ce va fi executat pentru fiecare pas al buclei.
+
+### Despre intervale
+
+Pentru a construi bucle for, avem nevoie să înțelegem că numărul de cicluri, de iterații, de bucle, este dat de un interval numeric pe care-l creăm de la bun început în blocul de inițializare. Acest interval este inițiat prin declararea unei variabile cu o valoare numerică - un contor. Apoi, este nevoie de specificarea limitei până la care se vor face iterații. Această limită poate fi una deschisă, dacă este folosit operatorul de comparare. Folosind mai mic sau mai mare după necesitate, indică motorului că este vizat un interval deschis, care nu va include și ultima valoare, dar dacă se folosește mai mic sau egal ori mai mare sau egal, motorul va ști că dorim folosirea unui interval închis ceea ce se traduce la momentul evaluării că ultima iterație va fi făcută chiar pe valoarea menționată la comparator.
+
+Am menționat aceste informații pentru că în funcție de operatorul de comparație folosit, vom avea cu o iterație mai mult sau mai puțin decât numărul real menționat drept limită.
+
+Un interval care pornește de la 0 și are menționată limita ca fiind 3, în cazul folosirii operatorului de comparație simplu, va declanșa o buclă cu trei iterații: pentru 0, pentru 1, pentru 2, dar nu și pentru 3. Oarecum face sens deplin pentru că asta ne-am și dorit specificând valoarea 3: dorim trei iterații. Dacă foloseam operatorul de comparație combinat, care va include și valoarea trei, vom avea 4 iterații.
+
+### Blocul de inițializare
 
 Oricare dintre *expresiile opționale* pot fi utilizate sau nu în blocul de inițializare. Mai jos avem un exemplu pentru care s-a optat plasarea variabilei cu rol de contor în afara blocului de inițializare. Sintaxa este perfect legitimă atâta vreme cât pui totuși un punct și virgulă care să delimiteze *locul* de expresia de comparare.
 
@@ -88,7 +93,7 @@ Declararea unei variabile într-un `for`, are ca efect, declararea unei variabil
 
 Pentru cei ingrijorați de blocul delimitat de acolade. Doresc să vă liniștesc temerile. În acest moment, conform standardului un bloc de cod `for` nu creează un scope (mediu lexical separat). Ține minte că doar funcțiile creează unul.
 
-### Păstrarea vie a mediului lexical per fiecare iterație
+### Păstrarea vie a mediului lexical pentru fiecare iterație în parte
 
 Declararea variabilelor cu `let` la contor, le va „lega” de blocul de execuție a lui `for` pentru fiecare iterație. Aici vorbim despre avantajul folosirii lui `let` în cazul constituirii de *closure*-uri. Mai fin spus, se leagă de necesitarea ca funcțiile care au fost definite în corpul enunțului `for` să păstreze viu mediul lexical existent la momentul unei singure iterații.
 
@@ -120,7 +125,7 @@ colectie[1](); // Iterația 5 și 11
 
 ### Sari peste o iterație - iterare cu verificare
 
-În cazul în care este necesar, se poate face un `salt`, evitându-se execuția unuia dintre pașii buclei.
+În cazul în care este necesar, se poate face un `salt`, evitându-se execuția unuia din pașii buclei.
 
 ```javascript
 for (var x = 0; x < 10; x++) {
@@ -134,7 +139,19 @@ for (var x = 0; x < 10; x++) {
 };
 ```
 
-În exemplul prezentat am ajuns la 5, care este afișat în pagina web prin utilizarea utilitarului `writeln` (*write line*, care înseamnă scrie o linie), pus la dispoziție de browser. Consola sare peste afișarea lui 5.
+În exemplul prezentat am ajuns la `5`, care este afișat în pagina web prin utilizarea utilitarului `writeln` (*write line*, care înseamnă scrie o linie), pus la dispoziție de browser. Consola sare peste afișarea lui 5.
+
+### Pași variabili
+
+TODO: Completează secțiunea
+
+### Întreruperea execuției unei bucle
+
+TODO: Completează secțiunea
+
+### Bucle imbricate
+
+TODO: Completează secțiunea
 
 ### Enunțul `for` poate fi folosit și în lucrul cu șirurile de caractere
 
@@ -194,4 +211,5 @@ for(let temp, i = 0, j = 1; j < 4; temp = i, i = j, j = i + temp) {
 
 ## Referințe
 
-Ethan Brown. Learning JavaScript
+- Ethan Brown. Learning JavaScript
+- [Interval (mathematics), Wikipedia](https://en.wikipedia.org/wiki/Interval_(mathematics))
