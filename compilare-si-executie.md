@@ -1,11 +1,27 @@
 # Compilare și execuție
 
+Este anul 1950. Războiul se terminase iar computerele treceau în faza comercială. Pe coridor ne întâlnim din nou cu Grace Hopper, doamna care găsise primul **bug** - molie - în măruntaiele lui **Harvard Mark I**.
+
+![](Grace_Hopper_and_UNIVAC.jpg)
+
+Stimabila doamnă, care este și un personaj hâtru pune un accent pe viteza de dezvoltare:
+
+> Înainte de Al Doilea Război Mondial, viața era simplă. După aceea am avut sisteme.
+
+Acum lucrează la primul computer comercial, *UNIVAC I* și conduce departamentul de programare Automatic Programming Development for Remington Rand. Este tare necăjită că mașinile de calcul nu înțeleg limba engleză, dar prin '53 va publica un articol științific despre compilatoare. Bine, deja exista un compilator încă din 1952, dar, stupoare: *nimeni nu-l atingea*, rememora dânsa ceva mai târziu, pentru că *mi se spusese că un computer face doar aritmetică*. De fapt, *nimeni nu credea* că se poate acest lucru.
+
+În acel moment, un compilator *traducea limbajul matematic în cod mașină*. Doamna Grace sau „bunica COBOL” așa cum este alintată, argumenta necesitatea ca persoanele care manipulează date să nu fie forțate să manipuleze simboluri așa cum o fac matematicienii. Dorința sa a fost să fie posibilă folosirea de *enunțuri în engleză*. Acestea au fost începuturile compilatoarelor și a limbajului de programare COBOL (COmmon Business-Oriented Language).
+
+Copilatoarele preiau codul sursă redactat într-un limbaj de programare și îl transformă în cod obiect pe care procesorul îl înțelegere. Codul obiect se execută direct și este înțeles de mașină.
+
+## Compilarea în JavaScript
+
 **Moment ZEN**: codul JavaScript este compilat la momentul execuției.
 
 Motorul de JavaScript când încarcă codul sursă, face două treceri peste cod:
 
-1. Este faza unei așa-zise compilării, când citește codul sursă linie cu linie (*parsing*), îl transformă în atomi lexicali (`tokens`), face recensământul identificatorilor și inițializează cu `undefined` și se constituie un Arbore Sintactic Abstract - Abstract Syntax Tree. După constituirea AST, codul este transformat într-o formă numită bytecode (înșiruirea de 0 și 1 pe care computerul o înțelege). În cazul funcțiilor, abia la momentul apelării lor se va proceda la constituirea unui mediu lexical propriu acelei funcții în care vor fi sub evidență identificatorii găsiți în corpul funcției.
-2. Este faza de execuție. Identificatorii capătă valori iar expresiile sunt evaluate.
+1. Este faza unei așa-zise compilării, când citește codul sursă linie cu linie (*parsing*), îl transformă în atomi lexicali (`tokens`), face recensământul identificatorilor și îi inițializează cu `undefined`, constituindu-se un Arbore Sintactic Abstract - Abstract Syntax Tree. După constituirea AST, codul este transformat într-o formă numită **bytecode** (înșiruirea de 0 și 1 pe care computerul o înțelege). În cazul funcțiilor, abia la momentul apelării lor se va proceda la constituirea unui mediu lexical propriu acelei funcții în care vor fi sub evidență identificatorii găsiți în corpul funcției. Pe scurt, compilarea lor se face la momentul apelării.
+2. Este faza de execuție. Identificatorii capătă valori și expresiile sunt evaluate.
 
 Trebuie specificat faptul că operațiunile nu decurg liniar, ci într-un mod care să permită cei mai buni timpi de execuție. Adică, se face puțin, parsing, urmat de compilare, rulare, optimizare și reoptimizare, apoi se mai ia un fragment și se repetă pașii și tot așa pentru a realiza per global cei mai buni timpi de rulare pentru cod. Pentru că acest comportament este cel real și actual, spunem că JavaScript beneficiază de compilare în timp real - JIT (Just In Time). Înțelegerea modului în care funcținează JIT-ul, conduce la o execuție performantă a codului.
 
@@ -13,7 +29,7 @@ Ceea ce trebuie adăugat ca detaliu important este faptul că spre deosebire de 
 
 ## Faza de compilare
 
-În faza de compilare codul este parcurs linie cu linie. Există o fază preliminară numită parsare a codului, moment în care codul sursă este procesat pentru a produce o formă care să poată fi folosită de interpretor. Abia apoi urmează o fază de compilare care este cuplată și cu o fază de optimizare a rezultatelor.
+În faza de compilare codul este parcurs linie cu linie. Există o fază preliminară numită **parsare** a codului (poți traduce ca parcurgere sau lecturare a codului), moment în care codul sursă este procesat pentru a produce o formă care să poată fi folosită de interpretor. Abia apoi urmează o fază de compilare care este cuplată și cu o fază de optimizare a rezultatelor.
 
 ### Momentul 0: declararea variabilelor și a funcțiilor și recensământul identificatorilor
 
@@ -294,3 +310,6 @@ faceva(2);                        // 12
 - [Lin Clark - An Abridged Cartoon Introduction To WebAssembly](https://www.smashingmagazine.com/2017/05/abridged-cartoon-introduction-webassembly/)
 - [Franziska Hinkelmann: JavaScript engines - how do they even? | JSConf EU 2017](https://www.youtube.com/watch?v=p-iiEDtpy6I)
 - [Marja Hölttä: Parsing JavaScript - better lazy than eager? | JSConf EU 2017](https://www.youtube.com/watch?v=Fg7niTmNNLg)
+- [Grace Hopper, Wikipedia în limba engleză](https://en.wikipedia.org/wiki/Grace_Hopper)
+- [Hopper at the UNIVAC I console, c. 1960](https://en.wikipedia.org/wiki/Grace_Hopper#/media/File:Grace_Hopper_and_UNIVAC.jpg "SI Neg. 83-14878. Date: na...Grace Murray Hopper at the UNIVAC keyboard, c. 1960. Grace Brewster Murray: American mathematician and rear admiral in the U.S. Navy who was a pioneer in developing computer technology, helping to devise UNIVAC I. the first commercial electronic computer, and naval applications for COBOL (common-business-oriented language). This image, which was originally posted to Flickr, was uploaded to Commons using Flickr upload bot on 4 June 2012, 18:21 by Jan Arkesteijn. On that date, it was confirmed to be licensed under the terms of the license indicated Creative Commons Attribution 2.0 Generic license.")
+- [The Wit and Wisdom of Grace Hopper. From The OCLC Newsletter, March/April, 1987, No. 167 (Editor and article author is Philip Schieber.)](http://www.cs.yale.edu/homes/tap/Files/hopper-wit.html)

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Interschimbare valori</title>
+    <script src="interschimbareValori.js" charset="utf-8"></script>
+  </head>
+  <body>
+    În consolă vei putea vedea algoritmul de schimbare a două valori între ele folosind trei variabile. Două care țin valorile și a treia ca variabilă temporară.
+    <code>
+      let a = 1, b = 2, temp;
+      console.log(a, b);
+      temp = a;
+      a = b;
+      b = temp;
+      console.log(a, b);
+    </code>
+    Dar mai este o metodă care nu folosește o variabilă temporară, ci de identități matematice. În cazul nostru <strong>a = (a - b) + b</strong> și <strong>b = ((a - b) + b) - (a - b)</strong>.
+  </body>
+</html>

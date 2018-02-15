@@ -1,6 +1,8 @@
 ## Enunțul `for`
 
-Aceast enunț, numit de standard `IterationStatement`, creează o buclă care produce un set de rezultate sau parcurge o structură de date existentă. Este enunțul cel mai des folosit pentru a genera serii de numere, pentru a parcurge liste de valori din array-uri, pentru a asocia valori din liste diferite și cam tot ce îți trece prin minte atunci când vine vorba de a lucra cu intervale de numere sau seturi de date în general.
+Ca și în cazul lui `while` sau al lui `do`, `for` execută repetat un fragment de cod de câte ori o condiție este întrunită.
+
+Aceast enunț, numit de standard `IterationStatement`, creează o secvență repetitivă, care produce un set de rezultate sau care parcurge o structură de date existentă. Este enunțul cel mai des folosit pentru a genera serii de numere, pentru a parcurge liste de valori din array-uri, pentru a asocia valori din liste diferite și cam tot ce îți trece prin minte atunci când vine vorba de a lucra cu intervale de numere sau seturi de date în general.
 
 Înțelegerea iterațiilor cu `for` este pasul către înțelegerea unor instrumente mai puternice cum ar fi `Array.prototype.forEach()` și mai departe pentru `Array.prototype.map()`, `Array.prototype.reduce()`, `Array.prototype.filter()`. Aceste instrumente sunt una din țintele pe care le vizăm cu toate aceste cunoștințe pe care le acumulăm.
 
@@ -258,11 +260,22 @@ for(let temp, i = 0, j = 1; j < 4; temp = i, i = j, j = i + temp) {
 };
 ```
 
+![Ilustrație pentru ciclurile for](for-ilustratie-for-fibonacci.png)
+
+Pentru că aceeași problemă se poate rezolva folosindu-ne de recursivitatea funcțiilor, vom introduce aici soluția pentru a avea o ancoră în viitor.
+
+```javascript
+function fibonacci (x) {
+  if (x < 2) {
+    return x
+  }
+  return fibonacci (x - 1) + fibonacci (n - 2)
+};
+```
+
 ## Mantre
 
 - toate expresiile din blocul de inițializare pot lipsi, dar trebuie să existe terminatoarele punct și virgulă.
-
-![Ilustrație pentru ciclurile for](for-ilustratie-for-fibonacci.png)
 
 ## Referințe
 
