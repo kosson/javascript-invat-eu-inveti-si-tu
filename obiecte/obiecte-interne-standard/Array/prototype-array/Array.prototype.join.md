@@ -12,7 +12,9 @@ var text = a.join(' + '); // atribuie lui text 'Ceva + Altceva + Altundeva'
 var text = a.join('');    // atribuie lui text 'CevaAltcevaAltundeva'
 ```
 
-## Concatenări de stringuri - asamblare de markup
+## Concatenări de stringuri (asamblare de markup)
+
+Uneori când lucrezi cu fragmente de text, fie acestea și markup, indiferent că este HTML sau XML, poți folosi cu succes join.
 
 ```javascript
 var html = ['<p>a</p>', '<p>b</p>', '<p>c</p>'].join('');

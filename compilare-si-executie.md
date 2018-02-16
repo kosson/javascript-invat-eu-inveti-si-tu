@@ -75,7 +75,7 @@ La prima fază a compilării, funcțiile nu sunt parcurse de compilator, ci doar
 
 ATENȚIE! Pentru funcții, acestea sunt înregistrate, dar conținutul lor este stocat undeva în memorie fără a fi compilat deocamdată. Este momentul în care sunt create obiectele funcții care conțin codul funcției plus alte proprietăți. Funcția pe lângă proprietățile sale, va primi tacit `this`, `arguments` și o altă proprietate internă (`[[Environment]]`) care este scope-ul preexistent la momentul declarării. Dacă declarăm o funcție în Global Object, **scope** va fi chiar <u>Global Object</u>.
 
-Reține că fiecare funcție declarată stabilește propriul scope (mediu lexical), care la momentul apelării, va porni compilarea cu înregistrarea variabilelor proprii și a parametrilor care la rândul lor sunt de fapt tot variabile înregistrate în scope-ul acelei funcții.
+Reține că fiecare funcție declarată stabilește propriul scope (mediu lexical), care la momentul apelării, va porni compilarea cu înregistrarea variabilelor proprii și a parametrilor care la rândul lor sunt, de fapt, tot variabile înregistrate în scope-ul acelei funcții.
 
 Compilatorul „coboară” în funcție pentru a face înregistrarea variabilelor și a altor funcții dacă acestea există. Dacă alte funcții sunt descoperite în interiorul funcției, se va proceda la același pas dacă acestea sunt invocate în interior. Dacă în interiorul unei funcții este declarată o altă funcție și aceasta este returnată, avem de-a face cu cel mai interesant mecanism pe care JavaScript îl pune la cingătoarea programatorului: un closure (tradus ar fi „țarc”, dar în cazul nostru putem să-i spunem „instantaneu” pentru acesta este comportamentul).
 

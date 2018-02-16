@@ -1,6 +1,6 @@
 # Enunțul `for..of`
 
-ES6 a introdus această nouă structură de iterare împreună cu două concepte importante: iterable și iterator. Intenția a fost de a oferi un instrument superior de ciclare, superior celor oferite de ES5: `for..in` și `forEach`.
+ES6 a introdus această nouă structură de iterare împreună cu două concepte importante: iterable și iterator. Intenția a fost de a oferi un instrument superior celor oferite de ES5 deja: `for..in` și `forEach`.
 
 Poți folosi enunțul `for..of` dacă nu ai nevoie să lucrezi și cu indexurile elementelor componente ale colecției. Dacă ai nevoie de localizare pentru a adresa exact un element, vei folosi un clasic `for`.
 
@@ -14,16 +14,15 @@ Formele canonice ale enunțurilor `for..of` sunt:
 - `for ( var expresieLegatăDeIndentificator of expresieDeAtribuire ) enunț,
 - `for ( declarațieDeExpresie of expresieDeAtribuire ) enunț.
 
-DeclarațiaDeExpresie poate fi un `let` sau un `const`.
+`DeclarațiaDeExpresie` poate fi un `let` sau un `const`.
 
 Forma canonică a enunțului este: `for ( expresieManaStângă of expresieDeAtribuire ) enunț`.
 
 ## Lucru
 
-Ori de câte ori un obiect trebuie să fie iterat, metoda `@@iterator` este apelată fără argumente.
-Iteratorul care este returnat este folosit pentru a obține valorile care trebuie iterate.
+Ori de câte ori un obiect trebuie să fie iterat, metoda `@@iterator` este apelată fără argumente. Iteratorul (un obiect cu o funcție specială) care este returnat este folosit pentru a obține valorile care trebuie iterate.
 
-Enunțul `for..of` poate parcurge și extrage valori din următoarele obiecte care respectă ***protocolul iterator***:
+Enunțul `for..of` poate parcurge și extrage valori din următoarele obiecte care respectă **protocolul iterator**:
 
 - `Array`
 - `Map`
@@ -41,7 +40,7 @@ for (let i of colectie) {
 };
 ```
 
-Domeniul de aplicativitate pentru care a apărut acest nou enunț este acela al obiectelor „iterable” precum `Array`, `Map`, `Set`.
+Domeniul de aplicativitate pentru care a apărut acest nou enunț este acela al obiectelor „iterable”, precum `Array`, `Map` și `Set`.
 
 În ciclările cu `for..of`, cel mai potrivit ar fi să folosești `let` pentru că la fiecare iterare se va crea câte o variabilă nouă care stabilește o nouă legătură la valoarea din pasul respectiv al iterației.
 

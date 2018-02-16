@@ -281,3 +281,44 @@ function fibonacci (x) {
 
 - Ethan Brown. Learning JavaScript
 - [Interval (mathematics), Wikipedia](https://en.wikipedia.org/wiki/Interval_(mathematics))
+
+## Carte de bucate
+
+### Inversarea unui șir de caractere
+
+Uneori ai nevoie de inversarea unui șir de caractere. Poți face acest lucru folosind o buclă `for` cu ajutorul căreia parcurgi caracter cu caracter. Pe fiecare dintre acestea le adaugi unui nou șir format ce va conține la final varianta inversată.
+
+```javascript
+let șir = 'ceva', șirInversat = '';
+for (let i = 0; i < șir.length; i++) {
+  șirInversat = șir[i] + șirInversat;
+}
+console.log(șirInversat); // avec
+```
+
+Folosind `for..of` sintaxa se reduce semnificativ, fiind eliminate posibilele erori de redactare. Adu-ți mereu aminte de faptul că iterările cu `for..of` sunt o specializare a lui `for` în scopul parcurgerii unor structuri de date, precum `Array`, `Map` și `Set`.
+
+```javascript
+let șir = 'ceva', șirInversat = '';
+for (let i of șir) {
+  șirInversat = i + șirInversat;
+}
+```
+
+Și acum pentru a înțelege că există posibilitatea de a face aceste operațiuni și cu instrumentele pe care le avem în vizor spre finalul acestui manual, voi adăuga și posibilitatea de a prelucra șirul nostru de caractere folosind `Array.prototype.reduce()`.
+
+```javascript
+let șir = 'ceva', șirInversat = '';
+șirInversat = șir.split('').reduce((acumulator, curent) => {
+  return curent + acumulator;
+}, '');
+console.log(șirInversat);
+```
+
+Și ca să folosim toate trucurile moderne ale ES6 (fat arrows și ASI), vom putea condensa expresia funcției callback pasată lui reduce și mai mult, ajungând la următoarea formulare:
+
+```javascript
+let șir = 'ceva', șirInversat = '';
+șirInversat = șir.split('').reduce((acumulator, curent) => curent + acumulator, '');
+console.log(șirInversat);
+```
