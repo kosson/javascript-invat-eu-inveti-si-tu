@@ -6,7 +6,7 @@ Toate textele și ilustrațiile sunt disponibile oricui sub o licență Creative
 
 Rezerv restul drepturilor patrimoniale pentru posibile căi de valorificare, care sa susțină dezvoltarea mai departe a resurselor cu o calitate și o dinamică crescută.
 
-Dacă totuși doriți să faceți cunoscute prin distribuire aceste materiale, vă rog să o faceți sub aceeași licență pentru ca cei cărora le-au fost destinate să accepte și să înțeleagă la rândul lor licența. Pentru alte utilizări care depășesc cadrul personal sau cel al unui grup restrâns, vă invit să contactați creatorul. Orice donație este binevenită și se va adăuga la plata facturilor și mulțumirea celui care astăzi vi le oferă deschis.
+Dacă totuși doriți să faceți cunoscute prin distribuire aceste materiale, vă rog să o faceți sub aceeași licență pentru ca cei cărora le-au fost destinate să accepte și să o înțeleagă la rândul lor. Pentru alte utilizări care depășesc cadrul personal sau cel al unui grup restrâns, vă invit să contactați creatorul. Orice donație este binevenită și se va adăuga la plata facturilor și mulțumirea celui care astăzi vi le oferă deschis.
 
 Colecția va fi actualizată foarte des, iar scopul final este realizarea un manual vizual, care să vină în sprijinul celor care doresc să înțeleagă acest limbaj de programare. Bazele programării sunt atinse în aceste materiale. Pentru cei care doresc să învețe și alte limbaje, au un start bun prin parcurgerea resurselor introductive și a celor referitoare la structurile de date.
 
