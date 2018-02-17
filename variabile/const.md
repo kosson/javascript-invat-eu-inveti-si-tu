@@ -11,6 +11,15 @@ console.log(ceva[1]); // "bum"
 
 Dacă se dorește atingerea imutabilității, se va folosi utilitarul `var ceva = Object.freeze(['unu','doi'])`, care, cu adevărat are capacitatea de a face obiectul unul care nu poate fi modificat.
 
+Variabilele const trebuie inițializate la declarare, altfel vei avea o eroare de sintaxă.
+
+```javascript
+const ceva;
+// SyntaxError: missing = in const declaration (Firefox)
+// Uncaught SyntaxError: Missing initializer in const declaration (Chrome)
+// SyntaxError: Missing initializer in const declaration (Nodejs)
+```
+
 Ca și variabilele declarate cu `let`, cele declarate prin `const` sunt limitate la blocul de cod delimitat prin acolade `{}`. Asta înseamnă că, de îndată ce execuția s-a încheiat pentru un anume bloc, variabilele declarate prin `const` nu vor mai fi disponibile.
 
 Declarațiile cu `const` nu beneficiază de mecanismul de hoisting. Nu sunt disponibile decât codului de după declararea sa.
@@ -57,4 +66,6 @@ Practica indică faptul că variabilele din global ar trebui scrise cu majuscule
 const O_SETARE_CEVA = true;
 ```
 
-JavaScript nu permite un „rebinding” (conectarea la altă valoare) al unui nume de identificator care s-a „legat” deja de o valoare în mediul lexical existent.
+JavaScript nu permite un „rebinding” (conectarea la altă valoare) al unui nume de identificator `const` care s-a „legat” deja de o valoare în mediul lexical existent. Ceea ce ai declarat cu un `const` rămâne bătut în cuie.
+
+Care este cel mai bun indicator că în loc de `let` ar trebui să folosim `const`? Dacă valoarea acelei variabile nu este modificată în funcțiile programului, cel mai bine este să facem acea variabilă `const`.

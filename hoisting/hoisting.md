@@ -28,6 +28,8 @@ function faCeva () {
 
 Din acest motive este cel mai bine ca variabilele să fie declarate în capul funcției de la bun început.
 
+Hoistingul se manifestă la fel ca și în cazul variabilelor declarate cu `var`, atunci când ai o expresie de funcție. Este hoistată declarația, dar asignarea se face când motorul ajunge la atribuire. Deci, nu vei putea apela înainte de a o inițializa cu valoarea de funcție.
+
 Cel mai evident exemplu este să scrii o funcție care să returneze după ce ai declarat variabila. Surpriza mare este returnarea valorii `undefined` deoarece declarația a hoistat variabila, dar nu a mai apucat să facă și „legătura” la valoare.
 
 ```javascript
