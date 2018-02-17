@@ -116,16 +116,17 @@ Mai întâi de toate, pentru că o funcție este totuși un obiect, ceva mai spe
 
 **Cum se fabrică obiectul prototip?**
 
-- înregistrarea realmRec este trimisă ca prim argument,
-- o secvență algoritmică vidă (noSteps) constituie al doilea, argument. Este și logic, obiectul-funcție returnat nu dorim să facă nimic, nu va fi apelat,
-- referința către obiectul prototip zero `objProto`.
+- înregistrarea realmRec este trimisă ca prim argument,
+- o secvență algoritmică vidă (noSteps) constituie al doilea, argument. Este și logic, obiectul-funcție returnat nu dorim să facă nimic, nu va fi apelat,
+- referința către obiectul prototip zero `objProto`.
 
 Este returnată funcția-obiect internă ca rezultat al lui CreateBuiltinFunction. Dacă am face o disecție acestui obiect-funcție care tocmai a devenit prototipul oricărei funcții care va fi creată de acum încolo, vom găsi următoarele:
-- are o înregistrare care ține minte cărui *Tărâm* aparține,
-- are referința către obiectul prototip universal creat anterior identificat prin `objProto`
-- are o mențiune ce indică că acest obiect-funcție este extensibil, adică i se pot adăuga proprietăți noi,
-- are un câmp comun care indică dacă este un Script sau Module, dar este setat la null pentru că nu este cazul
-- și o listă de proprietăți setate la undefined pentru că acelea aparțin altor funcții-obiect ce vor apărea în viitor.
+
+- are o înregistrare care ține minte cărui *Tărâm* aparține,
+- are referința către obiectul prototip universal creat anterior identificat prin `objProto`
+- are o mențiune ce indică că acest obiect-funcție este extensibil, adică i se pot adăuga proprietăți noi,
+- are un câmp comun care indică dacă este un Script sau Module, dar este setat la null pentru că nu este cazul
+- și o listă de proprietăți setate la undefined pentru că acelea aparțin altor funcții-obiect ce vor apărea în viitor.
 
 În acest moment s-a constituit obiectul prototip al tuturor funcțiilor. Acesta nu mai este un obiect ordinar, ci este un obiect-funcție. Reține faptul că acest obiect-funcție intern este unul extensibil. Astfel, s-a născut și mecanismul de moștenire ce va asigura transmiterea tuturor caracteristicilor prototipului în mod automat tuturor copiilor. Acum, dacă avem prototipul, îl vom referenția mereu cu identificatorul creat la început: `funcProto`.
 
