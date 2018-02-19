@@ -73,7 +73,7 @@ La prima fază a compilării, funcțiile nu sunt parcurse de compilator, ci doar
 - declară variabilele locale (din interiorul funcției), încluzând aici și funcțiile anonime care sunt atribuite unei variabile locale, de neinițializându-le
 - declară și inițializează funcțiile.
 
-ATENȚIE! Pentru funcții, acestea sunt înregistrate, dar conținutul lor este stocat undeva în memorie fără a fi compilat deocamdată. Este momentul în care sunt create obiectele funcții care conțin codul funcției plus alte proprietăți. Funcția pe lângă proprietățile sale, va primi tacit `this`, `arguments` și o altă proprietate internă (`[[Environment]]`) care este scope-ul preexistent la momentul declarării. Dacă declarăm o funcție în Global Object, **scope** va fi chiar <u>Global Object</u>.
+ATENȚIE! Pentru funcții, acestea sunt înregistrate, dar conținutul lor este stocat undeva în memorie fără a fi compilat deocamdată. Adu-ți mereu aminte că funcțiile sunt valori. Este momentul în care sunt create obiectele funcții care conțin codul funcției plus alte proprietăți. Funcția pe lângă proprietățile sale, va primi tacit `this`, `arguments` și o altă proprietate internă (`[[Environment]]`) care este scope-ul preexistent la momentul declarării. Dacă declarăm o funcție în Global Object, **scope** va fi chiar <u>Global Object</u>.
 
 Reține că fiecare funcție declarată stabilește propriul scope (mediu lexical), care la momentul apelării, va porni compilarea cu înregistrarea variabilelor proprii și a parametrilor care la rândul lor sunt, de fapt, tot variabile înregistrate în scope-ul acelei funcții.
 
@@ -83,7 +83,7 @@ Ce se întâmplă este pasionant. Se face „instantaneul” pe care l-am menți
 
 Și urmează **mecanismul miraculos**: chiar dacă funcția gazdă și-a încheiat execuția, referința returnată, dacă este apelată se va bucura de tot ce conținea funcția gazdă la momentul returnării.
 
-Puțin amețit? Nu-ți fă griji, totul va fi explicat și în mai mare detaliu la momentul potrivit.
+Puțin amețită? Nu-ți fă griji, totul va fi explicat și în mai mare detaliu la momentul potrivit.
 
 Dacă funcțiile au în scope o variabilă care nu a fost declarată în scope-ul funcției respective, se va ieși din scope-ul local al funcției și se va căuta în scope-ul imediat de deasupra. Dacă acesta nu există, iar funcția a fost declarată în global scope, atunci motorul JavaScript va crea acea variabilă din oficiu.
 
@@ -127,32 +127,34 @@ Dacă nu a fost declarat și apare ca și `test = 'ceva'`, la etapa compilării,
 
 Pentru că JavaScript are un singur fir de execuție, trebuie reținut faptul că de fiecare dată când o funcție este invocată, contextul de execuție a celui care a invocat funcția la momentul acela este înghețat urmând să se creeze un altul pentru evaluarea noii funcții. După ce funcția invocată și-a încheiat execuția, contextul de execuție a funcției care a făcut apelul este restaurat.
 
-Evidența apelurilor și a operațiunilor privind înghețarea și restaurarea contextelor de execuție este făcută de **call stack**. Tradus în română, *call stack* este **stiva de apeluri**. Acest mecanism de evidență a ceea ce se execută la un moment dat este prezent pentru a fi inspectat în Debugger.
+Evidența apelurilor și a operațiunilor privind înghețarea și restaurarea contextelor de execuție este făcută de **call stack**. Tradus în română, *call stack* este **stiva de apeluri**. Acest mecanism de evidență a ceea ce se execută la un moment dat este prezent pentru a fi inspectat în Debugger. Pentru fiecare funcție, motorul creează un obiect care *ține minte* toate referințele necesare executării. Acest lucru este absolut necesar pentru realizarea de closure-uri. Motorul JavaScript (cazul V8) îl numește **obiect context**.
 
 La invocarea funcției se creează un nou obiect scope care moștenește proprietăți din cel care era deja format la momentul declarării.
 
 ## Context de execuție
 
-TODO: Integrează mai bine materialul privind contextul de execuție.
+**Spune standardul**:
 
-Contextul de execuție este un mecanism pentru a ține evidența evaluării codului la momentul în care acesta este rulat. La oricare moment în timp ceea ce rulează când arunci privirea se numește „running execution context” - contextul de execuție în efect sau care rulează, mai pe scurt **ce rulează pe moment**.
+> Contextul de execuție este un mecanism pentru a ține evidența evaluării codului la momentul în care acesta este rulat. În oricare moment există cel mult un context de execuție pentru fiecare agent care rulează cod. Acesta este cunoscut a fi *running execution context*. [ECMAScript® 2017 Language Specification (ECMA-262, 8th edition, June 2017). 8.3 Execution Contexts](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-execution-contexts)
 
-Pentru fiecare funcție, motorul creează un obiect care *ține minte* toate referințele necesare executării. Este cazul closure-urilor. Motorul JavaScript (cazul V8) îl numește **obiect context**.
+Am stabilit în acest moment că la momentul în care codul este evaluat, se va crea un **context de execuție** pentru un anumit fragment de cod. Nu putem avea mai mult de un **context de execuție în derulare** (*running execution context*).
 
-### Spune standardul
+**Spune standardul**:
 
-În oricare moment există cel mult un singur context de execuție per agent, care execută cod.
+> Stiva executărilor contextelor este folosită pentru a urmări contextele de execuție. Contextul de execuție în derulare este întotdeauna primul element din stivă. De fiecare dată când este transferat controlul de la un cod executabil asociat contextului de execuție în derulare către unui cod executabil care nu este asociat cu acest context de execuție, se creează un nou context de execuție. Contextul de execuție nou este împins în capul stivei și devine noul context de execuție curent. [ECMAScript® 2017 Language Specification (ECMA-262, 8th edition, June 2017). 8.3 Execution Contexts](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-execution-contexts)
 
-Un context de execuție conține tot ce este necesar pentru a urmări evoluția execuției și a codului său asociat. Tot înseamnă orice este caracteristic motorului care implementează ECMAScript și necesar urmăririi execuției codului.
+Un context de execuție conține **tot** ce este necesar pentru a urmări evoluția execuției. Standardul spune că vorbim propriu-zis de urmărirea unei stări de rulare a codului. Tot înseamnă orice este caracteristic motorului care implementează ECMAScript și este necesar urmăririi execuției codului.
 
-O stare are următoarele componente:
+O stare are cel puțin următoarele componente pe care motorul le urmărește:
 
-- starea de execuție a codului, care este starea necesară pentru a executa, suspenda sau relua evaluarea codului asociat cu acest context de execuție
-- Function. Dacă contextul de execuție evaluează codul dintr-o funcție obiect, atunci valoarea acestei componente este chiar acea funcție obiect. Dacă contextul evaluează codul dintr-un **Script** sau dintr-un **Module**, atunci, valoarea componentei **Function** este `null`. Valoarea pentru Function în `running execution context` este numită și `active function object`.
-- Realm. Este registrul de tărâmuri (***Realm Record***) prin care codul asociat accesează resurse ECMAScript. Tărâmul asociat contextului de execuție este numit `current Realm Record`.
-- ScriptOrModule. Este o înregistrare care identifică un Module sau un Script în care își are originea codul rulat.
--  LexicalEnvironment. Identifică `Lexical Environment` - scope-ul care este folosit pentru a referințele pe care le fac identificatorii din codul care rulează în contextul de execuție curent.
-- VariableEnvironment. Identifică scope-ul (`Lexical Environment`) al cărui EnvironmentRecord conține legăturile create de `VariableStatements` din contextul de execuție curent. Când se creează un context de execuție nou, LexicalEnvironment și VariableEnvironment au aceeași valoare.
+- **starea de execuție a codului**, care este starea necesară pentru a executa, suspenda sau relua evaluarea codului asociat cu acest context de execuție
+- `Function`. Dacă contextul de execuție evaluează codul dintr-o funcție obiect, atunci valoarea acestei componente este chiar acea funcție obiect. Dacă contextul evaluează codul dintr-un **Script** sau dintr-un **Module**, atunci, valoarea componentei **Function** este `null`. Valoarea pentru Function în `running execution context` este numită și `active function object`.
+- `Realm` este registrul de tărâmuri (**Realm Record**) prin care codul asociat accesează resurse ECMAScript. Tărâmul asociat contextului de execuție este numit `current Realm Record`.
+- `ScriptOrModule` este o înregistrare care identifică un `Module` sau un `Script` în care își are originea codul rulat.
+-  `LexicalEnvironment` identifică `Lexical Environment` - mediul care este folosit de referințele făcute prin identificatorii din codul rulat în contextul de execuție curent.
+- `VariableEnvironment` identifică scope-ul (`Lexical Environment`) al cărui EnvironmentRecord conține legăturile create de `VariableStatements` din contextul de execuție curent. Când se creează un context de execuție nou, `LexicalEnvironment` și `VariableEnvironment` au aceeași valoare.
+
+Atunci când avem de-a face cu mai multe contexte de execuție, pentru urmărirea tuturor acestora este utilizată o **stivă a contextelor**
 
 ### Mecanismul
 
@@ -199,7 +201,7 @@ ATENȚIE, toate acestea sunt create de motorul JavaScript.
 
 În cazul obiectelor, atunci când apelezi o funcție (care joacă rolul de metodă), folosind `.` sau `[]`, vei avea un obiect drept context, altfel, vei avea global environment.
 
-Vorbim de faptul că funcțiile, atunci când sunt apelate, generează un context. `this` este legat la acest context iar acesta este setat după modul în care este apelată funcția. Reginald Braithwaite chiar exprima regretul că `this` nu a fost numit `context` direct.
+Vorbim de faptul că funcțiile, atunci când sunt apelate, generează un context. Este creată legptura `this` la acest context, fiind setat după modul în care este apelată funcția. Reginald Braithwaite chiar exprima regretul că `this` nu a fost numit `context` direct.
 
 Contextul unei funcții nu poate fi determinat examinând strict codul.
 

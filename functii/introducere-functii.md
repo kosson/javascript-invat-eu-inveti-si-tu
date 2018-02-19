@@ -37,9 +37,13 @@ Haideți să disecăm o funcție. Încă o dată: funcțiile sunt valori. Conșt
 
 Pentru ilustrare, am compus o imagine cu simbolurile pe care le-am creat drept ilustrații la capitolul dedicat dualității funcție-obiect. După cum putem urmări, o funcție primește argumente, care devin parametrii de lucru. Aceștia sunt colectați într-o structură de date internă funcției numită **arguments** care este disponibilă la momentul evaluării codului intern.
 
-Aplicarea unei funcții argumentelor sale produce un nou **mediu lexical**, un nou **scope** așa cum mai este denumit în engleză. Acest mediu lexical este ca un registru în care se ține evidența legăturilor între identificatori și valori. În mediul lexica sunt disponibile și identificatorii și valorile primite ca argumente.
+Aplicarea unei funcții argumentelor sale produce un nou **mediu lexical**, un nou **scope** așa cum mai este denumit în engleză. Acest mediu lexical este ca un registru în care se ține evidența legăturilor între identificatori și valori. În mediul lexical sunt disponibile și identificatorii și valorile primite ca argumente.
 
-Ca și obișnuință, ar fi cel mai util să gândești că funcția se aplică pe argumente, atunci când acestea există. Mult timp am gândit altfel: funcția este un fragment de cod care „primește” pentru că, într-adevăr, introduci niște argumente. Nu este greșit, dar pentru o iluminare rapidă în domeniul funcțiilor, cel mai bine este să gândești în termenii aplicării sale pe argumente primite. În adâncime, trebuie înțeles că acest comportament este posibil pentru funcții pentru că pur și simplu sunt o-bi-ec-te. Unele speciale pentru că pur și simplu pot executa codul din interior ori de câte ori se dorește.
+**Spune standardul**:
+
+> Mediul unei funcții este un Mediu Lexica care corespunde invocării unui obiect funcție EMCAScript. Un mediu al unei funcții poate crea o mouă legătură `this`. Un mediu al funcției poate captura starea necesară pentru a satisface invocările metodei `super` [ECMAScript® 2017 Language Specification (ECMA-262, 8th edition, June 2017). 8.1 Lexical Environments](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-environment-records).
+
+Ca obișnuință, ar fi de dorit să gândești că funcția se aplică pe argumente, atunci când acestea există. Mult timp am gândit altfel: funcția este un fragment de cod care „primește” pentru că, într-adevăr, introduci niște argumente. Nu este greșit, dar pentru o iluminare rapidă în domeniul funcțiilor, cel mai bine este să gândești în termenii aplicării sale pe argumente primite. În adâncime, trebuie înțeles că acest comportament este posibil pentru funcții pentru că pur și simplu sunt **o-bi-ec-te**. Unele speciale pentru că pur și simplu pot executa codul din interior ori de câte ori se dorește.
 
 **Moment Zen**: O funcție, de fapt, „se aplică” argumentelor pasate care sunt valori, le va prelucra și le va oferi apelantului prin returnare.
 
@@ -90,19 +94,20 @@ Pentru ambele funcții `this` este obiectul global.
 Pe lângă `this`, funcția mai are acces la un obiect la momentul evaluării: `arguments`, care este un obiect ce seamănă cu un array. Acesta cuprinde toate argumentele pasate funcției. Poate fi accesat chiar și dintr-o funcție internă după sintaxa `numeFunctieGazda.arguments`, dacă acest lucru este necesar sau direct fiecare parametru separat: `console.log(unu);`.
 Funcția `intern()` are posibilitatea de a accesa proprietățile funcției gazdă pentru că la momentul evaluării face **o poză** cu toți identificatorii pe care-i are gazda în `Environment Record`. Această **poză** se numește **closure**.
 
-## Mecanisme magice
+## Magie pură - hoisting
 
 Am numit eu **magice** aceste acțiuni ale compilatorului la momentul când interpretează codul pentru că se petrec câteva lucruri cu adevărat uimitoare.
-**Mecanisme magice**: Declararea unei funcții are ca efect declanșarea **hoising**-ului. Declarația este introdusă în registrul inventar al mediului lexical existent. Magia rezidă din faptul că poți invoca o funcție înainte ca aceasta să fie declarată. Superciudățel, nu?! Psst! Secretul este legat de compilarea codului. Adu-ți mereu aminte că înainte de a fi rulat, codul este compilat.
 
-Am aflat mai devreme că la executarea unei funcții, aceasta creează și un mediu lexical propriu, dar mai e o chestie supertare: dacă într-un bloc de cod introduci o declarație sau o expresie, se va crea un nou scope pentru respectivul cod. Ciudățel și super-interesant, nu?
+Declararea unei funcții are ca efect declanșarea **hoising**-ului. Declarația este introdusă în registrul inventar al mediului lexical existent la momentul compilării codului. Magia rezidă din faptul că poți invoca o funcție înainte ca aceasta să fie declarată dacă privești la modul în care este redactat codul în fișierul sursă. Superciudățel, nu?! Psst! Secretul este legat chiar de compilarea codului. Adu-ți mereu aminte că înainte de a fi rulat, codul este compilat. Dacă ai uitat ce se petrece în acel moment, merită să te întorci să mai citești o dată.
+
+Am aflat mai devreme că la executarea unei funcții, aceasta creează și un mediu lexical propriu (*scope*), dar mai e o chestie supertare: dacă într-un bloc de cod simplu introduci o declarație sau o expresie, se va crea un nou scope pentru respectivul cod. Ciudățel și super-interesant, nu?
 
 ```javascript
 var x = 100, y = 'ceva';
 { var x = 10; console.log(this.x, this.y) }; // 10 ceva
 ```
 
-## Funcția ca valoare poate fi redusă la nimic cu void
+## Funcția ca valoare poate fi redusă la nimic cu `void`
 
 Utilizarea operatorului `void`, care precedă o expresie, o golește de valoarea pe care o avea.
 
