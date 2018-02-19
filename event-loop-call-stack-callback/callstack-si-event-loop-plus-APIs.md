@@ -1,15 +1,30 @@
-# Relația între stivă, event loop și API-uri
+# Relația între stiva apelurilor, bucla de evenimente și API-urile browserului
 
-Am amintit deja faptul că un programator se poate asemui unui pilot în carlingă, fiind cel responsabil de felul în care va fi executat planul de zbor. La momentul în care povesteam despre modul în care poți face salturi în cod după anumite condiții, spuneam că este necesară buna înțelegere a funcțiilor. Continuăm acum pentru că aceste cunoștințe le-ai dobândit. Există un concept fundamental pentru a înțelege în adâncime programarea în JavaScript și nu numai. Acesta este cel de **control**. Adeseori veți auzi, viziona sau citi despre faptul că o anumită funcție este executată de control sau acesta este redat unei funcții deja aflată în execuție.
+Există un concept fundamental pentru a înțelege în adâncime programarea în JavaScript și nu numai. Acesta este cel de **control**. Adeseori veți auzi, viziona sau citi despre faptul că o anumită funcție este executată de **control** sau că acesta este înapoiat unei funcții deja aflată în execuție care era în așteptare în stivă.
 
-Controlul, de fapt este firul de execuție care evaluează în succesiune fragmentele de cod.
+**Controlul**, de fapt este firul roșu al execuției fragmentelor de cod.
 
-Limbajul nostru de programare are un set foarte important de funcții gata pentru a fi utilizate și mulți programatori numesc aceste funcții părți ale API-ului JavaScript. Ce este API? Este acronimul de la Application Programming Interface (Interfață de programare pentru aplicații), care este un set de conectori/funcțioanlități ale unui software. Aceste funcționalități sunt puse la dispoziția unui programator pentru a folosi o aplicație ca parte dintr-o suită sau pur și simplu de a manipula date fără să fie nevoit să apeleze la vreo interfață. Poți asemui funcționalitățile expuse ale unui API precum manetele și butoanele unui cockpit. Nu trebuie să știi toate părțile componente ale avionului pentru a-l face să zboare. În plus, precum în cazul avioanelor, există un manual detaliat pentru fiecare intrument. Așa și JavaScript oferă câteva funcții. Una dintre ele am folosit-o deja pentru a sonda rezultatele execuției fragmentelor de cod: `console.log()`. Aceasta face parte din API-urile Web puse la dispoziție de fiecare browser. Pentru a vedea câte instrumente există, nu ar fi rău să aruncați o privire la documentația existentă pe Mozilla Developer Network, https://developer.mozilla.org/en-US/docs/Web/API.
+Browserul are un set foarte important de funcții gata pentru a fi utilizate și mulți programatori numesc aceste funcții părți ale API-ului JavaScript. Ce este API? Este acronimul de la Application Programming Interface (Interfață de programare pentru aplicații), care este un set de conectori / funcționalități ale unui software gata de a fi folosite de programatori. Poți asemui funcționalitățile expuse de un API precum manetele și butoanele dintr-un cockpit. Nu trebuie să știi toate părțile componente ale avionului pentru a-l face să zboare. În plus, de obicei, există un manual detaliat pentru fiecare intrument.
 
-O funcție poate fi pasată ca valoare a unui argument unei alteia pentru a fi executată de îndată ce a fost evaluat codul din corpul funcției care a primit-o.
+Browserul oferă programelor JavaScript câteva funcții care pot fi asemuite utilitarelor. Una deja o folosim în mod curent pentru a sonda rezultatele evaluărilor: `console.log()`. Aceasta face parte din API-urile Web puse la dispoziție de fiecare browser. Pentru a vedea câte instrumente există, nu ar fi rău să aruncați o privire la documentația existentă pe Mozilla Developer Network, https://developer.mozilla.org/en-US/docs/Web/API.
+
+O funcție poate fi pasată ca valoare a unui argument unei alteia pentru a fi executată de îndată ce a fost evaluat codul din corpul funcției pe care a primit-o.
 
 Vom dedica timp separat pentru a înțelege callback-urile, dar acum ne vom focaliza atenția chiar pe conceptul de **timp**.
-Controlul evaluării codului beneficiază de **un singur fir de execuție**. Indiferent cât de multe apeluri de funcție sunt făcute, doar una singură este în evaluare, iar restul așteaptă cuminți la rând într-o **stivă**. Privitor la firele de execuție, API-urile puse la dispoziție de browser au propriile fire  separate de cel principal.
+
+**Controlul** evaluării codului beneficiază de **un singur fir de execuție**. Indiferent cât de multe apeluri de funcție sunt făcute, doar una singură este în evaluare. Restul așteaptă cuminți la rând în **stiva contextelor de execuție în derulare** (stiva de apeluri) sau într-o **coadă** de așteptare. Atenție, API-urile puse la dispoziție de browser au propriile fire de execuție separate de cel principal. Acesta este motivul pentru care anumite acțiuni precum rularea unui apel AJAX sau a unui `setTimeout()` nu blochează firul principal de execuție.
+
+## Job și job queue
+
+Înainte de toate, va trebui să lămurim conceptul de **job** și **job queue** pe care le introduce standardul. Am putea traduce în limba română un **job** ca **sarcină**, dar pentru că termenul este deja absorbit de limba română ca neologism, voi continua să-l folosesc pe cel din limba română.
+
+**Spune standardul**:
+
+> Un Job este o operațiune abstractă care inițiază o computație atunci când nici o altă computație ECMAScript nu este în desfășurare.[...] Execuția unui Job poate fi inițiată doar atunci când nu există niciun context de execuție și stiva contextelor de execuție este goală. A PendingJob este o cerere pentru o viitoare execuție a unui Job.[...] Din moment ce execuția unui Job este inițiată, Job-ul va fi rulat până când se încheie. Totuși, Job-ul care rulează sau evenimente externe pot fi cauza trimiterii în coada de așteptare a unor PendingJobs suplimentare care pot fi inițiate cândva după încheierea Job-ului curent.
+
+
+
+## Imaginea întregului
 
 Pentru a gestiona comportamentul complex al apelurilor și al timpilor de execuție, motorul de JavaScript are la dispoziție două mecanisme interne: **stiva de apeluri** (*callstack* în engleză) și **bucla de evenimente** (*event loop* în engleză). Coroborarea celor două mecanisme permite rularea codului complex al oricărei aplicații JavaScript. Din acest motiv este necesară înțelegerea în adâncime a felului în care funcționează.
 

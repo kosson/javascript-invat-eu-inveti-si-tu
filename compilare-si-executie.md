@@ -141,9 +141,11 @@ Am stabilit în acest moment că la momentul în care codul este evaluat, se va 
 
 **Spune standardul**:
 
-> Stiva executărilor contextelor este folosită pentru a urmări contextele de execuție. Contextul de execuție în derulare este întotdeauna primul element din stivă. De fiecare dată când este transferat controlul de la un cod executabil asociat contextului de execuție în derulare către unui cod executabil care nu este asociat cu acest context de execuție, se creează un nou context de execuție. Contextul de execuție nou este împins în capul stivei și devine noul context de execuție curent. [ECMAScript® 2017 Language Specification (ECMA-262, 8th edition, June 2017). 8.3 Execution Contexts](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-execution-contexts)
+> Stiva executărilor contextelor este folosită pentru a urmări contextele de execuție. Contextul de execuție în derulare este întotdeauna primul element din stivă. De fiecare dată când este transferat controlul de la un cod executabil asociat contextului de execuție în derulare către unui cod executabil care nu este asociat cu acest context de execuție, se creează un nou context de execuție. Contextul de execuție nou este împins în capul stivei și devine noul context de execuție în derulare. [ECMAScript® 2017 Language Specification (ECMA-262, 8th edition, June 2017). 8.3 Execution Contexts](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-execution-contexts)
 
-Un context de execuție conține **tot** ce este necesar pentru a urmări evoluția execuției. Standardul spune că vorbim propriu-zis de urmărirea unei stări de rulare a codului. Tot înseamnă orice este caracteristic motorului care implementează ECMAScript și este necesar urmăririi execuției codului.
+Un context de execuție conține **tot** ce este necesar unui **agent** pentru a urmări evoluția execuției. Lămurim faptul că un **agent** în litera standardului este un executant al codului care pune la dispoziție stiva contextelor de execuție, un set al contextelor, un context de execuție în derulare, un set de cozi ale joburilor, o înregistrare de evidență necesară agentului și, cel mai important, un **fir de execuție**.
+
+Standardul spune că vorbim propriu-zis de urmărirea unei stări de rulare a codului. Tot înseamnă orice este caracteristic motorului care implementează ECMAScript și este necesar urmăririi execuției codului.
 
 O stare are cel puțin următoarele componente pe care motorul le urmărește:
 

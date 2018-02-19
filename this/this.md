@@ -13,7 +13,7 @@ Referința `this` este strict legată de „locul” în care a fost apelată fu
 
 **Spune standardul**:
 
-> Operațiunea abstractă ResolveThisBinding determină legătura cuvântului cheie **this** folosind LexicalEnvironment al contextului de execuție în derulare.s
+> Operațiunea abstractă ResolveThisBinding determină legătura cuvântului cheie **this** folosind LexicalEnvironment al contextului de execuție în derulare.
 
 Dacă ești nelămurit merită să arunci o privire la compilare și execuție.
 
