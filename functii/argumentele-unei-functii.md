@@ -1,6 +1,6 @@
 # Argumentele și parametrii funcțiilor
 
-Pe scurt, argumentele sunt ceea ce pasezi funcțiilor. Numărul de parametri menționați la declararea funcției, se numește în jargonul programatorilor **arity**. Poți chiar să întrebi o funcție câți parametri are prin utilizarea proprietății `length` (în limba engleză, length înseamnă dimensiune, lungime).
+Pe scurt, argumentele sunt ceea ce pasezi funcțiilor. Numărul de parametri menționați la declararea funcției, se numește în jargonul programatorilor **arity**. Poți chiar să întrebi o funcție câți parametri are prin utilizarea proprietății `length` (în limba engleză, `length` înseamnă dimensiune, lungime).
 
 ```javascript
 function facCeva (x, y) {
@@ -107,11 +107,21 @@ faCeva(1, 3, 4); // Error: Trebuie musai doar două argumente
 ## Ce este `arguments`?
 
 Este un obiect care este pasat funcției și care permite accesul la toți parametrii, fără a fi necesar să-i definești în interiorul funcției.
+
+**Spune standardul**:
+
+> Majoritatea funcțiilor ECMAScript pun la dispoziția propriului cod un obiect arguments.
+
+```javascript
+function ceva (unu, doi) {
+  return arguments.toString();
+};
+ceva(); // "[object Arguments]"
+```
+
 Scenariul în care va fi folosit acest obiect este cel al funcțiilor care primesc un număr variabil de argumente.
 
 **Sfatul lui Crockford**: tratează `arguments` ca pe o structură read-only (doar pe care să o citești), pentru că, altfel, poți modifica fără să-ți dorești valorile și ordinea parametrilor funcției.
-
-**Moment Zen**: `arguments` este un obiect.
 
 ```javascript
 function testX(unu, doi){
@@ -153,14 +163,18 @@ De multe ori se ivește necesitatea de a avea obiectul `arguments`, care seamăn
 
 ```javascript
 function convertireArgs(a, b){
-  var arr = Array.prototype.slice.call(arguments);
+  let arr1 = Array.prototype.slice.call(arguments);
+  console.log(arr1);
   // sau
-  var arr = [].slice.call(arguments);
+  let arr2 = [].slice.call(arguments);
+  console.log(arr2);
   // se poate folosi și Array.from()
-  var arr = Array.from(arguments);
+  let arr3 = Array.from(arguments);
+  console.log(arr3);
   // dar și spread operator
-  var arr = [...arguments];
-};
+  let arr4 = [...arguments];
+  console.log();
+}; convertireArgs(10, 11);
 ```
 
 Uneori era nevoie să trimiți obiectul argumentelor altei funcții pe care o apelai din cea care primea datele și le avea în `arguments`.

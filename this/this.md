@@ -385,7 +385,7 @@ var metoda = obiectLiteral.metoda;                            // metodă a obi.g
 metoda(); // => valoarea proprietății obi. global; echivalent cu window.metoda()
 ```
 
-Bindingul implicit poate fi pierdut atunci când faci referință către metodă, când nu o și execuți. De fapt, nu faci referința către metodă, căci însăși metoda este o referință către funcția care joacă rol de metodă.
+Bindingul implicit poate fi pierdut atunci când faci referință către metodă și nu o și execuți. De fapt, nu faci referința către metodă, căci însăși metoda este o referință către funcția care joacă rol de metodă.
 
 ```javascript
 var obiectStudiu = {
@@ -405,7 +405,7 @@ Ceea ce s-a întâmplat, de fapt este că a fost „împrumutată” (invocată)
 
 Utilitarele `call()` și `apply()` sunt utilități disponibile prin `[[Prototype]]` tuturor funcțiilor, care sunt de fapt la rândul lor obiecte (funcțiile sunt obiecte `Function`, care moștenesc metodele din prototipul său).
 
-Bindingul explicit se realizează prin intermediul lui call() și apply(). Ambele iau ca prim parametru un obiect care va fi folosit pentru `this` și apoi va invoca funcția cu acel `this` deja specificat. Pentru că este afirmat în mod direct unde dorești să fie this, numim aceasta binding explicit.
+Bindingul explicit se realizează prin intermediul lui `call()` și `apply()`. Ambele iau ca prim parametru un obiect care va fi folosit pentru `this` și apoi va invoca funcția cu acel `this` deja specificat. Pentru că este afirmat în mod direct unde dorești să fie `this`, numim aceasta **binding explicit**.
 
 O chestie interesantă este că de vei pasa valoarea unei primitive simple de tip string, boolean sau number, atunci primitiva va fi „impachetată” în forma de obiect corespondentă (`new String(..)`, `new Boolean(..)`, or `new Number(..)`) și abia la acesta se va face binding-ul `this`. Acest lucru se numește "boxing".
 
@@ -499,9 +499,15 @@ Este modul în care te asiguri întotdeauna că `this` este predictibil și nu a
 
 ```javascript
 var a = 101;
-function faCeva(){ console.log(this.a); };
-var obi = { a: 1010 };
-var gazda = function(){ faCeva.call(obi); };
+function faCeva () {
+  console.log(this.a);
+};
+var obi = {
+  a: 1010
+};
+var gazda = function () {
+  faCeva.call(obi);
+};
 gazda(); //1010
 // functia gazda întărește legătura lui this la obi.
 gazda.call(window); // 1010

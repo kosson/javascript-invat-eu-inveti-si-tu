@@ -1,32 +1,32 @@
 # Relația între stiva apelurilor, bucla de evenimente și API-urile browserului
 
-Există un concept fundamental pentru a înțelege în adâncime programarea în JavaScript și nu numai. Acesta este cel de **control**. Adeseori veți auzi, viziona sau citi despre faptul că o anumită funcție este executată de **control** sau că acesta este înapoiat unei funcții deja aflată în execuție care era în așteptare în stivă.
+Există un concept fundamental pentru a înțelege în adâncime programarea în JavaScript și nu numai. Acesta este cel de **control**. Adeseori veți auzi, viziona sau citi despre faptul că o anumită funcție este executată de **control** sau că acesta este înapoiat unei funcții deja aflată în execuție dar care era în așteptare în stivă.
 
 **Controlul**, de fapt este firul roșu al execuției fragmentelor de cod.
 
-Browserul are un set foarte important de funcții gata pentru a fi utilizate și mulți programatori numesc aceste funcții părți ale API-ului JavaScript. Ce este API? Este acronimul de la Application Programming Interface (Interfață de programare pentru aplicații), care este un set de conectori / funcționalități ale unui software gata de a fi folosite de programatori. Poți asemui funcționalitățile expuse de un API precum manetele și butoanele dintr-un cockpit. Nu trebuie să știi toate părțile componente ale avionului pentru a-l face să zboare. În plus, de obicei, există un manual detaliat pentru fiecare intrument.
+Browserul are un set foarte important de utilitare gata pentru a fi utilizate și mulți programatori le numesc aceste părți ale API-ului JavaScript. Ce este un API? Este acronimul de la Application Programming Interface (Interfață de programare pentru aplicații), care este un set de conectori / funcționalități ale unui software gata pentru a fi folosite de programatori. Poți asemui funcționalitățile expuse de un API precum manetele și butoanele dintr-un cockpit. Nu trebuie să știi toate părțile componente ale avionului pentru a-l face să zboare. În plus, de obicei, există un manual detaliat pentru fiecare instrument.
 
-Browserul oferă programelor JavaScript câteva funcții care pot fi asemuite utilitarelor. Una deja o folosim în mod curent pentru a sonda rezultatele evaluărilor: `console.log()`. Aceasta face parte din API-urile Web puse la dispoziție de fiecare browser. Pentru a vedea câte instrumente există, nu ar fi rău să aruncați o privire la documentația existentă pe Mozilla Developer Network, https://developer.mozilla.org/en-US/docs/Web/API.
+În cazul browserul sunt oferite deja funcții care pot fi asemuite utilitarelor așa cum am menționat deja. Una deja o folosim în mod curent pentru a sonda rezultatele evaluărilor: `console.log()`. Aceasta face parte din API-urile Web puse la dispoziție de fiecare browser. Pentru a vedea câte instrumente există, nu ar fi rău să aruncați o privire la documentația existentă pe Mozilla Developer Network, https://developer.mozilla.org/en-US/docs/Web/API pentru a vedea cât de complex este mediul de care dispune un program JavaScript.
 
-O funcție poate fi pasată ca valoare a unui argument unei alteia pentru a fi executată de îndată ce a fost evaluat codul din corpul funcției pe care a primit-o.
+Adu-ți aminte că o funcție poate fi pasată ca valoare a unui argument unei alteia pentru a fi executată de îndată ce a fost evaluat codul din corpul funcției pe care a primit-o. Vorbim despre callback-uri. Le-am amintit pentru motivul că acesta este modul în care comunicăm intențiile noastre unui API. Folosim un utilitar al API-ului căruia îi trimitem o funcție ce va fi executată de îndată ce utilitarul a adus niște rezultate. Ceea ce se petrece pe scara timpului este că toate aceste utilitate, până să execute callback-ul, au nevoie de timp să-și facă ele treaba. Imaginează-ți un apel către o resursă de undeva de pe Internet. utilitarul trebuie să parcurgă toate căile către acea resursă interogând servere de DNS, stabilind comunicații pe diferite protocoale, ș.a.m.d. Tot acest efort are o amprentă în timp. Și totuși, atunci când rulăm programale noastre în browser, nu simțim aceste sincope. Dacă ar fi fost altfel, tot programul s-ar opri până își face treaba utilitarul finalizând prin execuția funcției callback. Știm că JavaScript are un singur fir de execuție. Și totuși acesta nu este blocat. Acest lucru se petrece pentru că utilitarele sunt rulate de browser în alte fire separate de cel al programului nostru. Și atunci, te ve întreba, cum se face comunicarea și armonizarea?
 
-Vom dedica timp separat pentru a înțelege callback-urile, dar acum ne vom focaliza atenția chiar pe conceptul de **timp**.
+## Scenariul de lucru
 
-**Controlul** evaluării codului beneficiază de **un singur fir de execuție**. Indiferent cât de multe apeluri de funcție sunt făcute, doar una singură este în evaluare. Restul așteaptă cuminți la rând în **stiva contextelor de execuție în derulare** (stiva de apeluri) sau într-o **coadă** de așteptare. Atenție, API-urile puse la dispoziție de browser au propriile fire de execuție separate de cel principal. Acesta este motivul pentru care anumite acțiuni precum rularea unui apel AJAX sau a unui `setTimeout()` nu blochează firul principal de execuție.
+Indiferent de numărul funcțiilor apelate, doar una singură este în evaluare. Restul așteaptă cuminți la rând în **stiva contextelor de execuție în derulare** (stiva de apeluri) sau într-o **coadă** de așteptare. Atenție, API-urile puse la dispoziție de browser au propriile fire de execuție separate de cel principal. Acesta este motivul pentru care anumite acțiuni precum rularea unui apel AJAX (XMLHttpRequest) sau a unui `setTimeout()` nu blochează firul principal de execuție.
 
 ## Job și job queue
 
-Înainte de toate, va trebui să lămurim conceptul de **job** și **job queue** pe care le introduce standardul. Am putea traduce în limba română un **job** ca **sarcină**, dar pentru că termenul este deja absorbit de limba română ca neologism, voi continua să-l folosesc pe cel din limba română.
+Înainte de toate, va trebui să lămurim conceptul de **job** și **job queue** pe care le introduce standardul. Am putea traduce în limba română un **job** ca **sarcină**, dar pentru că termenul este deja absorbit de limba română ca neologism, voi continua să-l folosesc ca atare.
 
 **Spune standardul**:
 
 > Un Job este o operațiune abstractă care inițiază o computație atunci când nici o altă computație ECMAScript nu este în desfășurare.[...] Execuția unui Job poate fi inițiată doar atunci când nu există niciun context de execuție și stiva contextelor de execuție este goală. A PendingJob este o cerere pentru o viitoare execuție a unui Job.[...] Din moment ce execuția unui Job este inițiată, Job-ul va fi rulat până când se încheie. Totuși, Job-ul care rulează sau evenimente externe pot fi cauza trimiterii în coada de așteptare a unor PendingJobs suplimentare care pot fi inițiate cândva după încheierea Job-ului curent.
 
-Job-urile sunt organizate printr-un mecanism intern motorului care se comportă ca o stivă FIFO (First In, First Out), ceea ce înseamnă că primul job intrat va fi și primul care va ieși. Standardul prevede că motoarele diferiților implementatori să fie prevăzute cu cel puțin două stive de Job-uri: una dedicată validării și evaluării textelor sursă pentru scripturi și module și una dedicată rezolvării promisiunilor.
+Job-urile sunt organizate printr-un mecanism intern motorului care se comportă ca o stivă FIFO (First In, First Out), ceea ce înseamnă că primul job intrat va fi și primul care va ieși. Standardul recomandă ca motoarele diferiților implementatori să fie prevăzute cu cel puțin două stive de Job-uri: una dedicată validării și evaluării textelor sursă pentru scripturi și module și una dedicată rezolvării promisiunilor.
 
 ## Imaginea întregului
 
-Pentru a gestiona comportamentul complex al apelurilor și al timpilor de execuție, motorul de JavaScript are la dispoziție două mecanisme interne: **stiva de apeluri** (*callstack* în engleză) și **bucla de evenimente** (*event loop* în engleză). Coroborarea celor două mecanisme permite rularea codului complex al oricărei aplicații JavaScript. Din acest motiv este necesară înțelegerea în adâncime a felului în care funcționează.
+Pentru a gestiona comportamentul complex al apelurilor și al timpilor de execuție, motorul de JavaScript are la dispoziție trei mecanisme interne: **stiva de apeluri** numită științific **stiva contextelor de execuție în derulare** (*callstack* în engleză), API-urile browserului, care preiau din efortul de soluționare a unor evaluări precum apelurile AJAX sau temporizările cu `setTimeout`, acestea fiind niște Job-uri, precum și un mecanism de gestionare a felului în care joburile sunt reinserate în firul principal de execuție a codului JavaScript. Coroborarea acestor mecanisme permite rularea codului complex al oricărei aplicații JavaScript. Din acest motiv este necesară înțelegerea în adâncime a felului în care funcționează.
 
 Rularea unui program în firul de execuție, neutilizând API-urile browserului, este un program care va rula secvență cu secvență în ordinea intenționată de programator. Acest aspect descrie execuția ca fiind una **sincronă**. Aceste cazuri sunt rare, de cele mai multe ori se aplică framentelor de cod explicate într-un manual de programare.
 
@@ -52,7 +52,7 @@ for (let x = 0; x < colectie.length; x++) {
 În cazul în care pentru fiecare element ai dori să faci mult mai multe lucruri, poți apela la un callback, care va împlini toate sarcinile și abia la final va face procesarea elementului din colecție. În acest caz, vom construi o funcție specială care ia drept argumente colecția și drept callback, o altă funcție care trebuie să fie aplicată pe fiecare element al colecției. Ceea ce permite astfel de model de lucru este ca funcția callback să fie una diferită în funcție de necesități.
 
 ```javascript
-var colectie = ['unu', 'doi', 'trei'];
+let colectie = ['unu', 'doi', 'trei'];
 function procesor (element) {
   console.log(element);
 };
@@ -67,7 +67,7 @@ prelucrarePerElement (colectie, procesor);
 Lucrurile se simplifică drastic dacă folosim utilitarul `forEach` pus la dispoziție de prototipul obiectului intern `Array`. Nu mai trebuie să creăm noi funcția de `prelucrarePerElement`.
 
 ```javascript
-var colectie = ['unu', 'doi', 'trei'];
+let colectie = ['unu', 'doi', 'trei'];
 function procesor (element) {
   console.log(element);
 };
@@ -81,7 +81,7 @@ colectie.forEach(afisare);
 Simți să s-ar putea simplifica și mai mult? Da, ai dreptate, pur și simplu am putea folosi în locul callback-ului o funcție anonimă care să facă prelucrarea. Astfel, am putea renunța din verbozitatea codului prin declararea funcțiilor cu nume.
 
 ```javascript
-var colectie = ['unu', 'doi', 'trei'];
+let colectie = ['unu', 'doi', 'trei'];
 colectie.forEach(function (element) {
   console.log(`Am pe: ${element}`);
 });
@@ -90,7 +90,7 @@ colectie.forEach(function (element) {
 Și pentru că unora le place eleganța, îți voi arăta o formă și mai prescurtată prin folosirea „arrow functions”.
 
 ```javascript
-var colectie = ['unu', 'doi', 'trei'];
+let colectie = ['unu', 'doi', 'trei'];
 colectie.forEach( element => console.log(`Am pe: ${element}`));
 ```
 
