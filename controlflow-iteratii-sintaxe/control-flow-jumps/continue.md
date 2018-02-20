@@ -1,4 +1,4 @@
-# Enunțul `continue`
+# Instrucțiunea `continue`
 
 Este folosit pentru a sări pur și simplu peste un pas în timpul executării unei bucle.
 

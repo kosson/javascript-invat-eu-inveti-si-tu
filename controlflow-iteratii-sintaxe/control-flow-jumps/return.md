@@ -1,13 +1,12 @@
-# Enunțul `return`
+# Instrucțiunea `return`
 
-Orice funcție în JavaScript returnează o valoare. Folosind `return` obții rezultatul evaluării funcției.
-Poate fi utilizat și pentru a ieși din execuția unei funcții dacă o anumită condiție a fost întrunită.
+Orice funcție în JavaScript returnează o valoare. Folosind `return` obții rezultatul evaluării funcției. Poate fi utilizată și pentru a ieși din execuția unei funcții dacă o anumită condiție a fost întrunită.
 
 Return poate fi folosit simplu sau urmat de o expresie.
 
-## Spune standardul
+**Spune standardul**:
 
-„Un enunț return are ca efect întreruperea execuției și returnarea unei valori apelantului (doar dacă nu intervine un gestionar finally). Dacă nu există o expresie, valoarea returnată este undefined, în celălalt caz, fiind valoarea expresiei”.
+> O instrucțiune return are ca efect întreruperea execuției și returnarea unei valori apelantului (doar dacă nu intervine un gestionar finally). Dacă nu există o expresie, valoarea returnată este undefined, în celălalt caz, fiind valoarea expresiei.
 
 ## Mantre
 

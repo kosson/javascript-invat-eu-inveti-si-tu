@@ -133,7 +133,7 @@ Pentru a face o anatomie, vom construi tărâmul JavaScript de la cele mai mici 
 ### Date, date, date
 
 Scrierea unui program are drept țintă manipularea unor date pentru a le transforma în diverse scopuri.
-Datele pe care un computer le poate manipula au o structură și dezvoltă o adevărată ierarhie pe măsură ce urmărim felul în care sunt reprezentate într-un computer. Cea mai mică unitate de date este bitul - digitul binar, care poate fi 0 sau 1 (în lb. engleză „bits”). Urcând o treaptă mai sus, avem caracterele despre care știm că sunt reprezentări pe 16 biți codate după standardul UTF (în lb. engleză „characters”). Pășind încă o treaptă ajungem la câmpuri de date (în lb. engleză „fields”). Mai multe câmpuri de date puse împreună formează o înregistrare (în lb. engleză „record”). O înregistrare specifică este gruparea a mai multor câmpuri înrudite. Cel mai bun exemplu este o înregistrare de catalog bibliografic indiferent de formatul de reprezentare. Toate câmpurile unei înregistrări unice sunt în relație directă cu aceeași entitate pe care o descriu; căreia îi aparțin. Gruparea mai multor înregistrări înrudite, care sunt de același tip se numește fișier (în lb. engleză „file”). Totuși un fișier poate strânge date diferite după scheme diferite. Nu este obligatoriu ca toate datele să fie structurate identic sau să conțină aceleași date. Fișierele sunt organizate pe mediul de stocare ca secvențe de 8 biți numite în limba engleză „bytes”. Ultimul stadiu de ordonare a datelor este baza de date organizată pe tabele. Tabelele conțin înregistrări, care la rândul lor conțin câmpurile de date.
+Datele pe care un computer le poate manipula au o structură și dezvoltă o adevărată ierarhie pe măsură ce urmărim felul în care sunt reprezentate într-un computer. Cea mai mică unitate de date este bitul - digitul binar, care poate fi 0 sau 1 (în lb. engleză *bits*). Urcând o treaptă mai sus, avem caracterele despre care știm că sunt reprezentări pe 16 biți codate după standardul UTF (în lb. engleză *characters*). Pășind încă o treaptă ajungem la câmpuri de date (în lb. engleză *fields*). Mai multe câmpuri de date puse împreună formează o înregistrare (în lb. engleză *record*). O înregistrare specifică este gruparea a mai multor câmpuri înrudite. Cel mai bun exemplu este o înregistrare de catalog bibliografic indiferent de formatul de reprezentare. Toate câmpurile unei înregistrări unice sunt în relație directă cu aceeași entitate pe care o descriu; căreia îi aparțin. Gruparea mai multor înregistrări înrudite, care sunt de același tip se numește fișier (în lb. engleză *file*). Totuși un fișier poate strânge date diferite după scheme diferite. Nu este obligatoriu ca toate datele să fie structurate identic sau să conțină aceleași date. Fișierele sunt organizate pe mediul de stocare ca secvențe de 8 biți numite în limba engleză *bytes*. Ultimul stadiu de ordonare a datelor este baza de date organizată pe tabele. Tabelele conțin înregistrări, care la rândul lor conțin câmpurile de date.
 
 ### Caracterele folosite
 
@@ -278,16 +278,10 @@ Le vom enumera aici cu traducerea lor pentru a vă familiariza la un prim contac
 
 Ele inițiază un curs de acțiune pentru îndeplinirea unei sarcini. Pur și simplu, instruiesc computerul în a face ceva, iar de aici încolo putem vorbi despre unele dintre ele ca instrucțiuni, cu sensul de comenzi ferme.
 
-Buna practică spune că toate exprimările intenției programatorului, hai să le numim **enunțuri** (iar liniile de cod cu instrucțiuni - *statements*), în JavaScript trebuie să fie încheiate prin punct și virgulă (`;`), chiar dacă motoarele care implementează ECMAScript, la momentul evaluării codului, introduc automat prin mecanismul de **automatic semicolon insertion** acest caracter.
-Da, da. Programatorii sunt creaturi comode și motoarele permit anumite facilități. Unii aleg această practică înadins. Personal, mă feresc și pun semnele de punctuație pentru că astfel, codul devine lizibil, ochii deprind automatisme de citire și de aici și o mai mare eficiență.
+Buna practică spune că toate exprimările intenției programatorului reflectate în instrucțiuni le numim **enunțuri** (în limba engleză *statements*), în JavaScript trebuie să fie încheiate prin punct și virgulă (`;`), chiar dacă motoarele care implementează ECMAScript, la momentul evaluării codului, introduc automat prin mecanismul de **automatic semicolon insertion** (ASI) acest caracter.
+Programatorii sunt creaturi foarte comode și motoarele JavaScript permit anumite facilități printre care și această completare automată. Unii aleg această practică înadins. Personal, mă feresc și pun semnele de punctuație pentru că astfel, codul devine lizibil, ochii deprind automatisme de citire și de aici și o mai mare eficiență. Codul este scris nu numai pentru mașini, ci pentru oameni ca un act de comunicare a intențiilor de la un om la altul. Lizibilitatea trebuie să primeze.
 
-Bine, bine. Dar care este treaba cu **momentele ZEN**? Pe parcursul acestei călătorii de descoperire și autodescoperire, voi jalona conținutul cu astfel de momente, care vor fi propoziții sau fraze cu o sarcină precisă: să fie chintesența informației analizată defalcat. De ce moment ZEN? Pentru că este ca un exercițiu de meditație, care conduce la identificarea cu informația prin asimilarea ei.
-
-### Automatic semicolon insertion - introducerea automată a lui punct și virgulă
-
-În JavaScript, enunțurile (*statements*), care sunt echivalentul propozițiilor din limbajul nostru de zi cu zi, trebuie să se termine cu punct și virgulă, iar acolo unde semnul grafic nu a fost scris de programator, codul se supune mecanismului ASI - **Automatic Semicolon Insertion**, care introduce de la sine putere semnul grafic.
-
-Reguli de introducere:
+Reguli de introducere prin ASI:
 
 - imediat înaintea acoladei de închidere `}`,
 - atunci când șirul de token-uri nu poate fi tratat unitar `x - y`, de exemplu,
@@ -305,76 +299,72 @@ Declarațiile și instrucțiunile beneficiare ale acestui mecanism sunt:
 
 Există mai multe curente de opinii care au condus la diferite stiluri de redactare a codului sursă. Veți întâlni foarte mult cod scris fără punct și virgulă care să marcheze finalitatea enunțului. Unii consideră acest lucru acceptabil, dar vă invit în partea cealaltă, a celor care scriu foarte corect codul și care vor pune întotdeauna punct și virgulă la încheierea unui enunț după cum ne-a intrat în sânge ca atunci când încheiem o propoziție în scris să punem punct.
 
+Care este treaba cu **momentele ZEN**? Pe parcursul acestei călătorii, voi jalona conținutul cu astfel de momente, care vor fi propoziții sau fraze cu o sarcină precisă: să fie chintesența informației analizată defalcat. De ce moment ZEN? Pentru că este ca un exercițiu de meditație, care conduce la identificarea cu informația prin asimilarea ei.
+
 ### Operanzii
 
-Pentru a ajunge la un rezultat avem nevoie mai întâi de niște valori, de niște date cu care să lucrăm. Operanzii, ca denumire, vin din matematică. Mda, știu, nu scăpăm... Nu te descuraja așa ușor, pur și simplu programarea este o dezvoltare a matematicii și de acolo își trage și denumirile pentru „chestiile” cu care operăm. Am zis operăm, nu?! Păi ce poți face cu niște operanzi altceva în afară de a opera cu ele? Ce? Nu știu. O adunare, o înmulțire... mai multe operațiuni, unele grupate cu paranteze. Hai că mai vedem ce și cum putem combina în expresiile formate.
+Pentru a ajunge la un rezultat avem nevoie mai întâi de niște valori, de niște date cu care să lucrăm. Operanzii, ca denumire, vin din matematică. Mda, știu, nu scăpăm... Nu te descuraja așa ușor! Pur și simplu programarea este o dezvoltare a matematicii și de acolo își trage și denumirile pentru „chestiile” cu care operăm. Am zis operăm, nu?! Păi ce poți face cu niște operanzi altceva în afară de a opera cu ei? O adunare, o înmulțire... mai multe operațiuni, unele grupate cu paranteze. Hai că mai vedem ce și cum putem combina în **expresiile pe care le formează**.
 
 <img src="OperanziSiOperator.png" width="300px">
 
-### Operatorii (***operators***)
+### Operatorii
 
-Sunt caractere sau combinații de caractere care au rolul de a stabili o relație între doi operanzi. Este exact ca în matematică. Rolul operatorilor este de a ajunge la un rezultat în urma „evaluării”. De exemplu, când ai expresia `1 > 0;`, operatorul de comparație `>` va oferi rezultatul, care este o valoare boolean `true` (ești încă aici? nu te-am pierdut, nu?!).
+În limba engleza operatorii se numesc *operators*. Aceștia sunt caractere sau combinații de caractere care au rolul de a stabili o relație între doi operanzi. Exact ca în matematică. Rolul operatorilor este de a ajunge la un rezultat în urma „evaluării”. De exemplu, când ai expresia `1 > 0;`, operatorul de comparație `>` va oferi rezultatul, care este o valoare boolean `true` (ești încă aici? nu te-am pierdut, nu?!).
 
 ![George Boole](George_Boole_color.jpg "George Boole, matematician, 1815-1864. Este creatorul logicii matematice moderne și a algebrei booleene. Resursă aflată în Domeniu public accesibilă la https://commons.wikimedia.org/wiki/File:George_Boole_color.jpg")
 
-În esență, putem spune că majoritatea rezultatelor, atunci când scriem cod, provin din astfel de evaluări. Ăăă, cum **boolean**, prietene? Da. E o valoare care testează adevărul și poartă numele de boolean în memoria cercetătorului George Boole, care a dezvoltat algebra booleană. Nu uita că într-un computer, la nivelul cel mai de jos, totul este 1 și 0, `adevărat` **sau** `fals`, `adevărat` **ȘI** `fals`, `adevărat` **NU** `fals`. Hahaha... Apropo de Boole și de operatori. Tot de la Boole avem și regula comutativității pentru adunare `x + y = y + x` și regula distributivității `z(x + y) = zx + zy`.
+În esență, putem spune că majoritatea rezultatelor, atunci când scriem cod, provin din astfel de evaluări. Ăăă, cum adică **boolean**? Da. E o valoare care testează adevărul și poartă numele de boolean în memoria cercetătorului George Boole, care a dezvoltat această ramură a algebrei. Nu uita că într-un computer, la nivelul cel mai de jos, totul este 1 și 0, `adevărat` **sau** `fals`, `adevărat` **ȘI** `fals`, `adevărat` **NU** `fals`. Apropo de Boole și de operatori. Tot de la Boole avem și regula comutativității pentru adunare `x + y = y + x` și regula distributivității `z(x + y) = zx + zy`.
 
-De cele mai multe ori, operatorii stabilesc o evaluare a expresiilor de la stânga la dreapta. Putem verbaliza, de exemplu `1 + 1` ca „unu plus unu”, ceea ce înseamnă că am citit enunțul de la stânga la dreapta. Am spus de cele mai multe ori, pentru că avem și cazurile când un operator, de exemplu ***egal*** (`=`), care este interpretat la evaluarea codului de la dreapta la stânga. De exemplu, în enunțul `a = 1`, citim: „valoarea 1 este atribuită variabilei a”. Operatorul egal împarte cei doi operanzi în expresii aflate în partea stângă (***left-hand-side***) și expresii aflate în partea dreaptă (***right-hand-side***).
+De cele mai multe ori, operatorii stabilesc o evaluare a expresiilor de la stânga la dreapta. Putem verbaliza, de exemplu `1 + 1` ca „unu plus unu”, ceea ce înseamnă că am citit enunțul de la stânga la dreapta. Am spus de cele mai multe ori, pentru că avem și cazurile când un operator, de exemplu **egal** (`=`), care este interpretat la evaluarea codului de la dreapta la stânga. De exemplu, în enunțul `a = 1`, citim: „valoarea 1 este atribuită variabilei a”. Operatorul egal împarte cei doi operanzi în expresii aflate în partea stângă (**left-hand-side**) și expresii aflate în partea dreaptă (**right-hand-side**).
 
-### Expresiile (***expressions***)
+### Expresiile
 
-O expresie este o combinație rezolvabilă de operatori și operanzi. Finalizarea rezolvării unei expresii se numește **evaluare**. Asta înseamnă că la momentul evaluării combinației, aceasta se va finaliza cu obținerea unei valori.
+În limba engleză se numesc **expressions**. O expresie este o combinație rezolvabilă de operatori și operanzi. Finalizarea rezolvării unei expresii se numește **evaluare**. Asta înseamnă că la momentul evaluării combinației, aceasta se va finaliza cu obținerea unei valori.
 
 Dicționarele explicative spun că o expresie este un **grup de numere, litere etc. legate între ele prin simboluri de operații matematice (adunare, înmulțire etc.)** (DEX 98) sau **formulă care exprimă raporturi matematice** (NODEX 2002).
 
-O mică paranteză utilă pentru curiozitatea ta. Sunt convins că te-ai întrebat cum s-a ajuns la forma actuală de scriere a codului. Am găsit un răspuns.
+O mică paranteză utilă pentru curiozitatea ta. Sunt convins că te-ai întrebat cum s-a ajuns la forma actuală de scriere a codului. Cum s-au ales formulele de redactare, punctuația ș.a.m.d. Înainte de momentul formalizării sintaxei limbajelor de programare, a existat un pas crucial pentru dezvoltarea informaticii. În anul 1952 a fost creat primul **compilator**, un software specializat, care permitea abstractizarea în limbaj natural (limba engleză) a codului mașină. Ulterior, în anii 60 ai secolului trecut, la momentul apariției limbajului de programare ALGOL, a fost inițiat un efort colaborativ de formalizare a sintaxei limbajelor de programare. Rezultatul a fost o formă de exprimare sintactică cunoscută acum sub titulatura de **Backus Naur**. Conform **Backus Naur Form** (BNF), notația care formalizează sintaxa unui limbaj de programare indiferent care ar fi el, o expresie **fiind definită ca** astfel: un „termen”, care poate fi la rândul său urmat de alt termen și așa mai departe. Așa arată formalizarea BNF: `expression ::=  term { "|" term }`. Simbolul `::=` înseamnă „este definit ca”, iar <code>&#124;</code> (caracterul *pipe*) înseamnă „ȘI-ul” logic.
 
-Odată, demult, prin anii 60, la apariția limbajului de programare ALGOL, a debutat un efort colaborativ de formalizare a sintaxei limbajelor de programare. Rezultatul a fost o formă de exprimare sintactică cunoscută acum sub titulatura de **Backus Naur**.
-
-Conform **Backus Naur Form** (BNF), notația care formalizează sintaxa unui limbaj de programare indiferent care ar fi el, o expresie ***este definită ca*** un „termen”, care poate fi la rândul său urmat de alt termen și așa mai departe. Așa arată formalizarea BNF: `expression ::=  term { "|" term }`. Simbolul `::=` înseamnă „este definit ca”, iar <code>&#124;</code> (caracterul *pipe*) înseamnă „ȘI-ul” logic.
-
-Expresiile mai complexe cer folosirea unor semne grafice care să indice motorului unde se încheie acestea. Aceste semne grafice sunt **separatorii**.
-
-### Separatorii
-
-I-am amintit mai sus. Sunt folosiți pentru **a separa** fragmentele cu înțeles pentru compilator. De exemplu, cel mai simplu separator este un spațiu (adu-ți mereu aminte că un spațiu este și el un caracter) sau un TAB, care sunt folosite pentru a despărți cuvintele între ele. Un alt separator este punct și virgulă, care este ca punctul din limbajul natural.
-Enter-ul pe care îl dai pentru a trece pe o nouă linie, de fapt este tot un separator.
+Expresiile mai complexe cer folosirea unor semne grafice care să indice motorului unde se încheie acestea. Aceste semne grafice sunt **separatorii**. Pe aceștia i-am amintit mai sus. Sunt folosiți pentru **a separa** fragmentele cu înțeles pentru compilator. De exemplu, cel mai simplu separator este un spațiu (adu-ți mereu aminte că un spațiu este și el un caracter) sau un TAB, care sunt folosite pentru a despărți cuvintele între ele. Un alt separator este punct și virgulă, care este ca punctul din limbajul natural. Enter-ul pe care îl dai pentru a trece pe o nouă linie, de fapt este tot un separator.
 
 ### Categorii de expresii
 
 JavaScript are următoarele categorii de expresii:
 
-- aritmetice, care se rezumă la un număr. Este și cazul folosirii operatorilor aritmetici;
-- de șiruri de caractere, care se rezumă chiar la o înșiruire de caractere. Este și cazul folosirii operatorilor pe șiruri;
-- logice, care se rezumă ori la `true` ori la `false`;
-- expresii de bază cum ar fi cuvintele cheie sau expresiile de uz general și
-- expresiile din partea stângă a operatorului de atribuire (`=`), adică la ce trebuie să se lege evaluarea a ceea ce este în partea dreaptă.
+- **aritmetice**, care se rezumă la un număr. Este și cazul folosirii operatorilor aritmetici;
+- de **șiruri de caractere**, care se rezumă chiar la o înșiruire de caractere. Este și cazul folosirii operatorilor pe șiruri;
+- **logice**, care se rezumă ori la `true` ori la `false`;
+- expresii de bază cum ar fi **cuvintele cheie** (instrucțiunile) sau expresiile de uz general și
+- **expresiile din partea stângă (LHS) a operatorului de atribuire** (`=`), adică la ce trebuie să se lege evaluarea a ceea ce este în partea dreaptă.
 
 Cea mai simplă expresie este o `valoare literală` scrisă direct, ori o variabilă, dacă e mai pe gustul tău.
 
 ```javascript
 1;      // expresie de valoare literală
-var x;  // expresie de variabilă
+let x;  // expresie de variabilă
 ```
 
-După cum spuneam, combinarea operanzilor cu operatorii, creează expresii. Este necesară o mică precizare. Valorile de lucru sunt de două feluri. Cele care sunt fixe, care așa cum le-ai scris, așa rămân. Mai sunt numite și **literale**. Și valorile care se pot modifica în funcție de dinamica programului și care se numesc **variabile**, care pornesc de la o valoare dată sau nu.
+După cum spuneam, combinarea operanzilor cu operatorii, creează expresii. Este necesară o mică precizare. Valorile de lucru sunt de două feluri:
+
+- fixe, care așa cum le-ai scris și așa rămân, numite și **literale**
+- valorile care se pot modifica în funcție de dinamica programului numite **variabile**, care pornesc de la o valoare dată sau nu.
 
 ```javascript
-var x = 1 + 1;
+let x = 1 + 1;
 // expresie de atribuire a unei expresii aritmetice
 ```
 
-În exemplul dat, avem litera `x`, care ține locul unei valori ce va apărea în urma evaluării expresiei `1 + 1`. Tehnic, `x` este definit prin cuvântul special `var` ca fiind o variabilă. Litera `x` o numim identificator al variabilei. E ca o etichetă pe un borcănel (variabila) a cărui conținut se va schimba când expresia din partea dreaptă a egalului va fi evaluată la executarea codului.
+În exemplul dat, avem litera `x`, care ține locul unei valori ce va apărea în urma evaluării expresiei `1 + 1`. Tehnic, `x` este definit prin cuvântul special `let` ca fiind o variabilă. Litera `x` o numim identificator al variabilei. E ca o etichetă pe un borcănel (variabila) a cărui conținut se va schimba când expresia din partea dreaptă a egalului va fi evaluată la executarea codului.
 
 **Moment ZEN**: Tot ce este în partea dreaptă a egalului, este o valoare.
 
-Aceasta este adunată cu o valoare de sine stătătoare numită **valoare literală**. Am lămurit deja mai sus că o valoare literală este pur și simplu valoarea introdusă direct prin reprezentarea sa literală, adică cifre pentru numerale și caractere între ghilimele pentru text. Deci, ca să indici computerului că folosești o variabilă care este inițializată cu valoarea trei vei scrie cifra: `var trei = 3;`. Ce se întâmplă când îl pui pe trei între ghilimele? Da, ai intuit perfect, se transformă în text: `var text = '3';`.
+Aceasta este adunată cu o valoare de sine stătătoare numită **valoare literală**. Am lămurit deja mai sus că o valoare literală este pur și simplu valoarea introdusă direct prin reprezentarea sa literală, adică cifre pentru numerale și caractere între ghilimele pentru text. Deci, ca să indici computerului că folosești o variabilă care este inițializată cu valoarea trei vei scrie cifra: `let trei = 3;`. Ce se întâmplă când îl pui pe trei între ghilimele? Da, ai intuit perfect, se transformă în text: `let text = '3';`.
 
 Mai sunt și altele, dar le vom lămuri pe parcurs. De ce este nevoie de o precizare de acest fel? Pentru că de nu ai pune între ghilimele textul, motorul nostru de JavaScript ar înțelege că faci o referință către un identificator al unei variabile, constante, funcții sau obiect. Reține acest aspect foarte important. Pe scurt, cifrele sunt evidente în sine, iar textul trebuie între ghilimele simple sau duble.
 
 **Moment ZEN**: Dacă textul din partea dreaptă nu este între ghilimele, acesta este o referință către o altă valoare.
 
-Adu-ți mereu aminte că `var ceva = "altceva";` este o variabilă care identifică valoarea text `"altceva"`, ceea ce este complet diferit de `var ceva = altceva;`, care transformă variabila cu identificatorul `ceva` într-o referință către identificatorul `altceva`. Acesta poate fi o altă variabilă, o funcție sau un obiect.
+Adu-ți mereu aminte că `let ceva = "altceva";` este o variabilă care identifică valoarea text `"altceva"`, ceea ce este complet diferit de `let ceva = altceva;`, care transformă variabila cu identificatorul `ceva` într-o referință către identificatorul `altceva`. Acesta poate fi o altă variabilă, o funcție sau un obiect.
 
 **Moment ZEN**: Expresiile sunt evaluate după reguli.
 
@@ -397,23 +387,21 @@ Ne focalizăm pe enunțul de mai sus. Începem de la stânga spre dreapta să fa
 
 Continuăm cu o precizare foarte importantă pentru a întări ceea ce am rememorat. Atunci când codul sursă este rulat pentru a obține un rezultat, de fapt, ceea ce se petrece este o întreagă succesiune de evaluări ale expresiilor, care se reduc la o valori rând pe rând prin evaluarea condiționată de diverșii operatori. Totul, dar totul se reduce la o valoare. De fapt, evaluăm expresii rezolvând **operațiunile** și ajungând la **valori** care sunt necesare altor **expresii**. Acestea, la rândul lor așteptau cuminți ca evaluarea precedentă să se încheie pentru a avea și ele valorile de care aveau nevoie și așa mai departe.
 
-### Tratarea expresilor cu operanzi diferiți - transformarea (**coercion**)
+### Tratarea expresilor cu operazi de tip diferit
 
-JavaScript este un limbaj de programare care oferă o flexibilitate fantastică. În ceea ce privește operanzii, aceștia pot fi chiar de tipuri diferite iar JavaScript este forțat să ofere totuși un răspuns.
+JavaScript este un limbaj de programare care oferă o flexibilitate fantastică. Spre deosebire de restul limbajelor de programare, nu te forțează să indici din start tipul de valoare cu care lucrezi. Dar dacă se nimerește ca într-o expresie să se lucreze cu două tipuri diferite de valori, la momentul evaluării, motorul JavaScript este forțat să ofere totuși un răspuns. Acest lucru se face prin constrângerea valorii unuia dintre operanzi în funcție de regulile impuse de operatorul folosit. Acest lucru se numește în limba engleză *coercion* ceea ce am putea traduce ca *transformare* sau constrângerea la un anumit tip de valoare cu scopul de a face totuși operațiunea indicată de operator.
 
-**Moment ZEN**: Totul în JavaScript este evaluat în final la o valoare boolean, fie ceva care poate fi considerată a fi o valoare **adevărată**, fie ceva care poate fi considerat a fi o valoare **falsă** - truthy și falsey, cum ar zice în engleză.
+**Moment ZEN**: Totul în JavaScript este evaluat în final la o valoare boolean, fie ceva care poate fi considerată a fi o valoare **adevărată**, fie ceva care poate fi considerat a fi o valoare **falsă**. În engleză aceste rezultate interpretate din punct de vedere al adevărului se numesc *truthy* și *falsy*.
 
-Hai să ne uităm la următoarea expresie: `true + 10;` pe care o dăm motorului JavaScript spre evaluare. Ce crezi că se va întâmpla pentru că în acest moment operezi cu o valoare boolean și un număr?
+Hai să ne uităm la următoarea expresie: `true + 10;` pe care o dăm motorului JavaScript spre evaluare. Ce crezi că se va întâmpla, pentru că în acest moment operezi cu o valoare boolean și un număr?
 
-JavaScript va recurge la un mecanism de transformare (în limba engleză **coercion**) aplicat valorilor și în acest caz, va „transforma” valoarea boolean în echivalentul său numeric, adică 1. Da, da, `true` este 1, iar `false` este 0.
+JavaScript va recurge la coercion iar în acest caz, va „transforma” valoarea boolean în echivalentul său numeric, adică 1. Da, da, `true` este 1, iar `false` este 0. Astfel se va face evaluarea care va avea drept rezultat valoarea `11`. Interesant, nu?! Vom trata mai atent aceste „transformări”.
 
-Bun, acum a fost rezolvată dilema. Se va face evaluarea care va avea drept rezultat valoarea 11. Nebunie, nu?! Vom trata mai atent aceste „transformări”.
-
-Pentru că expresiile sunt evaluate la o valoare, acestea pot fi asignate unor variabile, constante sau proprietăți ale unui obiect: `var ceva = 2 + 2;`.
+Pentru că expresiile sunt evaluate la o valoare, acestea pot fi asignate unor variabile, constante sau proprietăți ale unui obiect: `let ceva = 2 + 2;`.
 
 Dacă ai amețit, e perfect normal. Respiră de cinci ori foarte adânc cu ochii închiși concentrându-te adânc la fiecare respirație. Dacă nimic nu se leagă, mergi într-un parc. Eu te aștept aici.
 
-### Enunțuri (***statements***)
+### Enunțuri (**statements**)
 
 Este echivalentul unei propoziții în limbaj uman. Componentele unui enunț pot fi **valori**, **operatori**, **expresii**, **cuvinte cheie** și **comentarii**.
 
@@ -427,32 +415,34 @@ Cel mai simplu enunț este introducerea unei **valori literale** (literal însea
 
 Dicționarele explicative spun că un enunț este o **regulă după care se face un calcul sau se aplică o construcție matematică; executare a unui calcul.** (DEX 09).
 
-Cel mai simplu enunț, care nu este folosit pentru că nu are utilitate, dar care este bun pentru a ilustra, este cel al unei simple expresii. Deocamdată înțelege expresia ca pe o combinație de operanzi și operatori care evaluată oferă o valoare.
+Deocamdată înțelege expresia ca o combinație de operanzi și operatori. Evaluarea acestei expresii oferă o valoare.
 
 ```javascript
 a + 1; // enunțul unei expresii (expression statement)
 ```
 
-Crede-mă, nu vreau să te zăpăcesc, dar o expresie poate fi în același timp un enunț așa cum avem cazul simplu de mai sus. O expresie este un enunț care este evaluat întotdeauna la o valoare. Enunțul este ca fraza din analiza gramaticală cu diferența în cazul nostru că nu se termină cu punct, ci cu punct și virgulă.
+Nu vreau să te zăpăcesc, dar o expresie poate fi în același timp un enunț așa cum avem cazul simplu de mai sus.
+O expresie este un enunț care este evaluat întotdeauna la o valoare.
+Enunțurile sunt precum frazele limbajului natural cu diferența în cazul nostru că nu se termină cu punct, ci cu punct și virgulă.
 
 <img src="EnuntExpresie.png" width="350px">
 
-Exemplul oferit nu este cel mai util. În schimb, există un enunț al celei mai utile expresii întâlnite în întreg limbajul: *enunțul expresiei de apelare* al unei funcții (***call expression***): `făCeva();`. Chiar dacă nu am învățat nimic despre funcții, ține minte că apelarea acestora este nimic mai mult decât **un enunț al unei expresii**, dar care declanșează executarea acelei funcții. Nu te las așa în suspans... consideră un obiect în JavaScript ca pe un pistol iar gloanțele lui ca pe niște proprietăți. Folosind această imagine, o funcție este un cartuș care a fost pușcat iar apelul funcției este trăgaciul. Apăsând trăgaciul (apelezi funcția), puști capsa cartușului și iese glonțul pe țeavă (funcția returnează un rezultat celui care a apelat-o). Cam militaristă comparația, dar e târziu în noapte și asta mi-a venit la îndemână pe ecranul minții.
+Exemplul oferit deja nu este cel mai util. În schimb, există un enunț al celei mai utile expresii întâlnite în întreg limbajul: *enunțul expresiei de apelare* al unei funcții (**call expression**): `făCeva();`.
+
+Chiar dacă nu am învățat nimic despre funcții, ține minte că apelarea acestora este doar **un enunț al unei expresii**. Minunea rezidă din faptul că declanșează executarea codului dintr-o funcție.
 
 ```javascript
 alert('salut');
 ```
 
-Ei, abia acum te-am zăpăcit. Nu?!
-
-Hai să facem o mică „analiză gramaticală” pe „text” dacă tot știm în acest moment ce sunt expresiile și ce sunt enunțurile.
+Hai să facem o mică *analiză gramaticală*, dacă tot știm în acest moment ce sunt expresiile și ce sunt enunțurile.
 
 ```javascript
-var x;  // enunț declarativ - declaration statement
+let x;  // enunț declarativ - declaration statement
 x = 2 * 3;
 ```
 
-Pe prima linie avem un enunț declarativ pentru variabila x. Pe a doua linie avem două expresii. Una a înmulțirii și alta a asignării valorii rezultate.
+Pe prima linie avem un enunț declarativ pentru variabila `x`. Pe a doua linie avem două expresii. Una a înmulțirii și alta a asignării valorii rezultate.
 
 **Moment ZEN**: Enunțurile sunt încheiate cu punct și virgulă cu excepția notabilă aplicată prin mecanismul ASI.
 
@@ -460,38 +450,31 @@ Enunțurile pot sta singure sau pot fi adunate într-un bloc distinct. Acest blo
 
 ```javascript
 {
-  var mesaj = 'Salut!';
+  let mesaj = 'Salut!';
   console.log(mesaj);
 }
 ```
 
-Vei vedea mai târziu cât de utile sunt în cazul scrierii enunțurilor care controlează execuția codului, cum ar fi deciziile prin `if...else` sau buclele, cum ar fi `while(expresie){bloc de enunțuri}`.
+Veți vedea mai târziu cât de utile blocurile sunt în cazul scrierii instrucțiunilor care controlează execuția codului, cum ar fi deciziile prin `if..else` sau buclele, cum ar fi `while (expresie) {bloc de enunțuri}`.
 
 Este nevoie acum să punem ordine în ideile pe care le-am explorat cu privire la enunțuri.
 
 Care sunt enunțurile în JavaScript?
 
 - enunțul blocurilor de cod `{...}`,
-- enunțul declarațiilor de variabile și constante `let x = 10; const y = 9.8;`,
+- enunțul declarațiilor de variabile și constante `let x = 10; const y = 9.8, var = 'ceva';`,
 - enunțuri goale. Pur și simplu nu ai nimic, dar un terminator: `;`,
-- enunțul unei expresii,
-- enunțul `if`,
-- enunțul `break`,
-- enunțul `continue`,
-- enunțul `return`,
-- enunțul `with`,
-- enunțul `switch`,
-- enunțul `throw`,
-- enunțul `try` și
-- enunțul `debugger`.
+- enunțul unei expresii `a + 1;`,
+- enunțuri ale instrucțiunilor precum `while`, `if`, etc.,
+- enunțul `debugger;` sau enunțul `"use strict";`.
 
 Mai există un set care se numesc „enunțuri ale iterabilelor”:
 
-- `do...while`,
+- `do..while`,
 - `while`,
 - `for`,
-- `for-in`,
-- `for-of`.
+- `for..in`,
+- `for..of`.
 
 Ce nu poate constitui un enunț al unei expresii? Orice începe cu:
 
@@ -501,21 +484,20 @@ Ce nu poate constitui un enunț al unei expresii? Orice începe cu:
 - `class`,
 - `let [`.
 
-Enunțurile pot fi indentate (pui spații albe înaintea fragmentului de cod și ca efect vizual se vor deplasa spre dreapta). Despre indentare spune *Marele Dicționar pentru Neologisme* din 2000: „plasare a programelor pe linii, pentru scrierea cât mai clară a acestora”.
+Enunțurile pot fi indentate (pui spații albe înaintea fragmentului de cod și ca efect vizual se vor deplasa spre dreapta). Despre indentare spune *Marele Dicționar pentru Neologisme* din 2000: *plasare a programelor pe linii, pentru scrierea cât mai clară a acestora*.
 
 ### Declarațiile
 
-Folosind cuvintele cheie ale limbajului faci declarații, care, de fapt, ceea ce menționează este tipul datelor cu care vei lucra în programul tău. Un exemplu foarte simplu este declararea unei variabile: `var x = 10;`.
-Un program JavaScript este o colecție de declarații de variabile și funcții.
+Folosind cuvintele cheie ale limbajului faci declarații, care, de fapt, ceea ce menționează este tipul datelor cu care vei lucra în programul tău. Un exemplu foarte simplu este declararea unei variabile: `let x = 10;`.
+
+**Moment Zen**: Un program JavaScript este o colecție de declarații de variabile și funcții.
 
 ### Blocurile de cod
 
-Blocurile grupează enunțurile. În JavaScript poți declara un bloc de cod foarte simplu deschizând acolade. Scrii codul între acolade și poți considera că acest cod aparține unui bloc de cod distinct. Blocurile au rolul de a grupa una sau mai multe enunțuri.
-
-Gruparea declarațiilor într-un bloc, se comportă ca **o unitate de cod** menită să evalueze expresii, să apeleze funcții și metode, să afișeze rezultate și să returneze rezultate.
+Blocurile grupează enunțurile. În JavaScript poți declara un bloc de cod foarte simplu deschizând acolade. Scrii codul între acolade și poți considera că acest cod aparține unui bloc de cod distinct. Gruparea declarațiilor într-un bloc, se comportă ca **o unitate de cod** menită să evalueze expresii, să apeleze funcții și metode, să afișeze rezultate și să returneze rezultate.
 
 ```javascript
-{ var ceva = 'Salut!' }
+{ let ceva = 'Salut!' }
 ```
 
 Cel mai adesea vei vedea blocurile de cod ca parte a unor sintaxe mai elaborate cum ar fi deciziile ori ca parte a funcției, chiar indicând corpul funcției.
@@ -546,7 +528,7 @@ Să ne imaginăm că avem o hartă imaginară pe care avem marcate prin fanioane
 Putem să ne închipuim că identificatorii sunt toponime ale „tărâmului" JavaScript. Identificatorii pot fi orice secvență de caractere care poate să înceapă cu semnul dollar `$`, sau cu liniuță jos `_` (*underscore*) urmate de orice puncte de cod codate numeric respectând schema de codare a caracterelor UTF16.
 
 ```javascript
-var mâncare = 'vinete coapte';
+let mâncare = 'vinete coapte';
 ```
 
 Am putea spune foarte simplu că un identificator este numele unei valori, iar identificatorul este o înșiruire de caractere. După cum observi, identificatorii pot fi cuvinte românești cu diacritice. De ce? Pentru că un computer se uită la reprezentarea numerică a caracterelor, iar numerele din spatele fiecărui caracter în parte ce alcătuiește numele identificatorului face parte din setul de numere acceptat de UTF16. Vom insista mai mult pe această corespondență numerică pentru că, mai târziu, vom vedea că stă la baza multor operațiuni pe șiruri. Înțelegerea acestui aspect este o cheie foarte importantă.

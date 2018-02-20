@@ -1,14 +1,15 @@
-let a = 1, b = 2, temp;
-console.log(a, b);
-temp = a;
-a = b;
-b = temp;
-console.log(a, b);
+/*Varianta cu variabilă intermediară*/
+// let a = 1, b = 2, temp;
+// console.log(a, b);
+// temp = a;
+// a = b;
+// b = temp;
+// console.log(a, b);
 
 
-// identitățile
-// x = (x - y) + y
-// y = ((x - y) + b) - (x - y)
+/*Variantă folosind identitățile
+x = (x - y) + y
+y = ((x - y) + b) - (x - y) */
 let x = 1, y = 2;
 console.log(x, y);
 x = x - y;  // 1 - 2 = -1
