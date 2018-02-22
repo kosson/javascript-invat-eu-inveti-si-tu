@@ -1,6 +1,12 @@
 # Hoisting - ridicarea în „capul blocului”
 
-Hoistingul trebuie privit ca un comportament al motorului JavaScript, care ia identificatorii și îi face omniprezenți pentru blocul de cod în care au fost declarați poziționându-i în „capul blocului” de cod. Atașarea unui varibile la mediul lexical al unei funcții în interiorul căreia a fost declarată la momentul compilării este cel mai rapid exemplu de „hoisting” - de ridicare. Hoisting ca și termen sau procedură nu există în standard. Este mai degrabă o explicație pentru comportamentul motorului la momentul compilării vis-a-vis de ceea ce se petrece cu identificatorii la momentul compilării.
+Hoistingul trebuie privit ca un comportament al motorului JavaScript, care ia identificatorii și îi face omniprezenți pentru blocul de cod în care au fost declarați poziționându-i în „capul blocului” de cod.
+
+**Spune standardul**:
+
+> `undefined` este pasat mediului pentru a arăta că operațiunea PutValue ar trebui să fie folosită pentru a asigna valoarea de inițializare. Acesta este cazul variabilelor **var** și al listei de parametri formali ai unor funcții non-stricte ( [Vezi 9.2.12](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-functiondeclarationinstantiation) ). În acele cazuri legătura lexicală este hoisted și preinițializată înainte de evaluarea inițializatorilor săi. [12.1.5 Runtime Semantics: BindingInitialization](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-functiondeclarationinstantiation)
+
+Atașarea unui varibile la mediul lexical al unei funcții în interiorul căreia a fost declarată la momentul compilării este cel mai rapid exemplu de „hoisting” - de ridicare. Hoisting ca și termen sau procedură nu există în standard. Este mai degrabă o explicație pentru comportamentul motorului la momentul compilării vis-a-vis de ceea ce se petrece cu identificatorii la momentul compilării.
 Această omniprezență permite disponibilitatea variabilelor și a funcțiilor înainte ca acestea să capete și valorile lor.
 
 Acest lucru se petrece deoarece mai întâi de a fi executat programul, codul sursă trece printr-o fază de compilare în care motorul JavaScript se uită să vadă mai întâi de toate care sunt identificatorii. Apoi motorul trece la execuție, moment în care toți identificatorii primesc și valorile.

@@ -459,8 +459,28 @@ Veți vedea mai târziu cât de utile blocurile sunt în cazul scrierii instruc�
 
 Este nevoie acum să punem ordine în ideile pe care le-am explorat cu privire la enunțuri.
 
-Care sunt enunțurile în JavaScript?
+Care sunt enunțurile în JavaScript? Conform standardului, expresiile sunt catalogate în **expresii primare** și **expresii între paranteze și listă de parametri arrow**.
 
+#### Expresii primare
+
+Conform textului standardului, următoarele sintaxe pot fi considerate a fi expresii primare:
+
+- cuvântul cheie `this`,
+- identificatorii pentru referențiere posibil urmați de `yield` sau `await`,
+- literale generale:
+  - literal `null`,
+  - literal boolean: `true` / `false`,
+  - literal numeric: zecimal (`0`), întreg binar (`0b`), digiți binari (`0` sau `1`), întreg octal (`0o`), întreg hexa (`0x`),
+  - literal string
+- array literal cu următoarele forme: `[eliziune`<sub>[opțional]</sub>`]`, `[elemente]` și elemente cu virgulă finală (*eliziune*) `[elemente ,]`,
+- obiecte literale declarate cu acolade: `{}`, `{elemente}` sau `{elemente ,}`,
+- expresia de funcție: `function numeFuncție (parametrii_formali) {corpul}`,
+- expresia de clasă: `class numeClasă moștenirea_clasei_extends {corpul_clasei și alte elemente de clasă precum static}`,
+- expresia unui generator `function * nume_generator (parametrii_formali) {corp}`,
+- expresii de funcții async: `async function nume_functie (parametrii_formali) {corp}`,
+- expresii RegExp,
+- literale de șablonare,
+- parantezele rotunde de grupare și lista parametrilor unei funcții săgeată: `()` sau `( ,)`,
 - enunțul blocurilor de cod `{...}`,
 - enunțul declarațiilor de variabile și constante `let x = 10; const y = 9.8, var = 'ceva';`,
 - enunțuri goale. Pur și simplu nu ai nimic, dar un terminator: `;`,

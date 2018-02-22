@@ -7,14 +7,23 @@ Banalul punct este folosit de JavaScript ca operator ce oferă acces la propriet
 Privind accesarea proprietăților unui obiect, în cazul în care valoarea este o metodă, adică o expresie, aceasta trebuie evaluată pentru a ajunge la un rezultat care să fie util mai departe.
 
 ```javascript
-var obi = {
+let obi = {
   a: 10,
   b: function () {return this.a + 10;}
 };
 obi.b();
-obi['b']();
+obi.a += 1; // a este 11
 ```
 
 Același operator poate fi folosit pentru a introduce o valoare în obiect.
 
-## Operatorul de apelare a funcțiilor
+## Operatorul de apelare a funcțiilor - `()`
+
+Două paranteze rotunde au drept efect invocarea unei funcții. Între paranteze pot fi introduse valorile așteptate de parametrii funcției.
+
+```javascript
+function facCeva (a, b) {
+  return a + b;
+};
+facCeva(1, 2);  // 3
+```

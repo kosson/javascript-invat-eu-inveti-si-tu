@@ -53,8 +53,8 @@ Să pornim de la baza lucrurilor repetând mantrele necesare:
 Pentru a înțelege legătura `this`, cel mai util scenariu este cel în care această legătură se pierde. În scenă intră o funcție cu rol de metodă, care este definită în obiect. Această funcție, este gazda unei alteia care realizează un closure.
 
 ```javascript
-var ceva = 100;
-var obi = {
+let ceva = 100;
+let obi = {
   ceva: 'text',
   faCeva: function () {
     function interna () {
@@ -73,15 +73,15 @@ Ca o regulă generală putem considera o funcție declarată într-un obiect ca 
 Obiectul `obi` poate fi considerat ca un furnizor de adresă pentru a putea apela funcția-obiect. Legătura aceasta poate fi văzută precum cea a unei gospodării cu localitatea în care se află. Localitatea cu nivelul administrativ oferă o modalitate de a ajunge la gospodărie. Pentru a înțelege, putem desface exemplul dat în următoarea formă perfect echivalentă.
 
 ```javascript
-var ceva = 100;
-var faCeva = function () {
+let ceva = 100;
+let faCeva = function () {
   console.log(this.ceva); // text
   function interna () {
     console.log(this.ceva);
   };
   return interna();
 }
-var obi = {
+let obi = {
   ceva: 'text',
   faCeva
 };
