@@ -480,8 +480,12 @@ Conform textului standardului, următoarele sintaxe pot fi considerate a fi expr
 - expresii de funcții async: `async function nume_functie (parametrii_formali) {corp}`,
 - expresii RegExp,
 - literale de șablonare,
-- parantezele rotunde de grupare și lista parametrilor unei funcții săgeată: `()` sau `( ,)`,
-- enunțul blocurilor de cod `{...}`,
+- parantezele rotunde de grupare și lista parametrilor unei funcții săgeată: `()` sau `( ,)`.
+
+#### Enunțuri ale expresiilor
+
+Acestea sunt fragementele sintactice care au înțeles de sine stătător pentru compilator:
+
 - enunțul declarațiilor de variabile și constante `let x = 10; const y = 9.8, var = 'ceva';`,
 - enunțuri goale. Pur și simplu nu ai nimic, dar un terminator: `;`,
 - enunțul unei expresii `a + 1;`,
@@ -514,7 +518,7 @@ Folosind cuvintele cheie ale limbajului faci declarații, care, de fapt, ceea ce
 
 ### Blocurile de cod
 
-Blocurile grupează enunțurile. În JavaScript poți declara un bloc de cod foarte simplu deschizând acolade. Scrii codul între acolade și poți considera că acest cod aparține unui bloc de cod distinct. Gruparea declarațiilor într-un bloc, se comportă ca **o unitate de cod** menită să evalueze expresii, să apeleze funcții și metode, să afișeze rezultate și să returneze rezultate.
+Blocurile grupează enunțurile. În JavaScript poți declara un bloc de cod foarte simplu deschizând acolade. Scrii codul între acolade și poți considera că acest cod aparține unui bloc de cod distinct. Gruparea declarațiilor într-un bloc, se comportă ca **o unitate de cod** destinate evaluării.
 
 ```javascript
 { let ceva = 'Salut!' }

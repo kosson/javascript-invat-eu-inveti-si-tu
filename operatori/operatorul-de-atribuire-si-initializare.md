@@ -1,4 +1,4 @@
-# Asignarea valorilor prin operatorul egal `=`
+# Operatorul egal `=`
 
 Acest operator este și primul cu care ai luat contact. Operatorul este folosit pentru a asigna o valoare de inițializare a unei variabile. În cazul evaluării unei expresii aflate în partea din dreapta, operatorul egal va asigna o valoare operandului din partea stângă. Această atribuire se face în funcție de rezultatul la care s-a ajuns în urma evaluării operandului din partea dreaptă.
 
