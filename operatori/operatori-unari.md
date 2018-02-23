@@ -10,6 +10,7 @@ Aceștia sunt:
 - `-`,
 - `~`,
 - `!`
+- `await`
 
 Acest tip de operator se pune înainte sau după operand.
 

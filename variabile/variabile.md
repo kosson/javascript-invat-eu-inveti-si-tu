@@ -2,10 +2,14 @@
 
 ## Introducere
 
-Nu putem intra într-o discuție despre variabile fără puțin context istoric care să ne ajute să înțelegem mai bine anumite aspecte. Voi aduce spre cunoaștere câteva lucruri interesante despre activitatea cercetătorului Christopher Strachey, care a jucat un rol foarte important în fixarea semanticii limbajelor de programare. Este cunoscut prin notele de curs intitulate „Concepte fundamentale în limbajele de programare” (Fundamental Concepts in Programming Languages). Christopher Strachey este figura proeminentă a echipei care a creat limbajului de programare CPL (Combined Programming Language) în anii 60. Acest limbaj de programare este strămoșul limbajului de programare C și a fost influiențat de ALGOL60. Vă mai aduceți aminte când în introducere am povestit despre partea stângă (Left Hand Side) și partea din dreapta (Right Hand Side) a unei expresii. Strachey le numește L-value și R-value.
-În notele de curs apare, pe lângă sintaxa conform BNF și o expresie care asignează o valoare unui identificator: `let p = 3.5`. Am menționat aceste detalii pentru a vedea rădăcinile JavaScript, care sunt reactualizate parcă atunci când privim noile sintaxe introduse de versiunile noi ale standardului ECMAScript.
+Drept introducere vom aduce în prim plan câteva lucruri interesante despre activitatea cercetătorului Christopher Strachey, care a jucat un rol foarte important în fixarea semanticii limbajelor de programare. Este cunoscut prin notele sale de curs intitulate „Concepte fundamentale în limbajele de programare” (Fundamental Concepts in Programming Languages). Christopher Strachey este figura proeminentă a echipei care a creat limbajului de programare CPL (Combined Programming Language) în anii 60. Acest limbaj de programare este strămoșul limbajului de programare C și a fost influențat de ALGOL60. Vă mai aduceți aminte când în introducere am povestit despre partea stângă (**Left Hand Side**) și partea din dreapta (**Right Hand Side**) a unei expresii? Strachey le numește **L-value** și **R-value**.
+În notele de curs apare, pe lângă sintaxa conform BNF și o expresie care asignează o valoare unui identificator: `let p = 3.5`. Am menționat aceste detalii pentru a vedea rădăcinile JavaScript, care rezonează cu trecutul programării atunci când privim noile sintaxe introduse de versiunile noi ale standardului ECMAScript.
 
 Christopher Strachey indică faptul că există termeni concurenți pentru „identificator”, care a fost introdus de ALGOL60. Aceștia sunt „nume” (în lb. engleză `name`) și „referință” (în lb. engleză `reference`), care era folosit de alte limbaje de programare. Tot din lucrarea sa vom găsi clarificarea faptului că varibilele sunt „legate” de valori (**bound variable**). Acest lucru este important pentru a înțelege natura variabilelor, care în esență este o legătură dintre un identificator și o valoare. Variabilele care încă nu au asignată o valoare sunt „variabile libere”. În JavaScript, variabilele libere primesc automat valoarea `undefined`.
+
+```javascript
+var ceva; // undefined
+```
 
 ## Natura variabilelor
 
