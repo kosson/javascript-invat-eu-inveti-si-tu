@@ -502,9 +502,7 @@ var a = 101;
 function faCeva () {
   console.log(this.a);
 };
-var obi = {
-  a: 1010
-};
+var obi = {  a: 1010 };
 var gazda = function () {
   faCeva.call(obi);
 };
@@ -543,7 +541,7 @@ var rezultat = modificaGazda(100);
 console.log(rezultat); // 1100
 ```
 
-## Hard binding cu `bind()`
+### Hard binding cu `bind()`
 
 Începând cu ES5 `bind()` a fost introdusă ca metodă în prototipul oricărei funcții - `Function.prototype.bind()`.
 
@@ -660,8 +658,10 @@ function SuntUnConstructor (){
   // se creează proprietăți în this
   this.ceva = 100;
 
-  // dacă se returnează un obiect, atunci obiectul va fi rezultatul apelării cu new
-  // dacă nu returnează un obiect, atunci this va fi rezultatul apelării cu new.
+  // dacă se returnează un obiect,
+  // atunci obiectul va fi rezultat
+  // dacă nu returnează un obiect,
+  // atunci this va fi rezultatul apelării cu new.
 };
 
 var obi = new SuntUnConstructor();
@@ -674,7 +674,7 @@ console.log(obi.ceva); // 100
 ```javascript
 function AltConstructor (){
   this.alfa = 10000;
-  return {alfa: 1};
+  return { alfa: 1 };
 };
 
 var obi = new AltConstructor();
@@ -736,7 +736,7 @@ var obiectPacalitor = VehiculSpatial.call(obiectNou, 'Soyuz');
 // în acest moment, obiectNou este modificat la Object { nume: "Soyuz", tip: "vehicul" }
 ```
 
-Ceea ce tocmai s-a petrecut este că s-a invocat constructorul în contextul unui obiect deja construit pe baza lui iar `this`, de fapt a devenit obiectul deja creat. Acest lucru conduce la rescrierea lui `nume` în obiectul gazdă (`obiectNou`). Aceast comportament nu este cel așteptat atâta vreme cât am dorit ca funcția constructor să permită invocarea doar cu `new`.
+Ceea ce tocmai s-a petrecut este că s-a invocat constructorul în contextul unui obiect deja construit pe baza lui, iar `this` a devenit obiectul deja creat. Acest lucru conduce la rescrierea lui `nume` în obiectul gazdă (`obiectNou`). Aceast comportament nu este cel așteptat atâta vreme cât am dorit ca funcția constructor să permită invocarea doar cu `new`.
 
 În ES6 această problemă este reglată prin `new.target`. Acestă proprietate, care este mai specială pentru că se adresează unui viitor obiect ce nu a fost creat încă, capătă o valoare atunci când metoda `[[Construct]]`. Valoarea este constructorul obiectului proaspăt generat, adică `this`. Dacă funcția constructor este apelată fără `new` asta înseamnă că este apelată cu `[[Call]]`, `new.target` va avea valoarea `undefined`.
 
@@ -824,28 +824,28 @@ Ceea ce se observă este că `new` are capacitatea de a suprascrie hard binding-
 
 ## Comportamentul lui `this` în cazul fat arrows
 
-Funcțiile arrow nu au propria valoare pentru parametrul `this`. Pur și simplu folosesc obiectul context ca fiind `this` și dacă rulează în altă funcție, vor folosi obiectul `this` constituit de acea funcție.
-Funcțiile fat arrows sunt legate de scope-ul lexical, asta însemnând că `this` va fi același ca și cel din blocul părintelui.
+Funcțiile arrow nu stabilesc propria legătură la `this`. Pur și simplu folosesc obiectul în contextul căruia rulează ca `this`, dar dacă rulează în altă funcție, vor folosi obiectul `this` constituit de acea funcție.
+Funcțiile fat arrows sunt legate de scope-ul lexical, asta însemnând că `this` va fi același, adică cel din blocul părintelui.
 
 ```javascript
 var nume = 'Auraș din Global Scope';
 function Ciao (nume) {
   this.nume = nume;
 };
-
-ciao.prototype.urare = function facUrare() {
-  setTimeout(function callback () {     // this care este pasat automat este cel al global scope (window)
+Ciao.prototype.urare = function facUrare() {
+  setTimeout( function callback () {
+    // this acum va fi global scope (window)
     console.log('Ciao '+ this.nume);
   }, 5000);
 };
-
-var intalnire = new Ciao('Grigoraș');
-intalnire.urare();
-// Ciao undefined (asta daca nume nu este declarat în Global Scope)
-// Când este declarată o variabilă în global scope, va fi afișat în consolă: Ciao Auraș din Global Scope
+var întâlnire = new Ciao('Grigoraș');
+întâlnire.urare();
 ```
 
-Pentru a face conectarea la obiectul generat de `ciao`, se va face o legătură prin metoda `bind()`.
+Exemplul va returna `Ciao undefined` asta daca nume nu este declarat în Global Scope. Acest lucru se întâmplă dacă vei folosi la declararea variabilei nume `let` în loc de `var`.
+Când este declarată o variabilă cu `var`, aceasta apare în global scope, va fi afișat în consolă `Ciao Auraș din Global Scope` pentru că `this` a fost legat la obiectul global în care avem deja `nume`.
+
+Pentru a face conectarea la obiectul generat de `Ciao`, se va face o legătură prin metoda `bind()`.
 
 ```javascript
 var nume = 'Auraș din Global Scope';
