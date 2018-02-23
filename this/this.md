@@ -824,63 +824,57 @@ Ceea ce se observă este că `new` are capacitatea de a suprascrie hard binding-
 
 ## Comportamentul lui `this` în cazul fat arrows
 
-Funcțiile arrow nu stabilesc propria legătură la `this`. Pur și simplu folosesc obiectul în contextul căruia rulează ca `this`, dar dacă rulează în altă funcție, vor folosi obiectul `this` constituit de acea funcție.
-Funcțiile fat arrows sunt legate de scope-ul lexical, asta însemnând că `this` va fi același, adică cel din blocul părintelui.
+Funcțiile *fat arrow* nu stabilesc propria legătură la `this`. Pur și simplu folosesc obiectul în contextul căruia rulează ca `this`, dar dacă rulează în altă funcție, vor folosi obiectul `this` constituit de acea funcție.
+Funcțiile *fat arrows* sunt legate de scope-ul lexical, asta însemnând că `this` va fi același, adică cel din blocul părintelui. Vom porni analizând cazul în care folosim o funcție normală. Pentru a înțelege pe deplin, treci mai întâi pe la subiectele care țin de *call stack*, *event loop* și *API*-uri și relațiile pe care le formează.
 
 ```javascript
 var nume = 'Auraș din Global Scope';
 function Ciao (nume) {
   this.nume = nume;
 };
-Ciao.prototype.urare = function facUrare() {
+Ciao.prototype.urare = function facUrare () {
   setTimeout( function callback () {
     // this acum va fi global scope (window)
-    console.log('Ciao '+ this.nume);
+    console.log('Ciao, ' + this.nume);
   }, 5000);
 };
-var întâlnire = new Ciao('Grigoraș');
-întâlnire.urare();
+var întâlnire = new Ciao('Daniel!');
+întâlnire.urare();  // Ciao, Auraș din Global Scope
 ```
 
-Exemplul va returna `Ciao undefined` asta daca nume nu este declarat în Global Scope. Acest lucru se întâmplă dacă vei folosi la declararea variabilei nume `let` în loc de `var`.
-Când este declarată o variabilă cu `var`, aceasta apare în global scope, va fi afișat în consolă `Ciao Auraș din Global Scope` pentru că `this` a fost legat la obiectul global în care avem deja `nume`.
+Când este declarată o variabilă cu `var`, aceasta apare în global scope și va fi afișat în consolă mesajul `Ciao, Auraș din Global Scope` pentru că `this` a fost legat la obiectul global în care avem variabila `nume` ca proprietate a obiectului global. Exemplul va returna `Ciao, undefined` dacă `nume` este declarat cu `let` în loc de `var` pentru că nu va fi creată variabila în obiectul global.
 
-Pentru a face conectarea la obiectul generat de `Ciao`, se va face o legătură prin metoda `bind()`.
+Pentru a face conectarea la obiectul generat, se va face o legătură prin metoda `bind()`. Ceea ce face `bind()` este să lege forțat execuția unei funcții de un anumit obiect context. Utilitarul `Function.prototype.bind()` moștenit de toate funcțiile în JavaScript, face o conexiune tare între obiectul dorit a fi contextul de execuție și funcția ce va fi executată. Spun că va fi executată pentru că folosirea lui bind, returnează o funcție. În cazul nostru aceasta va fi executată pentru că va fi trimisă din coada de așteptare a jobu-urilor direct în stiva de apeluri, unde va fi executată.
 
 ```javascript
 var nume = 'Auraș din Global Scope';
-function ciao(nume){
+function Ciao (nume) {
   this.nume = nume;
 };
-
-ciao.prototype.urare = function facUrare () {
-  setTimeout( (function callback () {     // this care este pasat automat este cel al global scope (window)
-    console.log('Ciao '+ this.nume);
-  }).bind(this), 500);
+Ciao.prototype.urare = function facUrare () {
+  setTimeout( (function callback () {
+    console.log('Ciao, '+ this.nume);
+  }).bind(this), 3000);
 };
-
-var intalnire = new ciao('Grigoras');
-intalnire.urare(); // Ciao Grigoras
+var întâlnire = new Ciao('Daniel!');
+întâlnire.urare(); // Ciao, Daniel!
 ```
 
-Datorită faptului că fat arrows este legat la scope-ul lexical, nu mai trebuie făcută o legătură apeland la `bind()`.
+Datorită faptului că *fat arrows* este legat la scope-ul lexical, nu mai trebuie făcută o legătură apelând la `bind()`.
 
 ```javascript
 var nume = 'Auraș din Global Scope';
-
-function ciao(nume){
+function Ciao (nume) {
   this.nume = nume;
 };
-
-ciao.prototype.urare = function(){
-  setTimeout(() => console.log('Salutare ' + this.nume), 500);
+Ciao.prototype.urare = function(){
+  setTimeout( () => console.log('Salve, ' + this.nume), 500 );
 };
-
-var intalnire = new ciao('Grigoraș');
-intalnire.urare(); // Ciao Grigoraș
+var întâlnire = new Ciao('Adina!');
+întâlnire.urare(); // Salve, Adina!
 ```
 
-### `forEach` după felul în care se face binding-ul la `this`
+### Iterare cu `forEach` după felul în care se face binding-ul la `this`
 
 În cazul fat arrows, this este legat de mediul lexical al obiectului. `forEach` nu alunecă în global.
 

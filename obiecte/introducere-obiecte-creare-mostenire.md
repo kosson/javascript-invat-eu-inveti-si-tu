@@ -8,6 +8,8 @@ Pentru a realiza natura limbajului de programare JavaScript, care este unul orie
 
 > ECMAScript este bazat pe obiecte: limbajul de bază și toate funcționalitățile sunt oferite de obiecte iar un program ECMAScript este un ciorchine de obiecte care comunică.
 
+Obiectele sunt și ele valori. Aceste valori sunt pasate prin referință în contrast cu valorile primare care sunt pasate prin valoare. Ceea ce doresc să subliniez pentru a reține ca regulă generală este că atunci când trimitem ca argument identificatorul unui obiect, nu trimitem obiectul în sine, ci o referință către acesta. O adresă! Obiectele sunt structuri de date dinamice ale căror proprietăți se modifică și atunci spunem că obiectul își modifică starea. Reține faptul că atunci când pasezi un obiect unei funcții pentru a opera asupra datelor sale, trebuie la final să returnezi referința către obiect pentru a-i modifica starea.
+
 Tot la standard vom apela pentru a lămuri natura unui obiect. Obiectele sunt:
 
 > colecții de zero sau mai multe proprietăți fiecare având atribute care determină cum poate fi folosită.
@@ -152,7 +154,9 @@ Obiectele pot fi create în două feluri: prin declararea acestora sau prin cons
 
 Toate variantele au același efect: creează un obiect gol.
 
-Atenție, obiectele create cu `new` și cu `Object.create(null)` nu au constructor. Proprietatea `.constructor` va trimite la funcția la care a fost atașat prototype la momentul declarării. Am amintit de șablonul **dict**, o prescurtare de la dicționar. Câteva lămuriri sunt necesare. Acum câțiva ani, nu aveam la îndemână obiectele interne `Map` și `Set`, iar programatorii trebuiau să găsească o alternativă pentru obiecte care să fie folosite precum un siloz, mai corect precum un dicționar pentru că ajuta și sintaza să pară ca unul (cuvânt cheie: valoare). Astfel, folosindu-se `Object.create(null)` puteai crea un obiect fără legătură prototipală ceea ce ar fi complicat lucrurile prin apariția multor alte valori moștenite în anumite scenarii. Ceea ce rămânea era o structură care putea fi folosită precum un **dicționar**.
+Atenție, obiectele create cu `new` și cu `Object.create(null)` nu au constructor. Proprietatea `.constructor` va trimite la funcția la care a fost atașat `prototype` la momentul declarării. Am amintit de șablonul **dict**, o prescurtare de la dicționar. Câteva lămuriri sunt necesare. Acum câțiva ani, nu aveam la îndemână obiectele interne `Map` și `Set`, iar programatorii trebuiau să găsească o alternativă pentru obiecte, care să fie folosite precum un siloz, mai corect precum un dicționar
+
+Am zis dicționar pentru că ajută până și sintaxa la asemănarea cu unul (**cuvânt cheie: valoare**). Astfel, folosindu-se `Object.create(null)` puteai crea un obiect fără legătură prototipală ceea ce ar fi complicat lucrurile prin apariția multor alte valori moștenite în anumite scenarii. Ceea ce rămânea era o structură care putea fi folosită precum un **dicționar**.
 
 Modalitatea de a crea obiecte care implică returnarea unui obiect la executarea unei funcții constituie un tipar foarte des întâlnit în practica de programare. Acest model, șablon, tipar, spune-i cum îți place pentru că englezii îi spun **pattern**, se comportă ca o mică făbricuță de făcut obiecte. De fiecare dată când o astfel de funcție va fi apelată, tot atâtea obiecte vor fi returnate.
 
@@ -188,7 +192,7 @@ După ce instanțiezi un obiect, ai nevoie să-l faci funcțional populându-l. 
 
 #### Atributele proprietăților unui obiect
 
-Atributele sunt folosite pentru a defini și a explica starea proprietăților unui obiect. Vom vedea că o singură proprietate a unui obiect are mai multe atribute, care pot fi manipulate pentru a realiza anumite condiții pentru datele primite și analizate în cadrul unui obiect. Proprietățile unui obiect sunt niște membri care pot fi accesați, setați, pot modificați pentru a putea prelua valori sau dimpotrivă, poți să le blochezi. Ba mai mult, poți să pui o setare prin care să interzici configurarea unei anumite proprietăți sau a tuturor proprietăților printr-o așa-zisă „înghețare” a obiectului. Am structurat atributele proprietăților după ceea ce oferă util acestea.
+Atributele sunt folosite pentru a defini și a explica starea proprietăților unui obiect. Vom vedea că o singură proprietate a unui obiect are mai multe atribute, care pot fi manipulate pentru a realiza anumite condiții pentru datele primite și analizate în cadrul unui obiect. Proprietățile unui obiect sunt niște membri care pot fi accesați, setați și pot fi modificați pentru a putea prelua valori. Sau dimpotrivă, poți să le blochezi. Ba mai mult, poți să pui o setare prin care să interzici configurarea unei anumite proprietăți sau a tuturor proprietăților printr-o așa-zisă „înghețare” a obiectului. Am structurat atributele proprietăților după ceea ce oferă util acestea.
 
 <img src="ProprietatePentruDate.png" width="300">
 
