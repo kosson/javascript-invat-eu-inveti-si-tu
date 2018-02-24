@@ -422,8 +422,8 @@ Pentru că sintaxa cu paranteze pătrate (`["proprietate"]`), folosește un șir
 ```javascript
 var numeCheieNoua = "special";
 var obi = {
-	cheie1: 10,
-	cheie2: "ceva"
+  cheie1: 10,
+  cheie2: "ceva"
 };
 obi[numeCheieNoua] = 1000;
 ```
@@ -432,9 +432,9 @@ ECMAScript 2015 propune următoarea sintaxă:
 ```javascript
 var numeCheieNoua = "special";
 var obi = {
-	cheie1: 10,
-	cheie2: "ceva",
-	[numeCheieNoua]: 1000
+  cheie1: 10,
+  cheie2: "ceva",
+  [numeCheieNoua]: 1000
 };
 // { cheie1: 10, cheie2: "ceva", special: 1000 }
 ```
@@ -455,10 +455,10 @@ var obiect = {'aceasta cheie nu este identificator': 10};
 obiect['aceasta cheie nu este identificator']; // 10
 ```
 
-Trebuie spus că operatorul paranteză dreaptă constrânge, transformă automat (în engleză **coerce**) ceea ce are în interior la string.
+Trebuie spus că operatorul paranteză dreaptă constrânge, transformă automat (prin **coercion**) ceea ce are în interior la string.
 
 ```javascript
-var obiect = {23: 10};
+var obiect = { 23: 10 };
 obiect[20 + 3];
 // se rezolvă adunarea și se
 // face constrângere la string
@@ -467,7 +467,7 @@ obiect[20 + 3];
 Se pot seta și proprietăți folosind notația paranteză pătrată la fel ca în cazul operatorului cu punct:
 
 ```javascript
-var obiect = {unu: 1};
+var obiect = { unu: 1 };
 obiect['doi'] = 2;
 obiect; // { unu: 1, doi: 2 }
 ```
@@ -485,7 +485,7 @@ delete obiect['doi']; // true
 Operatorul `delete` permite eliminarea unei proprietăți, adică a perechii cheie-valoare din obiect. Operatorul `delete` are efect doar asupra proprietăților care aparțin obiectului (`own`). Prototipul nu este afectat. Delete returnează `false` dacă proprietatea nu poate fi ștearsă dar care este deținută de obiect, și va returna `true` dacă proprietatea a fost ștearsă cu succes.
 
 ```javascript
-var obiect = {prima: 1, aDoua: 2};
+let obiect = { prima: 1, aDoua: 2 };
 delete obiect.prima; // true
 console.log(obiect); // Object { aDoua: 2 }
 ```
@@ -533,15 +533,16 @@ Poți inlocui oricând obiectul cu rol de prototip după instanțierea obiectelo
 Două obiecte care conțin fix aceiași membri, nu sunt identice; au identități diferite și acest lucru le face unice.
 
 ```javascript
-var a = {0: 'ceva'},
-    b = {0: 'ceva'};
+var a = { 0: 'ceva' },
+    b = { 0: 'ceva' };
 a === b; // false
 ```
 
 Obiectele sunt structuri care pot fi modificate chiar dacă identitatea rămâne neschimbată și spunem că din acest motiv pot suferi **mutații**. Același comportament îl au și array-urile. Și mai este un lucru pe care obiectele îl împărtășesc cu array-urile. Membrii unui obiect pot fi accesați prin folosirea parantezelor drepte.
 
 ```javascript
-var obi = {a: 10}; obi['a']; // 10
+var obi = { a: 10 };
+obi['a']; // 10
 ```
 
 Folosirea moștenirii prototipale introduce o ierarhie, o taxonomie prealabilă în aplicație, care este posibil să intre în conflict cu realitățile ulterioare. Acest mod de a scrie cod nu este încurajat în contextul actual care se orientează mai degrabă către programarea funcțională. În contextul programării funcționale, este încurajată compoziția obiectelor opusă mecanismului de moștenire.
@@ -1195,6 +1196,31 @@ let avion = new class {
 }('IAR 99');
 avion.id();
 ```
+
+### Metodele statice
+
+Metodele statice există doar în corpul clasei și nu pot fi apelabile din instanțele clasei. Metodele statice sunt folosite adesea pentru a crea funcții cu rol de utilitar.
+
+Poți apela o metodă statică din altă metodă statică folosind `this`.
+
+```javascript
+class Test {
+  constructor (val) {
+    this.val = val;
+  }
+  static ceva () {
+    return 'ceva';
+  }
+  static altceva () {
+    return this.ceva() + ' din alt apel static';
+  }
+};
+Test.ceva(); // "ceva"
+Test.altceva(); // "ceva din alt apel static"
+```
+
+Metodele statice nu pot fi accesate folosind `this` din metodele non-statice. După cum se observă în exemplu, pot fi accesate cu sintaxa nume_clasă.nume_metodă_statică().
+
 ### Clasele permit proprietăți accesor
 
 Cu ajutorul accesorilor se poate comunica direct cu proprietățile obiectului instanțiat pe baza clasei.
@@ -1549,5 +1575,5 @@ console.log(valori); //[Array] [10,20]
 
 ## Resurse
 
-1. [Crockford on Javascript - Functions](https://www.youtube.com/watch?v=lVnnxfdLdlM)
-2. [A fresh look at JavaScript Mixins, de  Angus Croll](https://javascriptweblog.wordpress.com/2011/05/31/a-fresh-look-at-javascript-mixins/)
+- [Crockford on Javascript - Functions](https://www.youtube.com/watch?v=lVnnxfdLdlM)
+- [A fresh look at JavaScript Mixins, de  Angus Croll](https://javascriptweblog.wordpress.com/2011/05/31/a-fresh-look-at-javascript-mixins/)
