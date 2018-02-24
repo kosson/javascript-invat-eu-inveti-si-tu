@@ -1219,7 +1219,7 @@ Test.ceva(); // "ceva"
 Test.altceva(); // "ceva din alt apel static"
 ```
 
-Metodele statice nu pot fi accesate folosind `this` din metodele non-statice. După cum se observă în exemplu, pot fi accesate cu sintaxa nume_clasă.nume_metodă_statică().
+Metodele statice nu pot fi accesate folosind `this` din metodele non-statice. După cum se observă în exemplu, pot fi accesate cu sintaxa `nume_clasă.nume_metodă_statică()`.
 
 ### Clasele permit proprietăți accesor
 
@@ -1265,9 +1265,9 @@ class Altceva extends Ceva {
 }
 ```
 
-### Clase derivate
+### Clase derivate - extends
 
-Derivarea obiectelor înainte de facilitățile pe care le pune la dispoziție noul standard ES6 era un proces laborios de creare a unui obiect și apoi crearea unui altuia căruia îi era setat prototipul îmbogățit al primului. Mai jos este modelul „istoric” comparat cu ceea ce propune `extends`.
+Derivarea obiectelor înainte de facilitățile pe care le pune la dispoziție noul standard ES6 era un proces laborios de creare a unui obiect și apoi crearea unui altuia căruia îi era setat prototipul îmbogățit al primului. Mai jos este modelul „istoric” comparat cu ceea ce propune `extends`. Să pornim de la modelul istoric.
 
 ```javascript
 // PRIMUL OBIECT
@@ -1282,7 +1282,8 @@ Stramos.prototype.oriDoi = function () {
 function Copil (deinmultit) {
   Stramos.call(this, deinmultit);
 };
-Copil.prototype = Object.create(Stramos.prototype, {
+
+Copil.prototype = Object.create( Stramos.prototype, {
   constructor: {
     value: Copil,
     enumerable: true,
@@ -1295,22 +1296,22 @@ console.log(rezultat.oriDoi()); // 4
 ```
 
 Este observabil cu cât efort s-a realizat acest lucru.
-Mai întâi am executat funcția Stramos în contextul lui Copil pasându-i `this`, care este obiectul `this` propriu lui `Copil` pentru a seta corect contextul de execuție, adică în interiorul lui `Copil`. Au fost pasate atributele așteptate de Stramos. A trebuit să „rescriem” obiectul prototip al lui Copil setându-l artificial la cel pe care dorim să-l moștenim folosind această posibilitate oferită prin `Object.create()`. A mai trebuit să facem un pas suplimentar setând ca proprietatea constructor să trimită totuși înapoi la `Copil` pentru a consolida originea sa.
+Mai întâi am executat funcția Stramos în contextul lui Copil pasându-i `this` pentru a seta corect contextul de execuție, adică în interiorul lui `Copil`. Au fost pasate atributele așteptate de Stramos. A trebuit să „rescriem” obiectul prototip al lui Copil setându-l artificial la cel pe care dorim să-l moștenim folosind această posibilitate oferită prin `Object.create()`. A mai trebuit să facem un pas suplimentar setând ca proprietatea constructor să trimită totuși înapoi la `Copil` pentru a consolida originea sa.
 
 În cazul claselor, mare parte din aceste operațiuni complexe sunt rezolvate prin introducerea sintagmei `extends` în declarația funcției care dorești să fie o derivare a alteia. Prototipul este setat automat și poți accesa constructorul folosind metoda `super()`. Pentru a reține mai ușor, `super()` are rolul de a apela constructorul părintelui. În clasele derivate `super()` trebuie apelat înainte de a folosi `this` în constructor pentru că `super()` este cel care-l setează.
 
 ```javascript
 class Stramos {
   constructor (val) {
-    this.statica = val;
-  };
+    this.ceva = val;
+  }
   oriDoi () {
-    return this.statica * 2;
-  };
-};
+    return this.ceva * 2;
+  }
+}
 class Copil extends Stramos {
-  constructor (deinmultit) {
-    super(deinmultit);
+  constructor (val) {
+    super(val);
   };
 };
 var inmultire = new Copil(2);
