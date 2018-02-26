@@ -1,6 +1,11 @@
 ## Enunțul `for`
 
 Ca și în cazul lui `while` sau al lui `do`, `for` execută repetat un fragment de cod de câte ori o condiție este întrunită.
+Există o regulă simplă pe care o avem de la cercetătorul Edsger W. Dijkstra care spune așa:
+
+> two or more, use a for
+
+Se traduce în limba română „două sau mai multe, se folosește for”.
 
 Aceast enunț, numit de standard `IterationStatement`, creează o secvență repetitivă, care produce un set de rezultate sau care parcurge o structură de date existentă. Este enunțul cel mai des folosit pentru a genera serii de numere, pentru a parcurge liste de valori din array-uri, pentru a asocia valori din liste diferite și cam tot ce îți trece prin minte atunci când vine vorba de a lucra cu intervale de numere sau seturi de date în general.
 
@@ -322,3 +327,7 @@ let șir = 'ceva', șirInversat = '';
 șirInversat = șir.split('').reduce((acumulator, curent) => curent + acumulator, '');
 console.log(șirInversat);
 ```
+
+## Resurse
+
+[Edsger W. Dijkstra](https://en.wikipedia.org/wiki/Edsger_W._Dijkstra)
