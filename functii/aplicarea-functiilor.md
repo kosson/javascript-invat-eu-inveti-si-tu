@@ -27,6 +27,6 @@ Această funcție primește două argumente:
 - un argument
 - returnează o funcție
 
-Funcția returnată primește un set pe care-l **desface** - spread.
+Funcția returnată primește un set pe care-l **desface**, în engleză *spread*.
 
 La rândul ei, această funcție returnată va returna rezultatul aplicării funcției trimisă ca argument funcției gazdă în contextul ei (`this`), pe al doilea argument trimis funcției gazdă și mai multe argumente trimise funcției găzduite.
