@@ -10,7 +10,7 @@ Callback-ul este o funcție care va porni evaluarea propriului cod când va avea
 
 ## De ce avem nevoie de funcții callback?
 
-Care este motivul pentru care facem acest lucru? Aducerea unei resurse sau prelucrarea sa poate să ia timp. Nu ai voie să blochezi firul de execuție și ca să realizezi această magie, vei apela la un API al browserului. Ce te faci în momentul în care resursa a venit? Tu ai adus-o pentru a face ceva cu ea. În aceast scop trebuie să ai cod care să o prelucreze. Acest cod este „păstrat” ca valoare într-o funcție. Această funcție este pasată API-ului ca în momentul în care a terminat operațiunea sa specifică, să execute codul funcției noastre aplicată pe rezultatul adus.
+Care este motivul pentru care facem acest lucru? Aducerea unei resurse sau prelucrarea sa poate să ia timp. Nu ai voie să blochezi firul de execuție și ca să realizezi această magie, vei apela la un API al browserului. Ce te faci în momentul în care resursa a venit? Tu ai adus-o pentru a face ceva cu ea. În aceast scop trebuie să ai cod care să o prelucreze. Acest cod este „păstrat” ca valoare într-o funcție. Această funcție este pasată API-ului pentru ca în momentul în care a terminat operațiunea sa specifică, să execute codul funcției noastre aplicată pe rezultatul adus.
 
 Modelul de lucru folosind funcții ce îndeplinesc o anumită sarcină după ce funcția container și-a încheiat sarcinile la rândul său, este o necesitate dictată de lucrul cu date care intră și ies din aplicațiile pe care le creăm. Exemplele sunt nenumărate: citirea unui fișier sau legarea la o bază de date. Multe exemple sunt legate de lucrul cu evenimente în cadrul **DOM** (Document Object Model) atunci când dorim manipularea elementelor dintr-o pagină web.
 
@@ -224,7 +224,7 @@ Atenție, în NodeJS, primul argument al unui callback va fi întotdeauna un obi
 ## Disciplina folosirii callback-urilor
 
 - Ieși din funcție cât se poate de repede cu `return`, `continue` sau `break`.
-- Creează funcții cu nume pentru callback-uri pasând rezultatele intermediare ca argumente.
+- Creează funcții cu nume pentru callback-uri pasând rezultatele intermediare ca argumente. Scoate funcțiile și declară-le în afară. Fă mecanismul de hoisting să lucreze pentru tine.
 - Modularizează codul împărțindu-l în funcții mici, făcându-l reutilizabil ori de câte ori acest lucru este posibil.
 - În cazul folosirii callback-urilor împreună cu operatorul spread (...), callback-ul nu va mai fi poziționat ultimul, ci primul sau penultimul. Acest lucru se întâmplă pentru că sintaxa spread trebuie să fie ultimul argument introdus.
 
