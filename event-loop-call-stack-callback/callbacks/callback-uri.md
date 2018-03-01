@@ -1,12 +1,26 @@
 # Callback-uri
 
-Știm despre funcții că sunt valori care pot fi pasate ca oricare alta. În spiritul acestei afirmații fundamentale putem realiza comunicarea intenției de prelucrare a datelor printr-o funcție unei alte părți software, care va lua funcția ta și o va face parte din propriile evaluări, iar la finalizarea acestora vei primi un rezultat. Este o relație simbiotică pe care se realizează pe încrederea acordată API-ului că îți va returna rezultatul pe care îl aștepți. Pentru că majoritatea codului unui API este cu sursă deschisă, poți investiga ce se petrece cu funcția pe care ai pasat-o, dar de cele mai multe ori tratezi un API ca pe o *cutie neagră* în care introduci date și care îți oferă înapoi alte date tratate în acord cu specificațiile. Să detaliem!
+Știm despre funcții că sunt valori care pot fi pasate ca oricare alta. În spiritul acestei afirmații fundamentale putem realiza comunicarea intenției de prelucrare a datelor printr-o funcție unei alte părți software, care va lua funcția ta și o va face parte din propriile evaluări, iar la finalizarea acestora vei primi un rezultat.
 
-Callback-ul este o funcție care va porni evaluarea propriului cod când va avea toate datele necesare pe care i le va furniza contextul de execuție. Această funcție este numită de practicieni **callback**, adică o funcție care va aștepta cuminte ca tot ce îi este necesar și abia atunci se lansează în execuție. Vom vedea mai departe că recent, în noua versiune a standardului, mai este disponibil un alt mecanism numit *promisiune*, un model de gestiune asincron mult superior practicii callback-urilor. Deocamdată, să ne concentrăm pe callback-uri pentru că de ele ne vom lovi foarte des mai ales când vom utiliza cod scris de alții.
+Este o relație simbiotică realizată pe încrederea acordată API-ului că îți va returna rezultatul pe care îl aștepți. Pentru că majoritatea codului unui API este cu sursă deschisă, poți investiga ce se petrece cu funcția pe care ai pasat-o, dar de cele mai multe ori tratezi un API ca pe o *cutie neagră* în care introduci date și care îți oferă înapoi alte date tratate. Să detaliem!
 
-Un **callback** este o funcție, care este pasată ca argument altei funcții. Adu-ți aminte de faptul că o funcție este o valoare care poate fi pasată ca argument. Funcțiile care primesc alte funcții ca valori sunt **funcții de nivel înalt**.
+În limba română am putea aproxima numele în limba engleză de **callback** ca **apeluri ulterioare**. Funcția ca valoare este pasată ca argument și este „apelată ulterior” (în engleză: *called back*) de către funcția care este în execuție deja. Vom folosi varianta denumirii în limba engleză pentru a recunoaște în alte lucrări despre ce vorbim, dar și pentru simplitatea pe care o oferă un singur cuvânt.
 
-În limba română am putea aproxima denumirea ca **apeluri ulterioare**. Funcția ca valoare este pasată ca argument și este „apelată ulterior” (în engleză: *called back*) de către funcția care este în execuție deja. Vom folosi varianta denumirii în limba engleză pentru a recunoaște în alte lucrări despre ce vorbim, dar și pentru simplitatea pe care o oferă un singur cuvânt.
+Callback-ul este o funcție care va porni evaluarea propriului cod când va avea toate datele necesare oferite de contextul său de execuție. Este o funcție care va aștepta cuminte tot ce îi este necesar și abia atunci se lansează în execuție.
+
+## De ce avem nevoie de funcții callback?
+
+Care este motivul pentru care facem acest lucru? Aducerea unei resurse sau prelucrarea sa poate să ia timp. Nu ai voie să blochezi firul de execuție și ca să realizezi această magie, vei apela la un API al browserului. Ce te faci în momentul în care resursa a venit? Tu ai adus-o pentru a face ceva cu ea. În aceast scop trebuie să ai cod care să o prelucreze. Acest cod este „păstrat” ca valoare într-o funcție. Această funcție este pasată API-ului ca în momentul în care a terminat operațiunea sa specifică, să execute codul funcției noastre aplicată pe rezultatul adus.
+
+Modelul de lucru folosind funcții ce îndeplinesc o anumită sarcină după ce funcția container și-a încheiat sarcinile la rândul său, este o necesitate dictată de lucrul cu date care intră și ies din aplicațiile pe care le creăm. Exemplele sunt nenumărate: citirea unui fișier sau legarea la o bază de date. Multe exemple sunt legate de lucrul cu evenimente în cadrul **DOM** (Document Object Model) atunci când dorim manipularea elementelor dintr-o pagină web.
+
+Callback-urile fac ceva de mare ajutor în toate aceste scenarii de lucru: pur și simplu dau răgaz unei anumite sarcini să se termine înainte de a finaliza cu totul execuția unui program.
+
+Vom vedea mai departe că recent, în noua versiune a standardului este disponibil un alt mecanism numit *promisiune*, un model de gestiune asincron mult superior practicii callback-urilor. Deocamdată, să ne concentrăm pe callback-uri pentru că de ele ne vom lovi foarte des mai ales când vom utiliza cod scris de alții.
+
+## Descrierea callback-urilor
+
+Am stabilit că un **callback** este o funcție, care este pasată ca argument altei funcții. Adu-ți aminte mereu că o funcție este o valoare care poate fi pasată ca argument. Funcțiile care primesc altele drept valori se numesc **funcții de nivel înalt**.
 
 Ce-ar fi să ne imaginăm un identificator ca pe un cârlig cu care extragem valori din funcții?!
 
@@ -16,26 +30,20 @@ var extragValoare = producValoare();
 // extragValoare închipuiește-l ca pe un extractor de valoare
 ```
 
-Valoarea identificatorului `extragValoare` este tocmai rezultatul funcției. Ne putem închipui, că înainte de evaluarea funcției prin apelarea sa, identificatorul avea valaorea `undefined`, dar de îndată ce am obținut un rezultat prin evaluarea codului din corpul funcției, identificatorul nostru va avea o valoare.
+Valoarea identificatorului `extragValoare` este tocmai rezultatul funcției. Ne putem închipui, că înainte de evaluarea funcției prin apelarea sa, identificatorul avea valoarea `undefined`, dar de îndată ce am obținut un rezultat prin evaluarea codului din corpul funcției, identificatorul nostru va avea valoarea evaluării.
 
-Acest exemplu este unul foarte simplu, dar hai să ne închipuim faptul că funcția noastră face ceva muuuuult mai mult. Să ne imaginăm că este o funcție care descarcă de pe internet o resursă de text sau o imagine, ori mai multe. Această operațiune, după cum îți poți imagina, va necesita ceva timp. Acum vine cheia problemei. Știind că avem un singur fir de execuție, operațiunea noastră are potențialul de a bloca temporar firul cât timp sunt căutate resursele și apoi aduse una câte una, etc.
+Acest exemplu este unul foarte simplu, dar hai să ne închipuim faptul că funcția noastră face ceva muuuuult mai mult. Să ne imaginăm că este o funcție care descarcă de pe internet o resursă de text sau o imagine, ori mai multe. Această operațiune, după cum îți poți imagina, va necesita ceva timp. Operațiunea noastră are potențialul de a bloca temporar firul cât timp sunt căutate resursele și apoi aduse una câte una, etc.
 
 ```javascript
-// pseudo cod:
+// acesta este cod ilustrativ (nu rula!)
 aducDeLaServer('http://kosson.ro/ceva.csv', function (rezultat) {
   console.log(rezultat.nume);
 });
 ```
 
-În traducere liberă un astfel de eveniment (apelul funcției) spune controlului: eu, funcția `aducDeLaServer`, care tocmai am fost apelată, îmi voi întrerupe execuția (evaluarea codului meu intern) pentru a mă duce pe net să aduc resursa de la adresa web specificată de tine. Câtă vreme fac acest lucru, eu nu am să te întrerup și poți executa altceva, dar să știi că din momentul în care resursa de pe net a venit, te invit să *programezi* execuția funcției pe care ți-am pasat-o drept callback (de aici și explicația termenului de apel ulterior), prin introducerea ei în **bucla evenimentelor**. Când îi vine rândul, funcția callback va fi executată, iar controlul reia execuția funcției `aducDeLaServer`. Dacă nu mai e nimic de făcut încheie și execuția acesteia.
+În traducere liberă un astfel de **eveniment** (apelul funcției) spune controlului: eu, funcția `aducDeLaServer`, care tocmai am fost apelată, îmi voi întrerupe execuția (evaluarea codului meu intern) pentru a mă duce pe net să aduc resursa de la adresa web specificată de tine. Câtă vreme fac acest lucru, eu nu am să te întrerup și poți executa altceva, dar să știi că din momentul în care resursa de pe net a venit, te invit să *programezi* execuția funcției pe care ți-am pasat-o drept *callback* (de aici și explicația termenului de apel ulterior), prin introducerea ei în **bucla evenimentelor**. Când îi vine rândul, funcția callback va fi executată, iar controlul reia execuția funcției `aducDeLaServer`. Dacă nu mai e nimic de făcut încheie și execuția acesteia.
 
 În concluzie, un callback este o convenție de folosire a funcțiilor, un model de utilizare dacă ți se pare mai ușor să înțelegi.
-
-## De ce avem nevoie de funcții callback?
-
-Modelul de lucru folosind funcții ce îndeplinesc o anumită sarcină după ce funcția container și-a încheiat sarcinile la rândul său, este o necesitate dictată de lucrul cu date care intră și ies din aplicațiile pe care le creăm. Exemplele sunt nenumărate: citirea unui fișier sau legarea la o bază de date. Multe exemple sunt legate de lucrul cu evenimente în cadrul **DOM** (Document Object Model) atunci când dorim manipularea elementelor dintr-o pagină web.
-
-Callback-urile fac ceva de mare ajutor în toate aceste scenarii de lucru: pur și simplu dau răgaz unei anumite sarcini să se termine înainte de a finaliza cu totul execuția unui program. Să ne imaginăm că dorim să descărcăm o imagine de la distanță, de undeva de pe net, la care vom atașa o legendă ce descrie conținutul. Textul legendei îl avem deja și se încarcă foarte repede, dar imaginea este ceva mai corpolentă și este nevoie de un timp de așteptare. Callback-ul însărcinat cu aducerea imaginii, va avea răgazul necesar să-și termine treaba în timp ce restul codului va genera containerul imaginii și va poziționa legenda fără a bloca firul de execuție. Când este gata descărcată și imaginea, aceasta va fi afișată și ea. Adu-ți mereu aminte de faptul că JavaScript rulează pe un singur fir de execuție. Sarcina unei anumite funcții care se execută, nu trebuie să blocheze firul de execuție.
 
 ## Callback hell - iadul apelurilor
 
@@ -50,9 +58,17 @@ aducResursa('mar', function () {
 });
 ```
 
-Totuși trebuie spus un lucru la care trebuie reflectat foarte adânc. Există momente când vei folosi biblioteci de cod externe, care vor prelua callback-ul pe care-l scrii, vor rula utilitarul în contextul aplicației lor, iar la final vor executa funcția scrisă de tine. Kyle Simpson pune această întrebare esențială pentru a verifica și pentru a fi sigur pe modul de execuție a callback-ului: ești sigur pe aplicația externă căreia îi pasezi callback-ul? Ai siguranța că va executa în parametrii doriți de tine codul din funcția pe care i-o pasezi ca și callback? Dacă nu ai scris tu întreaga aplicație, ai **încredere** să o folosești? Recomandarea este ca în momentul dobândirii abilităților de lucru cu **promisiunile** sau cu funcțiile **async/await**, să fie abandonată practica callback-urilor.
+Totuși trebuie spus un lucru la care trebuie reflectat foarte adânc. Există momente când vei folosi biblioteci de cod externe, care vor prelua callback-ul pe care-l scrii, vor rula utilitarul în contextul aplicației lor, iar la final vor executa funcția scrisă de tine.
 
-Urmărirea callback-urilor este o sarcină dificilă și din acest motiv este nevoie de o alternativă.
+Kyle Simpson pune câteva întrebări esențiale pentru verificare și dobândirea siguranței în scenariul de lucru cu un callback:
+
+- Ești sigur pe aplicația externă căreia îi pasezi callback-ul?
+- Ești încredințat că va executa în parametrii doriți de tine codul din funcția pe care i-o pasezi ca și callback?
+- Dacă nu ai scris tu întreaga aplicație care va folosi callback-ul, ai **încredere** să o folosești?
+
+Acestea sunt întrebări foarte serioase, care setează cadrul mental pentru căutarea de noi soluții. Acestea nu au întârziat să apară, fiind propulsate de standard: promisiunile și funcțiile async/await. În acest moment, recomandarea este ca în momentul dobândirii abilităților de lucru cu **promisiunile** sau cu funcțiile **async/await**, să fie abandonată practica callback-urilor.
+
+Un argument în plus pentru abandonarea treptată a practicii callback-urilor este aceea că urmărirea callback-urilor este o sarcină dificilă în sine.
 
 ## Explorarea unui scenariu
 
@@ -101,7 +117,7 @@ La invocarea funcției, asigură-te că ultimul argument pasat este funcția cal
 })();
 ```
 
-Exemplul de mai sus este unul **sincron**, adică unul care nu a deferit execuția callback-ului unui moment viitor în timp pentru că `adunare` ar fi blocat firul de execuție. Pur și simplu, evaluarea decurge normal. Acestea sunt invocate înainte ca o funcție să returneze. Callback-urile sincrone sunt invocate în firul de execuție originar. Spre exemplu, la invocarea unui callback cu `forEach`, acesta va fi performat pentru fiecare dintre elementele listei.
+Exemplul de mai sus este unul **sincron**, adică unul care nu a deferit execuția callback-ului unui moment viitor în timp pentru că `adunare` ar fi blocat firul de execuție. Pur și simplu, evaluarea decurge normal. Acestea sunt invocate înainte ca o funcție să returneze. Callback-urile sincrone sunt invocate în firul de execuție originar. De exemplu, la invocarea unui callback cu `forEach`, acesta va fi performat pentru fiecare dintre elementele listei.
 
 Mai există cazul în care callback-urile funcționează **asincron**.
 Pentru a simula asincronicitatea, vom folosi utilitarul `setTimeout`, un API oferit de motor. Folosirea lui `setTimeout` implică fragmentarea în două calupuri de timp: cel al execuției utilitarului și cel al execuției codului din corpul funcției callback, care se va petrece la un moment viitor specificat.

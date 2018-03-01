@@ -2,7 +2,7 @@
 
 XMLHttpRequest oferă tot ce este nevoie pentru a transfera date de la un server la un client.
 
-Cel mai important lucru este faptul că XMLHttpRequest aduce datele fără a face un refresh la pagină.
+Cel mai important lucru este faptul că `XMLHttpRequest` aduce datele fără a face un refresh la pagină. Acesta este și motivul pentru care Microsoft l-a introdus în API-urile browserului, fiind preluat și de ceilalți implementatori.
 
 XMLHttpRequest este baza pentru [AJAX](https://developer.mozilla.org/en-US/docs/AJAX) - Asynchronous JavaScript + XML. Chiar dacă acest model a fost gândit să folosească date în XML, în acest moment se folosește pe scară largă JSON, care preferat pentru apropierea de JavaScript printre motivele principale.
 
@@ -40,3 +40,7 @@ xhr.onerror = function() {
 
 xhr.send();
 ```
+
+## Resurse
+
+- [XMLHttpRequest. Living Standard](https://xhr.spec.whatwg.org/)
