@@ -239,3 +239,7 @@ Dacă un callback trebuie invocat cu întârziere, definește funcția pentru a 
 - scope
 - this
 - closures
+
+## Referințe
+
+- [The Art of Node. An introduction to Node.js](https://github.com/maxogden/art-of-node#callbacks)
