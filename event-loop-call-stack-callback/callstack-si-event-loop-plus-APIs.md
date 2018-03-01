@@ -74,24 +74,34 @@ Rularea unui program în firul de execuție, neutilizând API-urile browserului,
 Realitatea rulării unor mari aplicații ține de gestionarea mai multor fire de execuție: a celui principal al programului și ale API-urilor puse la dispoziție de mediul creat de browser. Înțelegerea aspectelor complexe la rularea într-un astfel de model ține de caracterul **asincron** al execuției. Marea majoritate a software-ului JavaScript existent este scris pentru a rula asincron.
 Asincronicitatea se întâmplă și atunci când folosim callback-uri. De ce? Pentru că funcția cu rol de callback se va executa și va produce un rezultat vom avea un scenariu diferit de comportamentul funcției al cărui scop este să returneze ceva. Executarea funcțiilor callback ia ceva timp și din acest motiv numim acest comportament a fi unul **asincron**. Rezultatul evaluării codului din callback va fi returnat într-un moment viitor.
 
-Să presupunem că dorești să prelucrezi un set de date aflat pe un server pe Internet. Mai întâi, ai nevoie să-l aduci și de îndată ce l-ai adus să ai o funcție care să aplice transformările dorite asupra conținutului său.
+Să presupunem că dorești să prelucrezi un set de date aflat pe un server pe Internet. Mai întâi, ai nevoie să-l aduci și de îndată ce l-ai adus să ai o funcție care să aplice transformările dorite asupra conținutului său. Pentru exemplificare vom lucra cu API-ul pus la dispoziție de Europeana.
 
 ```javascript
-var addr = "https://www.europeana.eu/api/v2/search.json?wskey=MH8g7b6hz&query=The%20Fraternity%20between%20Romanian%20and%20French%20Army";
-fetch(addr)
-  .then( function(response) {
-    if (response.headers.get('Content-Type') === 'application/json') {
-      return response.json();
+console.log('Am solicitat date de la Europeana.');
+var adresa = "https://www.europeana.eu/api/v2/search.json?wskey=MH8g7b6hz&query=The%20Fraternity%20between%20Romanian%20and%20French%20Army";
+
+// înlocuiește cheia API din link, cu una personală
+// wskey=XXXXXXXXX
+// dacă nu introduci cheia personală vei avea o eroare
+// Cross-Origin Request Blocked
+
+fetch(adresa)
+  .then( function(raspuns) {
+    if (raspuns.headers.get('Content-Type') === 'application/json') {
+      return raspuns.json();
     }
-    return response.text();
-  }).then(function(data) {
-    console.log(data);
+    return raspuns.text();
+  }).then(function(dateleAduse) {
+    console.log(dateleAduse);
   }).catch(function() {
     console.log("A apărut o eroare");
   });
+console.log('Mesaj afișat înaintea primirii datelor.');
 ```
 
-Un exemplu de care te vei lovi în practica lucrului cu paginile web. Gândește-te la faptul că vei dori manipularea unei pagini web, care, de fapt, este un arbore dinamic de noduri a ceea ce numim **Document Object Model**. La un moment dat, un utilizator, dă un click pe un element al paginii. Asociat elementului acționat prin click trebuie să ai un mecanism de ascultare și o funcție din program care să pornească execuția la momentul click-ului. Utilizatorului îi este returnat un rezultat la finalizarea execuției funcției acționate (în jargonul programării web se numește **event handler**). Toate acestea, fără să te simți copleșit se subscriu caracterului asincron al programelor JavaScript. Acest aspect este, de fapt, cel pentru care JavaScript are valoarea sa actuală.
+În exemplul selectat, delegăm o cerere pentru aducerea unor date de al Europeana, API-ului `fetch()` al browserului. Ceea ce tocmai am făcut este să delegăm sarcina aducerii datelor unui alt „program” în timp ce firul de execuție își va vedea de treabă în continuare. Din acest motiv com avea cele două mesaje în consolă unul după altul și abia **la un moment dat** vom avea și datele afișate.
+
+Lucrul asyncron îl vei „simți” în practica cu paginile web. Gândește-te la faptul că vei dori manipularea unei pagini web, care, de fapt, este un arbore dinamic de noduri a ceea ce numim **Document Object Model**. La un moment dat, un utilizator, dă un click pe un element al paginii. Asociat elementului acționat prin click trebuie să ai un mecanism de ascultare și o funcție din program care să pornească execuția la momentul click-ului. Utilizatorului îi este returnat un rezultat la finalizarea execuției funcției acționate (în jargonul programării web se numește **event handler**). Toate acestea, fără să te simți copleșit se subscriu caracterului asincron al programelor JavaScript. Acest aspect este, de fapt, cel pentru care JavaScript are valoarea sa actuală.
 
 Să luăm cazul callback-urilor pentru că acestea sunt cel mai des întâlnit exemplu în practică. O funcție este pasată unui utilitar al API-ului pentru ca în momentul în care utilitarul și-a încheiat execuția, acesta să execute funcția pe care i-am dat-o noi și pe care să o aplice rezultatelor oferite de utilitar la finalul execuției sale. Fenomenele interesante apar atunci când stiva apelurilor (a contextelor de execuție în desfășurare) nu este goală. De ce este nevoie să fie goală, te vei întreba? Pentru că funcția callback trebuie și ea la rândul ei executată, dar pentru că necesitaea executării sale a survenit într-un moment când alte apeluri de funcții erau în rulare, această cerință trebuie memorată undeva. Astfel, mecanismul cozii de așteptare este evident. De îndată ce stiva apelurilor se golește, primul apel de callback din coadă, va fi trimis spre execuție. Acesta devine primul context din stiva apelurilor. Această funcție intră în execuție chiar dacă va apela la rândul ei alte funcții, etc. Următorul callback din coadă alteaptă cumințel ca stiva să fie goală ca să intre și el în execuție. Și tot așa până când sunt epuizate toate callbackurile din coadă.
 

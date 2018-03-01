@@ -15,3 +15,28 @@ var client = new XMLHttpRequest();
 ```
 
 Invocarea cu `new` a constructorului XMLHttpRequest are ca efect crearea unui obiect.
+
+Un exemplu de utilizare este cel al aducerii unor date dintr-un API la distanță. Pentru acest exemplu vom folosi API-ul pus la dispoziție de Europeana.
+
+```javascript
+var adresa = "https://www.europeana.eu/api/v2/search.json?wskey=XXXXXXXXX&query=The%20Fraternity%20between%20Romanian%20and%20French%20Army";
+
+// înlocuiește cheia API din link, cu una personală
+// wskey=XXXXXXXXX
+// dacă nu introduci cheia personală vei avea o eroare
+// Cross-Origin Request Blocked
+
+var xhr = new XMLHttpRequest();
+xhr.open('GET', adresa);
+xhr.responseType = 'json';
+
+xhr.onload = function() {
+  console.log(xhr.response);
+};
+
+xhr.onerror = function() {
+  console.log("A apărut o eroare");
+};
+
+xhr.send();
+```

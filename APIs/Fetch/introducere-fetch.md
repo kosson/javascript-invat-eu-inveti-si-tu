@@ -11,7 +11,28 @@ fetch('x').then(raspuns => console.log('am primit raspuns'));
 // Promise { <state>: "pending" }
 ```
 
-TODO: Completează și documentează fetch()
+Un exemplu complet de utilizarea a lui fetch pentru a accesa o înregistrare.
+
+```javascript
+var adresa = "https://www.europeana.eu/api/v2/search.json?wskey=XXXXXXXXX&query=The%20Fraternity%20between%20Romanian%20and%20French%20Army";
+
+// înlocuiește cheia API din link, cu una personală
+// wskey=XXXXXXXXX
+// dacă nu introduci cheia personală vei avea o eroare
+// Cross-Origin Request Blocked
+
+fetch(adresa)
+  .then( function(raspuns) {
+    if (raspuns.headers.get('Content-Type') === 'application/json') {
+      return raspuns.json();
+    }
+    return raspuns.text();
+  }).then(function(dateleAduse) {
+    console.log(dateleAduse);
+  }).catch(function() {
+    console.log("A apărut o eroare");
+  });
+```
 
 ## Referințe
 
