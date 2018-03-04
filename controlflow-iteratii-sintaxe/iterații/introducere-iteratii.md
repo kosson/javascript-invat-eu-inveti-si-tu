@@ -33,7 +33,7 @@ Există două protocoale:
 
 ## Iterable
 
-Permite obiectelor să-și definească sau să-și particularizeze comportamentul la iterare: ce valori vor fi în bucla generată cu un construct `for..of`.
+Acest protocol permite obiectelor să-și definească sau să-și particularizeze comportamentul la momentul iterării, adică ce valori vor fi generate cu un enunț `for..of`.
 
 `for..of` poate itera prin următoarele obiecte care respectă **protocolul iterator**:
 
@@ -63,9 +63,10 @@ Ori de câte ori un obiect trebuie să fie iterat, este invocată metoda `@@iter
 
 Definește o modalitate standard pentru a produce o secvență de valori finite sau infinite. Se comportă ca un pointer.
 
-**Un obiect este un iterator atunci când implementează metoda next()**
+**Moment Zen**: Un obiect este un iterator atunci când implementează metoda next().
 
 **`next()`** este o funcție care nu primește argumente, dar care returnează un obiect cu două proprietăți:
+
 - `done` care este un Boolean
   - dacă `true`, atunci iteratorul a trecut de finalul secvenței pe care a avut-o de parcurs.
   - dacă `false` înseamnă că a produs următoarea valoare din secvență

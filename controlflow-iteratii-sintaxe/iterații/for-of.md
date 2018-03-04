@@ -1,8 +1,8 @@
 # Enunțul `for..of`
 
-ES6 a introdus această nouă structură de iterare împreună cu două concepte importante: iterable și iterator. Intenția a fost de a oferi un instrument superior celor oferite de ES5 deja: `for..in` și `forEach`.
+ES6 a introdus această nouă structură de iterare împreună cu două concepte importante: **iterable** și **iterator**. Intenția a fost de a oferi un instrument superior celor oferite de ES5 deja: `for..in` și `forEach`.
 
-Poți folosi enunțul `for..of` dacă nu ai nevoie să lucrezi și cu indexurile elementelor componente ale colecției. Dacă ai nevoie de localizare pentru a adresa exact un element, vei folosi un clasic `for`.
+Poți folosi enunțul `for..of` dacă nu ai nevoie să lucrezi și cu indexurile elementelor componente ale colecției. Dacă ai nevoie de localizare exact un element, vei folosi un clasic `for`.
 
 ## Mică anatomie
 
@@ -11,14 +11,14 @@ Este numit de standard un **enunț de iterare**.
 Formele canonice ale enunțurilor `for..of` sunt:
 
 - `for ( expresieManaStângă of expresieDeAtribuire ) enunț`,
-- `for ( var expresieLegatăDeIndentificator of expresieDeAtribuire ) enunț,
-- `for ( declarațieDeExpresie of expresieDeAtribuire ) enunț.
+- `for ( var expresieLegatăDeIndentificator of expresieDeAtribuire ) enunț`,
+- `for ( declarațieDeExpresie of expresieDeAtribuire ) enunț`.
 
 `DeclarațiaDeExpresie` poate fi un `let` sau un `const`.
 
 Forma canonică a enunțului este: `for ( expresieManaStângă of expresieDeAtribuire ) enunț`.
 
-## Lucru
+## Lucru cu for..of
 
 Ori de câte ori un obiect trebuie să fie iterat, metoda `@@iterator` este apelată fără argumente. Iteratorul (un obiect cu o funcție specială) care este returnat este folosit pentru a obține valorile care trebuie iterate.
 
@@ -61,3 +61,27 @@ for (let x of '\u{13165}\u{13189}\u{13197}'){
 ```
 
 Te vei întreba de ce să folosești `for..of` dacă ai deja la îndemână `for..in`? Răspunsul rezidă în faptul că în cazul enunțului `for..in` sunt luate în considerare toate proprietățile care au atributul `enumerable` activat.
+
+### Iterarea obiectelor
+
+Obiectele care nu au implementare protocolul iterable nu pot fi parcurse cu bucle `for..of`. Pentru a exemplifica, vom lucra cu un obiect comun
+
+```javascript
+let obi = {
+  a: 10,
+  b: 'ceva'
+};
+for (let elem of obi) {
+  console.log(elem);
+}
+```
+
+O astfel de încercare se va solda cu o eroare: `TypeError: obi is not iterable`. Ce-i de făcut? Cum am putea parcurge totuși o astfel de structură?
+
+```javascript
+for(let [cheie, valoare] of Object.entries(obi)){
+  console.log(cheie, valoare);
+};
+``` 
+
+După cum se observă am folosit destructurarea pentru a face declararea variabilelor. Fii foarte atent căci metodele vor fi reduse la `null` prin acțiunea lui `Object.entries`.
