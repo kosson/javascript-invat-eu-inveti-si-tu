@@ -31,7 +31,7 @@ Enunțul `for..of` poate parcurge și extrage valori din următoarele obiecte ca
 - `TypedArray`
 - `arguments`
 
-Dacă în cazul lui `for` era nevoie să introduci expresiile opționale în blocul de inițializare, în cazul utilizării enunțului `for..of` lucrurile stau ceva mai simplu atunci când dorești o parcurgere a unui array.
+Dacă în cazul lui `for` era nevoie să introduci expresiile opționale în blocul de inițializare, în cazul utilizării enunțului `for..of` lucrurile stau ceva mai simplu atunci când dorești parcurgerea unui array.
 
 ```javascript
 var colectie = [1, true, null, 'ceva'];
@@ -60,7 +60,7 @@ for (let x of '\u{13165}\u{13189}\u{13197}'){
 };
 ```
 
-Te vei întreba de ce să folosești `for..of` dacă ai deja la îndemână `for..in`? Răspunsul rezidă în faptul că în cazul enunțului `for..in` sunt luate în considerare toate proprietățile care au atributul `enumerable` activat.
+Te vei întreba de ce să folosești `for..of` dacă ai deja la îndemână `for..in`? Răspunsul e vizibil în cazul enunțului `for..in`, unde sunt luate în considerare toate proprietățile care au atributul `enumerable` activat.
 
 ### Iterarea obiectelor
 
@@ -82,6 +82,8 @@ O astfel de încercare se va solda cu o eroare: `TypeError: obi is not iterable`
 for(let [cheie, valoare] of Object.entries(obi)){
   console.log(cheie, valoare);
 };
-``` 
+// a 10
+// b ceva
+```
 
-După cum se observă am folosit destructurarea pentru a face declararea variabilelor. Fii foarte atent căci metodele vor fi reduse la `null` prin acțiunea lui `Object.entries`.
+După cum se observă am folosit **destructurarea** pentru a face declararea variabilelor. Fii foarte atent căci metodele vor fi reduse la `null` prin acțiunea lui `Object.entries(obi)`. Pentru că ești un om curios, te invit să faci un salt la destructurare pentru a citi măcar partea introductivă. Pe lângă destructurare ar trebui să mai faci un salt la obiectul intern `Object`, metoda `entries`.

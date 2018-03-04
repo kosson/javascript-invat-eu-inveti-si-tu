@@ -8,15 +8,21 @@ Pentru a realiza natura limbajului de programare JavaScript, care este unul orie
 
 > ECMAScript este bazat pe obiecte: limbajul de bază și toate funcționalitățile sunt oferite de obiecte iar un program ECMAScript este un ciorchine de obiecte care comunică.
 
-Obiectele sunt și ele valori. Aceste valori sunt pasate prin referință în contrast cu valorile primare care sunt pasate prin valoare. Ceea ce doresc să subliniez pentru a reține ca regulă generală este că atunci când trimitem ca argument identificatorul unui obiect, nu trimitem obiectul în sine, ci o referință către acesta. O adresă! Obiectele sunt structuri de date dinamice ale căror proprietăți se modifică și atunci spunem că obiectul își modifică starea. Reține faptul că atunci când pasezi un obiect unei funcții pentru a opera asupra datelor sale, trebuie la final să returnezi referința către obiect pentru a-i modifica starea.
+Obiectele sunt și ele valori. La aceste valori se ajunge printr-o referință (către o locație în memorie unde este stocat), în contrast cu valorile primitive care sunt însăși valoarea. Vorbim despre o adevărată adresă!
 
-Tot la standard vom apela pentru a lămuri natura unui obiect. Obiectele sunt:
+Obiectele sunt colecții de proprietăți identificabile printr-un nume, care sunt strânse împreună fără a avea o ordine internă.
+Obiectele sunt structuri de date dinamice ale căror proprietăți se modifică și atunci spunem că obiectul își modifică starea.
+Reține faptul că atunci când pasezi un obiect unei funcții pentru a opera asupra datelor sale, trebuie la final să returnezi referința către obiect pentru a-i modifica starea.
+
+**Despre natura unui obiect spune standardul**:
 
 > colecții de zero sau mai multe proprietăți fiecare având atribute care determină cum poate fi folosită.
 
-Mai departe, părțile componente, mai exact proprietățile trebuie înțelese ca niște:
+Mai departe, părțile componente, mai exact proprietățile trebuie înțelese precum:
 
 > containere care pot conține alte obiecte, valori primitive sau funcții.
+
+Adu-ți mereu aminte că funcțiile sunt și ele obiecte și din acest motiv, la rândul lor niște referințe.
 
 Câteva concepte fundamentale pentru înțelegerea obiectelor în general:
 
@@ -27,7 +33,7 @@ Câteva concepte fundamentale pentru înțelegerea obiectelor în general:
 
 Atunci când un obiect este creat, toate caracteristicile sale sunt moștenite de la un alt obiect cu rol de prototip. Să nu vi se pară ciudat că un prototip este un obiect, iar acesta la rândul lui are un prototip. E ca un lanț care are drept limită superioară obiectele interne `Object` și `Function`.
 
-Pentru că ești nerăbdătoare am să-ți dau două indicii privind crearea obiectelor. Poți folosi notația literală folosind acoladele ca în `var obiect = {a: 1}` sau poți apela cu operatorul `new` funcții cu rol de constructor. Aceste două metode sunt și cel mai des întâlnite. O regulă de scriere care este foarte utilă este aceea că toate valorile text, vor fi introduse în obiecte cu textul între ghilimele simple, iar restul valorilor așa cum sunt ele. Proprietățile se redactează precum listele, fiind delimitate prin virgulă.
+Pentru că ești nerăbdătoare am să-ți dau două indicii privind crearea obiectelor. Poți folosi notația literală folosind acoladele ca în `var obiect = {a: 1}` sau poți apela cu operatorul `new` funcții cu rol de constructor. Aceste două metode sunt și cel mai des întâlnite. O regulă de scriere care este foarte utilă este aceea că toate valorile text, vor fi introduse în obiecte cu textul între ghilimele simple, iar restul valorilor așa cum sunt ele. Proprietățile se redactează precum listele, fiind delimitate prin virgulă. A crea un obiect, în limbajul programatorilor este echivalent cu termenul de *a instanția* un obiect. Sunt una și același lucru.
 
 ```javascript
 var obi = {
@@ -37,13 +43,13 @@ var obi = {
 };
 ```
 
-Exemplul oferit înfățișează cea mai uzitată notație pe care o numim notația literală: `var obi = {};`. Acum poți să-ți pui o întrebare foarte simplă: cât timp „trăiește” un obiect? Un obiect trăiește atâta vreme cât există o referință către acesta.
+Exemplul oferit înfățișează cea mai uzitată notație pe care o numim notația *literală*: `var obi = {};`. Acum poți să-ți pui o întrebare foarte simplă: cât timp „trăiește” un obiect? Un obiect trăiește atâta vreme cât există o referință către acesta.
 
 Am menționat constructorii deja?
 
-## Ce sunt constructorii?
+## Ce sunt constructorii
 
-Constructorii sunt niște funcții, care sunt redactate special ca la momentul execuției, să genereze un obiect. După cum am văzut în capitolul dedicat genezei Tărâmului, atunci când s-au format **intrinsics**, a fost creat și obiectul prototip al tuturor obiectelor, care o fracțiune mai târziu a fost folosit pentru crearea obiectului-funcție ce va juca rolul de prototip al tuturor funcțiilor. Un mic exemplu nu ar strica.
+Constructorii sunt niște funcții, care sunt redactate special ca la momentul execuției, să genereze un obiect. După cum am văzut în capitolul dedicat genezei Tărâmului, atunci când s-au format **intrinsics**, a fost creat și obiectul prototip al tuturor obiectelor, care o fracțiune mai târziu a fost folosit pentru crearea obiectului-funcție ce va juca rolul de prototip al tuturor funcțiilor. Un mic exemplu nu ar strica. Prin convenție, pentru a distinge constructorii de funcțiile simple, vor avea identificatorul cu literă mare.
 
 ```javascript
 function MatrițăAvionVuiaI (tip = 'experimental', an = '1906') {
@@ -566,7 +572,7 @@ Legătura cu `[[Prototype]]` este aceea că în cazul unui `[[Extensible]]` cu v
 - Relațiile prototipale pot cauza probleme atunci când este nevoie de enumerarea proprietăților obiectelor. Ambalează într-o funcție de verificare cu `Object.hasOwnPropery()`;
 - [Obiecte](#obiecte)
   - [Ce sunt obiectele?](#ce-sunt-obiectele)
-  - [Ce sunt constructorii?](#ce-sunt-constructorii)
+  - [Ce sunt constructorii](#ce-sunt-constructorii)
   - [Alcătuirea obiectelor](#alc%C4%83tuirea-obiectelor)
   - [Categorii de obiecte](#categorii-de-obiecte)
   - [Obiecte interne (*built-in*)](#obiecte-interne-built-in)

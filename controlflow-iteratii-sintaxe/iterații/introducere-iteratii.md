@@ -7,7 +7,7 @@ Dicționarul explicativ ne dă o definiție foarte utilă: *repetare a unui anum
 
 ECMAScript 2015 (ES6) a introdus un nou mecanism de parcurgere a datelor numit **iterare**. Mai exact, un **protocol de iterare** pentru că iterarea ca și concept este în ADN-ul programării.
 
-### Ce înseamnă **iterare**?
+### Ce înseamnă **iterare**
 
 Atunci când rezultatul unui pas devine valoarea de start pentru următorul, atunci vorbim despre iterare.
 
