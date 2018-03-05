@@ -1,6 +1,6 @@
 # Obiecte
 
-## Ce sunt obiectele?
+## Ce sunt obiectele
 
 Standardul spune că **un obiect este un membru al tipului built-in Object** al limbajului.
 
@@ -43,7 +43,7 @@ var obi = {
 };
 ```
 
-Exemplul oferit înfățișează cea mai uzitată notație pe care o numim notația *literală*: `var obi = {};`. Acum poți să-ți pui o întrebare foarte simplă: cât timp „trăiește” un obiect? Un obiect trăiește atâta vreme cât există o referință către acesta.
+Exemplul oferit înfățișează cea mai întâlnită notație pe care o numim *literală*: `var obi = {};`. Acum poți să-ți pui o întrebare foarte simplă: cât timp „trăiește” un obiect? Un obiect trăiește atâta vreme cât există o referință către acesta. Dacă dorești totuși ca memoria să fie eliberată, vei seta obiectul la valoarea `null`.
 
 Am menționat constructorii deja?
 
@@ -571,7 +571,7 @@ Legătura cu `[[Prototype]]` este aceea că în cazul unui `[[Extensible]]` cu v
 - Legătura prototipală creează un lanț de delegare pentru cazurile în care nu găsești o proprietate sau o metodă într-un anumit context de execuție.
 - Relațiile prototipale pot cauza probleme atunci când este nevoie de enumerarea proprietăților obiectelor. Ambalează într-o funcție de verificare cu `Object.hasOwnPropery()`;
 - [Obiecte](#obiecte)
-  - [Ce sunt obiectele?](#ce-sunt-obiectele)
+  - [Ce sunt obiectele](#ce-sunt-obiectele)
   - [Ce sunt constructorii](#ce-sunt-constructorii)
   - [Alcătuirea obiectelor](#alc%C4%83tuirea-obiectelor)
   - [Categorii de obiecte](#categorii-de-obiecte)
