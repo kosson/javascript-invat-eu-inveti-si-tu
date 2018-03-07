@@ -1,6 +1,5 @@
 # Operatorii logici
 
-
 ## Introducere
 
 Toate expresiile pot fi reduce la o valoare de adevăr, fie aceasta adevărată (`true`) sau falsă (`false`). Acest mod de lucru constituie o ramură a algebrei booleene introdusă de George Boole prima dată în lucrarea *The Mathematical Analysis of Logic* (*Analiza matematică a logicii*), 1847 cu o dezvoltare deplină în 1854 în lucrarea *An investigation of the Laws of Thought*. În loc de a opera cu numere așa cum facem în operațiunile aritmetice de bază (adunare și înmulțire), operațiunile booleene de bază sunt:
@@ -71,7 +70,7 @@ Să constituim tabela de adevăr. Dacă te ajută să înțelegi, privește aten
 | true  | false | false |
 | true  | true  | true  |
 
-Aplicat la domeniul programării, valorile variabilelor sunt reduse la corespondentul lor de adevăr. Limbajul permite lucrul cu valorile de adevăr și falsitate pentru a decide un curs de evaluare sau pentru a proba anumite valori prin reducerea acestora la o concluzie înscrisă adevărului (și în engleză îi spunem *truthy*) sau falsității (în engleză îi spunem *falsey*).
+Aplicat la domeniul programării, valorile variabilelor sunt reduse la corespondentul lor de adevăr. Limbajul permite lucrul cu valorile de adevăr și falsitate pentru a decide un curs de evaluare sau pentru a proba anumite valori prin reducerea acestora la o concluzie înscrisă adevărului (și în engleză îi spunem *truthy*) sau falsității (în engleză îi spunem *falsy*).
 
 ## Legile lui De Morgan
 
@@ -100,7 +99,7 @@ Acest operator este folosit atunci când dorești să inversezi evaluarea unei a
 
 Ceea ce s-a întâmplat este că motorul JS a văzut operatorul și a evaluat valoarea de adevăr a lui 1. Știm că pentru 1, valoarea de adevăr este `true`. Negat, aceasta va deveni `false`.
 
-La nevoie poți nega negația `!!true`. Folosind acest operator pe orice valoare, spui motorului că dorești să folosești echivalentul boolean. Ca să folosești valoarea sa adevărată, mai trebuie să negi încă o dată expresia. Este un truc pe care coercion îl oferă pentru a folosi valoarea boolean a unei valori: `!!20; // true`
+La nevoie poți nega negația `!!true`. Folosind acest operator pe orice valoare, spui motorului că dorești să folosești echivalentul boolean. Ca să folosești valoarea sa adevărată, mai trebuie să negi încă o dată expresia. Este un truc pe care coercion îl oferă pentru a folosi valoarea boolean a unei valori: `!!20; // true`.
 
 ## Operatorul logic ȘI - `&&` (AND)
 

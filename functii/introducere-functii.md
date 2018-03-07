@@ -209,6 +209,10 @@ După cum ai observat, am ales să lucrez cu funcțiile **fat arrow** în ultime
 
 Standardul numește funcțiile `function objects`. O funcție produce o instanță a unui **function object**, fapt care conduce la concluzia logică că în JavaScript, funcțiile au metode. Fain, nu?! Da hai să-ți mai spun una. Standardul le spune `callable objects`, adică în limba română **obiecte apelabile**.
 
+```javascript
+function 
+```
+
 **O funcție este un obiect apelabil**. O funcție care este asociată unui obiect prin intermediul unei proprietăți, este numită *metodă*.
 
 Funcțiile sunt **obiecte first-class**, adică pot fi pasate ca argumente altor funcții și pot fi returnate din funcții. Funcțiile în JavaScript sunt de ***ordin înalt***, adică pot fi pasate ca valori și pot primi ca argumente alte funcții, dar acest lucru tot de faptul că sunt **first class** ține.

@@ -38,25 +38,25 @@ După cum am observat, am implicat în soluție o funcție cu rol de callback ș
 Să răspundem la întrebarea: de ce avem nevoie de promisiuni? Răspuns: pentru că cedarea controlului unei părți terțe printr-un callback, nu mai este un răspuns adecvat nevoilor de precizie a rulării codului. Pur și simplu nu ne mai permitem luxul de a folosi callback-uri despre care știm puține lucruri privitor la cum vor fi executate, când, de câte ori, în câte locuri ale API-ului (de regulă folosești API-uri contruite de alții), ș.a.m.d.
 
 Ghidat de necesitatea de a înțelege bine și de explicațiile lui Kyle Simpson, vom explora un model de funcții existent, care ar mai rezolva din problemele callback-urilor. Acesta se numește funcții **thunk**, care conform lucrării lui P.Z.Ingerman din 1961, introduce conceptul, fiind în definiția sa *un fragment de cod care oferă o adresă*. În accepțiune modernă și în contextul pregătitor înțelegerii promisiunilor, un *thunk* este o funcție care încapsulează în același timp cod sincron și asincron, acceptă un singur argument, care este o funcție CPS (*continuation passing style* - vezi la callback-uri) și returnează o altă funcție sau chiar un alt *thunk*.
-Un *thunk* asincron este o funcție căreia îi pasezi un callback pentru a scoate o valoare. Hai să vedem mai întâi cum arată un thunk sincron și care este utilitatea sa.
+Un *thunk* asincron este o funcție căreia îi pasezi un callback pentru a scoate o valoare. Hai să vedem mai întâi cum arată un *thunk* sincron și care este utilitatea sa.
 
 ```javascript
 function numePrenume (nume, prenume) {
   return `${nume} ${prenume}`;
 };
 var thunk = function () {
-  return numePrenume ('Ioana', 'Pavelescu');
+  return numePrenume ('Ionel', 'Pavelescu');
 };
-thunk(); // Ioana Pavelescu
+thunk(); // Ionel Pavelescu
 ```
 
 După cum observi, o expresie de funcție *thunk* are totul pentru a-ți oferi o valoare. Nu trebuie să introduci tu nicio valoare pentru a avea deja una la momentul execuției.
 
 Dar dincolo de operațiune în sine, am construit un soi de „referință” către o valoare computată la apelarea oriunde în cod a funcției `thunk` atunci când avem nevoie. Am numit funcția `thunk`, dar poate purta oricare alt nume. Mecanismul în sine este important de înțeles: accesul la o valoare computată care nu se schimbă pentru că este *hard-coded* (adică valorile sunt predefinite la apelarea lui `numePrenume`). Se mai petrece un lucru foarte important. Adu-ți aminte de faptul că o funcție pentru a se executa are nevoie de tot ce are ea nevoie în mediul lexical propriu sau în afara sa. Variabila `thunk` va fi, de fapt, o referință către o stare ambalată într-un container. Această referință, acest container care ambalează o valoare, fie aceasta o funcție care returnează o valoare computată, va fi la dispoziția ta în întregul program.
 
-Kyle Simpson spune că aici ar trebui să fim atenți pentru că, de fapt, acesta este ideea principală a promisiunilor: **un ambalaj peste o valoare**. Referința către ambalaj poate fi utilizată în program.
+Kyle Simpson spune că aici ar trebui să fim atenți pentru că, de fapt, acesta este ideea principală a promisiunilor: **un ambalaj peste o valoare**. Referința către ambalaj poate fi utilizată în program. Mai este un aspect important referitor la promisiuni. Acestea nu au fost introduse pentru a elimina callback-urile, ci pentru a elimina callbackurile inutile spune Adam Boduch în lucrarea sa *JavaScript Concurency*.
 
-Un thunk asincron este o funcție care, spre deosebire de surata sincronă, are nevoie de o funcție callback care să-i fie pasată. Pentru a simula asincronicitatea, în funcția returnată, vom folosi utilitarul `setTimeout`.
+Un *thunk asincron* este o funcție care, spre deosebire de surata sincronă, are nevoie de o funcție callback care să-i fie pasată. Pentru a simula asincronicitatea, în funcția returnată, vom folosi utilitarul `setTimeout`.
 
 ```javascript
 function concatenare (nume, prenume, callback) {
@@ -309,12 +309,12 @@ var listaPromisiunilor = mapPromisificat(lista, dublezLitere);
 
 ## Resurse
 
-[ECMAScript versiunea 7](http://www.ecma-international.org/ecma-262/7.0/index.html#sec-promise-objects)
-[Trevor Burnham. Async JavaScript]()
-[Wikipedia. Futures and promises](https://en.wikipedia.org/wiki/Futures_and_promises)
-[Eric Elliot. Master the JavaScript Interview: What is a Promise?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261)
-[Jecelyn Yeen. JavaScript Promises for Dummies](https://scotch.io/tutorials/javascript-promises-for-dummies)
-[Benjamin Diuguid. Asynchronous Adventures in JavaScript: Callbacks](https://medium.com/dailyjs/asynchronous-adventures-in-javascript-callbacks-39880f1b470e)
-[P.Z.Ingerman.Thunks: A Way of Compiling Procedure Statements with Some Comments on Procedure Declarations](http://archive.computerhistory.org/resources/text/algol/ACM_Algol_bulletin/1064045/frontmatter.pdf)
-[Thunks](https://github.com/thunks/thunks)
-[Rethinking Asynchronous JavaScript: Thunks](https://frontendmasters.com/courses/rethinking-async-js/thunks/)
+- [ECMAScript versiunea 7](http://www.ecma-international.org/ecma-262/7.0/index.html#sec-promise-objects)
+- [Trevor Burnham. Async JavaScript]()
+- [Wikipedia. Futures and promises](https://en.wikipedia.org/wiki/Futures_and_promises)
+- [Eric Elliot. Master the JavaScript Interview: What is a Promise?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261)
+- [Jecelyn Yeen. JavaScript Promises for Dummies](https://scotch.io/tutorials/javascript-promises-for-dummies)
+- [Benjamin Diuguid. Asynchronous Adventures in JavaScript: Callbacks](https://medium.com/dailyjs/asynchronous-adventures-in-javascript-callbacks-39880f1b470e)
+- [P.Z.Ingerman.Thunks: A Way of Compiling Procedure Statements with Some Comments on Procedure Declarations](http://archive.computerhistory.org/resources/text/algol/ACM_Algol_bulletin/1064045/frontmatter.pdf)
+- [Thunks](https://github.com/thunks/thunks)
+- [Rethinking Asynchronous JavaScript: Thunks](https://frontendmasters.com/courses/rethinking-async-js/thunks/)

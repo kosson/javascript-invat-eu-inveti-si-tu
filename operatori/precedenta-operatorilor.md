@@ -36,8 +36,6 @@ x = y = 1;
 
 Ceea ce se petrece este asignarea valorii 1 lui y, iar y este asignat lui x.
 
-## Precedența operatorilor
-
 Modul în care se face evaluarea codului depinde în mod direct de precedența operatorilor și a felului cum aceștia decid, de fapt, valoarea finală. Precedența este ordinea în care se vor executa operațiunile. Orice limbaj de programare are o tabelă de precedență.
 
 Vom porni de la cel mai important către cei cu prioritatea cea mai redusă.

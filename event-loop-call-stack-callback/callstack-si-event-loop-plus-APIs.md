@@ -1,6 +1,6 @@
 # Relația între stiva apelurilor, bucla de evenimente și API-urile browserului
 
-Există un concept fundamental pentru a înțelege în adâncime programarea în JavaScript și nu numai. Acesta este cel de **control**. Adeseori veți auzi, viziona sau citi despre faptul că o anumită funcție este executată de **control** sau că acesta este înapoiat unei funcții deja aflată în execuție dar care era în așteptare în stivă.
+Există un concept fundamental pentru a înțelege în adâncime programarea în JavaScript și nu numai. Acesta este cel de **control**. Adeseori veți auzi, viziona sau citi despre faptul că o anumită funcție este executată de **control** sau că acesta este returnat unei funcții deja aflată în execuție dar care era în așteptare în stivă.
 
 **Controlul**, de fapt este firul roșu al execuției fragmentelor de cod.
 
@@ -69,9 +69,12 @@ Job-urile sunt organizate printr-un mecanism intern motorului care se comportă 
 
 Pentru a gestiona comportamentul complex al apelurilor și al timpilor de execuție, motorul de JavaScript are la dispoziție trei mecanisme interne: **stiva de apeluri** numită științific **stiva contextelor de execuție în derulare** (*call stack* în engleză prescurtat în debuggerul browserelor), **API**-urile browserului, care preiau din efortul de soluționare a unor evaluări precum apelurile AJAX sau temporizările cu `setTimeout()` și **job queue**. Mai există și un mecanism care gestionează felul în care joburile sunt reinserate în firul principal de execuție a codului JavaScript. Coroborarea acestor mecanisme permite rularea codului complex al oricărei aplicații JavaScript. Din acest motiv este necesară înțelegerea în adâncime a felului în care funcționează.
 
-Rularea unui program în firul de execuție, neutilizând API-urile browserului, este un program care va rula secvență cu secvență în ordinea intenționată de programator. Acest aspect descrie execuția ca fiind una **sincronă**. Aceste cazuri sunt rare și de cele mai multe ori se aplică fragmentelor de cod explicate într-un manual de programare.
+Rularea unui program în firul de execuție, neutilizând API-urile browserului, este un program care va rula secvență cu secvență în ordinea intenționată de programator. În lurările de specialitate veți găsi sintagma **run-to-completition**, adică un program va rula până la încheierea tuturor pașilor prevăzuți în algoritm. Acest aspect descrie execuția ca fiind una **sincronă** sau **serială**. Pe măsură ce paradigma de programare în JavaScript evoluează, aceste cazuri sunt rare și de cele mai multe ori se aplică fragmentelor de cod explicate într-un manual de programare sau local în funcții.
 
 Realitatea rulării unor mari aplicații ține de gestionarea mai multor fire de execuție: a celui principal al programului și ale API-urilor puse la dispoziție de mediul creat de browser. Înțelegerea aspectelor complexe la rularea într-un astfel de model ține de caracterul **asincron** al execuției. Marea majoritate a software-ului JavaScript existent este scris pentru a rula asincron.
+
+Din nefericire, modul în care funcționează asimilarea de informație pentru noi oamenii este una sincronă, secvențială. Fie că lecturăm, fie că privim un film, informația este asimilată secvențial. Intelectul uman are capacitatea de a reconstitui un context complex chiar dacă detaliile acestuia au fost asimilate fragment cu fragment. Acesta este și cazul paradigmei noi de programare asincronă în care efortul este de a stabili legăturile dintre fragmentele de cod, relațiile pe care le stabilesc și cum modifică starea una alteia în funcție de evenimentele apărute.
+
 Asincronicitatea se întâmplă și atunci când folosim callback-uri. De ce? Pentru că funcția cu rol de callback se va executa și va produce un rezultat vom avea un scenariu diferit de comportamentul funcției al cărui scop este să returneze ceva. Executarea funcțiilor callback ia ceva timp și din acest motiv numim acest comportament a fi unul **asincron**. Rezultatul evaluării codului din callback va fi returnat într-un moment viitor.
 
 Să presupunem că dorești să prelucrezi un set de date aflat pe un server pe Internet. Mai întâi, ai nevoie să-l aduci și de îndată ce l-ai adus să ai o funcție care să aplice transformările dorite asupra conținutului său. Pentru exemplificare vom lucra cu API-ul pus la dispoziție de Europeana.
@@ -99,9 +102,9 @@ fetch(adresa)
 console.log('Mesaj afișat înaintea primirii datelor.');
 ```
 
-În exemplul selectat, delegăm o cerere pentru aducerea unor date de al Europeana, API-ului `fetch()` al browserului. Ceea ce tocmai am făcut este să delegăm sarcina aducerii datelor unui alt „program” în timp ce firul de execuție își va vedea de treabă în continuare. Din acest motiv com avea cele două mesaje în consolă unul după altul și abia **la un moment dat** vom avea și datele afișate. Scopul penru care facem această delegare este acela de a nu bloca firul de execuție.
+În exemplul selectat, delegăm o cerere pentru aducerea unor date de al Europeana, API-ului `fetch()` al browserului. Ceea ce tocmai am făcut este să delegăm sarcina aducerii datelor unui alt „program” în timp ce firul de execuție își va vedea de treabă în continuare. Din acest motiv com avea cele două mesaje în consolă unul după altul și abia **la un moment dat** vom avea și datele afișate. Scopul pentru care facem această delegare este acela de a nu bloca firul de execuție.
 
-Lucrul asyncron îl vei „simți” în practica cu paginile web. Gândește-te la faptul că vei dori manipularea unei pagini web, care, de fapt, este un arbore dinamic de noduri a ceea ce numim **Document Object Model**. La un moment dat, un utilizator, dă un click pe un element al paginii. Asociat elementului acționat prin click trebuie să ai un mecanism de ascultare și o funcție din program care să pornească execuția la momentul click-ului. Utilizatorului îi este returnat un rezultat la finalizarea execuției funcției acționate (în jargonul programării web se numește **event handler**). Toate acestea, fără să te simți copleșit se subscriu caracterului asincron al programelor JavaScript. Acest aspect este, de fapt, cel pentru care JavaScript are valoarea sa actuală.
+Lucrul asyncron îl vei *simți* în practica cu paginile web. Gândește-te la faptul că vei dori manipularea unei pagini web, care, de fapt, este un arbore dinamic de noduri a ceea ce numim **Document Object Model**. La un moment dat, un utilizator, dă un click pe un element al paginii. Asociat elementului acționat prin click trebuie să ai un mecanism de ascultare și o funcție din program care să pornească execuția la momentul click-ului. Utilizatorului îi este returnat un rezultat la finalizarea execuției funcției acționate (în jargonul programării web se numește **event handler**). Toate acestea, fără să te simți copleșit se subscriu caracterului asincron al programelor JavaScript. Acest aspect este, de fapt, cel pentru care JavaScript are valoarea sa actuală.
 
 Să luăm cazul callback-urilor pentru că acestea sunt cel mai des întâlnit exemplu în practică. O funcție este pasată unui utilitar al API-ului pentru ca în momentul în care utilitarul și-a încheiat execuția, acesta să execute funcția pe care i-am dat-o noi și pe care să o aplice rezultatelor oferite de utilitar la finalul execuției sale. Fenomenele interesante apar atunci când stiva apelurilor (a contextelor de execuție în desfășurare) nu este goală. De ce este nevoie să fie goală, te vei întreba? Pentru că funcția callback trebuie și ea la rândul ei executată, dar pentru că necesitaea executării sale a survenit într-un moment când alte apeluri de funcții erau în rulare, această cerință trebuie memorată undeva. Astfel, mecanismul cozii de așteptare este evident. De îndată ce stiva apelurilor se golește, primul apel de callback din coadă, va fi trimis spre execuție. Acesta devine primul context din stiva apelurilor. Această funcție intră în execuție chiar dacă va apela la rândul ei alte funcții, etc. Următorul callback din coadă alteaptă cumințel ca stiva să fie goală ca să intre și el în execuție. Și tot așa până când sunt epuizate toate callbackurile din coadă.
 
@@ -115,7 +118,8 @@ let colectie = ['unu', 'doi', 'trei'];
 function procesor (element) {
   console.log(element);
 };
-for (let x = 0; x < colectie.length; x++) {
+let dimensiune = colectie.length;
+for (let x = 0; x < dimensiune; x++) {
   procesor(colectie[x]);
 }; /* unu doi trei*/
 ```
