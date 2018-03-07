@@ -33,14 +33,19 @@ Câteva concepte fundamentale pentru înțelegerea obiectelor în general:
 
 Atunci când un obiect este creat, toate caracteristicile sale sunt moștenite de la un alt obiect cu rol de prototip. Să nu vi se pară ciudat că un prototip este un obiect, iar acesta la rândul lui are un prototip. E ca un lanț care are drept limită superioară obiectele interne `Object` și `Function`.
 
-Pentru că ești nerăbdătoare am să-ți dau două indicii privind crearea obiectelor. Poți folosi notația literală folosind acoladele ca în `var obiect = {a: 1}` sau poți apela cu operatorul `new` funcții cu rol de constructor. Aceste două metode sunt și cel mai des întâlnite. O regulă de scriere care este foarte utilă este aceea că toate valorile text, vor fi introduse în obiecte cu textul între ghilimele simple, iar restul valorilor așa cum sunt ele. Proprietățile se redactează precum listele, fiind delimitate prin virgulă. A crea un obiect, în limbajul programatorilor este echivalent cu termenul de *a instanția* un obiect. Sunt una și același lucru.
+Pentru că ești nerăbdătoare am să-ți dau două indicii privind crearea obiectelor. Poți folosi **notația literală** folosind acoladele ca în `var obiect = {a: 1}`, poți apela cu operatorul `new` funcții cu rol de constructor sau poți invoca `Object.create()`. O regulă de scriere care este foarte utilă este aceea că toate valorile text, vor fi introduse în obiecte cu textul între ghilimele simple, iar restul valorilor așa cum sunt ele. Proprietățile se redactează precum listele, fiind delimitate prin virgulă. A crea un obiect, în limbajul programatorilor este echivalent cu termenul de *a instanția* un obiect. Sunt una și același lucru.
 
 ```javascript
 var obi = {
-  a: 'ceva text',
-  b: true,
-  c: 10
+  a: 'ceva text'
 };
+// sau declarând proprietatea cu string literal
+let obi2 = {
+  "a": 'altceva'
+};
+// echivalent cu 
+let obi3 = new Object();
+obi3.a = 'cineva';
 ```
 
 Exemplul oferit înfățișează cea mai întâlnită notație pe care o numim *literală*: `var obi = {};`. Acum poți să-ți pui o întrebare foarte simplă: cât timp „trăiește” un obiect? Un obiect trăiește atâta vreme cât există o referință către acesta. Dacă dorești totuși ca memoria să fie eliberată, vei seta obiectul la valoarea `null`.
@@ -356,7 +361,7 @@ console.log(obi[prop]); // 189439
 console.log(obi['primul lucru']); // o balenă
 ```
 
-### Getters și setters
+### Accesarea și inițializarea indirectă a unor proprietăți prin getters și setters
 
 Javascript oferă posibilitatea de a defini funcții specializate cu ajutorul cărora să poți manipula o valoare din interiorul unui obiect, fără a accesa direct, brut acea valoare prin sintaxa cu punct sau paranteze pătrate. În limba engleză **get** înseamnă să obții valoarea, iar **set**, să o introduci. Acest lucru este util atunci când lucrezi cu o colecție de valori  folosind un array, de exemplu.
 
@@ -570,77 +575,7 @@ Legătura cu `[[Prototype]]` este aceea că în cazul unui `[[Extensible]]` cu v
 - Legătura prototipală se obține și prin invocarea cu `new`.
 - Legătura prototipală creează un lanț de delegare pentru cazurile în care nu găsești o proprietate sau o metodă într-un anumit context de execuție.
 - Relațiile prototipale pot cauza probleme atunci când este nevoie de enumerarea proprietăților obiectelor. Ambalează într-o funcție de verificare cu `Object.hasOwnPropery()`;
-- [Obiecte](#obiecte)
-  - [Ce sunt obiectele](#ce-sunt-obiectele)
-  - [Ce sunt constructorii](#ce-sunt-constructorii)
-  - [Alcătuirea obiectelor](#alc%C4%83tuirea-obiectelor)
-  - [Categorii de obiecte](#categorii-de-obiecte)
-  - [Obiecte interne (*built-in*)](#obiecte-interne-built-in)
-    - [Metodele obiectelor interne](#metodele-obiectelor-interne)
-  - [Mantre](#mantre)
-  - [Crearea obiectelor](#crearea-obiectelor)
-  - [Membrii obiectului](#membrii-obiectului)
-    - [Proprietățile unui obiect](#propriet%C4%83%C8%9Bile-unui-obiect)
-      - [Atributele proprietăților unui obiect](#atributele-propriet%C4%83%C8%9Bilor-unui-obiect)
-      - [Atributele unei proprități de tip **accessor**](#atributele-unei-proprit%C4%83%C8%9Bi-de-tip-accessor)
-    - [Metodele unui obiect](#metodele-unui-obiect)
-  - [Adăugarea membrilor în obiect](#ad%C4%83ugarea-membrilor-%C3%AEn-obiect)
-    - [Folosirea operatorul punct](#folosirea-operatorul-punct)
-    - [Folosirea sintaxei cu parante drepte](#folosirea-sintaxei-cu-parante-drepte)
-    - [Folosirea metodei `Object.defineProperty()`](#folosirea-metodei-objectdefineproperty)
-    - [Folosirea metodei `Object.defineProperties()`](#folosirea-metodei-objectdefineproperties)
-    - [Proprietăți computate](#propriet%C4%83%C8%9Bi-computate)
-    - [Getters și setters](#getters-%C8%99i-setters)
-  - [Accesarea membrilor unui obiect](#accesarea-membrilor-unui-obiect)
-  - [Eliminarea membrilor unui obiect](#eliminarea-membrilor-unui-obiect)
-  - [Moștenirea prototipală](#mo%C8%99tenirea-prototipal%C4%83)
-    - [Ce-i cu moștenirea asta?](#ce-i-cu-mo%C8%99tenirea-asta)
-    - [Mantre](#mantre)
-    - [Verificarea prototipului](#verificarea-prototipului)
-      - [Confirmarea prototipului pentru cel investigat](#confirmarea-prototipului-pentru-cel-investigat)
-      - [Cine este obiectul prototipal pentru cel investigat?](#cine-este-obiectul-prototipal-pentru-cel-investigat)
-    - [Modele de realizare a moștenirii prototipale](#modele-de-realizare-a-mo%C8%99tenirii-prototipale)
-      - [A. Prototip gol, care nu moștenește](#a-prototip-gol-care-nu-mo%C8%99tene%C8%99te)
-      - [B. Crearea unui obiect literal](#b-crearea-unui-obiect-literal)
-      - [C. Clonarea obiectelor și moștenirea prototipului de către clonă](#c-clonarea-obiectelor-%C8%99i-mo%C8%99tenirea-prototipului-de-c%C4%83tre-clon%C4%83)
-    - [Apelarea unei metode din `prototype`, clasic și cu `super`](#apelarea-unei-metode-din-prototype-clasic-%C8%99i-cu-super)
-  - [Crearea obiectelor cu un constructor](#crearea-obiectelor-cu-un-constructor)
-    - [Ce se întâmplă când folosești `new`](#ce-se-%C3%AEnt%C3%A2mpl%C4%83-c%C3%A2nd-folose%C8%99ti-new)
-    - [Introducerea de proprietăți în prototipul unui obiect gol - obiect literal](#introducerea-de-propriet%C4%83%C8%9Bi-%C3%AEn-prototipul-unui-obiect-gol---obiect-literal)
-    - [Crearea și accesarea membrilor unui obiect creat cu un constructor](#crearea-%C8%99i-accesarea-membrilor-unui-obiect-creat-cu-un-constructor)
-  - [Crearea unui obiect printr-o declarație literală](#crearea-unui-obiect-printr-o-declara%C8%9Bie-literal%C4%83)
-  - [Crearea obiectelor cu `Object.create()`](#crearea-obiectelor-cu-objectcreate)
-  - [Crearea obiectelor cu valori deja computate](#crearea-obiectelor-cu-valori-deja-computate)
-  - [Extinderea obiectelor](#extinderea-obiectelor)
-    - [Ce este un „mixin”](#ce-este-un-%E2%80%9Emixin%E2%80%9D)
-  - [Clase în JavaScript](#clase-%C3%AEn-javascript)
-    - [Drumul către clase - studiu](#drumul-c%C4%83tre-clase---studiu)
-      - [Funcție simplă cu metode adăugate direct la prototip](#func%C8%9Bie-simpl%C4%83-cu-metode-ad%C4%83ugate-direct-la-prototip)
-      - [Folosirea unui obiect literal - un Singleton](#folosirea-unui-obiect-literal---un-singleton)
-    - [Sintaxa `class`](#sintaxa-class)
-    - [Mantre](#mantre)
-    - [Declarare și expresii de clase](#declarare-%C8%99i-expresii-de-clase)
-      - [Declarație de clasă](#declara%C8%9Bie-de-clas%C4%83)
-      - [Expresie de clasă](#expresie-de-clas%C4%83)
-    - [Clasele ca valori de prim-rang](#clasele-ca-valori-de-prim-rang)
-    - [Metodele statice](#metodele-statice)
-    - [Clasele permit proprietăți accesor](#clasele-permit-propriet%C4%83%C8%9Bi-accesor)
-    - [Extinderea claselor](#extinderea-claselor)
-    - [Clase derivate - extends](#clase-derivate---extends)
-    - [Moștenirea din obiectele interne prin clase derivate](#mo%C8%99tenirea-din-obiectele-interne-prin-clase-derivate)
-  - [Tratarea obiectelor care seamănă cu array-uri](#tratarea-obiectelor-care-seam%C4%83n%C4%83-cu-array-uri)
-  - [Folosirea unui obiect ca un dicționar de valori (`map`)](#folosirea-unui-obiect-ca-un-dic%C8%9Bionar-de-valori-map)
-    - [Moștenirea - o problemă](#mo%C8%99tenirea---o-problem%C4%83)
-  - [Verificări](#verific%C4%83ri)
-    - [Testare cu operatorul `in`](#testare-cu-operatorul-in)
-    - [Testare cu `Object.hasOwnProperty()`](#testare-cu-objecthasownproperty)
-    - [Radiografierea obiectelor cu `Object.getOwnPropertyNames()`](#radiografierea-obiectelor-cu-objectgetownpropertynames)
-    - [Testare cu `for..in`](#testare-cu-forin)
-    - [Accesează și citește cheile obiectului](#acceseaz%C4%83-%C8%99i-cite%C8%99te-cheile-obiectului)
-      - [Obținerea unui array cu numele tuturor proprietăților](#ob%C8%9Binerea-unui-array-cu-numele-tuturor-propriet%C4%83%C8%9Bilor)
-      - [Obținerea valorii asociate unei proprietăți](#ob%C8%9Binerea-valorii-asociate-unei-propriet%C4%83%C8%9Bi)
-  - [Destructurarea obiectelor sau destructuring assignment](#destructurarea-obiectelor-sau-destructuring-assignment)
-  - [Resurse](#resurse)
+
 
 ### Verificarea prototipului
 

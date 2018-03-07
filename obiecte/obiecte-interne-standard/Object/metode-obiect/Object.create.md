@@ -1,9 +1,10 @@
-# `Object.create`
+# `Object.create()`
 
 Este o metodă propusă de Douglas Crockford. Aceasta creează un obiect nou cu un prototip și proprietăți specificate.
 Permite atribuirea directă a unui prototip unui obiect eliberând prototipul de legătura cu, constructorul.
 
 Metoda primește doi parametri:
+
 - obiectul la a cărui prototip se va lega obiectul nou creat
 - și al doilea, opțional poate primi proprietățile pentru noul obiect, dacă un acest scenariu este urmărit de programator.
 
@@ -55,7 +56,7 @@ var obi2 = Object.create(
 
 Dacă ai nevoie de un control în cele mai mici detalii a procesului de construcție a unui obiect, metoda create oferă posibilitatea de a descrie în cele mai fine detalii proprietățile obiectului pe care-l creezi. Acest lucru se face prin folosirea unui obiect specializat în descrierea detaliilor privind proprietățile. Acest obiect este opțional, dar este același pe care îl vei folosi atunci când dorești utilizarea lui `Object.defineProperties`.
 
-Mai întâi de toate, trebuie să povestim despre practica de incapsulare, care este principiul de bază al lucrului cu obiectele. De cele mai multe ori, proprietățile unui obiect trebuie să permită o flexibilitate în ceea ce privește valorile sale, adică, limbajul să pună la îndemâna programatorului instrumentele de a introduce o valoare și de a o accesa prompt. Hai să pornim de la un exemplu simplu. Să presupunem că avem o funcție care va îndeplini rolul unui constructor. Acest constructor are două proprietăți. Una care primește o valoare la instanțierea obiectului și alta care are nevoie să fie actualizată constant.
+Mai întâi de toate, trebuie să povestim despre practica de **incapsulare**, care este principiul de bază al lucrului cu obiectele. De cele mai multe ori, proprietățile unui obiect trebuie să permită o flexibilitate în ceea ce privește valorile sale, adică, limbajul să pună la îndemâna programatorului instrumentele de a introduce o valoare și de a o accesa prompt. Hai să pornim de la un exemplu simplu. Să presupunem că avem o funcție care va îndeplini rolul unui constructor. Acest constructor are două proprietăți. Una care primește o valoare la instanțierea obiectului și alta care are nevoie să fie actualizată constant.
 
 ```javascript
 function Vehicul (acceleratie) {
@@ -66,7 +67,7 @@ function Vehicul (acceleratie) {
 var automobil = new Vehicul(10);
 ```
 
-Observă faptul că proprietățile `_acceleratie` și `_viteza` sunt pur și simplu **ascunse** atunci când ai generat obiectul. Dar ai creat mijloacele de a le accesa. Chiar există o notație specifică întărită prin convenții de practică: un caracter underscore în fața identificatorului înseamnă că ai de-a face cu o variabilă privată.
+Observă faptul că proprietățile `_acceleratie` și `_viteza` sunt pur și simplu **ascunse** atunci când ai generat obiectul. Dar ai creat mijloacele de a le accesa. Chiar există o notație specifică întărită prin convenții de practică: un caracter underscore (`_`) în fața identificatorului înseamnă că ai de-a face cu o variabilă privată.
 
 Pentru a rezolva mai elegant, ne-a fost pus la dispoziție posibilitatea de a specifica mecanismul de actualizare și de extragere a valorii printr-un obiect descriptiv de accesare a unei proprietăți (**accessor descriptor**). Știind aceste detalii, să vedem cum arată exemplul nostru.
 
