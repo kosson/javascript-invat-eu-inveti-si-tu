@@ -6,16 +6,16 @@ Moștenește proprietățile lui HTMLElement.
 
 ```javascript
 // varianta clasică cu callback
-function incarcImagine(url, callback){
+function incarcImagine (url, callback) {
   let imagine = new Image();
-   imagine.onload = function(){
-     callback(null, image);
-   };
-   imagine.onerror = function(){
-     let mesaj = "Încărcare eșuată de la " + url;
-     callback(new Error(msg));
-   };
-   imagine.src = url;
+  imagine.onload = function(){
+    callback(null, image);
+  };
+  imagine.onerror = function(){
+    let mesaj = "Încărcare eșuată de la " + url;
+    callback(new Error(msg));
+  };
+  imagine.src = url;
 };
 export default incarcImagine;
 

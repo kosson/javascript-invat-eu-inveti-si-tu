@@ -6,14 +6,14 @@ Această interfață constituie punctul de acces la toate evenimentele apărute 
 
 ## Spune standardul
 
-„Un obiect Event este un eveniment denumit. Acesta semnalizează când ceva s-a întâmplat, de exemplu, s-a terminat de descărcat o imagine”.
+> Un obiect Event este un eveniment denumit. Acesta semnalizează când ceva s-a întâmplat, de exemplu, s-a terminat de descărcat o imagine.
 
-„Termenul de obiect context se referă la obiectul în care algoritmul, ge
-tter-ul sau setter-ul de proprietate sau metoda care este în discuție au fost apelate”.
+„Termenul de obiect context se referă la obiectul în care algoritmul, *getter*-ul sau *setter*-ul de proprietate sau metoda care este în discuție au fost apelate”.
 
 ## Obiectul `event`
 
-Acest obiect are câteva fanioane care nu sunt setate inițial.
+Acest obiect are câteva fanioane care nu sunt setate inițial:
+
 - oprește propagarea
 - oprește imediat propagarea
 - anulat
@@ -24,20 +24,19 @@ Acest obiect are câteva fanioane care nu sunt setate inițial.
 
 ## Proprietăți și metode ale obiectului eveniment
 
-### numeEveniment*.type*
+### numeEveniment.type
 
 La momentul creării evenimentului, atributul trebuie inițializat cu un șir vid. Type returnează valoarea cu care a fost inițializat evenimentul.
 
-### numeEveniment*.target*
+### numeEveniment.target
 
 Returnează obiectul pentru care s-a atașat evenimentul. Când este creat evenimentul, se va inițializa la `null`.
 
-### numeEveniment*.currentTarget*
+### numeEveniment.currentTarget
 
-Avem un event listener (un receptor). Acest event listener are o funcție cu rol de callback. Atunci când este invocată funcția callback, currentTarget returnează obiectul în contextul căreia callbackul rulează la momentul apelării. Este posibil ca ținta să se fi schimbat între timp.
-Când este creat evenimentul, se va inițializa la `null`.
+Avem un event listener (un receptor). Acest event listener are o funcție cu rol de callback. Atunci când este invocată funcția callback, `currentTarget` returnează obiectul în contextul căreia callbackul rulează la momentul apelării. Este posibil ca ținta să se fi schimbat între timp. Când este creat evenimentul, se va inițializa la `null`.
 
-### numeEveniment*.eventPhase*
+### numeEveniment.eventPhase
 
 Indică faza în care se află evenimentul.
 
@@ -46,47 +45,47 @@ Indică faza în care se află evenimentul.
 - `Event.AT_TARGET` - a ajuns la țintă, codat prin `2`; evenimentul a ajuns la țintă și a fost setată valoarea pentru proprietatea `target`. În acest moment, dacă `numeEveniment.bubbles` are valoarea `false`, procesarea evenimentului se încheie după această fază.
 - `Event.BUBBLING_PHASE` - faza de bubbling, codată prin `3`; evenimentul a ajuns la țintă deja și s-a setat valoarea pentru proprietatea `target`. Dacă `numeEveniment.bubbles` are valoarea `true`, evenimentul se propagă din părinte în părinte până la `Window` declanșând toți receptorii de eveniment setați pentru faza de bubbling.
 
-### numeEveniment*.stopPropagation()*
+### numeEveniment.stopPropagation()
 
 Invocarea acestei metode într-un arbore conduce la stoparea propagării evenimentului dincolo de obiectul curent. Invocarea acestei metode conduce la setarea fanionului „stop propagation” care aparține obiectului context.
 
-### numeEveniment*.stopImmediatePropagation()*
+### numeEveniment.stopImmediatePropagation()
 
 Metoda este invocată atunci când ai nevoie să împiedici propagarea evenimentului imediat după ce funcțiile callback pentru receptorii de eveniment ai nodului curent la care evenimentul a ajuns, și-au încheiat execuția.
-Pentru a înțelege mai ușor, să presupunem că avem mai mulți receptori (event listeners) pentru același element și pentru același tip de eveniment. Aceștia sunt apelați în ordinea adăugării lor dar dacă în timpul unui astfel de apel `numeEveniment.stopImmediatePropagation()` a fost invocat, receptorii rămași nu vor mai fi apelați.
+Pentru a înțelege mai ușor, să presupunem că avem mai mulți receptori (*event listeners*) pentru același element și pentru același tip de eveniment. Aceștia sunt apelați în ordinea adăugării lor dar dacă în timpul unui astfel de apel `numeEveniment.stopImmediatePropagation()` a fost invocat, receptorii rămași nu vor mai fi apelați.
 
-### numeEveniment*.bubbles*
+### numeEveniment.bubbles
 
 Proprietatea returnează `true` sau `false` în funcție de modul în care a fost inițializat evenimentul. Dacă este `true`, atunci evenimentul se va propaga înapoi către `Window`; pe scurt, face bubbling.
 
-### numeEveniment*.cancelable*
+### numeEveniment.cancelable
 
 Indică printr-un boolean dacă un eveniment poate fi anulat sau nu. Verificarea dacă un evenimnet poate fi anulat sau nu, este ceva ce poate fi determinat la momentul inițierii evenimentului.
 
-### numeEveniment*.preventDefault()*
+### numeEveniment.preventDefault()
 
 Această metodă spune browserului că de nu există nimic care să gestioneze evenimentul, acesta să nu producă efectele. Totuși, evenimentul se va propaga cu specificația că nu va produce niciun efect iar dacă va da peste un event listener care apelează `stopPropagation()`, evenimentul va fi oprit din propagare.
 Atenție, funcționează doar dacă proprietatea `cancelable` este setată la `true`.
 
-### numeEveniment*.defaultPrevented*
+### numeEveniment.defaultPrevented
 
 Returnează `true` dacă a fost invocată `preventDefault()`.
 
-### numeEveniment*.composed*
+### numeEveniment.composed
 
 Returnează `true` sau `false` în funcție de modul în care a fost inițializat evenimentul. Este `true`, dacă s-a trecut din shadowDOM în DOM normal.
 
-### numeEveniment*.isTrusted*
+### numeEveniment.isTrusted
 
 Returnează `true` dacă evenimentul a fost emis de browser.
 
-### numeEveniment*.timeStamp*
+### numeEveniment.timeStamp
 
 Returnează timpul la care a apărut evenimentul.
 
 ## Resurse
 
-[DOM: Living Standard, 9 mai, 2017](https://dom.spec.whatwg.org)
-[MDN - Event.eventPhase](https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase)
-[2.2. Interface Event](https://dom.spec.whatwg.org/#interface-event)
-[MDN - Event](https://developer.mozilla.org/en-US/docs/Web/API/Event)
+- [DOM: Living Standard, 9 mai, 2017](https://dom.spec.whatwg.org)
+- [MDN - Event.eventPhase](https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase)
+- [2.2. Interface Event](https://dom.spec.whatwg.org/#interface-event)
+- [MDN - Event](https://developer.mozilla.org/en-US/docs/Web/API/Event)

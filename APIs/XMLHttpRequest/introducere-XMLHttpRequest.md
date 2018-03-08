@@ -14,7 +14,7 @@ XMLHttpRequest este un standard în continuă dezvoltare și poate fi consultat 
 var client = new XMLHttpRequest();
 ```
 
-Invocarea cu `new` a constructorului XMLHttpRequest are ca efect crearea unui obiect.
+Invocarea cu `new` a constructorului `XMLHttpRequest` are ca efect crearea unui obiect.
 
 Un exemplu de utilizare este cel al aducerii unor date dintr-un API la distanță. Pentru acest exemplu vom folosi API-ul pus la dispoziție de Europeana.
 

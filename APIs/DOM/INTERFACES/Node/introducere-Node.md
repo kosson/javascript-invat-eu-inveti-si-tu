@@ -1,6 +1,6 @@
 # Interfața Node - fundamentală
 
-Este considerată a fi o interfață fundamentală.
+Este considerată a fi o **interfață fundamentală**.
 În DOM, Node-ul este unitatea de bază pentru a accesa datele. Este un reper fix.
 
 Node este o interfață de la care moștenesc o serie de tipuri DOM printre care `Document`, `Element`, `CharacterData` (din care moștenesc la rândul lor `Text`, `Comment`, and `CDATASection`), `ProcessingInstruction`, `DocumentFragment`, `DocumentType`, `Notation`, `Entity`, `EntityReference`.
@@ -72,11 +72,11 @@ Returnează primul nod al arborelui. Ajungi la acest nod din Node.parentElement 
 
 Returnează sau setează conținutul de tip text al unui element și a tuturor descendenților acestora.
 
-## Metode ale Node.
+## Metodele unui Node
 
 ### `Node.appendChild()`
 
-Această metodă primește ca argument numele elementului. Acest nod va fi creat ca lastChild în ramura în care a fost creat. Dacă argumentul referențiază un nod deja existent, acesta va fi desprins din poziția sa și reatașat în noua poziție (lastchild).
+Această metodă primește ca argument numele elementului. Acest nod va fi creat ca `lastChild` în ramura în care a fost creat. Dacă argumentul referențiază un nod deja existent, acesta va fi desprins din poziția sa și reatașat în noua poziție (`lastchild`).
 
 ### `Node.cloneNode()`
 

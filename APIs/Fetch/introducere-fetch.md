@@ -2,7 +2,7 @@
 
 Scopul este acela de a unifica componentele folosite pentru a aduce resurse pe web.
 
-`fetch()` este o metodă a obiectului global sau a unui worker care returnează o promisiune.
+`fetch()` este o metodă a obiectului global sau a unui **worker** care returnează o promisiune.
 
 ```javascript
 fetch('x');

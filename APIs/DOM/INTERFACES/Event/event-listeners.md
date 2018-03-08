@@ -2,7 +2,7 @@
 
 ## Spune standardul
 
-„Un event listener poate fi utilizat pentru a observa un anumit eveniment” (DOM living standard).
+> Un event listener poate fi utilizat pentru a observa un anumit eveniment (DOM living standard).
 
 ## Din ce-i constituit un event listener - un receptor
 
@@ -28,10 +28,15 @@ Opusă setării de receptori, există și metoda prin care sunt eliminați: `ți
 
 Mai există o metodă prin care poate fi `emis` (dispatch) în mod artificial un eveniment: `ținta.dispatchEvent(event)`. Emiterea evenimentului către țintă returnează un boolean care este `true`, dacă atributul `cancelable` al evenimentului este `false` sau dacă metoda `preventDefault()` nu a fost invocată. False vice-versa.
 
-## Mecanismul de „trimitere” (dispatch) a evenimentelor
+## Mecanismul de „trimitere” (dispatch) al evenimentelor
 
 Acest mecanism se referă la modul în care evenimentele se propagă prin arborele DOM.
-Aplicațiile pot emite evenimente folosind metoda `dispatchEvent()`. Evenimentull se va propaga prin arborele DOM respectând modul în care se face propagarea în DOM. Înainte ca evenimentul să se propage, este construită o cale către elementul țintă: `propagation path`. **Calea de propagare** care în engleză mai este cunoscută și ca *event target chain* este setul ordonat de ținte pentru care este emis un eveniment și prin care acesta va trece în ordinea celor trei faze: captură (*capture phase*), localizată pe țintă (*target phase*) și cea de bubbling (*bubble phase*).
+Aplicațiile pot emite evenimente folosind metoda `dispatchEvent()`. Evenimentul se va propaga prin arborele DOM respectând modul în care se face propagarea. Înainte ca evenimentul să se propage, este construită o cale către elementul țintă: `propagation path`. **Calea de propagare** care în engleză este numită *event target chain* este setul ordonat de ținte pentru care este emis un eveniment și prin care acesta va trece în ordinea celor trei faze:
+
+- **captură** (*capture phase*),
+- **localizarea pe țintă** (*target phase*) și cea de
+- **bubbling** (*bubble phase*).
+
 Pe măsură ce fiecare element, care are receptori pentru eveniment, este „atins” de acesta, rând pe rând devine `currentTarget` (ținta curentă). Ultimul atins din această cale este chiar ținta evenimentului (event target).
 
 Cele trei faze ale „călătoriei” unui obiect eveniment.
@@ -50,10 +55,10 @@ După executarea funcției callback pentru evenimentul specificat de țintă, pr
 
 ## Acțiuni automate și evenimente care pot fi anulate
 
-Evenimentele sunt emise ca urmare a interacțiunii utilizatorului (a apăsat un buton) sau a încheierii unui proces cum ar fi accesarea asincronă a unor resurse. Unele evenimente pot să determine sau să controleze chiar comportamentul următoarelor evenimente care vor fi emise ca răspuns al primelor sau chiar poate fi urmat cursul anulării efectelor acțiunii primelor. Aceste acțiuni, aceste evenimente se numesc evenimente „anulabile” (cancelable), iar comportamentul pe care-l anulează este „efectul implicit” (*default action*) al evenimentului.
+Evenimentele sunt emise ca urmare a interacțiunii utilizatorului (a apăsat un buton) sau a încheierii unui proces cum ar fi accesarea asincronă a unor resurse. Unele evenimente pot să determine sau să controleze chiar comportamentul următoarelor evenimente care vor fi emise ca răspuns al primelor sau chiar poate fi urmat cursul anulării efectelor acțiunii primelor. Aceste acțiuni, aceste evenimente se numesc evenimente „anulabile” (*cancelable*), iar comportamentul pe care-l anulează este „efectul implicit” (*default action*) al evenimentului.
 Obiectele eveniment care pot fi anulate pot fi asociate cu una sau mai multe *efecte implicite*. Pentru a anula un eveniment se va invoca metoda `preventDefault()`.
 
-Ca exemplu, standardul indică comportamentul unui eveniment `mouse down`. Pentru momentul în care utilizatorul apasă pe butonul mouse-ului pe un text sau poziționează săgeata mouse-ului pe o imagine, efectul implicit (*default action*) este ceea ce se întâmplă imediat după eveniment iar acest lucru poate fi selecția textului sau modificarea imaginii. Anulatrea „efectului implicit” a evenimentului, anulează, de fapt acțiunile pe care le poți face după poziționarea mouse-ului: selectarea textului sau deplasarea imaginii.
+Ca exemplu, standardul indică comportamentul unui eveniment `mouse down`. Pentru momentul în care utilizatorul apasă pe butonul mouse-ului pe un text sau poziționează săgeata mouse-ului pe o imagine, efectul implicit (*default action*) este ceea ce se întâmplă imediat după eveniment, iar acest lucru poate fi selecția textului sau modificarea imaginii. Anularea „efectului implicit” al evenimentului, de fapt anulează, acțiunile pe care le poți face după poziționarea mouse-ului: selectarea textului sau deplasarea imaginii.
 Un alt exemplu oferit este cel al bifării unui checkbox. Dacă evenimentului `click` îi este anulat „efectul implicit”, pe ecran nu va mai apărea căsuța bifată iar valoarea va fi restaurata la cea anterioară.
 
 ## Oprirea propagării unui eveniment.
@@ -63,7 +68,7 @@ După cum știm, un eveniment se propagă de la elementul rădăcină spre eleme
 Dar pe drum, evenimentul poate fi oprit prin utilizarea metodei `stopPropagation()`.
 
 ```javascript
-function faCevaCuAcestClick(e){
+function faCevaCuAcestClick (e) {
   e.stopPropagation();
   // prelucrează date
 };
@@ -95,6 +100,5 @@ Unele ținte ale evenimentelor cum ar fi linkurile sau butoanele au un „compor
 
 ## Resurse
 
-[DOM: Living standard, 2.6. Interface EventTarget](https://dom.spec.whatwg.org/#concept-event-listener)
-
-[UI Events. 3.1. Event dispatch and DOM event flow](https://www.w3.org/TR/DOM-Level-3-Events/#event-flow)
+- [DOM: Living standard, 2.6. Interface EventTarget](https://dom.spec.whatwg.org/#concept-event-listener)
+- [UI Events. 3.1. Event dispatch and DOM event flow](https://www.w3.org/TR/DOM-Level-3-Events/#event-flow)
