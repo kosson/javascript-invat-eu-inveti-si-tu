@@ -270,7 +270,7 @@ for(let temp, i = 0, j = 1; j < 4; temp = i, i = j, j = i + temp) {
 
 ![Ilustrație pentru ciclurile for](for-ilustratie-for-fibonacci.png)
 
-Pentru că aceeași problemă se poate rezolva folosindu-ne de recursivitatea funcțiilor, vom introduce aici soluția pentru a avea o ancoră în viitor.
+Pentru că aceeași problemă se poate rezolva folosindu-ne de recursivitatea funcțiilor, vom introduce aici soluția pentru a avea o ancoră către subiectul recursivității, când vom aprofunda funcțiile.
 
 ```javascript
 function fibonacci (x) {
@@ -280,10 +280,6 @@ function fibonacci (x) {
   return fibonacci (x - 1) + fibonacci (n - 2)
 };
 ```
-
-## Mantre
-
-- toate expresiile din blocul de inițializare pot lipsi, dar trebuie să existe terminatoarele punct și virgulă.
 
 ## Carte de bucate
 
@@ -325,6 +321,10 @@ let șir = 'ceva', șirInversat = '';
 șirInversat = șir.split('').reduce((acumulator, curent) => curent + acumulator, '');
 console.log(șirInversat);
 ```
+
+## Mantre
+
+- toate expresiile din blocul de inițializare pot lipsi, dar trebuie să existe terminatoarele punct și virgulă.
 
 ## Resurse
 

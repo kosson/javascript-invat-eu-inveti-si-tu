@@ -7,14 +7,14 @@ Dicționarul explicativ ne dă o definiție foarte utilă: *repetare a unui anum
 
 ECMAScript 2015 (ES6) a introdus un nou mecanism de parcurgere a datelor numit **iterare**. Mai exact, un **protocol de iterare** pentru că iterarea ca și concept este în ADN-ul programării.
 
-### Ce înseamnă **iterare**
+### Ce înseamnă iterare
 
 Atunci când rezultatul unui pas devine valoarea de start pentru următorul, atunci vorbim despre iterare.
 
 În acest moment avem două concepte centrale care merită atenția noastră deplină:
 
-- **iterable** , care este structura de date ce expune elementele pentru a fi accesate public. Face acest lucru implementând o metodă care returnează un obiect numit *iterator* și
-- **iterator** fiind, de fapt, un pointer (în limba română ar fi tradus ca indicator, dar poți să ți-l închipui ca pe un semn de carte) pentru traversarea elementelor unei structuri de date.
+- **iterable** , care este structura de date ce expune elementele pentru a fi accesate public. Face acest lucru implementând o metodă care returnează un obiect numit *iterator*;
+- **iterator** fiind, de fapt, un pointer (în limba română ar fi tradus ca *indicator*, dar poți să ți-l închipui ca pe un semn de carte) pentru traversarea elementelor unei structuri de date.
 
 ## Cazuri în care se folosește iterarea
 

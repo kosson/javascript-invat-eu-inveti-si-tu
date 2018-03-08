@@ -92,7 +92,7 @@ Hai să facem un obiect. Vă mai aduceți aminte de la valori că obiectele pot 
 var obi = {a: 10, b: 20};
 ```
 
-Începând cu ECMAScript 2015 se poate folosi și notația prescurtată.
+Începând cu ECMAScript 2015 se poate folosi și notația prescurtată atunci când numele unei proprietăți este același cu numele identificatorului valorii.
 
 ```javascript
 var unu = 1, este = true; // în loc de
@@ -103,7 +103,7 @@ console.log(obi); // {"unu":1,"este":true}
 
 **Moment ZEN**: Obiectele pot fi privite ca array-uri asociative pentru că poți accesa valoarea folosind notația cu paranteze drepte: `obi['b']`.
 
-Proprietățile pot fi adăugate dinamic unui obiect deja existent fără a fi nevoie să mergi la constructorul său pentru a le adauga acolo. Am menționat deja un concept foarte important: constructor. Pe cât de pretențios sună, pe atât de simplă este misiunea sa: o funcție care să genereze un obiect. Vom trata distinct și în amănunt constructorii.
+Proprietățile pot fi adăugate dinamic unui obiect deja existent fără a fi nevoie să mergi la constructorul său pentru a le adauga acolo. Am menționat deja **constructorii** fiind funcții care instanțiază un obiect.
 
 ```javascript
 function Constructorul () { this.ceva = 1; };
@@ -119,14 +119,14 @@ Acest mod de a adăuga proprietăți noi fără a interveni asupra constructorul
 
 În textul standardului, obiectele se încadrează următoarelor categorii:
 
-- „Ordinary object” (*obiecte comune*), care au comportamentul comun tuturor obiectelor în JavaScript.
-- „Exotic object” (*obiecte exotice*), care au comportamentul comun obiectelor în JS, dar cu mici diferențe.
-- „Standard objects” (*obiecte standard*) sunt toate obiectele JS. Obiectele „ordinary” și cele „exotice” fac parte din setul obiectelor standard.
-- „Built-in objects” (*obiecte interne*) sunt toate obiectele pe care le expune din start motorul de JavaScript. Toate obiectele comune (*ordinary*) fac parte din setul celor interne.
+- **Ordinary object** (*obiecte comune*), care au comportamentul comun tuturor obiectelor în JavaScript.
+- **Exotic object** (*obiecte exotice*), care au comportamentul comun obiectelor în JS, dar cu mici diferențe.
+- **Standard objects** (*obiecte standard*) sunt toate obiectele JS. Obiectele „ordinary” și cele „exotice” fac parte din setul obiectelor standard.
+- **Built-in objects** (*obiecte interne*) sunt toate obiectele pe care le expune din start motorul de JavaScript. Toate obiectele comune (*ordinary*) fac parte din setul celor interne.
 
 ## Obiecte interne (*built-in*)
 
-Am menționat că JavaScript vine din start cu obiectele care se numesc „built-in object”, pe care le-am tradus ca **obiecte interne** limbajului. Pentru a avea acces la ele nu-i nevoie să faci ceva. Pur și simplu ele sunt acolo deja, gata de a fi folosite. Există un detaliu pe care aș dori să-l remarcați cu atenție. `Obiectul global` este parte a obiectelor interne. Am putea concluziona că `obiectul global` plus `obiectele standard` constituie setul mare al celor `interne`. O nuanță pe care trebuie să o fi realizat deja este aceea că obiectul global nu este containerul tuturor obiectelor oricât de tentant ar fi să-l imaginăm astfel. Dar este „containerul”, dacă vrei să-l închipui astfel, al întregului cod pe care-l scrii tu și al entităților care se formează la momentul evaluării acestuia.
+Am menționat că JavaScript vine din start cu obiectele care se numesc *built-in object*, pe care le-am tradus ca **obiecte interne** limbajului. Pentru a avea acces la ele nu-i nevoie să faci ceva. Pur și simplu ele sunt acolo deja, gata de a fi folosite. Există un detaliu pe care aș dori să-l remarcați cu atenție; obiectul `global` este parte a obiectelor interne. Am putea concluziona că `obiectul global` plus `obiectele standard` constituie setul mare al celor `interne`. O nuanță că obiectul global nu este containerul tuturor obiectelor oricât de tentant ar fi să-l imaginăm astfel. Dar este *containerul*, dacă vrei să-l închipui astfel, al întregului cod pe care-l scrii tu și al entităților care se formează la momentul evaluării acestuia.
 
 ### Metodele obiectelor interne
 

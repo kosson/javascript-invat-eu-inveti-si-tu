@@ -1,4 +1,4 @@
-# `setTimeout`
+# setTimeout()
 
 Este o metodă a obiectului `window`, care execută o funcție după ce timpul menționat în al doilea parametru introdus a expirat.
 
@@ -7,6 +7,8 @@ Este o metodă a obiectului `window`, care execută o funcție după ce timpul m
 Metoda returnează un identificator, care poate fi folosit pentru a întrerupe scurgerea timpului menționat.
 
 ```javascript
-let id = setTimeout(function(){return 'ceva'}, 3000);
+let id = setTimeout(function () {
+    return 'ceva';
+}, 3000);
 console.log(id); // 1
 ```

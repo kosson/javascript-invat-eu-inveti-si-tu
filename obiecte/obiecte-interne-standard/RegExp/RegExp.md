@@ -32,7 +32,7 @@ Următorul regex este unul valid și solicită atenția ta ca și detector de ca
 Regex-urile mai au în componență niște litere care succed șablonul. Acestea în limba engleză sunt numite „flags”, dar pentru limba română le-am tradus ca fanioane pentru că semnalizează un anumit comportament pe care motorul de interpretare trebuie să-l adopte.
 
 **Spune standardul**:
-*Un șablon este evaluat („este compilat”) la o valoare rezultată dintr-o procedură internă*.
+> Un șablon este evaluat („este compilat”) la o valoare rezultată dintr-o procedură internă.
 
 Șirurile de caractere în JavaScript sunt secvențe de 16 biți denumite tehnic `unități de cod` (*code unit*) ce reprezintă, de fapt, un singur caracter. `RegExp` se așteaptă să lucreze cu unități de cod pe 16 biți, care reprezintă un singur caracter. Totuși, începând cu ECMAScript 6, există un fanion dedicat, care semnalizează motorului `RegExp` că va avea de lucru cu un șir de caractere Unicode - `u`. De fapt, îi este indicat motorului faptul că trebuie să lucreze la nivel de caractere și nu la nivel de `code unit`.
 
@@ -110,12 +110,12 @@ După cum se observă, sintaxa este: `/pattern/flags`.
 
 `pattern`: este textul expresiei regulate.
 `flags`:
+
 - `g` - **global match**;
 - `i` - **ignore case**;
 - `m` - **multiline** - implică folosirea limitelor ^ și $ pentru o resursă text pe mai multe linii;
 - `u` - **unicode** - tratează secvența ca *puncte de cod* Unicode;
 - `y` - **sticky** face potrivirea numai după indexul indicat prin proprietatea `lastIndex` a expresiei regulate în șir.
-
 
 ### Flags - fanioane
 
@@ -184,7 +184,7 @@ Cel mai simplu exemplu este cel al unui șir exact (*direct match*), care să fi
 
 Șirurile de caractere care sunt „procesate” de motorul RegExp, trebuie privite ca pe niște resurse care au limite. Limita superioară o putem considera a fi începutul șirului, iar limita inferioară, capătul acestuia. Un lucru foarte util ar fi ca acum, în acest moment să înțelegem o curiozitate a motorului RegExp. Acesta își rezervă încă un spațiu înainte și după șir pentru a permite anumitor procese să se desfășoare. Unul dintre acestea ar fi parcurgerea întregului șir inclusiv a ultimului caracter și apoi în afara șirului pentru a se întoarce cu scopul de a face o regăsire. Pare mai ciudat, dar va face sens după ce acumulăm mai mult.
 
-**Limita superioară și limita inferioară a șirului - începutul și capătul**
+##### Limita superioară și limita inferioară a șirului - începutul și capătul
 
 Ambele limite sunt jalonate prin două caractere speciale: `^` (numit în engleză *carret*) și bine-cunoscutul dolar `$`.
 
@@ -193,14 +193,14 @@ Ambele limite sunt jalonate prin două caractere speciale: `^` (numit în englez
 | `^` «carret» | Identifică unde începe șirul.|
 | `$` «dollar» | Indică că se dorește căutarea pe caracterele chiar de dinaintea finalizării șirului. |
 
-***Detalii pentru carret***
+Detalii pentru carret
 
 Dacă stegulețul pentru multiline este setat, se face identificare și imediat după caracterul *line break*. De exemplu, `/^X/` nu identifică X-ul din „este un X”, dar identifică pe X în „X este”.
 
 În interiorul seturilor, are rolul de a specifica ce nu va fi inclus la căutare cu stricta condiție ca acesta să apară imediat după paranteza pătrată. De exemplu, `[^c-f]`, înseamnă: „fă căutarea, dar omite setul specificat de caractere”.
 Dacă apare mult după poziția de după paranteza pătrată, va avea înțelesul de caracter simplu ca oricare altul. Nu își va produce efectul special.
 
-**Detalii pentru dolar**
+##### Detalii pentru dolar
 
 Dacă stegulețul pentru multiline este prezent (true), atunci căutarea se va face imediat înainte de caracterul `line break`. De exemplu, `/t$/` nu îl găsește pe „t” în „etern”, dar îl găsește în „dorit”.
 
@@ -237,7 +237,6 @@ var cautare = sir.match(/pământ\B/g); // o potrivire
 
 Tot pe această direcție, pot fi folosite caracterele `\s`, care indică chiar un spațiu sau un tab.
 
-
 #### Cuantificatori
 
 | Caracter | Semnificație |
@@ -251,7 +250,7 @@ Apoi avem o paletă foarte expresivă de caractere care pur și simplu țin locu
 
 #### Metacaractere locțiitor
 
-**Backslash**
+##### Backslash
 
 | Caracter | Semnificație |
 |:-------- |:------------ |
@@ -259,7 +258,7 @@ Apoi avem o paletă foarte expresivă de caractere care pur și simplu țin locu
 
 Caracterele care indică un anumit curs de acțiune pentru motorul RegExp sunt speciale sunt numite și „metacaractere”. De exemplu, `/a*/` înseamnă caută un a, care poate fi urmat de mai mulți a, dar `/a\*/` înseamnă caută chiar `a*` - a urmat de o steluță. Însuși backslash-ului trebuie să i se facă „escaping” pentru a fi tratat ca orice caracter simplu: `/\\/` - caută un `\`.
 
-**Cifrele**
+##### Cifrele
 
 | Caracter | Semnificație |
 |:---------|:-------------|
@@ -269,14 +268,14 @@ Caracterele care indică un anumit curs de acțiune pentru motorul RegExp sunt s
 Metacaracterul `\D` este negarea lui `\d`.
 În cazul negării, dacă șirul original începe cu un digit nu este adus niciun rezultat. De exemplu, `"saturn4 23".match(/\D/); // ["s"]` și `"saturn4 23".match(/\D+/); // ["saturn"]`
 
-**Caracterele albe, spațiile goale**
+##### Caracterele albe, spațiile goale
 
 | Caracter | Semnificație |
 |:---------|:-------------|
 | `\s` | Identifică un singur spațiu gol, incluzând: *spațiu*, *tab*-urile, *form feed*, *line feed* și alte spații din schema Unicode. De exemplu, `"ana are mere".match(/\s\w*/)` identifică `[" are"]`, deci, primul cuvânt de după primul spațiu |
 | `\S` | Identifică orice caracter, dar nu și un spațiu gol. De exemplu, `"ana are mere".match(/\S\w*/);` identifică `["ana"]`. Practic, am putea spune că este negarea lui `\s`.|
 
-**Caractere de control și machetare**
+##### Caractere de control și machetare
 
 | Caracter | Semnificație |
 |:---------|:-------------|
@@ -287,7 +286,7 @@ Metacaracterul `\D` este negarea lui `\d`.
 | `\f` | Identifică un form feed |
 | `[\b]` | Identifică caracterul backspace și nu trebuie confundat cu `\b` |
 
-**Caractere nule și setul Latin al Unicode**
+##### Caractere nule și setul Latin al Unicode
 
 | Caracter | Semnificație |
 |:---------|:-------------|
@@ -296,7 +295,7 @@ Metacaracterul `\D` este negarea lui `\d`.
 | `\W` | Este negarea identificării cu `\w`. Identifică orice caracter care nu este un caracter dintr-un posibil cuvânt format cu Latine. De exemplu, /\W/ identifică „%” din 50%. |
 | `\cX` | Unde `X` este un caracter de la A la Z, fiind un caracter de control. |
 
-**Potrivirea directă pe code pointuri Unicode**
+##### Potrivirea directă pe code pointuri Unicode
 
 | Caracter | Semnificație |
 |:---------|:-------------|
@@ -539,6 +538,7 @@ După cum bine ai intuit, se poate preciza și limita superioară a numărului d
 var cautare = sir.match(/a{3,4}/gi);
 console.dir(cautare); // 2 potriviri
 ```
+
 ## Ancorarea și constrângerile de căutare
 
 Ancorele sunt menite a poziționa procesul de căutare înainte sau între caractere.
@@ -799,8 +799,6 @@ Se mai pot folosi expresiile regulate și cu metoda `split` a obiectului String.
 
 ## Referințe
 
-Mozilla Developer Network [Regular Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
-
-Eloquent JavaScript. Second edition [Regular Expressions](http://eloquentjavascript.net/09_regexp.html)
-
-Regular Expressions: The Complete Tutorial [Regular Expressions. The Complete Tutorial](https://www.princeton.edu/~mlovett/reference/Regular-Expressions.pdf)
+- Mozilla Developer Network [Regular Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
+- Eloquent JavaScript. Second edition [Regular Expressions](http://eloquentjavascript.net/09_regexp.html)
+- Regular Expressions: The Complete Tutorial [Regular Expressions. The Complete Tutorial](https://www.princeton.edu/~mlovett/reference/Regular-Expressions.pdf)
