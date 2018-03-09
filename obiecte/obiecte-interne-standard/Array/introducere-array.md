@@ -534,8 +534,8 @@ colectie; // Array [ 3, 1, "doi", 2, "unu", "trei" ]
 
 Pentru a face căutări avem la dispoziție două metode:
 
-- metoda `find()` și
-- metoda `indexOf()`.
+-   metoda `find()` și
+-   metoda `indexOf()`.
 
 În cazul utilizării lui find, dacă elementul există în array, metoda returnează chiar elementul folosind o funcție callback, iar în caz contrar returnează `undefined`. Cazul metodei `indexOf()` este în oglindă cu diferența că este returnat indexul la care se află valoarea.
 
@@ -623,20 +623,20 @@ Obiectul nostru are trei metode și două proprietăți. Una dintre proprietăț
 
 Explicații:
 
-- https://www.ecma-international.org/ecma-262/#sec-logical-not-operator
-- https://www.ecma-international.org/ecma-262/#sec-abstract-equality-comparison
+-   [logical-not-operator](https://www.ecma-international.org/ecma-262/#sec-logical-not-operator)
+-   [abstract-equality-comparison](https://www.ecma-international.org/ecma-262/#sec-abstract-equality-comparison)
 
 ## Mantre
 
-- Atunci când `Array` este apelat ca funcție și nu ca un constructor, va creea și va inițializa un nou obiect `Array`.
-- Are metodă internă `@@iterator`.
-- `Array`-urile sunt **obiecte** și poți adăuga proprietăți în array folosind notația dot `var a = [1,2]; a.i = 23; a.i // 23`. Valorile sunt adăugate indiferent că array-ul are un index numeric prestabilit. Ele sunt acolo.
-- Orice obiect `Array` are o proprietate `length`.
-- cheia unei proprietăți al unui array se numește `index` al unui array (valorile dintre paranteze pătrate sunt convertite la string).
-- o proprietate într-un array care este identificată printr-un index este numită `element`.
-- `Array` este un obiect intern limbajului JavaScript. Acesta este folosit pentru crearea array-urilor.
-- `Array` este un obiect iterabil pentru că obiectul prototip are o metodă @@iterator (precum String, TypedArray, Map și Set).
+-   Atunci când `Array` este apelat ca funcție și nu ca un constructor, va creea și va inițializa un nou obiect `Array`.
+-   Are metodă internă `@@iterator`.
+-   `Array`-urile sunt **obiecte** și poți adăuga proprietăți în array folosind notația dot `var a = [1,2]; a.i = 23; a.i // 23`. Valorile sunt adăugate indiferent că array-ul are un index numeric prestabilit. Ele sunt acolo.
+-   Orice obiect `Array` are o proprietate `length`.
+-   cheia unei proprietăți al unui array se numește `index` al unui array (valorile dintre paranteze pătrate sunt convertite la string).
+-   o proprietate într-un array care este identificată printr-un index este numită `element`.
+-   `Array` este un obiect intern limbajului JavaScript. Acesta este folosit pentru crearea array-urilor.
+-   `Array` este un obiect iterabil pentru că obiectul prototip are o metodă @@iterator (precum String, TypedArray, Map și Set).
 
 ## Resurse
 
-- [MDN Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array?redirectlocale=en-US&redirectslug=JavaScript%2FReference%2FGlobal_Objects%2FArray)
+-   [MDN Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array?redirectlocale=en-US&redirectslug=JavaScript%2FReference%2FGlobal_Objects%2FArray)

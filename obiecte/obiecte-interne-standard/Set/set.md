@@ -1,6 +1,6 @@
 # Set
 
-Un `Set` ceea ce spune numele său: un set de valori, dar unul care permite stocarea de **elemente unice** indiferent de tipul acestora.
+Un `Set` este un set de valori  care permite stocarea de **elemente unice** indiferent de tipul acestora.
 
 `Null` este tratat ca `undefined`.
 
@@ -10,13 +10,9 @@ Dacă este pasat un obiect iterabil, toate elementele vor fi adăugat la noul `S
 const colectie = new Set([0, 1, 2, 3]);
 ```
 
-## Generarea unui Array cu totul unic
+## Metode
 
-```javascript
-const ArrayUnic = [...new Set(unArray)];
-```
-
-## `Set.prototype.add(valoare)`
+### `Set.prototype.add(valoare)`
 
 Valoarea nu este opțională, dar acest lucru este logic pentru că vrei să introduci noi elemente în setul unic.
 
@@ -29,9 +25,7 @@ console.log(colectieValoriUnice);
 // Set [ "unu", 1, "I" ]
 ```
 
-Reține faptul că un `Set` este o colecție de elemente unice. Încercarea de a introduce un element care deja există va avea drept efect ignorarea lui.
-
-Se poate adăuga chiar și obiecte (reține că poți adăuga orice).
+Reține faptul că un `Set` este o colecție de elemente unice. Încercarea de a introduce un element care deja există va avea drept efect ignorarea lui. Se poate adăuga chiar și obiecte (reține că poți adăuga orice).
 
 ```javascript
 var colectieUnica = new Set();
@@ -45,14 +39,12 @@ Această proprietate va oferi un număr care spune câte elemente sunt în set.
 
 ### `Set.prototype.delete(valoare)`
 
-Metoda delete are nevoie de valoare, care nu este opțională.
+Metoda `delete()` are nevoie de valoare. Returnează valoarea `true` dacă elementul există și a fost eliminat, în caz contrar, va fi returnat `false`.
 
-Returnează valoarea `true` dacă elementul există și a fost eliminat, în caz contrar, va fi returnat `false`.
-
-În cazul în care dorești să ștergi un obiect care există în set, se poate aplica `forEach` pe set.
+În cazul în care dorești să ștergi un obiect care există în set, se poate aplica `forEach()` pe set.
 
 ```javascript
-colectieUnica.forEach(function(element){
+colectieUnica.forEach(function (element) {
   if(element.x === 10){
     colectieUnica.delete(element);
   }
@@ -64,11 +56,12 @@ colectieUnica.forEach(function(element){
 Această metodă va executa o funcție cu rol de callback pentru fiecare element din Set. Opțional se poate trimite un al doilea argument și anume un obiect care să fie considerat a fi `this` de fiecare dată când funcția se execută.
 
 Funția callback se va apela cu următoarele argumente:
-- valoarea element din set,
-- cheia elementului și
-- setul care va fi traversat.
 
-Trebuie spus un lucru important: într-un obiect Set nu există chei, dar pentru a fi asigurată compatibilitatea cu `forEach`, intern există un mecanism de evidență folosit în mod similar lui Map și lui Array.
+-   valoarea element din set,
+-   cheia elementului și
+-   setul care va fi traversat.
+
+Trebuie spus un lucru important: într-un obiect Set nu există chei, dar pentru a fi asigurată compatibilitatea cu `forEach`, intern există un mecanism de evidență folosit în mod similar lui `Map` și lui `Array`.
 
 Dacă nu este pasat un obiect care să fie folosit drept `this`, atunci este pasat automat `undefined`.
 
@@ -90,7 +83,7 @@ console.log(iteratorObj.next().value); // Array [ true, true ]
 
 ### `Set.prototype.has(valoare)`
 
-Metoda este folosită pentru a verifica dacă există o valoare în setul țintit. Este returnat `true`, dacă există valoarea și `false` în caz contrar.
+Metoda este folosită pentru a verifica dacă există o valoare în setul țintit. Este returnat `true`, în caz contrar este returnat `false`.
 
 ### `Set.prototype.values()`
 
@@ -101,30 +94,49 @@ var iteratorObjNou = setNou.values();
 console.log(iteratorObjNou.next().value); // unu
 ```
 
+## Cazuri de utilizare
+
 ### Transformarea într-un array
 
-Folosind `Array.from(setVizat)` se poate obține un array din `Set`.
+Folosind `Array.from(setVizat)` se poate obține un array dintr-un `Set`.
+
+```javascript
+let unice = new Set(['ceva', 'alceva']);
+let arr =  Array.from(unice);
+```
+
+### Generarea unui array cu valori unice
+
+```javascript
+const ArrayUnic = [...new Set(unArray)];
+```
 
 ## Parcurgerea unui set
 
-### `for` ca mijloc de a traversa setul
+### Iterarea cu `for`
 
-Cel mai simplu este să afișezi toate elementele:
+Este cel mai simplu mod de a afișa toate elementele:
 
 ```javascript
-for (let element of setNou) console.log(element); // unu 1 true
+for (let element of setNou) {
+  console.log(element);
+}; // unu 1 true
 ```
 
 O altă metodă de a parcurge setul este să te folosești de iterator:
 
 ```javascript
-for (let element of setNou.values()) console.log(element); // unu 1 true
+for (let element of setNou.values()) {
+  console.log(element);
+} // unu 1 true
 ```
 
 Folosirea iteratorului creat prin folosirea metodei `entries()`.
 
 ```javascript
-for (let [cheie, valoare] of setNou.entries()) console.log(cheie); // unu 1 true
+for (let [cheie, valoare] of setNou.entries()) {
+  console.log(cheie)
+}; // unu 1 true
 ```
 
 ### Constituirea unui set cu elemente unice dintr-un Array
