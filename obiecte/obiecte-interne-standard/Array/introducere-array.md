@@ -1,35 +1,28 @@
 # Array - tablouri, vectori
 
-Este un obiect intern care are și rol de constructor.
+Este un obiect intern care are și rol de constructor. În literatura românească de specialitate veți întâlni adesea denumirea de *tablou*. Pentru că este mai simplu și în obișnuința multor programatori români să folosească termenul din engleză ca neologism acceptat de practica curentă, vom folosi și în acest material neologismul **array**. În comunitatea profesională array-ul mai este întâlnit și sub denumirea de *listă* sau *vector*.
 
-Array-urile sunt o bornă centrală a programării indiferent de limbaj. Acestea permit stocarea temporară a unor valori într-o formă ușor accesibilă folosind indecși, dar cel mai important aspect este bogăția metodelor puse la dispoziție de obiectul intern Array pentru a prelucra, aranja, rearanja, filtra elementele conținute de array-uri.
+Array-urile sunt o bornă centrală a programării indiferent de limbaj. Acestea permit stocarea temporară a unor valori într-o formă ușor accesibilă folosind indecși, dar cel mai important aspect este bogăția metodelor puse la dispoziție de obiectul intern Array pentru a prelucra, aranja, rearanja, filtra elementele conținute de array-uri. Ori de câte ori veți lucra cu valori simple (în jargonul programatorilor veți mai auzi că sunt numite *scalare*), veți folosi cu siguranță array-urile. Array-urile mai pot fi folosite și ca structuri de „depozitare” a obiectelor. Spre exemplu, poți constitui un registru pentru elemente DOM cărora le asociezi câte un un eveniment sau alte funcționalități oferite de API-ul browserului. Array-ul este cel mai des întâlnit mecanism de a „prelua” date care vin ca efect al evaluării unei funcții sau a unei metode.
 
-Ori de câte ori veți lucra cu valori simple (în jargonul programatorilor veți mai auzi că sunt numite *scalare*), veți folosi cu siguranță array-urile.
+Această structură capabilă să țină valori este cea mai utilizată atunci când suntem confruntați cu nevoia de a prelucra fragmente de date sau pentru a „memora” temporar valorile utile unui anumit context în care se execută codul.
 
-Array-urile mai pot fi folosite și ca structuri de „depozitare” a obiectelor. Spre exemplu, poți constitui un registru pentru elemente DOM cărora le asociezi câte un API.
+**Spune standardul**:
 
-Această structură capabilă să țină valori este cea mai folosită atunci când suntem confruntați cu nevoia de a prelucra fragmente de date sau pentru a „memora” temporar valorile utile unui anumit context în care se execută codul.
-
-Array-ul este cel mai des întâlnit mecanism de a „prelua” date care vin ca efect al evaluării unei funcții, de exemplu.
-
-În literatura românească de specialitate veți întâlni adesea denumirea de *tablou*. Pentru că este mai simplu și în obișnuința multor programatori români să folosească cuvântul din engleză ca neologism acceptat de practica curentă, vom folosi și în acest material neologismul **array**.
-
-În comunitatea profesională array-ul mai este întâlnit și sub denumirea de *listă* sau *vector*.
-
-**Spune standardul**: Valorarea slotului intern [\[Prototype]] a contructorului Array este obiectul prototype a obiectul intern Function. **Obiectul prototype al lui `Function` este în sine un obiect-funcție intern**.
+> Valorarea slotului intern [\[Prototype\]\] al constructorului `Array` este obiectul prototype a obiectul intern `Function`. Obiectul prototype al lui `Function` este în sine un obiect-funcție intern.
 
 ## Descriere
 
-Array-urile conțin mai multe valori numite `elemente` care sunt ordonate cu niște chei numite indecși de pornesc numărătoarea de la 0.
-De fapt, aflăm ce este un array în JavaScript verificând cu `typeof`.
+Array-urile conțin mai multe valori numite `elemente` care sunt ordonate cu niște chei numite indecși care pornesc numărătoarea de la `0`. De fapt, aflăm ce este un array în JavaScript verificând cu `typeof`.
 
 ```javascript
 typeof []; // "object"
 ```
 
+Concluzia simplă este că un array este un obiect.
+
 ## Natura unui array
 
-**Un array este un obiect!**. Este o structură care poate „agrega” date indiferent de tipul lor, pe care le structurează după un sistem de indexare care pornește de la 0 atunci când indecșii nu sunt menționați explicit. Numărul maxim de indici este 2^23 - 1. Pentru a introduce o valoare se va folosi sintaxa cu paranteze pătrate.
+Un array este o structură care poate „agrega” date indiferent de tipul lor. Le structurează după un sistem de indexare care pornește de la 0 atunci când indecșii nu sunt menționați explicit. Numărul maxim de indici este `2^23 - 1`. Pentru a introduce o valoare se va folosi sintaxa cu paranteze pătrate.
 
 ```javascript
 var colectie = [];
@@ -44,58 +37,83 @@ Structura generată arată astfel:
 |---------|:---:|:---:|:---:|
 | index   |  0  |  1  |  2  |
 
-Pentru că este foarte util, poți afla dimensiunea unui array foarte rapid prin utilizarea lui `length`.
+Acest lucru conduce la concluzia logică că numărul elementelor unui array este valoarea ultimului index plus unu. Pentru că este absolut necesar, poți afla dimensiunea unui array utilizarea proprietății `length`.
 
 ```javascript
-[1,2,3].length; // 3
+[1, 2, 3].length; // 3
 ```
 
 Pe cale de consecință putem afla indexul ultimului element scăzând 1 din numărul returnat la evaluarea lui `length`. Da, ai intuit perfect. Trebuie făcut acest lucru pentru că indecșii array-ului pornesc de la valoarea 0.
 
-## Shadowing (umbrire) - modificarea / suprascrierea valorilor elementelor
+## Operațiuni cu array-uri și elementele lor
+
+### Modificarea elementelor
 
 Array-urile sunt structuri care își pot modifica componența chiar dacă identitatea rămâne neschimbată și spunem că pot suferi *mutații*. Folosind sufixul `[]`, este posibil să modificăm elementele interne.
 
 ```javascript
-var arr = [1, 2];
+let arr = [1, 2];
 arr[1] = 5; console.log(arr); // [1, 5]
 ```
 
-Dincolo de modificarea simplă a unui element, ar fi necesar să vedem cum se petrece acest lucru în cazul mediilor lexicale (scope) create de funcții. Avem un prim caz, în care, în mediul lexical format de o funcție, se face o reasignare a identificatorului (`rebounding`), care până la momentul reasignării trimitea și el tot către **arr**.
+### Ștergerea elementelor dintr-un array
+
+Această metodă creează „goluri” în array. Proprietatea `length` nu va fi afectată.
 
 ```javascript
-var arr = [1, 2, 3];
-(function (a) {
-  a = [2, 3, 4];
-})(arr); console.log(arr); // [1, 2, 3]
+let tablou = [1, 2, 3, 4];
+delete tablou[2];
+console.log(tablou);
+// Array [ 1, 2, <1 empty slot>, 4 ]
 ```
 
-Ca și în cazul „umbririi” simple, se va folosi sufixul `[]` pentru a modifica valorile array-ului original.
+### Ștergerea tuturor elementelor
+
+Dacă este necesar, putem șterge toate valorile din array, reasignând identificatorul inițial cu un array gol.
+
+```javascript
+let colectie = [1, 2];
+console.log(colectie);
+colectie = [];
+console.log(colectie);
+```
+
+Dincolo de modificarea simplă a unui element, ar fi necesar să vedem cum se petrece acest lucru în cazul mediilor lexicale (scope) create de funcții. Avem un prim caz, unde, în mediul lexical format de o funcție, se face o reasignare a identificatorului (în engleză îi spune *rebounding*). Până la momentul reasignării trimitea tot către **arr**.
+
+```javascript
+let arr = [1, 2, 3];
+(function (a) {
+  a = [2, 3, 4];
+})(arr);
+console.log(arr); // [1, 2, 3]
+```
+
+Ca și în cazul *umbririi* simple, se va folosi sufixul `[]` pentru a modifica valorile array-ului original.
 
 ```javascript
 var arr = [1, 2, 3];
 (function (a) {
   a[0] = 10;
-})(arr); console.log(arr); // [ 10, 2, 3 ]
+})(arr); console.log(arr);
+// [ 10, 2, 3 ]
 ```
 
-În cazul array-urilor, valorile sunt copiate prin referință. Acest lucru este util de reținut atunci când în array-uri se vor introduce funcții, de exemplu - o colecție de funcții. Acestea vor fi referențiate și nu declarate direct în array.
+În cazul array-urilor, valorile sunt copiate prin referință pentru că array-urile sunt, de fapt obiecte. Acest lucru este util de reținut atunci când în array-uri se vor introduce funcții, de exemplu - o colecție de funcții. Acestea vor fi referențiate și nu declarate direct în array.
 
 ```javascript
-var faCeva = function () {
-  return function () {console.log('salut');};
+function faCeva () {
+  return function () {
+    console.log('salut');
+  };
 };
-var actiune = faCeva(); // actiune este funcția returnată
+var actiune = faCeva();
+// actiune este funcția returnată
 var arr = [actiune];
 // acum testul
 arr[0] === actiune; // true
 ```
 
-Rezultatul este `true` pentru că valoarea evaluată a expresiei `arr[0]` este `actiune`, care la rândul său ține valoarea evaluată a invocării lui `faCeva()`.
-
-## Ștergerea unei valori
-
-În regulă, ai introdus sau ai deja un array cu valori, dar ai nevoie să ștergi din acest array o valoare. Pentru acest lucru există un operator dedicat: `delete`.
+Rezultatul este `true` pentru că valoarea evaluată a expresiei `arr[0]` este `actiune`, care la rândul său ține valoarea evaluată a invocării lui `faCeva()`. În regulă, ai introdus sau ai deja un array cu valori, dar ai nevoie să ștergi din acest array o valoare. Pentru acest lucru există un operator dedicat: `delete`.
 
 ```javascript
 delete colectie[2];
@@ -104,10 +122,10 @@ delete colectie[2];
 Uneori array-urile sunt compuse de elemente care la rândul lor sunt array-uri. În acest caz vorbim de array-uri multidimensionale.
 
 ```javascript
-var multidimensional = [[23,10,4],['a','b']];
+var multidimensional = [[23, 10, 4],['a','b']];
 ```
 
-Întrebarea care se pune în acest moment este cum accesezi o valoare dintr-un array care este de fapt un element al unui array? Pentru a răspunde acestei întrebări trebuie să ne imaginăm locația unei valori ca pe o adresă: București, Uverturii, 90. Ce-ar fi dacă am transcrie adresa ca pe o interogare într-un array în JavaScript? Ar fi așa: `adresa[București][Uverturii][90]`. Nu fi păcălit de structura liniară a sintaxei. De fapt, se face o accesare în adâncime a unei locații, ca și cum am desface o păpușă rusească Matrioșca.
+Întrebarea care se pune în acest moment este cum accesezi o valoare dintr-un array care este de fapt un element al unui array? Pentru a răspunde acestei întrebări trebuie să ne imaginăm locația unei valori ca pe o adresă: *Botoșani, Str. Uverturii, Nr. 90*. Ce-ar fi dacă am transcrie adresa ca pe o interogare într-un array în JavaScript? Ar fi așa: `adresa[Botoșani][Uverturii][90]`. Nu fi păcălit de structura liniară a sintaxei. De fapt, se face o accesare în adâncime a unei locații, ca și cum am desface o păpușă rusească Matrioșca.
 
 ```javascript
 var multidimensional = [['unu','doi',[1, 2]], true];
@@ -131,24 +149,38 @@ var arr = [1 + 2, 4, (2 - 1) + 2]; console.log(arr); // [ 3, 4, 3 ]
 
 ![](ArrayMap.png)
 
+### Indecșii negativi
+
+Indecșii care sunt numere negative vor fi considerați chei pentru valorile introduse în obiectul `Array`.
+
+```javascript
+var tablou = [];
+tablou[-1] = 'ceva în afară';
+console.log(tablou); // Array [ ]
+tablou[-1];          // ceva în afară
+```
+
 ## Verificări
 
-Am indicat mai sus faptul că verificarea unui array cu `typeof` are drept rezultat tipul obiect. Deci este clară natura adâncă a acestui tip de structură. Ce ce ar mai fi foarte util de verificat în lucrul cu array-uri:
+Am indicat mai sus faptul că verificarea unui array cu `typeof` are drept rezultat tipul obiect. Deci este clară natura adâncă a acestui tip de structură. Ar fi foarte util de verificat în lucrul cu array-uri dacă există un anume index și mai ales care este valoarea indexului pentru o anumită valoare?
 
-1. există un anume index?
-2. care este valoarea indexului pentru o anumită valoare?
+### Existența unui index
 
-Pentru a verifica dacă un index cu o valoare anume există în array poți folosi operatorul `in` pentru că un array, de fapt, este un obiect iar indecșii sunt cheile lui.
+Pentru a verifica dacă un index există în array poți folosi operatorul `in` pentru că un array, de fapt, este un obiect, iar indecșii sunt cheile lui.
 
 ```javascript
 1 in ['a', 'b', 'c']; // true
 ```
 
-Pentru aceeași verificare poți folosi și metoda dedicată `includes()`. Acesteia îi pasezi la argumente valoarea pe care vrei să o verifici. Răspunsul va fi `true` sau `false`.
+### Existența unei valori
+
+Pentru aceeași verificare poți folosi și metoda dedicată `includes()`. Acesteia îi pasezi la argumente valoarea pe care o cauți. Răspunsul va fi `true` sau `false`.
 
 ```javascript
-['a', 'b', 'c'].includes('b');
+['a', 'b', 'c'].includes('b'); // true
 ```
+
+### Indexul unei element cunoscut
 
 Apoi dacă ai verificat că o cheie există, poți obține indexul pentru o valoare știută.
 
@@ -156,10 +188,12 @@ Apoi dacă ai verificat că o cheie există, poți obține indexul pentru o valo
 ['a', 'b', 'c'].indexOf('b'); // 1
 ```
 
+### Verificarea existenței unei valori pentru un index
+
 Operatorul `in` detectează dacă pentru un anumit index, există o valoare în array.
 
 ```javascript
-var tablou = [0,1, ,2,4,"unu"];
+var tablou = [0, 1, , 2, 4, "unu"];
 3 in tablou; // true
 2 in tablou; // false
 ```
@@ -169,63 +203,52 @@ Pentru mai multe operațiuni care trec de scopul unor verificări, va trebui să
 Mai sunt și metode general accesibile pe care le poți aplica, iar cel mai rapid exemplu, care vă va fi util adesea, este metoda globală `toString()`. Aceasta transformă un array într-un șir de fragmente de text despărțite prin virgule.
 
 ```javascript
-['a', 'b', 'c'].toString(); // "a,b,c"
+['a', 'b', 'c'].toString(); // "a, b, c"
 ```
 
-## Lanțul prototipal al unui array:
+## Lanțul prototipal al unui array
 
 Uneori este necesar să afli care este prototipul unei colecții de care nu ești sigur dacă este array curat sau array-like (*asemănător-cu-array*) - o entitate care are caracteristici apropiate de un array.
 
 ```javascript
-var tablou = ['prima', 'a doua', 1, 2];
-
-var protoTablou = Object.getPrototypeOf(tablou);
+let tablou = ['prima', 'a doua', 1, 2];
+let protoTablou = Object.getPrototypeOf(tablou);
 protoTablou; // Array [  ]
-var protoLaProtoTablou = Object.getPrototypeOf(protoTablou);
+let protoLaProtoTablou = Object.getPrototypeOf(protoTablou);
 protoLaProtoTablou; // Object { , 15 more… }
-
 Object.getPrototypeOf(protoLaProtoTablou); // null
 ```
 
 Structura lanțului ar fi: `array` --> `Array.prototype` --> `Object.prototype` --> `null`.
 
-Colecțiile care sunt **asemănătoare-cu-array-urile** (array-like), vor avea un lanț mult mai scurt care-l indică la cap pe `Object`.
+Colecțiile care sunt **asemănătoare-cu-array-urile** (array-like), vor avea un lanț mult mai scurt care-l indică la capăt pe `Object`.
 
 Structura lanțului ar fi: `arrayLike` --> `Object.prototype` --> `null`.
 
-## Mantre
-
-- Atunci când `Array` este apelat ca funcție și nu ca un constructor, va creea și va inițializa un nou obiect `Array`.
-- Are metodă internă `@@iterator`.
-- `Array`-urile sunt **obiecte** și poți adăuga proprietăți în array folosind notația dot `var a = [1,2]; a.i = 23; a.i // 23`. Valorile sunt adăugate indiferent că array-ul are un index numeric prestabilit. Ele sunt acolo.
-- Orice obiect `Array` are o proprietate `length`.
-- cheia unei proprietăți al unui array se numește `index` al unui array (valorile dintre paranteze pătrate sunt convertite la string).
-- o proprietate într-un array care este identificată printr-un index este numită `element`.
-- `Array` este un obiect intern limbajului JavaScript. Acesta este folosit pentru crearea array-urilor.
-- `Array` este un obiect iterabil pentru că obiectul prototip are o metodă @@iterator (precum String, TypedArray, Map și Set).
-
 ## Crearea array-urilor
 
-Obiectele array oferă programatorului o flexibilitate extraordinară, care permite crearea nuanțată a acestor structuri în funcție de neceistăți și de conjuncturi. Vom trece în revistă câteva dintre modalitățile de a crea array-uri de la generarea unuia gol, gata să primească date, până la array-uri care sunt create cu anumite constrângeri de performanță și / sau utilitate.
+Obiectele array oferă programatorului o flexibilitate extraordinară, care permite crearea nuanțată a acestor structuri în funcție de necesități și de conjuncturi. Vom trece în revistă câteva dintre modalitățile de a crea array-uri de la generarea unuia gol, gata să primească date, până la array-uri care sunt create cu anumite constrângeri de performanță și / sau utilitate.
 
-### Crearea unui array prin menționarea formei literale
+### Crearea unui array literal
 
-Cel mai adesea vei întâlni array-uri create prin forma literală mult mai simplă ca practică (`[]`). Este practică curentă ca un programator să „captureze” valorile rezultate dintr-o iterație, de exemplu într-un array gol. Astfel, de foarte multe ori veți vedea array-uri goale lângă structuri de iterare. Acestea sunt acolo pentru a fi „îndesate” cu valorile rezultate.
+Cel mai adesea vei întâlni array-uri create prin forma literală mult mai simplă ca practică (`[]`).
 
 ```javascript
-var colectie = [];
+let colectie = [];
 ```
+
+Este practică curentă ca un programator să *captureze* valorile rezultate dintr-o iterație, de exemplu într-un array gol. Astfel, de foarte multe ori veți vedea array-uri goale lângă structuri de iterare. Acestea sunt acolo pentru a fi *îndesate* cu valorile rezultate.
 
 Uneori, din motive practice de inițializare a unei structuri de procesare a datelor cu valori de test (fi și numai o funcție simplă), sunt create array-uri literale care vor servi drept colecții de lucru.
 
 ```javascript
-var colectie = [1,2,3];
+let colectie = [1, 2, 3];
 ```
 
 Dacă nu sunt menționate elementele array-ului, acesta va fi constituit din locuri goale, exact ca o sală de teatru goală. Toate scaunele poartă un număr, dar nu este nimeni așezat pe ele. Pentru introducerea elementelor într-un array, se va folosi metoda `push(elemVal)`, care va „împinge” valorile.
 
 ```javascript
-var colectie = [];
+let colectie = [];
 colectie.push('el1');
 colectie.push('el2');
 colectie.push('el3');
@@ -248,20 +271,25 @@ console.log(test);
 
 S-a creat astfel un array cu cinci spații goale. Efectul este crearea unui array cu un număr fix de elemente, ceea ce ar fi de dorit ca și practică generală din motive de optimizare a performanțelor codului la momentul execuției. Preferabil, fă acest lucru prin utilizarea lui `fill()`.
 
-Mai este un caz al folosirii constructorului în ceea ce privește crearea unui array. Acesta este cazul în care ai nevoie de un array, dar care deja să poarte niște valori prestabilite. Spunem că un astfel de array prepopulat este unul „dens”.
+Mai este un caz al folosirii constructorului în ceea ce privește crearea unui array. Acesta este cazul în care ai nevoie de un array, dar care deja să poarte niște valori prestabilite. Spunem că un astfel de array prepopulat este unul *dens*.
 
 ![](operatiuniArrayuri.svg)
 
 ### Array-uri „dense” prin aplicarea lui `apply()` moștenit de la `Function`.
 
-Acesta este un truc pentru a genera array-uri de o dimensiune fixă, dar care, în loc de elemente vide la inițiere, va fi populat cu valori `undefined`. Se folosește `Function.prototype.apply()`, care se poate invoca direct pe `Array` pentru că și `Array`, de fapt este o funcție. Cu rol de contructor, dar o funcție fără niciun dubiu, având acces la `apply()`. Pentru aceasta, contextul va fi obiectul global (în cazul browserului este `window`) sau la `null`, iar drept argumente, va fi invocat `apply()` pasându-i-se numărul de elemente dorit:
+Acesta este un truc pentru a genera array-uri de o dimensiune fixă, dar care, în loc de elemente vide la inițiere, va fi populat cu valori `undefined`. Se folosește `Function.prototype.apply()`, care se poate invoca direct pe `Array` pentru că și `Array`, de fapt este o funcție. Cu rol de contructor, dar o funcție fără niciun dubiu, având acces la `apply()`. Pentru aceasta, contextul va fi obiectul global (în cazul browserului este `window`) sau la `null`. Drept argumente, va fi invocat `apply()` pasându-i-se numărul de elemente dorit:
 
 ```javascript
-Array.apply(window, Array(5)); // Array [ undefined, undefined, undefined, undefined, undefined ] echivalent cu Array(5).fill()
-Array.apply(null, Array(5)); // Array [ undefined, undefined, undefined, undefined, undefined ]
-Array.apply(window, [1,,3]); // Array [ 1, undefined, 3 ]
+Array.apply(window, Array(5));
+// Array [ undefined, undefined, undefined, undefined, undefined ] echivalent cu Array(5).fill()
+Array.apply(null, Array(5));
+// Array [ undefined, undefined, undefined, undefined, undefined ]
+Array.apply(window, [1,,3]);
+// Array [ 1, undefined, 3 ]
 
-Array.apply(window, Array(5)).map(function (x, y) { return y + 1; });  // [1, 2, 3, 4, 5]
+Array.apply(window, Array(5)).map(function (x, y) {
+  return y + 1;
+}); // [1, 2, 3, 4, 5]
 Array.apply(null, Array(5)).map(Function.prototype.call.bind(Number)); // [0,1,2,3,4,5]
 
 Array.apply(window, Array(26))
@@ -277,8 +305,10 @@ Acesta este un pont de la Brandon Benvie descoperit prin intermediul articolului
 Să facem pasul în perioada modernă a limbajului nostru. Ultima iterație a standardului oferă metoda `fill()` pentru a crea array-uri dense (vezi `Array.prototype.fill()`). Cu `fill()` se pot crea array-uri dense care să conțină valori prestabilite, dacă se dorește:
 
 ```javascript
-[1,2,3].fill();                 // Array [ undefined, undefined, undefined ] echivalent cu Array(3).fill()
-Array(3).fill(4);               // [4, 4, 4]
+[1, 2, 3].fill();
+// Array [ undefined, undefined, undefined ]
+// echivalent cu Array(3).fill()
+Array(3).fill(4); // [4, 4, 4]
 [].fill.call({ length:2, ceva:1 }, `0` + `1`);
 // {'0':'01', '1':'01', length: 2, ceva: 1}
 ```
@@ -311,26 +341,25 @@ Exemplul de mai sus este perfect echivalent cu următoarea structură de cod int
 var arrDeArr = [ ['0','0','X'], ['0','0','0'], ['0','0','0'] ];
 ```
 
-## Indecșii negativi
+### Copierea unui array
 
-Indecșii care sunt numere negative vor fi considerați chei pentru valorile introduse în obiectul `Array`.
-
-```javascript
-var tablou = [];
-tablou[-1] = 'ceva în afară';
-console.log(tablou); // Array [ ]
-tablou[-1];          // ceva în afară
-```
-
-## Ștergerea elementelor dintr-un array
-
-Această metodă creează „goluri” în array. Proprietatea `length` nu va fi afectată.
+Știm faptul că array-urile sunt obiecte. Obiectele sunt pasate prin referință, iar acest lucru conduce la concluzia că nu poți copia un array pur și simplu asignându-l pe unu altui identificator.
 
 ```javascript
-var tablou = [1,2,3,4];
-delete tablou[2];
-console.log(tablou); // Array [ 1, 2, <1 empty slot>, 4 ]
+let colectie = [1, 2];
+let alta = colectie;
+console.log(colectie === alta);
 ```
+
+Totuși, dacă se dorește o copiere verbatim a unui array, soluția este constituirea unui nou prin utilizarea metodei `slice()` aplicată array-ului pe care dorești să-l copiezi.
+
+```javascript
+let colectie = ["a", "b"];
+let alta = colectie.slice();
+console.log(alta);
+```
+
+Dacă un array are obiecte drept elemente în cazul în care am dori să facem o copie a acelui array, de fapt am face o copie la referințele către obiecte. În limba engleză vom întâlni această situație cu denumirea *shallow copy* - **copie subțire**.
 
 ## Manipularea dimensiunii unui array
 
@@ -339,17 +368,17 @@ console.log(tablou); // Array [ 1, 2, <1 empty slot>, 4 ]
 Proprietatea `length` numără toate elementele array-ului chiar dacă acestea au și goluri.
 
 ```javascript
-var tablou = [0,1,,3]; // conține un element lipsă
-tablou.length; // 4
+let tablou = [0, 1, , 3]; // conține un element lipsă
+tablou.length;         // 4
 ```
 
 Pentru a număra câte elemente chiar există în array se poate scrie o funcție specializată:
 
 ```javascript
-var tablou = [0,1,,3];
+let tablou = [0, 1, , 3];
 function numaraElementeReale(date){
-  var contor = 0;
-  date.forEach(function(){
+  let contor = 0;
+  date.forEach(function () {
     contor++;
   });
   return contor;
@@ -411,24 +440,25 @@ tablou; // []
 altTablou; // Array [ "prima", "a doua", 1, 2 ]
 ```
 
-## Tratarea array-urilor după felul lor: **sparse** (în limba română: *cu goluri*) sau **dense**.
+## Operațiuni cu datele din array
 
-Array-urile care au goluri se numesc „sparse”. Un array care nu are goluri se numește „dense”.
+Dacă privești la gradul de populare, unele array-uri pot fi socotite **sparse** (în limba română: *cu goluri*), iar altele fără goluri catalogate a fi **dense**.
 
 ```javascript
 // array sparce
-var arrayCuGoluri = [1,,3,4];
+let arrayCuGoluri = [1, , 3, 4];
 // array dense
-var arrayDens = [1,2,3,4];
-Array(4).fill(); // Array [undefined, undefined, undefined, undefined]
+let arrayDens = [1, 2, 3, 4];
+Array(4).fill();
+// Array [undefined, undefined, undefined, undefined]
 ```
 
-### Trecerea peste goluri
+Uneori este necesară trecerea peste goluri pentru a prelucra restul datelor din array.
 
-A. Folosind `forEach()`
+A. Folosind metoda `forEach()`
 
 ```javascript
-['prima',, 1, 2].forEach(function(element, index){
+['prima', , 1, 2].forEach(function (element, index) {
   console.log(index + ' -> ' + element);
 });
 // 0 -> prima
@@ -454,56 +484,70 @@ E. Folosind `filter()` golurile sunt eliminate.
 Array [ "prima", 1, 2 ];
 ```
 
-F. `join()` convertește golurile, iar valorile `undefined` și `null` la stringul pasat în join.
+F. Metoda `join()` convertește golurile, iar valorile `undefined` și `null` la stringul pasat în join.
 
 ```javascript
 ['prima',,1,2].join('X');
 // "primaXX1X2"
 ```
-G. `sort()` păstrează golurile.
-H. Bucla `for...in` listează cheile array-ului (acestea sunt un superset al indicilor array-ului).
+
+G. Metoda `sort()` păstrează golurile.
+H. Bucla `for..in` listează cheile array-ului (acestea sunt un superset al indicilor array-ului).
 
 ```javascript
-for (var key in ['prima',,1,2]){ console.log(key); }; // 0 2 3
+for (let key in ['prima',,1,2]){
+  console.log(key);
+}; // 0 2 3
 ```
 
-I. Folosirea lui `apply()`.
+I. Folosirea lui `apply()`
 
-## Completarea unui array existent
+Completarea unui array existent se poate face aplicând metoda `push()` pe primul array pentru că, de fapt, transformi primul array ca fiind obiectul context pentru execuția metodei. Acest lucru permite injectarea celui de-al doilea obiect în primul.
 
 ```javascript
-var primul = [1,2,3];
-var alDoilea = [4,5,6];
-
+let primul = [1, 2, 3];
+let alDoilea = [4, 5, 6];
 Array.prototype.push.apply(primul, alDoilea);
 console.log(primul); // Array [ 1, 2, 3, 4, 5, 6 ]
 ```
 
-O altă soluție
+O altă soluție dar foarte complexă.
 
 ```javascript
-var a = [1,2,3,7,8,9],
-    b = [4,5,6],
+let a = [1, 2, 3, 7, 8, 9],
+    b = [4, 5, 6],
     insertIndex = 3;
 a.splice.apply(a, Array.concat(insertIndex, 0, b));
 ```
 
-## Accesare pe sărite a elementelor unui array
+### Accesarea pe sărite a elementelor unui array
 
 ```javascript
-var colectie = [1,2,3,'unu','doi','trei'];
-colectie = colectie.sort(function(){return Math.random() - 0.5});
+var colectie = [1, 2, 3, 'unu', 'doi', 'trei'];
+colectie = colectie.sort(function () {
+  return Math.random() - 0.5;
+});
 colectie; // Array [ 3, 1, "doi", 2, "unu", "trei" ]
 ```
 
-## Destructurarea
+### Căutări în array
+
+Pentru a face căutări avem la dispoziție două metode:
+
+- metoda `find()` și
+- metoda `indexOf()`.
+
+În cazul utilizării lui find, dacă elementul există în array, metoda returnează chiar elementul folosind o funcție callback, iar în caz contrar returnează `undefined`. Cazul metodei `indexOf()` este în oglindă cu diferența că este returnat indexul la care se află valoarea.
+
+### Destructurarea
 
 Destructurarea este un procedeu care are drept scop extragerea sau manipularea valorilor asignându-le unor variabile.
 
 ```javascript
 var arr = ['unu', 'doi'];
 var [unu, doi] = arr;
-console.log(unu, doi); // 'unu' 'doi'
+console.log(unu, doi);
+// 'unu' 'doi'
 ```
 
 ### Potrivire *unu-la-unu*
@@ -511,7 +555,8 @@ console.log(unu, doi); // 'unu' 'doi'
 ```javascript
 var unu, doi, trei;
 [unu, doi, trei] = [1, 2, 3];
-console.log(unu, doi, trei); // 1 2 3
+console.log(unu, doi, trei);
+// 1 2 3
 ```
 
 ### Inversarea valorilor
@@ -531,7 +576,8 @@ function genArray(){
   return ['unu', 'doi', 'trei'];
 };
 [x, y, z] = genArray();
-console.log(x, y, z); // unu doi trei
+console.log(x, y, z);
+// unu doi trei
 ```
 
 ### Valori implicite
@@ -575,10 +621,22 @@ Tot ce am povestit mai sus abia a reușit să facă un tablou generic al posibil
 
 Obiectul nostru are trei metode și două proprietăți. Una dintre proprietăți este referința către obiectul prototip, care la rândul său oferă o serie de proprietăți pe care le-am grupat după sfera de aplicare și relația pe care o stabilesc. Vom debuta cu metodele.
 
-
 Explicații:
+
 - https://www.ecma-international.org/ecma-262/#sec-logical-not-operator
 - https://www.ecma-international.org/ecma-262/#sec-abstract-equality-comparison
 
+## Mantre
+
+- Atunci când `Array` este apelat ca funcție și nu ca un constructor, va creea și va inițializa un nou obiect `Array`.
+- Are metodă internă `@@iterator`.
+- `Array`-urile sunt **obiecte** și poți adăuga proprietăți în array folosind notația dot `var a = [1,2]; a.i = 23; a.i // 23`. Valorile sunt adăugate indiferent că array-ul are un index numeric prestabilit. Ele sunt acolo.
+- Orice obiect `Array` are o proprietate `length`.
+- cheia unei proprietăți al unui array se numește `index` al unui array (valorile dintre paranteze pătrate sunt convertite la string).
+- o proprietate într-un array care este identificată printr-un index este numită `element`.
+- `Array` este un obiect intern limbajului JavaScript. Acesta este folosit pentru crearea array-urilor.
+- `Array` este un obiect iterabil pentru că obiectul prototip are o metodă @@iterator (precum String, TypedArray, Map și Set).
+
 ## Resurse
-[MDN Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array?redirectlocale=en-US&redirectslug=JavaScript%2FReference%2FGlobal_Objects%2FArray)
+
+- [MDN Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array?redirectlocale=en-US&redirectslug=JavaScript%2FReference%2FGlobal_Objects%2FArray)

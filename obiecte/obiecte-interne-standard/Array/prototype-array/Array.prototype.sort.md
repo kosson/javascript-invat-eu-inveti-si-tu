@@ -3,37 +3,30 @@
 Atenție! Această metodă modifică definitiv array-ul original.
 
 Sortează elementele unui array și returnează acel array.
-Fii avertizat că această metodă modică array-ul. Există un mic truc care protejează array-ul original.
+Fii avertizat că această metodă modică array-ul. Există un mic truc care protejează array-ul original: folosirea metodei `slice()` pentru a face o copie pe care faci sortarea.
 
 ```javascript
 const arrOrig = [23, 'ceva', 43, 8];
-const arrCopie = arrOrig.slice().sort(); // [ 23, 43, 8, "ceva" ]
+const arrCopie = arrOrig.slice().sort();
+// [ 23, 43, 8, "ceva" ]
 ```
 
-Dacă nu este pasat un argument, de fapt o funcție care să îndeplinească sortarea, aceasta se va face prin compararea ***punctelor de cod*** Unicode.
-
-Ceea ce se întâmplă este o conversie a elementelor de array la string urmată de compararea lor ca valori Unicode.
-
-Pentru șiruri funcția de comparare poate fi astfel:
+Dacă nu este pasat un argument, de fapt o funcție care să îndeplinească sortarea, aceasta se va face prin compararea **punctelor de cod** Unicode, adică a valorilor numerice care codează caracterele. Ceea ce se întâmplă este o conversie a elementelor de array la string urmată de compararea lor ca valori Unicode. Pentru șiruri funcția de comparare poate fi astfel:
 
 ```javascript
-// atenție, acesta este pseudocod
-function compare(primulCaracter, aldoileaCaracter) {
-  if (primulCaracter este mai mic decât aldoileaCaracter folosind un criteriu de ordonare) {
+function compara (primulCaracter, alDoileaCaracter) {
+  if ( primulCaracter < alDoileaCaracter) {
     return -1;
-  }
-  if (primulCaracter este mai mare decât aldoileaCaracter folosind un criteriu de ordonare) {
+  } else if (primulCaracter > alDoileaCaracter) {
     return 1;
-  }
-  // primulCaracter trebuie să fie egal cu aldoileaCaracter
+  };
   return 0;
 }
-["c", "a", "d"].sort(compare);
+["c", "a", "d"].sort(compara);
+// Array [ "a", "c", "d" ]
 ```
 
-### Compararea și sortarea numerelor
-
-Pentru că valorile de lucru sunt cele ale tabelei Unicod și oarecum nu sunt evidente pentru cel care lucrează cu valorile array-ului, practica a găsit o metodă de a face sortarea să se comporte mai apropiat de ceea ce se așteaptă de la o astfel de metodă.
+Pentru că valorile de lucru sunt cele ale tabelei Unicod și oarecum nu sunt evidente pentru cel care lucrează cu valorile array-ului, în practică s-a găsit o metodă de a face sortarea să se comporte mai apropiat de ceea ce se așteaptă de la o astfel de metodă.
 
 Acest lucru se transpune în pasarea unei funcții cu rol de sortare. Funcția pasată va compara două elemente x și y. Rezultatul comparării conduce la o decizie în ceea ce privește reorganizarea array-ului. Există trei cazuri în care comportamentul de sortare este modelat de ceea ce este returnat de funcția pasată:
 
@@ -41,25 +34,7 @@ Acest lucru se transpune în pasarea unei funcții cu rol de sortare. Funcția p
 - valoarea este mai mare de 0: y va sta înaintea lui x
 - valoarea este egală cu 0: x și y își vor păstra pozițiile.
 
-O formă pentru a înțelege pașii este următoarea secvență care se autodescrie prin verbozitatea codului.
-
-```javascript
-var arr = [-23, -2, 102, 3, -54];
-
-function aranjament(x, y) {
-  var jalon = 0;
-  if ( x > y ) {
-    jalon = 1;
-  } else if ( y > x) {
-    jalon = -1;
-  };
-  return jalon;
-};
-
-arr.sort(aranjament); // [ -54, -23, -2, 3, 102 ]
-```
-
-O formulă mai contrasă este următoarea secvență:
+O formă pentru a înțelege pașii este următoarea secvență care se autodescrie:
 
 ```javascript
 [-23, -2, 102, 3, -54].sort( function (x, y) {
@@ -88,7 +63,7 @@ Se poate condensa mai mult folosindu-se operatorul ternar:
 }); // [ -54, -23, -2, 3, 102 ]
 ```
 
-O altă variantă de comparator pentru numere este pur și simplu scăderea unuia din celălalt:
+O altă variantă de comparator pentru valori numerice este pur și simplu scăderea unuia din celălalt:
 
 ```javascript
 [-23, -2, 102, 3, -54].sort( (x, y) => x - y );
@@ -145,7 +120,7 @@ function aranjament(x, y) {
 arr.sort(aranjament); // [ 102, 3, -2, -23, -54 ]
 ```
 
-Și acum, că tot am ajuns la asta, este posibil ca la un moment dat să faci o sortare, dar să poți și inversa sortarea la nevoie.
+La un moment dat să faci o sortare, dar să poți și inversa sortarea la nevoie.
 
 ```javascript
 var colectie = [
