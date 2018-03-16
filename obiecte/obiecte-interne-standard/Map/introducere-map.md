@@ -1,10 +1,6 @@
 # `Map`
 
-Este un obiect intern introdus de ECMAScript 2015 care oferă o structură simplă de chei - valori care permite iterarea elementelor dar în ordinea în care acestea au fost introduse.
-
-Obiectul Map este o colecție chei - valori. Acceptă valori primitive și obiecte și respectă protocolul iterabil ceea ce înseamnă că poți folosi și operatorii `spread`.
-
-Înainte de introducerea lui Map, obiectele simple erau folosite pentru a stoca chei - valori.
+Este un obiect intern introdus de ECMAScript 2015 care oferă o structură simplă de chei - valori care permite iterarea elementelor dar în ordinea în care acestea au fost introduse. Obiectul Map este o colecție de perechi *chei - valori*. Acceptă valori primitive și obiecte și respectă protocolul iterabil ceea ce înseamnă că poți folosi și operatorii `spread`. Înainte de introducerea lui Map, obiectele simple erau folosite pentru a stoca chei - valori.
 
 Pentru lucrul cu o structură simplă de date în care unei chei reprezentate de un string îi corespundea o valoare sau o metodă, obiectele simple se pretează cu succes.
 Lucrurile încep să se complice atunci când era nevoie să introduci structuri mai complexe ca valori așa cum sunt obiectele (așa-numitele hash-map-uri).
@@ -14,15 +10,12 @@ Un exemplu de folosire cu forțarea la limită a obiectelor.
 
 ```javascript
 var obi = {};
-
 function adauga (numeCheie, valoare) {
   obi[numeCheie] = valoare;
 };
-
 function scoate (numeCheie) {
   return obi[numeCheie];
 };
-
 adauga('primul', {a: 'element', b: true});
 adauga('alDoilea', {x: 10, y: function(){return this.a}});
 console.log(obi);   // Object { primul: Object, alDoilea: Object }
@@ -36,9 +29,7 @@ O posibilă soluție pe genunchi, ar fi crearea unui obiect căruia să-i fie t�
 let obi = Object.create(null); // lanțul prototipal este întrerupt
 ```
 
-Dar chiar și așa, un alt neajuns este că toate cheile obiectului vor fi mereu stringuri.
-
-Folosirea lui `Map` rezolvă aceste probleme oferind și metodele necesare pentru a gestiona datele din colecție.
+Dar chiar și așa, un alt neajuns este că toate cheile obiectului vor fi mereu stringuri. Folosirea lui `Map` rezolvă aceste probleme oferind și metodele necesare pentru a gestiona datele din colecție.
 
 ```javascript
 var obi = new Map();
@@ -47,7 +38,7 @@ obi.set('alDoilea', {x: 10, y: function(){return this.a}});
 obi.set(new Date(), 'data la această proprietate a fost accesată');
 ```
 
-Spre deosebire de obiectul clasic, într-un Map poți introduce orice valoare, de la primitive, la obiecte iar cheile nu vor mai fi limitate la șiruri de caractere. Se va instanția cu new: `new Map([interable])`. Obiectul care va constitui colecția trebuie să fie o colecție iterabilă.
+Spre deosebire de obiectul clasic, într-un `Map` poți introduce orice valoare, de la primitive, la obiecte, iar cheile nu vor mai fi limitate la șiruri de caractere. Se va instanția cu `new`: `new Map([interable])`. Obiectul care va constitui colecția trebuie să fie o colecție iterabilă.
 
 ```javascript
 var obiect = new Map([
@@ -105,7 +96,7 @@ bibliotecaTest.size; // 2
 
 ### `Map.prototype.set()` și `Map.prototype.get()`
 
-Adaugă un element nou la un Map, adică o pereche cheie - valoare.
+Adaugă un element nou la un `Map`, adică o pereche cheie - valoare.
 
 ```javascript
 var colectie = new Map();
@@ -120,7 +111,7 @@ colectie.get('ceva'); // 100
 
 ### `Map.prototype.delete()` și `Map.prototype.has()`
 
-Este evident că folosind delete se poate șterge o pereche, atenție întreaga pereche. Dacă dorești să verifici existența unei chei, vei folosi `has()` pentru a face interogarea asupra map-ului.
+Este evident că folosind `delete` se poate șterge o pereche, atenție întreaga pereche. Dacă dorești să verifici existența unei chei, vei folosi `has()` pentru a face interogarea asupra map-ului.
 
 ```javascript
 var colectie = new Map();
@@ -139,7 +130,7 @@ Metoda este cât se poate de clară: șterge toate perechile din `Map`.
 
 ### `Map.prototype.entries()`
 
-Metoda returnează un obiect Iterator care conține perechi cheie - valoare pentru fiecare element din obiectul Map.
+Metoda returnează un obiect **Iterator** care conține perechi cheie - valoare pentru fiecare element din obiectul Map.
 
 ```javascript
 var colectie = new Map();
@@ -157,15 +148,14 @@ console.log(iteratorColectie.next().value); // Array [ Object, "hmmmmm" ]
 
 ### `Map.prototype.forEach()`
 
-Metoda execută o funcție pentru fiecare pereche cheie - valoare din obiectul Map în ordinea inserției. Callback-ul nu se va executa pentru cheile care au fost șterse, dar se va executa pentru valorile prezente dar care sunt `undefined`.
-
-Metoda primește ca argumente callback-ul și un alt argument, care dacă este pasat este `this` și acesta este pasat callback-ului. Dacă nu este pasat acesta va fi din start undefined, care va fi pasat callback-ului.
+Metoda execută o funcție pentru fiecare pereche cheie - valoare din obiectul `Map` în ordinea inserției. Callback-ul nu se va executa pentru cheile care au fost șterse, dar se va executa pentru valorile prezente dar care sunt `undefined`.
+Metoda primește ca argumente callback-ul și un alt argument, care dacă este pasat este `this` și acesta este pasat callback-ului. Dacă nu este pasat acesta va fi din start `undefined`, care va fi pasat callback-ului.
 
 Callback-ul este invocat cu trei argumente:
 
-- valoarea elementului
-- cheia elementului
-- obiectul Map care trebuie traversat
+-   valoarea elementului
+-   cheia elementului
+-   obiectul Map care trebuie traversat
 
 `forEach` execută o funcție vizitând fiecare element, dar nu va returna nicio valoare.
 
@@ -182,7 +172,7 @@ Fiecare element într-o buclă este un array format din cheie, care este primul 
 
 ### `Map.prototype.keys()` și `Map.prototype.values()`
 
-Este o metodă care returnează un nou obiect iterator care conține cheile pentru fiecare element din obiectul Map în ordinea inserării.
+Este o metodă care returnează un nou obiect iterator care conține cheile pentru fiecare element din obiectul `Map` în ordinea inserării.
 
 ```javascript
 var colectie = new Map();
