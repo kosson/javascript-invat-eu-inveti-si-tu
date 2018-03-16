@@ -15,11 +15,11 @@ Un exemplu de folosire cu forțarea la limită a obiectelor.
 ```javascript
 var obi = {};
 
-function adauga(numeCheie, valoare){
+function adauga (numeCheie, valoare) {
   obi[numeCheie] = valoare;
 };
 
-function scoate(numeCheie){
+function scoate (numeCheie) {
   return obi[numeCheie];
 };
 
@@ -47,9 +47,7 @@ obi.set('alDoilea', {x: 10, y: function(){return this.a}});
 obi.set(new Date(), 'data la această proprietate a fost accesată');
 ```
 
-Spre deosebire de obiectul clasic, într-un Map poți introduce orice valoare, de la primitive, la obiecte iar cheile nu vor mai fi limitate la șiruri de caractere.
-
-Se va instanția cu new: `new Map([interable])`. Obiectul care va constitui colecția trebuie să fie o colecție iterabilă.
+Spre deosebire de obiectul clasic, într-un Map poți introduce orice valoare, de la primitive, la obiecte iar cheile nu vor mai fi limitate la șiruri de caractere. Se va instanția cu new: `new Map([interable])`. Obiectul care va constitui colecția trebuie să fie o colecție iterabilă.
 
 ```javascript
 var obiect = new Map([
