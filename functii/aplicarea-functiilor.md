@@ -1,6 +1,6 @@
 # Aplicarea funcțiilor
 
-Este procedura de ***aplicare*** a unei funcții argumentelor sale pentru a produce o valoare care să fie returnată.
+Este procedura de **aplicare** a unei funcții argumentelor sale pentru a produce o valoare care să fie returnată.
 
 Profesorul Christopher Strachey spune:
 
@@ -20,7 +20,7 @@ const finalizare = prima(combinaArgs, ['ping', 'echo']);
 finalizare('pong'); // "am combinat ping,echo cu pong"
 ```
 
-În exemplu avem `prima` care este o funcție ***fat arrow***.
+În exemplu avem `prima` care este o funcție **fat arrow**.
 
 Această funcție primește două argumente:
 - o altă funcție și
