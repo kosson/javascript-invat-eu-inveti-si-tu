@@ -71,7 +71,7 @@ let arr = [1, 2, 3];
 console.log(arr); // [1, 2, 3]
 ```
 
-Dacă dorești, poți modifica valoarea elementelor interne ale array-ului externe funcției folosind sufixul `[]`. În acest caz referința este păstrată către obiectul array original. Nu se mai creează un nou obiect array în mediul lexical al funcției.
+Dacă dorești, poți modifica valoarea elementelor interne ale array-ului extern funcției folosind sufixul `[]`. În acest caz referința este păstrată către obiectul array original. Nu se mai creează un nou obiect array în mediul lexical al funcției.
 
 ```javascript
 var arr = [1, 2, 3];

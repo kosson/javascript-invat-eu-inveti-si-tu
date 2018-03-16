@@ -2,12 +2,35 @@
 
 Este o metodă introdusă de ECMAScript 2017.
 
-Returnează un array de array-uri având drept valori numele tuturor proprităților unui obiect sub formă de perechi în câte un array dedicat, care sunt enumerabile și care aparțin obiectului respectiv.
+Returnează un array de array-uri având drept valori numele tuturor proprietăților unui obiect sub formă de perechi în câte un array dedicat, care sunt enumerabile și care aparțin obiectului respectiv.
 
 ```javascript
-var obi =  {a: 10, b: true, c: function(){return 'ceva'}};
-var colectie = Object.entries(obi);
-console.log(colectie); // [["a",10],["b",true],["c",null]]
+let obi =  {
+  a: 10,
+  b: true,
+  c: function () {
+    return 'ceva';
+  }
+};
+let colectie = Object.entries(obi);
+console.log(colectie);
+// [["a",10],["b",true],["c",null]]
 ```
 
 După cum se observă, această metodă este folositoare câtă vreme obiectul nostru este un set de date, de fapt. În cazul metodelor, valorile lor vor fi reduse la `null`.
+
+Un posibil scenariu ar fi combinarea cu metoda `map` pentru a transforma array-ul de date în ceva altfel structurat.
+
+```javascript
+let colectie = {
+  Bacău: 'BC',
+  Timișoara: 'TM'
+};
+Object.entries(colectie).map(
+  ([oras, indicativ]) => `${oras}: ${indicativ}`
+);
+```
+
+## Referințe
+
+- [JavaScript ES8 Object.entries/values. Dale Jefferson. Published 10 Jun 2017](https://www.dalejefferson.com/es8-object-entries-values/)

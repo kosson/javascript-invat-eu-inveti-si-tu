@@ -5,19 +5,19 @@ Creează un wrapper (un obiect ambalaj) pentru un obiect atunci când este insta
 
 ## Mantre
 
-- `Object` este un constructor.
-- `Object` creează un wrapper pentru o anumită valoare. Dacă valoarea este `null` sau `undefined`, `Object` va crea și returna un obiect gol.
-- Dacă valoarea pasată nu este `null` sau `undefined`, `Object` va returna un obiect de tipul care corespunde valorii oferite.
-- Dacă valoarea este deja un obiect, va fi returnată valoarea.
-- Obiectul window are o metodă numită Object [ function Object() ]. Motorul Javascript construiește automat metoda Obiect în obiectul window (`window.Object` returnează function Object()).
-- Toate obiectele în JavaScript descind din `Object`, își au originea în `Object`. Toate obiectele moștenesc metode și proprietăți din `Object.prototype`. Acestea pot fi suprascrise.
-- `Object.prototype` este un obiect în care poți adăuga propriile proprietăți și metode.
-- Modificările aduce obiectului `Object.prototype` se propagă către toate obiectele. Singura excepție este atunci când proprietățile și metodele supuse modificărilor nu sunt ele la rândul lor modificate mai departe în lanțul prototipal.
-- Proprietățile lui `Object` nu sunt `enumerable`. Deci, nu vor apărea în bucle `for..in` care nu ciclează doar proprietățile proprii.
+-   `Object` este un constructor.
+-   `Object` creează un wrapper pentru o anumită valoare. Dacă valoarea este `null` sau `undefined`, `Object` va crea și returna un obiect gol.
+-   Dacă valoarea pasată nu este `null` sau `undefined`, `Object` va returna un obiect de tipul care corespunde valorii oferite.
+-   Dacă valoarea este deja un obiect, va fi returnată valoarea.
+-   Obiectul window are o metodă numită Object \[ function Object() ]. Motorul Javascript construiește automat metoda Obiect în obiectul window (`window.Object` returnează function Object()).
+-   Toate obiectele în JavaScript descind din `Object`, își au originea în `Object`. Toate obiectele moștenesc metode și proprietăți din `Object.prototype`. Acestea pot fi suprascrise.
+-   `Object.prototype` este un obiect în care poți adăuga propriile proprietăți și metode.
+-   Modificările aduce obiectului `Object.prototype` se propagă către toate obiectele. Singura excepție este atunci când proprietățile și metodele supuse modificărilor nu sunt ele la rândul lor modificate mai departe în lanțul prototipal.
+-   Proprietățile lui `Object` nu sunt `enumerable`. Deci, nu vor apărea în bucle `for..in` care nu ciclează doar proprietățile proprii.
 
 ## Spune standardul
 
-Valoarea slotului intern [[Prototype]] a obiectului cu rol de prototype pentru Object este `null` iar valoarea slotului intern [[Extensible]] este `true`.
+Valoarea slotului intern \[\[Prototype]] a obiectului cu rol de prototype pentru Object este `null` iar valoarea slotului intern \[\[Extensible]] este `true`.
 
 ## Crearea obiectelor cu `Object`
 

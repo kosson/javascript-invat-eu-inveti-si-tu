@@ -43,7 +43,7 @@ var obi = {
 let obi2 = {
   "a": 'altceva'
 };
-// echivalent cu 
+// echivalent cu
 let obi3 = new Object();
 obi3.a = 'cineva';
 ```
@@ -413,15 +413,15 @@ obiect.colectie; // [ "test" ]
 
 Accesarea proprietăților se poate face folosind sintaxa cu punct și cea cu paranteză pătrată:
 
-1. obiect.proprietate
-2. obiect\["proprietate"]
+1 obiect.proprietate
+2 obiect\["proprietate"]
 
 Operatorul punct permite citirea proprietăților, dar încercarea de a citi o proprietate care nu există, returnează `undefined`. Dacă o proprietate nu există, aceasta va fi creată: `obiect.oProprietate = 'ceva';`.
 
 Metodele pot fi și ele la rândul lor accesate folosind cele două tipuri de sintaxă, fie ca valori, fie ca apeluri.
 
-1. obiect.metoda()
-2. obiect\["metoda"]()
+1 obiect.metoda()
+2 obiect\["metoda"]()
 
 Atunci când invoci o metodă folosind notația cu punct, ai acces la proprietățile obiectului folosind cuvântul cheie `this` deoarece obiectul în cadrul căruia se execută funcția este `this`.
 
@@ -515,7 +515,7 @@ for ( cheie in obiect ) { console.log( cheie, obiect[cheie] ); };
 
 Pentru a înțelege cu adevărat natura și specificitățile limbajului de programare JavaScript, trebuie să fie înțeles modul în care proprietățile unui obiect sunt „moștenite” de un altul. Nu uita nicio secundă faptul că JavaScript este un limbaj de programare care este o continuă comunicare între diferite obiecte, fie că acestea sunt cele interne, fie că sunt cele create de noi. Simplificând în tușe foarte groase, creatorii limbajului au dorit o modelare a structurilor de prelucrare a datelor după modul în care lumea reală funcționează: copii au părinți, iar aceștia moștenesc caracteristicile părinților pe lângă cele care definesc propria persoană.
 
-***JavaScript este un limbaj bazat pe moștenire prototipală - prototypal inheritance***
+**JavaScript este un limbaj bazat pe moștenire prototipală - prototypal inheritance**
 
 În alte limbaje de programare așa cum este Java, de exemplu, pentru a genera un obiect ai nevoie de un fragment de cod care are rolul de plan de construcție pentru viitoarele obiecte. Pur și simplu este o secvență de cod care descrie care sunt valorile și tipul lor pentru proprietățile viitorului obiect.
 
@@ -570,11 +570,11 @@ Legătura cu `[[Prototype]]` este aceea că în cazul unui `[[Extensible]]` cu v
 
 ### Mantre
 
-- \[[Prototype]], adică proprietatea `.prototype` este o legătură care se stabilește de la un obiect la altul.
-- Legătura prototipală se poate obține și prin `Object.create()`.
-- Legătura prototipală se obține și prin invocarea cu `new`.
-- Legătura prototipală creează un lanț de delegare pentru cazurile în care nu găsești o proprietate sau o metodă într-un anumit context de execuție.
-- Relațiile prototipale pot cauza probleme atunci când este nevoie de enumerarea proprietăților obiectelor. Ambalează într-o funcție de verificare cu `Object.hasOwnPropery()`;
+-   \[\[Prototype]], adică proprietatea `.prototype` este o legătură care se stabilește de la un obiect la altul.
+-   Legătura prototipală se poate obține și prin `Object.create()`.
+-   Legătura prototipală se obține și prin invocarea cu `new`.
+-   Legătura prototipală creează un lanț de delegare pentru cazurile în care nu găsești o proprietate sau o metodă într-un anumit context de execuție.
+-   Relațiile prototipale pot cauza probleme atunci când este nevoie de enumerarea proprietăților obiectelor. Ambalează într-o funcție de verificare cu `Object.hasOwnPropery()`;
 
 
 ### Verificarea prototipului
@@ -666,7 +666,6 @@ var obi2 = {
     return super.faceva() + ' este oferită aici';
   }
 };
-
 // setezi prototipul lui obi2 la cel a lui obi1.
 Object.setPrototypeOf(obi2, obi1);
 obi2.faAltceva(); // "ce-i returnat din obi1  este oferită aici"
@@ -676,9 +675,9 @@ obi2.faAltceva(); // "ce-i returnat din obi1  este oferită aici"
 
 Mai este numită de o parte a programatorilor „moștenire clasică”. De fapt, este vorba tot despre moștenire prototipală, dar care face uz de un constructor. Acesta este modelul cel mai des întâlnit și acceptat ca practică istorică:
 
-1. Creezi o funcție constructor (este o practică acceptată ca funcțiile constructor să aibă numele începând cu literă mare).
-2. Adaugi metode în obiectul `prototype` al funcției cu rol de constructor.
-3. Instanțiezi obiectul folosind cuvântul cheie `new`.
+1  Creezi o funcție constructor (este o practică acceptată ca funcțiile constructor să aibă numele începând cu literă mare).
+2  Adaugi metode în obiectul `prototype` al funcției cu rol de constructor.
+3  Instanțiezi obiectul folosind cuvântul cheie `new`.
 
 ```javascript
 var Ceva = function (info) { this.info = info; };
@@ -707,10 +706,10 @@ Standardul spune că un constructor, **este un obiect funcție care suportă met
 
 Invocarea unei funcții constructor folosind operatorul `new`, are drept urmare parcurgerea unor etape esențiale. Rezultatul este un obiect. Reține faptul că acest nou obiect trebuie referențiat printr-o expresie de tipul `var obiNou = new FacObiecte();`. Să urmărim pașii prin care un constructor creează un obiect atunci când se evaluează expresia cu operator `new`. Când ajunge la `new`, motorul JavaScript înțelege că este momentul să creeze un obiect după cum urmează.
 
-1. Se creează un obiect nou.
-2. Se creează o legătură prototipală la obiectul prototype al funcției constructor.
-3. Obiectul generat automat este pasat funcției cu rol de constructor ca fiind `this` și astfel, devine contextul de execuție al funcției constructor invocate. După ce va fi înzestrat cu proprietățile dorite prin execuția corpului funcției constructor, obiectul `this` va fi returnat ca fiind noul obiect.
-4. Dacă funcția constructor nu returnează ceva, atunci înainte de a se închide blocul („}”) se va returna automat obiectul constituit la pasul 1 și după ce a fost „înzestrat” la pasul 3.
+1  Se creează un obiect nou.
+2  Se creează o legătură prototipală la obiectul prototype al funcției constructor.
+3  Obiectul generat automat este pasat funcției cu rol de constructor ca fiind `this` și astfel, devine contextul de execuție al funcției constructor invocate. După ce va fi înzestrat cu proprietățile dorite prin execuția corpului funcției constructor, obiectul `this` va fi returnat ca fiind noul obiect.
+4  Dacă funcția constructor nu returnează ceva, atunci înainte de a se închide blocul („}”) se va returna automat obiectul constituit la pasul 1 și după ce a fost „înzestrat” la pasul 3.
 
 Cel mai simplu exemplu:
 
@@ -726,7 +725,7 @@ Fragmentul de cod debutează printr-o expresie de funcție referențiată prin i
 
 Pentru că știm faptul că o funcție este de fapt o funcție-obiect, știm că are un obiect `prototype`. Deseori veți vedea că programatorii preferă să introducă proprietăți noi în obiectul prototipal prin formula `Salut.prototype.glas`. Obiectul care va fi creat mai poate fi dotat de la naștere cu proprietăți folosindu-se `this` în corpul funcției constructor după cum am mai văzut. În cazul nostru, am introdus o metodă `euVorbesc`, care va prelua prin parametrul `vorbe` date „externe” obiectului și le va prelucra. În acest moment, am dotat obiectul prototype al funcției-obiect `Salut` cu metoda `glas`. Putem verifica acest lucru interogând consola cu `Salut.prototype`, fiind returnat `{  glas: Salut.prototype.glas(), constructor: Salut() }`. Dacă vei avea curiozitatea să interoghezi funcția cu `Salut.__proto__`, vei observa ceva diferit. Va fi returnat constructorul general pentru toate funcțiile limbajului de programare, adică `function ()`. Pentru că avem nevoie de obiect, setăm o referință pe care o vom folosi pentru a-l apela `var unObiect` și construim mai departe o expresie cu atribuirea unei viitoare evaluări cu operatorul `new` a funcției constructor `Salut`. O interogare cu `unObiect.prototype`, va returna `undefined` pentru că obiectul nostru nu are un obiect prototipal, dar poți vedea pe lanțul prototipal format prin efectul operatorului `new`, de la cine moștenește: `unObiect.__proto__`. Buna practică ne indică faptul că interogarea prin `unObiect.__proto__` să fie abandonată în favoarea utilizării metodei obiectului fundamental `Object.getPrototypeOf(unObiect)`. Totuși, folosind `unObiect.__proto__.constructor` poți afla care a fost funcția cu rol de constructor pentru un anumit obiect. De ce sunt utile aceste instrumente? Pentru că sunt scenarii care necesită depanarea codului și poate că este nevoie să investighezi cum s-a format un anumit obiect.
 
-Atenție! Aici există ceva foarte important de lămurit. Proprietatea `prototype` aparține funcției constructor (`Function.prototype`). Această legătură vizibilă, care poate fi „interogată”, expune o legătură internă referită de standard ca [\[Prototype]].
+Atenție! Aici există ceva foarte important de lămurit. Proprietatea `prototype` aparține funcției constructor (`Function.prototype`). Această legătură vizibilă, care poate fi „interogată”, expune o legătură internă referită de standard ca \[\[Prototype]].
 
 Spuneam deja că, la nevoie, poți adăuga în prototipul funcției proprietăți pentru a fi moștenite mai târziu de obiectele create. Să spunem că avem o funcție cu rol de constructor și se instanțiază un obiect. Dar mai târziu, pentru că este nevoie de o proprietate care să fie moștenită de toate obiectele generate, se poate introduce direct în obiectul `prototype` al funcției.
 
@@ -970,7 +969,7 @@ Pentru a simplifica adăugarea metodelor și proprietăților, se poate scrie o 
 ```javascript
 function extinde (obi, obiSursa) {
   for (let x in obiSursa) {
-    if ( obiSursa.hasOwnProperty(x) ) { 
+    if ( obiSursa.hasOwnProperty(x) ) {
       obi[x] = obiSursa[x];
     };
   };
@@ -1115,14 +1114,14 @@ Echivalent lui `constructor(val){}`, este `function Test (val){ this.val = val }
 
 ### Mantre
 
-- Spre deosebire de funcții, declarația de clasă nu beneficiază de mecanismul de hoisting indiferent că este o declarație sau o expresie de clasă. Deci, până când execuția nu ajunge la locul de declarare, clasa se află în Temporal Dead Zone (TDZ).
-- Tot codul din clasă rulează automat în `strict mode`.
-- Toate metodele create sunt automat non-enumerabile.
-- Apelarea constructorului fără `new` conduce la o stare de eroare.
-- Numele clasei nu trebuie folosit în interiorul acesteia pentru o reasignare. Conduce la eroare.
-- În cazul folosirii expresiilor de clasă, nu este necesară introducerea unui identificator după cuvântul cheie `class`.
-- `super()` setează legătura la `this` în cazul claselor derivate. Dacă folosești constructorul, adu-ți mereu aminte să invoci mai întâi de toate `super()`.
-- clasele permit moștenirea din toate obiectele built-in: `class ArraySpecial extends Array {}`.
+-   Spre deosebire de funcții, declarația de clasă nu beneficiază de mecanismul de hoisting indiferent că este o declarație sau o expresie de clasă. Deci, până când execuția nu ajunge la locul de declarare, clasa se află în Temporal Dead Zone (TDZ).
+-   Tot codul din clasă rulează automat în `strict mode`.
+-   Toate metodele create sunt automat non-enumerabile.
+-   Apelarea constructorului fără `new` conduce la o stare de eroare.
+-   Numele clasei nu trebuie folosit în interiorul acesteia pentru o reasignare. Conduce la eroare.
+-   În cazul folosirii expresiilor de clasă, nu este necesară introducerea unui identificator după cuvântul cheie `class`.
+-   `super()` setează legătura la `this` în cazul claselor derivate. Dacă folosești constructorul, adu-ți mereu aminte să invoci mai întâi de toate `super()`.
+-   clasele permit moștenirea din toate obiectele built-in: `class ArraySpecial extends Array {}`.
 
 ### Declarare și expresii de clase
 
@@ -1172,7 +1171,7 @@ var Plan = class {
 };
 ```
 
-### Clasele ca valori de prim-rang
+### Clasele sunt valori de prim-rang
 
 Ca orice valoare de „primă-clasă”, și clasa poate fi pasată drept valoare unei funcții.
 
@@ -1271,7 +1270,7 @@ class Altceva extends Ceva {
 };
 ```
 
-### Clase derivate - extends
+### Clase derivate
 
 Derivarea obiectelor înainte de facilitățile pe care le pune la dispoziție noul standard ES6 era un proces laborios de creare a unui obiect și apoi crearea unui altuia căruia îi era setat prototipul îmbogățit al primului. Mai jos este modelul „istoric” comparat cu ceea ce propune `extends`. Să pornim de la modelul istoric.
 
@@ -1313,7 +1312,7 @@ class Stramos {
   oriDoi () {
     return this.ceva * 2;
   }
-}
+};
 class Copil extends Stramos {
   constructor (val) {
     super(val);
@@ -1329,8 +1328,7 @@ Clasele care moștenesc de la altele, se numesc clase derivate. Adu-ți mereu am
 
 ### Moștenirea din obiectele interne prin clase derivate
 
-Clasele permit moștenirea din obiectele predefinite intern din JavaScript, ceea ce se poate dovedi foarte util atunci când vei dori niște funcționalități mai speciale pornind de la un obiect intern al limbajului.
-Acest lucru se realizează prin extinderea lor.
+Clasele permit moștenirea din obiectele predefinite intern din JavaScript, ceea ce se poate dovedi foarte util atunci când vei dori niște funcționalități mai speciale pornind de la un obiect intern al limbajului. Acest lucru se realizează prin extinderea lor.
 
 ```javascript
 class ArrayulMeu extends Array {
@@ -1350,15 +1348,14 @@ Toate metodele din obiectul prototip al lui Array sunt disponibile noului obiect
 Cel mai la îndemână exemplu sunt nodurile DOM. Parcurgerea (traversing) DOM-ului se numește „walking the DOM”.
 DOM-ul este o colecție de noduri. Cel mai ades pentru accesarea informației din nodurile de interes, mai întâi acestea trebuie identificate. Se folosesc clasicele:
 
-- `document.getElementById("#idfolosit")`,
-- `document.getElementsByTagName`,
-- `document.querySelector(pot fi tag-uri, class, id-uri, attributes, pseudoclase, elemente)`.
+-   `document.getElementById("#idfolosit")`,
+-   `document.getElementsByTagName`,
+-   `document.querySelector(pot fi tag-uri, class, id-uri, attributes, pseudoclase, elemente)`.
 
 ```javascript
 "use strict";
 var noduriDOM = document.querySelectorAll("div"),   // se constituie o colecție array-like
-    arrayLike = Array.prototype.slice.call(noduriDOM);    // transformarea într-un array-like
-
+    arrayLike = Array.prototype.slice.call(noduriDOM); // transformarea într-un array-like
 arrayLike.forEach(function(element){
   console.log(element);
 });
@@ -1367,15 +1364,15 @@ arrayLike.forEach(function(element){
 Cu o simplificare:
 
 ```javascript
-var noduriDOM = document.querySelectorAll("div"),   // se constituie o colecție array-like
-    arrayLike = [].slice.call(noduriDOM);           // transformarea într-un array-like
+var noduriDOM = document.querySelectorAll("div"),
+    arrayLike = [].slice.call(noduriDOM);
 
 arrayLike.forEach(function(element){
   console.log(element);
 });
 ```
 
-Atenție, pentru că o țintire a elementelor de interes cu ajutorul lui querySelector poate fi confuză uneori, cel mai bine este să fie folosit atributul de selecție „data-ceva="formular"”.
+Atenție, pentru că o *țintire* a elementelor de interes cu ajutorul lui `querySelector` poate fi confuză uneori, cel mai bine este să fie folosit atributul de selecție `data-ceva="formular"`.
 
 ```html
 <ul data-target="lista">
@@ -1409,16 +1406,16 @@ JavaScript nu are structuri de date specifice unei „hărți” de valori - cee
 Adică lanțul prototipal care se stabilește, poate afecta citirea proprietăților. Unele operațiuni, se uită la tot lanțul prototipal și „văd” proprietăți moștenite. Alte operațiuni accesează doar proprietățile pe care obiectul le are fără a se uita la cele moștenite. Atunci când folosești un obiect drept colecție (`map`), trebuie operat asupra lui cu mare atenție.
 
 ```javascript
-var matrita = {proprietate: 'ceva'};
-var obiect = Object.create(matrita);
+var matrița = {proprietate: 'ceva'};
+var obiect = Object.create(matrița);
 obiect.altaProprietate = 'altceva';
 ```
 
 ## Verificări
 
-### Testare cu operatorul `in`
+### Testare cu operatorul in
 
-Pentru a testa dacă o proprietate există se poate folosi operatorul `in`. Problema cu `in` este aceea că ia în calcul și ceea ce este în prototip, în cazul nostru în matrita.
+Pentru a testa dacă o proprietate există se poate folosi operatorul `in`. Problema cu `in` este aceea că ia în calcul și ceea ce este în prototip, în cazul nostru în `matrița`.
 
 ```javascript
 'altaProprietate' in obiect; // true
@@ -1449,7 +1446,7 @@ console.log(Object.getOwnPropertyNames(window));
 La momentul redactării acestui material, o astfel de interogare a returnat un array cu 904 chei reprezentând toate proprietățile și metodele obiectului `window` al browserului. Putem merge mai departe pentru a separa care sunt metodele. Această procedură nu poate fi aplicată pe obiectul global `window`, dar funcționează pe oricare obiect, fie el global sau nu.
 
 ```javascript
-console.log(Object.getOwnPropertyNames(String).filter(function(p){
+console.log( Object.getOwnPropertyNames(String).filter( function (p) {
   return typeof String[p] === 'function';
 }));
 ```
@@ -1487,8 +1484,8 @@ Object.keys(obiect); // Array [ "altaProprietate", "artefact" ]
 
 Se poate opta pentru una din două modalități posibile de a face acest lucru:
 
-- folosind **operatorul cu punct**
-- folosind **operatorul cu paranteză pătrată**
+-   folosind **operatorul cu punct**
+-   folosind **operatorul cu paranteză pătrată**
 
 Operatorul cu punct nu poate fi folosit pentru că avem de a face cu diverse chei care ar putea avea asociate diferite tipuri de date. Din nefericire, operatorul cu paranteză dreaptă ia în considerare și proprietățile moștenite.
 
@@ -1517,10 +1514,16 @@ function accesProprietatiProprii(obiectul, proprietatea){
 
 ## Destructurarea obiectelor sau destructuring assignment
 
-ES6 introduce posibilitatea de a transfera valorile cheilor unor variabile care trebuie să respecte o singură cerință: numele identificatorilor să fie aceleași cu cele ale proprietăților. Dacă vrem să privim obiectele ca pe niște depozite de valori identificate prin numele cheilor, atunci cu siguranță că asignarea prin destructurare va fi o binecuvântare.
+ES6 introduce posibilitatea de a transfera valorile cheilor unor variabile care trebuie să respecte o singură cerință: **numele identificatorilor să fie aceleași cu cele ale proprietăților**. Dacă vrem să privim obiectele ca pe niște depozite de valori identificate prin numele cheilor, atunci cu siguranță că asignarea prin destructurare va fi o binecuvântare.
 
 ```javascript
-var obi = { a: 4, b: true, c: function y () {return 'salut'} };
+var obi = {
+  a: 4,
+  b: true,
+  c: function y () {
+    return 'salut';
+  }
+};
 var {b, c} = obi;
 console.log(a); // undefined
 console.log(b); // true
@@ -1580,7 +1583,36 @@ console.log(igrec()); // salut
 console.log(valori); //[Array] [10,20]
 ```
 
+Un alt caz interesant de destructurare este atunci când asignezi unei structuri de identificare un obiect.
+
+```javascript
+let obi = {
+  a: 10,
+  b: {
+    x: [1, 2],
+    y: {
+      i: 'Salut, ',
+      j: 'România!'
+    }
+  }
+};
+let {b: {y}} = obi;
+console.log(y.i + y.j);
+// Salut, România!
+```
+
+### Mimarea parametrilor cu nume
+
+Să presupunem că ai nevoie să populezi parametrii unei funcții cu valorile unui obiect prin preluarea dinamică a acestora. Poți face acest lucru cu singura condiție ca numele parametrilor să corespundă proprietăților de unde se vor prelua valorile.
+
+```javascript
+let afisezCeva = ({x, y}) => {
+  return `${x} și ${y}`;
+};
+afisezCeva({x: 10, y: 20}); // "10 și 20"
+```
+
 ## Resurse
 
-- [Crockford on Javascript - Functions](https://www.youtube.com/watch?v=lVnnxfdLdlM)
-- [A fresh look at JavaScript Mixins, de  Angus Croll](https://javascriptweblog.wordpress.com/2011/05/31/a-fresh-look-at-javascript-mixins/)
+-   [Crockford on Javascript - Functions](https://www.youtube.com/watch?v=lVnnxfdLdlM)
+-   [A fresh look at JavaScript Mixins, de  Angus Croll](https://javascriptweblog.wordpress.com/2011/05/31/a-fresh-look-at-javascript-mixins/)

@@ -3,14 +3,16 @@
 Metoda creează un nou array care cuprinde valorile rezultate din executarea unei funcții callback pentru fiecare dintre elementele unui array căruia i se aplică.
 Pentru fiecare element din array, se execută funcția iar rezultatul devine un element al unui nou array. `map()` împreună cu `filter()` și `reduce()` sunt baza programării funcționale (stil de programare bazat pe folosirea funcțiilor).
 
-`map()` are doi parametri:
-- callback-ul și
-- `this`
+Metoda `map()` are doi parametri:
+
+-   callback-ul și
+-   `this`
 
 Callback-ul primește trei argumente:
-- currentValue - elementul procesat,
-- index,
-- și array-ul în sine.
+
+-   currentValue - elementul procesat,
+-   index,
+-   și array-ul în sine.
 
 Noul array constituit are fix același număr de obiecte precum cel prelucrat.
 
@@ -18,20 +20,25 @@ Noul array constituit are fix același număr de obiecte precum cel prelucrat.
 
 ```javascript
 let colectie = [1, 'primul', true];
-colectie.map(function test(elem, index, array){
+colectie.map( function test (elem, index, array) {
   console.log(typeof elem + ' ' + 'index: ' + index + ' ' + array + this);
 });
 
 /*
-number index: 0 1,primul,true[object Window]
-string index: 1 1,primul,true[object Window]
+number  index: 0 1,primul,true[object Window]
+string  index: 1 1,primul,true[object Window]
 boolean index: 2 1,primul,true[object Window]
  */
 ```
 
+Cum procedezi atunci când vrei să prelucrezi un array al unei proprietăți al unui obiect.
+
 ```javascript
-let obi = {id: 'obiect 1', colectie: [1, 'primul', true]};
-obi.colectie.map(function test(elem, index, array){
+let obi = {
+  id: 'obiect 1',
+  colectie: [1, 'primul', true]
+};
+obi.colectie.map(function test (elem, index, array) {
   console.log('context: ' + this.id + ' ' + typeof elem + ' ' + 'index: ' + index + ' ' + array + this);
 });
 /*
@@ -55,9 +62,9 @@ Opțional se mai poate pasa o valoare care să reprezinte `this` la executarea c
 
 ## Mantre
 
-- `map()` construiește un array nou din rezultate
-- Callback-ul este invocat doar pentru indexurile care au valori chiar dacă sunt `undefined`
-- Callbackul poate fi și o metodă a unui obiect intern standard al JavaScript
+-   `map()` construiește un array nou din rezultate
+-   Callback-ul este invocat doar pentru indexurile care au valori chiar dacă sunt `undefined`
+-   Callback-ul poate fi și o metodă a unui obiect intern standard al JavaScript
 
 ## Construcția unui mapper de la 0
 
@@ -66,7 +73,7 @@ Pentru a înțelege felul în care funcționează intern funcția map, este foar
 ```javascript
 var colectie = ["prima", "a doua", "a treia", "a doua", "prima"];
 
-function mapper(array, callback){
+function mapper (array, callback) {
   var mapate = [];                        // array-ul care va conține datele prelucrate
   for(var i = 0; i < array.length; i++){  // pentru fiecare element al array-ului pasat ca parametru
     mapate.push(callback(array[i]));      // trimite în array-ul nou valoarea rezultată din prelucrarea făcută în callback
@@ -74,8 +81,9 @@ function mapper(array, callback){
   return mapate;                          // returnează array-ul
 };
 
-var rezultatMapat = mapper(colectie, function(element){ // ia o colecție și un callback
-  return element + ' prelucrare';                       // returnează valoarea prelucrată
+var rezultatMapat = mapper (colectie, function(element) {
+  // ia o colecție și un callback
+  return element + ' prelucrare'; // returnează valoarea prelucrată
 });
 
 console.log(rezultatMapat);
@@ -115,7 +123,7 @@ Un exemplu super privind ce se poate obține folosind metoda este construirea un
 var obiect = {paraunu: "unu", paradoi: "doi trei"};
 
 var stringCodat = Object.keys(obiect)
-                        .map(function(key){
+                        .map( function (key) {
                           return key + "=" + window.encodeURIComponent(obiect[key]);
                         })
                         .join("&");
@@ -161,9 +169,10 @@ console.log(nume.map(String.toLowerCase)); // Array [ "iulius", "alequin" ]
 ### Maparea valoare cu valoare din două array-uri diferite
 
 Metoda map trimite trei argumente callback-ului:
-- elementul curent pe care se lucrează
-- cheia elementului
-- și array-ul întreg.
+
+-   elementul curent pe care se lucrează
+-   cheia elementului
+-   și array-ul întreg.
 
 Pentru acest fapt se poate realiza o împerechiere a elementelor din două array-uri diferite:
 
