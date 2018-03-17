@@ -23,6 +23,7 @@ finalizare('pong'); // "am combinat ping,echo cu pong"
 În exemplu avem `prima` care este o funcție **fat arrow**.
 
 Această funcție primește două argumente:
+
 - o altă funcție și
 - un argument
 - returnează o funcție

@@ -1,9 +1,11 @@
 # Generators
 
+Generatoarele oferă posibilitatea de a parcurge o colecție de date.
+
 Sunt un nou tip de funcții introduse în ECMAScript 2015. Acest nou tip de lucru cu funcțiile se bazează pe faptul că accesul la date se face cu ajutorul iteratoarelor. Datele noastre sunt obiecte iterator pe care le putem parcurge.
 
 ```javascript
-var iterator = [1,2,3][Symbol.iterator](),
+var iterator = [1, 2, 3][Symbol.iterator](),
     element;
 while( !(element = iterator.next()).done ) {
   console.log(element.value);
@@ -13,7 +15,7 @@ while( !(element = iterator.next()).done ) {
 Odată cu ECMAScript 2015, beneficiem de enunțul `for..of`, care va face exact ce am realizat mai sus construind obiectul iterator.
 
 ```javascript
-for(var x of [1,2,3]){
+for(var x of [1, 2, 3]){
   console.log(x);
 };
 ```
@@ -49,7 +51,7 @@ exempluGen.next();
 ```
 
 Returnează doar evaluarea primei metode `log`.
-Pentru a obține și rezultatul celei de-a doua metode `log`, se va aplica din nou metoda `next`.
+Pentru a obține și rezultatul celei de-a doua metode `log`, se va aplica din nou metoda `next()`.
 
 Se creează și scope-ul aferent. Ca efect este creat și returnat un obiect iterator prin care putem cere valori din generator. Obiectul iterator ține o referință către contextul de execuție a generatorului care este în call-stack.
 La apelarea funcției generatorului, acesta este scoasă din call-stack (nu este garbage collected), iar variabila care va identifica iteratorul, va ține o referință către funcția generatorului și astfel la contextul de execuție prin obiectul iterator care tocmai s-a creat. Mecanismul seamănă cu cel al closure-urilor.

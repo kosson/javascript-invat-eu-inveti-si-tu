@@ -24,7 +24,7 @@ Atunci când rezultatul unui pas devine valoarea de start pentru următorul, atu
 - **iterable** fiind structura de date ce expune elementele pentru a fi accesate public. Face acest lucru implementând o metodă care returnează un obiect numit *iterator*;
 - **iterator** fiind, de fapt, un pointer (în limba română ar fi tradus ca *indicator*, dar poți să ți-l închipui ca pe un semn de carte) pentru traversarea elementelor unei structuri de date.
 
-## Cazuri în care se folosește iterarea
+### Cazuri în care se folosește iterarea
 
 - `for..of`,
 - `Array.from()`,
@@ -43,7 +43,7 @@ Există două protocoale:
 
 Acest protocol permite obiectelor să-și definească sau să-și particularizeze comportamentul la momentul iterării, adică ce valori vor fi generate cu un enunț `for..of`.
 
-`for..of` poate itera prin următoarele obiecte care respectă **protocolul iterator**:
+Bucla `for..of` poate itera prin următoarele obiecte care respectă **protocolul iterator**:
 
 - `Array`,
 - `Map`,
@@ -52,7 +52,7 @@ Acest protocol permite obiectelor să-și definească sau să-și particularizez
 - `TypedArray`,
 - `arguments`
 
-Pentru a fi iterabil, un obiect trebuie să aibe implementată la nivelul obiectului intern de la care moștenește metoda `@@iterator`.  Acest lucru înseamnă că obiectul (sau unul din obiectele din lanțul prototipal), trebuie să aibă o proprietate cu o cheie `Symbol.iterator`. Valoarea sa este o funcție fără argumente ce returnează un obiect. Acest obiect returnat se conformează protocolului de interare (**iterator protocol**).
+Pentru a fi iterabil, un obiect trebuie să aibă implementată la nivelul obiectului intern de la care moștenește metoda `@@iterator`.  Acest lucru înseamnă că obiectul (sau unul din obiectele din lanțul prototipal), trebuie să aibă o proprietate cu o cheie `[Symbol.iterator]`. Valoarea sa este o funcție fără argumente ce returnează un obiect. Acest obiect returnat se conformează protocolului de interare (**iterator protocol**).
 
 Amețită deja? Hai să aruncăm un ochi mai aproape.
 
