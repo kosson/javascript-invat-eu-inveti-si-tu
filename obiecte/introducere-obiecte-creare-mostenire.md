@@ -26,10 +26,10 @@ Adu-ți mereu aminte că funcțiile sunt și ele obiecte și din acest motiv, la
 
 Câteva concepte fundamentale pentru înțelegerea obiectelor în general:
 
-- **Incapsulare**: este ceea ce obții atunci când pui împreună datele cu funcționalitățile care vor opera cu ele.
-- **Agregarea obiectelor** se realizează atunci când un obiect are proprietăți care sunt referințe către alte obiecte.
-- **Moștenirea** este un mecanism prin care este asigurată posibilitatea ca obiectul creat să poată folosi datele și funcționalitățile altuia.
-- **Poliformism** este caracteristica unui obiect de a deveni un comportament urmat de multe alte obiecte. Spunem că un obiect se comportă ca o interfață, care poate fi aplicată altor obiecte pentru a opera cu acestea.
+-   **Incapsulare**: este ceea ce obții atunci când pui împreună datele cu funcționalitățile care vor opera cu ele.
+-   **Agregarea obiectelor** se realizează atunci când un obiect are proprietăți care sunt referințe către alte obiecte.
+-   **Moștenirea** este un mecanism prin care este asigurată posibilitatea ca obiectul creat să poată folosi datele și funcționalitățile altuia.
+-   **Poliformism** este caracteristica unui obiect de a deveni un comportament urmat de multe alte obiecte. Spunem că un obiect se comportă ca o interfață, care poate fi aplicată altor obiecte pentru a opera cu acestea.
 
 Atunci când un obiect este creat, toate caracteristicile sale sunt moștenite de la un alt obiect cu rol de prototip. Să nu vi se pară ciudat că un prototip este un obiect, iar acesta la rândul lui are un prototip. E ca un lanț care are drept limită superioară obiectele interne `Object` și `Function`.
 
@@ -119,10 +119,10 @@ Acest mod de a adăuga proprietăți noi fără a interveni asupra constructorul
 
 În textul standardului, obiectele se încadrează următoarelor categorii:
 
-- **Ordinary object** (*obiecte comune*), care au comportamentul comun tuturor obiectelor în JavaScript.
-- **Exotic object** (*obiecte exotice*), care au comportamentul comun obiectelor în JS, dar cu mici diferențe.
-- **Standard objects** (*obiecte standard*) sunt toate obiectele JS. Obiectele „ordinary” și cele „exotice” fac parte din setul obiectelor standard.
-- **Built-in objects** (*obiecte interne*) sunt toate obiectele pe care le expune din start motorul de JavaScript. Toate obiectele comune (*ordinary*) fac parte din setul celor interne.
+-   **Ordinary object** (*obiecte comune*), care au comportamentul comun tuturor obiectelor în JavaScript.
+-   **Exotic object** (*obiecte exotice*), care au comportamentul comun obiectelor în JS, dar cu mici diferențe.
+-   **Standard objects** (*obiecte standard*) sunt toate obiectele JS. Obiectele „ordinary” și cele „exotice” fac parte din setul obiectelor standard.
+-   **Built-in objects** (*obiecte interne*) sunt toate obiectele pe care le expune din start motorul de JavaScript. Toate obiectele comune (*ordinary*) fac parte din setul celor interne.
 
 ## Obiecte interne (*built-in*)
 
@@ -138,26 +138,26 @@ Aceste metode, de fapt, aceste **rețete** prestabilite, pot fi și ele alterate
 
 ## Mantre
 
-- ECMAScript vine cu obiectele sale din start care se numesc obiecte `built-in` în care este inclus și `global object` - obiectul global.
-- Totul în JavaScript are comportamentul unui obiect cu două excepții: `null` și `undefined`.
-- Toate obiectele în JavaScript descind din `Object`, adică își au originea în `Object`.
-- Toate obiectele moștenesc metode și proprietăți din `Object.prototype`, iar acestea pot fi suprascrise sau poți adăuga propriile proprietăți și metode.
-- În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype (numeFunctie.prototype). Acest obiect (prototype), este gol și este creat de constructorul lui `Object()`.
-- Fiecare funcție obiect are un obiect prototip diferit.
-- Un obiect poate fi creat cu `new Object()`:
-  1. acestă modalitate **nu va crea și constructor**.
-  2. Accesarea `numeObiect.__proto__.constructor` răspunde cu `function Obiect()` la care s-a ajuns prin delegare.
-- O funcție apelată cu `new` în fața sa este un constructor.
+-   ECMAScript vine cu obiectele sale din start care se numesc obiecte `built-in` în care este inclus și `global object` - obiectul global.
+-   Totul în JavaScript are comportamentul unui obiect cu două excepții: `null` și `undefined`.
+-   Toate obiectele în JavaScript descind din `Object`, adică își au originea în `Object`.
+-   Toate obiectele moștenesc metode și proprietăți din `Object.prototype`, iar acestea pot fi suprascrise sau poți adăuga propriile proprietăți și metode.
+-   În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype (numeFunctie.prototype). Acest obiect (prototype), este gol și este creat de constructorul lui `Object()`.
+-   Fiecare funcție obiect are un obiect prototip diferit.
+-   Un obiect poate fi creat cu `new Object()`:
+  #1 acestă modalitate **nu va crea și constructor**.
+  #2 Accesarea `numeObiect.__proto__.constructor` răspunde cu `function Obiect()` la care s-a ajuns prin delegare.
+-   O funcție apelată cu `new` în fața sa este un constructor.
 
 ## Crearea obiectelor
 
 Obiectele pot fi create în două feluri: prin declararea acestora sau prin construirea lor.
 
-1. `var ObiNou = new Object();` la execuție cu `new` se respectă cele patru reguli: (1) crearea obiectului; (2) stabilirea lanțului prototipal; (3) legarea lui `this` la noul obiect; (4) obiectul nou creat este returnat. Sintaxa este echivalentă cu `var newObj = {}`.
-2. `var ObiNou = Object.create(null);`, unde `prototype` este setat la `null`. Acest model este supranumit `dict pattern`, adică șablonul de creare a unui dicționar.
-3. `var ObiNou = Object.create(Object.prototype);`, fiind echivalent sintaxei `var newObj = {}`.
-4. `var ObiNou = {};`, fiind echivalentă cu sintaxa `new Object()`.
-5. `function x () { return {a: 1} }; var y = x();`, returnează un obiect în urma execuției unei funcții.
+#1 `var ObiNou = new Object();` la execuție cu `new` se respectă cele patru reguli: (1) crearea obiectului; (2) stabilirea lanțului prototipal; (3) legarea lui `this` la noul obiect; (4) obiectul nou creat este returnat. Sintaxa este echivalentă cu `var newObj = {}`.
+#2 `var ObiNou = Object.create(null);`, unde `prototype` este setat la `null`. Acest model este supranumit `dict pattern`, adică șablonul de creare a unui dicționar.
+#3 `var ObiNou = Object.create(Object.prototype);`, fiind echivalent sintaxei `var newObj = {}`.
+#4 `var ObiNou = {};`, fiind echivalentă cu sintaxa `new Object()`.
+#5 `function x () { return {a: 1} }; var y = x();`, returnează un obiect în urma execuției unei funcții.
 
 Toate variantele au același efect: creează un obiect gol.
 
@@ -700,16 +700,18 @@ var instanta = Object.create(Ceva.prototype, {
 instanta.difuzor(); // Salut!
 ```
 
-Standardul spune că un constructor, **este un obiect funcție care suportă metoda internă `[[Construct]]`**.
+Standardul spune că un constructor este
+
+> este un obiect funcție care suportă metoda internă `[[Construct]]`.
 
 ### Ce se întâmplă când folosești `new`
 
 Invocarea unei funcții constructor folosind operatorul `new`, are drept urmare parcurgerea unor etape esențiale. Rezultatul este un obiect. Reține faptul că acest nou obiect trebuie referențiat printr-o expresie de tipul `var obiNou = new FacObiecte();`. Să urmărim pașii prin care un constructor creează un obiect atunci când se evaluează expresia cu operator `new`. Când ajunge la `new`, motorul JavaScript înțelege că este momentul să creeze un obiect după cum urmează.
 
-1  Se creează un obiect nou.
-2  Se creează o legătură prototipală la obiectul prototype al funcției constructor.
-3  Obiectul generat automat este pasat funcției cu rol de constructor ca fiind `this` și astfel, devine contextul de execuție al funcției constructor invocate. După ce va fi înzestrat cu proprietățile dorite prin execuția corpului funcției constructor, obiectul `this` va fi returnat ca fiind noul obiect.
-4  Dacă funcția constructor nu returnează ceva, atunci înainte de a se închide blocul („}”) se va returna automat obiectul constituit la pasul 1 și după ce a fost „înzestrat” la pasul 3.
+#1  Se creează un obiect nou.
+#2  Se creează o legătură prototipală la obiectul prototype al funcției constructor.
+#3  Obiectul generat automat este pasat funcției cu rol de constructor ca fiind `this` și astfel, devine contextul de execuție al funcției constructor invocate. După ce va fi înzestrat cu proprietățile dorite prin execuția corpului funcției constructor, obiectul `this` va fi returnat ca fiind noul obiect.
+#4  Dacă funcția constructor nu returnează ceva, atunci înainte de a se închide blocul („}”) se va returna automat obiectul constituit la pasul 1 și după ce a fost „înzestrat” la pasul 3.
 
 Cel mai simplu exemplu:
 

@@ -1,4 +1,4 @@
-# Instrucțiunile `if`, `if..else` și `else if`
+# Instrucțiunile if, if..else și else if
 
 Este o decizie pe care trebuie să o iei în funcție de două posibile căi. Pentru instrucțiunea `if` este luată decizia pentru calea de execuție dictată de evaluarea unei instrucțiuni care o condiționează. Adu-ți mereu aminte de faptul că toate expresiile în JavaScript se reduc la o valoare de adevăr. Este foarte important să-ți aduci aminte mereu de acest aspect pentru că uneori va fi nevoie să testezi dacă o expresie complexă se reduce la o valoare *truthy* sau la una *falsey*. Însăși posibilitatea de a modifica cursul de execuție a unui program prin evaluarea la valoarea de adevăr, face posibil visul lui Leibnitz pe baza algebrei lui Boole.
 
@@ -13,7 +13,7 @@ Mai sus este o situație puțin probabilă în practica de zi cu zi, dar ilustre
 În practica zilnică și în mare parte a codul pe care-l vei scrie sau examina, vei evalua expresii.
 
 ```javascript
-var gând = 'negativ';
+let gând = 'negativ';
 if (gând === 'negativ') {
   console.log('Privește cerul! Citește o carte!');
 };
@@ -24,7 +24,7 @@ Trebuie evitată atribuirea valorilor în expresia de evaluare și mai ales decl
 Este clar că vom folosi această instrucțiune pentru a stabili un curs de acțiuni în funcție de anumite condiții. Ai putea să-ți închipui că apuci pe un drum dorind să te plimbi prin Brașov și în funcție de anumite condiții, de la București poți să mergi pe Cheia, pe Valea Prahovei sau pe Rucăr-Bran. Din nefericire, traficul și condițiile meteo decid. Dacă nimic nu este practicabil pentru că este foarte aglomerat, poți să încerci pe la Buzău. Toate aceste opțiuni pot fi modelate cu enunțul `if..else`, iar în cazul în care ai nevoie să mai faci un nivel suplimentar de decizii, vei folosi `else if`.
 
 ```javascript
-var valeaPrahoveiAglomerat = true,
+let valeaPrahoveiAglomerat = true,
     cheiaLapovita = true;
 if (valeaPrahoveiAglomerat == true) {
   console.log('ma opresc');
@@ -49,7 +49,7 @@ if (true) {
 };
 ```
 
-Dacă tot am lămurit povestea instrucțiunilor `if`, `if..else` și `else if`, am să mai adaug un lucru legat de redactarea codului în sine. Veți vedea atunci când veți investiga cod scris de alți programatori, faptul că uneori instrucțiunile (*statements*), nu sunt introduse într-un bloc delimitat de acoloade (*block statements*) așa cum am redactat în cazurile prezentate. Uneori veți vedea instrucțiuni redactate ca și cum ar atârna în gol, dar să știți că în diversitatea pe care o oferă JavaScript, acest mod de redactare a codului este permis.
+Dacă tot am lămurit povestea instrucțiunilor `if`, `if..else` și `else if`, am să mai adaug un lucru legat de redactarea codului în sine. Veți vedea atunci când veți parcurge fragmente de cod scris de alți programatori, că uneori instrucțiunile (*statements*), nu sunt introduse într-un bloc delimitat de acoloade (*block statements*) așa cum am redactat în cazurile prezentate. Uneori veți vedea instrucțiuni redactate ca și cum ar atârna în gol, dar să știți că în diversitatea pe care o oferă JavaScript, acest mod de redactare a codului este permis.
 
 ```javascript
 if (true) console.log('e adevarat');
@@ -72,3 +72,24 @@ else {
 ```
 
 Toate acestea sunt variante acceptate de redactare, dar nu sunt indicate pentru că nu ajută la înțelegerea codului dintr-o privire și pot îngreuna semnificativ procesul de detectare a unor erori.
+
+## Microcircuite logice
+
+Blocurile decizionale pot fi interpretate precum circuite logice care au capacitatea de a orienta execuția codului pe o anumită ramură. De exemplu, putem testa dacă o valoare există. În cazul unui răspuns pozitiv, putem inițializa o valoare sau putem alege să executăm o funcție, dacă dorim.
+
+```javascript
+let martor = 1;
+if (martor) {
+  console.log('Apare acest mesaj');
+}
+```
+
+Folosirea operatorilor booleani implică o evaluare apropiată de cea condițională și pot fi utilizați pentru inițializări a unor variabile cu valori implicite în cazul în care nu sunt primite cele așteptate.
+
+```javascript
+let martor = 1; // dacă martor este truthy,
+let rezultat = martor && 100; // rezultat va fi inițializat cu valoarea implicită
+console.log(rezultat);
+```
+
+Dacă martor va fi evaluat la o valoare truthy, atunci rezultat va fi inițializat cu o valoare implicită de 100. În caz contrar, rezultat va avea valoarea 0. Acesta poate fi considerat un microcircuit util în cazul condiționării unei inițializări de valoarea unei evaluări.
