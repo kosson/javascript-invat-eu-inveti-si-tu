@@ -3,14 +3,14 @@
 Un operator unar este un operator care aplică o operațiune asupra unui singur operand sau argument.
 Aceștia sunt:
 
-- `delete`,
-- `void`,
-- `typeof`,
-- `+`,
-- `-`,
-- `~`,
-- `!`
-- `await`
+-   `delete`,
+-   `void`,
+-   `typeof`,
+-   `+`,
+-   `-`,
+-   `~`,
+-   `!`
+-   `await`
 
 Acest tip de operator se pune înainte sau după operand.
 

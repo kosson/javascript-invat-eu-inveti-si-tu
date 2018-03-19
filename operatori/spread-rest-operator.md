@@ -84,8 +84,8 @@ Acest operator folosește protocolul de iterare ceea ce înseamnă că obiectele
 Permite expadarea unei expresii în locuri în care argumente multiple sau elemente multiple sunt așteptate să existe.
 
 ```javascript
-var obiecte = ['pixuri', 'creioane'];
-var birou = ['lampă', ...obiecte, 'scaun', 'tușieră'];
+let obiecte = ['pixuri', 'creioane'];
+let birou = ['lampă', ...obiecte, 'scaun', 'tușieră'];
 birou; // Array [ "lampă", "pixuri", "creioane", "scaun", "tușieră" ]
 ```
 
@@ -113,21 +113,20 @@ primulArray.unshift(...alDoileaArray);
 Sau atunci când ai mai multe array-uri și dorești să le combini.
 
 ```javascript
-var ab = ["a","b"];
-var bc = ["c","d"];
-var abcde = [].concat(ab, bc, ["e"]);
+let ab = ["a","b"];
+let bc = ["c","d"];
+let abcde = [].concat(ab, bc, ["e"]);
 //  [ "a", "b", "c", "d", "e" ]
 
 // mai simplu
-
-abcde = [...ab,...bc,'e'];
+abcde = [...ab, ...bc, 'e'];
 ```
 
 ## Introducerea elementelor unui array printre elementele unuia existent
 
 ```javascript
-var arrIntrodus = [1, 2, 3];
-var arrGazda = [x, ...arrIntrodus, y, z];
+let arrIntrodus = [1, 2, 3];
+let arrGazda = [x, ...arrIntrodus, y, z];
 ```
 
 ## Copierea unui array
@@ -135,8 +134,8 @@ var arrGazda = [x, ...arrIntrodus, y, z];
 În versiunile anterioare, acest lucru se obținea folosind `[].slice()`.
 
 ```javascript
-var arr1 = [1, 2, 3];
-var arr2 = [...arr1]; // gata copia
+let arr1 = [1, 2, 3];
+let arr2 = [...arr1]; // gata copia
 ```
 
 Această copiere în cazul elementelor care sunt obiecte, se face prin referință.
@@ -144,16 +143,16 @@ Această copiere în cazul elementelor care sunt obiecte, se face prin referinț
 ## Transformarea argumentelor unei funcții într-un array
 
 ```javascript
-function transforma(){
+function transforma () {
   return [...arguments];
 };
-transforma("unu","doi",3); // Array [ "unu", "doi", 3 ]
+transforma("unu", "doi", 3); // Array [ "unu", "doi", 3 ]
 
 // alternativa este folosirea lui Array.from
-function transforma(){
+function transforma () {
   return Array.from(arguments);
 };
-transforma("unu","doi",3); // Array [ "unu", "doi", 3 ]
+transforma("unu", "doi", 3); // Array [ "unu", "doi", 3 ]
 ```
 
 ## Constituirea unei colecții de elemente DOM
@@ -161,15 +160,15 @@ transforma("unu","doi",3); // Array [ "unu", "doi", 3 ]
 Acest lucru este posibil pentru că `NodeList` permite protocolul de iterare. Efectul este convertirea unui `NodeList` într-un Array.
 
 ```javascript
-function colectDivs(){
+function colectDivs () {
   return [...document.querySelectorAll('div')];
 };
 
 // sau:
-var divuri = [...document.querySelectorAll('div')];
+let divuri = [...document.querySelectorAll('div')];
 
 // ca alternativă folosim Array.from
-var divuri = Array.from(document.querySelectorAll('div'));
+let divuri = Array.from(document.querySelectorAll('div'));
 ```
 
 ## Pasarea către metode ale obiectelor interne

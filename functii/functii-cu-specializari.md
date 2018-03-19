@@ -161,5 +161,5 @@ Acum, ceva
 ```
 
 Care ar fi utilitățile unei astfel de funcții:
-- ca mic debugger
-- pentru lucrul cu metodele obiectelor sau ale instanțierilor
+-   ca mic debugger
+-   pentru lucrul cu metodele obiectelor sau ale instanțierilor

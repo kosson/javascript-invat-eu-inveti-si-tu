@@ -58,5 +58,5 @@ Adu-ți mereu aminte că prototipul unui obiect se mai poate seta și cu `Object
 
 ## Mantre
 
-- Un obiect literal are prototype `undefined`. Cu toate acestea la interogare cu instanceof trimite la Object.
-- `instanceof` este o prescurtare care apelează metoda `hasInstance` a constructorului `Symbol`.
+-   Un obiect literal are prototype `undefined`. Cu toate acestea la interogare cu instanceof trimite la Object.
+-   `instanceof` este o prescurtare care apelează metoda `hasInstance` a constructorului `Symbol`.

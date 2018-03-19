@@ -1,4 +1,6 @@
-# Numere
+# Number
+
+Această valoare este o primitivă.
 
 Valorile numerice în JavaScript sunt reflectate în formatul binar, iar JavaScript folosește un număr limitat de biți pentru a reprezenta numerele. O valoarea numerică în JavaScript este de 64 de biți ceea ce oferă o dimensiune de 2 la puterea 64, adică aproximativ 18 cvintilioane. Dintre acestea, trebuie folosite o parte pentru a reprezenta numerele pe axa negativă și iarăși o parte trebuie folosite pentru a marca semnul minus ce indică faptul că un număr e la stânga lui 0.
 Reprezentarea numerelor în JavaScript respectă standardul IEEE 754.
@@ -62,9 +64,10 @@ Dacă specifici al doilea argument acesta reprezintă baza și trebuie să fie u
 Dacă metoda întâlnește un caracter care nu este un numeral în baza specificată, acesta este ignorat și este returnat numărul format până la acel caracter. Nu folosi șiruri de caractere care sunt de fapt numere în notație științifică.
 
 Ce se întâmplă când nu specifici rădăcina?
-Dacă șirul începe cu secvența 0x sau 0X, metoda spune că ar fi un număr în baza 16 (hexazecimal).
-Dacă șirul începe cu 0, atunci se presupune că numărul este zecimal.
-Dacă șirul începe cu orice altceva, se presupune că rădăcina este 10 (zecimal).
+
+-   Dacă șirul începe cu secvența 0x sau 0X, metoda spune că ar fi un număr în baza 16 (hexazecimal);
+-   Dacă șirul începe cu 0, atunci se presupune că numărul este zecimal;
+-   Dacă șirul începe cu orice altceva, se presupune că rădăcina este 10 (zecimal).
 
 Această metodă poate fi regăsită și ca membră a obiectului `Number`, fiind introdusă odată cu ECMAScript 2015.
 

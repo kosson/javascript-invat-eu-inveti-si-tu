@@ -121,7 +121,6 @@ var imp = 4;
 imp /= 3; // 1.33333333
 ```
 
-
 ## Înmulțire `*`
 
 ```javascript

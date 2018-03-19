@@ -1,6 +1,6 @@
 # Valorile boolean
 
-Numele acestor valori ne aduce aminte de George Boole, cercetătorul care a oferit o variantă algebrică de calcul al unor astfel de valori.
+Numele acestor valori ne aduce aminte de George Boole, cercetătorul care a oferit o variantă algebrică de calcul al unor astfel de valori. Această valoare este o primitivă.
 
 Acestea sunt `true` și `false`.
 
@@ -14,10 +14,10 @@ Boolean('test'); // true
 
 Valorile care sunt evaluate la `false`:
 
-- `""` (un șir de caractere vid marcat prin ghilimele duble),
-- `''` (un șir de caractere vid marcat prin ghilimele simple),
-- `0`,
-- `NaN`,
-- `false`,
-- `null`,
-- `undefined`
+-   `""` (un șir de caractere vid marcat prin ghilimele duble),
+-   `''` (un șir de caractere vid marcat prin ghilimele simple),
+-   `0`,
+-   `NaN`,
+-   `false`,
+-   `null`,
+-   `undefined`

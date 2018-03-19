@@ -4,9 +4,9 @@
 
 Toate expresiile pot fi reduce la o valoare de adevăr, fie aceasta adevărată (`true`) sau falsă (`false`). Acest mod de lucru constituie o ramură a algebrei booleene introdusă de George Boole prima dată în lucrarea *The Mathematical Analysis of Logic* (*Analiza matematică a logicii*), 1847 cu o dezvoltare deplină în 1854 în lucrarea *An investigation of the Laws of Thought*. În loc de a opera cu numere așa cum facem în operațiunile aritmetice de bază (adunare și înmulțire), operațiunile booleene de bază sunt:
 
-- **conjuncția**, numită în engleză **AND** și în română **ȘI**, fiind *produsul logic* notat cu simbolul `∧` sau `∩`,
-- **disjuncția**, numită în engleză **OR**, fiind suma logică notată cu simbolul `∨` sau `∪` și
-- **negarea** sau **complementarea**, numită în engleză **NOT**, fiind notată cu simbolul `¬`.
+-   **conjuncția**, numită în engleză **AND** și în română **ȘI**, fiind *produsul logic* notat cu simbolul `∧` sau `∩`,
+-   **disjuncția**, numită în engleză **OR**, fiind suma logică notată cu simbolul `∨` sau `∪` și
+-   **negarea** sau **complementarea**, numită în engleză **NOT**, fiind notată cu simbolul `¬`.
 
 Ceea ce a permis algebra lui Boole este construcția de porți logice cu ajutorul circuitelor electronice imediat ce am avut la îndemână conceptul de **bit** ca unitate de codare a informației. În timp ce studia circuitele de basculare (gândește-te la un releu), în anii 30 ai secolului trecut, matematicianul și inginerul american Claude Elwood Shannon face o conexiune importantă între algebra Booleană și dispozitivele electromagnetice folosite pentru comutarea liniilor în trunchiurile de telefonie.
 
@@ -34,10 +34,10 @@ Să o luăm băbește. Din acest moment, ceea ce este notat cu `a` în diagramă
 
 Și acum să facem calcule:
 
-- `nimic` (`false`) adunat cu `ceva` (`true`) egal `ceva` (`true`);
-- `ceva` (`true`) adunat cu `nimic` (`false`) egal `ceva` (`true`);
-- `ceva` (`true`) adunat cu `ceva` (`true`) egal `ceva` (`true`);
-- `nimic` (`false`) adunat cu `nimic` (`false`) egal `nimic` (`false`);
+-   `nimic` (`false`) adunat cu `ceva` (`true`) egal `ceva` (`true`);
+-   `ceva` (`true`) adunat cu `nimic` (`false`) egal `ceva` (`true`);
+-   `ceva` (`true`) adunat cu `ceva` (`true`) egal `ceva` (`true`);
+-   `nimic` (`false`) adunat cu `nimic` (`false`) egal `nimic` (`false`);
 
 Să facem un tabel pentru claritate:
 
@@ -56,10 +56,10 @@ Să avansăm cu operațiunea de conjuncție - AND.
 
 Facem calculul și pentru că vorbim de o înmulțire, voi apela la ceea ce a rămas din școală de la înmulțirea cu 0. Vă mai aduceți aminte, nu? E simplu. Vom opera cu 0 și cu 1, corespondent lui `false` și `true`.
 
-- `0` (`false`) înmulțit cu `1` (`true`) egal `0` (`false`);
-- `0` (`false`) înmulțit cu `0` (`false`) egal `0` (`false`);
-- `1` (`true`) înmulțit cu `0` (`false`) egal `0` (`false`);
-- `1` (`true`) înmulțit cu `1` (`true`) egal `1` (`true`);
+-   `0` (`false`) înmulțit cu `1` (`true`) egal `0` (`false`);
+-   `0` (`false`) înmulțit cu `0` (`false`) egal `0` (`false`);
+-   `1` (`true`) înmulțit cu `0` (`false`) egal `0` (`false`);
+-   `1` (`true`) înmulțit cu `1` (`true`) egal `1` (`true`);
 
 Să constituim tabela de adevăr. Dacă te ajută să înțelegi, privește atent la circuitul realizat din cele două întrerupătoare. Singurul mod în care trece curentul este să apeși pe ambele întreruptoare, restul: nu trece nimic - `false`.
 
@@ -76,8 +76,8 @@ Aplicat la domeniul programării, valorile variabilelor sunt reduse la corespond
 
 Pentru a vă adăuga încă un instrument util în viitoarele evaluări. Legile lui De Morgan sunt niște reguli simple de transformare care poartă numele matematicianului Augustus De Morgan:
 
-- negarea *disjuncției* (adunarea logică) este conjuncția (înmulțirea) negațiilor
-- negarea *conjuncției* este disjuncția negațiilor.
+-   negarea *disjuncției* (adunarea logică) este conjuncția (înmulțirea) negațiilor
+-   negarea *conjuncției* este disjuncția negațiilor.
 
 > NOT(**true** OR **false**) <=> NOT **true** AND NOT **false**
 > NOT(**true** AND **false**) <=> NOT **true** OR NOT **false**
@@ -167,9 +167,9 @@ console.log(z);
 
 ## Resurse
 
-- [Algebră booleană, Wikipedia în limba română](https://ro.wikipedia.org/wiki/Algebr%C4%83_boolean%C4%83)
-- [Boolean algebra, Wikipedia în limba engleză](https://en.wikipedia.org/wiki/Boolean_algebra)
-- [Claude E. Shannon: A Goliath Amongst Giants](https://www.bell-labs.com/claude-shannon/)
-- [Claude Shannon, painted portrait - la théorie de l'information _1010155](https://www.flickr.com/photos/home_of_chaos/7591110676/in/album-72157630621527032/)
-- [Logical conjunction](https://en.wikipedia.org/wiki/Logical_conjunction)
-- [Boolean algebra (structure)](https://en.wikipedia.org/wiki/Boolean_algebra_(structure))
+-   [Algebră booleană, Wikipedia în limba română](https://ro.wikipedia.org/wiki/Algebr%C4%83_boolean%C4%83)
+-   [Boolean algebra, Wikipedia în limba engleză](https://en.wikipedia.org/wiki/Boolean_algebra)
+-   [Claude E. Shannon: A Goliath Amongst Giants](https://www.bell-labs.com/claude-shannon/)
+-   [Claude Shannon, painted portrait - la théorie de l'information _1010155](https://www.flickr.com/photos/home_of_chaos/7591110676/in/album-72157630621527032/)
+-   [Logical conjunction](https://en.wikipedia.org/wiki/Logical_conjunction)
+-   [Boolean algebra (structure)](https://en.wikipedia.org/wiki/Boolean_algebra_(structure))

@@ -36,10 +36,12 @@ Cel cu care vom lucra folosind operatorii bitwise, este sistemul binar, care rep
 
 De exemplu, 27.
 
-27 / 2 = 13 * 2 + **1**;
-13 / 2 = 6 * 2  + **1**;
-6 / 2 = 3 * 2   + **0**;
-3 / 2 = **1** * 2   + **1**;
+```javascript
+27 / 2 = 13 * 2 + 1;
+13 / 2 = 6 * 2  + 1;
+6 / 2 = 3 * 2   + 0;
+3 / 2 = 1 * 2   + 1;
+```
 
 Pornind de jos reconstituim valoarea binară: **11011**.
 

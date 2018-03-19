@@ -1,9 +1,11 @@
-# `String` - șiruri de caractere
+# String, șir de caractere
+
+Această valoare este o primitivă.
 
 ## Mantre
 
-- JavaScript convertește automat primarele în obiecte String, fiind astfel posibilă folosirea metodelor obiectului String pentru primarele string. De fapt ceea ce se întâmplă este o „ambalare” a primarei string în obiectul global aferent.
-- String este un obiect iterabil pentru că obiectul prototip are o metodă @@iterator (precum Array, TypedArray, Map și Set).
+-   JavaScript convertește automat primarele în obiecte String, fiind astfel posibilă folosirea metodelor obiectului String pentru primarele string. De fapt ceea ce se întâmplă este o „ambalare” a primarei string în obiectul global aferent.
+-   String este un obiect iterabil pentru că obiectul prototip are o metodă @@iterator (precum Array, TypedArray, Map și Set).
 
 ```javascript
 "test".length; // 4
@@ -35,7 +37,7 @@ iterator.next(); // Object { value: "h", done: false }
 iterator.next(); // Object { value: "i", done: false }
 ```
 
-Pentru a vedea toate metodele care pot fi aplicate unui șir de caractere, vă invit să mergeți la informațiile despre obiectul intern String.
+Pentru a vedea toate metodele care pot fi aplicate unui șir de caractere, vă invit să mergeți la informațiile despre obiectul intern `String`.
 
 ## Concatenarea șirurilor de caractere
 

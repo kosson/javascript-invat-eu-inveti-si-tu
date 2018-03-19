@@ -1,4 +1,4 @@
-# Array - tablouri, vectori
+# Array - tablou, vector
 
 Este un obiect intern care are și rol de constructor. În literatura românească de specialitate veți întâlni adesea denumirea de *tablou*. Pentru că este mai simplu și în obișnuința multor programatori români să folosească termenul din engleză ca neologism acceptat de practica curentă, vom folosi și în acest material neologismul **array**. În comunitatea profesională array-ul mai este întâlnit și sub denumirea de *listă* sau *vector*.
 
@@ -10,7 +10,9 @@ Această structură capabilă să țină valori este cea mai utilizată atunci c
 
 > Valoarea slotului intern [\[Prototype\]\] al constructorului `Array` este obiectul prototype al obiectul intern `Function`. Obiectul prototype al lui `Function` este în sine un obiect-funcție intern.
 
-## Descriere
+## Natura unui array
+
+### Descriere
 
 Array-urile conțin mai multe valori numite `elemente`, care sunt ordonate cu niște chei de identificare numite indecși. Numărătoarea elementelor pornește de la `0`. Tipologic vorbind, un array este un obiect (verifică cu `typeof`).
 
@@ -28,8 +30,6 @@ Array.isArray(colectie); // true
 // ca array
 Array.isArray(Array.prototype); // true
 ```
-
-## Natura unui array
 
 Un array este o structură care poate „agrega” date indiferent de tipul lor. Indecșii nu trebuie menționați explicit fiind o asignarea automată. Numărul maxim de elemente este `2^23 - 1`.
 
@@ -98,7 +98,26 @@ arr[0] === actiune; // true
 
 Rezultatul este `true` pentru că valoarea evaluată a expresiei `arr[0]` este `actiune`, care la rândul său ține valoarea evaluată a invocării lui `faCeva()`.
 
-## Operațiuni cu array-uri și elementele lor
+### Lanțul prototipal al unui array
+
+Uneori este necesar să afli care este prototipul unei colecții de care nu ești sigur dacă este array curat sau array-like (*asemănător-cu-array*) - o entitate care are caracteristici apropiate de un array.
+
+```javascript
+let tablou = ['prima', 'a doua', 1, 2];
+let protoTablou = Object.getPrototypeOf(tablou);
+protoTablou; // Array [  ]
+let protoLaProtoTablou = Object.getPrototypeOf(protoTablou);
+protoLaProtoTablou; // Object { , 15 more… }
+Object.getPrototypeOf(protoLaProtoTablou); // null
+```
+
+Structura lanțului ar fi: `array` --> `Array.prototype` --> `Object.prototype` --> `null`.
+
+Colecțiile care sunt **asemănătoare-cu-array-urile** (array-like), vor avea un lanț mult mai scurt care-l indică la capăt pe `Object`.
+
+Structura lanțului ar fi: `arrayLike` --> `Object.prototype` --> `null`.
+
+## Manipularea elementelor
 
 ### Modificarea elementelor
 
@@ -169,7 +188,7 @@ var arr = [1 + 2, 4, (2 - 1) + 2]; console.log(arr); // [ 3, 4, 3 ]
 
 ### Indecșii negativi
 
-Indecșii care sunt numere negative vor fi considerați chei pentru valorile introduse în obiectul `Array`.
+Indecșii care sunt numere negative vor fi considerați chei pentru valorile introduse în obiectul `Array`. Acestlucru este posibil pentru că natura unui array este a unui obiect.
 
 ```javascript
 var tablou = [];
@@ -178,16 +197,18 @@ console.log(tablou); // Array [ ]
 tablou[-1];          // ceva în afară
 ```
 
-## Verificări
+## Verificări și căutări
 
 Am indicat mai sus faptul că verificarea unui array cu `typeof` are drept rezultat tipul obiect. Deci este clară natura adâncă a acestui tip de structură. Ar fi foarte util de verificat în lucrul cu array-uri dacă există un anume index și mai ales care este valoarea indexului pentru o anumită valoare?
 
 ### Existența unui index
 
-Pentru a verifica dacă un index există în array poți folosi operatorul `in` pentru că un array, de fapt, este un obiect, iar indecșii sunt cheile lui.
+Pentru a verifica dacă un index există în array poți folosi operatorul `in` pentru că un array, de fapt, este un obiect, iar indecșii sunt cheile lui. Operatorul `in` detectează dacă pentru un anumit index, există o valoare în array.
 
 ```javascript
-1 in ['a', 'b', 'c']; // true
+var tablou = [0, 1, , 2, 4, "unu"];
+3 in tablou; // true
+2 in tablou; // false
 ```
 
 ### Existența unei valori
@@ -198,50 +219,37 @@ Pentru aceeași verificare poți folosi și metoda dedicată `includes()`. Acest
 ['a', 'b', 'c'].includes('b'); // true
 ```
 
-### Indexul unei element cunoscut
+### Indexul unui element cunoscut
 
-Apoi dacă ai verificat că o cheie există, poți obține indexul pentru o valoare știută.
+Apoi dacă ai verificat că o cheie există, poți obține indexul pentru o valoare știută. Elementele array-ului sunt parcurse secvențial până la găsirea valorii pentru care se dorește obținerea indexului.
 
 ```javascript
 ['a', 'b', 'c'].indexOf('b'); // 1
 ```
 
-### Verificarea existenței unei valori pentru un index
+### Căutări de valori sau index
 
-Operatorul `in` detectează dacă pentru un anumit index, există o valoare în array.
+Pentru a face căutări avem la dispoziție două metode:
 
-```javascript
-var tablou = [0, 1, , 2, 4, "unu"];
-3 in tablou; // true
-2 in tablou; // false
-```
+-   metoda `find()` și
+-   metoda `indexOf()`.
 
-Pentru mai multe operațiuni care trec de scopul unor verificări, va trebui să consultați metodele pe care obiectul intern `Array` (care, de fapt, îmbracă orice array), le pune la dispoziție.
-
-Mai sunt și metode general accesibile pe care le poți aplica, iar cel mai rapid exemplu, care vă va fi util adesea, este metoda globală `toString()`. Aceasta transformă un array într-un șir de fragmente de text despărțite prin virgule.
+În cazul utilizării lui `find()`, dacă elementul există în array, metoda returnează chiar elementul folosind o funcție callback, iar în caz contrar returnează `undefined`. Cazul metodei `indexOf()` este în oglindă cu diferența că este returnat indexul la care se află valoarea.
 
 ```javascript
-['a', 'b', 'c'].toString(); // "a, b, c"
+const colecție = ['a', 'b', 'c'];
+let căutare = colecție.find(function (valoarea) {
+    if (valoarea === 'b') {
+      return valoarea;
+    };
+});
+console.log(căutare); // b
+// variantă cu funcție fat arrow
+let cautC = colecție.find( (elem) => elem === 'c');
+console.log(cautC);
 ```
 
-## Lanțul prototipal al unui array
-
-Uneori este necesar să afli care este prototipul unei colecții de care nu ești sigur dacă este array curat sau array-like (*asemănător-cu-array*) - o entitate care are caracteristici apropiate de un array.
-
-```javascript
-let tablou = ['prima', 'a doua', 1, 2];
-let protoTablou = Object.getPrototypeOf(tablou);
-protoTablou; // Array [  ]
-let protoLaProtoTablou = Object.getPrototypeOf(protoTablou);
-protoLaProtoTablou; // Object { , 15 more… }
-Object.getPrototypeOf(protoLaProtoTablou); // null
-```
-
-Structura lanțului ar fi: `array` --> `Array.prototype` --> `Object.prototype` --> `null`.
-
-Colecțiile care sunt **asemănătoare-cu-array-urile** (array-like), vor avea un lanț mult mai scurt care-l indică la capăt pe `Object`.
-
-Structura lanțului ar fi: `arrayLike` --> `Object.prototype` --> `null`.
+În cazul în care elementul nu este găsit, este returnat `undefined`.
 
 ## Crearea array-urilor
 
@@ -280,7 +288,8 @@ Alternativa la folosirea formei literale este oferită de constructor. Să nu ui
 var tablou = new Array('abc','def');
 console.log(tablou); // Array [ "abc", "def" ]
 ```
-Dacă ai ales o astfel de practică, cea a lucrului cu funcția constructor, poți să-l folosești pentru a prestabili dimensiunea array-ul. Dacă se poate, acest lucru conduce la eficientizarea alocării memoriei pentru array-uri. Mai departe, vom vedea că o soluție, care ar trebui să primeze, este aceea a utilizării metodei `fill()`. Dar să vedem contructorul la lucru:
+
+Dacă ai ales o astfel de practică, cea a lucrului cu funcția constructor, poți să-l folosești pentru a prestabili dimensiunea array-ul. Dacă se poate, acest lucru conduce la eficientizarea alocării memoriei pentru array-uri. Mai poți face acest lucru specificând dimensiunea cu ajutorul proprietății `length`, precum în `colecție.length = 5`. Mai departe, vom vedea că o soluție, care ar trebui să primeze, este aceea a utilizării metodei `fill()`. Dar să vedem contructorul la lucru:
 
 ```javascript
 var test = new Array(5);
@@ -387,16 +396,16 @@ Proprietatea `length` numără toate elementele array-ului chiar dacă acestea a
 
 ```javascript
 let tablou = [0, 1, , 3]; // conține un element lipsă
-tablou.length;         // 4
+tablou.length;            // 4
 ```
 
 Pentru a număra câte elemente chiar există în array se poate scrie o funcție specializată:
 
 ```javascript
 let tablou = [0, 1, , 3];
-function numaraElementeReale(date){
+function numaraElementeReale (date) {
   let contor = 0;
-  date.forEach(function () {
+  date.forEach( function () {
     contor++;
   });
   return contor;
@@ -407,7 +416,7 @@ numaraElementeReale(tablou); // 3
 ### Creșterea lungimii array-ului prin introducerea valorii
 
 ```javascript
-var tablou = ['x', 'y'];
+const tablou = ['x', 'y'];
 tablou.length = 3;
 // în acest moment ceea ce s-a întâmplat este că a fost introdus un slot gol în array.
 ```
@@ -417,7 +426,7 @@ tablou.length = 3;
 Se poate face simplu prin:
 
 ```javascript
-var tablou = ['unu', 'doi', 'trei', 'patru'];
+const tablou = ['unu', 'doi', 'trei', 'patru'];
 tablou.length;        // 4
 tablou.length = 2;
 tablou.length;        // 2
@@ -443,12 +452,12 @@ Resetarea la 0 a array-urilor dacă se face cu `length` va avea același efect �
 ```javascript
 var tablou = ['prima', 'a doua'];
 var altTablou = tablou;
-tablou.length = 0;
+tablou.length = 0; // distructiv!
 tablou; // []
 altTablou; // []
 ```
 
-Folosirea resetării prin inițializarea variabilei cu un array gol, nu afectează alte referințe. Acestea vor păstra array-ul preexistent.
+Folosirea resetării prin inițializarea variabilei cu un array gol, nu afectează alte referințe. Acestea vor păstra array-ul preexistent pentru că prin al doilea identificator se păstrează legătura la zona de memorie unde este obiectul array. Primul identificator va conduce acum către un nou obiect dintr-o altă zonă de memorie.
 
 ```javascript
 var tablou = ['prima', 'a doua', 1, 2];
@@ -471,9 +480,11 @@ Array(4).fill();
 // Array [undefined, undefined, undefined, undefined]
 ```
 
+### Ocolirea golurilor
+
 Uneori este necesară trecerea peste goluri pentru a prelucra restul datelor din array.
 
-A. Folosind metoda `forEach()`
+#### A. Cu metoda forEach()
 
 ```javascript
 ['prima', , 1, 2].forEach(function (element, index) {
@@ -484,9 +495,11 @@ A. Folosind metoda `forEach()`
 // 3 -> 2
 ```
 
-B. Folosind `every()` se trece peste goluri.
-C. Folosind `some()` se trece peste goluri.
-D. Folosind `map()` se face un salt peste goluri, dar le păstrează în array-ul rezultat.
+#### B. Cu metoda every() se trece peste goluri.
+#### C. Cu metoda some() se trece peste goluri.
+#### D. Cu metoda map()
+
+Efectul este că se face un salt peste goluri, dar acestea sunt păstrate în array-ul rezultat.
 
 ```javascript
 ['prima',, 1, 2].map(function(currentValue, index){
@@ -495,22 +508,31 @@ D. Folosind `map()` se face un salt peste goluri, dar le păstrează în array-u
 // Array [ "prima -> 0", <1 empty slot>, "1 -> 2", "2 -> 3" ]
 ```
 
-E. Folosind `filter()` golurile sunt eliminate.
+#### E. Folosind metoda filter()
+
+Folosirea metodei are ca efect obținerea unui nou array din care sunt eliminate golurile.
 
 ```javascript
-['prima',, 1, 2].filter(function(x){return true});
-Array [ "prima", 1, 2 ];
+['prima', , 1, 2].filter( function (x) {
+  return true;
+});
+Array ["prima", 1, 2 ];
 ```
 
-F. Metoda `join()` convertește golurile, iar valorile `undefined` și `null` la stringul pasat în join.
+#### F. Metoda join()
+
+Aceasta convertește golurile, iar valorile `undefined` și `null` la stringul pasat în join.
 
 ```javascript
 ['prima',,1,2].join('X');
 // "primaXX1X2"
 ```
 
-G. Metoda `sort()` păstrează golurile.
-H. Bucla `for..in` listează cheile array-ului (acestea sunt un superset al indicilor array-ului).
+#### G. Metoda sort() păstrează golurile.
+
+#### H. Bucla for..in
+
+Ciclarea cu `for..in` listează cheile array-ului (acestea sunt un superset al indicilor array-ului).
 
 ```javascript
 for (let key in ['prima',,1,2]){
@@ -518,9 +540,9 @@ for (let key in ['prima',,1,2]){
 }; // 0 2 3
 ```
 
-I. Folosirea lui `apply()`
+#### I. Folosirea lui `apply()`
 
-Completarea unui array existent se poate face aplicând metoda `push()` pe primul array pentru că, de fapt, transformi primul array ca fiind obiectul context pentru execuția metodei. Acest lucru permite injectarea celui de-al doilea obiect în primul.
+Completarea unui array existent se poate face aplicând metoda `push()` pe primul array pentru că, de fapt, transformi primul array ca fiind obiect context pentru execuția metodei. Acest lucru permite injectarea celui de-al doilea obiect în primul.
 
 ```javascript
 let primul = [1, 2, 3];
@@ -538,24 +560,46 @@ let a = [1, 2, 3, 7, 8, 9],
 a.splice.apply(a, Array.concat(insertIndex, 0, b));
 ```
 
+Cu `a.splice`, de fapt generezi un nou array asupra căruia faci un `apply()`.
+
+### Sortarea valorilor
+
+De cele mai multe ori vom avea nevoie să facem o sortare după valorile elementelor unui array. Scenariile pot fi multiple, de la ordonarea unor valori numerice, până la ordonarea alfabetică a unor temeni. Pentru a realiza ordonarea, se va utiliza metoda `sort()`, care va utiliza o funcție cu rol de callback.
+
+```javascript
+[-23, -2, 102, 3, -54].sort( function (x, y) {
+  if (x < y) {
+    return -1;
+  };
+  // dacă true pune x pe un index mai mic decât y: deplasare stânga.
+  if (x > y) {
+    return 1;
+  };
+  // dacă y este mai mic decât x, acordă un index mai mic.
+  return 0;
+  // dacă valorile sunt sortate lasă neschimbată poziția unuia față de celălalt.
+}); // Array [ -54, -23, -2, 3, 102 ]
+```
+
 ### Accesarea pe sărite a elementelor unui array
+
+Uneori se poate dovedi utilă amestecarea la întâmplare a elementelor dintr-un array. Vă puteți duce cu gândul la scenariul unui joc. Realizezi acest lucru folosind metoda `sort()` în combinație cu `Math.random()` apelat în funcția callback.
 
 ```javascript
 var colectie = [1, 2, 3, 'unu', 'doi', 'trei'];
-colectie = colectie.sort(function () {
+colectie = colectie.sort( function () {
   return Math.random() - 0.5;
 });
 colectie; // Array [ 3, 1, "doi", 2, "unu", "trei" ]
 ```
 
-### Căutări în array
+### Reducerea la șir de caractere - aplatizare
 
-Pentru a face căutări avem la dispoziție două metode:
+Mai sunt și metode general accesibile pe care le poți aplica (vezi metodele obiectului intern `Array`), iar cel mai rapid exemplu, care vă va fi util adesea, este metoda globală `toString()`. Aceasta transformă un array într-un șir de fragmente de text despărțite prin virgule. În practică astfel de practici de reducere la nivel de șir a unui set de valori se numește aplatizare, în engleză *flatenning*.
 
--   metoda `find()` și
--   metoda `indexOf()`.
-
-În cazul utilizării lui find, dacă elementul există în array, metoda returnează chiar elementul folosind o funcție callback, iar în caz contrar returnează `undefined`. Cazul metodei `indexOf()` este în oglindă cu diferența că este returnat indexul la care se află valoarea.
+```javascript
+['a', 'b', 'c'].toString(); // "a, b, c"
+```
 
 ### Destructurarea
 
@@ -614,7 +658,7 @@ let [data, an, luna, zi] = /^(\d\d\d\d)-(\d\d)-(\d\d)$/.exec('1912-12-3');
 
 Ceea ce s-a întâmplat este că ai scăpat de sarcina de a crea un array intermediar din care să extragi indice cu indice.
 
-### Folosirea operatorului rest (`...`)
+### Folosirea operatorului rest (...)
 
 ```javascript
 var [x, ...restop] = [1, 2, 3];

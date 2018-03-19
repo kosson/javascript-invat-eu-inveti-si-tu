@@ -1,4 +1,4 @@
-# `Array.prototype.sort()`
+# Array.prototype.sort()
 
 Atenție! Această metodă modifică definitiv array-ul original.
 
@@ -30,17 +30,21 @@ Pentru că valorile de lucru sunt cele ale tabelei Unicod și oarecum nu sunt ev
 
 Acest lucru se transpune în pasarea unei funcții cu rol de sortare. Funcția pasată va compara două elemente x și y. Rezultatul comparării conduce la o decizie în ceea ce privește reorganizarea array-ului. Există trei cazuri în care comportamentul de sortare este modelat de ceea ce este returnat de funcția pasată:
 
-- valoarea returnată mai mică de 0: x va sta înaintea lui y
-- valoarea este mai mare de 0: y va sta înaintea lui x
-- valoarea este egală cu 0: x și y își vor păstra pozițiile.
+-   valoarea returnată mai mică de 0: x va sta înaintea lui y
+-   valoarea este mai mare de 0: y va sta înaintea lui x
+-   valoarea este egală cu 0: x și y își vor păstra pozițiile.
 
 O formă pentru a înțelege pașii este următoarea secvență care se autodescrie:
 
 ```javascript
 [-23, -2, 102, 3, -54].sort( function (x, y) {
-  if (x < y) { return -1; };
+  if (x < y) {
+    return -1;
+  };
   // dacă true pune x pe un index mai mic decât y: deplasare stânga.
-  if (x > y) { return 1; };
+  if (x > y) {
+    return 1;
+  };
   // dacă y este mai mic decât x, acordă un index mai mic.
   return 0;
   // dacă valorile sunt sortate lasă neschimbată poziția unuia față de celălalt.
@@ -154,3 +158,29 @@ colectie.sort(comparValori('valoare'));
 colectie.sort(comparValori('nume'));
 colectie.sort(comparValori('valoare', 'desc'));
 ```
+
+Algoritmul de sortare folosit se aseamnă cu `Bubble Sort`-ul. Dacă se dorește, poți face o implementare `Bubble Sort`. Parcurgerea codului pentru o astfel de sortare, va aduce mai multă lumină asupra algoritmului folosit de metoda `sort()` a obiectului intern `Array`.
+
+```javascript
+let arr = ['ceva','altceva','după'];
+function bubbleSort (arr) {
+  const len = arr.length;
+  for (let index = len - 1; index >= 0; index--) {
+    for (let idxInt = 1; idxInt <= index; idxInt++) {
+      let temp;
+      if (arr[idxInt - 1] > arr[idxInt]) {
+        temp = arr[idxInt - 1];
+        arr[idxInt - 1] = arr[idxInt];
+        arr[idxInt] = temp;
+      };
+   };
+ };
+ return arr;
+};
+bubbleSort(arr);
+```
+
+## Referințe
+
+-   [JS: Interview Questions](http://khan4019.github.io/front-end-Interview-Questions/sort.html)
+-   [Sorting algorithms in JavaScript, Posted on March 12, 2016](http://blog.benoitvallon.com/sorting-algorithms-in-javascript/sorting-algorithms-in-javascript/)

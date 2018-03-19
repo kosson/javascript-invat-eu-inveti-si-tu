@@ -1,23 +1,22 @@
-# Async / await
+# Funcții async / await
 
-Acest enunț a fost introdus în EcmaScript 2017 și face ca o funcție să returneze o promisiune (`Promise`).
+Acest enunț a fost introdus în EcmaScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile acestea poartă cuvântul cheie `async` în fața lui `function`. Apariția lor marchează o nouă paradigmă de lucru cu promisiunile.
 
-Operatorul `await` poate fi folosit în interiorul unei expresii de funcție async și numai în interiorul unei astfel de funcții. Acest operator returnează valoarea rezolvată a unei promisiuni. În același timp, operatorul oprește execuția funcției async până când promisiunea este rezolvată. Abia după rezolvarea promisiunii, va fi reluată execuția funcției. Dacă valoarea nu este o promisiune, este convertită la o promisiune rezolvată. În cazul în care promisiunea este respinsă, este returnată valoarea rezultată ca respingere.
-
-În mod tradițional, returnarea unei funcții se face instanțiindu-se cu `new` un obiect `Promise`.
+Înainte de apariția acestori funcții, pentru a scrie cod asyncron aveam la îndemână callback-uri și promisiuni. În mod curent, până la apariția async/await ai fi returnat un obiect `Promise` proaspăt instanțiat.
 
 ```javascript
-function simulare() {
+function simulare () {
   return new Promise((resolve, reject) => {
     setTimeout(() => resolve("Salutare"), 2000);
   });
 };
-let x = simulare(); // Promise {[[PromiseStatus]]: "pending", [[PromiseValue]]: undefined}
+let x = simulare();
+// Promise {[[PromiseStatus]]: "pending", [[PromiseValue]]: undefined}
 // după 2 secunde
 // [[PromiseValue]]: "Salutare"
 ```
 
-Folosirea lui `await`.
+Aceste noi funcții te fac să percepi asicronicitatea ceva mai secvențial, mai sincron. O funcție async returnează o promisiune. Cheia utilizării funcțiilor async este utilizarea operatorului `await`. Acest operator poate fi folosit în interiorul unei expresii de funcție async și numai în interiorul unei astfel de funcții. Acest operator returnează valoarea rezolvată a unei promisiuni. În același timp, operatorul oprește execuția funcției async până când promisiunea este rezolvată. Abia după rezolvarea promisiunii, va fi reluată execuția funcției. Dacă valoarea nu este o promisiune, este convertită la o promisiune rezolvată. În cazul în care promisiunea este respinsă, este returnată valoarea rezultată ca respingere.
 
 ```javascript
 async function sarcina() {
@@ -56,8 +55,12 @@ async function aduMi () {
   const rezultat = await resursa.json();
   return rezultat;
 };
+const promisiunea = aduMi();
+typeof promisiune;
 aduMi().then((înregistrarea) => console.log(înregistrarea)).catch(() => console.log('A apărut o eroare'));
 ```
+
+Ceea ce permit funcțiile async/await este posibilitatea de a captura toate erorile ridicate de codul asincron, dar și cel sincron. Deci, folosirea unei structuri try/catch este valabilă.
 
 ## Referințe
 
