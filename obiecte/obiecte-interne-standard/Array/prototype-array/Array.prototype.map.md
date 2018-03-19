@@ -1,7 +1,7 @@
-# `Array.prototype.map()`
+# Array.prototype.map()
 
 Metoda creează un nou array care cuprinde valorile rezultate din executarea unei funcții callback pentru fiecare dintre elementele unui array căruia i se aplică.
-Pentru fiecare element din array, se execută funcția iar rezultatul devine un element al unui nou array. `map()` împreună cu `filter()` și `reduce()` sunt baza programării funcționale (stil de programare bazat pe folosirea funcțiilor).
+Pentru fiecare element din array, se execută funcția callback, iar rezultatul devine un element al unui nou array. Această metodă împreună cu `filter()` și `reduce()` sunt baza programării funcționale (stil de programare bazat pe folosirea funcțiilor).
 
 Metoda `map()` are doi parametri:
 
@@ -14,9 +14,19 @@ Callback-ul primește trei argumente:
 -   index,
 -   și array-ul în sine.
 
-Noul array constituit are fix același număr de obiecte precum cel prelucrat.
+Noul array constituit are fix același număr de elemente cu cel original.
 
 ## Anatomie
+
+Vă mai aduceți aminte de rima copilăriei *cei patru Evangheliști erau trei: Luca și Matei*. Cam așa ai putea privi și aplicarea lui `map()` sau *maparea* așa cum s-a înrădăcinat printre programatorii români. Sunt două lucruri esențiale în lucru: funcția callback și setarea legăturii lui `this`. În jocul de-a *maparea* lucrăm cu elementul de array pentru care facem niște operațiuni.
+
+```javascript
+// ceva foarte rapid
+[2, 4, 6].map( (numar) => numar * 2 );
+// [ 4, 8, 12 ]
+```
+
+Cel de-al doilea este `this` poate fi setat la alt obiect ale cărui date vrem să le folosim în contextul nostru de prelucrare.
 
 ```javascript
 let colectie = [1, 'primul', true];

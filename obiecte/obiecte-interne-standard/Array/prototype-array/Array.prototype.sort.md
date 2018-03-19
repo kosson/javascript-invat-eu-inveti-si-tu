@@ -180,6 +180,15 @@ function bubbleSort (arr) {
 bubbleSort(arr);
 ```
 
+Și acum, același principiu prin aplicarea metodei `sort()`. Dacă vom cupla cu noua sintază pe care o introduce fat arrow, vom ajunge la o formulă mult simplificată. Atenție, variantele următoare funcționează pentru valorile numerice.
+
+```javascript
+const ascendent = (a, b) => a - b;
+[3, 1, 10].sort(ascendent);
+const descendent = (a, b) => b - a;
+[23, 54, 87].sort(descendent);
+```
+
 ## Referințe
 
 -   [JS: Interview Questions](http://khan4019.github.io/front-end-Interview-Questions/sort.html)
