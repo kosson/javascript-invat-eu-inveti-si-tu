@@ -1574,7 +1574,7 @@ var unu = 10,
 // () este nevoie pentru a indica ca {} nu sunt un bloc de cod, ci o expresie
 ```
 
-Destructurarea funcționează foarte bine și în cazul array-urilor. În acest caz nu mai este necesară respectarea parității numelor ientificatorilor cu cea a cheilor pentru că nu mai avem chei. Potrivirea se va face în ordinea elementelor din array.
+Destructurarea funcționează foarte bine și în cazul array-urilor, care la rândul lor sunt obiecte. În acest caz nu mai este necesară respectarea parității numelor ientificatorilor cu cea a cheilor pentru că nu mai avem chei. Potrivirea se va face în ordinea elementelor din array.
 
 ```javascript
 var arr = [1, true, function y () {return 'salut'}, 10, 20];

@@ -27,7 +27,7 @@ function ex(primul, ...multiAltii){
 
 Adu-ți mereu aminte faptul că lista de parametri este într-un context care permite atribuirea valorilor (*assignment context*). Operatorul `...` folosit într-un context de asignare, strânge valorile într-un array.
 
-Din motive de semantică, unii programatori preferă să numească acest operator „gather”, care în limba română s-ar traduce „adună”. Semanntic vorbind implică faptul că strânge, adună toți parametrii care nu sunt asignați deja, dar care au venit prin invocarea funcției și creează din ei un array adevărat.
+Din motive de semantică, unii programatori preferă să numească acest operator „gather”, care în limba română s-ar traduce „adună”. Semantic vorbind implică faptul că strânge, adună toți parametrii care nu sunt asignați deja, dar care au venit prin invocarea funcției și creează din ei un array adevărat.
 
 ```javascript
 function faCeva (...argumentele) {
@@ -64,15 +64,7 @@ function faCeva (a, b = true, ...argumentele) {
 
 ## Operatorul `spread`
 
-Operatorul spread permite „desfacerea” (*spread* în limba română înseamnă a desface) unui array în elementele sale componente luate independent pentru a fi pasate unei funcții. Acest lucru se întâmplă atunci când la invocarea unei funcții, nu la declarare, este pasat un array pe care-l dorim desfăcut și asimilat obiectului arguments.
-
-```javascript
-var colectie = ['cooperare', 'independență', 'acceptare'];
-function ex(primul, ...multime){
-  console.log(primul, `${multime}`);
-}; ex(1, colectie); // 1 cooperare,independență,acceptare
-```
-
+Operatorul spread permite „desfacerea” (*spread* în limba română înseamnă a desface) unui array în elementele sale componente luate independent pentru a fi pasate unei funcții drept argumente.
 Acest operator folosește protocolul de iterare ceea ce înseamnă că obiectele pe care dorim să le transformăm, trebuie să aibe implementată metoda internă `@@iterator` prin intermediul lui Symbol.iterator. `arguments` are deja implementat protocolul de iterare în ECMAScript 2015.
 
 ```javascript

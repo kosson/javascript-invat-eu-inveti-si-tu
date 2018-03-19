@@ -118,7 +118,9 @@ ceva(); // "[object Arguments]"
 
 Scenariul în care va fi folosit acest obiect este cel al funcțiilor care primesc un număr variabil de argumente.
 
-**Sfatul lui Crockford**: tratează `arguments` ca pe o structură read-only (doar pe care să o citești), pentru că, altfel, poți modifica fără să-ți dorești valorile și ordinea parametrilor funcției.
+**Sfatul lui Crockford**:
+
+> tratează `arguments` ca pe o structură read-only (doar pe care să o citești), pentru că, altfel, poți modifica fără să-ți dorești valorile și ordinea parametrilor funcției.
 
 ```javascript
 function testX (unu, doi) {
@@ -126,19 +128,11 @@ function testX (unu, doi) {
   console.log(arguments.constructor); // function Object()
   console.log(arguments.__proto__);   // Object { , 15 more… }
   console.log(arguments.prototype);   // undefined
-}; testX(10, 1000);
+};
+testX(10, 1000);
 ```
 
-Parametrii funcției au propriul lor scope (lexical environment), care este separat de cel al funcției.
-
-```javascript
-function testX (unu, doi) {
-  console.log(this.unu === arguments[0]); // false
-  console.log(this.unu === this.arguments[0]); // false
-}; testX(10, 1000);
-```
-
-Unui obiect `arguments` i se pot seta proprietăți: `arguments[3] = 'trei'`.
+Unui obiect `arguments` i se pot seta proprietăți: `arguments[3] = 'trei'` în caz că acest lucru este necesar.
 
 ```javascript
 function ex (unu, doi) {
@@ -155,9 +149,9 @@ ex(1,2);
 console.log(window.trei);
 ```
 
-## Transformarea lui `arguments` într-un array
+## Transformarea lui arguments într-un array
 
-De multe ori se ivește necesitatea de a avea obiectul `arguments`, să fie transformat într-un array. Pentru acest lucru se folosea utilitarul `slice()` de la obiectul intern `Array`, care era invocat în contextul obiectului `arguments`.
+De multe ori se ivește necesitatea de a avea obiectul `arguments`, să fie transformat într-un array. Pentru acest lucru se folosea utilitarul `slice()` invocat în contextul obiectului `arguments`.
 
 ```javascript
 function convertireArgs (a, b) {
@@ -185,6 +179,8 @@ function convertireArgs (a, b) {
 ```
 
 Fă o vizită operatorului `...` (rest / spread) pentru mai multe exemple și lucruri potențial foarte utile pentru a înțelege simplitatea oferită prin abstractizarea pe care ES6 a introdus-o cu astfel de sintaxe.
+
+Pentru a obține un array din obiectul `arguments` se poate folosi și noul utilitar `Array.from(arguments)`.
 
 ## Câte argumente sunt?
 
@@ -481,7 +477,7 @@ var x = {
 
 ### Aplicarea destructurării
 
-Utilizarea operatorului **trei puncte** are o acțiune destructurantă asupra structurilor de date pe care se aplică. Am văzut acest efect deja ceva mai devreme când am discutat despre **rest parameters - parametrii rest**. Știm deja faptul că operațiunea de destructurare „desface” o structură de date cum este un array în elementele sale componente pentru a le servi unei funcții sau într-un enunț specializat. Mecanismul de destructurare funcționează foarte bine și în cazul argumentelor.
+Utilizarea operatorului **trei puncte** are o acțiune destructurantă asupra colecțiilor pe care se aplică. Am văzut acest efect deja ceva mai devreme când am discutat despre **rest parameters - parametrii rest**. Știm deja faptul că operațiunea de destructurare „desface” o structură de date cum este un array în elementele sale componente pentru a le servi unei funcții sau într-un enunț specializat. Mecanismul de destructurare funcționează foarte bine și în cazul argumentelor.
 
 ```javascript
 function facCeva (...argumente) {
