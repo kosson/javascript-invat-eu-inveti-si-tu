@@ -11,19 +11,34 @@ function faCeva (arg1, arg2) {
 }; faCeva(1, 3); //4
 ```
 
-**Moment ZEN**: O funcție este un obiect foarte special.
+**Moment ZEN**: O funcție este un obiect care poate fi invocat.
 
-Veți întâlni funcțiile la orice pas și în combinații diferite ca parte a unor expresii ale unui enunț sau ca declarații directe. Veți mai întâlni funcțiile ca valori care sunt pasate ca argumente unei alte funcții și le veți vedea la treabă în rolul de constructori de obiecte. Unul din motivele evidente pentru care există funcțiile este acela al reutilizări în diferite scenarii. De ce? Pentru că ar fi o nebunie să scrii aceeași secvență de cod de 1000 de ori, dacă în diferite părți ale codului este nevoie de un „tratament” identic al unor seturi de valori diferite.
+Funcțiile oferă toate capabilitățile obiectelor pentru că sunt obiecte. Dacă privești la modul de redactare, chiar arată precum o declarație de obiect literal, având în plus cuvântul cheie `function` și parantezele rotunde în care poți introduce argumentele.
+
+```javascript
+let obi = {};
+obi.a = 10;
+function fun () {};
+fun.a = 10;
+// poți introduce proprietăți
+// exact ca în cazul obiectelor
+```
+
+Ba mai mult, funcțiile au chiar metode proprii pe care le poți utiliza în anumite cazuri. Cel mai adesea vei vedea utilitatea lui `call()`, `apply()` sau `bind()`. Din curiozitate, deschide consola în browser și declară o funcție: `function ceva () {};`. Acum scrie identificatorul funcției urmat de punct. Ceea ce vei vedea sunt toate proprietățile și metodele obiectului funcție. Cred că în acest moment ești convinsă că funcțiile sunt obiecte, de fapt.
+
+Veți întâlni funcțiile la orice pas și în combinații diferite ca parte a unor expresii ale unui enunț sau ca declarații directe. Veți mai întâlni funcțiile ca valori care sunt pasate ca argumente unei alte funcții, fie ca identificator, fie declarate direct în antetul altei funcții. Le veți mai vedea la treabă în rolul de constructori de obiecte. Reține faptul că acolo unde este permisă scrierea unei expresii, poți scrie o funcție. Bunele practici îndeamnă programatorii să scrie funcțiile cât mai aproape de locul unde vor fi folosite.
+
+Unul din motivele evidente pentru care există funcțiile este acela al reutilizării în diferite scenarii. De ce? Pentru că ar fi o nebunie să scrii aceeași secvență de cod de 1000 de ori, dacă în diferite părți ale codului este nevoie de un „tratament” identic al unor seturi de valori diferite.
 
 ## Unități de execuție
 
-Funcțiile sunt unitățile de execuție ale codului JavaScript. O funcție poate fi percepută ca un subprogram, ca o subrutină. Veți mai întâlni în alte lucrări și denumirea de „proceduri”. Cel mai sănătos mod de a privi activitatea și efectele unei funcții este gândind întotdeauna că o funcție este un set de instrucțiuni, care se aplică unui set de date primit ca argumente. De ce să faci asta? Pentru că în interiorul funcției vei prelucra datele primite și la final vei dori să oferi rezultatele la care ai ajuns.
+Funcțiile sunt unități modulare de execuție ale codului JavaScript. O funcție poate fi percepută ca un subprogram, ca o subrutină. Veți mai întâlni în alte lucrări și denumirea de „proceduri”. Cel mai sănătos mod de a privi activitatea și efectele unei funcții este gândind întotdeauna că o funcție este un set de instrucțiuni, care se aplică unui set de date primit ca argumente. De ce să faci asta? Pentru că în interiorul funcției vei prelucra datele primite și la final vei dori să oferi rezultatele la care ai ajuns.
 
 ## Funcțiile sunt valori
 
 **Moment Zen**: Funcțiile sunt valori în sine care pot fi referențiate printr-un identificator (variabilă).
 
-Funcțiile sunt cunoscute ca fiind de ordin înalt (în engleză îi spune **higher order**), ceea ce simplu înseamnă că sunt la rândul lor valori, că pot fi pasate altor funcții, că pot fi returnate ca rezultat al evaluării unei alte funcții, cam tot ce poți face cu oricare altă valoare. Acest aspect face din JavaScript un limbaj foarte potrivit pentru a lucra cu funcțiile într-o paradigmă numită în limba engleză „functional programming”, adică **programare funcțională**.
+Funcțiile sunt cunoscute ca fiind de ordin înalt (în engleză îi spune **higher order**), ceea ce simplu înseamnă că sunt la rândul lor valori, că pot fi pasate altor funcții, că pot fi returnate ca rezultat al evaluării unei alte funcții, cam tot ce poți face cu oricare altă valoare. Acest aspect face din JavaScript un limbaj foarte potrivit pentru a lucra cu funcțiile într-o paradigmă numită în limba engleză *functional programming*, adică **programare funcțională**.
 
 ## Anatomie
 
@@ -102,7 +117,9 @@ Funcția `intern()` are posibilitatea de a accesa proprietățile funcției gazd
 
 Am numit eu **magice** aceste acțiuni ale compilatorului la momentul când interpretează codul pentru că se petrec câteva lucruri cu adevărat uimitoare.
 
-Declararea unei funcții are ca efect declanșarea **hoising**-ului. Declarația este introdusă în registrul inventar al mediului lexical existent la momentul compilării codului. Magia rezidă din faptul că poți invoca o funcție înainte ca aceasta să fie declarată dacă privești la modul în care este redactat codul în fișierul sursă. Superciudățel, nu?! Psst! Secretul este legat chiar de compilarea codului. Adu-ți mereu aminte că înainte de a fi rulat, codul este compilat. Dacă ai uitat ce se petrece în acel moment, merită să te întorci să mai citești o dată.
+Declararea unei funcții are ca efect declanșarea **hoising**-ului. Declarația este introdusă în registrul inventar al mediului lexical existent la momentul compilării codului. Magia rezidă din faptul că poți invoca o funcție înainte ca aceasta să fie declarată, dacă privești la modul în care este redactat codul în fișierul sursă. Superciudățel, nu?! Psst! Secretul este legat chiar de compilarea codului. Adu-ți mereu aminte că înainte de a fi rulat, codul este compilat. Dacă ai uitat ce se petrece în acel moment, merită să te întorci să mai citești o dată. Concluzia este că totul este deja disponibil încă din faza de compilare.
+
+Poți să-ți imaginezi funcțiile ca niște vapoare care transportă și prelucrează valori. Toate vasele pe tot mapamondul se află deja în plutire la nivelul mării. Pot comunica unele cu altele și sunt diponibile scopurilor pentru care există. Așa sunt și funcțiile. Pur și simplu sunt disponibile deodată, nu pe măsură ce codul este executat.
 
 Am aflat mai devreme că la executarea unei funcții, aceasta creează și un mediu lexical propriu (*scope*), dar mai e o chestie supertare: dacă într-un bloc de cod simplu introduci o declarație sau o expresie, se va crea un nou scope pentru respectivul cod. Ciudățel și super-interesant, nu?
 
@@ -210,7 +227,7 @@ După cum ai observat, am ales să lucrez cu funcțiile **fat arrow** în ultime
 Standardul numește funcțiile `function objects`. O funcție produce o instanță a unui **function object**, fapt care conduce la concluzia logică că în JavaScript, funcțiile au metode. Fain, nu?! Da hai să-ți mai spun una. Standardul le spune `callable objects`, adică în limba română **obiecte apelabile**.
 
 ```javascript
-function 
+function
 ```
 
 **O funcție este un obiect apelabil**. O funcție care este asociată unui obiect prin intermediul unei proprietăți, este numită *metodă*.

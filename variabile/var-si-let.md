@@ -8,7 +8,7 @@ Identificatorii declarați cu `var` beneficiază de mecanismul de hoisting prin 
 
 Avem o explicație foarte bună pe care Kyle Simpson o face pentru a înțelege diferențele dintre cele două. În cazurile în care erau declarate variabile pentru a fi folosite în instrucțiuni precum `for` sau `if`, dar care în subsidiar comunicau celorlalți programatori să nu le folosească dincolo de aceste enunțuri, `let` este cea mai bună abordare pentru că domeniul său de vizibilitate este limitat la blocul de cod.
 
-Dar dacă dorești ca o variabilă să fie cu adevărat disponibilă întregului cod, atunci continuă să folosești `var` pentru că va fi omniprezentă pentru acel program, fie el funcție, etc.
+Dar dacă dorești ca o variabilă să fie cu adevărat disponibilă întregului cod, atunci continuă să folosești `var` pentru că va fi omniprezentă pentru acel program.
 
 Reține faptul că variabilele declarate cu `let` sunt *vizibile* doar la nivelul unei expresii și a unui bloc, precum și toate blocurile imbricate. ATENȚIE foarte mare la comportamentul lui `var` și `let` în contextul obiectului global. În vreme ce o declarare a unei variabile folosind `var` are ca efect introducerea acelei variabile în obiectul global, declararea cu `let`, nu va avea acest efect și interogarea identificatorului va returna `undefined`.
 

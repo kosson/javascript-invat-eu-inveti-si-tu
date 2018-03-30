@@ -1,9 +1,10 @@
 let arr = ['ceva','altceva','după', 'abac'];
+let x = 10;
 function bubbleSort (arr) {
   const len = arr.length;
   for (let index = len - 1; index >= 0; index--) {
     for (let idxInt = 1; idxInt <= index; idxInt++) {
-      let temp;
+      let temp;/*?*/
       if (arr[idxInt - 1] > arr[idxInt]) {
         temp = arr[idxInt - 1];
         arr[idxInt - 1] = arr[idxInt];

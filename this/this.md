@@ -1,35 +1,33 @@
 # `this`
 
-În JavaScript, vorbim despre obiecte. Funcțiile sunt niște obiecte speciale în sensul că pot fi apelate, ceea ce conduce la executarea codului. Reține faptul că tot niște obiecte sunt. Și acum să ne gândim la o funcție ca la o persoană care privește **bolta celestă** într-o noapte înstelată. Cum ar putea povesti despre toate constelațiile văzute? Cum le-ar putea referenția printr-o singură expresie? Hai, nu e greu, am zis deja... da, da, ai remarcat perfect: **bolta celestă**.
-Dacă vrem să constrângem la un singur termen care să o identifice, am putea spune foarte simplu **cerul**, nu? Așa este și cuvântul cu înțeles special `this`, care s-ar traduce în română **acesta**. Termenul stabilește **legătura** unei funcții cu obiectul în al cărui context a fost invocată. Pentru funcția apelată `this` este o proprietate care nu poate fi modificată, dar prin care poate accesa proprietăți și metode ale obiectului în contextul căruia a fost apelată.
+În JavaScript, vorbim despre obiecte. Funcțiile sunt niște obiecte speciale în sensul că pot fi apelate, ceea ce conduce la executarea codului. Reține faptul că tot niște obiecte sunt. Și acum să ne gândim la o funcție ca la o persoană care privește **bolta celestă** într-o noapte înstelată. Cum ar putea povesti despre toate constelațiile văzute? Cum le-ar putea referenția printr-o singură expresie? Hai, nu e greu, am zis deja... da, da, ai remarcat perfect: **bolta celestă**. Dacă dorim să constrângem la un singur termen care să o identifice, am putea spune foarte simplu **cerul**, nu? Așa este și cuvântul cu înțeles special `this`, care s-ar traduce în română **acesta** cu sensul că indică spațiul în care se face o evaluare. Termenul stabilește **legătura** / conectarea unei funcții cu obiectul și mediul pe care acesta îl formează în al cărui context a fost invocată. Pentru funcția care tocmai și-a început execuția `this` este o proprietate care nu poate fi modificată. Prin aceasta se pot accesa proprietățile  obiectului în contextul căruia a fost apelată.
 
-Poți să-ți imaginezi o funcție precum un pilot care se urcă la bordul *obiectului* numit avion. Primul lucru pe care îl face este să-și conecteze căștile la sistemul de comunicare intern al avionului. Acest intercom este **mediul** de comunicare al avionului la care mai sunt conectate alte funcții precum navigatorii, mecanicii și însoțitorii de bord. Primul lucru pe care îl fac toți aceștia este să se conecteze printr-un panou special la intercom ( **mediul** ) pentru a raporta piloților, precum și inginerilor diverși parametri. Toți sunt conectați la același **mediu de comunicare** și fiecare, individual știe că lucrează la pregătirea unui anumit avion pentru că s-a conectat la el.
+Poți să-ți imaginezi o funcție precum un pilot care se urcă la bordul *obiectului* numit avion. Primul lucru pe care îl face este să-și conecteze căștile la sistemul de comunicare intern al avionului. Acest intercom este **mediul** de comunicare al avionului la care mai sunt conectate și alte funcții precum navigatorii, mecanicii și însoțitorii de bord. Consideră-i pe aceștia funcții. Primul lucru pe care îl fac toți este să se conecteze prin intercom la **mediul** care oferă date pentru a raporta piloților, precum și altor funcții diverse informații. Toți sunt conectați la același **mediu de comunicare** oferit de obiectul avion.
 
-Același scenariu este și în cazul funcțiilor în relația cu obiectele din interiorul cărora au fost apelate. Se conectează cu obiectul printr-o legătură specială numită `this`. Și ca să fie un reper cu substanță, trebuie să menționăm că `this` este chiar un obiect generat la momentul acestei conectări. Și acum partea cea mai importantă a acestei prime expuneri: `this` în sine, acest cuvânt rezervat al limbajului este doar **referința** către obiectul despre care am spus că tocmai a fost generat. Nu este obiectul în sine, este precum eticheta atașată obiectului. Adresa, dacă vrei. Și ca să respectăm scenariul cu avionul, `this` este inscripționat pe o etichetă prinsă pe cablul căștilor de comunicare să știm ce face cablul acela.
+Același scenariu se aplică și în cazul funcțiilor în relația lor cu obiectele care le vor folosi din rolul de metode. Dacă folosești sintaxa `obiect.facCeva()` pentru a apela o funcție, atunci cu siguranță aceasta este metodă a obiectului `obiect`. Perfect! Ce se petrece cu funcția la momentul apelării din postura de metoda!? Aceasta va crea propriul mediu lexical și în același timp un obiect special numai al său care va fi populat cu proprietăți ce reflectă mediul lexical al obiectului pentru care funcția este metodă. Acest obiect special se conectează cu obiectul pentru care funcția este metodă printr-o legătură specială numită `this`. Acesta va fi și identificatorul obiectului proaspăt format. Poți să-ți imaginezi ca pe un vas care se umple cu referințe către identificatorii din mediul lexical al obiectului în a cărui context se execută funcția.
 
 Pentru a avea un prim contact cu `this` poți încerca în consola browserului să scrii `this.window`. Va fi returnat chiar obiectul global `Window`. De ce s-a întâmplat acest lucru? Pentru că obiectul global ține o referință către sine. În cazul browserelor aceasta este `window`.
 
-Referința `this` este strict legată de „locul” în care a fost apelată funcția, nu de „locul” unde a fost declarată.
+Reține că referința `this` este strict legată de *locul* în care a fost apelată funcția, nu de *locul* unde a fost declarată. Sunt două lucruri distincte. Dacă nu le vei percepe așa încă de acum, te vei lovi de multe erori și nu vei putea construi structuri ceva mai complexe.
 
 **Spune standardul**:
 
 > Operațiunea abstractă ResolveThisBinding determină legătura cuvântului cheie **this** folosind LexicalEnvironment al contextului de execuție în derulare.
 
-Dacă ești nelămurit merită să arunci o privire la compilare și execuție.
+Multe informații necesare înțelegerii `this` se leagă de discuția pe care am avut-o privind compilarea și execuția.
 
-## Cum se stabilește legătura la `this`
-
-Legătura (termenul în engleză fiind `binding`) la `this` depinde de obiectul **în care** s-a făcut apelul (în limba engleză i se spune *call-site*).
+Legătura (termenul în engleză fiind `binding`) la `this` depinde de obiectul **în care** s-a făcut apelul (în literatura din limba engleză i se spune *call-site*).
 
 ```javascript
 function faCeva () {
   console.log(this);      // (1)
   console.log(this.ceva); // (2)
 };
-var obj = {
+const obj = {
   faCeva: faCeva
 };
-var obj = {
+// hai să vedem și notația ES6
+const obj2 = {
   faCeva // (3)
 };
 obj.faCeva(); // (4)
@@ -44,43 +42,53 @@ obj.faCeva(); // (4)
 
 Să pornim de la baza lucrurilor repetând mantrele necesare:
 
-- funcțiile sunt **valori**,
-- funcțiile sunt **obiecte**, numite de standard **funcții-obiecte**,
-- un closure este o legătură permanentă la mediul lexical al funcției gazdă,
-- locul unde funcțiile sunt declarate, nu este neapărat locul unde se execută,
-- obiectele sunt structuri dinamice de date.
+-   funcțiile sunt **valori**,
+-   funcțiile sunt **obiecte**, numite de standard **funcții-obiecte**,
+-   un *closure* este o legătură permanentă la mediul lexical al funcției gazdă,
+-   locul unde funcțiile sunt declarate, nu este neapărat locul unde se execută,
+-   obiectele sunt structuri dinamice de date care oferă referințe către proprietăți.
 
-Pentru a înțelege legătura `this`, cel mai util scenariu este cel în care această legătură se pierde. În scenă intră o funcție cu rol de metodă, care este definită în obiect. Această funcție, este gazda unei alteia care realizează un closure.
+Pentru a înțelege conectarea lui `this`, cel mai util scenariu este acela în care această conectare se pierde. În scenă intră o funcție cu rol de metodă, care este definită în obiect. Această funcție, este gazda unei alteia care realizează un closure pe mediul lexical al gazdei.
 
 ```javascript
-let ceva = 100;
-let obi = {
+var ceva = 100;
+/*
+declararea cu let împiedică faCeva
+să devină variabilă globală
+*/
+const obi = {
   ceva: 'text',
-  faCeva: function () {
+  faCeva: function gazda () {
     function interna () {
       console.log(this.ceva);
     };
     return interna();
-  },
+  }
 };
 obi.faCeva(); // 100
+// dacă let este returnat undefined
 ```
 
-Apelarea funcției `interna`, nu realizează o legătură pentru `this` la obiectul în care este definită metoda `faceva`. De ce se întâmplă acest lucru? Pentru că o funcție chiar dacă este declarată în interiorul unui obiect, aceasta trebuie considerată a fi o funcție-obiect separată de acesta. Efectele execuției sale, primul fiind conectarea prin `this`, sunt sesizabile când este apelată în contextul obiectului.
+Apelarea funcției `interna`, nu realizează o legătură pentru `this` la obiectul în care este definită metoda `faceva()`, *gazda* sa. De ce se întâmplă acest lucru?
 
-Ca o regulă generală putem considera o funcție declarată într-un obiect ca fiind o funcție-obiect independentă, care în afara locului în care apare în codul sursă, nu are nicio legătură cu obiectul respectiv. De ce gândim așa? Pentru că în JavaScript toate obiectele sunt entități independente. Ele realizează conexiuni unele cu celelalte prin referințe.
+Cred că e timpul să închidem ochii și să ne imaginăm oceanul planetar. Acesta este obiectul nostru global. Să ne închipuim că orașele care au porturi sunt obiecte. Funcțiile, firesc sunt nave care prelucrează și transportă valori. Dar și navele sunt la rândul lor obiecte. Programul nostru este ca o cronică a lumii acesteia care povestește cum se mișcau navele, cum comunică orașele, cum se primesc și se trimit valorile. Funcțiile, adică vapoarele sunt toate deodată pe mare, fiind beneficiarele mecanismului de hoisting. Totul coexistă în același timp: orașe și vapoare. Vapoarele au fiecare un nume și un pavilion sub care sunt înregistrate, dar de fiecare dată când intră într-un port vapoarele arborează și pavilionul țării în care acostează. Pavilionul propriu este obiectul în care au fost **declarate**, iar cel pe care îl arborează la acostare este chiar `this`. Arborarea acestui pavilon al țării gazdă, permite navei noastre să acceseze toate informațiile și datele locale ale portului care se încarcă într-o bază de date locală a navei numită `this`.
 
-Obiectul `obi` poate fi considerat ca un furnizor de adresă pentru a putea apela funcția-obiect. Legătura aceasta poate fi văzută precum cea a unei gospodării cu localitatea în care se află. Localitatea cu nivelul administrativ oferă o modalitate de a ajunge la gospodărie. Pentru a înțelege, putem desface exemplul dat în următoarea formă perfect echivalentă.
+Chiar dacă o funcție este declarată în interiorul unui obiect, aceasta trebuie considerată a fi un obiect separat de acesta. Nu **aparține** obiectului. Este doar o referință către un alt obiect care se întâmplă să fie o funcție. Singura specificitate este că nu poate fi accesată ca valoare sau apelată din exteriorul obiectului altfel decât folosind sintaxa cu punct: `obiect.funcție`.
+
+Ca o regulă generală putem considera o funcție declarată într-un obiect ca fiind o funcție-obiect independentă, care, exceptând locul în care apare în codul sursă, adică în interiorul obiectului, are o singură legătură cu acesta: modul de a o accesa ca valoare și ca apel, fiind necesară menționarea obiectului. De ce gândim așa? Pentru că în JavaScript toate obiectele sunt entități independente. Ele realizează conexiuni unele cu celelalte prin referințe.
+
+Obiectul `obi` poate fi considerat ca un furnizor de adresă pentru a putea apela funcția-obiect. Legătura aceasta poate fi văzută precum relația dintre navă și portul în care se află. Numele danei oferă o modalitate de a ajunge la navă. Pentru a înțelege, putem desface exemplul dat în următoarea formă perfect echivalentă.
 
 ```javascript
-let ceva = 100;
+var ceva = 100;
+// s-a creat o variabilă globală
 let faCeva = function () {
-  console.log(this.ceva); // text
+  console.log(this.ceva); // #A
   function interna () {
     console.log(this.ceva);
   };
   return interna();
-}
+};
 let obi = {
   ceva: 'text',
   faCeva
@@ -88,18 +96,18 @@ let obi = {
 obi.faCeva(); // 100
 ```
 
-Este simplu ceea ce am făcut. Am scos declarația de funcție în afara obiectului și am pus-o într-o expresie de funcție. În obiect am introdus-o în ca referință. Și pentru că numele identificatorului expresiei de funcție este același cu cel ales pentru cheia din obiect, am făcut uz de sintaxa concisă introdusă de ES6.
+Este simplu ceea ce am făcut. Am scos declarația de funcție în afara obiectului și am pus-o într-o expresie de funcție. În obiect am introdus-o ca referință. Și pentru că numele identificatorului expresiei de funcție este același cu cel ales pentru cheia din obiect, am făcut uz de sintaxa concisă introdusă de ES6.
 
-Ceea ce observăm la rularea codului este că funcția `faCeva` este executată în contextul obiectului `obi` și pentru că se întâmplă asta, se realizează legătura `this` la el, implicit la mediul său lexical. Acest lucru face posibilă returnarea corectă a valorii `text`.
+Ceea ce observăm la rularea codului este că funcția `faCeva()` este executată în contextul obiectului `obi` pentru că s-a folosit numele cheii proprietăți obiectului și pentru că se întâmplă asta, se realizează legătura `this` implicit la mediul său lexical. Acest lucru face posibilă returnarea corectă a valorii `text` la pasul #A.
 
-Ce se întâmplă cu funcția internă? Ca să înțelegem corect ce se petrece, să mai desfacem încă o dată firul în patru și să scoatem funcția internă din `faCeva`.
+Ce se întâmplă cu funcția internă? Ca să înțelegem corect ce se petrece, să mai desfacem încă o dată firul în patru și să scoatem funcția internă din `faCeva()`. În loc de a o declara în interiorul lui `faCeva()`, o vom apela de acolo. Adresa acestei funcții ca valoare în sine, în cazul folosirii unui browser este `window.interna`. Dacă îți amintești povestea de mai sus cu vasele, această adresă este pavilionul sub care navighează funcția noastră. Dacă era declarată în interiorul obiectului pavilionul arăta `obi.faCeva`.
 
 ```javascript
 var ceva = 100;
 function interna () {
   console.log(this.ceva);
 };
-var faCeva = function () {
+function faCeva () {
   console.log(this.ceva); // text
   return interna();
 }
@@ -110,25 +118,27 @@ var obi = {
 obi.faCeva(); // 100
 ```
 
-Știi că putem face asta pentru că fiecare funcție-obiect este o entitate distinctă, de fapt. Ceea ce face funcția `faCeva`, care este metodă a obiectului `obi` este să returneze rezultatul evaluării funcției `interna`. Lucrurile sunt clare.
+Știi că putem face asta pentru că fiecare funcție-obiect este o entitate distinctă, de fapt. Asta ne permite să o declarăm oriunde în cod cu respect pentru necesitatea pentru o anumită adresă. Putem să declarăm direct în obiect o funcție, iar acest lucru reprezintă o posibilitate la îndemână, dar nimic nu ne împiedică să declarăm funcțiile în afara acestuia și să facem referință către ele. Declari funcțiile în afara obiectului atunci când știi că vor fi folosite de mai multe zone ale codului. Declararea în interiorul unui obiect, creează o adresă unică pentru acea funcție. În acest caz spunem despre obiect că a creat un `namespace` - un domeniu a cărui valori sunt accesibile doar prin menționarea numelui obiectului mai întâi de toate.
 
-### Cazul funcțiilor simple
+Dacă funcția a fost declarată în afara obiectului, doar în momentul în care se creează o referință către acea funcție în interiorul unui obiect aceasta va conecta **automat** `this` la obiect. Ce se petrece cu funcțiile referențiate prin proprietățile unui obiect este că la momentul executării prin sintaxa cu punct, acestea vor popula obiectul `this` cu proprietățile din mediul lexical al obiectului.
 
-Ceea ce se va observa rapid este faptul că în cazul folosirii lui `var` pentru declarații, obiectul `this` va fi însuși **obiectul global**. Am introdus cazul funcțiilor simple pentru că au, de fapt un context de execuție, acesta fiind obiectul global a cărui proprietăți pot fi accesate prin legătura pe care o face obiectul `this`.
+### Funcții în global și this
+
+Ceea ce se va observa rapid este faptul că în cazul folosirii lui `var` pentru declarații, obiectul `this` va fi însuși **obiectul global**. Am introdus cazul funcțiilor simple pentru că au, de fapt un context de execuție, acesta fiind obiectul global a cărui proprietăți pot fi accesate prin legătura pe care o face obiectul `this`. Fii foarte atent că declararea cu `let` a variabilelor, nu creează nimic în obiectul global. Exemplele folosite se folosesc de capacitatea lui `var` de a îmbogăți obiectul global.
 
 Un lucru interesant este că poți folosi `this` pentru a testa instanțierea unui constructor cu ajutorul lui `instanceOf`. Dincolo de faptul că poți face acest lucru, de fapt ceea se observă este faptul că `this` este un obiect.
 
 Cazul folosirii declarării variabilelor cu `let`. Valoarea lui x nu poate fi accesată din scope-ul funcției pentru că este declarată în global scope.
 
 ```javascript
-let x = 10;
+var x = 10;
 function container () {
   let x = 1000;
   this.y = function interna() {
     let x = 10000;
     console.log(this);  // este Window
     console.log(x);     // 10000
-    console.log(this.x);// undefined pentru că în global let nu creeaza proprietati
+    console.log(this.x);// undefined->caz let!!!
   };
   console.log(x);       // 1000
   console.log(this);    // Window
@@ -138,7 +148,7 @@ function container () {
 }; container();
 ```
 
-Evaluările se soldează cu `undefined` pentru cazul global scope pentru că `let` și `const` sunt blocked scoped. Spre deosebire de `var`, `let` nu creează o proprietate nouă în global scope.
+Evaluările se soldează cu `undefined` pentru cazul global scope pentru că `let` și `const` sunt blocked scoped.
 
 Formarea legăturii la obiectul `this` mai depinde și de modul cum scrii codul. Dacă ai deprins practica bună a folosirii lui `"use strict";`, atunci vei observa că legătura la `this` în cazul unei funcții simple suferă o modificare. Nu se va mai lega la obiectul global, iar valoarea va fi `undefined`.
 
@@ -155,58 +165,40 @@ function arataMiThis () {
 arataMiThis (); // true
 ```
 
-Atenție, nu contează dacă locul apelării este sub regula `"use strict";`, ci contează dacă funcția este sub această regulă. Am menționat acest aspect pentru că este posibil ca software-ul scris de tine să respecte `"use strict";`, dar să fie legat de software mai vechi (programatorii îi spun pe engleză **legacy**, adică **moștenit**), care să nu fie sub regulă și astfel, fiind posibilă apariția unei serii de erori a căror sursă să fie chiar această diferență.
-Reține că pentru codul sub `"use strict";`, valoarea lui `this` este `undefined`.
+Atenție, nu contează dacă locul apelării este sub regula `"use strict";`, ci contează dacă funcția este sub această regulă. Am menționat acest aspect pentru că este posibil ca software-ul scris de tine să respecte `"use strict";`, dar să fie legat de software mai vechi (programatorii îi spun pe engleză **legacy**, adică **moștenit**), care nu este sub regulă și astfel, fiind posibilă apariția unei serii de erori a căror sursă să fie chiar această diferență.
+Reține că pentru codul sub `"use strict";`, valoarea lui `this` este `undefined` pentru global scope.
 
 ## Cazurile lui `this`
 
-În cazul obiectelor, atunci când apelezi o funcție (care joacă rolul de metodă), folosind `.` sau `[]`, vei avea un obiect drept context, altfel, vei avea o legătură la obiectul global, de fapt.
+În cazul obiectelor, atunci când apelezi o funcție (care joacă rolul de metodă), folosind `.` sau `[]`, acel obiect va fi contextul, adică `this`.
 
-Un exemplu pentru cazul în care o funcție este metoda unui obiect:
+### `this` și constructorii
 
-```javascript
-var obiect = {
-  getThis: function(){
-    return this;
-  }
-};
-
-obiect.getThis() === obiect; // true
-var cineEsteThis = obiect.getThis(); // este apelată o metodă
-var doarOFunctieOarecare = obiect.getThis; // o referință către o funcție.
-console.log(cineEsteThis); // Object { getThis: obiect.getThis() }
-console.log(doarOFunctieOarecare); // function obiect.getThis()
-console.log(doarOFunctieOarecare()); // Window → about:newtab
-var functiaLegata = obiect.getThis.bind(obiect); // reatasarea funcției ca metodă
-console.log(functiaLegata()); // Object { getThis: obiect.getThis() }
-```
-
-Remarcați că invocarea funcției ca metodă a obiectului conduce la executarea acesteia în contextul obiectului, iar atunci când se face o referință, ceea ce se întâmplă este că funcția pierde rolul de metodă și odată cu acest fapt și legătura la `this` al obiectului în favoarea celui global.
-
-### Cazul lui `this` pentru un constructor
-
-Am văzut faptul că funcțiile sunt folosite pentru a construi obiecte. Au această capacitate fantastică, de fapt flexibilitatea de a fi invocate pentru a crea obiecte. Fii totuși atentă că o funcție cu rol de constructor poate fi invocată și fără operatorul `new`. În acest caz se va comporta ca o funcție simplă cu toate consecințele rulări în acest mod.
+Știm că funcțiile sunt folosite pentru a construi obiecte. Fii totuși atentă că o funcție cu rol de constructor poate fi invocată și fără operatorul `new`. În acest caz se va comporta ca o funcție simplă cu toate consecințele rulări în acest mod.
 
 ```javascript
 function NumescNave (indicativ, nume) {
   this.indicativ = indicativ;
   this.nume = nume;
-  var tot = `${indicativ} este ${nume}`;
+  let tot = `${indicativ} este ${nume}`;
   console.log(tot);
 };
-var executie = NumescNave('ISS', 'International Space Station');
-// 'ISS este International Space Station'
-console.log(executie); // undefined
+let executie = NumescNave('ISS', 'International Space Station');
+console.log(executie);// undefined (ce returnează o funcție fără return)
 console.log(`${window.indicativ} este ${window.nume}`);
 // 'ISS este International Space Station'
-var obiect = new NumescNave('Tiangong-1', "Palatul Celest");
+let obiect = new NumescNave('Tiangong-1', "Palatul Celest");
 console.log(obiect);
 ```
 
 Ceea se se distinge imediat este faptul că rularea funcției `NumescNave` fără `"use strict";` înjectează toate valorile precizate prin `this.` direct în obiectul global. De ce? Pentru că la acesta a fost stabilită legătura implicită pentru valoarea lui `this`. În cazul rulării funcției sub `"use strict";`, motorul JavaScript ar fi semnalat o excepție și ar fi afișat: **Exception: TypeError: this is undefined**. Concluzie, injectarea valorilor nu s-ar mai produce.
 
+#### Pierderea contextului de execuție
+
+TODO: rescrie pentru că este confuz!!!
+
 ```javascript
-var Dorel = function dorel(){
+function Dorel () {
   this.nume = "Dorel";
   this.ego = function ego () {
     console.log(`Sunt constructorul ${this.nume}`);
@@ -217,8 +209,6 @@ Dorel();
 // Sunt constructorul Dorel (afișat o singură dată)
 ```
 
-#### Pierderea contextului de execuție
-
 Există cazuri în care sunt folosite funcții ale motorului JavaScript, care mai sunt numite în comunitate și utilitare (sunt funcții ale API-ul Web pus la dispoziție de fiecare browser în parte pe care le folosim în mod curent). Unul dintre acestea folosit pe scară largă este `setInterval()` cu scopul de a mima anumite comportamente în lucrul cu evenimentele.
 
 ```javascript
@@ -227,10 +217,10 @@ setInterval(this.ego(), 1000);
 
 Efectul execuției:
 
-* Mesajul este afișat o singură dată,
-* this este obiectul global care este pasat la execuția funcției Dorel() și se va îmbogăți automat cu `nume` (`window.nume`) și `ego` (`window.ego`)
-* `window` va sta îmbogățit cât timp funcția este executată.
-* După execuție, va fi afișat `undefined` pentru că funcția și-a terminat execuția, contextul de execuție a dispărut, valorile lui `nume` și cea rezultată din evaluarea lui `ego` au fost ***colectate la gunoi*** (garbage collected) iar `this`, care, de fapt era `window` revine la forma anterioară.
+*   Mesajul este afișat o singură dată,
+*   `this` se conectează la obiectul global la execuția funcției `Dorel()` și se va îmbogăți automat cu `nume` (`window.nume`) și `ego` (`window.ego`)
+*   `window` va păstra aceste proprietăți cât timp funcția este executată.
+*   După execuție, va fi afișat `undefined` pentru că funcția și-a terminat execuția, contextul de execuție a dispărut, valorile lui `nume` și cea rezultată din evaluarea lui `ego` au fost **colectate la gunoi** (garbage collected) iar `this`, care, de fapt era `window` revine la forma anterioară.
 
 Explicație:
 
@@ -246,7 +236,7 @@ Acest lucru se realizează cu ajutorul unei funcții, care are darul de a face u
 Făcând uz de ceea ce tocmai am aflat, vom putea actualiza fragmentul de cod pentru rezultatul așteptat de noi.
 
 ```javascript
-var Dorel = function dorel(){
+let Dorel = function dorel () {
   this.nume = "Dorel";
   this.ego = function ego(){
     console.log(`Sunt constructorul ${this.nume}`);
@@ -261,15 +251,15 @@ Dorel();
 Împachetând apelul către metoda obiectului într-o funcție, ne asigurăm că nu pierdem legătura la `this` pentru că executăm metoda în contexul dorit.
 Acest lucru se întâmplă pentru că funcția `setInterval` nu a fost declarată în interiorul funcției noastre (aici este cheia înțelegerii). Noi, am executat-o în contextul codului scris de noi, dar nu suntem noi cei care au scris funcția `setInterval`. Aceasta aparține obiectului global și va avea drept `this` pe acesta mereu. Trucul pentru a menține o legătură la obiectul pe care-l dorim noi a fi să pasăm delararea unei funcții drept prim parametru și `this` va fi scope-ul creat de funcția `dorel` așa cum ne-am dorit.
 La execuție, ceea ce se întâmplă este că împrumutăm funcționalitatea lui `setInterval`, dar contextul de execuție va fi setat la scope-ul și `this`-ul funcției `dorel` pentru care funcția callback face **closure**.
-`This`-ul este chiar `window`, cel care a fost primit automat la invocarea lui `dorel` și care a fost îmbogățit deja cu proprietatea `nume` și metoda `ego`. O altă soluție pe care o vom explora de îndată este legarea cu bind de obiectul care se dorește a fi contextul de execuție.
+`This`-ul este chiar `window`, cel care a fost primit automat la invocarea lui `dorel` și care a fost îmbogățit deja cu proprietatea `nume` și metoda `ego`. O altă soluție pe care o vom explora de îndată este legarea cu `bind` de obiectul care se dorește a fi contextul de execuție.
 
-## Manifestarea legăturii la `this` în funcție de vecinătate
+### Manifestarea legăturii la `this` în funcție de vecinătate
 
 Atenție! Legătura la `this` se manifestă la cel mai apropiat membru al unui obiect la care se face referință:
 
 ```javascript
-var token = 1000;
-var obi = { token: 10 };
+let token = 1000;
+let obi = { token: 10 };
 function faCeva () {
   console.log(this.token);
 };
@@ -299,7 +289,7 @@ thisPierdut(); // 1
 
 Ceea ce se observă este faptul că indiferent de faptul că am definit funcția în interiorul obiectului, sintagma `obiect.altceva` nu este nimic mai mult decât o adresă a valorii de funcție. Problema este că în acest moment constituirea unei referințe la această adresă și invocarea referinței, va conduce la stabilirea obiectului `this` la mediul lexical al referinței, nu a obiectului în care a fost definită funcția a cărei valoare a fost asignată referinței noi. Poți privi acest lucru ca pe un **împrumut** al funcționalității metodei, dar care se va aplica într-un nou context. Ce să vezi, acest nou context este și obiectul `this` în care se va evalua codul funcției.
 
-## `this` pe lanțul prototipal al obiectului
+### `this` pe lanțul prototipal al obiectului
 
 Dacă metoda este definită în lanțul prototipal al obiectului, `this` face referință către obiectul în care s-a invocat metoda ca și cum metoda ar face parte din obiect.
 
@@ -322,12 +312,12 @@ Douglas Crockford spune despre `this` că este un parametru bonus și mai spune 
 
 Pe scurt cazurile în care se face legătura la `this` și cine este `this` pentru fiecare caz.
 
-|Cazul de invocare a funcției|Cine este `this`|
-|:-|:-|
-|funcție simplă|obiectul global, iar în „strict” este „undefined”|
-|metodă|obiectul pentru care funcția joacă rol de metodă|
-|funcția este folosită ca și constructor|`this` este însuși obiectul returnat de invocarea cu `new`|
-|folosirea cu `apply()`, `call()` și `bind()`|`this` este pur și simplu obiectul specificat în primul parametru.|
+| Cazul de invocare a funcției                 | Cine este `this`                                                   |
+|:-------------------------------------------- |:------------------------------------------------------------------ |
+| funcție simplă                               | obiectul global, iar în „strict” este „undefined”                  |
+| metodă                                       | obiectul pentru care funcția joacă rol de metodă                   |
+| funcția este folosită ca și constructor      | `this` este însuși obiectul returnat de invocarea cu `new`         |
+| folosirea cu `apply()`, `call()` și `bind()` | `this` este pur și simplu obiectul specificat în primul parametru. |
 
 ### 1. Binding primar
 
@@ -336,11 +326,11 @@ Bindingul primar se face la global object (Window).
 Este prima regulă și este și cazul simplei invocării a funcției. Atunci când nicio altă regulă nu se aplică, aceasta se aplică din start. Funcționează dacă nu este rulat codul sub „use strict”.
 
 ```javascript
-var test = 2;
-function faceva(){
+let test = 2;
+function faCeva () {
   console.log(this.test); // this.test rezolvă la variabila globală test
 };
-faceva(); // 2
+faCeva(); // 2
 ```
 
 ### 2. Binding implicit numit și *atașat*
@@ -349,11 +339,11 @@ faceva(); // 2
 Regula: obiectul în contextul căruia se execută funcția ca metodă este pe care funcția îl consideră a fi `this`.
 
 ```javascript
-var obiectLiteral = {
+const obiectLiteral = {
   ceva: 2,
-  metoda: faceva
+  metoda: faCeva
 };
-function faceva(){
+function faCeva () {
   this.test = 1001; // introduce în obiectLiteral test
   this.ceva = 50;   // modifica valoarea lui ceva
   console.log( this.ceva ); // 50
@@ -368,34 +358,34 @@ Pentru că `obiectLiteral` este `this` pentru invocarea `faceva()`, atunci **thi
 Următoarea secvență de cod este asemănătoare.
 
 ```javascript
-var obiectLiteral = {
+const obiectLiteral = {
   proprietate: "ceva",
   metoda: function () {
     console.log(this.proprietate);
   }
 };
 obiectLiteral.metoda(); // ceva
-var obiectLiteral2 = {
+const obiectLiteral2 = {
   proprietate: "altceva",
   metoda: obiectLiteral.metoda
 };
 obiectLiteral2.metoda(); // altceva
-var proprietate = "valoarea proprietății obiectului global";  // prop. a obi.global
-var metoda = obiectLiteral.metoda;                            // metodă a obi.global
+let proprietate = "valoarea proprietății obiectului global";  // prop. a obi.global
+let metoda = obiectLiteral.metoda;                            // metodă a obi.global
 metoda(); // => valoarea proprietății obi. global; echivalent cu window.metoda()
 ```
 
 Bindingul implicit poate fi pierdut atunci când faci referință către metodă și nu o și execuți. De fapt, nu faci referința către metodă, căci însăși metoda este o referință către funcția care joacă rol de metodă.
 
 ```javascript
-var obiectStudiu = {
+const obiectStudiu = {
   ceva: 1001,
-  metoda: function special(){
+  metoda: function special () {
     console.log(this.ceva);
   }
 };
-var ceva = 2002;
-var referinta = obiectStudiu.metoda; // e doar o referință, nu este valoarea funcției.
+let ceva = 2002;
+let referinta = obiectStudiu.metoda; // e doar o referință, nu este valoarea funcției.
 referinta(); // 2002  call-site pentru care se aplică regula 1 - binding primar.
 ```
 
@@ -427,13 +417,13 @@ Dacă vrei să pasezi argumente funcției, acestea vor urma referința către no
 **De exemplu**:
 
 ```javascript
-var obiect = {
+const obiect = {
   proprietate: 1000,
-  metoda: function(unu, doi, trei){
+  metoda: function (unu, doi, trei) {
     console.log(this.proprietate);
   }
 };
-var proprietate = 4000;
+let proprietate = 4000;
 obiect.metoda(); // => 1000
 obiect.metoda.call(window); // 4000
 obiect.metoda.call(window, 1, 2, 3);
@@ -447,19 +437,19 @@ Chiar și când se face un binding explicit, se poate pierde bindingul la `this`
 ##### Restabilirea contextului
 
 Utilitarele `apply()` și `call()` oferă posibilitatea de a specifica direct contextul dorit. O altă metodă este de a folosi arrow functions. Funcțiile săgeată - arrow function au drept caracteristică faptul că mențin legătura la `this` care exista la momentul definirii sale.
-ATENȚIE! Dacă funcția arrow este definită într-un object literal, valoarea lui this pe care o referențiază arrow function este obiectul global `window`.
+ATENȚIE! Dacă funcția arrow este definită într-un object literal, valoarea lui `this` pe care o referențiază *arrow function* este obiectul global `window`.
 
 ```javascript
-var fix = 1000;
-var faCeva = function(){
+const fix = 1000;
+let faCeva = function () {
   console.log(this);
   console.log(this.fix);
 };
-var faAltceva = () => {
+let faAltceva = () => {
   console.log(this);
   console.log(this.fix);
 };
-var centru = {
+const centru = {
   fix: 10,
   faCeva: faCeva,
   faAltceva: faAltceva
@@ -469,15 +459,15 @@ centru.faCeva();    // Object { fix: 10, faCeva: faCeva(), faAltceva: faAltceva(
 centru.faAltceva(); // Window → about:newtab // 1000
 ```
 
-Există un exemplu pe care Marius Schulz îl oferă în cursul privind `this` pe egghead.io care oferă o perspectivă asupra mecanismelor interne limbajului, dar care sunt ascunse elegant într-o simplitate care are adâncimi interesant de explorat.
+Există un exemplu pe care Marius Schulz îl oferă în cursul privind `this` pe platforma egghead.io, care oferă o perspectivă asupra mecanismelor interne limbajului, dar care sunt ascunse elegant într-o simplitate care are adâncimi interesant de explorat.
 
 ```javascript
-var colectie = [2, 4, 7, 9];
-var felia1 = colectie.slice(0,2);
+let colectie = [2, 4, 7, 9];
+let felia1 = colectie.slice(0, 2);
 console.log(felia1); // 2, 4
 ```
 
-Avem o colecție de cifre din care vom extrage o **felie** (slice în engleză). Ceea ce este interesat este că, de fapt am putea rescrie apelul la slice ca un binding pe obiectul colectie. Apelului, îi vom trimite și cei doi parametri necesari lui `slice` pentru a funcționa.
+Avem o colecție de cifre din care vom extrage o **felie** (slice în engleză). Ceea ce este interesat este că, de fapt am putea rescrie apelul la `slice()` ca un binding pe obiectul `colectie`. Apelului, îi vom trimite și cei doi parametri necesari lui `slice()` pentru a funcționa.
 
 ```javascript
 var felia2 = colectie.slice.call(colectie, 0, 2);
@@ -487,23 +477,25 @@ console.log(felia2);
 Și dacă dorim să încercăm o grupare a parametrilor, vom folosi `apply()`:
 
 ```javascript
-var felia3 = colectie.slice.apply(colectie, [0, 2]);
+let felia3 = colectie.slice.apply(colectie, [0, 2]);
 console.log(felia3);
 ```
 
-Fii foarte atent căci de vei pasa drept prim parametru lui call sau lui apply o valoare `null` sau `undefined`, motorul va lua drept obiect `this` pe obiectul global. Scriere codului sub regula `"use strict";` nu va mai fi permis un asemenea comportament.
+Fii foarte atent căci de vei pasa drept prim parametru lui `call()` sau lui `apply()` o valoare `null` sau `undefined`, motorul va lua drept obiect `this` obiectul global. Scrierea codului sub regula `"use strict";` nu mai permite această legătură.
 
-## 4. Binding puternic (hard binding)
+### 4. Binding puternic (hard binding)
 
 Este modul în care te asiguri întotdeauna că `this` este predictibil și nu alunecă în global scope.
 
 ```javascript
-var a = 101;
+const a = 101;
 function faCeva () {
   console.log(this.a);
 };
-var obi = {  a: 1010 };
-var gazda = function () {
+const obi = {
+  a: 1010
+};
+let gazda = function () {
   faCeva.call(obi);
 };
 gazda(); //1010
@@ -519,65 +511,63 @@ Se realizează un cuplaj forțat între o funcție care trebuie să ruleze musai
 // o funcție care se va executa în contextul unui obiect
 // 1. acceptă date prin parametri
 // 2. returnează date prelucrate
-var activitate = function activ(date){
+let activitate = function activ (date) {
   console.log(this.a, date);
   return this.a + date;
 };
 
 // un obiect care oferă contextul de lucru pentru activitate()
 // 1. conține date și sau metode necesare prelucrărilor pe care le face activitate()
-var obiectGazda = {
+let obiectGazda = {
   a: 1000
 };
 
 // o funcție gazdă care „întărește” bindingul this la obiect
 // returnează o valoare, care este ceea ce a returnat activitate după ce a prelucrat datele
-var modificaGazda = function (){
+let modificaGazda = function () {
   return activitate.apply(obiect, arguments); // arguments este un array like
 };
 
 // introdu date in gazdă, pe care le va folosi activitate
-var rezultat = modificaGazda(100);
+let rezultat = modificaGazda(100);
 console.log(rezultat); // 1100
 ```
 
-### Hard binding cu `bind()`
-
-Începând cu ES5 `bind()` a fost introdusă ca metodă în prototipul oricărei funcții - `Function.prototype.bind()`.
+Începând cu ES5 `bind()` a fost introdusă ca metodă în prototipul oricărei funcții - `Function.prototype.bind()`. Această metodă este cel mai des întâlnită în uz atunci când se dorește legarea de un obiect.
 
 ```javascript
 // o funcție care se va executa în contextul unui obiect
-var activitate = function activ(date){
+let activitate = function (date) {
   console.log(this.a, date);
   return this.a + date;
 };
 // un obiect care oferă contextul de lucru pentru activitate()
-var obiect = { a: 1000 };
+const obiect = { a: 1000 };
 // realizarea hard binding-ului
-var binding = activitate.bind(obiect);
+let binding = activitate.bind(obiect);
 // folosirea șablonului cu date
-var rezultat = binding(4000); console.log(rezultat); // 5000
+let rezultat = binding(4000); console.log(rezultat); // 5000
 ```
 
-Rolul lui `bind()` este acela de a returna o funcție care setează `this` la obiectul context.
+Rolul lui `bind()` este acela de a returna o funcție care conectează `this` la obiectul context în care rulează.
 
 ```javascript
-var obi = {
+const obi = {
   prop1: 10,
-  metho: function ex(){
-    setTimeout(function(){
+  met: function ex () {
+    setTimeout(function () {
       console.log(this.prop1);
     }.bind(this), 1500);
   }
 };
-obi.metho();
+obi.met();
 ```
 
 O mulțime de metode ale obiectelor interne ale limbajului oferă un parametru opțional numit „context”, care are rolul de a evita folosirea lui `bind()`, asigurând faptul că funcția callback folosește un anume `this`.
 
 Nu uitați că odată cu ES6 se pot folosi „funcțiile săgeată” - arrow functions, care sunt legate de `this` automat. Folosirea lui `this` într-o astfel de funcție trimite la `this` al funcției context / gazdă.
 
-### Parcurgerea unui array cu aplicarea unei funcții:
+#### Parcurgerea unui array cu aplicarea unei funcții:
 
 ```javascript
 function actiune (date){ console.log(date, this.a + date); };
@@ -585,12 +575,12 @@ var obiect = { a: 1000 };
 [1, 2, 3].forEach(actiune, obiect);
 ```
 
-### Evenimentele din API-ul browserului
+#### Evenimentele din API-ul browserului
 
 Să ne imaginăm cazul unui obiect care are metode construite special pentru a gestiona o pagină sau un fragment de pagină web prin manipularea evenimentelor.
 
 ```javascript
-var obiExecutor = {
+const obiExecutor = {
   codUnicObiect: '1035442',
   captura: function(){document.addEventListener('click', function(eveniment){
     this.prelucreaza(eveniment.type); // trimite tipul evenimentului
@@ -606,7 +596,7 @@ Este nevoie de `bind(this)` pentru a păstra legătura la obiectul în cadrul c�
 Formula `bind(this)` leagă înapoi `this` la obiectul a cărui metodă este. Dar pentru ca acest lucru să se întâmple, se va folosi operatorul de grupare pentru a „repoziționa” legătura `this` la obiectul părinte, nu a elementului DOM.
 
 ```javascript
-var obiExecutor = {
+let obiExecutor = {
   captura: function(){document.addEventListener('click', (function(eveniment){
     this.prelucreaza(eveniment.type); // trimite tipul evenimentului
   }).bind(this), false)}
@@ -616,45 +606,34 @@ var obiExecutor = {
 Pentru a rezolva elegant se poate folosi un arrow function:
 
 ```javascript
-var obiExecutor = {
+let obiExecutor = {
   captura: function(){document.addEventListener('click', eveniment => this.prelucreaza(eveniment.type), false)}
 };
 ```
-
-#### Mantre
-
-- `bind()` creează o nouă funcție, care atunci când este apelată va avea `this` setat la valoarea introdusă ca paramentru împreună cu o serie de argumente.
-- `bind()` nu modifică funcția originală cu nimic, pur și simplu construiește una nouă.
 
 Exemplul de la Mozilla Developer Network:
 
 ```javascript
 this.x = 9;
-
-var modul = {
+const modul = {
   x: 81,
-  getX: function() { return this.x; }
+  getX: function () { return this.x }
 };
-
 modul.getX(); // 81
-
-var retrieveX = modul.getX;
-
-retrieveX(); // 9, deoarece "this" face referință la obiectul global. Funcția este doar „împrumutată” din metoda obiectului
-
+let retrieveX = modul.getX;
+retrieveX(); // 9, deoarece "this" face referință la obiectul global.
+// Funcția este doar „împrumutată” din metoda obiectului
 // Creează o nouă funcție cu this bound la modul
-var boundGetX = retrieveX.bind(modul);
+let boundGetX = retrieveX.bind(modul);
 boundGetX(); // 81
 ```
 
-Utilitarul `bind()` ține de obiectul prototip al lui  Function: `Function.prototype.bind()`.
-
-## 5. Binding cu `new` în cazul constructorilor
+### 5. Binding cu `new` în cazul constructorilor
 
 Poți pune în fața oricărei funcții operatorul `new` și o transformi astfel într-un apel către un constructor.
 
 ```javascript
-function SuntUnConstructor (){
+function SuntUnConstructor () {
   // se creează proprietăți în this
   this.ceva = 100;
 
@@ -663,61 +642,57 @@ function SuntUnConstructor (){
   // dacă nu returnează un obiect,
   // atunci this va fi rezultatul apelării cu new.
 };
-
-var obi = new SuntUnConstructor();
-
+let obi = new SuntUnConstructor();
 console.log(obi.ceva); // 100
 ```
 
 Și cazul în care se face returnare:
 
 ```javascript
-function AltConstructor (){
+function AltConstructor () {
   this.alfa = 10000;
   return { alfa: 1 };
 };
-
-var obi = new AltConstructor();
-
+let obi = new AltConstructor();
 console.log(obi.alfa); // 1
 ```
 
-### Mantre
+#### Mantre
 
-- O funcție apelată cu `new` în fața sa este un constructor.
-- `new` este mai puternic decât hard binding-ului.
-- Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), `this` va fi returnat automat.
+-   O funcție apelată cu `new` în fața sa este un constructor.
+-   `new` este mai puternic decât hard binding-ului.
+-   Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), `this` va fi returnat automat.
 
 Ceea ce va face la instanțiere este exact ceea ce a fost proiectată funcția la care se adaugă patru comportamente nevăzute.
 
-### Ce se întâmplă când pui operatorul `new` în fața oricărei funcții?
+#### Ce se întâmplă când pui operatorul `new` în fața oricărei funcții?
 
-1. Se creează un obiect nou.
-2. Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu `new`. Se creează legătura prototipală.
-3. Obiectul generat automat este pasat funcției cu rol de constructor ca fiind parametrul `this` și astfel, devine contextul de execuție a funcției constructor invocate (`this` este pasat ca parametru împreună cu `arguments`).
-4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), `this` va fi returnat automat.
+1.  Se creează un obiect nou.
+2.  Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu `new`. Se creează legătura prototipală.
+3.  Obiectul generat automat este pasat funcției cu rol de constructor ca fiind parametrul `this` și astfel, devine contextul de execuție a funcției constructor invocate (`this` este pasat ca parametru împreună cu `arguments`).
+4.  Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), `this` va fi returnat automat.
 
 ```javascript
-function viitorObiect(data){
+function viitorObiect (data) {
   this.x = "ceva din obiectul test2";
   this.y = data;
-}
+};
 
 /* Se generează un obiect cu identificatorul obiectul
  * poți trimite date în noul obiect care devin membri ai this */
-var obiectul = new viitorObiect('venit din afară');
+let obiectul = new viitorObiect('venit din afară');
 
 /* Atunci ai acces la proprietatea x și y
 *  pentru că este returnat obiectul */
 console.log(obiectul.x, obiectul.y); // ceva din obiectul test2 venit din afară
 ```
 
-### Restricționarea folosirii unei funcții doar ca și constructor
+#### Restricționarea folosirii unei funcții doar ca și constructor
 
 Restricția se aplică astfel:
 
 ```javascript
-function VehiculSpatial(nume){
+function VehiculSpatial (nume) {
   if(this instanceof VehiculSpatial){
     this.nume = nume;
     this.tip = 'vehicul';
@@ -725,8 +700,8 @@ function VehiculSpatial(nume){
     throw new Error('Funcția are rol de constructor! Invocă cu new');
   }
 };
-var obiectNou = new VehiculSpatial('ISS'); // { nume: "ISS", tip: "vehicul" }
-var obiectEsuat = VehiculSpatial(); // Error: Funcția are rol de constructor! Invocă cu new
+let obiectNou = new VehiculSpatial('ISS'); // { nume: "ISS", tip: "vehicul" }
+let obiectEsuat = VehiculSpatial(); // Error: Funcția are rol de constructor! Invocă cu new
 ```
 
 Această restricționare poate fi păcălită apelând funcția constructor în contextul unui obiect deja creat de funcția constructor fără a instanția cu new.
@@ -741,7 +716,7 @@ Ceea ce tocmai s-a petrecut este că s-a invocat constructorul în contextul unu
 În ES6 această problemă este reglată prin `new.target`. Acestă proprietate, care este mai specială pentru că se adresează unui viitor obiect ce nu a fost creat încă, capătă o valoare atunci când metoda `[[Construct]]`. Valoarea este constructorul obiectului proaspăt generat, adică `this`. Dacă funcția constructor este apelată fără `new` asta înseamnă că este apelată cu `[[Call]]`, `new.target` va avea valoarea `undefined`.
 
 ```javascript
-function VehiculSpatial(nume){
+function VehiculSpatial (nume) {
   if(typeof new.target !== "undefined"){
     this.nume = nume;
     this.tip = 'vehicul';
@@ -749,8 +724,8 @@ function VehiculSpatial(nume){
     throw new Error('Funcția are rol de constructor! Invocă cu new');
   }
 };
-var obiectNou = new VehiculSpatial('ISS'); // { nume: "ISS", tip: "vehicul" }
-var obiectPacalitor = VehiculSpatial.call(obiectNou, 'Soyuz'); // Error: Funcția are rol de constructor! Invocă cu new
+let obiectNou = new VehiculSpatial('ISS'); // { nume: "ISS", tip: "vehicul" }
+let obiectPacalitor = VehiculSpatial.call(obiectNou, 'Soyuz'); // Error: Funcția are rol de constructor! Invocă cu new
 ```
 
 ## Precedența regulilor
@@ -759,17 +734,17 @@ var obiectPacalitor = VehiculSpatial.call(obiectNou, 'Soyuz'); // Error: Funcți
 
 Întrebări de verificare cheie în call-site pentru a determina la ce este făcut bindingul prin `this`. Aceasta este și ordinea precedenței:
 
-1. A fost chemată funcția cu `new`? Dacă da, `this` este chiar obiectul returnat (**binding cu new**).
-2. A fost apelată prin `call()` sau `apply()`? Dacă da, folosește acel obiect pentru context - binding explicit.
-3. A fost apelată funcția într-un obiect care conține referința sau o deține (context) - binding implicit.
-4. Global object (cu excepția rulării în `use strict`)
+1.  A fost chemată funcția cu `new`? Dacă da, `this` este chiar obiectul returnat (**binding cu new**).
+2.  A fost apelată prin `call()` sau `apply()`? Dacă da, folosește acel obiect pentru context - binding explicit.
+3.  A fost apelată funcția într-un obiect care conține referința sau o deține (context) - binding implicit.
+4.  Global object (cu excepția rulării în `use strict`)
 
 Concluzie: Bindingul explicit are precedență asupra celui implicit.
 
 ## Studiu de caz: acțiunea operatorului new asupra bindingului lui `this`:
 
 ```javascript
-function actiune(val1, val2){
+function actiune (val1, val2) {
   this.x = val1;
   this.y = val2;
 };
@@ -799,7 +774,7 @@ console.log(JSON.stringify(nou));  // {"x":2000}
 Ce se întâmplă atunci când setezi valorile argumentelor:
 
 ```javascript
-function actiune(val1, val2){
+function actiune (val1, val2) {
   this.x = val1;
   this.y = val2;
 };
@@ -828,7 +803,7 @@ Funcțiile *fat arrow* nu stabilesc propria legătură la `this`. Pur și simplu
 Funcțiile *fat arrows* sunt legate de scope-ul lexical, asta însemnând că `this` va fi același, adică cel din blocul părintelui. Vom porni analizând cazul în care folosim o funcție normală. Pentru a înțelege pe deplin, treci mai întâi pe la subiectele care țin de *call stack*, *event loop* și *API*-uri și relațiile pe care le formează.
 
 ```javascript
-var nume = 'Auraș din Global Scope';
+let nume = 'Auraș din Global Scope';
 function Ciao (nume) {
   this.nume = nume;
 };
@@ -838,7 +813,7 @@ Ciao.prototype.urare = function facUrare () {
     console.log('Ciao, ' + this.nume);
   }, 5000);
 };
-var întâlnire = new Ciao('Daniel!');
+let întâlnire = new Ciao('Daniel!');
 întâlnire.urare();  // Ciao, Auraș din Global Scope
 ```
 
@@ -847,7 +822,7 @@ Când este declarată o variabilă cu `var`, aceasta apare în global scope și 
 Pentru a face conectarea la obiectul generat, se va face o legătură prin metoda `bind()`. Ceea ce face `bind()` este să lege forțat execuția unei funcții de un anumit obiect context. Utilitarul `Function.prototype.bind()` moștenit de toate funcțiile în JavaScript, face o conexiune tare între obiectul dorit a fi contextul de execuție și funcția ce va fi executată. Spun că va fi executată pentru că folosirea lui bind, returnează o funcție. În cazul nostru aceasta va fi executată pentru că va fi trimisă din coada de așteptare a job-urilor direct în stiva de apeluri, unde va fi executată.
 
 ```javascript
-var nume = 'Auraș din Global Scope';
+let nume = 'Auraș din Global Scope';
 function Ciao (nume) {
   this.nume = nume;
 };
@@ -856,7 +831,7 @@ Ciao.prototype.urare = function facUrare () {
     console.log('Ciao, '+ this.nume);
   }).bind(this), 3000);
 };
-var întâlnire = new Ciao('Daniel!');
+let întâlnire = new Ciao('Daniel!');
 întâlnire.urare(); // Ciao, Daniel!
 ```
 
@@ -926,47 +901,51 @@ this.array.forEach(function (el) => {
 
 ## Dependințe cognitive
 
-- scope
-- funcții
-- `arguments`
-- call-site
-- constructori
-- `Function.prototype.apply()`
-- `Function.prototype.bind()`
-- `Function.prototype.call()`
-
-## Mantre
-
-- Prin `this`, de fapt accesezi starea obiectului cu care lucrezi.
-- Legătura la obiectul reprezentat de cuvântul cheie `this` se realizează la momentul execuției codului, nu la momentul scrierii lui.
-- **this** este o referință către contextul de execuție curent în timp ce funcția se execută.
-- `this` nu se referă în niciun caz la **lexical scope**.
-- `this` este un binding pentru fiecare invocare a unei funcții care se bazează pe de-antregul pe call-site.
-- Funcțiile și obiectele sunt REFERENȚIATE, nu sunt deținute atunci când atribui IDENTIFICATORUL într-o expresie sau ca valoarea a unei metode.
-- Call-site (locul din cod unde este apelată o funcție) determină formarea lui `this`.
-- Modul de invocare influiențează felul în care obiectul este constituit (către care face referință `this`).
-- Toate funcțiile au la dispoziția lor un set de utilități preexistent, care poate fi apelat prin `[[Prototype]]`. Cele mai evidente sunt `call()` și `apply()`.
-- Atunci când există un obiect-context (folosit de o funcție prin apelare cu `apply()` sau `call()`), regula de bază a binding-ului spune că obiectul-context va fi cel la care se face bindingul `this`.
-- În contextul de execuție tot ce este cu `this.ceva` devine membru al obiectului generat.
-  - Bindingul primar se face la obiectul global.
-- Bindingul implicit se face la contextul de execuție al unei funcții sau al unei metode.
-- o funcție poate fi invocată în patru moduri: (1) ca funcție (this e window); (2) ca metodă (this e obiectul); (3) ca și constructor (this e obiectul abia construit); (4) cu `apply()` și `call()` (this e primul obiect introdus).
-- `this` este cuvânt cheie rezervat.
-- `this` este o referință la obiectul care se creează în funcție de contextul de execuție.
-- `this` este o referință către un obiect-context: pentru funcțiile din global scope este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
-- în interiorul unui obiect, apelezi metodele folosind `this`, pentru că este o referință către proprietățile și metodele interne.
-- dacă o funcție a fost invocată în interiorul altei funcții sau a unui obiect, atunci `this` este o referință către obiectul în contextul în care a fost invocată. Pentru a înțelege, adu-ți aminte faptul că o funcție este un obiect, de fapt, dar nu uita că primește `this` automat, nu-l formează. Doar obiectele formează `this`.
-- Referința `this` va fi folosită pe durata execuției funcției.
-- în cazul funcțiilor`this` nu este o referință către funcția în sine. Reține faptul că unei funcții îi sunt pasate tacit `this` și `arguments`.
-- `this` NU ESTE O REFERINȚĂ CĂTRE SCOPE-ul LEXICAL AL FUNCȚIEI.
+-   scope
+-   funcții
+-   `arguments`
+-   call-site
+-   constructori
+-   `Function.prototype.apply()`
+-   `Function.prototype.bind()`
+-   `Function.prototype.call()`
 
 ## Alonje
 
-- înțelegerea programării funcționale
+-   inversion of control
+-   unit testing
+-   înțelegerea programării funcționale
+
+## Mantre
+
+-   Prin `this`, de fapt accesezi starea obiectului cu care lucrezi.
+-   Legătura la obiectul reprezentat de cuvântul cheie `this` se realizează la momentul execuției codului, nu la momentul scrierii lui.
+-   **this** este o referință către contextul de execuție curent în timp ce funcția se execută.
+-   `this` nu se referă în niciun caz la **lexical scope**.
+-   `this` este un binding pentru fiecare invocare a unei funcții care se bazează pe de-antregul pe call-site.
+-   Funcțiile și obiectele sunt REFERENȚIATE, nu sunt deținute atunci când atribui IDENTIFICATORUL într-o expresie sau ca valoarea a unei metode.
+-   Call-site (locul din cod unde este apelată o funcție) determină formarea lui `this`.
+-   Modul de invocare influiențează felul în care obiectul este constituit (către care face referință `this`).
+-   Toate funcțiile au la dispoziția lor un set de utilități preexistent, care poate fi apelat prin `[[Prototype]]`. Cele mai evidente sunt `call()` și `apply()`.
+-   Atunci când există un obiect-context (folosit de o funcție prin apelare cu `apply()` sau `call()`), regula de bază a binding-ului spune că obiectul-context va fi cel la care se face bindingul `this`.
+-   În contextul de execuție tot ce este cu `this.ceva` devine membru al obiectului generat.
+-   Bindingul primar se face la obiectul global.
+-   Bindingul implicit se face la contextul de execuție al unei funcții sau al unei metode.
+-   o funcție poate fi invocată în patru moduri: (1) ca funcție (this e window); (2) ca metodă (this e obiectul); (3) ca și constructor (this e obiectul abia construit); (4) cu `apply()` și `call()` (this e primul obiect introdus).
+-   `this` este cuvânt cheie rezervat.
+-   `this` este o referință la obiectul care se creează în funcție de contextul de execuție.
+-   `this` este o referință către un obiect-context: pentru funcțiile din global scope este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
+-   în interiorul unui obiect, apelezi metodele folosind `this`, pentru că este o referință către proprietățile și metodele interne.
+-   dacă o funcție a fost invocată în interiorul altei funcții sau a unui obiect, atunci `this` este o referință către obiectul în contextul în care a fost invocată. Pentru a înțelege, adu-ți aminte faptul că o funcție este un obiect, de fapt, dar nu uita că primește `this` automat, nu-l formează. Doar obiectele formează `this`.
+-   Referința `this` va fi folosită pe durata execuției funcției.
+-   în cazul funcțiilor`this` nu este o referință către funcția în sine. Reține faptul că unei funcții îi sunt pasate tacit `this` și `arguments`.
+-   `this` NU ESTE O REFERINȚĂ CĂTRE SCOPE-ul LEXICAL AL FUNCȚIEI.
+-   `bind()` creează o nouă funcție, care atunci când este apelată va avea `this` setat la valoarea introdusă ca paramentru împreună cu o serie de argumente.
+-   `bind()` nu modifică funcția originală cu nimic, pur și simplu construiește una nouă.
 
 ## Resurse:
 
-[MDN Function.prototype.bind()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
-[MDN this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
-[Crockford on Javascript - Functions](https://www.youtube.com/watch?v=lVnnxfdLdlM)
-[Understand JavaScript's this Keyword in Depth](https://egghead.io/lessons/javascript-specify-this-using-call-or-apply)
+-   [MDN Function.prototype.bind()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
+-   [MDN this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
+-   [Crockford on Javascript - Functions](https://www.youtube.com/watch?v=lVnnxfdLdlM)
+-   [Understand JavaScript's this Keyword in Depth](https://egghead.io/lessons/javascript-specify-this-using-call-or-apply)

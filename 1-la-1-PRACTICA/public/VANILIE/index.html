@@ -7,5 +7,30 @@
   </head>
   <body>
     <h1>e de test</h1>
+    <!-- <button id="test">Apasă-mă!</button>
+    <script>
+      function ModStare () {
+        this.valoare = false;
+        this.modificator = function () {
+          this.valoare ? this.valoare = false : this.valoare = true;
+          console.log(this.valoare);
+        }
+      };
+      let mod = new ModStare();
+      let but = document.querySelector('#test');
+      but.addEventListener('click', mod.modificator);
+    </script> -->
+    <button id="test2">Apasă-mă! 2</button>
+    <script>
+      let state = {
+        valoare: false,
+        modificator: function modi () {
+          this.valoare ? this.valoare = false : this.valoare = true;
+          console.log(this.valoare);
+        }
+      };
+      let but2 = document.querySelector('#test2');
+      but2.addEventListener('click', state.modificator.bind(state));
+    </script>
   </body>
 </html>

@@ -6,8 +6,6 @@ Este o relație simbiotică realizată pe încrederea acordată API-ului că î�
 
 În limba română am putea aproxima numele în limba engleză de **callback** ca **apeluri ulterioare**. Funcția ca valoare este pasată ca argument și este „apelată ulterior” (în engleză: *called back*) de către funcția care este în execuție deja. Vom folosi varianta denumirii în limba engleză pentru a recunoaște în alte lucrări despre ce vorbim, dar și pentru simplitatea pe care o oferă un singur cuvânt.
 
-Callback-ul este o funcție care va porni evaluarea propriului cod când va avea toate datele necesare oferite de contextul său de execuție. Este o funcție care va aștepta cuminte tot ce îi este necesar și abia atunci se lansează în execuție.
-
 ## De ce avem nevoie de funcții callback?
 
 Care este motivul pentru care facem acest lucru? Aducerea unei resurse sau prelucrarea sa poate să ia timp. Nu ai voie să blochezi firul de execuție și ca să realizezi această magie, vei apela la un API al browserului. Ce te faci în momentul în care resursa a venit? Tu ai adus-o pentru a face ceva cu ea. În aceast scop trebuie să ai cod care să o prelucreze. Acest cod este „păstrat” ca valoare într-o funcție. Această funcție este pasată API-ului pentru ca în momentul în care a terminat operațiunea sa specifică, să execute codul funcției noastre aplicată pe rezultatul adus.
@@ -58,21 +56,21 @@ aducResursa('mar', function () {
 });
 ```
 
-Totuși trebuie spus un lucru la care trebuie reflectat foarte adânc. Există momente când vei folosi biblioteci de cod externe, care vor prelua callback-ul pe care-l scrii, vor rula utilitarul în contextul aplicației lor, iar la final vor executa funcția scrisă de tine.
+Totuși trebuie spus un lucru la care trebuie reflectat foarte adânc. Există momente când vei folosi biblioteci de cod externe, care vor prelua callback-ul pe care-l scrii, iar la final vor executa funcția scrisă de tine.
 
-Kyle Simpson pune câteva întrebări esențiale pentru verificare și dobândirea siguranței în scenariul de lucru cu un callback:
+Kyle Simpson pune câteva întrebări esențiale pentru verificarea și dobândirea siguranței în scenariul de lucru cu un callback:
 
-- Ești sigur pe aplicația externă căreia îi pasezi callback-ul?
-- Ești încredințat că va executa în parametrii doriți de tine codul din funcția pe care i-o pasezi ca și callback?
-- Dacă nu ai scris tu întreaga aplicație care va folosi callback-ul, ai **încredere** să o folosești?
+-   Ești sigur pe aplicația externă căreia îi pasezi callback-ul?
+-   Ești încredințat că va executa în parametrii doriți de tine codul din funcția pe care i-o pasezi ca și callback?
+-   Dacă nu ai scris tu întreaga aplicație care va folosi callback-ul, ai **încredere** să o folosești?
 
 Acestea sunt întrebări foarte serioase, care setează cadrul mental pentru căutarea de noi soluții. Acestea nu au întârziat să apară, fiind propulsate de standard: promisiunile și funcțiile async/await. În acest moment, recomandarea este ca în momentul dobândirii abilităților de lucru cu **promisiunile** sau cu funcțiile **async/await**, să fie abandonată practica callback-urilor.
 
 Un argument în plus pentru abandonarea treptată a practicii callback-urilor este aceea că urmărirea callback-urilor este o sarcină dificilă în sine.
 
-## Explorarea unui scenariu
+## Răspunsul la un eveniment
 
-O funcție este declarată. Să o poreclim **funcția de bază**. Acesta este un termen arbitrar, care ne va ajuta să înțelegem mai bine relația cu o altă funcție: callback-ul. Funcția de bază este definită de utilizator cu scopul de a prelucra datele oferite la invocare. Funcția de bază are un mic secret. Primește funcția callback ca argument și după ce a terminat toate prelucrările, o execută la final pasându-i rezultatul evaluărilor din funcția de bază.
+Declarăm o funcție pe care o poreclim **funcția de bază**. Acesta este un termen arbitrar, care ne va ajuta să înțelegem mai bine relația cu o altă funcție: callback-ul. Funcția de bază este definită de utilizator cu scopul de a prelucra datele oferite la invocare. Funcția de bază are un mic secret. Primește funcția callback ca argument și după ce a terminat toate prelucrările, o execută la final pasându-i rezultatul evaluărilor din funcția de bază.
 
 **Moment ZEN**: Callback-ul este o funcție care este executată ca răspuns la un eveniment.
 
@@ -124,14 +122,14 @@ Pentru a simula asincronicitatea, vom folosi utilitarul `setTimeout`, un API ofe
 
 ```javascript
 // adunarea ca operațiune asincronă
-function adunareAsinc(a, b, callback){
-  setTimeout(function(){
+function adunareAsinc (a, b, callback) {
+  setTimeout(function () {
     //simularea asincronicității
     callback(a + b);
   }, 3000);
 };
 console.log('inainte');
-adunareAsinc(1, 2, function(rezultat){
+adunareAsinc(1, 2, function (rezultat) {
   console.log('Rezultat: ' + rezultat);
 });
 console.log('după');
@@ -140,65 +138,94 @@ console.log('după');
 
 ![Exemplificare asincronicitate folosind Nodejs](callbacksSiEventLoop.svg)
 
-Atenție! funcția `adunareAsincrona` nu va mai aștepta la execuție să se declanșeze execuția callbackului și va relua execuția mai departe și abia după ce `setTimeout` va fi terminat, după cele 3 secunde, abia atunci va fi executat și callback-ul. După ce timpul se va fi scurs, execuția callback-ului returnează rezultatul. Menținerea contextului se face datorită closure-ului.
+Atenție, funcția `adunareAsincrona` nu va mai aștepta la execuție să se declanșeze execuția callbackului și va relua execuția mai departe și abia după ce `setTimeout` va fi terminat, după cele 3 secunde, abia atunci va fi executat și callback-ul. După ce timpul se va fi scurs, execuția callback-ului returnează rezultatul. Menținerea contextului se face datorită closure-ului.
 
 ### Callbackurile asincrone - deferred callback (invocare întârziată)
 
 Callback-ul este invocat după ce o funcție a returnat deja sau a returnat într-un alt fir de execuție al stivei.
 
-Callback-urile asincrone sunt folosite pe scară largă în API-urile legate de IO așa cum sunt `socket`-urile, de exemplu (`socket.connet(callback)`). Ceea ce este de așteptat în cazul `socket` este ca atunci când `connect` returnează, callback-ul încă să nu fie invocat de vreme ce așteaptă să se facă conexiunea.
+Callback-urile asincrone sunt folosite pe scară largă în API-urile legate de I/O așa cum sunt `socket`-urile, de exemplu (`socket.connet(callback)`). Ceea ce este de așteptat în cazul `socket` este ca atunci când `connect` returnează, callback-ul încă să nu fie invocat de vreme ce așteaptă să se facă conexiunea.
 
 Pot fi invocate de un alt fir de execuție (în cazul mecanismelor de invocare întârziată «deferral» bazate pe firul de execuție). În acest caz, o aplicație ar trebui să sincronizeze orice resurse accesează callback-ul. Aici este ridicată o problemă care ține și de modificarea stării aplicației, mai exact trebuie luat în calcul faptul că alte fire de execuție deja au modificat starea aplicației.
 
-„Amânarea” unui callback are ca efect „trecerea unei perioade” necesară stivei să ajungă înapoi la bucla centrală (event loop). Mai este un caz: cel al rulării într-un alt fir de execuție.
+Amânarea unui callback are ca efect *trecerea unei perioade* necesară stivei să ajungă înapoi la bucla centrală (*event loop*). Mai este un caz: cel al rulării într-un alt fir de execuție.
+
+## Callback-urile și this
+
+JavaScript este un limbaj de programare care răspunde la evenimente. Mecanismul de răspuns este chiar callback-ul. Cel mai adesea callback-urile sunt folosite în manipularea elementelor DOM pentru a face ceva ca reacție la un eveniment apărut în urma interacțiunii cu documentul.
+
+```html
+<button id="test">Apasă-mă!</button>
+<script>
+  function ModStare () {
+    this.valoare = false;
+    this.modificator = () => {
+      this.valoare ? this.valoare = false : this.valoare = true;
+      console.log(this.valoare);
+    }
+  };
+  let mod = new ModStare();
+  let but = document.querySelector('#test');
+  but.addEventListener('click', mod.modificator);
+</script>
+```
+
+Fii foarte atent că folosirea unui arrow function ca metodă într-un obiect literal, va avea drept `this`, obiectul global, dacă acel obiect este în global. În codul legacy veți mai întâlni funcții care sunt legate de obiectul context, de regulă obiectul creat de aun element DOM prin funcția `bind()`. Exemplul de mai sus funcționează pentru că obiectul este creat în urma efectului apelului cu `new`, care printre altele returnează obiectul construit. Dar în unele cazuri, veți întâlni crearea de obiecte literale, care sunt legate automat de obiectul global. În acest caz, este nevoie să legați funcția cu rol de metodă, de obiectul DOM folosind `bind()`.
+
+```html
+<button id="test2">Apasă-mă! 2</button>
+<script>
+  let state = {
+    valoare: false,
+    modificator: function modi () {
+      this.valoare ? this.valoare = false : this.valoare = true;
+      console.log(this.valoare);
+    }
+  };
+  let but2 = document.querySelector('#test2');
+  but2.addEventListener('click', state.modificator.bind(state));
+</script>
+```
+
+Reține un amănunt foarte important. Atunci când folosești `bind()`, se creează o funcție nouă iar cea originală este nemodificată.
 
 ## Closure-uri făcute de callback-uri
 
-Pentru fiecare pas al animației, callback-ul pasat lui `setInterval` face closure pe valorile `elementTinta` și `increment` și astfel, fiind accesibile ca niște variabile care pot fi accesate, dar având valorile modificate.
+Cel mai simplu exemplu este oferit de execuția la un anumit moment în timp.
+
+```javascript
+function arataMesajul (mesaj) {
+  setTimeout(function () {
+    alert(mesaj);
+  }, 3000);
+};
+arataMesajul('apel după trei secunde');
+```
+
+Pentru fiecare pas al animației, callback-ul pasat lui `setInterval()` face closure pe valorile `elementTinta` și `increment`, fiind accesibile ca variabile care pot fi accesate, dar cu valorile modificate deja.
 
 ```html
 <div id="element">Un nod de text</div>
 <script type="text/javascript">
-  function Misca(elem){
+  function Misca (elem) {
     var elementTinta = document.getElementById('element'),
-        increment = 0;
-    var temporizator = setInterval(function(){
-      if(increment < 400){
-        elementTinta.style.position = "relative";
-        elementTinta.style.background = "red";
-        elementTinta.style.left = elementTinta.style.top = increment + "px";
-        increment++;
-      }else{
-        clearInterval(temporizator);
-      }
-    }, 10);
+        increment = 0,
+        temporizator = setInterval(function () {
+          if(increment < 400){
+            elementTinta.style.position = "relative";
+            elementTinta.style.background = "red";
+            elementTinta.style.left = elementTinta.style.top = increment + "px";
+            increment++;
+          }else{
+            clearInterval(temporizator);
+          }
+        }, 10);
   };
   Misca("element");
 </script>
 ```
 
 Reține faptul că de fiecare dată când intervalul presetat expiră, funcția care joacă rol de callback reactivează mediul lexical de la momentul creării. Closure-ul pe care-l face fiecare callback ține evidența propriului set de variabile.
-
-## Mantre
-
-- Funcțiile pot fi pasate ca argumente altor funcții pentru că, de fapt, este pasat un obiect, este pasată o valoare în sine.
-- Funcțiile care acceptă alte funcții drept argumente sau care returnează funcții se numesc „funcții de ordin superior” - „higher-order function”.
-- Un callback este un closure a cărui funcție va fi invocată atunci când un anumit eveniment se întâmplă.
-- Nu toate funcțiile cărora li se pasează un callback sunt asincrone. Un exemplu este `[1,2].map(function(elem){return elem+1;});`. Rezultatul este returnat sincron folosind „direct style”.
-- **`this` al unui callback indică întotdeauna către obiectul global. Pentru a fixa `this` la funcția gazdă se va folosi `call()`, `apply()` sau `bind()`**.
-- **Callback-ul care folosește fat arrows este legat de scope-ul lexical și nu mai este nevoie de `call()`, `apply()` sau `bind()`**.
-- Invocarea unui callback este invocarea unei funcții a cărui `this` este obiectul global (implicit assignment).
-
-Cel mai simplu exemplu este oferit de execuția la un anumit moment în timp.
-
-```javascript
-function arataMesajul(mesaj){
-  setTimeout(function(){
-    alert(mesaj);
-  }, 3000);
-};
-arataMesajul('funcția internă este chemată după trei secunde');
-```
 
 ## Folosire
 
@@ -210,8 +237,9 @@ Un exemplu de folosire a callback-urilor în Node.js
 
 ```javascript
 var fs = require('fs');
-var callback = function faCeva(error, data){  // o practică bună este a numi funcțiile pentru a le vedea în stivă
-  if(error){
+var callback = function faCeva (error, data) {
+  // o practică bună este a numi funcțiile pentru a le vedea în stivă
+  if (error) {
     return callback(error, null);
   };
   // fă ceva cu datele
@@ -223,23 +251,32 @@ Atenție, în NodeJS, primul argument al unui callback va fi întotdeauna un obi
 
 ## Disciplina folosirii callback-urilor
 
-- Ieși din funcție cât se poate de repede cu `return`, `continue` sau `break`.
-- Creează funcții cu nume pentru callback-uri pasând rezultatele intermediare ca argumente. Scoate funcțiile și declară-le în afară. Fă mecanismul de hoisting să lucreze pentru tine.
-- Modularizează codul împărțindu-l în funcții mici, făcându-l reutilizabil ori de câte ori acest lucru este posibil.
-- În cazul folosirii callback-urilor împreună cu operatorul spread (...), callback-ul nu va mai fi poziționat ultimul, ci primul sau penultimul. Acest lucru se întâmplă pentru că sintaxa spread trebuie să fie ultimul argument introdus.
+-   Ieși din funcție cât se poate de repede cu `return`, `continue` sau `break`.
+-   Creează funcții cu nume pentru callback-uri pasând rezultatele intermediare ca argumente. Scoate funcțiile și declară-le în afară. Fă mecanismul de hoisting să lucreze pentru tine.
+-   Modularizează codul împărțindu-l în funcții mici, făcându-l reutilizabil ori de câte ori acest lucru este posibil.
+-   În cazul folosirii callback-urilor împreună cu operatorul spread (...), callback-ul nu va mai fi poziționat ultimul, ci primul sau penultimul. Acest lucru se întâmplă pentru că sintaxa spread trebuie să fie ultimul argument introdus.
 
 ## Bună practică
 
 Din capul locului menționează dacă o funcție este asincronă sau nu la momentul definirii.
-Dacă un callback trebuie invocat cu întârziere, definește funcția pentru a realiza acest lucru.
-În cazul folosirii callback-urilor, va trebui să capturezi erorile la fiecare pas pentru că utilizarea de callback-uri suferă pe partea de raportare a acestora. Acest aspect a fost rezolvat elegant în cazul folosirii promisiunilor.
+Dacă un callback trebuie invocat cu întârziere, definește funcția pentru a realiza acest lucru. În cazul folosirii callback-urilor, va trebui să capturezi erorile la fiecare pas pentru că utilizarea de callback-uri suferă pe partea de raportare a acestora. Acest aspect a fost rezolvat elegant în cazul folosirii promisiunilor.
 
 ## Dependințe cognitive:
 
-- scope
-- this
-- closures
+-   scope
+-   this
+-   closures
+
+## Mantre
+
+-   Funcțiile pot fi pasate ca argumente altor funcții pentru că, de fapt, este pasat un obiect, este pasată o valoare în sine.
+-   Funcțiile care acceptă alte funcții drept argumente sau care returnează funcții se numesc „funcții de ordin superior” - „higher-order function”.
+-   Un callback este un closure a cărui funcție va fi invocată atunci când un anumit eveniment se întâmplă.
+-   Nu toate funcțiile cărora li se pasează un callback sunt asincrone. Un exemplu este `[1,2].map(function(elem){return elem+1;});`. Rezultatul este returnat sincron folosind „direct style”.
+-   **`this` al unui callback indică întotdeauna către obiectul global. Pentru a fixa `this` la funcția gazdă se va folosi `call()`, `apply()` sau `bind()`**.
+-   **Callback-ul care folosește fat arrows este legat de scope-ul lexical și nu mai este nevoie de `call()`, `apply()` sau `bind()`**.
+-   Invocarea unui callback este invocarea unei funcții a cărui `this` este obiectul global (implicit assignment).
 
 ## Referințe
 
-- [The Art of Node. An introduction to Node.js](https://github.com/maxogden/art-of-node#callbacks)
+-   [The Art of Node. An introduction to Node.js](https://github.com/maxogden/art-of-node#callbacks)

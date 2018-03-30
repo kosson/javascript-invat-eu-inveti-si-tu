@@ -5,7 +5,7 @@ Există o regulă simplă pe care o avem de la cercetătorul Edsger W. Dijkstra 
 
 > two or more, use a for
 
-Se traduce în limba română „două sau mai multe, se folosește for”.
+Se traduce în limba română „ai două sau mai multe, folosește for”.
 
 Aceast enunț, numit de standard `IterationStatement`, creează o secvență repetitivă care produce un set de rezultate sau care parcurge o structură de date existentă. Este enunțul cel mai des folosit pentru a genera serii de numere, pentru a parcurge liste de valori din array-uri, pentru a asocia valori din liste diferite și cam tot ce îți trece prin minte atunci când vine vorba de a lucra cu intervale de numere sau seturi de date în general.
 
@@ -36,9 +36,9 @@ for (; x < 5; x++) {
 
 Expresiile opționale sunt separate prin punct și virgulă și se compun din următoarele:
 
-- **un contor**, care este o valoare ce va porni de la o anumită valoare prestabilită (standardul spune că este un `LexicalDeclaration Expression`).
-- **un comparator**, care ia valoarea din contor și o compară cu o altă valoare, de regulă dimensiunea unui array adusă prin proprietatea `array.length`.
-- **un incrementor/decrementor**
+-   **un contor**, care este o valoare ce va porni de la o anumită valoare prestabilită (standardul spune că este un `LexicalDeclaration Expression`).
+-   **un comparator**, care ia valoarea din contor și o compară cu o altă valoare, de regulă dimensiunea unui array adusă prin proprietatea `array.length`.
+-   **un incrementor/decrementor**
 
 Privind la expresiile folosite pentru a face funcțional un `for`, nu poți să nu privești la expresia `do..while` și să nu te întrebi, de ce nu ai folosi-o în continuare pe aceasta. Singura diferență este că la `do..while`, inițializarea sau contorul (ca expresie) stă în blocul de cod ce trebuie executat, iar condiția sau comparatorul este în **blocul expresiei de evaluat**. În cazul lui `for`, blocul are la final expresia de incrementare. Răspunsul este legat de concizia pe care o oferă `for`. Este pur și simplu mai ușor de urmărit.
 
@@ -83,7 +83,7 @@ for (var i = 0; i < listă.length; i++) {
 
 După parcurgerea array-ului sunt returnate rezultatele, dar dacă se mai dorește parcurgerea încă o dată, acest lucru nu este posibil decât dacă pornim din nou execuția codului. Dacă am dori să avem acces la rezultatele de etapă, acest lucru nu este posibil. În exemplul de mai sus, am folosit utilitarul `console.log()` ca și funcție de prelucrare. Acesta nu ne ajută prea mult în afară de a vedea datele din array, în schimb, am putea introduce în exercițiul nostru o funcție, care să poată face o prelucrare mult mai complexă pentru fiecare valoare din array. Acest pas crește complexitatea exemplului nostru, dar și flexibilitatea în ceea ce privește multitudinea de prelucrări pe care le poți efectua.
 
-Pentru a optimiza codul unei bucle efectuate pe un obiect iterabil este de preferat ca operațiunea de interogare a dimensiunii array-ului, în cazul în care acesta nu variază, să fie scoasă din evaluarea `for`. Facem acest lucru pentru că în cazul unei liste de câteva mii de repere, de fiecare dată trebuie calculată dimensiunea array-ul. Aceasta este o operație inutilă.
+Pentru a optimiza codul unei bucle efectuate pe un obiect **iterabil** este de preferat ca operațiunea de interogare a dimensiunii array-ului, în cazul în care acesta nu variază, să fie scoasă din evaluarea `for`. Facem acest lucru pentru că în cazul unei liste de câteva mii de repere, de fiecare dată trebuie calculată dimensiunea array-ul. Aceasta este o operație inutilă.
 
 ```javascript
 function prelucrează (elementArray) {
@@ -96,6 +96,19 @@ for (var i = 0; i < dimensiune; i++) {
 ```
 
 Față de exemplul anterior, am avansat considerabil aplicând o funcție pe fiecare valoarea din listă. Da, o funcție croită după necesitățile noastre. Câteva lucruri care încă persistă: trecerea se face din nou o singură dată și nu avem acces la valorile de etapă. Soluția pentru aceste cazuri este legată de modul în care declarăm variabilele în enunțul `for`.
+
+Lucrul cu `for` pentru prelucrarea unei colecții de valori este caracterizat în literatura de specialitate ca fiind unul *imperativ*. Asta înseamnă că pentru fiecare element din colecție faci o evaluare ceea ce se aproprie de o comandă aplicată pe element.
+
+```javascript
+let colectie = [1, 2];
+for (let x = 0; x < colectie.length; x++) {
+  /*pentru fiecare colectie[x] fă ceva!*/
+};
+```
+
+Pasul următor, așa cum am amintit mai sus, este să trecem la o abordare orientată pe utilizarea funcțiilor atunci când dorim să prelucrăm elementul colecției - o abordare funcțională, i-am spune. Dacă mă întrebi de ce, răspunsul este simplu. Imaginează-ți că în locul unei valori primare am avea un obiect care este o structură complexă. un obiect care este o fișă bibliografică din catalog. Dacă ai o colecție de fișe sau chiar întregul catalog pentru care dorești să modifici doar o singură informație comună dintr-un câmp, nu vei folosi niciodată o buclă `for`. Pentru că fiecare înregistrare este foarte complexă, vei opta pentru o funcție care să facă prelucrările necesare. Aici este punctul în care se deschide calea pentru utilizarea unor instrumente mai avansate precum `forEach()`, `map()`, `reduce()` sau `filter()`. Pssst! Dacă ești foarte curioasă, fă un salt la `forEach()` să vezi nițel rostul tuturor acestor pași ai înțelegerii în adâncime.
+
+Pentru a te obișnui cu aceste instrumente mai avansate, ai nevoie să înțelegi bine funcțiile și exploatarea acestora sub formă de apeluri din alte funcții. Evident, este vorba despre callback-uri.
 
 ## Declararea variabilelor în `for`
 

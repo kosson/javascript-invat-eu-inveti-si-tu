@@ -1,0 +1,16 @@
+{
+  "name": "VANILIE",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "watch": "jest --watch *.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^22.4.3"
+  }
+}

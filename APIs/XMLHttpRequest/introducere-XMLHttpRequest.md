@@ -43,4 +43,5 @@ xhr.send();
 
 ## Resurse
 
-- [XMLHttpRequest. Living Standard](https://xhr.spec.whatwg.org/)
+-   [XMLHttpRequest. Living Standard](https://xhr.spec.whatwg.org/),
+-   [Gestionarea răspunsurilor XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest#Handling_responses)

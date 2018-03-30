@@ -1,6 +1,8 @@
 # Argumentele și parametrii funcțiilor
 
-Pentru a face o analogie utilă poți să-ți imaginezi că o funcție este un port la mare. Acest oraș are un port cu dane. Fiecare dană are un nume. Poți trimite câte o navă (argument) în fiecare dană (parametru), dar pot fi mult mai multe nave în rada (arity) portului, pe care le ține evidența căpitănia (obiectul arguments). Fiecare navă conține bunuri (valori) pe care le vom prelucra în oraș.
+## Perspectivă generală
+
+Pentru a face o analogie utilă poți să-ți imaginezi că o funcție este un port la mare. Portul are dane. Fiecare dană are un nume sau un număr. Poți trimite câte o navă (argument) în fiecare dană (parametru), dar pot fi mult mai multe nave în rada (arity) portului, pe care le ține evidența căpitănia (obiectul arguments). Fiecare navă conține bunuri (valori) pe care le vom prelucra în oraș.
 
 Argumentele sunt valorile pasate funcțiilor. Numărul de parametri menționați la declararea funcției, se numește în jargonul programatorilor **arity**. Poți chiar să întrebi o funcție câți parametri are prin utilizarea proprietății `length` (în limba engleză, `length` înseamnă dimensiune, lungime).
 
@@ -20,7 +22,7 @@ function fac3 ({x, y}) {}; fac3.length; // 1
 function fac4 (x, ...y) {}; fac4.length; // 1
 ```
 
-Fiecare argument trebuie pasat funcției în ordinea corectă pentru că valoarea sa se va „lega” de numele desemnat de programator între parantezele rotunde. Aceste nume, de fapt identificatori, se numesc parametri. Ca să clarificăm, valorile pasate unei funcții se numesc argumente, iar identificatorii menționați între paranteze (în jargon i se spune headerul funcției), se numesc parametri. Acum că lucrurile sunt limpezite, trebuie să adăugăm faptul că o funcție poate primi mult mai mulțe argumente față de ceea ce este precizat ca și parametri. Valorile acestea nu se pierd în neant. Ele vor putea fi regăsite în obiectul special `arguments`.
+Fiecare argument trebuie pasat funcției în ordinea corectă pentru că valoarea sa se va „lega” de numele desemnat de programator între parantezele rotunde. Aceste nume, de fapt identificatori, se numesc parametri. Ca să clarificăm, valorile pasate unei funcții se numesc argumente, iar identificatorii menționați între paranteze (în jargon i se spune headerul funcției), de care se leagă aceste valori, se numesc parametri. Acum că lucrurile sunt limpezite, trebuie să adăugăm faptul că o funcție poate primi mult mai multe argumente față de ceea ce este precizat ca și parametri. Valorile acestea nu se pierd în neant. Ele vor putea fi regăsite în obiectul special `arguments`, dar dacă vei trimite mai puține argumente, restul parametrilor vor avea valoarea `undefined`.
 
 Toate aceste detalii sunt utile pentru că la un moment dat este necesară executarea unei funcții în funcție de numărul parametrilor săi. Poate să existe și cazul în care dorești un anumit parametru să stea întotdeauna pe ultima poziție pentru că, de fapt, acesta este la rândul său o funcție cu rol de callback.
 
@@ -43,7 +45,7 @@ Spunem despre o funcție care primește mai multe argumente decât numărul para
 
 ## O imagine în adâncime
 
-Mai jos este dat un exemplu care ilustrează afirmația: **o funcție este o rutină aplicată pe argumentele sale**. Exemplul se bazează pe funcționalitatea metodei `apply()` oferită prin moștenire din obiectul prototip al lui `Function`. (`Function.prototype.apply()`).
+Mai jos este dat un exemplu întărește afirmația: **o funcție este o rutină aplicată pe argumentele sale**. Exemplul se bazează pe funcționalitatea metodei `apply()` oferită prin moștenire din obiectul prototip al lui `Function`. (`Function.prototype.apply()`).
 
 ```javascript
 function oFunctie(x, y, z) {
@@ -55,6 +57,76 @@ oFunctie.apply(null, argumentele); // argumentele sunt aplicate literalmente fun
 ```
 
 Acest exemplu ilustrează în adâncime ceea ce se petrece cu argumentele unei funcții. Am folosit soluția practică `Array.prototype.slice.call(arguments)` pentru a transforma obiectul `arguments` într-un array.
+
+### Ce este `arguments`?
+
+Este un obiect care este disponibil funcției la momentul execuției. Acesta permite accesul la toți parametrii.
+
+**Spune standardul**:
+
+> Majoritatea funcțiilor ECMAScript pun la dispoziția propriului cod un obiect arguments.
+
+```javascript
+function ceva (unu, doi) {
+  return arguments.toString();
+};
+ceva(); // "[object Arguments]"
+```
+
+Scenariul în care va fi folosit acest obiect este cel al funcțiilor care primesc un număr variabil de argumente.
+
+**Sfatul lui Crockford**:
+
+> tratează `arguments` ca pe o structură read-only (doar pe care să o citești), pentru că, altfel, poți modifica fără să-ți dorești valorile și ordinea parametrilor funcției.
+
+```javascript
+function testX (unu, doi) {
+  console.log(typeof arguments);      // object
+  console.log(arguments.constructor); // function Object()
+  console.log(arguments.__proto__);   // Object { , 15 more… }
+  console.log(arguments.prototype);   // undefined
+};
+testX(10, 1000);
+```
+
+Unui obiect `arguments` i se pot seta proprietăți: `arguments[3] = 'trei'` în caz că acest lucru este necesar.
+
+```javascript
+function ex (unu, doi) {
+  console.log(this);  // Window
+  this.trei = 3;      // se creează prop trei: window.trei care este 3
+  console.log(ex.arguments); // Arguments {0:1,1:2,calee:ex(),length:2,__proto__:Object}
+  function intern (patru, cinci) {
+    console.log(this.trei);    // 3
+    console.log(ex.arguments); // Arguments {0:1,1:2,calee:ex(),length:2,__proto__:Object}
+  };
+  intern();
+};
+ex(1,2);
+console.log(window.trei);
+```
+
+### Efectul use strict
+
+În interiorul unei funcții, pentru că un parametru poate fi modificat, el fiind parte din mediul lexical format la execuția funcției, obiectul „arguments” este și el actualizat. Acest comportament este atunci când codul rulează fără restricția `"use strict";`. Dar când codul este rulat în `strict mode`, valorile inițiale din „arguments” rămân neschimbate.
+
+```javascript
+function demoArgs (unu) {
+  console.log(unu === arguments[0]); // true
+  unu = 100;
+  console.log(unu === arguments[0]); // true
+};
+demoArgs(10);
+
+function demoArgs (unu) {
+  "use strict";
+  console.log(unu === arguments[0]); // true
+  unu = 100;
+  console.log(unu === arguments[0]); // false
+  console.log(arguments[0]); // 10
+};
+demoArgs(10);
+```
 
 ## Operatorul spread
 
@@ -101,57 +173,9 @@ function faCeva (a, b) {
 faCeva(1, 3, 4); // Error: Trebuie musai doar două argumente
 ```
 
-## Ce este `arguments`?
-
-Este un obiect care este pasat funcției și care permite accesul la toți parametrii, fără a fi necesar să-i definești în interiorul funcției.
-
-**Spune standardul**:
-
-> Majoritatea funcțiilor ECMAScript pun la dispoziția propriului cod un obiect arguments.
-
-```javascript
-function ceva (unu, doi) {
-  return arguments.toString();
-};
-ceva(); // "[object Arguments]"
-```
-
-Scenariul în care va fi folosit acest obiect este cel al funcțiilor care primesc un număr variabil de argumente.
-
-**Sfatul lui Crockford**:
-
-> tratează `arguments` ca pe o structură read-only (doar pe care să o citești), pentru că, altfel, poți modifica fără să-ți dorești valorile și ordinea parametrilor funcției.
-
-```javascript
-function testX (unu, doi) {
-  console.log(typeof arguments);      // object
-  console.log(arguments.constructor); // function Object()
-  console.log(arguments.__proto__);   // Object { , 15 more… }
-  console.log(arguments.prototype);   // undefined
-};
-testX(10, 1000);
-```
-
-Unui obiect `arguments` i se pot seta proprietăți: `arguments[3] = 'trei'` în caz că acest lucru este necesar.
-
-```javascript
-function ex (unu, doi) {
-  console.log(this);  // Window
-  this.trei = 3;      // se creează prop trei: window.trei care este 3
-  console.log(ex.arguments); // Arguments {0:1,1:2,calee:ex(),length:2,__proto__:Object}
-  function intern (patru, cinci) {
-    console.log(this.trei);    // 3
-    console.log(ex.arguments); // Arguments {0:1,1:2,calee:ex(),length:2,__proto__:Object}
-  };
-  intern();
-};
-ex(1,2);
-console.log(window.trei);
-```
-
 ## Transformarea lui arguments într-un array
 
-De multe ori se ivește necesitatea de a avea obiectul `arguments`, să fie transformat într-un array. Pentru acest lucru se folosea utilitarul `slice()` invocat în contextul obiectului `arguments`.
+De multe ori se ivește necesitatea de a tranforma `arguments` într-un array. Pentru acest lucru se folosea utilitarul `slice()` invocat în contextul obiectului `arguments`. Aceasta este o practică de dinaintea actualizării standardului la ES5.
 
 ```javascript
 function convertireArgs (a, b) {
@@ -180,7 +204,7 @@ function convertireArgs (a, b) {
 
 Fă o vizită operatorului `...` (rest / spread) pentru mai multe exemple și lucruri potențial foarte utile pentru a înțelege simplitatea oferită prin abstractizarea pe care ES6 a introdus-o cu astfel de sintaxe.
 
-Pentru a obține un array din obiectul `arguments` se poate folosi și noul utilitar `Array.from(arguments)`.
+În acest moment, pentru a obține un array din obiectul `arguments` se poate folosi și noul utilitar `Array.from(arguments)`.
 
 ## Câte argumente sunt?
 
@@ -192,28 +216,6 @@ function cateSunt () {
 };
 cateSunt(1); // 1
 cateSunt(23, 10, 5, 'aha'); // 4
-```
-
-## Argumente, parametri și modificarea acestora
-
-În interiorul unei funcții, pentru că un parametru poate fi modificat, el fiind parte din mediul lexical format la execuția funcției, obiectul „arguments” este și el actualizat. Acest comportament este atunci când codul rulează fără restricția `"use strict";`. Dar când codul este rulat în `strict mode`, valorile inițiale din „arguments” rămân neschimbate.
-
-```javascript
-function demoArgs (unu) {
-  console.log(unu === arguments[0]); // true
-  unu = 100;
-  console.log(unu === arguments[0]); // true
-};
-demoArgs(10);
-
-function demoArgs (unu) {
-  "use strict";
-  console.log(unu === arguments[0]); // true
-  unu = 100;
-  console.log(unu === arguments[0]); // false
-  console.log(arguments[0]); // 10
-};
-demoArgs(10);
 ```
 
 ### Numărul la invocare vs. la declarare
@@ -251,7 +253,7 @@ Valorile corespondente vor fi atribuite iar parametrii care nu au valori, vor fi
 
 În anumite cazuri este nevoie de a inițializa un parametru cu o anumită valoare prestabilită și nu `undefined` așa cum este comportamentul standard al ECMAScript.
 
-Până la noua versiune a ECMAScript, mai întâi se verifica în funcție dacă un anumit parametru este `undefined`, iar dacă acesta era cazul, se inițializa cu o valoare. Acest lucru este posibil dacă ne readucem aminte faptul că și parametrii sunt identificatori în scope-ul funcției (`lexical environment`).
+Până la noua versiune a ECMAScript, mai întâi se verifica în funcție dacă un anumit parametru este `undefined`, iar dacă acesta era cazul, se inițializa cu o valoare. Acest lucru este posibil, dacă ne readucem aminte faptul că și parametrii sunt identificatori în scope-ul funcției (`lexical environment`).
 
 ```javascript
 let test = function (ceva) {
@@ -286,9 +288,9 @@ function test (ceva = "Valoare implicită") {
 test();
 ```
 
-## Parametri pot avea valori inițiale
+## Valori inițiale opționale
 
-Odată cu apariția noii versiuni a standardului ES6, parametrii pot avea valori inițiale ceea ce făcea ca invocarea cu acești parametri să fie opțională. În ES5, acest lucru se putea face folosind operatorul `||`. În acest caz, nu se puteau pasa valori care evaluate de operatorul `||` se reduceau la o valoare falsey.
+Odată cu apariția noii versiuni a standardului ES6, parametrii pot avea valori inițiale ceea ce făcea ca invocarea lor să fie opțională. În ES5, acest lucru se putea face folosind operatorul `||`. În acest caz, nu se puteau pasa valori care evaluate de operatorul `||` se reduceau la o valoare falsy.
 
 ```javascript
 function faUnBloc (inaltime, latime, lungime, timpCoacere) {
@@ -300,12 +302,23 @@ function faUnBloc (inaltime, latime, lungime, timpCoacere) {
 faUnBloc('', '', 150, 0); // 100 80 150 85000
 ```
 
-Pentru cei care vor să fie ultracorecți, idiomul de setare a unei valori de start ar fi trebuit să fie acesta: `inaltime = inaltime !== undefined ? x : 100`. În acest mod poți pasa și valori care s-ar reduce la o valoarea ce exprimă falsitatea (**falsey**), precum `0`, `undefined` sau `null`. Mai este o posibilitate care se reduce la testarea tipului valorii pasate pentru a determina valoarea de start (default îi spun englezii) în funcție de rezultat. În exemplul de mai sus, pentru ultima valoare, care este una validă pentru timp (`0`), motorul a redus-o la o valoare `falsey` și a preferat valoarea inițială.
+Pentru cei care vor să fie ultracorecți, idiomul de setare a unei valori de start ar fi trebuit să fie acesta: `inaltime = inaltime !== undefined ? x : 100`.
+
+```javascript
+function x (a) {
+  a = typeof a === 'undefined' ? 100 : a;
+  // cod
+};
+```
+
+Folosirea lui `typeof` returnează tipul valorii. Dacă un parametru nu primește argument, `undefined` este atribuit automat de motor. Odată detectată valoarea `undefined` se poate seta o nouă valoare din oficiu pentru parametru.
+
+În acest mod poți pasa și valori care s-ar reduce la o valoarea ce exprimă falsitatea (**falsy**), precum `0`, `undefined` sau `null`. Mai este o posibilitate care se reduce la testarea tipului valorii pasate pentru a determina valoarea de start (default îi spun englezii) în funcție de rezultat. În exemplul de mai sus, pentru ultima valoare, care este una validă pentru timp (`0`), motorul a redus-o la o valoare `falsy` și a preferat valoarea inițială.
 
 ```javascript
 function masoaraTimp (timpCoacere, rasuceste) {
   timpCoacere = (typeof timpCoacere !== 'undefined') ? timpCoacere : 85000;
-  rasuceste = (typeof rasuceste !== 'undefined') ? rasuceste : (function(){
+  rasuceste = (typeof rasuceste !== 'undefined') ? rasuceste : (function () {
     if(timpCoacere > 100000){
       alert('Răsucesc!');
     } else {
@@ -318,19 +331,19 @@ masoaraTimp(0); // Mai coc! Comportamentul este corect de această dată.
 masoaraTimp(150000); // Răsucesc!
 ```
 
-În exemplul oferit mai sus, această verificare a existenței unei valori este des întâlnită în practica de zi cu zi a codului conform ES5. Este un șablon des întâlnit. Poate fi considerat idiomul preferat pentru valorile default. Acesta reflectă o manieră imperativă în ceea ce privește setarea valorilor default.
+În exemplul oferit mai sus, această verificare a existenței unei valori este des întâlnită în practica de zi cu zi a codului conform ES5. Poate fi considerat idiomul preferat pentru valori inițiale. Acesta reflectă o manieră imperativă în ceea ce privește setarea valorilor default.
 
 ### Default values începând cu ES6
 
-ES6 permite introducerea valorilor inițiale direct în zona argumentelor transformând un obicei imperativ la o abordare declarativă chiar din zona argumentelor, în headerul funcției. Atenție, sunt permise numai expresii, nu instrucțiuni.
+ES6 permite introducerea valorilor inițiale direct în zona argumentelor transformând un obicei imperativ într-o abordare declarativă chiar din zona argumentelor. Atenție, sunt permise numai expresii, nu instrucțiuni.
 
 ```javascript
-function masoaraTimp (timpCoacere = 85000, rasuceste = function(){ alert('') }) {
+function masoaraTimp (timpCoacere = 85000, rasuceste = function () { alert('') }) {
   // cod funcție
 };
 ```
 
-Obiectul `arguments` în cazul parametrilor presetați are comportamentul rulării conform ES5 cu `"use strict";`. Pur și simplu, când motorul „vede” parametri cu valori inițiale, aplică comportamentul de izolare asupra obiectului `arguments`.
+Obiectul `arguments` în cazul parametrilor presetați are comportamentul rulării conform ES5 cu `"use strict";`. Pur și simplu, când motorul *vede* parametri cu valori inițiale, aplică comportamentul de izolare asupra obiectului `arguments`.
 
 ```javascript
 function demoArgs (unu, doi = 2) {
@@ -442,9 +455,9 @@ function exemplu (una, alta = una + 2, cateva = alta + ' mere') {
 exemplu(2); // Array [ 4, "4 mere" ]
 ```
 
-## Destructurarea argumentelor și parametrii rest
+## Rest și destructurare
 
-Folosirea operatorului `...` generează un Array adevărat, nu un array-like așa cum este `arguments`. Parametrii rest sunt singurii cărora nu le-a fost dat un nume. Totuși `arguments` îi conține pe toți.
+Folosirea operatorului `...` generează un array adevărat, nu un *array-like* așa cum este `arguments`. Parametrii rest generează o colecție a tuturor argumentelor care nu au primit identificatori. Totuși `arguments` îi conține pe toți.
 
 Intenția introducerii prin ES6 a **parametrilor rest**, a fost accea de a înlocui `arguments`. Motivul a fost necesitatea de a putea introduce un număr nelimitat de argumente.
 
@@ -467,17 +480,17 @@ function lucru (a, b, ...argumente) {
 };
 ```
 
-Parametrii rest nu pot fi utilizați atunci când se creează obiecte a căror proprietăți sunt introduse folosind `object literal setters`. Acest lucru se petrece pentru că setarea în acest mod a proprietăților se poate face doar cu un singur argument iar parametrii rest pot seta o mulțime de parametri.
+Parametrii rest nu pot fi utilizați atunci când se creează obiecte a căror proprietăți sunt introduse folosind `object literal setters`. Acest lucru se petrece pentru că setarea în acest mod a proprietăților se poate face doar cu un singur argument, iar parametrii rest pot seta o mulțime de parametri.
 
 ```javascript
-var x = {
+let x = {
   set facCeva(...argumente){}
 };
 ```
 
 ### Aplicarea destructurării
 
-Utilizarea operatorului **trei puncte** are o acțiune destructurantă asupra colecțiilor pe care se aplică. Am văzut acest efect deja ceva mai devreme când am discutat despre **rest parameters - parametrii rest**. Știm deja faptul că operațiunea de destructurare „desface” o structură de date cum este un array în elementele sale componente pentru a le servi unei funcții sau într-un enunț specializat. Mecanismul de destructurare funcționează foarte bine și în cazul argumentelor.
+Utilizarea operatorului **trei puncte** are o acțiune destructurantă asupra colecțiilor pe care se aplică. Am văzut acest efect deja ceva mai devreme când am discutat despre **rest parameters - parametrii rest**. Știm deja faptul că operațiunea de destructurare *desface* o structură de date cum este un array în elementele sale componente pentru a le servi unei funcții sau într-un enunț specializat. Mecanismul de destructurare funcționează foarte bine și în cazul argumentelor.
 
 ```javascript
 function facCeva (...argumente) {

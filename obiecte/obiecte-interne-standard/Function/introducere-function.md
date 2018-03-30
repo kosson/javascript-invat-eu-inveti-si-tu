@@ -10,14 +10,15 @@ Constructorul lui `Function` este în sine un obiect funcție built-in. Acest ob
 
 **Obiectul prototype al lui `Function` este în sine un obiect - funcție intern**. Acest lucru este încă acceptat pentru că trebuie asigurată compatibilitatea cu restul codului scris înainte de ECMAScript 2015.
 
-`Function` nu poate fi constructor (nu are metoda internă [\[Construct]]). Acest obiect nu are o proprietate `property`.
+`Function` nu poate fi constructor (nu are metoda internă \[\[Construct]]). Acest obiect nu are o proprietate `property`.
 
 **Spune standardul**:
 
 Funcțiile create folosind `Function.prototype.bind()` au următoarele sloturi interne:
-- [\[BoundTargetFunction]] care este obiectul funcție împachetat,
-- [\[BoundThis]] fiind valoarea care este pasată întotdeauna ca this atunci când este apelată funcția împachetată.
-- [\[BoundArguments]] este o listă de valori a cărei valori sunt folosite ca prime argumente pentru funcția împachetată apelată.
+
+-   \[\[BoundTargetFunction]] care este obiectul funcție împachetat,
+-   \[\[BoundThis]], fiind valoarea care este pasată întotdeauna ca this atunci când este apelată funcția împachetată.
+-   \[\[BoundArguments]] este o listă de valori a cărei valori sunt folosite ca prime argumente pentru funcția împachetată apelată.
 
 Nu au proprietatea `prototype` obiectele funcții care sunt create prin `Function.prototype.bind()` sau care au fost create prin evaluarea definirii unei simple metode (care nu este `Generator`) sau funcțiile arrow.
 
@@ -49,21 +50,21 @@ functieNoua('a','b','c','d'); // "a"
 
 ## Metode:
 
-- `Function.prototype.apply()`
-- `Function.prototype.bind()`
-- `Function.prototype.call()`
-- `Function.prototype.toString()`
+-   `Function.prototype.apply()`
+-   `Function.prototype.bind()`
+-   `Function.prototype.call()`
+-   `Function.prototype.toString()`
 
 ### `Function.prototype.apply()`
 
 Apelează o funcție căreia îi setează bindingul pentru `this` la obiectul precizat între paranteze . Argumentele pot fi pasate și ca array.
 
-Funcția este pur și simplu invocată în contextul indicat de primul argument al lui `apply` și îi sunt pasate argumentele care sunt elementele array-ului din al doilea argument al lui apply `nume_funcție.apply(this, ['para1', 'para2'])`.
+Funcția este pur și simplu invocată în contextul indicat de primul argument al lui `apply`, pasându-se argumentele care sunt elementele array-ului din al doilea argument al lui apply `nume_funcție.apply(this, ['para1', 'para2'])`.
 
 Metoda primește două argumente:
 
-- o referință către un obiect, care devine și `this` pentru funcția apelată cu `apply()`.
-- o listă de argumente organizată ca array sau ceva ce seamănă cu un array (`array-like`).
+-   o referință către un obiect, care devine și `this` pentru funcția apelată cu `apply()`,
+-   o listă de argumente organizată ca array sau ceva ce seamănă cu un array (`array-like`).
 
 Dacă nu este invocat *strict mode* (`"use strict";`), `null` și `undefined` în cazul primului argument, acesta va fi înlocuit cu obiectul global, iar primitivele vor fi „învelite” în obiectul corespunzător (în limba engleză această operațiune este numită `boxing`).
 
@@ -75,7 +76,7 @@ Pentru parametrul listei de argumente se poate folosi și obiectul care seamăn�
 
 Obiectul pasat ca și context de execuție este menționat între paranteze, fiind urmat de un array cuprinzând argumentele funcției.
 
-Începând cu ECMAScript 5, array-ul argumentelor pasate poate fi un obiect dar care are caracteristicile unui array. Ca exemplu de tipologie este `arguments` care este un obiect asemănător unui array disponibil în timpul execuției unei funcții.
+Începând cu ECMAScript 5, array-ul argumentelor pasate poate fi un obiect care are caracteristicile unui array. Ca exemplu de tipologie este `arguments`, care este un obiect asemănător unui array disponibil în timpul execuției unei funcții.
 
 ##### Mecanism de operare a funcțiilor interne ale limbajului
 
@@ -114,11 +115,28 @@ console.log(adauga(5)); // 13
 
 Standardul spune că funcțiile obiecte create folosind `Function.prototype.bind()` sunt **obiecte exotice**. Acest lucru înseamnă că nu au proprietatea `prototype`.
 
-Un exemplu cu aplicativitate directă este manipularea DOM-ului. Spre exemplu să te asiguri că vei referenția mereu obiectul `document` și pentu ca să nu scape bindingul lui `this` în obiectul global al JavaScript.
+Un exemplu cu aplicativitate directă este manipularea DOM-ului. Te ajută să te asiguri că vei referenția mereu obiectul `document` și pentru ca să nu scape bindingul lui `this` în obiectul global al JavaScript.
 
 ```javascript
 var extrage = document.getElementById.bind(document, 'elementulX');
 var elemX = extrage();
+```
+
+Un alt exemplu elocvent este întâlnit la gestionarea evenimentelor atunci când dorim să ne asigurăm că funcția cu rol de callback este *legată* corect de `this`-ul obiectului generat de elementul DOM.
+
+```html
+<button id="test2">Apasă-mă! 2</button>
+<script>
+  let state = {
+    valoare: false,
+    modificator: function modi () {
+      this.valoare ? this.valoare = false : this.valoare = true;
+      console.log(this.valoare);
+    }
+  };
+  let but2 = document.querySelector('#test2');
+  but2.addEventListener('click', state.modificator.bind(state));
+</script>
 ```
 
 ### `Function.prototype.call()`

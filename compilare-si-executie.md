@@ -53,14 +53,14 @@ Rând pe rând, linie cu linie sunt notate (**registered**) în mediul lexical g
 
 ## Mantre
 
-- Faza de compilare este distinctă de faza de execuție a codului.
-- Înainte de evaluare este creat un `realm` pentru codul sursă.
-- La fiecare evaluare a codului sursă este recreat `lexical environment` - scope-ul.
-- În faza de compilare, variabilele și funcțiile sunt „înregistrate” în global scope, adică sunt create referințe în memorie pentru acestea pe baza identificatorilor lor.
-- În compilare sunt create doar referințe în ceea ce standardul numește `environment record` - registrul mediului pe care îl creează `lexical environment` (scope-ul).
-- Conținutul funcțiilor nu este procesat deocamdată.
-- Execuția pornește imediat după această fază de „înregistrare”.
-- La momentul execuției, entitățile deja există și relaționează.
+-   Faza de compilare este distinctă de faza de execuție a codului.
+-   Înainte de evaluare este creat un `realm` pentru codul sursă.
+-   La fiecare evaluare a codului sursă este recreat `lexical environment` - scope-ul.
+-   În faza de compilare, variabilele și funcțiile sunt „înregistrate” în global scope, adică sunt create referințe în memorie pentru acestea pe baza identificatorilor lor.
+-   În compilare sunt create doar referințe în ceea ce standardul numește `environment record` - registrul mediului pe care îl creează `lexical environment` (scope-ul).
+-   Conținutul funcțiilor nu este procesat deocamdată.
+-   Execuția pornește imediat după această fază de „înregistrare”.
+-   La momentul execuției, entitățile deja există și relaționează.
 
 ### Cazul funcțiilor
 
@@ -68,10 +68,10 @@ Rând pe rând, linie cu linie sunt notate (**registered**) în mediul lexical g
 
 La prima fază a compilării, funcțiile nu sunt parcurse de compilator, ci doar se face o referință către conținutul lor. Abia la faza execuției, atunci când funcția este invocată, funcția intră din nou într-o fază de compilare:
 
-- declară și inițializează argumentele funcției.
-- fiecare argument al unei funcții este de fapt o variabilă locală.
-- declară variabilele locale (din interiorul funcției), încluzând aici și funcțiile anonime care sunt atribuite unei variabile locale, de neinițializându-le
-- declară și inițializează funcțiile.
+-   declară și inițializează argumentele funcției.
+-   fiecare argument al unei funcții este de fapt o variabilă locală.
+-   declară variabilele locale (din interiorul funcției), încluzând aici și funcțiile anonime care sunt atribuite unei variabile locale, de neinițializându-le
+-   declară și inițializează funcțiile.
 
 ATENȚIE! Pentru funcții, acestea sunt înregistrate, dar conținutul lor este stocat undeva în memorie fără a fi compilat deocamdată. Adu-ți mereu aminte că funcțiile sunt valori. Este momentul în care sunt create obiectele funcții care conțin codul funcției plus alte proprietăți. Funcția pe lângă proprietățile sale, va primi tacit `this`, `arguments` și o altă proprietate internă (`[[Environment]]`) care este scope-ul preexistent la momentul declarării. Dacă declarăm o funcție în Global Object, **scope** va fi chiar <u>Global Object</u>.
 

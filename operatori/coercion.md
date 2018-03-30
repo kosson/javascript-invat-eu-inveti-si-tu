@@ -102,4 +102,8 @@ Există o metodă prin care poți transforma un număr într-o bază la alegere.
 parseInt('101',2); // 5
 ```
 
-În încheiere, atrag atenția asupra acestor transformări care se petrec automat la momentul evaluării expresiilor. Uneori, mecanismul de transformarea automată, dacă nu este înțeles pe deplin poate conduce la erori și situații aparent inexplicabile. Întelegerea coercion este strâns legată de înțelegerea operatorilor și efectelor pe care aceștia le au asupra operanzilor la momentul evaluării.
+## Transformări implicite și explicite
+
+Până acum am discutat doar despre transformările care se petrec la momentul evaluării codului. Acestea se numersc transformări implicite. Dacă este nevoie, poți face și transformări explicite ale valorilor folosind obiectele interne ale limbajului. Acestea sunt niște constructori și, ca oricare alt contructor, o funcție. Apelarea strictă ca funcție pasând o valoare, va avea drept efect transformarea explicită a acelei valori la tipul constructorului folosit. Mai sus, am strecurat deja câteva exemple.
+
+În încheiere, atrag atenția asupra acestor transformări care se petrec automat la momentul evaluării expresiilor. Uneori, mecanismul de transformarea automată, dacă nu este înțeles pe deplin poate conduce la erori și situații aparent inexplicabile. Întelegerea transformărilor este strâns legată de înțelegerea operatorilor și efectelor pe care aceștia le au asupra operanzilor la momentul evaluării.

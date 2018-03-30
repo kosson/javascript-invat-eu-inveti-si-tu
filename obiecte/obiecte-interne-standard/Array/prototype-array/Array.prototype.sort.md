@@ -2,8 +2,7 @@
 
 Atenție! Această metodă modifică definitiv array-ul original.
 
-Sortează elementele unui array și returnează acel array.
-Fii avertizat că această metodă modică array-ul. Există un mic truc care protejează array-ul original: folosirea metodei `slice()` pentru a face o copie pe care faci sortarea.
+Sortează elementele unui array și returnează acel array. Fii avertizat că această metodă modică array-ul. Există un mic truc care protejează array-ul original: folosirea metodei `slice()` pentru a face o copie pe care apoi faci sortarea.
 
 ```javascript
 const arrOrig = [23, 'ceva', 43, 8];
@@ -11,7 +10,9 @@ const arrCopie = arrOrig.slice().sort();
 // [ 23, 43, 8, "ceva" ]
 ```
 
-Dacă nu este pasat un argument, de fapt o funcție care să îndeplinească sortarea, aceasta se va face prin compararea **punctelor de cod** Unicode, adică a valorilor numerice care codează caracterele. Ceea ce se întâmplă este o conversie a elementelor de array la string urmată de compararea lor ca valori Unicode. Pentru șiruri funcția de comparare poate fi astfel:
+Dacă nu este pasat un argument, de fapt o funcție care să îndeplinească sortarea, aceasta se va face prin compararea **punctelor de cod** Unicode, adică a valorilor numerice care codează caracterele. Ceea ce se întâmplă este o conversie a elementelor de array la string urmată de compararea lor ca valori Unicode.
+
+Pentru compararea șirurilor este necesară folosirea unei funcții care să se aplice elementelor care vor fi comparate între ele. Funcția va fi, de fapt un algoritm care va fi folosite pentru compararea valorilor. Acesta este un ca clasic de utilizarea a unui callback. Funcția de comparare poate fi astfel:
 
 ```javascript
 function compara (primulCaracter, alDoileaCaracter) {
@@ -73,7 +74,7 @@ O altă variantă de comparator pentru valori numerice este pur și simplu scăd
 [-23, -2, 102, 3, -54].sort( (x, y) => x - y );
 ```
 
-Și obiectele pot fi sortate dacă este dată o valoare a uneia dintre proprietăți.
+Și obiectele pot fi sortate dacă este dată o valoarea uneia dintre proprietăți.
 
 ```javascript
 var colectie = [
@@ -180,7 +181,7 @@ function bubbleSort (arr) {
 bubbleSort(arr);
 ```
 
-Și acum, același principiu prin aplicarea metodei `sort()`. Dacă vom cupla cu noua sintază pe care o introduce fat arrow, vom ajunge la o formulă mult simplificată. Atenție, variantele următoare funcționează pentru valorile numerice.
+Și acum, același principiu prin aplicarea metodei `sort()`. Dacă vom cupla cu noua sintaxă pe care o introduce *fat arrow*, vom ajunge la o formulă mult simplificată. Atenție, variantele următoare funcționează pentru valorile numerice.
 
 ```javascript
 const ascendent = (a, b) => a - b;
