@@ -172,6 +172,11 @@ Reține că pentru codul sub `"use strict";`, valoarea lui `this` este `undefine
 
 În cazul obiectelor, atunci când apelezi o funcție (care joacă rolul de metodă), folosind `.` sau `[]`, acel obiect va fi contextul, adică `this`.
 
+### Puntea lexicală `self = this`
+
+Acesta este cazul în care o metodă este gazda unei funcții interne. Știm că fiecare funcție are propriul obiect identificat prin `this`. Dacă funcția internă ar dori să acceseze `this`, referința nu va fi `this` a funcției gazdă cu rol de metodă, ci propriul obiect `this` format la momentul propriei invocări în funcție de contextul de execuție de la momentul apelului.
+Pentru că din punct de vedere a structurii lexicale a codului ar fi de înțeles faptul că dorim accesul la `this` care să fie referință către obiectul metodei, de cele mai multe ori se recurge la un artificiu, la o punte lexicală de forma `var self = this;`.
+
 ### `this` și constructorii
 
 Știm că funcțiile sunt folosite pentru a construi obiecte. Fii totuși atentă că o funcție cu rol de constructor poate fi invocată și fără operatorul `new`. În acest caz se va comporta ca o funcție simplă cu toate consecințele rulări în acest mod.

@@ -1,24 +1,22 @@
 # Closures
 
-O funcție definită în interiorul unei funcții container, generează un closure.
+O funcție definită în interiorul unei funcții container, generează un closure peste mediul lexical existent la momentul definirii. Motorul Javascript ține evidența mediilor lexicale, fie că acestea sunt la nivel de bloc, la nivel de funcție sau globalul. Reține faptul că declararea variabilelor cu `var` introduce identificatorii în limitele unei funcții container sau în obiectul global ignorând complet blocurile delimitate prin acolade. Declararea variabilelor cu `let` și `const` introduce identificatori doar la nivelul blocului în care se face declararea și în blocurile de cod delimitate prin acolade.
 
-Cum am putea traduce în română termenul de *closure*. Am explorat deja la funcții posibile traduceri în limba română și pentru că ambii termeni identificați: **portiță** și  **breșă** nu sunt tocmai eleganți pentru uzul curent, am căzut de acord că vom folosi termenul în limba engleză. După ce vom fi explorat mai mult, vom înțelege că este o caracteristică, un mecanism al limbajului de programare și astfel, am putea să ne gândim la acțiunea pe care o implică termenul de **closure**. Să o luăm încetișor. Primul lucru pe care-l știm despre funcții, este că acestea sunt acțiuni transformatoare asupra datelor pe care le primesc (aplicarea pe argumente de care am pomenit), fie că aceste date sunt „injectate” în funcție prin argumente, fie că sunt disponibile „la liber” în mediul lexical unde a fost declarată funcția. Trebuie să ne aducem mereu aminte de importanța redactării codului și în consecință de locul unde declarăm funcțiile. Foarte important este și locul de unde le apelăm pentru că de acolo este posibil să „injectăm” prin argumente date, care sunt necesare doar în locul în care este apelată funcția sau în obiectul în a cărui context a fost invocată.
+Cum am putea traduce în română termenul de *closure*. Am explorat deja la funcții posibile traduceri în limba română și pentru că ambii termeni identificați: **portiță** și  **breșă** nu sunt tocmai eleganți pentru uzul curent, am căzut de acord că vom folosi termenul în limba engleză. După ce vom fi explorat mai mult, vom înțelege că este o caracteristică, un mecanism al limbajului de programare și astfel, am putea să ne gândim la acțiunea pe care o implică termenul de **closure**. 
+
+Să o luăm încetișor. Primul lucru pe care-l știm despre funcții, este că acestea sunt acțiuni transformatoare asupra datelor pe care le primesc (aplicarea pe argumente de care am pomenit), fie că aceste date sunt „injectate” în funcție prin argumente, fie că sunt disponibile „la liber” în mediul lexical unde a fost declarată funcția. Trebuie să ne aducem mereu aminte de importanța redactării codului și în consecință de locul **unde declarăm funcțiile**. Foarte important este și locul de unde le apelăm pentru că de acolo este posibil să „injectăm” prin argumente date, care sunt necesare doar în locul în care este apelată funcția sau în obiectul în al cărui context a fost invocată.
 
 O funcție declarată în mediul lexical global, va avea acces la toate proprietățile acestui obiect. Dacă o funcție, va fi declarată într-un bloc de cod sau într-o altă funcție, aceasta va avea acces la tot ce constituie mediul lexical format local de acel bloc de cod sau de funcție.
 
-Acum apare minunea: dacă declari o funcție în interiorul altei funcții, pe care o returnezi, vei avea acces la un set de date ce nu pot fi prelucrate direct. Acesta este și motivul pentru care avem acest instrument foarte puternic care este closure-ul.
+Acum apare minunea: dacă declari o funcție în interiorul altei funcții, pe care o returnezi, vei avea acces la un set de date ce nu pot fi prelucrate direct. Acesta este și motivul pentru care avem acest instrument foarte puternic care este closure-ul. Poți realiza variabile private. Ascunderea unui set de date ce nu poate fi manipulat direct, care poate fi accesat la un moment dat sau dacă este nevoie cu o anumită întârzire, ori pur și simplu să știi că există o structură de date creată în anumite condiții, dar cu care poți interacționa, este ceea ce oferă closure-urile.
 
-Ascunderea unui set de date ce nu poate fi manipulat direct, care poate fi accesat la un moment dat sau dacă este nevoie cu o anumită întârzire, ori pur și simplu să știi că există o structură de date creată în anumite condiții, dar cu care poți interacționa, este ceea ce oferă closure-urile.
-
-Bineînțeles vei avea o variabilă-identificator căreia îi va fi asignat rezultatul evaluării funcției gazdă. Rezultatul va fi funcția returnată (**nu uita niciodată că mai întâi de toate, o funcție este o valoare în sine**), care, MAGIE! are acces încă la mediul lexical al funcției gazdă, chiar dacă aceasta și-a încheiat execuția.
+Bineînțeles vei avea o variabilă-identificator căreia îi va fi asignat rezultatul evaluării funcției gazdă. Rezultatul va fi funcția returnată (**nu uita niciodată că mai întâi de toate, o funcție este o valoare în sine**), care, magie, are acces încă la mediul lexical al funcției gazdă, chiar dacă aceasta și-a încheiat execuția.
 
 ![](ClosureVisual.png)
 
 Te vei întreba pe bună dreptate: cum să mai fie disponibile datele unei funcții care și-a terminat execuția, când știm foarte bine că „dispar” (sunt trimise la gunoi)?
 
-Răspunsul este unul simplu și plin de lumină: funcția noastră a returnat o altă funcție, care și ea la rândul ei are nevoie de date din mediul lexical în care a fost declarată, plus toate referințele la datele necesare pentru a se putea face evaluarea codului din corpul său.
-
-Și cum acestea aparțineau funcției gazde, acestea nu vor fi colectate la gunoi, ci vor fi disponibile tocmai pentru a-i servi celei returnate.
+Răspunsul este unul simplu și plin de lumină: funcția noastră a returnat o altă funcție, care și ea la rândul ei are nevoie de date din mediul lexical în care a fost declarată, plus toate referințele la datele necesare pentru a se putea face evaluarea codului din corpul său. Și cum acestea aparțineau funcției gazde, acestea nu vor fi colectate la gunoi, ci vor fi disponibile tocmai pentru a-i servi celei returnate.
 
 Profesorul Christopher Strachey, cercetător britanic în domeniul sistemelor de calcul, spunea încă din octombrie 1967:
 
@@ -607,8 +605,6 @@ Funcțiile de nivel înalt și closure-urile formează coloana vertebrală a pro
 
 ## Referințe
 
-[JavaScript Allongé, the "Six" Edition](https://leanpub.com/javascriptallongesix/read#closures)
-
-[JavaScript Getters and Setters](https://javascriptplayground.com/blog/2013/12/es5-getters-setters/)
-
-[Javascript Closures](http://jibbering.com/faq/notes/closures/)
+- [JavaScript Allongé, the "Six" Edition](https://leanpub.com/javascriptallongesix/read#closures)
+- [JavaScript Getters and Setters](https://javascriptplayground.com/blog/2013/12/es5-getters-setters/)
+- [Javascript Closures](http://jibbering.com/faq/notes/closures/)

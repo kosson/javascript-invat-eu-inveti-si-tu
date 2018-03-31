@@ -42,7 +42,7 @@ Doar dacă se folosește 'use strict', se poate ocoli acest comportament. ATENȚ
 ### Problema suprascrierii prin folosirea aceluiași identificator
 
 ```javascript
-function ceva(){};
+function ceva () {};
 var ceva = 0;
 console.log(typeof ceva); // number
 ```

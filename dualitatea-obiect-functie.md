@@ -184,10 +184,12 @@ Din acest moment, vom analiza doar sloturile unei funcții obiect. Am încheiat 
 
 ![](FunctionEnvironmentSymbol.png)
 
-Tipul de date la care se referă este chiar **mediul lexical** al unei funcții. Standardul aduce câteva lămuriri în ceea ce privește natura mediilor lexicale și spune că este o specificație a standardului folosită pentru a defini asocierile identificatorilor la anumite variabile și funcții pe baza structurii de imbricare lexicală a codului ECMAScript.
-Mediul lexical este asociat unor structuri de cod precum declarația de funcție, enunțurile de bloc de cod și secvența Catch din enunțul Try..Catch (**8.1.1 Environment Records**).
+Vorbim despre **mediul lexical** al unei funcții la momentul creării sale. Acest mediu lexical este *memorat* de slotul \[\[Environment]]. Standardul aduce câteva lămuriri în ceea ce privește natura mediilor lexicale și spune că este o specificație a standardului folosită pentru a defini asocierile identificatorilor la anumite variabile și funcții pe baza structurii de imbricare lexicală a codului ECMAScript.
+În ceea ce privește formarea sa, mediul lexical este asociat unor structuri de cod precum declarația de funcție, enunțurile de bloc de cod și secvența `Catch()` din enunțul Try..Catch (**8.1.1 Environment Records**).
 
-Tot aici la slotul privind mediul lexical este potrivit să amintim ce face o funcție atunci când este declarată în raport cu mediul lexical. Tot standardul spune la **9.2 ECMAScript Function Objects** faptul că *funcțiile obiect încapsulează cod parametrizat ECMAScript acoperind un mediu lexical și care permit evaluarea dinamică a codului. Un obiect funcție ECMAScript este un obiect ordinar care are aceleași sloturi interne și aceleași metode ca și celelalte obiecte ordinare*.
+Este potrivit să amintim ce face o funcție atunci când este declarată în raport cu mediul lexical. Tot standardul spune la **9.2 ECMAScript Function Objects**:
+
+> funcțiile obiect încapsulează cod parametrizat ECMAScript acoperind un mediu lexical care permite evaluarea dinamică a codului. Un obiect funcție ECMAScript este un obiect ordinar care are aceleași sloturi interne și aceleași metode ca și celelalte obiecte ordinare.
 
 Aceste detalii sunt importante pentru a înțelege aspectele cele mai intime ale unei funcții.
 Ar fi necesar să privim și la cazul în care o funcție este invocată într-un anumit context de execuție. Ce se întâmplă cu mediul lexical? Acesta se modifică reflectând ceea ce a fost găsit în locul în care se execută. Să-ți aduci mereu aminte că funcțiile pot fi pasate și apelate oriunde este necesar.
@@ -259,7 +261,7 @@ Am reprezentat cu încadrarea unei căsuțe într-un cerc care desemnează un ob
 
 ## Discuție
 
-Ce am aflat până în același moment?
+Ce am aflat până în acest moment?
 
 Știm că la baza oricărei funcții stă un obiect. Peste acest obiect se adaugă propriile sloturi și cele două metode interne care transformă obiectul într-o funcție. Metoda `Call` permite ca obiectul funcție să permită evaluarea codului din corp. Metoda `Construct` este cea care dă posibilitatea unui obiect funcție să poată construi obiecte prin invocarea cu operatorul `new`.
 

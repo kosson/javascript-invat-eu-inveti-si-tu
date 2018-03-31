@@ -1,8 +1,17 @@
 # Generators
 
-Generatoarele oferă posibilitatea de a parcurge o colecție de date.
+Generatoarele oferă posibilitatea de a parcurge o colecție de date. Este un nou tip de funcții introduse în ECMAScript 2015 care generează de valori la cerere.
 
-Sunt un nou tip de funcții introduse în ECMAScript 2015. Acest nou tip de lucru cu funcțiile se bazează pe faptul că accesul la date se face cu ajutorul iteratoarelor. Datele noastre sunt obiecte iterator pe care le putem parcurge.
+```javascript
+function* ceva () {
+  yield "test1";
+  yield "test2";
+};
+let x = ceva();
+x.next(); // Object { value: "test1", done: false }
+```
+
+Acest nou tip de lucru cu funcțiile se bazează pe faptul că accesul la date se face cu ajutorul iteratoarelor. Datele noastre sunt obiecte iterator pe care le putem parcurge.
 
 ```javascript
 var iterator = [1, 2, 3][Symbol.iterator](),
@@ -22,7 +31,7 @@ for(var x of [1, 2, 3]){
 
 Parcurgerea se face automat, rezultatele fiind oferite la încheierea iterării. Ce te faci în momentul în care dorești să ai acces secvențial la valorile unei colecții? În acest caz, vom apela la funcțiile generator. Punerea unei steluțe după cuvântul cheie `function`, va semnala că avem de a face cu o funcție generator.
 
-Apelarea unui generator nu îl execută, ci doar este trimisă funcția în call-stack. De fapt, la executare este returnată o instanță a funcției.
+Apelarea unui generator nu îl execută, ci doar este trimisă funcția în stiva apelurilor. De fapt, la apelare este returnată o instanță a funcției.
 
 ```javascript
 function* faCeva () {

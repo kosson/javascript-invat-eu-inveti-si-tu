@@ -8,25 +8,6 @@ La invocare se creează un nou context de execuție, care ajunge în call-stack.
 
 > Atunci când se stabilește un context de execuție pentru a evalua o funcție ECMAScript, este creat un nou Environment Record, precum și legăturile pentru fiecare parametru formal din acel Environment Record. Fiecare declarație din corpul funcției este instanțiată și ea. Dacă parametrii formali ai funcției nu includ niciun inițializator pentru valori implicite, atunci corpul declarațiilor sunt instanțiate în același Environment Record ca și parametrii. Dacă aceștia există, este creat un al doilea Environment Record pentru declarațiile din corp. Parametrii formali și funcțiile sunt inițializate ca parte a FunctionDeclarationInstantiation. Restul celorlalte legături sunt inițializate în timpul evaluării corpului funcției. [9.2.12 FunctionDeclarationInstantiation ( func, argumentsList ). Nota 1](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-functiondeclarationinstantiation)
 
-## Mantre
-
--   A invoca înseamnă aplicarea funcției pe zero sau mai multe argumente.
--   Funcțiile sunt invocate într-un loc care determină rezultatul, adică într-un anumit *context*.
--   La invocarea funcțiilor pe lângă argumente sunt constituite „tacit” obiectele `this` și `arguments`.
--   Când invoci funcția ca metodă a unui obiect, acel obiect devine **contextul** funcției și acesta devine disponibil în funcție prin intermediul parametrului `this`.
--   `this` este un obiect-context: pentru funcții simple este `window` (nu și sub regula use strict), pentru metode este obiectul în care se execută, iar pentru noile obiecte create este chiar noul obiect generat.
--   în `"strict mode";`, la invocarea directă în global execution context `this` este `undefined`.
--   există patru cazuri în care o funcție este invocată:
-  - ca funcție invocată în mod direct;
-  - ca metodă, fapt care leagă invocarea de un obiect;
-  - ca și constructor prin care un nou obiect este generat;
-  - prin folosirea lui `call()` și `apply()`.
--   La evaluarea funcției toate declarațiile dintre `{}` vor genera un `Environment Record`. Invocarea unei funcții creează un scope nou.
--   Contextul de execuție al unei funcții se modifică după „locul” în care a fost invocată.
--   Ori de câte ori o funcție este invocată se creează un nou context de execuție care este introdus în call-stack.
--   O funcție are acces și poate performa operațiuni asupra obiectului în interiorul căruia a fost invocată.
--   O funcție care returnează, fie `true`, fie `false` se numește funcție „predicat”.
-
 ## Ce se întâmplă când o funcție este invocată?
 
 1.  Locul în care se întâmplă acest lucru se numește **call-site**.
@@ -59,22 +40,17 @@ Obiectul **arguments** este o colecție (seamănă dar NU ESTE UN ARRAY) a tutur
 
 ### Funcție invocată
 
-Această invocare se întâmplă atunci când este folosit operatorul `()`. În ES5 și versiunile anterioare, la invocarea funcțiilor, `this` este setat la obiectul global. Folosirea regulii `"use strict";` va atribui ibiectului `this` valoarea `undefined`.
-
-#### Puntea lexicală `self = this`
-
-Acesta este cazul în care o metodă este gazda unei funcții interne. Știm că fiecare funcție are propriul `this`. Dacă funcția internă ar dori să acceseze `this`, referința nu va fi `this` al funcției gazdă cu rol de metodă, ci propriul `this` format la momentul propriei invocări în funcție de contextul de execuție existent.
-Dar pentru că din punct de vedere a structurii lexicale a codului ar fi de înțeles faptul că dorim accesul la `this` care să fie referință către obiectul metodei, de cele mai multe ori se recurge la un artificiu, la o punte lexicală de forma `var self = this;`.
+Această invocare se întâmplă atunci când este folosit operatorul `()`.
 
 ### Invocarea ca metodă
 
-Când invoci funcția ca metodă a unui obiect, acel obiect devine **contextul** funcției și acesta devine disponibil în funcție prin intermediul parametrului `this` pasat tacit împreună cu `arguments`. Acesta este mecanismul de acces la membrii obiectului.
+Când invoci funcția ca metodă a unui obiect, acel obiect devine **contextul** funcției, devinind accesibil funcției prin intermediul obiectului `this`. Acesta este mecanismul de acces la membrii obiectului.
 
 ### Invocarea în rol de constructor
 
 #### Regulile constructorului
 
-Scopul unui constructor este de a crea un obiect, care este, de fapt valoarea returnată prin execuția funcției cu `new`.
+Scopul unui constructor este acela de a crea un obiect, care este valoarea returnată prin execuția funcției cu `new`.
 
 1.  Se creează un obiect nou.
 2.  Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu `new`. Se creează legătura prototipală.
@@ -93,6 +69,7 @@ let instanta = new Ceva();
 ```
 
 Observăm că funcția noastră va avea un comportament *normal* și va returna evaluarea oricăror expresii. Astfel se explică de ce o parte din constructorii obiectelor interne pot fi apelați și ca funcții, unii fiind folosiți pentru a face *casting* unor valori pentru care dorim un tip fix. Atenție, dacă se va apela cu `new`, valoarea returnată va fi complet ignorată și se va crea un obiect nou.
+
 Mai există o situație interesantă legată de pierderea capacității de a genera un nou obiect a unui contructor creat de noi. Dacă funcția constructor va returna un obiect, atunci la invocarea cu `new`, nu va crea un obiect nou, ci îl va returna pe cel specificat.
 
 ```javascript
@@ -105,6 +82,29 @@ let obi2 = new Ceva();
 ```
 
 Ca regulă de bună practică, constructorii îi denumim cu substantive și cu literă mare spre deosebire de funcții și metode pe care le denumim cu verbe și cu literă mică.
+
+În cazul constructorilor se mai ridică o problemă interesantă. Toate variabile declarate în funcția constructor vor fi accesibile metodelor obiectului nou creat prin closure. Se poate realiza astfel o ascundere a unor valori care pot fi manipulate prin accesori. Acest lucru se petrece pentru că oricare funcție ține minte mediul în care au fost create prin slotul intern \[\[Environment]].
+
+```javascript
+function Manipulare () {
+  let ascunsă = 10;
+  // creezi un getter
+  this.getAscunsă = function () {
+    return ascunsă;
+  };
+  // creezi un seter
+  this.setAscunsă = function (valoare) {
+    ascunsă = valoare;
+  };
+};
+var obi = new Manipulare();
+obi.getAscunsă();
+obi.setAscunsă(20);
+```
+
+Indiferent cât de multe obiecte ar fi instanțiate, se creează un closure pe mediul funcției care joacă rolul de constructor la momentul instanțierii. Obiectele generate sunt diferite, fiecare pornind de la valorile existente în funcția constructor la momentul invocării. Ceea ce am realizat cu această tehnică este să „ascundem” variabile și să le manipulăm prin efectul de closure realizat de metodele care le țin în viață - un joc între contextele de execuție și mediul lexical.
+
+Din nefericire dacă creăm un alt obiect și îi facem un identificator căruia îi asignăm metoda de acces către valoarea așa-zis **privată**, o vom putea accesa cu ușurință pentru că până la urmă, o metodă este o funcție, care este o valoare. Acesta este motivul pentru care în JavaScript nu există posibilitatea de a avea variabile private cu adevărat.
 
 ### Invocarea funcțiilor prin `call()` și `apply()`
 
@@ -140,3 +140,22 @@ function gazda(){
   return faCeva();
 };
 ```
+
+## Mantre
+
+-   A invoca înseamnă aplicarea funcției pe zero sau mai multe argumente.
+-   Funcțiile sunt invocate într-un loc care determină rezultatul, adică într-un anumit *context*.
+-   La invocarea funcțiilor pe lângă argumente sunt constituite „tacit” obiectele `this` și `arguments`.
+-   Când invoci funcția ca metodă a unui obiect, acel obiect devine **contextul** funcției și acesta devine disponibil în funcție prin intermediul parametrului `this`.
+-   `this` este un obiect-context: pentru funcții simple este `window` (nu și sub regula use strict), pentru metode este obiectul în care se execută, iar pentru noile obiecte create este chiar noul obiect generat.
+-   în `"strict mode";`, la invocarea directă în global execution context `this` este `undefined`.
+-   există patru cazuri în care o funcție este invocată:
+  - ca funcție invocată în mod direct;
+  - ca metodă, fapt care leagă invocarea de un obiect;
+  - ca și constructor prin care un nou obiect este generat;
+  - prin folosirea lui `call()` și `apply()`.
+-   La evaluarea funcției toate declarațiile dintre `{}` vor genera un `Environment Record`. Invocarea unei funcții creează un scope nou.
+-   Contextul de execuție al unei funcții se modifică după „locul” în care a fost invocată.
+-   Ori de câte ori o funcție este invocată se creează un nou context de execuție care este introdus în call-stack.
+-   O funcție are acces și poate performa operațiuni asupra obiectului în interiorul căruia a fost invocată.
+-   O funcție care returnează, fie `true`, fie `false` se numește funcție „predicat”.

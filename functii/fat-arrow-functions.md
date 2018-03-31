@@ -2,7 +2,7 @@
 
 Acest nou tip de funcții au fost introduse de ECMAScript 2015. Este tot un obiect-funcție. Cea mai simplă semnătură este `parametru => expresie`.
 
-Semnul care dă și denumirea de *fat arrow* este un egal urmat de semnul mai mare ca: `=>`, ceea ce trimite vizual la ideea că funcția returnează rezultatul evaluării codului din funcție, adică a expresiei. Corpul funcției este numit și „concis”, ceea ce implică faptul că doar expresiile pot constitui corpul funcției.
+Semnul care dă și denumirea de fat arrow este un egal urmat de semnul mai mare ca: =>, ceea ce trimite vizual la ideea că funcția returnează rezultatul evaluării codului din funcție, adică a expresiei. Corpul funcției este numit și „concis”, ceea ce implică faptul că doar expresiile pot constitui corpul funcției.
 Adu-ți aminte mereu faptul că în cazul unui bloc de cod, trebuie să scrii `return` pentru a scoate ceva din funcție. Doar în cazul expresiilor simple, precum un literal, beneficiem de un return implicit.
 
 Sunt considerate a fi soluția perfectă pentru funcțiile anonime, care la rândul lor sunt cel mai des folosite în rolul de callback-uri. De fapt, asta a fost și gândirea din spatele deciziei de a introduce această sintaxă. Mai există și avantajul preluării `this` al callback-ului fără a mai fi nevoie să legi cu `bind()`. Există totuși cazul în care o funcție arrow, capătă un nume acesta fiind sub forma unei expresii de funcție cu nume.
@@ -12,7 +12,7 @@ var faCeva = x => x * 2;
 faCeva.name; "faCeva"
 ```
 
-Funcțiile *fat arrows* la momentul execuției preiau `this` și `arguments` de la mediul lexical găzduitor. Nu creează legăturile proprii la `this` sau la `arguments`, ci, pur și simplu, le folosește pe cele ale gazdei. Contextul de execuție este moștenit de la funcția sau obiectul în care sunt definite. La ce bun acest lucru? În primul rând la evitarea problemelor de referențiere ale lui `this`.
+Funcțiile *fat arrows* la momentul execuției preiau `this` și `arguments` de la mediul lexical găzduitor. Nu creează legăturile proprii la `this` sau la `arguments`, ci, pur și simplu, le folosește pe cele ale gazdei. Contextul de execuție este moștenit de la funcția sau obiectul în care sunt definite. La ce este bun acest lucru? În primul rând la evitarea problemelor de referențiere ale lui `this`.
 
 ```javascript
 var obi = {
