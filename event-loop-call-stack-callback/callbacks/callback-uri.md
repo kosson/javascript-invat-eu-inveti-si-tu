@@ -1,6 +1,6 @@
 # Callback-uri
 
-Știm despre funcții că sunt valori care pot fi pasate ca oricare alta. În spiritul acestei afirmații fundamentale putem realiza comunicarea intenției de prelucrare a datelor printr-o funcție unei alte părți software, care va lua funcția ta și o va face parte din propriile evaluări, iar la finalizarea acestora vei primi un rezultat.
+Știm despre funcții că sunt valori care pot fi pasate ca oricare altele. În spiritul acestei afirmații fundamentale putem realiza comunicarea intenției de prelucrare a datelor printr-o funcție unei alte părți software, care va lua funcția ta și o va face parte din propriile evaluări, iar la finalizarea acestora vei primi un rezultat.
 
 Este o relație simbiotică realizată pe încrederea acordată API-ului că îți va returna rezultatul pe care îl aștepți. Pentru că majoritatea codului unui API este cu sursă deschisă, poți investiga ce se petrece cu funcția pe care ai pasat-o, dar de cele mai multe ori tratezi un API ca pe o *cutie neagră* în care introduci date și care îți oferă înapoi alte date tratate. Să detaliem!
 
@@ -34,7 +34,7 @@ Acest exemplu este unul foarte simplu, dar hai să ne închipuim faptul că func
 
 ```javascript
 // acesta este cod ilustrativ (nu rula!)
-aducDeLaServer('http://kosson.ro/ceva.csv', function (rezultat) {
+aducDeLaServer('http://undevapenet.ro/ceva.csv', function (rezultat) {
   console.log(rezultat.nume);
 });
 ```
@@ -138,7 +138,7 @@ console.log('după');
 
 ![Exemplificare asincronicitate folosind Nodejs](callbacksSiEventLoop.svg)
 
-Atenție, funcția `adunareAsincrona` nu va mai aștepta la execuție să se declanșeze execuția callbackului și va relua execuția mai departe și abia după ce `setTimeout` va fi terminat, după cele 3 secunde, abia atunci va fi executat și callback-ul. După ce timpul se va fi scurs, execuția callback-ului returnează rezultatul. Menținerea contextului se face datorită closure-ului.
+Atenție, funcția `adunareAsincrona` nu va mai aștepta la execuție să se declanșeze execuția callbackului și va relua execuția mai departe și abia după ce `setTimeout()` va fi terminat, după cele 3 secunde, abia atunci va fi executat și callback-ul. După ce timpul se va fi scurs, execuția callback-ului returnează rezultatul. Menținerea contextului se face datorită closure-ului.
 
 ### Callbackurile asincrone - deferred callback (invocare întârziată)
 

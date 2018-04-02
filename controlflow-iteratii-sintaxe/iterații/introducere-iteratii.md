@@ -1,6 +1,6 @@
 # Iterații
 
-Partea cea mai valoroasă a programării este aceea că poate prelua un set de date pe care le poate parcurge element cu element, aplicând transformări sau căutări după anumite criterii. cu scopul de a obține un anumit rezultat dorit. Este ceea ce se poate înțelege prin ciclu, adică o mișcare repetitivă sau aplicarea repetată a unor proceduri pe elementele individuale ale unei colecții. De altfel, în practica de zi cu zi, veți auzi interșanjabil termenii de buclă, iterare și ciclare. Când vine vorba despre iterare, aceasta este tot o ciclare, dar care se face în baza unor protocoale special prevăzute de standardul ECMAScript.
+Partea cea mai valoroasă a programării este aceea că poate prelua un set de date pe care le poate parcurge element cu element, aplicând transformări sau căutări după anumite criterii, cu scopul de a obține un anumit rezultat dorit. Este ceea ce se poate înțelege prin ciclu, adică o mișcare repetitivă sau aplicarea repetată a unor proceduri pe elementele individuale ale unei colecții. De altfel, în practica de zi cu zi, veți auzi interșanjabil termenii de buclă, iterare și ciclare. Când vine vorba despre iterare, aceasta este tot o ciclare, dar care se face în baza unor protocoale special prevăzute de standardul ECMAScript.
 
 Dicționarul explicativ ne dă o definiție foarte utilă pentru iterare: *repetare a unui anumit procedeu de calcul, prin aplicarea lui la rezultatul calculului din etapa precedentă*.
 
@@ -22,7 +22,7 @@ Am menționat deja despre protocoalele de iterate. ECMAScript 2015 (ES6) a intro
 Atunci când rezultatul unui pas devine valoarea de start pentru următorul, atunci vorbim despre iterare. În acest moment avem două concepte centrale care merită atenția noastră deplină:
 
 - **iterable** fiind structura de date ce expune elementele pentru a fi accesate public. Face acest lucru implementând o metodă care returnează un obiect numit *iterator*;
-- **iterator** fiind, de fapt, un pointer (în limba română ar fi tradus ca *indicator*, dar poți să ți-l închipui ca pe un semn de carte) pentru traversarea elementelor unei structuri de date.
+- **iterator** fiind, de fapt, un pointer (în limba română ar fi tradus ca *indicator* sau *cursor*, dar poți să ți-l închipui ca pe un semn de carte) pentru traversarea elementelor unei structuri de date.
 
 ### Cazuri în care se folosește iterarea
 

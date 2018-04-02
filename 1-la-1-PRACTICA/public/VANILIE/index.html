@@ -20,7 +20,7 @@
       let but = document.querySelector('#test');
       but.addEventListener('click', mod.modificator);
     </script> -->
-    <button id="test2">Apasă-mă! 2</button>
+    <!-- <button id="test2">Apasă-mă! 2</button>
     <script>
       let state = {
         valoare: false,
@@ -31,6 +31,26 @@
       };
       let but2 = document.querySelector('#test2');
       but2.addEventListener('click', state.modificator.bind(state));
+    </script> -->
+
+    <div id="start">
+      <p>un para</para>
+      <p>alt para</para>
+      <ul>
+        <li>unu</li>
+        <li>doi</li>
+      </ul>
+      <p>Oau</p>
+    </div>
+    <script>
+      function* parcurgDOM (element) {
+        yield element;
+        element = element.firstElementChild;
+      };
+      const elementDOM = document.getElementById("start");
+      for(let element of parcurgDOM(elementDOM)){
+        console.log(element.innerText);
+      };
     </script>
   </body>
 </html>

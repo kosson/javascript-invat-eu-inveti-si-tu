@@ -119,7 +119,7 @@ Unul dintre simbolurile folosite extensiv este `Symbol.iterator`. Acesta este fo
 
 ## Metode de acces la registrul simbolurilor
 
-Metodele `Symbol.for()` și `Symbol.keyFor()` pot accesa valorile din registrul simbolurilor. După cum am văzut anterior, registrul simbolurilor este creat înainte de evaluarea codului JavaScript și este o listă de obiecte care există în motor și care nu poate fi accesată direct. Aceste două metode sunt singurii mediatori dintre procesul de rulare a codului (*runtime*) și registrul simbolurilor.
+Metodele `Symbol.for()` și `Symbol.keyFor()` pot accesa valorile din registrul simbolurilor. După cum am văzut anterior, registrul simbolurilor este creat înainte de evaluarea codului JavaScript și este o listă de obiecte care există în motor și care nu poate fi accesată direct. Aceste două metode sunt singurii mediatori dintre procesul de rulare al codului (*runtime*) și registrul simbolurilor.
 
 ## Folosirea aceluiași simbol pentru întreg codul rulat: `Symbol.for('numeSimbol')`
 
@@ -176,7 +176,7 @@ Concluzia este că operatorul `instanceof` începând cu ECMAScript 6 a devenit 
 
 ### `Symbol.isConcatSpreadable`
 
-Aceasta este o valoare boolean. Ceea ce indică ea este dacă un obiect poate fi transformat într-un array ce conține proprietățile sale atunci când se invocă `concat` pe un array existent. Adu-ți aminte că un array este la rândul său un obiect, de fapt. Acest simbol dă girul că obiectul poate fi tratat ca un array căruia urmează să se adauge ca elemente noi la un array pe care se face `concat`-ul.
+Aceasta este o valoare boolean. Ceea ce indică ea este dacă un obiect poate fi transformat într-un array ce conține proprietățile sale atunci când se invocă `concat()` pe un array existent. Adu-ți aminte că un array este la rândul său un obiect, de fapt. Acest simbol dă girul că obiectul poate fi tratat ca un array căruia urmează să se adauge ca elemente noi la un array pe care se face `concat`-ul.
 
 ```javascript
 var obiSimulandUnArray = {
@@ -192,7 +192,7 @@ console.log(numaram); // [ "zero", "unu", "doi" ]
 
 ### `Symbol.iterator`
 
-Acest simbol este mijlocul prin care se aplează iteratorul pentru un anumit obiect. Este binecunoscută apelarea iteratorului atunci când se folosește `for...of`.
+Acest simbol este mijlocul prin care se aplează iteratorul pentru un anumit obiect. Este binecunoscută apelarea iteratorului atunci când se folosește `for..of`.
 
 ### Expunerea metodelor prin care se realizează interacțiuni cu textul
 
@@ -293,6 +293,6 @@ console.log(Symbol('ceva') === Symbol('ceva')); // false
 
 ## Referințe
 
-https://hacks.mozilla.org/2015/06/es6-in-depth-symbols/
-Zakas, Nicholas C. Understanding ECMAScript 6: The Definitive Guide for JavaScript Developers.
+- https://hacks.mozilla.org/2015/06/es6-in-depth-symbols/
+- Zakas, Nicholas C. Understanding ECMAScript 6: The Definitive Guide for JavaScript Developers.
 https://www.keithcirkel.co.uk/metaprogramming-in-es6-symbols/
