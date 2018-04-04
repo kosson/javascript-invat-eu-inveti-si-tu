@@ -8,7 +8,7 @@ function* ceva () {
   yield "test2";
 };
 let x = ceva(); // s-a creat obiectul iterator
-let primulRezultat = x.next(); 
+let primulRezultat = x.next();
 // Object { value: "test1", done: false }
 let alDoileaRezultat = x.next();
 x.next(); // încearcă să mai scoți un rezultat
@@ -53,35 +53,25 @@ function* altGen () {
   yield 'bau';
 };
 for (let obiRet of unGen()) {
-  console.log(obiRet);  
+  console.log(obiRet);
 };
 ```
 
 ## Trimiterea mesajelor
 
-Un lucru foarte interesant care privește funcțiile generator este că se pot trimite mesaje din funcție în obiectul iterator instanțiat și invers.
-
-### Trimiterea unui mesaj din funcție în instanță
-
-La momentul finalizării evaluarii expresiilor de după `yield`, este returnat un obiect în care vom găsi valoarea returnată în urma evaluărilor, dar și starea iteratorului.
+Un lucru foarte interesant care privește funcțiile generator este că se pot trimite mesaje din funcție în obiectul iterator instanțiat și invers. Dacă tratezi generatoarele ca funcții simple, cel mai la îndemână mecanism de trimitere a datelor este cel al argumentelor. Reține faptul că poți *injecta* date în generator în oricare etapă a execuției sale, de regulă într-o etapă în care dorești să utilizeze date externe.
 
 ```javascript
-function* unGenerator () {
-  yield 'primul mesaj';
+function* testDeGen (oValoare) {
+  let valoareEtapa = yield 'Ceva ' + oValoare;
 };
-const emitator = unGenerator();
-console.log(emitator.next());
-// { value: "primul mesaj", done: false }
-```
-
-Valoarea lui `done` este `false` pentru că execuția funcției doar a fost oprită temporar. Funcția încă nu și-a încheiat execuția chiar dacă avem în cazul nostru un singur `yield`. Pentru a încheia, va trebui să mai apelăm o dată `next()`.
-
-```javascript
-console.log(emitator.next());
-// returneaza { value: undefined, done: true }
+let obiIterabil = testDeGen('important');
+obiIterabil.next().value; // "Ceva important"
 ```
 
 ### Trimiterea unui mesaj din instanță către generator
+
+Pentru a trimite date la o anumită etapă de execuție, se vor pasa datele în apelul metodei `next()`.
 
 ```javascript
 function* altGenerator () {
@@ -227,7 +217,7 @@ Unul din scopurile principale a întregului efort de a învăța programare este
         element = element.firstElementChild;
       };
       function afișează (element) {
-        console.log(element.innerText);      
+        console.log(element.innerText);
       };
       const fragmentDOM = document.querySelector('#start');
       parcurgDOM(fragmentDOM, afișează);
@@ -259,7 +249,7 @@ function* faCeva (ceva) {
 
 let obiIterator = faCeva("o dudă");
 
-// console.log(obiIterator.next());  
+// console.log(obiIterator.next());
 // Object { value: "Cineva a primit o dudă", done: false }
 let afirm = obiIterator.next();
 console.log(afirm.value); // Cineva a primit o dudă
