@@ -1,6 +1,6 @@
 # Generators
 
-Generatoarele oferă posibilitatea de a parcurge o colecție de date. Este un nou tip de funcții introduse în ECMAScript 2015 care generează de valori la cerere. Punerea unei steluțe după cuvântul cheie `function`, va semnala că avem de a face cu o funcție generator.
+Generatoarele oferă posibilitatea de a parcurge o colecție de date. Este un nou tip de funcții introduse în ECMAScript 2015 care *produc* (yield în limba engleză) valori la cerere. Punerea unei steluțe după cuvântul cheie `function`, va semnala că avem de a face cu o funcție generator.
 
 ```javascript
 function* ceva () {
@@ -15,8 +15,7 @@ x.next(); // încearcă să mai scoți un rezultat
 //Object { value: undefined, done: true }
 ```
 
-Acest nou tip de lucru cu funcțiile se bazează pe faptul că accesul la date se face cu ajutorul iteratoarelor. Atunci când execuți un generator se crează un nou obiect iterator. Un obiect iterator știe cum să acceseze elementele unei colecții unul după altul ceea ce implică faptul că are mecanismele prin care să țină minte poziția din secvență.
-Acest obiect are niște metode disponibile pentru a iniția evaluarea expresiilor după cuvântul cheie `yield`. După evaluare, execuția generatorului se oprește în așteptarea unui nou apel al metodei `next()`. Poți percepe un generator ca un program care se execută la cerere și în etape. Fiecare etapă marcată de `yield` are asociată o stare.
+Acest nou tip de lucru cu funcțiile se bazează pe faptul că accesul la date se face cu ajutorul iteratoarelor. Atunci când execuți un generator se crează un nou obiect iterator. Standardul menționează că acest obiect nou generat poate suporta și subclase. Un obiect iterator știe cum să acceseze elementele unei colecții unul după altul până la epuizarea lor. Acest obiect are niște metode disponibile pentru a iniția evaluarea expresiilor după cuvântul cheie `yield`. După evaluare, execuția generatorului se oprește în așteptarea unui nou apel al metodei `next()`. Poți percepe un generator ca un program care se execută la cerere și în etape. Fiecare etapă marcată de `yield` are asociată o stare.
 
 Apelarea unui generator nu îl execută, ci doar este trimisă funcția în stiva apelurilor și imediat este suspendată execuția. De fapt, la apelare este returnat un obiect iterator. Obiectul iterator ține o referință către contextul de execuție al generatorului care este în call-stack. După ce au fost evaluate toate expresiile până la întâlnirea primului `yield`, contextul de execuție al generatorului va fi scos din stiva de apeluri, dar obiectul iterator care s-a creat, va ține minte acest context de execuție. Execuția metodei `next()` nu creează un nou context de execuție precum în cazul clasic, ci doar reactivează contextul de execuție al generatorului pe care-l împinge din nou în callstack. Se continuă execuția de unde a rămas începând cu expresiile de după `yield`. Codul este evaluat până la întâlnirea următorului `yield`, când execuția este suspendată din nou, nu înainte de a actualiza obiectul iterator care ține minte starea - ține viu contextul de execuție. Acest ultim aspect oferă un mare avantaj al generatoarelor pentru că rețin valorile între diferitele etape parcurse cu `next()`.
 
@@ -113,10 +112,10 @@ Formularea condiției: `!(let element = refIterator.next()).done`.
 
 Explicație:
 
-- creezi o referință către obiectul adus de fiecare yield: `let obi;`
-- `obi = refIterator.next()` aduce obiectul.
-- pui expresia între paranteze pentru a o evalua. Evaluarea este obiectul adus de cursor: `(obi = refIterator.next())`
-- Valoarea lui `done` o negi pentru toate obiectele returnate care au proprietate `value`, adică false va deveni true pentru ca bucla while să poată avansa.
+-   creezi o referință către obiectul adus de fiecare yield: `let obi;`
+-   `obi = refIterator.next()` aduce obiectul.
+-   pui expresia între paranteze pentru a o evalua. Evaluarea este obiectul adus de cursor: `(obi = refIterator.next())`
+-   Valoarea lui `done` o negi pentru toate obiectele returnate care au proprietate `value`, adică false va deveni true pentru ca bucla while să poată avansa.
 
 Vom continua completând exemplul de mai sus.
 
@@ -261,3 +260,8 @@ Altcineva a primit o dudă
 Valoarea lui next anterior este altceva
  */
 ```
+
+## Dependințe cognitive
+
+-   funcții,
+-   iteratori

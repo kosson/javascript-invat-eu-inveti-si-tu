@@ -425,16 +425,16 @@ obi.sunet; // "paf"
 
 Pentru a înțelege funcțiile ai nevoie să înțelegi următoarele:
 
-- identificatori
-- primitive
-- obiecte
-- obiecte interne
-- lexical environment (noțiuni elementare)
+-   identificatori
+-   primitive
+-   obiecte
+-   obiecte interne
+-   lexical environment (noțiuni elementare)
 
 ## Alonje
 
-- closures
-- programare funcțională
+-   closures
+-   programare funcțională
 
 ## Resurse
 

@@ -15,13 +15,13 @@ Alternativa la procesele repetitive, la ciclurile iterative realizate cu buclele
 
 ## Protocoale de iterare
 
-Am menționat deja despre protocoalele de iterate. ECMAScript 2015 (ES6) a introdus un nou mecanism de parcurgere a datelor numit **iterare**. Mai exact, un **protocol de iterare** pentru că iterarea ca și concept este în ADN-ul programării.
+Am menționat deja despre protocoalele de iterare. ECMAScript 2015 (ES6) a introdus un nou mecanism de parcurgere a datelor numit **iterare**. Mai exact, un **protocol de iterare** pentru că iterarea ca și concept este în ADN-ul programării.
 
 ### Ce înseamnă iterare
 
 Atunci când rezultatul unui pas devine valoarea de start pentru următorul, atunci vorbim despre iterare. În acest moment avem două concepte centrale care merită atenția noastră deplină:
 
--   **iterable** fiind structura de date ce expune elementele pentru a fi accesate public. Face acest lucru implementând o metodă care returnează un obiect numit *iterator*;
+-   **iterable** fiind structura de date ce expune elementele pentru a fi accesate public. Face acest lucru implementând o metodă care returnează un obiect numit *iterator*. Această metodă nu este abstractă, ci poate fi apelată în obiectele care pot fi iterate (`[Symbol.iterator]()`)
 -   **iterator** fiind, de fapt, un pointer (în limba română ar fi tradus ca *indicator* sau *cursor*, dar poți să ți-l închipui ca pe un semn de carte) pentru traversarea elementelor unei structuri de date.
 
 ### Cazuri în care se folosește iterarea
@@ -52,23 +52,23 @@ Bucla `for..of` poate itera prin următoarele obiecte care respectă **protocolu
 -   `TypedArray`,
 -   `arguments`
 
-Pentru a fi iterabil, un obiect trebuie să aibă implementată la nivelul obiectului intern de la care moștenește metoda `@@iterator`.  Acest lucru înseamnă că obiectul (sau unul din obiectele din lanțul prototipal), trebuie să aibă o proprietate cu o cheie `[Symbol.iterator]`. Valoarea sa este o funcție fără argumente ce returnează un obiect. Acest obiect returnat se conformează protocolului de interare (**iterator protocol**).
+Pentru a fi iterabil, un obiect trebuie să aibă implementată la nivelul obiectului intern de la care moștenește metoda `@@iterator`. Acest lucru înseamnă că obiectul (sau unul din obiectele din lanțul prototipal), trebuie să aibă o proprietate cu o cheie `[Symbol.iterator]`. Valoarea sa este o funcție fără argumente ce returnează un obiect. Acest obiect returnat se conformează protocolului de interare (**iterator protocol**), ceea ce îl face pretabil unei prelucrări cu `for..of`, de exemplu.
 
 Amețită deja? Hai să aruncăm un ochi mai aproape.
 
 Să luăm un exemplu care se bazează pe moștenirea de la obiectul intern `String`. Acest obiect intern este un exemplu de obiect iterabil construit în limbaj.
 
 ```javascript
-var unSir = "un sir de caractere";
+let unSir = "un sir de caractere";
 typeof unSir[Symbol.iterator]; // "function"
 ```
 
-De fapt, această metodă este o fabrică (un șablon de programare numit în domeniu: **factory**) pentru iteratori..
+De fapt, această metodă este o fabrică (un șablon de programare numit în domeniu: **factory**) pentru iteratori.
 
-Ori de câte ori un obiect trebuie să fie iterat, este invocată metoda `@@iterator` fără nici un argument, iar iteratorul returnat este folosit **pentru a obține valorile care trebuie iterate** mai departe.
+Ori de câte ori un obiect trebuie să fie iterat, este invocată metoda `@@iterator` fără nici un argument. Este creat și returnat un obiect iterabil. Folosind metoda `next()` obții un obiect care are propritățile `value` și `done`. Cheia `value` are valoarea elementului la care a ajuns *cursorul* în parcurgerea obiectului iterabil, iar `done` prin valoarea boolean confirmă parcurgerea integrală a obiectului iterabil.
 
 ```javascript
-var iterator = [1, 2, 3][Symbol.iterator](),
+let iterator = [1, 2, 3][Symbol.iterator](),
     element;
 while( !(element = iterator.next()).done ) {
   console.log(element.value);
@@ -98,9 +98,11 @@ Metoda `next()` este o funcție care nu primește argumente, dar care returneaz�
   -dacă `false` înseamnă că a produs următoarea valoare din secvență.
 -   `value` care este valoarea returnată de Iterator. Se poate omite atunci când `done` este `true`.
 
-Te vei întreba la ce folosește această informație. Răspunsul este legat de evoluția limbajului JavaScript în dorința de a fi mereu modern și mai ales de înțelegerea adâncă a mecanismelor angajate de mototul JavaScript atunci când parcurgi date. Vom vedea de îndată la `for`.
+Te vei întreba la ce folosește această informație. Răspunsul este legat de evoluția limbajului JavaScript în dorința de a fi mereu modern și mai ales de înțelegerea adâncă a mecanismelor angajate de mototul JavaScript atunci când parcurgi date.
 
-Aceste protocoale implementate cu ajutorul simbolurilor, permit parcurgerea, permit prelucrarea datelor care au fost introduse în valori ce moștenesc automat de la tipurile de obiecte interne corespondente. La ce mă refer este faptul că indiferent de natura datelor, că este text, că este un array, că este un „dicționar”, aceste aparent simple structuri, de îndată ce controlul motorului va începe execuția, vor fi „ambalate” automat în obiectul intern corespondent. Acesta este și motivul pentru care poți aplica metode ale obiectelor interne direct pe valoarea identificată de o variabilă. Pe lângă tot bagajul genetic cu care sunt dotate datele
+Aceste protocoale implementate cu ajutorul simbolurilor, permit parcurgerea, permit prelucrarea datelor care au fost introduse în valori ce moștenesc automat de la tipurile de obiecte interne corespondente. La ce mă refer este faptul că indiferent de natura datelor, că este text, că este un array, că este un *dicționar*, aceste aparent simple structuri, de îndată ce controlul motorului va începe execuția, vor fi „ambalate” automat în obiectul intern corespondent. Acesta este și motivul pentru care poți aplica metode ale obiectelor interne direct pe valoarea identificată de o variabilă.
+
+În standard, veți găsi mai multe lămuriri când sunt oferite detaliile despre obiectele pentru controlul abstractizării (**Control Abstraction Objects**).
 
 ## Resurse
 
