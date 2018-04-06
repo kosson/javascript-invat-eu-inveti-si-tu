@@ -21,23 +21,23 @@ Am menționat deja despre protocoalele de iterate. ECMAScript 2015 (ES6) a intro
 
 Atunci când rezultatul unui pas devine valoarea de start pentru următorul, atunci vorbim despre iterare. În acest moment avem două concepte centrale care merită atenția noastră deplină:
 
-- **iterable** fiind structura de date ce expune elementele pentru a fi accesate public. Face acest lucru implementând o metodă care returnează un obiect numit *iterator*;
-- **iterator** fiind, de fapt, un pointer (în limba română ar fi tradus ca *indicator* sau *cursor*, dar poți să ți-l închipui ca pe un semn de carte) pentru traversarea elementelor unei structuri de date.
+-   **iterable** fiind structura de date ce expune elementele pentru a fi accesate public. Face acest lucru implementând o metodă care returnează un obiect numit *iterator*;
+-   **iterator** fiind, de fapt, un pointer (în limba română ar fi tradus ca *indicator* sau *cursor*, dar poți să ți-l închipui ca pe un semn de carte) pentru traversarea elementelor unei structuri de date.
 
 ### Cazuri în care se folosește iterarea
 
-- `for..of`,
-- `Array.from()`,
-- operatorul spread (`...`),
-- constructorul pentru Map `new Map([['varza',1],[2, true]])`,
-- constructorul pentru Set `new Set([1,'doi',false])`,
-- `Promise.all()` și `Promise.race()`,
-- `yield* unObiectIterabil`.
+-   `for..of`,
+-   `Array.from()`,
+-   operatorul spread (`...`),
+-   constructorul pentru Map `new Map([['varza',1],[2, true]])`,
+-   constructorul pentru Set `new Set([1,'doi',false])`,
+-   `Promise.all()` și `Promise.race()`,
+-   `yield* unObiectIterabil`.
 
 Există două protocoale:
 
-- Iterable protocol - protocolul aplicat unei structuri de date care este iterabilă și
-- Iterator protocol - protocolul de iterare, care se va aplica acelei structuri de date.
+-   Iterable protocol - protocolul aplicat unei structuri de date care este iterabilă și
+-   Iterator protocol - protocolul de iterare, care se va aplica acelei structuri de date.
 
 ## Iterable
 
@@ -45,12 +45,12 @@ Acest protocol permite obiectelor să-și definească sau să-și particularizez
 
 Bucla `for..of` poate itera prin următoarele obiecte care respectă **protocolul iterator**:
 
-- `Array`,
-- `Map`,
-- `Set`,
-- `String`,
-- `TypedArray`,
-- `arguments`
+-   `Array`,
+-   `Map`,
+-   `Set`,
+-   `String`,
+-   `TypedArray`,
+-   `arguments`
 
 Pentru a fi iterabil, un obiect trebuie să aibă implementată la nivelul obiectului intern de la care moștenește metoda `@@iterator`.  Acest lucru înseamnă că obiectul (sau unul din obiectele din lanțul prototipal), trebuie să aibă o proprietate cu o cheie `[Symbol.iterator]`. Valoarea sa este o funcție fără argumente ce returnează un obiect. Acest obiect returnat se conformează protocolului de interare (**iterator protocol**).
 
@@ -67,6 +67,24 @@ De fapt, această metodă este o fabrică (un șablon de programare numit în do
 
 Ori de câte ori un obiect trebuie să fie iterat, este invocată metoda `@@iterator` fără nici un argument, iar iteratorul returnat este folosit **pentru a obține valorile care trebuie iterate** mai departe.
 
+```javascript
+var iterator = [1, 2, 3][Symbol.iterator](),
+    element;
+while( !(element = iterator.next()).done ) {
+  console.log(element.value);
+};
+```
+
+Odată cu ECMAScript 2015, beneficiem de enunțul `for..of`, care va face exact ce am realizat mai sus construind obiectul iterator. Array-urile sunt obiecte care implementează protocolul de iterare.
+
+```javascript
+for(var x of [1, 2, 3]){
+  console.log(x);
+};
+```
+
+Parcurgerea se face automat, rezultatele fiind oferite la încheierea iterării. Ce te faci în momentul în care dorești să ai acces secvențial la valorile unei colecții? În acest caz, vom apela la funcțiile generator.
+
 ## Iterator
 
 Definește o modalitate standard pentru a produce o secvență de valori finite sau infinite. Se comportă ca un pointer.
@@ -75,10 +93,10 @@ Definește o modalitate standard pentru a produce o secvență de valori finite 
 
 Metoda `next()` este o funcție care nu primește argumente, dar care returnează un obiect cu două proprietăți:
 
-- `done` care este un `Boolean` cu cele două alternative:
-  - dacă `true`, atunci iteratorul a trecut de finalul secvenței pe care a avut-o de parcurs,
-  - dacă `false` înseamnă că a produs următoarea valoare din secvență.
-- `value` care este valoarea returnată de Iterator. Se poate omite atunci când `done` este `true`.
+-   `done` care este un `Boolean` cu cele două alternative:
+  -dacă `true`, atunci iteratorul a trecut de finalul secvenței pe care a avut-o de parcurs,
+  -dacă `false` înseamnă că a produs următoarea valoare din secvență.
+-   `value` care este valoarea returnată de Iterator. Se poate omite atunci când `done` este `true`.
 
 Te vei întreba la ce folosește această informație. Răspunsul este legat de evoluția limbajului JavaScript în dorința de a fi mereu modern și mai ales de înțelegerea adâncă a mecanismelor angajate de mototul JavaScript atunci când parcurgi date. Vom vedea de îndată la `for`.
 
@@ -86,5 +104,5 @@ Aceste protocoale implementate cu ajutorul simbolurilor, permit parcurgerea, per
 
 ## Resurse
 
-- [MDN - Iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
-- [Iterables and iterators](http://exploringjs.com/es6/ch_iteration.html)
+-   [MDN - Iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
+-   [Iterables and iterators](http://exploringjs.com/es6/ch_iteration.html)
