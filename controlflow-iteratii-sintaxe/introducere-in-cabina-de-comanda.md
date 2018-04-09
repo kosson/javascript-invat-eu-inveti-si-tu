@@ -34,10 +34,10 @@ Astfel de structuri de iterare pot fi numite și **bucle**. De ce? Pentru că pu
 
 Concluzionând, avem patru enunțuri care se comportă precum niște comenzi de salt cu care poți schimba în orice moment cursul acțiunilor:
 
-- `break`: conduce la ieșirea prematură dintr-o buclă
-- `continue`: produce o săritură peste o iterație a unei bucle dacă o anumită condiție a fost împlinită
-- `return`: iese imediat din execuția unei funcții
-- `throw`: indică o excepție, care va fi capturată de un gestionar pentru astfel de evenimente nedorite.
+-   `break`: conduce la ieșirea prematură dintr-o buclă
+-   `continue`: produce o săritură peste o iterație a unei bucle dacă o anumită condiție a fost împlinită
+-   `return`: iese imediat din execuția unei funcții
+-   `throw`: indică o excepție, care va fi capturată de un gestionar pentru astfel de evenimente nedorite.
 
 Aceste enunțuri mai sunt numite **de salt** pentru că modifică sensul de execuție a codului; dintr-un punct al execuției se face un salt în altul.
 

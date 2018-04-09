@@ -26,8 +26,8 @@ Funcțional vorbind, operatorii se pot împărți în două categorii: operatori
 
 Pentru a înțelege pe deplin operatorii, trebuie să ne întoarcem la ceea ce înseamnă expresiile și cum arată acestea. Ceea ce este util să ne aducem aminte este faptul că într-un enunț format dintr-o singură expresie sau în cazul unei expresii, care face parte dintr-un enunț format din mai multe, avem două zone importante:
 
-- partea din stânga a operatorului (în engleză *Left Hand Side* - LHS) și
-- partea din dreapta a operatorului (în engleză *Right Hand Side* - RHS).
+-   partea din stânga a operatorului (în engleză *Left Hand Side* - LHS) și
+-   partea din dreapta a operatorului (în engleză *Right Hand Side* - RHS).
 
 Adu-ți mereu aminte că operatorii stabilesc o relație între operandul (o expresie) din stânga sa cu operandul (o expresie) din dreapta sa. La momentul evaluării, operandul mai întâi încearcă să **transforme** valorile în tipul de care are nevoie, dacă în expresie sunt prezente alte valori decât cele așteptate.
 

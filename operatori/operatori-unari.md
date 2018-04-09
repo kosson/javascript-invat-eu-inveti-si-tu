@@ -191,7 +191,7 @@ Operatorul `void` nu trebuie confundat cu o funcție.
 ```javascript
 void 0; // undefined
 // setarea la undefined a unei funcții
-function faCeva(){return 'salve';};
+function faCeva () {return 'salve';};
 var x = void (faCeva());
 console.log(x); // undefined
 ```

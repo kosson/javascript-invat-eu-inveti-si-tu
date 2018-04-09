@@ -1,8 +1,8 @@
-# `Object.entries()`
+# Object.entries()
 
 Este o metodă introdusă de ECMAScript 2017.
 
-Returnează un array de array-uri având drept valori numele tuturor proprietăților unui obiect sub formă de perechi în câte un array dedicat, care sunt enumerabile și care aparțin obiectului respectiv.
+Returnează un array de array-uri având drept valori numele tuturor proprietăților unui obiect sub formă de perechi în câte un array dedicat. Proprietățile trebuie să fie enumerabile și să aparțină obiectului respectiv.
 
 ```javascript
 let obi =  {
@@ -19,7 +19,7 @@ console.log(colectie);
 
 După cum se observă, această metodă este folositoare câtă vreme obiectul nostru este un set de date, de fapt. În cazul metodelor, valorile lor vor fi reduse la `null`.
 
-Un posibil scenariu ar fi combinarea cu metoda `map` pentru a transforma array-ul de date în ceva altfel structurat.
+Un posibil scenariu de lucru ar fi combinarea cu metoda `map` pentru a transforma array-ul de date într-o structură diferită.
 
 ```javascript
 let colectie = {
@@ -33,4 +33,4 @@ Object.entries(colectie).map(
 
 ## Referințe
 
-- [JavaScript ES8 Object.entries/values. Dale Jefferson. Published 10 Jun 2017](https://www.dalejefferson.com/es8-object-entries-values/)
+-   [JavaScript ES8 Object.entries/values. Dale Jefferson. Published 10 Jun 2017](https://www.dalejefferson.com/es8-object-entries-values/)

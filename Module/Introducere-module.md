@@ -79,8 +79,8 @@ import oFuncție from 'src/manager'
 
 **Importurile cu namespace**
 
-/* main.js */
 ```javascript
+/* main.js */
 import * as bibliotecaCod from 'src/bib';
 ```
 
@@ -140,7 +140,7 @@ După cum bine știm, în HTML avem un tag pe care-l folosim pentru a încărca 
 <script type="module"></script>
 ```
 
-Care ar fi caracteristicile unui modul spre deosebire de încărcarea clasică? Păi, mai întâi de toate, un modul rulează întotdeauna în `"strict mode"`, este executat asincron și pentru valoarea lui `this` avem `undefined`.
+Care ar fi caracteristicile unui modul spre deosebire de încărcarea clasică? Păi, mai întâi de toate, un modul rulează întotdeauna în `"strict mode"`, este executat asincron, iar pentru valoarea lui `this` avem `undefined`.
 
 În cazul în care dorești să exporți mai multe elemente, acestea vor fi puse într-o listă de export.
 
@@ -174,6 +174,6 @@ Modulele sunt niște Singleton-uri, ceea ce înseamnă că ori de câte ori va f
 
 ## Referințe
 
-http://exploringjs.com/es6/ch_modules.html#sec_modules-vs-scripts
-https://addyosmani.com/writing-modular-js/
-http://requirejs.org/docs/commonjs.html
+-   [Axel Rauschmayer. Exploring ES6. 16. Modules](http://exploringjs.com/es6/ch_modules.html#sec_modules-vs-scripts)
+-   [Addy Osmani. Writing Modular JavaScript With AMD, CommonJS & ES Harmony](https://addyosmani.com/writing-modular-js/)
+-   [CommonJS Notes](http://requirejs.org/docs/commonjs.html)

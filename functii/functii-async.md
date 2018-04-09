@@ -19,7 +19,7 @@ let x = simulare();
 Aceste noi funcții te fac să percepi asicronicitatea ceva mai secvențial, mai sincron. O funcție async returnează o promisiune. Cheia utilizării funcțiilor async este utilizarea operatorului `await`. Acest operator poate fi folosit în interiorul unei expresii de funcție async și numai în interiorul unei astfel de funcții. Acest operator returnează valoarea rezolvată a unei promisiuni. În același timp, operatorul oprește execuția funcției async până când promisiunea este rezolvată. Abia după rezolvarea promisiunii, va fi reluată execuția funcției. Dacă valoarea nu este o promisiune, este convertită la o promisiune rezolvată. În cazul în care promisiunea este respinsă, este returnată valoarea rezultată ca respingere.
 
 ```javascript
-async function sarcina() {
+async function sarcina () {
   let salut = await simulare();
   return `${salut}`;
 };

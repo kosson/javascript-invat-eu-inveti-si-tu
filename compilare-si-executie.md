@@ -8,7 +8,7 @@ Stimabila doamnă, care este și un personaj hâtru pune un accent pe viteza de 
 
 > Înainte de Al Doilea Război Mondial, viața era simplă. După aceea am avut sisteme.
 
-Acum lucrează la primul computer comercial, *UNIVAC I* și conduce departamentul de programare Automatic Programming Development for Remington Rand. Este tare necăjită că mașinile de calcul nu înțeleg limba engleză, dar prin '53 va publica un articol științific despre compilatoare. Bine, deja exista un compilator încă din 1952, dar, stupoare: *nimeni nu-l atingea*, rememora dânsa ceva mai târziu, pentru că *mi se spusese că un computer face doar aritmetică*. De fapt, *nimeni nu credea* că se poate acest lucru.
+Acum lucrează la primul computer comercial, *UNIVAC I* și conduce departamentul de programare Automatic Programming Development pentru compania Remington Rand. Este tare necăjită că mașinile de calcul nu înțeleg limba engleză, dar prin '53 va publica un articol științific despre compilatoare. Bine, deja exista un compilator încă din 1952, dar, stupoare: *nimeni nu-l atingea*, rememora dânsa ceva mai târziu, pentru că *mi se spusese că un computer face doar aritmetică*. De fapt, *nimeni nu credea* că se poate acest lucru.
 
 În acel moment, un compilator *traducea limbajul matematic în cod mașină*. Doamna Grace sau „bunica COBOL” așa cum este alintată, argumenta necesitatea ca persoanele care manipulează date să nu fie forțate să manipuleze simboluri așa cum o fac matematicienii. Dorința sa a fost să fie posibilă folosirea de *enunțuri în engleză*. Acestea au fost începuturile compilatoarelor și a limbajului de programare COBOL (COmmon Business-Oriented Language).
 
@@ -20,8 +20,8 @@ Copilatoarele preiau codul sursă redactat într-un limbaj de programare și îl
 
 Motorul de JavaScript când încarcă codul sursă, face două treceri peste cod:
 
-1. Este faza unei așa-zise compilării, când citește codul sursă linie cu linie (*parsing*), îl transformă în atomi lexicali (`tokens`), face recensământul identificatorilor și îi inițializează cu `undefined`, constituindu-se un Arbore Sintactic Abstract - Abstract Syntax Tree. După constituirea AST, codul este transformat într-o formă numită **bytecode** (înșiruirea de 0 și 1 pe care computerul o înțelege). În cazul funcțiilor, abia la momentul apelării lor se va proceda la constituirea unui mediu lexical propriu acelei funcții în care vor fi sub evidență identificatorii găsiți în corpul funcției. Pe scurt, compilarea lor se face la momentul apelării.
-2. Este faza de execuție. Identificatorii capătă valori și expresiile sunt evaluate.
+1 Este faza unei așa-zise compilării, când citește codul sursă linie cu linie (*parsing*), îl transformă în atomi lexicali (`tokens`), face recensământul identificatorilor și îi inițializează cu `undefined`, constituindu-se un Arbore Sintactic Abstract - Abstract Syntax Tree. După constituirea AST, codul este transformat într-o formă numită **bytecode** (înșiruirea de 0 și 1 pe care computerul o înțelege). În cazul funcțiilor, abia la momentul apelării lor se va proceda la constituirea unui mediu lexical propriu acelei funcții în care vor fi sub evidență identificatorii găsiți în corpul funcției. Pe scurt, compilarea lor se face la momentul apelării.
+2 Este faza de execuție. Identificatorii capătă valori și expresiile sunt evaluate.
 
 Trebuie specificat faptul că operațiunile nu decurg liniar, ci într-un mod care să permită cei mai buni timpi de execuție. Adică, se face puțin, parsing, urmat de compilare, rulare, optimizare și reoptimizare, apoi se mai ia un fragment și se repetă pașii și tot așa pentru a realiza per global cei mai buni timpi de rulare pentru cod. Pentru că acest comportament este cel real și actual, spunem că JavaScript beneficiază de compilare în timp real - JIT (Just In Time). Înțelegerea modului în care funcținează JIT-ul, conduce la o execuție performantă a codului.
 
@@ -101,9 +101,9 @@ Se pierde referința către funcție.
 
 ### Cazul variabilelor
 
-- sunt declarate variabilele iar acestea devin proprietăți ale lui unui obiect special care este generat la momentul execuției.
-- dacă este declarată o referință, care mai târziu la faza de execuție i se atribuie o valoare, când nu este folosit „use strict”, motorul va crea din oficiu acea variabilă.
-- pentru fiecare variabilă găsită a cărui identificator nu este înregistrat, îi este înregistrat identificatorul iar valoarea este inițilizată cu `undefined`. Dacă este găsit acesta își păstrează valoarea.
+-   sunt declarate variabilele iar acestea devin proprietăți ale lui unui obiect special care este generat la momentul execuției.
+-   dacă este declarată o referință, care mai târziu la faza de execuție i se atribuie o valoare, când nu este folosit „use strict”, motorul va crea din oficiu acea variabilă.
+-   pentru fiecare variabilă găsită a cărui identificator nu este înregistrat, îi este înregistrat identificatorul iar valoarea este inițilizată cu `undefined`. Dacă este găsit acesta își păstrează valoarea.
 
 ### Left Hand Side și Right Hand Side
 
@@ -121,9 +121,9 @@ Dacă nu a fost declarat și apare ca și `test = 'ceva'`, la etapa compilării,
 
 ## Execuția
 
-- Este momentul când valorile sunt atribuite (*assigned*) variabilelor locale. De fapt, ceea ce se întâmplă este constituirea legăturii dintre identificator și valoarea sa. Îți poți închipui că un filament leagă o etichetă de o valoare. ADEVĂRUL este că aceste „filamente” sunt cele care sunt „memorate” de mediul lexical (scope).
-- Dacă există declarații precum `a = 1;` fără ca `a` să fie declarată variabilă, dacă ne aflăm în global scope, atunci o variabilă este creată pentru `a`.
-- Invocarea unei funcții conduce la alocarea unei zone de memorie numită „heap memory” în care se pregătește un context de execuție pentru funcție.
+-   Este momentul când valorile sunt atribuite (*assigned*) variabilelor locale. De fapt, ceea ce se întâmplă este constituirea legăturii dintre identificator și valoarea sa. Îți poți închipui că un filament leagă o etichetă de o valoare. ADEVĂRUL este că aceste „filamente” sunt cele care sunt „memorate” de mediul lexical (scope).
+-   Dacă există declarații precum `a = 1;` fără ca `a` să fie declarată variabilă, dacă ne aflăm în global scope, atunci o variabilă este creată pentru `a`.
+-   Invocarea unei funcții conduce la alocarea unei zone de memorie numită „heap memory” în care se pregătește un context de execuție pentru funcție.
 
 Pentru că JavaScript are un singur fir de execuție, trebuie reținut faptul că de fiecare dată când o funcție este invocată, contextul de execuție a celui care a invocat funcția la momentul acela este înghețat urmând să se creeze un altul pentru evaluarea noii funcții. După ce funcția invocată și-a încheiat execuția, contextul de execuție a funcției care a făcut apelul este restaurat.
 
@@ -149,12 +149,12 @@ Standardul spune că vorbim propriu-zis de urmărirea unei stări de rulare a co
 
 O stare are cel puțin următoarele componente pe care motorul le urmărește:
 
-- **starea de execuție a codului**, care este starea necesară pentru a executa, suspenda sau relua evaluarea codului asociat cu acest context de execuție
-- `Function`. Dacă contextul de execuție evaluează codul dintr-o funcție obiect, atunci valoarea acestei componente este chiar acea funcție obiect. Dacă contextul evaluează codul dintr-un **Script** sau dintr-un **Module**, atunci, valoarea componentei **Function** este `null`. Valoarea pentru Function în `running execution context` este numită și `active function object`.
-- `Realm` este registrul de tărâmuri (**Realm Record**) prin care codul asociat accesează resurse ECMAScript. Tărâmul asociat contextului de execuție este numit `current Realm Record`.
-- `ScriptOrModule` este o înregistrare care identifică un `Module` sau un `Script` în care își are originea codul rulat.
--  `LexicalEnvironment` identifică `Lexical Environment` - mediul care este folosit de referințele făcute prin identificatorii din codul rulat în contextul de execuție curent.
-- `VariableEnvironment` identifică scope-ul (`Lexical Environment`) al cărui EnvironmentRecord conține legăturile create de `VariableStatements` din contextul de execuție curent. Când se creează un context de execuție nou, `LexicalEnvironment` și `VariableEnvironment` au aceeași valoare.
+-   **starea de execuție a codului**, care este starea necesară pentru a executa, suspenda sau relua evaluarea codului asociat cu acest context de execuție
+-   `Function`. Dacă contextul de execuție evaluează codul dintr-o funcție obiect, atunci valoarea acestei componente este chiar acea funcție obiect. Dacă contextul evaluează codul dintr-un **Script** sau dintr-un **Module**, atunci, valoarea componentei **Function** este `null`. Valoarea pentru Function în `running execution context` este numită și `active function object`.
+-   `Realm` este registrul de tărâmuri (**Realm Record**) prin care codul asociat accesează resurse ECMAScript. Tărâmul asociat contextului de execuție este numit `current Realm Record`.
+-   `ScriptOrModule` este o înregistrare care identifică un `Module` sau un `Script` în care își are originea codul rulat.
+-   `LexicalEnvironment` identifică `Lexical Environment` - mediul care este folosit de referințele făcute prin identificatorii din codul rulat în contextul de execuție curent.
+-   `VariableEnvironment` identifică scope-ul (`Lexical Environment`) al cărui EnvironmentRecord conține legăturile create de `VariableStatements` din contextul de execuție curent. Când se creează un context de execuție nou, `LexicalEnvironment` și `VariableEnvironment` au aceeași valoare.
 
 Atunci când avem de-a face cu mai multe contexte de execuție, pentru urmărirea tuturor acestora este utilizată o **stivă a contextelor**
 
@@ -175,29 +175,30 @@ Este creat un **Global Object** și **this**, o variabilă specială. De regulă
 Execution Context este inițiat la executarea codului și este unul per pagină web.
 
 Conține:
-- Global object
-- this
-- stiva variabilelor
-- Outer environment (pentru cazul funcțiilor. Global env nu are outer env)
-- codul javascript
+
+-   Global object
+-   this
+-   stiva variabilelor
+-   Outer environment (pentru cazul funcțiilor. Global env nu are outer env)
+-   codul javascript
 
 ATENȚIE, toate acestea sunt create de motorul JavaScript.
 
 ## Mantre
 
-- Pentru orice program există un **global execution context** (activat spre exemplu când declari `<script>`).
-- Invocarea unei funcții generează un nou CONTEXT de EXECUȚIE. **Acesta nu este un obiect, ATENȚIE!**.
-- Un context de execuție are un „lexical environment” asociat, adică un scope, care conține toți identificatorii definiți în acel context.
-- Contextul de execuție este parte a scope-ului.
-- Contextul de execuție este constituit din TOT ce se întâmplă atunci când funcția se execută, adică toate variabilele și funcțiile. O variabilă este considerată a fi „în scope - in-scope", dacă este accesibilă în contextul de execuție curent.
-- O metodă are drept **function context** însuși obiectul „în care” este invocată și poate fi accesat prin `this`.
-- **Function context** nu este **execution context**.
-- Pentru că JavaScript are un singur fir de execuție, trebuie reținut faptul că de fiecare dată când o funcție este invocată, contextul de execuție a celui care a invocat funcția la momentul acela este înghețat urmând să se creeze un altul pentru evaluarea noii funcții. După ce funcția invocată și-a încheiat execuția, contextul de execuție a funcției care a făcut apelul este restaurat. Evidența apelurilor și a operațiunilor privind înghețarea și restaurarea contextelor de execuție este făcută de **call stack**.
-- Ori de câte ori este invocată o funcție, se creează un nou context execuție (TOT ce se întâmplă atunci când funcția se execută).
-- Variabilele și funcțiile care fac parte din contextul de execuție, sunt memorate în EXECUTION CONTEXT OBJECT, care este un obiect al motorului JavaScript.
-- contextul e execuție este parte a scope (format la faza de compilare).
-- Context este valoarea lui `this`.
-- toate variabilele și funcțiile definite într-o funcție sunt considerate parte a contextului de execuție.
+-   Pentru orice program există un **global execution context** (activat spre exemplu când declari `<script>`).
+-   Invocarea unei funcții generează un nou CONTEXT de EXECUȚIE. **Acesta nu este un obiect, ATENȚIE!**.
+-   Un context de execuție are un „lexical environment” asociat, adică un scope, care conține toți identificatorii definiți în acel context.
+-   Contextul de execuție este parte a scope-ului.
+-   Contextul de execuție este constituit din TOT ce se întâmplă atunci când funcția se execută, adică toate variabilele și funcțiile. O variabilă este considerată a fi „în scope - in-scope", dacă este accesibilă în contextul de execuție curent.
+-   O metodă are drept **function context** însuși obiectul „în care” este invocată și poate fi accesat prin `this`.
+-   **Function context** nu este **execution context**.
+-   Pentru că JavaScript are un singur fir de execuție, trebuie reținut faptul că de fiecare dată când o funcție este invocată, contextul de execuție a celui care a invocat funcția la momentul acela este înghețat urmând să se creeze un altul pentru evaluarea noii funcții. După ce funcția invocată și-a încheiat execuția, contextul de execuție a funcției care a făcut apelul este restaurat. Evidența apelurilor și a operațiunilor privind înghețarea și restaurarea contextelor de execuție este făcută de **call stack**.
+-   Ori de câte ori este invocată o funcție, se creează un nou context execuție (TOT ce se întâmplă atunci când funcția se execută).
+-   Variabilele și funcțiile care fac parte din contextul de execuție, sunt memorate în EXECUTION CONTEXT OBJECT, care este un obiect al motorului JavaScript.
+-   contextul e execuție este parte a scope (format la faza de compilare).
+-   Context este valoarea lui `this`.
+-   toate variabilele și funcțiile definite într-o funcție sunt considerate parte a contextului de execuție.
 
 ### Cazul obiectelor
 
@@ -270,7 +271,7 @@ faceva(2);                        // 12
     2.  *Motorul întreabă*: știi cumva ce este `altaDuda`?
     3.  *Răspuns*: Nu, nu știu ce este, dar regula este ca eu să creez un identificator cu acest nume.
     4.  *Efect*: `altaDuda` devine o variabilă în <u>global scope</u>. Valoarea `o altă dudă` este atribuită.
-    5. Condițiile pentru ca această regulă să se aplice: să fii în <u>Global scope</u> și să nu fie invocat `'use strict';`.
+    5.  Condițiile pentru ca această regulă să se aplice: să fii în <u>Global scope</u> și să nu fie invocat `'use strict';`.
 
 -   **\# 13** Este invocată funcția `faceva()`. Funcția intră în faza de execuție și ca urmare, scenariul se repetă. Mai întâi, se va intra într-o nouă fază de compilare.
 
@@ -310,10 +311,11 @@ faceva(2);                        // 12
 
 ## Referințe
 
-- [Arindam Paul - JavaScript VM internals, EventLoop, Async and ScopeChains](https://www.youtube.com/watch?v=QyUFheng6J0 "Este un material fantastic pentru a înțelege mai bine faza de compilare și cea de execuție")
-- [Lin Clark - An Abridged Cartoon Introduction To WebAssembly](https://www.smashingmagazine.com/2017/05/abridged-cartoon-introduction-webassembly/)
-- [Franziska Hinkelmann: JavaScript engines - how do they even? | JSConf EU 2017](https://www.youtube.com/watch?v=p-iiEDtpy6I)
-- [Marja Hölttä: Parsing JavaScript - better lazy than eager? | JSConf EU 2017](https://www.youtube.com/watch?v=Fg7niTmNNLg)
-- [Grace Hopper, Wikipedia în limba engleză](https://en.wikipedia.org/wiki/Grace_Hopper)
-- [Hopper at the UNIVAC I console, c. 1960](https://en.wikipedia.org/wiki/Grace_Hopper#/media/File:Grace_Hopper_and_UNIVAC.jpg "SI Neg. 83-14878. Date: na...Grace Murray Hopper at the UNIVAC keyboard, c. 1960. Grace Brewster Murray: American mathematician and rear admiral in the U.S. Navy who was a pioneer in developing computer technology, helping to devise UNIVAC I. the first commercial electronic computer, and naval applications for COBOL (common-business-oriented language). This image, which was originally posted to Flickr, was uploaded to Commons using Flickr upload bot on 4 June 2012, 18:21 by Jan Arkesteijn. On that date, it was confirmed to be licensed under the terms of the license indicated Creative Commons Attribution 2.0 Generic license.")
-- [The Wit and Wisdom of Grace Hopper. From The OCLC Newsletter, March/April, 1987, No. 167 (Editor and article author is Philip Schieber.)](http://www.cs.yale.edu/homes/tap/Files/hopper-wit.html)
+-   [Arindam Paul - JavaScript VM internals, EventLoop, Async and ScopeChains](https://www.youtube.com/watch?v=QyUFheng6J0 "Este un material fantastic pentru a înțelege mai bine faza de compilare și cea de execuție")
+-   [Lin Clark - An Abridged Cartoon Introduction To WebAssembly](https://www.smashingmagazine.com/2017/05/abridged-cartoon-introduction-webassembly/)
+-   [Franziska Hinkelmann: JavaScript engines - how do they even? | JSConf EU 2017](https://www.youtube.com/watch?v=p-iiEDtpy6I)
+-   [Marja Hölttä: Parsing JavaScript - better lazy than eager? | JSConf EU 2017](https://www.youtube.com/watch?v=Fg7niTmNNLg)
+-   [Grace Hopper, Wikipedia în limba engleză](https://en.wikipedia.org/wiki/Grace_Hopper)
+-   [Hopper at the UNIVAC I console, c. 1960](https://en.wikipedia.org/wiki/Grace_Hopper#/media/File:Grace_Hopper_and_UNIVAC.jpg "SI Neg. 83-14878. Date: na...Grace Murray Hopper at the UNIVAC keyboard, c. 1960. Grace Brewster Murray: American mathematician and rear admiral in the U.S. Navy who was a pioneer in developing computer technology, helping to devise UNIVAC I. the first commercial electronic computer, and naval applications for COBOL (common-business-oriented language). This image, which was originally posted to Flickr, was uploaded to Commons using Flickr upload bot on 4 June 2012, 18:21 by Jan Arkesteijn. On that date, it was confirmed to be licensed under the terms of the license indicated Creative Commons Attribution 2.0 Generic license.")
+-   [The Wit and Wisdom of Grace Hopper. From The OCLC Newsletter, March/April, 1987, No. 167 (Editor and article author is Philip Schieber.)](http://www.cs.yale.edu/homes/tap/Files/hopper-wit.html)
+-   [Lin Clark. A crash course in memory management](https://hacks.mozilla.org/2017/06/a-crash-course-in-memory-management/)

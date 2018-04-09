@@ -33,28 +33,32 @@ Câteva concepte fundamentale pentru înțelegerea obiectelor în general:
 
 Atunci când un obiect este creat, toate caracteristicile sale sunt moștenite de la un alt obiect cu rol de prototip. Să nu vi se pară ciudat că un prototip este un obiect, iar acesta la rândul lui are un prototip. E ca un lanț care are drept limită superioară obiectele interne `Object` și `Function`.
 
-Pentru că ești nerăbdătoare am să-ți dau două indicii privind crearea obiectelor. Poți folosi **notația literală** folosind acoladele ca în `var obiect = {a: 1}`, poți apela cu operatorul `new` funcții cu rol de constructor sau poți invoca `Object.create()`. O regulă de scriere care este foarte utilă este aceea că toate valorile text, vor fi introduse în obiecte cu textul între ghilimele simple, iar restul valorilor așa cum sunt ele. Proprietățile se redactează precum listele, fiind delimitate prin virgulă. A crea un obiect, în limbajul programatorilor este echivalent cu termenul de *a instanția* un obiect. Sunt una și același lucru.
+Pentru că ești nerăbdătoare am să-ți dau două indicii privind crearea obiectelor. Poți folosi **notația literală** folosind acoladele ca în `var obiect = {a: 1}`, poți apela cu operatorul `new` funcții cu rol de constructor sau poți invoca `Object.create()`. O regulă de scriere care este foarte utilă este aceea că toate valorile text, vor fi introduse în obiecte cu textul între ghilimele simple, iar restul valorilor așa cum sunt ele. Proprietățile se redactează precum listele, fiind delimitate prin virgulă. A crea un obiect, în limbajul programatorilor este echivalent cu termenul de *a instanția* un obiect atunci când folosim operatorul `new`.
 
 ```javascript
-var obi = {
+const obi = {
   a: 'ceva text'
 };
 // sau declarând proprietatea cu string literal
-let obi2 = {
+const obi2 = {
   "a": 'altceva'
 };
 // echivalent cu
-let obi3 = new Object();
+const obi3 = new Object();
 obi3.a = 'cineva';
 ```
 
-Exemplul oferit înfățișează cea mai întâlnită notație pe care o numim *literală*: `var obi = {};`. Acum poți să-ți pui o întrebare foarte simplă: cât timp „trăiește” un obiect? Un obiect trăiește atâta vreme cât există o referință către acesta. Dacă dorești totuși ca memoria să fie eliberată, vei seta obiectul la valoarea `null`.
+Exemplul oferit înfățișează cea mai întâlnită notație pe care o numim *literală*: `const obi = {};`. Vei observa că obiectele sunt declarate cu un identificator al unei variabile `const`. Este de preferat această aborare pentru avantajele oferite de `const`.
+
+Acum poți să-ți pui o întrebare foarte simplă: cât timp „trăiește” un obiect? Un obiect trăiește atâta vreme cât există o referință către acesta. Dacă dorești totuși ca memoria să fie eliberată, vei seta obiectul la valoarea `null`.
 
 Am menționat constructorii deja?
 
 ## Ce sunt constructorii
 
-Constructorii sunt niște funcții, care sunt redactate special ca la momentul execuției, să genereze un obiect. După cum am văzut în capitolul dedicat genezei Tărâmului, atunci când s-au format **intrinsics**, a fost creat și obiectul prototip al tuturor obiectelor, care o fracțiune mai târziu a fost folosit pentru crearea obiectului-funcție ce va juca rolul de prototip al tuturor funcțiilor. Un mic exemplu nu ar strica. Prin convenție, pentru a distinge constructorii de funcțiile simple, vor avea identificatorul cu literă mare.
+Sunt niște funcții care sunt redactate special ca la momentul execuției, să **construiască** un obiect. După cum am văzut în capitolul dedicat genezei Tărâmului, atunci când s-au format **intrinsics**, a fost creat și obiectul prototip al tuturor obiectelor, care o fracțiune mai târziu a fost folosit pentru crearea obiectului-funcție ce va juca rolul de prototip al tuturor funcțiilor. Un mic exemplu nu ar strica.
+
+Prin convenție, pentru a distinge constructorii de funcțiile simple, vor avea identificatorul cu literă mare.
 
 ```javascript
 function MatrițăAvionVuiaI (tip = 'experimental', an = '1906') {
@@ -69,21 +73,23 @@ console.log(VuiaI);
 
 Atunci când un obiect este instanțiat folosindu-se operatorul `new` așa cum am făcut și noi în exemplu, se va genera automat o proprietate numită `constructor`, care indică funcția care a generat obiectul.
 
-JavaScript este un univers al obiectelor care sunt generate de constructori sau prin folosirea notației literale așa cum deja am văzut la capitolul dedicat valorilor. Dacă avem deja o ideea despre notația literală, trebuie să lămurim natura constructorilor. Aceștia sunt pur și simplu niște funcții care au o proprietate numită `prototype`. Această proprietate este un obiect care prin însăși existența sa face posibilă moștenirea prototipală. De ce există această proprietate în funcția-obiect care este constructorul? Pentru că în cazul apelării folosind operatorul `new`, se va genera legătura prototipală.
+JavaScript este un univers al obiectelor care sunt generate de constructori sau prin folosirea notației literale așa cum deja am văzut la capitolul dedicat valorilor. Dacă avem deja o ideea despre notația literală, trebuie să lămurim natura constructorilor. Aceștia sunt pur și simplu funcții. Funcțiile, deja știm, sunt obiecte. Aceste funcții-obiecte precum toate obiectele au și ele o proprietate numită `prototype`. Această proprietate este un obiect care prin însăși existența sa face posibilă moștenirea prototipală. În cazul apelării folosind operatorul `new`, se va genera legătura prototipală fiind folosită chiar referința către obiectul prototip al funcției pentru a lega noul obiect în lanțul prototipal.
 
-Este astfel asigurat accesul la proprietăți pe care obiectul creat la apelararea funcției constructor cu operatorul `new` le pune la dispoziție de la bun început fără a fi fost setate la nomentul creării.
+Este astfel asigurat accesul la proprietăți pe care obiectul creat la apelarea funcției constructor cu operatorul `new` le are la dispoziție de la bun început fără a fi fost setate la momentul creării.
 
 Ceea ce mai trebuie să știi din start despre constructori este că la apelarea cu operatorul `new`, generează obiectul și apoi execută codul. Nu uita că un constructor este totuși o funcție. Execuția codului dintr-un constructor are ca efect asignarea proprietăților inițiale ale obiectului nou creat. Invocarea unui constructor fără operatorul `new` are efecte diferite pentru fiecare dintre aceștia.
 
 **Spune standardul**: *Fiecare obiect creat de un constructor are o referință implicită (numită prototipul obiectului) către valoarea proprietății «prototype» a constructorului*.
 
-Mai mult de atât fiecare `prototype` poate avea drept referință un alt `prototype`, realizându-se ceea ce se numește *lanț prototipal*. Modul de funcționare a lanțului prototipal se bazează pe un mecanism de delegare utilizat de motor atunci când se caută o proprietate a unui obiect. De exemplu, dacă vei căuta o proprietate într-un obiect, iar aceasta nu aparține obiectului, există o bună șansă să fie moștenită prin lanțul prototipal de la constructorul pe baza căruia a fost instanțiat. Astfel, se face căutarea mai departe din obiect în obiect până când proprietatea este găsită sau nu.
+Mai mult de atât fiecare `prototype` poate avea drept referință un alt `prototype`, realizându-se ceea ce se numește *lanț prototipal*. Modul de funcționare a lanțului prototipal se bazează pe un mecanism de delegare utilizat de motor atunci când se caută o proprietate a unui obiect. De exemplu, dacă vei căuta o proprietate într-un obiect, iar aceasta nu aparține obiectului, există o bună șansă să fie moștenită prin *lanțul prototipal* de la constructorul pe baza căruia a fost instanțiat. Astfel, se face căutarea mai departe din obiect în obiect până când proprietatea este găsită sau nu.
 
 ## Alcătuirea obiectelor
 
 Obiectele au **proprietăți** și **metode**. Împreună formează membrii obiectului.
 
-Proprietățile sunt valori primitive - numere, boolean-uri, șiruri de caractere, funcții sau chiar obiecte. Proprietățile **sunt ceva**! Prin contrast, metodele **fac ceva**. Metodele sunt de fapt niște funcții. Un aspect care vă va face viața ușoară odată înțeles este acela că toate funcțiile definite în obiectul global, de fapt, devin automat metode ale acestuia, adică lui `window` în cazul browserelor.
+Proprietățile sunt valori primitive - numere, boolean-uri, șiruri de caractere, funcții sau chiar obiecte. Proprietățile **sunt ceva**! Prin comparație, metodele **fac ceva**. Metodele sunt de fapt niște funcții.
+
+Un aspect care vă va face viața ușoară odată înțeles este acela că toate funcțiile definite în obiectul global, de fapt, devin automat metode ale acestuia, adică lui `window` în cazul browserelor. Acest comportament este modificat dacă se evaluează codul sub regula `"use strict";` iar funcțiile sunt expresii.
 
 Hai să facem un obiect. Vă mai aduceți aminte de la valori că obiectele pot fi exprimate literal prin precizarea unei simple perechi de acolade.
 
@@ -146,7 +152,7 @@ Aceste metode, de fapt, aceste **rețete** prestabilite, pot fi și ele alterate
 -   Fiecare funcție obiect are un obiect prototip diferit.
 -   Un obiect poate fi creat cu `new Object()`:
   #1 acestă modalitate **nu va crea și constructor**.
-  #2 Accesarea `numeObiect.__proto__.constructor` răspunde cu `function Obiect()` la care s-a ajuns prin delegare.
+  #2 Accesarea `numeObiect.__proto__.constructor` răspunde cu `function Obiect()` la care s-a ajuns prin căutarea în lanțul prototipal.
 -   O funcție apelată cu `new` în fața sa este un constructor.
 
 ## Crearea obiectelor
@@ -361,43 +367,66 @@ console.log(obi[prop]); // 189439
 console.log(obi['primul lucru']); // o balenă
 ```
 
-### Accesarea și inițializarea indirectă a unor proprietăți prin getters și setters
+### Getters și setters
 
-Javascript oferă posibilitatea de a defini funcții specializate cu ajutorul cărora să poți manipula o valoare din interiorul unui obiect, fără a accesa direct, brut acea valoare prin sintaxa cu punct sau paranteze pătrate. În limba engleză **get** înseamnă să obții valoarea, iar **set**, să o introduci. Acest lucru este util atunci când lucrezi cu o colecție de valori  folosind un array, de exemplu.
+Javascript oferă posibilitatea de a defini funcții specializate cu ajutorul cărora să poți manipula o valoare din interiorul unui obiect, fără a accesa direct acea valoare prin sintaxa cu punct sau paranteze pătrate.
+
+```javascript
+const obi = {
+  a: 1,
+  get ceva () {
+    return this.a;
+  },
+  set ceva (valoare) {
+    this.a = valoare;
+  }
+};
+obi.ceva = 10;
+obi.ceva;
+```
+
+În limba engleză **get** înseamnă să obții valoarea, iar **set**, să o asignezi. Acest lucru este util atunci când lucrezi cu o colecție de valori folosind un array, de exemplu.
 
 ```javascript
 const obiect = {
   colectie: [],
-  set ceva (valoare) { this.colectie[this.colectie.length] = valoare; },
-  get ceva () { return this.colectie.join(', '); }
+  set ceva (valoare) {
+    this.colectie[this.colectie.length] = valoare;
+  },
+  get ceva () {
+    return this.colectie.join(', ');
+  }
 };
 obiect.ceva = 10;
 obiect.ceva = 'un ceva';
 obiect.colectie // "un ceva, 10"
 
 delete obiect.ceva; //true
+// ai șters accesorii
+obiect.ceva = 101; // inserție directă
+// Object { colectie: […], ceva: 101 }
 obiect // Object { colectie: Array[2] }
 ```
 
-Reține faptul că funcțiile în JavaScript sunt obiecte și că, orice funcție în JS, poate face referință la variabile definite în scope-ul extern. Înțelegerea acestui exemplu, ne indică cât de necesară este înțelegerea closure-urilor. Poți simula astfel geterii și setterii construindu-i ca parte a unui obiect returnat la execuția unei funcții. Acest mecanism permite manipularea unor valori la care altfel nu ajungi ușor sau la valori care s-a dorit să fie protejate ori ascunse, de-a dreptul.
+Reține faptul că funcțiile în JavaScript sunt obiecte. Funcțiile fac closure pe valorile din mediul lexical extern, dacă acestea sunt necesare pentru evaluarea propriului cod. Poți simula astfel geterii și setterii construindu-i ca parte a unui obiect returnat la execuția unei funcții. Acest mecanism permite manipularea unor valori la care altfel nu ajungi ușor sau la valori care s-a dorit să fie protejate ori ascunse, de-a dreptul.
 
 ```javascript
 function unObiect () {
   let oValoare;
   return {
-    set: function (modVal) { oValoare = modVal; },
+    set: function (nou) { oValoare = nou; },
     get: function () { return oValoare; },
     tip: function () { return typeof oValoare; }
   };
 };
-let x = unObiect();
+const x = unObiect();
 x.get();    // undefined
 x.set(10);  // undefined
 x.get();    // 10
 x.tip();    // "number"
 ```
 
-Poți defini un setter/getter pe un obiect folosind metoda `Object.defineProperty()`.
+Poți defini un setter/getter folosind și metoda `Object.defineProperty()`.
 
 ```javascript
 const obiect = { colectie: [] };
@@ -457,6 +486,7 @@ obiect['u' + 'nu']; // "primul"
 let cheieProprietate = 'doi';
 obiect[cheieProprietate]; // "al doilea"
 ```
+
 Acest operator permite accesarea proprietăților a căror chei nu sunt identificatori. Iată un exemplu în care poate fi un întreg fragment de text.
 
 ```javascript
@@ -511,7 +541,13 @@ for ( cheie in obiect ) { console.log( cheie, obiect[cheie] ); };
 
 ## Moștenirea prototipală
 
-### Ce-i cu moștenirea asta?
+Standardul oferă definiția prototipului: *obiect al cărui proprietăți sunt puse la dispoziția altor obiecte*.
+
+Nota atașată definiției este și ea foarte valoroasă pentru lămuririle pe care le aduce:
+
+> Atunci când un constructor creează un obiect, acel obiect va referenția automat proprietatea prototype a constructorului cu scopul de a rezolva referințele proprietăților. Proprietatea prototype a constructorului poate fi referențiată de expresia constructor.prototype. Proprietățile adăugate prototipului unui obiect sunt puse la dispoziția tuturor obiectelor care accesează prototipul prin moștenire. Alternativa este crearea unui nou obiect având un prototip specificat explicit prin utilizarea funcției interne Objct.create.
+
+### Despre moștenire
 
 Pentru a înțelege cu adevărat natura și specificitățile limbajului de programare JavaScript, trebuie să fie înțeles modul în care proprietățile unui obiect sunt „moștenite” de un altul. Nu uita nicio secundă faptul că JavaScript este un limbaj de programare care este o continuă comunicare între diferite obiecte, fie că acestea sunt cele interne, fie că sunt cele create de noi. Simplificând în tușe foarte groase, creatorii limbajului au dorit o modelare a structurilor de prelucrare a datelor după modul în care lumea reală funcționează: copii au părinți, iar aceștia moștenesc caracteristicile părinților pe lângă cele care definesc propria persoană.
 
@@ -786,17 +822,17 @@ function Sablon () {
   this.getCantitate = function obtine () {
     return cantitate;
   };
-  this.incrementare = function adauga () {
+  this.setCantitate = function adauga () {
     cantitate++;
   };
 };
 const obiect = new Sablon();
 obiect.getCantitate(); // 10
-obiect.incrementare(); // undefined
+obiect.setCantitate(); // undefined
 obiect.getCantitate(); // 11
 ```
 
-Pentru a ajunge la `cantitate` este nevoie de metode de acces (**accessors**). Acesta este și unul din cazurile de realizare a unui closure.
+Pentru a ajunge la `cantitate` este nevoie de metode de acces (**accessors**). Acesta este și unul din cazurile în care se realizează un closure.
 
 ## Crearea unui obiect printr-o declarație literală
 
@@ -1163,7 +1199,7 @@ Una['metoda x'](); // Inima
 Expresia pentru clase în JavaScript este una din modalitățile prin care se pot declara clasele. Similar funcțiilor, clasele pot să aibe nume sau nu. Dacă poartă nume, acesta este disponibil în blocul de cod al clasei. Testul cu `typeof` va fi întotdeauna `function`.
 
 ```javascript
-var Plan = class {
+const Plan = class {
   constructor (extern) {
     this.ceva = extern;
   };
@@ -1193,7 +1229,7 @@ let obi = creatorDeCeva(
 O aplicație practică a claselor este crearea din zbor a Singleton-urilor (acestea sunt obiecte care sunt unice în economia unei aplicații - un singur obiect de acest fel poate exista la un moment dat). Acest lucru se poate realiza prin aplicarea directă a lui `new` pe expresia de clasă.
 
 ```javascript
-let avion = new class {
+const avion = new class {
   constructor (indicativ) {
     this.id = indicativ;
   };
@@ -1426,9 +1462,9 @@ Pentru a testa dacă o proprietate există se poate folosi operatorul `in`. Prob
 'proprietate' in obiect; // true
 ```
 
-### Testare cu `Object.hasOwnProperty()`
+### Testare cu Object.hasOwnProperty()
 
-Pentru a verifica dacă o proprietate aparține obiectului se va folosi `hasOwnProperty()`:
+Pentru a verifica dacă o proprietate aparține obiectului se va folosi `Object.hasOwnProperty()`:
 
 ```javascript
 obiect.hasOwnProperty('altaProprietate'); // true
@@ -1436,7 +1472,7 @@ obiect.hasOwnProperty('proprietate'); // false
 obiect.hasOwnProperty('toString'); // false
 ```
 
-### Radiografierea obiectelor cu `Object.getOwnPropertyNames()`
+### Radiografierea obiectelor cu Object.getOwnPropertyNames()
 
 Această metodă poate fi utilizată pentru a extrage informațiile care descriu un obiect. Mă refer la faptul că uneori avem nevoie să aflăm tot ce se poate afla despre un obiect pentru a ne face o idee generală despre ce oferă. Să vedem cum am putea obține toate informațiile despre un obiect.
 

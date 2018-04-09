@@ -6,8 +6,7 @@ Hoistingul trebuie privit ca un comportament al motorului JavaScript, care ia id
 
 > `undefined` este pasat mediului pentru a arăta că operațiunea PutValue ar trebui să fie folosită pentru a asigna valoarea de inițializare. Acesta este cazul variabilelor **var** și al listei de parametri formali ai unor funcții non-stricte ( [Vezi 9.2.12](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-functiondeclarationinstantiation) ). În acele cazuri legătura lexicală este hoisted și preinițializată înainte de evaluarea inițializatorilor săi. [12.1.5 Runtime Semantics: BindingInitialization](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-functiondeclarationinstantiation)
 
-Atașarea unui varibile la mediul lexical al unei funcții în interiorul căreia a fost declarată la momentul compilării este cel mai rapid exemplu de „hoisting” - omniprezență. Hoisting ca și termen sau procedură nu există în standard. Este mai degrabă o explicație pentru comportamentul motorului la momentul compilării pentru că toți identificatorii sunt deja disponibili atunci când pornește execuția.
-Această omniprezență permite disponibilitatea variabilelor și a funcțiilor înainte ca acestea să capete și valorile lor.
+Atașarea unui varibile la mediul lexical al unei funcții în interiorul căreia a fost declarată la momentul compilării este cel mai rapid exemplu de „hoisting” - omniprezență. Hoisting ca și termen sau procedură nu există în standard. Este mai degrabă o explicație pentru comportamentul motorului la momentul compilării pentru că toți identificatorii sunt deja disponibili atunci când pornește execuția. Această omniprezență permite disponibilitatea variabilelor și a funcțiilor înainte ca acestea să capete și valorile lor.
 
 Acest lucru se petrece deoarece mai întâi de a fi executat programul, codul sursă trece printr-o fază de compilare în care motorul JavaScript se uită să vadă mai întâi de toate care sunt identificatorii. Apoi motorul trece la execuție, moment în care toți identificatorii primesc și valorile.
 
@@ -48,11 +47,11 @@ Cel mai evident exemplu este să scrii o funcție care să returneze după ce ai
 ## Mantre
 
 -   JavaScript creează un **scope lexical**.
--   „Săltarea” - oistingul se face la momentul compilării, nu la faza de execuție.
--   Declararea variabilelor și funcțiilor este „săltată" - hoisted la vârful scope-ului funcțional indiferent de poziția lor în cod.
+-   Hoistingul se face la momentul compilării, nu la faza de execuție.
+-   Declararea variabilelor cu `var` și funcțiilor beneficiază de mecanismul hoistingului la nivelul funcțiilor indiferent de poziția lor în cod.
 -   Funcțiile sunt săltate înaintea variabilelor.
--   Variabila primește valoarea `undefined`. Pentru că se întâmplă acest lucru, cel mai bine este să declari variabilele în capul funcției și de preferat într-o singură declarație var.
--   Hoistingul are un rol funamental în cazurile de recursiviate și recursivitate mutuală (o funcție o cheamă pe alta până când o condiție rupe lanțul).
+-   Variabilele primesc automat valoarea `undefined`. Pentru că se întâmplă acest lucru, cel mai bine este să declari variabilele la începutul corpului funcției și de preferat într-o singură declarație `var`.
+-   Hoistingul are un rol fundamental în cazurile de recursivitate și recursivitate mutuală (o funcție o cheamă pe alta până când o condiție rupe lanțul).
 -   Folosirea noului cuvânt cheie `let` pentru a declara variabilele, are ca efect limitarea scope-ului la nivelul blocului `{}` (block scoping).
 -   Excepția pentru care JavaScript face block scope este contrucția `try..catch`.
 
@@ -60,14 +59,14 @@ Cel mai evident exemplu este să scrii o funcție care să returneze după ce ai
 
 ```javascript
 unu(1);
-function unu(ceva){
+function unu (ceva) {
     if(ceva > 20) return ceva;  // verifica valoarea sa nu fie mai mare de 20
     return doi(ceva + 2);       // 7+2
 };
-function doi(ceva){
+function doi (ceva) {
     return trei(ceva) + 1;      // 7
 };
-function trei(ceva){
+function trei (ceva) {
     return unu(ceva*2);         // 6
 };
 ```
@@ -90,7 +89,7 @@ function trei(ceva){
 
 ## Marcajul sintactic și hoisting-ul
 
-Să examinăm cazurile în care declarăm variabile în interiorul unor enunțuri precum `if` sau `for`. De ce facem acest lucru când suntem perfect conștienți că aceste variabile vor fi disponibile întregului cod, nu doar blocului decizional sau buclei `for`? Răspunsul rezidă din necesitatea umană de a semnala celorlalți programatori faptul că acele variabile, acei identificatori nu trebuie folosiți în altă parte în afara zonei în intenție pentru care au fost declarați.
+Să examinăm cazurile în care declarăm variabile în interiorul unor instrucțiuni precum `if` sau `for`. De ce facem acest lucru când suntem perfect conștienți că aceste variabile vor fi disponibile întregului cod, nu doar blocului decizional sau buclei `for`? Răspunsul rezidă din necesitatea umană de a semnala celorlalți programatori faptul că acele variabile, acei identificatori nu trebuie folosiți în altă parte în afara zonei în intenție pentru care au fost declarați.
 
 ```javascript
 if (x == undefined) {
@@ -124,4 +123,4 @@ for (let i = 0; i < 100; i++) {
 };
 ```
 
-Încercarea de a accesa varibilele declarate cu `let` în afara enunțurilor, se va solda cu o eroare.
+Încercarea de a accesa varibilele declarate cu `let` în afara enunțurilor, se va solda cu ridicarea unei excepții.

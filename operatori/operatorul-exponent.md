@@ -1,4 +1,6 @@
-# Operatorul exponent `**`
+# Operatorul exponent **
+
+Până la apariția acestui operator (ES6), era folosit `Math.pow(bază, exponent)`.
 
 Pentru că este nevoie de a calcula rapid ridicarea la putere, vom folosi acest operator dedicat. Iată cum ar arăta ridicarea la puterea a treia pentru doi: 2<sup>3</sup>:
 

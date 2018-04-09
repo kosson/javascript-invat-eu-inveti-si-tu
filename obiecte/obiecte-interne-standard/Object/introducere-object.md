@@ -1,4 +1,4 @@
-# `Object`
+# Object
 
 Este un obiect intern al Javascript caracterizat de standard ca fiind unul dintre cele fundamentale. Poate fi folosit pentru crearea de obiecte atunci când este nevoie de setarea unor detalii fine ale proprietăților acestora.
 Creează un wrapper (un obiect ambalaj) pentru un obiect atunci când este instanțiat prin apelarea cu `new` a constructorului `Object`. Parafrazând o zicală românească, am putea spune că în acest moment „haina face pe om”. Acest wrapper spune că lucrăm cu un obiect.
@@ -17,24 +17,24 @@ Creează un wrapper (un obiect ambalaj) pentru un obiect atunci când este insta
 
 ## Spune standardul
 
-Valoarea slotului intern \[\[Prototype]] a obiectului cu rol de prototype pentru Object este `null` iar valoarea slotului intern \[\[Extensible]] este `true`.
+Valoarea slotului intern `[[Prototype]]` a obiectului cu rol de prototype pentru Object este `null` iar valoarea slotului intern `[[Extensible]]` este `true`.
 
-## Crearea obiectelor cu `Object`
+## Crearea obiectelor folosind constructorul `Object`
 
 A. Crearea de obiecte goale
 
 ```javascript
-var obiect = new Object();
-var object = new Object(null);
-var object = new Object(undefined);
+const obiect = new Object();
+const object = new Object(null);
+const object = new Object(undefined);
 ```
 
 B. Crearea de obiecte de un anumit tip
 
 ```javascript
 // crearea de obiecte Boolean
-var obiect = new Object(true);
-var object = new Object(Boolean());
+const obiect = new Object(true);
+const object = new Object(Boolean());
 ```
 
 ![](ObjectMap.png)
@@ -52,15 +52,15 @@ Va creea un obiect având un obiect prototip și proprietăți care sunt specifi
 Să luăm un exemplu simplu care va descoperi anumite comportamente în cazul lui `Object`.
 
 ```javascript
-var animal = {
+const animal = {
   caracteristici: {}
 }; // Object.getPrototypeOf(animale) returnează prototype-ul lui Object
-var vrabie = Object.create(animal);
+const vrabie = Object.create(animal);
 // Object.getPrototypeOf(vrabie) returnează
 // prototype-ul lui Object căruia i se adaugă
 // proprietatea picioare: 4
 vrabie.caracteristici.picioare = '2';
-var crocodil = Object.create(animal);
+const crocodil = Object.create(animal);
 crocodil.caracteristici.picioare = '4';
 animal.caracteristici.picioare // 4
 // implicit
@@ -72,12 +72,12 @@ Ceea ce se întâmplă în acest caz este că obiectele nou create sunt la concu
 Pentru a evita un astfel de comportament, ai putea gândi ca pentru fiecare obiect nou creat, să setezi un obiect nou care că reprezinte atributele specifice ale fiecărui animal.
 
 ```javascript
-var animal = {
+const animal = {
   caracteristici: {}
 };
-var cal = Object.create(animal);
+const cal = Object.create(animal);
 cal.caracteristici = {picioare: 4};
-var cangur = Object.create(animal);
+const cangur = Object.create(animal);
 cangur.caracteristici = {picioare: 2};
 ```
 
@@ -86,12 +86,12 @@ Acest exemplu este limitat, pentru că în cazul în care setezi obiectul caract
 Soluția este de a renunța la setarea completă a obiectului `caracteristici` și setarea specifică a fiecărei proprietăți a obiectului `caracteristici` pentru fiecare dintre posibilitățile contribuite de obiectele create.
 
 ```javascript
-var animal = {
+const animal = {
   caracteristici: {}
 };
-var cal = Object.create(animal);
+const cal = Object.create(animal);
 cal.caracteristici = {insusiri: {picioare: 4}};
-var cangur = Object.create(animal);
+const cangur = Object.create(animal);
 cangur.caracteristici = {insusiri: {picioare: 2}};
 ```
 
@@ -100,9 +100,9 @@ Astfel, nu se vor mai înregistra schimbări în obiectul care servește drept p
 Plus de asta `Object` permite crearea unui obiect specificând în mod direct atributele fiecărui membru prin pasarea unui obiect de configurare.
 
 ```javascript
-var animal = {
+const animal = {
   caracteristici: {}
 };
-var cal    = Object.create(animal, {caracteristici: {writable: true, configurable: true, value: {picioare: 4}}});
-var cangur = Object.create(animal, {caracteristici: {writable: true, configurable: true, value: {picioare: 2}}});
+const cal    = Object.create(animal, {caracteristici: {writable: true, configurable: true, value: {picioare: 4}}});
+const cangur = Object.create(animal, {caracteristici: {writable: true, configurable: true, value: {picioare: 2}}});
 ```

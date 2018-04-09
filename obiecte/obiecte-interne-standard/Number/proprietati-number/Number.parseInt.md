@@ -1,4 +1,4 @@
-# `Number.parseIn()`
+# Number.parseIn()
 
 Este o metodă care primește un argument ca șir, îl va prelucra în funcție de rădăcină sau de bază și va fi returnat ca număr întreg.
 

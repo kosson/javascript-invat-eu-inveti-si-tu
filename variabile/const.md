@@ -1,6 +1,8 @@
-# `const`
+# Variabile const
 
-Este o variabilă ca nu poate fi reasignată. A fost adăugat de ECMAScript 2015 (ES6). În alți termeni este o variabilă unică pentru un program. Nu poți să o redeclari. Atenție, nu se referă la valoare, ci doar la atribuire. Nu asocia ideea de constantă cu valoarea asignată. E o capcană. În subsidiar asta înseamnă că poți modifica ceea ce există în cazul obiectelor, dar nu poți asigna alt obiect aceleiași constante.
+A fost adăugat de ECMAScript 2015 (ES6). Folosind `const` se declară o variabilă unică pentru un program. Nu poți să declari altă variabilă cu același identificator.
+
+Declarația unei variabile folosind `const` nu se referă la valoare, ci doar la modul cum se face atribuirea valorii. Nu asocia ideea de constantă cu valoarea asignată. E o capcană. În subsidiar asta înseamnă că poți modifica ceea ce există în cazul obiectelor, dar nu poți asigna alt obiect aceleiași constante, adică nu poți reasigna o altă valoare.
 
 ```javascript
 const ceva = ['unu','doi'];
@@ -11,7 +13,7 @@ console.log(ceva[1]); // "bum"
 
 Dacă se dorește atingerea imutabilității, se va folosi utilitarul `var ceva = Object.freeze(['unu','doi'])`, care, cu adevărat are capacitatea de a face obiectul unul care nu poate fi modificat.
 
-Variabilele const trebuie inițializate la declarare, altfel vei avea o eroare de sintaxă.
+Variabilele `const` trebuie inițializate la declarare, altfel vei avea o eroare de sintaxă.
 
 ```javascript
 const ceva;

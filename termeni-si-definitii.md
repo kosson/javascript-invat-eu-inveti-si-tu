@@ -25,11 +25,12 @@ Un obiect este un membru al tipului `Obiect` și este o colecție de proprietă�
 ## constructor
 
 Este un obiect funcție care creează și inițializează obiecte.
+
 Valoarea proprietății `prototype` este un obiect prototype care este folosit pentru a implementa propriu-zis mecanismul de moștenire și pentru a accesa proprietățile.
 
 ## prototype - prototip
 
-Este un obiect care oferă proprietăți ce pot fi împărtășite cu alte obiecte.
+Obiect al cărui proprietăți sunt puse la dispoziția altor obiecte.
 
 Atunci când constructorul creează un obiect, acel obiect referențiază direct proprietatea `prototype` a constructorului pentru a rezolva cererile care vin din referențierea diferitelor proprietăți.
 Atenție, se poate contrui un obiect nou pentru care să specifici care va fi prototipul folosindu-ne de funcția internă `Object.create()`.
@@ -159,4 +160,4 @@ Este o proprietate care aparține în mod direct obiectului său.
 
 Este o proprietate a unui obiect care nu este proprietate proprie, ci este una moștenită din prototipul obiectului.
 
-## 
+##

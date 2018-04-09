@@ -30,11 +30,11 @@ var xhr = new XMLHttpRequest();
 xhr.open('GET', adresa);
 xhr.responseType = 'json';
 
-xhr.onload = function() {
+xhr.onload = function () {
   console.log(xhr.response);
 };
 
-xhr.onerror = function() {
+xhr.onerror = function () {
   console.log("A apărut o eroare");
 };
 

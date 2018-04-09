@@ -116,7 +116,7 @@ TODO: Nu uita să ștergi cheia mea din stringul de acces la API-ul Europeana
 // înlocuiește XXXXXXXXX cu propria cheie
 // dacă nu introduci cheia personală vei avea o eroare
 // Cross-Origin Request Blocked
-var adresa = "https://www.europeana.eu/api/v2/search.json?wskey=MH8g7b6hz&query=The%20Fraternity%20between%20Romanian%20and%20French%20Army";
+let adresa = "https://www.europeana.eu/api/v2/search.json?wskey=MH8g7b6hz&query=The%20Fraternity%20between%20Romanian%20and%20French%20Army";
 fetch(adresa)
   .then( function(raspuns) {
     if (raspuns.headers.get('Content-Type') === 'application/json') {
@@ -125,8 +125,8 @@ fetch(adresa)
     return raspuns.text();
   }).then(function(dateleAduse) {
     console.log(dateleAduse);
-  }).catch(function() {
-    console.log("A apărut o eroare");
+  }).catch(function (error) {
+    console.log("A apărut o eroare: " + error);
   });
 console.log('Mesaj afișat înaintea primirii datelor.');
 ```

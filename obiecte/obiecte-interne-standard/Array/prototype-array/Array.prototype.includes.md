@@ -1,4 +1,4 @@
-# `Array.prototype.includes()`
+# Array.prototype.includes()
 
 Metoda verifică dacă într-un array există un anume element returnând `true` sau `false `după caz.
 Se poate menționa și indexul de la care să se facă căutarea.
@@ -10,3 +10,5 @@ Se poate menționa și indexul de la care să se facă căutarea.
 [1, 2, 3].includes(3, -1); // true
 [1, 2, NaN].includes(NaN); // true
 ```
+
+Ceea ce este de remarcat este că în cazul în care avem un element `NaN`, îl va lua în considerare.

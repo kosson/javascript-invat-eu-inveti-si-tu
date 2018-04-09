@@ -1,6 +1,6 @@
-# `Math.pow`
+# Math.pow
 
-`Math.pow(bază, exponent)` returnează rezultatul ridicării unei valori la o putere.
+Metoda `Math.pow(bază, exponent)` returnează rezultatul ridicării unei valori la o putere.
 
 Pătratul lui 4:
 

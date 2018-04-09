@@ -6,7 +6,7 @@ Această metodă suprascrie ca efecte produse metoda similară obiectului `Objec
 
 ```javascript
 var unSir = new String('A fost odată');
-unSir.toString(); // A fost odată
+unSir.toString(); // "A fost odată"
 ```
 
-Metoda `valueOf` este similară lui toString.
+Metoda `valueOf` este opusă lui `toString()` împachetând un literal în obiectul corespondent.

@@ -113,12 +113,12 @@ const promisune = new Promise();
 
 ### Fă o promisiune!
 
-Pentru a face o promisiune, se va folosi constructorul `Promise` căruia îi pasăm un singur argument. Acesta este o funcție cu rol de „executor”, spune standardul. Funcției îi sunt pasate două argumente: `resolve` și `reject` - două funcții puse la dispoziție deja de motor. Funcția executor este executată imediat de motorul JavaScript.
+Pentru a face o promisiune, se va folosi constructorul `Promise` căruia îi pasăm un singur argument. Acesta este o funcție cu rol de „executor”, spune standardul. Funcției îi sunt pasate două argumente: `resolve` și `reject` - două funcții puse la dispoziție deja de motor. Funcția executor este executată imediat de motorul JavaScript. În acest moment, promisiunea intră într-o stare (`state`) de așteptare marcată prin valoarea `pending`.
 
-Executorul este apelat pentru a iniția și pentru a avea un răspuns la operațiunea pentru care construim promisiunea. Dacă ne lovim de un eșec, putem apela funcția `reject`, iar în caz de rezolvare, este disponibilă funcția `resolve` care primește un singur argument, fiind valoarea returnată la încheierea operațiunii. Această valoare poate fi o valoare în sine sau un alt obiect `Promise`, care la rândul său va avea drept sarcină returnarea unei valori.
-Funcția `reject` este și ea pasată executorului și la rândul său primește un argument, care, de regulă este un obiect `Error`. Returnarea din funcția executor nu înseamnă că a fost încheiată treaba pentru care am constituit promisiunea, ci faptul că această treabă a întrat în lucru.
+Callbackul `resolve` conduce la obținerea unuei valori răspuns la operațiunile pentru care am inițiat promisiunea. Dacă ne lovim de un eșec, putem apela funcția `reject`. Valoarea pe care callback-ul `resolve` o primește poate fi o valoare în sine sau un alt obiect `Promise`, care la rândul său va avea drept sarcină returnarea unei valori.
+Funcția `reject` este și ea pasată executorului și la rândul său primește un argument, care, de regulă este un obiect `Error`. Returnarea din funcția executor nu înseamnă că a fost încheiată treaba pentru care am constituit promisiunea, ci faptul că această treabă a întrat în lucru și că în urma evaluării codului promisiunii am ajuns la un rezultat sau la un eșec.
 
-La apelarea cu `new`, constructorul `Promise` creează obiectul promisiune care pune la dispoziție o metodă `then()`. Metoda `then()` primește un callback pentru prelucrarea datelor în caz de `success`, fiind urmată de o metodă catch, care afișează erorile pe ramura `failure`. Callback-ul din `then(callback)` este invocat dacă funcția `resolve()` este invocată pentru acea promisiune, condiția fiind satisfăcută. În caz contrar, se procesează eroarea în metoda `catch(obiEroare)`.
+La apelarea cu `new`, constructorul `Promise` creează obiectul promisiune care pune la dispoziție o metodă `then()`. Metoda `then()` primește un callback pentru prelucrarea datelor în caz de succes, fiind urmată de o metodă catch, care afișează erorile pe ramura `failure`. Callback-ul din `then(callback)` este invocat dacă funcția `resolve()` este invocată pentru acea promisiune, condiția fiind satisfăcută. În caz contrar, se procesează eroarea în metoda `catch(obiEroare)`.
 
 ```javascript
 let promisiune = new Promise((resolve, reject) => {
@@ -138,6 +138,34 @@ promisiune.then(
   console.log(`${eroare}`);
 });
 ```
+
+Toată povestea interesantă este legată de evaluarea codului care conduce la satisfacerea unei condiții, care declanșează apelarea funcției `resolve(rezultat)`.
+
+```javascript
+TODO: Scoate cheia personală
+// înlocuiește cheia API din link, cu una personală
+// wskey=XXXXXXXXX
+// dacă nu introduci cheia personală vei avea o eroare
+// Cross-Origin Request Blocked
+const promisiune = new Promise((resolve, reject) => {
+  let adresa = "https://www.europeana.eu/api/v2/search.json?wskey=MH8g7b6hz&query=The%20Fraternity%20between%20Romanian%20and%20French%20Army";
+  let xhr = new XMLHttpRequest();
+  xhr.open('GET', adresa);
+  xhr.responseType = 'json';
+  xhr.onload = function () {
+    resolve(xhr.response);
+  };
+  xhr.onerror = function () {
+    reject('probleme cu resursa');
+  };
+  xhr.send();
+});
+promisiune.then(rezultat => {
+  console.log(rezultat);
+}).catch(error => console.log(error));
+```
+
+Pentru a exemplifica aplicat, am promisificat un apel AJAX către o resursă la distanță. În funcțiile care gestionează evenimentele `onload` și `onerror` am făcut apelurile către callbackurile specifice promisiunilor. Acest lucru permite lucrul cu metodele `then(succes, eșec)` și `catch(error)`.
 
 ### Fă mai multe promisiuni odată
 
