@@ -27,12 +27,25 @@ Hai să pornim făcând câteva verificări pentru un element înainte de a prel
 
 Poți colecta atributele unui element prin constituirea unei colecții ale acestora de tip `NameNodeMap`. Acest tip de colecție permite accesarea informațiilor privind atributele, fie după numele atributului, dar utilizând indexarea, fie accesarea valorii unui atribut, menționând numele atributului.
 
-## className și classList
+## Modificarea directă a claselor
 
 Există două proprietăți care folosite în JavaScript permit modificarea claselor folosite pentru un anume element:
 
 -   `className` - care se bucură de o largă compatibilitate în ceea ce privește suportul browserelor și
 -   `classList` - care este introdus ceva mai recent și mai ușor de folosit.
+
+Aceste proprietăți sunt puse la dispoziție de interfața `Element`. Proprietatea `className` poate fi folosită atunci când suntem siguri că un element are o singură clasă. În caz contrar, existența mai multor clase impune folosirea lui `classList`.
+
+```javascript
+let elem = document.querySelector('.top-sites');
+elem.classList.add('bau'); // adăugarea unei clase
+elem.classList.remove('bau'); // ștergerea unei clase
+elem.classList.toggle('bau');
+// dacă ai clasa returnează false și șterge clasa
+// dacă nu este clasa, o intruduce și returnează true.
+elem.classList.contains('bau'); // dacă există returnează true
+elem.classList.replace('bau', 'baubau'); // înlocuiește o clasă
+```
 
 ## Adăugarea unei clase folosind `className`
 
@@ -159,7 +172,7 @@ Odată cu versiunea 5 a HTML, există posibilitatea de a introduce în elemente 
 
 Atributele de acest tip formează o colecție care poate fi accesată folosind proprietatea `dataset`. Aceasta returnează un obiect de tipul `DOMStringMap`. Cheile acestui obiect vor fi numele atributelor, iar valorile, vor fi cele introduse.
 
-Ceea ce se realizează astfel este o comunicare de date între pagina web și DOM. 
+Ceea ce se realizează astfel este o comunicare de date între pagina web și DOM.
 
 ## Referințe
 

@@ -3,10 +3,50 @@
   <head>
     <meta charset="utf-8">
     <title>Vanilie</title>
-    <script src="index.js" charset="utf-8"></script>
+
   </head>
   <body>
     <h1>e de test</h1>
+
+    <div class="demo">Unu</div>
+    <div class="demo">Doi</div>
+    <div class="demo">Trei</div>
+    <script type="text/javascript">
+    let sel = document.querySelector(".demo");
+    console.log(sel.textContent);
+    </script>
+    <!-- <template id="fisa-biblio">
+      <ul id="unitate">
+        <li class="titlu"></li>
+        <li class="autor"></li>
+        <li class="editura"></li>
+      </ul>
+    </template>
+
+    <section id="ubeuri"></section>
+
+    <script type="text/javascript">
+      let date = [
+        {titlu: 'Amurgul cailor', autor: 'Emil Vinicius', editura: 'Ace'},
+        {titlu: 'Când pleacă vacile', autor: 'Paris Maglavit', editura: 'Saniti'},
+        {titlu: 'Vin crocodili', autor: 'Magdalena Ifrim', editura: 'Panika'}
+      ];
+
+      // selectăm template-ul
+      let template = document.querySelector('#fisa-biblio').content;
+      // selectăm inserția
+      let ins = document.querySelector(`#ubeuri`);
+      for (let ub of date) {
+        // clonezi întreaga structură
+        let fișa = template.cloneNode(true);
+
+        fișa.querySelector(`.titlu`).textContent = ub.titlu;
+        fișa.querySelector(`.autor`).textContent = ub.autor;
+        fișa.querySelector(`.editura`).textContent = ub.editura;
+
+        ins.appendChild(fișa);
+      }
+    </script> -->
     <!-- <button id="test">Apasă-mă!</button>
     <script>
       function ModStare () {
@@ -52,16 +92,18 @@
         console.log(element.innerText);
       };
     </script> -->
-    <div id="primul">
+    <!-- <div id="primul">
       <p class="verde">Primul</p>
       <p class="verde ceva">Al doilea</p>
       <p id="254" data-titlu="Apus de soare" data-isbn="143-432342" data-exemplare="3">O altă lectură care a plutit în vacanțele elevilor.</p>
-    </div>
-    <script>
+    </div> -->
+    <!-- <script>
       let bloc = document.getElementById('primul');
       let colectieP = document.getElementsByTagName('p');
       let colectieC = document.getElementsByClassName('verde');
       bloc.hasAttributes(); // true
-    </script>
+    </script> -->
+    <!-- <canvas id="canvas" width="500" height="400"></canvas>
+    <script src="index.js" charset="utf-8"></script> -->
   </body>
 </html>
