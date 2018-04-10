@@ -1,17 +1,14 @@
 # Interfața Node - fundamentală
 
-Este considerată a fi o **interfață fundamentală**.
-În DOM, Node-ul este unitatea de bază pentru a accesa datele. Este un reper fix.
+Este considerată a fi o **interfață fundamentală**. În DOM, Node-ul este unitatea de bază pentru a accesa datele. Este un reper fix.
 
-Node este o interfață de la care moștenesc o serie de tipuri DOM printre care `Document`, `Element`, `CharacterData` (din care moștenesc la rândul lor `Text`, `Comment`, and `CDATASection`), `ProcessingInstruction`, `DocumentFragment`, `DocumentType`, `Notation`, `Entity`, `EntityReference`.
+Node este o interfață de la care moștenesc o serie de tipuri DOM printre care `Document`, `Element`, `CharacterData` (de la care moștenesc la rândul lor `Text`, `Comment` și `CDATASection`), `ProcessingInstruction`, `DocumentFragment`, `DocumentType`, `Notation`, `Entity`, `EntityReference`.
 
-Standardul spune că această interfață este „tipul de dată primar pentru întreg DOM-ul”.
-
-Atenție, nu toate nodurile pot avea copii.
+Standardul spune că această interfață este „tipul de dată primar pentru întreg DOM-ul”. Atenție, nu toate nodurile pot avea copii.
 
 ## Mantre
 
-- Dintre toate proprietățile doar două pot fi și scrise, nu numai să fie citite. Restul pot fi doar citite. Acestea sunt: `Node.nodeValue` și `Node.textContent`.
+-   Dintre toate proprietățile doar două pot fi și scrise, nu numai să fie citite. Restul pot fi doar citite. Acestea sunt: `Node.nodeValue` și `Node.textContent`.
 
 ## Proprietățile Node
 
@@ -33,24 +30,24 @@ Toate nodurile au această proprietate. De exemplu, pentru nodurile text, valoar
 
 Returnează un număr care desemnează tipul nodului.
 
-| Nume | Valoare|
-|:-|:-|
-|ELEMENT_NODE| 1 |
-|ATTRIBUTE_NODE| 2 |
-|TEXT_NODE| 3 |
-|CDATA_SECTION_NODE| 4 |
-|ENTITY_REFERENCE_NODE| 5 |
-|ENTITY_NODE| 6 |
-|PROCESSING_INSTRUCTION_NODE| 7 |
-|COMMENT_NODE| 8 |
-|DOCUMENT_NODE| 9 |
-|DOCUMENT_TYPE_NODE| 10 |
-|DOCUMENT_FRAGMENT_NODE| 11 |
-|NOTATION_NODE| 12 |
+| Nume                        | Valoare |
+|:--------------------------- |:------- |
+| ELEMENT_NODE                | 1       |
+| ATTRIBUTE_NODE              | 2       |
+| TEXT_NODE                   | 3       |
+| CDATA_SECTION_NODE          | 4       |
+| ENTITY_REFERENCE_NODE       | 5       |
+| ENTITY_NODE                 | 6       |
+| PROCESSING_INSTRUCTION_NODE | 7       |
+| COMMENT_NODE                | 8       |
+| DOCUMENT_NODE               | 9       |
+| DOCUMENT_TYPE_NODE          | 10      |
+| DOCUMENT_FRAGMENT_NODE      | 11      |
+| NOTATION_NODE               | 12      |
 
 ### `Node.nodeValue`
 
-Setează valoarea sau extrage valoarea nodului. Această valoare este un șir de caractere care se află în nod, dacă acestea există. Pentru document în sine, nodeValue returnează `null`. Pentru text, comment și noduri CDATA, `nodeValues` returnează conținutul nodului. Pentru nodurile atribut va fi returnată valoarea acestuia.
+Setează valoarea sau extrage valoarea nodului. Această valoare este un șir de caractere care se află în nod, dacă acestea există. Pentru document în sine, `nodeValue` returnează `null`. Pentru text, comment și noduri CDATA, `nodeValues` returnează conținutul nodului. Pentru nodurile atribut va fi returnată valoarea acestuia.
 
 ### `Node.ownerDocument`
 

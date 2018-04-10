@@ -1,11 +1,11 @@
 # Clase și atribute
 
-## `className` și `classList`
+## className și classList
 
 Există două proprietăți care folosite în JavaScript permit modificarea claselor folosite pentru un anume element:
 
-- `className` - care se bucură de o largă compatibilitate în ceea ce privește suportul browserelor și
-- `classList` - care este introdus ceva mai recent și mai ușor de folosit.
+-   `className` - care se bucură de o largă compatibilitate în ceea ce privește suportul browserelor și
+-   `classList` - care este introdus ceva mai recent și mai ușor de folosit.
 
 
 ## Adăugarea unei clase folosind `className`

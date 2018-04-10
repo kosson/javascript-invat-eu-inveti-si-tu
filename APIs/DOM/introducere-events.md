@@ -4,12 +4,12 @@
 
 ## Mantre
 
-- HTML nu este DOM.
-- callback-ul este un closure a cărui funcție va fi invocată atunci când un anumit eveniment se întâmplă.
-- un eveniment este de fapt modificarea la un moment dat a stării unui sistem.
-- Evenimentele nu pornesc de la elementul care este cauza evenimentului (apăsarea unui buton), ci de la elementul rădăcină, de la `window` în cazul browserului și va merge din ramură în ramură până la elementul căruia îi este destinat. În drumul său, fiecare element din cale va „ști” despre acest eveniment. Acestă primă fază se numește `capturing phase`.
-- Capturarea unui eveniment returnează un eveniment. Datele depind de tipul evenimentului.
-- După ce evenimentul a ajuns la elementul țintit, acesta va porni înapoi către elementul rădăcină `window` alertând toate elementele din cale. Această fază se numește `bubbling phase` sau faza a doua.
+-   HTML nu este DOM.
+-   callback-ul este un closure a cărui funcție va fi invocată atunci când un anumit eveniment se întâmplă.
+-   un eveniment este de fapt modificarea la un moment dat a stării unui sistem.
+-   Evenimentele nu pornesc de la elementul care este cauza evenimentului (apăsarea unui buton), ci de la elementul rădăcină, de la `window` în cazul browserului și va merge din ramură în ramură până la elementul căruia îi este destinat. În drumul său, fiecare element din cale va „ști” despre acest eveniment. Acestă primă fază se numește `capturing phase`.
+-   Capturarea unui eveniment returnează un eveniment. Datele depind de tipul evenimentului.
+-   După ce evenimentul a ajuns la elementul țintit, acesta va porni înapoi către elementul rădăcină `window` alertând toate elementele din cale. Această fază se numește `bubbling phase` sau faza a doua.
 
 ## Anatomie
 
@@ -67,25 +67,25 @@ elementApasat.addEventListener("click", faCeva, true);
 
 Câteva informații interesante apar în consolă la o inspecție a conținutului obiectului eveniment:
 
-- `type`, fiind tipul evenimentului, în cazul nostru click;
-- `timestamp`, fiind momentul la care a apărut evenimentul;
-- `defaultPrevent`, fiind un Boolean care dacă este `true` înseamnă că va împiedica comportamentul normal al elementului... gândește-te că e un buton care trebuie să facă un apel pentru a aduce date de undeva. Dacă este `false`, va face acel lucu, dacă nu, va avea un comportament deturnat în alt scop.
-- `originalTarget`, fiind elementul care a declanșat evenimentul.
-- `target`, fiind elementul țintit de eveniment.
+-   `type`, fiind tipul evenimentului, în cazul nostru click;
+-   `timestamp`, fiind momentul la care a apărut evenimentul;
+-   `defaultPrevent`, fiind un Boolean care dacă este `true` înseamnă că va împiedica comportamentul normal al elementului... gândește-te că e un buton care trebuie să facă un apel pentru a aduce date de undeva. Dacă este `false`, va face acel lucu, dacă nu, va avea un comportament deturnat în alt scop.
+-   `originalTarget`, fiind elementul care a declanșat evenimentul.
+-   `target`, fiind elementul țintit de eveniment.
 
 Și acum câteva informații utile privind poziționarea elementului:
 
-- screenX,Y îți dă poziția relativ la ecranul utilizatorului
-- clientX,Y își dă poziția relativ la fereastra deschisă
-- offsetX,Y îți dă poziția relativ la elementul care a inițiat evenimentul
-- pageX,Y îți dă poziția relativ la documentul HTML,
-- layerX,Y îți dă poziția față de un alt element.
+-   screenX,Y îți dă poziția relativ la ecranul utilizatorului
+-   clientX,Y își dă poziția relativ la fereastra deschisă
+-   offsetX,Y îți dă poziția relativ la elementul care a inițiat evenimentul
+-   pageX,Y îți dă poziția relativ la documentul HTML,
+-   layerX,Y îți dă poziția față de un alt element.
 
 Poți obține informații despre care combinație de taste a fost folosită pentru a declanșa evenimentul:
 
-- altKey: false/true,
-- ctrlKey: false/true,
-- shiftKey: false/true.
+-   altKey: false/true,
+-   ctrlKey: false/true,
+-   shiftKey: false/true.
 
 ## Propagarea evenimentului - event propagation
 
@@ -182,6 +182,5 @@ Apoi motorul se uita dacă există vreun părinte pornind de la elementul care a
 
 ## Resurse
 
-https://quirksmode.org/js/events_order.html
-
-[3.1. Event dispatch and DOM event flow](https://www.w3.org/TR/DOM-Level-3-Events/#event-flow)
+-   [Event order](https://quirksmode.org/js/events_order.html)
+-   [3.1. Event dispatch and DOM event flow](https://www.w3.org/TR/DOM-Level-3-Events/#event-flow)

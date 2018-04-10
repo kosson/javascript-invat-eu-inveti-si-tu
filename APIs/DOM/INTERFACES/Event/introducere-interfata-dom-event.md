@@ -1,4 +1,4 @@
-# Event - interfață
+# Event
 
 Această interfață constituie punctul de acces la toate evenimentele apărute în DOM. Evenimentele își pot avea originea în interacțiunea utilizatorului prin tastatură, mouse, etc., sau pot fi generate de API-uri care își fac prezența semnalând o activitate.
 
@@ -14,13 +14,13 @@ Această interfață constituie punctul de acces la toate evenimentele apărute 
 
 Acest obiect are câteva fanioane care nu sunt setate inițial:
 
-- oprește propagarea
-- oprește imediat propagarea
-- anulat
-- ascultare pasivă
-- compus
-- inițializat
-- trimis
+-   oprește propagarea
+-   oprește imediat propagarea
+-   anulat
+-   ascultare pasivă
+-   compus
+-   inițializat
+-   trimis
 
 ## Proprietăți și metode ale obiectului eveniment
 
@@ -40,10 +40,10 @@ Avem un event listener (un receptor). Acest event listener are o funcție cu rol
 
 Indică faza în care se află evenimentul.
 
-- `Event.NONE` - în nicio fază, codat prin `0`; evenimentul nu este declanșat în acest moment.
-- `Event.CAPTURING_PHASE` - faza de capturare, codat prin `1`; evenimentul este declanșat pentru un obiect care face parte dintr-un arbore. Marchează faza de dinaintea atingerii valorii pentru proprietatea `target`. Evenimentul este propagat din obiect părinte în obiect părinte pornind de la `Window` -> `Document` -> `HTMLHtmlElement` ș.a.m.d până la părintele țintei. Receptorii de evenimente (event listeners) sunt în faza de captură și vor fi apelate callbackurile lor de îndată ce va fi apelat `țintaEvenimentului.addEventListener()`.
-- `Event.AT_TARGET` - a ajuns la țintă, codat prin `2`; evenimentul a ajuns la țintă și a fost setată valoarea pentru proprietatea `target`. În acest moment, dacă `numeEveniment.bubbles` are valoarea `false`, procesarea evenimentului se încheie după această fază.
-- `Event.BUBBLING_PHASE` - faza de bubbling, codată prin `3`; evenimentul a ajuns la țintă deja și s-a setat valoarea pentru proprietatea `target`. Dacă `numeEveniment.bubbles` are valoarea `true`, evenimentul se propagă din părinte în părinte până la `Window` declanșând toți receptorii de eveniment setați pentru faza de bubbling.
+-   `Event.NONE` - în nicio fază, codat prin `0`; evenimentul nu este declanșat în acest moment.
+-   `Event.CAPTURING_PHASE` - faza de capturare, codat prin `1`; evenimentul este declanșat pentru un obiect care face parte dintr-un arbore. Marchează faza de dinaintea atingerii valorii pentru proprietatea `target`. Evenimentul este propagat din obiect părinte în obiect părinte pornind de la `Window` -> `Document` -> `HTMLHtmlElement` ș.a.m.d până la părintele țintei. Receptorii de evenimente (event listeners) sunt în faza de captură și vor fi apelate callbackurile lor de îndată ce va fi apelat `țintaEvenimentului.addEventListener()`.
+-   `Event.AT_TARGET` - a ajuns la țintă, codat prin `2`; evenimentul a ajuns la țintă și a fost setată valoarea pentru proprietatea `target`. În acest moment, dacă `numeEveniment.bubbles` are valoarea `false`, procesarea evenimentului se încheie după această fază.
+-   `Event.BUBBLING_PHASE` - faza de bubbling, codată prin `3`; evenimentul a ajuns la țintă deja și s-a setat valoarea pentru proprietatea `target`. Dacă `numeEveniment.bubbles` are valoarea `true`, evenimentul se propagă din părinte în părinte până la `Window` declanșând toți receptorii de eveniment setați pentru faza de bubbling.
 
 ### numeEveniment.stopPropagation()
 
@@ -85,7 +85,7 @@ Returnează timpul la care a apărut evenimentul.
 
 ## Resurse
 
-- [DOM: Living Standard, 9 mai, 2017](https://dom.spec.whatwg.org)
-- [MDN - Event.eventPhase](https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase)
-- [2.2. Interface Event](https://dom.spec.whatwg.org/#interface-event)
-- [MDN - Event](https://developer.mozilla.org/en-US/docs/Web/API/Event)
+-   [DOM: Living Standard, 9 mai, 2017](https://dom.spec.whatwg.org)
+-   [MDN - Event.eventPhase](https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase)
+-   [2.2. Interface Event](https://dom.spec.whatwg.org/#interface-event)
+-   [MDN - Event](https://developer.mozilla.org/en-US/docs/Web/API/Event)

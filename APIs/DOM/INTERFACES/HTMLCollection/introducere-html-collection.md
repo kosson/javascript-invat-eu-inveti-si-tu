@@ -1,6 +1,6 @@
 # Interfața HTMLCollection
 
-Un obiect `HTMLCollection` este o colecție de elemente. Recomandarea DOM4 menționează faptul că mai bine se va folosi interfața `Elements`, `HTMLCollection` fiind o practică caducă.
+Un obiect `HTMLCollection` este o **colecție** de elemente. O colecție este un obiect care reprezintă o listă de noduri DOM. Recomandarea DOM 4 menționează faptul că mai bine se va folosi interfața `Elements`, `HTMLCollection` fiind o practică caducă.
 
 O colecție este un obiect care reprezintă o listă de noduri DOM. O colecție este dinamică („live”) sau statică. Dacă nu este specificat, o colecție va fi întotdeauna dinamică.
 
@@ -18,5 +18,5 @@ Pentru a accesa un singur element poți folosi interșanjabil `element = collect
 
 ## Resurse
 
-- https://www.w3.org/TR/domcore/#concept-collection
-- https://www.w3.org/TR/domcore/#interface-htmlcollection
+-   [W3C DOM4](https://www.w3.org/TR/domcore/#concept-collection)
+-   [W3C DOM4](https://www.w3.org/TR/domcore/#interface-htmlcollection)

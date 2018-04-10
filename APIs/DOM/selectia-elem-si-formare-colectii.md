@@ -1,11 +1,22 @@
-# Găsirea elementelor în DOM și colecții de elemente
+# Selecția elementelor în DOM și colecții de elemente
 
-Pentru a găsi anumite elemente în DOM, trebuie gândită mai întâi o strategie de căutare care să facă uz de metodele puse la dispoziție.
+Atunci când lucrezi cu paginile web trebuie să înțelegi că lucrezi cu o structură arborescentă de noduri, care pot fi acționate de utilizator, ceea ce produce un eveniment. Pentru a modifica o pagină web, ai nevoie de mecanismele care să permită manipularea nodurilor. Uneori ai nevoie de colecții de noduri care corespund unor criterii. Aceste criterii sunt tot atâtea mecanisme de selectare în spatele cărora stau metode specifice. O colecție va fi la rândul eu un obiect care reprezintă o listă de noduri DOM. Colecțiile pe care le vom constitui sunt formate din elemente. Aceste elemente sunt reprezentările HTML ale nodurilor DOM.
 
-Spre exemplu, cum să accesezi textul primului paragraf din body:
-`var text = document.body.getElementsByTagName('p')[0]`.
+```javascript
+colectie = document.getElementsByTagName('p');
+// selectează toate elementele paragraf ale paginii
+```
 
-Colecțiile de noduri pe care le poți constitui folosind diversele metode la dispoziție, va crea o colecție care este dinamică, care poate suferi modificări în orice moment. Pentru a extrage un fragment și pentru a transforma fragmentul, colecția țintită, de fapt, trebuie să transformi obiectul array-like într-un adevărat array.
+Pentru a căuta anumite elemente în DOM, trebuie gândită mai întâi o strategie care va implica metodele puse la dispoziție de obiectul `document`. Obiectul `document` implementează toate metodele interfeței `Document`. Acest lucru înseamnă că poți face o căutare după:
+
+-   numele tagurilor HTML (`document.getElementsByTagName('p')`), fiind returnat un `HTMLCollection`,
+-   valoarea atributului `class` al unor elemente (document.getElementsByClassName('rosii')), fiind returnată o colecție `HTMLCollection`,
+-   identificatorii unici (document.getElementById('suntUnic')), fiind returnat un singur element (o valoare de tip `Element`), dar mai poți folosi și `querySelector('#id')`
+-   o anumită clasă atașată unui element (document.querySelectorAll('.oClasa')), fiind returnat un `NodeList` care este o fotografie la momentul selecției (nu se actualizează dinamic)
+
+Spre exemplu, cum să accesezi textul primului paragraf din body: `var text = document.body.getElementsByTagName('p')[0]`.
+
+Colecțiile de noduri pe care le poți constitui folosind diversele metode la dispoziție sunt dinamice. Acestea pot suferi modificări în orice moment. Pentru a extrage un fragment și pentru a transforma fragmentul, colecția țintită, de fapt, trebuie să transformi obiectul array-like într-un adevărat array.
 
 ```javascript
 var colectieDeP = document.body.getElementsByTagName('p');
@@ -85,13 +96,13 @@ arrayLike.forEach(function(element){
 
 Un aspect util al elementelor este că fiecare dintre acestea au câteva proprietăți statice care s-ar putea dovedi foarte utile:
 
-- element.children
-- element.firstElementChild
-- element.lastElementChild
-- element.previousElementSibling
-- element.nextElementSibling
+-   element.children
+-   element.firstElementChild
+-   element.lastElementChild
+-   element.previousElementSibling
+-   element.nextElementSibling
 
-Atenție, pentru că o țintire a elementelor de interes cu ajutorul lui `querySelector` poate fi confuză uneori, cel mai bine este să fie folosit atributul de selecție „data-ceva="formular"”.
+Atenție, pentru că o țintire a elementelor de interes cu ajutorul lui `querySelector` poate fi confuză uneori, cel mai bine este să fie folosit atributul de selecție **data-ceva="formular"**.
 
 ```html
 <ul data-target="lista">

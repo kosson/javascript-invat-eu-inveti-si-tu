@@ -1,4 +1,4 @@
-# EventTargets
+# EventTarget
 
 Este o interfață pe care o implementează obiectele pretabile la evenimente și care pot crea listeners („receptori”), care să execute cod la momentul în care a fost declanșat un eveniment.
 
