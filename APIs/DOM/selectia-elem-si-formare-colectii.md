@@ -40,7 +40,7 @@ Această metodă este disponibilă pentru toate nodurile și are drept rezultat 
 
 Constituirea acestui obiect poate porni din orice punct al DOM-ului.
 
-## Metoda `querySelector`
+## Metoda `querySelector()`
 
 Această metodă primește un argument care este selectorul CSS după care se face căutarea în DOM. Atenție, lucrăm asupra unui singur, unic identificabil selector CSS.
 
@@ -69,13 +69,13 @@ Evită o referențiere de genul
 var tinta = document.querySelector('#mesaj > form.formular input[type="submit"]');
 ```
 
-## Metoda `querySelectorAll`
+## Metoda `querySelectorAll('nume')`
 
 Este o metodă care permite „colectarea” tuturor nodurilor DOM specificate de tagul ales care este pasat drept argument. Totuși, trebuie spus faptul că este o colectare care se face o singură dată ceea ce înseamnă că nu se va actualiza dinamic dacă sunt introduse sau scoase noduri pe parcurs. În schimb, `getElementsByTagName` va răspunde dinamic actualizând colecția.
 
 ```javascript
-var colectie1 = document.querySelectorAll('div');
-var colectie2 = document.getElementsByTagName('div');
+var colectie1 = document.querySelectorAll('div'); // returnează un NodeList
+var colectie2 = document.getElementsByTagName('div'); // returnează o colecție HTMLCollection
 
 var nodNou = document.createElement('div');
 document.body.appendChild(nodNou);
@@ -86,7 +86,7 @@ colectie1.length === colectie2.length; // false
 Încă un lucru de care trebuie să ținem seama atunci când lucrăm cu `querySelectorAll`. Nu putem aplica metode specifice nodurilor DOM, ci trebuie să iterăm rezultatul pentru a aplica rând pe rând pe fiecare element. Ține minte că pentru acest lucru, rezultatul trebuie transformat într-un array.
 
 ```javascript
-var noduriDOM = document.querySelectorAll("div"),   // se constituie o colecție array-like
+var noduriDOM = document.querySelectorAll("div"),   // se constituie o colecție array-like (NodeList)
     arrayLike = [].slice.call(noduriDOM);           // transformarea într-un array-like
 
 arrayLike.forEach(function(element){
@@ -94,7 +94,7 @@ arrayLike.forEach(function(element){
 });
 ```
 
-Un aspect util al elementelor este că fiecare dintre acestea au câteva proprietăți statice care s-ar putea dovedi foarte utile:
+Un aspect util al elementelor este că fiecare dintre acestea au câteva proprietăți statice care s-ar putea dovedi foarte utile ăn selectarea nodurilor apropiate:
 
 -   element.children
 -   element.firstElementChild
@@ -112,7 +112,7 @@ Atenție, pentru că o țintire a elementelor de interes cu ajutorul lui `queryS
 </ul>
 ```
 
-Țintele de selecție devin mult mai clare nefiind afectate de schimbările posibile aduse elementelor DOM sau CSS
+Țintele de selecție devin mult mai clare nefiind afectate de schimbările posibile aduse elementelor DOM sau CSS.
 
 ```javascript
 var lista = document.querySelector('[data-target=\"lista\"]');
@@ -140,3 +140,8 @@ var divuri = [...document.querySelectorAll('div')];
 // ca alternativă folosim Array.from
 var divuri = Array.from(document.querySelectorAll('div'));
 ```
+
+## Colecțiile NodeList și cele HTMLCollection pot fi iterate
+
+După ce ai constituit colecția, cel mai adesea ai nevoie să o iterezi pentru a face ceva cu elementele. Poți itera colecțiile folosind `for..of`.
+În plus, pentru că un `NodeList` nu se modifică dinamic, ci este o fotografiere la momentul colectării nodurilor, este permisă și prelucrarea cu `forEach`. Acest lucru l-ai putea face și în cazul colecțiilor `HTMLCollection` respectând condiția de transformare într-un array. Poți folosi în acest sens `Array.of(colecție)`, `Array.from(colecție)` sau folosind operatorul spread.

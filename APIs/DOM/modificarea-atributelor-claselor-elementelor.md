@@ -1,4 +1,21 @@
-# Clase și atribute
+# Modificarea atributelor
+
+Într-un document HTML, elementele pot avea atribute (`nume = "valoare"`). În momentul în care ai selectat un element, se pot aplica metode pentru a obține informații despre atribute, pentru setarea și obținerea valorii, cât și pentru eliminarea de atribute.
+
+Hai să pornim făcând câteva verificări pentru un element înainte de a prelucra valorile care reprezintă clasele. Pentru a face acest lucru, avem la îndemână câteva metode de verificare.
+
+```html
+<div id="primul">
+  <p class="verde">Primul</p>
+  <p class="verde ceva">Al doilea</p>
+</div>
+<script>
+  let bloc = document.getElementById('primul');
+  let colectieP = document.getElementsByTagName('p');
+  let colectieC = document.getElementsByClassName('verde');
+  
+</script>
+```
 
 ## className și classList
 
@@ -7,14 +24,15 @@ Există două proprietăți care folosite în JavaScript permit modificarea clas
 -   `className` - care se bucură de o largă compatibilitate în ceea ce privește suportul browserelor și
 -   `classList` - care este introdus ceva mai recent și mai ușor de folosit.
 
-
 ## Adăugarea unei clase folosind `className`
 
 Să studiem cum s-ar putea scrie o funcție care să adauge o clasă la elemente într-o deplină compatibilitate și cu browserele Internet Explorer până la versiunea 8.
 
 ```javascript
 function adaugaClasa (elementele, clasa) {
-  if (!elementele) {return;};                           // #0
+  if (!elementele) {
+    return;
+  };                           // #0
   if (typeof(elementele) === 'string') {                // #1
     elementele = document.querySelectorAll(elementele); // #2
   };
@@ -80,7 +98,7 @@ Folosind `classList`, codul se simplifică astfel:
 ```javascript
 function adaugaClasa (elementele, clasa) {
   elementele = document.querySelectorAll(elementele); // #1
-  for (var i=0; i<elementele.length; i++) {
+  for (var i = 0; i < elementele.length; i++) {
     elements[i].classList.add(clasa);
   };
 };
@@ -93,7 +111,9 @@ Acum ar fi util și reversul: eliminarea unei clase.
 
 ```javascript
 function eliminaClasa (elementele, clasa) {
-  if (!elementele) {return;};
+  if (!elementele) {
+    return;
+  };
   if (typeof(elementele) === 'string') {
     elementele = document.querySelectorAll(elementele);
   };
@@ -114,7 +134,7 @@ Folosind noua metodă `remove` a lui `classList` ajung la următoarea simplifica
 ```javascript
 function eliminaClasa (elementele, clasa) {
   elementele = document.querySelectorAll(elementele);
-  for (var i=0; i<elementele.length; i++) {
+  for (var i = 0; i < elementele.length; i++) {
     elements[i].classList.remove(clasa);
   };
 };
@@ -122,4 +142,4 @@ function eliminaClasa (elementele, clasa) {
 
 ## Referințe
 
-https://www.sitepoint.com/add-remove-css-class-vanilla-js/
+-   [Quick Tip: Add or Remove a CSS Class with Vanilla JavaScript](https://www.sitepoint.com/add-remove-css-class-vanilla-js/)
