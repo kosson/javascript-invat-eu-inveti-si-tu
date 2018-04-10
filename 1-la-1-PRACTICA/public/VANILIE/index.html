@@ -33,7 +33,7 @@
       but2.addEventListener('click', state.modificator.bind(state));
     </script> -->
 
-    <div id="start">
+    <!-- <div id="start">
       <p>un para</para>
       <p>alt para</para>
       <ul>
@@ -51,6 +51,17 @@
       for(let element of parcurgDOM(elementDOM)){
         console.log(element.innerText);
       };
+    </script> -->
+    <div id="primul">
+      <p class="verde">Primul</p>
+      <p class="verde ceva">Al doilea</p>
+      <p id="254" data-titlu="Apus de soare" data-isbn="143-432342" data-exemplare="3">O altă lectură care a plutit în vacanțele elevilor.</p>
+    </div>
+    <script>
+      let bloc = document.getElementById('primul');
+      let colectieP = document.getElementsByTagName('p');
+      let colectieC = document.getElementsByClassName('verde');
+      bloc.hasAttributes(); // true
     </script>
   </body>
 </html>

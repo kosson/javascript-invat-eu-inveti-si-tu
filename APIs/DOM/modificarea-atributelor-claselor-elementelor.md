@@ -13,9 +13,19 @@ Hai să pornim făcând câteva verificări pentru un element înainte de a prel
   let bloc = document.getElementById('primul');
   let colectieP = document.getElementsByTagName('p');
   let colectieC = document.getElementsByClassName('verde');
-  
+  bloc.hasAttributes(); // true
+  let para = document.querySelector('.ceva');
+  para.hasAttribute('class','ceva'); //true
+  para.getAttribute('class'); // "verde ceva"
+  para.setAttribute('altceva'); // este modificată clasa
+  para.removeAttribute('class'); // șterge atributul class
+  let attrs = bloc.attributes; // colecție NameNodeMap
+  attrs['class'].value; // "bau" - accesare după numele atributului
+  attrs[1].name; // "class" - accesarea după index
 </script>
 ```
+
+Poți colecta atributele unui element prin constituirea unei colecții ale acestora de tip `NameNodeMap`. Acest tip de colecție permite accesarea informațiilor privind atributele, fie după numele atributului, dar utilizând indexarea, fie accesarea valorii unui atribut, menționând numele atributului.
 
 ## className și classList
 
@@ -104,8 +114,7 @@ function adaugaClasa (elementele, clasa) {
 };
 ```
 
-\# 1: Folosind querySelectorAll aduci toate elementele care se încadrează criteriului de selecție, adică selectorul pasat prin argumentul `elementele`.
-
+\# 1: Folosind `querySelectorAll` aduci toate elementele care se încadrează criteriului de selecție, adică selectorul pasat prin argumentul `elementele`.
 
 Acum ar fi util și reversul: eliminarea unei clase.
 
@@ -121,7 +130,7 @@ function eliminaClasa (elementele, clasa) {
     elementele = [elementele]
   };
  var sablon = new RegExp('(^| )'+ clasa +'($| )','g'); // #1
- for (var i = 0; i<elementele.length; i++) {
+ for (var i = 0; i < elementele.length; i++) {
    elementele[i].className = elementele[i].className.replace(sablon, ' '); // #2
  };
 };
@@ -139,6 +148,18 @@ function eliminaClasa (elementele, clasa) {
   };
 };
 ```
+
+## Atributele data-
+
+Odată cu versiunea 5 a HTML, există posibilitatea de a introduce în elemente atribute care conțin date folosind această sintaxă care începe cu `data-` și apoi poți introduce o denumire a câmpului de date pentru care vei introduce o valoare.
+
+```html
+<p id="254" data-titlu="Apus de soare" data-isbn="143-432342" data-exemplare="3">O altă lectură care a plutit în vacanțele elevilor.</p>
+```
+
+Atributele de acest tip formează o colecție care poate fi accesată folosind proprietatea `dataset`. Aceasta returnează un obiect de tipul `DOMStringMap`. Cheile acestui obiect vor fi numele atributelor, iar valorile, vor fi cele introduse.
+
+Ceea ce se realizează astfel este o comunicare de date între pagina web și DOM. 
 
 ## Referințe
 

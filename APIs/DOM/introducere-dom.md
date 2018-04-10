@@ -18,8 +18,6 @@ Fiecare obiect nod al DOM-ului are o proprietate `nodeType`. Acest nodeType indi
 
 ## Lucrul cu DOM
 
-
-
 DOM-ul este de fapt o ierahie, un arbore de noduri. Fiecare dintre aceste noduri are un nod părinte, unul sau mai multe copil și unul sau mai multe pe același nivel ca și el.
 
 Fiecare `nodeType` conține un cod sub forma unui număr care identifică tipul nodului. Elementele comune au valoarea 1, o valoare pe care o poartă constanta ca proprietate `document.ELEMENT_NODE`.
