@@ -2,11 +2,11 @@
 
 Este un obiect intern introdus de ECMAScript 2015 care oferă o structură simplă de chei - valori. Această structură permite iterarea elementelor în ordinea în care acestea au fost introduse, folosind `for..of`, de exemplu. Obiectul `Map` este o colecție de perechi *chei - valori*. Acceptă valori primitive și obiecte drept chei și respectă protocolul `Iterable`, ceea ce înseamnă că poți folosi și operatorii `spread`. Înainte de introducerea lui `Map`, obiectele simple erau folosite pentru a stoca chei - valori.
 
-Pentru lucrul cu o structură simplă de date, în care unei chei string îi corespunde o valoare sau o metodă, obiectele simple se pretează cu succes. Lucrurile încep să se complice atunci când este nevoie să introduci structuri mai complexe ca valori așa cum sunt obiectele (așa-numitele hash-map-uri).
+Pentru lucrul cu o structură simplă de date, în care unei chei string îi corespunde o valoare sau o metodă, obiectele simple se pretează cu succes. Lucrurile încep să se complice atunci când este nevoie să introduci structuri mai complexe drept valori așa cum sunt obiectele (așa-numitele hash-map-uri).
 
 Din nefericire, o astfel de colecție de date gestionată cu ajutorul unor obiecte simple va fi poluată de **chei - valori** moștenite prin mecanismul prototipal. Singura metodă de a contracara acest lucru este să întrerupi moștenirea prin setarea la `null` a obiectului prototipal: `const map = Object.create(null);`. Efectul este crearea unui obiect care nu mai moștenește din prototip nimic păstrând o izolare benefică pentru scopul depozitării de chei - valori proprii.
 
-Un exemplu de folosire cu forțarea la limită a mecanismelor oferite de obiectele simple.
+Un exemplu forțând la limită mecanismele oferite de obiectele simple.
 
 ```javascript
 const obi = {};
@@ -27,13 +27,13 @@ console.log(obi);   // Object { primul: Object, alDoilea: Object }
 scoate('alDoilea'); // Object { x: 10, y: .y() }
 ```
 
-Problema aici este că obiectul va avea și proprietățile care nu-i aparțin în mod direct, dar care sunt moștenite prototipal. O simplă verificare cu `obi.__proto__` va indica acest lucru. O posibilă soluție *pe genunchi*, ar fi crearea unui obiect căruia să-i fie tăiată moștenirea.
+Problema aici este că obiectul va avea și proprietățile care nu-i aparțin în mod direct, dar care sunt moștenite prototipal. O simplă verificare cu `obi.__proto__` va indica acest lucru. O posibilă soluție *pe genunchi*, ar fi crearea unui obiect căruia să-i fie tăiată moștenirea așa cum deja am menționat.
 
 ```javascript
 const obi = Object.create(null); // lanțul prototipal este întrerupt
 ```
 
-Dar chiar și așa, un alt neajuns este că toate cheile obiectului vor fi mereu stringuri. Folosirea lui `Map` rezolvă aceste probleme oferind și metodele necesare pentru a gestiona datele din colecție.
+Dar chiar și așa, un alt neajuns este că **toate cheile obiectului vor fi mereu stringuri**. Folosirea lui `Map` rezolvă aceste probleme oferind și metodele necesare pentru a gestiona datele din colecție.
 
 ```javascript
 const obi = new Map();
@@ -42,7 +42,7 @@ obi.set('alDoilea', {x: 10, y: function(){return this.a}});
 obi.set(new Date(), 'data creării proprietății');
 ```
 
-Spre deosebire de obiectul clasic, într-un `Map` poți introduce orice valoare, de la primitive, la obiecte, iar cheile nu vor mai fi limitate la șiruri de caractere. Se va instanția cu `new`: `new Map([cheie, valoare])`. Obiectul care va constitui colecția trebuie să fie iterabil.
+Spre deosebire de obiectul clasic, într-un `Map` poți introduce orice valoare, de la primitive, la obiecte, iar cheile nu vor mai fi limitate la șiruri de caractere. Se va instanția cu `new`: `new Map([cheie, valoare])`. Obiectul care va constitui colecția trebuie să fie iterabil. Chiar la instanțiere poți să începi să-l populezi pasând un array de array-uri. Fiecare element array va avea la rândul lui două elemente. Primul reprezintă cheia, iar cel de-al doilea, valoarea.
 
 ```javascript
 const obiect = new Map([
