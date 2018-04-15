@@ -1057,8 +1057,6 @@ console.log(Santinel.prezentare());
 
 Partea deficitară a unei astfel de soluții este că funcțiile care joacă rol de metode în obiectul `this` (obiectul context în care va rula funcția când va fi apelată cu `new`), vor fi recreate ori de câte ori este creat un nou obiect. Acest fapt implică probleme de performanță a codului poluându-se memoria cu aceeași funcție recreată ori de câte ori este instanțiat un nou obiect.
 
-#### Funcție simplă cu metode adăugate direct la prototip
-
 Modelarea unei clase rudimentare se poate realiza și prin introducerea de funcționalități și date în obiectul prototip al funcției. Astfel, prin mecanismul de moștenire prototipală, toate obiectele instanțiate cu `new`, vor beneficia de acces direct la toți membrii obiectului prototip.
 
 ```javascript
@@ -1098,13 +1096,15 @@ console.log(typeof Test); // function
 console.log(typeof Test.prototype.ecou); // function
 ```
 
-Echivalent lui `constructor (val) {}`, este `function Test (val) { this.val = val }`. Urmează o listă a membrilor viitorului obiect care menționează direct identificatorul fără cuvântul cheie `function` și nici nu este folosită formula consacrată `Test.prototype.actiune`. Instanțierea se face folosind operatorul `new`. Atenție, obiectul `prototype` al clasei va fi protejat la scriere (**read-only**). Nu se comportă ca în cazul funcțiilor din modelul clasic în care poți adăuga ulterior în obiectul `prototype`.
+Echivalent lui `constructor (val) {}`, este `function Test (val) { this.val = val }`. Metoda constructor este opțională. O clasă poate avea o singură metodă constructor. Urmează o listă a membrilor viitorului obiect care menționează direct identificatorul fără cuvântul cheie `function` și nici nu este folosită formula consacrată `Test.prototype.actiune`. Instanțierea se face folosind operatorul `new`. Atenție, obiectul `prototype` al clasei va fi protejat la scriere (**read-only**). Nu se comportă ca în cazul funcțiilor din modelul clasic în care poți adăuga ulterior în obiectul `prototype`.
 
 ### Declarații și expresii de clase
 
 Precum în cazul funcțiilor, clasele pot fi declarate, dar pot fi și expresii.
 
 #### Declarație de clasă
+
+Clasele pot fi declarate direct apelelând la sintaxa `class NumeClasă {}`. Ar mai fi de adăugat că în constructor pot fi pasate date din exterior chiar la momentul instanțierii obiectului.
 
 ```javascript
 class Plan {
@@ -1120,7 +1120,7 @@ class Plan {
 };
 ```
 
-Este util să menționăm faptul că în clase sunt acceptate „numele computate” pentru identificatorii proprietăților. Trebuie folosită sintaxa cu paranteze pătrate
+Este util să menționăm faptul că în clase sunt acceptate „numele computate” pentru identificatorii proprietăților. În acest caz, trebuie folosită sintaxa cu paranteze pătrate.
 
 #### Expresie de clasă
 
