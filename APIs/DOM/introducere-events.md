@@ -5,7 +5,7 @@
 ## Mantre
 
 -   HTML nu este DOM.
--   callback-ul este un closure a cărui funcție va fi invocată atunci când un anumit eveniment se întâmplă.
+-   callback-ul este un closure care va fi invocat atunci când un anumit eveniment se întâmplă.
 -   un eveniment este de fapt modificarea la un moment dat a stării unui sistem.
 -   Evenimentele nu pornesc de la elementul care este cauza evenimentului (apăsarea unui buton), ci de la elementul rădăcină, de la `window` în cazul browserului și va merge din ramură în ramură până la elementul căruia îi este destinat. În drumul său, fiecare element din cale va „ști” despre acest eveniment. Acestă primă fază se numește `capturing phase`.
 -   Capturarea unui eveniment returnează un eveniment. Datele depind de tipul evenimentului.
@@ -13,7 +13,8 @@
 
 ## Anatomie
 
-Pentru a răspunde unui eveniment, browserul, mai întâi trebuie să *captureze* evenimentul iar această etapă se numește „înregistrarea evenimentului” - `event registration`. Mecanismul prin care se face acest lucru este acela al event handlers.
+Toate evenimentele implementează metodele interfeței `EventTarget`.
+Pentru a răspunde unui eveniment, browserul, mai întâi trebuie să *captureze* evenimentul iar această etapă se numește „înregistrarea evenimentului” - `event registration`. Mecanismul prin care se face acest lucru este acela al setării de către programator a unor funcții de răspuns la acel eveniment. Aceste funcții de răspuns se numesc în limba engleză `event handlers`. Atunci când se creează evenimentul, de fapt este generat un obiect eveniment, care este asociat mai apoi de browser cu funcția de răspuns. Funcția de răspuns este mai apoi trimisă în coada de așteptare. Când stiva de execuție (call stack) este liberă, se trimite spre execuție funcția răspuns.
 
 Cel mai simplu event handler este cel pe care-l oferă un atribut pus direct în codul HTML.
 
@@ -30,16 +31,16 @@ Cel mai simplu event handler este cel pe care-l oferă un atribut pus direct în
 </html>
 ```
 
-Această modalitate trebuie evitată în practica de zi cu zi. Ceea ce vei ajunge să faci este folosirea unei metode de selectare a unui element DOM `getElementById` sau `querySelector` și apoi vei atașa evenimentul.
+Această modalitate trebuie evitată în practica de zi cu zi. Ceea ce vei ajunge să faci este folosirea unei metode de selectare a unui element DOM `getElementById()` sau `querySelector()` și apoi vei atașa evenimentul.
 
 ```javascript
-var x = document.getElementById('identificator');
+let x = document.getElementById('identificator');
 x.onclick = function () {
   alert('am fost apasat');
 };
 ```
 
-Am ajuns la modul în care vei folosi evenimentele la momentul scrierii codului dedicat. În mod curent vei *atașa* evenimente folosind metoda `addEventListener(numeEveniment, numeFunctie, true/false)`.
+Am ajuns la modul în care vei folosi evenimentele la momentul scrierii codului dedicat. În mod curent vei *atașa* evenimente folosind metoda `addEventListener(numeEveniment, numeFunctie, true/false)` pusă la dispoziție de interfața `EventTarget`.
 
 Să atașăm un eveniment unui buton.
 
@@ -51,9 +52,7 @@ function faCeva () {
 elementApasat.addEventListener("click", faCeva, true);
 ```
 
-Cel de-al treilea argument (`true`) specifică faptul că evenimentul va fi capturat. O valoare `false` înseamnă `bubble`.
-
-Reține că folosirea metodei `addEventListener` permite verificarea pentru a vedea dacă sunt mai multe evenimente la un singur apel.
+Cel de-al treilea argument (`true`) specifică faptul că evenimentul va fi declanșat în faza de `capturing`. O valoare `false` înseamnă că evenimentul va fi declanșat în faza de `bubbling`. Când procesul de parcurgere a nodurilor a ajuns chiar la elementul destinație, spunem că că suntem chiar la țintă (at-target). Aceste *situații* în care poate fi un eveniment se numește propagarea evenimentului - `event propagation`.
 
 Pentru a vedea mai multe detalii despre eveniment, haideți să „capturăm” obiectul rezultat de eveniment. Pentru a realiza acest lucru, pasăm funcției cu rol de callback însuși obiectul eveniment.
 
@@ -67,9 +66,9 @@ elementApasat.addEventListener("click", faCeva, true);
 
 Câteva informații interesante apar în consolă la o inspecție a conținutului obiectului eveniment:
 
--   `type`, fiind tipul evenimentului, în cazul nostru click;
+-   `type`, fiind tipul evenimentului, în cazul nostru *click*;
 -   `timestamp`, fiind momentul la care a apărut evenimentul;
--   `defaultPrevent`, fiind un Boolean care dacă este `true` înseamnă că va împiedica comportamentul normal al elementului... gândește-te că e un buton care trebuie să facă un apel pentru a aduce date de undeva. Dacă este `false`, va face acel lucu, dacă nu, va avea un comportament deturnat în alt scop.
+-   `defaultPrevent`, fiind un Boolean care dacă este `true` înseamnă că va împiedica comportamentul normal al elementului... gândește-te la un link împiedicat să deschidă pagina. Dacă este `false`, va face acel lucu, dacă e `true`, va avea un comportament deturnat în alt scop.
 -   `originalTarget`, fiind elementul care a declanșat evenimentul.
 -   `target`, fiind elementul țintit de eveniment.
 
@@ -118,13 +117,13 @@ Ceea ce se observă imediat este faptul că indiferent că am dat click pe orica
 
 Vom observa că proprietatea `target` a evenimentului, va avea valoarea elementului DOM care a fost acționat.
 
-## Două modele: captură (capture) și ridicarea la suprafață (bubbling)
+### Două modele: captură (capture) și ridicarea la suprafață (bubbling)
 
 Să presupunem că avem două elemente unul fiind containerul celui de-al doilea. Ambele evenimente au același eveniment atașat: onclick. Ceea ce se întâmplă este că în cazul unui click pe elementul găzduit, se declanșează ambele evenimente, adică și `onclick` de la părinte.
 
 Întrebarea este următoarea: care event handler s-a executat primul?
 
-Aici intervin cele două modele pentru a înțelege. A existat un moment când Netscape și Microsoft nu au căzut de acord asupra unui model comun și asftel, s-au născut două modele diferite care coexistă. Cel al lui Netscape care spune că evenimentul elementului gazdă se va declanșa primul, numindu-se „capturing” și modelul Microsoft care spune că elementul găzduit, cel care a fost acționat primul se va declanșa primul, numindu-se „bubbling”.
+Aici intervin cele două modele pentru a înțelege. A existat un moment când Netscape și Microsoft nu au căzut de acord asupra unui model comun și astfel, s-au născut două modele diferite care coexistă. Cel al lui Netscape care spune că evenimentul elementului gazdă se va declanșa primul, numindu-se „capturing” și modelul Microsoft care spune că elementul găzduit, cel care a fost acționat primul se va declanșa primul, numindu-se „bubbling”.
 
 ![](EventModelBubbling.png)
 
@@ -132,7 +131,7 @@ Aici intervin cele două modele pentru a înțelege. A existat un moment când N
 
 ### MODELUL CURENT
 
-Pentru armonizare, W3C a fost de acord ca cele două modele să coexiste după următorul scenariu: orice eveniment se declanșează, mai întâi de orice este capturat și este declanșat în toți copii (dacă aceștia au event handlere - receptori cu true), până când ajunge la cel vizat (`target element`), după care face „bubbling”, adică se ridică din nou către gazdă.
+Pentru armonizare, W3C a fost de acord ca cele două modele să coexiste după următorul scenariu: orice eveniment se declanșează, mai întâi de orice este capturat și este declanșat în toți copii (dacă aceștia au event handlere - receptori cu true), până când ajunge la cel vizat (`target element`), după care face „bubbling”, adică se ridică din nou către gazdă declanșând toate *event handlere*-le.
 
 ![](EventModelW3CModel.png)
 

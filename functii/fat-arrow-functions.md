@@ -8,14 +8,15 @@ Adu-ți aminte mereu faptul că în cazul unui bloc de cod, trebuie să scrii `r
 Sunt considerate a fi soluția perfectă pentru funcțiile anonime, care la rândul lor sunt cel mai des folosite în rolul de callback-uri. De fapt, asta a fost și gândirea din spatele deciziei de a introduce această sintaxă. Mai există și avantajul preluării `this` al callback-ului fără a mai fi nevoie să legi cu `bind()`. Există totuși cazul în care o funcție arrow, capătă un nume acesta fiind sub forma unei expresii de funcție cu nume.
 
 ```javascript
-var faCeva = x => x * 2;
+let faCeva = x => x * 2;
 faCeva.name; "faCeva"
 ```
 
-Funcțiile *fat arrows* la momentul execuției preiau `this` și `arguments` de la mediul lexical găzduitor. Nu creează legăturile proprii la `this` sau la `arguments`, ci, pur și simplu, le folosește pe cele ale gazdei. Contextul de execuție este moștenit de la funcția sau obiectul în care sunt definite. La ce este bun acest lucru? În primul rând la evitarea problemelor de referențiere ale lui `this`.
+Funcțiile *fat arrows* la momentul execuției preiau `this` și `arguments` de la mediul lexical găzduitor. Nu creează propriul obiect `this` și nici nu se constituie obiectul `arguments`. Pur și simplu, le folosește pe cele ale gazdei. Contextul de execuție este moștenit de la funcția sau obiectul în care sunt definite. La ce este bun acest lucru? În primul rând la evitarea problemelor de referențiere ale lui `this`.
 
 ```javascript
-var obi = {
+// noua rutină
+const obi = {
   info: 'pi',
   scot: function () {
     setTimeout ( () => console.log(this.info), 1000 );
@@ -24,8 +25,7 @@ var obi = {
 obi.scot(); // pi
 
 // versus vechea rutină
-
-var obi = {
+const obi = {
   info: 'pi',
   scot: function () {
     setTimeout ( function () {
@@ -37,7 +37,6 @@ obi.scot(); // pi
 
 // versus și mai vechea rutină
 // cu puntea lexicală urâtă self = this
-
 var obi = {
   info: 'pi',
   scot: function () {
@@ -50,15 +49,15 @@ var obi = {
 obi.scot(); // pi
 ```
 
-Drept corp al funcției poate fi direct o expresie ce trebuie evaluată sau blocuri de cod convenționale ca în cazul funcțiilor declarate prin cuvântul cheie `function`. Hai să vedem câteva formule sintactice echivalente:
+Drept corp al funcției poate fi direct o expresie ce trebuie evaluată sau blocuri de cod convenționale precum în cazul funcțiilor declarate prin cuvântul cheie `function`. Hai să vedem câteva formule sintactice echivalente:
 
 ```javascript
-var oriDoi = (valoare) => valoare * valoare;
+let oriDoi = valoare => valoare * valoare;
 // este echivalent cu
-var oriDoi = (valoare) => { return valoare * valoare };
+let oriDoi = (valoare) => { return valoare * valoare };
 ```
 
-Cel mai clar exemplu pe care l-am găsit și care *a aprins lumina* este cel oferit de Reg *raganwald* Braithwaite în **JavaScript Allongé, the "Six" Edition**.
+Un exemplu excelent este cel oferit de Reg *raganwald* Braithwaite în **JavaScript Allongé, the "Six" Edition**. Pornim de la o funcție care se execută imediat. Acesteia îi trimtem o valoare string arbitrară. Știind că funcțiile convenționale generează obiectele `arguments` și `this`, la momentul returnării vom executa o altă expresie de funcție. Aceasta la rândul său va primi o valoare arbitrară. Am trimis aceste valori pentru a popula obiectele `arguments` ale ambelor funcții. Astfel pe poziția `arguments[0]` vom avea valori pentru ambele funcții.
 
 ```javascript
 (function () {
@@ -68,7 +67,7 @@ Cel mai clar exemplu pe care l-am găsit și care *a aprins lumina* este cel ofe
 })('gazdă'); // "oaspete"
 ```
 
-Acum, în cazul folosirii funcțiilor *fat arrow*, `arguments` va fi creat de funcția gazdă.
+Prin contrast, în cazul folosirii funcțiilor *fat arrow*, va fi utilizat obiectul `arguments` creat de funcția gazdă. Chiar dacă am împacheta funcția săgeată între paranteze rotunde cu scopul de a-i trimite un argument, acesta nu va fi utilizat pentru că nu există niciun mecanism dedicat evidenței argumentelor.
 
 ```javascript
 (function () {
@@ -76,13 +75,8 @@ Acum, în cazul folosirii funcțiilor *fat arrow*, `arguments` va fi creat de fu
 })('gazdă'); // "gazdă"
 ```
 
-Funcțiile **fat-arrow** își au originile în expresiile lambda ale programării bazate pe funcții.
-
-## Mică anatomie
-
-Un **fat arrow** este o funcție foarte simplă care nu poate fi folosită drept constructor. Nu are propriul `this` și nici `arguments`, acestea fiind preluate de la gazda în contextul căreia au fost apelate.
-
-Aceste funcții nu au nume. Dacă ții neapărat, poți totuși să legi un identificator la ele prin formularea unei expresii de funcție: `let x = () => 10;`.
+În cazul nostru, funcția *gazdă* va fi cea care va oferi o valoare pentru poziția 0 din obiectul `arguments`.
+Funcțiile **fat-arrow** își au originile în expresiile lambda ale programării funcționale. Un **fat arrow** este o funcție foarte simplă care nu poate fi folosită drept constructor. Aceste funcții nu au nume. Dacă ții neapărat, poți totuși să legi un identificator la ele prin formularea unei expresii de funcție: `let x = () => 10;`.
 
 ```javascript
 (function faCeva (ceva) {
@@ -97,9 +91,11 @@ Aceste funcții nu au nume. Dacă ții neapărat, poți totuși să legi un iden
 })(1000);
 ```
 
+## Sintaxa fat arrow
+
 În funcție de scenariul de utilizare, un *fat arrow* poate fi scris în câteva moduri diferite.
 
-## Un singur argument
+### Un singur argument
 
 Pentru un singur argument poți să nu mai pui parantezele:
 
@@ -107,14 +103,14 @@ Pentru un singur argument poți să nu mai pui parantezele:
 var x = valoare => valoare; x(1); // 1
 ```
 
-## Zero, două sau mai multe argumente folosesc parantezele:
+### Zero, două sau mai multe argumente folosesc parantezele:
 
 ```javascript
 var zero = () => 'sunt zero argumente'; zero();
 var y = (unu, doi) => unu + doi; y(2, 5); // 7
 ```
 
-## Parametrii rest folosesc parantezele:
+### Parametrii rest folosesc parantezele:
 
 ```javascript
 var z = [];
@@ -122,10 +118,10 @@ var w = (...z) => z;
 w(2, 2); // Array [ 2, 2 ]
 ```
 
-O funcție declarată clasic într-o prelucrare cu `map()`:
+Un exemplu rapid ar fi prelucrarea datelor folosind o funcție de mapping. Iată o funcție declarată clasic într-o prelucrare cu `map()`:
 
 ```javascript
-[1,2,3].map(function (numar) { return numar * 2; });  // Array [ 2, 4, 6 ]
+[1,2,3].map(function (numar) { return numar * 2 });  // Array [ 2, 4, 6 ]
 ```
 
 Funcția anonimă folosită de `map()`, se poate rescrie folosind *fat arrow* astfel:
@@ -146,6 +142,8 @@ Că tot veni vorba de argumente, în cazul fat arrows sunt permise și **default
 let ceva = (a = 10 * 2) => ++a; // 21
 ```
 
+### Expresii multiple de evaluat
+
 Dacă este nevoie de mai multe expresii, nu numai să returnezi ceva simplu, folosești acoladele:
 
 ```javascript
@@ -161,24 +159,34 @@ Pentru a returna un obiect trebuie întotdeauna să-l introduci între paranteze
 [1, 2, 3].map( (numar, index) => ( {numar: numar, indexul: index} ) );
 ```
 
-Arrow functions fac bindingul la contextul lexical imaginat de programator. Acest lucru este binevenit în lucrul cu DOM-ul.
+### Fat arrows și this
+
+Arrow functions prezintă marele avantaj pentru că fac o legătură la contextul lexical din intenția programatorului. Acest lucru este binevenit în lucrul cu obiectele DOM. Uneori ai nevoie să faci prelucrări de date într-un obiect creat de tine. În acest scop, va trebui să faci legătura la contextul obiectului tău pentru a executa o funcție drept răspuns la un eveniment. Pentru că atașarea unei funcții de răspuns la un eveniment are drept efect rularea funcției în contextul obiectului DOM pentru care se ascultă un eveniment, trebuie să găsim un mecanism de schimbare a contextului.
 
 ```html
 <button type="button" name="button" id="test">Testeaza this</button>
 <script type="text/javascript">
+  // creezi obiectul propriu în care faci prelucrări
   function Apasa () {
     this.stare = false;
     this.schimba = () => {
       this.stare = true;
     };
   };
-  let ruptor = new Apasa();
-  let element = document.getElementById('test');
+  const ruptor = new Apasa();
+  // se crează un obiect DOM
+  const element = document.getElementById('test');
   element.addEventListener('click', ruptor.schimba);
 </script>
 ```
 
-## Se aplică `call()`, `apply()` și `bind()`
+În acest moment contextul de execuție al metodei `schimbă` nu este obiectul creat de noi, ci obiectul generat de secția cu selectorul `getElementById`. Acest obiect nu are vreo proprietate ruptor. Avem nevoie să schimbăm cumva contextul. În trecut, se împacheta funcția de răspuns între paranteze rotunde și se folosea `bind()`.
+
+```javascript
+element.addEventListener('click', (ruptor.schimba).bind(ruptor));
+```
+
+#### Schimbarea contextului folosind `call()`, `apply()` și `bind()`
 
 Adu-ți mereu aminte că *fat arrows* sunt funcții, iar acestea moștenesc metodele lui `Function`. În concluzie, metodele obiectului fundamental `Function` sunt disponibile.
 
@@ -217,13 +225,19 @@ var faOScadere = (valoare) => {
 
 Sunt câteva cazuri de utilizare *fat arrows* care necesită un ochi ager și atenție.
 
-Să presupunem că pentru un motiv sau altul, ai nevoie să returnezi un enunț cum este „try {...} catch(error) {...}”. Cum faci? Pentru că sintaxa unui *fat arrow* este foarte concisă și nu prea permite variații. Singura metodă ar fi să introduci enunțul într-un bloc de acolade, care, după cum bine știm marchează limitele unui bloc de cod.
+Să presupunem că pentru un motiv sau altul, ai nevoie să folosești un enunț cum este *try {...} catch(error) {...}*. Cum faci? Pentru că sintaxa unui *fat arrow* este foarte concisă și nu prea permite variații. Singura metodă ar fi să introduci enunțul într-un bloc de acolade, care, după cum bine știm marchează limitele unui bloc de cod.
 
 ```javascript
-var facCeva = () => { try {...} catch(error) {...} };
+var facCeva = () => {
+  try {
+  //...
+  } catch(error) {
+    ...
+  }
+};
 ```
 
-De la Kyle Simpson includ câteva informații privind obișnuințele de programare privind arrow functions, iar una mai interesantă implică scrierea corpului concis al funcției ca o înșiruire de expresii separate prin operatorul virgulă.
+De la Kyle Simpson includ câteva informații privind obișnuințele de programare privind arrow functions. Una mai interesantă implică scrierea corpului concis al funcției ca o înșiruire de expresii separate prin operatorul virgulă.
 
 ```javascript
 ((oValPosibilă, altăValPosibilă) => (
@@ -242,7 +256,7 @@ Un lucru foarte interesant este că poți folosi ternarul în caz că ai nevoie 
 Dacă dorești să introduci o funcție ca fiind corpul concis al unei funcții arrow, trebuie să folosești cuvântul rezervat „function”. Această funcție va fi o expresie de funcție, preferabil cu nume (*named function expression* în lb. engleză).
 
 ```javascript
-var x = (a, b) => function ceva() {
+var x = (a, b) => function ceva () {
   return a + b;
 };
 ```

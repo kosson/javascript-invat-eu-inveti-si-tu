@@ -2,14 +2,14 @@
 
 JavaScript este un limbaj care face uz extensiv de obiecte. În Geneză, am văzut că exercitând pașii argoritmului intern `CreateRealm()`, care solicită rularea algoritmului `CreateIntrinsics(realmRec)`, există ca pas distinct crearea primului obiect al limbajului (prin apelarea algoritmului `ObjectCreate(null)`). Astfel, s-a născut obiectul prototipal, care va fi folosit pentru a forma și obiectul prototipal al funcțiilor.
 
-Prin urmare, putem spune că obiectele și funcțiile - obiect alcătuiesc o paradigmă circulară. Una nu poate fără cealaltă. În lucrul de zi cu zi, nu ne vom lovi de necesitatea de a lucra cu sloturile interne ale celor două entități, dar acestea sunt esențial a fi înțelese.
+Prin urmare, putem spune că obiectele și funcțiile - obiect alcătuiesc o paradigmă circulară. Una nu poate fără cealaltă. În lucrul de zi cu zi, nu ne vom lovi de necesitatea de a lucra cu sloturile interne ale celor două entități, dar este esențial a fi înțelese.
 
-O bună cunoaștere a acestor amănunte intime privind obiectele și funcțiile construite pe baza obiectelor, este o necesitate. Această secțiune s-a născut din această necesitate. Am realizat după ce am redactat final capitolul dedicat funcțiilor și pe cel al obiectelor că ar fi o bizarerie să încerc o poziționare a unuia față de celălalt, mai ales că un cititor nefamiliarizat, se va lovi, cu siguranță de concepte pe care nu le-ar înțelege decât dacă le-ar fi știut dinainte. Astfel s-a născut această secțiune ca o conciliere și o aprofundare a unor concepte care vor crea premiza înțelegerii celor două în armonie.
+O bună cunoaștere a acestor amănunte intime privind obiectele și funcțiile construite pe baza obiectelor, este o necesitate. Această secțiune s-a născut din această necesitate. După ce am redactat final capitolul dedicat funcțiilor și pe cel al obiectelor, am realizat că ar fi dificil să încerc o poziționare a unuia față de celălalt, mai ales că un cititor nefamiliarizat, se va lovi, cu siguranță de concepte pe care nu le-ar înțelege decât dacă le-ar fi știut dinainte. Astfel s-a născut această secțiune ca o conciliere și o aprofundare a unor concepte care vor crea premiza înțelegerii celor două în armonie.
 
 ## Sloturi
 
 După cum am aflat din capitolul genezei, motorul JavaScript trebuie să parcurgă o serie de pași aparținând unor algoritmi interni pentru a constitui un Tărâm (Realm) și odată cu acesta și obiectele intrinseci necesare pentru a se porni evaluarea codului sursă JavaScript.
-Ceea ce ochiul agil a cules ca informație specifică în capitolul genezei este faptul că generarea unui Tărâm nu este nimic mai mult decât constituirea unor registre în care se ține evidența unor înregistrări care au o denumire încadrată între paranteze pătrate duble: `[[intrinsics]]`. Acestea mai sunt numite și sloturi. Reamintindu-ne aceste detalii, vom avansa prin a face o mică anatomie a sloturilor, adică a ceea ce ascunde ca funcționalitate internă dezvoltată de motorul JavaScript pentru a fi capabil să genereze obiecte și funcții.
+Ceea ce ochiul agil a cules ca informație specifică în capitolul genezei este faptul că generarea unui Tărâm nu este nimic mai mult decât constituirea unor registre în care se ține evidența unor înregistrări. Acestea poartă denumirea între paranteze pătrate: `[[intrinsics]]`. Sunt numite sloturi. Reamintindu-ne aceste detalii, vom avansa prin a face o mică anatomie a sloturilor, adică ce ce ascunde ca funcționalitate internă în motorul JavaScript pentru a fi capabilă generarea de obiecte și funcții.
 
 ## Obiecte
 
@@ -269,14 +269,20 @@ Funcțiile sunt obiecte de „primă clasă” în JavaScript, ceea ce le permit
 
 ```javascript
 // Pot fi atribuite unui identificator:
-var funcție = function facCeva (x) { return x++; };
-var obiect = {x: 1};
+let funcție = function facCeva (x) {
+  return x++;
+};
+const obiect = {x: 1};
 // Poți introduce valori
 funcție.test = 10;
 obiect.test = 10;
 // Pot fi trimise altei funcții ca argumente
-function facCeva (x, y) { return x + y; };
-function maiElaborat (a, valoare) { return valoare(a, 1); };
+function facCeva (x, y) {
+  return x + y;
+};
+function maiElaborat (a, valoare) {
+  return valoare(a, 1);
+};
 var captura = maiElaborat(10, facCeva);
 // pot fi returnate din funcții ca orice valoare
 function iaOFuncție () {

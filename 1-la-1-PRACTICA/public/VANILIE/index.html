@@ -8,13 +8,29 @@
   <body>
     <h1>e de test</h1>
 
-    <div class="demo">Unu</div>
+
+    <button type="button" name="button" id="test">Testeaza this</button>
+    <script type="text/javascript">
+      // creezi obiectul propriu în care faci prelucrări
+      function Apasa () {
+        this.stare = false;
+        this.schimba = () => {
+          this.stare = true;
+        };
+      };
+      const ruptor = new Apasa();
+      // se crează un obiect DOM
+      const element = document.getElementById('test');
+      element.addEventListener('click', (ruptor.schimba).bind(ruptor));
+    </script>
+
+    <!-- <div class="demo">Unu</div>
     <div class="demo">Doi</div>
     <div class="demo">Trei</div>
     <script type="text/javascript">
     let sel = document.querySelector(".demo");
     console.log(sel.textContent);
-    </script>
+    </script> -->
     <!-- <template id="fisa-biblio">
       <ul id="unitate">
         <li class="titlu"></li>

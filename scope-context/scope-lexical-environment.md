@@ -60,15 +60,15 @@ Pentru a oferi cea mai corectă imagine a *mediului lexical*, voi folosi textul 
 
 ## Spune standardul
 
-* (1) Codul sursă este o structură lexicală.
-* (2) Când rulăm codul, acesta întră într-un proces de evaluare.
-* (3) Evaluarea structurii lexicale a codului sursă produce un lexical environment.
-* (4) Spunem că în acest moment că *mediul lexical* este asociat cu *anumite structuri sintactice* ale codului ECMAScript.
-* (5) Structurile sintactice cărora le sunt asociate medii lexicale sunt: declarațiile de funcții, o declarare a unui bloc de cod prin acolade și condiția *Catch* a instrucțiunii *Try*.
-* (6) De câte ori rulezi codul, acesta este evaluat și de se va crea mediul lexical tot de atâtea ori.
-* (7) Un *mediu lexical* constă dintr-o **înregistrare de mediu** (în engleză, *Environment Record* ) și o referință la un mediu lexical de pe un strat superior. Referința poate avea valoarea **null**, dacă un strat extern nu există. Înregistrarea de mediu este un inventar a tuturor legăturilor identificatorilor și spunem că este asociat mediului lexical
-* (8) Mediul lexical este folosit pentru a defini asocieri ale identificatorilor cu variabile și funcții. Reține o mică diferență: mediul lexical permite definirea legăturilor iar înregistrarea de mediu ține evidența legăturilor realizate.
-* (9) Din punctul de vedere al standardului, un mediu lexical este *pur un mecanism al specificației*, care va fi implementat de motorul JavaScript.
+*   (1) Codul sursă este o structură lexicală.
+*   (2) Când rulăm codul, acesta întră într-un proces de evaluare.
+*   (3) Evaluarea structurii lexicale a codului sursă produce un lexical environment.
+*   (4) Spunem că în acest moment că *mediul lexical* este asociat cu *anumite structuri sintactice* ale codului ECMAScript.
+*   (5) Structurile sintactice cărora le sunt asociate medii lexicale sunt: declarațiile de funcții, o declarare a unui bloc de cod prin acolade și condiția *Catch* a instrucțiunii *Try*.
+*   (6) De câte ori rulezi codul, acesta este evaluat și de se va crea mediul lexical tot de atâtea ori.
+*   (7) Un *mediu lexical* constă dintr-o **înregistrare de mediu** (în engleză, *Environment Record* ) și o referință la un mediu lexical de pe un strat superior. Referința poate avea valoarea **null**, dacă un strat extern nu există. Înregistrarea de mediu este un inventar a tuturor legăturilor identificatorilor și spunem că este asociat mediului lexical
+*   (8) Mediul lexical este folosit pentru a defini asocieri ale identificatorilor cu variabile și funcții. Reține o mică diferență: mediul lexical permite definirea legăturilor iar înregistrarea de mediu ține evidența legăturilor realizate.
+*   (9) Din punctul de vedere al standardului, un mediu lexical este *pur un mecanism al specificației*, care va fi implementat de motorul JavaScript.
 
 ### Detaliile mediului lexical și despre registrul descriptiv al mediului lexical
 
@@ -85,14 +85,14 @@ Un **environment record** (descriere de mediu sau harta mediului) este un mecani
 
 Câte medii lexicale (**lexical environments**) se pot stabili:
 
-- **global environment** - mediul global este cel mai de sus posibil la care cele interne fac conexiuni.,
-- **module environment** - mediul lexical al modulelor conține legăturile la declarațiile de prim nivel ale unui **Module**. Conține legături importate în mod explicit de `Module`. Mediul extern al unui `Module` este **global environment**,
-- **function environment** - mediul lexical au unei funcții este un mediu care se stabilește **la invocarea** unei funcții. Mediul funcției poate să stabilească o nouă legătură la „this”. Un **function environment** este un **lexical environment** care corespunde momentului invocării funcției. Mediul funcției capturează și starea necesară pentru a suporta invocații ale metodei **super**.
+-   **global environment** - mediul global este cel mai de sus posibil la care cele interne fac conexiuni.,
+-   **module environment** - mediul lexical al modulelor conține legăturile la declarațiile de prim nivel ale unui **Module**. Conține legături importate în mod explicit de `Module`. Mediul extern al unui `Module` este **global environment**,
+-   **function environment** - mediul lexical au unei funcții este un mediu care se stabilește **la invocarea** unei funcții. Mediul funcției poate să stabilească o nouă legătură la „this”. Un **function environment** este un **lexical environment** care corespunde momentului invocării funcției. Mediul funcției capturează și starea necesară pentru a suporta invocații ale metodei **super**.
 
 În obiectul **environment record** există două tipuri de valori:
 
-- ***declarative Enviroment Records*** - **înregistrări declarative în mediu** și
-- ***object Environment Records*** - **înregistrări de mediu ale obiectelor**.
+-   ***declarative Enviroment Records*** - **înregistrări declarative în mediu** și
+-   ***object Environment Records*** - **înregistrări de mediu ale obiectelor**.
 
 ***Declarative Enviroment Records*** definește efectele unor elemente precum declarații de funcții, de variabile și structuri `Try...Catch`.
 ***Object Environment Records*** definește efectele unor elemente precum declarația `with` care asociază legătura identificatorului cu proprietățile unui obiect.
@@ -122,11 +122,7 @@ var faCeva = function redau () {
 };
 ```
 
-În exemplul de mai sus GEC (Global Execution Context) ține evidența identificatorilor `ceva` și `faCeva`. `faCeva` ține evidența identificatorilor `altceva`, `console.log` și `prelucrez`.
-
-Mediul lexical (scope-ul) depinde de gradul de imbricare a codului (o funcție care conține o alta ș.a.m.d. înseamnă **code nesting**).
-
-După cum spuneam, mediul lexical se stabilește chiar și la nivelul `catch` din enunțul `try-catch` al limbajului.
+În exemplul de mai sus GEC (Global Execution Context) ține evidența identificatorilor `ceva` și `faCeva`. `faCeva` ține evidența identificatorilor `altceva`, `console.log` și `prelucrez`. Mediul lexical (scope-ul) depinde de gradul de imbricare a codului (o funcție care conține o alta ș.a.m.d. înseamnă **code nesting**). După cum spuneam, mediul lexical se stabilește chiar și la nivelul `catch` din enunțul `try..catch` al limbajului.
 
 Scope-ul nu se realizează la nivel de bloc în JavaScript pentru enunțurile `for`, `while`, `if` și `switch`.
 
@@ -144,34 +140,34 @@ Este observabil faptul că variabila declarată în `if` este accesibilă în af
 
 ## Mantre
 
-- JavaScript are o fază de compilare urmată de o fază de execuție.
-- JavaScript are un **scope lexical** generat la faza de compilare. De fapt, acesta este un set de reguli pentru a determina cum se face căutarea după un anume identificator.
-- La momentul rulării codului scope-urile există deja. Doar „this”, care se apropie de ideea de scope dinamic caracteristic altor limbaje se consituie la momentul rulării codului, relectând cum a fost apelată funcția.
-- Declararea funcțiilor generează SCOPE-ul - **lexical environment**.
-- Când funcțiile sunt executate SCOPE-ul folosit este cel de la MOMENTUL DEFINIRII (faza de compilare), nu cel de la momentul invocării (asta înseamnă LEXICAL SCOPE, de fapt).
-- De fiecare dată când este **evaluat** codul, scope-ul este asociat în funcție de structurile de cod (blocuri sau funcție sau catch).
-- La invocarea unei funcții se generează o referință către **lexical environment**. Dacă funcția a fost definită în global, se va ține o referință la ce se află în global, se face o cartografiere a tuturor identificatorilor din global. Definirea unei alte funcții interne, va crea o referință către toți identificatorii funcției gazdă.
-- Un context de execuție are un „lexical environment” asociat, adică un scope, care conține toți identificatorii definiți în acel context.
-- Variabilele au ca scope funcția.
-- Variabilele locale sunt stocate în scope, care poate fi perceput ca o hartă de identificatori la a căror valori ai access. Atunci când în execuție interpretorul caută o proprietate în obiectul scope curent. Dacă nu o găsește, atunci interpretorul va căuta mai sus în obiectul scope părinte și tot așa până când nu mai există un alt obiect părinte. Această secvență de obiecte scope se numește **scope chain**. Atenție, scope-ul se formează la momentul declarării, nu la momentul execuției.
-- **Scope chain** este totalitatea obiectelor care definesc variabilele existente în scope pentru o secvență de cod. Când motorul are nevoie să găsească valoarea unei variabile, se uită la primul obiect din lanț. Operațiunea se mai numește „walking up the scope chain".
-- Când este definită o funcție, aceasta stochează scope chain-ul care era în efect în acel moment.
-- Obiectul creat de invocarea unei funcții este adăugat scope chain-ului existent.
-  - Scope chain-ul astfel rezultat reprezintă scope chain-ul de la acel moment.
-  - Obiectul rezultat de fapt are rolul de a face legăturile tuturor variabilelor funcției în scope chain.
-- Când funcția returnează, obiectul care face binding-ul variabilelor este scos din **scope chain**.
-- Dacă nu există funcții interne, nu mai există nicio legătură spre obiectul care face binding-ul variabilelor și se face GARBAGE COLLECTING.
-- Când sunt definite funcții interne, acestea la rândul lor generează referințe în scope chain.
-- **Dacă o funcție internă este returnată sau introdusă într-o variabilă**, atunci va exista o referință către aceasta și nu se va face garbage collecting (avem un closure).
-- Scope chain-ul unui closure este unul viu; funcțiile interne nu fac copii private ale scope-ului și nici nu fac snapshot-uri ale binding-urilor variabilelor.
-- Câtă vreme există o referință către o proprietate din scope acest obiect scope exista. Este principiul din spatele funcționării closure-urilor. Când o funcție returnează, scope-ul creat de ea dispare, doar dacă nu cumva avem un closure (o altă funcție este găzduită). Funcția va rămâne ca referință în scope-ul părinte.
+-   JavaScript are o fază de compilare urmată de o fază de execuție.
+-   JavaScript are un **scope lexical** generat la faza de compilare. De fapt, acesta este un set de reguli pentru a determina cum se face căutarea după un anume identificator.
+-   La momentul rulării codului scope-urile există deja. Doar „this”, care se apropie de ideea de scope dinamic caracteristic altor limbaje se consituie la momentul rulării codului, relectând cum a fost apelată funcția.
+-   Declararea funcțiilor generează SCOPE-ul - **lexical environment**.
+-   Când funcțiile sunt executate SCOPE-ul folosit este cel de la MOMENTUL DEFINIRII (faza de compilare), nu cel de la momentul invocării (asta înseamnă LEXICAL SCOPE, de fapt).
+-   De fiecare dată când este **evaluat** codul, scope-ul este asociat în funcție de structurile de cod (blocuri sau funcție sau catch).
+-   La invocarea unei funcții se generează o referință către **lexical environment**. Dacă funcția a fost definită în global, se va ține o referință la ce se află în global, se face o cartografiere a tuturor identificatorilor din global. Definirea unei alte funcții interne, va crea o referință către toți identificatorii funcției gazdă.
+-   Un context de execuție are un „lexical environment” asociat, adică un scope, care conține toți identificatorii definiți în acel context.
+-   Variabilele au ca scope funcția.
+-   Variabilele locale sunt stocate în scope, care poate fi perceput ca o hartă de identificatori la a căror valori ai access. Atunci când în execuție interpretorul caută o proprietate în obiectul scope curent. Dacă nu o găsește, atunci interpretorul va căuta mai sus în obiectul scope părinte și tot așa până când nu mai există un alt obiect părinte. Această secvență de obiecte scope se numește **scope chain**. Atenție, scope-ul se formează la momentul declarării, nu la momentul execuției.
+-   **Scope chain** este totalitatea obiectelor care definesc variabilele existente în scope pentru o secvență de cod. Când motorul are nevoie să găsească valoarea unei variabile, se uită la primul obiect din lanț. Operațiunea se mai numește „walking up the scope chain".
+-   Când este definită o funcție, aceasta stochează scope chain-ul care era în efect în acel moment.
+-   Obiectul creat de invocarea unei funcții este adăugat scope chain-ului existent.
+  -Scope chain-ul astfel rezultat reprezintă scope chain-ul de la acel moment.
+  -Obiectul rezultat de fapt are rolul de a face legăturile tuturor variabilelor funcției în scope chain.
+-   Când funcția returnează, obiectul care face binding-ul variabilelor este scos din **scope chain**.
+-   Dacă nu există funcții interne, nu mai există nicio legătură spre obiectul care face binding-ul variabilelor și se face GARBAGE COLLECTING.
+-   Când sunt definite funcții interne, acestea la rândul lor generează referințe în scope chain.
+-   **Dacă o funcție internă este returnată sau introdusă într-o variabilă**, atunci va exista o referință către aceasta și nu se va face garbage collecting (avem un closure).
+-   Scope chain-ul unui closure este unul viu; funcțiile interne nu fac copii private ale scope-ului și nici nu fac snapshot-uri ale binding-urilor variabilelor.
+-   Câtă vreme există o referință către o proprietate din scope acest obiect scope exista. Este principiul din spatele funcționării closure-urilor. Când o funcție returnează, scope-ul creat de ea dispare, doar dacă nu cumva avem un closure (o altă funcție este găzduită). Funcția va rămâne ca referință în scope-ul părinte.
 
 ## Ce găsim în **lexical environment**?
 
-- variabilele locale,
-- parametrii funcției,
-- declarații de funcții,
-- scope-ul blocului părinte (se face lanțul prin care se caută „pe fir” mai sus identificatorul pentru care a fost definită o variabilă)
+-   variabilele locale,
+-   parametrii funcției,
+-   declarații de funcții,
+-   scope-ul blocului părinte (se face lanțul prin care se caută „pe fir” mai sus identificatorul pentru care a fost definită o variabilă)
 
 ![Mediul lexical al unei funcții](exempluIdentificatori.png "Exemplu simplu de variabile în global scope și mediul lexical format de o funcție")
 
@@ -283,5 +279,5 @@ Constituie baza pentru înțelegerea closure-urilor.
 
 ## Resurse
 
-[Wikipedia, Scope](https://en.wikipedia.org/wiki/Scope_(computer_science))
-[Wikipedia, Immediately-invoked function expression](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression)
+-   [Wikipedia, Scope](https://en.wikipedia.org/wiki/Scope_(computer_science))
+-   [Wikipedia, Immediately-invoked function expression](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression)
