@@ -1368,8 +1368,8 @@ Elementele găsite sunt de fapt o colecție de noduri, care este dinamică în s
 JavaScript nu are structuri de date specifice unei „hărți” de valori - ceea ce se înțelege în alte limbaje de programare a fi un `map`. Singura modalitate este aceea de a folosi un obiect. În acest caz sunt anumite probleme care trebuie luate în considerare precum durerile de cap pe care le dă moștenirea. Lanțul prototipal care se stabilește, poate afecta citirea proprietăților. Unele operațiuni, se uită la tot lanțul prototipal și *văd* proprietăți moștenite. Alte operațiuni accesează doar proprietățile pe care obiectul le are fără a se uita la cele moștenite. Atunci când folosești un obiect drept colecție (`map`), trebuie operat asupra lui cu mare atenție.
 
 ```javascript
-var matrița = {proprietate: 'ceva'};
-var obiect = Object.create(matrița);
+const matrița = {proprietate: 'ceva'};
+const obiect = Object.create(matrița);
 obiect.altaProprietate = 'altceva';
 ```
 
@@ -1586,7 +1586,7 @@ Pornești de la un obiect pe care vrei să-l „mixezi” cu un altul.
 
 ```javascript
 const functiiCerc = {
-  arie: function facAria () { return Math.PI * this.raza * this.raza; },
+  arie: function facAria () { return Math.PI * this.raza * this.raza },
   creste: function crescRaza () { this.raza++; },
   descreste: function descrRaza () { this.raza--; }
 };
@@ -1636,12 +1636,12 @@ Dacă funcțiile definite de un mixin sunt destinate a fi folosite de un alt obi
 
 ```javascript
 let functiiCerc = function () {
-  this.arie = function () { return Math.PI * this.raza * this.raza; };
+  this.arie = function () { return Math.PI * this.raza * this.raza };
   this.creste = function() { this.raza++; };
   this.descreste = function() { this.raza--; };
   return this;
 };
-let ElementRotund = function (raza) { this.raza = raza; };
+let ElementRotund = function (raza) { this.raza = raza };
 functiiCerc.call(ElementRotund.prototype);
 const cerc1 = new ElementRotund(10);
 cerc1.arie(); //
