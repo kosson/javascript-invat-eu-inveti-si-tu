@@ -24,8 +24,8 @@ Symbol are totuși o serie de proprietăți care oferă acces la membrii acestui
 
 Standardul lămurește faptul că atunci când se constituie registrul simbolurilor, care este o listă de elemente, care fiecare, individual, este un „Record”, ceea ce decriptat înseamnă că avem de-a face cu un obiect (19.4.1 The Symbol Constructor). Da, fiecare simbol este, de fapt, câte un obiect care are două proprietăți:
 
-- cheia pentru prima proprietate este `[[Key]]` și are drept valoare un șir de caractere necesar identificării la nivel global a simbolului respectiv și
-- a doua proprietate care are drept cheie `[[Symbol]]`, care are drept valoare un **simbol** ce poate fi accesat din oricare tărâm.
+-   cheia pentru prima proprietate este `[[Key]]` și are drept valoare un șir de caractere necesar identificării la nivel global a simbolului respectiv și
+-   a doua proprietate care are drept cheie `[[Symbol]]`, care are drept valoare un **simbol** ce poate fi accesat din oricare tărâm.
 
 Folosim simbolurile pentru a avea chei cu adevărat unice pentru proprietățile unui obiect și oriunde avem nevoie de identificatori unici. Simbolurile sunt ca niște fulgi de nea. Nu există asemănare a unuia cu altul.
 
@@ -34,7 +34,7 @@ Valorile de acest tip pot fi folosite pentru a face anumite proprietăți ale un
 Îndeajuns cu teoria. Cel mai rapid scenariu de utilizare este al unui simbol utilizat ca proprietate a unui obiect.
 
 ```javascript
-var unSimbol = Symbol('oDescriere');
+let unSimbol = Symbol('oDescriere');
 this[unSimbol] = function () {
   console.log('fac ceva');
 };
@@ -198,10 +198,10 @@ Acest simbol este mijlocul prin care se aplează iteratorul pentru un anumit obi
 
 Există patru metode a constructorului `Symbol`, care permit o posibilă interacțiune și mai intimă cu modul în care sunt exploatate textele folosind regex-urile. Pentru a înțelege ce oferă metodele lui Symbol, să trecem în revistă metodele utilizate de obiectul intern `RegExp`.
 
-- `match(șablonRegExp)` prin care se verifică dacă un șir de caractere este identic cu cel menționat prin șablonul regex-ului.
-- `replace(șablonRegExp, șirDeÎnlocuire)` prin care se caută un fragment identic cu cel menționat de regex, iar atunci când este găsit, se face înlocuirea sa cu șirul de caractere introdus ca al doilea argument.
-- `search(șablonRegExp)` localizează un fragment menționat prin șablonul regex-ului în interiorul unui text.
-- `split(șablonRegExp)` „sparge” un șir de caractere într-un array pe baza potrivirii după un șablon menționat prin regex.
+-   `match(șablonRegExp)` prin care se verifică dacă un șir de caractere este identic cu cel menționat prin șablonul regex-ului.
+-   `replace(șablonRegExp, șirDeÎnlocuire)` prin care se caută un fragment identic cu cel menționat de regex, iar atunci când este găsit, se face înlocuirea sa cu șirul de caractere introdus ca al doilea argument.
+-   `search(șablonRegExp)` localizează un fragment menționat prin șablonul regex-ului în interiorul unui text.
+-   `split(șablonRegExp)` „sparge” un șir de caractere într-un array pe baza potrivirii după un șablon menționat prin regex.
 
 Ceea ce oferă aceste metode este posibilitatea de a modifica felul în care se face căutarea definind, de fapt redefinind metodele care folosesc șabloane regex să se comporte ca metodele originale de la care se așteaptă să existe un regex, dar de fapt să existe o altă implementare de căutare.
 
@@ -225,13 +225,13 @@ Este algoritmul care se pune în mișcare la apelarea metodei `split()` pe care 
 
 Este o valoare implicată în crearea de obiecte derivate. Următoarele tipuri de obiecte interne au definite intern `Symbol.species`.
 
-- Array,
-- ArrayBuffer,
-- Map,
-- Promise,
-- RegExp,
-- Set,
-- Typed arrays
+-   Array,
+-   ArrayBuffer,
+-   Map,
+-   Promise,
+-   RegExp,
+-   Set,
+-   Typed arrays
 
 Toate aceste obiecte interne folosesc simbolul „well-known” `Symbol.species` pentru a returna pe `this`. Acest lucru mai implică un lucru: această proprietate va returna funcția constructor.
 
@@ -271,7 +271,7 @@ var unSimbol = Symbol('simbol01');
 typeof unSimbol; // "symbol"
 ```
 
-Spune standardul că valoarea pentru slotul intern [\[Prototype]] a lui Symbol este `funcția-obiect internă` a cărui slot intern [\[Prototype]] este obiectul prototype a lui Object.
+Spune standardul că valoarea pentru slotul intern `[[Prototype]]` a lui Symbol este `funcția-obiect internă` a cărui slot intern `[[Prototype]]` este obiectul prototype a lui `Object`.
 
 Tot standardul aduce lămuriri în ceea ce privește câteva aspecte care țin de bucătăria motoarelor JavaScript, dar care ne vor face nouă o imagine a contextului. Motorul de căutare înainte de a porni evaluarea codului construiește în „culise” o listă goală dedicată tuturor simbolurilor care vor fi create. Lista aceasta poate fi înțeleasă ca un registru. Chiar se numește **GlobalSymbolRegistry** și este o listă disponibilă tuturor tărâmurilor care ar putea fi; e o listă globală.
 
@@ -287,12 +287,11 @@ console.log(Symbol('ceva') === Symbol('ceva')); // false
 
 ## Mantre
 
-- Simbolurile nu vor intra în conflict cu valorile șir ale cheilor unui obiect.
-- Simbolurile nu împlică faptul că sunt un set privat de valori.
-- Nu poți face transformări (coercion) pe simboluri.
+-   Simbolurile nu vor intra în conflict cu valorile șir ale cheilor unui obiect.
+-   Simbolurile nu împlică faptul că sunt un set privat de valori.
+-   Nu poți face transformări (coercion) pe simboluri.
 
 ## Referințe
 
-- https://hacks.mozilla.org/2015/06/es6-in-depth-symbols/
-- Zakas, Nicholas C. Understanding ECMAScript 6: The Definitive Guide for JavaScript Developers.
-https://www.keithcirkel.co.uk/metaprogramming-in-es6-symbols/
+-   https://hacks.mozilla.org/2015/06/es6-in-depth-symbols/
+-   Zakas, Nicholas C. Understanding ECMAScript 6: The Definitive Guide for JavaScript Developers. https://www.keithcirkel.co.uk/metaprogramming-in-es6-symbols/

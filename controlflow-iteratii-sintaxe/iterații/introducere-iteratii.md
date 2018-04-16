@@ -78,7 +78,7 @@ while( !(element = iterator.next()).done ) {
 Odată cu ECMAScript 2015, beneficiem de enunțul `for..of`, care va face exact ce am realizat mai sus construind obiectul iterator. Array-urile sunt obiecte care implementează protocolul de iterare.
 
 ```javascript
-for(var x of [1, 2, 3]){
+for(let x of [1, 2, 3]){
   console.log(x);
 };
 ```
