@@ -1,6 +1,6 @@
 # Enunțul `for..of`
 
-ES6 a introdus această nouă structură de iterare împreună cu două concepte importante: **iterable** și **iterator**. Intenția a fost de a oferi un instrument superior celor oferite de ES5 deja: `for..in` și `forEach`.
+ES6 a introdus această nouă structură de iterare împreună cu două concepte importante: **iterable** și **iterator**. Intenția a fost de a oferi un instrument superior celor oferite de ES5 deja: `for..in` și `forEach`. De fapt, intenția este să avem un instrument universal de iterare a unor structuri de date.
 
 Poți folosi enunțul `for..of` dacă nu ai nevoie să lucrezi și cu indexurile elementelor componente ale colecției. Dacă ai nevoie de accesarea după index a unui element, vei folosi un clasic `for`.
 
@@ -28,6 +28,8 @@ iterator.next(); // Object { value: "altceva", done: false }
 iterator.next(); // Object { value: "undeva", done: false }
 iterator.next(); // Object { value: undefined, done: true }
 ```
+
+Ceea ce putem face manual apelând metoda `next()` pe obiectul iterator, face `for..of` automat pentru noi. Structurile iterabile, la momentul în care sunt supuse unor prelucrări folosind `for..of` vor genera un obiect iterator, pe care îl vor parcurge. Și aici gândurile mele mă duc către funcțiile generator, care nu este nimic altceva decât un mecanism de creare de iteratori. Dacă ești curios, aruncă repede un ochi.
 
 ## Lucru cu for..of
 
@@ -73,9 +75,9 @@ for (let x of '\u{13165}\u{13189}\u{13197}'){
 
 Te vei întreba de ce să folosești `for..of` dacă ai deja la îndemână `for..in`? Răspunsul e vizibil în cazul enunțului `for..in`, unde sunt luate în considerare toate proprietățile care au atributul `enumerable` activat.
 
-### Iterarea obiectelor
+### Iterarea obiectelor neiterabile
 
-Obiectele care nu au implementare protocolul iterable nu pot fi parcurse cu bucle `for..of`. Pentru a exemplifica, vom lucra cu un obiect comun.
+Obiectele care nu au implementare protocolul iterable nu pot fi parcurse cu bucle `for..of`. Acesta este și cazul obiectelor simple care au fost utilizate drept dicționare. Pentru a exemplifica, vom lucra cu un obiect comun.
 
 ```javascript
 let obi = {
@@ -87,7 +89,7 @@ for (let elem of obi) {
 }
 ```
 
-O astfel de încercare se va solda cu o eroare: `TypeError: obi is not iterable`. Ce-i de făcut? Cum am putea parcurge totuși o astfel de structură?
+O astfel de încercare se va solda cu o eroare: `TypeError: obi is not iterable`. Ce-i de făcut? Cum am putea parcurge totuși o astfel de structură? Ne vom folosi de destructurare și de capacitatea metodei `Object.entries(obiect))` de a genera array-uri de array-uri, care vor putea fi iterate. Array-urile permit iterarea.
 
 ```javascript
 for(let [cheie, valoare] of Object.entries(obi)){

@@ -265,3 +265,4 @@ Valoarea lui next anterior este altceva
 
 -   funcții,
 -   iteratori
+-   `for..of`
