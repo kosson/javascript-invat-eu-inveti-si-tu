@@ -1,6 +1,6 @@
 # Generators
 
-Generatoarele oferă posibilitatea de a parcurge o colecție de date. Este un nou tip de funcții introduse în ECMAScript 2015 care *produc* (yield în limba engleză) valori la cerere. Punerea unei steluțe după cuvântul cheie `function`, va semnala că avem de a face cu o funcție generator.
+Generatoarele oferă posibilitatea de a parcurge o colecție de date. Este un nou tip de funcții introduse în ECMAScript 2015 care *produc* (*yield* în limba engleză) valori la cerere. Punerea unei steluțe după cuvântul cheie `function`, va semnala că avem de a face cu o funcție generator. Funcțiile săgeată nu pot fi iteratori.
 
 ```javascript
 function* ceva () {
@@ -21,7 +21,7 @@ Apelarea unui generator nu îl execută, ci doar este trimisă funcția în stiv
 
 Dacă în execuție nu mai este întâlnit niciun `yield`, funcția generator returnează obiectul iterator, care în acest moment va avea valoarea `true` asociată cheii `done`.
 
-### Generatoare care procesează alte generatoare
+## Generatoare care procesează alte generatoare
 
 Funcțiile generator pot procesa alte funcții generator.
 
@@ -40,7 +40,11 @@ for (let obiRet of unGen()) {
 
 ## Trimiterea mesajelor
 
-Un lucru foarte interesant care privește funcțiile generator este că se pot trimite mesaje din funcție în obiectul iterator instanțiat și invers. Dacă tratezi generatoarele ca funcții simple, cel mai la îndemână mecanism de trimitere a datelor este cel al argumentelor. Reține faptul că poți *injecta* date în generator în oricare etapă a execuției sale, de regulă într-o etapă în care dorești să utilizeze date externe.
+Un lucru foarte interesant care privește funcțiile generator este că se pot trimite mesaje din funcție în obiectul iterator instanțiat și invers.
+
+### Trimiterea datelor în argumente
+
+Dacă tratezi generatoarele ca funcții simple, cel mai la îndemână mecanism de trimitere a datelor este cel al argumentelor. Reține faptul că poți *injecta* date în generator în oricare etapă a execuției sale, de regulă într-o etapă în care dorești să utilizeze date externe.
 
 ```javascript
 function* testDeGen (oValoare) {
@@ -49,6 +53,8 @@ function* testDeGen (oValoare) {
 let obiIterabil = testDeGen('important');
 obiIterabil.next().value; // "Ceva important"
 ```
+
+Reține faptul că funcțiile generator pot primi date și după ce au pornit execuția. Acest lucru se poate face prin intermediul argumentelor la momentul invocării, de exemplu.
 
 ### Trimiterea unui mesaj din instanță către generator
 
@@ -69,22 +75,27 @@ console.log(instantaAltGenerator.next('mesaj spre generator'));
 // { value: undefined, done: true }
 ```
 
-Pentru că o funcție generator este totuși sincronă, se pot trimite mesaje în cazul apariției unor erori folosind un bloc `try..catch`.
+Nu pot fi pasate valori la prima apelare a lui `next()` pentru că metoda `next()`, de fapt trimite o valoare unui `yield` care așteaptă. Dacă nu există vreun `yield` care să aștepte, nici valoarea nu are cui să-i fie pasată. Valoarea pasată este folosită de generator ca valoare a întregii expresii `yield` în care a fost înghețat generatorul.
 
 ```javascript
-function* facCevaSecvential () {
-  try {
-    const x = yield;
-    console.log(`Salut ${x}`);
-  } catch (err) {
-    console.log('Eroare', err);
-  };
+function* faCeva (ceva) {
+  let intern = yield ("Cineva a primit " + ceva);
+  yield ("Altcineva a primit " + ceva +  "\nValoarea lui next anterior este " + intern);
 };
-const ziCeva = facCevaSecvential();
-ziCeva.next(); // { value: undefined, done: false }
-ziCeva.throw('Auleu, ceva e rău.');
-// Eroare Auleu, ceva e rău.
-// { value: undefined, done: true }
+
+let obiIterator = faCeva("o dudă");
+
+let primulObi = obiIterator.next();
+let primaVal = primulObi.value;
+console.log(primaVal);  // Cineva a primit o dudă
+
+let alDoileaObi = obiIterator.next("altceva");
+let aDouaVal = alDoileaObi.value;
+console.log(aDouaVal);
+/*
+Altcineva a primit o dudă
+Valoarea lui next anterior este altceva
+ */
 ```
 
 ## Scoaterea datelor dintr-un generator cu `for..of`
@@ -132,7 +143,7 @@ Noapte bună
  */
 ```
 
-Modalitatea de a pargurge un generator cu o buclă `while` este mai greoaie față de ceea ce oferă `for..of`.
+Modalitatea de a parcurge un generator cu o buclă `while` este mai greoaie față de ceea ce oferă `for..of`.
 
 Dintr-un generator poți apela alte generatoare.
 
@@ -180,7 +191,58 @@ id.next();
 // Object { value: 2, done: false }
 ```
 
-### Parcurgerea DOM folosing o funcție generator.
+Dacă parcurgi un generator cu o buclă și decizi întreruperea buclei cu un `break`, iteratorul va muta cursorul la sfârșit.
+
+```javascript
+function* stopata () {
+  yield "ceva";
+  yield "altceva"
+};
+let obiIterabil = stopata();
+for (let elem of obiIterabil) {
+  console.log(elem);
+  break;
+};
+obiIterabil.next(); // { value: undefined, done: true }
+```
+
+## Generatorii ca metode
+
+Funcțiile generator pot fi metode ale unui obiect. Pentru a realiza acest lucru, se va adăuga steluța în stânga identificatorului metodei.
+
+```javascript
+class Test {
+  * unGenerator () {
+    yield "bau!";
+  }
+}
+const obiIter = new Test();
+for (let elem of obiIter.unGenerator()) {
+  console.log(elem);
+}; // bau!
+```
+
+## Tratarea erorilor
+
+Pentru că o funcție generator este totuși sincronă, se pot trimite mesaje în cazul apariției unor erori folosind un bloc `try..catch`.
+
+```javascript
+function* facCevaSecvential () {
+  try {
+    const x = yield;
+    console.log(`Salut ${x}`);
+  } catch (err) {
+    console.log('Eroare', err);
+  };
+};
+const ziCeva = facCevaSecvential();
+ziCeva.next(); // { value: undefined, done: false }
+ziCeva.throw('Auleu, ceva e rău.');
+// Eroare Auleu, ceva e rău.
+// { value: undefined, done: true }
+```
+
+## Parcurgerea DOM folosing o funcție generator.
 
 Unul din scopurile principale a întregului efort de a învăța programare este acela de a putea manipula datele de mari dimensiuni sau cele care de mare complexitate ca structură. Cel mai întrebuințat model de parcurgere a datelor de o mare complexitate este cel care folosește recursivitatea. Acesta este și cazul parcurgerii DOM (în engleză *walking the DOM*).
 
@@ -217,48 +279,6 @@ const elementDOM = document.getElementById("start");
 for(let element of parcurgDOM(elementDOM)){
   console.log(element.innerText);
 };
-```
-
-## Introducerea și modificarea datelor dintr-un generator
-
-Reține faptul că funcțiile generator pot primi date și după ce au pornit execuția. Acest lucru se poate face prin intermediul argumentelor la momentul invocării, de exemplu.
-
-```javascript
-function* faCeva (ceva) {
-  yield ("Cineva a primit " + ceva);
-};
-
-let obiIterator = faCeva("o dudă");
-
-// console.log(obiIterator.next());
-// Object { value: "Cineva a primit o dudă", done: false }
-let afirm = obiIterator.next();
-console.log(afirm.value); // Cineva a primit o dudă
-```
-
-Introducerea de date se mai poate face și prin pasarea de argumente în metoda `next()`
-
-Nu pot fi pasate valori la prima apelare a lui `next()` pentru că metoda `next()`, de fapt trimite o valoare unui `yield` care așteaptă. Dacă nu există vreun `yield` care să aștepte, nici valoarea nu are cui să-i fie pasată. Valoarea pasată este folosită de generator ca valoare a întregii expresii `yield` în care a fost înghețat generatorul.
-
-```javascript
-function* faCeva (ceva) {
-  let intern = yield ("Cineva a primit " + ceva);
-  yield ("Altcineva a primit " + ceva +  "\nValoarea lui next anterior este " + intern);
-};
-
-let obiIterator = faCeva("o dudă");
-
-let primulObi = obiIterator.next();
-let primaVal = primulObi.value;
-console.log(primaVal);  // Cineva a primit o dudă
-
-let alDoileaObi = obiIterator.next("altceva");
-let aDouaVal = alDoileaObi.value;
-console.log(aDouaVal);
-/*
-Altcineva a primit o dudă
-Valoarea lui next anterior este altceva
- */
 ```
 
 ## Dependințe cognitive

@@ -2,14 +2,15 @@
 
 Am stabilit deja din tot ce-am povestit până acum că textul este o resursă digitală care poate fi exploatată și în care poți face căutări după anumite fragmente cheie. Poți să-ți imaginezi `RegExp`-ul ca pe un motor de căutare în care introduci cheile de căutare după anumite reguli. Și de aici și denumirea de `regular expressions` în limba engleză -`RegExp`. Facem căutări în texte după *șabloane construite după anumite reguli*, dar ne vom referi la aceste construcții numindu-le șabloane sau regex-uri. Pentru englezescul „pattern” am ales `șablon` pentru că semantic exprimă cel mai bine scopul fragmentului după care facem căutarea, iar pentru operațiunea în sine de căutare am folosit interșanjabil „a potrivi”, cu sensul de a potrivi în șir șablonul sau „a căuta”, cu sensul operațiunii de identificare în șir atunci când explicația redă operațiunea din punctul de vedere al motorului `RegExp`.
 
-Scopul folosirii regex-urilor este acela de a **constitui** un filtru prin care trecem o succesiune de caractere.
+Scopul folosirii regex-urilor este acela de a *constitui* un filtru prin care trecem o succesiune de caractere.
 
 **Moment ZEN**: un șir de caractere poate fi un cuvânt, mai multe, o propoziție, o frază sau o carte întreagă, un document hipertext accesat la distanță... cam tot ce este reprezentat cu ajutorul caracterelor.
 
 **Spune standardul**:
-*Forma și funcționalitatea expresiilor regulate sunt modelate după cele oferite de limbajul de programare Perl 5*.
 
-Continuăm prin a ne transpune în starea necesară pentru lucrul cu șabloanele construite cu `RegExp`. Trebuie conștientizat din prima că `RegExp` lucrează la nivel de caracter individual, apoi seturi de caractere, grupuri și combinațiile dintre acestea. Dar starea necesară pornește de la conștientizarea importanței cruciale pe care o are un singur caracter, fie că acesta este „vizibil” sau „invizibil” (spațiile albe, taburile). Vă mai amintiți de faptul că JavaScript lucrează cu setul de caractere codat după standardul Unicode?! Amintiți-vă acest detaliu ca pe o melodie de fundal atunci când lucrați cu text.
+> Forma și funcționalitatea expresiilor regulate sunt modelate după cele oferite de limbajul de programare Perl 5.
+
+Continuăm prin a ne transpune în starea necesară pentru lucrul cu șabloanele construite cu `RegExp`. Trebuie conștientizat din prima că `RegExp` lucrează la nivel de caracter individual, apoi seturi de caractere, grupuri și combinațiile dintre acestea. Dar starea necesară pornește de la conștientizarea importanței cruciale pe care o are un singur caracter, fie că acesta este „vizibil” sau „invizibil” (spațiile albe, taburile). Vă mai amintiți de faptul că JavaScript lucrează cu setul de caractere codat după standardul Unicode?!
 
 **Moment ZEN**: Un singur caracter face diferența între a găsi ceea ce cauți într-un șir sau nu.
 
@@ -23,15 +24,14 @@ Caracterul `?` la regex-uri pune condiția strictă ca un șablon menționat în
 
 ### Ce înseamnă a include în rezultat?
 
-Motorul RegExp indică succesiunea caracterelor, de câte ori li se permite să apară, de câte ori pot să se repete și așa mai departe. Acest model, acest șablon făurit de programator, este o descriere a ceea ce căutăm într-un șir de caractere și a tuturor variațiunilor posibile, ori a deviațiilor acceptate pentru întregul model sau pentru părți din acesta. Ținând cont de aceste aspecte, motorul parcurge caracter după caracter întreg șirul dat spre analiză. Ori de câte ori un caracter se potrivește tipului sau succesiunii, acesta este introdus într-un rezultat. Abia după ce a găsit un șir care să potrivească exact cu regulile șablonului, motorul va renunța la căutare și dacă s-a făcut o potrivire iar șirul de caractere nu a fost epuizat, restul este ignorat. Acesta este comportamentul implicit al motorului. Acest comportament poate fi modificat în funcție de regulile incluse în șablon.
+Motorul RegExp indică succesiunea caracterelor, de câte ori li se permite să apară, de câte ori pot să se repete și așa mai departe. Acest model, acest șablon făurit de programator, este o descriere a ceea ce căutăm într-un șir de caractere și a tuturor variațiunilor posibile, ori a deviațiilor acceptate pentru întregul model sau pentru părți din acesta. Ținând cont de aceste aspecte, motorul parcurge caracter după caracter întreg șirul dat spre analiză. Ori de câte ori un caracter se potrivește tipului sau succesiunii, acesta este introdus într-un rezultat. Abia după ce a găsit un șir care să se potrivească exact cu regulile șablonului, motorul va renunța la căutare și dacă s-a făcut o potrivire, iar șirul de caractere nu a fost epuizat, restul este ignorat. Acesta este comportamentul implicit al motorului. Acest comportament poate fi modificat în funcție de regulile incluse în șablon.
 
 Și acum, focalizare maximă.
 
-Următorul regex este unul valid și solicită atenția ta ca și detector de caractere: <code><span style='color: red'>_</span>?</code> (spațiu și semnul întrebării, aici l-am folosit pe underscore să-ți marchez faptul că este un spațiu) te poate da peste cap dacă nu ești atent. Pur și simplu testează dacă există un spațiu sau nu pentru că înaintea semnului întrebării era un spațiu nedetectabil celor care abia s-au apucat de lucru pe șiruri de caractere. Vezi? De aceea trebuie lucrat cu multă atenție.
-
-Regex-urile mai au în componență niște litere care succed șablonul. Acestea în limba engleză sunt numite „flags”, dar pentru limba română le-am tradus ca fanioane pentru că semnalizează un anumit comportament pe care motorul de interpretare trebuie să-l adopte.
+Următorul regex este unul valid și solicită atenția ta ca detector de caractere: <code><span style='color: red'>_</span>?</code> (spațiu și semnul întrebării, aici l-am folosit pe underscore să-ți marchez faptul că este un spațiu) te poate da peste cap dacă nu ești atent. Pur și simplu testează dacă există un spațiu sau nu pentru că înaintea semnului întrebării era un spațiu nedetectabil celor care abia s-au apucat de lucru pe șiruri de caractere. Vezi? De aceea trebuie lucrat cu multă atenție.
 
 **Spune standardul**:
+
 > Un șablon este evaluat („este compilat”) la o valoare rezultată dintr-o procedură internă.
 
 Șirurile de caractere în JavaScript sunt secvențe de 16 biți denumite tehnic `unități de cod` (*code unit*) ce reprezintă, de fapt, un singur caracter. `RegExp` se așteaptă să lucreze cu unități de cod pe 16 biți, care reprezintă un singur caracter. Totuși, începând cu ECMAScript 6, există un fanion dedicat, care semnalizează motorului `RegExp` că va avea de lucru cu un șir de caractere Unicode - `u`. De fapt, îi este indicat motorului faptul că trebuie să lucreze la nivel de caractere și nu la nivel de `code unit`.
@@ -51,7 +51,7 @@ console.log(/^.$/u.test(exemplu));
 // true, având fanionul Unicode
 ```
 
-Expresiile regulate sunt șabloane folosite pentru a căuta combinații de caractere în șiruri. Dacă vrei să lucrezi direct pentru a face experimente, poți folosi instrumentul online **RegExr** accesibil de la următorul link: http://www.regexr.com/. Tot aici găsești și foarte multă documentație. Pentru JavaScript vezi și https://regexper.com/, care face o treabă foarte faină reprezentând cu hărți vizuale construcția șablonului.
+Expresiile regulate sunt șabloane folosite pentru a căuta combinații de caractere în șiruri. Dacă vrei să lucrezi direct pentru a face experimente, poți folosi instrumentul online **RegExr** accesibil de la următorul link: [http://www.regexr.com/](http://www.regexr.com/). Tot aici găsești și foarte multă documentație. Pentru JavaScript vezi și [https://regexper.com/](https://regexper.com/), care face o treabă foarte faină reprezentând cu hărți vizuale construcția șablonului.
 
 ## Detalii de funcționare ale motorului RegExp
 
@@ -65,15 +65,15 @@ Aplicarea șablonului va porni prin „consumarea” șirului de caractere porni
 
 Regex-urile fac uz de 11 caractere cu o însemnătate deosebită atunci când vine vorba de evaluarea unui șablon. Acestea sunt:
 
-- **«backslash»** `\`,
-- **«carret»** `^`,
-- **«dollar»** `$`,
-- **«punctul»** `.`,
-- **«parantezele dreapte»** `[]`,
-- **«parantezele rotunde»** `()`,
-- **caracterul «pipe»** <code>&#124;</code>,
-- **«semnul întrebării»** `?` și
-- **«simbolul plus»** `+`.
+-   **«backslash»** `\`,
+-   **«carret»** `^`,
+-   **«dollar»** `$`,
+-   **«punctul»** `.`,
+-   **«parantezele dreapte»** `[]`,
+-   **«parantezele rotunde»** `()`,
+-   **caracterul «pipe»** <code>&#124;</code>,
+-   **«semnul întrebării»** `?` și
+-   **«simbolul plus»** `+`.
 
 Aceste caractere au o valoare deosebită și pentru motorul JavaScript, fiind operatori ai limbajului, dar în același timp apar și în textele pe care le prelucrăm pentru că totuși fac parte și din limbajul natural. În cazul construcțiilor de șabloane, pentru a introduce aceste caractere în evaluare, vor trebui precedate cu **«backslash»** `\`.
 
@@ -106,22 +106,21 @@ new RegExp(/xyz/, 'i');
 
 Folosirea funcției constructor are ca efect compilarea la momentul rulării. Se va folosi constructorul atunci când se știe că șablonul se va modifica sau când nu cunoști expresia regulată, caz în care acesta se construiește dinamic prin acțiunea utilizatorului.
 
-După cum se observă, sintaxa este: `/pattern/flags`.
+După cum se observă, sintaxa este: `/pattern/flags`. Regex-urile mai au în componență niște litere care succed șablonul. Acestea în limba engleză sunt numite „flags” pentru că semnalizează un anumit comportament pe care motorul de interpretare trebuie să-l adopte.
 
-`pattern`: este textul expresiei regulate.
-`flags`:
+`pattern`: este textul expresiei regulate urmat de următoarele `flags` (*fanioane*):
 
-- `g` - **global match**;
-- `i` - **ignore case**;
-- `m` - **multiline** - implică folosirea limitelor ^ și $ pentru o resursă text pe mai multe linii;
-- `u` - **unicode** - tratează secvența ca *puncte de cod* Unicode;
-- `y` - **sticky** face potrivirea numai după indexul indicat prin proprietatea `lastIndex` a expresiei regulate în șir.
+-   `g` - **global match**;
+-   `i` - **ignore case** (nu ține cont de majuscule tratând toate caracterele uniform);
+-   `m` - **multiline** - implică folosirea limitelor ^ și $ pentru o resursă text pe mai multe linii;
+-   `u` - **unicode** - tratează secvența ca *puncte de cod* Unicode;
+-   `y` - **sticky** face potrivirea numai după indexul indicat prin proprietatea `lastIndex` a expresiei regulate în șir.
 
 ### Flags - fanioane
 
 #### Fanionul `i` - ignore case
 
-Toate șabloanele de căutare construite cu RegExp sunt „atente” la caracterele introduse, făcându-se distincție clară între minuscule și majuscule. Explicația este simplă: codul de caracter nu este același.
+Toate șabloanele de căutare construite cu RegExp sunt „atente” la caracterele introduse, făcându-se distincție clară între minuscule și majuscule. Explicația este simplă: codul Unicode pentru caracter nu este același.
 
 În cazul în care au un text în care nu știi cum a fost introdus textul, fiind posibile erori sau chiar intrări ale aceleași sintagme, care nu este uniformizată în ceea ce privește caracterele, acest fanion permite regăsirea fragmentului de text indiferent de lipsa uniformității.
 
@@ -151,26 +150,26 @@ sablon.test(sirCaractere); // true
 
 Aceste proprietăți sunt foarte utile atunci când dorești să afli starea în care se află obiectul regex la un anumit moment dat.
 
-- `RegExp.prototype.constructor` - returnează funcția obiect: function RegExp()
-- `RegExp.prototype.flags` - returnează un string cu fanioanele setate pentru obiectul curent
-- `RegExp.prototype.global` - dacă fanionul `g` a fost introdus, valoarea este `true`.
-- `RegExp.prototype.ignoreCase` - dacă fanionul `i` a fost introdus, valoarea este `true`.
-- `RegExp.prototype.multiline` - dacă fanionul `m` a fost introdus, valoarea este `true`.
-- `RegExp.prototype.source` returnează varianta text a obiectului.
-- `RegExp.prototype.sticky` - dacă fanionul `y` a fost introdus, valoarea este `true`.
-- `RegExp.prototype.unicode` - dacă fanionul `u` a fost introdus, valoarea este `true`.
+-   `RegExp.prototype.constructor` - returnează funcția obiect: function RegExp()
+-   `RegExp.prototype.flags` - returnează un string cu fanioanele setate pentru obiectul curent
+-   `RegExp.prototype.global` - dacă fanionul `g` a fost introdus, valoarea este `true`.
+-   `RegExp.prototype.ignoreCase` - dacă fanionul `i` a fost introdus, valoarea este `true`.
+-   `RegExp.prototype.multiline` - dacă fanionul `m` a fost introdus, valoarea este `true`.
+-   `RegExp.prototype.source` returnează varianta text a obiectului.
+-   `RegExp.prototype.sticky` - dacă fanionul `y` a fost introdus, valoarea este `true`.
+-   `RegExp.prototype.unicode` - dacă fanionul `u` a fost introdus, valoarea este `true`.
 
 ## Mantre
 
-- **Șirul este imuabil** (nu va fi modificat).
-- **Șirul este „consumat”** (cu sensul de procesare) de `RegExp` de la stânga la dreapta.
-- Din moment ce un caracter a fost „consumat”, acesta nu mai este folosit.
-- Expresiile regulate în JavaScript sunt obiecte.
-- `RegExp` în JavaScript avansează caracter cu caracter, iar când a fost găsit un șir care se potrivește, caracterul este „consumat” trecându-se la caracterul următor (dacă regex este global).
-- Folosirea funcției constructor are ca efect compilarea la momentul rulării.
-- Metacaracterele pot impune un comportament **greedy** (*expansive*: consumă tot șirul) sau **lazy** (*autosuficient*: oprește-te imediat după prima potrivire) în ceea ce privește consumarea resursei de șir.
-- șabloanele sunt folosite cu metodele `exec` și `test` ale obiectului RegExp.
-- șabloanele sunt folosite cu metodele `match`, `replace`, `search` și `split` ale lui String.
+-   **Șirul este imuabil** (nu va fi modificat).
+-   **Șirul este „consumat”** (cu sensul de procesare) de `RegExp` de la stânga la dreapta.
+-   Din moment ce un caracter a fost „consumat”, acesta nu mai este folosit.
+-   Expresiile regulate în JavaScript sunt obiecte.
+-   `RegExp` în JavaScript avansează caracter cu caracter, iar când a fost găsit un șir care se potrivește, caracterul este „consumat” trecându-se la caracterul următor (dacă regex este global).
+-   Folosirea funcției constructor are ca efect compilarea la momentul rulării.
+-   Metacaracterele pot impune un comportament **greedy** (*expansive*: consumă tot șirul) sau **lazy** (*autosuficient*: oprește-te imediat după prima potrivire) în ceea ce privește consumarea resursei de șir.
+-   șabloanele sunt folosite cu metodele `exec` și `test` ale obiectului RegExp.
+-   șabloanele sunt folosite cu metodele `match`, `replace`, `search` și `split` ale lui String.
 
 ### Potrivirea caracter cu caracter
 
@@ -188,9 +187,9 @@ Cel mai simplu exemplu este cel al unui șir exact (*direct match*), care să fi
 
 Ambele limite sunt jalonate prin două caractere speciale: `^` (numit în engleză *carret*) și bine-cunoscutul dolar `$`.
 
-| Caracter | Semnificație |
-|:---------|:-------------|
-| `^` «carret» | Identifică unde începe șirul.|
+| Caracter     | Semnificație                                                                         |
+|:------------ |:------------------------------------------------------------------------------------ |
+| `^` «carret» | Identifică unde începe șirul.                                                        |
 | `$` «dollar» | Indică că se dorește căutarea pe caracterele chiar de dinaintea finalizării șirului. |
 
 Detalii pentru carret

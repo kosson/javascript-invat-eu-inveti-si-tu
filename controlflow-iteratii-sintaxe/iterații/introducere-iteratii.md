@@ -63,9 +63,7 @@ let unSir = "un sir de caractere";
 typeof unSir[Symbol.iterator]; // "function"
 ```
 
-De fapt, această metodă este o fabrică (un șablon de programare numit în domeniu: **factory**) pentru iteratori.
-
-Ori de câte ori un obiect trebuie să fie iterat, este invocată metoda `@@iterator` fără nici un argument. Este creat și returnat un obiect iterabil. Folosind metoda `next()` obții un obiect care are propritățile `value` și `done`. Cheia `value` are valoarea elementului la care a ajuns *cursorul* în parcurgerea obiectului iterabil, iar `done` prin valoarea boolean confirmă parcurgerea integrală a obiectului iterabil.
+De fapt, această metodă este o fabrică (un șablon de programare numit în domeniu: **factory**) pentru iteratori. Ori de câte ori un obiect trebuie să fie iterat, este invocată metoda `@@iterator` fără nici un argument. Este creat și returnat un obiect iterabil. Folosind metoda `next()` obții un obiect care are propritățile `value` și `done`. Cheia `value` are valoarea elementului la care a ajuns *cursorul* în parcurgerea obiectului iterabil, iar `done` prin valoarea boolean confirmă parcurgerea integrală a obiectului iterabil.
 
 ```javascript
 let iterator = [1, 2, 3][Symbol.iterator](),
@@ -98,11 +96,87 @@ Metoda `next()` este o funcție care nu primește argumente, dar care returneaz�
   -dacă `false` înseamnă că a produs următoarea valoare din secvență.
 -   `value` care este valoarea returnată de Iterator. Se poate omite atunci când `done` este `true`.
 
-Te vei întreba la ce folosește această informație. Răspunsul este legat de evoluția limbajului JavaScript în dorința de a fi mereu modern și mai ales de înțelegerea adâncă a mecanismelor angajate de motorul JavaScript atunci când parcurgi date.
-
 Aceste protocoale implementate cu ajutorul simbolurilor, permit parcurgerea și prelucrarea datelor care au fost introduse în valori ce moștenesc automat de la tipurile de obiecte interne corespondente. La ce mă refer este faptul că indiferent de natura datelor, text sau un array, ori un obiect *dicționar*, vor fi „ambalate” automat în obiectul intern corespondent. Acesta este și motivul pentru care poți aplica metode ale obiectelor interne direct pe valoarea identificată de o variabilă.
 
-În standard, veți găsi mai multe lămuriri când sunt oferite detaliile despre obiectele pentru controlul abstractizării (**Control Abstraction Objects**).
+Dacă este nevoie, poți converti un obiect simplu în unul iterabil. Tot ce trebuie să faci este să adaugi o metodă `[Symbol.iterator]` pentru a adăuga protocolul de iterare.
+
+```javascript
+let colectie = [11, 22, 33];
+class Transformat {
+  constructor (colectie) {
+    this.colectie = colectie;
+    this.idx = 0;
+  }
+
+  [Symbol.iterator] () {
+    return this;
+  }
+
+  next () {
+    if (this.idx <= this.colectie.length) {
+      let obi = {value: colectie[this.idx], done: false};
+      this.idx++;
+      return obi;
+    }
+    return {value: undefined, done: true}
+  }
+}
+
+let iterator = new Transformat(colectie);
+iterator.next();
+```
+
+După cum se observă, am generat un obiect în baza unei clase, care prelucrează o colecție. Exemplul folosește un array care este un obiect. Acesta deja implementează protocolul iterator, dar am făcut acest exercițiu pentru a ilustra mecanismul intern al unui iterator.
+
+## Iteratori particularizați
+
+### Iteratori infiniți
+
+Poți construi obiecte iterator care să genereze la infinit un anumit rezultat pentru că `done` nu va fi niciodată `false`.
+
+```javascript
+class UnGenerator {
+  [Symbol.iterator](){
+    return this;
+  }
+  next () {
+    return {
+      value: Math.random(),
+      done: false
+    };
+  }
+}
+
+let obi = new UnGenerator(),
+    contor = 0;
+
+for (let valoare of obi) {
+  console.log(valoare.toFixed(4));
+  if (5 == ++contor) {
+    break;
+  }
+};
+```
+
+Iteratorul a fost întrerupt brusc și o reutilizare ar conduce la rezultate neașteptate. Pentru a preveni acest lucru, se va implementa o metodă care va seta `done` la `true`.
+
+```javascript
+class UnGenerator {
+  [Symbol.iterator](){
+    return this;
+  }
+  next () {
+    if (this.done) {
+      return {value: undefined, done: true}
+    }
+    return {value: Math.random(), done: this.done}
+  }
+  return () {
+    this.done = true;
+    return {done: true}
+  }
+}
+```
 
 ## Resurse
 
