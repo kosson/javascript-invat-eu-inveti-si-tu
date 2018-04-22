@@ -10,13 +10,13 @@ Un „gestionar de evenimente” (`event handler`) are un nume ușor de deosebit
 
 Gestionarii de evenimente sunt „expuși” în două moduri:
 
-- un mod comun tuturor gestionarilor (event handlers) este ca atribut IDL al event handler-ului. Numele atributului IDL este chiar numele evenimentului (`onclick`, `onclose`).
-- ca atribut de conținut al gestionarului de evenimente; de fapt numele unei funcții JavaScript.
+-   un mod comun tuturor gestionarilor (event handlers) este ca atribut IDL al event handler-ului. Numele atributului IDL este chiar numele evenimentului (`onclick`, `onclose`).
+-   ca atribut de conținut al gestionarului de evenimente; de fapt numele unei funcții JavaScript.
 
 Pentru ca un eveniment să aibe loc, trebuie să spunem explicit acest lucru browserului prin „înregistrarea” de evenimente. Acest lucru se poate face prin două modalități:
 
-- prin atașarea de funcții unor proprietăți speciale (de ex. `document.body.onclick = function(){};`)
-- și prin folosirea metodei interne `addEventListener`.
+-   prin atașarea de funcții unor proprietăți speciale (de ex. `document.body.onclick = function () {};`)
+-   și prin folosirea metodei interne `addEventListener()`.
 
 Un exemplu foarte simplu ar fi cel pe care practica îl indică ca fiind o cerință la momentul în care începi să scrii cod pentru client. Verifici dacă pagina s-a încărcat prin faimoasa secvență:
 
@@ -34,7 +34,7 @@ function onReady (){
 window.onload = onReady;
 ```
 
-Se pot atașa funcții direct unor proprietăți, dar această practică poate conduce la erori, suprascrieri de eveniment, ș.a.m.d. Cel mai bine este să se folosească metoda `addEventListener`:
+Se pot atașa funcții direct unor proprietăți, dar această practică poate conduce la erori, suprascrieri de eveniment, ș.a.m.d. Cel mai bine este să se folosească metoda `addEventListener()`:
 
 ```javascript
 // poți atașa direct

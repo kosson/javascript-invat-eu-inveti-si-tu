@@ -52,9 +52,9 @@ function faCeva () {
 elementApasat.addEventListener("click", faCeva, true);
 ```
 
-Cel de-al treilea argument (`true`) specifică faptul că evenimentul va fi declanșat în faza de `capturing`. O valoare `false` înseamnă că evenimentul va fi declanșat în faza de `bubbling`. Când procesul de parcurgere a nodurilor a ajuns chiar la elementul destinație, spunem că că suntem chiar la țintă (at-target). Aceste *situații* în care poate fi un eveniment se numește propagarea evenimentului - `event propagation`.
+Cel de-al treilea argument (`true`) specifică faptul că evenimentul va fi declanșat în faza de `capturing`. O valoare `false` înseamnă că evenimentul va fi declanșat în faza de `bubbling`. Când procesul de parcurgere a nodurilor a ajuns chiar la elementul destinație, spunem că că suntem chiar la țintă (Event.AT_TARGET === true). Aceste *situații* în care poate fi un eveniment se numește propagarea evenimentului - `event propagation`.
 
-Pentru a vedea mai multe detalii despre eveniment, haideți să „capturăm” obiectul rezultat de eveniment. Pentru a realiza acest lucru, pasăm funcției cu rol de callback însuși obiectul eveniment.
+Pentru a vedea mai multe detalii despre eveniment, haideți să *capturăm* obiectul rezultat de eveniment. Pentru a realiza acest lucru, pasăm funcției cu rol de callback însuși obiectul eveniment.
 
 ```javascript
 var elementApasat = document.querySelector("#identificator");
@@ -68,7 +68,7 @@ Câteva informații interesante apar în consolă la o inspecție a conținutulu
 
 -   `type`, fiind tipul evenimentului, în cazul nostru *click*;
 -   `timestamp`, fiind momentul la care a apărut evenimentul;
--   `defaultPrevent`, fiind un Boolean care dacă este `true` înseamnă că va împiedica comportamentul normal al elementului... gândește-te la un link împiedicat să deschidă pagina. Dacă este `false`, va face acel lucu, dacă e `true`, va avea un comportament deturnat în alt scop.
+-   `defaultPrevent()`, fiind un Boolean care dacă este `true` înseamnă că va împiedica comportamentul normal al elementului... gândește-te la un link împiedicat să deschidă pagina. Dacă este `false`, va face acel lucru, dacă e `true`, va avea un comportament deturnat în alt scop.
 -   `originalTarget`, fiind elementul care a declanșat evenimentul.
 -   `target`, fiind elementul țintit de eveniment.
 
@@ -87,6 +87,20 @@ Poți obține informații despre care combinație de taste a fost folosită pent
 -   shiftKey: false/true.
 
 ## Propagarea evenimentului - event propagation
+
+Cele trei faze ale „călătoriei” unui obiect eveniment.
+
+### Faza de captură - capturing phase
+
+Este faza în care obiectul eveniment „călătorește” până la părintele direct al țintei pornind de cel mai de sus, de la `Window`.
+
+### Faza localizată pe țintă - target phase
+
+În această fază, dacă tipul evenimentului are la opțiuni specificat că nu va face bubbling, propagarea se oprește aici.
+
+### Faza de bubbling
+
+După executarea funcției callback pentru evenimentul specificat de țintă, propagarea face cale întoarsă către `Window`.
 
 Un element părinte va permite capturarea tuturor evenimentelor apărute la elementele copil. Să ne uităm nițel cam cum ar apărea.
 
@@ -131,11 +145,29 @@ Aici intervin cele două modele pentru a înțelege. A existat un moment când N
 
 ### MODELUL CURENT
 
-Pentru armonizare, W3C a fost de acord ca cele două modele să coexiste după următorul scenariu: orice eveniment se declanșează, mai întâi de orice este capturat și este declanșat în toți copii (dacă aceștia au event handlere - receptori cu true), până când ajunge la cel vizat (`target element`), după care face „bubbling”, adică se ridică din nou către gazdă declanșând toate *event handlere*-le.
+Pentru armonizare, W3C a fost de acord ca cele două modele să coexiste după următorul scenariu: orice eveniment se declanșează, mai întâi de orice este capturat și este declanșat în toți copiii (dacă aceștia au event handlere - receptori cu true), până când ajunge la cel vizat (`target element`), după care face „bubbling”, adică se ridică din nou către gazdă declanșând toate *event handlere*-le.
 
 ![](EventModelW3CModel.png)
 
 Partea bună este că te poți decide singur când vei „înregistra” evenimentul, fie în faza de capturare, fie în faza de bubbling folosind metoda `addEventListener`. Dacă cel de-al treilea argument este setat la `true`, atunci evenimentul va fi „înregistrat” la faza de capturare, iar inversul indică faza de bubbling.
+
+## Oprește comportamentul implicit
+
+Am menționat deja faptul că obiectul eveniment pune la dispoziție o metodă `preventDefault()`, cu ajutorul căreia putem împiedica comportamentul obișnuit al unei acțiuni. De exemplu, comportamentul obișnuit al unui link este să deschidă pagina pentru adresa specificată la `href`.
+
+```javascript
+let selecțieLink = document.querySelector('#unLink');
+selecțieLink.addEventListener('click', (eveniment) => {
+  eveniment.preventDefault();
+  console.log(eveniment.target.attributes.href);
+});
+```
+
+Evenimentele sunt emise ca urmare a interacțiunii utilizatorului (a apăsat un buton) sau a încheierii unui proces cum ar fi accesarea asincronă a unor resurse. Unele evenimente pot să determine sau să controleze chiar comportamentul următoarelor evenimente care vor fi emise ca răspuns al primelor sau chiar poate fi urmat cursul anulării efectelor acțiunii primelor. Aceste acțiuni, aceste evenimente se numesc evenimente „anulabile” (*cancelable*), iar comportamentul pe care-l anulează este „efectul implicit” (*default action*) al evenimentului.
+
+Obiectele eveniment care pot fi anulate pot fi asociate cu una sau mai multe *efecte implicite*. Drept exemplu, standardul indică comportamentul unui eveniment `mouse down`. Pentru momentul în care utilizatorul apasă pe butonul mouse-ului pe un text sau poziționează săgeata mouse-ului pe o imagine, efectul implicit (*default action*) este ceea ce se întâmplă imediat după eveniment, iar acest lucru poate fi selecția textului sau modificarea imaginii. Anularea „efectului implicit” al evenimentului, de fapt anulează, acțiunile pe care le poți face după poziționarea mouse-ului: selectarea textului sau deplasarea imaginii.
+
+Un alt exemplu oferit este cel al bifării unui checkbox. Dacă evenimentului `click` îi este anulat „efectul implicit”, pe ecran nu va mai apărea căsuța bifată iar valoarea va fi restaurata la cea anterioară.
 
 ## Cazuistică
 
@@ -171,13 +203,31 @@ Efectul acestui aranjament este că se va executa mai întâi funcția de la pă
 
 Deci, evenimentul va porni de la părinte și se va propaga către copil executând toate callback-urile pentru receptoarele setate la `capture` pentru evenimentul `click`.
 
-Ajungând la copil, evenimentul va executa callback-ul pentru copil și evenimentul va intra în faza de bubbling, executând în orine către părinte toate callback-urile pentru care al treilea paramentru este setat la `false`.
+Ajungând la copil, evenimentul va executa callback-ul pentru copil și evenimentul va intra în faza de bubbling, executând în ordine orientat spre părinte toate callback-urile pentru care al treilea paramentru este setat la `false`.
 
 ### Container false (bubbling), copilul false (bubbling)
 
 Evenimentul `click` pornește în faza de capturing.
 
 Apoi motorul se uita dacă există vreun părinte pornind de la elementul care a fost acționat și care are capturing-ul activat prin `true`. În cazul nostru nu. Pentru că nu există niciun `onclick` listener în capture la vreun părinte, mototul pornește să facă bubbling de la elementul acționat către container. Astfel, este apelat `arataDetaliiCopil()` urmată de `arataDetaliiGazda()`.
+
+### Adăugarea funcției receptor la container
+
+Uneori pentru a gestiona mai multe elemente cu un singur eveniment, se va proceda la atașarea unui eveniment la elementul container și apoi identificarea elementului acționat cu proprietatea `target` a obiectului eveniment. Justificarea pentru o astfel de abordare este legată de eficientizarea și optimizarea codului. Ar fi contraproductiv dacă ai avea o colecție de elemente de același tip, de exemplu și ai atașa la fiecare același eveniment. Mai bine atașezi evenimentul la elementul container (părinte).
+
+```html
+<ul id="ceva">
+  <li>unu</li>
+  <li>doi</li>
+  <li>trei</li>
+</ul>
+<script>
+  let colectie = document.querySelector('#ceva');
+  colectie.addEventListener('click', (eveniment) => {
+    event.target.tagName === "LI" ? console.log(event.target.textContent) : console.log(`Bump`);;
+  });
+</script>
+```
 
 ## Resurse
 

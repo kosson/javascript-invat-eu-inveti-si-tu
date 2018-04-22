@@ -8,12 +8,12 @@
 
 Un receptor are câteva câmpuri.
 
-- `type`, care este un string.
-- `callback`, care este elementul activ al receptorului; funcția apelată când apare evenimentul.
-- `capture`, un boolean care este inițial setat la `false`.
-- `passive`, un boolean care este inițial setat la `false`.
-- `once`, un boolean care este inițial setat la `false`.
-- `removed`, un boolean care este inițial setat la `false`.
+-   `type`, care este un string.
+-   `callback`, care este elementul activ al receptorului; funcția apelată când apare evenimentul.
+-   `capture`, un boolean care este inițial setat la `false`.
+-   `passive`, un boolean care este inițial setat la `false`.
+-   `once`, un boolean care este inițial setat la `false`.
+-   `removed`, un boolean care este inițial setat la `false`.
 
 Standardul aduce o notă importantă la care trebuie reflectat. Spune că deși, un receptor este o funcție callback, conceptual, acesta este ceva mult mai mult. Fiecare obiect țintă (element din HTML-ul paginii noastre) al unui eveniment, are asociat un algoritm care îl va expune pentru obiectul eveniment, care-l țintește.
 
@@ -22,6 +22,7 @@ Standardul aduce o notă importantă la care trebuie reflectat. Spune că deși,
 Un receptor de evenimente (event listener) poate fi adăugat unei ținte (un obiect DOM).
 
 Pentru a adăuga un receptor unei ținte, se va folosi metoda `ținta.addEventListener(type, callback[, opțiuni])`, care este disponibilă tuturor nodurilor DOM.
+
 Ceea ce face această metodă este că atașează un receptor pentru un anumit tip de eveniment specificat cu un șir de caractere ca prim argument. Cel de-al doilea argument primit este callback-ul, o funcție ce va fi apelată atunci când evenimentul este receptat de țintă. Opțiunile introduse opțional după cel de-al doilea argument sunt specifice pentru tipul respectiv de eveniment.
 
 Opusă setării de receptori, există și metoda prin care sunt eliminați: `ținta.removeEventListener(type, callback [, opțiuni])`.
@@ -30,42 +31,21 @@ Mai există o metodă prin care poate fi `emis` (dispatch) în mod artificial un
 
 ## Mecanismul de „trimitere” (dispatch) al evenimentelor
 
-Acest mecanism se referă la modul în care evenimentele se propagă prin arborele DOM.
-Aplicațiile pot emite evenimente folosind metoda `dispatchEvent()`. Evenimentul se va propaga prin arborele DOM respectând modul în care se face propagarea. Înainte ca evenimentul să se propage, este construită o cale către elementul țintă: `propagation path`. **Calea de propagare** care în engleză este numită *event target chain* este setul ordonat de ținte pentru care este emis un eveniment și prin care acesta va trece în ordinea celor trei faze:
+Acest mecanism se referă la modul în care evenimentele se propagă prin arborele DOM. Aplicațiile pot emite evenimente folosind metoda `dispatchEvent()`.
 
-- **captură** (*capture phase*),
-- **localizarea pe țintă** (*target phase*) și cea de
-- **bubbling** (*bubble phase*).
+Evenimentul se va propaga prin arborele DOM respectând modul în care se face propagarea. Înainte ca evenimentul să se propage, este construită o cale către elementul țintă: `propagation path`. **Calea de propagare** care în engleză este numită *event target chain* este setul ordonat de ținte pentru care este emis un eveniment și prin care acesta va trece în ordinea celor trei faze:
 
-Pe măsură ce fiecare element, care are receptori pentru eveniment, este „atins” de acesta, rând pe rând devine `currentTarget` (ținta curentă). Ultimul atins din această cale este chiar ținta evenimentului (event target).
+-   **captură** (*capture phase*),
+-   **localizarea pe țintă** (*target phase*) și cea de
+-   **bubbling** (*bubble phase*).
 
-Cele trei faze ale „călătoriei” unui obiect eveniment.
-
-### Faza de captură - capturing phase
-
-Este faza în care obiectul eveniment „călătorește” până la părintele direct al țintei pornind de cel mai de sus, de la `Window`.
-
-### Faza localizată pe țintă - target phase
-
-În această fază, dacă tipul evenimentului are la opțiuni specificat că nu va face bubbling, propagarea se oprește aici.
-
-### Faza de bubbling
-
-După executarea funcției callback pentru evenimentul specificat de țintă, propagarea face cale întoarsă către `Window`.
-
-## Acțiuni automate și evenimente care pot fi anulate
-
-Evenimentele sunt emise ca urmare a interacțiunii utilizatorului (a apăsat un buton) sau a încheierii unui proces cum ar fi accesarea asincronă a unor resurse. Unele evenimente pot să determine sau să controleze chiar comportamentul următoarelor evenimente care vor fi emise ca răspuns al primelor sau chiar poate fi urmat cursul anulării efectelor acțiunii primelor. Aceste acțiuni, aceste evenimente se numesc evenimente „anulabile” (*cancelable*), iar comportamentul pe care-l anulează este „efectul implicit” (*default action*) al evenimentului.
-Obiectele eveniment care pot fi anulate pot fi asociate cu una sau mai multe *efecte implicite*. Pentru a anula un eveniment se va invoca metoda `preventDefault()`.
-
-Ca exemplu, standardul indică comportamentul unui eveniment `mouse down`. Pentru momentul în care utilizatorul apasă pe butonul mouse-ului pe un text sau poziționează săgeata mouse-ului pe o imagine, efectul implicit (*default action*) este ceea ce se întâmplă imediat după eveniment, iar acest lucru poate fi selecția textului sau modificarea imaginii. Anularea „efectului implicit” al evenimentului, de fapt anulează, acțiunile pe care le poți face după poziționarea mouse-ului: selectarea textului sau deplasarea imaginii.
-Un alt exemplu oferit este cel al bifării unui checkbox. Dacă evenimentului `click` îi este anulat „efectul implicit”, pe ecran nu va mai apărea căsuța bifată iar valoarea va fi restaurata la cea anterioară.
+Pe măsură ce fiecare element, care are receptori pentru eveniment, este „atins” de acesta, rând pe rând devine `currentTarget` (ținta curentă). Ultimul atins din această cale este chiar ținta evenimentului (*event target*).
 
 ## Oprirea propagării unui eveniment.
 
 După cum știm, un eveniment se propagă de la elementul rădăcină spre elementul căruia îi este adresat. Dacă pe drum exită un „receptor” (event listener) și acest element, are un receptor potrivit, va reacționa și acesta.
 
-Dar pe drum, evenimentul poate fi oprit prin utilizarea metodei `stopPropagation()`.
+Dacă putem ori comportamentul implicit al unui element, am putea foarte bine să oprim și modelul propagării. În acest sens, obiectul `Event` pune la dispoziție metoda `stopPropagation()`.
 
 ```javascript
 function faCevaCuAcestClick (e) {
@@ -73,6 +53,8 @@ function faCevaCuAcestClick (e) {
   // prelucrează date
 };
 ```
+
+Ceea ce se întâmplă este că evenimentul se propagă până la elementul țintit, iar dacă acesta apelează metoda, nu se mai face și faza de bubbling.
 
 Un exemplu mai apropiat:
 

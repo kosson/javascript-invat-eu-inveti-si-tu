@@ -7,7 +7,7 @@ Dicționarul explicativ ne dă o definiție foarte utilă pentru iterare: *repet
 ## Bucle
 
 Buclele sunt cel mai la îndemână instrument de a parcurge un set de date.
-Folosirea buclelor presupune utilizarea repetată a unei secvențe de instrucțiuni. Îi mai spunem **ciclare** sau **iterare**. În fapt, ceea ce se întâmplă este o repetarea ritmică a unui set de instrucțiuni. Fiecare rezultat al fiecărei iterații este supus unui control.
+Folosirea buclelor presupune utilizarea repetată a unei secvențe de instrucțiuni. Îi mai spunem **ciclare** sau **iterare**. În fapt, ceea ce se întâmplă este o repetarea ritmică a unui set de instrucțiuni. Fiecare rezultat al fiecărei iterații este supus verificările.
 
 ## Recursivitatea
 
@@ -98,9 +98,9 @@ Metoda `next()` este o funcție care nu primește argumente, dar care returneaz�
   -dacă `false` înseamnă că a produs următoarea valoare din secvență.
 -   `value` care este valoarea returnată de Iterator. Se poate omite atunci când `done` este `true`.
 
-Te vei întreba la ce folosește această informație. Răspunsul este legat de evoluția limbajului JavaScript în dorința de a fi mereu modern și mai ales de înțelegerea adâncă a mecanismelor angajate de mototul JavaScript atunci când parcurgi date.
+Te vei întreba la ce folosește această informație. Răspunsul este legat de evoluția limbajului JavaScript în dorința de a fi mereu modern și mai ales de înțelegerea adâncă a mecanismelor angajate de motorul JavaScript atunci când parcurgi date.
 
-Aceste protocoale implementate cu ajutorul simbolurilor, permit parcurgerea, permit prelucrarea datelor care au fost introduse în valori ce moștenesc automat de la tipurile de obiecte interne corespondente. La ce mă refer este faptul că indiferent de natura datelor, că este text, că este un array, că este un *dicționar*, aceste aparent simple structuri, de îndată ce controlul motorului va începe execuția, vor fi „ambalate” automat în obiectul intern corespondent. Acesta este și motivul pentru care poți aplica metode ale obiectelor interne direct pe valoarea identificată de o variabilă.
+Aceste protocoale implementate cu ajutorul simbolurilor, permit parcurgerea și prelucrarea datelor care au fost introduse în valori ce moștenesc automat de la tipurile de obiecte interne corespondente. La ce mă refer este faptul că indiferent de natura datelor, text sau un array, ori un obiect *dicționar*, vor fi „ambalate” automat în obiectul intern corespondent. Acesta este și motivul pentru care poți aplica metode ale obiectelor interne direct pe valoarea identificată de o variabilă.
 
 În standard, veți găsi mai multe lămuriri când sunt oferite detaliile despre obiectele pentru controlul abstractizării (**Control Abstraction Objects**).
 
