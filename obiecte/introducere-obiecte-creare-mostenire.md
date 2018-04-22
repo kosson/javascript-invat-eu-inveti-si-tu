@@ -1391,15 +1391,9 @@ console.log(b); // true
 console.log(c()); // salut
 ```
 
-Similar array-urilor, se pot destructura și obiecte. Cel mai simplu caz este cel de potrivire unu la unu prin asignarea directă a valorilor.
+Ceea ce se întâmplă este că se vor genera în mediul lexical identificatori cărora li se vor atribui valorile din obiect. Poți percepe această operațiune ca pe un transfer din mediul lexical al unui obiect, în mediul lexical dorit.
 
-```javascript
-const obi = {unu: 1, doi: 2};
-const {unu, doi} = obi;
-console.log(unu, doi); // 1 2
-```
-
-Trebuie ca numele identificatorilor să fie identic cu cel al proprietăților obiectului din care se face **transferul** valorilor, dar se poate face și cu modificarea numelor variabilelor.
+Trebuie ca numele identificatorilor să fie identic cu cel al proprietăților obiectului din care se face **transferul** valorilor, dar se poate face și cu modificarea numelor variabilelor, dacă acest lucru este necesar.
 
 ```javascript
 const obi = {unu: 1, doi: 2};
@@ -1412,7 +1406,12 @@ La fel de bine ar merge și asignarea directă cu singura condiție ca expresia 
 ```javascript
 ( {a,b,c} = obi );
 ```
+
 Dacă nu este introdus între paranteze rotunde, motorul JavaScript va considera acoladele ca un bloc de cod distinct.
+
+#### Suprascrierea valorilor - destructuring assignment
+
+La *transferul* valorilor este foarte posibil să aplici o modificare a valorilor preluate din obiect. Acest lucru este posibil prin ceea ce se numește *destructuring assignment*.
 
 ```javascript
 const {unu = 10, doi = 100} = {unu: 1000};
@@ -1430,8 +1429,10 @@ let unu = 10,
     doi = 20;
 // si acum destructurezi folosind operatorul ()
 ({unu, doi} = obi); console.log(unu, doi); // 1 2
-// () este nevoie pentru a indica ca {} nu sunt un bloc de cod, ci o expresie
+// () este nevoie pentru a indica ca {} nu marchează un bloc de cod, ci o expresie
 ```
+
+#### Destructurarea array-urilor
 
 Destructurarea funcționează foarte bine și în cazul array-urilor, care la rândul lor sunt obiecte. În acest caz nu mai este necesară respectarea parității numelor ientificatorilor cu cea a cheilor pentru că nu mai avem chei. Potrivirea se va face în ordinea elementelor din array.
 
@@ -1444,7 +1445,7 @@ console.log(igrec()); // salut
 console.log(valori); //[Array] [10,20]
 ```
 
-Un alt caz interesant de destructurare este atunci când asignezi unei structuri de identificare un obiect.
+Un alt caz interesant de destructurare este atunci când asignezi unei structuri de identificare un întreg obiect. În acest caz, pentru a constitui identificatorul, trebuie introdusă în expresia de destructurare adresa întreagă către acel obiect.
 
 ```javascript
 const obi = {
