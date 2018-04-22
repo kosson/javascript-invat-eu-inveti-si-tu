@@ -168,7 +168,7 @@ function prelucrarePerElement (arr, modificator) {
 prelucrarePerElement (colectie, procesor);
 ```
 
-Lucrurile se simplifică drastic dacă folosim utilitarul `forEach` pus la dispoziție de prototipul obiectului intern `Array.prototype`. Nu mai trebuie să creăm noi funcția de `prelucrarePerElement`.
+Lucrurile se simplifică drastic dacă folosim utilitarul `forEach()` pus la dispoziție de prototipul obiectului intern `Array.prototype`. Nu mai trebuie să creăm noi funcția de `prelucrarePerElement`.
 
 ```javascript
 let colectie = ['unu', 'doi', 'trei'];

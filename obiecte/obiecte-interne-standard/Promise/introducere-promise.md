@@ -53,7 +53,7 @@ function numePrenume (nume, prenume) {
   return `${nume} ${prenume}`;
 };
 let thunk = function () {
-  return numePrenume ('Ionel', 'Pavelescu');
+  return numePrenume('Ionel', 'Pavelescu');
 };
 thunk(); // Ionel Pavelescu
 ```
@@ -300,7 +300,7 @@ Promise.all([
 
 ### O funcție `map()` promisificată
 
-Să presupunem că dorim că aplicăm o funcție pe datele dintr-o listă (poate fi foarte bine datele dintr-o listă de fișiere diferite în cazul flosirii Node.js cu `fs`).
+Să presupunem că dorim că aplicăm o funcție pe datele dintr-o listă (poate fi foarte bine datele dintr-o listă de fișiere diferite în cazul folosirii Node.js cu `fs`).
 
 ```javascript
 const lista = ["a", "b", "c"];
