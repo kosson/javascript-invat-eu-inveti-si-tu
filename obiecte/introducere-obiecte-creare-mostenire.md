@@ -310,7 +310,7 @@ instanta.difuzor(); // Salut!
 
 #### Constrângerea la constructor
 
-Uneori ai nevoie să restricționezi o funcție doar la rolul de constructor. Pentru a face acest lucru realizezi faptul că obiectul rezultat este o instanță a obiectului `this` al funcției constructor pentru că în baza lui `this` a fost instanțiat acesta. Bazându-ne pe acest lucru putem verifica la momentul invocării dacă obiectul s-a creat sau nu. La apelarea cu `new` se creează obiectul, iar la execuția simplă nu se creează niciun obiect.
+Uneori ai nevoie să restricționezi o funcție doar la rolul de constructor. Obiectul rezultat este o instanță a obiectului `this` al funcției constructor pentru că în baza lui `this` a fost instanțiat acesta. Bazându-ne pe acest lucru putem verifica la momentul invocării dacă obiectul s-a creat sau nu. La apelarea cu `new` se creează obiectul, iar la execuția simplă nu se creează niciun obiect.
 
 ```javascript
 function VehiculSpatial (nume) {
@@ -884,7 +884,7 @@ Unul din motivele pentru care ai folosi acest lanț prototipal este acela de a r
 
 Un avantaj extraordinar pe care-l oferă moștenirea prototipală este că odată cu modificarea obiectului prototip, toate funcționalitățile noi vor fi disponibile tuturor celor care le moștenesc.
 
-Pentru a reutiliza cod, se creează obiecte care se bazează pe cele existente prin exploatarea unui lanț prototipal care se formează între obiecte și care poate fi interogat prin proprietatea oricărui obiect `__proto__`. Proprietatea `__proto__` nu este același lucru cu `prototype`. În cazul lui `__proto__` vorbim despre o proprietate a obiectului instanțiat, iar în cazul lui `prototype` vorbim despre o proprietate a constructorului folosit pentru crearea obiectului instanțiat.
+Pentru a reutiliza cod, se creează obiecte care se bazează pe cele existente prin exploatarea unui lanț prototipal care se formează între obiecte și care poate fi interogat prin proprietatea oricărui obiect `__proto__`. Proprietatea `__proto__` nu este același lucru cu `prototype`. În cazul lui `__proto__` acesta indică obiectul prototype al constructorului folosit pentru crearea obiectului instanțiat.
 
 ```javascript
 const obi = {ceva: 'salve'};// crearea unui obiect
@@ -949,7 +949,9 @@ ObiectInvestigat.prototype.isPrototypeOf(obiectulBanuitAFiPrototipul);
 #### Cine este obiectul prototipal pentru cel investigat?
 
 ```javascript
-ObiectDeLucru.__proto__ // sau folosind Object.getPrototypeOf(ObiectDeLucru)
+// În cazul în care s-a folosit un constructor
+ObiectDeLucru.__proto__ // sau cel mai repede
+Object.getPrototypeOf(ObiectDeLucru);
 ```
 
 ### Modele de realizare a moștenirii prototipale
@@ -1016,7 +1018,7 @@ După cum observi, această metodă vechi a fost prescurtată la `super`, ceea c
 
 ```javascript
 const obi1 = {
-  faceva(){
+  faceva () {
     return 'ce-i returnat din obi1 ';
   }
 };
@@ -1055,7 +1057,7 @@ console.log(Santinel.prezentare());
 // ori de câte ori este creat un nou obiect prin new
 ```
 
-Partea deficitară a unei astfel de soluții este că funcțiile care joacă rol de metode în obiectul `this` (obiectul context în care va rula funcția când va fi apelată cu `new`), vor fi recreate ori de câte ori este creat un nou obiect. Acest fapt implică probleme de performanță a codului poluându-se memoria cu aceeași funcție recreată ori de câte ori este instanțiat un nou obiect.
+Partea deficitară a unei astfel de soluții este că funcțiile care joacă rol de metode în obiectul `this` (obiectul context în care va rula funcția când va fi apelată cu `new`), vor fi recreate ori de câte ori este creat un nou obiect. Acest fapt implică probleme de performanță a codului ocupând memoria cu aceeași funcție recreată ori de câte ori este instanțiat un nou obiect.
 
 Modelarea unei clase rudimentare se poate realiza și prin introducerea de funcționalități și date în obiectul prototip al funcției. Astfel, prin mecanismul de moștenire prototipală, toate obiectele instanțiate cu `new`, vor beneficia de acces direct la toți membrii obiectului prototip.
 
@@ -1076,7 +1078,7 @@ console.log(Santinel.prezentare());
 
 Este rapid observabil faptul că simularea clasei s-a realizat prin introducerea de proprietăți și în `this`, dar și în `prototype`.
 
-Prin introducerea noii sintaxe se intenționează **crearea claselor pe baza moștenirii prototipale**. Sintaxa prezintă câteva particularități. Proprietățile viitorului obiect se introduc în metoda constructor, iar metodele se introduc fără să poarte cuvântul cheie `function` și nici nu vor fi despărțite prin virgulă.
+Prin introducerea noii sintaxe se intenționează *crearea claselor pe baza moștenirii prototipale*. Sintaxa prezintă câteva particularități. Proprietățile viitorului obiect se introduc în metoda constructor. Metodele se introduc fără să fie precedate de cuvântul cheie `function` și nici nu vor fi despărțite prin virgulă. Accesarea proprietăților și metodelor se va face prin intermediul obiectului `this`.
 
 ```javascript
 class Test {
@@ -1096,56 +1098,89 @@ console.log(typeof Test); // function
 console.log(typeof Test.prototype.ecou); // function
 ```
 
-Echivalent lui `constructor (val) {}`, este `function Test (val) { this.val = val }`. Metoda constructor este opțională. O clasă poate avea o singură metodă constructor. Urmează o listă a membrilor viitorului obiect care menționează direct identificatorul fără cuvântul cheie `function` și nici nu este folosită formula consacrată `Test.prototype.actiune`. Instanțierea se face folosind operatorul `new`. Atenție, obiectul `prototype` al clasei va fi protejat la scriere (**read-only**). Nu se comportă ca în cazul funcțiilor din modelul clasic în care poți adăuga ulterior în obiectul `prototype`.
+Echivalent lui `constructor (val) {}`, este `function Test (val) { this.val = val }`. Urmează o listă a membrilor viitorului obiect care menționează direct identificatorul fără cuvântul cheie `function`. Nu a fost folosită nici formula consacrată `Test.prototype.actiune`, rolul acesteia fiind preluat de funcția `constructor`. O clasă poate avea o singură metodă `constructor` care este opțională. Instanțierea se face folosind operatorul `new`. Atenție, obiectul `prototype` al clasei va fi protejat la scriere (**read-only**). Nu se comportă ca în cazul funcțiilor din modelul clasic în care poți adăuga ulterior în obiectul `prototype` proprietăți și metode.
+
+Obiectul `this` are un rol central pentru clase pentru că numai folosindu-l vei putea accesa metodele și proprietățile clasei. Tot `this` permite înlănțuirea (*chaining* în limba engleză) metodelor unei clase pe obiectul instanțiat. Singurul lucru de care trebuie să te asiguri este că pentru clasele pe care dorești să le înlănțuiești, `this` trebuie să fie returnat din metodă la final. Acest lucru trebuie făcut pentru a actualiza valorile obiectului generat cu `new`.
+
+```javascript
+class Ceva {
+  meto1 (val1) {
+    this.val1 = val1;
+    return this;
+  }
+  meto2 (val2) {
+    this.val2 = val2 + this.val1;
+    return this;
+  }
+}
+const obi = new Ceva();
+obi.meto1(10).meto2(2);
+// poți face chaining
+for(let prop in obi) {
+  console.log(prop);
+}; // undefined
+```
+
+Spre deosebire de constructorii declarați cu `function`, clasele nu pot fi instanțiate fără operatorul `new`. Reține faptul că o clasă tot o funcție este de fapt. În JavaScript nu există entități clase. Toate metodele din obiectul `prototype` sunt setate cu `false` la `enumerable`. Acest lucru înseamnă că obiectul nu va afișa metodele clasei într-un `for..in`.
+
+Chiar dacă nu ai declarat o funcție `constructor`, aceasta va fi generată din oficiu. Poți verifica acest lucru interogând obiectul prototip al clasei. Posibilitatea de a adăuga proprietăți direct în obiectul prototip încă este posibilă, dar nu este recomandabilă.
 
 ### Declarații și expresii de clase
 
-Precum în cazul funcțiilor, clasele pot fi declarate, dar pot fi și expresii.
+Precum în cazul funcțiilor, clasele pot fi declarate, dar pot fi și expresii. Există un detaliu important care separă declarația claselor de cea a funcțiilor cu rol de constructor: clasele nu beneficiază de hoisting.
 
 #### Declarație de clasă
 
-Clasele pot fi declarate direct apelelând la sintaxa `class NumeClasă {}`. Ar mai fi de adăugat că în constructor pot fi pasate date din exterior chiar la momentul instanțierii obiectului.
+Clasele pot fi declarate direct apelelând la sintaxa `class NumeClasă {...}`. Ceea ce se petrece la declararea unei clase este că se constituie variabila cu numele clasei. Variabila este inițializată cu o funcție. În obiectul `prototype` al funcției vor fi regăsite funcția constructor a cărui nume este numele clasei precum și toate metodele.
 
 ```javascript
-class Plan {
+class Ceva {
   constructor(extern){
     this.ceva = extern;
   }
   ecou () {
     console.log(this.ceva);
   }
-  [pentruOProprietate] () {
-    console.log(this.interna);
+
+  ["ceva" + "bun"] () {
+    console.log(Object.getOwnPropertyNames(this));
   }
 };
+Ceva === Ceva.prototype.constructor; // true
+Object.getOwnPropertyNames(Ceva.prototype); // [ "constructor", "ecou", "cevabun" ]
 ```
 
 Este util să menționăm faptul că în clase sunt acceptate „numele computate” pentru identificatorii proprietăților. În acest caz, trebuie folosită sintaxa cu paranteze pătrate.
 
 #### Expresie de clasă
 
-Expresia pentru clase în JavaScript este una din modalitățile prin care se pot declara clasele. Similar funcțiilor, clasele pot să aibă nume sau nu. Dacă poartă nume, acesta este disponibil în blocul de cod al clasei. Testul cu `typeof` va fi întotdeauna `function`.
+Sunt permise expresiile de clase. Similar funcțiilor, clasele pot să aibă nume sau nu. Dacă poartă nume, acesta este disponibil în blocul de cod al clasei. Testul cu `typeof` va fi întotdeauna `function`.
 
 ```javascript
-const Plan = class {
+const Plan = class OClasă {
   constructor (extern) {
     this.ceva = extern;
   };
   ecou () {
     console.log(this.ceva);
+    console.log(OClasă);
   };
 };
+const obi = new Plan('Salut!');
+obi.ecou(); // Salut! function OClasă()
 ```
 
-### Clasele sunt valori de prim-rang
+În cazul expresiilor, poți avea un nume atașat clasei, dar apelarea acelui nume va fi posibilă doar din interiorul clasei.
 
-Clasele pot fi pasate drept valori funcțiilor.
+#### Clasele sunt valori de prim-rang
+
+Clasele pot fi pasate drept valori funcțiilor. Funcțiile pot returna clase ca adevărate factory-uri.
 
 ```javascript
 function creatorDeCeva (ClasaMea) {
   return new ClasaMea();
 };
-let obi = creatorDeCeva(
+let obi = creatorDeCeva (
   class {
     ecou () {
       console.log('bing-bang!');
@@ -1170,9 +1205,14 @@ Avion.id();
 
 ### Metodele statice
 
-Metodele statice există doar în corpul clasei și nu pot fi apelabile din instanțele clasei. Metodele statice sunt folosite adesea pentru a crea funcții cu rol de utilitar. Utilitatea acestora se dovedește atunci când este nevoie să fie făcute calcule sau evaluări.
+Metodele statice există doar în corpul clasei și nu pot fi apelabile din obiectele create. O metodă statică este echivalentul adăugării unei metode unei funcții.
 
-Poți apela o metodă statică din altă metodă statică folosind `this`.
+```javascript
+function Ceva () {};
+Ceva.oMetodaStatica = function () {};
+```
+
+Metodele statice sunt folosite adesea pentru a crea funcții cu rol de utilitar și sunt folosite exclusiv pentru a prelucra date în clasă, nu în obiectele create. Poți apela o metodă statică din altă metodă statică folosind `this`.
 
 ```javascript
 class Test {
@@ -1191,6 +1231,41 @@ Test.altceva(); // "ceva din alt apel static"
 ```
 
 Metodele statice nu pot fi accesate folosind `this` din metodele non-statice. După cum se observă în exemplu, pot fi accesate cu sintaxa `nume_clasă.nume_metodă_statică()`.
+
+Uneori aceste metode statice sunt folosite pentru a crea obiecte pe care le returnează, dar care folosesc date diferite de cele din constructor.
+
+```javascript
+const obi = {titlu: "Margareta", autor: "Ion Fotiade"}
+class Fișă {
+  constructor (titlu, autor) {
+    this.titlu = titlu,
+    this.autor = autor
+  }
+  static Altceva (titlu, autor) {
+    return new Fișă(titlu, autor);
+  }
+}
+const fișăNouă = new Fișă('100 de ani', 'Ioan Fotiade');
+const fișăExt = Fișă.Altceva(obi.titlu, obi.autor);
+console.log(fișăExt);
+```
+
+Reține faptul că metodele statice nu sunt moștenite de obiectele create.
+
+### Incapsualare - protejarea datelor
+
+În JavaScript singura posibilitate de a atinge incapsularea prin care înțelegem protejarea datelor prin variabile private este să realizăm closure-ri. Clasele permit realizarea unei incapsulări dacă datele protejate le introducem în constructor și apoi le accesăm prin accesori.
+
+```javascript
+class Ceva {
+  constructor (privata) {
+    let _privata = privata;
+    this.getPrivata = function () {
+      return _privata;
+    }
+  }
+}
+```
 
 ### Clasele permit proprietăți accesor
 
@@ -1215,7 +1290,7 @@ obi['elem'] = 12; // val: 12
 
 ### Extinderea claselor
 
-Clasele pot fi extinse. Este indicată extinderea unei clase folosindu-se cuvântul cheie `extends`.
+Clasele pot fi extinse. Este indicată extinderea unei clase folosindu-se cuvântul cheie `extends`. În tratarea acestui subiect, legitim este să răspundem la întrebarea de ce? De ce avem nevoie să derivăm obiectele? Răspunsul vine din necesitatea de a putea avea acces la proprietățile și metodele unui obiect existent deja, dar pe care să-l înbogățim sau să-l modificăm din necesitate prin suprascrierea unor metode.
 
 ```javascript
 'use strict';
@@ -1236,40 +1311,38 @@ class Altceva extends Ceva {
 };
 ```
 
-### Clase derivate
-
-Derivarea obiectelor înainte de facilitățile pe care le pune la dispoziție noul standard ES6 era un proces laborios de creare a unui obiect și apoi crearea unui altuia căruia îi era setat prototipul îmbogățit al primului. Mai jos este modelul „istoric” comparat cu ceea ce propune `extends`. Să pornim de la modelul istoric.
+Derivarea obiectelor înainte de clasele introduse de noul standard ES6 era un proces laborios de creare a unui obiect și apoi crearea unui altuia căruia îi era setat prototipul îmbogățit al primului. Mai jos este modelul istoric comparat cu ceea ce propune `extends`. Să pornim de la modelul istoric.
 
 ```javascript
-function Părinte (val) {
+function Parinte (val) {
   this.statica = val;
 };
 Părinte.prototype.oriDoi = function () {
   return this.statica * 2;
 };
-
 function Copil (deinmultit) {
   Părinte.call(this, deinmultit);
 };
-Copil.prototype = Object.create( Părinte.prototype, {
-  constructor: {
-    value: Copil,
-    enumerable: true,
-    writable: true,
-    configurable: true
+Copil.prototype = Object.create( Parinte.prototype, {
+    constructor: {
+      value: Copil,
+      enumerable: true,
+      writable: true,
+      configurable: true
+    }
   }
-});
+);
 let rezultat = new Copil(2);
 console.log(rezultat.oriDoi()); // 4
 ```
 
 Este observabil cu cât efort s-a realizat acest lucru.
-Mai întâi am executat funcția `Stramos` în contextul lui Copil pasându-i `this` pentru a seta corect contextul de execuție, adică în interiorul lui `Copil`. Au fost pasate atributele așteptate de `Stramos`. A trebuit să *rescriem* obiectul prototip al lui `Copil` setându-l artificial la cel pe care dorim să-l moștenim folosind `Object.create()` în acest sens. A trebuit să facem un pas suplimentar setând proprietatea `constructor` să trimită înapoi la `Copil` pentru a consolida originea sa.
+Mai întâi am executat funcția `Parinte` în contextul lui Copil pasându-i `this` pentru a seta corect contextul de execuție, adică în interiorul lui `Copil`. Au fost pasate atributele așteptate de `Parinte`. A trebuit să *rescriem* obiectul prototip al lui `Copil` setându-l artificial la cel pe care dorim să-l moștenim folosind `Object.create()` în acest sens. A trebuit să facem un pas suplimentar setând proprietatea `constructor` să trimită înapoi la `Copil` pentru a consolida originea sa.
 
 În cazul claselor, mare parte din aceste operațiuni complexe sunt rezolvate prin introducerea sintagmei `extends` în declarația funcției care dorești să fie derivata alteia. Prototipul este setat automat și poți accesa constructorul folosind metoda `super()`. Pentru a reține mai ușor, `super()` are rolul de a apela constructorul părintelui. În clasele derivate `super()` trebuie apelat înainte de a folosi `this` în constructor pentru că `super()` este cel care-l setează.
 
 ```javascript
-class Părinte {
+class Parinte {
   constructor (val) {
     this.ceva = val;
   }
@@ -1278,9 +1351,10 @@ class Părinte {
   }
 };
 
-class Copil extends Părinte {
+class Copil extends Parinte {
   constructor (val) {
     super(val);
+    this.altceva = 10;
   }
 };
 const inmultire = new Copil(2);
@@ -1289,7 +1363,33 @@ console.log(inmultire instanceof Copil); // true
 console.log(inmultire instanceof Părinte); // true
 ```
 
-Clasele care moștenesc de la altele, se numesc clase derivate. Adu-ți mereu aminte că pentru clasele derivate, în cazul în care dorești să folosești constructorul, trebuie să-l folosești în combinație cu `super` căruia îi pasezi argumentele pe care le preia constructorul. Dacă nu dorești să folosești constructorul, adică să formulezi o clasă derivată fără a menționa constructorul, `super()` este apelat automat cu toate argumentele necesare la momentul instanțierii clasei.
+Clasele care moștenesc de la altele, se numesc clase derivate. Acest lucru înseamnă că toate proprietățile și metodele clasei derivate vor fi moștenite din clasa părinte.
+
+Adu-ți mereu aminte că pentru clasele derivate, în cazul în care dorești să folosești constructorul, trebuie să-l folosești în combinație cu `super()` căruia îi pasezi argumentele de care are nevoie constructorul clasei părinte. Aceste valori vor fi disponibile mai departe clasei părinte. Dacă nu dorești să folosești constructorul, adică să formulezi o clasă derivată fără a menționa constructorul, `super()` este apelat automat cu toate argumentele necesare la momentul instanțierii clasei.
+
+### Suprascrierea metodelor
+
+Menționam mai devreme faptul că unul din motivele pentru care avem clase este simplificarea extinderii unei clase, dar a cărui funcționalități sunt modificate pentru a servi scopurilor pentru care se face extinderea.
+
+```javascript
+class Parinte {
+  constructor (valoare) {
+    this.valoare = valoare;
+  }
+  afișare () {
+    console.log(this.valoare);
+  }
+}
+class Copil extends Parinte {
+  constructor (ceva, altceva) {
+    super(ceva); // se invocă constructorul părintelui
+    this.altceva = altceva;
+  }
+  afișare () {
+    super.afișare();
+  }
+}
+```
 
 ### Moștenirea din obiectele interne prin clase derivate
 
@@ -1304,7 +1404,7 @@ console.log(unArraySpecial); //[ "ceva", "altceva" ]
 console.log(ArrayulMeu instanceof Array); // false
 ```
 
-Toate metodele din obiectul prototip al lui Array sunt disponibile noului obiect creat în baza clasei care a derivat obiectul built-in. Responsabil pentru accesul la metodele din prototipul lui `Array` este un simbol `Symbol.species`, un simbol *binecunoscut* (**well-known**). Pentru a înțelege, trage un ochi la `Symbol`.
+Toate metodele din obiectul prototip al lui Array sunt disponibile noului obiect creat în baza clasei care a derivat obiectul built-in. Responsabil pentru accesul la metodele din prototipul lui `Array` este un simbol `Symbol.species`, un simbol *bine-cunoscut* (*well-known* în limba engleză). Pentru a înțelege, trage un ochi la `Symbol`.
 
 `Symbol.species` definește o proprietate accesor, care returnează o funcție. Funcția este un constructor gata de a fi utilizat în locul constructorului.
 

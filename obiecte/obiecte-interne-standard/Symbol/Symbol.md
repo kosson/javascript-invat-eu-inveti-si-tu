@@ -55,7 +55,7 @@ console.log(Object.getOwnPropertySymbols(obi)); // [Symbol(stauPitita)]
 console.log(Reflect.ownKeys(obi)); // [Symbol(stauPitita)]
 ```
 
-Se observă faptul că simbolurile ies la iveală prin interogarea cu `Object.getOwnPropertySymbols(obiect)`, fiind generat un array cu acestea, dar mai există o metodă a obiectului intern Reflect: `Reflect.ownKeys(obiect)`.
+Se observă faptul că simbolurile ies la iveală prin interogarea cu `Object.getOwnPropertySymbols(obiect)`, fiind generat un array al acestora, dar mai există o metodă a obiectului intern Reflect: `Reflect.ownKeys(obiect)`.
 
 ## Folosirea la „nume computate” pentru proprietăți
 
@@ -108,8 +108,9 @@ Registrul acesta trebuie înțels ca un mediu partajat pentru întreg codul. Ca 
 Registrul global pentru symbols ține evidența acestora folosindu-se de o cheie numită, evident `key`. Această cheie va fi folosită și ca descriere atunci când simbolurile care sunt create sunt introduse în registrul global (este cel care acționează peste tot la momentul rulării codului).
 
 Există două metode prin care poți adăuga un `Symbol` în registrul global:
-- `Symbol.for(key)` și
-- `Symbol.keyFor(symbol)`
+
+-   `Symbol.for(key)` și
+-   `Symbol.keyFor(symbol)`
 
 ```javascript
 Symbol.for('test') === Symbol.for('test'); // true
@@ -153,13 +154,13 @@ Identificatorul pentru ambele proprietăți ale obiectului este același simbol.
 
 Folosind această metodă se obține numele cheii unui simbol care există deja în registru.
 
-## Well-Known Symbols - „simboluri binecunoscute”
+## Well-Known Symbols - „simboluri bine-cunoscute”
 
-Standardul indică o serie de simboluri pe care le atașează atributul de „binecunoscute”. În spatele fiecărui astfel de simbol „binecunoscut” se află algoritmi (acești algoritmi sunt interni motorului de JavaScript) care au anumite efecte. Am putea spune că, de fapt, aceste simboluri identifică proprietăți care oferă „funcționalități binecunoscute” pentru obiectele interne. Mai pe scurt, unele obiecte interne JavaScript, au niște proprietăți ale căror chei sunt simboluri. Ce se ascunde în spatele lor este un algoritm, care oferă o funcție sau un anume comportament la momentul când tu, ca programator, le invoci.
+Standardul indică o serie de simboluri pe care le atașează atributul de „bine-cunoscute”. În spatele fiecărui astfel de simbol „bine-cunoscut” se află algoritmi (acești algoritmi sunt interni motorului de JavaScript) care au anumite efecte. Am putea spune că, de fapt, aceste simboluri identifică proprietăți care oferă „funcționalități bine-cunoscute” pentru obiectele interne. Mai pe scurt, unele obiecte interne JavaScript, au niște proprietăți ale căror chei sunt simboluri. Ce se ascunde în spatele lor este un algoritm, care oferă o funcție sau un anume comportament la momentul când tu, ca programator, le invoci.
 
-Un lucru foarte important pe care-l menționează standardul este acela că „valorile simbolurilor binecunoscute sunt comune tuturor tărâmurilor”.
+Un lucru foarte important pe care-l menționează standardul este acela că „valorile simbolurilor bine-cunoscute sunt comune tuturor tărâmurilor”.
 
-Prin ce se disting *simbolurile binecunoscute* de celelalte? Prin faptul că sunt referențiate printr-o notație specială folosită doar în textul standardului. Acesta este formată din numele simbolului, care este stabilit de standard, precedat de o pereche de ampresand: `@@iterator`, de exemplu. Pentru cazul utilizării de zi cu zi, aceste simboluri binecunoscute sunt parte a obiectului cu rol de prototip pentru obiectele interne `Object`, `Array` și `String` cu excepția unuia singur care este operatorul `instanceof`.
+Prin ce se disting *simbolurile bine-cunoscute* de celelalte? Prin faptul că sunt referențiate printr-o notație specială folosită doar în textul standardului. Acesta este formată din numele simbolului, care este stabilit de standard, precedat de o pereche de ampresand: `@@iterator`, de exemplu. Pentru cazul utilizării de zi cu zi, aceste simboluri bine-cunoscute sunt parte a obiectului cu rol de prototip pentru obiectele interne `Object`, `Array` și `String` cu excepția unuia singur care este operatorul `instanceof`.
 
 ### `Symbol.hasInstance`
 
@@ -172,7 +173,7 @@ obi instanceof Object; // true
 Object[Symbol.hasInstance](obi);
 ```
 
-Concluzia este că operatorul `instanceof` începând cu ECMAScript 6 a devenit o prescurtare către metoda `hasInstance` a lui `Symbol`. În acest caz, toate funcțiile în JavaScript vor avea o metodă `Symbol.hasInstance` prin care se poate testa dacă un obiecte este sau nu o instanță a acesteia. Această metodă este chiar în obiectul prototip al lui `Function` (`Function.prototype`), ceea ce face ca toate funcțiile să o moștenească. Proprietatea `Symbol.hasInstance` este non-writable, nonconfigurable și nonenumerable pentru a se asigura faptul că nu va fi suprascrisă dintr-o eroare. Totuși, fii foarte atent că prin utilizarea metodei `Object.defineProperty()`, poți modifica fără probleme `Symbol.hasInstance`.
+Concluzia este că operatorul `instanceof` începând cu ECMAScript 6 a devenit o prescurtare către metoda `hasInstance` a lui `Symbol`. În acest caz, toate funcțiile în JavaScript vor avea o metodă `Symbol.hasInstance` prin care se poate testa dacă un obiecte este sau nu o instanță a acesteia. Această metodă este chiar în obiectul prototip al lui `Function` (`Function.prototype`), ceea ce face ca toate funcțiile să o moștenească. Proprietatea `Symbol.hasInstance` este non-writable, non-configurable și non-enumerable pentru a se asigura faptul că nu va fi suprascrisă dintr-o eroare. Totuși, fii foarte atent că prin utilizarea metodei `Object.defineProperty()`, poți modifica fără probleme `Symbol.hasInstance`.
 
 ### `Symbol.isConcatSpreadable`
 
@@ -192,7 +193,7 @@ console.log(numaram); // [ "zero", "unu", "doi" ]
 
 ### `Symbol.iterator`
 
-Acest simbol este mijlocul prin care se aplează iteratorul pentru un anumit obiect. Este binecunoscută apelarea iteratorului atunci când se folosește `for..of`.
+Acest simbol este mijlocul prin care se aplează iteratorul pentru un anumit obiect. Este bine-cunoscută apelarea iteratorului atunci când se folosește `for..of`.
 
 ### Expunerea metodelor prin care se realizează interacțiuni cu textul
 
@@ -293,5 +294,5 @@ console.log(Symbol('ceva') === Symbol('ceva')); // false
 
 ## Referințe
 
--   https://hacks.mozilla.org/2015/06/es6-in-depth-symbols/
--   Zakas, Nicholas C. Understanding ECMAScript 6: The Definitive Guide for JavaScript Developers. https://www.keithcirkel.co.uk/metaprogramming-in-es6-symbols/
+-   [https://hacks.mozilla.org/2015/06/es6-in-depth-symbols/](https://hacks.mozilla.org/2015/06/es6-in-depth-symbols/)
+-   [Zakas, Nicholas C. Understanding ECMAScript 6: The Definitive Guide for JavaScript Developers](https://www.keithcirkel.co.uk/metaprogramming-in-es6-symbols/)

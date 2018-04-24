@@ -128,6 +128,60 @@ iterator.next();
 
 După cum se observă, am generat un obiect în baza unei clase, care prelucrează o colecție. Exemplul folosește un array care este un obiect. Acesta deja implementează protocolul iterator, dar am făcut acest exercițiu pentru a ilustra mecanismul intern al unui iterator.
 
+La nevoie poți transforma un obiect obișnuit creat printr-o expresie literală într-un iterator.
+
+```javascript
+function scotNr () {
+  let nr = Math.random() * 10;
+  return nr;
+};
+
+const obiect = {
+  // un factory de iteratorare
+  [Symbol.iterator]: () => {
+    return {
+      next: () => {
+        let numar = scotNr() > 3;
+        if(!numar) {
+          return {
+            value: scotNr(),
+            done: false
+          }
+        }
+        return { done: true }
+      }
+    }
+  }
+}
+for (let rezultat of obiect) {
+  console.log(rezultat);
+};
+```
+
+Pentru a înțelege faptul că generatoarele sunt doar un adaos sintactic pentru iteratoare, putem reformula factory-ul de iteratoare într-un generator.
+
+```javascript
+function scotNr () {
+  let nr = Math.random() * 10;
+  return nr;
+};
+const obiect = {
+  // un factory de iteratorare
+  [Symbol.iterator]: function* () {
+    while(true) {
+      let numar = scotNr() > 3;
+      if(numar) {
+        return;
+      }
+      yield scotNr();
+    }
+  }
+}
+for (let rezultat of obiect) {
+  console.log(rezultat);
+};
+```
+
 ## Iteratori particularizați
 
 ### Iteratori infiniți

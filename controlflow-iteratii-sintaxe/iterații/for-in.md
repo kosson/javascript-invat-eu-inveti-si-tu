@@ -11,15 +11,15 @@ Iterează proprietățile unui obiect, cele care sunt setate ca `enumerabile`, i
 Este numit de standard un **enunț de iterare**.
 Formele canonice ale enunțurilor `for..in` sunt:
 
-- `for ( expresieManaStângă in expresie ) enunț`,
-- `for ( var expresieLegatăDeIndentificator in expresie ) enunț`,
-- `for ( declarațieDeExpresie ) enunț`.
+-   `for ( expresieManaStângă in expresie ) enunț`,
+-   `for ( var expresieLegatăDeIndentificator in expresie ) enunț`,
+-   `for ( declarațieDeExpresie ) enunț`.
 
 `DeclarațiaDeExpresie` poate fi un `let` sau un `const`.
 
 ## Iterarea cheilor proprii, dar și a celor din constructor
 
-Trebuie reținut faptul că iterarea folosind `for..in` ia în calcul și cheile contructorului. Pentru izolarea iterării doar pe cheile proprii ale obiectului fără cele moștenite, se va folosi verificarea cu metoda `hasOwnProperty`.
+Trebuie reținut faptul că iterarea folosind `for..in` ia în calcul și cheile constructorului. Pentru izolarea iterării doar pe cheile proprii ale obiectului fără cele moștenite, se va folosi verificarea cu metoda `Object.hasOwnProperty()`.
 
 ```javascript
 let prop;

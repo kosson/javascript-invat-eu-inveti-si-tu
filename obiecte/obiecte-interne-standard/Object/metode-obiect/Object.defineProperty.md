@@ -6,7 +6,7 @@ Acum ai putea face un salt rapid la `Object.create` pentru a remarca faptul că 
 
 Un aspect important pentru a înțelege și mai bine avantajele oferite de această metodă este acela că o proprietate va fi configurată cu ajutorul unui obiect pe care metoda `Object.defineProperty` și care este denumit generic „descriptor”.
 
-Metoda primește trei argumente: identificatorul obiectului, numele identificatorului viitoarei proprietăți și descrierea sa prin binecunoscuți: `writable`, `enumerable`, `configurable`.
+Metoda primește trei argumente: identificatorul obiectului, numele identificatorului viitoarei proprietăți și descrierea sa prin bine-cunoscuți: `writable`, `enumerable`, `configurable`.
 
 La momentul execuției metodei, obiectul primit ca prim parametru este returnat dar îmbogățit cu noua proprietate setată.
 
