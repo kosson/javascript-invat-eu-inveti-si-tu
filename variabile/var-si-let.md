@@ -4,7 +4,11 @@ Identificatorii declarați cu `var` beneficiază de mecanismul de hoisting prin 
 
 Începând cu ES6 a fost adăugat `let`, care în comparație cu `var`, este legat la nivelul blocului de cod delimitat prin `{}`. Spunem că aceste variabile sunt block-scoped, fiind disponibile doar la nivelul blocului `{}`.
 
-În cazul declarațiilor `let`, acestea nu disponibile imediat (**hoisted**) ca în cazul celor declarate cu `var`. Din acest motiv, cel mai bine este ca declarațiile `let` să fie puse în capul blocului în mod voluntar pentru a fi disponibile. Dacă nu, variabilele declarate cu `let` vor fi disponibile de la momentul în care au fost întâlnite. Tot timpul anterior scurs deja de la debutul execuției, nu va *vedea* aceste variabile și se numește TDZ - Temporal Dead Zone (**Zona de Timp Moartă** ar fi traducerea în lb. română), fiind perioada de timp cât nu este disponibilă..
+În cazul declarațiilor `let`, acestea nu disponibile imediat (**hoisted**) ca în cazul celor declarate cu `var`. Din acest motiv, cel mai bine este ca declarațiile `let` să fie puse în capul blocului în mod voluntar pentru a fi disponibile. Dacă nu, variabilele declarate cu `let` vor fi disponibile de la momentul în care au fost întâlnite. Tot timpul anterior scurs deja de la debutul execuției, nu va *vedea* aceste variabile și se numește TDZ - Temporal Dead Zone (**Zona de Timp Moartă** ar fi traducerea în lb. română), fiind perioada de timp cât nu este disponibilă.
+
+**Spune standardul**:
+
+> Declarațiile let și const definesc variabile care sunt restricționate la scope-ul contextului de execuție în rulare a Mediului Lexical. Variabilele sunt create atunci când Mediul lor Lexical este instanțiat\[...].  
 
 Avem o explicație foarte bună pe care Kyle Simpson o face pentru a înțelege diferențele dintre cele două. În cazurile în care erau declarate variabile pentru a fi folosite în instrucțiuni precum `for` sau `if`, dar care în subsidiar comunicau celorlalți programatori să nu le folosească dincolo de aceste enunțuri, `let` este cea mai bună abordare pentru că domeniul său de vizibilitate este limitat la blocul de cod.
 

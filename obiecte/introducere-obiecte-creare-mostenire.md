@@ -205,15 +205,11 @@ Atunci când un obiect este instanțiat folosindu-se operatorul `new` se va gene
 
 Să ne gândim la o funcție ca la o persoană care privește **bolta celestă** într-o noapte înstelată. Cum ar putea povesti despre toate constelațiile văzute? Cum le-ar putea referenția printr-o singură expresie? Hai, nu e greu, am zis deja... da, da, ai remarcat perfect: **bolta celestă**. Dacă dorim să constrângem la un singur termen care să o identifice, am putea spune foarte simplu **cerul**, nu? Așa este și cuvântul cu înțeles special `this`, care s-ar traduce în română **acesta** cu sensul că indică spațiul în **contextul** căruia se execută o funcție, de exemplu. Termenul stabilește *conectarea* unei funcții cu obiectul și mediul pe care acesta îl formează la momentul apelării unei funcții. Această conectare la obiectul context este cimentată prin crearea unui obiect numit `this` a cărui proprietăți sunt, de fapt proprietățile obiectului în care se execută funcția. Pentru funcția care tocmai și-a început execuția `this` este o proprietate care nu poate fi modificată - nu poți schimba cine este obiectul `this`.
 
-Poți să-ți imaginezi o funcție precum un pilot care se urcă la bordul *obiectului* numit avion. Primul lucru pe care îl face este să-și conecteze căștile la sistemul de comunicare intern al avionului. Acest intercom este **mediul** de comunicare al avionului la care mai sunt conectate și alte funcții precum navigatorii, mecanicii și însoțitorii de bord. Consideră-i pe aceștia funcții. Primul lucru pe care îl fac toți este să se conecteze prin intercom la **mediul** care oferă date pentru a raporta piloților, precum și altor funcții diverse informații. Toți sunt conectați la același **mediu de comunicare** oferit de obiectul avion.
-
-Poți să-ți imaginezi obiectul `this` ca pe un vas care se umple cu referințe către identificatorii din mediul lexical al obiectului în a cărui context se execută funcția.
-
 Reține că referința `this` este strict legată de *locul* în care a fost apelată funcția, nu de *locul* unde a fost declarată. Sunt două lucruri distincte. Dacă nu le vei percepe astfel încă de acum, te vei lovi de multe erori și nu vei înțelege în profunzime anumite comportamente.
 
 #### `this` și constructorii în obiectul global
 
-Știm că funcțiile sunt folosite pentru a construi obiecte. Atenție, o funcție cu rol de constructor poate fi invocată și fără operatorul `new`. În acest caz se va comporta ca o funcție simplă cu toate consecințele rulări în acest mod.
+Știm că funcțiile pot fi folosite pentru a construi obiecte. Atenție, o funcție cu rol de constructor poate fi invocată și fără operatorul `new`. În acest caz se va comporta ca o funcție simplă cu toate consecințele rulări în acest mod.
 
 ```javascript
 function NumescNave (indicativ, nume) {
@@ -1085,7 +1081,7 @@ console.log(Santinel.prezentare());
 // ori de câte ori este creat un nou obiect prin new
 ```
 
-Partea deficitară a unei astfel de soluții este că funcțiile care joacă rol de metode în obiectul `this` (obiectul context în care va rula funcția când va fi apelată cu `new`), vor fi recreate ori de câte ori este creat un nou obiect. Acest fapt implică probleme de performanță a codului ocupând memoria cu aceeași funcție recreată ori de câte ori este instanțiat un nou obiect.
+Partea deficitară a unei astfel de soluții este că funcțiile care joacă rol de metode (obiectul context în care va rula funcția când va fi apelată cu `new`), vor fi recreate ori de câte ori este creat un nou obiect. Acest fapt implică probleme de performanță a codului ocupând memoria cu aceeași funcție recreată ori de câte ori este instanțiat un nou obiect.
 
 Modelarea unei clase rudimentare se poate realiza și prin introducerea de funcționalități și date în obiectul prototip al funcției. Astfel, prin mecanismul de moștenire prototipală, toate obiectele instanțiate cu `new`, vor beneficia de acces direct la toți membrii obiectului prototip.
 
@@ -1106,7 +1102,7 @@ console.log(Santinel.prezentare());
 
 Este rapid observabil faptul că simularea clasei s-a realizat prin introducerea de proprietăți și în `this`, dar și în `prototype`.
 
-Prin introducerea noii sintaxe se intenționează *crearea claselor pe baza moștenirii prototipale*. Sintaxa prezintă câteva particularități. Proprietățile viitorului obiect se introduc în metoda constructor. Metodele se introduc fără să fie precedate de cuvântul cheie `function` și nici nu vor fi despărțite prin virgulă. Accesarea proprietăților și metodelor se va face prin intermediul obiectului `this`.
+Prin introducerea noii sintaxe se intenționează *crearea claselor pe baza moștenirii prototipale*. Sintaxa prezintă câteva particularități. Proprietățile viitorului obiect se introduc în metoda constructor. Metodele se introduc fără să fie precedate de cuvântul cheie `function` și nici nu vor fi despărțite prin virgulă. Accesarea proprietăților și metodelor se va face prin intermediul obiectului `this`. Însăși funcția clasă nu creează o legătură `this`.
 
 ```javascript
 class Test {
@@ -1409,6 +1405,30 @@ console.log(inmultire instanceof Părinte); // true
 ```
 
 Dacă nu declari constructorul, adică formulezi o clasă derivată fără a menționa constructorul, acesta oricum este constituit în spate de motor, iar `super()` este apelat automat.
+
+Folosind `super` poți apela metode ale clasei părinte.
+
+```javascript
+class Parinte {
+  constructor (valoare) {
+    this.valoare = valoare;
+  }
+  adauga () {
+    this.valoare++;
+    console.log(this.valoare);
+  }
+}
+class Copil extends Parinte {
+  constructor (valoare) {
+    super(valoare);
+  }
+  afiseaza () {
+    super.adauga();
+  }
+}
+const obi = new Copil(10);
+obi.afiseaza();
+```
 
 Atunci când este nevoie, ai posibilitatea de a extinde și constructori care nu sunt clase.
 

@@ -1,14 +1,16 @@
 # Invocarea funcțiilor
 
-La momentul începerii execuției codului, toate funcțiile deja există (vezi etapa de compilare) și sunt asociate identificatorilor ca valori. Acest lucru este valabil doar pentru declarațiile de funcții (**function declaration**), nu și pentru **expresiile de funcții**. Expresiile de funcții și **arrow functions** nu fac parte din această secvență, fiind create la momentul în care **execuția** ajunge unde sunt declarate și le evaluează pentru a asigna o valoare identificatorului din stânga egalului.
-Invocarea funcțiilor se face prin operatorul `()`.
-La invocare se creează un nou context de execuție, care ajunge în call-stack.
+La momentul începerii execuției codului, toate funcțiile declarate cu `function` există (vezi etapa de compilare) și sunt asociate identificatorilor ca valori. Acest lucru este valabil doar pentru declarațiile de funcții (**function declaration**), nu și pentru **expresiile de funcții**. Expresiile de funcții și **arrow functions** nu fac parte din această secvență, fiind create la momentul în care **execuția** ajunge unde sunt declarate și le evaluează pentru a asigna o valoare identificatorului din stânga egalului. Invocarea funcțiilor se face prin operatorul `()`. La invocare se creează un nou context de execuție, care ajunge în stiva apelurilor (*call-stack*).
 
 **Spune standardul**:
 
-> Atunci când se stabilește un context de execuție pentru a evalua o funcție ECMAScript, este creat un nou Environment Record, precum și legăturile pentru fiecare parametru formal din acel Environment Record. Fiecare declarație din corpul funcției este instanțiată și ea. Dacă parametrii formali ai funcției nu includ niciun inițializator pentru valori implicite, atunci corpul declarațiilor sunt instanțiate în același Environment Record ca și parametrii. Dacă aceștia există, este creat un al doilea Environment Record pentru declarațiile din corp. Parametrii formali și funcțiile sunt inițializate ca parte a FunctionDeclarationInstantiation. Restul celorlalte legături sunt inițializate în timpul evaluării corpului funcției. [9.2.12 FunctionDeclarationInstantiation ( func, argumentsList ). Nota 1](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-functiondeclarationinstantiation)
+> Atunci când se stabilește un context de execuție pentru a evalua o funcție ECMAScript, este creat un nou Environment Record, precum și legăturile pentru fiecare parametru formal din acel Environment Record. Fiecare declarație din corpul funcției este instanțiată și ea. Dacă parametrii formali ai funcției nu includ niciun inițializator pentru valori implicite, atunci corpul declarațiilor sunt instanțiate în același Environment Record ca și parametrii. Dacă aceștia există, este creat un al doilea Environment Record pentru declarațiile din corp. Parametrii formali și funcțiile sunt inițializate ca parte a FunctionDeclarationInstantiation. Restul celorlalte legături sunt inițializate în timpul evaluării corpului funcției.
+
+[9.2.12 FunctionDeclarationInstantiation ( func, argumentsList ). Nota 1](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-functiondeclarationinstantiation)
 
 ## Ce se întâmplă când o funcție este invocată?
+
+Înainte de a radiografia efectele apelului de funcție, ne vom uita în standard la algoritmul intern motorului `FunctionInitialize(F, kind, ParameterList, Body, Scope )`. Argumentele acestui algoritm intern sunt o funcție obiect F, mențiunea kind care indică ce tip de funcție este (Normală, Metodă, Arrow), o listă cu toți parametri, un corp care cuprinde codul ce urmează să fie evaluat și un Mediu Lexical care este identificat ca Scope. Alcătuind acest context să vedem în ce constă execuția unei funcții.
 
 1.  Locul în care se întâmplă acest lucru se numește **call-site**.
 2.  Se creează un nou **execution context** - context de execuție care este introdus în stivă.
@@ -20,14 +22,15 @@ La invocare se creează un nou context de execuție, care ajunge în call-stack.
 3. Se face legătura la contextul lexical asociat acelei funcții (scope-ul). Pentru scope-ul extern, funcția va pune drept referință valoarea proprietății interne a funcției numită `[[Environment]]`.
 3. Se generează un obiect căruia îi sunt pasate automat ARGUMENTELE într-o colecție asemănătoare unui array și **this**.
 
-Obiectul **arguments** este o colecție (seamănă dar NU ESTE UN ARRAY) a tuturor argumentelor pasate funcției și are proprietatea `length` pentru a afla numărul argumentelor pasate. Valorile pot fi obținute prin indecși arguments\[i].
+Obiectul **arguments** este o colecție (seamănă dar NU ESTE UN ARRAY) a tuturor argumentelor pasate funcției și are proprietatea `length` pentru a afla numărul argumentelor pasate. Valorile pot fi obținute prin `arguments[index]`.
 
-## Invocarea funcțiilor se poate face în patru cazuri:
+## Invocarea funcțiilor se poate face în următoarele cazuri:
 
 1.  ca funcții;
 2.  ca metode;
-3.  constructori cu `new`;
-4.  indirect prin apelarea într-un context de execuție diferit folosind `call()` și `apply()` (vezi binding explicit la `this`).
+3.  ca arrow functions
+4.  constructori cu `new`;
+5.  indirect prin apelarea într-un context de execuție diferit folosind `call()` și `apply()` (vezi binding explicit la `this`).
 
 În toate aceste cazuri funcția generează obiectul `this` în mod diferit.
 
