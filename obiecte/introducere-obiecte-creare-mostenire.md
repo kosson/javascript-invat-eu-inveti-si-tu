@@ -201,7 +201,7 @@ Atunci când un obiect este instanțiat folosindu-se operatorul `new` se va gene
 
 În exemplul oferit l-am introdus pe `this`. Este nevoie să lămurim câteva aspecte privind acest obiect absolut necesar pentru rularea funcțiilor în contexte de execuție diferite.
 
-##### Despre this
+#### Despre this
 
 Să ne gândim la o funcție ca la o persoană care privește **bolta celestă** într-o noapte înstelată. Cum ar putea povesti despre toate constelațiile văzute? Cum le-ar putea referenția printr-o singură expresie? Hai, nu e greu, am zis deja... da, da, ai remarcat perfect: **bolta celestă**. Dacă dorim să constrângem la un singur termen care să o identifice, am putea spune foarte simplu **cerul**, nu? Așa este și cuvântul cu înțeles special `this`, care s-ar traduce în română **acesta** cu sensul că indică spațiul în **contextul** căruia se execută o funcție, de exemplu. Termenul stabilește *conectarea* unei funcții cu obiectul și mediul pe care acesta îl formează la momentul apelării unei funcții. Această conectare la obiectul context este cimentată prin crearea unui obiect numit `this` a cărui proprietăți sunt, de fapt proprietățile obiectului în care se execută funcția. Pentru funcția care tocmai și-a început execuția `this` este o proprietate care nu poate fi modificată - nu poți schimba cine este obiectul `this`.
 
@@ -211,7 +211,7 @@ Poți să-ți imaginezi obiectul `this` ca pe un vas care se umple cu referințe
 
 Reține că referința `this` este strict legată de *locul* în care a fost apelată funcția, nu de *locul* unde a fost declarată. Sunt două lucruri distincte. Dacă nu le vei percepe astfel încă de acum, te vei lovi de multe erori și nu vei înțelege în profunzime anumite comportamente.
 
-##### `this` și constructorii în obiectul global
+#### `this` și constructorii în obiectul global
 
 Știm că funcțiile sunt folosite pentru a construi obiecte. Atenție, o funcție cu rol de constructor poate fi invocată și fără operatorul `new`. În acest caz se va comporta ca o funcție simplă cu toate consecințele rulări în acest mod.
 
@@ -874,7 +874,7 @@ Nota atașată definiției este și ea foarte valoroasă pentru lămuririle pe c
 
 Pentru a înțelege cu adevărat natura și specificitățile limbajului de programare JavaScript, trebuie să fie înțeles modul în care proprietățile unui obiect sunt „moștenite” de un altul. Nu uita nicio secundă faptul că JavaScript este un limbaj de programare care este o continuă comunicare între diferite obiecte, fie că acestea sunt cele interne, fie că sunt cele create de noi. Simplificând în tușe foarte groase, creatorii limbajului au dorit o modelare a structurilor de prelucrare a datelor după modul în care lumea reală funcționează: copii au părinți, iar aceștia moștenesc caracteristicile părinților pe lângă cele care definesc propria persoană.
 
-**JavaScript este un limbaj bazat pe moștenire prototipală - prototypal inheritance**
+**Moment Zen**: JavaScript este un limbaj bazat pe moștenire prototipală - prototypal inheritance
 
 În alte limbaje de programare așa cum este Java, de exemplu, pentru a genera un obiect ai nevoie de un fragment de cod care are rolul de plan de construcție pentru viitoarele obiecte. Pur și simplu este o secvență de cod care descrie care sunt valorile și tipul lor pentru proprietățile viitorului obiect.
 
@@ -1034,7 +1034,35 @@ obi2.faAltceva(); // "ce-i returnat din obi1  este oferită aici"
 
 ## Clase în JavaScript
 
-În ciuda introducerii unei sintaxe care seamănă cu obișnuințele de programare din alte limbaje, de fapt nu este decât un aranjament sintactic, care ascunde o implementare specifică JavaScript. Dacă vei crede că existența sintaxei `class` implică și un comportament intern care să se plieze cu ceea ce știi din alte limbaje de programare, te afli într-o adâncă eroare. JavaScript este un limbaj de programare bazat pe obiecte pe care nu le instanțiază în baza unei clase. Istoric vorbind, JavaScript nu a avut drept țintă crearea obiectelor în baza unor clase, dar mulți programatori obișnuiți cu această practică, au simțit nevoia să-și poată exprima propriile rutine de lucru forțând conceptul de clase și în JavaScript. Prin modul lor de lucru, funcțiile au oferit calea către implementarea claselor.
+JavaScript este un limbaj de programare bazat pe obiecte pe care nu le instanțiază în baza unei clase. Prin modul lor de lucru, funcțiile au oferit calea către implementarea claselor. Ce a rezolvat implementarea claselor odată cu versiunea ES6? Primul și cel mai important lucru este posibilitatea ca o *funcție obiect* să moștenească de la altă *funcție obiect*. Acest salt a permis ca o funcție constructor să poată moșteni din altă funcție constructor.
+
+```javascript
+// Limitările ES5
+function X () {};
+X.metoda = function () { console.log('Salut!') };
+
+function Y () {};
+Y.prototype = Object.create(X.prototype);
+
+Y.metoda; // undefined
+Y.metoda(); // Y.metoda is not a function
+```
+
+Acest lucru se întâmplă pentru că `Object.create()` crează doar obiecte simple, nu poate crea *funcții obiecte*. Clasele rezolvă această moștenire.
+
+```javascript
+class X {
+  static  metoda () {
+    console.log('Salut!');
+  }
+}
+class Y extends X {}
+Y.metoda(); // Salut!
+```
+
+O altă problemă pe care o rezolvă clasele este posibilitatea de a extinde constructorii interni limbajului (*built-in*). Unii dintre aceștia sunt obiecte *exotice* și acum numai prin mecanismului claselor pot fi extinse.
+
+Totuși clasele au câteva detalii care le departajează de funcții. Nu pot fi apelate simplu fără operatorul `new`. Metodele, adică funcțiile declarate intern nu creează propriile obiecte `prototype`. Prototipul unei clase nu poate fi reasignat.
 
 ### Drumul către clase - studiu
 
@@ -1230,7 +1258,19 @@ Test.ceva(); // "ceva"
 Test.altceva(); // "ceva din alt apel static"
 ```
 
-Metodele statice nu pot fi accesate folosind `this` din metodele non-statice. După cum se observă în exemplu, pot fi accesate cu sintaxa `nume_clasă.nume_metodă_statică()`.
+Metodele statice nu pot fi accesate folosind `this` din metodele non-statice. După cum se observă în exemplu, pot fi accesate cu sintaxa `nume_clasă.nume_metodă_statică()`. În metodele statice poți defini alte proprietăți funcției clasă. Acestea sunt apelate cu numele funcției și nu cu `this`.
+
+```javascript
+class Ceva () {
+  static metoda () {
+    Ceva._cevaPrivat = new Date.now();
+  }
+  constuctor (data) {
+    this.expun = Ceva._cevaPrivat;
+    this.dataCalendaristica = data;
+  }
+}
+```
 
 Uneori aceste metode statice sunt folosite pentru a crea obiecte pe care le returnează, dar care folosesc date diferite de cele din constructor.
 
@@ -1252,7 +1292,7 @@ console.log(fișăExt);
 
 Reține faptul că metodele statice nu sunt moștenite de obiectele create.
 
-### Incapsualare - protejarea datelor
+### Accesori și incapsulare
 
 În JavaScript singura posibilitate de a atinge incapsularea prin care înțelegem protejarea datelor prin variabile private este să realizăm closure-ri. Clasele permit realizarea unei incapsulări dacă datele protejate le introducem în constructor și apoi le accesăm prin accesori.
 
@@ -1266,8 +1306,6 @@ class Ceva {
   }
 }
 ```
-
-### Clasele permit proprietăți accesor
 
 Cu ajutorul accesorilor se poate comunica direct cu proprietățile obiectului instanțiat în baza clasei.
 
@@ -1290,10 +1328,9 @@ obi['elem'] = 12; // val: 12
 
 ### Extinderea claselor
 
-Clasele pot fi extinse. Este indicată extinderea unei clase folosindu-se cuvântul cheie `extends`. În tratarea acestui subiect, legitim este să răspundem la întrebarea de ce? De ce avem nevoie să derivăm obiectele? Răspunsul vine din necesitatea de a putea avea acces la proprietățile și metodele unui obiect existent deja, dar pe care să-l înbogățim sau să-l modificăm din necesitate prin suprascrierea unor metode.
+Clasele pot fi extinse. Este indicată extinderea unei clase folosindu-se cuvântul cheie `extends`. În tratarea acestui subiect, legitim este să răspundem la întrebarea de ce? De ce avem nevoie să derivăm obiectele? Răspunsul vine din necesitatea de a putea avea acces la proprietățile și metodele unui obiect existent deja, pe care să nu le mai scriem din nou într-o nouă clasă, dar care să permită îmbogățirea sau modificarea acestora.
 
 ```javascript
-'use strict';
 class Ceva {
   constructor (primo, secundo) {
     this.ceva = 'o proprietate';
@@ -1311,7 +1348,11 @@ class Altceva extends Ceva {
 };
 ```
 
-Derivarea obiectelor înainte de clasele introduse de noul standard ES6 era un proces laborios de creare a unui obiect și apoi crearea unui altuia căruia îi era setat prototipul îmbogățit al primului. Mai jos este modelul istoric comparat cu ceea ce propune `extends`. Să pornim de la modelul istoric.
+Derivarea obiectelor înainte de clasele introduse de noul standard ES6 era un proces laborios de creare a unui obiect și apoi crearea unui altuia căruia îi era setat prototipul îmbogățit al primului. Clasele care moștenesc de la altele, se numesc *clase derivate*. Acest lucru înseamnă că toate proprietățile și metodele clasei derivate vor fi moștenite din clasa părinte.
+
+#### Modelul istoric
+
+Mai jos este modelul istoric comparat cu ceea ce propune `extends`. Să pornim de la modelul istoric.
 
 ```javascript
 function Parinte (val) {
@@ -1339,7 +1380,11 @@ console.log(rezultat.oriDoi()); // 4
 Este observabil cu cât efort s-a realizat acest lucru.
 Mai întâi am executat funcția `Parinte` în contextul lui Copil pasându-i `this` pentru a seta corect contextul de execuție, adică în interiorul lui `Copil`. Au fost pasate atributele așteptate de `Parinte`. A trebuit să *rescriem* obiectul prototip al lui `Copil` setându-l artificial la cel pe care dorim să-l moștenim folosind `Object.create()` în acest sens. A trebuit să facem un pas suplimentar setând proprietatea `constructor` să trimită înapoi la `Copil` pentru a consolida originea sa.
 
-În cazul claselor, mare parte din aceste operațiuni complexe sunt rezolvate prin introducerea sintagmei `extends` în declarația funcției care dorești să fie derivata alteia. Prototipul este setat automat și poți accesa constructorul folosind metoda `super()`. Pentru a reține mai ușor, `super()` are rolul de a apela constructorul părintelui. În clasele derivate `super()` trebuie apelat înainte de a folosi `this` în constructor pentru că `super()` este cel care-l setează.
+#### extends și super()
+
+În cazul claselor, mare parte din operațiunile complexe ale derivării sunt rezolvate prin introducerea sintagmei `extends` în declarația clasei care dorești să fie derivata alteia. Ceea ce realizează este și abstractizarea funcționalităților unei clase care va fi privită de cele derivate din ea ca un model de urmat în ceea ce privește comportamentele de bază. Similar copiilor care privesc și copiază comportamentele părinților, clasele care extind altele, vor avea acces la metodele și proprietățile părintelui prin mecanismul de moștenire care se va stabili automat. Putem afirma despre o clasă de la care se derivează că se comportă ca o interfață. O interfață fiind setul de date și funcționalități disponibil tuturor copiilor, dar care poate fi modificat de aceștia.
+
+Am stabilit faptul că prototipul este setat automat la obiectul prototip al constructorului părinte. Constructorul părintelui poate fi accesat folosind metoda `super()`. În clasele derivate, `super()` trebuie apelat înainte de a folosi `this` în funcția constructor a copilului. Acest lucru trebuie făcut pentru a seta o linie directă de moștenire cu proprietățile constructorului clasei părinte. Regula ar fi ca datele necesare să alimentezi părintele pentru operațiunile interne ale părintelui, să le trimiți prin super(arg1, arg2, etc). Ce este nevoie copilului, setezi prin `this`. Nu uita, că prin moștenire vei avea mereu acces la datele și metodele părintelui.
 
 ```javascript
 class Parinte {
@@ -1363,11 +1408,24 @@ console.log(inmultire instanceof Copil); // true
 console.log(inmultire instanceof Părinte); // true
 ```
 
-Clasele care moștenesc de la altele, se numesc clase derivate. Acest lucru înseamnă că toate proprietățile și metodele clasei derivate vor fi moștenite din clasa părinte.
+Dacă nu declari constructorul, adică formulezi o clasă derivată fără a menționa constructorul, acesta oricum este constituit în spate de motor, iar `super()` este apelat automat.
 
-Adu-ți mereu aminte că pentru clasele derivate, în cazul în care dorești să folosești constructorul, trebuie să-l folosești în combinație cu `super()` căruia îi pasezi argumentele de care are nevoie constructorul clasei părinte. Aceste valori vor fi disponibile mai departe clasei părinte. Dacă nu dorești să folosești constructorul, adică să formulezi o clasă derivată fără a menționa constructorul, `super()` este apelat automat cu toate argumentele necesare la momentul instanțierii clasei.
+Atunci când este nevoie, ai posibilitatea de a extinde și constructori care nu sunt clase.
 
-### Suprascrierea metodelor
+```javascript
+function Parinte () {};
+Parinte.prototype.unu = 10;
+
+class Copil extends Parinte {
+  aduValoare () {
+    console.log(this.unu);
+  }
+}
+const obi = new Copil();
+obi.aduValoare(); // 10
+```
+
+#### Suprascrierea metodelor
 
 Menționam mai devreme faptul că unul din motivele pentru care avem clase este simplificarea extinderii unei clase, dar a cărui funcționalități sunt modificate pentru a servi scopurilor pentru care se face extinderea.
 
@@ -1675,7 +1733,7 @@ function accesProprietatiProprii (obiectul, proprietatea) {
 };
 ```
 
-### Extinderea obiectelor
+### Extinderea obiectelor simple
 
 Obiectelor li se pot adăuga proprietăți și metode pentru a le extinde funcționalitatea. Extinderea unui obiect este simplă atunci când software-ul este scris de o singură persoană sau atunci când este singurul stăpân al codului. Lucrurile se complică atunci când trebuie să îmbogățești funcționalitățile unui obiect cu unele care au fost scrise deja și care au nevoie doar de o preluare în propriul obiect. De fapt, acesta este și scopul. Să preiei ceea ce a fost scris deja de alții pentru a realiza un compus software mult mai valoros.
 
@@ -1764,3 +1822,6 @@ cerc1.arie(); //
 -   [Crockford on Javascript - Functions](https://www.youtube.com/watch?v=lVnnxfdLdlM)
 -   [A fresh look at JavaScript Mixins, de  Angus Croll](https://javascriptweblog.wordpress.com/2011/05/31/a-fresh-look-at-javascript-mixins/)
 -   [Memory Management](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management)
+-   [Object-oriented JavaScript: A Deep Dive into ES6 Classes](https://www.sitepoint.com/object-oriented-javascript-deep-dive-es6-classes/)
+-   [What is the definition of “interface” in object oriented programming](https://stackoverflow.com/questions/2866987/what-is-the-definition-of-interface-in-object-oriented-programming)
+-   [](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
