@@ -211,7 +211,7 @@ JavaScript este un limbaj de programare **case sensitive**, adică ține cont da
 Vorbeam mai devreme despre codul sursă, despre textul pe care-l introduci tu într-un fișier și pe care-l consideră computerul a fi codul sursă pentru programul creat. După felul în care este *consumat* de motorul JavaScript, textul sursă sau **codul sursă** poate fi de două tipuri: `Script` (un script) sau un `Module` (modul).
 Codul sursă, sau mai simplu **sursa** este scrisă de tine în editorul preferat, pe care ai salvat-o ca fișier cu extensia `.js`: `ceva.js`.
 
-Codul pe care-l scrii poate fi redactat pe mai multe linii deoarece pentru JavaScript **spațiile**, **taburile** și **line breaks**-urile (trecerile pe linie nouă) sunt pur și simplu considerate a fi **spații albe** care nu au puterea să influiențeze evaluarea codului în niciun fel.
+Codul pe care-l scrii poate fi redactat pe mai multe linii deoarece pentru JavaScript **spațiile**, **taburile** și **line break**-urile (trecerile pe linie nouă) sunt pur și simplu considerate a fi **spații albe** care nu au puterea să influiențeze evaluarea codului în niciun fel.
 
 ### Elemente de input - elemente de intrare în vederea evaluării
 
@@ -387,7 +387,7 @@ Ne focalizăm pe enunțul de mai sus. Începem de la stânga spre dreapta să fa
 
 Continuăm cu o precizare foarte importantă pentru a întări ceea ce am rememorat. Atunci când codul sursă este rulat pentru a obține un rezultat, de fapt, ceea ce se petrece este o întreagă succesiune de evaluări ale expresiilor, care se reduc la o valori rând pe rând prin evaluarea condiționată de diverșii operatori. Totul, dar totul se reduce la o valoare. De fapt, evaluăm expresii rezolvând **operațiunile** și ajungând la **valori** care sunt necesare altor **expresii**. Acestea, la rândul lor așteptau cuminți ca evaluarea precedentă să se încheie pentru a avea și ele valorile de care aveau nevoie și așa mai departe.
 
-### Tratarea expresilor cu operazi de tip diferit
+### Tratarea expresilor cu operanzi de tip diferit
 
 JavaScript este un limbaj de programare care oferă o flexibilitate fantastică. Spre deosebire de restul limbajelor de programare, nu te forțează să indici din start tipul de valoare cu care lucrezi. Dar dacă se nimerește ca într-o expresie să se lucreze cu două tipuri diferite de valori, la momentul evaluării, motorul JavaScript este forțat să ofere totuși un răspuns. Acest lucru se face prin constrângerea valorii unuia dintre operanzi în funcție de regulile impuse de operatorul folosit. Acest lucru se numește în limba engleză *coercion* ceea ce am putea traduce ca *transformare* sau constrângerea la un anumit tip de valoare cu scopul de a face totuși operațiunea indicată de operator.
 
