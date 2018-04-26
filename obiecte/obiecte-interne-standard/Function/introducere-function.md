@@ -55,7 +55,7 @@ functieNoua('a','b','c','d'); // "a"
 -   `Function.prototype.call()`
 -   `Function.prototype.toString()`
 
-### `Function.prototype.apply()`
+### Function.prototype.apply()
 
 Apelează o funcție căreia îi setează bindingul pentru `this` la obiectul precizat între paranteze . Argumentele pot fi pasate și ca array.
 
@@ -72,7 +72,7 @@ Pentru parametrul listei de argumente se poate folosi și obiectul care seamăn�
 
 Începând cu ECMAScript 5 se poate folosi orice obiect care este array-like pentru al doilea argument. Cazul cel mai util ar fi aplicațiile practice în lucrul cu API-ul DOM-ului. Aici ne gândim la obiectele `NodeList` ( [referința MDN](https://developer.mozilla.org/en-US/docs/Web/API/NodeList) ) returnate de `Node.childNodes` și `document.querySelectorAll`. ATENȚIE! `NodeList` nu sunt array-uri și nu se pot invoca metodele din prototipul lui Array.
 
-#### Mecanisme oferite de `apply()`.
+#### Mecanisme oferite de apply()
 
 Obiectul pasat ca și context de execuție este menționat între paranteze, fiind urmat de un array cuprinzând argumentele funcției.
 
@@ -99,9 +99,9 @@ Putem crea un array „dens” (adică populat cu valori):
 Array.apply(null, Array(5)); // Array [ undefined, undefined, undefined, undefined, undefined ]
 ```
 
-### `Function.prototype.bind()`
+### Function.prototype.bind()
 
-Creează o funcție nouă a cărui `this` este setat la un obiect care trebuie să-l menționezi între paranteze. Secvența de argumente introdusă de `bind()` are precedență asupra celor introduse la momentul apelării funcției.
+Returnează o funcție nouă a cărui `this` este setat la un obiect care trebuie să-l menționezi între paranteze urmat opțional de o secvență de argumente. Secvența de argumente introdusă de `bind()` are precedență asupra celor introduse la momentul apelării funcției.
 
 ```javascript
 function incrementare (arg) {
@@ -113,7 +113,9 @@ var adauga = incrementare.bind(null, 12, 10); // 12 suprascrie pe 5
 console.log(adauga(5)); // 13
 ```
 
-Standardul spune că funcțiile obiecte create folosind `Function.prototype.bind()` sunt **obiecte exotice**. Acest lucru înseamnă că nu au proprietatea `prototype`.
+Standardul spune că funcțiile obiecte create folosind `Function.prototype.bind()` sunt **obiecte exotice**. Acest obiect funcție exotic împachetează funcția originală. Acest lucru mai înseamnă că nu au proprietatea `prototype`. Apelarea acestei împachetări conduce la apelarea funcției împachetate.
+
+De cele mai multe ori se apelează la utilizarea lui `bind()` atunci când folosești metode puse la dispoziție de API-ul browserului. Cel mai la îndemână exemplu este `setTimeout`, care este o metodă a lui `window`, având `this` setat la window. Pentru a o face să performeze corect în contextul unui anumit obiect, trebuie legată de obiect prin `bind`.
 
 Un exemplu cu aplicativitate directă este manipularea DOM-ului. Te ajută să te asiguri că vei referenția mereu obiectul `document` și pentru ca să nu scape bindingul lui `this` în obiectul global al JavaScript.
 
@@ -139,7 +141,7 @@ Un alt exemplu elocvent este întâlnit la gestionarea evenimentelor atunci cân
 </script>
 ```
 
-### `Function.prototype.call()`
+### Function.prototype.call()
 
 Apelează o funcție în contextul unui obiect precizat între parantezele rotunde , permițând și pasarea argumentelor funcției. Setează `this` la obiectul pasat și argumentele pot fi pasate așa cum sunt.
 
@@ -153,6 +155,6 @@ faCeva.call(null, ['o banană', ' și un măr']);
 // Am primit o banană, și un măr
 ```
 
-### `Function.prototype.toString()`
+### Function.prototype.toString()
 
 Returnează un șir de caractere, care reprezintă codul sursă al acelei funcții.
