@@ -2,9 +2,7 @@
 
 ## Perspectivă generală
 
-Pentru a face o analogie utilă poți să-ți imaginezi că o funcție este un port la mare. Portul are dane. Fiecare dană are un nume sau un număr. Poți trimite câte o navă (argument) în fiecare dană (parametru), dar pot fi mult mai multe nave în rada (arity) portului, pe care le ține evidența căpitănia (obiectul arguments). Fiecare navă conține bunuri (valori) pe care le vom prelucra în oraș.
-
-Argumentele sunt valorile pasate funcțiilor. Numărul de parametri menționați la declararea funcției, se numește în jargonul programatorilor **arity**. Poți chiar să întrebi o funcție câți parametri are prin utilizarea proprietății `length` (în limba engleză, `length` înseamnă dimensiune, lungime).
+Pentru a face o analogie utilă poți să-ți imaginezi că o funcție este un port la mare. Portul are dane. Fiecare dană are un nume sau un număr. Poți trimite câte o navă (argument) în fiecare dană (parametru), dar pot fi mult mai multe nave în rada portului (arity). Evidența navelor din radă o ține căpitănia (obiectul arguments). Fiecare navă conține bunuri (valori) pe care le vom prelucra în oraș (funcție). Poți chiar să întrebi o funcție câți parametri are prin utilizarea proprietății `length` (în limba engleză, `length` înseamnă dimensiune, lungime).
 
 ```javascript
 function facCeva (x, y) {
@@ -13,7 +11,7 @@ function facCeva (x, y) {
 facCeva.length; // 2
 ```
 
-De fapt, poți să spui că **arity**, adică totalitatea parametrilor menționați între parantezele rotunde, anunță programatorii ce este de așteptat ca și număr de valori necesare funcției pentru a evalua codul. Dimensiunea acestui **arity** poate să fie raportată diferit în funcție de valorile pasate.
+De fapt, poți să spui că **arity**, adică totalitatea parametrilor menționați între parantezele rotunde, anunță programatorii ce este așteptat ca număr de valori necesare evaluării codul. Dimensiunea acestui **arity** poate să fie raportată diferit în funcție de valorile pasate.
 
 ```javascript
 function fac1 (x, y) {}; fac1.length; // 2
@@ -22,9 +20,9 @@ function fac3 ({x, y}) {}; fac3.length; // 1
 function fac4 (x, ...y) {}; fac4.length; // 1
 ```
 
-Fiecare argument trebuie pasat funcției în ordinea corectă pentru că valoarea sa se va „lega” de numele desemnat de programator între parantezele rotunde. Aceste nume, de fapt identificatori, se numesc parametri. Ca să clarificăm, valorile pasate unei funcții se numesc argumente, iar identificatorii menționați între paranteze (în jargon i se spune headerul funcției), de care se leagă aceste valori, se numesc parametri. Acum că lucrurile sunt limpezite, trebuie să adăugăm faptul că o funcție poate primi mult mai multe argumente față de ceea ce este precizat ca și parametri. Valorile acestea nu se pierd în neant. Ele vor putea fi regăsite în obiectul special `arguments`, dar dacă vei trimite mai puține argumente, restul parametrilor vor avea valoarea `undefined`.
+Fiecare argument trebuie pasat funcției în ordinea corectă pentru că valoarea sa se va „lega” de numele desemnat de programator între parantezele rotunde. Aceste nume, de fapt identificatori, se numesc parametri. Ca să clarificăm, valorile pasate unei funcții se numesc argumente, iar identificatorii menționați între paranteze (headerul funcției), de care se leagă aceste valori, se numesc parametri. O funcție poate primi mult mai multe argumente față de ceea ce este precizat ca parametri. Valorile acestea nu se pierd în neant. Ele vor putea fi regăsite în obiectul special `arguments`, dar dacă vei trimite mai puține argumente, restul parametrilor vor avea valoarea `undefined`. Parametrii vor face parte din mediul lexical al funcției.
 
-Toate aceste detalii sunt utile pentru că la un moment dat este necesară executarea unei funcții în funcție de numărul parametrilor săi. Poate să existe și cazul în care dorești un anumit parametru să stea întotdeauna pe ultima poziție pentru că, de fapt, acesta este la rândul său o funcție cu rol de callback.
+Toate aceste detalii sunt utile pentru că la un moment dat este necesară executarea unei funcții în funcție de numărul parametrilor săi. Poate să existe și cazul în care dorești un anumit parametru să stea întotdeauna pe ultima poziție pentru că, de fapt, acesta este la rândul său o funcție cu rol de callback (va fi apelată in interiorul funcției).
 
 ```javascript
 let x = 10, y = function init () { return `Salut, ${x}!` };
@@ -39,16 +37,15 @@ if (fac2.length == 2) {
 }; // "Salut, 10!"
 ```
 
-Amintește-ți mereu faptul că proprietatea `length` este una care doar poate fi citită. Este **read-only**. Și acum că am aflat cum că numărăm parametrii, sunt absolut convins că mă vei întreba cum să numărăm și argumentele. Nimic mai simplu: obiectul **arguments** are la rândul său o proprietate `length` care poate fi folosită pentru a afla câte argumente au fost pasate funcției, de fapt `arguments.length`.
-
-Spunem despre o funcție care primește mai multe argumente decât numărul parametrilor că este una `variadică`.
+Amintește-ți mereu faptul că proprietatea `length` este una poate fi doar citită - *read-only*. Și acum că am aflat cum că numărăm parametrii, sunt absolut convins că mă vei întreba cum să numărăm și argumentele. Nimic mai simplu: obiectul **arguments** are la rândul său o proprietate `length` care poate fi folosită pentru a afla câte argumente au fost pasate funcției: `arguments.length`. Spunem despre o funcție care primește mai multe argumente decât numărul parametrilor că este una `variadică`.
 
 ## O imagine în adâncime
 
-Mai jos este dat un exemplu întărește afirmația: **o funcție este o rutină aplicată pe argumentele sale**. Exemplul se bazează pe funcționalitatea metodei `apply()` oferită prin moștenire din obiectul prototip al lui `Function`. (`Function.prototype.apply()`).
+Mai jos este dat un exemplu întărește afirmația: **o funcție este o rutină aplicată pe argumentele sale**. Exemplul se bazează pe funcționalitatea metodei `apply()` oferită prin moștenire din obiectul prototip al obiectului intern `Function`. (`Function.prototype.apply()`).
 
 ```javascript
-function oFunctie(x, y, z) {
+function oFunctie (x, y, z) {
+  // transformă obiectul arguments într-un array
   console.log([].slice.call(arguments)); // Array [ 0, 1, 2 ]
   console.log(...arguments); // 0 1 2
 };
@@ -60,11 +57,11 @@ Acest exemplu ilustrează în adâncime ceea ce se petrece cu argumentele unei f
 
 ### Ce este `arguments`?
 
-Este un obiect care este disponibil funcției la momentul execuției. Acesta permite accesul la toți parametrii.
+Este un obiect care este disponibil funcției la momentul execuției. Acesta permite accesul la toți parametrii. Atunci când pasăm unei funcții același număr de argumente câți parametri sunt, lucrurile sunt foarte clare. Ce te faci atunci când sunt pasați mult mai mulți parametri? Trebuie să fie o structură capabilă să înmagazineze surplusul. Pentru funcțiile variadice, această structură este obiectul `arguments`.
 
 **Spune standardul**:
 
-> Majoritatea funcțiilor ECMAScript pun la dispoziția propriului cod un obiect arguments.
+> Majoritatea funcțiilor ECMAScript pun la dispoziția propriului cod un obiect `arguments`.
 
 ```javascript
 function ceva (unu, doi) {
@@ -73,11 +70,11 @@ function ceva (unu, doi) {
 ceva(); // "[object Arguments]"
 ```
 
-Scenariul în care va fi folosit acest obiect este cel al funcțiilor care primesc un număr variabil de argumente.
+Scenariul comun în care este folosit acest obiect este cel al funcțiilor care primesc un număr variabil de argumente.
 
 **Sfatul lui Crockford**:
 
-> tratează `arguments` ca pe o structură read-only (doar pe care să o citești), pentru că, altfel, poți modifica fără să-ți dorești valorile și ordinea parametrilor funcției.
+> tratează `arguments` ca pe o structură read-only (pe care doar o citești), pentru că, altfel, poți modifica fără să-ți dorești valorile și ordinea parametrilor funcției.
 
 ```javascript
 function testX (unu, doi) {
@@ -106,9 +103,9 @@ ex(1,2);
 console.log(window.trei);
 ```
 
-### Efectul use strict
+### Efectul rulării sub "use strict"
 
-În interiorul unei funcții, pentru că un parametru poate fi modificat, el fiind parte din mediul lexical format la execuția funcției, obiectul „arguments” este și el actualizat. Acest comportament este atunci când codul rulează fără restricția `"use strict";`. Dar când codul este rulat în `strict mode`, valorile inițiale din „arguments” rămân neschimbate.
+În interiorul unei funcții, pentru că un parametru poate fi modificat, el fiind parte din mediul lexical format la execuția funcției, obiectul `arguments` este și el actualizat. Acest comportament este atunci când codul rulează fără restricția `"use strict";`. Dar când codul este rulat în `strict mode`, valorile inițiale din `arguments` rămân neschimbate.
 
 ```javascript
 function demoArgs (unu) {
@@ -132,12 +129,12 @@ demoArgs(10);
 
 Am văzut deja mai sus metoda prin care putem transforma `arguments` într-un array, dar există și alte metode pentru a gestiona argumentele pasate unei funcții, dar și parametrii.
 
-Noua sintaxă ES6 a introdus operatorul (trei puncte), care în funcție de cazul de utilizare, poate **colecta** într-un array argumentele, care nu au fost asociate cu un parametru sau la invocarea unei funcții, poate **desface** un array și fiecare valoare a acelui array va fi un argument trimis funcției.
+Noua sintaxă ES6 a introdus operatorul (trei puncte), care în funcție de cazul de utilizare, poate **colecta** într-un array argumentele care nu au fost asociate cu un parametru sau la invocarea unei funcții, poate **desface** un array și fiecare valoare a acelui array va fi un argument trimis funcției.
 
 ```javascript
 // adunarea într-un array a argumentelor neasociate parametrilor
 function facCeva (x, y, ...z) {};
-// spargerea unui array în argumente necesare unei functii
+// spargerea unui array în argumentele necesare unei functii
 let colectie = [2, 4, 10];
 prelucrezNr(...colectie);
 ```

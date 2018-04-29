@@ -1,7 +1,7 @@
 # Operatorul rest/spread (`...`)
 
 Acest operator produce confuzie pentru că se numește diferit în funcție de ce este pus să facă.
-Este un operator nou introdus de ECMAScript 2015, fiind inspirat de CoffeeScript (operatorul *splats*), care la rândul său a fost adoptat din Ruby. Acest operator foarte util funcționează pentru toate obiectele care au implementat protocolul de iterare, adică Symbol-ul intern `@@iterator` (dacă arunci o privire la obiectul intern Symbol găsești că este o proprietate statică). Deci, tot ce este iterabil, poate fi folosit cu acest operator. Șirurile de caractere și array-urile sunt iterabile, adică intern au implementat protocolul de iterare.
+Este un operator nou introdus de ECMAScript 2015, fiind inspirat de CoffeeScript (operatorul *splats*), care la rândul său a fost adoptat din Ruby. Acest operator foarte util funcționează pentru toate obiectele care au implementat *protocolul de iterare*. Deci, tot ce este iterabil, poate fi folosit cu acest operator. Șirurile de caractere și array-urile sunt iterabile, adică intern au implementat protocolul de iterare.
 
 Exemplul cel mai facil pentru o mică încălzire este să iei un șir de caractere și să-l transformi într-un array al caracterelor sale.
 
@@ -13,59 +13,22 @@ var arr = [...sir];
 var arr2 = sir.split("");
 ```
 
-**Parametrii rest** se deosebesc de **operatorul spread**.
-
 ## Parametrii `rest`
 
-Parametrii rest permit agregarea mai multor argumente independente, care nu au fost atribuite unor argumente deja existente într-un array.
+Lista parametrilor unei funcții este într-un context (*assignment context*) care permite atribuirea valorilor venite prin argumentele pasate funcției. Operatorul `...` folosit într-un context de atribuire, strânge valorile într-un array. Dacă folosești un `rest parameter` împreună cu alte argumente care vor fi pasate individual, asigură-te că cele individuale stau primele, iar `rest`-ul este la final.
 
 ```javascript
-function ex(primul, ...multiAltii){
-  console.log(`Primul argument ${primul} și un array: ${multiAltii}`);
-}; ex(1, 2, 3, 4, 5); // Primul argument 1 și un array: 2,3,4,5
-```
-
-Adu-ți mereu aminte faptul că lista de parametri este într-un context care permite atribuirea valorilor (*assignment context*). Operatorul `...` folosit într-un context de asignare, strânge valorile într-un array.
-
-Din motive de semantică, unii programatori preferă să numească acest operator „gather”, care în limba română s-ar traduce „adună”. Semantic vorbind implică faptul că strânge, adună toți parametrii care nu sunt asignați deja, dar care au venit prin invocarea funcției și creează din ei un array adevărat.
-
-```javascript
-function faCeva (...argumentele) {
-  // dacă vreau să apelez alta functie
-  // voi putea folosi cealaltă posibilă
-  // acțiune ca operator spread, de desfacere
-  facAltceva(...argumentele);
+function faCeva (a, ...argumentele) {
+  console.log(argumentele);
 };
+faCeva(1,'a','b','c'); // Array [ "a", "b", "c" ]
 ```
 
-Aici mai este o utilitate faină. Dacă la apelarea din interior mai dorești să adaugi valori, pur și simplu le pui înaintea operatorului spread. În cazul anterior, trebuia să procedezi la un unshift după ce transformasei deja obiectul arguments într-un array.
-
-```javascript
-function faCeva (...argumentele) {
-  facAltceva('valoare', ...argumentele);
-}; // varianta elegantă declarativă
-
-// versus practica antică, imperativă
-function faAltceva () {
-  var arr = [].slice.call(arguments);
-  arr.unshift('valoare');
-  facDiferit.apply(null, arr);
-};
-```
-
-Atenție aici la o chestie care ar putea părea banală, dar care are mult sens pentru practica de zi cu zi să fie amintită.
-Dacă folosești un rest parameter, împreună cu alte argumente care vor fi pasate individual, asigură-te că cele individuale stau primele, iar `rest`-ul este la final.
-
-```javascript
-function faCeva (a, b = true, ...argumentele) {
-  facAltceva('valoare', ...argumentele);
-};
-```
+Cunoscând deja faptul că și obiectul `arguments` colectează toate argumentele pasate unei funcții indiferent câte sunt acestea, te vei întreba pe bună dreptate la ce este bun un rest parameter. Utilitatea este că acest rest parameter pune la dispoziției un array *curat* cu argumentele pe care le va prelua, nu un obiect care are nevoie de o prelucrare supplimentară pentru a-l face array.
 
 ## Operatorul `spread`
 
-Operatorul spread permite „desfacerea” (*spread* în limba română înseamnă a desface) unui array în elementele sale componente luate independent pentru a fi pasate unei funcții drept argumente.
-Acest operator folosește protocolul de iterare ceea ce înseamnă că obiectele pe care dorim să le transformăm, trebuie să aibe implementată metoda internă `@@iterator` prin intermediul lui Symbol.iterator. `arguments` are deja implementat protocolul de iterare în ECMAScript 2015.
+Operatorul spread permite „desfacerea” (*spread* în limba română înseamnă a desface) unui array în elementele sale componente luate independent pentru a fi pasate unei funcții drept argumente. Acest operator folosește protocolul de iterare. Obiectul `arguments` are deja implementat protocolul de iterare în ECMAScript 2015.
 
 ```javascript
 [..."012345"]
@@ -81,11 +44,12 @@ let birou = ['lampă', ...obiecte, 'scaun', 'tușieră'];
 birou; // Array [ "lampă", "pixuri", "creioane", "scaun", "tușieră" ]
 ```
 
-Permite transformarea unor obiecte array-like precum `arguments` și `NodeList` în array-uri adevărate.
-Anterior existenței acestui operator, aceste transformări se făceau prin aplicarea lui `slice` cu un `call`:
+Permite transformarea unor obiecte array-like precum `arguments` și `NodeList` în array-uri adevărate. Anterior existenței acestui operator, aceste transformări se făceau prin aplicarea secvențe `[].slice` cu un `call` pe obiect:
 
 ```javascript
-Array.prototype.slice.call();
+Array.prototype.slice.call(obi);
+// sau
+[].slice.call(obi)
 ```
 
 ## Combinarea array-urilor
