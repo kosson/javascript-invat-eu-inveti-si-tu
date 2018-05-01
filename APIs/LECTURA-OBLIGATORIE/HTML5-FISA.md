@@ -2,7 +2,7 @@
 
 ## HTML templates
 
-Elementul `template` este utilizat pentru a declara fragmente de HTML care pot fi clonate și inserate în document folosindu-se JavaScript.
+Elementul `template` este utilizat pentru a declara fragmente de HTML care pot fi clonate și inserate în document folosindu-se JavaScript. Aceste fragmente nu sunt vizibile la încărcarea paginii.
 
 ```html
 <template id="fisa-biblio">

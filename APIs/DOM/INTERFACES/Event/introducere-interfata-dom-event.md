@@ -24,19 +24,31 @@ Acest obiect are câteva fanioane care nu sunt setate inițial:
 
 ## Proprietăți și metode ale obiectului eveniment
 
-### numeEveniment.type
+Vom porni de la felul în care atașăm un event listener pentru a studia obiectul eveniment format.
+
+```javascript
+let tinta = document.querySelector('#tinta');
+tinta.addEventListener('click', function (eveniment) {
+  // eveniment este obiectul pe care DOM îl pasează
+  // event handler
+})
+```
+
+![](ObiectulEventTargetReprezentare.png)
+
+### eveniment.type
 
 La momentul creării evenimentului, atributul trebuie inițializat cu un șir vid. Type returnează valoarea cu care a fost inițializat evenimentul.
 
-### numeEveniment.target
+### eveniment.target
 
 Returnează obiectul pentru care s-a atașat evenimentul. Când este creat evenimentul, se va inițializa la `null`.
 
-### numeEveniment.currentTarget
+### eveniment.currentTarget
 
 Avem un event listener (un receptor). Acest event listener are o funcție cu rol de callback. Atunci când este invocată funcția callback, `currentTarget` returnează obiectul în contextul căreia callbackul rulează la momentul apelării. Este posibil ca ținta să se fi schimbat între timp. Când este creat evenimentul, se va inițializa la `null`.
 
-### numeEveniment.eventPhase
+### eveniment.eventPhase
 
 Indică faza în care se află evenimentul.
 
@@ -45,41 +57,41 @@ Indică faza în care se află evenimentul.
 -   `Event.AT_TARGET` - a ajuns la țintă, codat prin `2`; evenimentul a ajuns la țintă și a fost setată valoarea pentru proprietatea `target`. În acest moment, dacă `numeEveniment.bubbles` are valoarea `false`, procesarea evenimentului se încheie după această fază.
 -   `Event.BUBBLING_PHASE` - faza de bubbling, codată prin `3`; evenimentul a ajuns la țintă deja și s-a setat valoarea pentru proprietatea `target`. Dacă `numeEveniment.bubbles` are valoarea `true`, evenimentul se propagă din părinte în părinte până la `Window` declanșând toți receptorii de eveniment setați pentru faza de bubbling.
 
-### numeEveniment.stopPropagation()
+### eveniment.stopPropagation()
 
 Invocarea acestei metode într-un arbore conduce la stoparea propagării evenimentului dincolo de obiectul curent. Invocarea acestei metode conduce la setarea fanionului „stop propagation” care aparține obiectului context.
 
-### numeEveniment.stopImmediatePropagation()
+### eveniment.stopImmediatePropagation()
 
 Metoda este invocată atunci când ai nevoie să împiedici propagarea evenimentului imediat după ce funcțiile callback pentru receptorii de eveniment ai nodului curent la care evenimentul a ajuns, și-au încheiat execuția.
 Pentru a înțelege mai ușor, să presupunem că avem mai mulți receptori (*event listeners*) pentru același element și pentru același tip de eveniment. Aceștia sunt apelați în ordinea adăugării lor dar dacă în timpul unui astfel de apel `numeEveniment.stopImmediatePropagation()` a fost invocat, receptorii rămași nu vor mai fi apelați.
 
-### numeEveniment.bubbles
+### eveniment.bubbles
 
 Proprietatea returnează `true` sau `false` în funcție de modul în care a fost inițializat evenimentul. Dacă este `true`, atunci evenimentul se va propaga înapoi către `Window`; pe scurt, face bubbling.
 
-### numeEveniment.cancelable
+### eveniment.cancelable
 
 Indică printr-un boolean dacă un eveniment poate fi anulat sau nu. Verificarea dacă un evenimnet poate fi anulat sau nu, este ceva ce poate fi determinat la momentul inițierii evenimentului.
 
-### numeEveniment.preventDefault()
+### eveniment.preventDefault()
 
 Această metodă spune browserului că de nu există nimic care să gestioneze evenimentul, acesta să nu producă efectele. Totuși, evenimentul se va propaga cu specificația că nu va produce niciun efect iar dacă va da peste un event listener care apelează `stopPropagation()`, evenimentul va fi oprit din propagare.
 Atenție, funcționează doar dacă proprietatea `cancelable` este setată la `true`.
 
-### numeEveniment.defaultPrevented
+### eveniment.defaultPrevented
 
 Returnează `true` dacă a fost invocată `preventDefault()`.
 
-### numeEveniment.composed
+### eveniment.composed
 
 Returnează `true` sau `false` în funcție de modul în care a fost inițializat evenimentul. Este `true`, dacă s-a trecut din shadowDOM în DOM normal.
 
-### numeEveniment.isTrusted
+### eveniment.isTrusted
 
 Returnează `true` dacă evenimentul a fost emis de browser.
 
-### numeEveniment.timeStamp
+### eveniment.timeStamp
 
 Returnează timpul la care a apărut evenimentul.
 

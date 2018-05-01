@@ -1,6 +1,6 @@
 # Evenimente
 
-„Programarea dictată de evenimente se întâmplă atunci când un sistem este interesat de un set de evenimente, oferă o cale de a fi anunțat atunci când evenimentele se întâmplă și răspunde la acestea folosind callback-uri”. (*Beautiful Javascript*, Jonathan Barronville).
+„Programarea dictată de evenimente se întâmplă atunci când un sistem este interesat de un set de evenimente, oferă o cale de a fi anunțat atunci când evenimentele se întâmplă și răspunde la acestea folosind callback-uri”. (*Beautiful Javascript*, Jonathan Barronville). Evenimentele din DOM oferă o reprezentare a ceea ce se petrece în browser cum ar fi interacțiuni de bază precum click-uri de mouse sau activități de notificare a unor accesări de date la distanță, cam tot ce ar putea să însemne dinamică, acțiune.
 
 ## Mantre
 
@@ -13,7 +13,7 @@
 
 ## Anatomie
 
-Toate evenimentele implementează metodele interfeței `EventTarget`.
+Fiecare eveniment DOM, de fapt, este un obiect care se bazează pe interfața `Event`. Toate evenimentele implementează metodele interfeței `EventTarget`. Fiecare dintre evenimentele DOM are proprietăți și metode caracteristice care se adaugă celor puse la dispoziție de interfața `Event`.
 Pentru a răspunde unui eveniment, browserul, mai întâi trebuie să *captureze* evenimentul iar această etapă se numește „înregistrarea evenimentului” - `event registration`. Mecanismul prin care se face acest lucru este acela al setării de către programator a unor funcții de răspuns la acel eveniment. Aceste funcții de răspuns se numesc în limba engleză `event handlers`. Atunci când se creează evenimentul, de fapt este generat un obiect eveniment, care este asociat mai apoi de browser cu funcția de răspuns. Funcția de răspuns este mai apoi trimisă în coada de așteptare. Când stiva de execuție (call stack) este liberă, se trimite spre execuție funcția răspuns.
 
 Cel mai simplu event handler este cel pe care-l oferă un atribut pus direct în codul HTML.
@@ -233,3 +233,4 @@ Uneori pentru a gestiona mai multe elemente cu un singur eveniment, se va proced
 
 -   [Event order](https://quirksmode.org/js/events_order.html)
 -   [3.1. Event dispatch and DOM event flow](https://www.w3.org/TR/DOM-Level-3-Events/#event-flow)
+-   [UI Events. W3C Working Draft, 04 August 2016](https://www.w3.org/TR/DOM-Level-3-Events)
