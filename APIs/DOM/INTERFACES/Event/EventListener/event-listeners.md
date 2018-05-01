@@ -1,5 +1,21 @@
 # Event listeners - receptorii
 
+`EventListener` este o interfață care oferă un obiect capabil să gestioneze un eveniment emis de un obiect `EventTarget`. În acest moment, obiectul acceptă pentru a prelucra un callback din motive de compatibilitate, dar și obiecte destinate prelucrării.
+
+```javascript
+const buttonElement = document.getElementById('btn');
+// versiunea folosind callback
+buttonElement.addEventListener('click', function (event) {
+  alert('Am fost declanșat de un callback');
+});
+// versiunea folosind obiect
+buttonElement.addEventListener('click', {
+  handleEvent: function (event) {
+    alert('am fost declanșat de metoda handleEvent a obiectului!');
+  }
+});
+```
+
 ## Spune standardul
 
 > Un event listener poate fi utilizat pentru a observa un anumit eveniment (DOM living standard).

@@ -23,8 +23,10 @@ Am stabilit că un **callback** este o funcție, care este pasată ca argument a
 Ce-ar fi să ne imaginăm un identificator ca pe un cârlig cu care extragem valori din funcții?!
 
 ```javascript
-function producValoare () { return 2; };
-var extragValoare = producValoare();
+function producValoare () {
+  return 2;
+};
+let extragValoare = producValoare();
 // extragValoare închipuiește-l ca pe un extractor de valoare
 ```
 
@@ -56,9 +58,7 @@ aducResursa('mar', function () {
 });
 ```
 
-Totuși trebuie spus un lucru la care trebuie reflectat foarte adânc. Există momente când vei folosi biblioteci de cod externe, care vor prelua callback-ul pe care-l scrii, iar la final vor executa funcția scrisă de tine.
-
-Kyle Simpson pune câteva întrebări esențiale pentru verificarea și dobândirea siguranței în scenariul de lucru cu un callback:
+Totuși trebuie spus un lucru la care trebuie reflectat foarte adânc. Există momente când vei folosi biblioteci de cod externe, care vor prelua callback-ul pe care-l scrii, iar la final vor executa funcția scrisă de tine. Kyle Simpson pune câteva întrebări esențiale pentru verificarea și dobândirea siguranței în scenariul de lucru cu un callback:
 
 -   Ești sigur pe aplicația externă căreia îi pasezi callback-ul?
 -   Ești încredințat că va executa în parametrii doriți de tine codul din funcția pe care i-o pasezi ca și callback?
@@ -118,7 +118,7 @@ La invocarea funcției, asigură-te că ultimul argument pasat este funcția cal
 Exemplul de mai sus este unul **sincron**, adică unul care nu a deferit execuția callback-ului unui moment viitor în timp pentru că `adunare` ar fi blocat firul de execuție. Pur și simplu, evaluarea decurge normal. Acestea sunt invocate înainte ca o funcție să returneze. Callback-urile sincrone sunt invocate în firul de execuție originar. De exemplu, la invocarea unui callback cu `forEach`, acesta va fi performat pentru fiecare dintre elementele listei.
 
 Mai există cazul în care callback-urile funcționează **asincron**.
-Pentru a simula asincronicitatea, vom folosi utilitarul `setTimeout`, un API oferit de motor. Folosirea lui `setTimeout` implică fragmentarea în două calupuri de timp: cel al execuției utilitarului și cel al execuției codului din corpul funcției callback, care se va petrece la un moment viitor specificat.
+Pentru a simula asincronicitatea, vom folosi utilitarul `setTimeout`, un API oferit de motor. Folosirea lui `setTimeout()` implică fragmentarea în două calupuri de timp: cel al execuției utilitarului și cel al execuției codului din corpul funcției callback, care se va petrece la un moment viitor specificat.
 
 ```javascript
 // adunarea ca operațiune asincronă
@@ -187,7 +187,7 @@ Fii foarte atent că folosirea unui arrow function ca metodă într-un obiect li
 </script>
 ```
 
-Reține un amănunt foarte important. Atunci când folosești `bind()`, se creează o funcție nouă iar cea originală este nemodificată.
+Reține un amănunt foarte important. Atunci când folosești `bind()`, se creează o funcție nouă fără a o modifica pe cea originală.
 
 ## Closure-uri făcute de callback-uri
 
