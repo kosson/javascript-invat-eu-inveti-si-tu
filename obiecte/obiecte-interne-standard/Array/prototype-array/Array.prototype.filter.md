@@ -8,7 +8,7 @@ colectie.filter((element) => element > 20);
 // Array [ 23, 34 ]
 ```
 
-Pentru că această funcționalitate intră pe lanțurile de prelucrare a datelor, vom intra în mai multe detalii privind modul de funcționare a filtrărilor.
+Pentru că această funcționalitate intră pe lanțurile de prelucrare ale datelor, vom intra în mai multe detalii privind modul de funcționare a filtrărilor.
 
 ## Construiește de la 0 o funcție de filtrare
 
@@ -19,7 +19,7 @@ const colectie = ["prima", "a doua", "a treia", "a doua", "prima"];
 
 function filtrare (array, callback) {     // este o funcție „pură”, adică nu modifică array-ului original
   let colector = [];                      // declari un array care va colecta valorile, dacă sunt găsite
-  for(let i = 0; i < array.length; i++){  // ciclezi întregul array
+  for (let i = 0; i < array.length; i++) {  // ciclezi întregul array
     if( callback(array[i]) ) {            // dacă evaluarea callback-ului returnează true pentru valoarea căutată
       colector.push(array[i]);            // se încărcă colector cu elementele repetate, fiecare fiind valoarea
     };

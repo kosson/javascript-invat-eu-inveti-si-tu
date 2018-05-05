@@ -33,12 +33,12 @@ Reduce construiește pe ceea ce oferă `forEach` și `map` ducând mai departe c
 
 Funcția callback primește patru argumente și se va aplica pe fiecare element al array-ului:
 
-- `previousValue`: este valoarea acumulată până la momentul unei noi operațiuni. Aceasta este returnată de invocarea anterioară a callback-ului sau inițial este valoarea opțională pasată ca al doilea argument lui reduce,
-- `currentValue`: este elementul curent din array care este procesat,
-- `currentIndex`: indexul elementului care tocmai este procesat,
-- `obiectul`: chiar obiectul care trebuie parcurs.
+-   `previousValue`: este valoarea acumulată până la momentul unei noi operațiuni. Aceasta este returnată de invocarea anterioară a callback-ului sau inițial este valoarea opțională pasată ca al doilea argument lui `reduce`,
+-   `currentValue`: este elementul curent din array care este procesat,
+-   `currentIndex`: indexul elementului care tocmai este procesat,
+-   `obiectul`: chiar obiectul care trebuie parcurs.
 
-Pentru a înțelege mai repede reduce, este util să privim la următoarea secvență de cod:
+Pentru a înțelege mai repede `reduce`, este util să privim la următoarea secvență de cod:
 
 ```javascript
 ['unu', 'doi', 'trei'].reduce(function(acumulator, elementulDeLucru, index){
@@ -49,14 +49,14 @@ Pentru a înțelege mai repede reduce, este util să privim la următoarea secve
 
 ## Mantre
 
-- se mai numește și `fold`, adică o funcție care să plieze valori pe rezultatul computat deja,
-- este o metodă Array care primește drept argumente un callback și o valoare opțională,
-- `[1,2,3].reduce(reducător, valoareInitiala)` este, de fapt, o expresie care va fi evaluată la o singură valoare finală a acumulatorului,
-- callback-ul primește patru argumente: `valoareaAnterioara`, `valoareaDeLucru`, `indexCurent`, `array`,
-- când este primită ca argument valoarea opțională, aceasta devine `valoareaAnterioara`,
-- reduce() trebuie să returneze ceva neapărat,
-- când pasezi ca argument opțional un obiect, elementele array-ului devin cheile obiectului nou creat,
-- dacă valoarea opțională este un obiect, în acesta se pot specifica criterii de selecție `{varsta: [], sex[]}`.
+-   se mai numește și `fold`, adică o funcție care să plieze valori pe rezultatul computat deja,
+-   este o metodă Array care primește drept argumente un callback și o valoare opțională,
+-   `[1,2,3].reduce(reducător, valoareInitiala)` este, de fapt, o expresie care va fi evaluată la o singură valoare finală a acumulatorului,
+-   callback-ul primește patru argumente: `valoareaAnterioara`, `valoareaDeLucru`, `indexCurent`, `array`,
+-   când este primită ca argument valoarea opțională, aceasta devine `valoareaAnterioara`,
+-   reduce() trebuie să returneze ceva neapărat,
+-   când pasezi ca argument opțional un obiect, elementele array-ului devin cheile obiectului nou creat,
+-   dacă valoarea opțională este un obiect, în acesta se pot specifica criterii de selecție `{varsta: [], sex[]}`.
 
 ## Reduce în practică
 
@@ -93,13 +93,13 @@ Un exemplu de calcul pentru generarea unui obiect care să conțină pentru fiec
 // { 1: 1, 2: 4, 3: 9, 4: 16, 5: 25 }
 ```
 
-| [1,2,3,4,5]       | previousValue                      | currentValue  | currentIndex  | valoarea returnată                 |
-| :---------------- | :--------------------------------- | :------------ | :------------ | :--------------------------------- |
-| prima invocare    | {}                                 | 1             | 0             | { 1: 1 }                           |
-| a doua invocare   | { 1: 1 }                           | 2             | 1             | { 1: 1, 2: 4 }                     |
-| a treia invocare  | { 1: 1, 2: 4 }                     | 3             | 2             | { 1: 1, 2: 4, 3: 9 }               |
-| a patra invocare  | { 1: 1, 2: 4, 3: 9 }               | 4             | 3             | { 1: 1, 2: 4, 3: 9, 4: 16 }        |
-| a cincea invocare | { 1: 1, 2: 4, 3: 9, 4: 16 }        | 5             | 4             | { 1: 1, 2: 4, 3: 9, 4: 16, 5: 25 } |
+| \[1,2,3,4,5]      | previousValue               | currentValue | currentIndex | valoarea returnată                 |
+|:----------------- |:--------------------------- |:------------ |:------------ |:---------------------------------- |
+| prima invocare    | {}                          | 1            | 0            | { 1: 1 }                           |
+| a doua invocare   | { 1: 1 }                    | 2            | 1            | { 1: 1, 2: 4 }                     |
+| a treia invocare  | { 1: 1, 2: 4 }              | 3            | 2            | { 1: 1, 2: 4, 3: 9 }               |
+| a patra invocare  | { 1: 1, 2: 4, 3: 9 }        | 4            | 3            | { 1: 1, 2: 4, 3: 9, 4: 16 }        |
+| a cincea invocare | { 1: 1, 2: 4, 3: 9, 4: 16 } | 5            | 4            | { 1: 1, 2: 4, 3: 9, 4: 16, 5: 25 } |
 
 ### Numără de câte ori apare un cuvânt
 
@@ -111,9 +111,9 @@ var colectie = ['mânătărci', 'bureți', 'gălbiori', 'ghebe', 'mânătărci',
 /** 1. Varianta defalcată */
 var valoareaDeStart = {};
 var reducator = function(acumulator, cuvant){
-  if(!acumulator[cuvant]){
+  if (!acumulator[cuvant]) {
     acumulator[cuvant] = 1;
-  }else{
+  } else {
     // acumulator[cuvant] = acumulator[cuvant] + 1;
     acumulator[cuvant] += 1;
   };
@@ -179,12 +179,12 @@ Dacă array-ul are o singură valoare indiferent de poziția acesteia și nu est
 }); // 10
 ```
 
-|                  | previousValue | currentValue  | currentIndex  | array           | valoarea returnată  |
-| :--------------- | :------------ | :------------ | :------------ | :-------------- | :------------------ |
-| prima invocare   | 0             | 1             | 1             | [0, 1, 2, 3, 4] | 1                   |
-| a doua invocare  | 1             | 2             | 2             | [0, 1, 2, 3, 4] | 3                   |
-| a treia invocare | 3             | 3             | 3             | [0, 1, 2, 3, 4] | 6                   |
-| a patra invocare | 6             | 4             | 4             | [0, 1, 2, 3, 4] | 10                  |
+|                  | previousValue | currentValue | currentIndex | array            | valoarea returnată |
+|:---------------- |:------------- |:------------ |:------------ |:---------------- |:------------------ |
+| prima invocare   | 0             | 1            | 1            | \[0, 1, 2, 3, 4] | 1                  |
+| a doua invocare  | 1             | 2            | 2            | \[0, 1, 2, 3, 4] | 3                  |
+| a treia invocare | 3             | 3            | 3            | \[0, 1, 2, 3, 4] | 6                  |
+| a patra invocare | 6             | 4            | 4            | \[0, 1, 2, 3, 4] | 10                 |
 
 Rezultatul lui reduce este la final 10.
 Varianta ES6 a aceleiași funcții reduce arată astfel:
@@ -200,13 +200,13 @@ Dacă s-ar oferi o valoare inițială ca al doilea argument:
   return previousValue + currentValue;
 }, 10);
 ```
-|                  | previousValue | currentValue  | previousIndex | array           | valoarea returnată  |
-| :--------------- | :------------ | :------------ | :------------ | :-------------- | :------------------ |
-| prima invocare   | 10            | 0             | 0             | [0, 1, 2, 3, 4] | 10                  |
-| a doua invocare  | 10            | 1             | 1             | [0, 1, 2, 3, 4] | 11                  |
-| a treia invocare | 11            | 2             | 2             | [0, 1, 2, 3, 4] | 13                  |
-| a patra invocare | 13            | 3             | 3             | [0, 1, 2, 3, 4] | 16                  |
-| a patra invocare | 16            | 4             | 4             | [0, 1, 2, 3, 4] | 20                  |
+|                  | previousValue | currentValue | previousIndex | array            | valoarea returnată |
+|:---------------- |:------------- |:------------ |:------------- |:---------------- |:------------------ |
+| prima invocare   | 10            | 0            | 0             | \[0, 1, 2, 3, 4] | 10                 |
+| a doua invocare  | 10            | 1            | 1             | \[0, 1, 2, 3, 4] | 11                 |
+| a treia invocare | 11            | 2            | 2             | \[0, 1, 2, 3, 4] | 13                 |
+| a patra invocare | 13            | 3            | 3             | \[0, 1, 2, 3, 4] | 16                 |
+| a patra invocare | 16            | 4            | 4             | \[0, 1, 2, 3, 4] | 20                 |
 
 ### Însumarea valorilor dintr-un array:
 
@@ -269,16 +269,19 @@ console.log(total); // 1836
 Varianta clasică ar fi următoarea:
 
 \#1. faci o funcție care trece în buclă fiecare element al array-ului căreia îi pasezi array-ul cu șiruri.
+
 Condiții:
-- inițiezi o variabilă contor,
-- inițiezi o variabilă care va ține valoarea celui mai mare șir,
-- contorul să fie mai mic decât valoarea dimensiunii array-ului,
-- preincrementezi contorul înainte de orice ai face pe fiecare ciclu.
+
+-   inițiezi o variabilă contor,
+-   inițiezi o variabilă care va ține valoarea celui mai mare șir,
+-   contorul să fie mai mic decât valoarea dimensiunii array-ului,
+-   preincrementezi contorul înainte de orice ai face pe fiecare ciclu.
 
 \#2. Testezi dacă dimensiunea șirului (element al array-ului) este mai mare decât dimensiunea șirului găsit anterior.
-- DA -> atunci valoarea lui `celMaiLung` este suprascrisă cu noua valoare;
-- NU -> returnează valoarea lui celMaiLung;
-- Aceeași operațiune de comparare se face pentru toate elementele array-ului cu valoarea găsită anterior până când este păstrată cea mai mare.
+
+-   DA -> atunci valoarea lui `celMaiLung` este suprascrisă cu noua valoare;
+-   NU -> returnează valoarea lui celMaiLung;
+-   Aceeași operațiune de comparare se face pentru toate elementele array-ului cu valoarea găsită anterior până când este păstrată cea mai mare.
 
 ```javascript
 var colectie = ['ceva', 'altceva', 'telejurnal', 'agave'];
@@ -294,7 +297,7 @@ function cautaSirLung (colectie) {
 cautaSirLung(colectie); // telejurnal
 ```
 
-Varianta folosind reduce:
+Varianta folosind `reduce`:
 
 ```javascript
 function cautaSirLung(colectie){

@@ -1,4 +1,4 @@
-# `Array.prototype.find()`
+# Array.prototype.find()
 
 Metoda a fost proiectată cu scopul de a descoperi un element din array care se potrivește după o condiție și mai puțin după o valoare. Este recomandabilă folosirea metodelor `indexOf()` sau `lastIndexOf()`, dacă este țintită valoarea.
 
@@ -6,9 +6,9 @@ Returnează valoarea căutată într-un array. Dacă un element al array-ului sa
 
 Metodele `find()` și `findIndex()` primesc două argumente: o funcție callback și o referință către un obiect care va fi folosit drept `this`. Funcția cu rol de callback poate primi trei argumente:
 
-- **elementul** care este procesat,
-- **indexul** elementului care este procesat,
-- **array**-ul pentru care `find()` a fost invocat.
+-   *elementul* care este procesat,
+-   *indexul* elementului care este procesat,
+-   *array*-ul pentru care `find()` a fost invocat.
 
 Pur și simplu sare în ochi faptul că sunt pasate aceleași lucruri ca și lui `map()` sau lui `forEach()`.
 Revenind la `find()`, funcția callback ar trebui să returneze `true` dacă valoarea pasată drept cheie de căutare este găsită între elemente. În cazul în care este găsit un element care se potrivește, ambele metode vor returna `true`. Singura diferență între cele două este că `find()` returnează valoarea, iar `findIndex()`, indexul la care a fost găsită aceasta.
