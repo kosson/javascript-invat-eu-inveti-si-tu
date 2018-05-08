@@ -7,7 +7,7 @@ Dicționarul explicativ ne dă o definiție foarte utilă pentru iterare: *repet
 ## Bucle
 
 Buclele sunt cel mai la îndemână instrument de a parcurge un set de date.
-Folosirea buclelor presupune utilizarea repetată a unei secvențe de instrucțiuni. Îi mai spunem **ciclare** sau **iterare**. În fapt, ceea ce se întâmplă este o repetarea ritmică a unui set de instrucțiuni. Fiecare rezultat al fiecărei iterații este supus verificările.
+Folosirea buclelor presupune utilizarea repetată a unei secvențe de instrucțiuni. Îi mai spunem **ciclare** sau **iterare**. În fapt, ceea ce se întâmplă este o repetarea ritmică a unui set de instrucțiuni. Fiecare rezultat al fiecărei iterații este supus verificărilor.
 
 ## Recursivitatea
 
@@ -17,7 +17,15 @@ Alternativa la procesele repetitive, la ciclurile iterative realizate cu buclele
 
 Am menționat deja despre protocoalele de iterare. ECMAScript 2015 (ES6) a introdus un nou mecanism de parcurgere a datelor numit **iterare**. Mai exact, un **protocol de iterare** pentru că iterarea ca și concept este în ADN-ul programării.
 
-### Ce înseamnă iterare
+În anul 1994, patru specialiști în informatică căutau să unifice soluțiile folosite în practica programării computerelor în șabloane ușor de înțeles. Cei patru, Erich Gamma, Richard Helm, Ralph Johnson și John Vlissides, numiți de comunitate *Gang of Four*, investighează în lucrarea *Design Patterns: Elements of Reusable Object-Oriented Software* mai multe soluții uniformizate la nivel abstract prin ceea ce se numește *design patterns*. Unul dintre acestea se numește *Iterator*, fiind catalogat a fi un model, un șablon comportamental. Intenția acestui model de organizare a funcționalităților era de a:
+
+> Oferi o cale pentru a accesa secvențial elementele unui obiect agregat fără a expune reprezentarea sa internă.
+
+Este menționat faptul că acestui șablon i se mai spune și *Cursor* și cea mai importantă mențiune este legată de domeniul de aplicatibilitate. Astfel, un șablon Iterator este construit pentru *a oferi o interfață uniformă pentru traversarea diferitelor structuri de agregare*.
+
+### Cum se face iterarea
+
+Pentru a lămuri aspectele legate de cum se petrece o iterare, vom recurge din nou la explicațiile *GoF*, care spun că iterarea este un algoritm de parcurgere (în engleză *traversal*) a unei structuri de date care folosește un *cursor* a cărui sarcină este să țină minte unde a ajuns (să memoreze starea). Dacă acest cursor este acționat cu o comandă next, își va modifica starea imediat ce va fi parcurs încă un element al structurii de date.
 
 Atunci când rezultatul unui pas devine valoarea de start pentru următorul, atunci vorbim despre iterare. În acest moment avem două concepte centrale care merită atenția noastră deplină:
 

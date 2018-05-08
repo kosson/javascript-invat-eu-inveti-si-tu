@@ -1,6 +1,6 @@
 # Array.prototype.filter()
 
-Funcția de filtrare păstrează valorile dintr-o colecție pe care o parcurge în funcție de anumite criterii care sunt expresii ale unei funcții callback. Principiul de bază este acela ca funcția callback să returneze o valoare de adevăr pentru elementul curent supus analizei. La final, este returnat un alt array care conține valorile pentru care funcția callback a returnat o valoare de adevăr. Array-ul original nu este modificat.
+Această metodă poate fi înțeleasă ca un test aplicat fiecărui element dintr-un array. Testarea se face după anumite criterii introduse de o funcție callback. Funcția callback returnează o valoare de adevăr pentru elementul curent supus analizei. Dacă un element trece testul, acesta este adăugat unui nou array. Array-ul original nu este modificat.
 
 ```javascript
 const colectie = [23, 34, 2, 10];
@@ -8,7 +8,8 @@ colectie.filter((element) => element > 20);
 // Array [ 23, 34 ]
 ```
 
-Pentru că această funcționalitate intră pe lanțurile de prelucrare ale datelor, vom intra în mai multe detalii privind modul de funcționare a filtrărilor.
+Metoda `filter()` face parte integrantă din metodele obiectului intern `Array`. Alături de `map()` și `reduce()` face parte integrantă din paradigma „programării funcționale”.
+Această funcționalitate intră pe lanțurile de prelucrare ale datelor.
 
 ## Construiește de la 0 o funcție de filtrare
 
@@ -55,7 +56,7 @@ let rezultat = filtrare (colectie, function (element) {
 console.log(JSON.stringify(rezultat, null, ' '));
 ```
 
-Metoda `filter()` face parte integrantă din metodele obiectului intern `Array`. Alături de `map()` și `reduce()` face parte integrantă din paradigma „programării funcționale”. Un exemplu de filtrare pentru valorile care sunt truthy, care conțin ceva.
+Un exemplu de filtrare pentru valorile care sunt truthy, care conțin ceva.
 
 ```javascript
 const data = [ "bar", "foo", "", 0 ];

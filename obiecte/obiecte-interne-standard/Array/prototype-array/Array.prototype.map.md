@@ -1,7 +1,6 @@
 # Array.prototype.map()
 
-Metoda creează un nou array care cuprinde valorile rezultate din executarea unei funcții callback pentru fiecare dintre elementele unui array căruia i se aplică.
-Pentru fiecare element din array, se execută funcția callback, iar rezultatul devine un element al unui nou array. Această metodă împreună cu `filter()` și `reduce()` sunt baza programării funcționale (stil de programare bazat pe folosirea funcțiilor).
+Metoda creează un nou array fără a-l modifica pe cel original. Noul array cuprinde valorile rezultate din executarea unei funcții callback pentru fiecare dintre elemente. Această metodă împreună cu `filter()` și `reduce()` sunt baza programării funcționale (stil de programare bazat pe folosirea funcțiilor).
 
 Metoda `map()` are doi parametri:
 
@@ -18,7 +17,7 @@ Noul array constituit are fix același număr de elemente cu cel original.
 
 ## Anatomie
 
-Vă mai aduceți aminte de rima copilăriei *cei patru Evangheliști erau trei: Luca și Matei*. Cam așa ai putea privi și aplicarea lui `map()` sau *maparea* așa cum s-a înrădăcinat printre programatorii români. Sunt două lucruri esențiale în lucru: funcția callback și setarea legăturii lui `this`. În jocul de-a *maparea* lucrăm cu elementul de array pentru care facem niște operațiuni.
+Vă mai aduceți aminte de rima copilăriei *cei patru Evangheliști erau trei: Luca și Matei*. Cam așa ai putea privi și aplicarea lui `map()` sau *maparea* așa cum au calchiat mulți programatori români. Sunt două mecanisme esențiale în lucru: funcția callback și setarea legăturii lui `this`. În jocul de-a *maparea*, lucrăm cu elementele din array pentru care facem niște operațiuni.
 
 ```javascript
 // ceva foarte rapid
@@ -29,46 +28,16 @@ Vă mai aduceți aminte de rima copilăriei *cei patru Evangheliști erau trei: 
 Cel de-al doilea este `this` poate fi setat la alt obiect ale cărui date vrem să le folosim în contextul nostru de prelucrare.
 
 ```javascript
-let colectie = [1, 'primul', true];
-colectie.map( function test (elem, index, array) {
-  console.log(typeof elem + ' ' + 'index: ' + index + ' ' + array + this);
-});
-
-/*
-number  index: 0 1,primul,true[object Window]
-string  index: 1 1,primul,true[object Window]
-boolean index: 2 1,primul,true[object Window]
- */
+const obi = {id: 'primo', colectie: [1, 'primul', true]};
+const obix = {id: 'secundo', colectie: ['ceva', 1000, true]};
+obi.colectie.map( function test (elem, index, array) {
+ console.log(`elem: ${elem}; context: ${this.id}`);
+}, obix);
+// Cu arrow function, nu poți seta this - va fi undefined
+obi.colectie.map( (elem, index, array) => console.log(`elem: ${elem}; context: ${this.id}`), obix);
 ```
 
-Cum procedezi atunci când vrei să prelucrezi un array al unei proprietăți al unui obiect.
-
-```javascript
-let obi = {
-  id: 'obiect 1',
-  colectie: [1, 'primul', true]
-};
-obi.colectie.map(function test (elem, index, array) {
-  console.log('context: ' + this.id + ' ' + typeof elem + ' ' + 'index: ' + index + ' ' + array + this);
-});
-/*
-context: undefined number index: 0 1,primul,true[object Window]
-context: undefined string index: 1 1,primul,true[object Window]
-context: undefined boolean index: 2 1,primul,true[object Window]
- */
- let obi = {id: 'primo', colectie: [1, 'primul', true]};
- let obix = {id: 'secundo', colectie: ['ceva', 1000, true]};
- obi.colectie.map(function test(elem, index, array){
-   console.log('context: ' + this.id + ' ' + typeof elem + ' ' + 'index: ' + index + ' ' + array + this);
- }, obix);
-/*
-context: secundo number index: 0 1,primul,true[object Object]
-context: secundo string index: 1 1,primul,true[object Object]
-context: secundo boolean index: 2 1,primul,true[object Object]
- */
-```
-
-Opțional se mai poate pasa o valoare care să reprezinte `this` la executarea callback-ului.
+La executarea callback-ului, `this` a fost setat la cel de-al doilea obiect.
 
 ## Mantre
 
@@ -78,20 +47,20 @@ Opțional se mai poate pasa o valoare care să reprezinte `this` la executarea c
 
 ## Construcția unui mapper de la 0
 
-Pentru a înțelege felul în care funcționează intern funcția map, este foarte util să construim de la 0 un utilitar care să facă exact același lucru precum map din prototipul lui Array.
+Pentru a înțelege felul în care funcționează intern funcția `map()`, este foarte util să construim de la 0 un utilitar care să facă exact același lucru precum map din prototipul lui Array.
 
 ```javascript
-var colectie = ["prima", "a doua", "a treia", "a doua", "prima"];
+const colectie = ["prima", "a doua", "a treia", "a doua", "prima"];
 
 function mapper (array, callback) {
-  var mapate = [];                        // array-ul care va conține datele prelucrate
-  for(var i = 0; i < array.length; i++){  // pentru fiecare element al array-ului pasat ca parametru
+  let mapate = [];                        // array-ul care va conține datele prelucrate
+  for(let i = 0; i < array.length; i++){  // pentru fiecare element al array-ului pasat ca parametru
     mapate.push(callback(array[i]));      // trimite în array-ul nou valoarea rezultată din prelucrarea făcută în callback
   };
   return mapate;                          // returnează array-ul
 };
 
-var rezultatMapat = mapper (colectie, function(element) {
+const rezultatMapat = mapper (colectie, function(element) {
   // ia o colecție și un callback
   return element + ' prelucrare'; // returnează valoarea prelucrată
 });
@@ -104,10 +73,10 @@ console.log(rezultatMapat);
 O variantă mai simplă de mapper:
 
 ```javascript
-function mapper(functie, array){
+function mapper (functie, array) {
   let rezultat = [];
   for(let element of array){
-    rezultat.push(functie(element));
+    rezultat.push( functie(element) );
   };
   return rezultat;
 };
@@ -117,22 +86,24 @@ function mapper(functie, array){
 
 ```javascript
 let arr = [1, 2, 3], func = (el) => ++el ;
-function mapper(func, arr){
-  if(arr.length === 0){return [];};
+function mapper (func, arr) {
+  if(arr.length === 0){
+    return [];
+  };
   return [func([arr[0]])].concat(mapper(func, arr.slice(1)));
 }; mapper(func, arr); // [ 2, 3, 4 ]
 ```
 
-## Exemplificare a posibilităților de prelucrare
+## Exemplificarea posibilităților de prelucrare
 
 ### Transformarea unui obiect într-un șir url-encoded
 
 Un exemplu super privind ce se poate obține folosind metoda este construirea unui mic utilitar care să transforme valorile unui obiect într-un șir url-encoded.
 
 ```javascript
-var obiect = {paraunu: "unu", paradoi: "doi trei"};
+const obiect = {paraunu: "unu", paradoi: "doi trei"};
 
-var stringCodat = Object.keys(obiect)
+const stringCodat = Object.keys(obiect)
                         .map( function (key) {
                           return key + "=" + window.encodeURIComponent(obiect[key]);
                         })
@@ -146,30 +117,30 @@ console.log(stringCodat); // paraunu=unu&paradoi=doi%20trei
 Callbackul poate fi și o metodă a unui obiect intern standard:
 
 ```javascript
-var numereIntregi = [-2, 4, -23, 34];
+const numereIntregi = [-2, 4, -23, 34];
 console.log(numereIntregi.map(Math.abs)); //Array [ 2, 4, 23, 34 ]
 ```
 
 ### Extragerea unui array dintr-o colecție de obiecte.
 
 ```javascript
-var colectie = [
+const colectie = [
   {"nume": "Iulius", "id": 1},
   {"nume": "Alequin", "id": 2}
 ];
 
-var nume = colectie.map(element => element.nume);
+const nume = colectie.map(element => element.nume);
 console.log(nume); // Array [ "Iulius", "Alequin" ]
 ```
 
 ### Folosirea metodelor obiectelor interne operând valori din obiecte
 
 ```javascript
-var colectie = [
+const colectie = [
   {"nume": "Iulius", "id": 1},
   {"nume": "Alequin", "id": 2}
 ];
-var nume = colectie.map(element => element.nume);
+const nume = colectie.map(element => element.nume);
 console.log(nume.map(String.toLowerCase)); // Array [ "iulius", "alequin" ]
 // echivalentul ar fi fost declararea callback-ului astfel: console.log(nume.map(unNume => unNume.toLowerCase()));
 ```
@@ -184,17 +155,18 @@ Metoda map trimite trei argumente callback-ului:
 -   cheia elementului
 -   și array-ul întreg.
 
-Pentru acest fapt se poate realiza o împerechiere a elementelor din două array-uri diferite:
+Pentru acest fapt se poate realiza împerecherea elementelor din două array-uri diferite:
 
 ```javascript
-var stanga  = ['Ileana', 'Anca'],
-    dreapta = [21, 43];
+const stanga  = ['Ileana', 'Anca'],
+      dreapta = [21, 43];
 
 // în acest moment luăm array-ul stânga,
 // îl parcurgem element cu element și pentru fiecare element,
 // vom crea un obiect a cărui valori pentru proprietăți sunt chiar valorile din array-urile mapate.
-var colectie = stanga.map( (elem, index) => ({nume: elem, varsta: dreapta[index]}) );
+const colectie = stanga.map( (elem, index) => ({nume: elem, varsta: dreapta[index]}) );
 
-console.log(JSON.stringify(colectie)); // [{"nume":"Ileana","varsta":21},{"nume":"Anca","varsta":43}]
+console.log(JSON.stringify(colectie));
+// [{"nume":"Ileana","varsta":21},{"nume":"Anca","varsta":43}]
 // s-au folosit paranteze pentru că altfel `{}` ar fi indicat blocul de cod
 ```
