@@ -1,6 +1,10 @@
-Mai nou este numită Publish/Subscribe (Pub/Sub) - Publică/Abonează
+# Observable
 
-Permite unui obiect (cunoscut și sub numele de abonat) să „observe” alt obiect (cel care publica)
+Acest model/pattern are capacitatea de a modela codul necesar gestiunii relațiilor dintre un eveniment, cererile async către un server apărute în urma acelui eveniment și posibilele animații.
+
+Mai nou este numită Publish/Subscribe (Pub/Sub) - Publică/Abonează.
+
+Permite unui obiect (cunoscut și sub numele de abonat) să „observe” alt obiect (cel care publica). Un Observable poate fi și o colecție care vine într-o perioadă de timp.
 
 ## Metoda push
 

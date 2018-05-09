@@ -15,9 +15,11 @@ Callback-ul primește trei argumente:
 
 Noul array constituit are fix același număr de elemente cu cel original.
 
+Pentru cel mai simplu exemplu, vom extrage fragmentele de date care ne interesează dintr-un array de obiecte pe care l-am obținut de la un serviciu API.
+
 ## Anatomie
 
-Vă mai aduceți aminte de rima copilăriei *cei patru Evangheliști erau trei: Luca și Matei*. Cam așa ai putea privi și aplicarea lui `map()` sau *maparea* așa cum au calchiat mulți programatori români. Sunt două mecanisme esențiale în lucru: funcția callback și setarea legăturii lui `this`. În jocul de-a *maparea*, lucrăm cu elementele din array pentru care facem niște operațiuni.
+Ca proces veți mai auzi de *mapare* așa cum au calchiat mulți programatori români. Sunt două mecanisme esențiale în lucru: funcția callback și setarea legăturii lui `this`. În jocul de-a *maparea*, lucrăm cu elementele din array pentru care facem niște operațiuni.
 
 ```javascript
 // ceva foarte rapid
@@ -41,7 +43,7 @@ La executarea callback-ului, `this` a fost setat la cel de-al doilea obiect.
 
 ## Mantre
 
--   `map()` construiește un array nou din rezultate
+-   `map()` generează un array nou din rezultate
 -   Callback-ul este invocat doar pentru indexurile care au valori chiar dacă sunt `undefined`
 -   Callback-ul poate fi și o metodă a unui obiect intern standard al JavaScript
 
@@ -92,6 +94,18 @@ function mapper (func, arr) {
   };
   return [func([arr[0]])].concat(mapper(func, arr.slice(1)));
 }; mapper(func, arr); // [ 2, 3, 4 ]
+```
+
+Am mai găsit un exemplu prin care poți contrui o funcție de mapare.
+
+```javascript
+Array.prototype.map = function (funcProiectie) {
+  let arrayRezultat = [];
+  this.forEach(function (elemDeArray) {
+    arrayRezultat.push(funcProiectie(elemDeArray));
+  });
+  return arrayRezultat;
+};
 ```
 
 ## Exemplificarea posibilităților de prelucrare

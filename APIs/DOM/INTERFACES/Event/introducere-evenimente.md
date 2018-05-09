@@ -2,6 +2,8 @@
 
 „Programarea dictată de evenimente se întâmplă atunci când un sistem este interesat de un set de evenimente, oferă o cale de a fi anunțat atunci când evenimentele se întâmplă și răspunde la acestea folosind callback-uri”. (*Beautiful Javascript*, Jonathan Barronville). Evenimentele din DOM oferă o reprezentare a ceea ce se petrece în browser cum ar fi interacțiuni de bază precum click-uri de mouse sau activități de notificare a unor accesări de date la distanță, cam tot ce ar putea să însemne dinamică, acțiune.
 
+La momentul în care un eveniment se declanșează, apelarea callback-ul are drept efect returnarea către program a unor date prelucrate.
+
 ## Mantre
 
 -   HTML nu este DOM.
@@ -165,7 +167,7 @@ selecțieLink.addEventListener('click', (eveniment) => {
 
 Evenimentele sunt emise ca urmare a interacțiunii utilizatorului (a apăsat un buton) sau a încheierii unui proces cum ar fi accesarea asincronă a unor resurse. Unele evenimente pot să determine sau să controleze chiar comportamentul următoarelor evenimente care vor fi emise ca răspuns al primelor sau chiar poate fi urmat cursul anulării efectelor acțiunii primelor. Aceste acțiuni, aceste evenimente se numesc evenimente „anulabile” (*cancelable*), iar comportamentul pe care-l anulează este „efectul implicit” (*default action*) al evenimentului.
 
-Obiectele eveniment care pot fi anulate pot fi asociate cu una sau mai multe *efecte implicite*. Drept exemplu, standardul indică comportamentul unui eveniment `mouse down`. Pentru momentul în care utilizatorul apasă pe butonul mouse-ului pe un text sau poziționează săgeata mouse-ului pe o imagine, efectul implicit (*default action*) este ceea ce se întâmplă imediat după eveniment, iar acest lucru poate fi selecția textului sau modificarea imaginii. Anularea „efectului implicit” al evenimentului, de fapt anulează, acțiunile pe care le poți face după poziționarea mouse-ului: selectarea textului sau deplasarea imaginii.
+Obiectele eveniment care pot fi anulate pot fi asociate cu una sau mai multe *efecte implicite*. Drept exemplu, standardul indică comportamentul unui eveniment `mouse down`. Pentru momentul în care utilizatorul apasă pe butonul mouse-ului pe un text sau poziționează săgeata mouse-ului pe o imagine, efectul implicit (*default action*) este ceea ce se întâmplă imediat după eveniment, iar acest lucru poate fi selecția textului sau modificarea imaginii. Anularea „efectului implicit” al evenimentului, de fapt elimină acțiunile pe care le poți face după poziționarea mouse-ului: selectarea textului sau deplasarea imaginii.
 
 Un alt exemplu oferit este cel al bifării unui checkbox. Dacă evenimentului `click` îi este anulat „efectul implicit”, pe ecran nu va mai apărea căsuța bifată iar valoarea va fi restaurata la cea anterioară.
 
@@ -227,6 +229,18 @@ Uneori pentru a gestiona mai multe elemente cu un singur eveniment, se va proced
     event.target.tagName === "LI" ? console.log(event.target.textContent) : console.log(`Bump`);;
   });
 </script>
+```
+
+## Bună practică
+
+Caută ca după ce vei fi termiat de procesat evenimentul să elimini funcția receptor. Acest lucru eliberează memoria crescând performanțele.
+
+```javascript
+// atașează receptori pe evenimente
+let handler = (event) => console.log(event.target.textContent);
+document.addEventListener('click', handler);
+// după ce ai terminat cu ei, șterge-i!
+document.removeEventListener('click', handler);
 ```
 
 ## Resurse

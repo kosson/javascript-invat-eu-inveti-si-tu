@@ -1,7 +1,7 @@
 # Array.prototype.forEach()
 
-Această metodă a fost introdusă odată cu versiunea ES5 a standardului. Are drept element transformator o funcție, ceea ce permite o paletă largă de operațiuni asupra datelor prelucrate. Pe scurt, execută o funcție pentru fiecare element din array.
-În practică vei întâlni cazuri în care elementele unei colecții sunt obiecte la rândul lor.
+Această metodă a fost introdusă odată cu versiunea ES5 a standardului în anul 2011. Are drept element transformator o funcție, ceea ce permite o paletă largă de operațiuni asupra datelor prelucrate. Pe scurt, execută o funcție pentru fiecare element din array.
+În practică vei întâlni cazuri în care elementele unei colecții sunt obiecte la rândul lor, iar funcția callback pe care o vei executa, vei dori să ruleze în contextul acestora.
 
 Dacă ai înțeles modul de funcționare a buclelor cu `for`, din curiozitate ai ajuns aici pentru a trage cu ochiul la un pas înainte privind prelucrarea datelor. Mai întâi de toate, asigură-te că ai înțeles în adâncime funcțiile, cum se realizează un closure și cum este folosită o funcție în rolul de callback. Pentru a înțelege în adâncime metoda `forEach()`, cel mai bine ar fi să o reconstruim folosind `for`.
 
@@ -37,25 +37,34 @@ colecție.forEach( function (element) {
 colecție.forEach( element => console.log(`Am publicat ${element.titlu} în anul ${element.an}`) );
 ```
 
+## Argumentele callback-ului
+
 Funcția care va fi executată poate avea trei argumente:
 
 -   `currentValue`; elementul din array care este procesat,
 -   `index`; indexul elementului din array care este procesat,
 -   `array`; array-ul pentru care se aplică forEach().
 
-Opțional se mai poate pasa o valoare care să reprezinte `this` la executarea callback-ului.
-
-Metoda nu poate fi înlănțuită (chainable).
-Spre deosebire de `map()` și `reduce()`, `forEach()` returnează întotdeauna `undefined`.
+Opțional se mai poate pasa o valoare care să reprezinte `this` la executarea callback-ului. În cazul folosirii unui arrow function drept callback, parametrul care indică legătura la `this` se va omite pentru că se face automat la mediul lexical gazdă.
 
 ```javascript
 function logElementeArray (element, index, array) {
-  console.log('a[' + index + '] = ' + element);
+  console.log('a[' + index + '] = ' + element + this);
 };
 // A se nota faptul că index 2 este sărit pentru că
 // nu există element la acea poziție în array.
-[2, 5, , 9].forEach(logElementeArray);
+[2, 5, , 9].forEach(logElementeArray); // sparse
 // a[0] = 2
 // a[1] = 5
 // a[3] = 9
 ```
+
+ Spre deosebire de `map()` și `reduce()`, metoda `forEach()` returnează întotdeauna `undefined`.
+
+## Reguli de utilizare
+
+Metoda nu poate fi înlănțuită (în limba engleză *chainable*). Callback-ul nu va fi apelat pentru proprietăți ale unor indecși care au fost șterși sau care nu sunt inițializați - *sparse arrays*.
+
+În cazul în care avem de-a face cu un array dinamic, la care se adaugă elemente chiar în moment ce este executat `forEach()`, cele noi nu vor fi prelucrate. Dacă în momentul prelucrării cu `forEach()` sunt modificate valorile array-ului, metoda le va folosi pe cele găsite la momentul *trecerii*.
+
+Un `forEach` nu poate fi oprit in execuție decât prin semnalizarea unei erori.

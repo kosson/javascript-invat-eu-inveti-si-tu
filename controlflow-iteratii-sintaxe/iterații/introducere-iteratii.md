@@ -19,7 +19,7 @@ Am menționat deja despre protocoalele de iterare. ECMAScript 2015 (ES6) a intro
 
 În anul 1994, patru specialiști în informatică căutau să unifice soluțiile folosite în practica programării computerelor în șabloane ușor de înțeles. Cei patru, Erich Gamma, Richard Helm, Ralph Johnson și John Vlissides, numiți de comunitate *Gang of Four*, investighează în lucrarea *Design Patterns: Elements of Reusable Object-Oriented Software* mai multe soluții uniformizate la nivel abstract prin ceea ce se numește *design patterns*. Unul dintre acestea se numește *Iterator*, fiind catalogat a fi un model, un șablon comportamental. Intenția acestui model de organizare a funcționalităților era de a:
 
-> Oferi o cale pentru a accesa secvențial elementele unui obiect agregat fără a expune reprezentarea sa internă.
+> oferi o cale pentru a accesa secvențial elementele unui obiect agregat fără a expune reprezentarea sa internă.
 
 Este menționat faptul că acestui șablon i se mai spune și *Cursor* și cea mai importantă mențiune este legată de domeniul de aplicatibilitate. Astfel, un șablon Iterator este construit pentru *a oferi o interfață uniformă pentru traversarea diferitelor structuri de agregare*.
 
@@ -244,3 +244,4 @@ class UnGenerator {
 
 -   [MDN - Iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
 -   [Iterables and iterators](http://exploringjs.com/es6/ch_iteration.html)
+-   [Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)
