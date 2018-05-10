@@ -1594,9 +1594,9 @@ console.log(b); // true
 console.log(c()); // salut
 ```
 
-Ceea ce se întâmplă este că se vor genera în mediul lexical identificatori cărora li se vor atribui valorile din obiect. Poți percepe această operațiune ca pe un transfer din mediul lexical al unui obiect, în mediul lexical dorit.
+Ceea ce se întâmplă este că se vor genera identificatori cărora li se vor atribui valorile din obiect. Poți percepe această operațiune ca pe un transfer din mediul lexical al unui obiect, în mediul lexical dorit.
 
-Trebuie ca numele identificatorilor să fie identic cu cel al proprietăților obiectului din care se face **transferul** valorilor, dar se poate face și cu modificarea numelor variabilelor, dacă acest lucru este necesar.
+Trebuie ca numele identificatorilor să fie identic cu cel al proprietăților obiectului din care se face *transferul* valorilor, dar se poate face și cu modificarea numelor variabilelor, dacă acest lucru este necesar.
 
 ```javascript
 const obi = {unu: 1, doi: 2};
@@ -1719,7 +1719,7 @@ console.log( Object.getOwnPropertyNames(String).filter( function (p) {
 
 Pentru obiecte care nu sunt foarte stufoase, se poate folosi cu succes și `console.dir(nume_obiect)`.
 
-### Testare cu `for..in`
+### Testare cu for..in
 
 Dacă folosești un `for..in` vei obține toate cheile, adică și pe cele din prototip. Deci, nu funcționează corect. De ce se întâmplă acest lucru? Pentru că sunt luate în considerare și proprietățile moștenite prin prototip, care sunt setate ca `enumerable`. Motivul pentru care proprietățile lui `Object` nu apar este că acestea nu sunt `enumerable`.
 

@@ -48,7 +48,7 @@ Dacă în cazul lui `for` era nevoie să introduci expresiile opționale în blo
 
 ```javascript
 var colectie = [1, true, null, 'ceva'];
-for (let elemetn of colectie) {
+for (let element of colectie) {
   console.log(element);
 };
 ```
@@ -100,3 +100,23 @@ for(let [cheie, valoare] of Object.entries(obi)){
 ```
 
 După cum se observă am folosit **destructurarea** pentru a face declararea variabilelor. Fii foarte atent căci metodele vor fi reduse la `null` prin acțiunea lui `Object.entries(obi)`. Pentru că ești un om curios, te invit să faci un salt la destructurare pentru a citi măcar partea introductivă. Pe lângă destructurare ar trebui să mai faci un salt la obiectul intern `Object`, metoda `entries`.
+
+## Accesarea cheilor și a valorilor
+
+Uneori ai nevoie să accesezi cheile obiectului pe care-l iterezi. Soluția vine prin folosirea metodei `Array.prototype.keys()`.
+
+```javascript
+const colecție = [1, 2, 3];
+for (let idx of colecție.keys()) {
+  console.log(idx);
+}; // 0, 1, 2
+```
+
+Dar pentru a putea să te desprinzi complet de folosirea lui `for`, ai nevoie să folosești și valorile. Pentru a rezolva această problemă, vei putea apela la metoda `Array.prototype.entries()`.
+
+```javascript
+const colecție = [1, 2, 3];
+for (let [idx, val] of colecție.entries()) {
+  console.log(idx, val);
+};
+```
