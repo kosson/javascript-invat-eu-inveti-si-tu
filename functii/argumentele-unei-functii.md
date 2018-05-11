@@ -105,7 +105,7 @@ console.log(window.trei);
 
 ### Efectul rulării sub "use strict"
 
-În interiorul unei funcții, pentru că un parametru poate fi modificat, el fiind parte din mediul lexical format la execuția funcției, obiectul `arguments` este și el actualizat. Acest comportament este atunci când codul rulează fără restricția `"use strict";`. Dar când codul este rulat în `strict mode`, valorile inițiale din `arguments` rămân neschimbate.
+În interiorul unei funcții, pentru că un parametru poate fi modificat, acesta fiind parte din mediul lexical format la execuția funcției, obiectul `arguments` este și el actualizat. Avem acest comportament când evaluarea se face fără regula `"use strict";`. În caz contrar, valorile inițiale din `arguments` rămân neschimbate.
 
 ```javascript
 function demoArgs (unu) {
@@ -114,7 +114,7 @@ function demoArgs (unu) {
   console.log(unu === arguments[0]); // true
 };
 demoArgs(10);
-
+// față de
 function demoArgs (unu) {
   "use strict";
   console.log(unu === arguments[0]); // true
@@ -139,7 +139,7 @@ let colectie = [2, 4, 10];
 prelucrezNr(...colectie);
 ```
 
-Știind acest lucruri despre **sintaxa spread** introdusă de ES6, hai să vedem același exemplu, dar folosind acest nou operator:
+Hai să vedem același exemplu folosind acest nou operator:
 
 ```javascript
 function oFunctie (x, y, z) {
@@ -222,7 +222,7 @@ Sunt cazuri în care numărul argumentelor este mai mare decât cel al parametri
 
 ### Argumente care variază ca număr
 
-Până la standardul ECMAScript 2015, JavaScript nu permitea colectarea unui număr variabil de argumente într-un singur parametru. Pentru a face acest lucru, se recurgea la un truc care exploata argumentul pasat automat `arguments`:
+Până la standardul ECMAScript 2015 (ES6), JavaScript nu permitea colectarea unui număr variabil de argumente într-un singur parametru. Pentru a face acest lucru, se apela la un truc care exploata argumentul pasat automat lui `arguments`. Dar acest truc depinde de tratarea obiectului `arguments` ca un array, fiind necesară transformarea lui în array.
 
 ```javascript
 function test () {
@@ -231,7 +231,7 @@ function test () {
   // restul codului
 };
 
-// alternativa oferită de ECMAScript 2015
+// alternativa oferită de ECMAScript 2015 - ES6
 function test (primulArg, ...restulArgs) {
   // cod
   console.log(restulArgs); // Array [ 2, 3, 4, 5 ]
@@ -250,7 +250,7 @@ Valorile corespondente vor fi atribuite iar parametrii care nu au valori, vor fi
 
 În anumite cazuri este nevoie de a inițializa un parametru cu o anumită valoare prestabilită și nu `undefined` așa cum este comportamentul standard al ECMAScript.
 
-Până la noua versiune a ECMAScript, mai întâi se verifica în funcție dacă un anumit parametru este `undefined`, iar dacă acesta era cazul, se inițializa cu o valoare. Acest lucru este posibil, dacă ne readucem aminte faptul că și parametrii sunt identificatori în scope-ul funcției (`lexical environment`).
+Până la noua versiune a ECMAScript, mai întâi se verifica în funcție dacă un anumit parametru este `undefined`. Dacă da, se inițializa cu o valoare. Acest lucru este posibil, dacă ne readucem aminte faptul că și parametrii sunt identificatori în scope-ul funcției (`lexical environment`).
 
 ```javascript
 let test = function (ceva) {
@@ -274,9 +274,7 @@ function faCeva (a, b) {
 faCeva(12);
 ```
 
-Acesta este un șablon de lucru foarte important care permite utilizarea de valori prestabilite atunci când nimic nu este pasat funcției.
-
-Acest mic șablon se va schimba odată cu folosirea ECMAScript 6, când se va putea seta valoarea implicită chiar la pasarea argumentelor:
+Acesta este un șablon de lucru foarte important care permite utilizarea de valori prestabilite atunci când nimic nu este pasat funcției. Acest mic șablon se schimbă odată cu folosirea ES6, când vei putea seta valoarea implicită chiar la pasarea argumentelor:
 
 ```javascript
 function test (ceva = "Valoare implicită") {
@@ -287,7 +285,7 @@ test();
 
 ## Valori inițiale opționale
 
-Odată cu apariția noii versiuni a standardului ES6, parametrii pot avea valori inițiale ceea ce făcea ca invocarea lor să fie opțională. În ES5, acest lucru se putea face folosind operatorul `||`. În acest caz, nu se puteau pasa valori care evaluate de operatorul `||` se reduceau la o valoare falsy.
+Odată cu apariția noii versiuni a standardului - ES6, parametrii pot avea valori inițiale. În ES5, acest lucru se putea face folosind operatorul `||`. În acest caz, nu se puteau pasa valori care prin evaluarea cu operatorul `||` se reduceau la o valoare *falsey*.
 
 ```javascript
 function faUnBloc (inaltime, latime, lungime, timpCoacere) {
@@ -299,7 +297,7 @@ function faUnBloc (inaltime, latime, lungime, timpCoacere) {
 faUnBloc('', '', 150, 0); // 100 80 150 85000
 ```
 
-Pentru cei care vor să fie ultracorecți, idiomul de setare a unei valori de start ar fi trebuit să fie acesta: `inaltime = inaltime !== undefined ? x : 100`.
+Pentru cei care vor să fie ultracorecți, idiomul de setare a unei valori de start ar trebui să fie acesta: `inaltime = inaltime !== undefined ? x : 100`.
 
 ```javascript
 function x (a) {
@@ -310,7 +308,7 @@ function x (a) {
 
 Folosirea lui `typeof` returnează tipul valorii. Dacă un parametru nu primește argument, `undefined` este atribuit automat de motor. Odată detectată valoarea `undefined` se poate seta o nouă valoare din oficiu pentru parametru.
 
-În acest mod poți pasa și valori care s-ar reduce la o valoarea ce exprimă falsitatea (**falsy**), precum `0`, `undefined` sau `null`. Mai este o posibilitate care se reduce la testarea tipului valorii pasate pentru a determina valoarea de start (default îi spun englezii) în funcție de rezultat. În exemplul de mai sus, pentru ultima valoare, care este una validă pentru timp (`0`), motorul a redus-o la o valoare `falsy` și a preferat valoarea inițială.
+În acest mod poți pasa și valori care s-ar reduce la o valoarea ce exprimă falsitatea (*falsey*), precum `0`, `undefined` sau `null`. Mai este o posibilitate care se reduce la testarea tipului valorii pasate pentru a determina valoarea de start (default îi spun englezii) în funcție de rezultat. În exemplul de mai sus, pentru ultima valoare, care este una validă pentru timp (`0`), motorul a redus-o la o valoare `falsey` și a preferat valoarea inițială.
 
 ```javascript
 function masoaraTimp (timpCoacere, rasuceste) {
@@ -406,7 +404,7 @@ let prima = persoana({
 console.log(prima);
 ```
 
-Mai observăm un lucru foarte important: parametrii pot fi introduși în oricare ordine. Nu mai suntem limitați de „poziție” ca în cazul prevederilor standardului până la ES5. Vă reamintesc că trebuia să introduci argumentele în ordine fixă pentru a se face legăturile corecte în obiectul `arguments`.
+Mai observăm un lucru foarte important: parametrii pot fi introduși în oricare ordine. Nu mai suntem limitați de *poziție*, precum în cazul standardelor până la ES5. Vă reamintesc că trebuia să introduci argumentele în ordine fixă pentru a se face legăturile corecte în obiectul `arguments`.
 
 ## Parametrii cu valori inițiale pot servi valori celor care urmează
 
@@ -485,19 +483,6 @@ let x = {
 };
 ```
 
-### Aplicarea destructurării
-
-Utilizarea operatorului **trei puncte** are o acțiune destructurantă asupra colecțiilor pe care se aplică. Am văzut acest efect deja ceva mai devreme când am discutat despre **rest parameters - parametrii rest**. Știm deja faptul că operațiunea de destructurare *desface* o structură de date cum este un array în elementele sale componente pentru a le servi unei funcții sau într-un enunț specializat. Mecanismul de destructurare funcționează foarte bine și în cazul argumentelor.
-
-```javascript
-function facCeva (...argumente) {
-  // cod de lucru
-};
-facCeva(...['a','b', 1]);
-```
-
-De fapt, ceea ce oferă destructurarea este un mecanism prin care elaborăm un tipar, un șablon pentru o anumită structură în care vrem să introducem datele într-o funcție. Această structură poate fi un array sau poate fi foarte bine un obiect.
-
 ### Modelul unui array
 
 Putem pasa unei funcții toate argumentele folosind un array, dar felul în care vor fi preluate și asociate unor parametri poate fi modelat prin destructurare. Putem imagina cazul în care ai nevoie ca primul argument să fie asociat unui parametru.
@@ -542,7 +527,7 @@ test(obi); //"10 și true"
 
 Spre deosebire de cazul array-urilor, utilizarea unui obiect în cazul destructurării, are avantajul introducerii în obiect a cheilor în orice ordine este dorită atâta vreme cât păstrăm convenția de echivalență a numelor cheilor în obiectul corespondent parametrilor.
 
-## `arguments` ca instrument de prelucrare a unui obiect
+## arguments în prelucrarea unui obiect
 
 Dacă trimitem unei funcții un argument care are drept valoare un obiect, putem constitui un alt obiect subset pe care să-l returnăm.
 

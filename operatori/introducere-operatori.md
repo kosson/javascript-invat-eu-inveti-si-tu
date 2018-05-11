@@ -16,11 +16,11 @@ Să ne amintim că expresiile pot fi constituite pur și simplu din declararea u
 
 **Moment ZEN**: Un program JavaScript este evaluarea unui set de expresii, care pentru a fi „rezolvate”, mai întâi trebuie să rezolvi din aproape în aproape toate celelalte expresii mai mici.
 
-## Valorile truthy și falsy
+## Valorile truthy și falsey
 
-Javascript operează cu diferite tipuri de valori, dar toate acestea sunt evaluate de către motorul JavaScript pentru a le reduce la un corespondent boolean, adică dacă pot fi reduse la `true` și sunt *truthy* (adevărate) sau la `false`, numite *falsy* (falsități).
+Javascript operează cu diferite tipuri de valori, dar toate acestea sunt evaluate de către motorul JavaScript pentru a le reduce la un corespondent boolean, adică dacă pot fi reduse la `true` și sunt *truthy* (adevărate) sau la `false`, numite *falsey* (falsități).
 
-Valorile pe care JavaScript le consideră a fi în categoria falsităților (*falsy*) sunt: `false`, `0`, `''` (un șir de caractere vid), `NaN` (Not-a-Number), `undefined` și `null`. Orice altceva este considerat a fi *truthy*. Pe parcursul acestei lucrări vom folosi denumirile în limba engleză.
+Valorile pe care JavaScript le consideră a fi în categoria falsităților (*falsey*) sunt: `false`, `0`, `''` (un șir de caractere vid), `NaN` (Not-a-Number), `undefined` și `null`. Orice altceva este considerat a fi *truthy*. Pe parcursul acestei lucrări vom folosi denumirile în limba engleză.
 
 Funcțional vorbind, operatorii se pot împărți în două categorii: operatorii unari în sensul că-și produc efectele asupra unui singur operand și cei binari care-și produc efectele la momentul evaluării asupra a doi operanzi. În afara acestei categorisiri mai sunt și alți operatori care ar putea fi grupați după sarcina pe care o au și așa mai departe.
 

@@ -83,7 +83,7 @@ Minus precedă operandul convertind tipurile de date care nu sunt numere. Spre d
 
 ## Operatorul logic de negare `!`
 
-Încearcă mai întâi de toate o conversie a operandului la o valoare `Boolean`. Adu-ți mereu aminte faptul că în JavaScript toate expresiile pot fi evaluate la o valoare boolean. **Absolut toate expresiile se reduc la a fi truthy sau falsy**.
+Încearcă mai întâi de toate o conversie a operandului la o valoare `Boolean`. Adu-ți mereu aminte faptul că în JavaScript toate expresiile pot fi evaluate la o valoare boolean. **Absolut toate expresiile se reduc la a fi truthy sau falsey**.
 
 ```javascript
 !true;      // false

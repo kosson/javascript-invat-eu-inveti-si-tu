@@ -70,7 +70,7 @@ Să constituim tabela de adevăr. Dacă te ajută să înțelegi, privește aten
 | true  | false | false |
 | true  | true  | true  |
 
-Aplicat la domeniul programării, valorile variabilelor sunt reduse la corespondentul lor de adevăr. Limbajul permite lucrul cu valorile de adevăr și falsitate pentru a decide un curs de evaluare sau pentru a proba anumite valori prin reducerea acestora la o concluzie înscrisă adevărului (și în engleză îi spunem *truthy*) sau falsității (în engleză îi spunem *falsy*).
+Aplicat la domeniul programării, valorile variabilelor sunt reduse la corespondentul lor de adevăr. Limbajul permite lucrul cu valorile de adevăr și falsitate pentru a decide un curs de evaluare sau pentru a proba anumite valori prin reducerea acestora la o concluzie înscrisă adevărului (și în engleză îi spunem *truthy*) sau falsității (în engleză îi spunem *falsey*).
 
 ## Legile lui De Morgan
 

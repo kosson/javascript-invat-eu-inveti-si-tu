@@ -115,7 +115,7 @@ Cele două funcții realizează un binding explicit a funcției cu un nou contex
 
 ## Invocare condițională
 
-Poți invoca rapid prin evaluarea `truthy` sau `falsy` a unei expresii.
+Poți invoca rapid prin evaluarea `truthy` sau `falsey` a unei expresii.
 
 ```javascript
 var testVal = 200;

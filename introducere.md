@@ -391,7 +391,7 @@ Continuăm cu o precizare foarte importantă pentru a întări ceea ce am rememo
 
 JavaScript este un limbaj de programare care oferă o flexibilitate fantastică. Spre deosebire de restul limbajelor de programare, nu te forțează să indici din start tipul de valoare cu care lucrezi. Dar dacă se nimerește ca într-o expresie să se lucreze cu două tipuri diferite de valori, la momentul evaluării, motorul JavaScript este forțat să ofere totuși un răspuns. Acest lucru se face prin constrângerea valorii unuia dintre operanzi în funcție de regulile impuse de operatorul folosit. Acest lucru se numește în limba engleză *coercion* ceea ce am putea traduce ca *transformare* sau constrângerea la un anumit tip de valoare cu scopul de a face totuși operațiunea indicată de operator.
 
-**Moment ZEN**: Totul în JavaScript este evaluat în final la o valoare boolean, fie ceva care poate fi considerată a fi o valoare **adevărată**, fie ceva care poate fi considerat a fi o valoare **falsă**. În engleză aceste rezultate interpretate din punct de vedere al adevărului se numesc *truthy* și *falsy*.
+**Moment ZEN**: Totul în JavaScript este evaluat în final la o valoare boolean, fie ceva care poate fi considerată a fi o valoare **adevărată**, fie ceva care poate fi considerat a fi o valoare **falsă**. În engleză aceste rezultate interpretate din punct de vedere al adevărului se numesc *truthy* și *falsey*.
 
 Hai să ne uităm la următoarea expresie: `true + 10;` pe care o dăm motorului JavaScript spre evaluare. Ce crezi că se va întâmpla, pentru că în acest moment operezi cu o valoare boolean și un număr?
 

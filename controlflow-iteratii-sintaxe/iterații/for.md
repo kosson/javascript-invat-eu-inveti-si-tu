@@ -68,7 +68,7 @@ for (;;) {
 console.timeEnd("final");
 ```
 
-Motivul pentru care bucla este una infinită este că blocul de condiție va fi evaluat la `undefined`, care este transformat într-un **falsy**, ceea ce conduce la execuția infinită.
+Motivul pentru care bucla este una infinită este că blocul de condiție va fi evaluat la `undefined`, care este transformat într-un **falsey**, ceea ce conduce la execuția infinită.
 
 ## Scenariu de prelucrare a datelor cu `for`
 

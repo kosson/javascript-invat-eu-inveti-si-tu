@@ -2,7 +2,7 @@
 
 Coercion în limba engleză înseamnă constrângere. Ceea ce se petrece este o „transformare” pe care o face un operator asupra unei valori date la momentul evaluării expresiei. Pe parcursul lucrării vom folosi interșanjabil termenul care exprimă ceea ce se petrece cu cel în limba engleză.
 
-**Moment ZEN**: Totul în JavaScript este evaluat în final la o valoare boolean, fie ceva care poate fi considerată a fi o valoare **adevărată**, fie ceva care poate fi considerat a fi o valoare **falsă** - *truthy* și *falsy*, cum am spune în engleză.
+**Moment ZEN**: Totul în JavaScript este evaluat în final la o valoare boolean, fie ceva care poate fi considerată a fi o valoare **adevărată**, fie ceva care poate fi considerat a fi o valoare **falsă** - *truthy* și *falsey*, cum am spune în engleză.
 
 Coercion este absolut necesar în JavaScript pentru că acest limbaj de programare nu precizează strict, de la bun început valorile cu care operează. JavaScript este ceea ce numim limbaj **loosely typed**, adică valorile nu au nevoie să le fie precizat strict tipul (**strongly typed**) înainte de a opera cu ele. Totuși, interpretorul va face automat conversiile respectând anumite reguli. Acesta este un mare avantaj care conferă o flezibilitate nemaiîntâlnită, dar pe de altă parte trebuie să existe un mecanism prin care să putem duce la bun sfârșit operațiunile de evaluare a expresiilor. Putem să ne gândim că JavaScript permite să adunăm mere cu pere, dar ca să ajungă la un rezultat, perele vor fi transformate, constrânse să devină mere. Acest lucru este asigurat prin regulile de coercion.
 
