@@ -98,9 +98,9 @@ Valoarea lui next anterior este altceva
  */
 ```
 
-## Scoaterea datelor dintr-un generator cu `for..of`
+## Scoaterea datelor dintr-un generator cu `for...of`
 
-Enunțul `for..of` trece prin generator și returnează chiar valorile existente.
+Enunțul `for...of` trece prin generator și returnează chiar valorile existente.
 
 ```javascript
 function* emiteFormule () {
@@ -118,7 +118,7 @@ Noapte bună
  */
 ```
 
-Se observă că o funcție generator se *consumă* cu o secvență `for..of`. Pentru exemplul de mai sus, să spunem că dorim să accesăm prima valoare. În acest caz, pur și simplu punem cursorul pe ea - `next()`. Valorile pot fi iterate și printr-un `while` pentru a scoate valoarea din obiectul returnat de `next()`. Pentru fiecare iterație testezi dacă `done` are valoarea `true`.
+Se observă că o funcție generator se *consumă* cu o secvență `for...of`. Pentru exemplul de mai sus, să spunem că dorim să accesăm prima valoare. În acest caz, pur și simplu punem cursorul pe ea - `next()`. Valorile pot fi iterate și printr-un `while` pentru a scoate valoarea din obiectul returnat de `next()`. Pentru fiecare iterație testezi dacă `done` are valoarea `true`.
 Formularea condiției: `!(let element = refIterator.next()).done`.
 
 Explicație:
@@ -143,7 +143,7 @@ Noapte bună
  */
 ```
 
-Modalitatea de a parcurge un generator cu o buclă `while` este mai greoaie față de ceea ce oferă `for..of`.
+Modalitatea de a parcurge un generator cu o buclă `while` este mai greoaie față de ceea ce oferă `for...of`.
 
 Dintr-un generator poți apela alte generatoare.
 
@@ -285,4 +285,4 @@ for(let element of parcurgDOM(elementDOM)){
 
 -   funcții,
 -   iteratori
--   `for..of`
+-   `for...of`

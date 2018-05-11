@@ -1,6 +1,6 @@
 # Map
 
-Este un obiect intern introdus de ECMAScript 2015 care oferă o structură simplă de chei - valori. Această structură permite iterarea elementelor în ordinea în care acestea au fost introduse, folosind `for..of`, de exemplu. Obiectul `Map` este o colecție de perechi *chei - valori*. Acceptă valori primitive și obiecte drept chei și respectă protocolul `Iterable`, ceea ce înseamnă că poți folosi și operatorii `spread`. Înainte de introducerea lui `Map`, obiectele simple erau folosite pentru a stoca chei - valori.
+Este un obiect intern introdus de ECMAScript 2015 care oferă o structură simplă de chei - valori. Această structură permite iterarea elementelor în ordinea în care acestea au fost introduse, folosind `for...of`, de exemplu. Obiectul `Map` este o colecție de perechi *chei - valori*. Acceptă valori primitive și obiecte drept chei și respectă protocolul `Iterable`, ceea ce înseamnă că poți folosi și operatorii `spread`. Înainte de introducerea lui `Map`, obiectele simple erau folosite pentru a stoca chei - valori.
 
 Pentru lucrul cu o structură simplă de date, în care unei chei string îi corespunde o valoare sau o metodă, obiectele simple se pretează cu succes. Lucrurile încep să se complice atunci când este nevoie să introduci structuri mai complexe drept valori așa cum sunt obiectele (așa-numitele hash-map-uri).
 

@@ -1,4 +1,4 @@
-# Enunțul `for..in`
+# Enunțul `for...in`
 
 Iterează proprietățile unui obiect, cele care sunt setate ca `enumerabile`, iar pentru fiecare dintre valorile proprietăților iterate, se poate aplica o funcție sau se poate executa cod.
 
@@ -9,7 +9,7 @@ Iterează proprietățile unui obiect, cele care sunt setate ca `enumerabile`, i
 ## Mică anatomie
 
 Este numit de standard un **enunț de iterare**.
-Formele canonice ale enunțurilor `for..in` sunt:
+Formele canonice ale enunțurilor `for...in` sunt:
 
 -   `for ( expresieManaStângă in expresie ) enunț`,
 -   `for ( var expresieLegatăDeIndentificator in expresie ) enunț`,
@@ -19,7 +19,7 @@ Formele canonice ale enunțurilor `for..in` sunt:
 
 ## Iterarea cheilor proprii, dar și a celor din constructor
 
-Trebuie reținut faptul că iterarea folosind `for..in` ia în calcul și cheile constructorului. Pentru izolarea iterării doar pe cheile proprii ale obiectului fără cele moștenite, se va folosi verificarea cu metoda `Object.hasOwnProperty()`.
+Trebuie reținut faptul că iterarea folosind `for...in` ia în calcul și cheile constructorului. Pentru izolarea iterării doar pe cheile proprii ale obiectului fără cele moștenite, se va folosi verificarea cu metoda `Object.hasOwnProperty()`.
 
 ```javascript
 let prop;
@@ -40,7 +40,7 @@ for(prop in ceva){
 };
 ```
 
-În cazul instanțierii cu `new`, tot ce este declarat în `this`, va fi inclus în iterațiile cu `for..in`.
+În cazul instanțierii cu `new`, tot ce este declarat în `this`, va fi inclus în iterațiile cu `for...in`.
 
 ## Parcurgerea cheilor care aparțin strict obiectului
 
@@ -93,7 +93,7 @@ for (let i in colectie) {
 
 ## Bune practici
 
-Nu folosi `for..in` pentru array-uri. Un motiv foarte bun este acela că ai putea avea de-a face cu array-uri sparte.
+Nu folosi `for...in` pentru array-uri. Un motiv foarte bun este acela că ai putea avea de-a face cu array-uri sparte.
 
 ```javascript
 var arr = [];

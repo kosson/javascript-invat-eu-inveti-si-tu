@@ -11,7 +11,7 @@ Object.getOwnPropertyNames(obi);
 // Array [ "prima", "aDoua" ]
 ```
 
-Ordinea numelor proprietăților este acceași ca aceea pe care o oferă o buclă `for..in` sau `Object.keys()`.
+Ordinea numelor proprietăților este acceași ca aceea pe care o oferă o buclă `for...in` sau `Object.keys()`.
 
 ```javascript
 let colectie = ['unu', 'doi', 'trei'];

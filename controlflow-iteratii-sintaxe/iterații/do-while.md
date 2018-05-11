@@ -12,7 +12,7 @@ do {
 } while (oValoare > 5); // 5
 ```
 
-Priviți cu atenție și mult respect această expresie pentru că este unul din fundamentele prelucrării datelor, nivel la care dorim să ajungem. Începând cu `do..while`, vom jalona parcursul nostru învățând ce face `for () {}`, care enunțul de la baza prelucrării structurilor de date și apoi derivatele sale `for..in` și `for..of`, apoi `Array.prototype.forEach()`, ajungând apoi la cele mai rafinate instrumente oferite de `Array.prototype.map()`, `Array.prototype.reduce()` și `Array.prototype.filter()`.
+Priviți cu atenție și mult respect această expresie pentru că este unul din fundamentele prelucrării datelor, nivel la care dorim să ajungem. Începând cu `do..while`, vom jalona parcursul nostru învățând ce face `for () {}`, care enunțul de la baza prelucrării structurilor de date și apoi derivatele sale `for...in` și `for...of`, apoi `Array.prototype.forEach()`, ajungând apoi la cele mai rafinate instrumente oferite de `Array.prototype.map()`, `Array.prototype.reduce()` și `Array.prototype.filter()`.
 
 Motivul pentru care s-a optat pentru `for` în practica zilnică este pentru că sintaxa facilitează lizibilitatea, indicând ceea ce se petrece mult mai bine. Amintiți-vă mereu de faptul că tot codul pe care îl **redactați** nu este destinat numai computerului, ci oamenilor. În cazul fericit al unei valori dovedite, oamenii vor fi cei care îl vor inspecta și citi mai târziu pentru a înțelege intenția de la început cu scopul de a-l îmbunătăți, optimiza, ș.a.m.d.
 

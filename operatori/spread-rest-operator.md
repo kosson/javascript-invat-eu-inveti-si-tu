@@ -1,7 +1,7 @@
 # Operatorul rest/spread (`...`)
 
 Acest operator produce confuzie pentru că se numește diferit în funcție de ce este pus să facă.
-Este un operator nou introdus de ECMAScript 2015, fiind inspirat de CoffeeScript (operatorul *splats*), care la rândul său a fost adoptat din Ruby. Acest operator foarte util funcționează pentru toate obiectele care au implementat *protocolul de iterare*. Deci, tot ce este iterabil, poate fi folosit cu acest operator. Șirurile de caractere și array-urile sunt iterabile, adică intern au implementat protocolul de iterare.
+Este un operator nou introdus de ECMAScript 2015, fiind inspirat de CoffeeScript (operatorul *splats*), care la rândul său a fost adoptat din Ruby. Acest operator foarte util funcționează pentru toate obiectele care au implementat *protocolul de iterare*. Deci, tot ce este iterabil, poate fi folosit cu acest operator. Șirurile de caractere și array-urile sunt iterabile, adică, intern au implementat protocolul de iterare.
 
 Exemplul cel mai facil pentru o mică încălzire este să iei un șir de caractere și să-l transformi într-un array al caracterelor sale.
 
@@ -96,7 +96,21 @@ let arr2 = [...arr1]; // gata copia
 
 Această copiere în cazul elementelor care sunt obiecte, se face prin referință.
 
+## Pasarea valorilor unui array drept argumente
+
+Veți aprecia cu siguranță posibilitatea de a pasa toate valorile dintr-un array unei funcții ca argumente. Este un mecanism foarte util care simplifică foarte mult fluxul de prelucrare a unor calupuri de date folosind funcțiile.
+
+```javascript
+const colectie = [1, 2];
+function facCeva () {
+  console.log(arguments[0], arguments[1]);
+};
+facCeva(...colectie); // 1 2
+```
+
 ## Transformarea argumentelor unei funcții într-un array
+
+De foarte multe ori veți avea nevoie să convertiți structura de date `arguments` a unei funcții, într-un array asupra căruia să puteți aplica metodele specifice de transformare și manipulrea a datelor.
 
 ```javascript
 function transforma () {
@@ -113,7 +127,7 @@ transforma("unu", "doi", 3); // Array [ "unu", "doi", 3 ]
 
 ## Constituirea unei colecții de elemente DOM
 
-Acest lucru este posibil pentru că `NodeList` permite protocolul de iterare. Efectul este convertirea unui `NodeList` într-un Array.
+Acest lucru este posibil pentru că `NodeList` permite protocolul de iterare. Colecțiile `NodeList` sunt obținute prin folosirea selectorului `document.querySelectorAll('.clasă')`. Efectul este convertirea unui `NodeList` într-un Array.
 
 ```javascript
 function colectDivs () {
@@ -129,14 +143,9 @@ let divuri = Array.from(document.querySelectorAll('div'));
 
 ## Pasarea către metode ale obiectelor interne
 
+Folosirea operatorului se poate dovedi foarte elegantă pentru că elimină necesitatea de a folosi o buclă cu care să iterezi elementele unui array.
+
 ```javascript
 let numbers = [23, 400, 6, 1021];
 Math.min(...numbers); // 6
-```
-
-## Folosirea cu metode ale lui Math
-
-```javascript
-let setNumere = [1, 3, 24];
-Math.min(...setNumere); // 1
 ```

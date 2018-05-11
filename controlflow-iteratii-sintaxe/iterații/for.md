@@ -308,7 +308,7 @@ for (let i = 0; i < șir.length; i++) {
 console.log(șirInversat); // avec
 ```
 
-Folosind `for..of` sintaxa se reduce semnificativ, fiind eliminate posibilele erori de redactare. Adu-ți mereu aminte de faptul că iterările cu `for..of` sunt o specializare a lui `for` în scopul parcurgerii unor structuri de date, precum `Array`, `Map` și `Set`.
+Folosind `for...of` sintaxa se reduce semnificativ, fiind eliminate posibilele erori de redactare. Adu-ți mereu aminte de faptul că iterările cu `for...of` sunt o specializare a lui `for` în scopul parcurgerii unor structuri de date, precum `Array`, `Map` și `Set`.
 
 ```javascript
 let șir = 'ceva', șirInversat = '';

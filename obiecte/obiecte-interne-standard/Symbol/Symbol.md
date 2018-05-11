@@ -40,7 +40,7 @@ this[unSimbol] = function () {
 };
 ```
 
-Ceea ce tocmai s-a întâmplat este că s-a creat un simbol, care este o valoare ce va sta „ascunsă” și care poate fi referențiată doar prin identificatorul variabilei și prin apelarea metodei `getOwnPropertySymbols()`. Am spus că stă „ascunsă” pentru că este non-enumerabilă, ceea ce înseamnă că nu „iese la numărătoarea” cu `for..in`, prin sondarea cu `Object.getOwnPropertyNames(obiect)` sau prin interogarea obiectului cu `Object.keys(obiect)`.
+Ceea ce tocmai s-a întâmplat este că s-a creat un simbol, care este o valoare ce va sta „ascunsă” și care poate fi referențiată doar prin identificatorul variabilei și prin apelarea metodei `getOwnPropertySymbols()`. Am spus că stă „ascunsă” pentru că este non-enumerabilă, ceea ce înseamnă că nu „iese la numărătoarea” cu `for...in`, prin sondarea cu `Object.getOwnPropertyNames(obiect)` sau prin interogarea obiectului cu `Object.keys(obiect)`.
 
 Un detaliu foarte important este acela că proprietățile pentru care cheile sunt simboluri nu pot fi accesate decât prin folosirea sintaxei cu paranteze drepte.
 
@@ -193,7 +193,7 @@ console.log(numaram); // [ "zero", "unu", "doi" ]
 
 ### `Symbol.iterator`
 
-Acest simbol este mijlocul prin care se aplează iteratorul pentru un anumit obiect. Este bine-cunoscută apelarea iteratorului atunci când se folosește `for..of`.
+Acest simbol este mijlocul prin care se aplează iteratorul pentru un anumit obiect. Este bine-cunoscută apelarea iteratorului atunci când se folosește `for...of`.
 
 ### Expunerea metodelor prin care se realizează interacțiuni cu textul
 

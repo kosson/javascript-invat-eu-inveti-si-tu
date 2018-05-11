@@ -119,7 +119,7 @@ console.log(apeluri.map(function(callback){
 
 În cazul folosirii lui `let`, variabila va fi accesibilă la nivelul buclei, ceea ce înseamnă, de fapt că pentru fiecare iterație se va face un nou binding la câte o nouă variabilă x pentru fiecare dintre funcțiile încărcate în array. Fiecare dintre aceste nou create variabile va avea valaorea de la finalizarea iterației anterioare. Nu se va mai rescrie cu fiecare iterație valoarea lui `x`.
 
-Mecanismul este valabil și pentru `for..in` și `for..of`.
+Mecanismul este valabil și pentru `for...in` și `for...of`.
 
 ```javascript
 var apeluri = [],

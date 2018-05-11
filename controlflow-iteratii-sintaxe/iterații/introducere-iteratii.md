@@ -1,6 +1,6 @@
 # Iterații
 
-Partea cea mai valoroasă a programării este aceea că poate prelua un set de date pe care le poate parcurge element cu element, aplicând transformări sau căutări după anumite criterii, cu scopul de a obține un anumit rezultat dorit. Este ceea ce se poate înțelege prin ciclu, adică o mișcare repetitivă sau aplicarea repetată a unor proceduri pe elementele individuale ale unei colecții. De altfel, în practica de zi cu zi, veți auzi interșanjabil termenii de buclă, iterare și ciclare. Când vine vorba despre iterare, aceasta este tot o ciclare, dar care se face în baza unor protocoale special prevăzute de standardul ECMAScript.
+Partea cea mai valoroasă a programării este aceea că poate prelua un set de date pe care le poate parcurge element cu element, aplicând transformări sau căutări după anumite criterii, cu scopul de a obține un anumit rezultat dorit. Este ceea ce se poate înțelege prin ciclu, adică o mișcare repetitivă sau aplicarea repetată a unor proceduri pe elementele individuale ale unei colecții. De altfel, în practica de zi cu zi, veți auzi interșanjabil termenii de buclă, iterare și uneori ciclare.
 
 Dicționarul explicativ ne dă o definiție foarte utilă pentru iterare: *repetare a unui anumit procedeu de calcul, prin aplicarea lui la rezultatul calculului din etapa precedentă*.
 
@@ -21,7 +21,7 @@ Am menționat deja despre protocoalele de iterare. ECMAScript 2015 (ES6) a intro
 
 > oferi o cale pentru a accesa secvențial elementele unui obiect agregat fără a expune reprezentarea sa internă.
 
-Este menționat faptul că acestui șablon i se mai spune și *Cursor* și cea mai importantă mențiune este legată de domeniul de aplicatibilitate. Astfel, un șablon Iterator este construit pentru *a oferi o interfață uniformă pentru traversarea diferitelor structuri de agregare*.
+Este menționat faptul că acestui șablon i se mai spune și *Cursor* și cea mai importantă mențiune este legată de domeniul de aplicatibilitate. Astfel, un șablon Iterator este construit pentru *a oferi o interfață uniformă pentru traversarea diferitelor structuri de agregare*. Trebuie adăugat faptul că iterarea se poate face doar pe structuri sincrone așa cum sunt array-urile. Nu se pot aplica în cazul evenimentelor, care sunt asyncrone în natură.
 
 ### Cum se face iterarea
 
@@ -34,7 +34,7 @@ Atunci când rezultatul unui pas devine valoarea de start pentru următorul, atu
 
 ### Cazuri în care se folosește iterarea
 
--   `for..of`,
+-   `for...of`,
 -   `Array.from()`,
 -   operatorul spread (`...`),
 -   constructorul pentru Map `new Map([['varza',1],[2, true]])`,
@@ -49,9 +49,9 @@ Există două protocoale:
 
 ## Iterable
 
-Acest protocol permite obiectelor să-și definească sau să-și particularizeze comportamentul la momentul iterării, adică ce valori vor fi generate cu un enunț `for..of`.
+Acest protocol permite obiectelor să-și definească sau să-și particularizeze comportamentul la momentul iterării, adică ce valori vor fi generate cu un enunț `for...of`.
 
-Bucla `for..of` poate itera prin următoarele obiecte care respectă **protocolul iterator**:
+Bucla `for...of` poate itera prin următoarele obiecte care respectă **protocolul iterator**:
 
 -   `Array`,
 -   `Map`,
@@ -60,7 +60,7 @@ Bucla `for..of` poate itera prin următoarele obiecte care respectă **protocolu
 -   `TypedArray`,
 -   `arguments`
 
-Pentru a fi iterabil, un obiect trebuie să aibă implementată la nivelul obiectului intern de la care moștenește metoda `@@iterator`. Acest lucru înseamnă că obiectul (sau unul din obiectele din lanțul prototipal), trebuie să aibă o proprietate cu o cheie `[Symbol.iterator]`. Valoarea sa este o funcție fără argumente ce returnează un obiect. Acest obiect returnat se conformează protocolului de interare (**iterator protocol**), ceea ce îl face pretabil unei prelucrări cu `for..of`, de exemplu.
+Pentru a fi iterabil, un obiect trebuie să aibă implementată la nivelul obiectului intern de la care moștenește metoda `@@iterator`. Acest lucru înseamnă că obiectul (sau unul din obiectele din lanțul prototipal), trebuie să aibă o proprietate cu o cheie `[Symbol.iterator]`. Valoarea sa este o funcție fără argumente ce returnează un obiect. Acest obiect returnat se conformează protocolului de interare (**iterator protocol**), ceea ce îl face pretabil unei prelucrări cu `for...of`, de exemplu.
 
 Amețită deja? Hai să aruncăm un ochi mai aproape.
 
@@ -81,7 +81,7 @@ while( !(element = iterator.next()).done ) {
 };
 ```
 
-Odată cu ECMAScript 2015, beneficiem de enunțul `for..of`, care va face exact ce am realizat mai sus construind obiectul iterator. Array-urile sunt obiecte care implementează protocolul de iterare.
+Odată cu ECMAScript 2015, beneficiem de enunțul `for...of`, care va face exact ce am realizat mai sus construind obiectul iterator. Array-urile sunt obiecte care implementează protocolul de iterare.
 
 ```javascript
 for(let x of [1, 2, 3]){

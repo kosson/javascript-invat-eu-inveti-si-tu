@@ -530,9 +530,9 @@ Aceasta convertește golurile, iar valorile `undefined` și `null` la stringul p
 
 #### G. Metoda sort() păstrează golurile.
 
-#### H. Bucla for..in
+#### H. Bucla for...in
 
-Ciclarea cu `for..in` listează cheile array-ului (acestea sunt un superset al indicilor array-ului).
+Ciclarea cu `for...in` listează cheile array-ului (acestea sunt un superset al indicilor array-ului).
 
 ```javascript
 for (let key in ['prima',,1,2]){

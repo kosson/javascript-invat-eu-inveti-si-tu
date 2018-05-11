@@ -557,7 +557,7 @@ Atributele sunt folosite pentru a defini și a explica starea proprietăților u
 |:------------------ |:---------------------- |:------------------------------------------------------------------------------------------- |
 | `value`            | oricare tip ECMAScript | Este valoarea obținută prin accesarea proprietății                                          |
 | `writable`         | Boolean                | Dacă `false`, atributul `value` nu va putea fi scris folosind `set`                         |
-| `enumerable`       | Boolean                | Dacă este setat la `true`, proprietatea va putea fi enumerată într-un `for..in`             |
+| `enumerable`       | Boolean                | Dacă este setat la `true`, proprietatea va putea fi enumerată într-un `for...in`             |
 | `configurable`     | Boolean                | Dacă `false`, nu poți modifica. Poți modifica `value` și setarea lui `writable` la `false`. |
 
 #### Atributele unei proprități de tip **accessor**
@@ -568,7 +568,7 @@ Atributele sunt folosite pentru a defini și a explica starea proprietăților u
 |:------------------ |:---------------------- |:----------------------------------------------------------------- |
 | `get`              | Obiect sau `undefined` | Dacă valoarea este un obiect acesta este o funcție-obiect         |
 | `set`              | Obiect sau `undefined` | Dacă valoarea este un obiect acesta este o funcție-obiect         |
-| `enumerable`       | Boolean                | Dacă `true`, proprietatea va putea fi enumerată într-un `for..in` |
+| `enumerable`       | Boolean                | Dacă `true`, proprietatea va putea fi enumerată într-un `for...in` |
 | `configurable`     | Boolean                | Dacă `false`, orice încercare de modificare, va eșua              |
 
 Un exemplu practic:
@@ -1170,7 +1170,7 @@ for(let prop in obi) {
 }; // undefined
 ```
 
-Spre deosebire de constructorii declarați cu `function`, clasele nu pot fi instanțiate fără operatorul `new`. Reține faptul că o clasă tot o funcție este de fapt. În JavaScript nu există entități clase. Toate metodele din obiectul `prototype` sunt setate cu `false` la `enumerable`. Acest lucru înseamnă că obiectul nu va afișa metodele clasei într-un `for..in`.
+Spre deosebire de constructorii declarați cu `function`, clasele nu pot fi instanțiate fără operatorul `new`. Reține faptul că o clasă tot o funcție este de fapt. În JavaScript nu există entități clase. Toate metodele din obiectul `prototype` sunt setate cu `false` la `enumerable`. Acest lucru înseamnă că obiectul nu va afișa metodele clasei într-un `for...in`.
 
 Chiar dacă nu ai declarat o funcție `constructor`, aceasta va fi generată din oficiu. Poți verifica acest lucru interogând obiectul prototip al clasei. Posibilitatea de a adăuga proprietăți direct în obiectul prototip încă este posibilă, dar nu este recomandabilă.
 
@@ -1578,7 +1578,11 @@ obiect.altaProprietate = 'altceva';
 
 ### Destructurarea obiectelor sau destructuring assignment
 
-ES6 introduce posibilitatea de a transfera valorile cheilor unor variabile care trebuie să respecte o singură cerință: **numele identificatorilor să fie aceleași cu cele ale proprietăților**. Dacă vrem să privim obiectele ca pe niște depozite de valori identificate prin numele cheilor, atunci cu siguranță că asignarea prin destructurare va fi o binecuvântare.
+ES6 introduce posibilitatea seta variabile cu valorile cheilor unui obiect.
+
+Trebuie respectată o singură cerință: **numele identificatorilor variabilelor trebuie să fie identice cu cele ale cheilor proprietăților din obiectul din care sunt luate valorile**.
+
+Dacă vrem să privim obiectele ca pe niște depozite de valori identificate prin numele cheilor, atunci cu siguranță că asignarea prin destructurare va fi o binecuvântare.
 
 ```javascript
 const obi = {
@@ -1719,9 +1723,9 @@ console.log( Object.getOwnPropertyNames(String).filter( function (p) {
 
 Pentru obiecte care nu sunt foarte stufoase, se poate folosi cu succes și `console.dir(nume_obiect)`.
 
-### Testare cu for..in
+### Testare cu for...in
 
-Dacă folosești un `for..in` vei obține toate cheile, adică și pe cele din prototip. Deci, nu funcționează corect. De ce se întâmplă acest lucru? Pentru că sunt luate în considerare și proprietățile moștenite prin prototip, care sunt setate ca `enumerable`. Motivul pentru care proprietățile lui `Object` nu apar este că acestea nu sunt `enumerable`.
+Dacă folosești un `for...in` vei obține toate cheile, adică și pe cele din prototip. Deci, nu funcționează corect. De ce se întâmplă acest lucru? Pentru că sunt luate în considerare și proprietățile moștenite prin prototip, care sunt setate ca `enumerable`. Motivul pentru care proprietățile lui `Object` nu apar este că acestea nu sunt `enumerable`.
 
 ```javascript
 for (key in obiect) console.log(key);
@@ -1851,7 +1855,7 @@ const cerc1 = new ElementRotund(10);
 cerc1.arie(); //
 ```
 
-### Mantre
+## Mantre
 
 -   Spre deosebire de funcții, declarația de clasă nu beneficiază de mecanismul de hoisting indiferent că este o declarație sau o expresie de clasă. Deci, până când execuția nu ajunge la locul declarației, clasa se află în Temporal Dead Zone (TDZ).
 -   Tot codul din clasă rulează automat în `strict mode`.

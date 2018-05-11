@@ -497,8 +497,8 @@ Mai există un set care se numesc „enunțuri ale iterabilelor”:
 - `do..while`,
 - `while`,
 - `for`,
-- `for..in`,
-- `for..of`.
+- `for...in`,
+- `for...of`.
 
 Ce nu poate constitui un enunț al unei expresii? Orice începe cu:
 

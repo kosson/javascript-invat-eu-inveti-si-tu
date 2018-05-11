@@ -143,5 +143,5 @@ var divuri = Array.from(document.querySelectorAll('div'));
 
 ## Colecțiile NodeList și cele HTMLCollection pot fi iterate
 
-După ce ai constituit colecția, cel mai adesea ai nevoie să o iterezi pentru a face ceva cu elementele. Poți itera colecțiile folosind `for..of`.
+După ce ai constituit colecția, cel mai adesea ai nevoie să o iterezi pentru a face ceva cu elementele. Poți itera colecțiile folosind `for...of`.
 În plus, pentru că un `NodeList` nu se modifică dinamic, ci este o fotografiere la momentul colectării nodurilor, este permisă și prelucrarea cu `forEach`. Acest lucru l-ai putea face și în cazul colecțiilor `HTMLCollection` respectând condiția de transformare într-un array. Poți folosi în acest sens `Array.of(colecție)`, `Array.from(colecție)` sau folosind operatorul spread.
