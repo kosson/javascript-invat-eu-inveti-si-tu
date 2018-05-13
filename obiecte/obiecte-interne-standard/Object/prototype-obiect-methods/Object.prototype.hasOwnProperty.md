@@ -1,6 +1,6 @@
-# `Object.prototype.hasOwnProperty`
+# Object.prototype.hasOwnProperty()
 
-Pentru a testa doar cheile care aparțin obiectului contruit fără proprietățile moștenite prin prototip se va testa dacă obiectul are proprietăți ale sale folosind `Object.prototype.hasOwnProperty`. Este returnat un boolean.
+Se va folosi pentru a testa doar cheile care aparțin obiectului contruit fără proprietățile moștenite prin prototip. Este returnat un boolean.
 Orice obiect care descinde din `Object` moștenește și metoda `hasOwnProperty`.
 
 ```javascript
