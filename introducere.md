@@ -272,7 +272,7 @@ Să analizăm împreună ce conțin elementele de intrare.
 
 ECMAScript are un set de **cuvinte rezervate** din limba engleză, care nu pot fi folosite decât în scopul pentru care au fost rezervate. Cuvintele cheie sunt unul din tipurile de **atomi lexicali** și se scriu întotdeauna fără majuscule.
 
-Le vom enumera aici cu traducerea lor pentru a vă familiariza la un prim contact: `break` (**întrerupe** cu sensul de _ieși din execuție_), `do` (**fă** cu sensul de _continuă ce faci_), `in` (**în** cu sensul _din_), `typeof` (**de tipul**), `case` (**cazul** cu sensul _în cazul_), `else` (**altfel** cu sensul de _în caz contrar_), `instanceof` (**instanță a lui**), `var` (**variabilă**), `catch` (**prinde**), `export` (**exportă**), `new` (**nou** cu sensul de _instanțiază un nou obiect_), `void` (**golește** cu sensul _golește de valoare_), `class` (**clasă**), `extends` (**extinde**), `return` (**returnează**), `while` (**cât timp**), `const` (**constantă**), `finally` (**încheie**), `super` (**super**), `with` (**cu**), `continue` (**continuă**), `for` (**pentru** cu sensul _evaluând următoarea(le) expresie(i) pentru fiecare element din_), `switch` (**schimbă** cu sensul _mergi pe ramura_), `yield` (**produ** cu sensul de **dă-mi valori**, `debugger` (**depanare** cu sensul _activează depanatorul_), `function` (**funcție**), `this` (**acesta** cu sensul de **obiectul meu necesar ca și context**), `default` (**inițial**), `if` (**dacă**), `throw` (**aruncă** cu sensul de a _scoate la lumină erorile_), `delete` (**șterge**), `import` (**importă**), `try` (**încearcă**), `await` (**așteaptă** cu sensul de _în așteptare_).
+Le vom enumera aici cu traducerea lor pentru a vă familiariza la un prim contact: break (întrerupe cu sensul de ieși din execuție), do (fă cu sensul de continuă ce faci), in (în cu sensul din), typeof (de tipul), case (cazul cu sensul în cazul), else (altfel cu sensul de în caz contrar), instanceof (instanță a lui), var (variabilă), catch (prinde), export (exportă), new (nou cu sensul de instanțiază un nou obiect), void (golește cu sensul golește de valoare), class (clasă), extends (extinde), return (returnează), while (cât timp), const (constantă), finally (încheie), super (super), with (cu), continue (continuă), for (pentru cu sensul evaluând următoarea/le expresie/ii pentru fiecare element din), switch (schimbă cu sensul mergi pe ramura), yield (produ cu sensul dă-mi va-lori), debugger (depanare cu sensul activează depanatorul), function (funcție), this (acesta cu sensul de obiectul meu necesar precum context), default (inițial), if (dacă), throw (aruncă cu sensul de a scoate la lumină erorile), delete (șterge), import (importă), try (încearcă), await (așteaptă cu sensul de în așteptare).
 
 **Moment ZEN**: Cuvintele rezervate poartă în sine o acțiune.
 
@@ -283,19 +283,19 @@ Programatorii sunt creaturi foarte comode și motoarele JavaScript permit anumit
 
 Reguli de introducere prin ASI:
 
-- imediat înaintea acoladei de închidere `}`,
-- atunci când șirul de token-uri nu poate fi tratat unitar `x - y`, de exemplu,
-- imediat după operatorii și sintagmele care nu mai permit altă dezvoltare la nivelul expresiei sau a programului: sufixurile de operare `++` și `--` și cuvintele cheie `continue`, `break`, `return`, `yield` și `yield*` și `module`.
+-   imediat înaintea acoladei de închidere `}`,
+-   atunci când șirul de token-uri nu poate fi tratat unitar `x - y`, de exemplu,
+-   imediat după operatorii și sintagmele care nu mai permit altă dezvoltare la nivelul expresiei sau a programului: sufixurile de operare `++` și `--` și cuvintele cheie `continue`, `break`, `return`, `yield` și `yield*` și `module`.
 
 Declarațiile și instrucțiunile beneficiare ale acestui mecanism sunt:
 
-- instrucțiuni simple,
-- declarații de variabile: `var`, `let`, `const`,
-- declarațiile de module: `import`, `export`,
-- declararea expresiilor,
-- declararea intenției de a folosi depanatorul de cod (`debugger`),
-- instrucțiunile `continue`, `break`, `throw`
-- și `return`.
+-   instrucțiuni simple,
+-   declarații de variabile: `var`, `let`, `const`,
+-   declarațiile de module: `import`, `export`,
+-   declararea expresiilor,
+-   declararea intenției de a folosi depanatorul de cod (`debugger`),
+-   instrucțiunile `continue`, `break`, `throw`
+-   și `return`.
 
 Există mai multe curente de opinii care au condus la diferite stiluri de redactare a codului sursă. Veți întâlni foarte mult cod scris fără punct și virgulă care să marcheze finalitatea enunțului. Unii consideră acest lucru acceptabil, dar vă invit în partea cealaltă, a celor care scriu foarte corect codul și care vor pune întotdeauna punct și virgulă la încheierea unui enunț după cum ne-a intrat în sânge ca atunci când încheiem o propoziție în scris să punem punct.
 
@@ -331,11 +331,11 @@ Expresiile mai complexe cer folosirea unor semne grafice care să indice motorul
 
 JavaScript are următoarele categorii de expresii:
 
-- **aritmetice**, care se rezumă la un număr. Este și cazul folosirii operatorilor aritmetici;
-- de **șiruri de caractere**, care se rezumă chiar la o înșiruire de caractere. Este și cazul folosirii operatorilor pe șiruri;
-- **logice**, care se rezumă ori la `true` ori la `false`;
-- expresii de bază cum ar fi **cuvintele cheie** (instrucțiunile) sau expresiile de uz general și
-- **expresiile din partea stângă (LHS) a operatorului de atribuire** (`=`), adică la ce trebuie să se lege evaluarea a ceea ce este în partea dreaptă.
+-   **aritmetice**, care se rezumă la un număr. Este și cazul folosirii operatorilor aritmetici;
+-   de **șiruri de caractere**, care se rezumă chiar la o înșiruire de caractere. Este și cazul folosirii operatorilor pe șiruri;
+-   **logice**, care se rezumă ori la `true` ori la `false`;
+-   expresii de bază cum ar fi **cuvintele cheie** (instrucțiunile) sau expresiile de uz general și
+-   **expresiile din partea stângă (LHS) a operatorului de atribuire** (`=`), adică la ce trebuie să se lege evaluarea a ceea ce este în partea dreaptă.
 
 Cea mai simplă expresie este o `valoare literală` scrisă direct, ori o variabilă, dacă e mai pe gustul tău.
 
@@ -346,8 +346,8 @@ let x;  // expresie de variabilă
 
 După cum spuneam, combinarea operanzilor cu operatorii, creează expresii. Este necesară o mică precizare. Valorile de lucru sunt de două feluri:
 
-- fixe, care așa cum le-ai scris și așa rămân, numite și **literale**
-- valorile care se pot modifica în funcție de dinamica programului numite **variabile**, care pornesc de la o valoare dată sau nu.
+-   fixe, care așa cum le-ai scris și așa rămân, numite și **literale**
+-   valorile care se pot modifica în funcție de dinamica programului numite **variabile**, care pornesc de la o valoare dată sau nu.
 
 ```javascript
 let x = 1 + 1;
@@ -465,36 +465,36 @@ Care sunt enunțurile în JavaScript? Conform standardului, expresiile sunt cata
 
 Conform textului standardului, următoarele sintaxe pot fi considerate a fi expresii primare:
 
-- cuvântul cheie `this`,
-- identificatorii pentru referențiere posibil urmați de `yield` sau `await`,
-- literale generale:
-  - literal `null`,
-  - literal boolean: `true` / `false`,
-  - literal numeric: zecimal (`0`), întreg binar (`0b`), digiți binari (`0` sau `1`), întreg octal (`0o`), întreg hexa (`0x`),
-  - literal string
-- array literal cu următoarele forme: `[eliziune`<sub>[opțional]</sub>`]`, `[elemente]` și elemente cu virgulă finală (*eliziune*) `[elemente ,]`,
-- obiecte literale declarate cu acolade: `{}`, `{elemente}` sau `{elemente ,}`,
-- expresia de funcție: `function numeFuncție (parametrii_formali) {corpul}`,
-- expresia de clasă: `class numeClasă moștenirea_clasei_extends {corpul_clasei și alte elemente de clasă precum static}`,
-- expresia unui generator `function * nume_generator (parametrii_formali) {corp}`,
-- expresii de funcții async: `async function nume_functie (parametrii_formali) {corp}`,
-- expresii RegExp,
-- literale de șablonare,
-- parantezele rotunde de grupare și lista parametrilor unei funcții săgeată: `()` sau `( ,)`.
+-   cuvântul cheie `this`,
+-   identificatorii pentru referențiere posibil urmați de `yield` sau `await`,
+-   literale generale:
+    - literal `null`,
+    - literal boolean: `true` / `false`,
+    - literal numeric: zecimal (`0`), întreg binar (`0b`), digiți binari (`0` sau `1`), întreg octal (`0o`), întreg hexa (`0x`),
+    - literal string
+-   array literal cu următoarele forme: `[eliziune`<sub>[opțional]</sub>`]`, `[elemente]` și elemente cu virgulă finală (*eliziune*) `[elemente ,]`,
+-   obiecte literale declarate cu acolade: `{}`, `{elemente}` sau `{elemente ,}`,
+-   expresia de funcție: `function numeFuncție (parametrii_formali) {corpul}`,
+-   expresia de clasă: `class numeClasă moștenirea_clasei_extends {corpul_clasei și alte elemente de clasă precum static}`,
+-   expresia unui generator `function * nume_generator (parametrii_formali) {corp}`,
+-   expresii de funcții async: `async function nume_functie (parametrii_formali) {corp}`,
+-   expresii RegExp,
+-   literale de șablonare,
+-   parantezele rotunde de grupare și lista parametrilor unei funcții săgeată: `()` sau `( ,)`.
 
 #### Enunțuri ale expresiilor
 
-Acestea sunt fragementele sintactice care au înțeles de sine stătător pentru compilator:
+Acestea sunt fragmentele sintactice care au înțeles de sine stătător pentru compilator:
 
-- enunțul declarațiilor de variabile și constante `let x = 10; const y = 9.8, var = 'ceva';`,
-- enunțuri goale. Pur și simplu nu ai nimic, dar un terminator: `;`,
-- enunțul unei expresii `a + 1;`,
-- enunțuri ale instrucțiunilor precum `while`, `if`, etc.,
-- enunțul `debugger;` sau enunțul `"use strict";`.
+-   enunțul declarațiilor de variabile și constante `let x = 10; const y = 9.8, var = 'ceva';`,
+-   enunțuri goale. Pur și simplu nu ai nimic. Doar un terminator: `;`,
+-   enunțul unei expresii `a + 1;`,
+-   enunțuri ale instrucțiunilor precum `while`, `if`, etc.,
+-   enunțul `debugger;` sau enunțul `"use strict";`.
 
 Mai există un set care se numesc „enunțuri ale iterabilelor”:
 
-- `do..while`,
+- `do...while`,
 - `while`,
 - `for`,
 - `for...in`,
@@ -561,18 +561,31 @@ Aceasta a fost mica lecție de anatomie aplicată codului sursă JavaScript pent
 
 ## Resurse
 
-- [ECMAScript® 2017 Language Specification](https://tc39.github.io/ecma262/)
-- [Standard ECMA-262 ECMAScript® 2016 Language Specification](http://www.ecma-international.org/publications/standards/Ecma-262.htm)
-- Simpson, Kyle. [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS)
-- Haverbeke, Marijn. [Eloquent JavaScript](http://eloquentjavascript.net/)
-- Brookshear, J. Glenn. [Computer science - An overview](https://www.amazon.com/Computer-Science-Overview-Global/dp/1292061162)
-- Ce este notația BNF [What is BNF notation?](http://cui.unige.ch/db-research/Enseignement/analyseinfo/AboutBNF.html)
-- Backus–Naur form [Backus–Naur form](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form)
-- A brief history of JavaScript [A brief history of JavaScript](https://auth0.com/blog/a-brief-history-of-javascript/)
-- ViewSource 2015 - Allen Wirfs-Bock [ViewSource 2015 - Allen Wirfs-Bock](https://www.youtube.com/watch?v=_oqkhslhNQU)
-- http://www.teora.ro/cgi-bin/teora/romania/mbshop.cgi?database=01&action=view_product&productID=%20823&category= "Brookshear, J. Glenn. Introducere în informatică. Editura Teora. 1998. Titlul original: Computer science - An overview, Fifth Edition"
-- https://en.wikipedia.org/wiki/George_Boole
-  - https://en.wikipedia.org/wiki/George_Boole#/media/File:George_Boole_color.jpg
-- [List of languages that compile to JS, Jeremy Ashkenas, jashkenas/coffeescript git repo](https://github.com/jashkenas/coffeescript/wiki/List-of-languages-that-compile-to-JS)
-- Tedre, Matti. The Science of Computing. CRC Press. 2015.
-- [Ashley Williams: If you wish to learn ES6/2015 from scratch, you must first invent the universe](https://www.youtube.com/watch?v=DN4yLZB1vUQ)
+-   [ECMAScript® 2017 Language Specification](https://tc39.github.io/ecma262/)
+-   [Standard ECMA-262 ECMAScript® 2016 Language Specification](http://www.ecma-international.org/publications/standards/Ecma-262.htm)
+-   Simpson, Kyle. [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS)
+-   Haverbeke, Marijn. [Eloquent JavaScript](http://eloquentjavascript.net/)
+-   Brookshear, J. Glenn. [Computer science - An overview](https://www.amazon.com/Computer-Science-Overview-Global/dp/1292061162)
+-   Ce este notația BNF [What is BNF notation?](http://cui.unige.ch/isi/bnf/AboutBNF.html)
+-   Backus–Naur form [Backus–Naur form](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form)
+-   A brief history of JavaScript [A brief history of JavaScript](https://auth0.com/blog/a-brief-history-of-javascript/)
+-   ViewSource 2015 - Allen Wirfs-Bock [ViewSource 2015 - Allen Wirfs-Bock](https://www.youtube.com/watch?v=_oqkhslhNQU)
+-   [Brookshear, J. Glenn. Introducere în informatică. Editura Teora. 1998](https://www.worldcat.org/title/introducere-in-informatica/oclc/895726681&referer=brief_results)
+-   [List of languages that compile to JS, Jeremy Ashkenas, jashkenas/coffeescript git repo](https://github.com/jashkenas/coffeescript/wiki/List-of-languages-that-compile-to-JS)
+-   [Tedre, Matti. The Science of Computing. CRC Press. 2015](https://www.crcpress.com/The-Science-of-Computing-Shaping-a-Discipline/Tedre/p/book/9781482217698)
+-   [Ashley Williams: If you wish to learn ES6/2015 from scratch, you must first invent the universe](https://www.youtube.com/watch?v=DN4yLZB1vUQ)
+
+## Bibliografie
+
+Ashkenas, J. (2018, May 15). List of languages that compile to JS. Retrieved from https://github.com/jashkenas/coffeescript (Original work published December 18, 2009)
+Brookshear (author), D. B. G. (2014). Computer Science: An Overview: Global Edition (12th edition edition). Harlow: Pearson Education Limited.
+Brookshear, J. G., Merezeanu, D. M., & Merezeanu, A. N. (1998). Introducere în informatică. Bucureşti: Teora.
+Estier, T. (n.d.). About BNF notation. Retrieved May 15, 2018, from http://cui.unige.ch/isi/bnf/AboutBNF.html
+Haverbeke, M. (n.d.). Eloquent JavaScript (3rd ed.). No Starch Press. Retrieved from http://eloquentjavascript.net/
+Hayes, B. (1997). ECMAScript® 2019 Language Specification. ACM Press. Retrieved from http://portal.acm.org/citation.cfm?doid=263698.263733
+JSConf. (n.d.). Ashley Williams: If you wish to learn ES6/2015 from scratch, you must first invent the universe. Retrieved from https://www.youtube.com/watch?v=DN4yLZB1vUQ
+Mozilla Hacks. (n.d.). ViewSource 2015 - Allen Wirfs-Bock. Retrieved from https://www.youtube.com/watch?v=_oqkhslhNQU
+Peyrott, S. (2017, January 16). A Brief History of JavaScript. Retrieved May 15, 2018, from https://auth0.com/blog/a-brief-history-of-javascript/
+Simpson, K. (2018). You-Dont-Know-JS: A book series on JavaScript. @YDKJS on twitter. Retrieved from https://github.com/getify/You-Dont-Know-JS (Original work published 2013)
+Standard ECMA-262. (n.d.). Retrieved May 15, 2018, from http://www.ecma-international.org/publications/standards/Ecma-262.htm
+Tedre, M. (2014). The Science of Computing: Shaping a Discipline. Retrieved from https://www.crcpress.com/The-Science-of-Computing-Shaping-a-Discipline/Tedre/p/book/9781482217698
