@@ -1,4 +1,4 @@
-# `String.prototype.includes()`
+# String.prototype.includes()
 
 Este o metodă introdusă recent. Înainte de aceasta era folosită `String.prototype.indexOf()`.
 

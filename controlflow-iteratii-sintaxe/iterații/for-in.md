@@ -1,4 +1,4 @@
-# Enunțul `for...in`
+# Enunțul for...in
 
 Iterează proprietățile unui obiect, cele care sunt setate ca `enumerabile`, iar pentru fiecare dintre valorile proprietăților iterate, se poate aplica o funcție sau se poate executa cod.
 
@@ -24,7 +24,7 @@ Trebuie reținut faptul că iterarea folosind `for...in` ia în calcul și cheil
 ```javascript
 let prop;
 
-function Puf(){
+function Puf () {
   let intern = 100;
   this.spuf = 1000;
 };

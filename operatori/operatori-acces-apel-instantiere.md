@@ -1,4 +1,4 @@
-## Operator de acces: punct `.`
+## Operator de acces: punct
 
 Banalul punct este folosit de JavaScript ca operator ce oferă acces la proprietățile unui obiect. Accesul se face menționând numele obiectului punct și numele sau cheia ce identifică o valoare: `obiect.oProprietate`. Același operator poate fi folosit pentru a introduce o valoare într-un obiect.
 

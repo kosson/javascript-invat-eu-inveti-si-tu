@@ -1,4 +1,4 @@
-# `String.prototype.repeat()`
+# String.prototype.repeat()
 
 Construiește și returnează un string nou făcut din concatenarea unui șir care se va repeta de câte ori o specifică parametrul.
 

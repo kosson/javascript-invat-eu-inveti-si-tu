@@ -1,13 +1,13 @@
-# `String.prototype.normalize()`
+# String.prototype.normalize()
 
 Această metodă normalizează secvențe care sunt diferite, dar pe care Unicode le vede echivalente sau compatibile și returnează o valoare normalizată.
 
 Există patru forme de normalizare pe care Unicodul le oferă:
 
-- NFC — Normalization Form Canonical Composition.
-- NFD — Normalization Form Canonical Decomposition.
-- NFKC — Normalization Form Compatibility Composition.
-- NFKD — Normalization Form Compatibility Decomposition.
+-   NFC — Normalization Form Canonical Composition.
+-   NFD — Normalization Form Canonical Decomposition.
+-   NFKC — Normalization Form Compatibility Composition.
+-   NFKD — Normalization Form Compatibility Decomposition.
 
 ```javascript
 var sir = 'șțăî';
