@@ -10,7 +10,7 @@ Atunci când o funcție este apelată, motorul rulează niște algoritmi interni
 
 **Spune standardul**:
 
-> Un mediu de funcție este un Mediu Lexical care corespunde invocării unei funcții obiect ECMAScript. Un mediu de funcție poate stabili o nouă legătură `this`. \[...] Fiecare Înregistrare de Mediu este asociat cu un obiect numit binding object. \[...] Operațiunea abstractă ResolveThisBinding determină legătura cuvântului cheie this folosind LexicalEnvironment al contextului de execuție în derulare.
+> Un mediu de funcție este un Mediu Lexical care corespunde invocării unei funcții obiect ECMAScript. Un mediu de funcție poate stabili o nouă legătură `this`. \[...] Fiecare Înregistrare de Mediu este asociat cu un obiect numit binding object. \[...] Operațiunea abstractă `ResolveThisBinding` determină legătura cuvântului cheie `this` folosind `LexicalEnvironment` al contextului de execuție în derulare.
 
 Multe informații necesare înțelegerii `this` se leagă de discuția pe care am avut-o privind compilarea și execuția.
 Legătura (termenul în engleză fiind `binding`) la `this` depinde de obiectul *din care* s-a făcut apelul (în literatura din limba engleză i se spune *call-site*).
@@ -165,7 +165,7 @@ Ceea ce trebuie reținut este faptul că atunci când funcția constituie legăt
 
 Metodele `call()`, `apply()` și `bind()` sunt disponibile tuturor funcțiilor prin moștenire de la obiectul intern `Function`. Poți folosi aceste metode moștenite pentru a indica explicit obiectul care va fi contextul de execuție al funcției. Funcțiile `call()` și `apply()` iau ca prim parametru un obiect la care se va face legătura `this`. Pentru că este afirmat în mod direct unde dorești să fie `this`, numim această metodă de a realiza legătura: **binding explicit** - legătură explicită.
 
-În cazul în care vei pasa acestor metode valoarea unei primitive simple de tip string, boolean sau number, atunci primitiva va fi „impachetată” în obiectul corespondent (`new String(..)`, `new Boolean(..)` sau `new Number(..)`) și abia la acesta se va face binding-ul `this`. Acest lucru se numește "boxing".
+În cazul în care vei pasa acestor metode valoarea unei primitive simple de tip string, boolean sau number, atunci primitiva va fi „impachetată” în obiectul corespondent (`new String(...)`, `new Boolean(...)` sau `new Number(...)`) și abia la acesta se va face binding-ul `this`. Acest lucru se numește "boxing".
 
 #### Conectarea cu apply() și call()
 

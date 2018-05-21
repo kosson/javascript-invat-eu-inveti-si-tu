@@ -8,26 +8,26 @@ Limbajul de programare ECMAScript, adică JavaScript-ul nostru are câteva valor
 
 > O valoare a limbajului ECMAScript este o valoare care este caracterizată de un tip al limbajului ECMAScript.
 
-Pe scurt, **tipul indică valoarea**. În JavaScript există două mari tipuri de valori:
+Pe scurt, **tipul indică valoarea**. Mai sunt numite și valori primare. În JavaScript există două mari tipuri de valori:
 
-- **tipurile primitive**, care sunt stocate în memoria computerului direct la nivel punctual și
-- **tipurile referință**, care sunt stocate în memoria computerului ca obiecte. Acestea sunt simple referințe către o zonă de memorie în care este stocat obiectul.
+-   **tipurile primitive**, care sunt stocate în memoria computerului direct la nivel punctual și
+-   **tipurile referință**, care sunt stocate în memoria computerului ca obiecte. Acestea sunt simple referințe către o zonă de memorie în care este stocat obiectul.
 
-Tipurile de valori disponibile sunt:
+Tipurile de valori disponibile în JavaScript sunt:
 
-- `Undefined`,
-- `Null`,
-- `Boolean`,
-- `String`,
-- `Symbol`,
-- `Number` și
-- `Object`
+-   `Undefined`,
+-   `Null`,
+-   `Boolean`,
+-   `String`,
+-   `Symbol`,
+-   `Number` și
+-   `Object`
 
-Pentru aceste valori primare, am creat un simbol de care să ne folosim în acest manual. Acesta este pentru primele șase un cerc cu trei raze în care este înscrisă o prescurtatare a numelui valorii. Singura valoare care este exceptată va fi cea a obiectului pe care l-am reprezentat precum un cerc cu trei linii suprapuse ce simbolizează proprietățile sale. Acest sistem de notare vizuală nu face parte din standard și îl adoptăm aici pentru a ne face viața mai ușoară în anumite explicații.
+Pentru aceste valori primare, am creat un simbol de care să ne folosim în acest manual. Acesta este pentru primele șase un cerc cu trei raze în care este înscrisă o prescurtare a numelui valorii. Singura care este exceptată va fi cea a obiectului pe care l-am reprezentat precum un cerc cu trei linii suprapuse ce simbolizează proprietățile sale. Acest sistem de notare vizuală nu face parte din standard. Îl vom adopta aici pentru a ne face viața mai ușoară în anumite explicații.
 
 ![](HeaderValori.png)
 
-Primitivele sunt valori în sine și sunt egale cu ele însele și nu este o referință. Acest lucru înseamnă că la capătul unei legături dintre un identificator și o valoare primitivă, există valoarea în sine, nu adresa către un obiect.
+Primitivele sunt valori în sine și sunt egale cu ele însele.
 
 Aceste valori sunt cele pe care diferitele structuri de prelucrare sau de stocare permanentă ori temporară, le vor organiza și manipula. Sunt baza structurilor de date, dacă vrei, atomii substanței cu care lucrăm în programare.
 
@@ -40,7 +40,7 @@ Aceste valori sunt cele pe care diferitele structuri de prelucrare sau de stocar
 (function () {}) === (function () {}); // false
 ```
 
-Atunci când nu ești sigur de valoarea reprezentată de un identificator, există un operator la îndemână care să te ajute să verifici ce este: `typeof valoare`.
+Atunci când nu ești sigur de valoarea asignată unui identificator, există un operator pentru a investiga cu ce valoare ai de-a face: `typeof valoare`.
 
 ```javascript
 var a = 10,
@@ -57,11 +57,11 @@ typeof e; // symbol
 typeof f; // object
 ```
 
-Atenție! `typeof null`, returnează `object`. Acest lucru se întâmplă pentru că standardul ECMAScript spune că `null` este un tip distinct în sine.
+Atenție, `typeof null`, returnează `object`. Acest lucru se întâmplă pentru că standardul ECMAScript spune că `null` este un tip distinct în sine.
 
 ## Împachetarea primitivelor
 
-Valorile primitive, întocmai ca obiectele, au proprietăți și metode. Cum se întâmplă acest lucru mai ales că mai devreme am menționat clar că la capătul legăturii dintre un identificator și valoarea primitivă este chiar valoarea, nu o referință către un obiect? JavaScript are un mecanism care pur și simplu *îmbracă* o primitivă într-un obiect. Pur și simplu se petrece o *împachetare* a valorii în obiectul intern corespondent. Împachetarea (*wrapping* în limba engleză) se face fără știrea sau intervenția utilizatorului și astfel, pare că și primitivele au metode.
+Valorile primitive în anumite condiții devin obiecte care au proprietăți și metode. JavaScript are un mecanism care pur și simplu *îmbracă* o primitivă într-un obiect. Pur și simplu se petrece o *împachetare* a valorii în obiectul intern corespondent. Împachetarea (*wrapping* în limba engleză) se face fără știrea sau intervenția utilizatorului și astfel, pare că și primitivele au metode.
 
 Când se petrece *împachetarea*? De îndată ce pui operatorul punct după identificatorul valorii primitive. Acesta este semnalul către motor să împacheteze primitiva în obiectul corespondent. Reține faptul că imediat ce s-a încheiat evaluarea, valoarea primitivă va fi *despachetată*.
 
@@ -77,11 +77,9 @@ O valoare primitivă care a fost „împachetată” o vom semnala vizual printr
 
 <img src="WrappedPrimitive.png" width="150px" />
 
-O valoare primitivă care a fost „împachetată” o vom semnala vizual printr-un cerc cu trei raze ca și în cazul primitivelor, dar înscris într-un cerc.
-
 ## `Undefined`
 
-Tipul de valori `Undefined` nu poate să conțină decât o singură valoare: `undefined`. `Null`, la fel.
+Acest tip de valoare ne spune că identificatorul sau o valoare rezultată în urma unei evaluări nu conține nimic.
 
 ## `Boolean`
 
@@ -96,9 +94,9 @@ let bool = new Boolean(true);
 typeof bool; // "object"
 ```
 
-## `String`
+## String - șiruri de caractere
 
-Tipul `String` este folosit pentru a reprezenta date reprezentate textual, fiind, de fapt, un șir de caractere, care prin succesiune și aranjament transmit informații importante. Fiecare caracter codat UTF16 considerat a fi „un element”. Un element este valoarea unui „code unit” din schema de codare a caracterelor UTF-16.
+Tipul `String` este folosit pentru a reprezenta texte. De fapt sunt un șir de caractere, care prin succesiune și aranjament transmit informații importante. Fiecare caracter codat UTF16 este considerat „un element”. Un element este valoarea unui „code unit” din schema de codare a caracterelor UTF-16.
 
 Standardul spune că un șir de caractere literal este *șirul constituit din zero sau mai multe puncte de cod Unicode cuprinse între ghilimele simple sau duble*.
 
@@ -112,21 +110,22 @@ Sunt pur și simplu siruri de caractere care pot fi introduse în mod direct cu 
 
 ## `Symbol`
 
-Tipul `Symbol` este un set de valori care nu sunt pot fi considerate a fi șiruri, dar care pot fi folosite precum chei ale unei proprietăți într-un obiect.
+Tipul `Symbol` este atașat unui set de valori care nu sunt pot fi considerate a fi șiruri, dar care pot fi folosite drept chei pentru proprietatea unui obiect.
 
 În cazul lui `Symbol`, fiecare valoare care reprezintă simbolul, este unică și nu poate fi modificată (în engleză, *immutable*), dar fiecare valoare la rândul ei poate avea o valoare asociată folosită pentru a descrie simbolul, care este `undefined` sau un șir de caractere. Un `Symbol` cu care te vei întâlni foarte des este `@@iterator` și care este o referință către o metodă care returnează un obiect iterator pentru un obiect pe care-l folosești. Formula `for...of` face apel automat la această metodă.
 
 ## `Number`
 
-Valorile numerice sunt caracterele a căror interpretare conduce la înțelegerea de către computer a foptului că-i introduci o valoare numerică. O valoare numerică exprimată printr-un literal va fi întotdeauna rotunjită atunci când se evaluează valoarea numerică.
-În cazul în care avem valori zecimale, acestea pot fi reprezentate și dacă încep cu 0. Important este că cifra care urmează să nu fie sub 8 pentru căci în acest caz este interpretat ca fiind un octal.
+Valorile numerice sunt exprimate prin caracterele a căror interpretare conduce la înțelegerea ca număr. O valoare numerică exprimată printr-un literal va fi întotdeauna rotunjită la momentul evaluării
+.
+În cazul în care avem valori zecimale, acestea pot fi reprezentate chiar dacă sunt reprezentate cu 0 pe ordinul care nu este completat. Important este că cifra care urmează să nu fie sub 8 pentru că în acest caz este interpretat ca fiind o valoare octală.
 
-Care sunt numerele pe care le poți introduce ca literale.
+Valori numerice exprimate literal.
 
-- Întregii binari precum `0b` (litera `b` poate fi introdusă și ca majusculă).
-- Digiții binari clasici: `0` și `1`.
-- Valorile octale scrise ca zero urmat de `o` - `0o` sau zero urmat de `O` - `0O`. Valorile numerice care urmează secvenței `0o` nu trebuie să fie mai mari de 7.
-- Întregi hexazecimali precum `0x` sau `0X`.
+-   Întregii binari: `0b` (litera `b` poate fi și majusculă).
+-   Digiții binari: `0` și `1`.
+-   Valorile octale scrise ca zero urmat de caracterul `o`, precum în `0o` sau zero urmat de `O`: `0O`. Valorile numerice care urmează secvenței `0o` nu trebuie să fie mai mari de 7.
+-   Întregi hexazecimali precum `0x` sau `0X`.
 
 ```javascript
 var unBinar = 0b0010000011000000111100001100000;
@@ -135,18 +134,18 @@ var unOctal = 0o644; console.log(unOctal); //420
 var unHexa = 0x24443AD; console.log(unHexa); //38028205
 ```
 
-Odată cu valorile numerice poți menționa și exponenții: `e` sau `E`.
+Odată cu valorile numerice poți menționa și exponenții folosind caracterul semnal: `e` sau `E`.
 Poți scrie semnul minus care să indice cu care valoare de pe axa numerelor se operează: `-10` și `10`, de exemplu.
 
 Tipul `Number` țintește valori numerice cu dubă precizie pe 64 de biți.
-`Number` nu poate avea valori mai multe de 18437736874454810627 (standardul IEEE 754-2008).
+`Number` nu poate avea valori mai mari de 18437736874454810627 (standardul IEEE 754-2008).
 Alte valori de tip `Number` sunt `NaN` (Not-a-Number, care tot o implementare a standardului menționat este), `Infinity` pozitivă și negativă, zero și minus zero.
 
 ## `Object`
 
 Tipul `Object` este o colecție de proprietăți fără o ordine formală.
 
-Inițializarea unui obiect este o sarcină simplă folosind literalul corespunzător. Pur și simplu folosești acoladele între care pui perechile de chei-valori și cam asta e.
+Inițializarea unui obiect este o sarcină simplă folosind notația literală. Pur și simplu folosești acoladele între care pui perechile de chei-valori.
 
 ```javascript
 let obi = {unu: 1, este: true};
@@ -157,29 +156,28 @@ let obi = {unu: 1, este: true};
 
 ```javascript
 let unu = 1, este = true;
-let obi = {unu, este};
+const obi = {unu, este};
 console.log(obi); // {"unu":1,"este":true}
 ```
 
-Obiectele au și ele obiectul de împachetare corespondent care poate fi instanțiat prin apelarea cu `new` a constructorului `Object`.
+Obiectele au și ele constructorului corespondent `Object()`. Poți instanția obiecte folosindu-l:
 
 ```javascript
-new Object();
+const obi = new Object();
 ```
 
 Oricare proprietate a unui obiect este, fie o proprietate care conține date, fie un „accessor”.
 O „proprietate de date” a unui obiect este o asociere dintre valoarea unei chei cu o valoare a limbajului (unul dintre tipuri), plus un set de atribute de tip Boolean (`writable`, `enumerable`, `configurable`).
-O „proprietate accesor” (`get` și `set`), asociază o cheie cu una din cele două funcții accesor, plus un set de atribute tip Boolean.
+O „proprietate accesor” (`get` și `set`), asociază o cheie cu una din cele două funcții accesor, plus un set de atribute tip Boolean. Proprietățile unui obiect accesate prin get și set, sunt cele ale obiectului, dar și cele moștenite.
 Cheile unui obiect nu pot fi decât un șir de caractere sau o valoare `Symbol`. Atenție, chiar și un șir vid poate sta drept cheie. Numele cheii este întotdeauna un șir de caractere.
 
-Proprietățile unui obiect accesate prin get și set, sunt cele ale obiectului, dar și cele moștenite.
-Atenție, fiecare obiect trebuie să aibe seturi cheie - valoare care să fie unice. Duplicatele nu sunt acceptate.
+Atenție, fiecare obiect trebuie să aibă seturi cheie - valoare care să fie unice. Duplicatele nu sunt acceptate.
 
-Acum că am încheiat cu tratarea valorilor care sunt și tipurile limbajului nostru și pentru că am tratat și povestea reprezentărilor literale ale lor, vom continua cu restul reprezentărilor literale pentru valori care le putem considera derivate din cele nucleu. De ce le tratez precum derivări? Pentru că se bazează pe valorile nucleu oferind un rafinament adaptat unor situații necesare pentru tratarea anumitor valori. Cel mai simplu, pentru a înțelege este relația dintre obiect și array. Un array este la rândul său un obiect, dar unul specializat pe manipularea datelor ca și liste de valori, care valori pot fi cele descrise până în acest moment.
+Acum că am încheiat cu tratarea valorilor care sunt și tipurile limbajului nostru și pentru că am tratat și povestea reprezentărilor literale, vom continua cu restul reprezentărilor literale pentru valori pe care le vom folosi pentru a modela datele.
 
 ## Literalul array
 
-În cazul array-urilor, forma literală pentru constituire este lista elementelor introdusă între paranteze pătrate.
+Acum este un moment potrivit să luăm contact cu una din structurile de date pe care o vom folosi foarte des. În limba română mai este numit și tablou, dar cei mai mulți practicieni folosesc termenul din limba engleză. În cazul array-urilor, forma literală este o listă de elemente despărțite de virgule încadrate între paranteze pătrate.
 
 ```javascript
 let arr = ['unu', 2, true];
@@ -188,22 +186,22 @@ let arr = ['unu', 2, true];
 Obiectul de împachetare este `Array` iar instanțierea acestuia cu `new` crează un array.
 
 ```javascript
-new Array('unu', 2, true);
+const unArrayNou = new Array('unu', 2, true);
 ```
 
 ## Literal RegExp
 
-Ca să nu fii confuză, RegExp este o parte importantă a rutinelor de lucru cu șiruri în oricare limbaj de programare. RegExp înseamnă regular expressions iar utilitatea sa este dovedită prin capacitatea de a face regăsiri într-un șir de caractere, care poate fi de orice dimensiuni (o carte, de exemplu). După cum intuiești, RexExp este foarte puternic ca și capacitate de a căuta după cuvinte cheie, expresii, succesiuni de caracteer, ce să mai, șabloane aranjate și construite după cele mai fanteziste reguli. Dar și aceste șabloane, trebuie specificate cumva. Uneori le poți introduce într-o variabilă iar în cazul literalelor, le putem specifica direct.
+RegExp constituie o parte importantă a rutinelor de lucru cu șiruri în oricare limbaj de programare. RegExp înseamnă regular expressions iar utilitatea sa este dovedită prin capacitatea de a face regăsiri într-un șir de caractere, care poate fi de orice dimensiuni (o carte, de exemplu). După cum intuiești, RexExp este foarte puternic ca și capacitate de a căuta după cuvinte cheie, expresii, succesiuni de caractere, ce să mai, șabloane aranjate și construite după cele mai fanteziste reguli. Dar și aceste șabloane, trebuie specificate cumva. Uneori le poți introduce într-o variabilă iar în cazul literalelor, le putem specifica direct.
 
 ```javascript
 /a+b/g; //sau
 /^a+b$/g;
 ```
 
-Obiectul de împachetare este `RegExp` și instanțierea sa cu `new` produce un obiect.
+Constructorul `RegExp()` prin instanțierea sa cu `new` produce un obiect.
 
 ```javascript
-new RegExp('^a+b$', 'g');
+let obiRegexNou = new RegExp('^a+b$', 'g');
 ```
 
 ## Literalul funcțiilor
@@ -211,13 +209,13 @@ new RegExp('^a+b$', 'g');
 Pentru a înțelege faptul că funcțiile au literalul lor, trebuie să înțelegem un lucru foarte simplu. În JavaScript, funcțile sunt valori.
 
 ```javascript
-function () { return true };
+function facCeva () { return true };
 ```
 
 O funcție are și ea la rândul ei un obiect de împachetare și poate fi creată prin invocarea cu `new`.
 
 ```javascript
-new Function('return true');
+let oFunctieNoua = new Function('return true');
 ```
 
 ### Literale rezervate pentru marcaje și delimitări în șirurile de caractere
@@ -230,13 +228,13 @@ Secvențe de escape pentru UNICODE: `u` sau `u{ }`
 
 Începând cu ECMAScript 2015 avem un mod suplimentar de a lucra cu fragmente de text și acesta este numit **template literal** - „șabloane literale”. Chestia extraordinară este că permite introducerea de expresii care pot fi evaluate folosind secvența `${identificator sau expresie}` și lucrul cu fragmente de text pe mai multe rânduri. Pentru a construi un template string punem tot textul nostru între două <code>&#96;</code>, care este caracterul pentru reprezentarea **accentului grav** (grave accent, în engleză). Acest caracter mai este denumit în limba engleză și **backtick**.
 
-Acestea este semnul distinct care spune motorului JavaScript că se pot interpola rezultate ale evaluării unei expresii folosind combinațiea dollar-acolade precum în: `${oVariabilaSauExpresie}`.
+Acestea este semnul distinct care spune motorului JavaScript că se pot interpola rezultatele evaluării unei expresii folosind combinația dollar-acolade precum în: `${oVariabilaSauExpresie}`.
 
 ```javascript
 let ceva = `ceva text ${numeIdentificator}`;
 ```
 
-*Șabloanele literale* (template literal) sunt un pas evolutiv important dacă ne gândim la faptul că până acum trebuia să apelăm la concatenare pentru a introduce într-un șir de caractere rezultatul evaluării unor expresii. Acest lucru introduce un nivel suplimentar de calcul pentru că mototul JS trebuia mai întâi să analizeze dacă nu cumva este vorba despre o adunare. Așa, folosind *șabloanele literale*, lucrurile sunt clare.
+*Șabloanele literale* (*template literal* în limba engleză) sunt un pas evolutiv important dacă ne gândim la faptul că până acum trebuia să apelăm la concatenare pentru a introduce într-un șir de caractere rezultatul evaluării unor expresii. Acest lucru introduce un nivel suplimentar de calcul pentru că motorul JS trebuia mai întâi să analizeze dacă nu cumva este vorba despre o adunare. Așa, folosind *șabloanele literale*, lucrurile sunt clare.
 
 ```javascript
 let a = 5, b = 10;
@@ -245,7 +243,7 @@ console.log("Cinsprezece este suma " + (a + b) + " și\nnu " + (2 * a + b) + "."
 console.log(`Cinsprezece este suma ${a + b} și\nnu ${2 * a + b}.`);
 ```
 
-O formă și mai avansată de *șabloane literale* (template literal) este cea numită `tagged template literals` - **literale șablon cu etichetă**. Un simplu exemplu:
+O formă și mai avansată de *șabloane literale* este cea numită `tagged template literals` - **literale șablon cu etichetă**. Un simplu exemplu:
 
 ```javascript
 let a = 0.5, b = 10;
@@ -263,7 +261,7 @@ console.log(altaParte);
 
 ### Tagged template literals - funcții de șablonare
 
-În acest caz, se folosește o funcție care este apelată cu datele template-ului literal care este procesat. Funcția primește datele din template ca bucăți individuale și trebuie să le combine pentru a creea rezultatul.
+În acest caz, se folosește o funcție care este apelată cu datele template-ului literal care este procesat. Funcția primește datele din template ca bucăți individuale și trebuie să le combine pentru a crea rezultatul.
 
 ```javascript
 let atribut = 'foarte bun',

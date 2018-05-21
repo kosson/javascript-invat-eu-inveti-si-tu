@@ -8,11 +8,11 @@ Valorile literale sunt valorile oferite în mod direct programului, fiind declar
 ```
 
 Știu la ce te gândești!
-Te întrebi pe bună dreptate cum face diferența motorul JavaScript între **identificatori** și **valorile literale** de tip șir de caractere. Ambele sunt șiruri de caractere, nu? Da! Dar pentru ca un șir de caractere să devină un literal, acesta are nevoie să fie încadrat între ghilimele simple sau duble: `var ceva = 'ceva';`. Dacă ar fi menționat fără ghilimele, ar fi o legătură realizată de un identificator la un alt identificator: `var ceva = altceva;`.
+Te întrebi pe bună dreptate cum face diferența motorul JavaScript între **identificatori** și **valorile literale** de tip șir de caractere. Ambele sunt șiruri de caractere, nu? Pentru ca un șir de caractere să devină un literal, acesta are nevoie să fie încadrat între ghilimele simple sau duble: `var ceva = 'ceva';`. Dacă ar fi menționat fără ghilimele, ar fi o legătură realizată de un identificator la un alt identificator: `var ceva = altceva;`.
 
 Acum, o situație interesantă pe care sunt sigur că ai sesizat-o. De ce pentru literalele cifre, nu este nevoie de ghilimele. Răspunsul vine din limitele pentru scrierea identificatorilor. Aceștia nu au voie să înceapă cu o cifră. Cââât de simplu! Și de aici e opțiunea simplă a motorului care face diferența fără a fi necesare ghilimele. Atenție, dacă pui o cifră între ghilimele, ceea ce este perfect ok, aceasta nu mai este un număr și un simplu caracter dintr-un șir text.
 
-Literalele următoare, ca și nume, sunt rezervate de sistem pentru sine să înțeleagă că despre acele valori speciale vorbești. Că să fiu mai clar, aceste cuvinte ale limbii engleze sunt rezervate de JavaScript pentru a le recunoaște și a le înțelege valoarea. În continuare vom trata valorile indicând acolo unde este necesar faptul că indicarea valorii se face printr-un literal.
+În continuare vom trata valorile indicând acolo unde este necesar faptul că indicarea valorii se face printr-un literal.
 
 ### Literal `null`
 
@@ -22,27 +22,29 @@ Avem unul singur și acesta este cuvântul rezervat `null`
 
 Avem cele două variante `true` și `false`.
 
-Acum vom purcede la a împușca doi iepuri deodată. La ce mă refer este la faptul că în afară de a declara valori literale, valorile pot fi create prin instanțierea obiectul corespondent tipului de valoare. Ești în ceață? Hai să o lămurim. JavaScript este un limbaj orietat pe obiecte. Am lămurit treaba asta mai demult, dar este necesar să o repetăm pentru firul logic. Din start sunt disponibile niște obiecte interne, niște constructori (funcții care invocate creează obiecte), de fapt. Printre aceste obiecte, se află și cele care permit crearea de valori la momentul în care le instanțiezi folosind operatorul `new`. Un exemplu scurt și trecem mai departe. Dacă dorim să introducem valoarea trei, valoarea literală pur și simplu permite să declari caracterul `3;`. Corect? Simplu! Dar pentru că există un obiect intern corespondent, ai putea să generezi aceeași valoare instanțiind obiectul intern cu ajutorul cuvântului cheie new după cum urmează: `new Number('3');`. Complicat? Nu cred. Dacă ești amețit nițel, reține acum că pentru fiecare valoare literală numerică sa șir, există un obiect intern pe care-l poți folosi. Aceste obiecte interne se numesc „obiecte ambalaj”, pentru că împăturesc o valoare căreia îi oferă metode și proprietăți transformând-o într-un obiect, de fapt.
+Acum vom purcede la a împușca doi iepuri deodată. La ce mă refer este la faptul că în afară de a declara valori literale, valorile pot fi create prin instanțierea obiectul corespondent tipului de valoare. Ești în ceață? Hai să o lămurim. JavaScript este un limbaj orientat pe obiecte. Am lămurit treaba asta mai demult, dar este necesar să o repetăm pentru argumentație. Din start sunt disponibile niște obiecte interne, niște constructori (funcții care invocate creează obiecte), de fapt. Printre aceste obiecte, se află și cele care permit crearea de valori la momentul în care le instanțiezi folosind operatorul `new`. Un exemplu scurt și trecem mai departe. Dacă dorim să introducem valoarea trei, valoarea literală pur și simplu permite să declari caracterul `3;`. Dar pentru că există un obiect intern corespondent, ai putea să generezi aceeași valoare instanțiind obiectul intern cu ajutorul cuvântului cheie `new` după cum urmează: `new Number('3');`.
 
-Iată, pentru valorile boolean, există un constructor, de fapt o funcție, care invocată prin operatorul `new`. Există o eroare teribilă în a cărei plasă poți cădea dacă nu ești atent. Aceea ar fi confundarea valorilor generate prin folosirea constructorilor, acestea fiind obiecte, cu valorile literale. Nu uita, folosirea unui constructor, adică instanțierea sa cu operatorul `new` rezultă în crearea unui obiect, nu a unei valori literale. Poți testa acest lucru evaluând identificatorul cu operatorul `typeof`.
+Complicat? Nu cred. Dacă ești amețit nițel, reține acum că pentru fiecare valoare literală numerică ca șir, există un obiect intern pe care-l poți folosi. Aceste obiecte interne se numesc *obiecte ambalaj*, pentru că împăturesc o valoare căreia îi oferă metode și proprietăți transformând-o într-un obiect, de fapt.
+
+Iată, pentru valorile boolean, există un constructor, de fapt o funcție, care invocată prin operatorul `new` creează un obiect. Există o eroare teribilă în a cărei plasă poți cădea dacă nu ești atent. Aceea ar fi confundarea valorilor generate prin folosirea constructorilor, acestea fiind obiecte, cu valorile literale. Nu uita, folosirea unui constructor, adică instanțierea sa cu operatorul `new` rezultă în crearea unui obiect, nu a unei valori literale. Poți testa acest lucru evaluând identificatorul cu operatorul `typeof`.
 
 ```javascript
-var bool = new Boolean(true);
-if(bool) {console.log(bool)}; // true
+var bool = new Boolean(true); // true
 typeof bool; // "object"
 ```
 
 ### Literale numerice
 
-Valorile numerice sunt caracterele a căror interpretare conduce la înțelegerea de către computer a foptului că-i introduci o valoare numerică. O valoare numerică exprimată printr-un literal va fi întotdeauna rotunjită atunci când se evaluează valoarea numerică.
+Valorile numerice sunt caracterele a căror interpretare conduce la înțelegerea de către computer a faptului că introduci o valoare numerică. O valoare numerică exprimată printr-un literal va fi întotdeauna rotunjită atunci când este evaluată.
+
 În cazul în care avem valori zecimale, acestea pot fi reprezentate și dacă încep cu 0. Important este că cifra care urmează să nu fie sub 8 pentru căci în acest caz este interpretat ca fiind un octal.
 
 Care sunt numerele pe care le poți introduce ca literale.
 
-- Întregii binari precum `0b` (litera `b` poate fi introdusă și ca majusculă).
-- Digiții binari clasici: `0` și `1`.
-- Valorile octale scrise ca zero urmat de `o` - `0o` sau zero urmat de `O` - `0O`. Valorile numerice care urmează secvenței `0o` nu trebuie să fie mai mari de 7.
-- Întregi hexazecimali precum `0x` sau `0X`.
+-   Întregii binari precum `0b` (litera `b` poate fi introdusă și ca majusculă).
+-   Digiții binari clasici: `0` și `1`.
+-   Valorile octale scrise ca zero urmat de `o` - `0o` sau zero urmat de `O` - `0O`. Valorile numerice care urmează secvenței `0o` nu trebuie să fie mai mari de 7.
+-   Întregi hexazecimali precum `0x` sau `0X`.
 
 ```javascript
 var unBinar = 0b0010000011000000111100001100000;

@@ -1,8 +1,13 @@
 # Symbols
 
-Este un tip de date introdus de ECMAScript 2015 (ES6). Un simbol este o valoare primitivă care diferă de celelalte prin faptul că nu are o reprezentare literală. Cum testezi că este o primitivă? Simplu: `typeof` răspunde cu `"symbol"`.
+Este un tip de date introdus de ECMAScript 2015. Un simbol este o valoare primitivă care diferă de celelalte prin faptul că nu are o reprezentare literală. Cum testezi că este o primitivă? Simplu: `typeof` răspunde cu "symbol".
 
-Un `Symbol` este unic și nu poate fi modificat (este „immutable”). Un simbol este creat la apelarea funcției intrinseci `Symbol()`. Standardul spune că `Symbol()` ar fi un constructor, dar acesta spre deosebire de restul constructorilor, nu poate instanția obiecte prin sintaxa cu `new`. Pentru a crea un simbol se va folosi constructorul Symbol apelându-l ca pe o funcție.
+Simbolurile pot fi folosite drept chei pentru proprietatea unui obiect.
+În cazul lui `Symbol`, fiecare valoare folosită pentru a reprezinta simbolul, este unică și nu poate fi modificată (în engleză, immutable). Simbolul poate avea o valoare atribuită pentru a o descrie.
+
+Valoarea folosită pentru a descrie simbolul poate fi undefined sau un șir de caractere. Un `Symbol` cu care te vei întâlni foarte des este `@@iterator`, fiind o referință către o metodă ce returnează un obiect iterator . Instrucțiunea `for...of` face apel automat la această metodă.
+
+Un simbol este creat la apelarea constructorului `Symbol()`. Standardul spune că `Symbol()` este un constructor, dar acesta spre deosebire de restul constructorilor, nu poate instanția obiecte prin sintaxa cu `new`. Pentru a crea un simbol se va folosi constructorul `Symbol` apelându-l ca pe o funcție.
 
 ```javascript
 var unSimbol = Symbol();
@@ -15,7 +20,7 @@ Pentru a ne face un serviciu nouă programatorilor, recomand introducerea unui �
 var unSimbol = Symbol('ceva deosebit');
 ```
 
-Aceste valori primitive nu pot fi modificate și sunt utilizate pentru a crea un nume unic pentru o proprietate a unui obiect. Până în acest moment foloseam doar șiruri de caractere pentru numele proprietăților. Acum putem folosi aceste simboluri. Îmi place să-mi maginez că simbolurile pot fi ca niște pietre artizanale pe care este încrustat un cuvânt sau o propoziție cu o însemnătate deosebită. Această piatră este unică, este deosebită și pe care nu se poate interveni cu nimic. Chiar dacă o altă piatră ar purta aceeași inscripție, ar fi totuși o piatră diferită.
+Aceste valori primitive nu pot fi modificate și sunt utilizate pentru a crea un nume unic pentru o proprietate a unui obiect. Până în acest moment foloseam doar șiruri de caractere pentru numele proprietăților. Acum putem folosi aceste simboluri. Îmi place să-mi imaginez că simbolurile pot fi ca niște pietre artizanale pe care este încrustat un cuvânt sau o propoziție cu o însemnătate deosebită. Această piatră este unică, este deosebită și pe care nu se poate interveni cu nimic. Chiar dacă o altă piatră ar purta aceeași inscripție, ar fi totuși o piatră diferită.
 
 ```javascript
 var i = Symbol('deosebit');
@@ -32,11 +37,9 @@ obi[unSimbol] = true;
 console.log(obi[unSimbol]);
 ```
 
-**Moment Zen**: Toate proprietățile a căror nume sunt simboluri, nu sunt enumerabile.
+Atenție, toate proprietățile unui obiect al căror nume sunt simboluri, nu sunt enumerabile.
 
-Ca și în cazul array-urilor, proprietățile ale căror cheie este un simbol, li se pot accesa valorile folosind notația cu paranteze drepte. Folosirea notației cu punct, va returna `undefined`.
-
-## Introdu descrierea simbolului!
+Precum în cazul array-urilor, proprietățile ale căror cheie este un simbol, li se pot accesa valorile folosind notația cu paranteze drepte. Folosirea notației cu punct, va returna `undefined`.
 
 Se observă că în sintaxa folosită `Symbol('descriere')` este introdus un șir de caractere care poate fi folosit în scopuri de depanare.
 
@@ -54,16 +57,14 @@ ATENȚIE! De fiecare dată când descriptorul este același, pentru două simbol
 ```javascript
 var simbol1 = Symbol('ceva');
 var simbol2 = Symbol('ceva');
-
-Symbol('ceva') === Symbol('ceva');
+Symbol('ceva') === Symbol('ceva'); // false
 ```
 
 ## Simboluri construite deja în limbaj
 
 ### Symbol.iterator
 
-Este o metodă care returnează iteratorul setat default pentru un obiect. Acesta este utilizat pentru declarația `for...of`.
-ATENȚIE! Iteratorul nu este writable, enumerable sau configurable.
+Este o metodă care returnează iteratorul setat default pentru un obiect. Acesta este utilizat pentru declarația `for...of`. Atenție, iteratorul nu este writable, enumerable sau configurable.
 
 ## Resurse
 

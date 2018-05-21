@@ -1,6 +1,7 @@
 # Operatorii unari
 
 Un operator unar este un operator care aplică o operațiune asupra unui singur operand sau argument.
+
 Aceștia sunt:
 
 -   `delete`,
@@ -120,11 +121,11 @@ Te-ai fi așteptat ca la incrementare să fie returnat 2 fără dubiu.
 
 Acest lucru nu s-a întâmplat pentru că valoarea variabilei a fost returnată la momentul când a fost evaluat operatorul `++`, care returnează noua valoare.
 
-Acest moment în timp este foarte important de reținut pentru că este cel imediat ce *cursorul* motorului a trecut de identificator și a *dat peste* operatorul de incrementare. După ce a trecut *cursorul* și de operator, acesta returnează valoarea operandului, dar nu la valoarea incrementată. Ceea ce s-a petrecut este că mediul de rulare reține în continuare valoarea anterioară, dar nu și pe cea nouă, cea actualizată. Abia după ce mai „citim” - **evaluăm** o dată identificatorul `x`, acesta indică valoarea actualizată. În cazul utilizării ca prefix, operatorul face incrementarea și returnează valoarea actualizată.
+Acest moment în timp este foarte important de reținut pentru că este cel imediat ce *cursorul* motorului a trecut de identificator și a *dat peste* operatorul de incrementare. După ce a trecut *cursorul* și de operator, acesta returnează valoarea operandului, dar nu la valoarea incrementată. Ceea ce s-a petrecut este că mediul de rulare reține în continuare valoarea anterioară, dar nu și pe cea nouă, cea actualizată după trecerea cursorului de operator și incrementarea în urma evaluării care s-a făcut. Abia după ce mai „citim” - **evaluăm** o dată identificatorul `x`, acesta indică valoarea actualizată. În cazul utilizării ca prefix, operatorul face mai întâi incrementarea. Astfel, vom avea la dispoziție valoarea actualizată fără a mai fi necesară citirea valorii identificatorului, care tot o operațiune de evaluare este.
 
 Reține acest comportament pentru că acest tip de incrementare este folosită în mod curent la realizarea buclelor cu enunțul `for`, când dorești să parcurgi o listă de valori. Cam așa arată: `for(var i = 0; i < listă.length; i++) { // operațiunea aplicată rând pe rând fiecărui element din listă}`. Îl vei mai folosi de multe ori și în calcule matematice.
 
-Înainte de a vedea comportamentul din poziția de prefix, pune o ancoră de memorie pe acest comportament pentru că uneori conduce la situații inexplicabile sau chiar erori - valoarea nu există, nu pentru că nu a fost incrementată, ci pentru că nu a mai fost evaluat (*citit*) identificatorul o dată și alte multe asemenea. Prima dată când vom folosi în vreo expresie respectiva variabilă, atunci valoarea va fi cea incrementată. Până atunci, motorul are memorie scurtă și în dinamica evaluării, până când nu va fi silit să citească din nou variabila, va folosi valaorea veche.
+Înainte de a vedea comportamentul din poziția de prefix, pune o ancoră de memorie pe acest comportament pentru că uneori conduce la situații inexplicabile sau chiar erori - valoarea nu există, nu pentru că nu a fost incrementată, ci pentru că nu a mai fost evaluat (*citit*) identificatorul o dată și alte multe asemenea. Prima dată când vom folosi în vreo expresie respectiva variabilă, atunci valoarea va fi cea incrementată. Până atunci, motorul are memorie scurtă și în dinamica evaluării, până când nu va fi silit să citească din nou variabila, va folosi valoarea veche.
 
 Când operatorul este folosit ca prefix, incrementarea se face înainte ca operatorul să returneze noua valoare.
 

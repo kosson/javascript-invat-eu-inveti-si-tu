@@ -1,8 +1,8 @@
 # Evaluarea
 
-Am introdus capitolul care prezintă valorile de lucru pentru că aceste valori sunt de fapt, operanzii care intră în combinație cu operatorii. Aceste expresii exprimă dorința de a ajunge la un rezultat în urma evaluării expresiei. Sunt precum verbele: *cinci* **adună-l** *cu doi*. Când vrem să adunăm două valori, folosim caracterul plus pentru a indica evaluatorului (motorul limbajului), că dorim să ajungem la valoarea cumulată.
+Am introdus capitolul care prezintă valorile de lucru pentru că aceste valori sunt operanzii care intră în combinație cu operatorii. Aceste expresii exprimă dorința de a ajunge la un rezultat în urma evaluării. Când vrem să adunăm două valori, folosim caracterul plus pentru a indica evaluatorului (motorul limbajului), că dorim să ajungem la valoarea cumulată.
 
-Insist asupra acestor detalii, care par a fi lipsite de importanță prin evidența lor, pentru că la un moment dat, se va dori rezultatul evaluărilor unor expresii de o mare complexitate. Dacă acum înțelegem că este crucial  să privim expresiile prin lupa evaluării, multe asperități în înțelegerea codului scris de tine sau de alții, pur și simplu vor dispărea. Ochiul antrenat, va detecta expresiile și le va parcurge mental înțelegând ce fac toți operatorii angrenați.
+Insist asupra acestor detalii pentru că la un moment dat, se va dori rezultatul evaluărilor unor expresii de o mare complexitate. Dacă acum înțelegem că este crucial  să privim expresiile prin lupa evaluării, multe asperități în înțelegerea codului scris de tine sau de alții vor dispărea. Ochiul antrenat, va detecta expresiile și le va parcurge mental înțelegând ce fac toți operatorii angrenați.
 
 ## Ce sunt operanzii?
 
@@ -16,7 +16,7 @@ Să ne amintim că expresiile pot fi constituite pur și simplu din declararea u
 
 **Moment ZEN**: Un program JavaScript este evaluarea unui set de expresii, care pentru a fi „rezolvate”, mai întâi trebuie să rezolvi din aproape în aproape toate celelalte expresii mai mici.
 
-## Valorile truthy și falsey
+## Truthy și falsey
 
 Javascript operează cu diferite tipuri de valori, dar toate acestea sunt evaluate de către motorul JavaScript pentru a le reduce la un corespondent boolean, adică dacă pot fi reduse la `true` și sunt *truthy* (adevărate) sau la `false`, numite *falsey* (falsități).
 

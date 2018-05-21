@@ -36,8 +36,7 @@ var iterator = someString[Symbol.iterator]();
 iterator.next(); // Object { value: "h", done: false }
 iterator.next(); // Object { value: "i", done: false }
 ```
-
-Pentru a vedea toate metodele care pot fi aplicate unui șir de caractere, vă invit să mergeți la informațiile despre obiectul intern `String`.
+Acest lucru înseamnă că un șir de caractere permite parcurgerea caracterelor unul după altul fiind posibile verificări, înlocuiri sau chiar prelucrări de date în funcție de existența sau a unui caracter anume. Pentru a vedea toate metodele care pot fi aplicate unui șir de caractere, vă invit să faceți un salt la informațiile despre obiectul intern `String`.
 
 ## Concatenarea șirurilor de caractere
 
