@@ -1,4 +1,4 @@
-# `String.prototype.concat()`
+# String.prototype.concat()
 
 Combină textul din două sau mai multe stringuri și returnează un string nou.
 
@@ -28,5 +28,6 @@ console.log(reunite); // Aceste cuvinte vor fi un șir!
 ```
 
 Ce se întâmplă:
-- parametrul rest obține `arguments`, care este pasat la apelarea funcției
-- de fiecare dată când un parametru este adăugat la stânga, este ca și cum s-ar face `argumentePasate.shift()`
+
+-   parametrul rest obține `arguments`, care este pasat la apelarea funcției
+-   de fiecare dată când un parametru este adăugat la stânga, este ca și cum s-ar face `argumentePasate.shift()`

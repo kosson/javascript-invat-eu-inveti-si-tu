@@ -1,4 +1,4 @@
-# `String.prototype.codePointAt(index)`
+# String.prototype.codePointAt(index)
 
 Este o metodă introdusă de ECMAScript 6 pentru a realiza conformitatea cu UTF-16.
 Metoda returnează un **code point** Unicode, care identifică un caracter.

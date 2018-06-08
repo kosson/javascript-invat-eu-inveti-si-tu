@@ -1,6 +1,6 @@
-# Instrucțiunea `switch..case`
+# Instrucțiunea switch..case
 
-Dacă în cazul folosirii instrucțiunii `if..else` aveai de ales între două opțiuni sau mai multe folosind `else if`, în cazul lui `switch` lucrurile stau diferit, fiind permisă o ramificarea mult mai largă. Dar există o limitate. În cazul instrucțiunii `case`, evaluarea se va face pentru o valoare clară.
+Dacă în cazul folosirii instrucțiunii `if...else` aveai de ales între două opțiuni sau mai multe folosind `else if`, în cazul lui `switch` lucrurile stau diferit, fiind permisă o ramificarea mult mai largă. Dar există o limitate. În cazul instrucțiunii `case`, evaluarea se va face pentru o valoare clară.
 
 Pentru a înțelege mai bine `switch`-ul, poți să-ți imaginezi că te afli într-o mașină care rulând pe o autostradă se apropie de un nod care permite schimbarea destinației. Șoferul (expresia din switch) se uită cu atenție la toate indicațiile panourilor aflate deasupra fiecărei porți (porțile sunt case-urile). O poartă indică accesul către Pitești, o alta indică accesul către Câmpina iar alta indică accesul către Buzău și Brăila. Dacă nu se optează pentru o anume direcție, șoferul nostru poate continua drumul său tot înainte (`default`). Șoferul poate opta pentru una dintre porți (`case`-uri) sau să continue pe direcția sa (`default`). Este cazul în care valoarea primită de switch nu se potrivește cu nicio variantă posibilă. Opțiunea `default` este opțională. Odată ce a fost făcută o opțiune, parcursul se încheie prin atingerea destinației (`break`).
 

@@ -62,8 +62,6 @@ Bucla `for...of` poate itera prin următoarele obiecte care respectă **protocol
 
 Pentru a fi iterabil, un obiect trebuie să aibă implementată la nivelul obiectului intern de la care moștenește metoda `@@iterator`. Acest lucru înseamnă că obiectul (sau unul din obiectele din lanțul prototipal), trebuie să aibă o proprietate cu o cheie `[Symbol.iterator]`. Valoarea sa este o funcție fără argumente ce returnează un obiect. Acest obiect returnat se conformează protocolului de interare (**iterator protocol**), ceea ce îl face pretabil unei prelucrări cu `for...of`, de exemplu.
 
-Amețită deja? Hai să aruncăm un ochi mai aproape.
-
 Să luăm un exemplu care se bazează pe moștenirea de la obiectul intern `String`. Acest obiect intern este un exemplu de obiect iterabil construit în limbaj.
 
 ```javascript
@@ -101,7 +99,33 @@ Metoda `next()` este o funcție care nu primește argumente, dar care returneaz�
 
 -   `done` care este un `Boolean` cu cele două alternative:
   -dacă `true`, atunci iteratorul a trecut de finalul secvenței pe care a avut-o de parcurs,
-  -dacă `false` înseamnă că a produs următoarea valoare din secvență.
+  -dacă `false` înseamnă că a produs următoarea valoare din secvență.Enunțul while
+
+În engleză *while* se traduce în limba română prin `câtă vreme`. Verbalizarea acestei comenzi ar fi „de câte ori evaluarea expresiei conduce la o valoare ce poate fi redusă la un boolean `true`, execută codul dintre acolade”.
+
+```javascript
+var x = 0;
+while (x < 10) {
+  console.log(x); // execută funcția log
+  x++;            // modifică valoarea
+};
+```
+
+Remarcă faptul că testul condiției se face la începutul fiecărei iterații. Acest lucru înseamnă că în caz de valoare `false`, codul nu se va executa nici măcar pentru o singură iterație.
+
+While își are locul său, dar practica înclină către folosirea instrucțiunii `for`, care în condiția de test permite introducerea a trei expresii. Evaluarea acestor trei expresii va determina continuarea iterării sau nu.
+
+Folosește `while` acolo unde condiția de test este simplă.
+
+Când vorbim de simplă nu înseamnă să te limitezi la o singură expresie, ci poți avea una care să fie o combinație destul de elaborată ca și condiție.
+
+```javascript
+var a = 5, b = 4;
+while (a < 10 && b > 3) {
+  console.log(a);
+  a++; b++;
+};
+```
 -   `value` care este valoarea returnată de Iterator. Se poate omite atunci când `done` este `true`.
 
 Aceste protocoale implementate cu ajutorul simbolurilor, permit parcurgerea și prelucrarea datelor care au fost introduse în valori ce moștenesc automat de la tipurile de obiecte interne corespondente. La ce mă refer este faptul că indiferent de natura datelor, text sau un array, ori un obiect *dicționar*, vor fi „ambalate” automat în obiectul intern corespondent. Acesta este și motivul pentru care poți aplica metode ale obiectelor interne direct pe valoarea identificată de o variabilă.
@@ -191,8 +215,6 @@ for (let rezultat of obiect) {
 ```
 
 ## Iteratori particularizați
-
-### Iteratori infiniți
 
 Poți construi obiecte iterator care să genereze la infinit un anumit rezultat pentru că `done` nu va fi niciodată `false`.
 

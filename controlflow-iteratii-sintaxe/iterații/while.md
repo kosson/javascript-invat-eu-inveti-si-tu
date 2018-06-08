@@ -1,6 +1,6 @@
-# Enunțul `while`
+# Enunțul while
 
-În engleză „while” se traduce în limba română prin `câtă vreme`. Verbalizarea acestei comenzi ar fi „de câte ori evaluarea expresiei conduce la o valoare ce poate fi redusă la un boolean `true`, execută codul dintre acolade”.
+While se traduce în limba română prin `câtă vreme`. Verbalizarea acestei comenzi ar fi „de câte ori evaluarea expresiei conduce la o valoare ce poate fi redusă la un boolean `true`, execută codul dintre acolade”.
 
 ```javascript
 var x = 0;

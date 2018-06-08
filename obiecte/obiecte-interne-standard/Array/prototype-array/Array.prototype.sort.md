@@ -1,6 +1,6 @@
 # Array.prototype.sort()
 
-Atenție! Această metodă modifică definitiv array-ul original.
+Această metodă modifică definitiv array-ul original.
 
 Sortează elementele unui array și returnează acel array. Fii avertizat că această metodă modică array-ul. Există un mic truc care protejează array-ul original: folosirea metodei `slice()` pentru a face o copie pe care apoi faci sortarea.
 

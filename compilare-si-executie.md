@@ -31,13 +31,13 @@ Ceea ce trebuie adăugat ca detaliu important este faptul că spre deosebire de 
 
 În faza de compilare codul este parcurs linie cu linie. Există o fază preliminară numită **parsare** a codului (poți traduce ca parcurgere sau lecturare a codului), moment în care codul sursă este procesat pentru a produce o formă care să poată fi folosită de interpretor. Abia apoi urmează o fază de compilare care este cuplată și cu o fază de optimizare a rezultatelor.
 
-### Momentul 0: declararea variabilelor și a funcțiilor și recensământul identificatorilor
+### Momentul 0: declararea variabilelor, a funcțiilor și recensământul identificatorilor
 
 Este momentul când mediul lexical (scope) este creat și se face inventarul identificatorilor.
 
 Dacă funcțiile au în scope o variabilă care nu a fost declarată în scope-ul funcției respective, se va ieși din scope-ul local al funcției și se va căuta în scope-ul imediat de deasupra. Dacă acesta nu există iar funcția a fost declarată în global scope, atunci motorul JavaScript va crea acea variabilă din oficiu.
 
-Doar dacă se folosește 'use strict', se poate ocoli acest comportament. ATENȚIE! acest lucru se petrece la faza de execuție, nu la cea de compilare.
+Doar dacă se folosește `'use strict';`, se poate ocoli acest comportament. ATENȚIE! acest lucru se petrece la faza de execuție, nu la cea de compilare.
 
 ### Problema suprascrierii prin folosirea aceluiași identificator
 
@@ -73,7 +73,7 @@ La prima fază a compilării, funcțiile nu sunt parcurse de compilator, ci doar
 -   declară variabilele locale (din interiorul funcției), încluzând aici și funcțiile anonime care sunt atribuite unei variabile locale, de neinițializându-le
 -   declară și inițializează funcțiile.
 
-ATENȚIE! Pentru funcții, acestea sunt înregistrate, dar conținutul lor este stocat undeva în memorie fără a fi compilat deocamdată. Adu-ți mereu aminte că funcțiile sunt valori. Este momentul în care sunt create obiectele funcții care conțin codul funcției plus alte proprietăți. Funcția pe lângă proprietățile sale, va primi tacit `this`, `arguments` și o altă proprietate internă (`[[Environment]]`) care este scope-ul preexistent la momentul declarării. Dacă declarăm o funcție în Global Object, **scope** va fi chiar <u>Global Object</u>.
+Atenție! Pentru funcții, acestea sunt înregistrate, dar conținutul lor este stocat undeva în memorie fără a fi compilat deocamdată. Adu-ți mereu aminte că funcțiile sunt valori. Este momentul în care sunt create obiectele funcții care conțin codul funcției plus alte proprietăți. Funcția pe lângă proprietățile sale, va primi tacit `this`, `arguments` și o altă proprietate internă (`[[Environment]]`) care este scope-ul preexistent la momentul declarării. Dacă declarăm o funcție în Global Object, **scope** va fi chiar <u>Global Object</u>.
 
 Reține că fiecare funcție declarată stabilește propriul scope (mediu lexical), care la momentul apelării, va porni compilarea cu înregistrarea variabilelor proprii și a parametrilor care la rândul lor sunt, de fapt, tot variabile înregistrate în scope-ul acelei funcții.
 
@@ -87,7 +87,7 @@ Puțin amețită? Nu-ți fă griji, totul va fi explicat și în mai mare detali
 
 Dacă funcțiile au în scope o variabilă care nu a fost declarată în scope-ul funcției respective, se va ieși din scope-ul local al funcției și se va căuta în scope-ul imediat de deasupra. Dacă acesta nu există, iar funcția a fost declarată în global scope, atunci motorul JavaScript va crea acea variabilă din oficiu.
 
-Doar dacă se folosește 'use strict', se poate ocoli acest comportament. ATENȚIE! acest lucru se petrece la faza de execuție, nu la cea de compilare.
+Doar dacă se folosește *use strict*, se poate ocoli acest comportament. Atenție, acest lucru se petrece la faza de execuție, nu la cea de compilare.
 
 #### Problema suprascrierii prin folosirea aceluiași identificator
 
@@ -102,8 +102,8 @@ Se pierde referința către funcție.
 ### Cazul variabilelor
 
 -   sunt declarate variabilele iar acestea devin proprietăți ale lui unui obiect special care este generat la momentul execuției.
--   dacă este declarată o referință, care mai târziu la faza de execuție i se atribuie o valoare, când nu este folosit „use strict”, motorul va crea din oficiu acea variabilă.
--   pentru fiecare variabilă găsită a cărui identificator nu este înregistrat, îi este înregistrat identificatorul iar valoarea este inițilizată cu `undefined`. Dacă este găsit acesta își păstrează valoarea.
+-   dacă este declarată o referință, care mai târziu la faza de execuție i se atribuie o valoare, când nu este folosit *use strict*, motorul va crea din oficiu acea variabilă.
+-   pentru fiecare variabilă găsită a cărui identificator nu este înregistrat, îi este înregistrat identificatorul, iar valoarea este inițilizată cu `undefined`. Dacă este găsit acesta își păstrează valoarea.
 
 ### Left Hand Side și Right Hand Side
 
@@ -204,7 +204,7 @@ ATENȚIE, toate acestea sunt create de motorul JavaScript.
 
 În cazul obiectelor, atunci când apelezi o funcție (care joacă rolul de metodă), folosind `.` sau `[]`, vei avea un obiect drept context, altfel, vei avea global environment.
 
-Vorbim de faptul că funcțiile, atunci când sunt apelate, generează un context. Este creată legptura `this` la acest context, fiind setat după modul în care este apelată funcția. Reginald Braithwaite chiar exprima regretul că `this` nu a fost numit `context` direct.
+Vorbim de faptul că funcțiile, atunci când sunt apelate, generează un context. Este creată legătura `this` la acest context, fiind setat după modul în care este apelată funcția. Reginald Braithwaite chiar exprima regretul că `this` nu a fost numit `context` direct.
 
 Contextul unei funcții nu poate fi determinat examinând strict codul.
 

@@ -1,4 +1,4 @@
-# `String.prototype.substr()`
+# String.prototype.substr()
 
 Metoda returnează un subșir de caractere începând cu locația specificată de un număr ce reprezintă indexul. Se poate introduce cel de-al doilea argument, care setează limita până la care se vor extrage caractere. Atenție, această limită nu presupune că va fi luat în subșir și caracterul care se află la acest index.
 
@@ -21,9 +21,9 @@ sir.substr(-5); // dată.
 
 Alte exemple:
 
-| t | e | s | t | e |   | d | e |   | s | t | r | i | n | g | u | r | i |
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 |
+|  t  |  e  |  s  |  t  |  e  |     |  d  |  e  |     |  s  |  t  |  r  |  i  |  n  |  g  |  u  |  r  |  i  |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  | 10  | 11  | 12  | 13  | 14  | 15  | 16  | 17  |
 
 
 ```javascript

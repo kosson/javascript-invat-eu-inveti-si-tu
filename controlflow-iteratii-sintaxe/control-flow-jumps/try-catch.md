@@ -1,14 +1,14 @@
-# Instrucțiunea `try..catch`
+# Instrucțiunea try...catch
 
 Această combinație este folosită pentru a testa prin evaluarea un fragment de cod. Dacă apar erori, acestea vor fi raportate prin `throw` (raportează ce erori au apărut).
 
-În aceast enunț (ai să vezi prin alte materiale că `try..catch` mai este numită *construcția try..catch*), va exista o singură instrucțiune `try` urmată de una sau mai multe secvențe `catch` sau `finally`.
+În aceast enunț (ai să vezi prin alte materiale că `try...catch` mai este numită *construcția try...catch*), va exista o singură instrucțiune `try` urmată de una sau mai multe secvențe `catch` sau de `finally`.
 
-- `try {...} catch(eroare) {...}`,
-- `try {...} finally {...};`,
-- `try {...} catch(eroare) {...} finally {...};`.
+-   `try {...} catch(eroare) {...}`,
+-   `try {...} finally {...};`,
+-   `try {...} catch(eroare) {...} finally {...};`.
 
-Secvența **catch** cuprinde acțiunile care vor fi întreprinse în caz că din blocul `try` sunt „raportate” - `thrown` excepții. Catch primește un obiect, care reprezintă însăși eroarea/erorile care vor fi expuse. Dacă nu există excepții ridicate la evaluare codului, `catch` este ignorat.
+Secvența **catch** cuprinde acțiunile care vor fi întreprinse în caz că din blocul `try` sunt *raportate* (în engleză se spune *thrown*) excepții. Catch primește un obiect, care reprezintă însăși eroarea/erorile care vor fi expuse. Dacă nu există excepții ridicate la evaluare codului, `catch` este ignorat.
 
 ```javascript
 try {
@@ -31,13 +31,13 @@ function EroarePersonalizata(mesaj){
 EroarePersonalizata.prototype = Object.create(Error.prototype);
 EroarePersonalizata.constructor = EroarePersonalizata;
 
-try{
+try {
   throw new EroarePersonalizata();
 }catch(e){
   console.log(e.mesaj);
 }; // Mesaj șablon
 
-try{
+try {
   throw new EroarePersonalizata('Mesaj trimis');
 }catch(e){
   console.log(e.mesaj);

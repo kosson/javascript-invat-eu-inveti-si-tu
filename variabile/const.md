@@ -2,16 +2,16 @@
 
 A fost adăugat de ECMAScript 2015 (ES6). Folosind `const` se declară o variabilă unică pentru un program. Nu poți să declari altă variabilă cu același identificator.
 
-Declarația unei variabile folosind `const` nu se referă la valoare, ci doar la modul cum se face atribuirea valorii. Nu asocia ideea de constantă cu valoarea asignată. E o capcană. În subsidiar asta înseamnă că poți modifica ceea ce există în cazul obiectelor, dar nu poți asigna alt obiect aceleiași constante, adică nu poți reasigna o altă valoare.
+Declarația unei variabile folosind `const` nu se referă la valoare, ci doar la modul cum se face atribuirea valorii. Nu asocia ideea de constantă cu valoarea asignată. E o capcană. În subsidiar asta înseamnă că nu poți modifica legătura creată între identificatorul lui const încercând atribuirea unui alt obiect, de exemplu. După cum ai sesizat, se folosește de cele mai multe ori în cazul obiectelor pe care le dorim fixate pe durata întregii execuții a programului. Obiectele astfel declarate pot fi modificate, pentru că efectul declarării folosind const se referă la stabilirea unei legături ce nu poate fi modificată.
 
 ```javascript
-const ceva = ['unu','doi'];
+const ceva = ['unu','doi']; // array-urile sunt obiecte și ele
 const ceva = []; // SyntaxError: redeclaration of const ceva
 ceva[1] = 'bum';
 console.log(ceva[1]); // "bum"
 ```
 
-Dacă se dorește atingerea imutabilității, se va folosi utilitarul `var ceva = Object.freeze(['unu','doi'])`, care, cu adevărat are capacitatea de a face obiectul unul care nu poate fi modificat.
+Dacă se dorește atingerea imutabilității, se va folosi utilitarul `var ceva = Object.freeze(['unu','doi'])`, care are capacitatea de a face obiectul greu de  modificat.
 
 Variabilele `const` trebuie inițializate la declarare, altfel vei avea o eroare de sintaxă.
 
@@ -22,7 +22,7 @@ const ceva;
 // SyntaxError: Missing initializer in const declaration (Nodejs)
 ```
 
-Ca și variabilele declarate cu `let`, cele declarate prin `const` sunt limitate la blocul de cod delimitat prin acolade `{}`. Asta înseamnă că, de îndată ce execuția s-a încheiat pentru un anume bloc, variabilele declarate prin `const` nu vor mai fi disponibile.
+Precum variabilele declarate cu `let`, cele declarate prin `const` sunt limitate la blocul de cod delimitat prin acolade `{}`. De îndată ce execuția s-a încheiat pentru un anume bloc, variabilele declarate prin `const` nu vor mai fi disponibile.
 
 Declarațiile cu `const` nu beneficiază de mecanismul de hoisting. Nu sunt disponibile decât codului de după declararea sa.
 
@@ -55,19 +55,10 @@ console.log(obi); //{ a: "x", b: "este b" }
 obi = {x: 'ceva nou'}; // TypeError: invalid assignment to const `obi'
 ```
 
-Putem inițializa o variabilă const și cu un array:
-
-```javascript
-const arr = [];
-arr.push("ceva"); // => 1; returnează dimensiunea array-ului
-```
-
 Practica indică faptul că variabilele din global ar trebui scrise cu majuscule:
 
 ```javascript
 const O_SETARE_CEVA = true;
 ```
-
-JavaScript nu permite un „rebinding” (conectarea la altă valoare) al unui nume de identificator `const` care s-a „legat” deja de o valoare în mediul lexical existent. Ceea ce ai declarat cu un `const` rămâne bătut în cuie.
 
 Care este cel mai bun indicator că în loc de `let` ar trebui să folosim `const`? Dacă valoarea acelei variabile nu este modificată în funcțiile programului, cel mai bine este să facem acea variabilă `const`.

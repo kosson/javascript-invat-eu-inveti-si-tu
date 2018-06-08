@@ -1,4 +1,4 @@
-# `Object.keys()`
+# Object.keys()
 
 Returnează un array care conține numele tuturor proprietăților `deținute` de un obiect. ATENȚIE! Aceste proprietăți trebuie să fie setate ca `enumerable`.
 

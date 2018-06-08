@@ -1,4 +1,4 @@
-# Enunțul `for`
+# Enunțul for
 
 Precum în cazul lui `while` sau al lui `do`, `for` execută repetat un fragment de cod de câte ori o condiție este întrunită.
 Există o regulă simplă pe care o avem de la cercetătorul Edsger W. Dijkstra care spune așa:
@@ -40,9 +40,9 @@ Expresiile opționale sunt separate prin punct și virgulă și se compun din ur
 -   **un comparator**, care ia valoarea din contor și o compară cu o altă valoare, de regulă dimensiunea unui array adusă prin proprietatea `array.length`.
 -   **un incrementor/decrementor**
 
-Privind la expresiile folosite pentru a face funcțional un `for`, nu poți să nu privești la expresia `do..while` și să nu te întrebi, de ce nu ai folosi-o în continuare pe aceasta. Singura diferență este că la `do..while`, inițializarea sau contorul (ca expresie) stă în blocul de cod ce trebuie executat, iar condiția sau comparatorul este în **blocul expresiei de evaluat**. În cazul lui `for`, blocul are la final expresia de incrementare. Răspunsul este legat de concizia pe care o oferă `for`. Este pur și simplu mai ușor de urmărit.
+Privind la expresiile folosite pentru a face funcțional un `for`, nu poți să nu privești la expresia `do...while` și să nu te întrebi, de ce nu ai folosi-o în continuare pe aceasta. Singura diferență este că la `do...while`, inițializarea sau contorul (ca expresie) stă în blocul de cod ce trebuie executat, iar condiția sau comparatorul este în **blocul expresiei de evaluat**. În cazul lui `for`, blocul are la final expresia de incrementare. Răspunsul este legat de concizia pe care o oferă `for`. Este pur și simplu mai ușor de urmărit.
 
-De cele mai multe ori vei întâlni în cod numele variabilei pentru contor ca fiind litera `i`. Acesta vine ca prescurtare la termenul *index* și este larg utilizat. Atenție, nu este necesar să se folosească `i`. Poți numi variabila cum dorești și din acest motiv pe parcursul lucrării acesteia voi folosi și alte litere sau chiar cuvinte. Adu-ți mereu aminte că nu este musai ca variabila să se cheme `i` sau `x` sau cumva anume. Câtă vreme sunt respectate regulile la denumirea unei variabile, totul e ok. Se pune o singură literă pentru concizie.
+De cele mai multe ori vei întâlni în cod numele variabilei pentru contor drept litera `i`. Acesta vine ca prescurtare la termenul *index* și este larg utilizat. Atenție, nu este necesar să se folosească `i`. Poți numi variabila cum dorești și din acest motiv pe parcursul lucrării acesteia voi folosi și alte litere sau chiar cuvinte. Adu-ți mereu aminte că nu este musai ca variabila să se cheme `i` sau `x` sau cumva anume. Câtă vreme sunt respectate regulile la denumirea unei variabile, totul e ok. Se pune o singură literă pentru concizie.
 
 În cazul în care se decide omiterea comparatorului, se va crea o buclă infinită, care poate fi întreruptă doar folosind comanda `break`.
 
@@ -221,7 +221,7 @@ console.log(lista); // Array [ 0, 1, 2, 3 ]
 console.log(lista.length); // 4
 ```
 
-Un singur amănunt mai adaug la informațiile despre array-uri. În orice moment se poate afla dimensiunea unui array, dacă se apelează proprietatea `length`. În cazul exemplului nostru, lungimea este 4, adică are patru elemente. Este chiar intervalul închis [0, 3].
+Un singur amănunt mai adaug la informațiile despre array-uri. În orice moment se poate afla dimensiunea unui array, dacă se apelează proprietatea `length`. În cazul exemplului nostru, lungimea este `4`, adică are patru elemente. Este chiar intervalul închis \[0, 3].
 
 ### Enunțul `for` poate fi folosit și în lucrul cu șirurile de caractere
 
@@ -232,7 +232,7 @@ Putem avea cazul în care la un caracter poți adăuga un altul până când num
 ```javascript
 for (var i = "»"; i.length < 5; i += "~") {
   console.log(i);
-}
+};
 /*
 »
 »~
@@ -337,10 +337,10 @@ console.log(șirInversat);
 
 ## Mantre
 
-- toate expresiile din blocul de inițializare pot lipsi, dar trebuie să existe terminatoarele punct și virgulă.
+-   toate expresiile din blocul de inițializare pot lipsi, dar trebuie să existe terminatoarele punct și virgulă.
 
 ## Resurse
 
-- Ethan Brown. Learning JavaScript
-- [Interval (mathematics), Wikipedia](https://en.wikipedia.org/wiki/Interval_(mathematics))
-- [Edsger W. Dijkstra](https://en.wikipedia.org/wiki/Edsger_W._Dijkstra)
+-   Ethan Brown. Learning JavaScript
+-   [Interval (mathematics), Wikipedia](https://en.wikipedia.org/wiki/Interval_(mathematics))
+-   [Edsger W. Dijkstra](https://en.wikipedia.org/wiki/Edsger_W._Dijkstra)

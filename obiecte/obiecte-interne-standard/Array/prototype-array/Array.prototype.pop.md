@@ -1,3 +1,5 @@
-# `Array.prototype.pop()` - afectează definitiv
+# Array.prototype.pop()
 
-Scoate din array ultimul element și îl returnează. `pop()` este generic și funcționează pe orice seamănă cu un array folosind call sau apply.
+Această metodă afectează definitiv stringul original.
+
+Scoate din array ultimul element și îl returnează. Metoda `pop()` este funcționează pe orice obiect care seamănă cu un array folosind metodele `call()` sau `apply()`.

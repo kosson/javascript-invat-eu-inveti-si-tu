@@ -2,7 +2,7 @@
 
 JavaScript este un limbaj care face uz extensiv de obiecte. În Geneză, am văzut că exercitând pașii argoritmului intern `CreateRealm()`, care solicită rularea algoritmului `CreateIntrinsics(realmRec)`, există ca pas distinct crearea primului obiect al limbajului (prin apelarea algoritmului `ObjectCreate(null)`). Astfel, s-a născut obiectul prototipal, care va fi folosit pentru a forma și obiectul prototipal al funcțiilor.
 
-Prin urmare, putem spune că obiectele și funcțiile - obiect alcătuiesc o paradigmă circulară. Una nu poate fără cealaltă. În lucrul de zi cu zi, nu ne vom lovi de necesitatea de a lucra cu sloturile interne ale celor două entități, dar este esențial a fi înțelese.
+Prin urmare, putem spune că obiectele și funcțiile - obiect sunt în permanentă relație. Una nu poate fără cealaltă. În lucrul de zi cu zi, nu ne vom lovi de necesitatea de a lucra cu sloturile interne ale celor două entități, dar este esențial a fi înțelese.
 
 O bună cunoaștere a acestor amănunte intime privind obiectele și funcțiile construite pe baza obiectelor, este o necesitate. Această secțiune s-a născut din această necesitate. După ce am redactat final capitolul dedicat funcțiilor și pe cel al obiectelor, am realizat că ar fi dificil să încerc o poziționare a unuia față de celălalt, mai ales că un cititor nefamiliarizat, se va lovi, cu siguranță de concepte pe care nu le-ar înțelege decât dacă le-ar fi știut dinainte. Astfel s-a născut această secțiune ca o conciliere și o aprofundare a unor concepte care vor crea premiza înțelegerii celor două în armonie.
 
@@ -25,7 +25,7 @@ Reține faptul că toate aceste indicații sunt date celor care construiesc moto
 
 Pentru a înțelege, am constituit o hartă internă a obiectelor. Un obiect, l-am reprezentat ca pe un cerc cu trei linii interioare, care simbolizează proprietățile și metodele. De jur împrejur am dispus fiecare **metodă internă** și slotul destinat obiectului prototip. Acestea stau în spatele formării entității ECMAScript pe care noi o numim obiect. Pe fiecare metodă internă am căutat că o reprezint grafic pentru a  adăuga și un reper vizual. Pentru a simplifica imaginea și a facilita înțelegerea, am renunțat la parantezele pătrate care indică faptul că vorbim de sloturi interne existente doar la nivel de motor.
 
-Spuneam mai devreme că acești algoritmi interni aparțin motorului JavaScript, dar ca și programator, avem acces la ceea ce oferă prin expunerea lor ca și metode, fie a obiectelor interne `Function` sau `Object`, fie, ceva mai direct prin obiectul intern `Reflect`, a cărei existență se justifică chiar pentru a pune la îndemâna noastră o cale de acces către *metodele interne*.
+Spuneam mai devreme că acești algoritmi interni aparțin motorului JavaScript, dar ca programator avem acces la ceea ce oferă prin expunerea lor ca și metode, fie a obiectelor interne `Function` sau `Object`, fie, ceva mai direct prin obiectul intern `Reflect`, a cărei existență se justifică chiar pentru a pune la îndemâna noastră o cale de acces către *metodele interne*.
 
 ![](InternalSlotsObjects.png)
 
@@ -37,7 +37,7 @@ Să le luăm pe rând să vedem ce reprezintă fiecare.
 
 Caută obiectul de la care moștenește proprietăți obiectul de lucru. Dacă valoarea este deja setată la `null`, înseamnă că moștenirea este tăiată. Ca simbol l-am reprezentat precum două obiecte ca două cercuri dintre care cel mai mic din dreapta este cel de lucru, iar cel din stânga este cel a cărui identificator va fi returnat în urma operațiunii de interogare. Sensul de interogare este dat de sensul săgeții orientat către un posibil obiect candidat cu rol de prototip.
 
-Metoda pe care o putem folosi și noi ca programatori este parte a obiectului global `Object` și este disponibilă prin mecanismul de moștenire tuturor obiectelor. Deci, ține minte că există `Object.getPrototypeOf(obiectPentruCareSeFaceInterogarea)`. Odată cu noua versiune a standardului, există și `Reflect.getPrototypeOf`, care permite folosirea directă a „metodelor interne”.
+Metoda pe care o putem folosi și noi ca programatori este parte a obiectului global `Object` și este disponibilă prin mecanismul de moștenire tuturor obiectelor. Ține minte că prin obiectul intern Object, ai acces la `Object.getPrototypeOf(unObi)`. Odată cu noua versiune a standardului, există și `Reflect.getPrototypeOf`, care permite folosirea directă a *metodelor interne*.
 
 ### \[\[SetPrototypeOf]]
 
@@ -68,9 +68,9 @@ Am reprezentat având ultima proprietate cu un semn interzis ceea ce trimite la 
 
 ![](ObjectGetOwnPropertySymbol.png)
 
-Rulând această metodă internă, fie obții valoarea `undefined` pentru că nu a fost găsită o astfel de proprietate, fie obții o descriere a acesteia în caz contrar. Descrierea aceasta, conform standardului este o înregistrare (Record). Am explicat în geneză ce este o înregistrare, un Record. În cazul nostru, **Property Descriptor** este un tip al specificației, care este ca specie un Record și conține toate informațiile privind o anumită proprietate a unui obiect; dacă poate fi scrisă (**writable**), dacă poate fi configurată (**configurable**), dacă este enumerabilă (**enumerable**), dacă are valoare deja (value) și în fine, dacă are proprietăți de accesare (**accessor**): **get** pentru obținerea valorii și **set** pentru a o seta.
+Rulând această metodă internă, fie obții valoarea `undefined` pentru că nu a fost găsită o astfel de proprietate, fie obții o descriere a acesteia în caz contrar. Descrierea aceasta, conform standardului este o înregistrare (`Record`). Am explicat în geneză ce este o înregistrare, un `Record`. În cazul nostru, **Property Descriptor** este un tip al specificației, care este ca specie un `Record` și conține toate informațiile privind o anumită proprietate a unui obiect; dacă poate fi scrisă (**writable**), dacă poate fi configurată (**configurable**), dacă este enumerabilă (**enumerable**), dacă are valoare deja (*value*). Dacă are proprietăți de accesare (**accessor**): **get** pentru obținerea valorii și **set** pentru a o seta.
 
-Am reprezentat această metodă internă precum obiect care are proprietăți. Cea din mijloc, care are săgeată, se distinge ca fiind proprie acelui obiect. Acest lucru înseamnă că nu a fost moștenită.
+Am reprezentat această metodă internă cu un obiect cu proprietățile sale. Cea din mijloc, care are săgeată, se distinge ca fiind proprie acelui obiect. Acest lucru înseamnă că nu a fost moștenită.
 
 Această metodă internă are un echivalent și pentru uzul programatorilor. Metoda este pusă la dispoziție de obiectul `prototype` a obiectului intern `Object`: `Object.prototype.hasOwnProperty`. Cel mai eficient este să folosim `Reflet.getOwnPropertyDescriptor`, care oferă acces direct la metoda internă.
 
@@ -156,7 +156,7 @@ Noi avem acces la acest obiect prin `Object.prototype`.
 
 În acest moment ar fi util să-ți imaginezi că în ADN-ul hărții funcțiilor stă înscrisă harta obiectelor. Pentru fiecare funcție va fi disponibil tot ce este disponibil obiectelor plus tot ce este înfățișat în noua hartă. Să pornim cu reluarea firului lăsat la \[\[Call]] și \[\[Construct]].
 
-În reprezentarea hărții pentru funcții am procedat la a nu menționa paramentrii pe care-i ia \[\[Call]] sau \[\[Construct]] pentru că vizual ar fi fost foarte aglomerat. Voi menționa forma completă la descrierea lor. Restul sunt sloturi, nu metode interne și nu au argumente.
+În reprezentarea hărții pentru funcții am procedat la a nu menționa parametrii pe care-i ia \[\[Call]] sau \[\[Construct]] pentru că vizual ar fi fost foarte aglomerat. Voi menționa forma completă la descrierea lor. Restul sunt sloturi, nu metode interne și nu au argumente.
 
 ### \[\[Call]] (thisArgument, argumentsList)
 
@@ -184,15 +184,15 @@ Din acest moment, vom analiza doar sloturile unei funcții obiect. Am încheiat 
 
 ![](FunctionEnvironmentSymbol.png)
 
-Vorbim despre **mediul lexical** al unei funcții la momentul creării sale. Acest mediu lexical este *memorat* de slotul \[\[Environment]]. Standardul aduce câteva lămuriri în ceea ce privește natura mediilor lexicale și spune că este o specificație a standardului folosită pentru a defini asocierile identificatorilor la anumite variabile și funcții pe baza structurii de imbricare lexicală a codului ECMAScript.
-În ceea ce privește formarea sa, mediul lexical este asociat unor structuri de cod precum declarația de funcție, enunțurile de bloc de cod și secvența `Catch()` din enunțul Try..Catch (**8.1.1 Environment Records**).
+Vorbim despre **mediul lexical** al unei funcții la momentul creării sale. Acest mediu lexical este *memorat* de slotul \[\[Environment]]. Standardul aduce câteva lămuriri în ceea ce privește natura mediilor lexicale și spune că este o specificație a standardului folosită pentru a defini asocierile identificatorilor cu valorile primare și funcții în funcție de structura lexicală a codului sursă ECMAScript.
+În ceea ce privește formarea sa, mediul lexical este asociat unor structuri de cod precum declarația de funcție, enunțurile de blocuri și secvența `catch()` din enunțul `try...catch` (*8.1.1 Environment Records*).
 
 Este potrivit să amintim ce face o funcție atunci când este declarată în raport cu mediul lexical. Tot standardul spune la **9.2 ECMAScript Function Objects**:
 
-> funcțiile obiect încapsulează cod parametrizat ECMAScript acoperind un mediu lexical care permite evaluarea dinamică a codului. Un obiect funcție ECMAScript este un obiect ordinar care are aceleași sloturi interne și aceleași metode ca și celelalte obiecte ordinare.
+> funcțiile obiect încapsulează cod parametrizat ECMAScript acoperind un mediu lexical care permite evaluarea dinamică a codului. Un obiect funcție ECMAScript este un obiect ordinar care are aceleași sloturi interne și aceleași metode precum celelalte obiecte ordinare.
 
 Aceste detalii sunt importante pentru a înțelege aspectele cele mai intime ale unei funcții.
-Ar fi necesar să privim și la cazul în care o funcție este invocată într-un anumit context de execuție. Ce se întâmplă cu mediul lexical? Acesta se modifică reflectând ceea ce a fost găsit în locul în care se execută. Să-ți aduci mereu aminte că funcțiile pot fi pasate și apelate oriunde este necesar.
+Ar fi necesar să privim și la cazul în care o funcție este invocată într-un anumit context de execuție. Ce se întâmplă cu mediul lexical? Acesta se cuplează la cel superior, reflectând ceea ce a fost găsit în locul în care se execută.  Să-ți aduci mereu aminte că funcțiile pot fi pasate și apelate oriunde este necesar ca acestea să prelucreze datele locale folosind și date interne dacă este necesar.
 
 Pentru acest slot am ales o reprezentare care cuprinde într-un cerc asocieri între identificatori notați cu semnul diez și valori notate cu puncte.
 
@@ -210,7 +210,7 @@ Am reprezentat parametrii ca trei valori care sunt disponibile în interiorul fu
 
 Acest slot conține o valoare tip șir care indică ce tip de funcție avem. Posibilitățile sunt: **normal**, **classConstructor** și **generator**.
 
-Am reprezententat slotul ca o funcție peste care vine o întrebare.
+Am reprezententat slotul ca o funcție peste care care primește o întrebare.
 
 ### \[\[ECMAScriptCode]]
 
@@ -240,9 +240,9 @@ Reprezentarea indică cele două posibile înregistrări.
 
 ![](FunctionThisModeSymbol.png)
 
-Este un slot care definește cum este interpretată legătura la `this`. Există trei  posibilități: lexical, strict și global. Lexical înseamnă că `this` va fi mediul lexical pentru care face o acoperire funcție. Strict înseamnă că `this` va respecta strict modul în care este invocată funcția, iar global se referă la momentul când valoarea lui `this` este `null`, ceea ce îl va seta pe `this` la obiectul global.
+Este un slot care definește cum este interpretată legătura la `this`. Există trei  posibilități: *lexical*, *strict* și *global*. Lexical înseamnă că `this` va fi mediul lexical pentru care face o acoperire funcție. Strict înseamnă că `this` va respecta strict modul în care este invocată funcția, iar global se referă la momentul când valoarea lui `this` este `null`, ceea ce îl va seta pe `this` la obiectul global.
 
-Reprezentarea grafică este grăitoare de la sine.
+Reprezentarea grafică este o întrebare adresată contextului de execuție.
 
 ### \[\[Strict]]
 

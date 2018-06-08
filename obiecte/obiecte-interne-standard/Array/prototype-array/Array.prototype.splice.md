@@ -1,6 +1,6 @@
-# `Array.prototype.splice()`
+# Array.prototype.splice()
 
-**Afectează definitiv** array-ul.
+Această metodă afectează definitiv array-ul original.
 
 Elimină elementele din intervalul de indecși menționat și opțional introduce ceva între.
 

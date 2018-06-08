@@ -1,14 +1,14 @@
-# `String.prototype.lastIndexOf()`
+# String.prototype.lastIndexOf()
 
 Returnează indexul ultimei apariții a fragmentului pentru care se face căutarea. Dacă valoarea nu este găsită, este returnat -1.
 Opțional se poate menționa de unde să se înceapă căutarea prin specificarea unui index de la care să se pornească. Valoarea din oficiu pentru parametru este `str.length - 1`.
 
 ## Mantre
 
-- Căutarea se face fix după caracterul sau fragmentul specificat. Atenție la caracterele mari, la spații și diacritice.
-- `lastIndexOf()` este case sensitive!
-- Căutările se fac în sens invers, de la dreapta spre stânga, având punctul de origine valoarea parametrului suplimentar iar atunci când acesta nu este specificat, cu valoarea de index a ultimului caracter din șir.
-- `'cevatext'.length` este echivalent cu `'cevatext'.lastIndexOf(''); // 8`
+-   Căutarea se face fix după caracterul sau fragmentul specificat. Atenție la caracterele mari, la spații și diacritice.
+-   `lastIndexOf()` este case sensitive!
+-   Căutările se fac în sens invers, de la dreapta spre stânga, având punctul de origine valoarea parametrului suplimentar iar atunci când acesta nu este specificat, cu valoarea de index a ultimului caracter din șir.
+-   `'cevatext'.length` este echivalent cu `'cevatext'.lastIndexOf(''); // 8`
 
 ## Cazuistică lastIndexOf()
 

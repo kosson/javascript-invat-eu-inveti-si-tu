@@ -8,13 +8,13 @@ Identificatorii declarați cu `var` beneficiază de mecanismul de hoisting prin 
 
 **Spune standardul**:
 
-> Declarațiile let și const definesc variabile care sunt restricționate la scope-ul contextului de execuție în rulare a Mediului Lexical. Variabilele sunt create atunci când Mediul lor Lexical este instanțiat\[...].  
+> Declarațiile let și const definesc variabile care sunt restricționate la scope-ul contextului de execuție în rulare a Mediului Lexical. Variabilele sunt create atunci când Mediul lor Lexical este instanțiat\[...].
 
 Avem o explicație foarte bună pe care Kyle Simpson o face pentru a înțelege diferențele dintre cele două. În cazurile în care erau declarate variabile pentru a fi folosite în instrucțiuni precum `for` sau `if`, dar care în subsidiar comunicau celorlalți programatori să nu le folosească dincolo de aceste enunțuri, `let` este cea mai bună abordare pentru că domeniul său de vizibilitate este limitat la blocul de cod.
 
 Dar dacă dorești ca o variabilă să fie cu adevărat disponibilă întregului cod, atunci continuă să folosești `var` pentru că va fi omniprezentă pentru acel program.
 
-Reține faptul că variabilele declarate cu `let` sunt *vizibile* doar la nivelul unei expresii și a unui bloc, precum și toate blocurile imbricate. ATENȚIE foarte mare la comportamentul lui `var` și `let` în contextul obiectului global. În vreme ce o declarare a unei variabile folosind `var` are ca efect introducerea acelei variabile în obiectul global, declararea cu `let`, nu va avea acest efect și interogarea identificatorului va returna `undefined`.
+Reține faptul că variabilele declarate cu `let` sunt *vizibile* doar la nivelul unei expresii și a unui bloc, precum și toate blocurile imbricate. ATENȚIE foarte mare la comportamentul lui `var` și `let` în contextul obiectului global. În vreme ce o declararea unei variabile folosind `var` are ca efect introducerea acelei variabile în obiectul global, declararea cu `let`, nu va avea acest efect și interogarea identificatorului va returna `undefined`.
 
 ```javascript
 var ceva = 'ceva';
@@ -55,12 +55,13 @@ function teste(){
 
 ## Block-scoping în cazul buclelor
 
-Unul din efectele directe ale hoisting-ului este efectul produs în cazul buclelor. Ceea ce se întâmplă este că variabila folosită drept contor, este ridicată prin hoisting iar efectul este că la finalul fiecărei iterații, valoarea variabilei contor este incrementată. Dar, atenție, nu este memorată separat pentru fiecare iterare. Execuția lui `for` s-a încheiat cu efectul că `x` încă există, memorând ultima valoare.
+Dacă ești abia la început, subiectul constituirii mediului lexical în cazul buclelor se va dovedi imposibil de înțeles fără a le parcurge mai întâi cele dedicate mediului lexical, buclelor și funcțiilor. Hoistingul își face efectele și atunci când parcurgi structuri de date folosind instrucțiuni de iterare așa cum este for, de exemplu.
+
+În cazul buclelor, ceea ce se întâmplă este că variabila folosită drept contor, este ridicată prin hoisting, iar efectul este incrementarea variabilei contor la finalul fiecărei iterații. Atenție, nu este memorată separat pentru fiecare iterare. Execuția lui `for` s-a încheiat fiind introdusă în mediul lexical noua variabila `x` care va avea ultima valoare rezultată în urma iterării.
 
 ```javascript
-// var x, y = [];
-var x, y = [];
 
+var x, y = [];
 for(x = 0; x < 5; x++){
   console.log(x); // 0,1,2,3,4,5
   y.push(x);
@@ -72,9 +73,7 @@ console.log(y); // Array [ 0, 1, 2, 3, 4 ]
 În cazul folosirii lui `let`
 
 ```javascript
-// var x, y = [];
 var y = [];
-
 for(let x = 0; x < 5; x++){
   y.push(x);
 };
@@ -82,24 +81,21 @@ console.log(x); // ReferenceError: x is not defined
 console.log(y); // Array [ 0, 1, 2, 3, 4 ]
 ```
 
-Pentru a exemplifica mai adânc (se va folosi closure-ul) efectele hostingului folosim o funcție care are drept scop încărcarea unui array cu funcții (nu uita, o funcție este o valoare care poate fi pasată drept argument). Acest array va fi `mapat` pentru a executa fiecare dintre ele. Se dorește obținerea unei serii de numere naturale.
+Pentru a exemplifica mai adânc (se va folosi closure-ul) efectele hostingului folosim o funcție care are drept scop încărcarea unui array cu funcții. Nu uita, o funcție este o valoare care poate fi pasată drept argument. Acest array va fi apoi parcurs element cu element, adică funcție după funcție pentru a executa fiecare dintre ele. Se dorește obținerea unei serii de numere naturale.
 
 ```javascript
 var apeluri = [];
-
 for (var x = 0; x < 5; x++){
   apeluri.push(function(){
     return x;
   });
 };
-
 console.log(apeluri.map(function(callback){
   return callback();
 })); // Array [ 5, 5, 5, 5, 5 ]
 ```
 
-Ceea ce s-a întâmplat este că înainte de a se rula mappingul, variabila `x` a fost supusă deja mecanismului de *hoisting*, însemnând că este în scope-ul format de funcție, nu cel al lui `for`. Ce trebuie înțeles este că, încărcând array-ul cu funcții, se face un closure pe valorile din „mediul lexical” în care au fost declarate.
-Sesizează faptul că rulând oricare dintre funcțiile din array sau la rând folosind `map`, accesul este făcut prin identificatorul `x` la valoarea ultimă ca efect al ultimei iterații ale lui `for`, adică `5`.
+Ceea ce s-a întâmplat este că înainte de a parcurge array-ul, variabila `x` a fost supusă deja mecanismului de *hoisting*, însemnând că este în scope-ul format de funcție, nu cel al lui `for`. Ce trebuie înțeles este că, încărcând array-ul cu funcții, se face un closure pe valorile din *mediul lexical* în care au fost declarate. Sesizează faptul că rulând oricare dintre funcțiile din array sau la rând folosind `map`, accesul este făcut prin identificatorul `x` la valoarea ultimă ca efect al ultimei iterații ale lui `for`, adică `5`.
 
 Folosind în locul lui `var` pe `let`, vom limita variabila la scope-ul blocului de cod în care a fost declarată.
 
@@ -117,9 +113,7 @@ console.log(apeluri.map(function(callback){
 })); // Array [ 0, 1, 2, 3, 4 ]
 ```
 
-În cazul folosirii lui `let`, variabila va fi accesibilă la nivelul buclei, ceea ce înseamnă, de fapt că pentru fiecare iterație se va face un nou binding la câte o nouă variabilă x pentru fiecare dintre funcțiile încărcate în array. Fiecare dintre aceste nou create variabile va avea valaorea de la finalizarea iterației anterioare. Nu se va mai rescrie cu fiecare iterație valoarea lui `x`.
-
-Mecanismul este valabil și pentru `for...in` și `for...of`.
+În cazul folosirii lui `let`, variabila va fi accesibilă la nivelul buclei, ceea ce înseamnă, de fapt că pentru fiecare iterație se va face un nou binding la câte o nouă variabilă x pentru fiecare dintre funcțiile încărcate în array. Fiecare dintre aceste nou create variabile va avea valaorea de la finalizarea iterației anterioare. Nu se va mai rescrie cu fiecare iterație valoarea lui `x`. Este valabil și pentru `for...in` și `for...of`.
 
 ```javascript
 var apeluri = [],
@@ -141,7 +135,7 @@ apeluri.forEach(function(functia){
 });
 ```
 
-Înainte de ES6, care pune la dispoziție `let`, „fixarea” variabilei la valoarea iterației, se făcea printr-un IIFE:
+Înainte de ES6, care pune la dispoziție `let`, *fixarea* variabilei la valoarea iterației, se făcea printr-un IIFE (Immediately Invoked Function Expression):
 
 ```javascript
 var apeluri = [];
@@ -163,7 +157,7 @@ La fiecare iterare bucla creează o nouă variabilă și o inițializează cu va
 
 ## Erori la redeclarare
 
-Dacă un identificator a fost definit deja în scope, dacă se va declara o variabilă cu let folosindu-se același nume pentru identificator, va fi emisă o eroare.
+Dacă un identificator a fost definit deja în mediul lexical, la declararea unei variabile cu `let` folosindu-se același nume pentru identificator, va fi emisă o eroare.
 
 ## Bune practici
 

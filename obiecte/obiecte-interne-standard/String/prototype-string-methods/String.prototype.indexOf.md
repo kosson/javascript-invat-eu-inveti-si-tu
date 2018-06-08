@@ -1,12 +1,12 @@
-# `String.prototype.indexOf()`
+# String.prototype.indexOf()
 
 Este o metodă care returnează indexul unde apare pentru prima dată un fragment de text.
 
-Este returnat `-1` dacă fragmentul nu este găsit. Atenție, dacă o parte a fragmentului este corectă și s-a greșit, fie și numai un caracter, nu se face identificarea și este returnat `-1`. Deci, trebuie să fie fix ceea ce este în textul în care se face căutare.
+Este returnat `-1` dacă fragmentul nu este găsit. Atenție, dacă o parte a fragmentului este corectă și s-a greșit, fie și numai un caracter, nu se face identificarea și este returnat `-1`.
 
 ## Mantre
 
-- `indexOf()` este case sensitive!: `'Ceva Mare'.indexOf('mare'); // -1`
+-   `indexOf()` este case sensitive!: `'Ceva Mare'.indexOf('mare'); // -1`
 
 ## Cazuistică indexOf()
 
@@ -26,7 +26,7 @@ Este returnat `-1` dacă fragmentul nu este găsit. Atenție, dacă o parte a fr
 
 ## Utilitate
 
-### Testarea pentru primul caracter întâlnit
+### Testarea după primul caracter întâlnit
 
 ```javascript
 var colectie = 'Acesta este un șir de test';

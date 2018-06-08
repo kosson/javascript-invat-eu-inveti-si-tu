@@ -1,6 +1,6 @@
-# Instrucțiunea `with`
+# Instrucțiunea with
 
-Este utilizat pentru a modifica lanțul mediilor lexicale pentru un anumit bloc de cod.
+Este utilizată pentru a modifica lanțul mediilor lexicale pentru un anumit bloc de cod.
 
 Există un comportament pentru momentul în care accesezi o variabilă. Dacă aceasta nu există în mediul lexical în care a fost solicitată valoarea legată de ea, se face o căutare în mediul lexical de deasupra și tot așa până la obiectul global.
 

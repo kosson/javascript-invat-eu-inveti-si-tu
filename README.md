@@ -2,7 +2,7 @@
 
 Aceste texte nu sunt definitive modificându-se ca formă și conținut într-o continuă îmbunătățire pe măsură ce timpul o va permite.
 
-Toate textele și ilustrațiile sunt disponibile oricui sub o licență Creative Commons **BY-NC-SA 4.0**. Acest lucru înseamnă că puteți lua aceste resurse și puteți face ceva mai mult, mai bine cu mai mult folos, dar fără drept de comercializare și distribuție. Asta înseamnă că le puteți folosi în scop personal sau la clasă pentru a împlini un act de instruire sau cercetare. În cazul în care se realizează profit din activitățile educaționale sau de instruire, creatorul așteaptă o donație generoasă cu deplina recunoaștere. La rândul său, va închide cercul virtuos și va dona o parte la dezvoltarea instrumentelor cu sursă deschisă pe care le folosește.
+Toate textele și ilustrațiile sunt disponibile oricui sub o licență Creative Commons **BY-NC-SA 4.0**. Acest lucru înseamnă că puteți lua aceste resurse și puteți face ceva mai mult, mai bine cu mai mare folos pentru voi înșivă, dar fără drept de comercializare și distribuție. Asta înseamnă că le puteți folosi în scop personal sau la clasă pentru a împlini un act de instruire sau cercetare. În cazul în care se realizează profit din activitățile educaționale sau de instruire, creatorul așteaptă o donație generoasă cu deplina recunoaștere. La rândul său, va închide cercul virtuos și va dona o parte la dezvoltarea instrumentelor cu sursă deschisă pe care le folosește.
 
 Rezerv restul drepturilor patrimoniale pentru posibile căi de valorificare, care sa susțină dezvoltarea mai departe a resurselor cu o calitate și o dinamică crescută.
 

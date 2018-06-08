@@ -1,4 +1,4 @@
-# `String.prototype.match`
+# String.prototype.match
 
 Faci o căutare într-un string după un șablon RegEx.
 

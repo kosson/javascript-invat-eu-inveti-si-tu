@@ -1,4 +1,4 @@
-# `String.prototype.slice()`
+# String.prototype.slice()
 
 Taie un segment de caractere dintr-un șir de la indexul menționat ca prim argument, până la indexul menționat ca limită dar care nu include și valoarea de la acel index.
 

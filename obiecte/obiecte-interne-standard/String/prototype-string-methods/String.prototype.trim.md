@@ -1,19 +1,21 @@
 # String.prototype.trim()
 
-Această metodă scoate „spațiile goale” de la capetele unui string.
-Ce poate fi considerat spații goale:
-- space
-- tab
-- non-break space
-- LF
-- CR
-- etc.
+Această metodă scoate *spațiile goale* de la capetele unui string.
 
-Metoda returnează un nou string fără „spații goale”.
+Ce poate fi considerat spații goale:
+
+-   space
+-   tab
+-   non-break space
+-   LF
+-   CR
+-   etc.
+
+Metoda returnează un nou string fără *spații goale*.
 
 ```javascript
-var unsir  = ' ceva ',
+let unsir  = ' ceva ',
     altsir = ' altceva';
-    
+
 unsir.trim(); // 'ceva'
 ```
