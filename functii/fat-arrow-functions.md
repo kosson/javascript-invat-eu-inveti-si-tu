@@ -76,7 +76,7 @@ Prin contrast, în cazul folosirii funcțiilor *fat arrow*, va fi utilizat obiec
 ```
 
 În cazul nostru, funcția *gazdă* va fi cea care va oferi o valoare pentru poziția 0 din obiectul `arguments`.
-Funcțiile **fat-arrow** își au originile în expresiile lambda ale programării funcționale. Un **fat arrow** este o funcție foarte simplă care nu poate fi folosită drept constructor. Aceste funcții nu au nume. Dacă ții neapărat, poți totuși să legi un identificator la ele prin formularea unei expresii de funcție: `let x = () => 10;`.
+Funcțiile **fat arrow** își au originile în expresiile lambda ale programării funcționale. Un **fat arrow** este o funcție foarte simplă care nu poate fi folosită drept constructor. Aceste funcții nu au nume. Dacă ții neapărat, poți totuși să legi un identificator la ele prin formularea unei expresii de funcție: `let x = () => 10;`.
 
 ```javascript
 (function faCeva (ceva) {
@@ -186,7 +186,7 @@ Arrow functions prezintă marele avantaj pentru că fac o legătură la contextu
 element.addEventListener('click', (ruptor.schimba).bind(ruptor));
 ```
 
-#### Schimbarea contextului folosind `call()`, `apply()` și `bind()`
+### Schimbarea contextului folosind `call()`, `apply()` și `bind()`
 
 Adu-ți mereu aminte că *fat arrows* sunt funcții, iar acestea moștenesc metodele lui `Function`. În concluzie, metodele obiectului fundamental `Function` sunt disponibile.
 
@@ -232,7 +232,7 @@ var facCeva = () => {
   try {
   //...
   } catch(error) {
-    ...
+  //...
   }
 };
 ```
@@ -280,7 +280,7 @@ Se observă cum numirea funcției callback care folosește un fat arrow, a permi
 -   Ceea ce se returnează este evaluarea unei expresii, nu a unui enunț.
 -   Funcțiile fat arrows sunt legate la scope-ul lexical. Nu mai este nevoie de trucul `var self = this` pentru a accesa contextul.
 -   Nu au funcție internă \[\[Construct]] și astfel, nu pot crea obiecte cu `new`.
--   Nu exisă `this`, nici `arguments` și nici `super` sau `new.target`. Valorile pentru `this`, `super`, `arguments` și `new target` sunt luate de la funcția în interiorul căreia este definit fat arrow-ul.
+-   Nu există `this`, nici `arguments` și nici `super` sau `new.target`. Valorile pentru `this`, `super`, `arguments` și `new target` sunt luate de la funcția în interiorul căreia este definit fat arrow-ul.
 -   Nu are proprietatea `prototype`.
 -   Nu poate modifica `this`-ul funcției gazdă.
 -   Nu poți folosi un fat arrow ca generator.

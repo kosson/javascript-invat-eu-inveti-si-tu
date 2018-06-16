@@ -87,9 +87,9 @@ decrementor(3, function (x) {
 ```
 
 1. declari o funcție fat arrow folosind o expresie. Funcția primește o valoare și un callback și returnează evaluarea unui ternar
-2. `numar` primește valoarea 3, iar `functie` primește ca valoare callbackul
+2. `numar` primește valoarea 3, iar `functie` primește ca valoare callback-ul
 3. se evaluează condiția și firul merge pe true (ciclul `#1`)
-4. se va evalua expresia `(functie recursiva, functie de executat pentru fiecare ciclu)`
+4. se va evalua expresia `(funcție recursivă, funcție de executat pentru fiecare ciclu)`
 5. se intră în evaluarea expresiei și se va evalua de la stânga la dreapta operanzii operatorului virgulă. Acest lucru conduce la execuția funcției din stânga virgulei
 6. execuția primului apel a lui decrementor este suspendată în stivă ceea ce va conduce ca apelul `functie(numar)` să nu mai fie făcut acum
 7. **controlul** este preluat de un nou apel `decrementor(numar - 1, functie)`
@@ -161,6 +161,6 @@ mapper(func, arr); // [ 2, 3, 4 ]
 
 ## Resurse
 
-- [Programming Loops vs Recursion - Computerphile](https://www.youtube.com/watch?v=HXNhEYqFo0o)
-- [What on Earth is Recursion? - Computerphile](https://www.youtube.com/watch?v=Mv9NEXX1VHc)
-- [The Most Difficult Program to Compute? - Computerphile](https://www.youtube.com/watch?v=i7sm9dzFtEI)
+-   [Programming Loops vs Recursion - Computerphile](https://www.youtube.com/watch?v=HXNhEYqFo0o)
+-   [What on Earth is Recursion? - Computerphile](https://www.youtube.com/watch?v=Mv9NEXX1VHc)
+-   [The Most Difficult Program to Compute? - Computerphile](https://www.youtube.com/watch?v=i7sm9dzFtEI)

@@ -17,7 +17,7 @@ La momentul începerii execuției codului, toate funcțiile declarate cu `functi
   1. vorbim de context de execuție global (obiectul **window**), când funcția este invocată ca funcție, nu ca metodă sau callback.
   2. contextul de execuție este o sumă de informații (activation record) privind
     1. **unde** a fost apelată funcția (în callstack);
-    2. ce parametri au fost pasați, etc,;
+    2. ce parametri au fost pasați, etc.;
     3. referința `this` care va fi folosită pe durata execuției funcției.
 3. Se face legătura la contextul lexical asociat acelei funcții (scope-ul). Pentru scope-ul extern, funcția va pune drept referință valoarea proprietății interne a funcției numită `[[Environment]]`.
 3. Se generează un obiect căruia îi sunt pasate automat ARGUMENTELE într-o colecție asemănătoare unui array și **this**.
@@ -47,11 +47,9 @@ Această invocare se întâmplă atunci când este folosit operatorul `()`.
 
 ### Invocarea ca metodă
 
-Când invoci funcția ca metodă a unui obiect, acel obiect devine **contextul** funcției, devinind accesibil funcției prin intermediul obiectului `this`. Acesta este mecanismul de acces la membrii obiectului.
+Când invoci funcția ca metodă a unui obiect, acel obiect devine **contextul** funcției, devenind accesibil funcției prin intermediul legăturii `this`. Acesta este mecanismul de acces la membrii obiectului.
 
 ### Invocarea în rol de constructor
-
-#### Regulile constructorului
 
 Scopul unui constructor este acela de a crea un obiect, care este valoarea returnată prin execuția funcției cu `new`.
 
@@ -71,7 +69,7 @@ Ceva(); // 100
 let instanta = new Ceva();
 ```
 
-Observăm că funcția noastră va avea un comportament *normal* și va returna evaluarea oricăror expresii. Astfel se explică de ce o parte din constructorii obiectelor interne pot fi apelați și ca funcții, unii fiind folosiți pentru a face *casting* unor valori pentru care dorim un tip fix. Atenție, dacă se va apela cu `new`, valoarea returnată va fi complet ignorată și se va crea un obiect nou.
+Observăm că funcția noastră va avea un comportament *normal* și va returna evaluarea oricăror expresii. Astfel se explică de ce o parte din constructorii obiectelor interne pot fi apelați drept funcții, unii fiind folosiți pentru a face *casting* unor valori pentru care dorim un tip fix. Atenție, dacă se va apela cu `new`, valoarea returnată va fi complet ignorată și se va crea un obiect nou.
 
 Mai există o situație interesantă legată de pierderea capacității de a genera un nou obiect a unui contructor creat de noi. Dacă funcția constructor va returna un obiect, atunci la invocarea cu `new`, nu va crea un obiect nou, ci îl va returna pe cel specificat.
 
@@ -123,8 +121,8 @@ testVal >= 150 && console.log("Acest mesaj va apărea dacă evaluarea lui testVa
 testVal >= 150 || console.log("Acest mesaj va apărea doar dacă evaluarea din left-hand-side este true");  // true
 ```
 
-În caz de valoare `truthy`, pentru `&&` se va afișa mesajul, dacă false, va returna false expresia.
-În caz de valoare `truthy`, pentru `||` se va returna `true`. Pentru false, se va afișa mesajul.
+În caz de valoare **truthy**, pentru `&&` se va afișa mesajul, dacă `false`, va returna `false` expresia.
+În caz de valoare **truthy**, pentru `||` se va returna `true`. Pentru `false`, se va afișa mesajul.
 
 Un alt caz este apelarea unui callback:
 
@@ -134,9 +132,9 @@ function tester(callback){
 };
 ```
 
-## Invocare `tail call`
+## Invocare tail call
 
-Un `tail call` este invocarea unei funcții atunci când o funcție este invocată ca ultimă instrucțiune a unei funcții gazde.
+Un *tail call* este invocarea unei funcții atunci când o funcție este invocată ca ultimă instrucțiune a unei funcții gazde.
 
 ```javascript
 function gazda(){

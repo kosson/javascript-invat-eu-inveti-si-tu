@@ -62,7 +62,7 @@ Aplicarea unei funcții argumentelor sale produce un nou **mediu lexical**, un n
 
 > Mediul unei funcții este un Mediu Lexical care corespunde invocării unui obiect funcție EMCAScript. Un mediu al unei funcții poate crea o nouă legătură `this`. Un mediu al funcției poate captura starea necesară pentru a satisface invocările metodei `super` [ECMAScript® 2017 Language Specification (ECMA-262, 8th edition, June 2017). 8.1 Lexical Environments](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-environment-records).
 
-Ca obișnuință, ar fi de dorit să gândești că funcția se aplică pe argumente, atunci când acestea există. Mult timp am gândit altfel: funcția este un fragment de cod care „primește” pentru că, într-adevăr, introduci niște argumente. Nu este greșit, dar pentru o iluminare rapidă în domeniul funcțiilor, cel mai bine este să gândești în termenii aplicării sale pe argumente primite. În adâncime, trebuie înțeles că acest comportament este posibil pentru funcții pentru că pur și simplu sunt **o-bi-ec-te**. Unele speciale pentru că pur și simplu pot executa codul din interior ori de câte ori se dorește.
+Ca obișnuință, ar fi de dorit să gândești că funcția se aplică pe argumente, atunci când acestea există. Mult timp am gândit altfel: funcția este un fragment de cod care „primește” pentru că, într-adevăr, introduci niște argumente. Nu este greșit, dar pentru o iluminare rapidă în domeniul funcțiilor, cel mai bine este să gândești în termenii aplicării sale pe argumente primite. În adâncime, trebuie înțeles că acest comportament este posibil pentru funcții pentru că pur și simplu sunt **o-bi-ec-te**. Sunt niște obiecte speciale pentru că pur și simplu pot executa codul din interior ori de câte ori se dorește.
 
 **Moment Zen**: O funcție, de fapt, „se aplică” argumentelor pasate care sunt valori, le va prelucra și le va oferi apelantului prin returnare.
 
@@ -89,12 +89,12 @@ Adesea vom dori returnarea rezultatelor ca un array sau ca un obiect. Pe lângă
 Următorul exemplu expune o funcție care conține la rândul său o altă funcție. Acest scenariu este unul care introduce și conceptul de **closure** (în limba română poți traduce ca **portiță** sau **breșă**), care este o funcție internă ce „face o ancorare” a mediului lexical în care a fost declarată. Acest lucru este absolu necesar pentru că funcția are nevoie de identificatorii necesari propriei execuții. Vom aprofunda **closure-urile**, dar pentru te știu fire curioasă, hai să privim la următoarea secvență de cod drept exemplu.
 
 ```javascript
-function ex(unu, doi){
+function ex (unu, doi) {
   console.log(this);  // Window
   this.trei = 3;      // se creează prop trei: window.trei care este 3
   console.log(ex.arguments);
   // Arguments {0:1,1:2,calee:ex(),length:2,__proto__:Object}
-  function intern(patru, cinci){
+  function intern (patru, cinci) {
     console.log(this.trei);    // 3
     console.log(ex.arguments);
     // Arguments {0:1,1:2,calee:ex(),length:2,__proto__:Object}
@@ -236,19 +236,19 @@ Funcțiile moștenesc din `Function.prototype` și `Object.prototype`, dar chiar
 
 **Moment Zen**: Funcțiile sunt efemere, fiind mecanismul prin care sunt preluate date, sunt prelucrate și apoi sunt returnate apelantului.
 
-Spre deosebire de restul obiectelor, funcțiile pot fi invocate. Funcțiile sunt un subtip de obiecte numit tehnic „callable object” iar acest lucru înseamnă că pentru acea funcție, motorul care implementează standardul ECMAScript are o metodă internă `[[Call]]`, care permite apelarea funcției dar și recursivitatea. Am introdus termenul de recursivitate. Acesta se referă la capacitatea ca o funcție să se autoapeleze la momentul evaluării codului intern.
+Spre deosebire de restul obiectelor, funcțiile pot fi invocate. Funcțiile sunt un subtip de obiecte numit tehnic *callable object*, iar acest lucru înseamnă că pentru acea funcție, motorul care implementează standardul ECMAScript are o metodă internă `[[Call]]`, care permite apelarea funcției dar și recursivitatea. Am introdus termenul de recursivitate. Acesta se referă la capacitatea ca o funcție să se autoapeleze la momentul evaluării codului intern.
 
 O funcție care se apelează din interiorul său se numește funcție recursivă. Sunt trei modalități de a apela o funcție din interiorul ei:
 
 -   după numele său,
--   folosind `arguments.callee`, o proprietate a obiectului `arguments` care conține funcția `arguments.callee()`,
+-   folosind `arguments.callee`, o funcție proprietate a obiectului `arguments`,
 -   folosind un identificator din scope care trimite la funcție.
 
 Funcțiile care pot deveni constructori prin apelarea cu `new`, au, de fapt, o metodă internă `[[Construct]]`, care permite ca acestea să „construiască” obiecte. Nu toate funcțiile au această metodă internă. `Arrow functions` nu au `[[Construct]]`.
 
 ## Spune standardul
 
-> Funcțiile obiecte încapsulează cod parametrizat care ține minte mediul lexical („closed over”) și care permite evaluarea dinamică a codului.
+> Funcțiile obiecte încapsulează cod parametrizat care ține minte mediul lexical («closed over»), permițând evaluarea dinamică a codului.
 > O funcție obiect este un obiect comun care are aceleași sloturi interne și aceleași metode interne ca orice alte obiecte comune.
 > Codul dintr-o funcție obiect poate fi în „strict mode” sau nu. O funcție care rulează codul în strict mode se numește „strict function”. Cele care nu rulează în „strict function” se cheamă că sunt „non-strict function”.
 

@@ -1,14 +1,14 @@
 # Definirea funcțiilor
 
-Funcțiile pot fi definite („create”) în următoarele moduri:
+Funcțiile pot fi definite (*create*) în următoarele moduri:
 
 -   prin intermediul unei expresii de funcție - *function expression*: `let adunare = function demo (param1, param2) { return param1 + param2 };`, fiind cazul unui `named function expression`,
--   prin *declararea funcției**: `function demo (param1, param2) { return param1 + param2 };`,
+-   prin *declararea funcției*: `function demo (param1, param2) { return param1 + param2 };`,
 -   prin folosirea constructorului obiectului intern `Function`: `new Function()`,
 -   prin folosirea lui *fat arrow* pentru a defini o funcție: `argument => argument++` (introdusă de EcmaScript 2015 (ES6)),
 -   prin folosirea funcțiilor *generator*: `function* generator () { yield true };` (introdus de EcmaScript 2015 (ES6)).
 
-În cazul unei expresii de funcție cu nume - `named function expression` precum în `let adunare = function demo (param1, param2) { return param1 + param2 };`, *adunare* este numele identificatorului din mediu iar *demo* este o proprietate a funcției. Poți proba prin `adunare.name` ceea ce va returna demo.
+În cazul unei expresii de funcție cu nume - `named function expression` precum în `let adunare = function demo (param1, param2) { return param1 + param2 };`, `adunare` este numele identificatorului din mediu iar `demo` este o proprietate a funcției. Poți proba prin `adunare.name` ceea ce va returna `demo`.
 
 Atenție, numele unei funcții nu-l vei găsi în registrul inventar al mediului în care funcția a fost declarată. Dar, numele funcției va putea fi găsit în registrul inventar al mediului format la execuția funcției. Acest lucru permite recursivitatea.
 
@@ -20,7 +20,7 @@ Atenție, numele unei funcții nu-l vei găsi în registrul inventar al mediului
 
 ## Funcție declarată și funcție exprimată
 
-Conceptele tratate sunt *function declaration statement și function definition expression.
+Conceptele tratate sunt **function declaration statement** și **function definition expression**.
 
 ### A. Instrucțiunea pentru declararea funcției
 
@@ -48,7 +48,7 @@ function oFunctie () {            // funcție declarată
 };
 ```
 
-Reține aspectul important că o funcție declarată este omniprezentă - beneficiază de hoisting. Acesta este și motivul pentru care nu vei introduce niciodată declarații de funcții în `if`-uri, de exemplu. Degeaba o vei face pentru că indiferent de intenția a a declara o funcție care să fie valabilă doar pentru if, aceasta, de fapt va fi valabilă întregului cod. Un exemplu să înțelegi că hoistingul lucrează chiar și dacă returnezi înaintea declarării funcției.
+Reține aspectul important că o funcție declarată este omniprezentă - beneficiază de hoisting. Acesta este și motivul pentru care nu vei introduce niciodată declarații de funcții în `if`-uri, de exemplu. Degeaba o vei face pentru că indiferent de intenția a a declara o funcție care să fie valabilă doar pentru `if`, aceasta, de fapt va fi valabilă întregului cod. Un exemplu să înțelegi că hoistingul lucrează chiar dacă returnezi înaintea declarării funcției.
 
 ```javascript
 (function () {
@@ -58,6 +58,7 @@ Reține aspectul important că o funcție declarată este omniprezentă - benefi
   };
 })(); // fac ceva!
 ```
+
 Pentru exemplificare am folosit o funcție care se execută imediat. Dacă am fi scris o expresie pentru definirea funcției, hoistingul nu s-ar mai fi realizat.
 
 ```javascript
@@ -69,7 +70,7 @@ Pentru exemplificare am folosit o funcție care se execută imediat. Dacă am fi
 })(); // TypeError: faCeva is not a function
 ```
 
-Eroarea apare pentru că se face „legătura” dintre identificator și funcție după ce s-a făcut return-ul.
+Eroarea apare pentru că se face *legătura* dintre identificator și funcție după ce s-a făcut `return`-ul.
 
 **Sfatul lui Crockford**: declară toate funcțiile înainte să începi să le apelezi.
 
@@ -209,8 +210,8 @@ oFunctie(2, 4); // 6
 -   Variabilele și funcțiile care fac parte din contextul de execuție, sunt memorate în **execution context object**, care este un obiect al motorului JavaScript.
 -   Când este definită o funcție, aceasta stochează scope chain-ul care era în efect în acel moment.
 -   Când o funcție este invocată creează un obiect în care stochează propriile variabile și adaugă acel obiect la scope chain.
--   Funcțiile anonime nu permit ***recursivitatea***
+-   Funcțiile anonime nu permit **recursivitatea**.
 -   Funcțiile care au nume permit referențierea după nume din interiorul ei.
 -   funcțiile declarate (`function ceva(){}`) se bucură de mecanismul de hoisting.
--   funcțiile exprimate (`var ceva = function(){}`) nu se supun hoistingului ceea ce le permite să rețină o copie a variabilelor dn scope-ul în care au fost definite.
--   funcțiile exprimate pot fi folosite ca: argumente pentru alte funcții, clojures, IIFEs
+-   funcțiile exprimate (`var ceva = function(){}`) nu se supun hoistingului ceea ce le permite să rețină o copie a variabilelor din scope-ul în care au fost definite.
+-   funcțiile exprimate pot fi folosite ca: argumente pentru alte funcții, clojures, IIFEs.

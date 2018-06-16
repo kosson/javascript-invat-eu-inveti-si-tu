@@ -24,9 +24,9 @@ finalizare('pong'); // "am combinat ping,echo cu pong"
 
 Această funcție primește două argumente:
 
-- o altă funcție și
-- un argument
-- returnează o funcție
+-   o altă funcție și
+-   un argument
+-   returnează o funcție
 
 Funcția returnată primește un set pe care-l **desface**, în engleză *spread*.
 

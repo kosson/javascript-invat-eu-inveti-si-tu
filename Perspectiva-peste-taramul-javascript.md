@@ -116,7 +116,7 @@ Să revenim la momentul când Demiurgul va lua pașii algoritmici capturați pri
 
 Pentru că a fost creată această primă funcție obiect internă, va trebui să fie atribuită unui identificator pentru a o apela când avem nevoie. În acest sens, standardul o atribuie identificatorul `thrower`. Funcția internă anonimă care face parte din elementele intrinseci este o funcție obiect care este definită o singură dată pentru un tărâm.
 
-2.7 Funcția de verificare identificată prin thrower va fi de acum înainte valoarea lui intrinsics.[[%ThrowTypeError%]].
+2.7 Funcția de verificare identificată prin thrower va fi de acum înainte valoarea lui intrinsics.\[\[%ThrowTypeError%]].
 
 2.8 Mai sus, a fost pus un identificator pe un algoritm. Acum se va pune un identificator pe un algoritm care nu are niciun pas. Esența sa este să nu facă ceva. Identificatorul acestuia este `noSteps`. Acesta este necesar momentelor când motorul să poată opta să nu facă nimic în anumite condiții.
 
@@ -128,8 +128,8 @@ Avem nevoie să dotăm funcțiile cu un obiect prototip propriu pentru că acest
 
 Pașii pentru crearea obiectului prototip al funcțiilor:
 
--   înregistrarea realmRec este trimisă ca prim argument,
--   o secvență algoritmică vidă (noSteps) constituie al doilea, argument. Este și logic,ca obiectul funcție returnatsă facă nimic, deci nu va fi apelat,
+-   înregistrarea `realmRec` este trimisă ca prim argument,
+-   o secvență algoritmică vidă (`noSteps`) constituie al doilea, argument. Este și logic ca obiectul funcție returnat să facă nimic, deci nu va fi apelat,
 -   referința către obiectul prototip zero `objProto`.
 
 Este returnată funcția obiect internă ca rezultat al executării algoritmului `CreateBuiltinFunction`. Dacă am face o disecție acestui obiect funcție care tocmai a devenit prototipul oricărei funcții care va fi creată de acum încolo, vom găsi următoarele:
@@ -310,17 +310,17 @@ Valorile literale sunt tipuri de date care pot fi definite fără să fie ceva i
 
 Haideți să le trecem în revistă tipurile de literale sau cum scriem valorile:
 
-- **String**: `'ceva';` (cu ghilimele simple) și `"altceva";` (cu ghilimele duble),
-- **Boolean**: `true;` sau `false;`,
-- **Număr**: `3;`, `3.1415;`, un binar `0b1101;`, un hexazecimal `0x00F`, un octal `0o324`,
-- **Array**: `[];`; iată un array care include două literale de tip număr: `[2,7];` sau care include un literal string și unul număr `['ceva', 2];`,
-- **Obiect**: `{};` - obiect literal gol sau obiect literal care are un literal string și unui număr numite `primo` și `secundo`: `{primo: 'ceva', secundo: 3};`,
-- **Regular Expression**: `/ceva/;`,
-- **Funcție**: `function () {};`,
-- **Funcție cu nume**: `function faCeva () {};`,
-- **Null**: `null;`,
-- **Undefined**: `undefined;`
-- **template string**: <code>&#96;</code>`un text ${variabila}`<code>&#96;</code>. Observă că pentru a construi un template string am pus tot textul nostru între două <code>&#96;</code>, care este caracterul pentru reprezentarea accentului grav (grave accent, în engleză).
+-   **String**: `'ceva';` (cu ghilimele simple) și `"altceva";` (cu ghilimele duble),
+-   **Boolean**: `true;` sau `false;`,
+-   **Număr**: `3;`, `3.1415;`, un binar `0b1101;`, un hexazecimal `0x00F`, un octal `0o324`,
+-   **Array**: `[];`; iată un array care include două literale de tip număr: `[2,7];` sau care include un literal string și unul număr `['ceva', 2];`,
+-   **Obiect**: `{};` - obiect literal gol sau obiect literal care are un literal string și unui număr numite `primo` și `secundo`: `{primo: 'ceva', secundo: 3};`,
+-   **Regular Expression**: `/ceva/;`,
+-   **Funcție**: `function () {};`,
+-   **Funcție cu nume**: `function faCeva () {};`,
+-   **Null**: `null;`,
+-   **Undefined**: `undefined;`
+-   **template string**: <code>&#96;</code>`un text ${variabila}`<code>&#96;</code>. Observă că pentru a construi un template string am pus tot textul nostru între două <code>&#96;</code>, care este caracterul pentru reprezentarea accentului grav (grave accent, în engleză).
 
 Pentru cei foarte curioși vom explora nițel și diferența dintre valorile literale declarate simplu și cele instanțiate folosind constructorul corespondent lor.
 
@@ -409,5 +409,4 @@ Pentru JavaScript se întâmplă că sursa este parcursă înainte de a fi rulat
 ## Resurse
 
 [ECMAScript® 2017 Language Specification](https://tc39.github.io/ecma262/)
-
 [Standard ECMA-262 ECMAScript® 2016 Language Specification](http://www.ecma-international.org/publications/standards/Ecma-262.htm)

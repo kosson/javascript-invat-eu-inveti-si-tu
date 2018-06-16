@@ -1,7 +1,5 @@
 # Argumentele și parametrii funcțiilor
 
-## Perspectivă generală
-
 Pentru a face o analogie utilă poți să-ți imaginezi că o funcție este un port la mare. Portul are dane. Fiecare dană are un nume sau un număr. Poți trimite câte o navă (argument) în fiecare dană (parametru), dar pot fi mult mai multe nave în rada portului (arity). Evidența navelor din radă o ține căpitănia (obiectul arguments). Fiecare navă conține bunuri (valori) pe care le vom prelucra în oraș (funcție). Poți chiar să întrebi o funcție câți parametri are prin utilizarea proprietății `length` (în limba engleză, `length` înseamnă dimensiune, lungime).
 
 ```javascript
@@ -20,7 +18,7 @@ function fac3 ({x, y}) {}; fac3.length; // 1
 function fac4 (x, ...y) {}; fac4.length; // 1
 ```
 
-Fiecare argument trebuie pasat funcției în ordinea corectă pentru că valoarea sa se va „lega” de numele desemnat de programator între parantezele rotunde. Aceste nume, de fapt identificatori, se numesc parametri. Ca să clarificăm, valorile pasate unei funcții se numesc argumente, iar identificatorii menționați între paranteze (headerul funcției), de care se leagă aceste valori, se numesc parametri. O funcție poate primi mult mai multe argumente față de ceea ce este precizat ca parametri. Valorile acestea nu se pierd în neant. Ele vor putea fi regăsite în obiectul special `arguments`, dar dacă vei trimite mai puține argumente, restul parametrilor vor avea valoarea `undefined`. Parametrii vor face parte din mediul lexical al funcției.
+Fiecare argument trebuie pasat funcției în ordinea corectă pentru că valoarea sa se va *lega* de numele desemnat de programator între parantezele rotunde. Aceste nume, de fapt identificatori, se numesc parametri. Ca să clarificăm, valorile pasate unei funcții se numesc argumente, iar identificatorii menționați între paranteze (headerul funcției), de care se leagă aceste valori, se numesc parametri. O funcție poate primi mult mai multe argumente față de ceea ce este precizat ca parametri. Valorile acestea nu se pierd în neant. Ele vor putea fi regăsite în obiectul special `arguments`, dar dacă vei trimite mai puține argumente, restul parametrilor vor avea valoarea `undefined`. Parametrii vor face parte din mediul lexical al funcției.
 
 Toate aceste detalii sunt utile pentru că la un moment dat este necesară executarea unei funcții în funcție de numărul parametrilor săi. Poate să existe și cazul în care dorești un anumit parametru să stea întotdeauna pe ultima poziție pentru că, de fapt, acesta este la rândul său o funcție cu rol de callback (va fi apelată in interiorul funcției).
 
@@ -37,7 +35,7 @@ if (fac2.length == 2) {
 }; // "Salut, 10!"
 ```
 
-Amintește-ți mereu faptul că proprietatea `length` este una poate fi doar citită - *read-only*. Și acum că am aflat cum că numărăm parametrii, sunt absolut convins că mă vei întreba cum să numărăm și argumentele. Nimic mai simplu: obiectul **arguments** are la rândul său o proprietate `length` care poate fi folosită pentru a afla câte argumente au fost pasate funcției: `arguments.length`. Spunem despre o funcție care primește mai multe argumente decât numărul parametrilor că este una `variadică`.
+Amintește-ți mereu faptul că proprietatea `length` este una poate fi doar citită - *read-only*. Și acum că am aflat cum că numărăm parametrii, sunt absolut convins că mă vei întreba cum să numărăm și argumentele. Nimic mai simplu: obiectul `arguments` are la rândul său o proprietate `length` care poate fi folosită pentru a afla câte argumente au fost pasate funcției: `arguments.length`. Spunem despre o funcție care primește mai multe argumente decât numărul parametrilor că este una `variadică`.
 
 ## O imagine în adâncime
 
@@ -250,7 +248,7 @@ Valorile corespondente vor fi atribuite iar parametrii care nu au valori, vor fi
 
 În anumite cazuri este nevoie de a inițializa un parametru cu o anumită valoare prestabilită și nu `undefined` așa cum este comportamentul standard al ECMAScript.
 
-Până la noua versiune a ECMAScript, mai întâi se verifica în funcție dacă un anumit parametru este `undefined`. Dacă da, se inițializa cu o valoare. Acest lucru este posibil, dacă ne readucem aminte faptul că și parametrii sunt identificatori în scope-ul funcției (`lexical environment`).
+Până la noua versiune a ECMAScript, mai întâi se verifica în funcție dacă un anumit parametru este `undefined`. Dacă da, se inițializa cu o valoare. Acest lucru este posibil, dacă ne readucem aminte faptul că și parametrii sunt identificatori în scope-ul funcției (*lexical environment*).
 
 ```javascript
 let test = function (ceva) {
@@ -382,7 +380,7 @@ function faCeva ({prim = 1, secund = 2, tert = 3} = {}) {
   console.log(...arguments);
 }; // 1 2 3
 faCeva({secund: 'ceva'}); // 1 ceva 3
-faCeva(10); // // 1 2 3
+faCeva(10); // 1 2 3
 faCeva({tert: true}, 10); // 1 2 true
 faCeva({secund: 'ceva', test: true});
 faCeva({secund: 'doi', tert: false, prim: 9});
@@ -456,7 +454,7 @@ Folosirea operatorului `...` generează un array adevărat, nu un *array-like* a
 
 Intenția introducerii prin ES6 a **parametrilor rest**, a fost accea de a înlocui `arguments`. Motivul a fost necesitatea de a putea introduce un număr nelimitat de argumente.
 
-Sintaxa este reprezentată prin operatorul `...` urmat de un identificator. Regula privind `rest parameters` este că identificatorul precedat de operatorul rest, trebuie să fie ultimul parametru introdus în headerul funcției.
+Sintaxa este reprezentată prin operatorul `...` urmat de un identificator. Regula privind *rest parameters* este că identificatorul precedat de operatorul rest, trebuie să fie ultimul parametru introdus în headerul funcției.
 
 Înainte de ES6, singura metodă de a transforma `arguments` într-un array era prin folosirea unui artificiu des întâlnit:
 
@@ -475,7 +473,7 @@ function lucru (a, b, ...argumente) {
 };
 ```
 
-Parametrii rest nu pot fi utilizați atunci când se creează obiecte a căror proprietăți sunt introduse folosind `object literal setters`. Acest lucru se petrece pentru că setarea în acest mod a proprietăților se poate face doar cu un singur argument, iar parametrii rest pot seta o mulțime de parametri.
+Parametrii rest nu pot fi utilizați atunci când se creează obiecte a căror proprietăți sunt introduse folosind *object literal setters*. Acest lucru se petrece pentru că setarea în acest mod a proprietăților se poate face doar cu un singur argument, iar parametrii rest pot seta o mulțime de parametri.
 
 ```javascript
 let x = {
@@ -526,8 +524,6 @@ test(obi); //"10 și true"
 ```
 
 Spre deosebire de cazul array-urilor, utilizarea unui obiect în cazul destructurării, are avantajul introducerii în obiect a cheilor în orice ordine este dorită atâta vreme cât păstrăm convenția de echivalență a numelor cheilor în obiectul corespondent parametrilor.
-
-## arguments în prelucrarea unui obiect
 
 Dacă trimitem unei funcții un argument care are drept valoare un obiect, putem constitui un alt obiect subset pe care să-l returnăm.
 

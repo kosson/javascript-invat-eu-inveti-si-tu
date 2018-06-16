@@ -27,8 +27,8 @@ var aDoua = prima(20, 21); console.log(aDoua); // 41
 
 ## Dependințe cognitive
 
-- funcții
-- closure
+-   funcții
+-   closure
 
 ## Aspecte practice
 

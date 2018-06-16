@@ -134,7 +134,7 @@ Este observabil faptul că variabila declarată în `if` este accesibilă în af
 
 -   Faza de compilare este urmată de o fază de execuție.
 -   Mediul lexical este generat la faza de compilare. De fapt, acesta este un set de reguli pentru a determina cum se face căutarea după un anume identificator.
--   La momentul rulării codului mediile lexicale există deja. Doar legătura this, care se apropie de ideea de scope dinamic caracteristic altor limbaje, se consituie la momentul rulării codului, relectând contextul în care a fost apelată funcția.
+-   La momentul rulării codului mediile lexicale există deja. Doar legătura `this`, care se apropie de ideea de scope dinamic caracteristic altor limbaje, se consituie la momentul rulării codului, relectând contextul în care a fost apelată funcția.
 -   Declararea funcțiilor generează mediul lexical.
 -   Când funcțiile sunt executate mediul lexical folosit este cel constituit la momentul compilării, nu cel existent la momentul invocării. Asta înseamnă lexical, de fapt.
 -   La invocarea unei funcții se generează o referință către mediul lexical existent la momentul definirii. Dacă a fost definită în global, se va ține o referință la ce se află în global, se face o cartografiere a tuturor identificatorilor din global. Definirea unei alte funcții interne, va crea o referință către toți identificatorii funcției gazdă.

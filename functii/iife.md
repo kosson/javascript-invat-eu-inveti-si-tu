@@ -1,14 +1,13 @@
 # IIFE - Immediately Invoked Function Expression
 
-IIFE permite invocarea imediată a unei funcții anonime fără a salva o referință. Permite crearea de spații de cod executabile separat de global scope.
-
-Un IIFE este folosit pentru a crea un scope și pentru a încapsula module.
+IIFE permite invocarea imediată a unei funcții anonime fără a salva o referință. Permite crearea de spații de cod executabile separat de global scope. Un IIFE este folosit pentru a crea un scope și pentru a încapsula module.
 
 Scopul parantezelor, adică a operatorului de grupare, este de a transforma definirea funcției într-o expresie. Acest lucru se întâmplă pentru că în JavaScript tot ce este între paranteze este tratat ca o expresie. A doua pereche de paranteze face ca funcția să fie executată imediat.
 
 ## Dependințe cognitive
-- funcții
-- clojures
+
+-   funcții
+-   clojures
 
 Dacă atribuiți funcția unei variabile, nu trebuie să punem funcția între paranteze deoarece este deja o expresie.
 
@@ -49,7 +48,7 @@ var y = ((nume, profesie) => {
 ```javascript
 var x = "ceva";
 
-(function(){
+(function () {
   var x = "ceva ascuns";
   console.log(x);
 })();
@@ -61,8 +60,8 @@ console.log(x);
 
 ## Când folosești?
 
-- atunci când dorești să ascunzi funcționalități fără a lăsa nicio urmă în GLOBAL sau LOCAL SCOPE
-- atunci când construiești Șabloane Modul.
+-   atunci când dorești să ascunzi funcționalități fără a lăsa nicio urmă în GLOBAL sau LOCAL SCOPE
+-   atunci când construiești Șabloane Modul.
 
 ### Ce este un IIFE pentru limbaj?
 
@@ -76,7 +75,7 @@ Să pornim cu cel mai simplu exemplu, dar, din capul locului, buna practică spu
 Cel mai simplu exemplu este cel al unei funcții care se autoexecută instant pentru că motorul are nevoie să atribuie identificatorului valoarea evaluată a funcției. Îți readuc aminte că toate funcțiile sunt valori și că operatorul `()` declanșează execuția funcției ceea ce conduce la evaluarea tuturor expresiilor din interior. Și nu te las să uiți faptul că, de fapt, un IIFE este rezultatul evaluării expresiei din partea dreaptă a operatorului egal.
 
 ```javascript
-var iife = (function(){
+var iife = (function () {
   var x = "ceva ascuns";
   console.log(x);
 })();
@@ -91,7 +90,7 @@ IIFE-urile pot primi valori pentru că, de fapt, este un apel al unei funcții c
 
 ```javascript
 var x = "ceva";
-var iife = (function(x){
+var iife = (function (x) {
   console.log(x);           // ceva
   var x = "ceva ascuns";    // ceva ascuns
   console.log(x);
@@ -102,7 +101,7 @@ Foarte interesant este cazul în care în IIFE ai marea parte a funcțiilor care
 
 ```javascript
 var y = "ceva din global";
-var iife = (function(global){
+var iife = (function (global) {
   console.log(global.y);    // ceva din global
   global.y = "ceva ascuns care a modificat in global";
 })(window);

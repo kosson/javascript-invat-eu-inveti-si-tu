@@ -21,9 +21,10 @@ Copilatoarele preiau codul sursă redactat într-un limbaj de programare și îl
 Motorul de JavaScript când încarcă codul sursă, face două treceri peste cod:
 
 1 Este faza unei așa-zise compilării, când citește codul sursă linie cu linie (*parsing*), îl transformă în atomi lexicali (`tokens`), face recensământul identificatorilor și îi inițializează cu `undefined`, constituindu-se un Arbore Sintactic Abstract - Abstract Syntax Tree. După constituirea AST, codul este transformat într-o formă numită **bytecode** (înșiruirea de 0 și 1 pe care computerul o înțelege). În cazul funcțiilor, abia la momentul apelării lor se va proceda la constituirea unui mediu lexical propriu acelei funcții în care vor fi sub evidență identificatorii găsiți în corpul funcției. Pe scurt, compilarea lor se face la momentul apelării.
+
 2 Este faza de execuție. Identificatorii capătă valori și expresiile sunt evaluate.
 
-Trebuie specificat faptul că operațiunile nu decurg liniar, ci într-un mod care să permită cei mai buni timpi de execuție. Adică, se face puțin, parsing, urmat de compilare, rulare, optimizare și reoptimizare, apoi se mai ia un fragment și se repetă pașii și tot așa pentru a realiza per global cei mai buni timpi de rulare pentru cod. Pentru că acest comportament este cel real și actual, spunem că JavaScript beneficiază de compilare în timp real - JIT (Just In Time). Înțelegerea modului în care funcținează JIT-ul, conduce la o execuție performantă a codului.
+Trebuie specificat faptul că operațiunile nu decurg liniar, ci într-un mod care să permită cei mai buni timpi de execuție. Adică, se face puțin parsing, urmat de compilare, rulare, optimizare și reoptimizare. Apoi se mai ia un fragment și se repetă pașii și tot așa pentru a realiza per global cei mai buni timpi de rulare pentru cod. Pentru că acest comportament este cel real și actual, spunem că JavaScript beneficiază de compilare în timp real - JIT (Just In Time). Înțelegerea modului în care funcținează JIT-ul, conduce la o execuție performantă a codului.
 
 Ceea ce trebuie adăugat ca detaliu important este faptul că spre deosebire de C și C++, unde trebuie să eliberezi memoria de variabilele setate, un fel de a duce gunoiul la pubelă după ce ai lucrat, în JavaScript, **garbage collecting**, căci așa se numește în programare, este făcut automat.
 
@@ -182,7 +183,7 @@ Conține:
 -   Outer environment (pentru cazul funcțiilor. Global env nu are outer env)
 -   codul javascript
 
-ATENȚIE, toate acestea sunt create de motorul JavaScript.
+Atenție, toate acestea sunt create de motorul JavaScript.
 
 ## Mantre
 
@@ -214,7 +215,6 @@ var obiect = {
     return this;
   }
 };
-
 obiect.getThis() === obiect; // true
 ```
 
@@ -265,7 +265,7 @@ faceva(2);                        // 12
 
 ### EXECUȚIE
 
--   **\# 0** Valoarea „o dudă” este atribuită identificatorului `duda`.
+-   **\# 0** Valoarea *o dudă* este atribuită identificatorului `duda`.
 -   **\# 1** Problema cu `altaDuda`
     1.  *Contextul de execuție*: <u>Global scope</u> (mediul lexical global).
     2.  *Motorul întreabă*: știi cumva ce este `altaDuda`?
@@ -287,27 +287,28 @@ faceva(2);                        // 12
 -   variabilei locale param îi este atribuită valoarea 2
 -   variabilei param îi este modificată valoarea.
     -   **\# 5** Cine este *ex*?
-    -   **Context**: local scope
+    -   **Context**: local scope.
     -   **Motorul întreabă**: știi ce este `ex`?
-    -   **Răspuns**: Nu, nu știu, dar mă duc pe „scope chain” și caut în container până în Global Scope dacă este nevoie.
-    -   **Efect**: dacă o variabilă cu același nume este găsită pe lanțul de scope în Global scope valoarea din funcție modifică valoarea variabilei din Global scope. - **Dacă**: nu este găsită o variabilă cu același nume *mai sus*, atunci va crea una din oficiu. Dacă se folosește „use strict”, va fi returnată o eroare ReferenceError
--   **\#11** se returnează funcția internă `sarcinaInterna` ceea ce conduce la invocarea acesteia.
+    -   **Răspuns**: Nu, nu știu, dar mă duc pe *scope chain* și caut în `container` până în Global Scope dacă este nevoie.
+    -   **Efect**: dacă o variabilă cu același nume este găsită pe lanțul de scope în Global scope valoarea din funcție modifică valoarea variabilei din global scope.
+    -   **Dacă**: nu este găsită o variabilă cu același nume *mai sus*, atunci va crea una din oficiu. Dacă se folosește `use strict`, va fi returnată o eroare `ReferenceError`.
+-   **\# 11** se returnează funcția internă `sarcinaInterna` ceea ce conduce la invocarea acesteia.
 
 ### COMPILARE
 
--   **\#7** este declarată variabila `ex`. Dacă există o variabilă cu același nume în funcția container, variabila acestuia nu va fi suprascrisă, ci întotdeauna se va referenția cea din scope-ul existent. Așa funcționează „scope resolution” iar această stare de lucruri se numește variable shadowing.
+-   **\# 7** este declarată variabila `ex`. Dacă există o variabilă cu același nume în funcția `container`, variabila acestuia nu va fi suprascrisă, ci întotdeauna se va referenția cea din scope-ul existent. Așa funcționează *scope resolution*, iar această stare de lucruri se numește variable *shadowing*.
 -   este declarată variabila locală `fruct`.
 -   **\# 9** Cine este *masura*?
--   **Context**: local scope
+-   **Context**: local scope.
 -   **Motorul întreabă**: știi ce este masura?
--   **Răspuns**: Nu, nu știu, dar mă duc pe „scope chain” și caut în funcția container până în Global Scope dacă este nevoie.
+-   **Răspuns**: Nu, nu știu, dar mă duc pe *scope chain* și caut în funcția container până în Global Scope dacă este nevoie.
 
 ### EXECUȚIE
 
 -   variabilei `ex` îi este atribuită valoarea „din interior”.
--   variabilei `fruct` îi este atribuită valoarea 0.
--   valiabila măsura va fi modificată în contextul local fiind înmulțită cu 2 și atribuită ei înseși
--   valoarea măsurii este returnată în contextul de mai sus, adică valoarea 24.
+-   variabilei `fruct` îi este atribuită valoarea `0`.
+-   valiabila `măsura` va fi modificată în contextul local fiind înmulțită cu `2` și atribuită ei înseși.
+-   valoarea `măsurii` este returnată în contextul de mai sus, adică valoarea `24`.
 
 ## Referințe
 

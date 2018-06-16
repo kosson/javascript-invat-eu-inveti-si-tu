@@ -4,7 +4,7 @@ O funcție definită în interiorul unei funcții container generează un closur
 
 Cum am putea traduce în română termenul de *closure*. Am explorat deja la funcții posibile traduceri în limba română și pentru că ambii termeni identificați: **portiță** și  **breșă** nu sunt tocmai eleganți pentru uzul curent, am căzut de acord că vom folosi termenul în limba engleză. După ce vom fi explorat mai mult, vom înțelege că este o caracteristică, un mecanism al limbajului de programare și astfel, am putea să ne gândim la acțiunea pe care o implică termenul de **closure**.
 
-Să o luăm încetișor. Primul lucru pe care-l știm despre funcții, este că acestea sunt acțiuni transformatoare asupra datelor pe care le primesc (aplicarea pe argumente de care am pomenit), fie că aceste date sunt „injectate” în funcție prin argumente, fie că sunt disponibile „la liber” în mediul lexical unde a fost declarată funcția. Trebuie să ne aducem mereu aminte de importanța redactării codului și în consecință de locul **unde declarăm funcțiile**. Foarte important este și locul de unde le apelăm pentru că de acolo este posibil să „injectăm” prin argumente date, care sunt necesare doar în locul în care este apelată funcția sau în obiectul în al cărui context a fost invocată.
+Să o luăm încetișor. Primul lucru pe care-l știm despre funcții, este că acestea sunt acțiuni transformatoare asupra datelor pe care le primesc (aplicarea pe argumente de care am pomenit), fie că aceste date sunt *injectate* în funcție prin argumente, fie că sunt disponibile *la liber* în mediul lexical unde a fost declarată funcția. Trebuie să ne aducem mereu aminte de importanța redactării codului și în consecință de locul **unde declarăm funcțiile**. Foarte important este și locul de unde le apelăm pentru că de acolo este posibil să *injectăm* prin argumente date, care sunt necesare doar în locul în care este apelată funcția sau în obiectul în al cărui context a fost invocată.
 
 O funcție declarată în mediul lexical global, va avea acces la toate proprietățile acestui obiect. Dacă o funcție, va fi declarată într-un bloc de cod sau într-o altă funcție, aceasta va avea acces la tot ce constituie mediul lexical format local de acel bloc de cod sau de funcție.
 
@@ -24,6 +24,8 @@ Profesorul Christopher Strachey, cercetător britanic în domeniul sistemelor de
 
 > Astfel, valoarea-R a funcției conține două părți: o regulă pentru evaluarea expresiei și un mediu care să-i ofere variabilele libere. O valoare-R de acest tip va fi numită un closure. Nu este nicio problemă în reprezentarea regulii dintr-un closure ca fiind adresa unui fragment de program ceea ce este suficient (i.e. punctul de acces pentru o subrutină). Cel mai direct mod de a reprezenta mediul este printr-un pointer (n.n. un pointer, este un indicator către o valoare) către un Free Variable List (FVL), care are câte o intrare pentru fiecare variabilă liberă a funcției. Această listă este formată atunci când funcția este definită inițial (mai exact atunci când expresia-λ care este funcția, este evaluată, de regulă la momentul definirii funcției) și în acest moment, fie valoarea-R, fie valoarea-L a oricăreia dintre variabilele libere este copiată în FVL.
 
+λ: lam(b)da este a unsprezecea literă a alfabetului grec.
+
 Funcțiile sunt valori! Pot fi pasate ca valori altor funcții și pot fi returnate de funcții ca valori. Te vei întreba pe bună dreptate care este utilitatea acestui aspect? Răspunsul vine tot din necesitatea de a manipula valori, dar care aparțin unor medii lexicale diferite, a celor care există în locul declarării funcției care face closure.
 
 **Moment Zen**: Closure-urile cuplează funcțiile cu mediile peste care face closure-uri.
@@ -32,7 +34,7 @@ Un closure menține accesul la toate variabilele care erau „în scope” la mo
 
 **Moment Zen**: Toate closure-urile - funcțiile din aceeași gazdă - împărtășesc același mediu.
 
-Acest comportament al closure-urilor este perfect pentru a „ascunde” date, pentru a le face private.
+Acest comportament al closure-urilor este oportun pentru a „ascunde” date, pentru a le face private.
 
 ## Closure cu fat arrows
 
@@ -98,36 +100,37 @@ closureEx()();
 
 ## Dependințe cognitive
 
-- funcții
-- scope (**Lexical Environment**)
+-   funcții
+-   scope (**Lexical Environment**)
 
 ## Mantre
 
-- Folosirea cuvântului cheie `function` într-o funcție gazdă, creează un closure.
-- JavaScript are un **scope lexical** (lexical environment) generat la faza de compilare.
-- Closure-uri generează doar funcțiile.
-- Closure-ul în sine nu este un obiect care să conțină toată informația necesară.
-- Un closure permite accesarea variabilelor definite în funcția container și, atenție, le poate și modifica.
-- Toate variabilele din scope, chiar dacă sunt declarate după ce funcția container a fost declarată, sunt incluse în closure.
-- Accesarea de informație prin intermediul unui closure, taxează memoria, pentru că la fiecare invocare a funcției care face closure, un nou set de informații va fi alocat în memorie.
-- În cazul buclelor, bindingul closer-ului se va face pe ultimul rezultat al buclei. Nu te aștepta să existe rezultate intermediare. În acest caz, abia la momentul returnării funcției interne, se face referențierea valorilor și de aceea va fi ultima valoare din operațiunea de ciclare.
-- De fiecare dată când funcția externă este apelată, funcția internă este definită din nou. Codul funcției interne va fi identic, dar scope chain-ul asociat va fi diferit. Pe scurt, se resetează valorile la cele definite, daca acestea au fost modificate.
-- De fiecare dată când funcția gazdă este apelată, se creează un nou set de variabile pentru acea invocare.
-- Variabilele din scope-ul pus la dispoziție de un closure **pot fi modificate**.
-- **Un closure nu poate accesa `this` al funcției container**. În acest scop se folosește salvarea lui this într-o variabilă `var self = this;`
-- Un closure stochează valorile externe prin referință, nu prin valoare.
-- Ori de câte ori folosești `eval()` într-o funcție, este folosit un closure. Textul de cod pe care-l folosești cu eval poate referenția variabile locale ale funcției gazde, dar și variabile declarare în textul de cod folosit cu eval.
-- Folosirea constructorului de funcții în interiorul unei funcții gazde `new Function()`, nu conduce la crearea unui closure.
-- Closure-urile pot merge mai adânc de un nivel.
-- Closure-ul introduce posibilitatea unor **variabile private**.
-- Pentru ca un closure să se formeze nu este neapărat nevoie să se facă un return. Accesarea variabilelor din afara scope-ului lexical propriu, creează un closure.
+-   Folosirea cuvântului cheie `function` într-o funcție gazdă, creează un closure.
+-   JavaScript are un **scope lexical** (lexical environment) generat la faza de compilare.
+-   Closure-uri generează doar funcțiile.
+-   Closure-ul în sine nu este un obiect care să conțină toată informația necesară.
+-   Un closure permite accesarea variabilelor definite în funcția container și, atenție, le poate și modifica.
+-   Toate variabilele din scope, chiar dacă sunt declarate după ce funcția container a fost declarată, sunt incluse în closure.
+-   Accesarea de informație prin intermediul unui closure, taxează memoria, pentru că la fiecare invocare a funcției care face closure, un nou set de informații va fi alocat în memorie.
+-   În cazul buclelor, bindingul closer-ului se va face pe ultimul rezultat al buclei. Nu te aștepta să existe rezultate intermediare. În acest caz, abia la momentul returnării funcției interne, se face referențierea valorilor și de aceea va fi ultima valoare din operațiunea de ciclare.
+-   De fiecare dată când funcția externă este apelată, funcția internă este definită din nou. Codul funcției interne va fi identic, dar scope chain-ul asociat va fi diferit. Pe scurt, se resetează valorile la cele definite, daca acestea au fost modificate.
+-   De fiecare dată când funcția gazdă este apelată, se creează un nou set de variabile pentru acea invocare.
+-   Variabilele din scope-ul pus la dispoziție de un closure **pot fi modificate**.
+-   **Un closure nu poate accesa `this` al funcției container**. În acest scop se folosește salvarea lui this într-o variabilă `var self = this;`
+-   Un closure stochează valorile externe prin referință, nu prin valoare.
+-   Ori de câte ori folosești `eval()` într-o funcție, este folosit un closure. Textul de cod pe care-l folosești cu eval poate referenția variabile locale ale funcției gazde, dar și variabile declarare în textul de cod folosit cu eval.
+-   Folosirea constructorului de funcții în interiorul unei funcții gazde `new Function()`, nu conduce la crearea unui closure.
+-   Closure-urile pot merge mai adânc de un nivel.
+-   Closure-ul introduce posibilitatea unor **variabile private**.
+-   Pentru ca un closure să se formeze nu este neapărat nevoie să se facă un return. Accesarea variabilelor din afara scope-ului lexical propriu, creează un closure.
 
 ## Anatomie
 
 Un closure, are acces la:
-- variabile și obiectele care aparțin de scope-ul global,
-- variabilele și obiectele care aparțin scope-ului funcției părinte, plus parametrii acesteia,
-- toate variabilele declarate după (d.p.d.v. lexical) ce funcția (care face closure-ul) a fost declarată.
+
+-   variabile și obiectele care aparțin de scope-ul global,
+-   variabilele și obiectele care aparțin scope-ului funcției părinte, plus parametrii acesteia,
+-   toate variabilele declarate după (d.p.d.v. lexical) ce funcția (care face closure-ul) a fost declarată.
 
 ### La ce avem acces:
 
@@ -152,7 +155,9 @@ init();
 init.__proto__.constructor // => function Function()
 ```
 
-Un closure este mecanismul prin care putem obține o încapsulare dinamică a stării scope-ului, care, atenție, poate fi modificat atâta vreme cât closure-ul există. Cel mai simplu closure se face atunci când funcția internă se execută chiar în funcția gazdă.
+Un closure este mecanismul prin care putem obține o **încapsulare** dinamică a stării scope-ului, care, atenție, poate fi modificat atâta vreme cât closure-ul există. Cel mai simplu closure se face atunci când funcția internă se execută chiar în funcția gazdă.
+
+> Încapsularea este unul din fundamentele programării orientate pe obiecte. Se referă la punerea laolaltă a datelor cu metodele care operează pe acestea. Încapsularea este folosită pentru a ascunde valorile sau starea unui obiect de date structurat în interiorul unei clase, ceea ce previne accesul direct al unor terți neautorizați la acestea. Clasa oferă metode accesibile public care sunt oferite uzual de către clasă (așa-numitele gettere și settere), prin care pot fi accesate valorile. Celelalte clase client apelează aceste metode pentru a obține și pentru a modifica valorile din obiect. [Wikipedia, Encapsulation (computer programming)](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming))
 
 Closure-urile întâlnite în practica curentă se fac prin returnarea unei funcții sau a unui obiect care conține metode sau se poate crea la momentul execuției funcției chiar în interiorul funcției gazdă.
 
@@ -212,7 +217,7 @@ faAltceva(0);                     // "x și 0"
 
 ### Crerea de obiecte noi folosind constructori.
 
-Înainte de a porni lucrul cu un exemplu, ar fi necesar să amintim getter-ii și sette-rii.
+Înainte de a porni lucrul cu un exemplu, ar fi necesar să amintim getter-ii și setter-ii.
 
 ```javascript
 function Lansare (data) {
@@ -320,9 +325,9 @@ var obiect2 = new Sablon();
 obiect2.getCantitate(); // 10
 ```
 
-Pentru a ajunge la cantitate este nevoie de metode de acces (în engleză li se spune **accessors**). Acesta este și unul din cazurile de realizare a unui closure. Trebuie reținut faptul că pentru funcțiile din contructor, `this` este obiectul generat prin invocarea cu `new`.
+Pentru a ajunge la cantitate este nevoie de metode de acces (în engleză li se spune **accessors**). Acesta este și unul din cazurile de realizare a unui closure. Trebuie reținut faptul că pentru funcțiile din constructor, legătura la `this` se realizează prin invocarea cu `new`.
 
-## Referințe către obiecte care nu fac closure.
+### Referințe către obiecte care nu fac closure.
 
 Exemplu de referințe către obiecte care nu sunt un closure (prezentat de Kyle Simpson):
 
