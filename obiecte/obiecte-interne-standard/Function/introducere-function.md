@@ -17,13 +17,10 @@ Constructorul lui `Function` este în sine un obiect funcție built-in. Acest ob
 Funcțiile create folosind `Function.prototype.bind()` au următoarele sloturi interne:
 
 -   \[\[BoundTargetFunction]] care este obiectul funcție împachetat,
--   \[\[BoundThis]], fiind valoarea care este pasată întotdeauna ca this atunci când este apelată funcția împachetată.
+-   \[\[BoundThis]], fiind valoarea care este pasată întotdeauna ca `this` atunci când este apelată funcția împachetată.
 -   \[\[BoundArguments]] este o listă de valori a cărei valori sunt folosite ca prime argumente pentru funcția împachetată apelată.
 
 Nu au proprietatea `prototype` obiectele funcții care sunt create prin `Function.prototype.bind()` sau care au fost create prin evaluarea definirii unei simple metode (care nu este `Generator`) sau funcțiile arrow.
-
-## Pe larg
-
 În exemplul alăturat, ultimul argument specifică codul executabil.
 
 ```javascript

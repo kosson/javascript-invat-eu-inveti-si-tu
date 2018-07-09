@@ -4,7 +4,7 @@ Este un obiect intern introdus de ECMAScript 2015 care oferă o structură simpl
 
 Pentru lucrul cu o structură simplă de date, în care unei chei string îi corespunde o valoare sau o metodă, obiectele simple se pretează cu succes. Lucrurile încep să se complice atunci când este nevoie să introduci structuri mai complexe drept valori așa cum sunt obiectele (așa-numitele hash-map-uri).
 
-Din nefericire, o astfel de colecție de date gestionată cu ajutorul unor obiecte simple va fi poluată de **chei - valori** moștenite prin mecanismul prototipal. Singura metodă de a contracara acest lucru este să întrerupi moștenirea prin setarea la `null` a obiectului prototipal: `const map = Object.create(null);`. Efectul este crearea unui obiect care nu mai moștenește din prototip nimic păstrând o izolare benefică pentru scopul depozitării de chei - valori proprii. Totuși, pentru a crea structuri de date folosind obiecte, Map se dovedește soluția.
+Din nefericire, o astfel de colecție de date gestionată cu ajutorul unor obiecte simple va fi poluată de **chei - valori** moștenite prin mecanismul prototipal. Singura metodă de a contracara acest lucru este să întrerupi moștenirea prin setarea la `null` a obiectului prototipal: `const map = Object.create(null);`. Efectul este crearea unui obiect care nu mai moștenește din prototip nimic păstrând o izolare benefică pentru scopul depozitării de chei - valori proprii. Totuși, pentru a crea structuri de date folosind obiecte, `Map` se dovedește soluția.
 
 Un exemplu forțând la limită mecanismele oferite de obiectele simple.
 
@@ -75,7 +75,7 @@ obiect.set('ceva', 'altceva');
 console.log(obiect[Symbol.iterator] === obiect.entries); // true
 ```
 
-Atenție, folosirea unui aceluiași identificator pentru o cheie, nu va crea una duplicat în `Map`, ci va suprascrie valoarea existentă.
+Atenție, folosirea aceluiași identificator pentru o cheie, nu va crea una duplicat în `Map`, ci va suprascrie valoarea existentă.
 
 Lucrul cel mai folositor în cazul `Map` este posibilitatea de folosi funcțiile și obiectele ca și chei ale map-ului. Acest lucru nu este posibil în cazul obiectelor clasice pentru că avem toate cheile exprimate ca stringuri.
 

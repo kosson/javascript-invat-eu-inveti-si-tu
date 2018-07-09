@@ -2,7 +2,7 @@
 
 Începând cu versiunea ES6 a standardului, au apărut obiecte dedicate colecțiilor de date. Au apărut din necesitatea evitării diferitelor contrângeri aplicate obiectelor obișnuite pentru a le adapta necesităților de gestiune a datelor.
 
-Este o colecție de perechi cheie/valoare care au o particularitate foarte utilă: toate cheile sunt obiecte. Nu sunt admise valori primitive. WeakMap-ul este asemănător unui `Map` în sensul că are metode similare.
+Este o colecție de perechi cheie-valoare care au o particularitate foarte utilă: toate cheile sunt obiecte. Nu sunt admise valori primitive. `WeakMap`-ul este asemănător unui `Map` în sensul că are metode similare.
 
 De unde vine denumirea **weak**? În limba engleză *weak* înseamnă slab. În cazul obiectului nostru, această *slăbiciune* vine din faptul că de îndată ce nu mai este nevoie de obiectul care joacă rol de cheie, acesta va putea fi colectat la gunoi, ceea ce este echivalentul unei ștergeri din structura internă a obiectului însuși. Vă mai aduceți aminte de faptul că un obiect *trăiește* câtă vreme există o referință către acesta sau către una din proprietățile sale. Dacă am ține evidența unor obiecte folosind un `Map`, această structură ar ține o referință permanentă către un obiect, dacă acel obiect a devenit o proprietate a sa. Tocmai din necesitatea de a fi permisă colectarea la gunoi a obiectelor care nu mai sunt referențiate în altă parte, s-a născut această nouă structură de gestiune special pentru obiecte.
 Putem trage concluzia că vom folosi `WeakMap`-uri pentru a gestiona obiecte asupra cărora nu ai niciun control sau nu dorești acest lucru. Concluzia conduce către posibilele aplicații pentru un `WeakMap`.
@@ -66,9 +66,9 @@ declanșezEv(evCnxCuReceptori, obiW);
 // Sunt evenimentul secund
 ```
 
-Avantajul gestionării obiectelor cărora li se atașează evenimente prin `WeakMap`-uri este acela că în momentul în care se face o colectare a gunoiului pe obiect, se face automat și pe receptori (în limba engleză *listners* sau *event handlers*).
+Avantajul gestionării obiectelor cărora li se atașează evenimente prin `WeakMap`-uri este acela că în momentul în care se face o colectare a gunoiului pe obiect, se face automat și pe receptori (în limba engleză *listeners* sau *event handlers*).
 
-Cheile unui `WeakMap` nu sunt enumerabile și nici nu putem afla câte chei sunt. În cazul lui Map, acest lucru este posibil. Spre deosebire de `Map`, pentru un `WeakMap` nu se poate determina dimensiunea.
+Cheile unui `WeakMap` nu sunt enumerabile și nici nu putem afla câte chei sunt. În cazul lui `Map`, acest lucru este posibil. Spre deosebire de `Map`, pentru un `WeakMap` nu se poate determina dimensiunea.
 
 ## Ascunderea proprietăților unei clase
 

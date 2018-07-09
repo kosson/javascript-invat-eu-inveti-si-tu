@@ -1,6 +1,6 @@
 # String.prototype.match
 
-Faci o căutare într-un string după un șablon RegEx.
+Faci o căutare într-un string după un șablon RegExp.
 
 ```javascript
 var continut = 'Acesta este un text demonstrativ versiunea 0.0.1';

@@ -39,13 +39,13 @@ const object = new Object(Boolean());
 
 ![](ObjectMap.png)
 
-## `Object.prototype.constructor`
+## Object.prototype.constructor
 
 Indică funcția care stă la baza prototipului.
 
-## `Object.create()`
+## Object.create()
 
-Va creea un obiect având un obiect prototip și proprietăți care sunt specificate.
+Va crea un obiect având un obiect prototip și proprietăți care sunt specificate.
 
 ### Comportament la instanțierea obiectelor noi
 

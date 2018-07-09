@@ -1,4 +1,4 @@
-# `Array.prototype.every()`
+# Array.prototype.every()
 
 Metoda testează dacă absolut toate elementele din array trec un test care se face printr-un callback. Atenție, fiecare element, rând pe rând, trebuie să treacă testul pentru ca `every()` să returneze `true`.
 

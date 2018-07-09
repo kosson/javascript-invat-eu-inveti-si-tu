@@ -37,7 +37,7 @@ listă.forEach(function (elementArray) {
 listă.forEach(elementArray => console.log(elementArray)); // 1 2 3
 ```
 
-După cum am observat, am implicat în soluție o funcție cu rol de callback și deja am aflat că promisiunile sunt soluția la problemele pe care utilizarea acestora le ridică. Callbackurile au problemele lor bine-cunoscute printre care imposibilitatea de a colecta erorile ridicate prin `try..catch`.
+După cum am observat, am implicat în soluție o funcție cu rol de callback și deja am aflat că promisiunile sunt soluția la problemele pe care utilizarea acestora le ridică. Callbackurile au problemele lor bine-cunoscute printre care imposibilitatea de a colecta erorile ridicate prin `try...catch`.
 
 Promisiunile sunt obiecte care țin locul valorilor rezultate din operațiuni asincrone. Este un concept foarte puternic în sine. Este ca și cum ai calcula deja în cap ce ai face cu un lucru pe care l-ai comandat pe Internet, dar care nu a ajuns încă acasă. Gândește-te că ai avea un locțiitor de valoare care ar permite deja utilizarea sa în combinație cu altele. Acest obiect locțiitor poate fi instrumentat grație unor stări prin care trece.
 

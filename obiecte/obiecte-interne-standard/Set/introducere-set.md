@@ -1,8 +1,8 @@
 # Set
 
-Acest obiect a apărut din necesitatea de a gestiona obiecte care să aibă chei/valori unice indiferent de tipul acestora.
+Acest obiect a apărut din necesitatea de a gestiona obiecte care să aibă chei - valori unice indiferent de tipul acestora.
 
-Într-un `Set`, `Null` este tratat ca `undefined`.
+Într-un `Set`, `null` este tratat ca `undefined`.
 
 Dacă este pasat un obiect iterabil, toate elementele vor fi adăugat la noul `Set`.
 
@@ -39,7 +39,7 @@ Această proprietate va oferi un număr care spune câte elemente sunt în set.
 
 ### Set.prototype.delete(valoare)
 
-Metoda `delete()` are nevoie de valoare. Returnează valoarea `true` dacă elementul există și a fost eliminat, în caz contrar, va fi returnat `false`. În cazul în care dorești să ștergi un obiect care există în set, se poate aplica `forEach()` pe set.
+Metoda `delete()` are nevoie de valoare. Returnează valoarea `true` dacă elementul există și a fost eliminat. În caz contrar, va fi returnat `false`. În cazul în care dorești să ștergi un obiect care există în set, se poate aplica `forEach()` pe set.
 
 ```javascript
 colectieUnica.forEach(function (element) {
@@ -51,9 +51,9 @@ colectieUnica.forEach(function (element) {
 
 ### Set.prototype.forEach(callbackFn\[, thisArg])
 
-Această metodă va executa o funcție cu rol de callback pentru fiecare element din Set. Opțional se poate trimite un al doilea argument și anume un obiect care să fie considerat a fi `this` de fiecare dată când funcția se execută.
+Această metodă va executa o funcție cu rol de callback pentru fiecare element din `Set`. Opțional se poate trimite un al doilea argument și anume un obiect care să fie considerat a fi `this` de fiecare dată când funcția se execută.
 
-Funția callback se va apela cu următoarele argumente:
+Funcția callback se va apela cu următoarele argumente:
 
 -   valoarea element din set,
 -   cheia elementului și
@@ -126,7 +126,7 @@ O altă metodă de a parcurge setul este să te folosești de iterator:
 ```javascript
 for (let element of setNou.values()) {
   console.log(element);
-} // unu 1 true
+}; // unu 1 true
 ```
 
 Folosirea iteratorului creat prin folosirea metodei `entries()`.

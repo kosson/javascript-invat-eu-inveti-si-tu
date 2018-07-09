@@ -1,13 +1,10 @@
-# `Array.prototype.push()` - afectează definitiv
+# Array.prototype.push()
 
-Adaugă la finalul array-ului unu sau mai multe elemente.
-ATENȚIE! Returnează noul `length` al array-ului.
+Această metodă modifică array-ul original. Adaugă la finalul array-ului unu sau mai multe elemente. Atenție, returnează noul `length` al array-ului.
 
-## Formula `push.apply(arr1, arr2)`
+Același efect îl poți obține folosind formula `push.apply(arr1, arr2)`.
 
-Același efect îl poți obține folosind `apply()`.
-
-## Fuzionarea a două array-uri al doilea în continuarea primlui
+Fuzionarea a două array-uri al doilea în continuarea primului
 
 ```javascript
 var tabel1 = ['veverita', 'liliac'];
@@ -17,7 +14,7 @@ Array.prototype.push.apply(tabel1, tabel2);
 console.log(tabel1); // Array [ "veverita", "liliac", "fluture", "cărăbuș" ]
 ```
 
-Aceeași operațiune poate fi împlinită folosind operatorul spread:
+Aceeași operațiune poate fi îndeplinită folosind operatorul spread:
 
 ```javascript
 var tabel1 = ['veverita', 'liliac'];

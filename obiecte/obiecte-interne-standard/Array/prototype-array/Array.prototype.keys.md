@@ -1,6 +1,6 @@
-# `Array.prototype.keys()`
+# Array.prototype.keys()
 
-Această metodă returnează un Array Iterator care conține cheile array-ului.
+Această metodă returnează un **Array Iterator** care conține cheile array-ului.
 
 ```javascript
 var colectie = ["a", "z", "ceva"];

@@ -1,4 +1,4 @@
-# `Array.of()`
+# Array.of()
 
 Este o metodă introdusă de ECMAScript 6 și lucrează ca și constructorul `Array` dar fără restricții de constituire. Metoda creează un array cu un număr variabil de argumente indiferent de numărul sau tipul acestora.
 

@@ -1,4 +1,4 @@
-# `Array.prototype.copyWithin()`
+# Array.prototype.copyWithin()
 
 Este o metodă similară lui `Array.prototype.fill()`.
 

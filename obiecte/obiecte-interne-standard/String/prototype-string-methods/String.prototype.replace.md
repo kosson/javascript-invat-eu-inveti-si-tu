@@ -1,4 +1,4 @@
-# `String.prototype.replace()`
+# String.prototype.replace()
 
 Metoda returnează un nou șir care a incorporat modificări ale unor părți ce s-au potrivit criteriilor de căutare sub forma unui alt șir sau al unui șablon `RegExp`. Când este folosit un șablon `RegExp`, va fi apelată automat metoda obiectului `RegExp`: `RegExp.prototype[@@replace]`.
 Înlocuirile se fac cu un alt șir sau cu rezultatul execuției unei funcții.

@@ -1,7 +1,7 @@
 # Array.prototype.indexOf()
 
 Returnează primul index pentru primul element care se potrivește cu cel căutat. Dacă nu este găsit elementul căutat, este returnată valoarea `-1`.
-Căutarea se face folosind egalitatea strictă ( === ). Se poate menționa și indexul de la care să se pornească căutarea.
+Căutarea se face folosind egalitatea strictă ( `===` ). Se poate menționa și indexul de la care să se pornească căutarea.
 
 ```javascript
 const array = [2, 9, 9];

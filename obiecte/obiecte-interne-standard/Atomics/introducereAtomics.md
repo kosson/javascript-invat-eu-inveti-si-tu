@@ -1,4 +1,4 @@
-# `Atomics`
+# Atomics
 
 Este un obiect care stabilește un domeniu de valori - namespace object.
 Se folosește în combinație cu obiecte `SharedArrayBuffer`.

@@ -1,33 +1,12 @@
 # Obiectul intern String
 
-Este un constructor pentru șiruri de caractere, în engleză „strings”.
+Este un constructor pentru șiruri de caractere, în engleză *strings*.
 
-Stăpânirea consolidată prin practică a șirurilor de caractere va permite manipularea datelor de tip `.txt, .csv, .json, etc.`. Combinarea lucrului pe șiruri de caractere cu lucrul pe array-uri, va permite transformări dintr-un format în altul, de îmbogățire și de segmentare a datelor.
+Stăpânirea consolidată prin practică a șirurilor de caractere va permite manipularea datelor de tip `.txt`, `.csv`, `.json` și `.xml`. Combinarea lucrului pe șiruri de caractere cu lucrul pe array-uri, va permite transformări dintr-un format în altul, îmbogățirea și segmentarea datelor.
 
 Obiectul global String este un constructor de șiruri de caractere.
 
 Stringurile pot fi create direct cu `String(ceva)`, în care `ceva` este orice ar putea fi convertit la string.
-
-## Dependințe cognitive
-
--   primitiva string
--   Expresii Regulate
--   Obiecte
--   Obiectul intern RegExp
-
-JavaScript nu face diferență între string-urile poziționate între ghilimele simple ale limbii engleze și cele duble.
-
-## Mantre
-
--   Pentru a concatena se folosește operatorul `+`.
--   Are metoda internă `@@iterator` ceea ce permite iterarea cu `for...of`. Se pot itera și fragmente `code point`-uri UTF.
--   JavaScript face o diferență foarte clară între obiectul String și primitiva șir. Același lucru se aplică și în cazul obiectelor Boolean și Number cu ale lor corespondențe la primitive.
--   JavaScript face automat conversia de la primitiva șir la obiectul String. Astfel este posibilă aplicarea metodelor obiectului.
--   șirurile în JavaScript sunt imuabile (nu se modifică șirul original),
--   șirurile sunt „consumate” de JavaScript de la stânga la dreapta,
--   din moment ce un caracter a fost „consumat”, acesta nu mai este folosit,
--   JavaScript convertește automat primitivele șir în obiecte String, fiind astfel posibilă folosirea metodelor obiectului String pentru primitivele string,
--   pentru a te asigura că poți face căutarea fără a te lovi de posibilele majuscule, mai întâi convertește toate caracterele șirului în minuscule folosind `toLowerCase()`. De exemplu: `var sir = "Acesta este un SIR"; sir.toLowerCase().startsWith("acesta"); // true`.
 
 Caracterele speciale vor putea fi menționate în string-uri folosindu-se notația escape:
 
@@ -37,9 +16,9 @@ Caracterele speciale vor putea fi menționate în string-uri folosindu-se notaț
 
 ## Crearea obiectelor String
 
-![](StrimgMap.png)
+![](StringMap.png)
 
-### Folosind constructorul: `new String()`
+Folosind constructorul `new String()`:
 
 ```javascript
 let str = new String("test");
@@ -57,14 +36,14 @@ Numărul de index al ultimului caracter se poate afla prin determinarea lungimii
 ### Lucrul cu indexul
 
 Este esențială înțelegerea indexului pentru că acesta poate fi considerat ca o adresă a caracterului. Închipuiește-ți că fiecare caracter dintr-un fragment de text, incluzând spațiile albe, este într-o cutie numerotată începând cu 0. Având la îndemână această ordonare, putem folosi metodele `indexOf()` și `lastIndexOf()` pentru căutarea unui fragment (*substring*) într-un string. Apelarea metodei `indexOf("ceva")` returnează valoarea indexului de la care începe substring-ul pasat ca argument.
-Metodele `indexOf()` și `lastIndexOf()` pot primi un al doilea parametru care indică indexul de la care să pornească căutarea. Dacă al doilea parametru nu este menționat, căutarea se va face de la index 0. Dacă nu este este găsit substring-ul, va fi returnată valoarea -1.
+Metodele `indexOf()` și `lastIndexOf()` pot primi un al doilea parametru care indică indexul de la care să pornească căutarea. Dacă al doilea parametru nu este menționat, căutarea se va face de la index `0`. Dacă nu este este găsit substring-ul, va fi returnată valoarea `-1`.
 
 ### Lucrul direct pe caractere și fragmente
 
 #### UTF-16, câteva precizări utile.
 
 UTF (Uniform Transformation Format) este un sistem de codare numerică a caracterelor. Aceste coduri pot fi percepute drept identificatori unici pentru caractere.
-Codarea adresează ceea ce este numit un „code unit” și se face prin „code points”, codurile de identificare despre care vorbeam. UTF-16 oferă coduri până la limita de 2<sup>16</sup>, valori ce se înscriu în așa-numitul Basic Multilingual Plane (BMP) iar codurile care depășesc această limită sunt codificate prin două coduri de identificare care formează o pereche. Această stare de fapt poate conduce la erori în ceea ce privește manipularea caracterelor în JavaScript.
+Codarea adresează ceea ce este numit un „code unit” și se face prin *code points*, codurile de identificare despre care vorbeam. UTF-16 oferă coduri până la limita de 2<sup>16</sup>, valori ce se înscriu în așa-numitul Basic Multilingual Plane (BMP), iar codurile care depășesc această limită sunt codificate prin două coduri de identificare care formează o pereche. Această stare de fapt poate conduce la erori în ceea ce privește manipularea caracterelor în JavaScript.
 
 ```javascript
 let exemplu = '𝒥';
@@ -79,15 +58,15 @@ Regăsirea folosind regex-urile nu se va putea face. Nici `charAt()` nu va func�
 -   `String.fromCodePoint()` este o metodă statică a obiectului String, care transformă o secvență de caractere considerată a fi un cod al unui caracter (a fost adăugată în ECMAScript 6).
 -   `String.prototype.charAt()` este o metodă aplicabilă direct pe string, care returnează caracterul căutat la indexul specificat ca argument.
 -   `String.prototype.charCodeAt()` returnează un număr care reprezintă codul UTF-16 a caracterului de la indexul specificat.
--   `String.prototype.concat()`
--   `String.prototype.endsWith()`
+-   `String.prototype.concat()` și
+-   `String.prototype.endsWith()`.
 
-Odată cu ES6, se pot folosi oricare `code point` de Unicode beneficiind de o notație prescurtată.
+Începând cu ES6, se pot folosi oricare `code point` de Unicode beneficiind de o notație prescurtată.
 
 ```javascript
-console.log('\u{13165}'); // 𓅥 acum dincolo de 16 biți
-// este același lucru ca și
-console.log('\uD80C\uDD65'); // 𓅥
+console.log('\u{13165}'); // e dincolo de 16 biți
+// este același lucru precum
+console.log('\uD80C\uDD65');
 ```
 
 Poți chiar să numeri câte code point-uri sunt:
@@ -125,29 +104,43 @@ for (let point of '𠮷') {
 
 1. Aflarea dimensiunii în caractere a stringului:
 
-`'string'.length;` sau
-`'string'.lastIndexOf('');` sau
-`'string'.indexOf('', 9999);` pentru care știi că al doilea parametru depășește cu mult lungimea șirului.
+-   `'string'.length;` sau
+-   `'string'.lastIndexOf('');` sau
+-   `'string'.indexOf('', 9999);` pentru care știi că al doilea parametru depășește cu mult lungimea șirului.
 
-efectul este același: este returnat 6, adică numărul total de caractere din șir
+Efectul este același: este returnat 6, adică numărul total de caractere din șir.
 
 2. Lucrul cu indexul
 
   A. Care este prima apariție în șirul de caractere:
 
-    a. **a unui caracter de la index 0**:
+    a. a unui caracter de la index 0: `'fragmente'.indexOf('e'); // 5 este returnat indexul la care apare prima dată caracterul căutat`;
+    b. a unui fragment de text de la index maxim: `'fragmente de text'.indexOf('de t'); // 10`.
 
-  `'fragmente'.indexOf('e'); // 5 este returnat indexul la care apare prima dată caracterul căutat`
+  B. Care este ultima apariție în șirul de caractere a unui caracter sau fragment: `'fragmente'.lastIndexOf('nt'); // 6`.
 
-    b. **a unui fragment de text de la index maxim**:
+  ## Dependințe cognitive
 
-  `'fragmente de text'.indexOf('de t'); // 10`
+  -   primitiva string
+  -   Obiecte
 
-  B. Care este ultima apariție în șirul de caractere:
+  ## Alonje
+  -   Expresii Regulate
+  -   Obiectul intern RegExp
 
-    a. unui caracter sau fragment:
+  JavaScript nu face diferență între string-urile poziționate între ghilimele simple ale limbii engleze și cele duble.
 
-    `'fragmente'.lastIndexOf('nt'); // 6`
+  ## Mantre
+
+  -   Pentru a concatena se folosește operatorul `+`.
+  -   Are metoda internă `@@iterator` ceea ce permite iterarea cu `for...of`. Se pot itera și fragmente `code point`-uri UTF.
+  -   JavaScript face o diferență foarte clară între obiectul String și primitiva șir. Același lucru se aplică și în cazul obiectelor Boolean și Number cu ale lor corespondențe la primitive.
+  -   JavaScript face automat conversia de la primitiva șir la obiectul String. Astfel este posibilă aplicarea metodelor obiectului.
+  -   șirurile în JavaScript sunt imuabile (nu se modifică șirul original),
+  -   șirurile sunt „consumate” de JavaScript de la stânga la dreapta,
+  -   din moment ce un caracter a fost „consumat”, acesta nu mai este folosit,
+  -   JavaScript convertește automat primitivele șir în obiecte String, fiind astfel posibilă folosirea metodelor obiectului String pentru primitivele string,
+  -   pentru a te asigura că poți face căutarea fără a te lovi de posibilele majuscule, mai întâi convertește toate caracterele șirului în minuscule folosind `toLowerCase()`. De exemplu: `var sir = "Acesta este un SIR"; sir.toLowerCase().startsWith("acesta"); // true`.
 
 ## Resurse
 

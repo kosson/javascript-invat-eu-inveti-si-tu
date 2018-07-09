@@ -1,12 +1,32 @@
 # Hoisting - omniprezență
 
-Hoistingul trebuie privit ca un comportament al motorului JavaScript, care ia identificatorii și îi face omniprezenți pentru blocul de cod în care au fost declarați poziționându-i în „capul blocului” de cod. De fapt, această omniprezență este realizată la compilarea codului sursă și totul este disponibil pentru execuție.
+Hoistingul trebuie privit ca un comportament al motorului JavaScript care ia identificatorii și îi face omniprezenți pentru blocul de cod în care au fost declarați poziționându-i în **capul blocului** de cod. De fapt, această *omniprezență* este realizată la compilarea codului sursă și totul este disponibil pentru execuție.
+
+```javascript
+console.log(a);
+// înțelege faptul că identificatorul a deja există și are valoarea undefined
+var a = 2;
+console.log(a);
+```
 
 **Spune standardul**:
 
 > `undefined` este pasat mediului pentru a arăta că operațiunea `PutValue` ar trebui să fie folosită pentru a asigna valoarea de inițializare. Acesta este cazul variabilelor **var** și al listei de parametri formali ai unor funcții non-stricte. În acele cazuri o legătură lexicală este hoisted și preinițializată înainte de evaluarea inițializatorului său.[12.1.5 Runtime Semantics: BindingInitialization](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-identifiers-runtime-semantics-bindinginitialization).
 
-Atașarea la momentul compilării a unei varibile la mediul lexical al funcției în interiorul căreia aceasta a fost declarată este cel mai rapid exemplu de hoisting - omniprezență. Acest mecanism pune la dispoziție variabilele  funcțiile înainte ca acestora să le fie asignate valorile. Acest lucru se petrece deoarece înainte de a fi executat programul, codul sursă trece printr-o fază de compilare în care motorul JavaScript se uită să vadă mai întâi de toate care sunt identificatorii. Apoi motorul trece la execuție, moment în care toți identificatorii primesc valorile.
+Pentru a înțelege mai bine, tot faza de compilare a codului sursă este responsabilă cu realizarea hoisting-ului. La momentul compilării sunt *culese* într-un inventar global toate variabilele și funcțiile. Abia după aceea este interpretat codul și abia după această etapă este executat. În concluzie, la momentul execuției, deja sunt disponibile toate variabilele și funcțiile la nivel de identificatori. Ba chiar în cazul funcțiilor, acestea sunt disponibile chiar mai devreme de variabile.
+
+Atașarea la momentul compilării a unei varibile la mediul lexical al funcției în interiorul căreia aceasta a fost declarată este cel mai rapid exemplu de hoisting - omniprezență. Acest mecanism pune la dispoziție variabilele funcțiile înainte ca acestora să le fie asignate valorile. Acest lucru se petrece deoarece înainte de a fi executat programul, codul sursă trece printr-o fază de compilare în care motorul JavaScript se uită să vadă mai întâi de toate care sunt identificatorii. Motorul trece apoi la execuție, moment în care toți identificatorii primesc valorile.
+
+```javascript
+facCeva(); // prima
+var facCeva;
+function facCeva () {
+  console.log('prima');  
+};
+facCeva = function () {
+  console.log('secunda');
+};
+```
 
 Există un mic truc care trebuie stăpânit pentru a înțelege hoisting-ul. Declararea trebuie detașată ca etapă separată de cea în care se face asignarea valorii. Nu cădea în capcana operatorul `=`, crezând că valoarea a fost deja atribuită la momentul în care ai declarat variabila.
 

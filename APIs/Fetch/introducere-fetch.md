@@ -1,6 +1,6 @@
 # Fetch
 
-Scopul este acela de a unifica componentele folosite pentru a aduce resurse pe web. Fetch este deja disponibil ca parte al API-ului browserului și nu necesită un pas suplimentar pentru a-l accesa.
+Scopul este acela de a unifica componentele folosite pentru a aduce resurse pe web. `Fetch` este deja disponibil ca parte al API-ului browserului și nu necesită un pas suplimentar pentru a-l accesa.
 
 `fetch()` este o metodă a obiectului global sau a unui **worker** care returnează o promisiune.
 
@@ -13,7 +13,7 @@ fetch('x').then(raspuns => console.log('am primit raspuns'));
 
 ## Exemple practice
 
-Să presupunem că lucrezi cu API-ul Europeana.eu. Putem foarte simplu să construim un exemplu complet de utilizarea a lui fetch pentru a accesa o înregistrare unică.
+Să presupunem că lucrezi cu API-ul Europeana.eu. Putem foarte simplu să construim un exemplu complet de utilizarea a lui `fetch` pentru a accesa o înregistrare unică.
 
 ```javascript
 var adresa = "https://www.europeana.eu/api/v2/search.json?wskey=XXXXXXXXX&query=The%20Fraternity%20between%20Romanian%20and%20French%20Army";

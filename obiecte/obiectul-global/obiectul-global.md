@@ -83,7 +83,7 @@ Este o funcție care permite verificarea unei valori din două puncte de vedere.
 isFinite(1e309); // false
 ```
 
-### Funcții pentru decodarea și decodarea URI-urilor
+### Codarea și decodarea URI-urilor
 
 Atunci când navigați pe Internet, în bara de adrese introduceți un șir de caractere care, din punct de vedere tehnic se numește Uniform Resource Locator, adică o cale către o anumită resursă de la un domeniu de pe net. URI-urile, adică Uniform Resource Identifiers, sunt normativul după care se poate scrie linkul pe care-l întroduci în bara de adrese. Reține doar că un URL este un URI.
 

@@ -23,7 +23,7 @@ sparge(1, 2, 3); // [1, 2, 3]
 
 ## Congruiență cu operatorul spread
 
-Există un operator nou introdus de ECMAScript 2015 care face același lucru. Este vorba despre operatorul trei puncte. Acest operator folosește protocolul de iterare ceea ce înseamnă că obiectele pe care dorim să le transformăm, trebuie să aibe implementat `@@iterator` prin intermediul lui `[Symbol.iterator]`. Obiectul `arguments` are deja implementat protocolul de iterare începând cu ECMAScript 2015. ATENȚIE! Operatorul spread se bazează pe existența implementării protocolului de iterare, pe când `Array.from()`, nu se bazează doar pe acesta. Spre deosebire de operator, metoda are capacitatea de a procesa și structuri de date „array-like”.
+Există un operator nou introdus de ECMAScript 2015 care face același lucru. Este vorba despre operatorul trei puncte. Acest operator folosește protocolul de iterare ceea ce înseamnă că obiectele pe care dorim să le transformăm, trebuie să aibe implementat `@@iterator` prin intermediul lui `[Symbol.iterator]`. Obiectul `arguments` are deja implementat protocolul de iterare începând cu ECMAScript 2015. Atenție, *operatorul spread* se bazează pe existența implementării protocolului de iterare, pe când `Array.from()`, nu se bazează doar pe acesta. Spre deosebire de operator, metoda are capacitatea de a procesa și structuri de date „array-like”.
 
 ```javascript
 function transforma () {

@@ -4,9 +4,7 @@ Este o metodă care returnează indexul unde apare pentru prima dată un fragmen
 
 Este returnat `-1` dacă fragmentul nu este găsit. Atenție, dacă o parte a fragmentului este corectă și s-a greșit, fie și numai un caracter, nu se face identificarea și este returnat `-1`.
 
-## Mantre
-
--   `indexOf()` este case sensitive!: `'Ceva Mare'.indexOf('mare'); // -1`
+Metoda este case sensitive!: `'Ceva Mare'.indexOf('mare'); // -1`
 
 ## Cazuistică indexOf()
 
@@ -23,8 +21,6 @@ Este returnat `-1` dacă fragmentul nu este găsit. Atenție, dacă o parte a fr
 // Returnarea numărului total de caractere
 'cevatext'.indexOf('', 20); // 7 returnează numărul de caractere. Parametrul trebuie să fie cu mult peste lungimea șirului
 ```
-
-## Utilitate
 
 ### Testarea după primul caracter întâlnit
 

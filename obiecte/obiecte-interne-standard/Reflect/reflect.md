@@ -3,19 +3,17 @@
 Este un obiect intern introdus de curând de noua versiune a standardului.
 
 Oferă metode utile operațiunilor supuse interceptării în JavaScript. Acest obiect nu este un obiect funcție care să poată fi invocat direct sau care să fie folosit drept constructor pentru alte obiecte.
-Poți să-ți imaginezi Reflect ca pe un instrument de investigare a diferitelor „lucruri” în JavaScript.
+Poți să-ți imaginezi `Reflect` ca pe un instrument de investigare a diferitelor *lucruri* în JavaScript.
 
-Cred că îți mai aduci aminte hărțile pe care le-am făcut la momentul în care explicam dualitatea obiect - funcție. Cu siguranță îți aduci bine aminte faptul că motorul JavaScript pune la bătaie o mulțime de „metode interne” care acționează ori de câte ori folosim câte-o metodă predefinită a vreunui obiect JavaScript.
+Cred că îți mai aduci aminte hărțile pe care le-am făcut la momentul în care explicam dualitatea obiect - funcție. Cu siguranță îți aduci bine aminte faptul că motorul JavaScript pune la bătaie o mulțime de *metode interne*, care acționează ori de câte ori folosim câte-o metodă predefinită a vreunui obiect JavaScript.
 
-Reflect oferă o cale către aceste metode „de adâncime” ale motorului JavaScript. Gândește-te la cazul util în care un obiect are „tăiată” moștenirea, dar parcă ai avea nevoie de metodele pe care `Object` ți le pune la dispoziție în prototipul său.
+Reflect oferă o cale către aceste metode *de adâncime* ale motorului JavaScript. Gândește-te la cazul util în care un obiect are *tăiată* moștenirea, dar parcă ai avea nevoie de metodele pe care `Object` ți le pune la dispoziție în prototipul său.
 
 ```javascript
 var obi = Object.create(null); // un obiect cu moștenirea tăiată
 ```
 
-Multe obiecte sunt construite înadins astfel.
-
-Nu ar fi supercool dacă am avea o cale directă către utilitarele motorului JavaScript, chiar la acele „metode interne” despre care am vorbit de ne-am plictisit?
+Multe obiecte sunt construite înadins astfel. Nu ar fi supercool dacă am avea o cale directă către utilitarele motorului JavaScript, chiar la acele *metode interne* despre care am vorbit de ne-am plictisit?
 
 Asta își propune să ofere `Reflect`: acces direct la utilitare superutile, pe care altfel ar fi trebuit să le căutăm prin prototipul lui `Function` sau `Object`.
 
@@ -31,7 +29,7 @@ var celMaiMareFunct = Function.prototype.apply.call(Math.max, null, colectie);
 var celMaiMareReflect = Reflect.apply(Math.max, null, colectie);
 ```
 
-Anterior, în ES5, ai fi folosit `Function.prototype.apply()`. Este ușor de observat că varianta de utilizare cu Reflect reduce verbozitatea.
+Anterior, în ES5, ai fi folosit `Function.prototype.apply()`. Este ușor de observat că varianta de utilizare cu `Reflect` reduce verbozitatea.
 
 ## Reflect.construct(funcțiaTintă, listaArgumentelor)
 
@@ -62,7 +60,7 @@ var obi = {a: true};
 Reflect.defineProperty(obi, 'b', {value: false}); // true
 ```
 
-Care-i aventajul asupra clasicului `Object.defineProperty`? Faptul că ai un răspuns imediat privind rezultatul modificării. Poți testa direct pentru true sau false, fără să fii nevoit să împachetezi într-un `try..catch` pentru a vedea dacă au apărut erori.
+Care-i aventajul asupra clasicului `Object.defineProperty`? Faptul că ai un răspuns imediat privind rezultatul modificării. Poți testa direct pentru `true` sau `false`, fără să fii nevoit să împachetezi într-un `try...catch` pentru a vedea dacă au apărut erori.
 
 ## Reflect.deleteProperty(obiectȚintă, cheiaProprietății)
 

@@ -1,4 +1,4 @@
-# `RegExp.prototype.source`
+# RegExp.prototype.source
 
 Această proprietate va returna șirul de caractere al șablonului.
 

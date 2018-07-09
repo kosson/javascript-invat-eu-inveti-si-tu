@@ -1,6 +1,6 @@
-# `Array.prototype.reverse()` - afectează definitiv
+# Array.prototype.reverse()
 
-Inversează ordinea dintr-un array și returnează o referință către array-ul modificat definitiv.
+Această metodă modifică array-ul original. Inversează ordinea dintr-un array și returnează o referință către array-ul modificat definitiv.
 
 ```javascript
 var tablou = ["unu", "doi", 3];

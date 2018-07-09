@@ -13,7 +13,7 @@ var ceva; // undefined
 
 ## Natura variabilelor
 
-O variabilă este ceea ce spune însăși cuvântul: o zonă rezervată de care este nevoie pentru a „memora” o valoare. Această valoare poate să se modifice pe măsură ce codul se execută și de aici și denumirea de variabilă. Pentru a înțelege cât mai bine variabilele, amintiți-vă de identificatori și rolul acestora în „spațiul” creat de mediul lexical. După cum bine v-ați amintit, identificatorii sunt etichetele necesare variabilelor pentru a identifica „zona rezervată”. E ca o tăbliță cu numele stației de autobuz. Știm că stația se numește „Laborator” și identifică un spațiu în care va intra autobuzul din când în când.
+O variabilă este ceea ce spune însăși cuvântul: o zonă rezervată de care este nevoie pentru a *memora* o valoare. Această valoare poate să se modifice pe măsură ce codul se execută și de aici și denumirea de variabilă. Pentru a înțelege cât mai bine variabilele, amintiți-vă de identificatori și rolul acestora în *spațiul* creat de mediul lexical. După cum bine v-ați amintit, identificatorii sunt etichetele necesare variabilelor pentru a identifica **zona rezervată**. E ca o tăbliță cu numele stației de autobuz. Știm că stația se numește „Laborator” și identifică un spațiu în care va intra autobuzul din când în când.
 
 ## Declararea variabilelor
 

@@ -1,4 +1,4 @@
-# `Array.prototype.shift()` - afectează definitiv
+# Array.prototype.shift()
 
-Scoate primul element din array și-l returnează.
-Dacă `length` este 0 este returnat `undefined`. `shift()` este generic și funcționează pe orice seamănă cu un array folosind call sau apply.
+Această metodă modifică array-ul original. Scoate primul element din array și-l returnează.
+Dacă `length` este `0` este returnat `undefined`. Metoda `shift()` este generică și funcționează pe orice seamănă cu un array folosind call sau apply.

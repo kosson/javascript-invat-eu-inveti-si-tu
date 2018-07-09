@@ -46,7 +46,7 @@ function aduMi () {
 aduMi();
 ```
 
-Pentru a simplifica putem transforma funcția noastă într-una `async`.
+Pentru a simplifica putem transforma funcția noastră într-una `async`.
 
 ```javascript
 let adresa = "https://www.europeana.eu/api/v2/search.json?wskey=MH8g7b6hz&query=The%20Fraternity%20between%20Romanian%20and%20French%20Army";
@@ -60,7 +60,7 @@ typeof promisiune;
 aduMi().then((înregistrarea) => console.log(înregistrarea)).catch(() => console.log('A apărut o eroare'));
 ```
 
-Ceea ce permit funcțiile async/await este posibilitatea de a captura toate erorile ridicate de codul asincron, dar și cel sincron. Deci, folosirea unei structuri `try..catch` este valabilă.
+Ceea ce permit funcțiile async/await este posibilitatea de a captura toate erorile ridicate de codul asincron, dar și cel sincron. Deci, folosirea unei structuri `try...catch` este valabilă.
 
 ## Referințe
 

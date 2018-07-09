@@ -1,4 +1,4 @@
-# Array - tablou, vector
+# Array
 
 Este un obiect intern care are și rol de constructor. În literatura românească de specialitate veți întâlni adesea denumirea de *tablou*. Pentru că este mai simplu și în obișnuința multor programatori români să folosească termenul din engleză ca neologism acceptat de practica curentă, vom folosi și în acest material neologismul **array**. În comunitatea profesională array-ul mai este întâlnit și sub denumirea de *listă* sau *vector*.
 
@@ -54,7 +54,7 @@ Acest lucru conduce la concluzia logică că numărul elementelor unui array est
 [1, 2, 3].length; // 3
 ```
 
-### Ce poți introduce într-un array
+### Ce poți introduce în array
 
 Am lămurit deja faptul că un array este un obiect care ordinează elementele folosind un index. Pe cale de consecință, putem introduce orice valoare într-un array. Valorile simple, vor fie pasate direct, iar valorile care sunt obiecte, vor fi pasate prin referință. Dacă ai nevoie de o structură a cărei elemente să răspundă propriei tale scheme de adresare, vei folosi obiectele în mod direct. Pentru că standardul a evoluat, acum avem suplimentar o nouă structură de agregare a datelor numită `Map`. Ce aduce nou față de array-uri și obiectele simple? Posibilitatea de a avea perechi cheie - valoare cu diferența îmbucurătoare că pentru chei poți folosi, fie valori primitive, fie obiecte.
 Array-ul își păstrează valoarea pentru că oferă o structură de adresare organizată din start prin structura fixă a indecșilor.
@@ -117,7 +117,7 @@ Colecțiile care sunt **asemănătoare-cu-array-urile** (array-like), vor avea u
 
 Structura lanțului ar fi: `arrayLike` --> `Object.prototype` --> `null`.
 
-## Manipularea elementelor
+## Manipulare elemente
 
 ### Modificarea elementelor
 
@@ -128,9 +128,9 @@ let arr = [1, 2];
 arr[1] = 5; console.log(arr); // [1, 5]
 ```
 
-### Ștergerea elementelor dintr-un array
+### Ștergerea elementelor din array
 
-Această metodă creează „goluri” în array. Proprietatea `length` nu va fi afectată.
+Această metodă creează *goluri* în array. Proprietatea `length` nu va fi afectată.
 
 ```javascript
 let tablou = [1, 2, 3, 4];

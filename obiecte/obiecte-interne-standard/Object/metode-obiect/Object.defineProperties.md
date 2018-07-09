@@ -1,4 +1,4 @@
-# `Object.defineProperties`
+# Object.defineProperties
 
 Această metodă modifică direct proprietățile unui obiect și apoi îl returnează.
 

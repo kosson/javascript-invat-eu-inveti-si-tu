@@ -38,7 +38,7 @@ Putem chiar interoga care este constructorul obiectului și vom afla că este fu
 
 O structură a acestor obiecte este oferită chiar de standardul ECMAScript care le subîmparte pe următoarele linii de funcționalitate:
 
--   obiecte care sunt esențiale pentru rularea programelor includ `Object`, `Function`, `Boolean`, `Symbol` și `Error`,
+-   obiectele fundamentale pentru rularea programelor includ `Object`, `Function`, `Boolean`, `Symbol` și `Error`,
 -   obiectele care reprezintă și manipulează valorile numerice includ `Math`, `Number` și `Date`,
 -   obiectele care prelucrează șiruri de caractere includ `String` și `RegExp`,
 -   obiecte care sunt de fapt colecții indexate de valori care includ `Array`, colecții cheie-valoare precum `Map` și `Set`,
@@ -70,7 +70,7 @@ Dacă nu este prevăzut altfel, toate funcțiile interne și toți constructorii
 
 ## Mantre
 
--   Constructorul lui `Function` este chiar o funcție. În schimb, `Function` este constructor pentru Object.
+-   Constructorul lui `Function` este chiar o funcție. În schimb, `Function` este constructor pentru `Object`.
 -   Toate obiectele au un slot intern `[[Prototype]]` prin care se realizează moștenirea.
 -   Dacă nu este specificat altfel, obiectele interne sunt extensibile.
 -   Fiecare obiect intern are memorat Realm-ul pentru care setul de obiecte interne a fost generat.
@@ -81,7 +81,7 @@ Dacă nu este prevăzut altfel, toate funcțiile interne și toți constructorii
 
 Standardul spune că fiecare funcție internă și fiecare constructor oferit de motor are obiectul prototipal al lui `Function`, care este valoarea inițială a expresiei `Function.prototype`. Această valoarea va fi valoarea slotului intern `[[Prototype]]`, fiind o simplă funcție. Acest lucru se întâmplă pentru că `Function` nu are o metodă internă `[[Construct]]`.
 
-În ceea ce privește oricare obiect care servește drept prototip, are ca valoare pe cea pe care o are `Object.prototype`, cu excepția obiectului prototip a lui Object.
+În ceea ce privește oricare obiect care servește drept prototip, are ca valoare `Object.prototype`, cu excepția obiectului prototip a lui `Object`.
 
 # Resurse
 

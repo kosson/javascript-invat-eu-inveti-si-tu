@@ -1,4 +1,4 @@
-# `String.fromCodePoint()`
+# String.fromCodePoint()
 
 Această metodă statică returnează un șir de caractere creat folosind o secvență specificată de un cod corespondent unor caractere.
 

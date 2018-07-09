@@ -1,4 +1,4 @@
-# `Symbol.iterator`
+# Symbol.iterator
 
 Acest simbol specifică iteratorul din oficiu pentru un obiect. Este folosit de `for...of`.
 

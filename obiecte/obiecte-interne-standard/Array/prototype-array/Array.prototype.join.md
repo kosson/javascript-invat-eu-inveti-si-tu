@@ -1,8 +1,6 @@
-# `Array.prototype.join()`
+# Array.prototype.join()
 
-Nu afectează array-ul.
-
-Concatenează elementele unui array într-un string a cărui carater de separare poate fi setat.
+Nu afectează array-ul. Concatenează elementele unui array într-un string a cărui caracter de separare poate fi setat.
 
 ```javascript
 var a = ['Ceva', 'Altceva', 'Altundeva'];
@@ -12,9 +10,7 @@ var text = a.join(' + '); // atribuie lui text 'Ceva + Altceva + Altundeva'
 var text = a.join('');    // atribuie lui text 'CevaAltcevaAltundeva'
 ```
 
-## Concatenări de stringuri (asamblare de markup)
-
-Uneori când lucrezi cu fragmente de text, fie acestea și markup, indiferent că este HTML sau XML, poți folosi cu succes join.
+Uneori când lucrezi cu fragmente de text, fie acestea și markup, indiferent că este HTML sau XML, poți folosi cu succes `join`.
 
 ```javascript
 var html = ['<p>a</p>', '<p>b</p>', '<p>c</p>'].join('');

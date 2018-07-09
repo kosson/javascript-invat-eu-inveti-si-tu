@@ -300,7 +300,7 @@ Se observă că după invocarea a doua oară a funcției gazdă, orice modificar
 
 John Resig aduce acest caz de closure format la crearea unui obiect pe baza unei funcții constructor.
 
-Funcțiile cu rol de constructori pot defini întern metodele, iar acestea devin niște metode tip „accessor” sau „getter”, care te ajută să ajungi din scope-ul extern la valorile din constructor.
+Funcțiile cu rol de constructori pot defini intern metodele, iar acestea devin niște metode tip „accessor” sau „getter”, care te ajută să ajungi din scope-ul extern la valorile din constructor.
 
 ```javascript
 function Sablon(){
@@ -316,7 +316,7 @@ function Sablon(){
 };
 
 var obiect1 = new Sablon();
-// se generează un obiect care va fi contextul pentru funcțiile din constructor.
+// se generează un obiect context pentru funcțiile din constructor.
 obiect1.getCantitate(); // 10
 obiect1.incrementare(); // undefined
 obiect1.getCantitate(); // 11

@@ -1,4 +1,4 @@
-# `Object.isExtensible`
+# Object.isExtensible
 
 Metoda returnează un boolean și determină dacă este permisă adăugarea de proprietăți suplimentare la obiectul investigat.
 

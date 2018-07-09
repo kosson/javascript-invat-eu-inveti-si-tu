@@ -24,7 +24,7 @@ Interfața `Iterator` trebuie să aibă următoarele proprietăți:
 
 Această interfață trebuie să aibă următoarele proprietăți:
 
--   `done`, care este, fie `true`, fie `false`. Această proprietate indică starea parcugerii cu `next()` a obiectului interator. Dacă a fost atins finalul parcurgerii obiectului iterator, această proprietate este setată la `true`.
+-   `done`, care este, fie `true`, fie `false`. Această proprietate indică starea parcugerii cu `next()` a obiectului iterator. Dacă a fost atins finalul parcurgerii obiectului iterator, această proprietate este setată la `true`.
 -   `value` fiind orice valoare JavaScript acceptă. În cazul în care `done` are valoarea `false`, `value` reprezintă valoarea de etapă pentru că obiectul iterator nu a fost parcurs complet. Dacă valoarea lui `done` este `true`, atunci `value` este ceea ce returnează final iteratorul. Dacă iteratorul nu are o valoare, va fi returnat `undefined`.
 
 ## Prototipul unui obiect iterator
