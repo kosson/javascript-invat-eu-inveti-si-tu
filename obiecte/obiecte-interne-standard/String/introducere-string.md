@@ -28,7 +28,7 @@ let str = new String("test");
 
 Proprietatea `String.length` returnează numărul de caractere al șirului incluzând spațiile albe. `String.prototype` este referința către obiectul `prototype` al obiectului intern `String`.
 
-## Anatomia unui șir de caractere
+## Anatomia unui șir
 
 Caracterele dintr-un `șir` se așează în ordine de la stânga la dreapta. Fiecare caracter este indexat începând de la 0. Un șir de caractere are o lungime care poate fi aflată prin simpla apelare a proprietății `length`: `'șir'.length; // 3`.
 Numărul de index al ultimului caracter se poate afla prin determinarea lungimii șirului din care se scade o unitate: `'cateva caractere'.length - 1;`. Acea unitate se scade pentru că numerotarea în sistemul pozițional pe care îl formează un șir, pornește de la 0, iar proprietatea length returnează numărul caracterelor. Dacă ai 3 caractere, indexul ultimului caracter este 2.
@@ -40,7 +40,7 @@ Metodele `indexOf()` și `lastIndexOf()` pot primi un al doilea parametru care i
 
 ### Lucrul direct pe caractere și fragmente
 
-#### UTF-16, câteva precizări utile.
+#### UTF-16, precizări utile.
 
 UTF (Uniform Transformation Format) este un sistem de codare numerică a caracterelor. Aceste coduri pot fi percepute drept identificatori unici pentru caractere.
 Codarea adresează ceea ce este numit un „code unit” și se face prin *code points*, codurile de identificare despre care vorbeam. UTF-16 oferă coduri până la limita de 2<sup>16</sup>, valori ce se înscriu în așa-numitul Basic Multilingual Plane (BMP), iar codurile care depășesc această limită sunt codificate prin două coduri de identificare care formează o pereche. Această stare de fapt poate conduce la erori în ceea ce privește manipularea caracterelor în JavaScript.
