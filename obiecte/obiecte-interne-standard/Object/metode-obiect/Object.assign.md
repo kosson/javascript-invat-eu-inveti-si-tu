@@ -2,7 +2,7 @@
 
 Această metodă este introdusă de ES6. Este replica oficială la practica curentă a mixin-urilor.
 
-Permite copierea tuturor proprietăților enumerable de la unul sau mai multe obiecte sursă într-un obiect țintă. Metoda returnează obiectul țintă.
+Permite copierea tuturor proprietăților `enumerable` de la unul sau mai multe obiecte sursă într-un obiect țintă. Metoda returnează obiectul țintă.
 Metodei îi pasezi obiectul destinație urmat de obiectele din care copiezi proprietățile. Dacă vreo proprietate este întâlnită în două din obiectele din care se face copierea, ultima găsită este luată în considerare.
 
 ## Mantre
@@ -11,7 +11,7 @@ Metodei îi pasezi obiectul destinație urmat de obiectele din care copiezi prop
 - proprietățile din lanțul prototipal nu pot fi copiate.
 - orice excepție va întrerupe copierea.
 
-Mecanismul prin care se face acest „transfer” este folosirea lui get pe sursă și set pe țintă.
+Mecanismul prin care se face acest *transfer* este folosirea lui `get` pe sursă și `set` pe țintă.
 
 ```javascript
 var obi = { unu: 1 };
@@ -19,7 +19,7 @@ var copie = Object.assign({}, obi);
 console.log(copie); // { unu: 1 }
 ```
 
-Această metodă permite fuzionarea mai multor obiecte în primul
+Această metodă permite fuzionarea mai multor obiecte în primul.
 
 ```javascript
 var obi1 = {a: 1, b: function(){console.log(this);}};

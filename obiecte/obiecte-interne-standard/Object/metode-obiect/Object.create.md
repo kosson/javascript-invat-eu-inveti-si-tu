@@ -29,7 +29,7 @@ var obi = new Constructor();
 var obi = Object.create(Constructor.prototype);
 ```
 
-## Modificarea moștenirii
+Folosind metoda, poți chiar modifica obiectul de la care se va face moștenirea proprietăților dorite a fi preluate.
 
 ```javascript
 var obi = {x: 'ceva'};
@@ -37,9 +37,7 @@ var o = Object.create(obi);
 o.__proto__; // { x: "ceva" }
 ```
 
-## Crearea unei clone a unui obiect folosind Object.create()
-
-O astfel de construcție este posibilă, dar nu este recomandată pentru că necesită o complexitate care cu greu își va găsi reflexia în practică.
+Ba chiar poți face o clonă după un obiect.O astfel de construcție este posibilă, dar nu este recomandată pentru că implică complexități greu justificabile în practică.
 
 ```javascript
 let obi = {
@@ -52,9 +50,9 @@ var obi2 = Object.create(
 );
 ```
 
-## Definirea proprietăților cu `set` și `get`
+## Definirea proprietăților cu set și get
 
-Dacă ai nevoie de un control în cele mai mici detalii a procesului de construcție a unui obiect, metoda create oferă posibilitatea de a descrie în cele mai fine detalii proprietățile obiectului pe care-l creezi. Acest lucru se face prin folosirea unui obiect specializat în descrierea detaliilor privind proprietățile. Acest obiect este opțional, dar este același pe care îl vei folosi atunci când dorești utilizarea lui `Object.defineProperties`.
+Dacă ai nevoie de un control în cele mai mici detalii a procesului de construcție a unui obiect, metoda `Object.create()` oferă această posibilitate. Pentru aceasta, vei folosi unui obiect specializat în descrierea detaliilor proprietăților dorite. Acest obiect este opțional, dar este același pe care îl vei folosi atunci când dorești utilizarea lui `Object.defineProperties`.
 
 Mai întâi de toate, trebuie să povestim despre practica de **incapsulare**, care este principiul de bază al lucrului cu obiectele. De cele mai multe ori, proprietățile unui obiect trebuie să permită o flexibilitate în ceea ce privește valorile sale, adică, limbajul să pună la îndemâna programatorului instrumentele de a introduce o valoare și de a o accesa prompt. Hai să pornim de la un exemplu simplu. Să presupunem că avem o funcție care va îndeplini rolul unui constructor. Acest constructor are două proprietăți. Una care primește o valoare la instanțierea obiectului și alta care are nevoie să fie actualizată constant.
 
@@ -83,7 +81,7 @@ var obi = Object.create(Object.prototype, {
 ```
 
 Ceea ce este ușor de observat este faptul că am pasat drept prim parametru obiectul cu rol de prototip. Am specificat înadins obiectul prototip al lui `Object`, ceea ce va asigura moștenirea prototipală de la acesta ca și în cazul unui obiect literal așa cum am văzut într-un exemplu mai sus.
-Ceea ce am realizat este că am transformat un câmp de date al unui obiect într-o proprietate, care are viață, care este dinamică. Ceea ce trebuie adăugat este faptul că funcțiile menționate la `set` și la `get` pot fi dezvoltate mai mult decât elemente de acționare a datelor. Poate fi dezvoltată logică transformatoare a datelor la intrare și la ieșirea din proprietate.
+Am transformat un câmp de date al unui obiect într-o proprietate, care are viață, care este dinamică. Ceea ce trebuie adăugat este faptul că funcțiile menționate la `set` și la `get` pot fi dezvoltate mai mult decât elemente de acționare a datelor. Poate fi dezvoltată logică transformatoare a datelor la intrare și la ieșirea din proprietate.
 
 În această poveste faină există o mică problemă. Ce se întâmplă în momentul în care dorești să actualizezi o proprietate, dar din grabă scrii greșit numele proprietății? Răspunsul neplăcut este că se creează una nouă cu numele celei scrise greșit. O rezolvare ar fi sigilarea obiectului cu `Object.seal`.
 

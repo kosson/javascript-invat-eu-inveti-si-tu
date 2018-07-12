@@ -1,4 +1,4 @@
-# `Object.prototype.toLocaleString`
+# Object.prototype.toLocaleString
 
 Această metodă returnează un string care reprezintă obiectul.
 

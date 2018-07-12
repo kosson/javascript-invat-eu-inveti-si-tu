@@ -1,8 +1,6 @@
 # Object.is
 
-Compară două valori pentru a vedea dacă sunt egale. Nu este același lucru cu operatorii `==` și `===` care fac operațiuni de coerciție asupra operatorilor.
-
-Verifică dacă valorile sunt ambele:
+Compară două valori pentru a vedea dacă sunt egale. Nu este același lucru cu operatorii `==` și `===` care fac operațiuni de coerciție asupra operatorilor. Verifică dacă valorile sunt ambele:
 
 - `undefined`
 - `null`

@@ -1,6 +1,6 @@
-# `Object.prototype.toString`
+# Object.prototype.toString()
 
-Este o metodă folosită pentru a obține o reprezentare a obiectului ca un text.
+Este o metodă folosită pentru a obține o reprezentare a obiectului ca text.
 
 ## Mantre
 - fiecare obiect are o metodă `toString`, care este apelată automat atunci când un obiect trebuie reprezentat ca o valoare textuală sau când se apelează obiectul pentru a fi reprezentat ca string.

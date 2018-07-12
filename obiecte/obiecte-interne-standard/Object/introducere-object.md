@@ -1,7 +1,7 @@
 # Object
 
 Este un obiect intern al Javascript caracterizat de standard ca fiind unul dintre cele fundamentale. Poate fi folosit pentru crearea de obiecte atunci când este nevoie de setarea unor detalii fine ale proprietăților acestora.
-Creează un wrapper (un obiect ambalaj) pentru un obiect atunci când este instanțiat prin apelarea cu `new` a constructorului `Object`. Parafrazând o zicală românească, am putea spune că în acest moment „haina face pe om”. Acest wrapper spune că lucrăm cu un obiect.
+Creează un wrapper (un obiect ambalaj) pentru un obiect atunci când este instanțiat prin apelarea cu `new` a constructorului `Object`. Parafrazând o zicală românească, am putea spune că în acest moment *haina face omul*. Acest wrapper spune că lucrăm cu un obiect.
 
 ## Mantre
 
@@ -45,7 +45,7 @@ Indică funcția care stă la baza prototipului.
 
 ## Object.create()
 
-Va crea un obiect având un obiect prototip și proprietăți care sunt specificate.
+Metoda va crea un obiect având un obiect prototip și proprietăți care sunt specificate. Pentru mai multe detalii poți să faci un salt la materialul care tratează în profunzime.
 
 ### Comportament la instanțierea obiectelor noi
 
@@ -67,9 +67,7 @@ animal.caracteristici.picioare // 4
 vrabie.caracteristici.picioare // 4
 ```
 
-Ceea ce se întâmplă în acest caz este că obiectele nou create sunt la concurență în a modifica un membru al prototipului: `animal.caracteristici.picioare`.
-
-Pentru a evita un astfel de comportament, ai putea gândi ca pentru fiecare obiect nou creat, să setezi un obiect nou care că reprezinte atributele specifice ale fiecărui animal.
+Ceea ce se întâmplă în acest caz este că obiectele nou create sunt la concurență în a modifica un membru al prototipului: `animal.caracteristici.picioare`. Pentru a evita un astfel de comportament, ai putea gândi ca pentru fiecare obiect nou creat, să setezi un obiect nou care că reprezinte atributele specifice ale fiecărui animal.
 
 ```javascript
 const animal = {

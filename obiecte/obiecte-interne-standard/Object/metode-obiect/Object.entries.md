@@ -17,18 +17,32 @@ console.log(colectie);
 // [["a",10],["b",true],["c",null]]
 ```
 
-După cum se observă, această metodă este folositoare câtă vreme obiectul nostru este un set de date, de fapt. În cazul metodelor, valorile lor vor fi reduse la `null`.
+După cum se observă, această metodă este folositoare câtă vreme obiectul nostru este un set de date, de fapt. În cazul metodelor, valorile lor vor fi reduse la `null`. Trebuie să fii avertizat de faptul că toate cheile simbol, dacă există vor fi ignorate neapărând în array-ul rezultat.
 
-Un posibil scenariu de lucru ar fi combinarea cu metoda `map` pentru a transforma array-ul de date într-o structură diferită.
+Un posibil scenariu de lucru ar fi combinarea cu metoda `map` pentru a transforma array-ul de date dându-i o nouă formă.
 
 ```javascript
 let colectie = {
-  Bacău: 'BC',
-  Timișoara: 'TM'
-};
-Object.entries(colectie).map(
-  ([oras, indicativ]) => `${oras}: ${indicativ}`
+    Bacău: 'BC',
+    Timișoara: 'TM'
+  };
+var rezultat =  Object.entries(colectie).map(
+    ([oras, indicativ]) => `${oras}: ${indicativ}`
 );
+console.log(rezultat); // ['Bacău: BC', 'Timișoara: TM']
+```
+
+Un alt posibil scenariu de lucru cu datele este să transformi datele unui obiect într-un `Map`.
+
+```javascript
+let colectie = {
+    Bacău: 'BC',
+    Timișoara: 'TM'
+  };
+
+let structurate = new Map(Object.entries(colectie));
+console.log(structurate);
+// ​​​​​Map { 'Bacău' => 'BC', 'Timișoara' => 'TM' }​​​​​
 ```
 
 ## Referințe

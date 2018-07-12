@@ -1,6 +1,6 @@
 # `Object.getOwnPropertyNames(obiectul)`
 
-Metoda returnează un array al tuturor proprietăților indiferent că acestea sunt enumerabile sau nu.
+Metoda returnează un array al tuturor cheilor indiferent că acestea sunt enumerabile sau nu.
 
 ```javascript
 let obi = {
