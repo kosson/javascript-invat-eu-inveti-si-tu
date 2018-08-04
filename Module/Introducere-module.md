@@ -66,7 +66,7 @@ let clasa1 = new Clasa1();
 ```
 
 Din nefericire, nu poți importa sau exporta într-o manieră condițională și nici nu poți introduce enunțurile de export sau import într-un bloc de cod.
-Ca și comportament importurile beneficiază de hoisting așa că nu contează unde se menționează importul d.p.d.v. sintactic.
+Privind comportamentul importurile beneficiază de hoisting așa că nu contează unde se menționează importul d.p.d.v. sintactic.
 
 ### Importurile
 
@@ -92,7 +92,7 @@ Acest tip de import va aduce codul unui modul ca un obiect care va avea o singur
 import {numeId1, numeID2} from 'src/bib';
 ```
 
-***Importuri în baza identificatorilor cu redenumire**
+**Importuri în baza identificatorilor cu redenumire**
 
 ```javascript
 import {numeId1 as idLocal, numeId2} from 'src/bib';
@@ -134,7 +134,7 @@ export function facCeva () {};
 ## Suport
 
 În acest moment, modulele nu au un suport extins în toate browserele, dar există metode folosite în comunitatea programatorilor pentru a trece peste aceste neajunsuri temporare.
-După cum bine știm, în HTML avem un tag pe care-l folosim pentru a încărca programele JavaScript. Acesta este `<script>`. În cazul modulelor, tagul `script` va mai avea un atribut în plus care va specifica faptul că avem de a face cu un modul.
+După cum bine știm, în HTML avem un tag pe care-l folosim pentru a încărca programele JavaScript. Acesta este `<script>`. În cazul modulelor, tagul `script` va mai avea un atribut în plus care indică un modul.
 
 ```html
 <script type="module"></script>

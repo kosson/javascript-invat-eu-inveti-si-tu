@@ -231,7 +231,7 @@ Reține că referința `this` este strict legată de *locul* în care a fost ape
 
 #### this și constructorii în obiectul global
 
-Am văzut deja cum funcțiile pot returna obiecte, aceasta fiind o modalitate de a le crea. Dar atunci când ai nevoie de mai multă finețe în compunerea viitorului obiect, vei folosi funcțiile din nou în postura de constructori. O funcție cu rol de constructor zămislește obiecte numai când este invocată cu operatorul `new`. Dacă nu o invoci cu `new`, chiar dacă este declarată cu ținta de a contrui obiecte, aceasta se va comporta ca o funcție simplă cu toate consecințele rulări în acest mod. Aceste mecanism comportamental dual este chiar un avantaj deosebit oferit de limbaj. Cu ajutorul contructorilor, de fapt alcătuiești semnătura viitoarelor obiecte. Te vei întreba care este mecanismul magic prin care o funcție poate crea un obiect? Nicio magie, aici: pur și simplu, funcțiile sunt și ele obiecte!
+Am văzut deja cum funcțiile pot returna obiecte, aceasta fiind o modalitate de a le crea. Dar atunci când ai nevoie de mai multă finețe în compunerea viitorului obiect, vei folosi funcțiile din nou în postura de constructori. O funcție cu rol de constructor zămislește obiecte numai când este invocată cu operatorul `new`. Dacă nu o invoci cu `new`, chiar dacă este declarată cu ținta de a contrui obiecte, aceasta se va comporta ca o funcție simplă cu toate consecințele rulări în acest mod. Aceste mecanism comportamental dual este chiar un avantaj deosebit oferit de limbaj. Cu ajutorul constructorilor, de fapt alcătuiești semnătura viitoarelor obiecte. Te vei întreba care este mecanismul magic prin care o funcție poate crea un obiect? Nicio magie, aici: pur și simplu, funcțiile sunt și ele obiecte!
 
 ```javascript
 function NumescNave (indicativ, nume) {
@@ -253,7 +253,7 @@ console.log(obiect);
 
 Ceea se se distinge imediat este faptul că rularea funcției `NumescNave` fără `"use strict";` înjectează toate valorile precizate prin sintaxa `this.ceva` direct în obiectul global, care în cazul browserului este `window`. De ce? Pentru că la acesta a fost stabilită legătura implicită pentru valoarea lui `this`. În cazul rulării funcției sub `"use strict";`, motorul JavaScript ar fi semnalat o excepție și ar fi afișat: **Exception: TypeError: this is undefined**. Concluzie, injectarea valorilor nu s-ar mai produce.
 
-### Legătura prototipală la contructori
+### Legătura prototipală la constructori
 
 Obiectele-funcții au la rândul lor o proprietate numită `prototype`. Această proprietate face posibilă moștenirea prototipală. În cazul apelării folosind operatorul `new`, se va genera legătura prototipală fiind folosită chiar referința către obiectul prototip al funcției pentru a adăuga noul obiect în lanțul prototipal.
 
@@ -353,7 +353,7 @@ let obiectPacalitor = VehiculSpatial.call(obiectNou, 'Soyuz');
 // în acest moment, obiectNou este modificat la Object { nume: "Soyuz", tip: "vehicul" }
 ```
 
-Ceea ce tocmai s-a petrecut este că s-a invocat constructorul în contextul unui obiect deja construit pe baza lui, iar `this` a devenit obiectul deja creat. Acest lucru conduce la rescrierea lui `nume` în obiectul gazdă (`obiectNou`). Acest comportament nu este cel așteptat atâta vreme cât am dorit ca funcția constructor să permită invocarea doar cu `new`.
+Ceea ce tocmai s-a petrecut este că s-a invocat constructorul în contextul unui obiect deja construit pe baza lui, iar `this` s-a legat obiectul deja creat. Acest lucru conduce la rescrierea lui `nume` în obiectul gazdă (`obiectNou`). Acest comportament nu este cel așteptat atâta vreme cât am dorit ca funcția constructor să permită invocarea doar cu `new`.
 
 În ES6 această problemă este reglată prin `new.target`. Această proprietate, care este mai specială pentru că se adresează unui viitor obiect ce nu a fost creat încă, capătă o valoare atunci când funcția este un constructor (apelat cu new folosind metoda internă `[[Construct]]`). Dacă funcția constructor este apelată fără `new` asta înseamnă că este apelată cu metoda internă `[[Call]]`, iar `new.target` va avea valoarea `undefined`.
 
@@ -441,7 +441,7 @@ const aplicatie = aplicatie || {};
 
 În fragmentul de mai sus am apelat la o expresie de inițializarea a unei aplicații, care prin utilizarea operatorului logic `SAU`, va verifica existența unui identificator `aplicatie`, iar dacă acesta nu există, va fi creat un obiect care să fie containerul a ceea ce va fi. Această expresie este o practică foarte des întâlnită pentru a **rezerva** un *nume de domeniu* (**namespace**) pentru propria aplicație.
 
-### Crearea obiectelor cu Object.create()
+### Crearea obiectelor cu Object.create
 
 Această metodă a obiectului intern fundamental `Object` a fost introdusă odată cu versiunea ES5 a standardului. Permite atribuirea directă a unui prototip unui obiect, eliberând prototipul din legătura sa cu propriul constructor, dacă acest lucru este dorit. Prin pasarea valorii `null`, ai posibilitatea să creezi un obiect care să nu aibă legătură prototipală intermediată. Foarte interesant, nu? Legătura se face automat la obiectul prototip a lui `Object`.
 
@@ -1059,7 +1059,7 @@ obi2.faAltceva(); // "ce-i returnat din obi1  este oferită aici"
 
 ## Clase în JavaScript
 
-JavaScript este un limbaj de programare bazat pe obiecte pe care nu le instanțiază în baza unei clase. Prin modul lor de lucru, funcțiile au oferit calea către implementarea claselor. Ce a rezolvat implementarea claselor odată cu versiunea ES6? Primul și cel mai important lucru este posibilitatea ca o *funcție obiect* să moștenească de la altă *funcție obiect*. Acest salt a permis ca o funcție constructor să poată moșteni din altă funcție constructor.
+JavaScript este un limbaj de programare bazat pe obiecte pe care nu le instanțiază în baza unei clase. Prin modul lor de lucru, funcțiile au oferit calea către implementarea claselor. Ce a rezolvat implementarea claselor odată cu versiunea ES6? Primul și cel mai important lucru este posibilitatea ca o *funcție obiect* să moștenească de la altă *funcție obiect*. Acest comportament a permis ca o funcție constructor să poată moșteni din altă funcție constructor.
 
 ```javascript
 // Limitările ES5
@@ -1073,7 +1073,7 @@ Y.metoda; // undefined
 Y.metoda(); // Y.metoda is not a function
 ```
 
-Acest lucru se întâmplă pentru că `Object.create()` crează doar obiecte simple, nu poate crea *funcții obiecte*. Clasele rezolvă această moștenire.
+Acest lucru se întâmplă pentru că `Object.create()` creează doar obiecte simple, nu poate crea *funcții obiecte*. Clasele rezolvă această moștenire.
 
 ```javascript
 class X {
@@ -1129,9 +1129,9 @@ Santinel.an = 2015;
 console.log(Santinel.prezentare());
 ```
 
-Este rapid observabil faptul că simularea clasei s-a realizat prin introducerea de proprietăți în `this`, dar și în `prototype`.
+Este rapid observabil faptul că simularea clasei s-a realizat prin introducerea de proprietăți în obiectul funcție folosind legătura `this`, care permite accesul la acesta, dar și în obiectul prototipal `prototype`.
 
-Prin introducerea noii sintaxe se intenționează *crearea claselor pe baza moștenirii prototipale*. Sintaxa prezintă câteva particularități. Proprietățile viitorului obiect se introduc în metoda constructor. Metodele se introduc fără să fie precedate de cuvântul cheie `function` și nici nu vor fi despărțite prin virgulă. Accesarea proprietăților și metodelor se va face prin intermediul obiectului `this`. Însăși funcția clasă nu creează o legătură `this`.
+Prin introducerea noii sintaxe, se intenționează *crearea claselor pe baza moștenirii prototipale*. Sintaxa prezintă câteva particularități. Proprietățile viitorului obiect se introduc în metoda constructor. Metodele se introduc fără să fie precedate de cuvântul cheie `function` și nici nu vor fi despărțite prin virgulă. Accesarea proprietăților și metodelor se va face prin intermediul legăturii `this`. Însăși funcția clasă nu creează o legătură `this`.
 
 ```javascript
 class Test {
@@ -1153,7 +1153,7 @@ console.log(typeof Test.prototype.ecou); // function
 
 Echivalent lui `constructor (val) {}`, este `function Test (val) { this.val = val }`. Urmează o listă a membrilor viitorului obiect care menționează direct identificatorul fără cuvântul cheie `function`. Nu a fost folosită nici formula consacrată `Test.prototype.actiune`, rolul acesteia fiind preluat de funcția `constructor`. O clasă poate avea o singură metodă `constructor` care este opțională. Instanțierea se face folosind operatorul `new`. Atenție, obiectul `prototype` al clasei va fi protejat la scriere (**read-only**). Nu se comportă ca în cazul funcțiilor din modelul clasic în care poți adăuga ulterior în obiectul `prototype` proprietăți și metode.
 
-Obiectul `this` are un rol central pentru clase pentru că numai folosindu-l vei putea accesa metodele și proprietățile clasei. Tot `this` permite înlănțuirea (*chaining* în limba engleză) metodelor unei clase pe obiectul instanțiat. Singurul lucru de care trebuie să te asiguri este că pentru clasele pe care dorești să le înlănțuiești, `this` trebuie să fie returnat din metodă la final. Acest lucru trebuie făcut pentru a actualiza valorile obiectului generat cu `new`.
+Legătura `this` are un rol central pentru clase pentru că numai folosindu-l vei putea accesa metodele și proprietățile clasei. Tot `this` permite înlănțuirea (*chaining* în limba engleză) metodelor unei clase pe obiectul instanțiat. Să te asiguri ca pentru clasele pe care dorești să le înlănțuiești, `this` să fie returnat din metodă la final. Acest lucru trebuie făcut pentru a actualiza valorile obiectului generat cu `new`.
 
 ```javascript
 class Ceva {
@@ -1203,7 +1203,7 @@ Ceva === Ceva.prototype.constructor; // true
 Object.getOwnPropertyNames(Ceva.prototype); // [ "constructor", "ecou", "cevabun" ]
 ```
 
-Este util să menționăm faptul că în clase sunt acceptate „numele computate” pentru identificatorii proprietăților. În acest caz, trebuie folosită sintaxa cu paranteze pătrate.
+Este util să menționăm faptul că în clase sunt acceptate *numele computate* pentru identificatorii proprietăților. În acest caz, trebuie folosită sintaxa cu paranteze pătrate.
 
 #### Expresie de clasă
 
@@ -1637,7 +1637,7 @@ let unu = 10,
 
 #### Destructurarea array-urilor
 
-Destructurarea funcționează foarte bine și în cazul array-urilor, care la rândul lor sunt obiecte. În acest caz nu mai este necesară respectarea parității numelor ientificatorilor cu cea a cheilor pentru că nu mai avem chei. Potrivirea se va face în ordinea elementelor din array.
+Destructurarea funcționează foarte bine și în cazul array-urilor, care la rândul lor sunt obiecte. În acest caz nu mai este necesară respectarea parității numelor identificatorilor cu cea a cheilor pentru că nu mai avem chei. Potrivirea se va face în ordinea elementelor din array.
 
 ```javascript
 const arr = [1, true, function y () {return 'salut'}, 10, 20];

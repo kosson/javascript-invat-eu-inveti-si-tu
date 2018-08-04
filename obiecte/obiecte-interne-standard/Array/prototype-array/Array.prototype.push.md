@@ -2,9 +2,7 @@
 
 Această metodă modifică array-ul original. Adaugă la finalul array-ului unu sau mai multe elemente. Atenție, returnează noul `length` al array-ului.
 
-Același efect îl poți obține folosind formula `push.apply(arr1, arr2)`.
-
-Fuzionarea a două array-uri al doilea în continuarea primului
+Același efect îl poți obține folosind formula `push.apply(arr1, arr2)`. Fuzionarea a două array-uri al doilea în continuarea primului:
 
 ```javascript
 var tabel1 = ['veverita', 'liliac'];
@@ -14,7 +12,7 @@ Array.prototype.push.apply(tabel1, tabel2);
 console.log(tabel1); // Array [ "veverita", "liliac", "fluture", "cărăbuș" ]
 ```
 
-Aceeași operațiune poate fi îndeplinită folosind operatorul spread:
+Aceeași operațiune poate fi îndeplinită folosind **operatorul spread**:
 
 ```javascript
 var tabel1 = ['veverita', 'liliac'];

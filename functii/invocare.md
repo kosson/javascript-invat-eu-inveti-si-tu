@@ -8,9 +8,9 @@ La momentul începerii execuției codului, toate funcțiile declarate cu `functi
 
 [9.2.12 FunctionDeclarationInstantiation ( func, argumentsList ). Nota 1](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-functiondeclarationinstantiation)
 
-## Ce se întâmplă când o funcție este invocată?
+## Ce se întâmplă
 
-Înainte de a radiografia efectele apelului de funcție, ne vom uita în standard la algoritmul intern motorului `FunctionInitialize(F, kind, ParameterList, Body, Scope )`. Argumentele acestui algoritm intern sunt o funcție obiect F, mențiunea kind care indică ce tip de funcție este (Normală, Metodă, Arrow), o listă cu toți parametri, un corp care cuprinde codul ce urmează să fie evaluat și un Mediu Lexical care este identificat ca Scope. Alcătuind acest context să vedem în ce constă execuția unei funcții.
+Înainte de a radiografia efectele apelului de funcție, ne vom uita în standard la algoritmul intern motorului `FunctionInitialize(F, kind, ParameterList, Body, Scope )`. Argumentele acestui algoritm intern sunt o funcție obiect `F`, mențiunea `kind` care indică ce tip de funcție este (*Normală*, *Metodă*, *Arrow*), o listă cu toți parametrii, un corp care cuprinde codul ce urmează să fie evaluat și un *Mediu Lexical* care este identificat ca Scope. Alcătuind acest context să vedem în ce constă execuția unei funcții.
 
 1.  Locul în care se întâmplă acest lucru se numește **call-site**.
 2.  Se creează un nou **execution context** - context de execuție care este introdus în stivă.
@@ -20,16 +20,16 @@ La momentul începerii execuției codului, toate funcțiile declarate cu `functi
     2. ce parametri au fost pasați, etc.;
     3. referința `this` care va fi folosită pe durata execuției funcției.
 3. Se face legătura la contextul lexical asociat acelei funcții (scope-ul). Pentru scope-ul extern, funcția va pune drept referință valoarea proprietății interne a funcției numită `[[Environment]]`.
-3. Se generează un obiect căruia îi sunt pasate automat ARGUMENTELE într-o colecție asemănătoare unui array și **this**.
+3. Se generează un obiect căruia îi sunt pasate automat argumentele într-o colecție asemănătoare unui array și legătura **this**.
 
-Obiectul **arguments** este o colecție (seamănă dar NU ESTE UN ARRAY) a tuturor argumentelor pasate funcției și are proprietatea `length` pentru a afla numărul argumentelor pasate. Valorile pot fi obținute prin `arguments[index]`.
+Obiectul **arguments** este o colecție (seamănă dar nu este un array) a tuturor argumentelor pasate funcției și are proprietatea `length` pentru a afla numărul argumentelor pasate. Valorile pot fi obținute prin `arguments[index]`.
 
-## Invocarea funcțiilor se poate face în următoarele cazuri:
+## Invocarea funcțiilor - cazuri
 
 1.  ca funcții;
 2.  ca metode;
-3.  ca arrow functions
-4.  constructori cu `new`;
+3.  ca arrow functions;
+4.  constructori cu new;
 5.  indirect prin apelarea într-un context de execuție diferit folosind `call()` și `apply()` (vezi binding explicit la `this`).
 
 În toate aceste cazuri funcția generează obiectul `this` în mod diferit.
@@ -107,7 +107,7 @@ Indiferent cât de multe obiecte ar fi instanțiate, se creează un closure pe m
 
 Din nefericire dacă creăm un alt obiect și îi facem un identificator căruia îi asignăm metoda de acces către valoarea așa-zis **privată**, o vom putea accesa cu ușurință pentru că până la urmă, o metodă este o funcție, care este o valoare. Acesta este motivul pentru care în JavaScript nu există posibilitatea de a avea variabile private cu adevărat.
 
-### Invocarea funcțiilor prin `call()` și `apply()`
+### Invocarea funcțiilor prin call și apply()
 
 Cele două funcții realizează un binding explicit a funcției cu un nou context de execuție. Se face „un împrumut” al mecanismelor și proceselor interne ale funcției în contextul de lucru oferit de un anume obiect.
 
@@ -137,7 +137,7 @@ function tester(callback){
 Un *tail call* este invocarea unei funcții atunci când o funcție este invocată ca ultimă instrucțiune a unei funcții gazde.
 
 ```javascript
-function gazda(){
+function gazda () {
   return faCeva();
 };
 ```
@@ -146,17 +146,13 @@ function gazda(){
 
 -   A invoca înseamnă aplicarea funcției pe zero sau mai multe argumente.
 -   Funcțiile sunt invocate într-un loc care determină rezultatul, adică într-un anumit *context*.
--   La invocarea funcțiilor pe lângă argumente sunt constituite „tacit” obiectele `this` și `arguments`.
+-   La invocarea funcțiilor pe lângă argumente sunt constituite tacit legătura `this` și obiectul `arguments`.
 -   Când invoci funcția ca metodă a unui obiect, acel obiect devine **contextul** funcției și acesta devine disponibil în funcție prin intermediul parametrului `this`.
 -   `this` este un obiect-context: pentru funcții simple este `window` (nu și sub regula use strict), pentru metode este obiectul în care se execută, iar pentru noile obiecte create este chiar noul obiect generat.
 -   în `"strict mode";`, la invocarea directă în global execution context `this` este `undefined`.
--   există patru cazuri în care o funcție este invocată:
-  - ca funcție invocată în mod direct;
-  - ca metodă, fapt care leagă invocarea de un obiect;
-  - ca și constructor prin care un nou obiect este generat;
-  - prin folosirea lui `call()` și `apply()`.
+-   există patru cazuri în care o funcție este invocată: (1) ca funcție invocată în mod direct; (2) ca metodă, fapt care leagă invocarea de un obiect; (3) drept constructor prin care un nou obiect este generat; (4) prin folosirea lui `call()` și `apply()`.
 -   La evaluarea funcției toate declarațiile dintre `{}` vor genera un `Environment Record`. Invocarea unei funcții creează un scope nou.
 -   Contextul de execuție al unei funcții se modifică după „locul” în care a fost invocată.
 -   Ori de câte ori o funcție este invocată se creează un nou context de execuție care este introdus în call-stack.
 -   O funcție are acces și poate performa operațiuni asupra obiectului în interiorul căruia a fost invocată.
--   O funcție care returnează, fie `true`, fie `false` se numește funcție „predicat”.
+-   O funcție care returnează, fie `true`, fie `false` se numește funcție *predicat*.

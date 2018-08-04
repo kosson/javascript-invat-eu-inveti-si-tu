@@ -1,4 +1,4 @@
-# `Function()`
+# Function
 
 Este un constructor pentru funcții. Primele argumente introduse constituie parametrii formali ai viitoarei funcții iar ultimul argument va fi codul executabil.
 

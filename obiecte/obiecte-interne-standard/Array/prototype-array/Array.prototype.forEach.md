@@ -1,9 +1,9 @@
-# Array.prototype.forEach()
+# Array.prototype.forEach
 
-Această metodă a fost introdusă odată cu versiunea ES5 a standardului în anul 2011. Are drept element transformator o funcție, ceea ce permite o paletă largă de operațiuni asupra datelor prelucrate. Pe scurt, execută o funcție pentru fiecare element din array.
+Această metodă a fost introdusă odată cu versiunea ES5 a standardului în anul 2011. Are drept element transformator o funcție, ceea ce permite o paletă largă de operațiuni asupra datelor prelucrate. Pe scurt, aplică o funcție fiecărui element din array.
 În practică vei întâlni cazuri în care elementele unei colecții sunt obiecte la rândul lor, iar funcția callback pe care o vei executa, vei dori să ruleze în contextul acestora.
 
-Dacă ai înțeles modul de funcționare a buclelor cu `for`, din curiozitate ai ajuns aici pentru a trage cu ochiul la un pas înainte privind prelucrarea datelor. Mai întâi de toate, asigură-te că ai înțeles în adâncime funcțiile, cum se realizează un closure și cum este folosită o funcție în rolul de callback. Pentru a înțelege în adâncime metoda `forEach()`, cel mai bine ar fi să o reconstruim folosind `for`.
+Dacă ai înțeles modul de funcționare al buclelor cu `for` și din curiozitate ai ajuns aici pentru a trage cu ochiul la un pas înainte privind prelucrarea datelor. Mai întâi de toate, asigură-te că ai înțeles în adâncime funcțiile, cum se realizează un closure și cum este folosită o funcție în rolul de callback. Pentru a înțelege în adâncime metoda `forEach()`, cel mai bine ar fi să o reconstruim folosind `for`.
 
 ```javascript
 const colecție = [
@@ -43,9 +43,9 @@ Funcția care va fi executată poate avea trei argumente:
 
 -   `currentValue`; elementul din array care este procesat,
 -   `index`; indexul elementului din array care este procesat,
--   `array`; array-ul pentru care se aplică forEach().
+-   `array`; array-ul pentru care se aplică `forEach()`.
 
-Opțional se mai poate pasa o valoare care să reprezinte `this` la executarea callback-ului. În cazul folosirii unui arrow function drept callback, parametrul care indică legătura la `this` se va omite pentru că se face automat la mediul lexical gazdă.
+Opțional se mai poate pasa o valoare care să reprezinte `this` la executarea callback-ului.
 
 ```javascript
 function logElementeArray (element, index, array) {
@@ -59,7 +59,35 @@ function logElementeArray (element, index, array) {
 // a[3] = 9
 ```
 
- Spre deosebire de `map()` și `reduce()`, metoda `forEach()` returnează întotdeauna `undefined`.
+Spre deosebire de `map()` și `reduce()`, metoda `forEach()` returnează întotdeauna `undefined`.
+
+## Pasarea explicită a legăturii this
+
+Este posibil ca în anumite scenarii să ai un obiect al cărui proprietăți să dorești să le actualizezi cu rezultatele obținute după prelucrarea unei colecții. Pentru a face acest lucru posibil, poți pasa obiectul pe care dorești să-l modifici drept `this`.
+
+```javascript
+const obi = { ceva: 1 };
+let colecție = ['a', 'b'];
+obi.mod = function (colecție) {
+  colecție.forEach(function (element) {
+    this.ceva += element;
+  }, obi);
+};
+obi.mod(colecție);
+// Object { ceva: "1ab", mod: mod() }
+```
+
+În cazul folosirii unui arrow function drept callback, parametrul care indică legătura la `this` se va omite pentru că se face automat la mediul lexical gazdă.
+Devine foarte utilă folosirea lui `forEach` atunci când lucrezi cu datele unui `Map`. Acest lucru este posibil pentru că un `Map` implementează protocoalele de iterare.
+
+```javascript
+const map = new Map(), obi = {a: 1};
+map.set('ceva', obi);
+map.forEach(function (valoare, cheie) {
+  console.log(`Cheia este ${cheie} și valoarea este ${valoare}`);  
+}, map);
+// Cheia este ceva și valoarea este [object Object]
+```
 
 ## Reguli de utilizare
 

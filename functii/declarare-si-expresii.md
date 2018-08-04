@@ -188,7 +188,9 @@ Sunt folosite pentru:
 -   preluarea unei funcții care are mulți parametri și returnarea uneia care cere mai puțini,
 -   returnarea unei funcții dintr-o altă funcție (curring). De exemplu, returnarea unei funcții care ia altă funcție căreia îi aplică un calcul pe argumentele existente.
 
-## Crearea funcțiilor prin constructor
+## Folosire constructor
+
+Atunci când situația o cere ai posibilitatea de a crea o funcție folosind constructorul `Function` căruia îi pasezi argumentele și codul ce reprezintă corpul funcției.
 
 ```javascript
 var oFunctie = new Function('arg1', 'arg2', 'return arg1 + arg2;');

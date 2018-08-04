@@ -212,7 +212,7 @@ Când o funcție este adăugată scope-ului existent la momentul declarării, o 
 
 ## Cazul obiectelor
 
-Dacă încă nu ai trecut prin subiectul legat de modurile în care se stabilesc legăturile `this`, acest subiect ar trebui abordat abia după aceea. Această legătură numită `this`, după cum vei afla mai târziu, este vitală pentru a alege contextul corect de exectare a unei funcții. Pentru a studia cum este constituit mediul lexical al obiectelor, avem nevoie să exprimentăm nițel cu o funcție care să construiască un obiect pe care să-l studiem.
+Dacă încă nu ai trecut prin subiectul legat de modurile în care se stabilesc legăturile `this`, acest subiect ar trebui abordat abia după aceea. Această legătură numită `this`, după cum vei afla mai târziu, este vitală pentru a alege contextul corect de execuție a unei funcții. Pentru a studia cum este constituit mediul lexical al obiectelor, avem nevoie să exprimentăm nițel cu o funcție care să construiască un obiect pe care să-l studiem.
 
 ```javascript
 function Obi () {
@@ -254,7 +254,7 @@ Obi();
 
 În acest al doilea caz, invocăm funcția cu rol de metodă dintr-un callback. Motivul pentru care se scope-ul este corect este pentru că funcția care invocă metoda trăiește în același scope cu obiectul pentru care invocă metoda. Funcția anonimă (callback-ul) oferă posibilitatea de a executa metoda și de a ne asigura că nu va executa ca funcție. Dacă s-ar invoca direct metoda `obi.mesaj()`, aceasta s-ar executa o singura dată la momentul execuției lui `Obi()` și apoi ar pierde scope-ul la a doua invocare în favoarea lui global. În acest caz `Obi()` va continua execuția până când `setInterval()` va fi întrerupt.
 
-## Înlănțuirea mediilor lexicale - scope chain
+## Scope chain
 
 Metoda de a căuta o variabilă în **scope chain** este similară cu cea care se face în **lanțul prototipal** cu o diferență notabilă. Dacă încerci să accesezi o proprietate care nu există într-un obiect, dacă pe lanțul prototipal nu este găsită proprietatea, nu este returnată o eroare, ci `undefined`. Dacă încerci să accesezi o proprietate care nu există în **scope chain**, adică o variabilă care nu există, atunci este returnată eroarea `ReferenceError`.
 

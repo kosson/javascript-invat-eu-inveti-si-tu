@@ -1,8 +1,8 @@
-# String.prototype.padStart()
+# String.prototype.padStart
 
-În limba română **pad** s-ar traduce ca „umplutură” și în metoda noastră chiar așa se și comportă. Această metodă a fost introdusă în ES8 sau ECMAScript 2017.
+În limba română **pad** s-ar traduce ca *umplutură* și în metoda noastră chiar așa se și comportă. Această metodă a fost introdusă în ES8 sau ECMAScript 2017.
 
-Metoda introduce spații sau un șir de caractere specificat la începutul unui șir pentru a ajunge la o dimensiune dorită. Dacă nu este specificat un anume caracter, cel care va fi „injectat” la începutul șirului va fi SPACE.
+Metoda introduce spații sau un șir de caractere specificat la începutul unui șir pentru a ajunge la o dimensiune dorită. Dacă nu este specificat un anume caracter, cel care va fi *injectat* la începutul șirului va fi SPACE.
 
 ```javascript
 'ceva'.padStart(5); // " ceva"

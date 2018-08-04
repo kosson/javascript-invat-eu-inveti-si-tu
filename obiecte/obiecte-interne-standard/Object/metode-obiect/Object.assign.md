@@ -2,8 +2,17 @@
 
 Această metodă este introdusă de ES6. Este replica oficială la practica curentă a mixin-urilor.
 
+```javascript
+cont obiNou = Object.assign(obiȚintă, obiSursă1, obiSursă2);
+// obiectul țintă este modificat, îmbogățit cu proprietățile surselor
+```
+
 Permite copierea tuturor proprietăților `enumerable` de la unul sau mai multe obiecte sursă într-un obiect țintă. Metoda returnează obiectul țintă.
-Metodei îi pasezi obiectul destinație urmat de obiectele din care copiezi proprietățile. Dacă vreo proprietate este întâlnită în două din obiectele din care se face copierea, ultima găsită este luată în considerare.
+Metodei îi pasezi obiectul destinație urmat de obiectele din care copiezi proprietățile. Dacă vreo proprietate este întâlnită în două din obiectele din care se face copierea, ultima găsită este luată în considerare. Metoda este una distructivă în sensul că obiectul țintă este modificat permanent. Pentru a păstra obiectele de lucru nealterate, vom pasa drept prim parametru un obiect gol.
+
+```javascript
+cont obiNou = Object.assign({}, obiSursă1, obiSursă2);
+```
 
 ## Mantre
 
@@ -18,6 +27,32 @@ var obi = { unu: 1 };
 var copie = Object.assign({}, obi);
 console.log(copie); // { unu: 1 }
 ```
+
+## Getteri si setteri in surse
+
+Se pune întrebarea legitimă despre cazul în care în obiectele sursă avem proprietăți `get` sau `set`. Ceea ce se va petrece atunci când va fi format noul obiect este că se va evalua expresia `get` și în obiectul țintă se va introduce o proprietate. Aceasta va avea drept cheie numele metodei `get`, dacă aceasta nu modifică nicio valoare a unui identificator din mediul lexical sau numele identificatorului pentru care este folosit în cazul în care returnează o valoare și, bineînțeles, valoarea obținută.
+
+```javascript
+const obiSursă1 = {
+  a: 'ceva',
+  get ceE () {
+    return a;
+  },
+  set ceE (val) {
+    a = val;
+  }
+};
+const obiSursă2 = {
+  b: 10,
+  get xXx () {
+    return this.b++;
+  }
+};
+const mix = Object.assign({}, obiSursă1, obiSursă2);
+// ​​​​​{ a: 'ceva', ceE: 'ceva', b: 10, xXx: 10 }​​​​​
+```
+
+## Realizarea mixinului
 
 Această metodă permite fuzionarea mai multor obiecte în primul.
 

@@ -37,7 +37,7 @@ if (fac2.length == 2) {
 
 Amintește-ți mereu faptul că proprietatea `length` este una poate fi doar citită - *read-only*. Și acum că am aflat cum că numărăm parametrii, sunt absolut convins că mă vei întreba cum să numărăm și argumentele. Nimic mai simplu: obiectul `arguments` are la rândul său o proprietate `length` care poate fi folosită pentru a afla câte argumente au fost pasate funcției: `arguments.length`. Spunem despre o funcție care primește mai multe argumente decât numărul parametrilor că este una `variadică`.
 
-## O imagine în adâncime
+## În adâncime
 
 Mai jos este dat un exemplu întărește afirmația: **o funcție este o rutină aplicată pe argumentele sale**. Exemplul se bazează pe funcționalitatea metodei `apply()` oferită prin moștenire din obiectul prototip al obiectului intern `Function`. (`Function.prototype.apply()`).
 
@@ -53,7 +53,7 @@ oFunctie.apply(null, argumentele); // argumentele sunt aplicate literalmente fun
 
 Acest exemplu ilustrează în adâncime ceea ce se petrece cu argumentele unei funcții. Am folosit soluția practică `Array.prototype.slice.call(arguments)` pentru a transforma obiectul `arguments` într-un array.
 
-### Ce este `arguments`?
+### Ce este arguments
 
 Este un obiect care este disponibil funcției la momentul execuției. Acesta permite accesul la toți parametrii. Atunci când pasăm unei funcții același număr de argumente câți parametri sunt, lucrurile sunt foarte clare. Ce te faci atunci când sunt pasați mult mai mulți parametri? Trebuie să fie o structură capabilă să înmagazineze surplusul. Pentru funcțiile variadice, această structură este obiectul `arguments`.
 
@@ -168,7 +168,7 @@ function faCeva (a, b) {
 faCeva(1, 3, 4); // Error: Trebuie musai doar două argumente
 ```
 
-## Transformarea lui arguments într-un array
+## Transformă arguments în array
 
 De multe ori se ivește necesitatea de a tranforma `arguments` într-un array. Pentru acest lucru se folosea utilitarul `slice()` invocat în contextul obiectului `arguments`. Aceasta este o practică de dinaintea actualizării standardului la ES5.
 
@@ -201,7 +201,7 @@ Fă o vizită operatorului `...` (rest / spread) pentru mai multe exemple și lu
 
 În acest moment, pentru a obține un array din obiectul `arguments` se poate folosi și noul utilitar `Array.from(arguments)`.
 
-## Câte argumente sunt?
+## Câte argumente sunt
 
 Acest lucru este posibil pentru că `arguments` este array-like și astfel, oferă o proprietate `length` pe care orice array o oferă.
 

@@ -22,7 +22,7 @@ Caracterele speciale din expresiile regulate se numesc *metacaractere* și sunt 
 
 Caracterul `?` la regex-uri pune condiția strictă ca un șablon menționat înaintea sa să existe sau nu. De exemplu, șablonul `x?` se va traduce: caracterul `x` poate să fie existe în șirul de caractere analizat sau nu, dar dacă îl găsești, include-l în rezultat.
 
-### Ce înseamnă a include în rezultat
+### Includerea în rezultat
 
 Motorul `RegExp` indică succesiunea caracterelor, de câte ori li se permite să apară, de câte ori pot să se repete și așa mai departe. Acest model, acest șablon făurit de programator, este o descriere a ceea ce căutăm într-un șir de caractere și a tuturor variațiunilor posibile, ori a deviațiilor acceptate pentru întregul model sau pentru părți din acesta. Ținând cont de aceste aspecte, motorul parcurge caracter după caracter întreg șirul dat spre analiză. Ori de câte ori un caracter se potrivește tipului sau succesiunii, acesta este introdus într-un rezultat. Abia după ce a găsit un șir care să se potrivească exact cu regulile șablonului, motorul va renunța la căutare și dacă s-a făcut o potrivire, iar șirul de caractere nu a fost epuizat, restul este ignorat. Acesta este comportamentul implicit al motorului. Acest comportament poate fi modificat în funcție de regulile incluse în șablon.
 
@@ -116,19 +116,19 @@ După cum se observă, sintaxa este: `/pattern/flags`. Regex-urile mai au în co
 
 ### Fanioane
 
-#### Fanionul `i` - ignore case
+#### Fanionul i - ignore case
 
 Toate șabloanele de căutare construite cu `RegExp` sunt *atente* la caracterele introduse, făcându-se distincție clară între minuscule și majuscule. Explicația este simplă: codul Unicode pentru caracter nu este același.
 
 În cazul în care au un text în care nu știi cum a fost introdus textul, fiind posibile erori sau chiar intrări ale aceleiași sintagme, care nu este uniformizată în ceea ce privește caracterele, acest fanion permite regăsirea fragmentului de text indiferent de lipsa uniformității.
 
-#### Fanionul `m` - multiline
+#### Fanionul m - multiline
 
 Este un fanion care va indica motorului JavaScript să trateze fiecare nouă linie de text drept un nou șir de caractere.
 
 Să spunem că un fragment de text începe cu un caracter ales de tine sau un șablon `RegExp` construit de tine. Fără fanion, JavaScript va testa dacă întregul șir de caractere va începe cu acel caracter căutat, dar dacă este pus fanionul, va căuta linie cu linie în întreg șirul până când va găsi acea linie care începe cu acel caracter.
 
-#### Fanionul `g` - global
+#### Fanionul g - global
 
 Fără acest fanion, va fi returnată doar prima potrivire care se face. Folosind fanionul, se va face potrivire pe tot ce seamănă cu secvența șablonului. Atunci când este folosită metoda `match()`, va fi returnat un tablou cu toate aparițiile în șir. Dacă inițiezi un apel succesiv al metodei `exec()`, va fi returnat de fiecare dată un array în care vei descoperi și poziția în șir. Repetarea apelului pe același șir va conduce la descoperirea aparițiilor, iar când a fost *consumat* fără a mai găsi vreo apariție, metoda va returna `null`.
 
@@ -142,7 +142,7 @@ console.log(regex.exec(fragment)); // 0: "ev", index: 21
 console.log(regex.exec(fragment)); // null
 ```
 
-#### Fanionul `y` - sticky
+#### Fanionul y - sticky
 
 Se mai numește și *modul lipicios* (*sticky* în limba engleză). Pentru acest fanion se vor face căutările de la indexul menționat de proprietatea `lastIndex`.
 
@@ -153,7 +153,7 @@ sablon.lastIndex = 2;
 sablon.test(sirCaractere); // true
 ```
 
-### Proprietățle obiectului prototip a lui `RegExp`
+### Proprietățile obiectului prototip a lui RegExp
 
 Aceste proprietăți sunt foarte utile atunci când dorești să afli starea în care se află obiectul regex la un anumit moment dat.
 
@@ -178,7 +178,7 @@ Aceste proprietăți sunt foarte utile atunci când dorești să afli starea în
 -   șabloanele sunt folosite cu metodele `exec` și `test` ale obiectului RegExp.
 -   șabloanele sunt folosite cu metodele `match()`, `replace()`, `search()` și `split()` ale lui `String`.
 
-### Potrivirea caracter cu caracter
+### Caracter cu caracter
 
 Cel mai simplu exemplu este cel al unui șir exact (*direct match*), care să fie căutat în alt șir - `/abc/`.
 
@@ -194,10 +194,8 @@ Cel mai simplu exemplu este cel al unui șir exact (*direct match*), care să fi
 
 Ambele limite sunt jalonate prin două caractere speciale: `^` (numit în engleză *carret*) și bine-cunoscutul dolar `$`.
 
-| Caracter     | Semnificație                                                                         |
-|:------------ |:------------------------------------------------------------------------------------ |
-| `^` *carret* | Identifică unde începe șirul.                                                        |
-| `$` *dollar* | Indică că se dorește căutarea pe caracterele chiar de dinaintea finalizării șirului. |
+- `^` *carret*: Identifică unde începe șirul;
+- `$` *dollar*: Indică că se dorește căutarea pe caracterele chiar de dinaintea finalizării șirului.
 
 Dacă fanionul pentru multiline este setat, se face identificare și imediat după caracterul *line break*. De exemplu, `/^X/` nu identifică X-ul din *este un X*, dar îl identifică pe `X` în fragmentul *X este*.
 
@@ -228,10 +226,8 @@ Acest metacaracter se comportă și el ca o ancoră. Va face și el o potrivire 
 
 Dacă șirul debutează cu un caracter parte a unui cuvânt, motorul RegExp poziționează valid limita `\b` chiar înaintea acelui caracter atunci când își începe evaluarea. Adu-ți aminte că `\b` are dimensiune zero. Este doar o ancoră. Constrângerea se poate face ori la început, ori la finalul cuvântului.
 
-| Caracter | Semnificație                                                              |
-|:-------- |:------------------------------------------------------------------------- |
-| `\b`     | Caracterul «word border» marchează limitele de căutare aplicate unui șir. |
-| `\B`     | Este opusul lui `\b`                                                      |
+- `\b`: Caracterul «word border» marchează limitele de căutare aplicate unui șir;
+- `\B`: Este opusul lui `\b`.
 
 De exemplu, în `"saturn".match(/\bs/); // [ "s" ]` este limita superioară, iar `"saturn".match(/urn\b/); // [ "urn" ]` indică limita inferioară a șirului. În cazul lui `\B` identificăm poziția **DINTRE** două caractere ce pot forma un cuvânt sau poziția dintre două caractere care nu pot forma un cuvânt.
 
@@ -262,110 +258,99 @@ Sunt acele caractere cu rolul de a identifica de câte ori apare sau este permis
 | `?`      | Se va face căutare după expresia anterioară. Rezultatul poate fi 0 sau poate apărea o singură dată - `{0,1}`.  |
 | `.`      | Punctul identifică toate caracterele posibile (litere, simboluri, numere), dar fără caracterul newline (`\n`). |
 
-##### Cuantificatorul `*`
+##### Cuantificatorul *
 
 Pentru `/au*/` va identifica în *auuu, ce doare* dar și în *am găsit aur*.
 
-##### Cuantificatorul `+`
+##### Cuantificatorul +
 
 Pentru `/a+/` va găsi în *casa* și în *aaaaau!*.
 
-##### Cuantificatorul `?`
+##### Cuantificatorul ?
 
-Pentru `"știință".match(/n?ță?/); // [ "nță" ]` `"gablonț".match(/n?ță?/); // [ "nț" ]` `"țeavă".match(/n?ță?/); // [ "ț" ]`. Dacă se folosește imediat după cuantificatori (`*`, `+`, `?`, ori `{}`), transformă cuantificatorul într-unul *non-greedy* (adică cât mai puține caractere posibil), opus comportamentului natural (găsirea a cât mai multe caractere posibil). De exemplu, `"caractere 1437675".match(/\d+/gui); // [ "1437675" ]`. Dar combinând cu `?` înseamnă caută numere întregi și adu-le rând pe rând în array-ul rezultatelor: `"caractere 1437675".match(/\d+?/gui); // [ "1", "4", "3", "7", "6", "7", "5" ]`. Expresia se limitează la o singură cifră oprindu-se. Se reia căutarea de la șirul rămas și tot așa.
+Dacă se folosește imediat după cuantificatori (`*`, `+`, `?`, ori `{}`), transformă cuantificatorul într-unul *non-greedy* (adică cât mai puține caractere posibil), opus comportamentului natural (găsirea a cât mai multe caractere posibil).
 
-##### Cuantificatorul punct `.`
+```javascript
+"știință".match(/n?ță?/); // [ "nță" ];
+"gablonț".match(/n?ță?/); // [ "nț" ];
+"țeavă".match(/n?ță?/); // [ "ț" ];
+```
+
+De exemplu, `"caractere 1437675".match(/\d+/gui); // [ "1437675" ]`. Dar combinând cu `?` înseamnă caută numere întregi și adu-le rând pe rând în array-ul rezultatelor: `"caractere 1437675".match(/\d+?/gui); // [ "1", "4", "3", "7", "6", "7", "5" ]`. Expresia se limitează la o singură cifră oprindu-se. Se reia căutarea de la șirul rămas și tot așa.
+
+##### Cuantificatorul punct .
 
 De multe ori este asemănat unui *wildcard* cu care poți substitui orice (nu și *new lines*). Adevăratul wildcard totuși este setul `[\s\S]`. Acesta identifică tot ce este whitespace și tot ce nu este whitespace, pe scurt, orice. Un exemplu pentru a înțelege: `"acuma mai multe mere a anemice cam anapoda a".match(/.a/); // [ "ma" ]`. Dacă activezi globalul, vei avea `// [ "ma", "ma", " a", " a", "ca", " a", "na", "da", " a" ]`. Ceea ce este observabil este faptul că, în cazul menționat aduce litera a și una înaintea ei, dacă aceasta a fost găsită într-un cuvânt. Ordinea o dă poziția punctului. Dacă era așezat după caracterul căutat aveam `[ "ac", "a ", "ai", "a ", "an", "am", "an", "ap", "a " ]`.
 
+- `ceva{x}`: fragmentul se poate repeta de câte ori precizează `x`
+- `ceva{x,}`: fragmentul se poate repeta de cel puțin `x` ori
+- `ceva{,y}`: fragmentul se poate repeta de cel mult `y` ori
+- `ceva{x,y}`: fragmentul se poate repeta de cel puțin `x` ori și cel mult `y` ori
+
 Prin folosirea cuantificatorilor am determinat de câte ori poate să apară șablonul. În plus, mai sunt parantezele care indică cu mai mare precizie de câte ori poate apărea șablonul după care stă expresia.
 
-| Cuantificator | Semnificație                                                        |
-| ------------- | ------------------------------------------------------------------- |
-| `ceva{x}`     | fragmentul se poate repeta de câte ori precizează `x`               |
-| `ceva{x,}`    | fragmentul se poate repeta de cel puțin `x` ori                     |
-| `ceva{,y}`    | fragmentul se poate repeta de cel mult `y` ori                      |
-| `ceva{x,y}`   | fragmentul se poate repeta de cel puțin `x` ori și cel mult `y` ori |
-
-
 ```javascript
-let fragment = 'Tricoul nu este nici XL, nici XXL.'
-let regex = /x{1,3}/gi
+let fragment = 'Tricoul nu este nici XL, nici XXL.';
+let regex = /x{1,3}/gi;
 console.log(fragment.match(regex)); // [ "X", "XX" ]
-console.log(regex.exec(fragment)); // 0: "X", index: 21
-console.log(regex.exec(fragment)); // 0: "XX", index: 30
+console.log(regex.exec(fragment));  // 0: "X", index: 21
+console.log(regex.exec(fragment));  // 0: "XX", index: 30
 ```
 
 #### Metacaractere locțiitor
 
 ##### Backslash
 
-| Caracter | Semnificație                                  |
-|:-------- |:--------------------------------------------- |
-| `\`      | Caracterul are înțeles special pentru sistem. |
+Caracterul `\` are înțeles special pentru sistem.
 
-Caracterele care indică un anumit curs de acțiune pentru motorul RegExp sunt speciale fiind numite și „metacaractere”. De exemplu, `/a*/` înseamnă caută un a, care poate fi urmat de multe alte caractere `a`, dar `/a\*/` înseamnă caută-l pe `a` urmat de o steluță: `a*`. Însuși backslash-ului trebuie să i se facă *escaping* pentru a fi tratat ca orice caracter simplu: `/\\/` - caută un `\`.
+Caracterele care indică un anumit curs de acțiune pentru motorul RegExp sunt speciale fiind numite și *metacaractere*. De exemplu, `/a*/` înseamnă caută un `a`, care poate fi urmat de multe alte caractere `a`, dar `/a\*/` înseamnă caută-l pe `a` urmat de o steluță: `a*`. Însuși backslash-ului trebuie să i se facă *escaping* pentru a fi tratat ca orice caracter simplu: `/\\/` - caută un `\`.
 
 ##### Cifrele
 
-| Caracter | Semnificație                                              |
-|:-------- |:--------------------------------------------------------- |
-| `\d`     | Specifică un caracter numeric, adică un singur digit.     |
-| `\D`     | Caută tot ce nu este digit și se oprește cu primul digit. |
+- `\d` specifică un caracter numeric, adică un singur digit,
+- `\D` caută tot ce nu este digit și se oprește cu primul digit.
 
-Metacaracterul `\D` este negarea lui `\d`.
-În cazul negării, dacă șirul original începe cu un digit nu este adus niciun rezultat. De exemplu, `"saturn4 23".match(/\D/); // ["s"]` și `"saturn4 23".match(/\D+/); // ["saturn"]`
+Metacaracterul `\D` este negarea lui `\d`. În cazul negării, dacă șirul original începe cu un digit nu este adus niciun rezultat. De exemplu, `"saturn4 23".match(/\D/); // ["s"]` și `"saturn4 23".match(/\D+/); // ["saturn"]`
 
 ##### Caracterele albe, spațiile goale
 
 Spațiile goale includ *spațiu*, *tab*-urile, *form feed*, *line feed* și alte spații din schema Unicode. De exemplu, `"ana are mere".match(/\s\w*/)` identifică `[" are"]`, deci, primul cuvânt de după primul spațiu.
 
-| Caracter | Semnificație                                        |
-|:-------- |:--------------------------------------------------- |
-| `\s`     | Identifică un singur spațiu gol,                    |
-| `\S`     | Identifică orice caracter, dar nu și un spațiu gol. |
+- `\s` identifică un singur spațiu gol,
+- `\S` identifică orice caracter, dar nu și un spațiu gol.
 
 În cazul lui `\S` este identificat orice caracter mai puțin un spațiu gol. De exemplu, `"ana are mere".match(/\S\w*/);` identifică `["ana"]`. Practic, am putea spune că este negarea lui `\s`.
 
 ##### Caractere de control și machetare
 
-| Caracter | Semnificație                                           |
-|:-------- |:------------------------------------------------------ |
-| `\t`     | Identifică un `tab orizontal`                          |
-| `\r`     | Identifică un `carriage return`                        |
-| `\n`     | Identifică un `new line`                               |
-| `\v`     | Identifică un `tab vertical`                           |
-| `\f`     | Identifică un `form feed`                              |
-| `[\b]`   | Identifică `backspace` și nu trebuie confundat cu `\b` |
+- `\t` - Identifică un `tab orizontal`,
+- `\r` - Identifică un `carriage return`,
+- `\n` - Identifică un `new line`,
+- `\v` - Identifică un `tab vertical`,
+- `\f` - Identifică un `form feed`,
+- `[\b]` - Identifică `backspace` și nu trebuie confundat cu `\b`.
 
 ##### Caractere nule și setul Latin al Unicode
 
-| Caracter | Semnificație                                                                                 |
-|:-------- |:-------------------------------------------------------------------------------------------- |
-| `0`      | Identifică un caracter NUL                                                                   |
-| `\w`     | Identifică orice caracter din setul de bază Latin plus majusculele, incluzând și underscore. |
-| `\W`     | Este negarea identificării cu `\w`.                                                          |
-| `\cX`    | Unde `X` este un caracter de la A la Z, fiind un caracter de control.                        |
 
-În cazul lui `\W` returnează orice caracter care nu este un caracter dintr-un posibil cuvânt format cu Latine. De exemplu, /\W/ identifică semnul procent (%) din espresia `50%`.
+- `0` - identifică un caracter NULL,
+- `\w` - identifică orice caracter din setul de bază Latin plus majusculele, incluzând și underscore,
+- `\W` - este negarea identificării cu `\w`,
+- `\cX` - unde `X` este un caracter de la A la Z, fiind un caracter de control.
+
+În cazul lui `\W` returnează orice caracter care nu este un caracter dintr-un posibil cuvânt format cu Latine. De exemplu, `/\W/` identifică semnul procent (%) din espresia `50%`.
 
 ##### Potrivirea directă pe code pointuri Unicode
 
-| Caracter   | Semnificație                                                                 |
-|:---------- |:---------------------------------------------------------------------------- |
-| `\xhh`     | Unde `hh` sunt coduri de caracter iar fiecare h este un digit hexazecimal.   |
-| `\xhhhh`   | Unde `hhhh` sunt coduri de caracter iar fiecare h este un digit hexazecimal. |
-| `\u{hhhh}` | Unde `hhhh` sunt coduri de caracter.                                         |
+- `\xhh` - unde `hh` sunt coduri de caracter. Fiecare `h` este un digit hexazecimal,
+- `\xhhhh` - unde `hhhh` sunt coduri de caracter. Fiecare `h` este un digit hexazecimal,
+- `\u{hhhh}` - unde `hhhh` sunt coduri de caracter.
 
 Pentru secvența `\u{hhhh}`, `h` este un digit hexazecimal pentru un caracter Unicode. Funcționează numai când fanionul pentru Unicode este menționat.
 
 ### Ori una, ori alta
 
-Uneori ai nevoia să-i spui motorului să facă o căutare după un caracter sau o alternativă la acesta. Acest lucru este posibil folosind un caracter special numit *pipe*.
-
-| Caracter                  | Semnificație                      |
-|:------------------------- |:--------------------------------- |
-| `a`<code>&#124;</code>`b` | Îl identifică, fie pe a, fie pe b |
+Uneori ai nevoia să-i spui motorului să facă o căutare după un caracter sau o alternativă la acesta. Acest lucru este posibil folosind un caracter special numit *pipe*. Pipe în expresia `a`<code>&#124;</code>`b` se traduce: fie `x`, fie pe `y`.
 
 Un caz ar fi atunci când dorești să găsești mai multe fragmente într-un șir.
 
@@ -385,9 +370,9 @@ console.log(sir.match(sablon)); // ["balaur"]
 
 Reamintește-ți mereu că motorul `RegExp` este *nerăbdător* să facă o potrivire așa că în cazul în care oricare din alternative va potrivi un fragment de caractere, se va declara mulțumit și acela va fi rezultatul. Concluzia este că ordinea șabloanelor în seria de alternative este crucială.
 
-### Seturi de caractere (ranges sau clase)
+### Seturi de caractere
 
-Într-un set poți specifica caracterele care să permită o regăsirea mult mai rapidă după niște criterii care să ofere o mai mare flexibilitate. În alte lucrări mai sunt denumite și *clase*. Noi vom folosi termenul de *set*.
+Seturile de caractere mai sunt numite *clase* sau *ranges*. Într-un set poți specifica caracterele care să permită o regăsirea mult mai rapidă după niște criterii care să ofere o mai mare flexibilitate. În alte lucrări mai sunt denumite și *clase*. Noi vom folosi termenul de *set*.
 
 **Moment ZEN**: Ordinea caracterelor dintr-un set nu contează.
 
@@ -403,18 +388,14 @@ Fără niciun fanion specificat, se va face regăsirea primului caracter din set
 
 Setul cel mai interesant este cel al metacaracterelor care permit codarea oricărui caracter indiferent de funcția și însemnătatea care ar putea să o aibă. Pur și simplu identifică orice.
 
-| Caracter | Semnificație                                                 |
-|:-------- |:------------------------------------------------------------ |
-| `[\s\S]` | Identifică cu adevărat orice caracter, fie el spațiu sau nu. |
+Șablonul `[\s\S]` identifică cu adevărat orice caracter, fie el spațiu sau nu.
 
 Aceast set este un adevărat wildcard - locțiitor de orice. De exemplu, `"acuma mai multe mere a anemice cam anapoda a".match(/\s\S/)` identifică primul `m` de după primul spațiu. Adăugarea fanionului `g` are darul de a identifica toate literele imediat de după spațiu `[" m"," m"," m"," a"," a"," c"," a"," a" ]`. Adăugarea cuantificatorului `+`, aduce în array toate cuvintele din șir: `"acuma mai multe mere a anemice cam anapoda a".match(/\s\S+/g); // [" mai"," multe"," mere"," a"," anemice"," cam"," anapoda"," a" ]`.
 
 Revenind la subiectul general al seturilor, acestea sunt cunoscute și sub denumirea de *clase de caractere*, dar cel mai apropiat de o simplă înțelegere a funcționalității este cel de **set**. Întregul set este evaluat doar la un unic caracter, care se găsește în set. Setul poate fi înțeles precum totalitatea caracterelor care rând pe rând, vor fi luate în considerare la momentul căutării în șir.
 
-| Caracter              | Semnificație                                                              |
-|:--------------------- |:------------------------------------------------------------------------- |
-| `[abc]` sau `[a-c]`   | Identificările se fac după oricare dintre caractere: ori a, ori b, ori c. |
-| `[^abc]` sau `[^a-c]` | Este un set de caractere care trebuie excluse.                            |
+- `[abc]` sau `[a-c]`: Identificările se fac după oricare dintre caractere: ori `a`, ori `b`, ori `c`,
+- `[^abc]` sau `[^a-c]`: Este un set de caractere care trebuie excluse.                            |
 
 Prin specificarea liniuței îi spui motorului `RegExp` să includă toate caracterele între cele două menționate la stânga și la dreapta. Nu se vor face niciodată potriviri după două caractere din set sau mai multe. Doar un singur caracter este căutat. Acest comportament poate fi deturnat în combinație cu acoladele care specifică strict câte caractere pot fi potrivite din fiecare cuvânt al unui fragment de text.
 
@@ -442,13 +423,13 @@ Utilitatea? Uite, de exemplu, poți face căutări după caractere care, în afa
 
 Uite, ceva foarte util. Parsarea însăși a codului sursă JavaScript pentru căutarea unui identificator, care deja știm că poate fi orice caracter plus `_` și `$`: `[A-Za-z_][A-Za-z_0-9]*`. Sau potrivirea unui tag HTML `<[A-Za-z][A-Za-z0-9]*>` - primul set forțează căutarea unui caracter, nu a unei cifre. Din tot ce-am povestit aici o concluzie care de ajutor este că trebuie să știi bine ce cauți și cum arată.
 
-Un alt exemplu de set foarte util este cel care are comportament de întreruptor cu sensul de *asta sau asta*. Să spunem că avem două variante care ar putea fi introduse de utilizator: `cluj napoca` și `cluj-napoca`. Pentru a face o regăsire după ambele variante, vom opta pentru următoarea construcție regex: `/[cluj[- ]napoca]/`.
+Un metoda ` comportament de întreruptor cu sensul de *asta sau asta*. Să spunem că avem două variante care ar putea fi intmetoda `oca`. Pentru a face o regăsire după ambele variante, vom opta pentru următoarea construcție regex: `/[cluj[- ]napmetoda `
 
-```javascript
-let sir = 'cluj-napoca sau cluj - napoca sau cluj napoca';
-let cautare = sir.match(/cluj[- ]napoca/g);
-console.log(cautare); // ["cluj-napoca","cluj napoca"]
-```
+```metoda `
+letmetoda `apoca';
+letmetoda `
+conmetoda `a"]
+```metoda `
 
 Sunt returnate ambele variante. Este folositor și pentru cazul în care vrei să oferi corecturi la cuvintele introduse cu erori de scriere: `/C[aâ]mpina/`.
 Un detaliu foarte important privind seturile, este cazul folosirii punctului. În interiorul seturilor, punctul nu are înțelesul de *orice caracter*, rol pe care-l are în construcțiile regex. În interiorul seturilor, punctul este punct. Asta permite identificarea de numere întregi, de exemplu. O construcție `[\d.][\d.]\d` poate regăsi toate numele întregi: `0.1` sau `.34`.
@@ -468,7 +449,7 @@ Seturile de caractere pot fi negate în sensul că se va face potrivire după to
 
 Pentru a nega folosirea setului, pur și simplu pui caracterul `^` la început: `[^c-f]`, cu înțelesul de exclude partea șirului care conține acest set de caractere. Caracterul *carret* trebuie pus chiar la început, imediat după paranteza pătrată dacă dorim negarea. Dacă este în altă poziție, pur și simplu este și el parte a setului de caractere.
 
-Există o nuanță semantică pe care trebuie să o lămurim. Când ai un șablon de genul `/al[^i] doilea/`, înțelesul corect este *al* care poate fi urmat de orice caracter, mai puțin de *i*. De ce este relevantă precizarea? Pentru că în locul acelui *i*, care nu este permis poate fi un spațiu, iar spațiul va fi returnat ca partea potrivirii. Negarea poate fi înțeleasă ca un wildcard care elimină anumite caractere sau combinații de caractere indezirabile (vezi grupările), dar care poate fi orice altceva plus setul invizibilelor.
+Există o nuanță semantică pe care trebuie să o lămurim. Când ai un șablon de genul `/al[^i] doilea/`, înțelesul corect este *al* care poate fi urmat de orice caracter, mai puțin de *i*. De ce este relevantă precizarea? Pentru că în locul acelui *i*, care nu este permis poate fi un spațiu, iar spațiul va fi returnat ca partea potrivirii. Negarea poate fi înțeleasă ca un *wildcard* (locțiitor de orice), care elimină anumite caractere sau combinații de caractere indezirabile (vezi grupările), dar care poate fi orice altceva plus setul invizibilelor.
 
 La ce ar fi utilă o astfel de opțiune? De exemplu, pentru a elimina anumite caractere de control pe care le folosești pentru a demarca fragmente de text, taguri, etc. Sau mai poți avea cazul în care dorești să corectezi numele de fișiere pentru a nu conține caractere altele decât cele din setul Latin, ș.a.m.d.
 
@@ -479,9 +460,9 @@ Ai putea folosi negările pentru a marca tot ceea ce NU vrei să intre în compo
 Acestea pot fi rezumate astfel:
 
 -   `[0-9]`     : `\d`,
--   `[^\d]`     : `\D`
+-   `[^\d]`     : `\D`,
 -   `[A-Za-z]`  : `\w`,
--   `[^\w]`     : `\W`
+-   `[^\w]`     : `\W`,
 -   `[ \t\r\n]` : `\s`,
 -   `[^\s]`     : `\S`,
 -   `[^\n]`     : `.`
@@ -490,17 +471,11 @@ Reține faptul că prescurtările se pot folosi și în interiorul seturilor: `[
 
 ### Cuantificatorii pe îndelete
 
-Am descris deja pe scurt comportamentul lui `+`, `?` și `*`.
+Am descris deja pe scurt comportamentul lui `+`, `?` și `*`. Uneori, din grabă, sunt folosiți interșanjabili, dar pentru a le reține comportamentul poți fixa câteva reguli.
 
-| `+`   | `?`   | `*`   |
-|:----- |:----- |:----- |
-| {1,n} | {0,1} | {0,n} |
+Pentru `+`, trebuie să existe cel puțin o dată șirul sau caracterul potrivit și continui cu șablonul la infinit, mai exact, până la epuizarea resursei de șir; are un caracter expansiv precum omida vorace, care va mânca toată păstaia indiferent că îi este satisfăcută foamea sau nu.
 
-**Cum să le ții minte?**
-
-Pentru `+`, ține minte că adaugi ceva la ceva ce există deja, deci trebuie să existe cel puțin o dată șirul sau caracterul potrivit și continui cu șablonul la infinit, mai exact, până la epuizarea resursei de șir; are un caracter expansiv precum omida vorace, care va mânca toată păstaia indiferent că e satisfăcută foamea sau nu.
-
-Pentru `*`, gândește-te ca la Big-Bang: din nimic, din 0 la infinit orice; deci șirul poate să existe sau nu. Cât despre `?`, pur și simplu este ca un `if`: bre! exiști sau nu?! Deci, potrivește dacă există, dacă nu, se trece mai departe, la următoarea regulă a șablonului.
+Pentru `*`, gândește-te ca la Big-Bang: din nimic, din 0 la infinit orice; deci șirul poate să existe sau nu. Cât despre `?`, pur și simplu este ca un `if`: bre, exiști sau nu?! Deci, potrivește dacă există, dacă nu, se trece mai departe, la următoarea regulă a șablonului.
 
 Acum că știm cum să folosim seturile, le putem atașa cuantificatori pentru a atinge căutări ceva mai rafinate. Un set de tipul `/[A-Z][a-z]+/g`, va găsi toate numele de persoane dintr-un șir: `Ana, George și emi`. Ultimul este intenționat scris fără majusculă pentru a face diferența.
 
@@ -640,7 +615,7 @@ let cautare = sir.match(/\s„.*”/);
 console.dir(cautare);
 ```
 
-Cuantificatorul `*` induce comportamentul expansiv (*greedy*). Limitarea o faci cu un tester `?` iar efectul este că va limita căutarea la minimul necesar.
+Cuantificatorul `*` induce comportamentul expansiv (*greedy*). Limitarea o faci cu un tester `?`. Efectul este că va limita căutarea la minimul necesar.
 
 ```javascript
 let cautare = sir.match(/\s„.*?”/);
@@ -659,22 +634,20 @@ Te-ai fi gândit că identificarea se face direct pe prima potrivire, care în e
 
 Pentru a limita efectul expansiv, în loc de a folosi punctul pentru a potrivi orice caracter, mai bine faci un set de caractere care să fie potrivite. Pentru a potrivi cu adevărat toate eventualitățile poți înlocui șablonul propus cu `/"[^"\r\n]*"/` - orice caractere aflate între ghilimele duble, dar care la rândul lor nu sunt ghilimele duble și nici *new lines* sau *carriage return*.
 
-La ce ar folosi să știm asta? Ia gândește-te că dorești să prelucrezi fragmente de JSON (date codate folosind schema JavaScript Object Notation).
+La ce ar folosi să știm asta? Ia gândește-te că dorești să prelucrezi fragmente de JSON (date codate JavaScript Object Notation).
 
 ## Grupări
 
 Grupările pot fi gândite ca posibilitatea de a construi șabloane elaborate, adevărate propoziții. Gruparea permite formularea de expresii secundare, care pot fi tratate ca și o unitate.
 
-| Caracter | Semnificație                                                                            |
-|:-------- |:--------------------------------------------------------------------------------------- |
-| `(x)`    | Identifică-l pe x și ține minte ce ai găsit.                                            |
-| `(?:x)`  | Îl identifică pe x, dar nu-l ține minte, nu-l „capturează”.                             |
-| `x(?=y)` | Spune că `x` nu va fi returnat la potrivire dacă nu este urmat de `y`.                  |
-| `x(?!y)` | Este inversul `lookahead`-ului. Șablonul va potrivi doar dacă `x` nu este urmat de `y`. |
+- `(x)`: Identifică-l pe x și ține minte ce ai găsit,
+- `(?:x)`: Îl identifică pe x, dar nu-l ține minte, nu-l *capturează*,
+- `x(?=y)`: Spune că `x` nu va fi returnat la potrivire dacă nu este urmat de `y`,
+- `x(?!y)`: Este inversul `lookahead`-ului. Șablonul va potrivi doar dacă `x` nu este urmat de `y`.
 
 ### Grupul (x)
 
-Acestea sunt numite grupuri de captură. Subșirurile descoperite pot fi reapelate din array-ul rezultatelor sau din proprietățile predefinite ale obiectului RegExp ($1, ..., $9). Atenție, folosirea grupurilor penalizează performanța. Dacă nu este nevoie de un apel la substringurile descoperite, mai bine se face identificarea fără paranteze.
+Acestea sunt numite grupuri de captură. Subșirurile descoperite pot fi reapelate din array-ul rezultatelor sau din proprietățile predefinite ale obiectului `RegExp ($1, ..., $9)`. Atenție, folosirea grupurilor penalizează performanța. Dacă nu este nevoie de un apel la substringurile descoperite, mai bine se face identificarea fără paranteze.
 
 ### Grupul (?:x)
 
@@ -802,11 +775,11 @@ console.log(sir.match(sablon));
 // [Array] ["scris scris","scris"]
 ```
 
-## Șabloane folosite cu `String`
+## Șabloane folosite cu String
 
 Șabloanele regex fac casă bună cu anumite metodele ale obiectului intern `String`.
 
-### Căutarea folosind metoda `search(șablon)`
+### Căutarea folosind search(șablon)
 
 Metoda specializată acceptă drept argument un șablon regex pentru a face căutări.
 
@@ -817,7 +790,7 @@ ceva.search(/orice/); // 14
 
 Este returnat indexul la care apare pentru prima dată combinația specificată de șablon. De ce nu a luat în considerare și primul cuvânt? Pentru că litera o este o majusculă care are nevoie de alt șablon. Prima secvență care se potrivește perfect este la indexul `4` al șirului.
 
-### Căutarea folosind metoda `match(șablon)`
+### Căutarea folosind match(șablon)
 
 Rezultatul unei căutări pe șir cu metoda `match` a obiectului intern `String`.
 
