@@ -1,6 +1,6 @@
 # Instrucțiunile if, if...else și else if
 
-Este o decizie pe care trebuie să o iei în funcție de două posibile căi. Pentru instrucțiunea `if` este luată decizia pentru calea de execuție dictată de evaluarea unei instrucțiuni care o condiționează. Adu-ți mereu aminte de faptul că toate expresiile în JavaScript se reduc la o valoare de adevăr. Este foarte important să-ți aduci aminte mereu de acest aspect pentru că uneori va fi nevoie să testezi dacă o expresie complexă se reduce la o valoare *truthy* sau la una *falsey*. Însăși posibilitatea de a modifica cursul de execuție a unui program prin evaluarea la valoarea de adevăr, face posibil visul lui Leibnitz pe baza algebrei lui Boole.
+Este o decizie pe care trebuie să o iei în funcție de două posibile căi. Pentru instrucțiunea `if` este luată decizia pentru calea de execuție dictată de evaluarea unei instrucțiuni care o condiționează. Adu-ți mereu aminte de faptul că toate expresiile în JavaScript se reduc la o valoare de adevăr. Este foarte important să-ți aduci aminte mereu de acest aspect pentru că uneori va fi nevoie să testezi dacă o expresie complexă se reduce la o valoare *truthy* sau la una *falsey*. Însăși posibilitatea de a modifica cursul de execuție a unui program determinând valoarea de adevăr, face posibil visul lui Leibnitz pe baza algebrei lui Boole.
 
 ```javascript
 if (true) {

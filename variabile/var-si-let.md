@@ -1,20 +1,22 @@
-# Folosirea lui `var` și `let`
+# Var și let
 
-Identificatorii declarați cu `var` beneficiază de mecanismul de hoisting prin care sunt aduși în „capul blocului” de cod și implicit al mediul lexical format. Acest lucru înseamnă că declarațiile `var` țin de funcția cea mai apropiată dacă o privim ca pe un container sau în obiectul global. Blocurile simple sunt complet ignorate.
+Identificatorii declarați cu `var` beneficiază de mecanismul de hoisting prin care sunt aduși în *capul blocului* de cod și implicit al mediului lexical format. Acest lucru înseamnă că declarațiile `var` țin de funcția cea mai apropiată dacă o privim ca pe un container sau în obiectul global. Blocurile simple sunt complet ignorate.
 
 Începând cu ES6 a fost adăugat `let`, care în comparație cu `var`, este legat la nivelul blocului de cod delimitat prin `{}`. Spunem că aceste variabile sunt block-scoped, fiind disponibile doar la nivelul blocului `{}`.
 
-În cazul declarațiilor `let`, acestea nu disponibile imediat (**hoisted**) ca în cazul celor declarate cu `var`. Din acest motiv, cel mai bine este ca declarațiile `let` să fie puse în capul blocului în mod voluntar pentru a fi disponibile. Dacă nu, variabilele declarate cu `let` vor fi disponibile de la momentul în care au fost întâlnite. Tot timpul anterior scurs deja de la debutul execuției, nu va *vedea* aceste variabile și se numește TDZ - Temporal Dead Zone (**Zona de Timp Moartă** ar fi traducerea în lb. română), fiind perioada de timp cât nu este disponibilă.
+În cazul declarațiilor `let`, acestea nu sunt ridicate (hoisted) la vârful blocului. Din acest motiv, cel mai bine este ca declarațiile `let` să fie puse în capul blocului în mod voluntar pentru a fi disponibile în întreg blocul.
 
 **Spune standardul**:
 
 > Declarațiile let și const definesc variabile care sunt restricționate la scope-ul contextului de execuție în rulare a Mediului Lexical. Variabilele sunt create atunci când Mediul lor Lexical este instanțiat\[...].
 
-Avem o explicație foarte bună pe care Kyle Simpson o face pentru a înțelege diferențele dintre cele două. În cazurile în care erau declarate variabile pentru a fi folosite în instrucțiuni precum `for` sau `if`, dar care în subsidiar comunicau celorlalți programatori să nu le folosească dincolo de aceste enunțuri, `let` este cea mai bună abordare pentru că domeniul său de vizibilitate este limitat la blocul de cod.
+Avem o explicație foarte bună pe care Kyle Simpson o face pentru a înțelege diferențele dintre cele două. În cazurile în care în codul sursă erau declarate variabile pentru a fi folosite în instrucțiuni precum `for` sau `if`, dar care nu se doresc a fi disponibile dincolo de aceste enunțuri, `let` este cea mai bună abordare pentru că domeniul său de vizibilitate este limitat la blocul de cod.
 
 Dar dacă dorești ca o variabilă să fie cu adevărat disponibilă întregului cod, atunci continuă să folosești `var` pentru că va fi omniprezentă pentru acel program.
 
-Reține faptul că variabilele declarate cu `let` sunt *vizibile* doar la nivelul unei expresii și a unui bloc, precum și toate blocurile imbricate. ATENȚIE foarte mare la comportamentul lui `var` și `let` în contextul obiectului global. În vreme ce o declararea unei variabile folosind `var` are ca efect introducerea acelei variabile în obiectul global, declararea cu `let`, nu va avea acest efect și interogarea identificatorului va returna `undefined`.
+Partea neplăcută a lui `let` este că, atunci când nu este declarat chiar de la început, această variabilă nu va fi omniprezentă, ci doar la momentul la care se va ajunge cu execuția. Ce înseamnă acest lucru? Înseamnă că va fi distant în timp, va fi disponibil mai târziu, la momentul la care controlul programului ajunge la ea, nu de la bun început așa cum este cazul lui var. Chiar există și un termen pentru acest lucru în limba engleză menționat de standard: **Temporal Dead Zone** (*Zona de Timp Moartă* ar fi traducerea în lb. română), fiind perioada de timp cât nu este disponibilă.
+
+Reține faptul că variabilele declarate cu `let` sunt *vizibile* doar la nivelul unei expresii și a unui bloc, precum și pentru toate blocurile imbricate. Atenție foarte mare la comportamentul lui `var` și `let` în contextul obiectului global. În vreme ce o declararea unei variabile folosind `var` are ca efect introducerea acelei variabile în obiectul global, declararea cu `let`, nu va avea acest efect și interogarea identificatorului va returna `undefined`.
 
 ```javascript
 var ceva = 'ceva';
@@ -24,9 +26,7 @@ console.log(window.ceva); // ceva
 console.log(window.altceva); // undefined
 ```
 
-O atenție deosebită trebuie dată blocurilor de decizie sau cele de iterare a unor array-uri.
-
-Un exemplu foarte simplu pentru a face diferența dintre modul cum acționează `var` și cum acționează `let`.
+O atenție deosebită trebuie dată blocurilor de decizie sau cele de iterare a unor array-uri. Un exemplu foarte simplu pentru a face diferența dintre modul cum acționează `var` și cum acționează `let`.
 
 ```javascript
 function teste(){
@@ -52,108 +52,6 @@ function teste(){
   console.log(x);
 }; teste(); // 10 1
 ```
-
-## Block-scoping în cazul buclelor
-
-Dacă ești abia la început, subiectul constituirii mediului lexical în cazul buclelor se va dovedi imposibil de înțeles fără a le parcurge mai întâi cele dedicate mediului lexical, buclelor și funcțiilor. Hoistingul își face efectele și atunci când parcurgi structuri de date folosind instrucțiuni de iterare așa cum este for, de exemplu.
-
-În cazul buclelor, ceea ce se întâmplă este că variabila folosită drept contor, este ridicată prin hoisting, iar efectul este incrementarea variabilei contor la finalul fiecărei iterații. Atenție, nu este memorată separat pentru fiecare iterare. Execuția lui `for` s-a încheiat fiind introdusă în mediul lexical noua variabila `x` care va avea ultima valoare rezultată în urma iterării.
-
-```javascript
-
-var x, y = [];
-for(x = 0; x < 5; x++){
-  console.log(x); // 0,1,2,3,4,5
-  y.push(x);
-};
-console.log(x); // 5
-console.log(y); // Array [ 0, 1, 2, 3, 4 ]
-```
-
-În cazul folosirii lui `let`
-
-```javascript
-var y = [];
-for(let x = 0; x < 5; x++){
-  y.push(x);
-};
-console.log(x); // ReferenceError: x is not defined
-console.log(y); // Array [ 0, 1, 2, 3, 4 ]
-```
-
-Pentru a exemplifica mai adânc (se va folosi closure-ul) efectele hostingului folosim o funcție care are drept scop încărcarea unui array cu funcții. Nu uita, o funcție este o valoare care poate fi pasată drept argument. Acest array va fi apoi parcurs element cu element, adică funcție după funcție pentru a executa fiecare dintre ele. Se dorește obținerea unei serii de numere naturale.
-
-```javascript
-var apeluri = [];
-for (var x = 0; x < 5; x++){
-  apeluri.push(function(){
-    return x;
-  });
-};
-console.log(apeluri.map(function(callback){
-  return callback();
-})); // Array [ 5, 5, 5, 5, 5 ]
-```
-
-Ceea ce s-a întâmplat este că înainte de a parcurge array-ul, variabila `x` a fost supusă deja mecanismului de *hoisting*, însemnând că este în scope-ul format de funcție, nu cel al lui `for`. Ce trebuie înțeles este că, încărcând array-ul cu funcții, se face un closure pe valorile din *mediul lexical* în care au fost declarate. Sesizează faptul că rulând oricare dintre funcțiile din array sau la rând folosind `map`, accesul este făcut prin identificatorul `x` la valoarea ultimă ca efect al ultimei iterații ale lui `for`, adică `5`.
-
-Folosind în locul lui `var` pe `let`, vom limita variabila la scope-ul blocului de cod în care a fost declarată.
-
-```javascript
-var apeluri = [];
-
-for (let x = 0; x < 5; x++){
-  apeluri.push(function(){
-    return x;
-  });
-};
-
-console.log(apeluri.map(function(callback){
-  return callback();
-})); // Array [ 0, 1, 2, 3, 4 ]
-```
-
-În cazul folosirii lui `let`, variabila va fi accesibilă la nivelul buclei, ceea ce înseamnă, de fapt că pentru fiecare iterație se va face un nou binding la câte o nouă variabilă x pentru fiecare dintre funcțiile încărcate în array. Fiecare dintre aceste nou create variabile va avea valaorea de la finalizarea iterației anterioare. Nu se va mai rescrie cu fiecare iterație valoarea lui `x`. Este valabil și pentru `for...in` și `for...of`.
-
-```javascript
-var apeluri = [],
-    obi = {
-      unu: 1,
-      doi: 2
-    };
-
-for(let cheie in obi){
-  // funcționează bine și cu const
-  // pentru că modifici obiectul
-  apeluri.push(function(){
-    console.log(cheie);
-  });
-};
-
-apeluri.forEach(function(functia){
-  functia();
-});
-```
-
-Înainte de ES6, care pune la dispoziție `let`, *fixarea* variabilei la valoarea iterației, se făcea printr-un IIFE (Immediately Invoked Function Expression):
-
-```javascript
-var apeluri = [];
-
-for(var x = 0; x < 5; x++){
-  apeluri.push((function(valoare){
-      return function(){
-        console.log(valoare);
-      }
-    }(x)));
-};
-
-apeluri.forEach(function(callback){
-  callback();
-});
-```
-
-La fiecare iterare bucla creează o nouă variabilă și o inițializează cu valoarea variabilei cu același nume de identificator din iterarea precedentă.
 
 ## Erori la redeclarare
 

@@ -1,8 +1,6 @@
 # Instrucțiunea continue
 
-Este folosit pentru a sări pur și simplu peste un pas în timpul executării unei bucle.
-
-Să presupunem că ciclezi peste o serie de numere, iar atunci când pică unul de nu întrunește o anume condiție, vrei să se întâmple ceva, și să treci la următorul pas de ciclare.
+Este folosită pentru a sări pur și simplu peste un pas în timpul executării unei bucle. Să presupunem că parcurgi peste o serie de numere. Atunci când pică unul ce nu întrunește o anume condiție, vrei să se întâmple ceva și apoi să treci la următorul pas de ciclare.
 
 ```javascript
 var x = 0;

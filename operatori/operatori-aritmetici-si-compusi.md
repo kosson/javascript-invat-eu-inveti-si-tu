@@ -1,6 +1,7 @@
 # Operatorii aritmetici
 
 Sunt clasicii operatori aritmetici cu care suntem obișnuiți de la clasele primare: adunare, scădere, înmulțire, împărțire, ridicarea la putere și modulo.
+Unii dintre ei sunt unari pentru că aplică transformări valorilor cărora sunt atașați.
 
 ## Exponent `**`
 
@@ -35,8 +36,7 @@ Există câteva situații specifice pentru care înțelegerea se leagă de recep
 
 ## Operatorul plus-egal `+=` (adunare la preexistent și asignare)
 
-Acest operator compune într-un singur simbol două operațiuni prima este de a lua valoare existentă și a-i adăuga valoarea dorită, iar a doua este de a reatribui identificatorului noua valoare.
-Are înțelesul următor exprimat prin cod: `a = a + expresie;`
+Acest operator compune într-un singur simbol două operațiuni prima este de a lua valoare existentă și a-i adăuga valoarea dorită, iar a doua este de a reatribui identificatorului noua valoare. Are înțelesul următor exprimat prin cod: `a = a + expresie;`
 
 Închipuiește-ți următoarea situație: ai nevoie să adaugi o valoare la una preexistentă. Cel mai simplu este să folosești operatorul plus simplu.
 
@@ -67,8 +67,7 @@ La exemplul oferit mai sus există un lucru de care trebuie să ții cont. Atunc
 
 ## Minus `-`
 
-Este operatorul cu care facem scăderi.
-Există situația în care dorești să precizezi că valoarea este pe axa negativă și în acest caz, minusul se va comporta precum un operator unar.
+Este operatorul cu care facem scăderi. Există situația în care dorești să precizezi că valoarea este pe axa negativă și în acest caz, minusul se va comporta precum un operator unar.
 
 ```javascript
 var valoare = 2;
@@ -76,7 +75,7 @@ var negativ = -valoare;
 negativ; // -2
 ```
 
-Dacă valoarea pe care o prefixează nu este o valoare numerică, operatorul va încerca o conversie.
+Dacă valoarea pe care o prefixează nu este o valoare numerică, operatorul va încerca o conversie (*coercion*).
 
 ```javascript
 var valoare = "2";

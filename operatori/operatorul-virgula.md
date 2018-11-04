@@ -10,10 +10,8 @@ Evaluarea se face de la stânga la dreapta. Vorbim despre asociativitate stâng�
 x = y = 5, z = 10; // 10
 x = (z += 1, z); // 11
 ```
-Se remarcă faptul că înainte să fie returnată valoarea celui mai din dreapta operator, expresiile anterioare din înșiruire sunt evaluate și ele.
 
-Evaluează operanzii de la stânga la dreapta.
-Returnează valoarea ultimului de la dreapta.
+Se remarcă faptul că înainte să fie returnată valoarea celui mai din dreapta operator, expresiile anterioare din înșiruire sunt evaluate și ele. Virgula implică evaluarea operanzilor de la stânga la dreapta. Returnează valoarea ultimului de la dreapta.
 
 ```javascript
 1,2; // 2

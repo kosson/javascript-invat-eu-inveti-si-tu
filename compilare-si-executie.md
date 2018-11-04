@@ -4,15 +4,15 @@ Este anul 1950. Războiul se terminase iar computerele treceau în faza comercia
 
 ![](Grace_Hopper_and_UNIVAC.jpg)
 
-Stimabila doamnă, care este și un personaj hâtru pune un accent pe viteza de dezvoltare:
+Anii 50 și 60 sunt ani de mare efervescență în domeniul computerelor. Stimabila doamnă, care este și un personaj hâtru pune un accent pe viteza de dezvoltare:
 
 > Înainte de Al Doilea Război Mondial, viața era simplă. După aceea am avut sisteme.
 
 Acum lucrează la primul computer comercial, *UNIVAC I* și conduce departamentul de programare Automatic Programming Development pentru compania Remington Rand. Este tare necăjită că mașinile de calcul nu înțeleg limba engleză, dar prin '53 va publica un articol științific despre compilatoare. Bine, deja exista un compilator încă din 1952, dar, stupoare: *nimeni nu-l atingea*, rememora dânsa ceva mai târziu, pentru că *mi se spusese că un computer face doar aritmetică*. De fapt, *nimeni nu credea* că se poate acest lucru.
 
-În acel moment, un compilator *traducea limbajul matematic în cod mașină*. Doamna Grace sau „bunica COBOL” așa cum este alintată, argumenta necesitatea ca persoanele care manipulează date să nu fie forțate să manipuleze simboluri așa cum o fac matematicienii. Dorința sa a fost să fie posibilă folosirea de *enunțuri în engleză*. Acestea au fost începuturile compilatoarelor și a limbajului de programare COBOL (COmmon Business-Oriented Language).
+În acel moment, un compilator *traducea limbajul matematic în cod mașină*. Doamna Grace sau *bunica COBOL* așa cum este alintată, argumenta necesitatea ca persoanele care manipulează date să nu fie forțate să manipuleze simboluri așa cum o fac matematicienii. Dorința sa a fost să fie posibilă folosirea de *enunțuri în engleză*. Acestea au fost începuturile compilatoarelor și a limbajului de programare COBOL (COmmon Business-Oriented Language).
 
-Copilatoarele preiau codul sursă redactat într-un limbaj de programare și îl transformă în cod obiect pe care procesorul îl înțelegere. Codul obiect se execută direct și este înțeles de mașină.
+Copilatoarele preiau codul sursă redactat într-un limbaj de programare și îl transformă în **cod obiect** pe care procesorul îl înțelegere. Codul obiect se execută direct și este înțeles de mașină.
 
 ## Compilarea în JavaScript
 
@@ -20,9 +20,9 @@ Copilatoarele preiau codul sursă redactat într-un limbaj de programare și îl
 
 Motorul de JavaScript când încarcă codul sursă, face două treceri peste cod:
 
-1 Este faza unei așa-zise compilării, când citește codul sursă linie cu linie (*parsing*), îl transformă în atomi lexicali (`tokens`), face recensământul identificatorilor și îi inițializează cu `undefined`, constituindu-se un Arbore Sintactic Abstract - Abstract Syntax Tree. După constituirea AST, codul este transformat într-o formă numită **bytecode** (înșiruirea de 0 și 1 pe care computerul o înțelege). În cazul funcțiilor, abia la momentul apelării lor se va proceda la constituirea unui mediu lexical propriu acelei funcții în care vor fi sub evidență identificatorii găsiți în corpul funcției. Pe scurt, compilarea lor se face la momentul apelării.
+**1** Este faza unei așa-zise compilării, când citește codul sursă linie cu linie (*parsing*), îl transformă în atomi lexicali (`tokens`), face recensământul identificatorilor și îi inițializează cu `undefined`, constituindu-se un Arbore Sintactic Abstract - Abstract Syntax Tree. După constituirea AST, codul este transformat într-o formă numită **bytecode** (înșiruirea de 0 și 1 pe care computerul o înțelege). În cazul funcțiilor, abia la momentul apelării lor se va proceda la constituirea unui mediu lexical propriu acelei funcții în care vor fi sub evidență identificatorii găsiți în corpul funcției. Pe scurt, compilarea lor se face la momentul apelării.
 
-2 Este faza de execuție. Identificatorii capătă valori și expresiile sunt evaluate.
+**2** Este faza de execuție. Identificatorii capătă valori și expresiile sunt evaluate.
 
 Trebuie specificat faptul că operațiunile nu decurg liniar, ci într-un mod care să permită cei mai buni timpi de execuție. Adică, se face puțin parsing, urmat de compilare, rulare, optimizare și reoptimizare. Apoi se mai ia un fragment și se repetă pașii și tot așa pentru a realiza per global cei mai buni timpi de rulare pentru cod. Pentru că acest comportament este cel real și actual, spunem că JavaScript beneficiază de compilare în timp real - JIT (Just In Time). Înțelegerea modului în care funcținează JIT-ul, conduce la o execuție performantă a codului.
 
@@ -36,11 +36,11 @@ Ceea ce trebuie adăugat ca detaliu important este faptul că spre deosebire de 
 
 Este momentul când mediul lexical (scope) este creat și se face inventarul identificatorilor.
 
-Dacă funcțiile au în scope o variabilă care nu a fost declarată în scope-ul funcției respective, se va ieși din scope-ul local al funcției și se va căuta în scope-ul imediat de deasupra. Dacă acesta nu există iar funcția a fost declarată în global scope, atunci motorul JavaScript va crea acea variabilă din oficiu.
+Dacă funcțiile au în scope o variabilă care nu a fost declarată (folosind `var`) în scope-ul funcției respective, se va ieși din scope-ul local al funcției și se va căuta în scope-ul imediat de deasupra. Dacă acesta nu există iar funcția a fost declarată în global scope, atunci motorul JavaScript va crea acea variabilă din oficiu. Doar dacă se folosește `'use strict';`, se poate ocoli acest comportament. Atenție, acest lucru se petrece la faza de execuție, nu la cea de compilare.
 
-Doar dacă se folosește `'use strict';`, se poate ocoli acest comportament. ATENȚIE! acest lucru se petrece la faza de execuție, nu la cea de compilare.
+### Legături și identificatori
 
-### Problema suprascrierii prin folosirea aceluiași identificator
+Să analizăm următoarea secvență de cod.
 
 ```javascript
 function ceva () {};
@@ -50,71 +50,58 @@ console.log(typeof ceva); // number
 
 Este întrebat global scope dacă există declarații de variabile și de funcții.
 
-Rând pe rând, linie cu linie sunt notate (**registered**) în mediul lexical global (global scope) variabilele și funcțiile. Este ca un recensământ. Dar este un recensământ în urma căruia se vor atribui valori creându-se „legături”. Reține că de fapt, aceste legături sunt cele care sunt contabilizate.
+Rând pe rând, linie cu linie sunt notate (**registered**) în mediul lexical global (global scope) variabilele și funcțiile. Este ca un recensământ. Dar este un recensământ în urma căruia se vor atribui valori creându-se *legături*. Reține că de fapt, aceste legături sunt cele care sunt contabilizate.
 
 ## Mantre
 
 -   Faza de compilare este distinctă de faza de execuție a codului.
 -   Înainte de evaluare este creat un `realm` pentru codul sursă.
--   La fiecare evaluare a codului sursă este recreat `lexical environment` - scope-ul.
--   În faza de compilare, variabilele și funcțiile sunt „înregistrate” în global scope, adică sunt create referințe în memorie pentru acestea pe baza identificatorilor lor.
--   În compilare sunt create doar referințe în ceea ce standardul numește `environment record` - registrul mediului pe care îl creează `lexical environment` (scope-ul).
--   Conținutul funcțiilor nu este procesat deocamdată.
--   Execuția pornește imediat după această fază de „înregistrare”.
+-   La fiecare evaluare a codului sursă este recreat `lexical environment`.
+-   În faza de compilare, variabilele și funcțiile sunt *înregistrate* în global scope, adică sunt create referințe în memorie pe baza identificatorilor lor.
+-   În compilare sunt create doar referințe în ceea ce standardul numește `environment record` - registrul mediului pe care îl creează `lexical environment`.
+-   Conținutul funcțiilor nu este procesat la compilare.
+-   Execuția pornește imediat după această fază de *înregistrare*.
 -   La momentul execuției, entitățile deja există și relaționează.
 
 ### Cazul funcțiilor
 
-În JavaScript ordinea definirii funcțiilor nu contează (vezi hoisting - poți apela funcția înainte de a o defini). Acest lucru se întâmplă pentru că **lexical environment** (scope) se constituie înainte de execuție. Funcțile deja există la momentul în care codul începe să fie executat. Acest lucru este valabil doar pentru declarațiile de funcții (**function declaration**). Function expression și arrow functions nu fac parte din această secvență, acestea fiind create la momentul în care **execuția** ajunge la declararea lor.
+În JavaScript ordinea definirii funcțiilor nu contează (vezi hoisting - poți apela funcția înainte de a o defini). Acest lucru se întâmplă pentru că *lexical environment* (scope) se constituie înainte de execuție. Funcțile deja există la momentul în care codul începe să fie executat. Acest lucru este valabil doar pentru declarațiile de funcții (*function declaration*). Function expression și arrow functions nu fac parte din această secvență, acestea fiind create la momentul în care **execuția** ajunge la declararea lor.
 
-La prima fază a compilării, funcțiile nu sunt parcurse de compilator, ci doar se face o referință către conținutul lor. Abia la faza execuției, atunci când funcția este invocată, funcția intră din nou într-o fază de compilare:
+La prima fază a compilării, corpul funcțiilor nu este parcurs de compilator. Acestea pur și simplu sunt doar inventariate și se *notează* referințe către ele. Abia la faza execuției, atunci când funcția este invocată, funcția intră în propria fază de compilare:
 
--   declară și inițializează argumentele funcției.
--   fiecare argument al unei funcții este de fapt o variabilă locală.
--   declară variabilele locale (din interiorul funcției), încluzând aici și funcțiile anonime care sunt atribuite unei variabile locale, de neinițializându-le
+-   declară și inițializează argumentele funcției;
+-   fiecare argument al unei funcții este de fapt o variabilă locală;
+-   declară variabilele locale (din interiorul funcției), încluzând aici și funcțiile anonime care sunt atribuite unei variabile locale, de neinițializându-le;
 -   declară și inițializează funcțiile.
 
-Atenție! Pentru funcții, acestea sunt înregistrate, dar conținutul lor este stocat undeva în memorie fără a fi compilat deocamdată. Adu-ți mereu aminte că funcțiile sunt valori. Este momentul în care sunt create obiectele funcții care conțin codul funcției plus alte proprietăți. Funcția pe lângă proprietățile sale, va primi tacit `this`, `arguments` și o altă proprietate internă (`[[Environment]]`) care este scope-ul preexistent la momentul declarării. Dacă declarăm o funcție în Global Object, **scope** va fi chiar <u>Global Object</u>.
+Atenție, funcțiile sunt înregistrate, dar conținutul lor este stocat în memorie fără a fi compilat deocamdată. Adu-ți mereu aminte că funcțiile sunt valori. Acesta este și momentul în care sunt create obiectele-funcții care conțin codul funcției, plus alte proprietăți. Funcția pe lângă proprietățile sale, va stabili tacit legătura la context, identificând-o prin `this`, va constitui obiectul `arguments` și o altă proprietate internă (`[[Environment]]`), care este scope-ul preexistent la momentul declarării. Dacă declarăm o funcție în Global Object, **scope** va fi chiar <u>Global Object</u>.
 
-Reține că fiecare funcție declarată stabilește propriul scope (mediu lexical), care la momentul apelării, va porni compilarea cu înregistrarea variabilelor proprii și a parametrilor care la rândul lor sunt, de fapt, tot variabile înregistrate în scope-ul acelei funcții.
+Reține că fiecare funcție declarată stabilește propriul scope (*mediu lexical*), care la momentul apelării, va porni compilarea cu înregistrarea variabilelor proprii și a parametrilor. La rândul lor aceștia sunt tot variabile înregistrate în scope-ul creat de acea funcție.
 
-Compilatorul „coboară” în funcție pentru a face înregistrarea variabilelor și a altor funcții dacă acestea există. Dacă alte funcții sunt descoperite în interiorul funcției, se va proceda la același pas dacă acestea sunt invocate în interior. Dacă în interiorul unei funcții este declarată o altă funcție și aceasta este returnată, avem de-a face cu cel mai interesant mecanism pe care JavaScript îl pune la cingătoarea programatorului: un closure (tradus ar fi „țarc”, dar în cazul nostru putem să-i spunem „instantaneu” pentru acesta este comportamentul).
+Compilatorul *coboară* în corpul funcțiilor pentru a face înregistrarea identificatorilor variabilelor și a altor funcții dacă acestea există. Dacă alte funcții sunt descoperite în interiorul funcției, se va proceda la același pas la momentul invocării lor. Dacă în interiorul unei funcții este declarată o altă funcție și aceasta este returnată, avem de-a face cu cel mai interesant mecanism pe care JavaScript îl pune la cingătoarea programatorului: un **closure**, mecanism care ține în viață întregul lanț de medii lexicale formate la momentul declarării. Acest mecanism este și logic pentru că o funcție are nevoie de datele de lucru specificate și trebuie să aibă cumva acces la ele chiar și în momentul în care funcția *gazdă* și-a încheiat execuția.
 
-Ce se întâmplă este pasionant. Se face „instantaneul” pe care l-am menționat a contextului de execuție (obiectul generat de funcția gazdă), adică a funcției în care funcția internă a fost apelată.
-
-Și urmează **mecanismul miraculos**: chiar dacă funcția gazdă și-a încheiat execuția, referința returnată, dacă este apelată se va bucura de tot ce conținea funcția gazdă la momentul returnării.
+Pare aproape miraculos că în condițiile în care funcția gazdă și-a încheiat execuția, referința la funcția internă care a fost returnată, la momentul apelării va avea încă disponibile datele din mediul lexical al gazdei. Dar logica este simplă: trebuie să beneficieze de aceste date, altminteri nu se va putea executa.
 
 Puțin amețită? Nu-ți fă griji, totul va fi explicat și în mai mare detaliu la momentul potrivit.
 
-Dacă funcțiile au în scope o variabilă care nu a fost declarată în scope-ul funcției respective, se va ieși din scope-ul local al funcției și se va căuta în scope-ul imediat de deasupra. Dacă acesta nu există, iar funcția a fost declarată în global scope, atunci motorul JavaScript va crea acea variabilă din oficiu.
+Dacă funcțiile au nevoie de o valoare a cărui identificator nu a fost declarat în mediul lexical al propriu, motorul va ieși din scope-ul local al funcției și va căuta în scope-ul imediat de deasupra, cel în care s-a declarat funcția. Dacă acesta nu există, iar funcția a fost declarată în global scope, atunci motorul JavaScript va crea acea variabilă din oficiu.
 
-Doar dacă se folosește *use strict*, se poate ocoli acest comportament. Atenție, acest lucru se petrece la faza de execuție, nu la cea de compilare.
+Dacă programul este rulat cu directiva *use strict*, acest comportament nu mai este valabil. Atenție, acest lucru se petrece la faza de execuție, nu la cea de compilare.
 
-#### Problema suprascrierii prin folosirea aceluiași identificator
+### Variabilele la compilare
 
-```javascript
-function ceva(){};
-var ceva = 0;
-console.log(typeof ceva); // number
-```
+Variabilele sunt declarate, devenind proprietăți ale unui obiect special care este generat la momentul execuției. Dacă este declarat un identificator fără `var`, căruia mai târziu, la faza de execuție i se atribuie o valoare, dacă nu este folosit *use strict*, motorul va crea din oficiu acea variabilă.
+Pentru fiecare variabilă este înregistrat identificatorul, iar valoarea este inițilizată cu `undefined`. Dacă deja există își păstrează valoarea, dar dacă este redeclarat, valoarea este actualizată.
 
-Se pierde referința către funcție.
+### LHS și RHS
 
-### Cazul variabilelor
-
--   sunt declarate variabilele iar acestea devin proprietăți ale lui unui obiect special care este generat la momentul execuției.
--   dacă este declarată o referință, care mai târziu la faza de execuție i se atribuie o valoare, când nu este folosit *use strict*, motorul va crea din oficiu acea variabilă.
--   pentru fiecare variabilă găsită a cărui identificator nu este înregistrat, îi este înregistrat identificatorul, iar valoarea este inițilizată cu `undefined`. Dacă este găsit acesta își păstrează valoarea.
-
-### Left Hand Side și Right Hand Side
-
-În cazul folosirii operatorului `=` pentru atribuirea unei valori unui identificator, lucrăm cu două zone aflate de o parte și de alta a operatorului: *partea din stânga* cunoscută sub denumirea de „left hand side - LHS” și *partea din dreapta* sau „right hand side - RHS”.
+Când folosim operatorului `=` pentru atribuirea unei valori unui identificator, lucrăm cu două zone aflate de o parte și de alta a operatorului: *partea din stânga* cunoscută sub denumirea de *left hand side - LHS* și *partea din dreapta* sau *right hand side - RHS*.
 
 ```javascript
 var test = "ceva";
 ```
 
-Mai întâi, motorul întreabă mediul lexical (local sau global scope) în care a găsit referința din „**partea stângă**" (LHS - Left Hand Side), dacă aceasta a fost declarată: `var test`.
+Mai întâi, motorul întreabă mediul lexical (local sau global scope) în care a găsit referința din **partea stângă** (LHS - Left Hand Side), dacă aceasta a fost declarată. De exemplu: `var test`.
 
 Dacă nu a fost declarat și apare ca și `test = 'ceva'`, la etapa compilării, `test` ar fi ignorat, dar, din oficiu, la etapa execuției, motorul va genera un identificator `test`. Asta respectând condiția de a nu fi folosit `use strict` și să te afli în global scope.
 
@@ -122,15 +109,17 @@ Dacă nu a fost declarat și apare ca și `test = 'ceva'`, la etapa compilării,
 
 ## Execuția
 
--   Este momentul când valorile sunt atribuite (*assigned*) variabilelor locale. De fapt, ceea ce se întâmplă este constituirea legăturii dintre identificator și valoarea sa. Îți poți închipui că un filament leagă o etichetă de o valoare. ADEVĂRUL este că aceste „filamente” sunt cele care sunt „memorate” de mediul lexical (scope).
--   Dacă există declarații precum `a = 1;` fără ca `a` să fie declarată variabilă, dacă ne aflăm în global scope, atunci o variabilă este creată pentru `a`.
--   Invocarea unei funcții conduce la alocarea unei zone de memorie numită „heap memory” în care se pregătește un context de execuție pentru funcție.
+Este momentul când valorile sunt atribuite (*assigned*) variabilelor locale. De fapt, ceea ce se întâmplă este constituirea legăturii dintre identificator și valoarea sa. Îți poți închipui că un filament leagă o etichetă de o valoare. Adevărul este că aceste *filamente* sunt cele care sunt *memorate* de mediul lexical (scope).
+
+Dacă există declarații precum `a = 1;` fără ca `a` să fie declarată variabilă, dacă ne aflăm în global scope, atunci o variabilă este creată pentru `a`.
+
+Invocarea unei funcții conduce la alocarea unei zone de memorie numită *heap memory* în care se pregătește un context de execuție pentru funcție.
 
 Pentru că JavaScript are un singur fir de execuție, trebuie reținut faptul că de fiecare dată când o funcție este invocată, contextul de execuție a celui care a invocat funcția la momentul acela este înghețat urmând să se creeze un altul pentru evaluarea noii funcții. După ce funcția invocată și-a încheiat execuția, contextul de execuție a funcției care a făcut apelul este restaurat.
 
-Evidența apelurilor și a operațiunilor privind înghețarea și restaurarea contextelor de execuție este făcută de **call stack**. Tradus în română, *call stack* este **stiva de apeluri**. Acest mecanism de evidență a ceea ce se execută la un moment dat este prezent pentru a fi inspectat în Debugger. Pentru fiecare funcție, motorul creează un obiect care *ține minte* toate referințele necesare executării. Acest lucru este absolut necesar pentru realizarea de closure-uri. Motorul JavaScript (cazul V8) îl numește **obiect context**.
+Evidența apelurilor și a operațiunilor privind înghețarea și restaurarea contextelor de execuție este făcută de **call stack**. Tradus în română, *call stack* este **stiva de apeluri**. Acest mecanism de evidență a ceea ce se execută la un moment dat este prezent pentru a fi inspectat în *Debugger*. Pentru fiecare funcție, motorul creează un obiect care *ține minte* toate referințele necesare executării. Acest lucru este absolut necesar pentru realizarea de *closure*-uri. Motorul JavaScript (cazul V8) îl numește **obiect context**.
 
-La invocarea funcției se creează un nou obiect scope care moștenește proprietăți din cel care era deja format la momentul declarării.
+La invocarea funcției se creează un nou obiect al mediului lexical, care moștenește proprietăți din cel care era deja format la momentul declarării.
 
 ## Context de execuție
 
@@ -138,7 +127,7 @@ La invocarea funcției se creează un nou obiect scope care moștenește proprie
 
 > Contextul de execuție este un mecanism pentru a ține evidența evaluării codului la momentul în care acesta este rulat. În oricare moment există cel mult un context de execuție pentru fiecare agent care rulează cod. Acesta este cunoscut a fi *running execution context*. [ECMAScript® 2017 Language Specification (ECMA-262, 8th edition, June 2017). 8.3 Execution Contexts](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-execution-contexts)
 
-Am stabilit în acest moment că la momentul în care codul este evaluat, se va crea un **context de execuție** pentru un anumit fragment de cod. Nu putem avea mai mult de un **context de execuție în derulare** (*running execution context*).
+Am stabilit în acest moment că la momentul în care codul este evaluat, se va crea un **context de execuție** pentru un anumit fragment de cod. Nu putem avea mai mult de un **context de execuție în derulare** (*running execution context*), pentru că JavaScript are la dispoziție un singur fir de execuție.
 
 **Spune standardul**:
 
@@ -161,53 +150,53 @@ Atunci când avem de-a face cu mai multe contexte de execuție, pentru urmărire
 
 ### Mecanismul
 
-Pentru a ține evidența a ceea ce se rulează este nevoie de un „răboj” pe care să poți aduna și scădea ce intră și se termină de rulat - contextele de execuție. Un astfel de mecanism este organizat ca o stivă și se numește „execution context stack” - stiva contextelor de execuție.
+Pentru a ține evidența a ceea ce se rulează este nevoie de un *răboj* pe care să poți aduna și scădea ce intră și se termină de rulat - contextele de execuție. Un astfel de mecanism este organizat ca o stivă și se numește *execution context stack* - stiva contextelor de execuție.
 
 `Running execution context` este întotdeauna în vârful stivei.
 
-Evaluarea codului care se face într-un „context de execuție în efect” în plină desfășurare, se poate suspenda din diferite motive. În acest moment este posibil ca un alt context de execuție să devină „context de execuție în efect” și să pornească evaloarea propriului cod. Trebuie înțeles acest moment ca un moment în care codul care rulează transferă controlul unei alte secvențe de cod care își începe execuția. Acest nou context de execuție trece direct în vârful stivei. Mai târziu, codul suspendat poate deveni la rândul său „contextul de execuție în efect” și să reia evaluara codului de la momentul de unde s-a oprit. Această succesiune a contextelor de execuție în efect este gestionată cu ajutorul unei stive care funcționează pe principiul FIFO - first in, first out.
+Evaluarea codului care se face într-un *context de execuție în efect* aflat în plină desfășurare, care se poate suspenda din diferite motive. În acest moment este posibil ca un alt context de execuție să devină *context de execuție în efect* și să pornească evaluarea propriului cod. Trebuie înțeles acest moment ca un moment în care codul care rulează, transferă controlul unei alte secvențe de cod care își începe execuția. Acest nou context de execuție trece direct în vârful stivei. Mai târziu, codul suspendat poate deveni la rândul său *contextul de execuție în efect* și să reia evaluara codului de la momentul de unde s-a oprit. Această succesiune a contextelor de execuție în efect este gestionată cu ajutorul unei stive care funcționează pe principiul **FIFO - first in, first out**.
 
 Contextul de execuție se leagă organic de **lexical environment**, adică de scope.
 
 ### Global Execution Context - contextul de execuție a codului
 
-Tot codul JavaScript rulează în Global Execution Context (GEC). Este un wrapper pentru cod.
-Este creat un **Global Object** și **this**, o variabilă specială. De regulă, pentru codul top-level este `window`.
-Execution Context este inițiat la executarea codului și este unul per pagină web.
+Tot codul JavaScript rulează în *Global Execution Context* (**GEC**). Este fundația, gazda, contextul dacă vrei a întregului cod.
+Este creat un **Global Object** și **this**, identificatorului legăturii la obiectul context (global în cazul nostru). Pentru **agentul** cel mai utilizat, care este browserul, obiectul global este chiar `window`.
+Execution Context este inițiat la executarea codului și este unul per per agent (pagină web).
 
 Conține:
 
--   Global object
--   this
--   stiva variabilelor
--   Outer environment (pentru cazul funcțiilor. Global env nu are outer env)
--   codul javascript
+-   Global object,
+-   `this`,
+-   stiva variabilelor,
+-   Outer environment (pentru cazul funcțiilor. Global env nu are outer env),
+-   codul javascript.
 
-Atenție, toate acestea sunt create de motorul JavaScript.
+Atenție, toate acestea sunt create de motorul JavaScript mai puțin codul sursă.
 
 ## Mantre
 
 -   Pentru orice program există un **global execution context** (activat spre exemplu când declari `<script>`).
 -   Invocarea unei funcții generează un nou CONTEXT de EXECUȚIE. **Acesta nu este un obiect, ATENȚIE!**.
--   Un context de execuție are un „lexical environment” asociat, adică un scope, care conține toți identificatorii definiți în acel context.
+-   Un context de execuție are un *lexical environment* asociat, adică un scope, care conține toți identificatorii definiți în acel context.
 -   Contextul de execuție este parte a scope-ului.
--   Contextul de execuție este constituit din TOT ce se întâmplă atunci când funcția se execută, adică toate variabilele și funcțiile. O variabilă este considerată a fi „în scope - in-scope", dacă este accesibilă în contextul de execuție curent.
--   O metodă are drept **function context** însuși obiectul „în care” este invocată și poate fi accesat prin `this`.
+-   Contextul de execuție este constituit din TOT ce se întâmplă atunci când funcția se execută, adică toate variabilele și funcțiile. O variabilă este considerată a fi *în scope* - *in-scope*, dacă este accesibilă în contextul de execuție curent.
+-   O metodă are drept **function context** însuși obiectul *în care* este invocată și poate fi accesat prin `this`.
 -   **Function context** nu este **execution context**.
 -   Pentru că JavaScript are un singur fir de execuție, trebuie reținut faptul că de fiecare dată când o funcție este invocată, contextul de execuție a celui care a invocat funcția la momentul acela este înghețat urmând să se creeze un altul pentru evaluarea noii funcții. După ce funcția invocată și-a încheiat execuția, contextul de execuție a funcției care a făcut apelul este restaurat. Evidența apelurilor și a operațiunilor privind înghețarea și restaurarea contextelor de execuție este făcută de **call stack**.
 -   Ori de câte ori este invocată o funcție, se creează un nou context execuție (TOT ce se întâmplă atunci când funcția se execută).
 -   Variabilele și funcțiile care fac parte din contextul de execuție, sunt memorate în EXECUTION CONTEXT OBJECT, care este un obiect al motorului JavaScript.
--   contextul e execuție este parte a scope (format la faza de compilare).
+-   Contextul de execuție este parte a scope (format la faza de compilare).
 -   Context este valoarea lui `this`.
--   toate variabilele și funcțiile definite într-o funcție sunt considerate parte a contextului de execuție.
+-   Toate variabilele și funcțiile definite într-o funcție sunt considerate parte a contextului de execuție.
 
 ### Cazul obiectelor
 
-În cazul obiectelor, atunci când apelezi o funcție (care joacă rolul de metodă), folosind `.` sau `[]`, vei avea un obiect drept context, altfel, vei avea global environment.
+În cazul obiectelor, atunci când apelezi o funcție cu rol de metodă, folosind `.` sau `[]`, vei avea un obiect drept context.
 
 Vorbim de faptul că funcțiile, atunci când sunt apelate, generează un context. Este creată legătura `this` la acest context, fiind setat după modul în care este apelată funcția. Reginald Braithwaite chiar exprima regretul că `this` nu a fost numit `context` direct.
 
-Contextul unei funcții nu poate fi determinat examinând strict codul.
+Contextul unei funcții nu poate fi determinat examinând codul.
 
 ```javascript
 var obiect = {
@@ -231,9 +220,9 @@ getThis(); // window
 Fragmentul de cod analizat este ceva mai complex, dar acoperă și un caz mai dificil al funcțiilor.
 
 ```javascript
-var duda = "o dudă";              // 0
-altaDuda = "o altă dudă";         // 1
-ex = 0;                           // modificabila
+var duda = "o dudă",              // 0
+    altaDuda = "o altă dudă",     // 1
+    ex = 0;                       // modificabila
 
 function faceva (param) {         // 2
     var masura = 12;              // 3

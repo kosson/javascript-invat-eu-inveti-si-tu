@@ -1,16 +1,14 @@
 # Valoarea undefined
 
-Această valoare este o primitivă.
-
-Această valoare semnalează lipsa uneia. Pur și simplu este ca un steguleț pe care scrie: *aici încă nu-i nimic*. Standardul marchează `undefined` ca pe o valoare în sine, dar nu este purtătoare de informație. Unul din motivele pentru care `undefined` există este acela că o mulțime de operațiuni pe care le faci, nu returnează vreo valoare computată în urma evaluării, dar trebuie să întoarcă un rezultat totuși.
+Această valoare semnalează lipsa uneia. Pur și simplu este ca un steguleț pe care scrie: *aici încă nu-i nimic*. Standardul marchează `undefined` ca o valoare în sine, dar care nu este purtătoare de informație. Unul din motivele pentru care `undefined` există este acela că o mulțime de operațiuni pe care le faci, nu returnează vreo valoare computată în urma evaluării, dar trebuie să întoarcă un rezultat totuși.
 
 De exemplu, această valoare va fi alocată imediat ce a fost declarată o variabilă, dar care nu a fost inițializată cu o valoare. De îndată ce în consolă vei da enter după declarare, va fi returnat `undefined` ca rezultat direct al acestei operațiuni.
 
-Aceeași valoare este returnată atunci când ceri o proprietate a unui obiect, dar aceasta nu există și în general când este cerută o valoare printr-un identificator care nu există, care nu are asignată una.
+Aceeași valoare este returnată atunci când ceri o proprietate a unui obiect, dar aceasta nu există și în general când este cerută o valoare printr-un identificator care nu există, care nu are atribuită una.
 
 Cazurile în care este returnat `undefined`:
 
--   la declararea unei variabile cu sau fără asignarea valorii. Dacă este asignată o valoare la declarare, abia la prima utilizare a variabilei se va face și atribuirea valorii;
+-   la declararea unei variabile cu sau fără asignarea valorii. Dacă este atribuită o valoare la declarare, abia la prima utilizare a variabilei se va face și atribuirea valorii;
 -   dacă într-o funcție ai menționat `return`, dar nicio expresie după;
 -   primim `undefined` atunci când o funcție nu returnează în mod explicit ceva. Motorul JavaScript este constrâns să returneze ceva și această valoare este `undefined`;
 -   când căutăm o proprietate într-un obiect, dar aceasta nu există;
@@ -24,7 +22,7 @@ Când vine vorba de mecanismul de transformare (*coercion*), `undefined` va fi r
 undefined + 1; // NaN
 ```
 
-Undefined este un răspuns automat al motorului JavaScript. Dacă programatorul dorește folosirea înadins a unei „non-valori”, va folosi întotdeauna `null`.
+Undefined este un răspuns automat a motorului JavaScript. Dacă programatorul dorește folosirea înadins a unei *non-valori*, va folosi întotdeauna `null`.
 
 În JavaScript, variabilele declarate și neinițializate cu valori sunt setate implicit la `undefined`, iar obiectele la `null`.
 

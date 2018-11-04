@@ -17,7 +17,7 @@ Formele canonice ale enunțurilor `for...in` sunt:
 
 `DeclarațiaDeExpresie` poate fi un `let` sau un `const`.
 
-## Iterarea cheilor proprii, dar și a celor din constructor
+## Chei proprii și din constructor
 
 Trebuie reținut faptul că iterarea folosind `for...in` ia în calcul și cheile constructorului. Pentru izolarea iterării doar pe cheile proprii ale obiectului fără cele moștenite, se va folosi verificarea cu metoda `Object.hasOwnProperty()`.
 
@@ -42,7 +42,7 @@ for(prop in ceva){
 
 În cazul instanțierii cu `new`, tot ce este declarat în `this`, va fi inclus în iterațiile cu `for...in`.
 
-## Parcurgerea cheilor care aparțin strict obiectului
+## Cheile care aparțin obiectului
 
 ```javascript
 let obj = {name: 'Ionel', varsta: 23, meserie: 'zugrav', creativ: true};

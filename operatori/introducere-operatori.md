@@ -1,20 +1,46 @@
 # Evaluarea
 
-Am introdus capitolul care prezintă valorile de lucru pentru că aceste valori sunt operanzii care intră în combinație cu operatorii. Aceste expresii exprimă dorința de a ajunge la un rezultat în urma evaluării. Când vrem să adunăm două valori, folosim caracterul plus pentru a indica evaluatorului (motorul limbajului), că dorim să ajungem la valoarea cumulată.
+Am introdus capitolul care prezintă valorile de lucru pentru că aceste valori sunt **operanzii** care întră în combinație cu operatorii. Aceste expresii exprimă dorința de a ajunge la un rezultat în urma evaluării. Când vrem să adunăm două valori, folosim caracterul plus pentru a indica evaluatorului (motorul limbajului) că dorim să ajungem la valoarea cumulată.
+La un moment dat, vei dori rezultatul evaluării unor expresii de o mare complexitate. Acum este necesar să înțelegem cât de important este să privim expresiile prin lupa evaluării. Ochiul antrenat le va detecta parcurgându-le mental, înțelegând ce fac toți operatorii angrenați.
 
-Insist asupra acestor detalii pentru că la un moment dat, se va dori rezultatul evaluărilor unor expresii de o mare complexitate. Dacă acum înțelegem că este crucial  să privim expresiile prin lupa evaluării, multe asperități în înțelegerea codului scris de tine sau de alții vor dispărea. Ochiul antrenat, va detecta expresiile și le va parcurge mental înțelegând ce fac toți operatorii angrenați.
+**Operanzii sunt expresii**.
 
-## Ce sunt operanzii?
+Operatorii sunt **semne grafice** sau **cuvinte cheie** care indică ce operațiune se va efectua la momentul evaluării expresiei. Aceste semne grafice sunt semnele operațiunilor matematice, adunare, scădere, compararea valorilor și așa mai departe.
 
-Sunt expresii.
+Să ne amintim că expresiile pot fi constituite pur și simplu din declararea unei valori sau a unei variabile, dar și din înșiruirea de operanzi și operatori. În unele lucrări dedicate în general programării veți mai întâlni opinia că operanzii pot fi percepuți drept substantive, iar operatorii ca adevărate verbe.
 
-## Ce sunt operatorii?
+**Moment ZEN**: Un program JavaScript este evaluarea unui set de expresii, care pentru a fi *rezolvate*, mai întâi trebuie să rezolvi din aproape în aproape toate celelalte expresii mai mici.
 
-Sunt **semne grafice** sau **cuvinte cheie** care indică ce operațiune se va efectua la momentul evaluării expresiei. Aceste semne grafice sunt semnele operațiunilor matematice, adunare, scădere, compararea valorilor și așa mai departe.
+În programare există două mari categorii de operatori: operatorii unari și cei binari. Operatorii unari sunt acei operatori care se aplică unui singur operand. Operatorii binari sunt cei care implică doi operatori. Ca și în cazul matematicii, operatorii au o anumită ordine, o anumită întâietate la evaluare a unora față de alții. Ne aducem aminte de la aritmetică că înmulțirea se face înaintea adunării și a scăderii.
+Până acum v-am obișnuit cu unul care este indispensabil, cel care atribuire a valorilor `=` (semnul egal). Este operatorul care pur și simplu face legătura dintre valoare și numele sub care poate fi regăsită. Haideți să pornim încetișor să vedem despre ce este vorba și pentru asta vom reveni la cele mai simple concepte ale operațiunilor matematice. Da, știu. Mate! Da' promit că nu doare. Hai să vedem care-i treaba cu asociativitatea.
 
-Să ne amintim că expresiile pot fi constituite pur și simplu din declararea unei valori sau a unei variabile, dar și din înșiruirea de operanzi și operatori. În unele lucrări dedicate în general programării veți mai întâlni opinia că operanzii pot fi percepuți precum substantive, iar operatorii ca adevărate verbe.
+## Asociativitatea operatorilor
 
-**Moment ZEN**: Un program JavaScript este evaluarea unui set de expresii, care pentru a fi „rezolvate”, mai întâi trebuie să rezolvi din aproape în aproape toate celelalte expresii mai mici.
+Este o proprietate care indică ordinea în care sunt procesați operatorii de același rang.
+
+```javascript
+1 + 2 + 3
+```
+
+Asociativitate stângă este atunci când grupezi termenii din partea stângă.
+
+```javascript
+(1 + 2) + 3
+```
+
+Asociativitatea dreaptă este atunci când poți grupa termenii de la dreapta.
+
+```javascript
+1 + (2 + 3)
+```
+
+Asociativitatea dreaptă funcționează și pentru următorul exemplu.
+
+```javascript
+x = y = 1;
+```
+
+Valoarea `1` este atribuită lui `y`, iar `y` este atribuit lui `x`.
 
 ## Truthy și falsey
 

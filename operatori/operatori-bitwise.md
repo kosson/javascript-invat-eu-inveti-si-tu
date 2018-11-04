@@ -6,16 +6,11 @@ Care este acest nivel? Reprezentarea ca un număr binar pe 32 de biți. Pentru a
 
 ## Sisteme de numerație
 
-Hai să ne readucem aminte că noi zi de zi folosim sistemul zecimal (baza este fragmentarea în grupe de câte zece cu multiplii acestora) în cuantificare și operațiunile curente de la numărarea banilor, până la calcularea distanțelor.
-Cifrele sistemului zecimal: `0, 1, 2, 3, 4, 5, 6, 7, 8, 9`.
-
-Ce înseamnă baza 10? Hai să vedem. Cum putem reprezenta un număr, de exemplu: **2310**?
+Hai să ne readucem aminte că noi zi de zi folosim sistemul zecimal (baza este fragmentarea în grupe de câte zece cu multiplii acestora) în cuantificare și operațiunile curente de la numărarea banilor, până la calcularea distanțelor. Cifrele sistemului zecimal: `0, 1, 2, 3, 4, 5, 6, 7, 8, 9`. Ce înseamnă baza 10? Hai să vedem. Cum putem reprezenta un număr, de exemplu: **2310**?
 
 2`*`10<sup>3</sup> `+` 3`*`10<sup>2</sup> `+` 3`*`10<sup>1</sup>+0
 
-Dar acest sistem de numerație nu este singurul cunoscut de omenire.
-
-Un altul este sistemul hexazecimal, a cărui bază este 16 și care este folosit în reprezentarea multor valori în programare. Simbolurile folosite sunt:
+Dar acest sistem de numerație nu este singurul cunoscut de omenire. Un altul este sistemul hexazecimal, a cărui bază este 16, fiind folosit în reprezentarea multor valori în programare. Simbolurile folosite sunt:
 
 `0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F`, unde literele țin locul astfel: `A` = 10, `B` = 11, `C` = 12, `D` = 13, `E` = 14, `F` = 15.
 

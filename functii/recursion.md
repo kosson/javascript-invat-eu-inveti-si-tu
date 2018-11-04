@@ -6,7 +6,7 @@ Alternativa la procesele repetitive, la ciclurile iterative realizate cu buclele
 
 Capacitatea unei funcții de a se apela pe sine însăși conduce la efecte interesante atunci când vorbim despre parcurgerea unor calupuri de date. În cel mai simplu scenariu vorbim de faptul că funcția va executa același set de instrucțiuni până la epuizarea unei condiții setată în apel.
 
-Ține minte că în cazul recursivității, fiecare operațiune, adică fiecare nouă apelare este **subordonată** pasului anterior și creează un cadru nou de execuție în stiva de apeluri.
+Ține minte că în cazul recursivității, fiecare operațiune, adică fiecare nouă apelare este **subordonată** pasului anterior și adaugă un cadru nou de execuție în stiva de apeluri.
 
 Exemplu simplu:
 
@@ -20,14 +20,14 @@ function scad (numar) {
 
 Cum funcționează:
 
-1. declari o funcție printr-o expresie care ia un argument
-2. se creează variabila internă „număr” cu valoarea 10
-3. se testează condiția de ieșire din execuția funcției
-4. dacă condiția nu este satisfăcută, se mai aplează o dată funcția
-5. de aceasă dată la argument se introduce expresia care transformă
-6. este evaluată expresia și noua valoare va fi valoarea lui număr
-7. Ciclul inițiat la pasul 3 se reia până când valoarea evaluată la argument satisface condiția.
-8. La satisfacerea condiției se iese din execuția primului apel scad()
+1. declari o funcție printr-o expresie care ia un argument,
+2. se creează variabila internă `număr` cu valoarea `10`,
+3. se testează condiția de ieșire din execuția funcției,
+4. dacă condiția nu este satisfăcută, se mai apelează o dată funcția,
+5. de această dată la argument se introduce expresia care transformă,
+6. este evaluată expresia și noua valoare va fi valoarea lui număr;
+7. Ciclul inițiat la pasul 3 se reia până când valoarea evaluată la argument satisface condiția;
+8. La satisfacerea condiției se iese din execuția primului apel `scad()`.
 
 Varianta ECMAScript 2015 folosind un *fat arrow*:
 
@@ -51,7 +51,6 @@ function fact (n) {
     }
     return n * fact(n - 1);
 };
-
 fact(4); // 4
 ```
 
@@ -66,7 +65,7 @@ function fibonacci (x) {
 };
 ```
 
-Primul contact cu această secvență de cod a fost atunci când ți-am atâțat curiozitatea la iterațiile cu `for`. Pentru că o funcție decursivă poate fi rezolvată și printr-o procedură iterativă se numește **recursivitate primitivă**.
+Primul contact cu această secvență de cod a fost atunci când ți-am ațâțat curiozitatea la iterațiile cu `for`. Pentru că o funcție recursivă poate fi rezolvată și printr-o procedură iterativă se numește **recursivitate primitivă**.
 
 ## Mantre
 

@@ -1,8 +1,8 @@
 # Variabile const
 
-A fost adăugat de ECMAScript 2015 (ES6). Folosind `const` se declară o variabilă unică pentru un program. Nu poți să declari altă variabilă cu același identificator.
+A fost adăugat de ECMAScript 2015 (ES6). Folosind `const` se declară o variabilă unică pentru un program. Nu poți să o redeclari.
 
-Declarația unei variabile folosind `const` nu se referă la valoare, ci doar la modul cum se face atribuirea valorii. Nu asocia ideea de constantă cu valoarea asignată. E o capcană. În subsidiar asta înseamnă că nu poți modifica legătura creată între identificatorul lui const încercând atribuirea unui alt obiect, de exemplu. După cum ai sesizat, se folosește de cele mai multe ori în cazul obiectelor pe care le dorim fixate pe durata întregii execuții a programului. Obiectele astfel declarate pot fi modificate, pentru că efectul declarării folosind const se referă la stabilirea unei legături ce nu poate fi modificată.
+Declarația unei variabile folosind `const` nu se referă la valoare, ci doar la modul cum se face atribuirea valorii. Nu asocia ideea de constantă cu valoarea atribuită. E o capcană. În subsidiar asta înseamnă că nu poți modifica legătura creată între identificatorul lui `const` încercând atribuirea unui alt obiect, de exemplu. După cum ai sesizat, se folosește de cele mai multe ori în cazul obiectelor pe care le dorim fixate pe durata întregii execuții a programului. Obiectele astfel declarate pot fi modificate, pentru că efectul declarării folosind `const` se referă la stabilirea unei legături ce nu poate fi modificată.
 
 ```javascript
 const ceva = ['unu','doi']; // array-urile sunt obiecte și ele

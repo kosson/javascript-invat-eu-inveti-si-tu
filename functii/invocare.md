@@ -1,6 +1,6 @@
 # Invocarea funcțiilor
 
-La momentul începerii execuției codului, toate funcțiile declarate cu `function` există (vezi etapa de compilare) și sunt asociate identificatorilor ca valori. Acest lucru este valabil doar pentru declarațiile de funcții (**function declaration**), nu și pentru **expresiile de funcții**. Expresiile de funcții și **arrow functions** nu fac parte din această secvență, fiind create la momentul în care **execuția** ajunge unde sunt declarate și le evaluează pentru a asigna o valoare identificatorului din stânga egalului. Invocarea funcțiilor se face prin operatorul `()`. La invocare se creează un nou context de execuție, care ajunge în stiva apelurilor (*call-stack*).
+La momentul începerii execuției codului, toate funcțiile declarate cu `function` există deja în mediul lexical (vezi etapa de compilare) și sunt atribuite identificatorilor ca valori. Acest lucru este valabil doar pentru declarațiile de funcții (**function declaration**), nu și pentru **expresiile de funcții**. Expresiile de funcții și **arrow functions** nu fac parte din această secvență, fiind create la momentul în care **execuția** ajunge unde sunt declarate și le evaluează pentru a atribui o valoare identificatorului din stânga egalului. Invocarea funcțiilor se face prin operatorul `()`. La invocare se creează un nou context de execuție, care ajunge în stiva apelurilor (*call-stack*).
 
 **Spune standardul**:
 
@@ -10,17 +10,19 @@ La momentul începerii execuției codului, toate funcțiile declarate cu `functi
 
 ## Ce se întâmplă
 
-Înainte de a radiografia efectele apelului de funcție, ne vom uita în standard la algoritmul intern motorului `FunctionInitialize(F, kind, ParameterList, Body, Scope )`. Argumentele acestui algoritm intern sunt o funcție obiect `F`, mențiunea `kind` care indică ce tip de funcție este (*Normală*, *Metodă*, *Arrow*), o listă cu toți parametrii, un corp care cuprinde codul ce urmează să fie evaluat și un *Mediu Lexical* care este identificat ca Scope. Alcătuind acest context să vedem în ce constă execuția unei funcții.
+Înainte de a radiografia efectele apelului de funcție, ne vom uita în standard la algoritmul intern motorului `FunctionInitialize(F, kind, ParameterList, Body, Scope )`. Argumentele acestui algoritm intern sunt o funcție obiect `F`, mențiunea `kind` care indică ce tip de funcție este (*Normală*, *Metodă*, *Arrow*), o listă cu toți parametrii, un corp care cuprinde codul ce urmează să fie evaluat și un *Mediu Lexical* care este identificat ca scope. Alcătuind acest context să vedem în ce constă execuția unei funcții.
 
-1.  Locul în care se întâmplă acest lucru se numește **call-site**.
-2.  Se creează un nou **execution context** - context de execuție care este introdus în stivă.
-  1. vorbim de context de execuție global (obiectul **window**), când funcția este invocată ca funcție, nu ca metodă sau callback.
-  2. contextul de execuție este o sumă de informații (activation record) privind
-    1. **unde** a fost apelată funcția (în callstack);
+ #1 Locul în care se întâmplă acest lucru se numește **call-site**.
+ #2 Se creează un nou **execution context** - context de execuție care este introdus în stivă. Vorbim de context de execuție global (obiectul **window**), când funcția este invocată ca funcție, nu ca metodă sau callback.
+
+Contextul de execuție este o sumă de informații (activation record) privind:
+
+    1. **unde** a fost apelată funcția (în call-stack);
     2. ce parametri au fost pasați, etc.;
     3. referința `this` care va fi folosită pe durata execuției funcției.
-3. Se face legătura la contextul lexical asociat acelei funcții (scope-ul). Pentru scope-ul extern, funcția va pune drept referință valoarea proprietății interne a funcției numită `[[Environment]]`.
-3. Se generează un obiect căruia îi sunt pasate automat argumentele într-o colecție asemănătoare unui array și legătura **this**.
+
+ #3 Se face legătura la contextul lexical asociat acelei funcții (scope-ul). Pentru scope-ul extern, funcția va pune drept referință valoarea proprietății interne a funcției numită `[[Environment]]`.
+ #4 Se generează un obiect căruia îi sunt pasate automat argumentele într-o colecție asemănătoare unui array și legătura **this**.
 
 Obiectul **arguments** este o colecție (seamănă dar nu este un array) a tuturor argumentelor pasate funcției și are proprietatea `length` pentru a afla numărul argumentelor pasate. Valorile pot fi obținute prin `arguments[index]`.
 
@@ -71,7 +73,7 @@ let instanta = new Ceva();
 
 Observăm că funcția noastră va avea un comportament *normal* și va returna evaluarea oricăror expresii. Astfel se explică de ce o parte din constructorii obiectelor interne pot fi apelați drept funcții, unii fiind folosiți pentru a face *casting* unor valori pentru care dorim un tip fix. Atenție, dacă se va apela cu `new`, valoarea returnată va fi complet ignorată și se va crea un obiect nou.
 
-Mai există o situație interesantă legată de pierderea capacității de a genera un nou obiect a unui contructor creat de noi. Dacă funcția constructor va returna un obiect, atunci la invocarea cu `new`, nu va crea un obiect nou, ci îl va returna pe cel specificat.
+Mai există o situație interesantă legată de pierderea capacității de a genera un nou obiect a unui constructor creat de noi. Dacă funcția constructor va returna un obiect, atunci la invocarea cu `new`, nu va crea un obiect nou, ci îl va returna pe cel specificat.
 
 ```javascript
 const obi = {a: 1};
@@ -103,13 +105,13 @@ obi.getAscunsă();
 obi.setAscunsă(20);
 ```
 
-Indiferent cât de multe obiecte ar fi instanțiate, se creează un closure pe mediul funcției care joacă rolul de constructor la momentul instanțierii. Obiectele generate sunt diferite, fiecare pornind de la valorile existente în funcția constructor la momentul invocării. Ceea ce am realizat cu această tehnică este să „ascundem” variabile și să le manipulăm prin efectul de closure realizat de metodele care le țin în viață - un joc între contextele de execuție și mediul lexical.
+Indiferent cât de multe obiecte ar fi instanțiate, se creează un closure pe mediul funcției care joacă rolul de constructor la momentul instanțierii. Obiectele generate sunt diferite, fiecare pornind de la valorile existente în funcția constructor la momentul invocării. Ceea ce am realizat cu această tehnică este să *ascundem* variabile și să le manipulăm prin efectul de closure realizat de metodele care le țin în viață - un joc între contextele de execuție și mediul lexical.
 
-Din nefericire dacă creăm un alt obiect și îi facem un identificator căruia îi asignăm metoda de acces către valoarea așa-zis **privată**, o vom putea accesa cu ușurință pentru că până la urmă, o metodă este o funcție, care este o valoare. Acesta este motivul pentru care în JavaScript nu există posibilitatea de a avea variabile private cu adevărat.
+Din nefericire dacă creăm un alt obiect și îi facem un identificator căruia îi atribuim metoda de acces către valoarea așa-zis **privată**, o vom putea accesa cu ușurință pentru că până la urmă, o metodă este o funcție, care este o valoare. Acesta este motivul pentru care în JavaScript nu există posibilitatea de a avea variabile private cu adevărat.
 
 ### Invocarea funcțiilor prin call și apply()
 
-Cele două funcții realizează un binding explicit a funcției cu un nou context de execuție. Se face „un împrumut” al mecanismelor și proceselor interne ale funcției în contextul de lucru oferit de un anume obiect.
+Cele două funcții realizează un binding explicit a funcției cu un nou context de execuție. Se face *un împrumut* al mecanismelor și proceselor interne ale funcției în contextul de lucru oferit de un anume obiect.
 
 ## Invocare condițională
 

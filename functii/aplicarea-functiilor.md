@@ -1,14 +1,6 @@
 # Aplicarea funcțiilor
 
 Este procedura de **aplicare** a unei funcții argumentelor sale pentru a produce o valoare care să fie returnată.
-
-Profesorul Christopher Strachey spune:
-
-> Aplicarea unei funcții argumentelor sale implică evaluarea expresiei care o definește după ce au fost date valori variabilelor conectate la acestea din lista argumentelor.
-Astfel, valoarea-R a funcției conține două părți: o regulă pentru evaluarea expresiei și un mediu care să-i ofere variabilele libere.
-
-## Aplicare parțială
-
 Aplicarea parțială este procesul de aplicare a unei funcții unei părți a argumentelor. Funcția este returnată pentru a fi folosită ulterior. Pe scurt, o funcție ia o funcție cu parametri multipli și returnează o funcție cu mai puțini parametri.
 
 ```javascript

@@ -4,7 +4,7 @@ Are rolul de a crea o instanță a unui obiect definit de programator.
 
 Pentru a crea un obiect este necesară o funcție care să joace rol de șablon și apoi instanțierea unui obiect prin apelarea funcției cu `new`.
 
-Dacă ești un programator începător și ai ajuns în acest punct, nu te descumpăni. Acest operator este folosit împreună cu un aplel la o funcție pentru a genera un nou obiect. Acest lucru este permis funcțiilor, fiind una din metodele de a crea obiecte printr-o parametrizare anterioară.
+Dacă ești un programator începător și ai ajuns în acest punct, nu te descumpăni. Acest operator este folosit împreună cu un apel la o funcție pentru a genera un nou obiect. Acest lucru este permis funcțiilor, fiind una din metodele de a crea obiecte printr-o parametrizare anterioară.
 
 La instanțierea cu `new` sunt urmați următorii pași:
 -   motorul inițiază un obiect nou;

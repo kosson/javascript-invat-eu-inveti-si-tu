@@ -18,7 +18,7 @@ Formele canonice ale enunțurilor `for...of` sunt:
 
 Forma canonică a enunțului este: `for ( expresieManaStângă of expresieDeAtribuire ) enunț`.
 
-Ce se întâmplă atunci când se face o iterare este invocarea unei metode interne pe care orice obiect iterabil o are: `obiectIterabil[Symbol.iterator]()`. Această metodă returnează un obiect din care se vor accesa valorile. Dacă ești curios cum funcționează, poți face același lucru.
+Când se face o iterare se invocă o metodă internă pe care orice obiect iterabil o are: `obiectIterabil[Symbol.iterator]()`. Această metodă returnează un obiect din care se vor accesa valorile. Dacă ești curios cum funcționează, poți face același lucru.
 
 ```javascript
 const colecție = ['ceva', 'altceva', 'undeva'];
@@ -29,20 +29,13 @@ iterator.next(); // Object { value: "undeva", done: false }
 iterator.next(); // Object { value: undefined, done: true }
 ```
 
-Ceea ce putem face manual apelând metoda `next()` pe obiectul iterator, face `for...of` automat pentru noi. Structurile iterabile, la momentul în care sunt supuse unor prelucrări folosind `for...of` vor genera un obiect iterator, pe care îl vor parcurge. Și aici gândurile mele mă duc către funcțiile generator, care nu este nimic altceva decât un mecanism de creare de iteratori. Dacă ești curios, aruncă repede un ochi.
+Ceea ce putem face manual apelând metoda `next()` pe obiectul iterator, face `for...of` automat pentru noi. Structurile iterabile, la momentul în care sunt supuse unor prelucrări folosind `for...of` vor genera un obiect iterator, pe care îl vor parcurge. Și aici gândurile mele mă duc către funcțiile generator, care nu sunt nimic altceva decât un mecanism de creare de iteratori. Dacă ești curios, aruncă repede un ochi.
 
-## Lucru cu for...of
+## Elemente practice
 
 Ori de câte ori un obiect trebuie să fie iterat, metoda `@@iterator` este apelată fără argumente. Apelarea metodei se va solda cu returnarea unui obiect iterator. Acesta va fi folosit pentru a obține valorile.
 
-Enunțul `for...of` poate parcurge și extrage valori din următoarele obiecte care respectă **protocolul iterator**:
-
--   `Array`
--   `Map`
--   `Set`
--   `String`
--   `TypedArray`
--   `arguments`
+Enunțul `for...of` poate parcurge și extrage valori din următoarele obiecte care respectă **protocolul iterator**: `Array`, `Map`, `Set`, `String`, `TypedArray` și `arguments`.
 
 Dacă în cazul lui `for` era nevoie să introduci expresiile opționale în blocul de inițializare, în cazul utilizării enunțului `for...of` lucrurile stau ceva mai simplu atunci când dorești parcurgerea unui array.
 
@@ -53,9 +46,9 @@ for (let element of colectie) {
 };
 ```
 
-Domeniul de aplicativitate pentru care a apărut acest nou enunț este cel al obiectelor „iterable”, iar cel mai des folosite sunt `Array`, `Map` și `Set`.
+Domeniul de aplicare pentru care a apărut acest nou enunț este cel al obiectelor *iterable*. Cel mai des folosite sunt `Array`, `Map` și `Set`.
 
-În iterările cu `for...of`, cel mai potrivit ar fi să declari variabila de lucru pentru element cu `let` pentru a avea acces la valorile de etapă în iterare. Declararea cu `var` ar suprascrie valoarea identificatorului respectând comportamentele de vază a unei variabile declarate cu `var`.
+În iterările cu `for...of`, cel mai potrivit ar fi să declari variabila de lucru pentru element cu `let` pentru a avea acces la valorile de etapă în iterare. Declararea cu `var` ar suprascrie valoarea identificatorului respectând comportamentele de bază a unei variabile declarate cu `var`.
 
 Cu `for...of` poți parcurge și valorile de tip șir.
 
@@ -119,7 +112,7 @@ console.log(titluri);
  */
 ```
 
-#### Accesarea cheilor și a valorilor obiectelor simple
+#### Cheile și a valorile obiectelor simple
 
 Uneori ai nevoie să accesezi cheile obiectului pe care-l iterezi. Soluția vine prin folosirea metodei `Array.prototype.keys()`.
 

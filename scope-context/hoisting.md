@@ -21,7 +21,7 @@ Atașarea la momentul compilării a unei varibile la mediul lexical al funcției
 facCeva(); // prima
 var facCeva;
 function facCeva () {
-  console.log('prima');  
+  console.log('prima');
 };
 facCeva = function () {
   console.log('secunda');
@@ -51,7 +51,7 @@ function faCeva () {
 
 Din acest motive este cel mai bine ca variabilele să fie declarate în capul funcției de la bun început. Mai ales în cazul variabilelor definite cu `let`.
 
-Hoistingul se manifestă la fel ca și în cazul variabilelor declarate cu `var`, atunci când ai o expresie de funcție. Este hoistată declarația, dar asignarea se face când motorul ajunge la atribuire. Deci, nu vei putea apela înainte de a o inițializa cu valoarea de funcție.
+Hoistingul se manifestă la fel ca și în cazul variabilelor declarate cu `var`, atunci când ai o expresie de funcție. Este hoistată declarația, dar atribuirea valorii, care este funcția în sine, se face când motorul ajunge la evaluarea expresiei. Deci, nu vei putea apela înainte de a o inițializa cu valoarea de funcție.
 
 Cel mai evident exemplu este să scrii o funcție care să returneze după ce ai declarat variabila. Surpriza mare este returnarea valorii `undefined` deoarece declarația a hoistat variabila, dar nu a mai apucat să facă și „legătura” la valoare.
 
@@ -107,7 +107,7 @@ function trei (ceva) {
 
 ## Marcajul sintactic și hoisting-ul
 
-Să examinăm cazurile în care declarăm variabile în interiorul unor instrucțiuni precum `if` sau `for`. De ce facem acest lucru când suntem perfect conștienți că aceste variabile vor fi disponibile întregului cod, nu doar blocului decizional sau buclei `for`? Răspunsul rezidă din necesitatea umană de a semnala celorlalți programatori faptul că acele variabile, acei identificatori nu trebuie folosiți în altă parte în afara zonei în intenție pentru care au fost declarați.
+Să examinăm cazurile în care declarăm variabile în interiorul unor instrucțiuni precum `if` sau `for`. De ce facem acest lucru când suntem perfect conștienți că aceste variabile vor fi disponibile întregului cod, nu doar blocului decizional sau buclei `for`? Răspunsul vine din necesitatea umană de a semnala celorlalți programatori faptul că acele variabile, acei identificatori nu trebuie folosiți în altă parte în afara zonei în intenție pentru care au fost declarați.
 
 ```javascript
 if (x == undefined) {
@@ -122,7 +122,7 @@ for (var i = 0; i < 100; i++) {
 };
 ```
 
-Felul de a declara, dacă ne uităm **unde** o facem, implică faptul că semnalizăm cui vrem noi să „aparțină” fiecare variabilă definită. Concluzia este că hoistingul este doar o explicație oferită pentru felul în care este constituit mediul lexical la momentul compilării și comportamentul vis-a-vis de inventarierea identificatorilor.
+Felul de a declara, dacă ne uităm **unde** o facem, implică faptul că semnalizăm cui vrem noi să *aparțină* fiecare variabilă definită. Concluzia este că hoistingul este doar o explicație oferită pentru felul în care este constituit mediul lexical la momentul compilării și comportamentul vis-a-vis de inventarierea identificatorilor.
 
 Ceva s-a întâmplat între timp odată cu apariția versiunii ES6. Folosirea lui `let`, forțează la nivelul compilatorului ca variabila declarată să fie atașată doar blocului în care apare.
 
