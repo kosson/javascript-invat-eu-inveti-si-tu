@@ -39,7 +39,7 @@ var scad = (numar) => {
 }; scad(10);
 ```
 
-Atunci când chemi recursiv folosind un singur apel din funcția care era în execuție, se numește **recursivitate unică**, iar atunci când în primul apel apelezi de mai multe ori în corp se numește **recursivitate multiplă**.
+Atunci când chemi recursiv folosind un singur apel din funcția care era în execuție, se numește **recursivitate unică**, iar atunci când apelezi de mai multe ori în corp se numește **recursivitate multiplă**.
 
 Pentru a exemplifica recursivitatea unică, vom factoriza un număr natural pozitiv:
 
@@ -61,7 +61,7 @@ function fibonacci (x) {
   if (x < 2) {
     return x
   }
-  return fibonacci (x - 1) + fibonacci (n - 2)
+  return fibonacci (x - 1) + fibonacci (n - 2);
 };
 ```
 

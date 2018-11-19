@@ -1,6 +1,6 @@
 # Closures
 
-O funcție definită în interiorul unei funcții container generează un closure peste mediul lexical existent la momentul definirii. Motorul Javascript ține evidența mediilor lexicale, fie că acestea sunt la nivel de bloc, la nivel de funcție sau globalul. Reține faptul că declararea variabilelor cu `var` introduce identificatorii în limitele unei funcții container sau în obiectul global ignorând complet blocurile delimitate prin acolade. Declararea variabilelor cu `let` și `const` introduce identificatori doar la nivelul blocului în care se face declararea și în blocurile de cod delimitate prin acolade.
+O funcție definită în interiorul unei funcții container generează un closure peste mediul lexical existent la momentul definirii. Motorul JavaScript ține evidența mediilor lexicale, fie că acestea sunt la nivel de bloc, la nivel de funcție sau globalul. Reține faptul că declararea variabilelor cu `var` introduce identificatorii în limitele unei funcții container sau în obiectul global ignorând complet blocurile delimitate prin acolade. Declararea variabilelor cu `let` și `const` introduce identificatori doar la nivelul blocului în care se face declararea și în blocurile de cod delimitate prin acolade.
 
 Cum am putea traduce în română termenul de *closure*. Am explorat deja la funcții posibile traduceri în limba română și pentru că ambii termeni identificați: **portiță** și  **breșă** nu sunt tocmai eleganți pentru uzul curent, am căzut de acord că vom folosi termenul în limba engleză. După ce vom fi explorat mai mult, vom înțelege că este o caracteristică, un mecanism al limbajului de programare și astfel, am putea să ne gândim la acțiunea pe care o implică termenul de **closure**.
 
@@ -198,7 +198,7 @@ referintaCatreIntern(); // Am acces la ceva extern și la ceva din container
 referintaCatreIntern(container());
 ```
 
-### Variabile „private” și accesarea acestora.
+### Variabile private și accesare
 
 Cazul cel mai simplu este al unei funcții returnate care păstrează referințele către toți identificatorii din propriul scope, dar și scope-ul părinte. Aici se observă cât de intim conceptul de closure este legat de cel al scope-ului (lexical environment) creat la momentul compilării codului sursă (**function code**).
 
@@ -215,7 +215,7 @@ let faAltceva = gazda("x");
 faAltceva(0);                     // "x și 0"
 ```
 
-### Crerea de obiecte noi folosind constructori.
+### Obiecte noi folosind constructori
 
 Înainte de a porni lucrul cu un exemplu, ar fi necesar să amintim getter-ii și setter-ii.
 
@@ -249,9 +249,9 @@ aDouaLansare.getAltitudine(); // 24.06.2016 la altitudinea de 45000
 Trebuie remarcat faptul că în exemplul nostru metodele sunt rulate în **global execution context**, iar scope-ul asociat, firesc, este cel global.
 La execuția metodelor, acestea vor crea câte un context de execuție propriu care va fi adăugat la call-stack și care va dispărea din stack la momentul finalizării execuției lor. Executarea metodelor mai are ca efect crearea scope-ului propriu (**lexical environment**) și crearea referinței către scope-ul în care au fost create (Lansare), care era activ la crearea funcției. Accesarea variabilei altitudine se face prin căutarea mai întâi în propriul scope creat, care nu conține un identificator pe nume altitudine și mai apoi căutarea în scope-ul care exista la momentul creării, adică scope-ul lui Lansare, unde îl găsește și rezolvă aducând valoarea.
 
-Reține faptul că în cazul în care este nevoie poți atribui metoda unui obiect creat cu `new` unei proprietăți a altui obiect creat ad-hoc și care va putea accesa valorile din scope-ul funcției contructor. Acest caz conduce la concluzia că aceste variabile nu sunt atât de ascunse pe cât s-ar crede la prima vedere. Dar acest mecanism totuși este cel mai aproape de „încapsularea” din alte limbaje de programare.
+Reține faptul că în cazul în care este nevoie poți atribui metoda unui obiect creat cu `new` unei proprietăți a altui obiect creat ad-hoc și care va putea accesa valorile din scope-ul funcției constructor. Acest caz conduce la concluzia că aceste variabile nu sunt atât de ascunse pe cât s-ar crede la prima vedere. Dar acest mecanism totuși este cel mai aproape de *încapsularea* din alte limbaje de programare.
 
-### Crearea accesarea și modificarea membrilor unui obiect
+### Crearea, accesarea și modificarea membrilor
 
 Pentru a înțelege exemplul de mai jos, nu uita faptul că funcțiile în JavaScript sunt obiecte și că, orice funcție în JS, poate face referință la variabile definite în scope-ul extern.
 
@@ -300,7 +300,7 @@ Se observă că după invocarea a doua oară a funcției gazdă, orice modificar
 
 John Resig aduce acest caz de closure format la crearea unui obiect pe baza unei funcții constructor.
 
-Funcțiile cu rol de constructori pot defini intern metodele, iar acestea devin niște metode tip „accessor” sau „getter”, care te ajută să ajungi din scope-ul extern la valorile din constructor.
+Funcțiile cu rol de constructori pot defini intern metodele, iar acestea devin niște metode tip *accessor* sau *getter*, care te ajută să ajungi din scope-ul extern la valorile din constructor.
 
 ```javascript
 function Sablon(){
@@ -327,7 +327,7 @@ obiect2.getCantitate(); // 10
 
 Pentru a ajunge la cantitate este nevoie de metode de acces (în engleză li se spune **accessors**). Acesta este și unul din cazurile de realizare a unui closure. Trebuie reținut faptul că pentru funcțiile din constructor, legătura la `this` se realizează prin invocarea cu `new`.
 
-### Referințe către obiecte care nu fac closure.
+### Referințe către obiecte care nu fac closure
 
 Exemplu de referințe către obiecte care nu sunt un closure (prezentat de Kyle Simpson):
 
@@ -345,7 +345,7 @@ console.log(obiect.obj.test); // => test
 Closure-ul poate simula variabile private.
 Este baza șablonului tip modul (MODULE PATTERN) prin care se realizează încapsularea și/sau ascunderea datelor.
 
-Cu ajutorul closure-urilor se poate scrie cod care să ruleze într-un mediu izolat. Closure-ul propune un model de incapsulare a funcționalităților, durează câtă vreme rulează aplicația și oferă o zonă privată, care poate memora o stare. Un exemplu este o funcție anonimă executată imediat.
+Cu ajutorul closure-urilor se poate scrie cod care să ruleze într-un mediu izolat. Closure-ul propune un model de încapsulare a funcțiilor, durează câtă vreme rulează aplicația și oferă o zonă privată, care poate memora o stare. Un exemplu este o funcție anonimă executată imediat.
 
 ```javascript
 // exemplu de closure anonim
@@ -355,7 +355,7 @@ Cu ajutorul closure-urilor se poate scrie cod care să ruleze într-un mediu izo
 }());
 ```
 
-Pornind de la acest model, se poat rula cod extern:
+Pornind de la acest model, se poate rula cod extern:
 
 ```javascript
 (function($, Mootools){
@@ -385,10 +385,7 @@ console.log(reper(true)); // 10
 
 ### Closure în bucle
 
-Este considerată a fi o eroare crearea de closure-uri în bucle. Probleme pot apărea, de exemplu, atunci când o serie de bucle au drept scop încărcarea unui array cu funcții.
-
-De exemplu, în cazul buclelor realizate cu `for`, binding-ul se va face pe ultima valoare stabilită și aceasta va fi returnată.
-Pentru a soluționa problema, se va introduce bucla în funcția returnată:
+Este considerată a fi o eroare crearea de closure-uri în bucle. Probleme pot apărea, de exemplu, atunci când o serie de bucle au drept scop încărcarea unui array cu funcții. De exemplu, în cazul buclelor realizate cu `for`, binding-ul se va face pe ultima valoare stabilită și aceasta va fi returnată. Pentru a soluționa problema, se va introduce bucla în funcția returnată:
 
 ```javascript
 var colectie = ["Gino", "Rahan", "Mario"];
@@ -504,7 +501,7 @@ run();
 
 #### init()
 
-`init()` ciclează de 3 ori iar `x` va rămâne după finalizarea buclei la valoarea `2`. Funcția `innerFunction` face *enclosing* (circumscrie) variabila `x`. La momentul execuției sunt introduse în array-ul `funcs` trei referințe către funcția internă a lui `init()`, astfel, făcându-se un clojure pe funcția internă.
+`init()` ciclează de 3 ori iar `x` va rămâne după finalizarea buclei la valoarea `2`. Funcția `innerFunction` face *enclosing* (circumscrie) variabila `x`. La momentul execuției sunt introduse în array-ul `funcs` trei referințe către funcția internă a lui `init()`, astfel, făcându-se un closure pe funcția internă.
 
 #### run()
 
@@ -596,7 +593,7 @@ for(var index in functii){
 };
 ```
 
-Diferența este că `emiteFunctii` este invocat pentru fiecare iterație. Ca efect se creează un scope nou, iar index este legat de acel scope, ceea ce înseamnă ca avem 5 scope-uri create.
+Diferența este că `emiteFunctii` este invocat pentru fiecare iterație. Ca efect se creează un scope nou și `index` este legat de acel scope, ceea ce înseamnă ca avem 5 scope-uri create.
 
 ## Alonjă
 

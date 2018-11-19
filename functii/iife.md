@@ -71,7 +71,7 @@ Este o **expresie de funcție** (*function expression*). Este o funcție exprima
 
 #### Execuția unui funcții fără a returna nimic
 
-Să pornim cu cel mai simplu exemplu, dar, din capul locului, buna practică spune să declarăm o variabilă care să referențieze IIFE-ul. Nu-l lăsa anomim. Beneficiul este că va apărea în call-stack (stiva de execuție) atunci când din diferite motive codul dă erori.
+Să pornim cu cel mai simplu exemplu, dar, din capul locului, buna practică spune să declarăm o variabilă care să referențieze IIFE-ul. Nu-l lăsa anonim. Beneficiul este că va apărea în call-stack (stiva de execuție) atunci când din diferite motive codul dă erori.
 Cel mai simplu exemplu este cel al unei funcții care se autoexecută instant pentru că motorul are nevoie să atribuie identificatorului valoarea evaluată a funcției. Îți readuc aminte că toate funcțiile sunt valori și că operatorul `()` declanșează execuția funcției ceea ce conduce la evaluarea tuturor expresiilor din interior. Și nu te las să uiți faptul că, de fapt, un IIFE este rezultatul evaluării expresiei din partea dreaptă a operatorului egal.
 
 ```javascript
@@ -123,7 +123,7 @@ var iife = (function (obi) {
 console.log(iife); // {"spot":true}
 ```
 
-#### Sunt acceptate mai multe niveluri de impricare
+#### Sunt acceptate mai multe niveluri de imbricare
 
 Dacă este necesar, IIFE-urile pot conține alte IIFE-uri în caz de necesitate.
 
@@ -160,9 +160,9 @@ afiseazaFructele(["mar", "banană", "pere", "struguri"]);
 // va afișa undefined de patru ori
 ```
 
-Acest lucru se întâmplă pentru că execuția celor patru iterații este foarte rapidă, mai rapidă decât răspunsul lui `setTimeout` care începe cu o secundă. Pentru că un clojure, care face o referință către variabila care ține valoarea, va face o referință către `i`, care deja este 4 datorită vitezei de execuție comparativ cu cea a timeout-ului.
+Acest lucru se întâmplă pentru că execuția celor patru iterații este foarte rapidă, mai rapidă decât răspunsul lui `setTimeout` care începe cu o secundă. Pentru că un closure, care face o referință către variabila care ține valoarea, va face o referință către `i`, care deja este 4 datorită vitezei de execuție comparativ cu cea a timeout-ului.
 
-Pentru a rezolva comportamentul, este nevoie de a fi creat un nou scope pentru fiecare funcție împlicată în buclă și de o variabilă, care să țină minte valoarea lui `i`.
+Pentru a rezolva comportamentul, este nevoie de a fi creat un nou scope pentru fiecare funcție implicată în buclă și de o variabilă, care să țină minte valoarea lui `i`.
 
 ```javascript
 function afiseazaFructele(fructe){

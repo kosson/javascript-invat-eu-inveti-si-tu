@@ -12,7 +12,7 @@ let faCeva = x => x * 2;
 faCeva.name; "faCeva"
 ```
 
-Funcțiile *fat arrows* la momentul execuției preiau `this` și `arguments` de la mediul lexical găzduitor. Nu creează propriul obiect `this` și nici nu se constituie obiectul `arguments`. Pur și simplu, le folosește pe cele ale gazdei. Contextul de execuție este moștenit de la funcția sau obiectul în care sunt definite. La ce este bun acest lucru? În primul rând la evitarea problemelor de referențiere ale lui `this`.
+Funcțiile *fat arrows* la momentul execuției preiau `this` și `arguments` de la mediul lexical găzduitor. Nu creează propria legătură `this` și nici nu se constituie obiectul `arguments`. Pur și simplu, le folosește pe cele ale gazdei. Contextul de execuție este moștenit de la funcția sau obiectul în care sunt definite. La ce este bun acest lucru? Sunt evitate problemele legate de referința `this`.
 
 ```javascript
 // noua rutină
@@ -57,7 +57,7 @@ let oriDoi = valoare => valoare * valoare;
 let oriDoi = (valoare) => { return valoare * valoare };
 ```
 
-Un exemplu excelent este cel oferit de Reg *raganwald* Braithwaite în **JavaScript Allongé, the "Six" Edition**. Pornim de la o funcție care se execută imediat. Acesteia îi trimtem o valoare string arbitrară. Știind că funcțiile convenționale generează obiectele `arguments` și `this`, la momentul returnării vom executa o altă expresie de funcție. Aceasta la rândul său va primi o valoare arbitrară. Am trimis aceste valori pentru a popula obiectele `arguments` ale ambelor funcții. Astfel pe poziția `arguments[0]` vom avea valori pentru ambele funcții.
+Un exemplu excelent este cel oferit de Reg *raganwald* Braithwaite în **JavaScript Allongé, the "Six" Edition**. Pornim de la o funcție care se execută imediat. Acesteia îi trimtem o valoare string arbitrară. Știind că funcțiile convenționale generează `arguments` și legătura `this`, la momentul returnării, vom executa o altă expresie de funcție. Aceasta la rândul său va primi o valoare arbitrară. Am trimis aceste valori pentru a popula obiectele `arguments` ale ambelor funcții. Astfel pe poziția `arguments[0]` vom avea valori în cazul ambelor funcții.
 
 ```javascript
 (function () {
@@ -75,7 +75,7 @@ Prin contrast, în cazul folosirii funcțiilor *fat arrow*, va fi utilizat obiec
 })('gazdă'); // "gazdă"
 ```
 
-În cazul nostru, funcția *gazdă* va fi cea care va oferi o valoare pentru poziția 0 din obiectul `arguments`.
+În cazul nostru, funcția *externă* va fi cea care va oferi valoarea de pe poziția `0` a propriului `arguments`.
 Funcțiile **fat arrow** își au originile în expresiile lambda ale programării funcționale. Un **fat arrow** este o funcție foarte simplă care nu poate fi folosită drept constructor. Aceste funcții nu au nume. Dacă ții neapărat, poți totuși să legi un identificator la ele prin formularea unei expresii de funcție: `let x = () => 10;`.
 
 ```javascript
@@ -186,7 +186,7 @@ Arrow functions prezintă marele avantaj pentru că fac o legătură la contextu
 element.addEventListener('click', (ruptor.schimba).bind(ruptor));
 ```
 
-### Schimbarea contextului folosind `call()`, `apply()` și `bind()`
+### Schimbă contextul folosind call(), apply() și bind()
 
 Adu-ți mereu aminte că *fat arrows* sunt funcții, iar acestea moștenesc metodele lui `Function`. În concluzie, metodele obiectului fundamental `Function` sunt disponibile.
 

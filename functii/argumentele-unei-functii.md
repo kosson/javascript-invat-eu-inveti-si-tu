@@ -317,7 +317,7 @@ Până la noua versiune a ECMAScript, mai întâi se verifica în funcție dacă
 
 ```javascript
 let test = function (ceva) {
-  return ceva || 'Valoare implicită';
+  return ceva || 'Valoare din oficiu';
 };
 console.log(test('CEVA')); // CEVA
 console.log(test());       // Valoare implicită
@@ -340,13 +340,13 @@ faCeva(12);
 Acesta este un șablon de lucru foarte important care permite utilizarea de valori prestabilite atunci când nimic nu este pasat funcției. Acest mic șablon se schimbă odată cu folosirea ES6, când vei putea seta valoarea implicită chiar la pasarea argumentelor:
 
 ```javascript
-function test (ceva = "Valoare implicită") {
+function test (ceva = "Valoare din oficiu") {
   return ceva;
 };
 test();
 ```
 
-## Valori inițiale opționale
+## Valori din oficiu opționale
 
 Odată cu apariția noii versiuni a standardului - ES6, parametrii pot avea valori inițiale. În ES5, acest lucru se putea face folosind operatorul `||`. În acest caz, nu se puteau pasa valori care prin evaluarea cu operatorul `||` se reduceau la o valoare *falsey*.
 
@@ -360,7 +360,7 @@ function faUnBloc (inaltime, latime, lungime, timpCoacere) {
 faUnBloc('', '', 150, 0); // 100 80 150 85000
 ```
 
-Pentru cei care vor să fie ultracorecți, idiomul de setare a unei valori de start ar trebui să fie acesta: `inaltime = inaltime !== undefined ? x : 100`.
+Pentru cei care vor să fie ultracorecți, idiomul de setare a unei valori din oficiu ar trebui să fie acesta: `inaltime = inaltime !== undefined ? x : 100`.
 
 ```javascript
 function x (a) {
@@ -371,7 +371,7 @@ function x (a) {
 
 Folosirea lui `typeof` returnează tipul valorii. Dacă un parametru nu primește argument, `undefined` este atribuit automat de motor. Odată detectată valoarea `undefined` se poate seta o nouă valoare din oficiu pentru parametru.
 
-În acest mod poți pasa și valori care s-ar reduce la o valoarea ce exprimă falsitatea (*falsey*), precum `0`, `undefined` sau `null`. Mai este o posibilitate care se reduce la testarea tipului valorii pasate pentru a determina valoarea de start (default îi spun englezii) în funcție de rezultat. În exemplul de mai sus, pentru ultima valoare, care este una validă pentru timp (`0`), motorul a redus-o la o valoare `falsey` și a preferat valoarea inițială.
+În acest mod poți pasa și valori care s-ar reduce la falsitate (*falsey*), așa cum sunt `0`, `undefined` sau `null`. Mai este o posibilitate care se reduce la testarea tipului valorii pasate pentru a determina valoarea din oficiu (*default* îi spun englezii) în funcție de rezultat. În exemplul de mai sus, pentru ultima valoare, care este una validă pentru `timpCoacere` (`0`), motorul a redus-o la `falsey`, alegând valoarea din oficiu.
 
 ```javascript
 function masoaraTimp (timpCoacere, rasuceste) {
@@ -389,11 +389,9 @@ masoaraTimp(0); // Mai coc! Comportamentul este corect de această dată.
 masoaraTimp(150000); // Răsucesc!
 ```
 
-În exemplul oferit mai sus, această verificare a existenței unei valori este des întâlnită în practica de zi cu zi conform ES5. Poate fi considerat idiomul preferat pentru valori inițiale. Acesta reflectă o manieră imperativă în ceea ce privește setarea valorilor default.
+În exemplul oferit mai sus, această verificare a existenței unei valori este des întâlnită în practica de zi cu zi conform ES5. Poate fi considerat idiomul preferat pentru valori din oficiu. Acesta reflectă o manieră imperativă în ceea ce privește setarea valorilor *default*.
 
-### Default values începând cu ES6
-
-ES6 permite introducerea valorilor inițiale direct în zona argumentelor transformând un obicei imperativ într-o abordare declarativă chiar din zona argumentelor. Atenție, sunt permise numai expresii, nu instrucțiuni.
+ES6 permite introducerea valorilor din oficiu direct în zona argumentelor transformând un obicei imperativ într-o abordare declarativă chiar din zona argumentelor. Atenție, sunt permise numai expresii, nu instrucțiuni.
 
 ```javascript
 function masoaraTimp (timpCoacere = 85000, rasuceste = function () { alert('') }) {
@@ -401,7 +399,7 @@ function masoaraTimp (timpCoacere = 85000, rasuceste = function () { alert('') }
 };
 ```
 
-Obiectul `arguments` în cazul parametrilor presetați are comportamentul rulării conform ES5 cu `"use strict";`. Pur și simplu, când motorul *vede* parametri cu valori inițiale, aplică comportamentul de izolare asupra obiectului `arguments`.
+Obiectul `arguments` în cazul parametrilor cu valori din oficiu are comportamentul rulării conform ES5 cu `"use strict";`. Pur și simplu, când motorul *vede* parametri cu valori din oficiu, aplică comportamentul de izolare asupra obiectului `arguments`.
 
 ```javascript
 function demoArgs (unu, doi = 2) {
@@ -413,16 +411,15 @@ function demoArgs (unu, doi = 2) {
 
 Expresia `console.log(doi === arguments[1]);` returnează `false` pentru că doar un singur argument a fost pasat funcției. Acest lucru poate fi demonstrat prin valoarea `1` data lui `arguments.length`, iar în acest moment `arguments[1]` va fi `undefined`, ceea ce este și firesc pentru că doar un singur argument a fost pasat.
 
-Reține faptul că `arguments` reflectă starea inițială și că trebuie să fie numai valori primitive, chiar dacă acestea sunt rezultatul evaluării unei alte funcții (care este o expresie) - trebuie să invoci funcție, nu să pasezi o referință către aceasta.
+Reține faptul că `arguments` reflectă starea inițială și că trebuie să fie numai valori primitive, chiar dacă acestea sunt rezultatul evaluării unei alte funcții (care este o expresie). Funcția trebuie invocată. Nu pasezi o referință către aceasta.
 
 ```javascript
-function doi () { return 2; };
-function demoArgs (unu, doi = doi()) {};
+function doi () { return 2 };
+function demoArgs (unu, x = doi) {return unu + x()};
+demoArgs(1); // 3
 ```
 
-Mai există un lucru care trebuie reținut în cazul asignării unei funcții unui parametru. Această funcție nu va fi invocată înainte de a fi apelată însăși funcția în sine. Pe scurt, expresia de funcție nu este evaluată până în momentul în care chiar este nevoie de valoarea la care se reduce. Dacă apelezi funcția cu un argument, iarăși, funcția nu va fi apelată și expresia astfel evaluată pentru că a fost primită valoarea așteptată. Dacă se invocă fără argument, ei bine, doar atunci va fi invocată funcția.
-
-O utilitate imediată și cu un impact imediat este aceea de a trimite o eroare în cazul în care funcția chiar are nevoie să primească o valoare la parametru.
+Mai există un lucru care trebuie reținut în cazul atribuirii unei funcții unui parametru. Aceasta nu va fi invocată înainte de a fi evaluat corpul funcției în sine. Pe scurt, expresia de funcție nu este evaluată până în momentul în care chiar este nevoie de valoarea la care se reduce. O utilitate imediată și cu un impact imediat este aceea de a trimite o eroare în cazul în care funcția chiar are nevoie să primească o valoare la parametru.
 
 ```javascript
 function atentionare () {
@@ -437,7 +434,7 @@ faCeva('ceva'); // "ceva"
 
 ### Argumente ca modificatori
 
-ES6 permite introducerea unui obiect cu proprietăți cu valori presetate. Acestea pot fi modificate prin argumentele funcției. Astfel, putem identifica eleganța pe care *destructurarea* o oferă.
+ES6 permite introducerea unui obiect cu proprietăți având valori din oficiu. Acestea pot fi modificate prin argumentele funcției. Putem observa eleganța pe care *destructurarea* o oferă.
 
 ```javascript
 function faCeva ({prim = 1, secund = 2, tert = 3} = {}) {
@@ -447,13 +444,13 @@ function faCeva ({prim = 1, secund = 2, tert = 3} = {}) {
 faCeva({secund: 'ceva'}); // 1 ceva 3
 faCeva(10); // 1 2 3
 faCeva({tert: true}, 10); // 1 2 true
-faCeva({secund: 'ceva', test: true});
+faCeva({secund: 'ceva', tert: true});
 faCeva({secund: 'doi', tert: false, prim: 9});
 ```
 
 Oricare alt argument pasat poate fi găsit în `arguments` dacă se dorește. Și în cazul obiectelor, trebuie să se respecte identificatorii proprietăților, dacă valorile acestora sunt dorite ca parametri. Alte proprietăți vor fi regăsite în `arguments`.
 
-Mai este ceva interesant care merită evidențiat. La momentul presetării valorilor prin `{prim = 1, secund} = {}`, dacă o proprietate are aceeași valoare literală ca și valoarea, nu mai este necesară atribuirea. Pur și simplu scrii doar cheia.
+Mai este ceva interesant care merită evidențiat. La momentul presetării valorilor prin `{prim = 1, secund} = {}`, dacă o proprietate a obiectului pasat drept argument are aceeași valoare literală cu a parametrului, nu mai este necesară atribuirea. Pur și simplu scrii doar cheia.
 
 ```javascript
 const persoana = ({nume, prenume, id}) => {
@@ -467,9 +464,7 @@ let prima = persoana({
 console.log(prima);
 ```
 
-Mai observăm un lucru foarte important: parametrii pot fi introduși în oricare ordine. Nu mai suntem limitați de *poziție*, precum în cazul standardelor până la ES5. Vă reamintesc că trebuia să introduci argumentele în ordine fixă pentru a se face legăturile corecte în obiectul `arguments`.
-
-## Parametrii cu valori inițiale servesc valori următoarelor
+Mai observăm un lucru foarte important: parametrii pot fi introduși în oricare ordine. Nu mai suntem limitați de *poziție*, precum în cazul standardelor până la ES5. Vă reamintesc că trebuia să introduci argumentele în ordine fixă pentru a se face legăturile corecte în obiectul `arguments`. Parametrii pot servi valori următorilor, dacă este nevoie.
 
 ```javascript
 function demoArgs (unu, doi = unu + 1) {
@@ -504,7 +499,7 @@ function exemplu (x = oFunctie()) {
 exemplu();
 ```
 
-Pe măsură ce parametrii sunt evaluați, aceștia se fac disponibili parametrilor evaluați ulterior ca în cazul următor:
+Pe măsură ce parametrii sunt evaluați, aceștia se fac disponibili parametrilor evaluați ulterior:
 
 ```javascript
 function exemplu (una, alta = una + 2, cateva = alta + ' mere') {
@@ -546,7 +541,7 @@ let x = {
 };
 ```
 
-### Modelul unui array
+### Cazul unui array
 
 Putem pasa unei funcții toate argumentele folosind un array, dar felul în care vor fi preluate și asociate unor parametri poate fi modelat prin destructurare. Putem imagina cazul în care ai nevoie ca primul argument să fie asociat unui parametru.
 
@@ -557,7 +552,7 @@ function facCeva ([x, ...restulArgumentelor] = []) {
 facCeva([1, 2]);
 ```
 
-Ceea ce tocmai am transmis motorului JavaScript este că va face o astribuire a parametrilor cu valori, iar pentru parametri, este dat un array în care vor fi introduși toți identificatorii pentru aceștia. Destructurarea va **desface** primul array și pentru fiecare valoare din acesta, va atribui o valoare din cel de-al doilea. În cazul nostru, pentru că am menționat numele primului identificator, acesta va primi valoarea 1 și așa va intra în mediul local al funcției. Valoarea 2 intră în `arguments` pentru că nu a fost precizat un alt identificator. Acest lucru este îndeplinit prin operatorul trei puncte. Acest lucru ar fi putut să fie obținut prin atribuirea manuală a parametrilor.
+Ceea ce tocmai am transmis motorului JavaScript este că va face o atribuire a parametrilor cu valori, iar pentru parametri, este dat un array în care vor fi introduși toți identificatorii pentru aceștia. Destructurarea va **desface** primul array și pentru fiecare valoare din acesta, va atribui o valoare din cel de-al doilea. În cazul nostru, pentru că am menționat numele primului identificator, acesta va primi valoarea 1 și așa va intra în mediul local al funcției. Valoarea 2 intră în `arguments` pentru că nu a fost precizat un alt identificator. Acest lucru este îndeplinit prin operatorul trei puncte. Acest lucru ar fi putut să fie obținut prin atribuirea manuală a parametrilor.
 
 ```javascript
 function facCeva (arrayValori) {
@@ -565,7 +560,7 @@ function facCeva (arrayValori) {
 };
 ```
 
-### Modelul unui obiect
+### Cazul unui obiect
 
 Obiectele sunt și ele bune candidate pentru destructurare.
 
@@ -588,9 +583,7 @@ var obi = {
 test(obi); //"10 și true"
 ```
 
-Spre deosebire de cazul array-urilor, utilizarea unui obiect în cazul destructurării, are avantajul introducerii în obiect a cheilor în orice ordine este dorită atâta vreme cât păstrăm convenția de echivalență a numelor cheilor în obiectul corespondent parametrilor.
-
-Dacă trimitem unei funcții un argument care are drept valoare un obiect, putem constitui un alt obiect subset pe care să-l returnăm.
+Spre deosebire de cazul array-urilor, utilizarea unui obiect în cazul destructurării, are avantajul introducerii în obiect a cheilor în orice ordine este dorită atâta vreme cât păstrăm convenția de echivalență a numelor cheilor în obiectul corespondent parametrilor. Dacă trimitem unei funcții un argument care are drept valoare un obiect, putem constitui un alt obiect subset pe care să-l returnăm.
 
 ```javascript
 var vehicul = {

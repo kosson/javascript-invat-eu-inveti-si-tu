@@ -15,14 +15,14 @@ La momentul începerii execuției codului, toate funcțiile declarate cu `functi
  #1 Locul în care se întâmplă acest lucru se numește **call-site**.
  #2 Se creează un nou **execution context** - context de execuție care este introdus în stivă. Vorbim de context de execuție global (obiectul **window**), când funcția este invocată ca funcție, nu ca metodă sau callback.
 
-Contextul de execuție este o sumă de informații (activation record) privind:
+Contextul de execuție este o sumă de informații (*activation record*) privind:
 
     1. **unde** a fost apelată funcția (în call-stack);
     2. ce parametri au fost pasați, etc.;
     3. referința `this` care va fi folosită pe durata execuției funcției.
 
  #3 Se face legătura la contextul lexical asociat acelei funcții (scope-ul). Pentru scope-ul extern, funcția va pune drept referință valoarea proprietății interne a funcției numită `[[Environment]]`.
- #4 Se generează un obiect căruia îi sunt pasate automat argumentele într-o colecție asemănătoare unui array și legătura **this**.
+ #4 Se generează un obiect căruia îi sunt pasate automat argumentele într-o colecție asemănătoare unui array și se constituie legătura **this**.
 
 Obiectul **arguments** este o colecție (seamănă dar nu este un array) a tuturor argumentelor pasate funcției și are proprietatea `length` pentru a afla numărul argumentelor pasate. Valorile pot fi obținute prin `arguments[index]`.
 
@@ -31,12 +31,12 @@ Obiectul **arguments** este o colecție (seamănă dar nu este un array) a tutur
 1.  ca funcții;
 2.  ca metode;
 3.  ca arrow functions;
-4.  constructori cu new;
+4.  constructori cu `new`;
 5.  indirect prin apelarea într-un context de execuție diferit folosind `call()` și `apply()` (vezi binding explicit la `this`).
 
 În toate aceste cazuri funcția generează obiectul `this` în mod diferit.
 
-1.  la obiectul global iar dacă codul este sub `"strict mode";` este `undefined`,
+1.  la obiectul global rulând sub `"strict mode";` este `undefined`,
 2.  la obiectul a cărui metodă este,
 3.  la obiectul care tocmai a fost returnat,
 4.  la obiectul precizat ca prim argument.
@@ -53,12 +53,12 @@ Când invoci funcția ca metodă a unui obiect, acel obiect devine **contextul**
 
 ### Invocarea în rol de constructor
 
-Scopul unui constructor este acela de a crea un obiect, care este valoarea returnată prin execuția funcției cu `new`.
+Scopul unui constructor este acela de a crea un obiect, care este valoarea returnată prin execuția funcției cu operatorul `new`.
 
 1.  Se creează un obiect nou.
-2.  Se creează o legătură la obiectul prototype al funcției a cărui identificator a fost folosit cu `new`. Se creează legătura prototipală.
+2.  Se creează o legătură la obiectul prototype al funcției folosite cu `new`. Se creează legătura prototipală.
 3.  Obiectul generat automat este pasat funcției cu rol de constructor ca fiind parametrul `this` și astfel, devine contextul de execuție a funcției constructor invocate (`this` este pasat ca parametru împreună cu `arguments`).
-4.  Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul („}”), `this` va fi returnat automat.
+4.  Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul (`}`), `this` va fi returnat automat.
 
 Există o mică discuție aici referitoare la invocarea unei funcții care este proiectată a fi constructor, dar care este utilizată în afara acestui scop. O funcție constructor poate returna o valoare, dacă este apelată fără operatorul `new`.
 
@@ -71,7 +71,7 @@ Ceva(); // 100
 let instanta = new Ceva();
 ```
 
-Observăm că funcția noastră va avea un comportament *normal* și va returna evaluarea oricăror expresii. Astfel se explică de ce o parte din constructorii obiectelor interne pot fi apelați drept funcții, unii fiind folosiți pentru a face *casting* unor valori pentru care dorim un tip fix. Atenție, dacă se va apela cu `new`, valoarea returnată va fi complet ignorată și se va crea un obiect nou.
+Observăm că funcția noastră va avea un comportament *normal* și va returna evaluarea oricăror expresii din corp. Astfel se explică de ce o parte din constructorii obiectelor interne pot fi apelați drept funcții, unii fiind folosiți pentru a face *casting* unor valori pentru care dorim un tip fix. Atenție, dacă se va apela cu `new`, valoarea returnată va fi complet ignorată și se va crea un obiect nou.
 
 Mai există o situație interesantă legată de pierderea capacității de a genera un nou obiect a unui constructor creat de noi. Dacă funcția constructor va returna un obiect, atunci la invocarea cu `new`, nu va crea un obiect nou, ci îl va returna pe cel specificat.
 
@@ -136,7 +136,7 @@ function tester(callback){
 
 ## Invocare tail call
 
-Un *tail call* este invocarea unei funcții atunci când o funcție este invocată ca ultimă instrucțiune a unei funcții gazde.
+Un *tail call* este invocarea unei funcții atunci când o funcție este invocată ca ultimă evaluare a unei funcții gazde.
 
 ```javascript
 function gazda () {
