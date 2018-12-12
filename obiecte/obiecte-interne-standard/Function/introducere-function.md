@@ -4,9 +4,9 @@ Este un constructor pentru funcții. Primele argumente introduse constituie para
 
 ## Spune standardul
 
-Atunci când `Function` este apelat ca funcție și nu ca un constructor, este creat și inițializat un nou obiect `Function`. Astfel, apelul `Function()` este echivalent cu expresia care generează obiectul Function: `new Function()`.
+Atunci când `Function` este apelat ca funcție și nu ca un constructor, este creat și inițializat un nou obiect `Function`. Astfel, apelul `Function()` este echivalent cu expresia care generează obiectul `Function`: `new Function()`.
 
-Constructorul lui `Function` este în sine un obiect funcție built-in. Acest obiect capabil să stea drept constructor însuși obiectului intern `Function` a fost tratat în geneză și în materialul dedicat ddualității obiect - funcție.
+Constructorul lui `Function` este în sine un obiect funcție built-in. Acest obiect capabil să stea drept constructor însuși obiectului intern `Function` a fost tratat în geneză și în materialul dedicat dualității obiect - funcție.
 
 **Obiectul prototype al lui `Function` este în sine un obiect - funcție intern**. Acest lucru este încă acceptat pentru că trebuie asigurată compatibilitatea cu restul codului scris înainte de ECMAScript 2015.
 

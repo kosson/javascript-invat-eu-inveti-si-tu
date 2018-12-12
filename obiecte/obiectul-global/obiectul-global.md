@@ -30,7 +30,7 @@ Aceasta permite executarea de cod JavaScript, care este pasat ca string.
 eval('console.log("ceva")'); // ceva
 ```
 
-În ceea ce privește folosirea acestei funcții, comunitatea recomandă limitarea utilizării din motive evidente de securitate și din motive de viteză. Există o mantră care spune că „eval is evil” - eval este rău.
+În ceea ce privește folosirea acestei funcții, comunitatea recomandă limitarea utilizării din motive evidente de securitate și din motive de viteză. Există o mantră care spune că **eval is evil** - eval este rău.
 
 ### Funcția parseInt()
 
@@ -85,7 +85,7 @@ isFinite(1e309); // false
 
 ### Codarea și decodarea URI-urilor
 
-Atunci când navigați pe Internet, în bara de adrese introduceți un șir de caractere care, din punct de vedere tehnic se numește Uniform Resource Locator, adică o cale către o anumită resursă de la un domeniu de pe net. URI-urile, adică Uniform Resource Identifiers, sunt normativul după care se poate scrie linkul pe care-l întroduci în bara de adrese. Reține doar că un URL este un URI.
+Atunci când navigați pe Internet, în bara de adrese introduceți un șir de caractere care, din punct de vedere tehnic se numește Uniform Resource Locator, adică o cale către o anumită resursă de la un domeniu de pe net. URI-urile, adică Uniform Resource Identifiers, sunt normativul după care se poate scrie linkul pe care-l introduci în bara de adrese. Reține doar că un URL este un URI.
 
 Avem la dispoziție o funcție numită `encodeUri()` și una `encodeUriComponent()`. Prima oferă URL-ul nostru într-o formă care poate fi utilizată pe net, fiecare caracter special cum ar fi spațiul fiind codat prin caracterul echivalent dat necesar pentru a folosi șirul ca pe un URL. Pentru operația inversă avem la dispoziție `decodeUri()` și `decodeUriComponent()`.
 
@@ -96,7 +96,3 @@ URI-urile nu sunt decât șiruri de caractere care identifică o resursă, precu
 Un URI este compus din componente separate prin câteva caractere cu rol de separatori. Forma generală este `protocol://domeniu/rădăcinaCăii/resursă;altăResursă?încăUna`. Separatorii sunt `:`,`;`,`/`,`?`,`@`,`&`,`=`,`+`,`$`.
 Pentru codarea și decodarea URI-urilor avem funcțiile `encodeURI()` și corespondentul `decodeURI()`, care lucrează cu URI-uri complete. Funcțiile `encodeURIComponent()` și `dencodeURIComponent()` lucrează cu părți ale URI-ului.
 Standardul menționează faptul că aceste funcții se pot aplica pe URI-uri care respectă sintaxa conform RFC 2396. Nu se aplică URI-urilor conforme cu RFC 3986.
-
-### Constructori disponibili
-
-TODO: Completează! Fa o frumoasă reprezentare grafică a tuturor constructorilor! RE-PE-DE!

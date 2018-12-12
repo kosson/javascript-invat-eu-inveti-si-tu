@@ -535,7 +535,7 @@ obi1.anunță();
 obi2.anunță();
 ```
 
-Metoda `Object.create()` permite o implementare simplă a conceputului de *moștenire diferențială* în care obiectele sunt capabile să moștenească direct din alte obiecte. Kyle Simpson numește această modalitate de a crea obiecte: *Objects Linked to Other Objects*, pe scurt OLOO. Acest model se bazează pe faptul că `Object.create()` are posibilitatea de a adăuga și în același timp de a configura proprietăți ale obiectului. Este de fapt un caz de șablon tip `Prototype`. Pentru că tot am amintit despre șabloane, ar fi foarte potrivită mențiune faptului că toate aceste elemente de bază pe care le aprofundăm acum, conduc la realizarea unor structuri mai complexe de cod, care permit o mai mare plasticitate atunci când apare nevoia de a modela date.
+Metoda `Object.create()` permite o implementare simplă a conceputului de *moștenire diferențiată* în care obiectele sunt capabile să moștenească direct din alte obiecte. Kyle Simpson numește această modalitate de a crea obiecte: *Objects Linked to Other Objects*, pe scurt OLOO. Acest model se bazează pe faptul că `Object.create()` are posibilitatea de a adăuga și în același timp de a configura proprietăți ale obiectului. Este de fapt un caz de șablon tip `Prototype`. Pentru că tot am amintit despre șabloane, ar fi foarte potrivită mențiune faptului că toate aceste elemente de bază pe care le aprofundăm acum, conduc la realizarea unor structuri mai complexe de cod, care permit o mai mare plasticitate atunci când apare nevoia de a modela date.
 
 ```javascript
 const vehicul = {
@@ -561,7 +561,7 @@ console.log(stație);
 stație.getModel();
 ```
 
-Atunci când vrei să creezi un obiect în baza altuia, folosește acest **OLOO**. După cum observi, este mult mai ușor de redactat și este ușor de urmărit ceea ce se întâmplă.
+Atunci când vrei să creezi un obiect în baza altuia, folosește acest **OLOO**. După cum observi, este mult mai ușor de redactat și de urmărit ceea ce se întâmplă.
 
 ### Folosirea valorilor deja computate
 
@@ -627,7 +627,7 @@ Object.defineProperty(newObj, 'numeCheieNoua', {
 
 ### Metodele unui obiect
 
-O funcție care este declarată într-un obiect sau care este referențiată de o cheie a unui obiect, devine metodă și parte a membrilor acelui obiect. Atenție! este totuși o funcție în sine, o valoare, care atunci când este declarată pentru o proprietate, poate fi accesată doar prefixându-i identificatorul cu numele obiectului. Este exact ca în cazul unei adrese (`oraș: 'Corabia'`).
+O funcție declarată într-un obiect sau care este referită de o cheie a unui obiect, devine metodă și parte a membrilor acelui obiect. Atenție, este totuși o funcție în sine, o valoare, care atunci când este declarată pentru o proprietate, poate fi accesată doar prefixându-i identificatorul cu numele obiectului. Este exact ca în cazul unei adrese (`oraș: 'Corabia'`).
 
 ```javascript
 const obi = {
@@ -675,7 +675,7 @@ const obi = {
 obi.faCeva(); // 10
 ```
 
-Observați faptul că declararea metodei `faCeva()` s-a făcut cu notația prescurtată. Este o contragere a scrierii unei metode folosind o funcție anonimă: de la `faCeva: function () {console.log(this.x)}`, am ajuns la forma prescurtată `faCeva () { console.log(this.x) }`. În limba engleză, programatorii numesc această formă prescurtată **concise method** - *metodă prescurtată*. Ar fi bine să vă obișnuiți cu această notație pentru că o veți vedea din ce în ce mai des.
+Observați faptul că declararea metodei `faCeva()` s-a făcut cu notația prescurtată. Este o contragere a scrierii unei metode folosind o funcție anonimă. De la `faCeva: function () {console.log(this.x)}`, am ajuns la forma prescurtată `faCeva () { console.log(this.x) }`. În limba engleză, programatorii numesc această formă prescurtată **concise method** - *metodă prescurtată*. Ar fi bine să vă obișnuiți cu această notație pentru că o veți vedea din ce în ce mai des.
 
 Cazul cel mai util în care prescurtările strălucesc este cel al inițializării directe a proprietăților (în engleză programatorii numesc această tehnică **property initializer**) prin valorile parametrilor unei funcții de tip fabrică.
 
@@ -687,7 +687,7 @@ const obiNou = construiesteObi(1, 2);
 // Object { unu: 1, doi: 2 }
 ```
 
-### Adăugare proprietăți
+### Adăugarea proprietăților
 
 #### Folosirea operatorul punct
 
@@ -860,7 +860,7 @@ Standardul oferă definiția prototipului: *obiect al cărui proprietăți sunt 
 
 Nota atașată definiției este și ea foarte valoroasă pentru lămuririle pe care le aduce:
 
-> Atunci când un constructor creează un obiect, acel obiect va referenția automat proprietatea prototype a constructorului cu scopul de a rezolva referințele proprietăților. Proprietatea prototype a constructorului poate fi referențiată de expresia constructor.prototype. Proprietățile adăugate prototipului unui obiect sunt puse la dispoziția tuturor obiectelor care accesează prototipul prin moștenire. Alternativa este crearea unui nou obiect având un prototip specificat explicit prin utilizarea funcției interne Object.create.
+> Atunci când un constructor creează un obiect, acel obiect va referi automat proprietatea prototype a constructorului cu scopul de a rezolva referințele proprietăților. Proprietatea prototype a constructorului poate fi referită de expresia constructor.prototype. Proprietățile adăugate prototipului unui obiect sunt puse la dispoziția tuturor obiectelor care accesează prototipul prin moștenire. Alternativa este crearea unui nou obiect având un prototip specificat explicit prin utilizarea funcției interne Object.create.
 
 Pentru a înțelege cu adevărat natura și specificitățile limbajului de programare JavaScript, trebuie să fie înțeles modul în care proprietățile unui obiect sunt *moștenite* de un altul. Nu uita nicio secundă faptul că JavaScript este un limbaj de programare care este o continuă comunicare între diferite obiecte, fie că acestea sunt cele interne, fie că sunt cele create de noi. Simplificând în tușe foarte groase, creatorii limbajului au dorit o modelare a structurilor de prelucrare a datelor după modul în care lumea reală funcționează: copii au părinți, iar aceștia moștenesc caracteristicile părinților pe lângă cele care definesc propria persoană.
 
@@ -921,7 +921,7 @@ Valoarea acestui slot poate fi `null` sau un obiect care va oferi tuturor descen
 
 Toate obiectele comune au *un slot intern* numit `[[Extensible]]`, care controlează dacă pot fi adăugate sau nu proprietăți la obiect. Dacă valoarea acestui slot este `false`, atunci nu se mai pot adăuga proprietăți noi.
 
-Legătura cu `[[Prototype]]` este aceea că în cazul unui `[[Extensible]]` cu valoare `false`, valoarea slotului intern `[[Prototype]]` a obiectului, nu poate fi modificată. În plus, de vreme ce a fost pusă pe `false`, nu o mai poți modifica la `true`.
+În cazul unui `[[Extensible]]` cu valoarea `false`, valoarea slotului intern `[[Prototype]]` a obiectului, nu poate fi modificată. În plus, de vreme ce a fost pusă pe `false`, nu o mai poți modifica la `true`.
 
 
 #### Introdu în prototip
@@ -999,7 +999,7 @@ Există două situații în care ai nevoie să afli informații despre un obiect
 ObiectInvestigat.prototype.isPrototypeOf(obiectulBanuitAFiPrototipul);
 ```
 
-#### Cine este obiectul prototipal
+#### Care este obiectul prototipal
 
 ```javascript
 // În cazul în care s-a folosit un constructor
@@ -1007,7 +1007,7 @@ ObiectDeLucru.__proto__ // sau cel mai repede
 Object.getPrototypeOf(ObiectDeLucru);
 ```
 
-### Modele de realizare a moștenirii prototipale
+### Realizarea moștenirii
 
 #### A. Prototip gol, care nu moștenește
 
@@ -1067,7 +1067,7 @@ Object.getPrototypeOf(this).numeMetodaDinPrototip.call(this); // varianta ES5
 super.numeMetodaDinPrototip() // varianta ES6
 ```
 
-După cum observi, această metodă vechi a fost prescurtată la `super`, ceea ce reduce din verbozitate. Pentru cei cu ochiul ager, nu-i așa că aduce nițel a Java? `super` este o referință către obiectul prototip al obiectului de lucru curent. Este echivalentul lui `Object.getPrototypeOf(this)`. Nu uita faptul că `Object.getPrototypeOf()` returnează valoarea din proprietatea internă `[[Prototype]]`. Orice referință la `super` folosește proprietatea internă `[[HomeObject]]` pentru a determina pașii următori cum ar fi `Object.getPrototypeOf()` asupra valorii stocate de `[[HomeObject]]` cu scopul de a obține, de fapt prototipul.
+După cum observi, această metodă veche a fost prescurtată la `super`, ceea ce reduce din verbozitate. Pentru cei cu ochiul ager, nu-i așa că aduce nițel a Java? `super` este o referință către obiectul prototip al obiectului de lucru curent. Este echivalentul lui `Object.getPrototypeOf(this)`. Nu uita faptul că `Object.getPrototypeOf()` returnează valoarea din proprietatea internă `[[Prototype]]`. Orice referință la `super` folosește proprietatea internă `[[HomeObject]]` pentru a determina pașii următori cum ar fi `Object.getPrototypeOf()` asupra valorii stocate de `[[HomeObject]]` cu scopul de a obține, de fapt prototipul.
 
 ```javascript
 const obi1 = {
@@ -1115,11 +1115,11 @@ Y.metoda(); // Salut!
 
 O altă problemă pe care o rezolvă clasele este posibilitatea de a extinde constructorii interni limbajului (*built-in*). Unii dintre aceștia sunt obiecte *exotice* și acum numai prin mecanismului claselor pot fi extinse.
 
-Totuși clasele au câteva detalii care le departajează de funcții. Nu pot fi apelate simplu fără operatorul `new`. Metodele, adică funcțiile declarate intern nu creează propriile obiecte `prototype`. Prototipul unei clase nu poate fi reasignat.
+Totuși clasele au câteva detalii care le departajează de funcții. Nu pot fi apelate simplu fără operatorul `new`. Metodele, adică funcțiile declarate intern nu creează propriile obiecte `prototype`. Prototipul unei clase nu poate fi reatribuit.
 
 ### Drumul către clase - studiu
 
-Modelarea unei clase rudimentare se poate realiza prin introducerea de funcționalități și date în obiectul `this` al unei funcții. Adu-ți aminte că la executarea unei funcții constructor folosind operatorul `new`, primul lucru pe care-l face motorul este să creeze un obiect în contextul căruia să execute corpul funcției.
+Modelarea unei clase rudimentare se poate realiza prin introducerea de funcționalități și date în obiectul indicat prin `this` pentru o funcție. Adu-ți aminte că la executarea unei funcții constructor, folosind operatorul `new`, primul lucru pe care-l face motorul este să creeze un obiect în contextul căruia să execute corpul funcției.
 
 ```javascript
 function VehiculSpatial (identificator) {
@@ -1212,7 +1212,7 @@ Precum în cazul funcțiilor, clasele pot fi declarate, dar pot fi și expresii.
 
 #### Declarație de clasă
 
-Clasele pot fi declarate direct apelelând la sintaxa `class NumeClasă {...}`. Ceea ce se petrece la declararea unei clase este că se constituie variabila cu numele clasei. Variabila este inițializată cu o funcție. În obiectul `prototype` al funcției vor fi regăsite funcția constructor a cărui nume este numele clasei precum și toate metodele.
+Clasele pot fi declarate direct apelând la sintaxa `class NumeClasă {...}`. Ceea ce se petrece la declararea unei clase este că se constituie variabila cu numele clasei. Variabila este inițializată cu o funcție. În obiectul `prototype` al funcției este funcția constructor, purtând denumirea clasei, precum și toate metodele.
 
 ```javascript
 class Ceva {
@@ -1318,7 +1318,7 @@ class Ceva () {
   static metoda () {
     Ceva._cevaPrivat = new Date.now();
   }
-  constuctor (data) {
+  constructor (data) {
     this.expun = Ceva._cevaPrivat;
     this.dataCalendaristica = data;
   }
@@ -1347,7 +1347,7 @@ Reține faptul că metodele statice nu sunt moștenite de obiectele create.
 
 ### Accesori și incapsulare
 
-În JavaScript singura posibilitate de a atinge incapsularea prin care înțelegem protejarea datelor prin variabile private este să realizăm closure-ri. Clasele permit realizarea unei incapsulări dacă datele protejate le introducem în constructor și apoi le accesăm prin accesori.
+În JavaScript singura posibilitate de a atinge incapsularea prin care înțelegem protejarea datelor prin variabile private este să realizăm closure-ri. Clasele permit realizarea unei incapsulări dacă datele protejate le introducem în constructor și apoi le utilizăm prin accesori.
 
 ```javascript
 class Ceva {
@@ -1434,9 +1434,9 @@ Este observabil cu cât efort s-a realizat acest lucru. Mai întâi am executat 
 
 #### extends și super
 
-În cazul claselor, mare parte din operațiunile complexe ale derivării sunt rezolvate prin introducerea sintagmei `extends` în declarația clasei care dorești să fie derivata alteia. Ceea ce realizează este și abstractizarea funcționalităților unei clase care va fi privită de cele derivate din ea ca un model de urmat în ceea ce privește comportamentele de bază. Similar copiilor care privesc și copiază comportamentele părinților, clasele care extind altele, vor avea acces la metodele și proprietățile părintelui prin mecanismul de moștenire care se va stabili automat. Putem afirma despre o clasă de la care se derivează că se comportă ca o interfață. O interfață fiind setul de date și funcționalități disponibil tuturor copiilor, dar care poate fi modificat de aceștia.
+În cazul claselor, mare parte din operațiunile complexe ale derivării sunt rezolvate prin introducerea sintagmei `extends` în declarația clasei care dorești să fie derivata alteia. Ceea ce realizează este și abstractizarea funcționalităților unei clase, care va fi privită de cele derivate din ea ca un model de urmat în ceea ce privește comportamentele de bază. Similar copiilor care privesc și copiază comportamentele părinților, clasele care extind altele, vor avea acces la metodele și proprietățile părintelui prin mecanismul de moștenire care se va stabili automat. Putem afirma despre o clasă de la care se derivează că se comportă ca o interfață. O interfață fiind setul de date și funcționalități disponibil tuturor copiilor, dar care poate fi modificat de aceștia.
 
-Am stabilit faptul că prototipul este setat automat la obiectul prototip al constructorului părinte. Constructorul părintelui poate fi accesat folosind metoda `super()`. În clasele derivate, `super()` trebuie apelat înainte de a folosi `this` în funcția constructor a copilului. Acest lucru trebuie făcut pentru a seta o linie directă de moștenire cu proprietățile constructorului clasei părinte. Regula ar fi ca datele necesare să alimentezi părintele pentru operațiunile interne ale părintelui, să le trimiți prin super(arg1, arg2, etc). Ce este nevoie copilului, setezi prin `this`. Nu uita, că prin moștenire vei avea mereu acces la datele și metodele părintelui.
+Am stabilit faptul că prototipul este setat automat la obiectul prototip al constructorului părinte. Constructorul părintelui poate fi accesat folosind metoda `super()`. În clasele derivate, `super()` trebuie apelat înainte de a folosi `this` în funcția constructor a copilului. Acest lucru trebuie făcut pentru a seta o linie directă de moștenire cu proprietățile constructorului clasei părinte. Regula ar fi ca datele necesare alimentării părintelui pentru operațiunile sale interne, să le trimiți prin `super(arg1, arg2, etc)`. Ce este nevoie copilului, setezi prin `this`. Nu uita, că prin moștenire vei avea mereu acces la datele și metodele părintelui.
 
 ```javascript
 class Parinte {
@@ -1503,7 +1503,7 @@ obi.aduValoare(); // 10
 
 #### Suprascrierea metodelor
 
-Menționam mai devreme faptul că unul din motivele pentru care avem clase este simplificarea extinderii unei clase, dar a cărui funcționalități sunt modificate pentru a servi scopurilor pentru care se face extinderea.
+Menționam mai devreme faptul că unul din motivele pentru care avem clase este simplificarea extinderii unei clase, fiind posibilă modificarea celor moștenite pentru a servi scopurilor pentru care se face extinderea.
 
 ```javascript
 class Parinte {
@@ -1514,6 +1514,7 @@ class Parinte {
     console.log(this.valoare);
   }
 }
+
 class Copil extends Parinte {
   constructor (ceva, altceva) {
     super(ceva); // se invocă constructorul părintelui
@@ -1544,10 +1545,10 @@ Toate metodele din obiectul prototip al lui Array sunt disponibile noului obiect
 
 ## Obiecte în practică
 
-### Obiecte care seamănă cu array-uri
+### Obiecte similare array-ului
 
 Cel mai la îndemână exemplu sunt nodurile DOM. Parcurgerea (traversing) DOM-ului se numește „walking the DOM”.
-DOM-ul este o colecție de noduri. Cel mai ades pentru accesarea informației din nodurile de interes, mai întâi acestea trebuie identificate. Se folosesc clasicele:
+DOM-ul este o colecție de noduri. Cel mai adesea pentru accesarea informației din nodurile de interes, mai întâi acestea trebuie identificate. Se folosesc clasicele:
 
 -   document.getElementById("#idfolosit"),
 -   document.getElementsByTagName,
@@ -1582,7 +1583,7 @@ Atenție, pentru că selectarea elementelor de interes cu ajutorul lui `querySel
 </ul>
 ```
 
-Selecția devine mult mai clară nefiind afectată de posibilele schimbări aduse nodurilor DOM pentru că acestea sunt dinamice.
+Selecția devine mult mai clară, nefiind afectată de posibilele schimbări aduse nodurilor DOM pentru că acestea sunt dinamice.
 
 ```javascript
 var lista = document.querySelector('[data-target=\"lista\"]');
@@ -1609,7 +1610,7 @@ obiect.altaProprietate = 'altceva';
 
 ### Destructurarea obiectelor
 
-ES6 introduce posibilitatea seta variabile cu valorile cheilor unui obiect (*destructuring assignment*). Trebuie respectată o singură cerință: numele identificatorilor variabilelor trebuie să fie identice cu cele ale cheilor proprietăților din obiectul din care sunt luate valorile. Dacă vrem să privim obiectele precum depozite de valori identificate prin numele cheilor, atunci cu siguranță că asignarea prin destructurare va fi o binecuvântare.
+ES6 introduce posibilitatea seta variabile cu valorile cheilor unui obiect (*destructuring assignment*). Trebuie respectată o singură cerință: numele identificatorilor variabilelor trebuie să fie identice cu cele ale cheilor proprietăților din obiectul din care sunt luate valorile. Dacă vrem să privim obiectele precum depozite de valori identificate prin numele cheilor, atunci cu siguranță că atribuirea prin destructurare va fi o binecuvântare.
 
 ```javascript
 const obi = {
@@ -1633,7 +1634,7 @@ const {unu: prima, doi: aDoua} = obi;
 console.log(prima, aDoua); // 1 2
 ```
 
-La fel de bine ar merge și asignarea directă cu singura condiție ca expresia să fie în interiorul unui operator de grupare.
+La fel de bine ar merge și atribuirea directă cu singura condiție ca expresia să fie în interiorul unui operator de grupare.
 
 ```javascript
 ( {a,b,c} = obi );
@@ -1664,7 +1665,7 @@ let unu = 10,
 
 #### Destructurarea array-urilor
 
-Destructurarea funcționează foarte bine și în cazul array-urilor, care la rândul lor sunt obiecte. În acest caz nu mai este necesară respectarea parității numelor identificatorilor cu cea a cheilor pentru că nu mai avem chei. Potrivirea se va face în ordinea elementelor din array.
+Destructurarea funcționează foarte bine și în cazul array-urilor, care la rândul lor sunt obiecte. În acest caz nu mai este necesară respectarea parității numelor identificatorilor cu cea a cheilor, pentru că nu mai avem chei. Potrivirea se va face în ordinea elementelor din array.
 
 ```javascript
 const arr = [1, true, function y () {return 'salut'}, 10, 20];
@@ -1675,7 +1676,7 @@ console.log(igrec()); // salut
 console.log(valori); //[Array] [10,20]
 ```
 
-Un alt caz interesant de destructurare este atunci când asignezi unei structuri de identificare un întreg obiect. În acest caz, pentru a constitui identificatorul, trebuie introdusă în expresia de destructurare adresa întreagă către acel obiect.
+Un alt caz interesant de destructurare este atunci când atribui unei structuri de identificare un întreg obiect. În acest caz, pentru a constitui identificatorul, trebuie introdusă în expresia de destructurare adresa întreagă către acel obiect.
 
 ```javascript
 const obi = {
@@ -1710,7 +1711,7 @@ Am stabilit deja faptul că atunci când ai nevoie să mergi la originile unui a
 
 ### Testare cu operatorul in
 
-Pentru a testa dacă o proprietate există se poate folosi operatorul `in`. Problema cu `in` este aceea că ia în calcul și ceea ce este în prototip, în cazul nostru în `matrița`.
+Pentru a testa dacă o proprietate există se poate folosi operatorul `in`. Problema cu `in` este aceea că ia în calcul și ceea ce este în prototip.
 
 ```javascript
 'altaProprietate' in obiect; // true
