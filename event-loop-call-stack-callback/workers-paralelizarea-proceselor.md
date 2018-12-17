@@ -46,7 +46,53 @@ work.terminate();
 
 ## Comunicarea cu workerul
 
+Pentru a pasa date webworker-ului vom folosi metoda `postMessage()`. Pentru a avea un răspuns, worker-ul trebuie să aibă un *event handler* pentru evenimentul apărut.
 
+```javascript
+// lansează un nou worker
+var worker = new Worker('worker.js');
+// trimiterea unui mesaj
+worker.postMessage('Salut, fir principal!');
+```
+
+Datele care pleacă din firul principal către worker trebuie mai întâi să fie serializate, iar la momentul în care ajung în firul de execuție a worker-ului, acestea sunt deserializate și sunt folosite ca primitive JavaScript. Acest lucru înseamnă că putem trimite obiecte JSON, dar nu putem trimite o funcție sau o clasă. Conținutul fișierului worker.js trebuie să cuprindă un *event handler*.
+
+```javascript
+addEventListener('message', (event) => {
+  console.log(event.type, `"${event.data}"`);
+});
+```
+
+Ca să trimiți un mesaj în firul principal, din worker pur și simplu apelezi de-a dreptul metoda `postMessage('Mesaj')`. Putem investiga ceea ce se poate trimite din și în worker.
+
+```javascript
+worker.postMessage({ceva: 'un obiect'});
+worker.postMessage([2,4,6]);
+```
+
+## Partajarea stării aplicației
+
+Pentru a trimite date către *shared workers*, este nevoie de a folosi porturi. Dacă am avea un *shared worker* care este folosit de trei taburi ale browserului, toate acestea trebuie să deschidă porturi care să asigure comunicarea cu acesta.
+
+```javascript
+/*Pagina web*/
+var worker = new SharedWorker('scriptWorker.js');
+worker.port.addEventListener('message', (event) => {
+  console.log('M-am legat la ', event.data);
+});
+worker.port.start();
+```
+
+Evenimentul *connect* este declanșat la momentul când o pagină se conectează la worker-ul partajat. Proprietatea `source` este de fapt portul, obiectul port care va fi deschis. Metoda `start()` spune *shared worker*-ului că este deschisă comunicarea (similar unui handshake de conexiune TCP). Portul este folosit pentru a ține minte care pagină a deschis conexiunea.
+
+```javascript
+/*scriptWorker.js*/
+var conexiuni = 0;
+addEventListener('connect', (event) => {
+  event.source.start();
+  event.source.postMessage(++conexiuni);
+});
+```
 
 ## Utilitate
 
