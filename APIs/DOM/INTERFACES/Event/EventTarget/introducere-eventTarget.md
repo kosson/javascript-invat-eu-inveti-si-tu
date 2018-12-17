@@ -1,10 +1,10 @@
 # EventTarget
 
-Este o interfață pe care o implementează obiectele pretabile la evenimente și care pot crea listeners („receptori”), care să execute cod la momentul în care a fost declanșat un eveniment.
+Este o interfață pe care o implementează obiectele pretabile la evenimente și care pot crea listeners (*receptori*), care să execute cod la momentul în care a fost declanșat un eveniment.
 
 Cel mai des țintite de evenimente sunt: `Element`, `document`, `window` dar și alte API-uri precum `XMLHttpRequest`.
 
-## Spune [standardul](https://dom.spec.whatwg.org/#introduction-to-dom-events)
+**Spune [standardul](https://dom.spec.whatwg.org/#introduction-to-dom-events)**
 
 Evenimentele țintesc obiecte pentru a semnala că ceva s-a întâmplat, precum activitate nouă pe rețea sau o interacțiune din partea utilizatorului. Aceste obiecte implementează interfața `EventTarget`. Evenimentele la rândul lor sunt obiecte care implementează interfața `Event`. Să explorăm cazul în care am dori să tratăm în toate amănuntele un eveniment.
 
@@ -30,7 +30,7 @@ Cel mai adesea vei vedea în cod evenimentele sub forma exemplul de mai jos:
 obiect.addEventListener("aparDate", function(date){ /*prelucrează date */ });
 ```
 
-Pentru a crea un eveniment folosești metoda `dispatchEvent()`. Pentru asta, mai întâi creezi un eveniment, care este un obiect, ține minte și apoi îl „expediezi” (în engleză i se spune `dispatch`).
+Pentru a crea un eveniment folosești metoda `dispatchEvent()`. Pentru asta, mai întâi creezi un eveniment, care este un obiect, ține minte și apoi îl *expediezi* (în engleză i se spune `dispatch`).
 
 ```javascript
 var evenimentSpecial = new EvenimentSpecial("urlet", {"animal": "gorilă"});

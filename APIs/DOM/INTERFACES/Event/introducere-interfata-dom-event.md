@@ -72,7 +72,7 @@ Proprietatea returnează `true` sau `false` în funcție de modul în care a fos
 
 ### eveniment.cancelable
 
-Indică printr-un boolean dacă un eveniment poate fi anulat sau nu. Verificarea dacă un evenimnet poate fi anulat sau nu, este ceva ce poate fi determinat la momentul inițierii evenimentului.
+Indică printr-un boolean dacă un eveniment poate fi anulat sau nu. Verificarea dacă un eveniment poate fi anulat sau nu, este ceva ce poate fi determinat la momentul inițierii evenimentului.
 
 ### eveniment.preventDefault()
 
@@ -85,7 +85,7 @@ Returnează `true` dacă a fost invocată `preventDefault()`.
 
 ### eveniment.composed
 
-Returnează `true` sau `false` în funcție de modul în care a fost inițializat evenimentul. Este `true`, dacă s-a trecut din shadowDOM în DOM normal.
+Returnează `true` sau `false` în funcție de modul în care a fost inițializat evenimentul. Este `true`, dacă s-a trecut din shadow DOM în DOM normal.
 
 ### eveniment.isTrusted
 

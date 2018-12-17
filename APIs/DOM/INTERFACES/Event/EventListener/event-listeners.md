@@ -45,7 +45,7 @@ Opusă setării de receptori, există și metoda prin care sunt eliminați: `ți
 
 Mai există o metodă prin care poate fi `emis` (dispatch) în mod artificial un eveniment: `ținta.dispatchEvent(event)`. Emiterea evenimentului către țintă returnează un boolean care este `true`, dacă atributul `cancelable` al evenimentului este `false` sau dacă metoda `preventDefault()` nu a fost invocată. False vice-versa.
 
-## Mecanismul de „trimitere” (dispatch) al evenimentelor
+## Mecanismul de trimitere (dispatch) al evenimentelor
 
 Acest mecanism se referă la modul în care evenimentele se propagă prin arborele DOM. Aplicațiile pot emite evenimente folosind metoda `dispatchEvent()`.
 
@@ -59,7 +59,7 @@ Pe măsură ce fiecare element, care are receptori pentru eveniment, este „ati
 
 ## Oprirea propagării unui eveniment.
 
-După cum știm, un eveniment se propagă de la elementul rădăcină spre elementul căruia îi este adresat. Dacă pe drum exită un „receptor” (event listener) și acest element, are un receptor potrivit, va reacționa și acesta.
+După cum știm, un eveniment se propagă de la elementul rădăcină spre elementul căruia îi este adresat. Dacă pe drum există un *receptor* (event listener) și acest element, are un receptor potrivit, va reacționa și acesta.
 
 Dacă putem ori comportamentul implicit al unui element, am putea foarte bine să oprim și modelul propagării. În acest sens, obiectul `Event` pune la dispoziție metoda `stopPropagation()`.
 
@@ -90,7 +90,7 @@ Evenimentele asincrone sunt emise ca rezultat al acțiunilor încheiate fără a
 
 ## Evenimente de încredere și evenimente care nu sunt
 
-Evenimentele care sunt generate de browser (user agent) sau ca rezultat al interacțiunii utilizatorului sau ca urmare a modificărilor suferite de DOM, sunt investite cu un nivel de încredere de către browser. Cele care nu sunt de încredere, de regulă provin din folosirea metodelor `createEvent()`, modificarea evenimentelor folosind `initEvent()` sau cele care au fost emise folosind metoda `dispatchEvent`. Pentru a marca încrederea, browserul setează proprietatea `isTrusted` cu valoarea `true`, celelalte având valoarea opusă. Evenimentele care nu sunt de încredere nu li se vor permite să-și facă „efectul implicit”, cu excepția evenimentului `click` (permis din motiv de compatibilitate istorică). Toate celelate evenimente care nu sunt de încredere se vor comporta ca și când a fost invocată metoda `preventDefault()` pentru respectivul eveniment.
+Evenimentele care sunt generate de browser (user agent) sau ca rezultat al interacțiunii utilizatorului sau ca urmare a modificărilor suferite de DOM, sunt investite cu un nivel de încredere de către browser. Cele care nu sunt de încredere, de regulă provin din folosirea metodelor `createEvent()`, modificarea evenimentelor folosind `initEvent()` sau cele care au fost emise folosind metoda `dispatchEvent`. Pentru a marca încrederea, browserul setează proprietatea `isTrusted` cu valoarea `true`, celelalte având valoarea opusă. Evenimentele care nu sunt de încredere nu li se vor permite să-și facă „efectul implicit”, cu excepția evenimentului `click` (permis din motiv de compatibilitate istorică). Toate celelalte evenimente care nu sunt de încredere se vor comporta ca și când a fost invocată metoda `preventDefault()` pentru respectivul eveniment.
 
 ## Comportamente și declanșatori de activare
 

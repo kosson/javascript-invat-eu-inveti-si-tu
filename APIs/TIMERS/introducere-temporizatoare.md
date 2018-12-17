@@ -1,6 +1,6 @@
 # Temporizări în cod
 
-În diferite scenarii de lucru este nevoie să temporizezi execuția codului. Acest lucru este posibil prin API-urile specializate oferite de motorul JavaScript.
+În diferite scenarii de lucru este nevoie să temporizezi execuția codului. Acest lucru este posibil prin API-urile specializate oferite de browser.
 
 Știm deja de la studiul funcțiilor că acestea sunt rulate o singură dată la executarea programului. Dar ceea ce mai știm este că funcțiile sunt valori, care la nevoie pot fi rulate din nou și din nou ori de câte ori. Având aceste repere reîmprospătate, ne putem gândi la cazurile în care avem nevoie să apelăm o funcție după un anumit timp sau să apelăm o funcție la un anumit interval specificat.
 
