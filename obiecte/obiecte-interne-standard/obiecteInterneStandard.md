@@ -1,12 +1,12 @@
 # Obiecte interne standard - ECMAScript Standard Built-in Objects
 
-Privitor la subiectul acestor obiecte, am ales să traduc „standard built-in” ca **obiecte interne standard** pentru că reflectă cel mai bine realitatea.
+Privitor la aceste obiecte, am ales să traduc *standard built-in* ca **obiecte interne standard** pentru că reflectă cel mai bine realitatea.
 
-Începem povestea obiectelor interne în momentul în care un „script” ori un „modul” își începe execuția. Codul nostru nu este rulat într-un vid deplin, ci deja există deja disponibile un set de obiecte puse la dispoziție de motor. Standardul menționează faptul că *obiectele interne standard* sunt **entități** ECMAScript (4.2 [ECMAScript Overview](https://tc39.github.io/ecma262/#sec-intro). Unul este obiectul global, ca parte a mediului lexical format, iar altele sunt accesibile ca proprietăți ale obiectului global. Unele sunt accesibile ca proprietăți ale altor obiecte *built-in* (preexistente).
+Începem povestea obiectelor interne în momentul în care un *script* ori un *modul* își începe execuția. Codul nostru nu este rulat într-un vid deplin, ci deja sunt disponibile un set de obiecte puse la dispoziție de motor. Standardul menționează faptul că *obiectele interne standard* sunt **entități** ECMAScript (4.2 [ECMAScript Overview](https://tc39.github.io/ecma262/#sec-intro). Unul este obiectul global, ca parte a mediului lexical format, iar altele sunt accesibile ca proprietăți ale obiectului global. Unele sunt accesibile ca proprietăți ale altor obiecte *built-in* (preexistente).
 
 ## Mică anatomie
 
-Obiectele interne standard sunt de fapt funcții care pot fi invocate. Adu-ți mereu aminte faptul că funcțiile sunt numite de standard **funcții obiect**, pentru că, de fapt, **funcțiile sunt obiecte**.
+Obiectele interne standard sunt de fapt funcții cu rol de constructori care pot fi invocate. Adu-ți mereu aminte faptul că funcțiile sunt numite de standard **funcții obiect**, pentru că, de fapt, **funcțiile sunt obiecte**.
 
 Pentru a vedea natura acestor obiecte interne, ne vom ajuta de operatorul `typeof` pentru a *sonda* aceste entități.
 
@@ -15,16 +15,14 @@ typeof Object; // "function"
 typeof Array;  // "function"
 ```
 
-Ceea ce se observă este faptul că obiectele interne sunt funcții, care au caracteristicile unui obiect. Acum vom elucida misterul care stă în spatele disponibilității proprietăților și metodelor unui obiect intern standard. Să spunem că avem un șir de caractere, de exemplu propoziția simplă: „eu învăț”.
-Deschidem o consolă și introducem între ghilimele valoarea literală. În acest moment avem doar valoarea literală a șirului de caractere. Nimic ciudat, nimic anormal, dar complet inutil. Ca să putem *mânui* acest șir de caractere, trebuie să-l legăm la un identificator.
+Să spunem că avem un șir de caractere, de exemplu propoziția simplă: *eu învăț*. Deschidem o consolă și introducem între ghilimele valoarea literală. În acest moment avem doar valoarea literală a șirului de caractere. Nimic ciudat, nimic anormal, dar complet inutil. Ca să putem *mânui* acest șir de caractere, trebuie să-l legăm la un identificator.
 
 ```javascript
 let x = 'eu învăț';
 typeof x; // "string"
 ```
 
-Dacă investigăm tipul valorii identificată prin `x`, motorul va răspunde cu `string`. Și acum vom face o minune. Vom accesa o proprietate disponibilă doar obiectelor `String`. Și te vei întreba pe bună dreptate: cum se poate întâmpla să ai acces la proprietățile și metodele unui obiect când tu operezi cu o valoare literală?
-Rezolvarea misterului vine din faptul că de îndată ce pui punctul, care este un operator destinat accesării membrilor unui obiect, valoarea noastră este „împachetată” (*wrapped*) instant în obiectul corespunzător tipului său de valoare și, minune, devine un obiect.
+Dacă investigăm tipul valorii identificată prin `x`, motorul va răspunde cu `string`. Și acum vom face o minune. Vom accesa o proprietate disponibilă doar obiectelor `String`. Și te vei întreba pe bună dreptate: cum se poate întâmpla să ai acces la proprietățile și metodele unui obiect când tu operezi cu o valoare literală. Rezolvarea misterului vine din faptul că de îndată ce pui punctul, care este un operator destinat accesării membrilor unui obiect, valoarea noastră este *împachetată* (*wrapped*) instant în obiectul corespunzător tipului său de valoare și, minune, devine un obiect.
 
 ```javascript
 x.length; // 8

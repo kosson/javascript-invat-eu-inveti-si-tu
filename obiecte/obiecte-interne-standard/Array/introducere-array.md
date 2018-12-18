@@ -302,7 +302,7 @@ Mai este un caz al folosirii constructorului în ceea ce privește crearea unui 
 
 ![](operatiuniArrayuri.svg)
 
-### Array-uri „dense” prin aplicarea lui `apply()` moștenit de la `Function`.
+### Array-uri dense prin aplicarea lui `apply()` moștenit de la `Function`.
 
 Acesta este un truc pentru a genera array-uri de o dimensiune fixă, dar care, în loc de elemente vide la inițiere, va fi populat cu valori `undefined`. Se folosește `Function.prototype.apply()`, care se poate invoca direct pe `Array` pentru că și `Array`, de fapt este o funcție. Cu rol de contructor, dar o funcție fără niciun dubiu, având acces la `apply()`. Pentru aceasta, contextul va fi obiectul global (în cazul browserului este `window`) sau la `null`. Drept argumente, va fi invocat `apply()` pasându-i-se numărul de elemente dorit:
 
@@ -340,7 +340,7 @@ Array(3).fill(4); // [4, 4, 4]
 // {'0':'01', '1':'01', length: 2, ceva: 1}
 ```
 
-Ultimul caz din seria de exemple de mai sus, se poate dovedi foarte util în practică. Să presupunem că dorești să generezi un obiect prepopulat cu valori din diferite motive. Acest obiect va avea la bază, între oricare alți membri, o pereche cheie:valoare, care va fi folosit drept indicator al dimensiunii array-ului. Ceea ce se va petrece este că aplicarea lui `fill`, care este aplicat obiectului sămânță în care găsește valoarea dimensiunii viitorului array, va conduce la „umplerea” obiectului cu tot atâția noi membri câți au fost specificați de `length`. Singura limitare este că identificatorii cheilor vor fi indecșii. Valorile care vor popula cheile obiectului, pot fi expresii sau valori simple. Am optat mai sus pentru
+Ultimul caz din seria de exemple de mai sus, se poate dovedi foarte util în practică. Să presupunem că dorești să generezi un obiect prepopulat cu valori din diferite motive. Acest obiect va avea la bază, între oricare alți membri, o pereche cheie:valoare, care va fi folosit drept indicator al dimensiunii array-ului. Ceea ce se va petrece este că aplicarea lui `fill`, care este aplicat obiectului sămânță în care găsește valoarea dimensiunii viitorului array, va conduce la „umplerea” obiectului cu tot atâția noi membri câți au fost specificați de `length`. Singura limitare este că identificatorii cheilor vor fi indecșii. Valorile care vor popula cheile obiectului, pot fi expresii sau valori simple.
 
 ### Crearea unui array multidimensional
 
@@ -388,7 +388,7 @@ console.log(alta);
 
 Dacă un array are obiecte drept elemente în cazul în care am dori să facem o copie a acelui array, de fapt am face o copie la referințele către obiecte. În limba engleză vom întâlni această situație cu denumirea *shallow copy* - **copie subțire**.
 
-## Manipularea dimensiunii unui array
+## Manipularea dimensiunii
 
 ### Folosirea proprietății `length`
 
@@ -413,13 +413,14 @@ function numaraElementeReale (date) {
 numaraElementeReale(tablou); // 3
 ```
 
-### Creșterea lungimii array-ului prin introducerea valorii
+### Creșterea lungimii array-ului
 
 ```javascript
 const tablou = ['x', 'y'];
 tablou.length = 3;
-// în acest moment ceea ce s-a întâmplat este că a fost introdus un slot gol în array.
 ```
+
+În acest moment ceea ce s-a întâmplat este că a fost introdus un slot gol în array.
 
 ### Scăderea dimensiunii unui array menționând `length`
 
@@ -435,7 +436,7 @@ console.log(tablou);  // Array [ "unu", "doi" ]
 
 ### Curățarea unui array cu resetarea sa la zero.
 
-Versatilitatea lui `length` merge mai departe oferind posibilitatea de a reseta la 0 un array.
+Versatilitatea lui `length` merge mai departe oferind posibilitatea de a reseta la `0` un array.
 
 ```javascript
 var tablou = ['unu', 'doi', 'trei', 'patru'];
@@ -446,8 +447,8 @@ console.log(tablou);  // Array [  ]
 tablou = [];
 ```
 
-Resetarea array-urilor la 0 - cele referențiate de altele. Există o variantă distructivă și una nedistructivă.
-Resetarea la 0 a array-urilor dacă se face cu `length` va avea același efect și pentru toate referințele la acel array. Cine va accesa o referință, va descoperi uimit că este 0.
+Resetarea array-urilor la `0` - cele referențiate de altele. Există o variantă distructivă și una nedistructivă.
+Resetarea la `0` a array-urilor dacă se face cu `length` va avea același efect și pentru toate referințele la acel array. Cine va accesa o referință, va descoperi uimit că este `0`.
 
 ```javascript
 var tablou = ['prima', 'a doua'];
@@ -467,7 +468,7 @@ tablou; // []
 altTablou; // Array [ "prima", "a doua", 1, 2 ]
 ```
 
-## Operațiuni cu datele din array
+## Operațiuni cu datele
 
 Dacă privești la gradul de populare, unele array-uri pot fi socotite **sparse** (în limba română: *cu goluri*), iar altele fără goluri catalogate a fi **dense**.
 

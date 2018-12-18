@@ -6,7 +6,7 @@ Urmând litera standardului vom lămuri concepe de bază pentru înțelegerea î
 
 ## Interfețe de iterare
 
-Să ne imaginăm că avem un obiect care poate fi deschis simplu de următoarea listă de proprietăți: culoare: roșie, gust: acrișor, formă: rotundă, areCodiță: true. Dacă am avea în față coșuri cu fructe, folosind acest model mental, am putea foarte ușor sorta doar merele pentru că acestea îndeplinesc toate criteriile. Folosind analogia, o interfață pentru motorul JavaScript este un set de proprietăți a căror valori se potrivesc unei anumite specificații a limbajului nostru de programare. Toate obiectele care au proprietățile ce descriu o anumită interfață, spunem că sunt **conforme** acelei interfețe. Proprietățile unei interfețe nu constituie un obiect în sine, ci sunt o listă pe care o regăsim la obiectele **conforme**. Un obiect poate să aibă proprietăți care să-l facă *conform* cu mai multe interfețe.
+Să ne imaginăm că avem un obiect care poate fi deschis simplu de următoarea listă de proprietăți: `culoare: roșie`, `gust: acrișor`, `formă: rotundă`, `areCodiță: true`. Dacă am avea în față coșuri cu fructe, folosind acest model mental, am putea foarte ușor sorta doar merele pentru că acestea îndeplinesc toate criteriile. Folosind analogia, o interfață pentru motorul JavaScript este un set de proprietăți a căror valori se potrivesc unei anumite specificații a limbajului nostru de programare. Toate obiectele care au proprietățile ce descriu o anumită interfață, spunem că sunt **conforme** acelei interfețe. Proprietățile unei interfețe nu constituie un obiect în sine, ci sunt o listă pe care o regăsim la obiectele **conforme**. Un obiect poate să aibă proprietăți care să-l facă *conform* cu mai multe interfețe.
 
 ### Interfața Iterable
 

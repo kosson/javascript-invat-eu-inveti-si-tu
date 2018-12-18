@@ -279,4 +279,5 @@ Dacă un callback trebuie invocat cu întârziere, definește funcția pentru a 
 
 ## Referințe
 
--   [The Art of Node. An introduction to Node.js](https://github.com/maxogden/art-of-node#callbacks)
+- [The Art of Node. An introduction to Node.js](https://github.com/maxogden/art-of-node#callbacks)
+- http://callbackhell.com/

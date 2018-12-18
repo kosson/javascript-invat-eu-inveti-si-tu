@@ -77,9 +77,7 @@ Obiectul pasat ca și context de execuție este menționat între paranteze, fii
 
 ##### Mecanism de operare a funcțiilor interne ale limbajului
 
-Ține minte că și funcțiile interne (metode ale obiectelor interne), se pot bucura de avantajele folosirii lui `apply()`.
-
-**În cazul obiectului intern Math**
+Ține minte că și funcțiile interne (metode ale obiectelor interne), se pot bucura de avantajele folosirii lui `apply()`. În cazul obiectului intern Math:
 
 ```javascript
 var numere = [12, 43, 32, 3];
@@ -88,9 +86,7 @@ var max = Math.max.apply(null, numere); // 43
 var min = Math.min.apply(null, numere); // 3
 ```
 
-**În cazul obiectului intern Array**
-
-Putem crea un array „dens” (adică populat cu valori):
+În cazul obiectului intern `Array` putem crea un array *dens* (adică populat cu valori):
 
 ```javascript
 Array.apply(null, Array(5)); // Array [ undefined, undefined, undefined, undefined, undefined ]
@@ -140,9 +136,7 @@ Un alt exemplu elocvent este întâlnit la gestionarea evenimentelor atunci cân
 
 ### Function.prototype.call()
 
-Apelează o funcție în contextul unui obiect precizat între parantezele rotunde , permițând și pasarea argumentelor funcției. Setează `this` la obiectul pasat și argumentele pot fi pasate așa cum sunt.
-
-Argumentele de după specificarea lui `this` sunt pasate funcției apelată cu call.
+Apelează o funcție în contextul unui obiect precizat între parantezele rotunde, permițând și pasarea argumentelor funcției. Setează `this` la obiectul pasat și argumentele pot fi pasate așa cum sunt. Argumentele de după specificarea lui `this` sunt pasate funcției apelată cu `call()`.
 
 ```javascript
 function faCeva (arg){

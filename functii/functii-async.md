@@ -2,7 +2,7 @@
 
 Acest enunț a fost introdus în EcmaScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile acestea poartă cuvântul cheie `async` în fața lui `function`. Apariția lor marchează o nouă paradigmă de lucru cu promisiunile.
 
-Înainte de apariția acestori funcții, pentru a scrie cod asyncron aveam la îndemână callback-uri și promisiuni. În mod curent, până la apariția async/await ai fi returnat un obiect `Promise` proaspăt instanțiat.
+Înainte de apariția acestor funcții, pentru a scrie cod asincron aveam la îndemână callback-uri și promisiuni. În mod curent, până la apariția async/await ai fi returnat un obiect `Promise` proaspăt instanțiat.
 
 ```javascript
 function simulare () {
@@ -29,14 +29,13 @@ sarcina().then(mesaj => console.log(mesaj));
 Să lucrăm cu un caz ceva mai util. Atunci când am discutat despre cum este executat codul JavaScript, am folosit un exemplu
 
 ```javascript
-TODO: Nu uita să ștergi cheia mea din stringul de acces la API-ul Europeana
 // înlocuiește cheia API din link numită wskey, cu una personală obținută
 // de la https://pro.europeana.eu/get-api
 // Secvența unde vei pune cheia ta este wskey=XXXXXXXXX
 // înlocuiește XXXXXXXXX cu propria cheie
 // dacă nu introduci cheia personală vei avea o eroare
 // Cross-Origin Request Blocked
-let adresa = "https://www.europeana.eu/api/v2/search.json?wskey=MH8g7b6hz&query=The%20Fraternity%20between%20Romanian%20and%20French%20Army";
+let adresa = "https://www.europeana.eu/api/v2/search.json?wskey=XXXXXXXXX&query=The%20Fraternity%20between%20Romanian%20and%20French%20Army";
 function aduMi () {
   fetch(adresa)
     .then((resursa) => resursa.json())
@@ -49,7 +48,7 @@ aduMi();
 Pentru a simplifica putem transforma funcția noastră într-una `async`.
 
 ```javascript
-let adresa = "https://www.europeana.eu/api/v2/search.json?wskey=MH8g7b6hz&query=The%20Fraternity%20between%20Romanian%20and%20French%20Army";
+let adresa = "https://www.europeana.eu/api/v2/search.json?wskey=XXXXXXXXX&query=The%20Fraternity%20between%20Romanian%20and%20French%20Army";
 async function aduMi () {
   const resursa = await fetch(adresa);
   const rezultat = await resursa.json();
@@ -61,6 +60,11 @@ aduMi().then((înregistrarea) => console.log(înregistrarea)).catch(() => consol
 ```
 
 Ceea ce permit funcțiile async/await este posibilitatea de a captura toate erorile ridicate de codul asincron, dar și cel sincron. Deci, folosirea unei structuri `try...catch` este valabilă.
+
+## Dependințe cognitive
+
+- iteratori
+- generatoare
 
 ## Referințe
 

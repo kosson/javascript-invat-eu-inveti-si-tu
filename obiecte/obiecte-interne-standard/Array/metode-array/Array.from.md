@@ -55,9 +55,7 @@ function colectDivs(){
 var divuri = [...document.querySelectorAll('div')];
 ```
 
-## Nu poți aplica `slice` pe array-ul rezultat
-
-Cu `Array.from()` nu se poate face `slice()`, dar poți să indici ce sunt părțile.
+Nu poți aplica `slice` pe array-ul rezultat. Cu `Array.from()` nu se poate face `slice()`, dar poți să indici ce sunt părțile.
 
 ```javascript
 function ceEste(){
