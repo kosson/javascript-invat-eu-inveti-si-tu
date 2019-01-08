@@ -2,7 +2,7 @@
 
 Această metodă scoate *spațiile goale* de la capetele unui string.
 
-Ce poate fi considerat spații goale:
+Ce poate fi considerat a fi spații goale:
 
 -   space
 -   tab

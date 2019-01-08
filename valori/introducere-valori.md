@@ -92,13 +92,19 @@ typeof bool; // "object"
 
 ## string
 
-Tipul `String` este folosit pentru a reprezenta texte. De fapt sunt un șir de caractere, care prin succesiune și aranjament transmit informații importante. Fiecare caracter codat UTF16 este considerat *un element*. Un element este valoarea unui *code unit* din schema de codare a caracterelor UTF-16. Standardul spune că un șir de caractere literal este *șirul constituit din zero sau mai multe puncte de cod Unicode cuprinse între ghilimele simple sau duble*. Sunt pur și simplu siruri de caractere care pot fi introduse în mod direct cu ajutorul ghilimelelor.
+Tipul `String` este folosit pentru a reprezenta texte. De fapt sunt un șir de caractere, care prin succesiune și aranjament transmit informații importante. Fiecare caracter codat UTF16 este considerat *un element*. Un element este valoarea unui *code unit* din schema de codare a caracterelor UTF-16. Standardul spune că un șir de caractere literal este *șirul constituit din zero sau mai multe puncte de cod Unicode cuprinse între ghilimele simple sau duble*. Sunt pur și simplu șiruri de caractere care pot fi introduse în mod direct cu ajutorul ghilimelelor.
 
 ```javascript
 'ceva';
 "altceva";
 '\u221E'; //"∞" o secvență Unicode
 ```
+
+### Marcaje și delimitări în șiruri
+
+Acestea sunt: `'` (ghilimele simple), '"' (duble), `\b`, `\f`, `\r`, `\n`, `\t`, `\v`.
+Pentru digiții zecimali este marcajul care indică că următoarea secvență de caractere este un număr zecimal: `x`, `u`. Pentru valorile hexazecimale este `x`.
+Secvențe de escape pentru UNICODE: `u` sau `u{ }`
 
 ## Symbol
 
@@ -168,7 +174,7 @@ Acum este un moment potrivit să luăm contact cu una din structurile de date pe
 let arr = ['unu', 2, true];
 ```
 
-Obiectul de împachetare este `Array` iar instanțierea acestuia cu `new` crează un array.
+Obiectul de împachetare este `Array` iar instanțierea acestuia cu `new` creează un array.
 
 ```javascript
 const unArrayNou = new Array('unu', 2, true);
@@ -191,7 +197,7 @@ let obiRegexNou = new RegExp('^a+b$', 'g');
 
 ## Literalul funcțiilor
 
-Pentru a înțelege faptul că funcțiile au literalul lor, trebuie să înțelegem un lucru foarte simplu. În JavaScript, funcțile sunt valori.
+Pentru a înțelege faptul că funcțiile au literalul lor, trebuie să înțelegem un lucru foarte simplu. În JavaScript, funcțiile sunt valori.
 
 ```javascript
 function facCeva () { return true };
@@ -202,12 +208,6 @@ O funcție are și ea la rândul ei un obiect de împachetare și poate fi creat
 ```javascript
 let oFunctieNoua = new Function('return true');
 ```
-
-### Marcaje și delimitări în șiruri
-
-Acestea sunt: `'` (ghilimele simple), '"' (ghilmele duble), `\b`, `\f`, `\r`, `\n`, `\t`, `\v`.
-Pentru digiții zecimali este marcajul care indică că următoarea secvență de caractere este un număr zecimal: `x`, `u`. Pentru valorile hexazecimale este `x`.
-Secvențe de escape pentru UNICODE: `u` sau `u{ }`
 
 ## Template Literal - text șablon
 

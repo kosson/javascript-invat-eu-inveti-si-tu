@@ -9,4 +9,4 @@ Metoda returnează un **code point** Unicode, care identifică un caracter.
 console.log(String.fromCodePoint(119973)); // 𝒥
 ```
 
-Parametrul pasat indică poziția **code point**-ului, nu cea a caracterului. Adu-ți aminte mereu de faptul că unele caractere au nevoie de o pereche de code point-uri pentru a fi reprezentare numeric.
+Parametrul pasat indică poziția **code point**-ului, nu cea a caracterului. Adu-ți aminte mereu de faptul că unele caractere au nevoie de o pereche de code point-uri pentru a fi reprezentate numeric.

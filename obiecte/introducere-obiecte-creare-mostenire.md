@@ -1345,9 +1345,9 @@ console.log(fișăExt);
 
 Reține faptul că metodele statice nu sunt moștenite de obiectele create.
 
-### Accesori și incapsulare
+### Accesori și încapsulare
 
-În JavaScript singura posibilitate de a atinge incapsularea prin care înțelegem protejarea datelor prin variabile private este să realizăm closure-ri. Clasele permit realizarea unei incapsulări dacă datele protejate le introducem în constructor și apoi le utilizăm prin accesori.
+În JavaScript singura posibilitate de a atinge încapsularea prin care înțelegem protejarea datelor prin variabile private este să realizăm closure-uri. Clasele permit realizarea unei încapsulări dacă datele protejate le introducem în constructor și apoi le utilizăm prin accesori.
 
 ```javascript
 class Ceva {

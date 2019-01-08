@@ -1,32 +1,36 @@
 # Programarea funcțională
 
-Conceptele programării funcționale sunt necesare pentru a înțelege cum se face „descompunerea” (decomposing) unei funcții ceea ce conduce la o mai bună înțelegere a felului în care trebuie scris software în JavaScript. Este vorba și despre cum să denumești părțile la nivel individual pentru ca la momentul „compunerii” lor să stabilească relații între entități, care să fie ușor de modelat.
+Conceptele programării funcționale sunt necesare pentru a înțelege cum se face *descompunerea* (decomposing) unei funcții ceea ce conduce la o mai bună înțelegere a felului în care trebuie scris software în JavaScript. Este vorba și despre cum să denumești părțile la nivel individual pentru ca la momentul *compunerii* lor să stabilească relații între entități, care să fie ușor de modelat.
 
-Javascript are un model de execuție foarte flexibil. Toate funcțiile beneficiază de metoda `apply()`, care permite apelarea funcției cu un array ca și cum elementele din array ar fi argumentele funcției.
+JavaScript are un model de execuție foarte flexibil. Toate funcțiile beneficiază de metoda `apply()`, care permite apelarea funcției cu un array ca și cum elementele din array ar fi argumentele funcției.
 
-Diferențele între paradigma orientată pe obiecte și cea funcțională:
-
-În cazul obiectelor avem metodele, care transformă și lucrează cu starea obiectului exprimată prin `this`.
-
-```javascript
-faCeva: function faCeva(){
-  return this.primo + this.secundo;
-}
-```
-
-În paradigma funcțională, obiectul este pasat ca argument.
+Diferențele între paradigma orientată pe obiecte și cea funcțională se rezumă la faptul că obiectele prin proprietățile sale au posibilitatea de a înregistra și păstra o stare.
+În cazul obiectelor avem metodele, care pot transforma și lucra cu starea obiectului exprimată prin legătura `this`. Obiectul este la nivel mai jos o referință către o zonă de memorie. Pasarea unui obiect în diferitele faze de rulare ale unei aplicații este pasarea unei referințe către un obiect. Toate aceste faze, pot modifica valorile proprietăților obiectului.
 
 ```javascript
-var faCeva = function(obiectulDeLucru){
-  return obiectulDeLucru.primo + obiectulDeLucru.secundo;
+var obi = {a: 1};
+function modificator1 (obiect) {
+  obiect.a = 100;
+  return obiect;
 };
-// sau mai simplu:
-var faCeva = obiectulDeLucru => obiectulDeLucru.primo + obiectulDeLucru.secundo;
+function modificator2 () {
+  this.nou = 'salve';
+};
+modificator1(obi);
+obi.a; // 100
+modificator2.call(obi);
+console.log(obi); // { a: 100, nou: 'salve' }
 ```
+
+Ceea ce se observă este capacitatea obiectelor de a încapsula starea și de a o transmite mai departe în lanțul de prelucrare. În paradigma funcțională, obiectul poate fi pasat ca argument, ca date.
+
+## Imutabilitatea
+
+Imutabilitatea este un concept cheie pentru programarea funcțională.
 
 ## Definiții
 
-Functional programming -- programarea bazată pe funcții constă în folosirea funcțiilor pentru a transforma valorile în unități de abstractizare, care mai apoi sunt folosite pentru a construi software. (Michael Fogus, „Functional Javascript”).
+Functional programming -- programarea bazată pe funcții constă în folosirea funcțiilor pentru a transforma valorile în unități de abstractizare, care mai apoi sunt folosite pentru a construi software. (Michael Fogus, *Functional Javascript*).
 
 ## Descriere
 
@@ -34,7 +38,7 @@ Ascunderea datelor și a comportamentelor este felul în care pot fi privite fun
 
 ## Mantre
 
-- Funcțiile care sunt folosite pentru a creea alte funcții se numesc „de ordin înalt”.
+- Funcțiile care sunt folosite pentru a crea alte funcții se numesc „de ordin înalt”.
 - Orice funcție poate fi apelată cu oricâte argumente de orice tip în orice moment.
 - Funcțiile care returnează un Boolean, se numesc **predicate**.
 
@@ -55,13 +59,14 @@ faOAdunare([2, 3]); // 5
 ## Puritatea funcțiilor
 
 Înseamnă că o funcție este:
+
 - testabilă
 - portabilă
 - memoizabilă
 - paralelizabilă
 
 O funcție pură este ușor de recunoscut dacă nu schimbă nimic în afara scope-ului său și care nu depinde de nimic din afara scope-ului său.
-O funcție pură oferă același rezultat dacă folosește aceiați parametri. Ceea ce se înțelege este faptul că funcția este independentă de starea sistemului/programului.
+O funcție pură oferă același rezultat dacă folosește aceiași parametri. Ceea ce se înțelege este faptul că funcția este independentă de starea sistemului/programului.
 
 ## Funcțiile în JavaScript sunt de primă clasă
 
@@ -139,7 +144,7 @@ Sunt obiecte care au o metodă map. Functor-ul este obiectul care implementează
 Regulile pe care le îndeplinește Array prin metoda sa map:
 - transformă conținutul
 - menține structura
-- valoare pe care o returneză map trebuie să fie un functor de același tip. Adică poți face chaining cu map (.map(//cod).map(// cod).map(// cod)).
+- valoarea pe care o returnează map trebuie să fie un functor de același tip. Adică poți face chaining cu map (`.map(//cod).map(// cod).map(// cod)`).
 
 ```javascript
 var colectie = [
@@ -153,7 +158,7 @@ console.log(colectieDeNume); // Array [ "Tereza", "Ciprian", "Gina" ]
 ```
 
 Promisiunile sunt implementate și ele ca functori. ECMAScript 2015 nu are o metodă map, dar alte biblioteci de cod au.
-Streamurile sunt și ele implementatori ai lui `map()`.
+Stream-urile sunt și ele implementatori ai lui `map()`.
 
 
 ## Funcțiile map(), filter(), reduce()

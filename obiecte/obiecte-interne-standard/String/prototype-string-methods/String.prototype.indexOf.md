@@ -4,7 +4,7 @@ Este o metodă care returnează indexul unde apare pentru prima dată un fragmen
 
 Este returnat `-1` dacă fragmentul nu este găsit. Atenție, dacă o parte a fragmentului este corectă și s-a greșit, fie și numai un caracter, nu se face identificarea și este returnat `-1`.
 
-Metoda este case sensitive!: `'Ceva Mare'.indexOf('mare'); // -1`
+Metoda este case sensitive: `'Ceva Mare'.indexOf('mare'); // -1`
 
 ## Cazuistică indexOf()
 

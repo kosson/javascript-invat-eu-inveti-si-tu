@@ -14,7 +14,7 @@ Această metodă poate fi apelată direct așa cum este, dar cel mai adesea este
 /abc/[Symbol.replace]('abcde', 'Ca'); // "Cade"
 ```
 
-## Cazuistică în contextul String.prototype.replace()
+## Cazul String.prototype.replace()
 
 ### Înlocuirea cu un alt șir prestabilit
 
@@ -60,7 +60,7 @@ var modificat2 = sursa2.replace(/<span>(.*)<\/span>/ig, '<strong>$1</strong>');
 console.log(modificat2);
 ```
 
-Rezultatul este unul nedorit: `<p>Lorem ipsum <strong>ceva</span> mai <span>mult</strong></p>`. Comportamentul greedy al motorului a condus la identificarea cu succes a subșirului, când aceasta a apărut prima dată, dar a continuat să parcurgă șirul până la epuizat, făcându-ne un ultim serviciu prin înlocuirea ultimului subșir care se potrivea regulilor. Pentru a regla acest comportament, se va adăuga metacaracterul `?`, care va avea ca efect anularea comportamentului greedy.
+Rezultatul este unul nedorit: `<p>Lorem ipsum <strong>ceva</span> mai <span>mult</strong></p>`. Comportamentul greedy al motorului a condus la identificarea cu succes a subșirului, când aceasta a apărut prima dată, dar a continuat să parcurgă șirul până l-a epuizat, făcându-ne un ultim serviciu prin înlocuirea ultimului subșir care se potrivea regulilor. Pentru a regla acest comportament, se va adăuga metacaracterul `?`, care va avea ca efect anularea comportamentului greedy.
 
 ```javascript
 var modificat3 = sursa2.replace(/<span>(.*?)<\/span>/ig, '<strong>$1</strong>');
@@ -97,13 +97,13 @@ propCSS("borderTop"); // border-top
 ### Folosirea unei funcții
 
 În locul unui string predefinit, poți introduce o funcție ca un al doilea parametru.
-În acest caz, funcția va fi invocată imediat ce a fost găsit un șir care să se potrivească șablonului. Rezultatul funcției, care va fi returnat, va fi folosit ca șir de caractere ce va fi înlocuit. ATENȚIE! Funcția va fi invocată ori de câte ori se va găsi șirul căutat după modelul construit de regex. Condiția ca acest lucru să se întâmple este ca obiectul `RegExp` să fie declarat la nivel global (introdu fanionul **g** în regex).
+În acest caz, funcția va fi invocată imediat ce a fost găsit un șir care să se potrivească șablonului. Rezultatul funcției, care va fi returnat, va fi folosit ca șir de caractere ce va fi înlocuit. Atenție, funcția va fi invocată ori de câte ori se va găsi șirul căutat după modelul construit de regex. Condiția ca acest lucru să se întâmple este ca obiectul `RegExp` să fie declarat la nivel global (introdu fanionul **g** în regex).
 
 Argumentele pe care le poate lua o funcție sunt după cum urmează:
 
 #### Primul argument: un șablon
 
-Primul argument al funcției este un șablon `RegExp`. Ca acesta să funcționeze, acesta trebuie constituit din grupuri. Spuneam atunci când discutam grupurile că, de fapt un grup este o expresie secundară care poate fi considerată a fi o unitate distinctă. Ținând cont de acest lucru, șablonul se va constitui din grupuri, cărora, mai târziu, li se vor putea atașa un parametru. Acesta va referenția subșirurile descoperite.
+Primul argument al funcției este un șablon `RegExp`. Ca acesta să funcționeze, acesta trebuie constituit din grupuri. Spuneam atunci când discutam grupurile că, de fapt un grup este o expresie secundară care poate fi considerată a fi o unitate distinctă. Ținând cont de acest lucru, șablonul se va constitui din grupuri, cărora, mai târziu, li se vor putea atașa un parametru. Acesta va referi subșirurile descoperite.
 
 #### Al doilea până la parametrul n
 

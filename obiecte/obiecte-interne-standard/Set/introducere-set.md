@@ -137,7 +137,7 @@ for (let [cheie, valoare] of setNou.entries()) {
 }; // unu 1 true
 ```
 
-### Constituirea unui set cu elemente unice dintr-un Array
+### Set cu elemente unice dintr-un Array
 
 Există posibilitatea ca la un moment dat să parcurgi programatic un text din care să extragi o submulțime de cuvinte după anumite criterii. Există posibilitatea ca aceste cuvinte să se repete în array-ul nou constituit. Ceea ce ar fi nevoie în acest scenariu este să se constituie un `Set` inițial de cuvinte la care în timp să se poată adăuga altele.
 `Set` va excela la acest capitol.

@@ -1,6 +1,6 @@
 # String.raw()
 
-Este o metodă foarte utilă în lucrul cu șabloanele de text de tipul `${...}`.
+Este o metodă foarte utilă în lucrul cu șabloanele de text `${...}`.
 
 Metoda returnează forma brută a șirului.
 
@@ -9,7 +9,7 @@ var fragment = 'ceva';
 String.raw`Am mâncat ${fragment}`; // Am mâncat ceva
 ```
 
-Poți crea noi șiruri „brute”:
+Poți crea noi șiruri *brute*:
 
 ```javascript
 var sir = String.raw`Vreau ceva bun!`;

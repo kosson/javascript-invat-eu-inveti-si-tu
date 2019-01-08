@@ -1,7 +1,7 @@
 # Module
 
 Modularizarea codului este o necesitate în momentul în care dezvolți o aplicație. În timp au fost dezvoltate instrumente care permit modularizarea, dar odată cu apariția lui ES6, modulele fac parte din limbaj.
-În ES5, modularizarea codului era realizată folosind biblioteci de cod precum RequireJS ce implementează standardul Asynchronous Module Definition (AMD) și modul de a realiza modularizarea de către Nodejs, structurând modulele după cerințele CommonJS (încărcare sincronă).
+În ES5, modularizarea codului era realizată folosind biblioteci de cod precum RequireJS ce implementează standardul Asynchronous Module Definition (AMD) și modul de a realiza modularizarea de către NodeJS, structurând modulele după cerințele CommonJS (încărcare sincronă).
 
 Istoric vorbind, un anumit nivel de modularizare era făcut prin încărcarea diferitelor fragmente de cod JS în pagina web, dar acest lucru nu poate constitui un adevărat sistem de gestiune a diferitelor părți utile pentru a rula în armonie.
 
@@ -18,9 +18,7 @@ Totuși, cel mai util ar fi să existe un singur punct de intrare în aplicația
 
 ## Spune standardul
 
-Un Module are un `Module Record` care conține informație privind structura de import și export a unui modul. Înregistrările conținute sunt folosite doar la evaluarea unui modul.
-
-Modulele oferă avantajul că rulează codul în `"strict mode"` deja.
+Un Module are un `Module Record` care conține informație privind structura de import și export a unui modul. Înregistrările conținute sunt folosite doar la evaluarea unui modul. Modulele oferă avantajul că rulează codul în `"strict mode"` deja.
 
 ## Analiza modulelor
 
