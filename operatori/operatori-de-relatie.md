@@ -2,7 +2,7 @@
 
 Acești operatori investighează caracteristici importante ale obiectelor și returnează o valoare Boolean în funcție de rezultat.
 
-## Operatorul in
+## Operatorul `in`
 
 Dacă ești la început și încă nu știi nimic despre obiecte, poți le percepi precum colecții de date care pot fi accesate prin sintaxa cu punct. Prin acest operator testezi dacă o valoare există într-un obiect. Încă nu am ajuns la obiecte, dar vom parcurge acești operatori pentru a-i avea tratați unitar. Poți reveni în momentul în care deslușind tainele obiectelor vei găsi exemple îi utilizează.
 
@@ -10,12 +10,12 @@ Revenind, în cazul array-urilor vorbim despre căutarea unui index cu valoarea 
 
 ```javascript
 2 in ['ceva', true, 3, 4]; // true
-'length' in ['a', 1, true]; // true
+'length' in ['a', 1, true];// true
 ```
 
-Interesant este că și `length` va returna `true`. De ce? Pentru că este o proprietate a obiectului intern `Array` la care ți s-a oferit acces prin mecanismul moștenirii. Trebuie precizat că de îndată ce declari un array, valoarea acestuia este „învelită” în obiectul asociat, ceea ce are ca efect lucrul cu un obiect array, care moștenește toate proprietățile obiectului intern `Array`, printre acestea fiind și `length`. Da, acesta va testa dacă există și îl va detecta pentru că, de fapt, a fost moștenit.
+Interesant este că și `length` va returna `true`. De ce? Pentru că este o proprietate a obiectului intern `Array` la care ți s-a oferit acces prin moștenir. Trebuie precizat că de îndată ce declari un array, valoarea acestuia este *învelită* în obiectul asociat, ceea ce are ca efect lucrul cu un obiect array, care moștenește toate proprietățile obiectului intern `Array`, printre acestea fiind și `length`. Da, acesta va testa dacă există și îl va detecta pentru că, de fapt, a fost moștenit.
 
-În cazul obiectelor declarate, folosirea lui `in` are sens pentru cazul în care cauți după numele cheii unei proprietăți.
+În cazul obiectelor se poate folosi `in` pentru a căuta după numele cheii.
 
 ```javascript
 var obi = {a: 1, b: 2};
@@ -31,11 +31,11 @@ let colectie = ['1', 1, true];
 Symbol.iterator in colectie; // true
 ```
 
-Mai devreme menționam faptul că investigarea unui obiect folosind acest operator, va merge pe lanțul prototipal pentru a căuta proprietăți. De exemplu, metoda `toSource()` este moștenită de la obiectul intern `Object`, ceea ce va conduce la returnarea valorii true, dacă va fi căutată.
+Mai devreme menționam faptul că investigarea unui obiect folosind acest operator, va merge pe lanțul prototipal pentru a căuta proprietăți. De exemplu, metoda `toSource()` este moștenită de la obiectul intern `Object`, ceea ce va conduce la returnarea valorii `true`, dacă va fi căutată.
 
-## Operatorul instanceof
+## Operatorul `instanceof`
 
-Acest operator testează dacă în lanțul prototipal al unui obiect se află proprietatea `prototype` a unui constructor. Începând cu ECMAScript 6, operatorul `instanceof` este o prescurtare care apelează metoda `hasInstance` a constructorului `Symbol`. Toate funcțiile au o metodă `Symbol.hasInstance` cu ajutorul căreia se poate verifica dacă un anume obiect este sau nu o instanță a acelei funcții.
+Acest operator testează dacă în lanțul prototipal al unui obiect se află proprietatea `prototype` a unui constructor. Începând cu ES6, operatorul `instanceof` este o prescurtare care apelează metoda `hasInstance` a constructorului `Symbol`. Toate funcțiile au o metodă `Symbol.hasInstance` cu ajutorul căreia se poate verifica dacă un anume obiect este sau nu o instanță a acelei funcții.
 
 ```javascript
 function EX () {};

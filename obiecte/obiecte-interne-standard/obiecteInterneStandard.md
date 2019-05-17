@@ -15,14 +15,14 @@ typeof Object; // "function"
 typeof Array;  // "function"
 ```
 
-Să spunem că avem un șir de caractere, de exemplu propoziția simplă: *eu învăț*. Deschidem o consolă și introducem între ghilimele valoarea literală. În acest moment avem doar valoarea literală a șirului de caractere. Nimic ciudat, nimic anormal, dar complet inutil. Ca să putem *mânui* acest șir de caractere, trebuie să-l legăm la un identificator.
+Ceea ce se observă este faptul că obiectele interne sunt funcții, care au caracteristicile unui obiect. Acum urmează o parte mai interesantă ca un mic mister egiptean. Vom elucida misterul care stă în spatele disponibilității proprietăților și metodelor unui obiect intern standard. Să spunem că avem un șir de caractere, de exemplu propoziția simplă: *eu învăț*. Deschidem o consolă și introducem între ghilimele valoarea literală. Nimic ciudat, nimic anormal, dar e inutil. Ca să putem *mânui* acest șir de caractere, trebuie să-l legăm la un identificator.
 
 ```javascript
 let x = 'eu învăț';
 typeof x; // "string"
 ```
 
-Dacă investigăm tipul valorii identificată prin `x`, motorul va răspunde cu `string`. Și acum vom face o minune. Vom accesa o proprietate disponibilă doar obiectelor `String`. Și te vei întreba pe bună dreptate: cum se poate întâmpla să ai acces la proprietățile și metodele unui obiect când tu operezi cu o valoare literală. Rezolvarea misterului vine din faptul că de îndată ce pui punctul, care este un operator destinat accesării membrilor unui obiect, valoarea noastră este *împachetată* (*wrapped*) instant în obiectul corespunzător tipului său de valoare și, minune, devine un obiect.
+Dacă investigăm tipul valorii identificată prin `x`, motorul va răspunde cu `string`. Și acum, vom face o minune. Vom accesa o proprietate disponibilă doar obiectelor `String`. Te vei întreba pe bună dreptate: cum se poate întâmpla să ai acces la proprietățile și metodele unui obiect când tu operezi cu o valoare literală. Rezolvarea misterului vine din faptul că de îndată ce pui punctul, care este un operator destinat accesării membrilor unui obiect, valoarea noastră este *împachetată* (*wrapped*) instant în obiectul corespunzător tipului său de valoare și, minune, devine un obiect.
 
 ```javascript
 x.length; // 8
@@ -34,19 +34,17 @@ Putem chiar interoga care este constructorul obiectului și vom afla că este fu
 
 ## Structură
 
-O structură a acestor obiecte este oferită chiar de standardul ECMAScript care le subîmparte pe următoarele linii de funcționalitate:
+O structură a acestor obiecte este oferită chiar de standardul ECMAScript, care le subîmparte pe următoarele linii de funcționalitate:
 
 -   obiectele fundamentale pentru rularea programelor includ `Object`, `Function`, `Boolean`, `Symbol` și `Error`,
 -   obiectele care reprezintă și manipulează valorile numerice includ `Math`, `Number` și `Date`,
 -   obiectele care prelucrează șiruri de caractere includ `String` și `RegExp`,
 -   obiecte care sunt de fapt colecții indexate de valori care includ `Array`, colecții cheie-valoare precum `Map` și `Set`,
--   obiecte care suportă date structurate așa cum este obiectul `JSON`, `ArrayBuffer` și `DataView`,
+-   obiecte care suportă date structurate așa cum sunt obiectele`JSON`, `ArrayBuffer` și `DataView`,
 -   obiecte care oferă abstracțiuni de control așa cum sunt funcțiile generator și obiectele `Promise`,
 -   obiecte care oferă reflexie așa cum sunt `Proxy` și `Reflect`.
 
-Multe dintre obiectele interne sunt funcții de fapt. Acestea pot fi invocate cu argumente. O parte dintre acestea sunt constructori și sunt menite să fie invocate cu `new`. Acestea sunt proprietăți constructor ale obiectului global.
-
-Proprietățile constructor:
+Multe dintre obiectele interne sunt funcții de fapt. Acestea pot fi invocate cu argumente. O parte dintre acestea sunt constructori și sunt menite să fie invocate cu `new`. Acestea sunt proprietăți constructor ale obiectului global:
 
 -   `Array`, `ArrayBuffer`,
 -   `Boolean`,
@@ -62,7 +60,7 @@ Proprietățile constructor:
 -   `Set`, `String`, `Symbol`, `SyntaxError`,
 -   `TypeError`,
 -   `Uint8Array`, `Uint8ClampedArray`, `Uint16Array`, `Uint32Array`, `URIError`,
--   `WeakMap`, `WeakSet`
+-   `WeakMap`, `WeakSet`.
 
 Dacă nu este prevăzut altfel, toate funcțiile interne și toți constructorii au acces la obiectul prototype al lui `Function`, care este obiectul la care ajungi prin referința `Function.prototype`.
 

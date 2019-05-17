@@ -1,6 +1,6 @@
 # Array.from()
 
-Este o metodă introdusă de versiunea standardului ECMAScript 2015. Creează o instanță `new Array` din orice obiect care arată ca un array sau care este iterabil. Obiectele din care se creează array-urile trebuie să aibe o lungime și elementele să fie indexate. Obiectul `arguments` are deja implementat protocolul de iterare și poate fi exploatat cu `Array.from()`.
+Este o metodă introdusă de versiunea standardului ECMAScript 2015. Creează o instanță `new Array` din orice obiect care arată ca un array sau care este iterabil. Obiectele din care se creează array-urile trebuie să aibă o lungime și elementele indexate. Obiectul `arguments` are deja implementat protocolul de iterare și poate fi exploatat cu `Array.from()`.
 
 ## Aplicarea pe `arguments`
 
@@ -12,7 +12,7 @@ function transforma () {
 };
 ```
 
-Acum avem o viață mult mai ușoară, dar am prezentat metoda „veche” pentru că este posibil să o întâlniți destul de des în codul scris anterior și pe care este nevoie să-l înțelegeți.
+Acum avem o viață mult mai ușoară, dar am prezentat metoda *veche* pentru că este posibil să o întâlniți destul de des în codul scris anterior și pe care este nevoie să-l înțelegeți.
 
 ```javascript
 function sparge () {
@@ -23,7 +23,7 @@ sparge(1, 2, 3); // [1, 2, 3]
 
 ## Congruiență cu operatorul spread
 
-Există un operator nou introdus de ECMAScript 2015 care face același lucru. Este vorba despre operatorul trei puncte. Acest operator folosește protocolul de iterare ceea ce înseamnă că obiectele pe care dorim să le transformăm, trebuie să aibe implementat `@@iterator` prin intermediul lui `[Symbol.iterator]`. Obiectul `arguments` are deja implementat protocolul de iterare începând cu ECMAScript 2015. Atenție, *operatorul spread* se bazează pe existența implementării protocolului de iterare, pe când `Array.from()`, nu se bazează doar pe acesta. Spre deosebire de operator, metoda are capacitatea de a procesa și structuri de date „array-like”.
+Există un operator nou introdus de ECMAScript 2015 care face același lucru. Este vorba despre operatorul trei puncte. Acest operator folosește protocolul de iterare, ceea ce înseamnă că obiectele pe care dorim să le transformăm, trebuie să aibă implementat `@@iterator` prin intermediul lui `[Symbol.iterator]`. Obiectul `arguments` are deja implementat protocolul de iterare începând cu ECMAScript 2015. Atenție, *operatorul spread* se bazează pe existența implementării protocolului de iterare, pe când `Array.from()`, nu se bazează doar pe acesta. Spre deosebire de operator, metoda are capacitatea de a procesa și structuri de date *array-like*.
 
 ```javascript
 function transforma () {
@@ -108,6 +108,6 @@ console.log(transformate.join(''));
 // ["<p style="color: red">var</p>", "<p style="color: green">typeof</p>"]
 ```
 
-Ceea ce este observabil este că în momentul în care te-ai decis să folosești o metodă din obiectul parcurs, va trebui să pasezi ca al treilea argument și referința pentru obiect ca fiind `this`.
+Se observă că în momentul în care te-ai decis să folosești o metodă din obiectul parcurs, va trebui să pasezi ca al treilea argument și referința pentru obiect ca fiind `this`.
 
 Oricare obiect care are proprietatea `Symbol.iterator` poate fi convertit într-un array.

@@ -1,4 +1,4 @@
-# Valorile literale
+# Literale
 
 Valorile literale sunt valorile oferite în mod direct programului, fiind declarate prin însuși caracterul(ele) corespondent(e). Pe scurt, valoarea trei, ca să fie înțeleasă ca număr pentru computer, trebuie să fie introdusă folosind caracterul `3` a setului de caractere latin. Corect? De aici și denumirea lor de literale. Literalele oferă mecanismul cel mai simplu pentru a crea valori.
 
@@ -11,11 +11,11 @@ Te întrebi pe bună dreptate cum face diferența motorul JavaScript între **id
 
 Acum, o situație interesantă pe care sunt sigur că ai sesizat-o. De ce pentru literalele cifre, nu este nevoie de ghilimele. Răspunsul vine din limitele pentru scrierea identificatorilor. Aceștia nu au voie să înceapă cu o cifră. Logic, nu? Și de aici e opțiunea simplă a motorului care face diferența fără a fi necesare ghilimele. Atenție, dacă pui o cifră între ghilimele, ceea ce este perfect ok, aceasta nu mai este un număr, ci un simplu caracter dintr-un șir text.
 
-În continuare vom trata valorile indicând acolo unde este necesar faptul că valoarea este precizată printr-un literal.
+În continuare, vom trata valorile indicând acolo unde este necesar faptul că valoarea este precizată printr-un literal.
 
 ### Literal `null`
 
-Avem unul singur și acesta este cuvântul rezervat `null`
+Avem unul singur și acesta este cuvântul rezervat `null`.
 
 ### Literale `boolean`
 

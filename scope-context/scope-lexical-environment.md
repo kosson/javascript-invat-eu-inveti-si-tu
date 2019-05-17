@@ -2,7 +2,7 @@
 
 ## Introducere
 
-Povesteam anterior că în ceea ce privește limbajul de programare JavaScript, felul în care este redactat textul, adică codul sursă, este crucial. De ce? Pentru că JavaScript interpretează locul declarațiilor de obiecte, de funcții și variabile ca fiind semnalul că trebuie să genereze niște planuri cu anumite separări între ele. Constituirea acestor *planuri* se petrece la momentul compilării codului atunci când se formează *tokenii* și se identifică structurile lexicale ale codului sursă. Este crucial să înțelegi că ordinea în care scrii codul comunică algoritmilor lexicografici din spatele motorului JavaScript cum se vor forma mediile lexicale. Reține, locul unde cauți entități este determinat de ordinea în care le întroduci în codul sursă.
+În ceea ce privește localizarea valorilor declarate, felul în care este redactat textul, adică codul sursă, este crucial. De ce? Pentru că JavaScript interpretează locul declarațiilor de obiecte, de funcții și variabile ca fiind semnalul că trebuie să genereze niște planuri cu anumite separări între ele. Constituirea acestor *planuri* se petrece la momentul compilării codului atunci când se formează *tokenii* și sunt identificate structurile lexicale ale codului sursă. Este crucial să înțelegi că ordinea în care scrii codul comunică algoritmilor lexicografici din spatele motorului JavaScript cum se vor forma mediile lexicale. Reține, locul unde cauți entități este determinat de ordinea în care le întroduci în codul sursă.
 
 Compilatorul este cel responsabil pentru a pregăti în spate codul pe care îl servește motorului JavaScript. Compilarea se face de la cap la coadă într-o singură trecere pentru a fi gata de a fi executat imediat după. Aceste detalii alcătuiesc contextul pentru a înțelege cât mai bine aceste medii lexicale care se formează.
 
@@ -13,7 +13,7 @@ Mediul lexical sau scope-ul poate fi foarte ușor înțeles ca un *registru inve
 
 Mediul lexical nu este ceva nou, de curând adăugat limbajelor de programare. Rădăcinile conceptului și domeniul de aplicare vin chiar de la începutul deceniului șase al secolului trecut.
 
-> „Este porțiunea de cod sursă pentru care este disponibilă o legătură între un nume și o entitate” (definiție pentru limbajul de programare ALGOL 60, 1960).
+> Este porțiunea de cod sursă pentru care este disponibilă o legătură între un nume și o entitate (definiție pentru limbajul de programare ALGOL 60, 1960).
 
 Această definiție explică cel mai bine conceptul de *legătură*. De fapt, acesta este menirea mediului lexical, de a ține evidența acestor legături. De ce? Pentru că valorile legate de un anume identificator se pot modifica în timp deoarece valoarea pentru care s-a făcut legătura s-a modificat.
 
@@ -44,7 +44,7 @@ Astfel, putem spune că există **tipuri** asociate valorilor (**value types**),
 
 ## Definiții
 
-Este **locul** unde te uiți după lucruri.
+Este **locul** unde te uiți după identificatori.
 Locul unde definești variabilele determină zona.
 Este **mediul** în care au efect funcțiile și sunt disponibile variabilele.
 Global scope este locul de unde pot fi accesate funcții și variabile în întreg codul.
@@ -79,15 +79,15 @@ Câte medii lexicale (**lexical environments**) se pot stabili:
 
 -   **global environment** - mediul global este cel mai de sus posibil la care cele interne fac conexiuni.,
 -   **module environment** - mediul lexical al modulelor conține legăturile la declarațiile de prim nivel ale unui **Module**. Conține legături importate în mod explicit de `Module`. Mediul extern al unui `Module` este **global environment**,
--   **function environment** - mediul lexical au unei funcții este un mediu care se stabilește **la invocarea** unei funcții. Mediul funcției poate să stabilească o nouă legătură la „this”. Un **function environment** este un **lexical environment** care corespunde momentului invocării funcției. Mediul funcției capturează și starea necesară pentru a suporta invocații ale metodei `super`.
+-   **function environment** - mediul lexical au unei funcții este un mediu care se stabilește **la invocarea** unei funcții. Mediul funcției poate să stabilească o nouă legătură la `this`. Un **function environment** este un **lexical environment** care corespunde momentului invocării funcției. Mediul funcției capturează și starea necesară pentru a permite invocații ale metodei `super`.
 
 În obiectul **environment record** există două tipuri de valori:
 
 -   ***declarative Enviroment Records*** - **înregistrări declarative în mediu** și
 -   ***object Environment Records*** - **înregistrări de mediu ale obiectelor**.
 
-***Declarative Enviroment Records*** definește efectele unor elemente precum declarații de funcții, de variabile și structuri `try...catch`.
-***Object Environment Records*** definește efectele unor elemente precum declarația `with`, care asociază legătura identificatorului cu proprietățile unui obiect.
+***Declarative Enviroment Records*** definesc efectele unor elemente precum declarații de funcții, de variabile și structuri `try...catch`.
+***Object Environment Records*** definesc efectele unor elemente precum declarația `with`, care asociază legătura identificatorului cu proprietățile unui obiect.
 
 Fiecare înregistrare de mediu a unui obiect are o legătură la un obiect numit **binding object**. Un obiect **environment record** are drept sarcină să lege șirurile de caractere care sunt numele identificatorilor proprietăților obiectului pentru care se stabilește acest **environment record**. Cheile proprietăți care nu sunt numere nu vor fi considerate în obiectul **environment record**. În setul legăturilor (bindings) sunt incluse deopotrivă proprietățile moștenite, cât și cele proprii indiferent de setarea atributului *enumerable*. Setul identificatorilor legați de environment record poate varia în funcție de ștergerea sau adăugarea proprietăților și sunt considerate a fi *legături schimbătoare* - *mutable bindings* în engleză.
 
@@ -143,9 +143,9 @@ Posibilele elemente cărora mediul lexical le ține evidența:
 
 ## Variabilele in scope
 
-Pentru a fi eficienți, informațiile despre comportamentul variabilelor în diferite medii lexicale trebui cuplate neapărat cu ceea ce am aflat despre hoisting și comportamentul diferit a lui `var`, pe de o parte și `let` și `const` pe de alta.
+Pentru a fi eficienți, informațiile despre comportamentul variabilelor în diferite medii lexicale trebuie cuplate neapărat cu ceea ce am aflat despre hoisting și comportamentul diferit a lui `var`, pe de o parte și `let` și `const` pe de alta.
 
-Scope-ul unei variabile poate fi înțeles setul de linii de cod sursă pentru care este definit un identificator.
+Mediul lexical al unei variabile poate fi înțeles drept setul de linii de cod sursă pentru care este disponibil identificatorul.
 Variabilele locale sunt disponibile funcției în care au fost declarate și tuturor funcțiilor interne.
 Variabilele locale sunt reatribuite cu valori de fiecare dată când o funcție este invocată.
 Nu uita, parametrii unei funcții sunt la rândul lor variabile locale.
@@ -163,7 +163,7 @@ function scope1 () {
 };
 ```
 
-Declarațiile de variabile cu `var` se află în scope de la momentul în care au fost declarate, până la închiderea blocului funcției în care au fost declarate indiferent de imbricarea altor blocuri `{}`.
+Declarațiile de variabile cu `var` se află în scope de la momentul în care au fost declarate, până la închiderea blocului funcției în care au fost declarate indiferent de imbricarea altor blocuri `{}`. Declararea variabilelor cu `var` nu onorează mecanismul de block-scope, fiind hoistate.
 
 ```javascript
 var ceva = true;
@@ -178,13 +178,15 @@ facCeva(); // false
 
 În cazul declarării variabilelor cu `var`, regula de aur este să se facă declararea cât mai aproape de locul unde sunt necesare. Să fie cât mai localizate fragmentului în execuție care are nevoie de ele. Opus acestui comportament este declararea variabilelor cu `let` și `const` care onorează blocurile `{}`, fiind disponibile doar acestora.
 
-Funcțiile interne altora, care au nume, se află în scope-ul celei în care au fost declarate. Toți identificatorii sunt disponibili plenar unui mediu lexical. Există o nuanță în ceea ce privește variabilele declarate cu `var` și cele cu `let` și `const`. Cele declarate cu `let` și `const` introduc o temporizare (**temporal dead zone**) prin faptul că nu sunt disponibile înainte ca firul de execuție să ajungă la ele, pe când `var` face ca variabilele să fie omniprezente indiferent unde se află *controlul*.
+Funcțiile interne altora, se află în scope-ul celei în care au fost declarate. Toți identificatorii sunt disponibili plenar unui mediu lexical. Există o nuanță în ceea ce privește variabilele declarate cu `var` și cele cu `let` și `const`. Cele declarate cu `let` și `const` introduc o temporizare (**temporal dead zone**) prin faptul că nu sunt disponibile înainte ca firul de execuție să ajungă la ele, pe când `var` face ca variabilele să fie omniprezente indiferent unde se află *controlul*.
 
 ## Cazul funcțiilor
 
+Dacă ești începător și încă nu ai parcurs subiectul funcțiilor, atunci următoarele informații vor fi cea mai bună încălzire pentru că îți oferă cel mai bun context de a le înțelege modul de operare. Dacă ai citit temeinic restul capitolelor, ai toate informațiile pentru a face această încălzire.
+
 Atunci când este pus să evalueze o funcție, motorul JavaScript consultă mai întâi *lexical environment* care se constituie după felul în care este redactat codul din interiorul funcției.
 
-Acesta este generat în funcție de cum apar diferitele structuri de cod cum ar fi blocurile de cod delimitate în mod obișnuit de acolade: `{}`. Începând cu versiunea ES6 - *block scoping* este posibil ori de câte ori încadrezi enunțuri între acolade, anterior fiind limitat doar la funcții. În mod tradițional, funcțiile au fost singurele mecanisme care generau un mediu lexical propriu și astfel permiteau și ideea de *spații private* pentru date și funcționalități private. Puteți să vă închipuiți funcțiile în contextul mediului lexical realizat precum niște grădini private din interiorul cărora poți privi *lumea* de afară, dar invers niciodată.
+Acesta este generat în funcție de cum apar diferitele structuri de cod cum ar fi blocurile de cod delimitate în mod obișnuit de acolade: `{}`. Începând cu versiunea ES6 - *block scoping*-ul este posibil ori de câte ori încadrezi enunțuri între acolade, anterior fiind limitat doar la funcții. Istoric vorbind, funcțiile au fost singurele mecanisme care generau un mediu lexical propriu și astfel permiteau și ideea de *spații private* pentru date și funcționalități private. Puteți să vă închipuiți funcțiile în contextul mediului lexical realizat, precum niște grădini private din interiorul cărora poți privi *lumea* de afară, dar invers niciodată.
 
 Înainte de ES6 **block scope**-ul se realiza doar printr-un IIFE (Immediately Invoked function Expression), care produce propriul său lexical scope izolat de restul codului.
 
@@ -202,19 +204,17 @@ Acesta este generat în funcție de cum apar diferitele structuri de cod cum ar 
 }
 ```
 
-În cazul funcțiilor mai trebuie menționat faptul că mediul lexical pe care-l formează la momentul apelării, va pune la dispoziția funcției **doar pe perioada execuției** identificatorii. Este foarte important acest detaliu pentru că în cazul în care vei dori să menții *în viață* acest mediu, va trebui să constitui o funcție internă pe care să o returnezi. Identificatorul care va fi atribuit cu rezultatul execuției funcției gazdă, va fi acea funcție internă care va ține în viață mediul existent la momentul rulării gazdei. De ce ai face un astfel de mecanism? Pentru că în el sunt date valoroase care uneori sunt valoroase pentru că țin evidența unei stări ce determină executarea altor funcții ș.a.m.d. Acest mecanism se numește **closure**.
+În cazul funcțiilor mai trebuie menționat faptul că mediul lexical pe care-l formează la momentul apelării, va pune la dispoziția funcției **doar pe perioada execuției** identificatorii. Este foarte important acest detaliu pentru că în cazul în care vei dori să menții *în viață* acest mediu, va trebui să constitui o funcție internă pe care să o returnezi. Identificatorul care va fi atribuit cu rezultatul execuției funcției gazdă, va fi acea funcție internă care va ține în viață mediul existent la momentul rulării gazdei. De ce ai face un astfel de mecanism? Pentru că în el sunt date valoroase, care uneori sunt valoroase pentru că țin evidența unei stări ce determină executarea altor funcții ș.a.m.d. Acest mecanism se numește **closure**.
 
 ### Declararea unei funcții
 
-Dacă ești începător și încă nu ai parcurs subiectul funcțiilor, atunci următoarele informații vor fi cea mai bună încălzire pentru că îți oferă cel mai bun context de a le înțelege modul de operare. Dacă ai citit temeinic restul capitolelor, ai toate informațiile pentru a face această încălzire.
+La momentul declarării, identificatorul funcției este adăugat la mediul lexical deja existent, care să presupunem că ar fi `Global Object`. Identificatorul acestei noi funcții, care doar a fost declarată, referă un obiect funcție care tocmai s-a generat. Un secret: funcțiile for obiecte sunt.
 
-La momentul declarării, identificatorul funcției este adăugat la mediul lexical deja existent, care să presupunem că ar fi `Global Object`. Identificatorul acestei noi funcții, care doar a fost declarată, referă un obiect funcție care tocmai s-a generat. Îți șoptesc un secret: funcțiile for obiecte sunt.
-
-Când o funcție este adăugată scope-ului existent la momentul declarării, o altă proprietate internă care este scope-ul preexistent la momentul declarării este accesibil funcției noi la momentul invocării. Dacă declarăm o funcție în `Global Object`, scope va fi chiar `Global Object`.
+Când o funcție este adăugată scope-ului existent la momentul declarării, o altă proprietate internă care este scope-ul preexistent la momentul declarării este accesibilă funcției noi la momentul invocării. Dacă declarăm o funcție în `Global Object`, **scope** va fi chiar `Global Object`.
 
 ## Cazul obiectelor
 
-Dacă încă nu ai trecut prin subiectul legat de modurile în care se stabilesc legăturile `this`, cazul obiectelor în contextul mediilor lexical ar trebui abordat în paralel cu acesta. Legătura numită `this`, după cum vei afla mai târziu, este vitală pentru a alege contextul corect de executare a unei funcții. Pentru a studia cum este constituit mediul lexical al obiectelor, avem nevoie să exprimentăm nițel cu o funcție care să construiască un obiect pe care să-l studiem.
+Dacă încă nu ai trecut prin subiectul legat de modurile în care se stabilesc legăturile `this`, cazul obiectelor în contextul mediilor lexicale, ar trebui abordat în paralel cu acesta. Legătura numită `this`, după cum vei afla mai târziu, este vitală pentru a alege contextul corect de executare a unei funcții. Pentru a studia cum este constituit mediul lexical al obiectelor, avem nevoie să exprimentăm nițel cu o funcție care să construiască un obiect pe care să-l studiem.
 
 ```javascript
 function Obi () {
@@ -233,7 +233,7 @@ Obi();
 // Esti un om de nota undefined
 ```
 
-Atenție, în cazul invocării lui `setInterval`, `this` este setat la obiectul global, care este, de regulă, `window`. Acest lucru se întâmplă pentru că `setInterval` se execută într-un context diferit de cel în care este invocat. Utilitarul `setInterval` va căuta o funcție `obi.ceva` în obiectul `window`. Acest lucru se întâmplă pentru că `setInterval` schimbă contextul la global și astfel taie calea către funcția cu rol de metodă din obi. Bineînțeles, funcția care există în obi cu rol de metodă nu există în obiectul global. Pentru ca referința să se facă corect, `obi.mesaj` trebuie apelată ca metodă: `obi.ceva()`. Când `setInterval` va invoca `obi.ceva` ca funcție și nu ca metodă, nu va avea acces la `this` cel dorit, al obiectului în care avem datele. Doar metodele apelate direct au acces la `this`, nu și cele în contextul unui utilitar. În cazul de mai sus `Obi()` își va încheia execuția imediat după returnarea obiectului.
+Atenție, în cazul invocării lui `setInterval`, `this` este setat la obiectul global, care este, de regulă, `window`. Acest lucru se întâmplă pentru că `setInterval` se execută într-un context diferit de cel în care este invocat. Utilitarul `setInterval` va căuta o funcție `obi.ceva` în obiectul `window`. Acest lucru se întâmplă pentru că `setInterval` schimbă contextul la global și astfel taie calea către funcția cu rol de metodă din obi. Bineînțeles, funcția care există în obi cu rol de metodă, nu există în obiectul global. Pentru ca referința să se facă corect, `obi.mesaj` trebuie apelată ca metodă: `obi.ceva()`. Când `setInterval` va invoca `obi.ceva` ca funcție și nu ca metodă, nu va avea acces la `this` cel dorit, al obiectului în care avem datele. Doar metodele apelate direct au acces la `this`, nu și cele în contextul unui utilitar. În cazul de mai sus `Obi()` își va încheia execuția imediat după returnarea obiectului.
 
 ```javascript
 function Obi(){
@@ -260,7 +260,7 @@ Obi();
 
 Metoda de a căuta o variabilă în **scope chain** este similară cu cea care se face în **lanțul prototipal** cu o diferență notabilă. Dacă încerci să accesezi o proprietate care nu există într-un obiect, dacă pe lanțul prototipal nu este găsită proprietatea, nu este returnată o eroare, ci `undefined`. Dacă încerci să accesezi o proprietate care nu există în **scope chain**, adică o variabilă care nu există, atunci este returnată eroarea `ReferenceError`.
 
-Ultimul element din **scope chain** este Obiectul Global.
+Ultimul element din **scope chain** este obiectul global.
 
 ## Mantre
 
@@ -271,7 +271,7 @@ Ultimul element din **scope chain** este Obiectul Global.
 -   Când funcțiile sunt executate, mediul lexical folosit este cel constituit la momentul compilării, nu cel existent la momentul invocării. Asta înseamnă lexical, de fapt.
 -   La invocarea unei funcții se generează o referință către mediul lexical existent la momentul definirii. Dacă a fost definită în global, se va ține o referință la ce se află în global, se face o cartografiere a tuturor identificatorilor din global. Definirea unei alte funcții interne, va crea o referință către toți identificatorii funcției gazdă.
 -   Un context de execuție stabilit la executarea unei funcții are un mediu lexical asociat, adică zona tuturor identificatorilor definiți în acel context.
--   Mediul lexical poate fi perceput ca o hartă de identificatori la a căror valori ai access. Atunci când este în execuție, interpretorul caută o proprietate în mediul lexical curent. Dacă nu o găsește, atunci interpretorul va căuta mai sus în mediul lexical părinte și tot așa până când nu mai există un alt mediu părinte. Această secvență de medii concentrice, se numește scope chain. Căutarea se mai numește „walking up the scope chain".
+-   Mediul lexical poate fi perceput ca o hartă de identificatori la a căror valori ai access. Atunci când este în execuție, interpretorul caută o proprietate în mediul lexical curent. Dacă nu o găsește, atunci interpretorul va căuta mai sus în mediul lexical părinte și tot așa până când nu mai există un alt mediu părinte. Această secvență de medii concentrice, se numește scope chain. Căutarea se mai numește *walking up the scope chain*.
 -   Când este definită o funcție, aceasta memorează lanțul mediilor lexicale (scope chain) care era în efect în acel moment.
 -   Obiectul creat de invocarea unei funcții este adăugat scope chain-ului existent. Scope chain-ul astfel rezultat reprezintă scope chain-ul de la acel moment. Obiectul rezultat de fapt are rolul de a face legăturile tuturor variabilelor funcției în scope chain.
 -   Când funcția returnează, obiectul care face binding-ul variabilelor este scos din **scope chain**.

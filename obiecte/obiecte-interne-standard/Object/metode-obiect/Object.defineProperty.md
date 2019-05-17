@@ -8,12 +8,12 @@ Un aspect important pentru a înțelege și mai bine avantajele oferite de aceas
 
 Metoda primește trei argumente: identificatorul obiectului, numele identificatorului viitoarei proprietăți și descrierea sa prin bine-cunoscuți: `writable`, `enumerable`, `configurable`.
 
-La momentul execuției metodei, obiectul primit ca prim parametru este returnat dar îmbogățit cu noua proprietate setată.
+În momentul execuției metodei, obiectul primit ca prim parametru este returnat, dar îmbogățit cu noua proprietate setată.
 
 Ce o face specială pe această metodă este faptul că poți seta atributele proprietății sau la nevoie poți face o proprietate accesibilă prin setteri și getteri. Aici vine și diferența față de atribuirea directă a valorilor la momentul creării noii proprietăți: `var obi = {}; obi.ceva = 'txt';`.
 Proprietățile introduse într-un obiect prin atribuire vor apărea în prelucrările cu `for...in` sau la numărarea cheilor cu `Object.keys`.
 
-`Object.defineProperty` aduce ceva foarte util: granularitate la introducerea unei noi proprietăți. Din start orice valoare introdusă prin definirea unei proprietăți cu ajutorul lui `Object.defineProperty`, nu poate fi modificată în contrast cu cele introduse prin asignare.
+`Object.defineProperty` aduce ceva foarte util: granularitate la introducerea unei noi proprietăți. Din start orice valoare introdusă prin definirea unei proprietăți cu ajutorul lui `Object.defineProperty`, nu poate fi modificată în contrast cu cele introduse prin atribuire.
 
 
 ```javascript

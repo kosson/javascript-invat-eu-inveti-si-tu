@@ -8,16 +8,17 @@ Browserul are un set foarte important de utilitare gata pentru a fi utilizate ș
 
 ## Mediul de execuție
 
-Executarea codului JavaScript este sincronă pentru majoritatea cazurilor, iar activitatea web este una asincronă. Asincronicitatea implică gândirea codului într-un model care rupe liniaritatea procedurală cu care creierul uman este obișnuit și ne forțează să gândim în termenul relațiilor și timpilor când acestea se realizează între diferitele entități, fie acestea ale browserului, fie ale codului în execuție. La momentul în care browserul se află în interacțiune cu utilizatorul, toată activitatea sa, se traduce în **task-uri** (în limba română: *sarcini*). Acestea se nasc în mediul de execuție. Interacțiunea părților poate fi privită ca o scenă.
+Executarea codului JavaScript este sincronă pentru majoritatea cazurilor, iar activitatea web este una asincronă. Asincronicitatea implică gândirea codului într-un model care rupe liniaritatea procedurală cu care creierul uman este obișnuit și ne forțează să gândim în termenul relațiilor și timpilor dintre diferitele entități, fie acestea ale browserului, fie ale codului în execuție. În momentul în care browserul se află în interacțiune cu utilizatorul, toată activitatea sa se traduce în **task-uri** (în limba română: *sarcini*). Acestea se nasc în mediul de execuție. Interacțiunea părților poate fi privită ca o scenă.
 
 Actorii principali:
 
 - **mediul de execuție** pe care îl generează browserul,
 - **interpretorul** JavaScript, care execută fragmentele de cod ca răspuns la evenimente (callback-uri),
-- **coada în care se rânduiesc task-urile**, ceea ce numim în engleză **task queue**,
+- **coada** în care se rânduiesc sarcinile, ceea ce numim în engleză **task queue**,
+- **job queue**,
 - **event loop**.
 
-În cazul browser-ului sunt oferite din oficiu funcții care pot fi asemuite utilitarelor. Una deja o folosim în mod curent pentru a sonda rezultatele evaluărilor: `console.log()`. Aceasta face parte din API-urile Web puse la dispoziție de fiecare browser. Pentru a vedea câte instrumente există, nu ar fi rău să aruncați o privire la documentația existentă pe Mozilla Developer Network - [API](https://developer.mozilla.org/en-US/docs/Web/API), pentru a vedea cât de complex este mediul de care dispune un program JavaScript.
+În cazul browser-ului sunt oferite din oficiu funcții care pot fi asemuite utilitarelor. Una deja o folosim în mod curent pentru a sonda rezultatele evaluărilor: `console.log()`. Aceasta face parte din API-urile Web puse la dispoziție de fiecare browser. Pentru a vedea câte instrumente există, nu ar fi rău să aruncați o privire la documentația existentă pe Mozilla Developer Network - [API](https://developer.mozilla.org/en-US/docs/Web/API).
 
 Cât privește codul JavaScript și executarea sa de către interpretor, există un concept fundamental pentru a înțelege în adâncime programarea în JavaScript și nu numai. Acesta este cel de **control**. Adeseori veți auzi, viziona sau citi despre faptul că o anumită funcție este executată de **control** sau că acesta este returnat unei funcții deja aflată în execuție dar care era în așteptare în stivă. **Controlul**, de fapt este firul roșu al execuției fragmentelor de cod ca răspuns la anumite evenimente.
 
@@ -25,7 +26,7 @@ Sunt convins că te-ai întrebat de foarte multe ori cum *știe* browserul să r
 
 Pentru ca să anunțăm browserul că suntem interesați să răspundem cu execuția unei funcții atunci când apare un eveniment, vom atașa un **receptor de eveniment** (în limba engleză se numesc **event handlers**) pentru elementul care va fi acționat de utilizator.
 
-Atașarea unor *event handlers* se face cu funcția `addEventListener('click', numeFuncție)` pe care o pune la dispoziție browserul. Browserul nostru va căuta identificatorul funcției și va încărca în memorie tot ce este nevoie pentru evaluare funcției callback și returnarea unui rezultat. Codul din corpul funcției este pasat interpretorului JavaScript care are sarcina de a-l executa. Dacă sunt mai multe apeluri către alte funcții ș.a.m.d., se creează o stivă de apeluri precum un registru cu ajutorul căruia să ținem evidența a ceea ce se execută și când. Când ultima funcție adăugată în stivă returnează, aceasta dispare cedând **controlul** celei de dedesubt, care devine contextul activ de execuție și tot așa până când toate își încheie execuția.
+Atașarea unor *event handlers* se face cu funcția `addEventListener('click', numeFuncție)` pe care o pune la dispoziție browserul. Browserul nostru va căuta identificatorul funcției și va încărca în memorie tot ce este nevoie pentru evaluarea funcției callback și returnarea unui rezultat. Codul din corpul funcției este pasat interpretorului JavaScript, care are sarcina de a-l executa. Dacă sunt mai multe apeluri către alte funcții ș.a.m.d., se creează o stivă de apeluri precum un registru cu ajutorul căruia să ținem evidența a ceea ce se execută și când. Când ultima funcție adăugată în stivă returnează, aceasta dispare cedând **controlul** celei de dedesubt, care devine contextul activ de execuție și tot așa până când toate își încheie execuția.
 
 Browserul stă atent și verifică în continuu dacă apar evenimente (**task**-uri) pe care le inventariază și le introduce în **task queue**. Sarcinile pot cere executarea prin intermediul unui mecanism care asigură evaluarea numit **buclă** - în limba engleză **event loop**. Într-un mediu de execuție nu există mai mult de o **buclă** pentru că interpretorul nu rulează decât pe un singur fir de execuție.
 
@@ -47,17 +48,17 @@ Să ne imaginăm că pagina a fost încărcată și toate scripturile care au fo
 
 Fă o diferență clară între **task queue**, care coordonează toate componentele browserului și **job queue**, care gestionează ordinea în care vor intra în evaluare callback-uri plus cea dedicată promisiunilor.
 
-## Concepte care se legă de contextul de execuție
+## Contextul de execuție
 
-În multe lucrări veți vedea că momentul rulării codului unei funcții - contextul său de execuție - este reprezentat sau menționat ca fiind un **cadru** (în limba engleză *frame*). Un *cadru* este un concept abstract, care incorporează toate elementele asociate contextului de execuție: **mediul lexical propriu**, legătura `this`, **obiectul prototip** și stabilirea legăturii de **moștenire** și constituirea obiectului `arguments`. Toate aceste concepte se leagă la nivelul cel mai de jos, cel de alocarea a unor spații de memorie care nu indică o structură. Acest spațiu de memorie este numit și *heap* în limba engleză.
+În multe lucrări veți vedea că momentul rulării codului unei funcții - contextul său de execuție - este reprezentat sau menționat ca fiind un **cadru** (în limba engleză *frame*). Un *cadru* este un concept abstract, care incorporează toate elementele asociate contextului de execuție: **mediul lexical propriu**, legătura `this`, **obiectul prototip**, stabilirea legăturii de **moștenire** și constituirea obiectului `arguments`. Toate aceste concepte se leagă la nivelul cel mai de jos, cel de alocarea a unor spații de memorie, care nu indică o structură. Acest spațiu de memorie este numit și *heap* în limba engleză.
 
 ### Call stack - stiva apelurilor
 
 Când arunci privirea la ceea ce se petrece atunci când este rulat codul, imaginea poartă numele de **running execution context**, ceea ce am putea traduce în română ca fiind **contextul de execuție în efect**. Pe scurt, **ce rulează pe moment**.
 
-Evaluarea codului care se face într-un *context de execuție* în plină desfășurare, care se poate suspenda în momentul în care o altă funcție este apelată în interiorul celei care este deja în execuție. În acest moment special de întrerupere un alt context de execuție devine „context de execuție în efect” și astfel va purcede la evaluarea propriului cod. Mai târziu, codul suspendat poate redeveni la rândul său „contextul de execuție în efect” pentru că ceea ce l-a întrerupt s-a încheiat și să reia evaluarea codului de la momentul de unde s-a oprit. Această succesiune a contextelor de execuție în efect este gestionată cu ajutorul unei structuri de date speciale.
+Evaluarea codului se face într-un *context de execuție* în plină desfășurare, care se poate suspenda în momentul în care o altă funcție este apelată în interiorul celei care este deja în execuție. În acest moment special de întrerupere un alt context de execuție devine *context de execuție în efect* și astfel va purcede la evaluarea propriului cod. Mai târziu, codul suspendat poate redeveni la rândul său *contextul de execuție în efect* pentru că ceea ce l-a întrerupt s-a încheiat și se reia evaluarea codului de la momentul de unde s-a oprit. Această succesiune a contextelor de execuție în efect este gestionată cu ajutorul unei structuri de date speciale.
 
-Structura de date care ține evidența funcțiilor care sunt în execuție, se numește **stiva apelurilor** - **call stack**. Să analizăm următoarea secvență de cod foarte simplă. Vom factoriza un număr natural pozitiv. Asta înseamnă că luăm numărul și îl înmulțim cu valoarea obținută după ce am scăzut o unitate și așa mai departe până când ajungem la 1. Acesta este un caz în care vom folosi stiva apelurilor pentru că apelăm la recursivitate.
+Structura de date care ține evidența funcțiilor care sunt în execuție, se numește **stiva apelurilor** - **call stack**. Să analizăm următoarea secvență de cod foarte simplă. Vom factoriza un număr natural pozitiv. Asta înseamnă că luăm numărul și îl înmulțim cu valoarea obținută după ce am scăzut o unitate și așa mai departe până când ajungem la `1`. Acesta este un caz în care vom folosi stiva apelurilor pentru că apelăm la recursivitate.
 
 ```javascript
 function factorizez (x) {
@@ -71,12 +72,12 @@ fact(4); // 24 fiind 4*3*2*1
 
 Ceea ce se petrece mai sus este că pentru numărul natural pasat ca parametru funcției `factorizez`, va fi testat să nu fie 1 pentru că 1 factorial este 1. Acesta este și declanșatorul ieșirii din recursivitate, de fapt. Legătura cu stiva contextelor de execuție se leagă de următorul scenariu:
 
--   este apelată pentru prima dată funcția pasându-i-se argumentul cu valoarea 4. Aceasta își începe execuția. Se creează în stivă cadrul de execuție pentru `factorizez`. Execuția codului din corpul funcției începe. Controlul se asigură că `x` nu este `1` și ajunge la momentul în care ar trebui să iasă din execuție prin returnarea rezultatului în urma evaluării expresiei de după `return`. Ce să vezi?! Această expresie implică apelarea funcției `factorizez` dar de data aceasta cu valoarea nu `x` din mediul de execuție curent din care am scăzut o unitate.
+-   este apelată pentru prima dată funcția pasându-i-se argumentul cu valoarea 4. Aceasta își începe execuția. Se creează în stivă cadrul de execuție pentru `factorizez`. Execuția codului din corpul funcției începe. Controlul se asigură că `x` nu este `1` și ajunge la momentul în care ar trebui să iasă din execuție prin returnarea rezultatului în urma evaluării expresiei de după `return`. Ce să vezi?! Această expresie implică apelarea funcției `factorizez` dar de data aceasta cu valoarea nu `x` din mediul de execuție curent, din care am scăzut o unitate.
 -   Controlul oprește finalizarea funcției `factorizez` și apelează încă o dată funcția după ce a scăzut valoarea. Este creat un alt cadru de execuție peste cel al funcției *suspendate* în care se execută încă o dată corpul funcției. Se va ajunge la aceeași imposibilitate de finalizare, cu aceleași urmări. Acest lucru va fi repetat până când condiția ca `x` să fie `1` va fi întrunită. Abia atunci `1` este returnat din cel mai de sus context de execuție al stivei către cel de dedesubt care aștepta această valoare. Acest proces se va repeta în cascadă până când apelul original va avea valoarea așteptată pentru a încheia evaluarea.
 
-Programarea bazată pe evenimente este o paradigmă înscrisă practicii de zi cu zi tradițional legată de manipularea **DOM**-ului (*Document Object Model*). Modelul bazat pe *evenimente* mai este cunoscut drept modelul de gestiune al tuturor solicitărilor de preluare a controlului, în engleză numit *concurency model*. Chiar despre asta este și vorba: despre gestionarea intereselor concurente la momentul evaluării codului. În acest sens, este nevoie de un mecanism de gestiune a evenimentelor care să fie capabil introducă ordine pentru a putea raționaliza codul și pașii necesari. Toate evenimentele sunt asincrone.
+Programarea bazată pe evenimente este o paradigmă înscrisă practicii de zi cu zi tradițional legată de manipularea **DOM**-ului (*Document Object Model*). Modelul bazat pe *evenimente* mai este cunoscut drept modelul de gestiune al tuturor solicitărilor de preluare a controlului, în engleză numit *concurency model*. Chiar despre asta este și vorba: despre gestionarea intereselor concurente la momentul evaluării codului. În acest sens, este nevoie de un mecanism de gestiune a evenimentelor care să fie capabil să introducă ordine pentru a putea raționaliza codul și pașii necesari. Toate evenimentele sunt asincrone.
 
-Îți poți închipui povestea concurențială precum o busculadă care s-a creat la poarta unui magazin de Black Friday. Din fericire, există ofițeri de securitatea care ordonează accesul. Dacă sunt multe persoane, vor fi organizate pe mai multe rânduri, dar la intrare se va face una după cealaltă. Bucla evenimentelor împreună cu stiva pot fi considerați agenții noștri de securitate.
+Îți poți închipui povestea concurențială precum o busculadă care s-a creat la poarta unui magazin de Black Friday. Din fericire, există ofițeri de securitate, care ordonează accesul. Dacă sunt multe persoane, vor fi organizate pe mai multe rânduri, dar la intrare se va face una după cealaltă. Bucla evenimentelor împreună cu stiva pot fi considerați agenții noștri de securitate.
 
 Sunt necesare câteva lămuriri importante. Evaluarea codului din corpul unei funcții începe la momentul apelării. Atunci când o funcție este apelată, fie a programului, fie a API-ului, poți spune că aceasta creează un *eveniment*.
 
@@ -88,7 +89,7 @@ Din acest motiv, JavaScript este considerat a fi **event-driven**, adică un lim
 
 Înainte de toate, va trebui să lămurim conceptul de **job** și **job queue** pe care le introduce standardul. Am putea traduce în limba română un **job** ca **sarcină**, dar pentru că termenul este deja absorbit de limba română ca neologism, voi continua să-l folosesc ca atare. Spre deosebire de API-uri care sunt puse la dispoziție de browser, coada joburilor este un mecanism pus la dispoziție de motorul JavaScript și acest lucru este o diferență importantă pentru a înțelege că o operațiune desfășurată prin apelul unui API, va trimite rezultatul în coada joburilor, ca mecanism de reinserție în firul de execuție JavaScript.
 
-În cuprinsul materialelor am folosit de multe ori API-ul `setTimeout()`. Acest API, după cum am practicat de multe ori primește ca prim parametru o funcție callback și drept al doilea parametru timpul după care se va executa funcția. Browserul pornește un cronometru și după timpul specificat în cel de-al doilea parametru, browserul va trimite funcția în coada de așteptare. Mecanismele cozii vor aștepta primul momentu când stiva contextelor de execuție va fi goală și va injecta funcția callback pentru a fi executată. Vom mai investiga acest proces, dar ceea ce doream să subliniez aici un aspect important: timpul menționat este unul minim garantat de așteptare, dar la acesta se mai poate adăuga un timp cât l-a petrecut în coadă pentru a fi trimis spre execuție.
+În cuprinsul materialelor, am folosit de multe ori API-ul `setTimeout()`. Acest API, după cum am practicat de multe ori primește ca prim parametru o funcție callback și drept al doilea parametru timpul după care se va executa funcția. Browserul pornește un cronometru și după timpul specificat în cel de-al doilea parametru, browserul va trimite funcția în coada de așteptare. Mecanismele cozii vor aștepta primul momentu când stiva contextelor de execuție va fi goală și va injecta funcția callback pentru a fi executată. Vom mai investiga acest proces, dar ceea ce doream să subliniez aici un aspect important: timpul menționat este unul minim garantat de așteptare, dar la acesta se mai poate adăuga un timp cât l-a petrecut în coadă pentru a fi trimis spre execuție.
 
 ```javascript
 function temporizator (x = 10000) {
@@ -108,7 +109,7 @@ expensive();
 
 > Un Job este o operațiune abstractă care inițiază o computație atunci când nici o altă computație ECMAScript nu este în desfășurare.\[...] Execuția unui Job poate fi inițiată doar atunci când nu există niciun context de execuție și stiva contextelor de execuție este goală. A PendingJob este o cerere pentru o viitoare execuție a unui Job.\[...] Din moment ce execuția unui Job este inițiată, Job-ul va fi rulat până când se încheie. Totuși, Job-ul care rulează sau evenimente externe pot fi cauza trimiterii în coada de așteptare a unor PendingJobs suplimentare care pot fi inițiate cândva după încheierea Job-ului curent.
 
-Job-urile sunt organizate printr-un mecanism intern motorului care se comportă ca o stivă FIFO (First In, First Out), ceea ce înseamnă că primul job intrat va fi și primul care va ieși. Standardul recomandă ca motoarele diferiților implementatori să fie prevăzute cu cel puțin două stive de Job-uri: una dedicată validării și evaluării textelor sursă pentru scripturi și module și una dedicată rezolvării promisiunilor.
+Job-urile sunt organizate printr-un mecanism intern motorului care se comportă ca o stivă FIFO (First In, First Out), ceea ce înseamnă că primul job intrat, va fi și primul care va ieși. Standardul recomandă ca motoarele diferiților implementatori să fie prevăzute cu cel puțin două stive de Job-uri: una dedicată validării și evaluării textelor sursă pentru scripturi și module, precum și una dedicată rezolvării promisiunilor.
 
 În resursele pe care le veți consulta suplimentar, veți remarca faptul că acest **job queue** este numit simplu **queue** sau **coada**.
 
@@ -120,7 +121,7 @@ Rularea unui program în firul de execuție, neutilizând API-urile browserului,
 
 Realitatea rulării unor mari aplicații ține de gestionarea mai multor fire de execuție: a celui principal al programului și ale API-urilor puse la dispoziție de mediul creat de browser. Înțelegerea aspectelor complexe la rularea într-un astfel de model ține de caracterul **asincron** al execuției. Marea majoritate a software-ului JavaScript existent este scris pentru a rula asincron.
 
-Din nefericire, modul în care funcționează asimilarea de informație pentru noi oamenii este una sincronă, secvențială. Fie că lecturăm, fie că privim un film, informația este asimilată secvențial. Intelectul uman are capacitatea de a reconstitui un context complex chiar dacă detaliile acestuia au fost asimilate fragment cu fragment. Acesta este și cazul paradigmei noi de programare asincronă în care efortul este de a stabili legăturile dintre fragmentele de cod, relațiile pe care le stabilesc și cum modifică starea una alteia în funcție de evenimentele apărute.
+Din nefericire, modul în care funcționează asimilarea de informație pentru noi oamenii este una sincronă, secvențială. Fie că lecturăm, fie că privim un film, informația este asimilată secvențial. Intelectul uman are capacitatea de a reconstitui un context complex, chiar dacă detaliile acestuia au fost asimilate fragment cu fragment. Acesta este și cazul paradigmei noi de programare asincronă în care efortul este de a stabili legăturile dintre fragmentele de cod, relațiile pe care le stabilesc și cum modifică starea una alteia în funcție de evenimentele apărute.
 
 Asincronicitatea se întâmplă și atunci când folosim callback-uri. De ce? Pentru că funcția cu rol de callback se va executa și va produce un rezultat vom avea un scenariu diferit de comportamentul funcției al cărui scop este să returneze ceva. Executarea funcțiilor callback ia ceva timp și din acest motiv numim acest comportament a fi unul **asincron**. Rezultatul evaluării codului din callback va fi returnat într-un moment viitor.
 
@@ -151,7 +152,7 @@ fetch(adresa)
 console.log('Mesaj afișat înaintea primirii datelor.');
 ```
 
-În exemplul selectat, delegăm o cerere pentru aducerea unor date de al Europeana, API-ului `fetch()` al browserului. Ceea ce tocmai am făcut este să delegăm sarcina aducerii datelor unui alt „program” în timp ce firul de execuție își va vedea de treabă în continuare. Din acest motiv vom avea cele două mesaje în consolă unul după altul și abia **la un moment dat** vom avea și datele afișate. Scopul pentru care facem această delegare este acela de a nu bloca firul de execuție.
+În exemplul selectat, delegăm o cerere pentru aducerea unor date de al Europeana, API-ului `fetch()` al browserului. Ceea ce tocmai am făcut este să delegăm sarcina aducerii datelor unui alt *program*, în timp ce firul de execuție își va vedea de treabă în continuare. Din acest motiv vom avea cele două mesaje în consolă unul după altul și abia **la un moment dat** vom avea și datele afișate. Scopul pentru care facem această delegare este acela de a nu bloca firul de execuție.
 
 Lucrul asincron îl vei *simți* în practica cu paginile web. Gândește-te la faptul că vei dori manipularea unei pagini web, care, de fapt, este un arbore dinamic de noduri a ceea ce numim **Document Object Model**. La un moment dat, un utilizator, dă un click pe un element al paginii. Asociat elementului acționat prin click trebuie să ai un mecanism de ascultare și o funcție din program care să pornească execuția la momentul click-ului. Utilizatorului îi este returnat un rezultat la finalizarea execuției funcției acționate (în jargonul programării web se numește **event handler**). Toate acestea, fără să te simți copleșit se subscriu caracterului asincron al programelor JavaScript. Acest aspect este, de fapt, cel pentru care JavaScript are valoarea sa actuală.
 
@@ -211,7 +212,7 @@ colectie.forEach(function (element) {
 });
 ```
 
-Și pentru că unora le place eleganța, îți voi arăta o formă și mai prescurtată prin folosirea „arrow functions”.
+Și pentru că unora le place eleganța, îți voi arăta o formă și mai prescurtată prin folosirea *arrow functions*.
 
 ```javascript
 let colectie = ['unu', 'doi', 'trei'];
@@ -227,7 +228,7 @@ setTimeout (() => {
 console.log('Eu între timp m-am executat');
 ```
 
-Pe scurt, ceea ce se întâmplă este că apelarea lui `console.log()` intern din callback-ul lui `setTimeout()`, a fost *amânat* la execuție cinci secunde mai târziu unui API intern motorului JavaScript în vreme ce codul care urma a `setTimeout()`-ului a fost evaluat fără a mai aștepta finalizarea celui anterior. Este un fel de „valoarea vine, când vine”.
+Pe scurt, ceea ce se întâmplă este că apelarea lui `console.log()` intern din callback-ul lui `setTimeout()`, a fost *amânat* la execuție cinci secunde mai târziu unui API intern motorului JavaScript în vreme ce codul care urma a `setTimeout()`-ului a fost evaluat fără a mai aștepta finalizarea celui anterior. Este un fel de *valoarea vine, când vine*.
 
 Din nefericire, modelul asincronicității construit pe callback-uri conduce la un anumit fenomen de aglomerare în care vei folosi un callback în interiorul unui alt callback și așa mai departe pentru atingerea unui anumit model funcțional. Din nefericire, apelarea unui callback atunci când deja execuți un callback și posibil un altul din cel tocmai apelat, conduce la o situație numită în literatura de specialitate **callback hell**. Unii programatori mai numesc această situație *piramida pierzaniei* - **pyramid of doom**, datorită formei pe care o dă indentarea codului. O astfel de practică trebuie evitată ori de câte ori este posibil printr-o abordare diferită a logicii aplicației, fie prin chaining, fie prin folosirea promisiunilor.
 

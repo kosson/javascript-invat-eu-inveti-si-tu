@@ -16,6 +16,81 @@ Totuși, cel mai util ar fi să existe un singur punct de intrare în aplicația
 <script type="application/javascript" src="CALE/main.js" ></script>
 ```
 
+## O privire retrospectivă
+
+JavaScript este un limbaj de programare care nu a avut din start suport pentru module. Singura metodă de a modulariza codul era prin setarea unor variabile globale. Inconvenientul este evident de vreme ce poți atribui altă valoare unui identificator pierzând referința la valoarea preexistentă. O altă variantă a fost introducerea codului în funcții, care erau autoexecutabile, returnând un obiect, care se prezenta ca o interfață.
+
+```javascript
+var modul = function mod01 () {
+    var x = 10;
+    return {
+        adun: function (val) {
+            console.log(x + val);
+        }
+    };
+}();
+
+modul.adun(3);
+```
+
+Și această metodă era supusă unor rigori de lucru privind ordinea de încărcare. În plus era mai mult de scris cod dedicat, adică funcția care returna obiectul, ș.a.m.d. Pentru a rezolva problemele menționate, dar și cu gândul de a rezolva posibilele circularități ale dependințelor (un modul x cere modulul y, care la rândul lui îl cere pe z, dar z are nevoie neapărat pe x), în practică s-a mai recurs la registre de dependințe. Acestea țineau evidența dependințelor, care pentru a evita încărcarea repetată, dacă *vedeau* că deja sunt încărcate, nu se mai executau.
+
+```javascript
+// registru
+var modules = (function reg () {
+    var module = {}; // un registru de evidență
+    function define (nume_mod, functie) {
+        // lazzy-loading
+        if (module[nume_mod]) throw new Error('Modulul există deja și este încărcat!')
+
+        var modul = {
+            exports: {},
+            func: functie,
+            executat: false
+        };
+        module[nume_mod] = modul; // populezi obiectul modulelor
+    };
+    function require (nume_mod) {
+        var modul = module[nume_mod];
+
+        if(!modul) throw new Error('Nu există modulul cerut!')
+        if(!modul.executed) {
+            modul.executat = true;
+            modul.func.call(module, modul, module.exports)
+        }
+        return modul.exports;
+    };
+    return {
+        define: define, // expune metoda de lucru cu registrul
+        require: require
+    };
+}());
+
+// modul01.js
+modules.define('primo', function mod01 () {
+    var x = 10;
+    return function adun (val) {
+        return x + val;
+    };
+});
+
+// modul02.js
+modules.define('secundo', function mod02 () {
+    var primo = modules.require('primo')(4);
+    return {
+        valoareCalculata: function dividCu (divizor) {            
+            return primo / divizor;
+        }
+    }
+});
+
+// app
+var ceva = modules.require('secundo');
+console.log(ceva.valoareCalculata(3)); // 4.666666
+```
+
+Trebuie să-ți imaginezi aceste fragmente de cod fiecare în fișierul propriu. Odată strânse într-unul singur (operațiunea de bundling - `cat registru.js modul01.js modul02.js app.js > main.js`) vor funcționa corespunzător.
+
 ## Spune standardul
 
 Un Module are un `Module Record` care conține informație privind structura de import și export a unui modul. Înregistrările conținute sunt folosite doar la evaluarea unui modul. Modulele oferă avantajul că rulează codul în `"strict mode"` deja.

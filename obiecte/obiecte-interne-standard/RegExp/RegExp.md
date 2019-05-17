@@ -1,6 +1,6 @@
 # RegExp
 
-Am stabilit deja din tot ce-am povestit până acum că textul este o resursă digitală care poate fi exploatată în care poți face căutări după anumite fragmente cheie. Poți să-ți imaginezi `RegExp`-ul ca pe un motor de căutare în care introduci cheile de căutare după anumite reguli. Și de aici și denumirea de `regular expressions` în limba engleză -`RegExp`. Facem căutări în texte după *șabloane construite după anumite reguli*, dar ne vom referi la aceste construcții numindu-le **șabloane** sau r**egex-uri**. Pentru englezescul *pattern* am ales `șablon` pentru că semantic exprimă cel mai bine scopul fragmentului după care facem căutarea, iar pentru operațiunea în sine de căutare am folosit interșanjabil *a potrivi*, cu sensul de **a potrivi** în șir șablonul sau *a căuta*, cu sensul operațiunii de identificare în șir atunci când explicația redă operațiunea din punctul de vedere al motorului `RegExp`.
+Textul este o resursă digitală care poate fi exploatată, făcând căutări după anumite fragmente cheie. Poți să-ți imaginezi `RegExp`-ul ca pe un motor de căutare în care introduci cheile de căutare după anumite reguli. Și de aici și denumirea de `regular expressions` în limba engleză -`RegExp`. Facem căutări în texte după *șabloane construite după anumite reguli*, dar ne vom referi la aceste construcții numindu-le **șabloane** sau r**egex-uri**. Pentru englezescul *pattern* am ales `șablon` pentru că semantic exprimă cel mai bine scopul fragmentului după care facem căutarea, iar pentru operațiunea în sine de căutare am folosit interșanjabil *a potrivi*, cu sensul de **a potrivi** în șir șablonul sau *a căuta*, cu sensul operațiunii de identificare în șir atunci când explicația redă operațiunea din punctul de vedere al motorului `RegExp`.
 
 Scopul folosirii regex-urilor este acela de a *constitui* un filtru prin care trecem o succesiune de caractere.
 
@@ -28,7 +28,7 @@ Motorul `RegExp` indică succesiunea caracterelor, de câte ori li se permite s�
 
 **Și acum, focalizare maximă.**
 
-Următorul regex este unul valid și solicită atenția ta ca detector de caractere. Fragmentul <code><span style='color: red'>_</span>?</code> (spațiu și semnul întrebării) te poate da peste cap dacă nu ești atent. Regula testează dacă există un spațiu sau nu înaintea semnului întrebării. Pentru o persoană neavizată, caracterul spațiu nu are importanță pentru că este invizibil. Dar acesta este indubtabil un caracter de care trebuie să ținem seama.
+Următorul regex este unul valid și solicită atenția ta ca detector de caractere. Fragmentul <code><span style='color: red'>_</span>?</code> (spațiu și semnul întrebării) te poate da peste cap dacă nu ești atent. Regula testează dacă există un spațiu sau nu înaintea semnului întrebării. Pentru o persoană neavizată, caracterul spațiu nu are importanță pentru că este invizibil. Dar acesta este indubitabil un caracter de care trebuie să ținem seama.
 
 **Spune standardul**:
 
@@ -51,7 +51,7 @@ Expresiile regulate sunt șabloane folosite pentru a căuta combinații de carac
 
 ## Detalii de funcționare ale motorului RegExp
 
-Tehnic vorbind, motorul `RegExp` este unul ***regex-directed***, adică șablonul ocupă rolul central. Motorul este o implementare **eager** ceea ce înseamnă că este un motor foarte *nerăbdător* să ofere un rezultat. Dacă s-a format rezultatul respectându-se regulile, restul resursei de text este ignorat.
+Tehnic vorbind, motorul `RegExp` este unul ***regex-directed***, adică șablonul ocupă rolul central. Motorul este o implementare **eager**, ceea ce înseamnă că este un motor foarte *nerăbdător* să ofere un rezultat. Dacă s-a format rezultatul respectându-se regulile, restul resursei de text este ignorat.
 
 Am menționat aceast lucru pentru că acest motor, la momentul evaluării, returnează rezultatul potrivirii cu cel mai din stânga fragment din șirul de caractere, adică cel care se află cât mai aproape de începutul șirului, chiar dacă ar fi fost disponibilă o variantă mai apropiată de împlinirea tuturor criteriilor șablonului în corpul său. Reține acest aspect de funcționare. Te va ajuta să înțelegi mai bine problemele pentru care, aparent, nu există nicio rațiune.
 
@@ -100,9 +100,9 @@ new RegExp(/xyz/, 'i');
 
 Folosirea funcției constructor are ca efect compilarea la momentul rulării. Se va folosi constructorul atunci când se știe că șablonul se va modifica sau când nu cunoști expresia regulată, caz în care acesta se construiește dinamic prin acțiunea utilizatorului.
 
-După cum se observă, sintaxa este: `/pattern/flags`. Regex-urile mai au în componență niște litere care succed șablonul. Acestea în limba engleză sunt numite „flags” pentru că semnalizează un anumit comportament pe care motorul de interpretare trebuie să-l adopte.
+După cum se observă, sintaxa este: `/pattern/flags`. Regex-urile mai au în componență niște litere care succed șablonul. Acestea în limba engleză sunt numite **flags** pentru că semnalizează un anumit comportament, pe care motorul de interpretare trebuie să-l adopte. L-am tradus ca **fanioane**.
 
-`pattern`: este textul expresiei regulate urmat de următoarele `flags` (*fanioane*):
+`pattern`: este textul expresiei regulate urmat de următoarele `flag`-uri:
 
 -   `g` - **global match**;
 -   `i` - **ignore case** (nu ține cont de majuscule tratând toate caracterele uniform);
@@ -114,19 +114,17 @@ După cum se observă, sintaxa este: `/pattern/flags`. Regex-urile mai au în co
 
 #### Fanionul i - ignore case
 
-Toate șabloanele de căutare construite cu `RegExp` sunt *atente* la caracterele introduse, făcându-se distincție clară între minuscule și majuscule. Explicația este simplă: codul Unicode pentru caracter nu este același.
-
-În cazul în care au un text în care nu știi cum a fost introdus textul, fiind posibile erori sau chiar intrări ale aceleiași sintagme, care nu este uniformizată în ceea ce privește caracterele, acest fanion permite regăsirea fragmentului de text indiferent de lipsa uniformității.
+Toate șabloanele de căutare construite cu `RegExp` sunt *atente* la caracterele introduse, făcându-se distincție clară între minuscule și majuscule. Explicația este simplă: codul Unicode pentru caracter nu este același.În cazul oricărui text sunt posibile erori sau chiar intrări ale aceleiași sintagme,  uniformizate în ceea ce privește caracterele, acest fanion permite regăsirea.
 
 #### Fanionul m - multiline
 
-Este un fanion care va indica motorului JavaScript să trateze fiecare nouă linie de text drept un nou șir de caractere.
+Este un fanion care va indica motorului JavaScript ca fiecare nouă linie de text să fie tratată pur și simplu ca un nou șir de caractere.
 
-Să spunem că un fragment de text începe cu un caracter ales de tine sau un șablon `RegExp` construit de tine. Fără fanion, JavaScript va testa dacă întregul șir de caractere va începe cu acel caracter căutat, dar dacă este pus fanionul, va căuta linie cu linie în întreg șirul până când va găsi acea linie care începe cu acel caracter.
+Să spunem că un fragment de text începe cu un caracter ales de tine sau un șablon `RegExp` construit de tine. Fără fanion, JavaScript va testa dacă întregul șir de caractere începe cu acel caracter căutat. Dacă este pus fanionul, va căuta linie cu linie în întreg șirul până când o va găsi pe aceea care începe cu respectivul caracter.
 
 #### Fanionul g - global
 
-Fără acest fanion, va fi returnată doar prima potrivire care se face. Folosind fanionul, se va face potrivire pe tot ce seamănă cu secvența șablonului. Atunci când este folosită metoda `match()`, va fi returnat un array cu toate aparițiile în șir. Dacă inițiezi un apel succesiv al metodei `exec()`, va fi returnat de fiecare dată un array în care vei descoperi și poziția în șir. Repetarea apelului pe același șir va conduce la descoperirea aparițiilor, iar când a fost *consumat* fără a mai găsi vreo apariție, metoda va returna `null`.
+Fără acest fanion, va fi returnată doar prima potrivire care se face. Folosind fanionul, se va face potrivire pe tot ce seamănă cu secvența șablonului. Atunci când este folosită metoda `match()`, va fi returnat un array cu toate aparițiile în șir. Dacă inițiezi un apel succesiv al metodei `exec()`, va fi returnat de fiecare dată un array în care vei descoperi și poziția în șir. Repetarea apelului pe același șir, va conduce la descoperirea aparițiilor, iar când a fost *consumat* fără a mai găsi vreo apariție, metoda va returna `null`.
 
 ```javascript
 let fragment = 'Ceva din evul unui elev.';
@@ -153,13 +151,13 @@ sablon.test(sirCaractere); // true
 
 Aceste proprietăți sunt foarte utile atunci când dorești să afli starea în care se află obiectul regex la un anumit moment dat.
 
--   `RegExp.prototype.constructor` - returnează funcția obiect: function RegExp()
--   `RegExp.prototype.flags` - returnează un string cu fanioanele setate pentru obiectul curent
--   `RegExp.prototype.global` - dacă fanionul `g` a fost introdus, valoarea este `true`.
--   `RegExp.prototype.ignoreCase` - dacă fanionul `i` a fost introdus, valoarea este `true`.
--   `RegExp.prototype.multiline` - dacă fanionul `m` a fost introdus, valoarea este `true`.
--   `RegExp.prototype.source` returnează varianta text a obiectului.
--   `RegExp.prototype.sticky` - dacă fanionul `y` a fost introdus, valoarea este `true`.
+-   `RegExp.prototype.constructor` - returnează funcția obiect: function RegExp(),
+-   `RegExp.prototype.flags` - returnează un string cu fanioanele setate pentru obiectul curent,
+-   `RegExp.prototype.global` - dacă fanionul `g` a fost introdus, valoarea este `true`,
+-   `RegExp.prototype.ignoreCase` - dacă fanionul `i` a fost introdus, valoarea este `true`,
+-   `RegExp.prototype.multiline` - dacă fanionul `m` a fost introdus, valoarea este `true`,
+-   `RegExp.prototype.source` returnează varianta text a obiectului,
+-   `RegExp.prototype.sticky` - dacă fanionul `y` a fost introdus, valoarea este `true`,
 -   `RegExp.prototype.unicode` - dacă fanionul `u` a fost introdus, valoarea este `true`.
 
 ## Mantre
@@ -203,7 +201,7 @@ let ultimulCuvânt = /\w+$/gi;
 console.log(fragment.match(ultimulCuvânt)); // [ "test" ]
 ```
 
-În interiorul seturilor, are rolul de a specifica ce nu va fi inclus la căutare cu stricta condiție ca acesta să apară imediat după paranteza pătrată. De exemplu, `[^c-f]`, înseamnă: *fă căutarea, dar exclude setul specificat de caractere*. Dacă apare mult după poziția de după paranteza pătrată, va avea înțelesul de caracter simplu ca oricare altul. Nu își va produce efectul special.
+În interiorul seturilor, are rolul de a specifica ce nu va fi inclus la căutare cu stricta condiție ca acesta să apară imediat după paranteza pătrată. De exemplu, `[^c-f]` înseamnă *fă căutarea, dar exclude setul specificat de caractere*. Dacă apare mult după poziția de după paranteza pătrată, va avea înțelesul de caracter simplu ca oricare altul. Nu își va produce efectul special.
 
 Un truc fain pe care îl poți realiza folosind limitele este transformarea unui fragment text care are câte un termen pe fiecare rând, dar pe care dorești să introduci într-un array. Nu uita să pui fanionul multiline.
 
@@ -225,7 +223,7 @@ Dacă șirul debutează cu un caracter parte a unui cuvânt, motorul RegExp pozi
 - `\b`: Caracterul «word border» marchează limitele de căutare;
 - `\B`: Este opusul lui `\b`.
 
-De exemplu, în `"saturn".match(/\bs/); // [ "s" ]` este limita superioară, iar `"saturn".match(/urn\b/); // [ "urn" ]` indică limita inferioară a șirului. În cazul lui `\B` identificăm poziția **dintre** două caractere ce pot forma un cuvânt sau poziția dintre două caractere care nu pot forma un cuvânt.
+De exemplu, în `"saturn".match(/\bs/); // [ "s" ]` este limita superioară, iar `"saturn".match(/urn\b/); // [ "urn" ]` indică limita inferioară a șirului. În cazul lui `\B`, identificăm poziția **dintre** două caractere ce pot forma un cuvânt sau poziția dintre două caractere care nu pot forma un cuvânt.
 
 ```javascript
 let sir = 'Un pământean apăru în prag. Era negru pământ.';
@@ -333,7 +331,7 @@ Spațiile goale includ *spațiu*, *tab*-urile, *form feed*, *line feed* și alte
 - `\W` - este negarea identificării cu `\w`,
 - `\cX` - unde `X` este un caracter de la A la Z, fiind un caracter de control.
 
-În cazul lui `\W` returnează orice caracter care nu este un caracter dintr-un posibil cuvânt format cu Latine. De exemplu, `/\W/` identifică semnul procent (%) din espresia `50%`.
+În cazul lui `\W` returnează orice caracter care nu apare într-un posibil cuvânt format din setul Latin. De exemplu, `/\W/` identifică semnul procent (%) din espresia `50%`.
 
 ##### Potrivirea directă pe code pointuri
 
@@ -389,8 +387,8 @@ Acest set este un adevărat **wildcard** - locțiitor de orice. De exemplu, `"ac
 
 Revenind la subiectul general al seturilor, acestea sunt cunoscute și sub denumirea de *clase de caractere*, dar cel mai apropiat de o simplă înțelegere a funcționalității este cel de **set**. Întregul set este evaluat doar la un unic caracter, care se găsește în set. Setul poate fi înțeles precum totalitatea caracterelor care rând pe rând, vor fi luate în considerare la momentul căutării în șir.
 
-- `[abc]` sau `[a-c]`: Identificările se fac după oricare dintre caractere: ori `a`, ori `b`, ori `c`,
-- `[^abc]` sau `[^a-c]`: Este un set de caractere care trebuie excluse.                            |
+- `[abc]` sau `[a-c]`: Căutarea se face după oricare dintre caractere: ori `a`, ori `b`, ori `c`,
+- `[^abc]` sau `[^a-c]`: Este un set de caractere care trebuie excluse.
 
 Prin specificarea liniuței îi spui motorului `RegExp` să includă toate caracterele între cele două menționate la stânga și la dreapta. Nu se vor face niciodată potriviri după două caractere din set sau mai multe. Doar un singur caracter este căutat. Acest comportament poate fi deturnat în combinație cu acoladele care specifică strict câte caractere pot fi potrivite din fiecare cuvânt al unui fragment de text.
 
@@ -403,7 +401,7 @@ Poți combina în același set mai multe subseturi. De exemplu, setul `[a-zA-Z0-
 
 #### Rolul metacaracterelor în seturi
 
-În cazul seturilor sunt doar câteva din metacaracterele care îți joacă rolul lor. Acestea sunt `[]`, care indică setul în sine, backslash `\`, carret `^` și hyphen `-`. Restul sunt simple caractere care nu au niciun înțeles specific pentru motorul `RegExp`. Pentru ca matacaracterele să fie incluse au nevoie să fie precedate de backslash (*escape sequence*). Poți să le introduci și direct doar dacă nu vor ocupa o poziție care să activeze înțelesul lor de metacaracter. De exemplu: `/[a^]/`.
+În cazul seturilor sunt doar câteva din metacaracterele care își joacă rolul lor. Acestea sunt `[]`, care indică setul în sine, backslash `\`, carret `^` și hyphen `-`. Restul sunt simple caractere care nu au niciun înțeles specific pentru motorul `RegExp`. Pentru ca matacaracterele să fie incluse, au nevoie să fie precedate de backslash (*escape sequence*). Poți să le introduci și direct doar dacă nu vor ocupa o poziție care să activeze înțelesul lor de metacaracter. De exemplu: `/[a^]/`.
 
 ```javascript
 let sir = "^Am scris \a^.";
@@ -600,9 +598,9 @@ Dacă cuplezi carret `^` cu fanionul `m`, căutarea se va face pentru fiecare î
 
 În mod natural, expresiile regulate au un comportament `greedy`, adică vor încerca să facă identificări până când resursa de șir este epuizată.
 
-Un exemplu simplu pentru a înțelege natura expansivă a RegExp-ului, este cel al definirii limitelor: `/\d{2,5}/`. În acest caz, va găsi toate caracterele număr între `2` și `5`, dar toate. Va epuiza toate caracterele număr acolo unde poate. Pentru a limita acest comportament, poți pune după șablon un `?` și astfel îi vei spune motorului să fie *foarte leneș* (în limba engleză *lazy* înseamnă *leneș*) în căutare. În general, în programare, termenul de *lazy* implică principiul calculării unei valori prin evaluarea expresiei doar dacă este absolut necesar. În cazul nostru, dacă a dat peste primele două caractere numerice, să se oprească acolo fiind suficient pentru a satisface acest șablon. Nu va încerca să caute mai departe până la cele 5 indiferent că acestea există sau nu.
+Un exemplu simplu pentru a înțelege natura expansivă a RegExp-ului, este cel al definirii limitelor: `/\d{2,5}/`. În acest caz, va găsi toate caracterele număr între `2` și `5`, dar toate. Va epuiza toate caracterele număr acolo unde poate. Pentru a limita acest comportament, poți pune după șablon un `?` și astfel îi vei spune motorului să fie *foarte leneș* (în limba engleză *lazy* înseamnă *leneș*) în căutare. În general, în programare, termenul de *lazy* implică principiul calculării unei valori prin evaluarea expresiei doar dacă este absolut necesar. În cazul nostru, dacă a dat peste primele două caractere numerice, să se oprească acolo, fiind suficient pentru a satisface acest șablon. Nu va încerca să caute mai departe până la cele 5, indiferent că acestea există sau nu.
 
-Comportamentul expansiv (*greedy*) se poate dovedi a fi o pacoste atunci când țintești fragmente specifice care apar prima dată în șir. De exemplu, dacă ai două citate unul după altul, comportamentul greedy va recolta tot ce este între primul semn al citării și ultimul din șir, nu cel pereche: `am „un citat” și aici „altul”`.
+Comportamentul expansiv (*greedy*) se poate dovedi a fi o pacoste atunci când țintești fragmente specifice, care apar prima dată în șir. De exemplu, dacă ai două citate unul după altul, comportamentul greedy va recolta tot ce este între primul semn al citării și ultimul din șir, nu cel pereche: `am „un citat” și aici „altul”`.
 
 ```javascript
 let sir = 'am „un citat” și aici „altul”';
@@ -635,8 +633,8 @@ La ce ar folosi să știm asta? Ia gândește-te că dorești să prelucrezi fra
 
 Grupările pot fi gândite ca posibilitatea de a construi șabloane elaborate, adevărate propoziții. Gruparea permite formularea de expresii secundare, care pot fi tratate precum o unitate.
 
-- `(x)`: Identifică-l pe x și ține minte ce ai găsit,
-- `(?:x)`: Îl identifică pe x, dar nu-l ține minte, nu-l *capturează*,
+- `(x)`   : Identifică-l pe x și ține minte ce ai găsit,
+- `(?:x)` : Îl identifică pe x, dar nu-l ține minte, nu-l *capturează*,
 - `x(?=y)`: Spune că `x` nu va fi returnat la potrivire dacă nu este urmat de `y`,
 - `x(?!y)`: Este inversul `lookahead`-ului. Șablonul va potrivi doar dacă `x` nu este urmat de `y`.
 
@@ -724,8 +722,7 @@ Termenul de lookahead s-ar putea traduce ca o căutare cu anticipare. Am mențio
 ```javascript
 let sir = 'abece';
 let sablon = /a(?=b)/;
-console.log(sir.match(sablon));
-// ["a"]
+console.log(sir.match(sablon)); // ["a"]
 ```
 
 Fii atent că un lookahead nu creează un backreference. Un *lookup negativ* este construirea unui șablon care să nege potrivirea imediată a caracterului: `a(?!b)`. `RegExp` va fi instruit să caute orice `a` dar care să nu fie urmat de `b`.
@@ -740,8 +737,7 @@ console.log(sir.match(sir));
 
 Gruparea activează un mecanism de memorizare care ține minte șirul de caractere pentru secvența șablonului dintre parantezele rotunde. Mecanismul de memorizare poate fi anulat la nevoie. Nu uita faptul că memorizarea (*backreference*) taxează resursele de calcul. Dacă nu ai nevoie de ea, anuleaz-o. De exemplu, în `bună(stare)?`, fragmentul memorizat, la momentul extragerii din șir va fi `stare`. Pentru a renunța la memorizare pui imediat după deschiderea parantezei rotunde a grupului sintaxa specială semnul întrebării și două puncte: `?:`. Astfel, șablonul va deveni `bună(?:stare)?`. Sintaxa `?:` spune motorului să nu folosească capturarea, adică memorizarea.
 
-Totuși, la ce ar fi bună memorarea fragmentelor de șir prin acest mecanism? Poți folosi acest mecanism atunci când dorești să cauți și să înlocuiești secvențe de text.
-Să presupunem că avem de parcurs un fragment XHTML, care este un soi de XML (Extended Markup Language) și avem de modificat ceva. Știm deja că XML-ul are o regulă strictă care spune că tagurile deschise trebuie închise, iar în cazul nostru: `<cite>Un citat</cite>`.
+Totuși, la ce ar fi bună memorarea fragmentelor de șir prin acest mecanism? Poți folosi acest mecanism atunci când dorești să cauți și să înlocuiești secvențe de text. Să presupunem că avem de parcurs un fragment XHTML, care este un soi de XML (Extended Markup Language) și avem de modificat ceva. Știm deja că XML-ul are o regulă strictă care spune că tagurile deschise trebuie închise, iar în cazul nostru: `<cite>Un citat</cite>`.
 
 Fiecărui grup îi sunt asignate numere de la stânga la dreapta începând cu `1`. Se pot referenția aceste grupuri cu backslash număr. De exemplu: `\1`.
 

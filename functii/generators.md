@@ -15,9 +15,9 @@ x.next(); // încearcă să mai scoți un rezultat
 //Object { value: undefined, done: true }
 ```
 
-Acest nou tip de lucru cu funcțiile se bazează pe faptul că accesul la date se face cu ajutorul iteratoarelor. Atunci când execuți un generator se creează un nou obiect iterator. Standardul menționează că acest obiect nou generat poate suporta și subclase. Un obiect iterator știe cum să acceseze elementele unei colecții unul după altul până la epuizarea lor. Acest obiect are niște metode disponibile pentru a iniția evaluarea expresiilor după cuvântul cheie `yield`. După evaluare, execuția generatorului se oprește în așteptarea unui nou apel al metodei `next()`. Poți percepe un generator ca un program care se execută la cerere și în etape. Fiecare etapă marcată de `yield` are asociată o stare.
+Acest nou mod de lucru cu funcțiile se bazează pe faptul că accesul la date se face cu ajutorul iteratoarelor. Atunci când execuți un generator, se creează un nou obiect iterator. Standardul menționează că acest obiect nou generat poate avea și subclase. Un obiect iterator știe cum să acceseze elementele unei colecții unul după altul până la epuizarea lor. Acest obiect are niște metode disponibile pentru a iniția evaluarea expresiilor după cuvântul cheie `yield`. După evaluare, execuția generatorului se oprește în așteptarea unui nou apel al metodei `next()`. Poți percepe un generator ca un program care se execută la cerere și în etape. Fiecare etapă marcată de `yield` are asociată o stare.
 
-Apelarea unui generator nu îl execută, ci doar este trimisă funcția în stiva apelurilor și imediat este suspendată execuția, fiind returnat un obiect iterator. Obiectul iterator ține o referință către contextul de execuție al generatorului care este în call-stack. După ce au fost evaluate toate expresiile până la întâlnirea primului `yield`, contextul de execuție al generatorului va fi scos din stiva de apeluri, dar obiectul iterator care s-a creat, va ține minte acest context de execuție. Execuția metodei `next()` nu creează un nou context de execuție precum în cazul clasic, ci doar reactivează contextul de execuție al generatorului pe care-l împinge din nou în callstack. Se continuă execuția de unde a rămas începând cu expresiile de după `yield`. Codul este evaluat până la întâlnirea următorului `yield`, când execuția este suspendată din nou, nu înainte de a actualiza obiectul iterator care ține minte starea - ține viu contextul de execuție. Acest ultim aspect oferă un mare avantaj al generatoarelor pentru că rețin valorile între diferitele etape parcurse cu `next()`.
+Apelarea unui generator doar trimite funcția în stiva apelurilor și imediat este suspendată execuția, fiind returnat un obiect iterator. Obiectul iterator ține o referință către contextul de execuție al generatorului care este în stivă. După ce au fost evaluate toate expresiile până la întâlnirea primului `yield`, contextul de execuție al generatorului va fi scos din stiva de apeluri, dar obiectul iterator, care s-a creat, va ține minte acest context de execuție. Execuția metodei `next()` nu creează un nou context de execuție, precum în cazul clasic, ci doar reactivează contextul de execuție al generatorului, pe care-l împinge din nou în stivă. Se continuă execuția de unde a rămas începând cu expresiile de după `yield`. Codul este evaluat până la întâlnirea următorului `yield`, când execuția este suspendată din nou, nu înainte de a actualiza obiectul iterator care ține minte starea - ține viu contextul de execuție. Acest ultim aspect oferă un mare avantaj al generatoarelor pentru că rețin valorile între diferitele etape parcurse cu `next()`.
 
 Dacă în execuție nu mai este întâlnit niciun `yield`, funcția generator returnează obiectul iterator, care în acest moment va avea valoarea `true` asociată cheii `done`.
 
@@ -57,9 +57,9 @@ Ceea ce se petrece atunci când `yield*` este aplicat unui obiect iterabil este 
 
 Un lucru foarte interesant care privește funcțiile generator este că se pot trimite mesaje din funcție în obiectul iterator instanțiat și invers.
 
-### Trimiterea datelor în argumente
+### Date în argumente
 
-Dacă tratezi generatoarele ca funcții simple, cel mai la îndemână mecanism de trimitere a datelor este cel al argumentelor. Reține faptul că poți *injecta* date în generator în oricare etapă a execuției sale, de regulă într-o etapă în care dorești să utilizeze date externe.
+Dacă tratezi generatoarele ca funcții simple, cel mai facil mecanism de trimitere a datelor este cel al argumentelor. Reține faptul că poți *injecta* date în generator în oricare etapă a execuției sale, de regulă, într-o etapă în care dorești să utilizeze date externe.
 
 ```javascript
 function* testDeGen (oValoare) {
@@ -73,7 +73,7 @@ Reține faptul că funcțiile generator pot primi date și după ce au pornit ex
 
 ### Mesaj din instanță către generator
 
-Pentru a trimite date la o anumită etapă de execuție, se vor pasa datele în apelul metodei `next()`. Aceste valori sunt trimise, de regulă pentru a influența valoarea următorului `yield`.
+Pentru a trimite date la o anumită etapă de execuție, se vor pasa datele în apelul metodei `next()`. Aceste valori sunt trimise, de regulă, pentru a influența valoarea următorului `yield`.
 
 ```javascript
 function* altGenerator () {
@@ -90,7 +90,7 @@ console.log(instantaAltGenerator.next('mesaj spre generator'));
 // { value: undefined, done: true }
 ```
 
-Nu pot fi pasate valori la prima apelare a lui `next()` pentru că metoda `next()`, de fapt trimite o valoare unui `yield` care așteaptă. Dacă nu există vreun `yield` care să aștepte, nici valoarea nu are cui să-i fie pasată. Valoarea pasată este folosită de generator ca valoare a întregii expresii `yield` în care a fost înghețat generatorul.
+Nu pot fi pasate valori la prima apelare a lui `next()` pentru că metoda `next()`, de fapt, trimite o valoare unui `yield` care așteaptă. Dacă nu există vreun `yield` care să aștepte, nici valoarea nu are cui să-i fie pasată. Valoarea pasată este folosită de generator ca valoare a întregii expresii `yield`, în care a fost înghețat generatorul.
 
 ```javascript
 function* faCeva (ceva) {
@@ -133,7 +133,8 @@ Noapte bună
  */
 ```
 
-Se observă că o funcție generator se *consumă* cu o secvență `for...of`. Pentru exemplul de mai sus, să spunem că dorim să accesăm prima valoare. În acest caz, pur și simplu punem cursorul pe ea - `next()`. Valorile pot fi iterate și printr-un `while` pentru a scoate valoarea din obiectul returnat de `next()`. Pentru fiecare iterație testezi dacă `done` are valoarea `true`.
+Se observă că o funcție generator se *consumă* cu un enunț `for...of`. Pentru exemplul de mai sus, să spunem că dorim să accesăm prima valoare. În acest caz, pur și simplu punem *cursorul* `next()` pe ea. Valorile pot fi iterate și printr-un `while` pentru a scoate valoarea din obiectul returnat de `next()`. Pentru fiecare iterație testezi dacă `done` are valoarea `true`.
+
 Formularea condiției: `!(let element = refIterator.next()).done`.
 
 Explicație:
@@ -174,7 +175,7 @@ for(let obi of emiteFormule()){
 };
 ```
 
-O chestie foarte faină care ține de felul în care funcționează generatoarele, este că se pot construi bucle infinite fără a avea temerea că se vor returna erori din mediul în care programul rulează. Acest lucru se petrece pentru că indiferent de faptul că limita este la infinit, generarea valorilor este controlată prin `yield`. Se poate ușor închipui o listă cu bilete de ordine sau orice necesită o listă de elemente care să se prelungească la infinit și care au nevoie de o identificare unică, de exemplu.
+O chestie foarte faină care ține de felul în care funcționează generatoarele, este că se pot construi bucle infinite, fără a avea temerea că se vor returna erori din mediul în care programul rulează. Acest lucru se petrece pentru că indiferent de faptul că limita este la infinit, generarea valorilor este controlată prin `yield`. Se poate ușor închipui o listă cu bilete de ordine sau orice necesită o listă de elemente, care să se prelungească la infinit și care au nevoie de o identificare unică, de exemplu.
 
 ```javascript
 function* generatorIDuri () {
@@ -273,7 +274,7 @@ for (let elem of obiIter.unGenerator()) {
 
 ## Tratarea erorilor
 
-Pentru că o funcție generator este totuși sincronă, se pot trimite mesaje în cazul apariției unor erori folosind un bloc `try..catch`.
+Pentru că o funcție generator este totuși sincronă, se pot trimite mesaje în cazul apariției unor erori folosind un bloc `try...catch`.
 
 ```javascript
 function* facCevaSecvential () {

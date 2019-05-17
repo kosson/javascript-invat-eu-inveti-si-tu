@@ -1,6 +1,6 @@
 # Array.prototype.slice()
 
-Această metodă nu afectează array-ul original. Slice în limba engleză se referă la a tăia, la a decupa, la a extrage o bucată. Pentru a înțelege `slice`, cel mai bine este să vă imaginați un croitor care măsoară stofa cu un centimetru, face semne pentru bucata pe care o dorește și apoi taie materialul.
+Această metodă nu afectează array-ul original. Slice în limba engleză se referă la *a tăia*, *a decupa*, *a extrage o bucată*. Pentru a înțelege `slice`, cel mai bine este să vă imaginați un croitor care măsoară stofa cu un centimetru, face semne pentru bucata pe care o dorește și apoi taie materialul.
 
 Slice pentru array-uri este o metodă care returnează un nou array. Acesta este o copie a unei porțiuni delimitate prin argumentele pasate. Slice nu alterează array-ul original în niciun fel.
 

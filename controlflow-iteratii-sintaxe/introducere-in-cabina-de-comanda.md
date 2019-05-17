@@ -1,16 +1,14 @@
 # Cabina de comandă și control
 
-Tu ești cel care descrie procedurile de pilotare atunci când vine vorba despre software. De fapt, un programator este cel care-și imaginează toate procedurile, situațiile și opțiunile pentru un pilot (pentru moment vom numi momentul execuției codului *pilot*). Nu vreau să te dezamăgesc, dar pilotul adevărat va fi motorul de JavaScript. Acesta preia textul care reprezintă codul, îl compilează și apoi îl evaluează. I se mai spune și **control** pentru că este cel care preia controlul total atunci când ai solicitat executarea codului. Și încă un amănunt important: codul scris de tine se execută o singură dată.
+Motorul de JavaScript preia textul care reprezintă codul, îl compilează și apoi îl evaluează. I se mai spune și **control** pentru că este cel care preia controlul total atunci când ai solicitat executarea codului. Și încă un amănunt important: codul scris de tine se execută o singură dată.
 
-Ca să-ți pun zâmbetul din nou pe buze, tu ești cea care a văzut și a prevăzut totul dinainte ca *pilotul*/*controlul* să preia execuția. Ești peste pilot. Ești creatorul tuturor acestor lucruri! Ești cel care a imaginat, raționat și prevăzut totul. Toată această magie este performată de tine în spațiul cel mai prețios din tot universul: imaginația și rațiunea ta. Te poftesc să pășești în cabina de comandă a JavaScript-ului.
+Tu ești cel care a imaginat, raționat și prevăzut totul. Toată această magie este performată de tine în spațiul cel mai prețios din tot universul: imaginația și rațiunea ta. Te poftesc să pășești în cabina de comandă a JavaScript-ului.
 
-Mai întâi avem declarațiile de variabile, funcții și obiecte. Ai un tablou de bord foarte bogat pentru **a aplica transformări datelor**... unii spun că este singurul lucru apropiat de magie.
+Pornim cu declarațiile de variabile, funcții și obiecte. Acestea trebuie privite ca pe o enumerare a instrumentelor de măsură și control. Ai un tablou de bord foarte bogat pentru **a aplica transformări datelor**... unii spun că este singurul lucru apropiat de magie.
 
 ## Control operațiuni
 
 Pentru a dirija cursul acțiunilor unui program, avem nevoie de instrumentele care ne permit acest lucru. Vom porni chiar de la cadrul oferit de motorul JavaScript pentru a înșirui diferitele operațiuni. Cel mai simplu este o pereche de acolade. Am mai vorbit noi despre ele, dar este bine să ne reamintim că acestea stabilesc un cadru separat (un mediu lexical), în care putem rula codul.
-
-Povestea celui care scrie codul este ca un film care debutează cu vocea povestitorului și încet, încet alunecă în acțiunea propriu-zisă.
 
 Controlul operațiunilor oferă alternativele pe care le-ai configurat pentru anumite situații. De exemplu, pentru a lua o decizie în funcție de anumite valori computate, vei folosi un enunț `if...else`, care îți permite să iei o decizie, plus alternativele menționate prin `else`. Dar dacă te uiți la un set cunoscut de posibile decizii, ai putea folosi un `case...switch`.
 

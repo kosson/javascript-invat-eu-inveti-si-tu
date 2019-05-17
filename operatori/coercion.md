@@ -1,6 +1,6 @@
 # Coercion - transformare
 
-Coercion în limba engleză înseamnă constrângere. Ceea ce se petrece este o „transformare” pe care o face un operator asupra unei valori date la momentul evaluării expresiei. Pe parcursul lucrării vom folosi interșanjabil termenul care exprimă ceea ce se petrece cu cel în limba engleză.
+Coercion în limba engleză înseamnă constrângere. Ceea ce se petrece este o *transformare* pe care o face un operator asupra unei valori date la momentul evaluării expresiei. Pe parcursul lucrării vom folosi interșanjabil termenul care exprimă ceea ce se petrece cu cel în limba engleză.
 
 **Moment ZEN**: Totul în JavaScript este evaluat în final la o valoare boolean, fie ceva care poate fi considerată a fi o valoare **adevărată**, fie ceva care poate fi considerat a fi o valoare **falsă** - *truthy* și *falsey*, cum am spune în engleză.
 
@@ -19,14 +19,14 @@ Sunt și alte transformări care se petrec, dar acestea sunt determinate de acț
 Există câteva valori care vor fi întotdeauna reduse la `false` în evaluările expresiilor: `0` (ce poate fi mai evident?), `''` un șir vid, valoarea `undefined` și `NaN`, încheind cu faimosul `null`. Aici adăugăm o mențiune foarte utilă pe termen lung: restul valorilor se reduc la `truthy`. Dacă ai nevoie să transformi explicit în valoarea de adevăr o valoare, te poți folosi de operatorul de negare, care pentru a nega ceva, mai întâi are nevoie să transforme acea valoare la echivalentul Boolean. Odată negat, îl mai negi odată ca să revii la valoarea sa de adevăr originală.
 
 ```javascript
-!!0; // false
-!!''; // false
+!!0;         // false
+!!'';        // false
 !!undefined; // false
-!!NaN; // false
-!!null; // false
-// câteva curiozități
-!!(true); // true
-!!(1); // true
+!!NaN;       // false
+!!null;      // false
+/* câteva curiozități */
+!!(true);    // true
+!!(1);       // true
 ```
 
 ## Transformarea unui șir de caractere

@@ -28,7 +28,9 @@ var j = Symbol('deosebit');
 i == j; // false
 ```
 
-Acest nou tip de date nu este nici obiect și nici șir de caractere (string). Este ceva cu totul și cu totul nou. Simbolurile sunt folosite pentru a crea și pentru a utiliza proprietăți ale unui obiect care oferă siguranța că nu vor intra vreodată în conflict cu cele ale altor biblioteci de cod.
+Atenție, de fiecare dată când descriptorul este același, pentru două simboluri diferite, se vor crea două simboluri diferite.
+
+Acest nou tip de date nu este nici obiect și nici șir de caractere (string). Este ceva cu totul și cu totul nou. Simbolurile sunt folosite pentru a crea și pentru a utiliza proprietăți ale unui obiect. Oferă siguranța că nu vor intra vreodată în conflict cu cele ale altor biblioteci de cod.
 
 ```javascript
 var obi = {};
@@ -50,14 +52,6 @@ simbolSigur.toString(); // "Symbol(oProprietateUnică)"
 ```javascript
 let totem = Symbol.for("ursul carpatin");
 Symbol.keyFor(totem);
-```
-
-ATENȚIE! De fiecare dată când descriptorul este același, pentru două simboluri diferite, se vor crea două simboluri diferite.
-
-```javascript
-var simbol1 = Symbol('ceva');
-var simbol2 = Symbol('ceva');
-Symbol('ceva') === Symbol('ceva'); // false
 ```
 
 ## Simboluri construite deja în limbaj

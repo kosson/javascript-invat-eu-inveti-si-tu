@@ -16,7 +16,7 @@ Cu ajutorul acestei metode înlănțuită cu `entries()` vei obține un iterator
 var colectie = {unu: 1, doi: 2};
 let iterator = Object.values(colectie).entries();
 console.log(typof(iterator));
-console.log(iterator.next()); //{ value: [ 0, 1 ], done: false }​​​​​
+console.log(iterator.next()); // { value: [ 0, 1 ], done: false }
 for ([key, val] of iterator) {
     console.log(val);    
 }; // 2 (doar 2 petru că deja cursorul intern a trecut de prima valoare)

@@ -33,7 +33,7 @@ Să le luăm pe rând să vedem ce reprezintă fiecare.
 
 ![](ObjectGetPrototypeOfSymbol.png)
 
-Caută obiectul de la care moștenește proprietăți obiectul de lucru. Dacă valoarea este deja setată la `null`, înseamnă că nu moștenește. L-am reprezentat precum două obiecte ca două cercuri dintre care cel mai mic din dreapta este cel de lucru, iar cel din stânga este cel a cărui identificator va fi returnat în urma operațiunii de interogare. Sensul de interogare este dat de sensul săgeții orientat către un posibil obiect candidat cu rol de prototip.
+Caută obiectul de la care moștenește proprietăți obiectul de lucru. Dacă valoarea este deja setată la `null`, înseamnă că nu moștenește. L-am reprezentat prin două obiecte ca două cercuri. Cel mai mic din dreapta este cel de lucru, iar cel din stânga este cel al cărui identificator va fi returnat în urma operațiunii de interogare. Sensul de interogare este dat de sensul săgeții orientat către un posibil obiect candidat cu rol de prototip.
 
 Metoda pe care o putem folosi și noi ca programatori este parte a obiectului global `Object` și este disponibilă prin mecanismul de moștenire tuturor obiectelor. Programatorii de JavaScript au acces la acest algoritm prin obiectul intern `Object`, folosind metoda `Object.getPrototypeOf(unObi)`. Metoda este disponibilă prin mecanismul de moștenire al tuturor obiectelor. Odată cu noua versiune a standardului, există și `Reflect.getPrototypeOf`, care permite folosirea directă a *metodelor interne*.
 

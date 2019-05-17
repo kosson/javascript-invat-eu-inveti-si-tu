@@ -7,7 +7,7 @@ var nucleu = "Salutare, ";
 console.log(nucleu.concat('prietene,', ' ce mai faci?')); // Salutare, prietene, ce mai faci?
 ```
 
-Același efect poate fi obținut cu următoarea secvență de cod, care de această dată construiește o funcție `concat` și care operează asupra array-like-ului `arguments`:
+Același efect poate fi obținut cu următoarea secvență de cod, care de această dată construiește o funcție `concat` ce operează asupra array-like-ului `arguments`:
 
 ```javascript
 function concat () {
@@ -17,7 +17,7 @@ var sirNou = concat('ceva', 'text', 'pentru', 'a', 'fi', 'unit')
 console.log(sirNou); // ceva text pentru a fi unit
 ```
 
-Folosirea `rest parameters`, adică o sintaxă ce permite extragerea unui Array din argumentele pasate unei funcții. Această sintaxă constă din adăugarea unui nume de parametru prefixat de trei puncte de suspensie. Această sintaxă generează un array adevărat, nu un *array-like* așa cum este `arguments`.
+Folosirea `rest parameters` generează un array adevărat, nu un array-like așa cum este `arguments`.
 
 ```javascript
 function concat (...argumentePasate){

@@ -67,4 +67,4 @@ Object.create(
 );
 ```
 
-Fii avertizată de faptul că atunci când faci copii astfel, de fapt nu vei crea o entitate cu totul și cu totul distinctă. Ceea ce vei reuși este să faci o nouă entitate care va conține referințe care trimit către proprietățile obiectului original. Orice modificare pe care o aduci copiei, se va reflecta fidel în obiectul original.
+Fii avertizată de faptul că atunci când copiezi astfel, de fapt nu vei crea o entitate cu totul și cu totul distinctă. Ceea ce vei reuși este să faci o nouă entitate care va conține referințe care trimit către proprietățile obiectului original. Orice modificare pe care o aduci copiei, se va reflecta fidel în obiectul original.

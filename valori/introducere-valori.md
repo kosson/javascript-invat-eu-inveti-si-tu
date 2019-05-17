@@ -1,27 +1,21 @@
 # Valorile în JavaScript
 
+Vă mai aduceți aminte despre identificatori? În capitolul introduc-tiv, ultimul subiect angajat a fost cel al identificatorilor și a fost pro-iectat să fie o punte cu acest capitol. Identificatorii se leagă organic cu valorile pentru că sunt ca o adresă prin care ajungem la valoare. Această legătură foarte intimă conduce mai departe la înțelegerea mediului lexical, care este un caiet de recensământ, unde sunt inventariate toate aceste legături ale identificatorilor cu valorile pentru care joacă rolul de referințe.
+
 Valorile sunt datele pe care un programator le poate manipula în JavaScript. Valorile ca tipologie sunt diferite.
 
-Limbajul de programare ECMAScript, adică JavaScript-ul nostru are câteva valori care sunt **tipuri ale limbajului**, cum le spune standardul. Ce înseamnă că sunt tipuri ale limbajului? Valorile pe care un programator le poate manipula folosind limbajul de programare ECMAScript.
+Limbajul de programare ECMAScript are câteva valori care sunt **tipuri ale limbajului**, cum le spune standardul. Ce înseamnă că sunt tipuri ale limbajului? Valorile pe care un programator le poate manipula folosind limbajul de programare ECMAScript.
 
 **Spune standardul**:
 
 > O valoare a limbajului ECMAScript este o valoare care este caracterizată de un tip al limbajului ECMAScript.
 
-Pe scurt, **tipul indică valoarea**. Mai sunt numite și valori primare. În JavaScript există două mari tipuri de valori:
+Pe scurt, **tipul este indicat de valoare**. Mai sunt numite și valori primare. Valorile sunt expresii. De fapt, expresiile sunt o posibilă reprezentare a valorii pentru că sunt reduse la o valoare. Sunt două mari tipuri de valori:
 
 -   **tipurile primitive**, care sunt stocate în memoria computerului direct și
 -   **tipurile referință**, care sunt stocate în memoria computerului ca obiecte. Acestea sunt simple referințe către o zonă de memorie în care se află membrii obiectului.
 
-Tipurile de valori disponibile în JavaScript sunt:
-
--   `Undefined`,
--   `Null`,
--   `Boolean`,
--   `String`,
--   `Symbol`,
--   `Number` și
--   `Object`
+Tipurile de valori disponibile în JavaScript sunt: `Undefined`, `Null`, `Boolean`, `String`, `Symbol`, `Number` și `Object`.
 
 Pentru aceste valori primare, am creat un simbol de care să ne folosim în acest manual. Acesta este pentru primele șase un cerc cu trei raze în care este înscrisă o prescurtare a numelui valorii. Singura care este exceptată va fi cea a obiectului pe care l-am reprezentat precum un cerc cu trei linii suprapuse ce simbolizează proprietățile sale. Acest sistem de notare vizuală nu face parte din standard. Îl vom adopta aici pentru a ne face viața mai ușoară în anumite explicații.
 
@@ -34,9 +28,7 @@ Pentru aceste valori primare, am creat un simbol de care să ne folosim în aces
 'ceva' === 'ceva'; // true
 ```
 
-Aceste valori sunt cele pe care diferitele structuri de prelucrare sau de stocare permanentă ori temporară, le vor organiza și manipula. Sunt baza structurilor de date, dacă vrei, atomii substanței cu care lucrăm în programare.
-
-Atunci când nu ești sigur de valoarea asignată unui identificator, există un operator pentru a investiga cu ce valoare ai de-a face: `typeof valoare`.
+Aceste valori sunt cele pe care diferitele structuri de prelucrare sau de stocare permanentă ori temporară, le vor organiza și manipula. Atunci când nu ești sigur de valoarea atribuită unui identificator, există un operator pentru a investiga cu ce valoare ai de-a face: `typeof valoare`.
 
 ```javascript
 var a = 10,
@@ -57,11 +49,9 @@ Atenție, `typeof null`, returnează `object`. Acest lucru se întâmplă pentru
 
 ## Împachetare
 
-Valorile primitive în anumite condiții devin obiecte care au proprietăți și metode. JavaScript are un mecanism care pur și simplu *îmbracă* o primitivă într-un obiect. Pur și simplu se petrece o *împachetare* a valorii în obiectul intern corespondent. Împachetarea (*wrapping* în limba engleză) se face fără știrea sau intervenția utilizatorului și astfel, pare că și primitivele au metode.
+În anumite condiții, valorile primitive devin obiecte care au proprietăți și metode. JavaScript are un mecanism care pur și simplu *îmbracă* o primitivă într-un obiect corespondent tipului. Pur și simplu se petrece o *împachetare* a valorii în obiectul intern corespondent. Împachetarea (*wrapping* în limba engleză) se face fără știrea sau intervenția utilizatorului și astfel, pare că și primitivele au metode.
 
-Când se petrece *împachetarea*? De îndată ce pui operatorul punct după identificatorul valorii primitive. Acesta este semnalul către motor să împacheteze primitiva în obiectul corespondent. Reține faptul că imediat ce s-a încheiat evaluarea, valoarea primitivă va fi *despachetată*.
-
-Poți verifica acest lucru prin accesarea uneia dintre cele mai utile proprietăți a unui șir de caractere: `length`.
+Când se petrece *împachetarea*? De îndată ce pui operatorul punct după identificatorul valorii primitive. Acesta este semnalul către motor să împacheteze primitiva în obiectul corespondent. Reține faptul că imediat ce s-a încheiat evaluarea, valoarea primitivă va fi *despachetată*. Poți verifica acest lucru prin accesarea uneia dintre cele mai utile proprietăți a unui șir de caractere: `length`.
 
 ```javascript
 'ceva'.length; // 4
@@ -114,7 +104,7 @@ Tipul `Symbol` este atașat unui set de valori care nu sunt pot fi considerate a
 
 ## Number
 
-Valorile numerice sunt exprimate prin caracterele a căror interpretare conduce la înțelegerea ca număr. O valoare numerică exprimată printr-un literal va fi întotdeauna rotunjită la momentul evaluării. În cazul în care avem valori zecimale, acestea pot fi reprezentate chiar dacă sunt reprezentate cu `0` pe ordinul care nu este completat. Important este că cifra care urmează să nu fie sub 8 pentru că în acest caz este interpretat ca fiind o valoare octală.
+Valorile numerice sunt exprimate prin caracterele a căror interpretare conduce la înțelegerea ca număr. O valoare numerică exprimată printr-un literal va fi întotdeauna rotunjită la momentul evaluării. În cazul în care avem valori zecimale, acestea pot fi reprezentate chiar și cu `0` pe ordinul care nu este completat. Important este că cifra care urmează să nu fie sub 8 pentru că în acest caz este interpretat ca fiind o valoare octală.
 
 Valori numerice exprimate literal.
 
@@ -130,11 +120,10 @@ var unOctal = 0o644; console.log(unOctal); //420
 var unHexa = 0x24443AD; console.log(unHexa); //38028205
 ```
 
-Odată cu valorile numerice poți menționa și exponenții folosind caracterul semnal: `e` sau `E`.
+Odată cu valorile numerice poți menționa și exponenții, folosind caracterul semnal: `e` sau `E`.
 Poți scrie semnul minus care să indice cu care valoare de pe axa numerelor se operează: `-10` și `10`, de exemplu.
 
-Tipul `Number` țintește valori numerice cu dubă precizie pe 64 de biți.
-`Number` nu poate avea valori mai mari de 18437736874454810627 (standardul IEEE 754-2008).
+Tipul `Number` țintește valori numerice cu dubă precizie pe 64 de biți. `Number` nu poate avea valori mai mari de 18437736874454810627 (standardul IEEE 754-2008).
 Alte valori de tip `Number` sunt `NaN` (Not-a-Number, care tot o implementare a standardului menționat este), `Infinity` pozitivă și negativă, zero și minus zero.
 
 ## Object
@@ -159,14 +148,18 @@ Obiectele au și ele constructorului corespondent `Object()`. Poți instanția o
 const obi = new Object();
 ```
 
-Oricare proprietate a unui obiect este, fie o proprietate care conține date, fie un *accessor*. O *proprietate de date* a unui obiect este o asociere dintre valoarea unei chei cu o valoare a limbajului (unul dintre tipuri), plus un set de atribute de tip Boolean (`writable`, `enumerable`, `configurable`).
+Proprietățile sunt date sau **accessori** către alte proprietăți. O *proprietate de date* a unui obiect este o asociere dintre valoarea unei chei cu o valoare a limbajului (unul dintre tipuri), plus un set de atribute setate cu valori Boolean (`writable`, `enumerable`, `configurable`).
 O *proprietate accesor* (`get` și `set`), asociază o cheie cu una din cele două funcții accesor, plus un set de atribute tip Boolean. Proprietățile unui obiect accesate prin `get` și `set`, sunt cele ale obiectului, dar și cele moștenite. Cheile unui obiect nu pot fi decât un șir de caractere sau o valoare `Symbol`. Atenție, chiar și un șir vid poate sta drept cheie. Numele cheii este întotdeauna un șir de caractere.
 
 Atenție, fiecare obiect trebuie să aibă seturi cheie - valoare care să fie unice. Duplicatele nu sunt acceptate.
 
 Acum că am încheiat cu tratarea valorilor care sunt și tipurile limbajului nostru și pentru că am tratat și povestea reprezentărilor literale, vom continua cu restul reprezentărilor literale pentru valori pe care le vom folosi pentru a modela datele.
 
-## Literalul array
+## Declarații literale
+
+Dacă am văzut ce este nevoie pentru a scrie valorile astfel încât să fie înțelese de computer, vom continua explorând expresiile literale folosite pentru a redacta alte valori de lucru care nu sunt primitive, ci sunt obiecte specializate.
+
+### array
 
 Acum este un moment potrivit să luăm contact cu una din structurile de date pe care o vom folosi foarte des. În limba română mai este numit și tablou, dar cei mai mulți practicieni folosesc termenul din limba engleză. În cazul array-urilor, forma literală este o listă de elemente despărțite de virgule încadrate între paranteze pătrate.
 
@@ -180,9 +173,9 @@ Obiectul de împachetare este `Array` iar instanțierea acestuia cu `new` creeaz
 const unArrayNou = new Array('unu', 2, true);
 ```
 
-## Literal RegExp
+## RegExp
 
-RegExp constituie o parte importantă a rutinelor de lucru cu șiruri în oricare limbaj de programare. RegExp înseamnă regular expressions iar utilitatea sa este dovedită prin capacitatea de a face regăsiri într-un șir de caractere, care poate fi de orice dimensiuni (o carte, de exemplu). După cum intuiești, RexExp este foarte puternic ca și capacitate de a căuta după cuvinte cheie, expresii, succesiuni de caractere, ce să mai, șabloane aranjate și construite după cele mai fanteziste reguli. Dar și aceste șabloane, trebuie specificate cumva. Uneori le poți introduce într-o variabilă iar în cazul literalelor, le putem specifica direct.
+RegExp constituie o parte importantă a rutinelor de lucru cu șiruri în oricare limbaj de programare. RegExp înseamnă *regular expressions*, iar utilitatea sa este dovedită prin capacitatea de a face regăsiri într-un șir de caractere, care poate fi de orice dimensiuni (o carte, de exemplu). După cum intuiești, RexExp este foarte puternic pentru a căuta după cuvinte cheie, expresii, succesiuni de caractere, ce să mai, șabloane aranjate și construite după cele mai fanteziste reguli. Dar și aceste șabloane, trebuie specificate cumva. Uneori le poți introduce într-o variabilă, dar în cazul literalelor, le putem specifica direct.
 
 ```javascript
 /a+b/g; //sau
@@ -195,7 +188,7 @@ Constructorul `RegExp()` prin instanțierea sa cu `new` produce un obiect.
 let obiRegexNou = new RegExp('^a+b$', 'g');
 ```
 
-## Literalul funcțiilor
+### Funcții
 
 Pentru a înțelege faptul că funcțiile au literalul lor, trebuie să înțelegem un lucru foarte simplu. În JavaScript, funcțiile sunt valori.
 
@@ -211,7 +204,7 @@ let oFunctieNoua = new Function('return true');
 
 ## Template Literal - text șablon
 
-Începând cu ECMAScript 2015 avem un mod suplimentar de a lucra cu fragmente de text și acesta este numit **template literal** - „șabloane literale”. Chestia extraordinară este că permite introducerea de expresii care pot fi evaluate folosind secvența `${identificator sau expresie}` și lucrul cu fragmente de text pe mai multe rânduri. Pentru a construi un template string punem tot textul nostru între două <code>&#96;</code>, care este caracterul pentru reprezentarea **accentului grav** (grave accent, în engleză). Acest caracter mai este denumit în limba engleză și **backtick**.
+Începând cu ECMAScript 2015 avem un mod suplimentar de a lucra cu fragmente de text. Acesta este numit **template literal** - **șabloane literale**. Chestia extraordinară este că permite introducerea de expresii care pot fi evaluate folosind secvența `${identificator sau expresie}` și lucrul cu fragmente de text pe mai multe rânduri. Pentru a construi un template string punem tot textul nostru între două <code>&#96;</code>, care este caracterul pentru reprezentarea **accentului grav** (grave accent, în engleză). Acest caracter mai este denumit în limba engleză și **backtick**.
 
 Acestea este semnul distinct care spune motorului JavaScript că se pot interpola rezultatele evaluării unei expresii folosind combinația dollar-acolade precum în: `${oVariabilaSauExpresie}`.
 
@@ -219,21 +212,13 @@ Acestea este semnul distinct care spune motorului JavaScript că se pot interpol
 let ceva = `ceva text ${numeIdentificator}`;
 ```
 
-*Șabloanele literale* (*template literal* în limba engleză) sunt un pas evolutiv important dacă ne gândim la faptul că până acum trebuia să apelăm la concatenare pentru a introduce într-un șir de caractere rezultatul evaluării unor expresii. Acest lucru introduce un nivel suplimentar de calcul pentru că motorul JS trebuia mai întâi să analizeze dacă nu cumva este vorba despre o adunare. Așa, folosind *șabloanele literale*, lucrurile sunt clare.
+*Șabloanele literale* (*template literal* în limba engleză) sunt un pas evolutiv important dacă ne gândim la faptul că până acum trebuia să apelăm la concatenare pentru a introduce într-un șir de caractere rezultatul evaluării unor expresii. Acest lucru introduce un nivel suplimentar de calcul pentru că motorul JS trebuia mai întâi să analizeze dacă nu cumva este vorba despre o adunare. Folosind *șabloanele literale*, lucrurile sunt clare.
 
 ```javascript
 let a = 5, b = 10;
 console.log("Cinsprezece este suma " + (a + b) + " și\nnu " + (2 * a + b) + ".");
 // este echivalent cu:
 console.log(`Cinsprezece este suma ${a + b} și\nnu ${2 * a + b}.`);
-```
-
-O formă și mai avansată de *șabloane literale* este cea numită `tagged template literals` - **literale șablon cu etichetă**. Un simplu exemplu:
-
-```javascript
-let a = 0.5, b = 10;
-let stranse = `Adunarea este: ${(a + b).toFixed(2)}, înmulțirea este: ${a * b}`;
-console.log(stranse);
 ```
 
 Se pot imbrica șabloane, precum în următorul exemplu:
@@ -244,6 +229,8 @@ let oParte = 'o parte de text',
 console.log(altaParte);
 ```
 
+O formă și mai avansată de *șabloane literale* este cea numită `tagged template literals` - **literale șablon cu etichetă**.
+
 ### Tagged template literals
 
 În acest caz, se folosește o funcție care este apelată cu datele template-ului literal care este procesat. Funcția primește datele din template ca bucăți individuale și trebuie să le combine pentru a crea rezultatul.
@@ -251,21 +238,22 @@ console.log(altaParte);
 ```javascript
 let atribut = 'foarte bun', procent = '100';
 
-function inlocuieste (text, atrInput, procInput) {
-  var sirPanaPrimaInlocuire = text[0];
-  var sirDeDupaInlocuirePanaLaUrm = text[1];
-  var ceAMaiRamas = text[2];
+function inlocuieste (text, atribut, procent) {
+  var primFragment     = text[0]; // -> fragmentul 'Un text'
+  var alDoileaFragment = text[1]; // -> fragmentul ' cu '
+  var ceAMaiRamas      = text[2]; // -> fragmentul ' încântare'
 
   // în funcție poți face anumite modificari valorilor
   // care vor fi interpolate
-  if (procInput == 100) {
+  var procInput; 
+  if (procent == 100) {
     procInput = 'sută la sută';
   };
 
-  return sirPanaPrimaInlocuire + atrInput + sirDeDupaInlocuirePanaLaUrm + procInput + ceAMaiRamas;
+  return `${primFragment}${atribut}${alDoileaFragment}${procInput}${ceAMaiRamas}`;
 };
 
-var transmutare = inlocuieste`Un text ${atribut} cu ${procent} încântare.`;
+var sirNou = inlocuieste`Un text ${atribut} cu ${procent} încântare.`;
 console.log(transmutare);
 ```
 

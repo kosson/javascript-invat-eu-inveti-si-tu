@@ -14,15 +14,15 @@ Pe lângă acestea mai există o suită de instrumente online pentru evaluarea c
 
 ## Locuitorii tărâmului
 
-Mă voi întoarce pentru scurt timp la conceptele cheie cu care vom lucra în JavaScript pentru că este nevoie să avem mai mult context. Menționam anterior că atunci când privești prin prisma standardului, motorul JavaScript trebuie să creeze un tărâm. Întrebarea care se pune este: care sunt locuitorii acestui tărâm pe care trebuie să-i cunoaștem mai întâi? Să pornim un minim inventar.
+Mă voi întoarce pentru scurt timp la conceptele cheie cu care vom lucra în JavaScript pentru că este nevoie să avem mai mult context. Menționam anterior că atunci când privești prin prisma standardului, motorul JavaScript trebuie să creeze un tărâm. Cine sunt locuitorii acestui tărâm? Să pornim un minim inventar.
 
 ### Primitivele
 
-Primitivele sunt blocurile constructive. La ce mă refer este faptul că avem nevoie să lucrăm în mod curent cu numere, cu șiruri de caractere și cu valori de adevăr. Dar mai mult, în programare, mai este nevoie să exprimi și realități care se leagă în mod direct de felul cum este alocată memoria și *mediul lexical* pe care codul îl formează și astfel avem primitive, precum valorile nule (`null`), cele nedefinite încă (`undefined`),  numere, fragmente de text, `true`/`false`.
+Primitivele sunt blocurile constructive. La ce mă refer este faptul că avem nevoie să lucrăm în mod curent cu numere, cu șiruri de caractere și cu valori de adevăr. Dar mai mult, în programare, mai este nevoie să exprimi și realități care se leagă în mod direct de felul cum este alocată memoria și *mediul lexical* pe care codul îl formează și astfel avem următoarele primitive: valorile nule (`null`), cele nedefinite încă (`undefined`), numere, text, `true`/`false`.
 
 ### Variabile
 
-Primitivele despre care discutam mai sus trebuie să fie luate cumva în evidență. Să presupunem că avem un instrument pentru măsurarea gradului de poluare, care are 2 senzori: unul pentru emisii de azot, iar altul pentru numărul de particule. Acest post de măsurare emite datele culese în flux continuu, datele culese de senzori fiind numere întregi. Întrebarea este următoarea: cum separăm noi ce emite un senzor de celălalt atâta vreme cât pe *firul* de comunicații vine un șuvoi neîntrerupt de numere? Răspunsul logic ar fi să punem câte o etichetă pentru fiecare număr care să indice numele senzorului, nu?
+Primitivele despre care discutam mai sus trebuie să fie luate cumva în evidență. Să presupunem că avem un instrument pentru măsurarea gradului de poluare, care are 2 senzori: unul pentru emisii de azot, iar altul pentru numărul de particule. Acest post de măsurare emite în flux continuu datele culese de senzori. Acestea sunt numere întregi. Întrebarea este  cum separăm noi ce emite un senzor de celălalt atâta vreme cât pe *firul* de comunicații vine un șuvoi neîntrerupt de numere? Răspunsul logic ar fi să punem câte o etichetă pentru fiecare valoare emisă care să indice numele senzorului de la care provine, nu?
 
 ```text
 azot: 142.23
@@ -40,17 +40,15 @@ var x = 10;
 
 ### Obiecte
 
-Când folosim browserul web al sistemului de operare, cel mai important locatar este obiectul global, iar acesta poartă numele de `window`. Curioasă din fire, vei deschide repede browserul, vei apăsa `F12` și în linia consolei vei scrie `window.` (`window` urmat de punct). De îndată ce ai scris numele obiectului global, vor *țâșni* toate proprietățile acestui obiect... obiectul care oferă tot ce spune standardul că ar trebui să fie. În Node.js chiar se numește `global`. Dacă ești curiozitatea personificată, având Node.js instalat pe sistem deja, deschizi un `Terminal` sau `Command Prompt` și inițiezi o sesiune de Nodejs. Scrie `global` și vei vedea o descriere amănunțită a acestui obiect.
+Când folosim browserul web, cel mai important locatar este obiectul global, iar acesta poartă numele de `window`. Curioasă din fire, vei deschide repede browserul, vei apăsa `F12` și în linia consolei vei scrie `window.` (`window` urmat de punct). De îndată ce ai scris numele obiectului global, vor *țâșni* toate proprietățile acestui obiect... obiectul care oferă tot ce spune standardul că ar trebui să fie. În Node.js chiar se numește `global`. Dacă ești curiozitatea personificată, având Node.js instalat pe sistem deja, deschizi un `Terminal` sau `Command Prompt` și inițiezi o sesiune de Nodejs. Scrie `global` și vei vedea o descriere amănunțită a acestui obiect.
 
 De fapt, în JavaScript totul este o proprietate a unui obiect și/sau o metodă a unuia. Vorbim despre o metodă atunci când o funcție joacă un rol activ în interiorul unui obiect.
 
-Și acum, că tot am vorbit de obiecte anterior, vom depăși viziunea unei rodii pe care am propus-o în introducere pentru simplitate și vom folosi-o pe cea a unui robot. Un robot, chiar este un **obiect**.
-
-Acum că avem la îndemână un robot, poți să-ți imaginezi o metodă ca pe un semnal transmis unui membru pentru a-l mișca. Hai să ne uităm nițel cum arată scris un mic robot care are o codiță ca mijloc de locomoție căruia îi dăm comanda să se miște.
+Și acum, că tot am vorbit de obiecte anterior, ne vom folosi de un robot. Un robot, chiar este un **obiect**. Acum, că avem la îndemână un robot, poți să-ți imaginezi o acțiune (*metodă*), ca un semnal transmis unui membru pentru a-l mișca. Hai să ne uităm nițel cum arată scris un mic robot care are o codiță ca mijloc de locomoție căruia îi dăm comanda să se miște.
 
 ![Ilustrare a unui obiect](IlustratieObiectCaRobotelCodat-Obiect-reprezentare.png "Un roboțel este un obiect")
 
-Codul complet pentru un obiect este o listă de perechi cheie - valoare. Cum adică cheie - valoare? O cheie este un fragment de text care identifică o valoare: `ceva: 10`. Pentru cheia `ceva`, am valoarea `10`. O cheie are chiar sensul de cheie de acces la o valoare.
+Codul complet pentru un obiect este o listă de perechi cheie - valoare. O cheie este un fragment de text care identifică o valoare: `ceva: 10`. Pentru cheia `ceva`, am valoarea `10`. O cheie a unui obiect are sensulul de cheie de acces la o valoare.
 
 ```javascript
 var robotel = {
@@ -98,9 +96,9 @@ Când nu este codul scris de tine sau când ai îndoieli asupra unui identificat
 
 ![Primul caz de „debugging” din istoria informaticii - Grace Hopper](H96566k.jpg)
 
-Pentru a rotunji povestea, profesorul Aiken a fost și cel care a ținut un curs la Harvard, care poate fi numit acum *de informatică* (*computer science*). Harvard Mark I a constituit primul contact pentru câteva generații de studenți.
+Pentru a rotunji povestea, profesorul Aiken a fost și cel care a ținut un curs la Harvard, care poate fi numit acum *de informatică* (*computer science*). Harvard Mark I a constituit primul contact cu noua disciplină pentru câteva generații de studenți.
 
-Refocalizând, pentru momentul când folosești biblioteci de cod care nu-ți aparțin sau atunci când scrii cod care produce erori sau rezultate neașteptate sau pentru propria curiozitate izvorâtă din necesitatea de a vedea cum se comportă codul la rulare, cel mai adesea vei folosi un instrument pe care oricare browser modern îl pune la dispoziție: **debugger**-ul. Erorile de cod se numesc **bug**-uri (insecte deranjante). Acest instrument ajută la identificarea fragmentului de cod care le produce sau ajută la urmărirea valorilor pe măsură ce avansează evaluarea codului.
+Refocalizând, în momentul când folosești biblioteci de cod care nu-ți aparțin sau atunci când scrii cod care produce erori sau rezultate neașteptate sau pentru propria curiozitate izvorâtă din necesitatea de a vedea cum se comportă codul la rulare, cel mai adesea vei folosi un instrument pe care oricare browser modern îl pune la dispoziție: **debugger**-ul. Erorile de cod se numesc **bug**-uri. Acest instrument ajută la identificarea fragmentului de cod care le produce sau ajută la urmărirea valorilor pe măsură ce avansează evaluarea codului.
 
 Debugger-ul am putea să-l traducem în română cu o transliterare unu-la-unu prin **operator de dezinsecție**, dar pentru a fi foarte eleganți îl vom denumi **depanator**. Depanatorul este un instrument care permite parcurgerea unui fragment de cod încărcat în browser pentru a-i vedea comportamentul și efectele.
 
@@ -188,7 +186,7 @@ Același comportament este aplicat și funcțiilor după cum vom vedea pentru c�
 
 Există o notabilă excepție de la acest comportament al *hoisting*-ului - al omniprezenței identificatorilor. Acesta este dictat de modificările aduse standardului începând cu ES6. Regula standardului nou spune că variabilele declarate cu `let` în locul lui `var`, vor fi pironite de *locul* în cod unde au fost declarate. Acest nou comportament este încurajat ca practică și este menit să elimine toate problemele de înțelegere a mecanismului de *ridicare în capul codului* (hoisting). De fapt, a fost gândit să dea o mână de ajutor și celor care vin din zona de C și C++ pentru a le da familiaritate.
 
-Mie îmi place `let` pentru că îmi simplifică din procesul de gândire a codului, dar și pentru faptul că tradus are o anumită melodie. Fii atent la următorul enunț: `let a = 10;`. Chiar tradus în română sună foarte fain, ca în matematică: *fie ca `a` să fie legat de valoarea 10*. E aproape de spusele unui magician, nu? Fain!
+Mie îmi place `let` pentru că îmi simplifică din procesul de gândire a codului, dar și pentru faptul că tradus are o anumită melodie. Fii atent la următorul enunț: `let a = 10;`. Chiar tradus în română sună foarte fain, ca în matematică: *fie ca `a` să identifice valoarea 10*. E aproape de spusele unui magician, nu? Fain!
 
 Să revenim, privind la primul pas făcut cu debugger-ul și vom observa tocmai această *ridicare în capul codului* cu atribuirea valorii `undefined`. Dacă pui mouse-ul pe identificatorul `a` interoghezi valoarea.
 
@@ -198,23 +196,23 @@ Valoarea identificatorului nostru se reflectă și în cele ținute în evidenț
 
 ![Valoarea „undefined” a lui „a”, se reflectă și în evidențele lui „this” vizibil din panoul „Variables”](VariablesThisUndefined.png)
 
-Ce-o fi `this`?! Mai ții minte când spuneam că în JavaScript totul este un obiect și că din start totul este o proprietate a obiectului global (`window`)?! Atunci, explicația lui `this` e simplă: este referința către obiectul a cărui proprietate este de fapt funcția. Tradus în românește ar fi: *folosește ACEST obiect drept context în care mă execut eu ca funcție*.
+Ce-o fi `this`?! Mai ții minte când spuneam că în JavaScript totul este un obiect și că din start totul este o proprietate a obiectului global (`window`)?! Atunci, explicația lui `this` e simplă: este referința către obiectul a cărui proprietate este de fapt funcția. Tradus în românește ar fi: *folosește ACEST obiect drept context în care mă execut eu ca funcție*. De regulă, motivul pentru care faci acest lucru este să ai acces la identificatorii acelui obiect context.
 
-Putem privi `this` ca spațiul de unde tot codul rulat își ia valorile de care are nevoie pentru a rula. De exemplu, dacă o funcție folosește un identificator în interiorul ei, dar care nu a fost definit în interiorul ei, ea, funcția se așteaptă ca această valoare să fie disponibilă deja undeva numai bună să fie folosită. Acest *undeva* poate fi în spațiul creat de funcție, fiind declarată acolo, poate fi în spațiul altei funcții cu rol de *container* sau poate fi  `this`. Primul `this` de care te lovești când scrii cod, este cel generat de obiectul global. Reține acest lucru pentru că este de mare ajutor să înțelegi contextul de unde codul tău începe să ruleze.
+De exemplu, dacă o funcție folosește un identificator în interiorul ei, dar care nu a fost definită acolo, funcția se așteaptă ca această valoare să fie disponibilă deja undeva. Acest *undeva* poate fi în spațiul creat de funcție, fiind declarată acolo, poate fi în spațiul altei funcții cu rol de *container* sau poate fi `this`. Primul `this` de care te lovești când scrii cod, este cel generat de obiectul global. Reține acest lucru pentru că este de mare ajutor să înțelegi contextul, obiectul context în care rulează codul.
 
-Ține minte că în afară de **undeva**, mai trebuie dată atenție și lui **cândva** (asta e o chestie faină care ține chiar de felul în care se rulează codul pe *linia timpului*).
+Ține minte că în afară de **undeva**, mai trebuie dată atenție și lui **cândva** (succesiunea în care se rulează codul pe *linia timpului*).
 
 ### Observații asupra acestui break-point
 
-În tabul `Variables`, dacă *extinzi* caracteristicile lui `this.window`, vei observa că `a` a devenit o proprietate a lui `window`, accesibilă dacă dorești prin adresarea cu `this.a`. Dar cel mai important lucru de observat este că în acest moment, în care variabila `a` a fost declarată, valoarea sa este `undefined`.
+În tabul `Variables`, dacă *extinzi* caracteristicile lui `this.window`, vei observa că `a` a devenit o proprietate a lui `window`, accesibilă dacă dorești cu `this.a`. Dar cel mai important lucru de observat este că în acest moment, în care variabila `a` a fost declarată, valoarea sa este `undefined`.
 
 Aici, în zona de *Variables*, în `Block scope` (adică mediul lexical curent generat de blocul de cod care rulează), vei vedea toți identificatorii și valorile lor asociate. Această zonă a Debugger-ului va fi lupa sub care veți trece pașii de execuție ai codului. De fapt, vei observa că se deschide instant *Block scope*-ul și nu *Global scope* pentru orice este în afara unei funcții. Când debugger-ul va intra într-o funcție, automat va deschide *Function scope*. Hai că ajungem și acolo și ai să vezi cu ochii tăi.
 
-Mai observăm ceva, dacă ne uităm pe lista proprietăților lui `this`. Găsim că funcția noastră `faCeva` deja a fost luată și ea în evidență ca identificator.
+Mai observăm ceva. Dacă ne uităm pe lista proprietăților lui `this`, găsim că funcția noastră `faCeva` deja a fost luată și ea în evidență ca identificator.
 
-Deci, în acest moment spunem că avem codul sursă compilat, adică au fost recoltați toți identificatorii și au fost generate mediile lexical corespunzătoare ordinii de redactare a codului sursă.
+În acest moment spunem că avem codul sursă compilat, adică au fost recoltați toți identificatorii și au fost generate mediile lexicale corespunzătoare ordinii de redactare a codului sursă.
 
-Încă nu am terminat. Mai e ceva în *Variables* foarte important: `Global scope[Window]`. Acesta indică faptul că deja codul nostru rulează într-un mediu lexical inițial, care este generat de obiectul global, în cazul nostru `window`. De ce este important acest Global scope. Pentru că ori de câte ori vei lucra cu un identificator într-o funcție *adâncită* dintr-o structură de cod și nu știi de unde este acel identificator, poți *întreba* dacă nu cumva a fost definit în cel global.
+Încă nu am terminat. Mai e ceva în *Variables* foarte important: `Global scope[Window]`. Acesta indică faptul că deja codul nostru rulează într-un mediu lexical inițial, care este generat de obiectul global, în cazul nostru `window`. De ce este important acest *Global scope*. Ori de câte ori vei lucra cu un identificator într-o funcție *adâncită* dintr-o structură de cod și nu știi de unde este acel identificator, poți *întreba* dacă nu cumva a fost definit în cel global.
 
 ## Break-point 2 (apasă F11)
 
@@ -226,31 +224,31 @@ Am uitat să spun că atribuirea valorii se face cu operatorul egal (`=`), care 
 
 Pentru a putea avansa, mai trebuie să lămurim câteva aspecte privind funcțiile.
 
-### Funcția
+### Informații despre funcții
 
-Un fragment de cod de întindere mică sau medie care face un lucru precis atunci când este apelat este o funcție. Acest fragment de cod este pus între acolade. Pentru a declara o funcție, folosim cuvântul rezervat `function` urmat opțional de identificatorul pentru această funcție: `function facCeva`. Apoi urmează un spațiu și o pereche de paranteze rotunde în care, dacă se dorește sau este necesar, vor fi pasate argumente. Argumentele acestea sunt la rândul lor niște identificatori accesibili din interior.
+Un fragment de cod de întindere mică sau medie care avaluează codul propriu atunci când este apelat este o funcție. Acest fragment de cod este pus între acolade. Pentru a declara o funcție, folosim cuvântul rezervat `function` urmat opțional de identificatorul pentru această funcție: `function facCeva`. Apoi urmează opțional un spațiu și o pereche de paranteze rotunde în care, dacă se dorește sau este necesar, vor fi pasate argumente. Argumentele acestea sunt la rândul lor niște identificatori accesibili din interior.
 
 **Reține o chestie crucială: numele argumentelor devin variabile interne de lucru ale funcției pe lângă cele declarate în interiorul acoladelor**.
 
-Urmează după un alt spațiu o pereche de acolade în care va fi introdus fragmentul de cod sursă care constituie corpul funcției. Cel mai simplu este să-ți imaginezi o funcție precum un motor care între parantezele rotunde primește combustibil (benzină, aer, NOS), iar între acolade sunt toate părțile sale componente care transformă combustibilul în energie cinetică.
+Urmează după un alt spațiu opțional o pereche de acolade în care va fi introdus fragmentul de cod sursă care constituie corpul funcției. Cel mai simplu este să-ți imaginezi o funcție precum un motor care între parantezele rotunde primește combustibil (benzină, aer, NOS), iar între acolade sunt toate părțile sale componente care transformă combustibilul în energie cinetică.
 
 Sper că ai remarcat că fiecare enunț chiar și în interiorul funcției se încheie cu semnul de punctuație punct și virgulă. Câteva repere generale:
 
 -   În interiorul funcției putem introduce orice fragment de cod JavaScript. Ca urmare, vom declara o nouă variabilă.
--   Mai punem o sondă pentru a scoate și în consolă să vedem cu ochii noștri valoarea.
--   Apoi ajung la momentul crucial al unei funcții. Cuvântul rezervat `return` care oferă valoarea variabilei `a`.
+-   Mai punem o sondă pentru a scoate și în consolă valoarea.
+-   Apoi ajung la momentul crucial al unei funcții. Cuvântul rezervat `return` care oferă valoarea variabilei `a`. Folosirea lui `return` încheie executarea funcției
 
 ### Momentul cheie
 
 Acum, e acum! Pentru ce toată această pregătire? Pentru că sunt sigur că ai observat rapid faptul că identificatorul variabilei declarate în interiorul funcției este fix același cu cel al variabilei declarate *în afara* funcției.
 
-Întrebarea se pune așa: valoarea din interiorul funcției va suprascrie valoarea *din afară*? Tocmai pentru a răspunde la această întrebare, am folosit debugger-ul.
+Întrebarea se pune așa: valoarea din interiorul funcției va suprascrie valoarea *din afară*? Întreb pentru că funcția are acces la mediul în care este identificatorul `a`. Tocmai pentru a răspunde la această întrebare, am folosit debugger-ul.
 
-Haideți să terminăm prin apelarea funcției. Dacă nu apelezi funcția, aceasta nu-și produce efectele. Urmând analogia cu motorul, dacă nu învârți cheia în contact din poziția de staționare în cea de pornire, motorul va sta oprit.
+Haideți să terminăm prin apelarea funcției. Dacă nu apelezi funcția, aceasta nu-și produce efectele.
 
 ### Apelarea funcției
 
-Apelăm funcția prin scrierea identificatorului funcției urmată de paranteze rotunde. Parantezele rotunde spun motorului JavaScript: pornește execuția funcției. Este momentul când funcția este apelată sau cum ar spune magicienii JavaScript: **invocată**. Muhahaha!!! Ok, mai departe.
+Apelăm funcția prin scrierea identificatorului funcției urmată de paranteze rotunde. Parantezele rotunde spun motorului JavaScript: pornește execuția funcției. Este momentul când funcția este apelată sau cum ar spune magicienii JavaScript: **invocată**.
 
 ## Break-point 3 (apasă F11)
 
@@ -274,17 +272,17 @@ Deci, variabila `a` este `undefined`, dar ceva nou a apărut acolo. Este identif
 
 Evidențiatorul se află pe linia 4. Tot în `Function Scope` ne aflăm, dar după momentul compilării. Deja variabila internă `a` are asociată valoarea `11`.
 
-În acest moment suntem în pragul execuției metodei log din obiectul console. Acesta este momentul de sondare, când este evaluată valoarea lui `a` în acest moment. Vom folosi *sonda* de care povesteam mai sus pentru a vedea cu ochii noștri rezultatul.
+În acest moment suntem în pragul execuției metodei log din obiectul console. Acesta este momentul de sondare, când este evaluată valoarea lui `a`. Vom folosi *sonda* de care povesteam mai sus pentru a vedea cu ochii noștri rezultatul.
 
 ## Break-point 5 (apasă F11)
 
 Evidențiatorul se află pe linia 5.
-Apare valoarea `11` în consolă și ești în pragul de a încheia execuția funcției prin returnare.
+Apare valoarea `11` în consolă și ești în pragul de a încheia execuția funcției prin `return`are.
 
 ## Break-point 6 (apasă F11)
 
 Evidențiatorul se află pe linia 6, pe acolada de închiderea a blocului funcției.
-Gata! Funcția a returnat, dar ești încă în faza sa de execuție așteptând rezultatul evaluării expresiei de după return.
+Gata! Funcția a `return`at, dar ești încă în faza sa de execuție așteptând rezultatul evaluării expresiei de după `return`.
 
 ## Break-point 7 (apasă F11)
 
@@ -295,7 +293,7 @@ Evidențiatorul rămâne pe linia 6. Ai primit rezultatul. Acesta este valoarea 
 Evidențiatorul se află pe linia 7.
 Am terminat cu funcția și am revenit de unde am plecat, adică chiar de unde s-a întrerupt execuția codul extern funcției pentru a o executa.
 
-Ne mutăm cu observația în `Block scope`.
+Vom privi acum la `Block scope`.
 
 ## Break-point 9 (apasă F11)
 
@@ -316,11 +314,11 @@ Pagina web va terminat de afișat conținutul său pentru că s-a finalizat exec
 
 Gata! A fost o cursă nebună, știu! Dar în ce poziție fericită te afli acum pentru a înțelege în mai mare detaliu ce-am experimentat aici.
 
-## Curiozitatea nu a omorât pisica!
+## Fi curios!
 
-Acum e rândul tău să experimentezi. Parcurge cu un creion în mână și pe hârtie pur și simplu treci break-point-urile și scrii ce observi încercând să explici ceea ce se întâmplă cu voce tare. Nu-ți fie teamă să verbalizezi. Ajută enorm. Dialogul cu tine însuți ajută la consolidarea mai rapidă a cunoștințelor și depistarea lucrurilor incerte.
+Acum e rândul tău să experimentezi. Parcurge cu un creion în mână și pe hârtie pur și simplu treci break-point-urile și scrie ce observi încercând să explici ceea ce se întâmplă cu voce tare. Nu-ți fie teamă să verbalizezi. Ajută enorm. Dialogul cu tine însuți ajută la consolidarea mai rapidă a cunoștințelor și depistarea lucrurilor incerte.
 
-Un exemplu ceva mai dezvoltat urmărește felul în care se face shadowing (suprascrierea) în mediul lexical creat de o funcție. Mai exact, cum o variabilă după declarare (adică crearea identificatorului) este disponibilă întregului cod, apoi valoarea este setată la o valoare, iar mai apoi, valoarea este schimbată. Tot procesul acesta descris în linii mari poate fi urmărit cu debugger-ul pentru a vedea efectiv cum funcționează codul.
+Un exemplu ceva mai dezvoltat urmărește felul în care se face shadowing (suprascrierea) în mediul lexical creat de o funcție. Mai exact, cum o variabilă după declarare (adică crearea identificatorului) este disponibilă întregului cod, apoi valoarea este setată. Mai apoi, valoarea este schimbată. Tot procesul acesta descris în linii mari poate fi urmărit cu debugger-ul pentru a vedea efectiv cum funcționează codul.
 
 ```javascript
 var a = 10;           // break

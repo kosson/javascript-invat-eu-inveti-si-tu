@@ -27,7 +27,7 @@ typeof 'ceva';  // "string"
 
 ## String ca obiect iterabil
 
-Un șir de caractere poate fi tratat ca un obiect iterabil pentru că obiectul de ambalaj pentru o valoare primară de tip string, este un obiect care are protocolul de iterare, ceea ce-l transformă într-o colecție iterabilă.
+Un șir de caractere poate fi tratat ca un obiect iterabil pentru că obiectul de ambalaj pentru o valoare primară de tip string, este un obiect care are protocolul de iterare, ceea ce îl transformă într-o colecție iterabilă.
 
 ```javascript
 var someString = "hi";

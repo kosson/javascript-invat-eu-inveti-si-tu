@@ -6,7 +6,7 @@ Stăpânirea consolidată prin practică a șirurilor de caractere va permite ma
 
 Obiectul global `String` este un constructor de șiruri de caractere.
 
-Stringurile pot fi create direct cu `String(ceva)`, în care `ceva` este orice ar putea fi convertit la string.
+Stringurile pot fi create direct cu `String(ceva)`, unde `ceva` este orice ar putea fi convertit la string.
 
 Caracterele speciale vor putea fi menționate în string-uri folosindu-se notația escape:
 
@@ -52,12 +52,12 @@ console.log(exemplu.charCodeAt(0)); // 55349
 console.log(exemplu.charCodeAt(1)); // 56485
 ```
 
-Regăsirea folosind regex-urile nu se va putea face. Nici `charAt()` nu va funcționa corect, iar `charCodeAt()` va aduce codul pentru fiecare `code unit` separat așa cum arată și exemplul.
+Regăsirea folosind regex-urile nu se va putea face. Nici `charAt()` nu va funcționa corect, iar `charCodeAt()` va aduce codul pentru fiecare `code unit` separat, precum în exemplu.
 
 -   `String.fromCharCode()` este o metodă statică a obiectului String, care transformă secvențe de numere Unicode în caractere.
 -   `String.fromCodePoint()` este o metodă statică a obiectului String, care transformă o secvență de caractere considerată a fi un cod al unui caracter (a fost adăugată în ECMAScript 6).
 -   `String.prototype.charAt()` este o metodă aplicabilă direct pe string, care returnează caracterul căutat la indexul specificat ca argument.
--   `String.prototype.charCodeAt()` returnează un număr care reprezintă codul UTF-16 a caracterului de la indexul specificat.
+-   `String.prototype.charCodeAt()` returnează un număr, care reprezintă codul UTF-16 a caracterului de la indexul specificat.
 -   `String.prototype.concat()` și
 -   `String.prototype.endsWith()`.
 

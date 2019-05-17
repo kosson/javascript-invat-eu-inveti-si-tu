@@ -20,7 +20,7 @@ var obiect = {};
 var obiect = Object.create(Object.prototype);
 ```
 
-O formulă echivalentă în realizarea unui obiect față de ceea ce face operatorul `new` este posibilă prin menționarea drept obiect prototipal a obiectului prototipal al unui alt constructor.
+O formulă echivalentă în realizarea unui obiect, diferit de ceea ce face operatorul `new`, este menționarea drept obiect prototipal, obiectului prototipal al unui alt constructor.
 
 ```javascript
 function Constructor() {};
@@ -37,7 +37,7 @@ var o = Object.create(obi);
 o.__proto__; // { x: "ceva" }
 ```
 
-Ba chiar poți face o clonă după un obiect.O astfel de construcție este posibilă, dar nu este recomandată pentru că implică complexități greu justificabile în practică.
+Ba chiar poți face o clonă după un obiect. O astfel de construcție este posibilă, dar nu este recomandată pentru că implică complexități greu justificabile în practică.
 
 ```javascript
 let obi = {
@@ -88,7 +88,7 @@ Am transformat un câmp de date al unui obiect într-o proprietate, care are via
 Din start, nicio proprietate nu este nici `writable`, nici `enumerable` și nici `configurable`:
 
 ```javascript
-var obi = Object.create({},{
+var obi = Object.create({}, {
   x : {value: 1000}
 });
 
@@ -101,7 +101,7 @@ delete obi.x; // false
 Pentru a opera totuși cu valorile proprietăților, va trebui să menționăm explicit valorile de adevăr ale cheilor obiectelor cu rol de descriptor.
 
 ```javascript
-var obi = Object.create({},{
+var obi = Object.create({}, {
   x : {
     value: 1000,
     writable: true,
@@ -116,9 +116,11 @@ Trebuie făcută o mențiune aici că poți realiza același lucru folosind și 
 Cu ajutorul lui `Object.create` poți face legătura directă la prototipul unui obiect. Este șablonul propus de Kyle Simpson - Object Linked To Other Objects
 
 ```javascript
-var Foo = {};
-var Bar = Object.create(Foo);
-var Far = Object.create(Bar);
+var obiX     = {a: 'origine'},
+    obiPunte = Object.create(obiX),
+    obiZ     = Object.create(obiPunte);
+
+console.log(obiZ.a); // a
 ```
 
 ## Referințe

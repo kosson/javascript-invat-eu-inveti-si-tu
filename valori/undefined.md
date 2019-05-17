@@ -8,7 +8,7 @@ Aceeași valoare este returnată atunci când ceri o proprietate a unui obiect, 
 
 Cazurile în care este returnat `undefined`:
 
--   la declararea unei variabile cu sau fără asignarea valorii. Dacă este atribuită o valoare la declarare, abia la prima utilizare a variabilei se va face și atribuirea valorii;
+-   la declararea unei variabile cu sau fără atribuirea valorii. Dacă este atribuită o valoare la declarare, abia la prima utilizare a variabilei se va face conectarea valorii;
 -   dacă într-o funcție ai menționat `return`, dar nicio expresie după;
 -   primim `undefined` atunci când o funcție nu returnează în mod explicit ceva. Motorul JavaScript este constrâns să returneze ceva și această valoare este `undefined`;
 -   când căutăm o proprietate într-un obiect, dar aceasta nu există;

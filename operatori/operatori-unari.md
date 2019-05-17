@@ -15,32 +15,30 @@ Aceștia sunt:
 
 Acest tip de operator se pune înainte sau după operand.
 
-## Operatorul plus `+`
+## Prefixare cu plus `+`
 
 Mai întâi de toate, acest operator încearcă o transformare a operandului într-un număr. Dacă operandul nu poate fi convertit, operatorul va returna `NaN` în cazul în care valoarea nu poate fi folosită la adunare.
 
 ```javascript
-+10; // 10
-+'-100'; // -100
-+'23'; // 23
-+'0xDF'; // 223
-+true; // 1
-+false; // 0
-+null; // 0
-+'Infinity'; // Infinity
-+'ceva'; // NaN
++10;           // 10
++'-100';       // -100
++'23';         // 23
++'0xDF';       // 223
++true;         // 1
++false;        // 0
++null;         // 0
++'Infinity';   // Infinity
++'ceva';       // NaN
 +function(){}; // NaN
-+{a:10}; // NaN
++{a:10};       // NaN
 +{valueOf: function(){return '0xDF';}}; // 223
--10; // -10
--'ten'; // NaN
+-10;           // -10
+-'ten';        // NaN
 ```
 
 Încă nu am învățat despre obiecte, dar atunci când o vei face, reține că operatorul plus în cazul în care un obiect are o metodă `valueOf` ce returnează o valoare numerică, va face evaluarea metodei (o funcție într-un obiect se numește metodă) returnând rezultatului.
 
-```javascript
-10 + 1.1; // 11.1
-```
+## Adunări și concatenări cu `+`
 
 Acest operator mai este folosit și pentru a face concatenări, adică să construiască șiruri de caractere mai mari din fragmente mai mici. Semnalul pentru motorul JavaScript că se dorește o concatenare este acela că valoarea din stânga nu este o valoare numerică. **Pe cea din dreapta sa va încerca să o transforme într-una numerică pentru că acesta este comportamentul său nativ**. Deci, dacă valoarea din stânga nu este un număr, ci orice altceva, va încerca o concatenare.
 
@@ -55,16 +53,16 @@ var x = [] + true; typeof x; // string
 {} + 1;       // 1
 ```
 
-După cum se observă, dacă valoarea din stânga a fost evaluată la o valoare numerică aproximativă, adică din `true` în `1`, operațiunea matematică se desfășoară corect. Ceea ce va încerca motorul JavaScript la momentul evaluării codului, este să transforme valoarea din dreapta operatorului plus, fie într-o valoare primitivă, fie într-un număr, fie într-un șir de caractere.
+După cum se observă, dacă valoarea din stânga a fost evaluată la o valoare numerică aproximativă, adică din `true` în `1`, operațiunea matematică se desfășoară corect. La momentul evaluării codului, va transforma valoarea din dreapta operatorului plus, fie într-o valoare primitivă, fie într-un număr, fie într-un șir de caractere.
 
 ```javascript
-+('1'+'2'); //12 (numărul, nu șirul)
++('1'+'2');        //12 (numărul, nu șirul)
 typeof +('1'+'2'); // "number"
 ```
 
 După cum putem observa operatorul plus poate evalua expresii întregi pe care le reduce la un număr.
 
-## Operatorul minus `-`
+## Prefixare cu minus `-`
 
 La fel ca operatorul plus și acest operator încearcă mai întâi o conversie a operandului la o valoare număr.
 
@@ -79,7 +77,7 @@ Minus precedă operandul convertind tipurile de date care nu sunt numere. Spre d
 -null;    // -0
 -'Infinity'; // -Infinity
 -'ceva';  // NaN
--{valueOf: function(){return '0xDF';}}; // -223
+-{valueOf: function(){return '0xDF'}}; // -223
 ```
 
 ## Operatorul logic de negare `!`
@@ -100,7 +98,7 @@ Minus precedă operandul convertind tipurile de date care nu sunt numere. Spre d
 !!'salut';  // true
 ```
 
-## Operatorul de incrementare `++`
+## Incrementare `++`
 
 Adaugă o unitate la valoarea preexistentă a operandului și returnează rezultatul. Acest operator poate fi folosit ca **prefix** sau **postfix**. Ca prefix, operatorul va returna valoarea după incrementare. Ca postfix, va returna valoarea înaintea incrementării cu o unitate.
 
@@ -115,11 +113,9 @@ x;    // abia la următoarea utilizarea a
 
 Te-ai fi așteptat ca la incrementare să fie returnat `2` fără dubiu. Acest lucru nu s-a întâmplat pentru că valoarea variabilei a fost returnată la momentul când a fost evaluat operatorul `++`, care returnează noua valoare.
 
-Acest moment în timp este foarte important de reținut pentru că este cel imediat ce *cursorul* motorului a trecut de identificator și a *dat peste* operatorul de incrementare. După ce a trecut *cursorul* și de operator, acesta returnează valoarea operandului, dar nu la valoarea incrementată. Ceea ce s-a petrecut este că mediul de rulare reține în continuare valoarea anterioară, dar nu și pe cea nouă, cea actualizată după trecerea cursorului de operator și incrementarea în urma evaluării care s-a făcut. Abia după ce mai *citim* (**evaluăm**) o dată identificatorul `x`, acesta indică valoarea actualizată. În cazul utilizării ca prefix, operatorul face mai întâi incrementarea. Astfel, vom avea la dispoziție valoarea actualizată fără a mai fi necesară citirea valorii identificatorului, care tot o operațiune de evaluare este.
+Acest moment în timp este foarte important de reținut pentru că este după ce *cursorul* motorului a trecut de identificator și a *dat peste* operatorul de incrementare. După ce *cursorul* va trece și de operator, acesta returnează valoarea operandului, dar nu la valoarea incrementată. Ceea ce s-a petrecut este că *mediul de execuție* reține în continuare valoarea anterioară, dar nu și pe cea nouă, cea actualizată după trecerea cursorului de operator și incrementarea în urma evaluării care s-a făcut. Abia după ce mai *citim* (**evaluăm**) o dată identificatorul `x`, acesta indică valoarea actualizată. În cazul utilizării ca prefix, operatorul face mai întâi incrementarea. Astfel, vom avea la dispoziție valoarea actualizată fără a mai fi necesară citirea valorii identificatorului, care tot o operațiune de evaluare este.
 
-Reține acest comportament pentru că acest tip de incrementare este folosită în mod curent la realizarea buclelor cu enunțul `for`, când dorești să parcurgi o listă de valori. Cam așa arată: `for(var i = 0; i < listă.length; i++) { // operațiunea aplicată rând pe rând fiecărui element din listă}`. Îl vei mai folosi de multe ori și în calcule matematice.
-
-Înainte de a vedea comportamentul din poziția de prefix, pune o ancoră de memorie pe acest comportament pentru că uneori conduce la situații inexplicabile sau chiar erori - valoarea nu există, nu pentru că nu a fost incrementată, ci pentru că nu a mai fost evaluat (*citit*) identificatorul o dată și alte multe asemenea. Prima dată când vom folosi în vreo expresie respectiva variabilă, atunci valoarea va fi cea incrementată. Până atunci, motorul are memorie scurtă și în dinamica evaluării, până când nu va fi silit să citească din nou variabila, va folosi valoarea veche.
+Acest tip de incrementare este folosită în mod curent la realizarea buclelor cu enunțul `for`, când dorești să parcurgi o listă de valori. Îl vei mai folosi de multe ori și în calcule matematice. Înainte de a vedea comportamentul din poziția de prefix, reține acest comportament pentru că uneori conduce la situații inexplicabile sau chiar erori - valoarea nu există, nu pentru că nu a fost incrementată, ci pentru că nu a mai fost evaluat (*citit*) identificatorul încă o dată. Prima dată când vom folosi în vreo expresie respectiva variabilă, atunci valoarea va fi cea incrementată. Până atunci, motorul are memorie scurtă și în dinamica evaluării, până când nu va fi silit să *citească* din nou variabila, va folosi valoarea veche.
 
 Când operatorul este folosit ca prefix, incrementarea se face înainte ca operatorul să returneze noua valoare.
 
@@ -128,13 +124,12 @@ var x = 1;
 ++x; // 2
 ```
 
-## Operatorul de decrementare --
+## Operatorul de decrementare `--`
 
 Operatorul scade o unitate din valoarea preexistentă a operandului.
-Ca prefix, va returna valoarea după scăderea unei unități.
-Ca postfix, va returna mai întâi valoarea și abia apoi va opera scăderea unei unități.
+Ca prefix, va returna valoarea după scăderea unei unități. Ca postfix, va returna mai întâi valoarea și abia apoi va opera scăderea unei unități.
 
-## Operatorul bitwise not ~
+## Operatorul bitwise not `~`
 
 Operatorul inversează toți biții care reprezintă valoarea operandului și returnează un număr.
 
@@ -142,22 +137,22 @@ Operatorul inversează toți biții care reprezintă valoarea operandului și re
 ~'0xDF'; // -224 (+'0xDF' este 223)
 ```
 
-## typeof
+## `typeof`
 
 Returnează un șir de caractere care spune ce tip este valoarea operandului. Operatorul este poziționat înaintea operandului.
 
-## delete
+## `delete`
 
 Folosindu-l poți șterge un element dintr-un array sau o proprietate a unui obiect sau chiar obiectul cu totul. Returnează `true` când a reușit să șteargă și `false` când nu.
 
 ```javascript
 var obi = {a: 1, b: 2, 1: 10};
-delete obi.a; // true
+delete obi.a;   // true
 delete obi[10]; // true
 delete obi;
 ```
 
-Atenție, valorile asignate unui identificator declarat cu `var`, `const` și `let`, nu pot fi șterse cu `delete`. Atenție, există o singură excepție. Dacă variabila nu a fost declarată explicit, aceasta poate fi ștearsă.
+Atenție, valorile atribuite unui identificator declarat cu `var`, `const` și `let`, nu pot fi șterse cu `delete`. Există o singură excepție când variabila nu a fost declarată explicit, aceasta putând fi ștearsă.
 
 ```javascript
 x = 10; delete x; // true
@@ -169,12 +164,12 @@ Operatorul `delete` se poate folosi și cu array-urile, dar ceea ce se va petrec
 var colectie = ['ceva', 'altceva'];
 delete colectie[1];
 colectie.length; // 2
-colectie[1]; // undefined
+colectie[1];     // undefined
 ```
 
 Cu `delete` nu se pot șterge decât proprietățile care chiar aparțin unui obiect, nu și cele de pe lanțul prototipal. Încercarea de a șterge o proprietate care nu există va returna `true`, dar obiectul nu va fi afectat.
 
-## void
+## `void`
 
 Șterge valoarea returnată a unei expresii, adică expresia va fi evaluată, dar rezultatul evaluării va fi setat la `undefined`. Operatorul `void` nu trebuie confundat cu o funcție.
 

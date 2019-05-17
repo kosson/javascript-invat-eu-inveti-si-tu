@@ -9,3 +9,4 @@ function testeaza (element, index, array) {
 ['masinute', 'ac', 'papusi', 'cărți'].some(testeaza); // true
 ['masinute', 'flaut', 'papusi', 'cărți'].some(testeaza);  // false
 ```
+

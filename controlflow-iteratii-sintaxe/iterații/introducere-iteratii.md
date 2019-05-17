@@ -1,6 +1,6 @@
 # Iterații
 
-Partea cea mai valoroasă a programării este aceea că poți lua un set de date pe care le poți parcurge element cu element, aplicând transformări sau căutări după anumite criterii, cu scopul de a obține un anumit rezultat dorit. Este ceea ce se poate înțelege prin **ciclu**, adică o mișcare repetitivă sau aplicarea repetată a unor proceduri pe elementele individuale ale unei colecții. De altfel, în practica de zi cu zi, veți auzi interșanjabil termenii de buclă, iterare și uneori ciclare.
+Partea cea mai valoroasă a programării este aceea că poți lua un set de date pe care îl poți parcurge element cu element, aplicând transformări sau căutări după anumite criterii, cu scopul de a obține un anumit rezultat dorit. Este ceea ce se poate înțelege prin **ciclu**, adică o mișcare repetitivă sau aplicarea repetată a unor proceduri pe elementele individuale ale unei colecții. De altfel, în practica de zi cu zi, veți auzi interșanjabil termenii de buclă, iterare și uneori ciclare.
 
 Dicționarul explicativ ne dă o definiție foarte utilă pentru iterare: *repetare a unui anumit procedeu de calcul, prin aplicarea lui la rezultatul calculului din etapa precedentă*.
 
@@ -224,7 +224,7 @@ class UnGenerator {
 }
 ```
 
-## Enunțul while
+## Enunțul `while`
 
 În engleză *while* se traduce în limba română prin `câtă vreme`. Verbalizarea acestei comenzi ar fi *de câte ori evaluarea expresiei conduce la o valoare ce poate fi redusă la un boolean `true`, execută codul dintre acolade*.
 

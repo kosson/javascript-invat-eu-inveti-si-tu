@@ -11,6 +11,4 @@ var obi = null;
 typeof obi; // 'object'
 ```
 
-Fii foarte atent pentru că la testarea unei valori `null` cu `typeof`, va fi returnat că ar fi un obiect. Problema este una de limbaj și din rațiuni istorice, se perpetuează acest tip pentru `null`.
-
-Când vine vorba de coercion, `null` va fi redus la 0.
+Fii foarte atent pentru că la testarea unei valori `null` cu `typeof`, va fi returnat că ar fi un obiect. Problema este una de limbaj și din rațiuni istorice, se perpetuează acest tip pentru `null`. Când vine vorba de reducerea la o valoare (coercion), `null` va fi redus la 0.

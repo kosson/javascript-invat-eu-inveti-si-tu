@@ -1,10 +1,10 @@
 # WeakMap
 
-Începând cu versiunea ES6 a standardului, au apărut obiecte dedicate colecțiilor de date. Au apărut din necesitatea evitării diferitelor contrângeri aplicate obiectelor obișnuite pentru a le adapta necesităților de gestiune a datelor.
+Începând cu versiunea ES6 a standardului, au apărut obiecte dedicate realizării de colecții. Au apărut din necesitatea evitării diferitelor contrângeri impuse de obiecte obișnuite.
 
 Este o colecție de perechi cheie-valoare care au o particularitate foarte utilă: toate cheile sunt obiecte. Nu sunt admise valori primitive. `WeakMap`-ul este asemănător unui `Map` în sensul că are metode similare.
 
-De unde vine denumirea **weak**? În limba engleză *weak* înseamnă slab. În cazul obiectului nostru, această *slăbiciune* vine din faptul că de îndată ce nu mai este nevoie de obiectul care joacă rol de cheie, acesta va putea fi colectat la gunoi, ceea ce este echivalentul unei ștergeri din structura internă a obiectului însuși. Vă mai aduceți aminte de faptul că un obiect *trăiește* câtă vreme există o referință către acesta sau către una din proprietățile sale. Dacă am ține evidența unor obiecte folosind un `Map`, această structură ar ține o referință permanentă către un obiect, dacă acel obiect a devenit o proprietate a sa. Tocmai din necesitatea de a fi permisă colectarea la gunoi a obiectelor care nu mai sunt referențiate în altă parte, s-a născut această nouă structură de gestiune special pentru obiecte.
+De unde vine denumirea **weak**? În limba engleză *weak* înseamnă *slab*. În cazul obiectului nostru, această *slăbiciune* vine din faptul că de îndată ce nu mai este nevoie de obiectul care joacă rol de cheie, acesta va putea fi colectat la gunoi, ceea ce este echivalentul unei ștergeri din structura internă a obiectului însuși. Vă mai aduceți aminte de faptul că un obiect *trăiește* câtă vreme există o referință către acesta sau către una din proprietățile sale. Dacă am ține evidența unor obiecte folosind un `Map`, această structură ar ține o referință permanentă către un obiect, dacă acel obiect a devenit o proprietate a sa. Tocmai din necesitatea de a fi permisă colectarea la gunoi a obiectelor care nu mai sunt referențiate în altă parte, s-a născut această nouă structură de gestiune special pentru obiecte.
 Putem trage concluzia că vom folosi `WeakMap`-uri pentru a gestiona obiecte asupra cărora nu ai niciun control sau nu dorești acest lucru. Concluzia conduce către posibilele aplicații pentru un `WeakMap`.
 
 ## Cache de obiecte
@@ -17,7 +17,7 @@ function serveșteObiecte (obiect) {
   if(tamponDate.has(obiect)){
     console.log('obiectul este deja în tampon');
     return tamponDate.get(obiect);
-  }else{
+  } else {
     console.log('Nu este în tampon, îl bag!');
     let id = obiect.id;
     tamponDate.set(obiect, id);
@@ -54,7 +54,7 @@ cnxCuReceptorul(obiW, function secund () {
   console.log(`Sunt evenimentul secund`);
 });
 
-function declanșezEv (obi, tinta) {
+function declanșezEv (obi, tinta) {           // obiectul cache (obi) în care sunt contorizate elementele (tinta) cu receptori 
   if (obi.get(tinta)) {
     for (const receptor of obi.get(tinta)) {
       receptor();

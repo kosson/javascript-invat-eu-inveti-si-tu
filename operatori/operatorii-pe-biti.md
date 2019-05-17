@@ -6,20 +6,22 @@ Primul contact cu acești operatori este exemplul care are ca scop obținerea ca
 
 ```javascript
 var hex = 'ffaadd';
-var rgb = parseInt(hex, 16); // avem valoarea 1675421
+var rgb = parseInt(hex, 16);    // avem valoarea 1675421
 var red   = (rgb >> 16) & 0xFF; // returneaza 255
 var green = (rgb >> 8) & 0xFF;  // 170
-var blue  = rgb & 0xFF;		      // 221
+var blue  = rgb & 0xFF;		    // 221
 ```
 
 Nivelul de lucru este cel mai de jos posibil pentru un limbaj de programare de nivel înalt așa cum este JavaScript. Observăm că operăm cu reprezentări ale numerelor ca binare pe 32 de biți. Pentru a înțelege mai bine, facem o mică incursiune în sistemele de numerație.
 
+Operatorii pentru deplasare au doi operanzi. Primul, cel din stânga indică valoarea care trebuie deplasată, iar cel din dreapta operatorului este valoarea care indică cu cât să deplasezi biții. Efectul operatorului indiferent de sensul său este să transforme valoarea într-una pe 32 de biți iar după ce face transformarea, să returneze o valoare de același tip cu cea originală.
+
 ## Sisteme de numerație
 
-Hai să ne readucem aminte că noi zi de zi folosim sistemul zecimal (baza este fragmentarea în grupe de câte zece cu multiplii acestora) în cuantificare și operațiunile curente de la numărarea banilor, până la calcularea distanțelor.
+Hai să ne readucem aminte că noi zi de zi folosim sistemul zecimal (baza este fragmentarea în grupe de câte zece cu multiplii acestora) în cuantificare și operațiunile curente, de la numărarea banilor, până la calcularea distanțelor.
 Cifrele sistemului zecimal: `0, 1, 2, 3, 4, 5, 6, 7, 8, 9`.
 
-Ce înseamnă baza 10? Hai să vedem. Cum putem reprezenta un număr, de exemplu: **2310**?
+Ce înseamnă baza 10? Hai să vedem. Cum putem reprezenta, de exemplu: **2310**?
 
 2`*`10<sup>3</sup> `+` 3`*`10<sup>2</sup> `+` 3`*`10<sup>1</sup>+0
 
@@ -32,15 +34,15 @@ Un altul este sistemul hexazecimal, al cărui bază este 16 și care este folosi
 Cel cu care vom lucra folosind operatorii bitwise, este sistemul binar, care reprezintă valorile prin șiruri de `0` și `1`. Computerul la nivelul de bază, nu pricepe altceva decât stările logice 0 și 1.
 În JavaScript poți reprezenta un număr în formatul său binar cu formula `0b` urmată de succesiunea binară.
 
-Întrebarea corectă este cum ajungi la reprezentarea un număr zecimal în echivalentul său binar? Pentru a face acest lucru trebuie să împarți numărul zecimal la doi succesiv până când restul este 0 sau 1.
+Întrebarea corectă este cum ajungi la reprezentarea un număr zecimal în echivalentul său binar? Pentru a face acest lucru trebuie să împarți numărul zecimal la doi succesiv până când restul este `0` sau `1`.
 
-De exemplu, 27.
+De exemplu, `27`.
 
 ```javascript
 27 / 2 = 13 * 2 + 1;
 13 / 2 = 6 * 2  + 1;
-6 / 2 = 3 * 2   + 0;
-3 / 2 = 1 * 2   + 1;
+6 / 2  = 3 * 2  + 0;
+3 / 2  = 1 * 2  + 1;
 ```
 
 Pornind de jos reconstituim valoarea binară: **11011**.
@@ -60,7 +62,7 @@ Verificarea:
 
 Acești operatori vor fi folosiți pe valori care sunt numere întregi pe 32 de biți. De fapt la momentul când se folosesc acești operatori, se face o conversie la un număr pe 32 de biți și abia apoi se face operațiunea.
 
-Sistemul actual de reprezentare a numerelor întregi pentru sistemele de calcul existente este numit **complement față de doi** a unui număr pentru care se poate memora și semnul (are bit de semn: bitul cel mai semnificativ este fie 1 însemnând că valoarea este pozitivă, fie 0 care înseamnă că valoarea este negativă). **Complement față de doi** înseamnă că valoarea maximă reprezentată merge pe axa pozitivă dar și pe cea negativă. În JavaScript avem o plajă de la -2147483648 la 2147483647.
+Sistemul actual de reprezentare a numerelor întregi pentru sistemele de calcul existente este numit **complement față de doi** a unui număr pentru care se poate memora și semnul (are bit de semn: bitul cel mai semnificativ este fie `1`, însemnând că valoarea este pozitivă, fie `0`, care înseamnă că valoarea este negativă). **Complement față de doi** înseamnă că valoarea maximă reprezentată merge pe axa pozitivă dar și pe cea negativă. În JavaScript avem o plajă de la `-2147483648` la `2147483647`.
 
 Mai trebuie menționat un lucru foarte important. Atunci când vine vorba de lucrul cu valori numerice în JavaScript, acestea sunt de tip float, nu integer.
 
@@ -140,13 +142,13 @@ true ^ true; // 0
 
 ## Operatori pentru deplasare pe biți
 
-Operatorii pentru deplasare au doi operanzi. Primul, cel din stânga indică valoarea care trebuie „deplasată” iar cel din dreapta operatorului este valoarea care indică cu cât să „deplasezi” biții.
+Operatorii pentru deplasare au doi operanzi. Primul, cel din stânga indică valoarea care trebuie *deplasată*, iar cel din dreapta operatorului este valoarea care indică cu cât să *deplasezi* biții.
 
 Efectul operatorului indiferent de sensul său este să transforme valoarea într-una pe 32 de biți iar după ce face transformarea, să returneze o valoare de același tip cu cea originală.
 
 ### Deplasare pe biți spre stânga `<<`
 
-În exemplul prezentat, reprezentarea pe 32 de biți a numărului întreg 2 va fi deplasat cu 1 poziție spre stânga. În cazul în care biții fiind mutați spre stânga și sunt prea mulți, aceștia vor fi pur și simplu vor dispărea.
+În exemplul prezentat, reprezentarea pe 32 de biți a numărului întreg 2 va fi deplasată cu o poziție spre stânga. În cazul în care biții fiind mutați spre stânga și sunt prea mulți, aceștia pur și simplu vor dispărea.
 
 ```javascript
 // hai să aflăm numărul în binar
@@ -171,7 +173,7 @@ x >> 0; // 49
 
 ### Deplasare pe biți spre dreapta `>>`
 
-În cazul deplasării spre dreapta, avem o mică mențiune privind semnul pentru că cel mai din stânga bit, dă semnul numărului întreg reprezentat pe cei 32 de biți. Pentru că biții se vor mișca spre dreapta, bitul semnificativ, care dă semnul își va păstra poziția propagându-se și pentru noul întreg reprezentat.
+În cazul deplasării spre dreapta, avem o mică mențiune privind semnul. Bitul cel mai din stânga, dă semnul numărului întreg reprezentat pe cei 32 de biți. Pentru că biții se vor mișca spre dreapta, bitul semnificativ, care dă semnul își va păstra poziția propagându-se și pentru noul întreg reprezentat.
 
 ```javascript
 4 >> 1; // echivalent cu 4 împărțit la 2

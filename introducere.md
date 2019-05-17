@@ -211,7 +211,7 @@ Conform standardului mai întâi textul codului sursă este parcurs pentru a-l *
 
 #### Atomi lexicali
 
-Toate elementele lexicografice care constituie codul în sine, cu excepția spațiilor albe și a comentariilor, se numesc `token-uri`, adică, am zis eu pe românește `atomi lexicali`.
+Toate elementele lexicografice care constituie codul în sine, cu excepția spațiilor albe și a comentariilor, se numesc `token-uri`, adică, am zis eu pe românește `atomi lexicali` (te poți gândi la acestea ca fiind părți de propoziție).
 
 Acești **atomi lexicali** sunt rezultatul parcurgerii unui fragment de cod (codul sursă) căruia i se aplică regulile lexicale specifice gramaticii impuse de standardul ECMAScript.
 
@@ -260,16 +260,16 @@ Să analizăm împreună ce conțin elementele de intrare.
 
 ### Cuvintele cheie
 
-ECMAScript are un set de **cuvinte rezervate** din limba engleză, care nu pot fi folosite decât în scopul pentru care au fost rezervate. Cuvintele cheie sunt unul din tipurile de **atomi lexicali** și se scriu întotdeauna fără majuscule.
+ECMAScript are un set de **cuvinte rezervate** din limba engleză, care nu pot fi folosite în propriile progrmae. Cuvintele cheie sunt un tip de **atomi lexicali** și se scriu întotdeauna fără majuscule.
 
-Le vom enumera aici cu traducerea lor pentru a vă familiariza la un prim contact: break (întrerupe cu sensul de ieși din execuție), do (fă cu sensul de continuă ce faci), in (în cu sensul din), typeof (de tipul), case (cazul cu sensul în cazul), else (altfel cu sensul de în caz contrar), instanceof (instanță a lui), var (variabilă), catch (prinde), export (exportă), new (nou cu sensul de instanțiază un nou obiect), void (golește cu sensul golește de valoare), class (clasă), extends (extinde), return (returnează), while (cât timp), const (constantă), finally (încheie), super (super), with (cu), continue (continuă), for (pentru cu sensul evaluând următoarea/le expresie/ii pentru fiecare element din), switch (schimbă cu sensul mergi pe ramura), yield (produ cu sensul dă-mi va-lori), debugger (depanare cu sensul activează depanatorul), function (funcție), this (acesta cu sensul de obiectul meu necesar precum context), default (inițial), if (dacă), throw (aruncă cu sensul de a scoate la lumină erorile), delete (șterge), import (importă), try (încearcă), await (așteaptă cu sensul de în așteptare).
+Le vom enumera aici cu traducerea lor pentru a vă familiariza la un prim contact: `break` (întrerupe cu sensul de *ieși din execuție*), `do` (fă cu sensul de *continuă ce faci*), `in` (în cu sensul *din*), `typeof` (*de tipul*), `case` (cazul cu sensul *în cazul*), `else` (altfel cu sensul de *în caz contrar*), `instanceof` (*instanță a lui*), `var` (*variabilă*), `catch` (*prinde*), `export` (*exportă*), `new` (nou cu sensul de *instanțiază un nou obiect*), `void` (golește cu sensul *golește de valoare*), `class` (*clasă*), `extends` (*extinde*), `return` (*returnează*), `while` (*cât timp*), `const` (*constantă*), `finally` (*încheie*), `super` (super cu sensul *caută în părinte*), `with` (*cu*), `continue` (*continuă*), `for` (pentru cu sensul *evaluând următoarea/le expresie/ii pentru fiecare element din*), `switch` (schimbă cu sensul *mergi pe ramura*), `yield` (produ cu sensul *dă-mi valori*), `debugger` (depanare cu sensul *activează depanatorul*), `function` (*funcție*), `this` (acesta cu sensul de *obiectul necesar drept context*), `default` (*inițial*), `if` (*dacă*), `throw` (aruncă cu sensul de a *scoate la lumină erorile*), `delete` (*șterge*), `import` (*importă*), `try` (*încearcă*), `await` (așteaptă cu sensul de *în așteptare*).
 
 **Moment ZEN**: Cuvintele rezervate poartă în sine o acțiune.
 
 Ele inițiază un curs de acțiune pentru îndeplinirea unei sarcini. Pur și simplu, instruiesc computerul în a face ceva, iar de aici încolo putem vorbi despre unele dintre ele ca instrucțiuni, cu sensul de comenzi ferme.
 
-Buna practică spune că toate expresiile intenției programatorului reflectate prin folosirea instrucțiunilor le numim **enunțuri** (în limba engleză *statements*), în JavaScript trebuie să fie încheiate prin punct și virgulă (`;`), chiar dacă motoarele care implementează ECMAScript, la momentul evaluării codului, introduc automat prin mecanismul de **automatic semicolon insertion** (ASI) acest caracter.
-Programatorii sunt creaturi foarte comode și motoarele JavaScript permit anumite facilități printre care și această completare automată. Unii aleg această practică înadins. Personal, mă feresc și pun semnele de punctuație pentru că astfel, codul devine lizibil, ochii deprind automatisme de citire și de aici și o mai mare eficiență. Codul este scris nu numai pentru mașini, ci pentru oameni ca un act de comunicare a intențiilor de la un om la altul. Lizibilitatea trebuie să primeze.
+Intenția programatorului se reflectă prin folosirea instrucțiunilor în **enunțuri** (în limba engleză *statements*), în JavaScript trebuie să fie încheiate prin punct și virgulă (`;`), chiar dacă, mai nou, motoarele care implementează ECMAScript, la momentul evaluării codului, introduc automat prin mecanismul de **automatic semicolon insertion** (ASI) acest caracter.
+Programatorii sunt creaturi foarte comode și motoarele JavaScript permit anumite facilități printre care și această completare automată. Unii aleg această practică înadins. Personal, mă feresc și pun semnele de punctuație pentru că astfel, codul devine lizibil, ochii deprind automatisme de citire și de aici și o mai mare eficiență. Codul este scris nu numai pentru mașini, ci pentru oameni ca un act de comunicare a intențiilor de la un om la altul. **Lizibilitatea trebuie să primeze**.
 
 Reguli de introducere prin ASI:
 
@@ -279,15 +279,15 @@ Reguli de introducere prin ASI:
 
 Declarațiile și instrucțiunile beneficiare ale acestui mecanism sunt:
 
--   instrucțiuni simple,
--   declarații de variabile: `var`, `let`, `const`,
+-   instrucțiunile simple,
+-   declarațiile de variabile: `var`, `let`, `const`,
 -   declarațiile de module: `import`, `export`,
 -   declararea expresiilor,
 -   declararea intenției de a folosi depanatorul de cod (`debugger`),
 -   instrucțiunile `continue`, `break`, `throw`
 -   și `return`.
 
-Există mai multe curente de opinii care au condus la diferite stiluri de redactare a codului sursă. Veți întâlni foarte mult cod scris fără punct și virgulă care să marcheze finalitatea enunțului. Unii consideră acest lucru acceptabil, dar vă invit în partea cealaltă, a celor care scriu foarte corect codul și care vor pune întotdeauna punct și virgulă la încheierea unui enunț după cum ne-a intrat în sânge ca atunci când încheiem o propoziție în scris să punem punct.
+Există mai multe curente de opinii care au condus la diferite stiluri de redactare a codului sursă. Veți întâlni foarte mult cod scris fără punct și virgulă. Unii consideră acest lucru acceptabil, dar vă invit în partea cealaltă, a celor care scriu foarte corect codul și care vor pune întotdeauna punct și virgulă la încheierea unui enunț după cum ne-a intrat în sânge ca atunci când încheiem o propoziție în scris să punem punct.
 
 Care este treaba cu **momentele ZEN**? Pe parcursul acestei călătorii, voi jalona conținutul cu astfel de momente, care vor fi propoziții sau fraze cu o sarcină precisă: să fie chintesența informației analizată defalcat. De ce moment ZEN? Pentru că este ca un exercițiu de meditație, care conduce la identificarea cu informația prin asimilarea ei.
 
@@ -313,7 +313,7 @@ De cele mai multe ori, operatorii stabilesc o evaluare a expresiilor de la stân
 
 Dicționarele explicative spun că o expresie este un **grup de numere, litere etc. legate între ele prin simboluri de operații matematice (adunare, înmulțire etc.)** (DEX 98) sau **formulă care exprimă raporturi matematice** (NODEX 2002).
 
-O mică paranteză utilă pentru curiozitatea ta. Sunt convins că te-ai întrebat cum s-a ajuns la forma actuală de scriere a codului. Cum s-au ales formulele de redactare, punctuația ș.a.m.d. Înainte de momentul formalizării sintaxei limbajelor de programare, a existat un pas crucial pentru dezvoltarea informaticii. În anul 1952 a fost creat primul **compilator**, un software specializat, care permitea abstractizarea în limbaj natural (limba engleză) a codului mașină. Ulterior, în anii 60 ai secolului trecut, la momentul apariției limbajului de programare ALGOL (ALGOrithmic Language 1960), a fost inițiat un efort colaborativ de formalizare a sintaxei limbajelor de programare. Rezultatul a fost o formă de exprimare sintactică cunoscută acum sub titulatura de **Backus Naur**. Conform **Backus Naur Form** (BNF), notația care formalizează sintaxa unui limbaj de programare indiferent care ar fi el, o expresie **fiind definită ca** astfel: un „termen”, care poate fi la rândul său urmat de alt termen și așa mai departe. Așa arată formalizarea BNF: `expression ::=  term { "|" term }`. Simbolul `::=` înseamnă „este definit ca”, iar <code>&#124;</code> (caracterul *pipe*) înseamnă „ȘI-ul” logic.
+O mică paranteză utilă pentru curiozitatea ta. Sunt convins că te-ai întrebat cum s-a ajuns la forma actuală de scriere a codului. Cum s-au ales formulele de redactare, punctuația ș.a.m.d. Înainte de momentul formalizării sintaxei limbajelor de programare, a existat un pas crucial pentru dezvoltarea informaticii. În anul 1952 a fost creat primul **compilator**, un software specializat, care permitea abstractizarea în limbaj natural (limba engleză) a codului mașină. Ulterior, în anii 60 ai secolului trecut, la momentul apariției limbajului de programare ALGOL (ALGOrithmic Language 1960), a fost inițiat un efort colaborativ de formalizare a sintaxei limbajelor de programare. Rezultatul a fost o formă de exprimare sintactică cunoscută acum sub titulatura de **Backus Naur**. Conform **Backus Naur Form** (BNF), notația care formalizează sintaxa unui limbaj de programare indiferent care ar fi el, o expresie *fiind definită de* : un ***termen***, care poate fi la rândul său urmat de alt termen și așa mai departe. Așa arată formalizarea BNF: `expression ::=  term { "|" term }`. Simbolul `::=` înseamnă *este definit ca*, iar <code>&#124;</code> (caracterul *pipe*) înseamnă **ȘI**-ul logic.
 
 Expresiile mai complexe cer folosirea unor semne grafice care să indice motorului unde se încheie acestea. Aceste semne grafice sunt **separatorii**. Pe aceștia i-am amintit mai sus. Sunt folosiți pentru **a separa** fragmentele cu înțeles pentru compilator. De exemplu, cel mai simplu separator este un spațiu (adu-ți mereu aminte că un spațiu este și el un caracter) sau un TAB, care sunt folosite pentru a despărți cuvintele între ele. Un alt separator este punct și virgulă, care este ca punctul din limbajul natural. Enter-ul pe care îl dai pentru a trece pe o nouă linie, de fapt este tot un separator.
 
@@ -327,14 +327,14 @@ JavaScript are următoarele categorii de expresii:
 -   expresii de bază cum ar fi **cuvintele cheie** (instrucțiunile) sau expresiile de uz general și
 -   **expresiile din partea stângă (LHS) a operatorului de atribuire** (`=`), adică la ce trebuie să se lege evaluarea a ceea ce este în partea dreaptă.
 
-Cea mai simplă expresie este o `valoare literală` scrisă direct, ori o variabilă, dacă e mai pe gustul tău.
+Cea mai simplă expresie este o `valoare literală` scrisă direct. Poate fi și o variabilă fără valoare atribuită.
 
 ```javascript
 1;      // expresie de valoare literală
 let x;  // expresie de variabilă
 ```
 
-După cum spuneam, combinarea operanzilor cu operatorii, creează expresii. Este necesară o mică precizare. Valorile de lucru sunt de două feluri:
+După cum spuneam, combinarea operanzilor cu operatorii, constituie **expresii**. Este necesară o mică precizare. Valorile de lucru sunt de două feluri:
 
 -   fixe, care așa cum le-ai scris și așa rămân, numite și **literale**
 -   valorile care se pot modifica în funcție de dinamica programului numite **variabile**, care pornesc de la o valoare dată sau nu.
@@ -348,9 +348,9 @@ let x = 1 + 1;
 
 **Moment ZEN**: Tot ce este în partea dreaptă a egalului, este o valoare.
 
-Aceasta este adunată cu o valoare de sine stătătoare numită **valoare literală**. Am lămurit deja mai sus că o valoare literală este pur și simplu valoarea introdusă direct prin reprezentarea sa literală, adică cifre pentru numerale și caractere între ghilimele pentru text. Deci, ca să indici computerului că folosești o variabilă care este inițializată cu valoarea trei vei scrie cifra: `let trei = 3;`. Ce se întâmplă când îl pui pe trei între ghilimele? Da, ai intuit perfect, se transformă în text: `let text = '3';`.
+Aceasta este adunată cu o valoare de sine stătătoare numită **valoare literală**. Am lămurit deja mai sus că o valoare literală este pur și simplu valoarea introdusă direct prin reprezentarea sa literală, adică cifre pentru numerale și caractere între ghilimele pentru text. Deci, ca să indici computerului că folosești o variabilă care este inițializată cu valoarea trei, vei scrie cifra, precum în: `let trei = 3;`. Ce se întâmplă când îl pui pe trei între ghilimele? Da, ai intuit perfect, se transformă în text: `let text = '3';`.
 
-Mai sunt și altele, dar le vom lămuri pe parcurs. De ce este nevoie de o precizare de acest fel? Pentru că de nu ai pune între ghilimele textul, motorul nostru de JavaScript ar înțelege că faci o referință către un identificator al unei variabile, constante, funcții sau obiect. Reține acest aspect foarte important. Pe scurt, cifrele sunt evidente în sine, iar textul trebuie între ghilimele simple sau duble.
+Mai sunt și altele, dar le vom lămuri pe parcurs. De ce este nevoie de o precizare de acest fel? Pentru că de nu ai pune între ghilimele textul, motorul nostru de JavaScript ar înțelege că faci o referință către un identificator al unei variabile, constante, funcții sau obiect. Reține acest aspect foarte important. Pe scurt, cifrele sunt evidente în sine, iar textul trebuie introdus între ghilimele simple sau duble.
 
 **Moment ZEN**: Dacă textul din partea dreaptă nu este între ghilimele, acesta este o referință către o altă valoare.
 
@@ -362,7 +362,7 @@ Revenim acum la matematică, la momentul când respectam regulile dictate de pri
 
 **Moment ZEN**: Citirea expresiilor se face de la stânga la dreapta.
 
-O mică mențiune: în cazul programării acoladele și parantezele pătrate pe care le foloseam în matematică pentru a separa expresiile imbricate, sunt numai paranteze rotunde. De exemplu, pentru expresia: `{1 + [2 - (2 * 3)]}` din notația convențională matematică, în programare este scris astfel: `1 + (2 - (2 * 3))`.
+În cazul programării, acoladele și parantezele pătrate pe care le foloseam în matematică pentru a separa expresiile imbricate, sunt numai paranteze rotunde. De exemplu, pentru expresia: `{1 + [2 - (2 * 3)]}` din notația convențională matematică, în programare este scris astfel: `1 + (2 - (2 * 3))`.
 
 **Moment ZEN**: O expresie nu va fi tratată niciodată ca operand, ci **rezultatul evaluării sale**.
 
@@ -379,9 +379,9 @@ Continuăm cu o precizare foarte importantă pentru a întări ceea ce am rememo
 
 ### Expresii cu operanzi de tip diferit
 
-JavaScript este un limbaj de programare care oferă o flexibilitate fantastică. Spre deosebire de restul limbajelor de programare, nu te forțează să indici din start tipul de valoare cu care lucrezi. Dar dacă se nimerește ca într-o expresie să se lucreze cu două tipuri diferite de valori, la momentul evaluării, motorul JavaScript este forțat să ofere totuși un răspuns. Acest lucru se face prin constrângerea valorii unuia dintre operanzi în funcție de regulile impuse de operatorul folosit. Acest lucru se numește în limba engleză *coercion* ceea ce am putea traduce ca *transformare* sau *constrângerea* la un anumit tip de valoare cu scopul de a face totuși operațiunea indicată de operator.
+JavaScript este un limbaj de programare care oferă o flexibilitate fantastică. Spre deosebire de restul limbajelor de programare, nu te forțează să indici din start tipul de valoare cu care lucrezi. Dar dacă se nimerește ca într-o expresie să se lucreze cu două tipuri diferite de valori, la momentul evaluării, motorul JavaScript este forțat să ofere totuși un răspuns. Acest lucru se face prin constrângerea valorii unuia dintre operanzi în funcție de regulile impuse de operatorul folosit. Acest lucru se numește în limba engleză *coercion* ceea ce am putea traduce ca *transformare* sau *constrângerea* la un anumit tip de valoare cu scopul de a rezolva operațiunea indicată de operator.
 
-**Moment ZEN**: Totul în JavaScript este evaluat în final la o valoare boolean, fie ceva care poate fi considerată a fi o valoare **adevărată**, fie ceva care poate fi considerat a fi o valoare **falsă**. În engleză aceste rezultate interpretate din punct de vedere al adevărului se numesc *truthy* și *falsey*.
+**Moment ZEN**: Totul în JavaScript este evaluat în final la o valoare boolean, fie ceva care poate fi considerată a fi o valoare **adevărată**, fie ceva care poate fi considerat a fi o valoare **falsă**. În engleză aceste rezultate interpretate din punct de vedere al adevărului se numesc *truthy* și *falsy*.
 
 Hai să ne uităm la următoarea expresie: `true + 10;` pe care o dăm motorului JavaScript spre evaluare. Ce crezi că se va întâmpla, pentru că în acest moment operezi cu o valoare boolean și un număr?
 
@@ -434,7 +434,7 @@ let x;  // enunț declarativ - declaration statement
 x = 2 * 3;
 ```
 
-Pe prima linie avem un enunț declarativ pentru variabila `x`. Pe a doua linie avem două expresii. Una a înmulțirii și alta a asignării valorii rezultate.
+Pe prima linie avem un enunț declarativ pentru variabila `x`. Pe a doua linie avem două expresii. Una a înmulțirii și alta a atribuirii valorii rezultate.
 
 **Moment ZEN**: Enunțurile sunt încheiate cu punct și virgulă cu excepția notabilă aplicată prin mecanismul ASI.
 
@@ -451,14 +451,14 @@ Veți vedea mai târziu cât de utile blocurile sunt în cazul scrierii instruc�
 
 Este nevoie acum să punem ordine în ideile pe care le-am explorat cu privire la enunțuri.
 
-Care sunt enunțurile în JavaScript? Conform standardului, expresiile sunt catalogate în **expresii primare** și **expresii între paranteze și listă de parametri arrow**.
+Care sunt enunțurile în JavaScript? Conform standardului, expresiile sunt catalogate în **expresii primare** și **expresii între paranteze** și **listă de parametri arrow**.
 
 #### Expresii primare
 
 Conform textului standardului, următoarele sintaxe pot fi considerate a fi expresii primare:
 
 -   cuvântul cheie `this`,
--   identificatorii pentru referențiere posibil urmați de `yield` sau `await`,
+-   identificatorii posibil urmați de `yield` sau `await`,
 -   literale generale:
     - literal `null`,
     - literal boolean: `true` / `false`,
@@ -484,7 +484,7 @@ Acestea sunt fragmentele sintactice care au înțeles de sine stătător pentru 
 -   enunțuri ale instrucțiunilor precum `while`, `if`, etc.,
 -   enunțul `debugger;` sau enunțul `"use strict";`.
 
-Mai există un set care se numesc *enunțuri ale iterabilelor*:
+Mai există un set numit *enunțuri ale iterabilelor*:
 
 -`do...while`,
 -`while`,
@@ -537,17 +537,17 @@ Adu-ți aminte că scopul pentru care scriem software este pentru a manipula val
 
 ![Identificatoriii pot fi percepuți ca fanioane](IdentificatoriIsland.png "Identificatori ca niște fanioane")
 
-Reperele de mai sus sunt identificatorii, care odată înțeleși, vor permite accesul la ceea ce înseamnă variabilele ca și concept.
+Reperele de mai sus sunt identificatorii, care odată înțeleși, vor permite accesul la ceea ce înseamnă conceptul de variabilă.
 
 Să ne imaginăm că avem o hartă imaginară pe care avem marcate prin fanioane diferite locații. Locațiile reprezintă valorile pentru care avem nevoie de un nume, de un toponim. De exemplu, pentru orașul (percepem orașul ca fiind valoarea) din centrul regiunii Moldova avem numele Bacău, care este identificatorul. Adică, identificăm orașul ca valoare administrativă cu un toponim.
 
-Putem să ne închipuim că identificatorii sunt toponime ale „tărâmului" JavaScript. Identificatorii pot fi orice secvență de caractere care poate să înceapă cu semnul dollar `$`, sau cu liniuță jos `_` (*underscore*) urmate de orice puncte de cod codate numeric respectând schema de codare a caracterelor UTF16.
+Putem să ne închipuim că identificatorii sunt toponime ale *tărâmului* JavaScript. Identificatorii pot fi orice secvență de caractere care poate să înceapă cu semnul dollar `$`, sau cu liniuță jos `_` (*underscore*) urmate de orice puncte de cod codate numeric respectând schema de codare a caracterelor UTF16.
 
 ```javascript
 let mâncare = 'vinete coapte';
 ```
 
-Am putea spune foarte simplu că un identificator este numele unei valori, iar identificatorul este o înșiruire de caractere. După cum observi, identificatorii pot fi cuvinte românești cu diacritice. De ce? Pentru că un computer se uită la reprezentarea numerică a caracterelor, iar numerele din spatele fiecărui caracter în parte ce alcătuiește numele identificatorului face parte din setul de numere acceptat de UTF16. Vom insista mai mult pe această corespondență numerică pentru că, mai târziu, vom vedea că stă la baza multor operațiuni pe șiruri. Înțelegerea acestui aspect este o cheie foarte importantă.
+Am putea spune foarte simplu că un identificator este numele unei valori, iar identificatorul este o înșiruire de caractere. După cum observi, identificatorii pot fi cuvinte românești cu diacritice. De ce? Pentru că un computer se uită la reprezentarea numerică a caracterelor, iar numerele din spatele fiecărui caracter în parte dintr-un set acceptat de UTF16. Vom insista mai mult pe această corespondență numerică pentru că, mai târziu, vom vedea că stă la baza multor operațiuni pe șiruri. Înțelegerea acestui aspect este o cheie foarte importantă.
 
 Aceasta a fost mica lecție de anatomie aplicată codului sursă JavaScript pentru a înțelege foarte bine și cele mai mici părți ale sale.
 

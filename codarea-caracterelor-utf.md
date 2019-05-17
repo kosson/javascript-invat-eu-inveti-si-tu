@@ -12,7 +12,7 @@ Câteva informații privind sistemele de numerație, care se vor dovedi foarte u
 | Explicație:  | 2 seturi a câte o sută de membri; mai scurt 2 X 100              | 4 seturi a câte zece membri; mai scurt 4 X 10                  | un singur set al unităților format din trei membri            |
 | Exponent:    | 10<sup>2</sup> X 2 (<code>10<sup>2</sup> = 10 X 10 = 100</code>) | 10<sup>1</sup> X 4 (<code>10<sup>1</sup> = 10 X 1 = 10</code>) | 10<sup>0</sup> X 3 (<code>10<sup>0</sup> = 10 X 0 = 1</code>) |
 
-Dacă ai încerca să-i explici unui extraterestru cum codăm noi cantitățile, pe scurt, i-ai spune: dispunem câte un simbol, care codează o cantitate. Dispunem simbolurile de la dreapta spre stânga și pentru fiecare poziție pe care avansăm, simbolul este înmulțit cu 10 pentru că, de fapt, printr-un singur simbol explicăm câte seturi sunt pentru acel ordin de magnitudine.
+Dacă ai încerca să-i explici unui extraterestru cum codăm noi cantitățile, pe scurt, i-ai spune: poziționăm câte un simbol, care codează o cantitate. Dispunem simbolurile de la dreapta spre stânga și pentru fiecare poziție pe care avansăm, simbolul este înmulțit cu 10 pentru că, de fapt, printr-un singur simbol explicăm câte seturi sunt pentru acel ordin de magnitudine.
 
 Putem spune că am folosit un sistem de codare al cantităților având baza de referință zece. Adică măsura după care se numără totul este 10.
 
@@ -29,13 +29,13 @@ O combinație între sistemul binar închipuit de matematicianul Gottfried Leibn
 
 Forma binară a unui număr nu este ceea ce vom folosi în lucrul cu computerul. Trebuie găsit un nivel intermediar între computer și om, iar acest nivel intermediar este reprezentarea numerică în sistem hexazecimal.
 
-Să pornim de la termenul hexazecimal. Acesta este o compunere între hexa, care înseamnă șase și zecimal. Șase plus zece egal 16, adică un sistem numeric care are baza 16. De exemplu, 16<sup>2</sup>. Folosirea acestui sistem de reprezentare a numerelor este folosit pentru că are capacitatea de a coda cu mai puține caractere numere întregi de dimensiuni foarte mari ca număr de cifre necesar pentru a-l reprezenta.
+Să pornim de la termenul hexazecimal. Acesta este o compunere între hexa, care înseamnă șase și zecimal. Șase plus zece egal 16, adică un sistem numeric care are baza 16. De exemplu, 16<sup>2</sup>. Folosirea acestui sistem de reprezentare a numerelor este folosit pentru că are capacitatea de a coda cu mai puține caractere numere întregi de dimensiuni foarte mari ca număr de cifre necesar pentru a-l scrie.
 
 | Hexazecimal: | 0   | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | A   | B   | C   | D   | E   | F   |
 |:------------ |:--- |:--- |:--- |:--- |:--- |:--- |:--- |:--- |:--- |:--- |:--- |:--- |:--- |:--- |:--- |:--- |
 | Zecimal:     | 0   | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  | 11  | 12  | 13  | 14  | 15  |
 
-Baza numerică este 16 iar valorile întâlnite sunt cele până la 16^4.
+Baza numerică este 16, iar valorile întâlnite sunt cele până la 16^4.
 
 | Baza     | 16<sup>4</sup> | 16<sup>3</sup> | 16<sup>2</sup> | 16<sup>1</sup> | 16<sup>0</sup> |
 |:-------- |:-------------- |:-------------- |:-------------- |:-------------- |:-------------- |
@@ -60,7 +60,7 @@ Unicode formatează reprezentarea numerică ca numere pe 32 de biți (UTF-32), p
 
 JavaScript folosește caracterele codate UTF-16. Acest lucru înseamnă că există un set de 65535 de *code point-uri* oferite pentru a lucra cu ele în limbajul nostru de programare. Dacă este nevoie să lucrezi cu caractere care sunt reprezentate numeric peste limita celor 16 biți, acest lucru este posibil printr-un artificiu numit *surogate pairs* - *perechi înlocuitoare* și care adaugă alte 2048 de code point-uri.
 
-Te vei întreba de ce studiem noi acum Unicode-ul? Răspunsul este pentru că programele tale sunt coduri sursă, care este text simplu, dar și pentru că datele pe care le prelucrezi sunt niște fluxuri de caractere. Standardul aduce lămuriri asupra ceea ce este textul simplu: *o secvență pură de coduri de caractere*. JavaScript și-a îmbunătățit suportul pentru Unicode începând cu ECMAScript 6.
+Te vei întreba de ce studiem noi acum Unicode-ul? Răspunsul este pentru că programele tale sunt coduri sursă, care sunt texte simple, dar și pentru că datele pe care le prelucrezi sunt niște fluxuri de caractere. Standardul aduce lămuriri asupra naturii textului simplu: *o secvență pură de coduri de caractere*. JavaScript și-a îmbunătățit suportul pentru Unicode începând cu ES6.
 
 Am menționat deja faptul că toate caracterele sunt codate numeric. Standardul aduce o precizare importantă și anume că domeniul de numere întregi folosite pentru a coda caracterele limbilor lumii se numește *codespace*. Un singur număr întreg al acestui set se numește *code point*. Un caracter care este reprezentat printr-un număr întreg din *codespace* spunem despre el că este *encoded character*, adică un caracter codat. În acest moment putem afirma că o mașină de calcul, adică un computer poate procesa simboluri.
 

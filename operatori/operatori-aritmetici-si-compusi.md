@@ -126,7 +126,7 @@ imp /= 3; // 1.33333333
 5 * 2; // 10
 ```
 
-## Operatorul `*=` (înmulțirea preexistentului cu o valoare)
+## Operatorul `*=` (înmulțirea existentului cu o valoare)
 
 Face operațiunea de înmulțire și apoi va atribui variabilei noua valoare rezultată.
 
