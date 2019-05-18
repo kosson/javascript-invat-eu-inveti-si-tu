@@ -29,7 +29,7 @@ Dacă doriți să sprijiniți mai departe munca editorială pentru următoarele 
 
 Pentru cei care vor să facă cinste cu o cafeluță, puteți să trimiteți una pe paypall.com la adresa de email kosson@gmail.com.
 
-Materialele acestea plus alte lucruri utile, vor avea un spațiu organizat la https://kosson.ro/ieis2 și mai departe la https://ieis2.ro.
+Materialele acestea plus alte lucruri utile vor avea un spațiu organizat la https://kosson.ro/ieis2 și mai departe la https://ieis2.ro.
 
 Vă doresc mult succes și închei spunându-vă că ceea ce veți asimila este de mare folos așa cum este dobândirea ușurinței de a te înțelege cu un străin în limba sa. Străinul nostru este computerul și una din limbile pe care le înțelege este JavaScript.
 

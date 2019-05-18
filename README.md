@@ -1,3 +1,5 @@
+![](images/JSInvatEuInvetiSiTu3d.png)
+
 ***JavaScript învăt eu, înveți și tu*** este o colecție structurată de texte care lămuresc subiecte legate de limbajul de programare JavaScript în limba română.
 
 Aceste texte nu sunt definitive modificându-se ca formă și conținut într-o continuă îmbunătățire pe măsură ce timpul o va permite.
