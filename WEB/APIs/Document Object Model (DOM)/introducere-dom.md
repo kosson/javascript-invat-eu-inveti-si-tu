@@ -2,19 +2,30 @@
 
 ## Introducere
 
-DOM este acronimul de la **Document Object Model**. DOM este un API (Application Programming Interface) care oferă posibilitatea de a manipula documentele HTML și XML. DOM-ul trebuie văzut ca un liant între tagurile HTML și JavaScript, fiind astfel permisă interacțiunea cu pagina.
+DOM este acronimul de la **Document Object Model**. DOM este un API (Application Programming Interface), care oferă posibilitatea de a manipula documentele HTML și XML. DOM-ul trebuie văzut ca un liant între tagurile HTML și JavaScript, fiind astfel permisă interacțiunea cu pagina.
 
 Standardul spune că *programatorii pot redacta documente, pot parcurge structura lor și pot adăuga, modifica sau șterge elementele și conținutul acestora*.
 
-Să vedem ce înseamnă *document* în cazul acestui API. Standardul spune că termenul de *document* este utilizat în sens larg și se leagă de capacitatea XML-ului de a *reprezenta diferite tipuri de informație care pot fi stocate în diferite sisteme și mare parte dintre acestea vor fi văzute în mod tradițional ca date și nu ca documente*. Următoarea precizare este fundamentală pentru a înțelege relația dintre date, informație și reprezentarea acestora. Zice standardul: **\[...] XML prezintă aceste date ca documente iar DOM-ul poate fi utilizat pentru a gestiona aceste date**.
+Să vedem ce înseamnă *document* în cazul acestui API. Standardul spune că termenul *document* este utilizat în sens larg și se leagă de capacitatea XML-ului de a *reprezenta diferite tipuri de informație care pot fi stocate în diferite sisteme și mare parte dintre acestea vor fi văzute în mod tradițional ca date și nu ca documente*. Următoarea precizare este fundamentală pentru a înțelege relația dintre date, informație și reprezentarea acestora. Zice standardul: **\[...] XML prezintă aceste date ca documente iar DOM-ul poate fi utilizat pentru a gestiona aceste date**.
 
-Standardul (DOM Core) spune că *prezintă documentele ca o ierarhie de obiecte Node care implementează alte interfețe mai specializate*. Hai să lămurim nițel care-i treaba cu interfețele astea. Sunt de fapt niște abstracțiuni implementate la nivel de browser de fiecare producător de browser așa cum crede mai bine și au drept scop punerea la dispoziție de metode și proprietăți pentru a manipula diferite reprezentări de date.
+Standardul (DOM Core) spune că *prezintă documentele ca o ierarhie de obiecte Node care implementează alte interfețe mai specializate*. Hai să lămurim nițel care-i treaba cu interfețele astea. Sunt de fapt niște colecții de funcționalități implementate la nivel de browser de fiecare producător. Scopul este punerea la dispoziție de metode și proprietăți pentru a manipula diferite reprezentări de date.
+
+Browserele când parcurg structura HTML, construiesc un arbore cu noduri care reprezintă elementele. Această structură este una vie, care poate fi manipulată într-o manieră dinamică.
 
 ## Ce sunt nodurile?
 
 Nodul este un nume dat oricărui tip de obiect din ierarhia DOM. Nodurile pot fi obiectele native ale DOM cum ar fi `document` sau `document.body`, dar poate fi foarte bine și reprezentarea ca obiect a unui tag de HTML.
 
-Fiecare obiect nod al DOM-ului are o proprietate `nodeType`. Acest nodeType indică tipul de care poate fi un nod: noduri document (`DOCUMENT_NODE` cu valoarea `1`), noduri text (`TEXT_NODE` cu valoarea `3`), adică caracterele unui text, noduri elemente (`ELEMENT_NODE` cu valoarea `1`) sau noduri de atribut (`ATTRIBUTE_NODE` cu valoarea `2`) așa cum sunt, de exemplu clasele specificate: `class="ceva"` sau `DOCUMENT_FRAGMENT_NODE`, ori `DOCUMENT_TYPE_NODE`. Aceste tipuri de noduri specificate prin constantele scrise cu majuscule poartă o valoare specifică fiecărui tip de nod. Pentru a afla valoarea constantelor se va apela numele constantei ca proprietate a obiectului `Node : Node.ELEMENT_NODE // 1`
+Fiecare obiect nod al DOM-ului are o proprietate `nodeType`. Acest `nodeType` indică tipul de care poate fi un nod:
+
+- noduri document (`DOCUMENT_NODE` cu valoarea `1`), adică `window.document`, 
+- noduri elemente (`ELEMENT_NODE` cu valoarea `1`), adică `body`, `p`, `html`, etc., 
+- noduri de atribut (`ATTRIBUTE_NODE` cu valoarea `2`) așa cum sunt, de exemplu clasele specificate: `class="ceva"` sau `DOCUMENT_FRAGMENT_NODE` (`document.createDocumentFragment()`), ori `DOCUMENT_TYPE_NODE`,
+- noduri text (`TEXT_NODE` cu valoarea `3`), adică caracterele unui text.
+
+Aceste tipuri de noduri specificate prin constantele scrise cu majuscule poartă o valoare specifică fiecărui tip de nod. Pentru a afla valoarea constantelor se va apela numele constantei ca proprietate a obiectului `Node : Node.ELEMENT_NODE // 1`
+
+Toate nodurile pe care le generează motorul browserului moștenesc proprietăți de la interfața `Node`. Adu-ți mereu aminte faptul că `Node` este un constructor, deci o funcție obiect, care moștenește totul din `Object.prototype`.
 
 ## Lucrul cu DOM
 

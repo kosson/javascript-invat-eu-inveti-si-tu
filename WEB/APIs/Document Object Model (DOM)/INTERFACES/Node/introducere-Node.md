@@ -6,6 +6,8 @@ Node este o interfață de la care moștenesc o serie de tipuri DOM printre care
 
 Standardul spune că această interfață este „tipul de dată primar pentru întreg DOM-ul”. Atenție, nu toate nodurile pot avea copii.
 
+Fiecare node are două proprietăți care îl descriu: `nodeType` și `nodeName`.
+
 ## Mantre
 
 -   Dintre toate proprietățile doar două pot fi și scrise, nu numai să fie citite. Restul pot fi doar citite. Acestea sunt: `Node.nodeValue` și `Node.textContent`.
@@ -47,7 +49,9 @@ Returnează un număr care desemnează tipul nodului.
 
 ### `Node.nodeValue`
 
-Setează valoarea sau extrage valoarea nodului. Această valoare este un șir de caractere care se află în nod, dacă acestea există. Pentru document în sine, `nodeValue` returnează `null`. Pentru text, comment și noduri CDATA, `nodeValues` returnează conținutul nodului. Pentru nodurile atribut va fi returnată valoarea acestuia.
+Setează valoarea sau extrage valoarea nodului. Această valoare este un șir de caractere care se află în nod, dacă acestea există. Pentru `document` în sine, `nodeValue` returnează `null`. Pentru text, comment și noduri CDATA, `nodeValues` returnează conținutul nodului. Pentru nodurile atribut va fi returnată valoarea acestuia.
+
+Reține faptul că această proprietate returnează textul care este conținut de nod și atunci când se atribuie o valoare nouă, va modifica conținutul nodului.
 
 ### `Node.ownerDocument`
 

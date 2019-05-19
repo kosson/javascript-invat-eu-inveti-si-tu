@@ -10,11 +10,11 @@ colectie = document.getElementsByTagName('p');
 Pentru a căuta anumite elemente în DOM, trebuie gândită mai întâi o strategie care va implica metodele puse la dispoziție de obiectul `document`. Obiectul `document` implementează toate metodele interfeței `Document`. Acest lucru înseamnă că poți face o căutare după:
 
 -   numele tagurilor HTML (`document.getElementsByTagName('p')`), fiind returnat un `HTMLCollection`,
--   valoarea atributului `class` al unor elemente (document.getElementsByClassName('rosii')), fiind returnată o colecție `HTMLCollection`,
--   identificatorii unici (document.getElementById('suntUnic')), fiind returnat un singur element (o valoare de tip `Element`), dar mai poți folosi și `querySelector('#id')`
--   o anumită clasă atașată unui element (document.querySelectorAll('.oClasa')), fiind returnat un `NodeList` care este o fotografie la momentul selecției (nu se actualizează dinamic)
+-   valoarea atributului `class` al unor elemente (`document.getElementsByClassName('rosii')`), fiind returnată o colecție `HTMLCollection`,
+-   identificatorii unici (`document.getElementById('suntUnic')`), fiind returnat un singur element (o valoare de tip `Element`), dar mai poți folosi și `querySelector('#id')`
+-   o anumită clasă atașată unui element (`document.querySelectorAll('.oClasa')`), fiind returnat un `NodeList` care este o fotografie la momentul selecției (nu se actualizează dinamic)
 
-Spre exemplu, cum să accesezi textul primului paragraf din body: `var text = document.body.getElementsByTagName('p')[0]`.
+Spre exemplu, cum să accesezi textul primului paragraf din `body`: `var text = document.body.getElementsByTagName('p')[0]`.
 
 Colecțiile de noduri pe care le poți constitui folosind diversele metode la dispoziție sunt dinamice. Acestea pot suferi modificări în orice moment. Pentru a extrage un fragment și pentru a transforma fragmentul, colecția țintită, de fapt, trebuie să transformi obiectul array-like într-un adevărat array.
 
@@ -42,13 +42,13 @@ Constituirea acestui obiect poate porni din orice punct al DOM-ului.
 
 ## Metoda `querySelector()`
 
-Această metodă primește un argument care este selectorul CSS după care se face căutarea în DOM. Atenție, lucrăm asupra unui singur, unic identificabil selector CSS.
+Această metodă primește un argument care este selectorul CSS după care se face căutarea în DOM. Atenție, lucrăm asupra unui singur selector CSS, care este unic identificabil.
 
 ```javascript
 var elementCautat = document.querySelector('#tinta > p.fragment');
 ```
 
-Poți verifica și dacă un selector este într-un obiect DOM asignat unei variabile deja.
+Poți verifica și dacă un selector este într-un obiect DOM atribuit unei variabile deja.
 
 ```javascript
 elementCautat.matches('p.fragment') === true;
@@ -56,14 +56,14 @@ elementCautat.matches('p.fragment') === true;
 
 ### Optimizarea căutării
 
-Pentru a face o căutare optimizată după un element care știi că este copilul altuia, cel mai bine este să referențiezi părintele și apoi să referențiezi copilul.
+Pentru a face o căutare optimizată după un element care știi că este copilul altuia, cel mai bine este să faci o referință către părinte și abia apoi către copil.
 
 ```javascript
 var elementCautat = document.querySelector('.formular');
 var copilulElementului = elementCautat.querySelector('input[type="submit"]');
 ```
 
-Evită o referențiere de genul
+Evită o referință de genul
 
 ```javascript
 var tinta = document.querySelector('#mesaj > form.formular input[type="submit"]');
@@ -71,7 +71,7 @@ var tinta = document.querySelector('#mesaj > form.formular input[type="submit"]'
 
 ## Metoda `querySelectorAll('nume')`
 
-Este o metodă care permite „colectarea” tuturor nodurilor DOM specificate de tagul ales care este pasat drept argument. Totuși, trebuie spus faptul că este o colectare care se face o singură dată ceea ce înseamnă că nu se va actualiza dinamic dacă sunt introduse sau scoase noduri pe parcurs. În schimb, `getElementsByTagName` va răspunde dinamic actualizând colecția.
+Este o metodă care permite *colectarea* tuturor nodurilor DOM specificate de tagul ales, care este pasat drept argument. Totuși, trebuie spus faptul că este o colectare care se face o singură dată ceea ce înseamnă că nu se va actualiza dinamic dacă sunt introduse sau scoase noduri pe parcurs. În schimb, `getElementsByTagName` va răspunde dinamic actualizând colecția.
 
 ```javascript
 var colectie1 = document.querySelectorAll('div'); // returnează un NodeList
@@ -94,13 +94,13 @@ arrayLike.forEach(function(element){
 });
 ```
 
-Un aspect util al elementelor este că fiecare dintre acestea au câteva proprietăți statice care s-ar putea dovedi foarte utile ăn selectarea nodurilor apropiate:
+Un aspect util al elementelor este că fiecare dintre acestea au câteva proprietăți statice care s-ar putea dovedi foarte utile în selectarea nodurilor apropiate:
 
--   element.children
--   element.firstElementChild
--   element.lastElementChild
--   element.previousElementSibling
--   element.nextElementSibling
+-   element.`children`,
+-   element.`firstElementChild`,
+-   element.`lastElementChild`,
+-   element.`previousElementSibling`,
+-   element.`nextElementSibling`.
 
 Atenție, pentru că o țintire a elementelor de interes cu ajutorul lui `querySelector` poate fi confuză uneori, cel mai bine este să fie folosit atributul de selecție **data-ceva="formular"**.
 
@@ -118,9 +118,9 @@ Atenție, pentru că o țintire a elementelor de interes cu ajutorul lui `queryS
 var lista = document.querySelector('[data-target=\"lista\"]');
 var colectia = document.querySelectorAll('[data-target=\"element\"]');
 
-var caAr = [].slice.call(colectia);
-console.log(caAr);            // Array[li, li, li]
-caAr.forEach(function(elem){
+var caArr = [].slice.call(colectia);
+console.log(caArr);            // Array[li, li, li]
+caArr.forEach(function(elem){
   console.log(elem);          // <li data-target="element">
 });
 ```

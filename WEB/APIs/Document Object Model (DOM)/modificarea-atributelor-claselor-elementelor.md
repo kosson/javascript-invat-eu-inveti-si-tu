@@ -162,7 +162,7 @@ function eliminaClasa (elementele, clasa) {
 };
 ```
 
-## Atributele data-
+## Atributele `data-*`
 
 Odată cu versiunea 5 a HTML, există posibilitatea de a introduce în elemente atribute care conțin date folosind această sintaxă care începe cu `data-` și apoi poți introduce o denumire a câmpului de date pentru care vei introduce o valoare.
 

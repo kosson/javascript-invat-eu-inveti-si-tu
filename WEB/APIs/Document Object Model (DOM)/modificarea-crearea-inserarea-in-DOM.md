@@ -1,6 +1,6 @@
 # Manipularea elementelor DOM
 
-După ce ai selectat elementele sau unul singur, vei trece la prelucrarea acestora. Ceea ce se înțelege prin aceasta este o posibilă modificare și actualizare a conținutului unui nod sau chiar introducerea unuia nou nouț. Reține faptul că fiecare element este un obiect cu proprietățile sale. Cele mai întâlnite modificări aduse unui element se referă la actualizarea conținutului său, a datelor sale care sunt text.
+După ce ai selectat elementele sau unul singur, vei trece la prelucrarea acestora. Ceea ce se înțelege prin aceasta este o posibilă modificare și actualizare a conținutului unui nod sau chiar introducerea unuia nou nouț. Reține faptul că fiecare element este un obiect cu proprietățile sale. Cele mai întâlnite modificări aduse unui element se referă la actualizarea conținutului său, a datelor sale, care sunt text.
 
 ```javascript
 let colecție = document.querySelectorAll('p');
@@ -13,7 +13,7 @@ Exemplul oferit mizează pe faptul că toate browserele moderne atunci când des
 
 Aceste proprietăți sunt oferite de interfața `Element`.
 
-## Metoda innerHTML
+## Metoda `innerHTML`
 
 ```javascript
 let identificat = document.getElementById( "identificator" );
@@ -48,9 +48,9 @@ for(let element of colecție) {
 
 În exemplul dat, m-am folosit de o clasă generată automat la deschiderea unui tab nou în Firefox pentru a nu pierde timpul și pentru a insera fragmentul de cod în consolă.
 
-## Metoda inserării exacte cu .insertBefore()
+## Metoda inserării exacte cu `.insertBefore()`
 
-## Eliminarea unui anumit element removeChild
+## Eliminarea unui anumit element `removeChild`
 
 Se face cu `removeChild(el)`. Pentru a șterge un element, mai întâi trebuie fixat părintele folosind proprietatea `parentNode`.
 
