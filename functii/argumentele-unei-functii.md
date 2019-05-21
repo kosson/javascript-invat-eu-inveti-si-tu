@@ -18,7 +18,7 @@ function fac3 ({x, y}) {}; fac3.length; // 1
 function fac4 (x, ...y) {}; fac4.length; // 1
 ```
 
-Fiecare argument trebuie pasat funcției în ordinea corectă pentru că valoarea sa se va *lega* de numele desemnat de programator între parantezele rotunde. Aceste nume, de fapt identificatori, se numesc parametri. Ca să clarificăm, valorile pasate unei funcții se numesc argumente, iar identificatorii menționați între paranteze (headerul funcției), de care se leagă aceste valori, se numesc parametri. O funcție poate primi mult mai multe argumente față de ceea ce este precizat ca parametri. Valorile acestea nu se pierd în neant. Ele vor putea fi regăsite în obiectul special `arguments`, dar dacă vei trimite mai puține argumente, restul parametrilor vor avea valoarea `undefined`. Parametrii vor face parte din mediul lexical al funcției.
+Fiecare argument trebuie pasat funcției în ordinea corectă pentru că valoarea sa se va *lega* de numele desemnat de programator între parantezele rotunde. Aceste nume, de fapt identificatori, se numesc parametri. Ca să clarificăm, valorile pasate unei funcții se numesc **argumente**, iar identificatorii menționați între paranteze (*headerul funcției*), de care se leagă aceste valori, se numesc **parametri**. O funcție poate primi mult mai multe argumente față de ceea ce este precizat ca parametri. Valorile acestea nu se pierd în neant. Ele vor putea fi regăsite în obiectul special `arguments`, dar dacă vei trimite mai puține argumente, restul parametrilor vor avea valoarea `undefined`. Parametrii vor face parte din mediul lexical al funcției.
 
 Toate aceste detalii sunt utile pentru că la un moment dat este necesară executarea unei funcții în funcție de numărul parametrilor săi. Poate să existe și cazul în care dorești un anumit parametru să stea întotdeauna pe ultima poziție pentru că, de fapt, acesta este la rândul său o funcție cu rol de callback (va fi apelată in interiorul funcției).
 
@@ -186,6 +186,22 @@ function demoArgs (unu) {
   console.log(arguments[0]); // 10
 };
 demoArgs(10);
+```
+
+În cazul în care ai dori să modifici datele primite prin argumente în interiorul funcției, atunci când codul rulează sub regula strict, nu este posibil.
+
+```javascript
+function test1 (x, y) {
+  arguments[0] = 10;
+  return x + y;
+};
+function test2 (x, y) {
+  "use strict";
+  arguments[0] = 10;
+  return x + y;
+};
+console.log(test1(1,1)); // 11
+console.log(test2(1,1)); // 2
 ```
 
 ## Operatorul spread

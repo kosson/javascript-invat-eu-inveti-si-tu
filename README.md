@@ -18,7 +18,12 @@ Mare parte a codului conține nume de variabile în limba română din dorința 
 
 Colecția nu este una finală și poate suferi multe modificări. Materialele vor fi redactate în Markdown. Cei care doresc alte formate vor putea transforma textele cu ajutorul utilitarului pandoc în formate care să avantajeze obișnuințele proprii de lectură.
 
+Dacă doriți să sprijiniți mai departe munca editorială pentru următoarele două volume, aștept contribuțiile la https://www.patreon.com/kosson.
+Pentru cei care vor să facă cinste cu o cafeluță, puteți să trimiteți una pe paypall.com la adresa de email kosson@gmail.com.
+Materialele acestea plus alte lucruri utile vor avea un spațiu organizat la https://kosson.ro/ieis2 și mai departe la https://ieis2.ro.
+
 ***JavaScript, I learn, you learn*** is a collection of texts meant to shed light on JavaScript topics aiming to become a free educational resource for all those who would like to learn the language.
-The content is in the Romanian language, but all the graphics are using English words enlarging the scope of their usefulness.
+The content is in the Romanian language, but the illustrations convey an universal language easy to grasp. In the near future, I will try developing a visual encoding for the language entities. The aim is to achieve faster a deeep understanding of programming concepts. This will open a new class of educational materials.
+If interested, please support my work at https://www.patreon.com/kosson or simply send me a coffee using paypall.com at kosson@gmail.com.
 
 All the resources are under Creative Commons BY-NC-SA 4.0 license.
