@@ -95,9 +95,68 @@ Returnează `true` dacă evenimentul a fost emis de browser.
 
 Returnează timpul la care a apărut evenimentul.
 
+## Interfețe care depind
+
+O serie de interfețe depind de aceasta pentru a implementa propria funcționare. Acestea sunt:
+
+    AnimationEvent
+    AudioProcessingEvent
+    BeforeInputEvent
+    BeforeUnloadEvent
+    BlobEvent
+    ClipboardEvent
+    CloseEvent
+    CompositionEvent
+    CSSFontFaceLoadEvent
+    CustomEvent
+    DeviceLightEvent
+    DeviceMotionEvent
+    DeviceOrientationEvent
+    DeviceProximityEvent
+    DOMTransactionEvent
+    DragEvent
+    EditingBeforeInputEvent
+    ErrorEvent
+    FetchEvent
+    FocusEvent
+    GamepadEvent
+    HashChangeEvent
+    IDBVersionChangeEvent
+    InputEvent
+    KeyboardEvent
+    MediaStreamEvent
+    MessageEvent
+    MouseEvent
+    MutationEvent
+    OfflineAudioCompletionEvent
+    OverconstrainedError
+    PageTransitionEvent
+    PaymentRequestUpdateEvent
+    PointerEvent
+    PopStateEvent
+    ProgressEvent
+    RelatedEvent
+    RTCDataChannelEvent
+    RTCIdentityErrorEvent
+    RTCIdentityEvent
+    RTCPeerConnectionIceEvent
+    SensorEvent
+    StorageEvent
+    SVGEvent
+    SVGZoomEvent
+    TimeEvent
+    TouchEvent
+    TrackEvent
+    TransitionEvent
+    UIEvent
+    UserProximityEvent
+    WebGLContextEvent
+    WheelEvent
+
 ## Resurse
 
 -   [DOM: Living Standard, 9 mai, 2017](https://dom.spec.whatwg.org)
 -   [MDN - Event.eventPhase](https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase)
 -   [2.2. Interface Event](https://dom.spec.whatwg.org/#interface-event)
 -   [MDN - Event](https://developer.mozilla.org/en-US/docs/Web/API/Event)
+-   [Event reference, MDN](https://developer.mozilla.org/en-US/docs/Web/Events)

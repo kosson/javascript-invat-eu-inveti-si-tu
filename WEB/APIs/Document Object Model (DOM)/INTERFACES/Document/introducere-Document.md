@@ -1,5 +1,7 @@
 # Document
 
+Această interfață permite interacțiunea cu arborele DOM.
+
 Este considerată a fi una din interfețele *fundamentale* așa cum o menționează standardul și reprezintă „întregul document HTML sau XML”. Oferă accesul la toate datele documentului.
 
 Este un document încărcat în browser care oferă accesul la structura DOM-ului.
@@ -10,12 +12,12 @@ Interfața `Document` oferă metodele și proprietățile care sunt comune tutur
 ## Modelul de moștenire al interfeței `Document`
 
 ```mermaid
-graph LR;
+graph RL;
   Document -->|moștenește din| Node;
-  Node((Node)) -->|care moștenește din| EventTarget;
+  Node((Node)) -->|moștenește din| EventTarget;
 ```
 
-Această interfață permite interacțiunea cu arborele DOM.
+Interfața este extinsă de interfața `ParentNode`.
 
 ## Mantre
 
