@@ -60,10 +60,10 @@ Poți mișca „fereastra” pentru a investiga doar o parte a zonei tampon. Să
 let fereastra = new DataView(tampon, 4, 6);
 ```
 
-La momentul în care am aruncat o privire peste datele din zona tampon am găsit câteva proprietăți ale „ferestrei”.
+La momentul în care am aruncat o privire peste datele din zona tampon am găsit câteva proprietăți ale *ferestrei*.
 
-- `buffer`: indică bufferul la care este atașată fereastra
-- `byteOffset`: este implicit setat la valoarea 0.
+- `buffer`: indică bufferul la care este atașată *fereastra*
+- `byteOffset`: este implicit setat la valoarea `0`.
 - `byteLength`: dacă este oferită vreo valoare acestei proprietăți pentru constructorul `DataView`, va seta dimensiunea buffer-ului.
 
 Atenție, investigarea unui buffer folosind o fereastră inițiată prin constructorul `DataView` va fi una limitată doar la acea fereastră cu toate setările sale. Asupra aceluiași buffer poți iniția mai multe ferestre.
@@ -74,3 +74,7 @@ Pentru datele numerice care pot fi scrise într-un tampon de date, constructorul
 - setInt8(byteOffset, value, littleEndian): scrie un număr pe 8 biți de la poziția specificată de `byteOffset`.
 - getUInt8(byteOffset, littleEndian): citește un număr pe 8 biți de la poziția byteOffset, dar care este unsigned.
 - setUInt8(byteOffset, value, littleEndian): scrie un număr.
+
+## Referințe
+
+- [TypedArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray)
