@@ -2,7 +2,7 @@
 
 Este o interfață care permite manipularea layout-ului și a prezentării elementelor `<img>`.
 
-Moștenește proprietățile lui HTMLElement.
+Moștenește proprietățile lui `HTMLElement`.
 
 ```javascript
 // varianta clasică cu callback

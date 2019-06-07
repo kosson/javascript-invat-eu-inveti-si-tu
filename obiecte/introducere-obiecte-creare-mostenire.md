@@ -189,7 +189,7 @@ const obi = new Ceva;
 
 Spunem că instanțiem obiecte de tipul constructorului. Pe cale de consecință, operatorului `instanceof` va indica mereu constructorul. În exemplul oferit, l-am introdus pe `this`. Este nevoie să lămurim câteva aspecte privind aceast cuvânt cheie, care denumește o legătură la un obiect context.
 
-Să ne gândim la o funcție ca la o persoană care privește **bolta celestă** într-o noapte înstelată. Cum ar putea povesti despre toate constelațiile văzute? Cum le-ar putea descrie printr-o singură expresie? Hai, nu e greu, am zis deja... da, da, ai remarcat perfect: **bolta celestă**. Dacă dorim să constrângem la un singur termen care să o identifice, am putea spune foarte simplu **cerul**, nu? Așa este și cuvântul cu înțeles special `this`, care s-ar traduce în română **acesta**. Am putea spune ca tehnică de învățare că this este acest obiect în care mă execut eu acum. 
+Să ne gândim la o funcție ca la o persoană care privește **bolta celestă** într-o noapte înstelată. Cum ar putea povesti despre toate constelațiile văzute? Cum le-ar putea descrie printr-o singură expresie? Hai, nu e greu, am zis deja... da, da, ai remarcat perfect: **bolta celestă**. Dacă dorim să constrângem la un singur termen care să o identifice, am putea spune foarte simplu **cerul**, nu? Așa este și cuvântul cu înțeles special `this`, care s-ar traduce în română **acesta**. Am putea spune ca tehnică de învățare că this este acest obiect în care mă execut eu acum.
 
 Acest cuvânt cheie oferă posibilitatea de a referi proprietăți și metode chiar din interiorul obiectului. Ai putea întreba de ce ar fi nevoie să existe un cuvânt cheie care să facă referirea către membrii obiectului, dacă avem identificatorul obiectului. Răspunsul se leagă de posibilitatea ca un al programator să atribuie obiectul nostru unui alt identificator și în acel moment vei pierde toate referințele interne.
 
@@ -244,7 +244,7 @@ let obiect = new NumescNave('Tiangong-1', "Palatul Celest");
 console.log(obiect);
 ```
 
-Ceea se se remarcă imediat este faptul că rularea funcției `NumescNave` fără `"use strict";` înjectează toate valorile precizate prin sintaxa `this.ceva` direct în obiectul global, care în cazul browserului este `window`. De ce? Pentru că la acesta a fost stabilită legătura implicită pentru valoarea lui `this`. În cazul rulării funcției sub `"use strict";`, motorul JavaScript ar fi semnalat o excepție și ar fi afișat: **Exception: TypeError: this is undefined**. Concluzie: injectarea valorilor nu s-ar mai produce.
+Ceea se se remarcă imediat este faptul că rularea funcției `NumescNave` fără `"use strict";` injectează toate valorile precizate prin sintaxa `this.ceva` direct în obiectul global, care în cazul browserului este `window`. De ce? Pentru că la acesta a fost stabilită legătura implicită pentru valoarea lui `this`. În cazul rulării funcției sub `"use strict";`, motorul JavaScript ar fi semnalat o excepție și ar fi afișat: **Exception: TypeError: this is undefined**. Concluzie: injectarea valorilor nu s-ar mai produce.
 
 ### Legătura prototipală la constructori
 
@@ -263,7 +263,7 @@ Invocarea unei funcții constructor folosind operatorul `new`, declanșează par
 1  Se creează un obiect nou.
 2  Se creează legătura prototipală la obiectul prototype al funcției constructor.
 3  Obiectul generat automat este pasat funcției cu rol de constructor ca fiind obiectul `this` și astfel, din acest moment devine contextul de execuție al funcției constructor invocate. După ce va fi înzestrat cu proprietățile dorite prin execuția corpului funcției constructor, obiectul `this` va fi returnat drept noul obiect.
-4  Dacă funcția constructor nu returnează ceva explicit, atunci înainte de a se închide blocul (`}`) se va returna automat obiectul constituit la pasul 1 și după ce a fost *înzestrat* la pasul 3. În cazul în care funcția constructor returnează ceva explicit, nu se mai creează obiectul.
+4  Dacă funcția constructor nu returnează ceva explicit, atunci înainte de a se închide blocul (`}`) se va returna automat obiectul constituit la pasul 1, după ce a fost *înzestrat* la pasul 3. În cazul în care funcția constructor returnează ceva explicit, nu se mai creează obiectul.
 
 Spuneam că la nevoie poți adăuga în prototipul funcției proprietăți pentru a fi moștenite mai târziu de obiectele create. Să spunem că avem o funcție cu rol de constructor și se instanțiază un obiect. Mai târziu, pentru că este nevoie de o proprietate care să fie moștenită de toate obiectele generate, se poate introduce direct în obiectul `prototype` al funcției și astfel va fi disponibilă și obiectelor instanțiate. Reține că poți introduce metode sau valori și mai târziu, după ce s-a făcut instanțierea.
 
@@ -869,7 +869,7 @@ Astfel, între obiecte se creează această legătură numită *legătură proto
 
 Aceste legături realizează ceea ce numim *moștenirea prototipală* - `prototypal inheritance`. Obiectul preexistent constituie prototipul pentru cel nou creat, care poate adăuga noi membri, noi comportamente. De fapt, vorbim despre o *delegare* pe lanțul prototipal format. Acest lucru înseamnă că atunci când ceri o proprietate care nu există, delegi solicitarea către prototip. Motorul caută referința și returnează o valoare, dacă aceasta este găsită. Dacă nu, se deleagă mai sus cererea, dacă mai există un obiect prototip părinte. Dacă nu mai există vreun părinte, este returnată o excepție. Acest proces de căutare, poate fi vizualizat ca un somon care sare în amonte pragurile unui râu.
 
-Unul din motivele pentru care ai folosi acest *lanț prototipal* este acela de a realiza șabloane care structurează funcționalități prin ascunderea sau expunerea anumitor detalii. Acest lucru este posibil prin introducerea de funcții în prototip. Avantajul major al acestui lucru este că funcția este creată o singură dată în obiectul prototip. 
+Unul din motivele pentru care ai folosi acest *lanț prototipal* este acela de a realiza șabloane care structurează funcționalități prin ascunderea sau expunerea anumitor detalii. Acest lucru este posibil prin introducerea de funcții în prototip. Avantajul major al acestui lucru este că funcția este creată o singură dată în obiectul prototip.
 
 Un avantaj extraordinar pe care-l oferă moștenirea prototipală este că odată cu modificarea obiectului prototip, toate funcționalitățile noi vor fi disponibile tuturor celor care le moștenesc. Poți reutiliza cod prin moștenire folosind lanțul prototipal care se formează între obiecte și care poate fi interogat prin proprietatea `__proto__`. Proprietatea `__proto__` nu este același lucru cu `prototype`. În cazul lui `__proto__`, acesta indică obiectul prototype al constructorului folosit pentru crearea obiectului instanțiat.
 

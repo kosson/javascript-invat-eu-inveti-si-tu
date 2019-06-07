@@ -1,0 +1,1 @@
+# WindowOrWorkerGlobalScope.caches
