@@ -1,6 +1,19 @@
 # Object.create()
 
-Este o metodă propusă de Douglas Crockford. Aceasta creează un obiect nou cu un prototip și proprietăți specificate.
+Este o metodă propusă de Douglas Crockford. Aceasta creează un obiect nou cu un prototip și proprietăți specificate. Pentru a înțelege istoricul și necesitatea acestei metode, vă recomand să citiți secțiunea *Prototype* a capitolului 3 *Object* din cartea sa *JavaScript: The Good Parts*. Următorul fragment de cod are o valoare istorică care oferă înțelegerea profundă a efectelor modernei metode pe care o avem la dispoziție.
+
+```javascript
+if (typeof Object.create !== 'function') {
+  Object.create = function (o) {
+    var F = function () {};
+    F.prototype = o;
+    return new F();
+  };
+}
+```
+
+Este ușor de înțeles faptul că se introducea o nouă metodă obiectului global `Object`, care are rolul să creeze un constructor `F` căruia să-i atașeze un obiect prototip a cărui valoare va fi obiectul pasat noii metode `create`. La final, metoda returnează un obiect constituit prin instanțierea cu `new`.
+
 Permite atribuirea directă a unui prototip unui obiect eliberând prototipul de legătura cu, constructorul.
 
 Metoda primește doi parametri:

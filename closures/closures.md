@@ -1,12 +1,16 @@
 # Closures
 
-O funcție definită în interiorul unei funcții container generează un closure peste mediul lexical existent la momentul definirii. Motorul JavaScript ține evidența mediilor lexicale, fie că acestea sunt la nivel de bloc, la nivel de funcție sau globalul. Reține faptul că declararea variabilelor cu `var` introduce identificatorii în limitele unei funcții container sau în obiectul global ignorând complet blocurile delimitate prin acolade. Declararea variabilelor cu `let` și `const` introduce identificatori doar la nivelul blocului în care se face declararea și în blocurile de cod delimitate prin acolade.
+Motorul JavaScript ține evidența mediilor lexicale, fie că acestea sunt la nivel de bloc, la nivel de funcție sau globalul. Reține faptul că declararea variabilelor cu `var` introduce identificatorii în limitele unei funcții container sau în obiectul global ignorând complet blocurile delimitate prin acolade. Declararea variabilelor cu `let` și `const` introduce identificatori doar la nivelul blocului în care se face declararea și în blocurile de cod delimitate prin acolade.
+
+O funcție definită în interiorul unei funcții container generează un **closure** peste mediul lexical existent la momentul definirii.
 
 Am explorat deja la funcții posibile traduceri în limba română și pentru că ambii termeni identificați: **portiță** și  **breșă** nu sunt tocmai eleganți pentru uzul curent. Mai bine folosim termenul în limba engleză. După ce vom fi explorat mai mult, vom înțelege că este o caracteristică, un mecanism al limbajului de programare și astfel, am putea să ne gândim la acțiunea pe care o implică termenul de **closure**.
 
-Să o luăm încetișor. Primul lucru pe care-l știm despre funcții, este că acestea sunt acțiuni transformatoare asupra datelor pe care le primesc (aplicarea pe argumente de care am pomenit), fie că aceste date sunt *injectate* în funcție prin argumente, fie că sunt disponibile *la liber* în mediul lexical unde a fost declarată funcția. Trebuie să ne aducem mereu aminte de importanța redactării codului și în consecință de locul **unde declarăm funcțiile**. Foarte important este și locul de unde le apelăm pentru că de acolo este posibil să *injectăm* prin argumente date, care sunt necesare doar în locul în care este apelată funcția sau în obiectul în al cărui context a fost invocată.
+Să o luăm încetișor. Primul lucru pe care-l știm despre funcții, este că acestea sunt acțiuni transformatoare asupra datelor pe care le primesc (aplicarea pe argumente de care am pomenit), fie că aceste date sunt *injectate* în funcție prin argumente, fie că sunt disponibile *la liber*, în mediul lexical unde a fost declarată funcția.
 
-O funcție declarată în mediul lexical global, va avea acces la toate proprietățile acestui obiect. Dacă o funcție, va fi declarată într-un bloc de cod sau într-o altă funcție, aceasta va avea acces la tot ce constituie mediul lexical format local de acel bloc de cod sau de funcție.
+Trebuie să ne aducem mereu aminte de importanța redactării codului și în consecință de locul **unde declarăm funcțiile**. Foarte important este și locul de unde le apelăm pentru că de acolo este posibil să *injectăm* prin argumente date. Există scenarii în care aceste date sunt necesare doar în locul în care este apelată funcția sau în obiectul în al cărui context a fost invocată.
+
+O funcție declarată în mediul lexical global, va avea acces la toate proprietățile acestui obiect. Dacă o funcție, va fi declarată într-un bloc de cod sau într-o altă funcție, aceasta va avea acces la tot ce constituie mediul lexical format local de acel bloc de cod sau de funcție. Pe scurt, legătura care se realizează la momentul compilării între funcție și mediul lexical în care a fost declarată, se numește `closure`. E ca dorul de casă. Chiar dacă ești plecat, vei avea mereu o conexiune cu toate lucrurile de acasă pentru că le **ții minte**, știi unde sunt și ce valoare au pentru tine. Dar în același timp ești conectat cu toate lucrurile unde ai ajuns, ceea ce ar fi legătura `this` în cazul executării funcției.
 
 Acum apare minunea: dacă declari o funcție în interiorul altei funcții, pe care o returnezi, vei avea acces la un set de date ce nu pot fi prelucrate direct. Acesta este și motivul pentru care avem acest instrument foarte puternic care este closure-ul. Poți realiza variabile private. Ascunderea unui set de date ce nu poate fi manipulat direct, care poate fi accesat la un moment dat sau dacă este nevoie cu o anumită întârzire, ori pur și simplu să știi că există o structură de date creată în anumite condiții, dar cu care poți interacționa, este ceea ce oferă closure-urile.
 
@@ -89,7 +93,7 @@ cheama('a');              // ceva
 cheama.toString();        // "function (valoare){ console.log(a);}"
 ```
 
-La nevoie, se poate executa funcția returnată fără a mai fi asignată.
+La nevoie, se poate executa funcția returnată fără a mai fi atribuită.
 
 ```javascript
 closureEx()();

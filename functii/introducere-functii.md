@@ -1,10 +1,14 @@
 # Funcții în ECMAScript
 
-Povesteam la capitolul dedicat legăturii `this` că funcțiile sunt precum niște nave care își execută misiunile în contextul Oceanului planetar. Acestea prelucrează date, dar pot fi la rândul lor purtătoare a datelor proprii. De fiecare dată când ne gândim la o funcție, trebuie să privim un obiect. Funcțiile sunt obiecte. Ele în sine sunt valori care pot fi manipulate la fel cum facem cu oricare altă valoare a limbajului.
+Douglas Crockford spunea în lucrarea de căpătâi *JavaScript: The Good Parts* că
+
+> În general, arta programării este să transformi un set de cerințe într-un set de funcții și structuri de date.
+
+Povesteam la capitolul dedicat legăturii `this` că funcțiile sunt precum niște nave, care își execută misiunile în contextul *Oceanului planetar*. Acestea prelucrează date, dar pot fi la rândul lor purtătoare a datelor proprii. De fiecare dată când ne gândim la o funcție, trebuie să privim un obiect. Funcțiile sunt obiecte. Ele în sine sunt valori care pot fi manipulate la fel cum facem cu oricare altă valoare a limbajului.
 
 **Moment ZEN**: O funcție este un obiect care poate fi invocat.
 
-O funcție este declarată folosind cuvântul cheie `function` urmat de un șir de caractere, care este numele funcției urmate de paranteze rotunde. Între paranteze sunt declarați identificatori care constituie argumentele funcției (acestea formează antetul), urmate apoi de acolade ce delimitează blocul de cod ce va fi executat la invocarea funcției.
+O funcție este declarată folosind cuvântul cheie `function`, opțional urmat de un șir de caractere, care este numele funcției urmate de paranteze rotunde. Dacă funcțiile nu primesc nume, le vom clasifica ca *anonime*. Între parantezele rotunde sunt declarați identificatori, care constituie argumentele funcției (acestea formează antetul). În interiorul funcției se transformă în tot atâtea variabile locale. Urmează apoi acolade ce delimitează blocul de cod ce găzduiește un set de enunțuri ce vor fi evaluate la invocarea funcției. Acesta este numit corpul funcției.
 
 ```javascript
 function faCeva (arg1, arg2) {
@@ -36,7 +40,7 @@ Funcțiile sunt unități modulare de execuție a codului. O funcție poate fi p
 
 ## Funcțiile sunt valori
 
-**Moment Zen**: Funcțiile sunt valori în sine care pot fi referențiate printr-un identificator (variabilă).
+**Moment Zen**: Funcțiile sunt valori în sine care pot fi referite printr-un identificator (variabilă).
 
 Funcțiile sunt cunoscute ca fiind de **ordin înalt** (în engleză îi spune **higher order**), ceea ce înseamnă că sunt la rândul lor valori, că pot fi pasate altor funcții, că pot fi returnate ca rezultat al evaluării unei alte funcții, cam tot ce poți face cu oricare altă valoare. Acest aspect face din JavaScript un limbaj foarte potrivit pentru a lucra cu funcțiile într-o paradigmă numită în limba engleză *functional programming*, adică **programare funcțională**.
 
@@ -46,13 +50,13 @@ Pentru a înțelege mecanismele oferite de o funcție în prelucrarea datelor, v
 
 ![](FunctiaLaMomentulExecutiei.png)
 
-Atunci când este invocată o funcție, se creează un nou mediu lexical propriu acelei funcții. Orice funcție va moșteni automat proprietățile și metodele obiectelor interne `Object` și `Function`. Îți mai aduci aminte de capitolul pe care l-am dedicat Genezei și apoi dualității funcție-obiect? Toate acele informații sunt necesare acum pentru a înțelege natura unei funcții. Dacă vei declara o funcție în consola unui browser, și apoi vei scrie numele funcției urmat de operatorul punct, vei vedea că apar deja proprietăți ale acestei funcții. Este semnul că funcția ca  valoare este obiect deja, moștenind proprietăți de la cele două obiecte interne fundamentale `Object` și `Function`.
+Atunci când este invocată o funcție, se creează un nou mediu lexical propriu acelei funcții. Orice funcție va moșteni automat proprietățile și metodele obiectelor interne `Object` și `Function`. Îți mai aduci aminte de capitolul pe care l-am dedicat Genezei și apoi dualității funcție-obiect? Toate acele informații sunt necesare acum pentru a înțelege natura unei funcții. Dacă vei declara o funcție în consola unui browser, și apoi vei scrie numele funcției urmat de operatorul punct, vei vedea că apar deja proprietăți ale acestei funcții. Este semnul că funcția ca valoare este obiect deja, moștenind proprietăți de la cele două obiecte interne fundamentale `Object` și `Function`. Pe scurt, o funcție moștenește proprietățile din obiectul prototipal `Function.prototype`, care la rândul lui moștenește proprietăți din `Object.prototype`.
 
 **Spune standardul**:
 
-> Atunci când se realizează un context de execuție pentru evaluarea unei funcții ECMAScript, se creează un nou Environment Record pentru această funcție, iar legăturile pentru fiecare parametru formal sunt instanțiate în acel Environment Record. Fiecare declarație din corpul funcției este la rândul ei instanțiată. Dacă parametrii formali ai funcției nu includ niciun inițializator de valori implicite, atunci declarațiile din corp sunt instanțiate în același Environment Record ca și parametrii. Dacă inițializatorii de valori implicite există, va fi creat un al doilea Environment Record pentru declarațiile din corp. Parametrii formali și funcțiile sunt inițializate ca parte a FunctionDeclarationInstantiation. Toate celelalte legături sunt inițializate în timpul evaluării corpului funcției. [9.2.12 FunctionDeclarationInstantiation ( func, argumentsList )](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-functiondeclarationinstantiation)
+> Atunci când se realizează un context de execuție pentru evaluarea unei funcții ECMAScript, se creează un nou Environment Record pentru această funcție, iar legăturile pentru fiecare parametru formal sunt instanțiate în acel Environment Record. Fiecare declarație din corpul funcției este la rândul ei instanțiată. Dacă parametrii formali ai funcției nu includ niciun inițializator de valori implicite, atunci declarațiile din corp sunt instanțiate în același Environment Record ca și parametrii. Dacă inițializatorii de valori implicite există, va fi creat un al doilea Environment Record pentru declarațiile din corp. Parametrii formali și funcțiile sunt inițializate ca parte a `FunctionDeclarationInstantiation`. Toate celelalte legături sunt inițializate în timpul evaluării corpului funcției. [9.2.12 FunctionDeclarationInstantiation ( func, argumentsList )](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-functiondeclarationinstantiation)
 
-Funcțiile sunt valori! Conștientizarea acestei afirmații este una crucială pentru înțelegerea în adâncime a limbajului de programare. Mai înainte de a fi executată și astfel, codul ECMAScript conținut să fie evaluat, aceasta este o valoare în sine. Știm deja că ne putem juca cum vrem noi cu o valoare, chiar o putem pasa ca unei alte funcții sau o putem returna dintr-o funcție.
+**Funcțiile sunt valori**! Conștientizarea acestei afirmații este una crucială pentru înțelegerea în adâncime a limbajului de programare. Mai înainte de a fi executată și astfel, codul ECMAScript conținut să fie evaluat, aceasta este o valoare în sine. Știm deja că ne putem juca cum vrem noi cu o valoare, chiar o putem pasa ca unei alte funcții sau o putem returna dintr-o funcție.
 
 Am compus o imagine cu simbolurile pe care le-am folosit și în capitolul dedicat dualității funcție-obiect. Putem urmări cum o funcție primește argumente, care devin parametri. Aceștia sunt colectați într-o structură de date internă funcției numită **arguments**, care este disponibilă la momentul evaluării codului intern.
 
@@ -64,7 +68,7 @@ Aplicarea unei funcții argumentelor sale produce un nou **mediu lexical**, un n
 
 Ca obișnuință, ar fi de dorit să gândești că funcția se aplică pe argumente, atunci când acestea există. În adâncime, trebuie înțeles că acest comportament este posibil pentru că funcțiile sunt pur și simplu sunt **o-bi-ec-te**. Sunt niște obiecte speciale pentru că pur și simplu pot executa codul din interior ori de câte ori se dorește.
 
-**Moment Zen**: O funcție, de fapt, *se aplică* argumentelor pasate care sunt valori, le va prelucra și le va oferi apelantului prin returnare.
+**Moment Zen**: O funcție, de fapt, *se aplică* argumentelor pasate care sunt valori, le prelucrează și le oferă apelantului prin returnare.
 
 Mai observăm din imagine că unei funcții îi sunt puse la dispoziție două lanțuri de conectare cu obiectele în contextul cărora sunt executate. O scurtă paranteză aci. Spuneam din deschiderea lucrării că mai totul în JavaScript este un obiect. Chiar și o funcție, care este un obiect special, la momentul execuției sale lansată în urma unui apel, aceasta nu rulează în vid absolut. Există un obiect pe fundalul căruia aceasta rulează. Vorbim despre un obiect context, cu care funcția noastră stabilește niște legături speciale. Una dintre legături este chiar la proprietățile obiectului context, care sunt accesibile printr-o legătură numită `this`, iar cealaltă este la mediul lexical format prin declararea variabilelor, dar și restul funcțiilor și obiectelor programului prezente ca identificatori în locul unde a fost declarată. Pentru că vorbirăm de mediul lexical, o funcție creează propriul său mediu lexical în momentul evaluării. Dacă un identificator necesar evaluării codului funcției, nu a fost găsit, se va proceda la o căutare *în afara* funcției, în mediul lexical exterior ei în locul unde a fost definită și așa mai departe până când se ajunge la mediul global. Această procedură se numește în limba engleză **scope lookup** și pentru faptul că din bula lexicală a funcției se caută în bula mai mare a mediului lexical ce înconjoară funcția, iar dacă există una superioară, va căuta și în aceea, programatorii au numit acest lucru **scope chain**, cu o traducere în limba română: **căutare pe lanțul mediilor lexicale**.
 
@@ -149,7 +153,7 @@ Cred că ai observat că am folosit operatorul de grupare, care *strânge* enun�
 
 ## Evaluare
 
-Înainte de a merge mai departe, trebuie să facem o diferență clară între apelare și referință. O funcție este apelată prin scrierea identificatorului urmat de `()`, iar referința este doar introducerea identificatorului ceea ce va returna funcția ca valoare, adică chiar conținutul său.
+Înainte de a merge mai departe, trebuie să facem o diferență clară între apelare și referință. O funcție este apelată prin scrierea identificatorului urmat de `()`, iar referința este doar scrierea identificatorului, fiind returnată funcția ca valoare, adică chiar conținutul său.
 
 Nimic din conținutul unei funcții nu produce niciun rezultat până când funcția nu este apelată și evaluată. *Apelare*, *invocare* și *rulare* sunt sinonime și înseamnă același lucru: momentul de inițiere a evaluării codului dintre acolade - **corpul funcției**.
 
@@ -165,7 +169,7 @@ Am vorbit deja despre funcțiile *fat arrow*. În limba română s-ar traduce ca
 (() => 'ceva')(); // ceva
 ```
 
-După cum se observă, sintaxa aplicată este ceva mai specială: `() => 'ceva'`. Fat arows au nevoie de un eveniment care să declanșeze execuția. Pentru a face exemplul să funcționeze, am împachetat funcția într-o structură `()()`, ceea ce are drept efect executarea funcției dintre parantezele de grupare imediat ce a fost compilat codul. În comunitate, aceste structuri care se execută imediat se numesc **Immediately Invoked Function Expressions** - expresii de funcții invocate imediat. Pe scurt: IIFE.
+După cum se observă, sintaxa aplicată este ceva mai specială: `() => 'ceva'`. Fat arrows au nevoie de un eveniment care să declanșeze execuția. Pentru a face exemplul să funcționeze, am împachetat funcția într-o structură `()()`, ceea ce are drept efect executarea funcției dintre parantezele de grupare imediat ce a fost compilat codul. În comunitate, aceste structuri care se execută imediat se numesc **Immediately Invoked Function Expressions** - expresii de funcții invocate imediat. Pe scurt: IIFE.
 
 Pentru că am deschis o fereastră în interiorul funcțiilor, trebuie menționat faptul că returnarea directă a unei expresii are drept efect returnarea valorii, dar dacă expresia este introdusă într-un bloc funcțional, va fi returnat `undefined`.
 

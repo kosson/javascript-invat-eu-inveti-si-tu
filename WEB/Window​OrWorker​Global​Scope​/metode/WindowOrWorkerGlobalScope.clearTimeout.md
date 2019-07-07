@@ -1,1 +1,0 @@
-# WindowOrWorkerGlobalScope.clearTimeout()

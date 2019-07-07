@@ -4,9 +4,9 @@
 
 Standardul spune că **un obiect este un membru al tipului built-in Object** al limbajului. Din punct de vedere al taxonomiei, standardul este clar: *un tip a lui `Object`, care este o entitate internă limbajului nostru*. Însă pentru a realiza natura obiectelor, cităm standardul pentru următoarea lămurire:
 
-> ECMAScript este bazat pe obiecte: limbajul de bază și toate funcționalitățile sunt oferite de obiecte iar un program ECMAScript este un ciorchine de obiecte care comunică.
+> ECMAScript este bazat pe obiecte: limbajul de bază și toate funcționalitățile sunt oferite de obiecte, iar un program ECMAScript este un ciorchine de obiecte care comunică.
 
-Obiectele sunt și ele valori. La aceste valori se ajunge printr-o referință (către o locație în memorie unde este stocat), în contrast cu valorile primitive care sunt însăși valoarea. Putem pune primitivele în mai multe zone de memorie, fiecare având identificatori diferiți. Obiectele ocupă o zonă de memorie și nu poate fi copiate în alte zone de memorie. Pur și simplu, sunt unice, așa cum o țară este unică în lume cu relieful, obiceiurile și sistemul de valori. Dar pentru a trimite o scrisoare cuiva în lume, trebuie să cunoști țara, orașul, strada și numele persoanei. Așa și cu obiectele. Pentru a folosi acea zonă de memorie ocupată de obiect, vom folosi referințele către aceasta.
+Obiectele sunt și ele valori. La aceste valori se ajunge printr-o referință (către o locație în memorie unde este stocat), în contrast cu valorile primitive care sunt însăși valoarea. Putem pune primitivele în mai multe zone de memorie, fiecare având identificatori diferiți. Obiectele ocupă o zonă de memorie și nu pot fi copiate în alte zone de memorie. Pur și simplu, sunt unice, așa cum o țară este unică în lume cu relieful, obiceiurile și sistemul de valori. Dar pentru a trimite o scrisoare cuiva în lume, trebuie să cunoști țara, orașul, strada și numele persoanei. Așa și cu obiectele. Pentru a folosi acea zonă de memorie ocupată de obiect, vom folosi referințele către aceasta.
 
 Privind la modul în care sunt organizate datele într-un obiect, vom remarca că acestea sunt colecții de proprietăți identificabile printr-un nume, fiind strânse împreună fără a avea o ordine internă. Este ca și cum ai strânge jucării de același tip într-o cutie după o zi de distracție. Obiectele sunt structuri de date dinamice ale căror proprietăți se modifică. Atunci când acest lucru se întâmplă spunem că obiectul își modifică starea.
 
@@ -31,7 +31,7 @@ Atunci când un obiect este creat, toate caracteristicile sale sunt moștenite d
 
 ### Alcătuirea obiectelor
 
-Obiectele au **proprietăți** și **metode**. Împreună formează membrii obiectului.
+Obiectele au **proprietăți** și **metode**. Împreună formează **membrii** obiectului.
 
 Proprietățile pot fi numere, boolean-uri, șiruri de caractere, funcții sau chiar obiecte. Proprietățile sunt valori, adică sunt **ceva**, iar metodele **fac ceva**. Membrii unui obiect constituie *semnătura* obiectului. Fiecare obiect are o *semnătură* distinctă. Dacă dorești să creezi mai multe obiecte asemănătoare, ai putea să le scrii sau să le generezi, dar în cazul acesta, cel mai înțelept este să folosești constructorii sau funcții care returnează obiecte. Astfel, elimini repetițiile inutile, care taxează resursele de calcul.
 
@@ -39,9 +39,18 @@ Proprietățile pot fi numere, boolean-uri, șiruri de caractere, funcții sau c
 
 Acum poți să-ți pui o întrebare foarte simplă: cât timp *trăiește* un obiect? Mai corect ar fi, cât timp este disponibil un obiect programului? Un obiect este disponibil atâta vreme cât există cel puțin o referință către acesta sau către o proprietate a sa. Ce se întâmplă când nu mai există nicio referință? Zona de memorie este eliberată de un mecanism intern motorului denumit în limba engleză *garbage collector*. În această lucrare veți mai întâlni expresia *colectat la gunoi*, ceea ce implică chiar acest proces de eliberare a memoriei care este unul automat. Dacă un obiect oferă metode altuia prin mecanismul de moștenire prototipală, acesta nu va fi colectat la gunoi pentru că de el depind alte obiecte care lucrează cu metode sau valori pe care le apelează din lanțul prototipal format. Acest tip de referință este una implicită. Atunci când un obiect face referințe către proprietățile unui alt obiect, spunem că realizează o referință explicită. Atunci când ambele referințe nu mai există, intervine mecanismul de colectare la gunoi și memoria este eliberată.
 
+Obiectele sunt pasate ca valori prin referință. Înseamnă că ceea ce pasăm în program este o adresă către același obiect. Nu se fac copii ale obiectului atunci când pasăm unei funcții identificatorul său, de exemplu.
+
+```javascript
+var obi1 = {}; let obi2 = {}; const obi3 = {};
+// cei trei identificatori creează câte un obiect unic, distinct.
+var obiA = obiB = obiC = {};
+// cei trei identificatori sunt tot atâtea referințe către același obiect
+```
+
 ### Reguli de redactare
 
-Pentru a introduce o proprietate într-un obiect, pur și simplu vei avea obiectul marcat prin acolade, iar în interior vei introduce identificatori urmați de valoarea care se va delimita prin două puncte: `{a: 'ceva'}`.
+Pentru a introduce o proprietate într-un obiect, pur și simplu vei avea obiectul marcat prin acolade, iar în interior, vei introduce identificatori urmați de valoarea care se va delimita prin două puncte: `{a: 'ceva'}`.
 
 Toate valorile text vor fi introduse în obiecte între ghilimele simple, iar restul valorilor așa cum sunt ele. Dacă nu sunt între ghilimele, înseamnă că avem identificatorii altor valori. Am putea introduce textul folosind și ghilimelele duble, dar dacă în text vor fi folosite ghilimelele duble (valori într-un CSV), instantaneu am avea o mare problemă. Motorul ar considera că, la primele ghilimele duble ale textului, se încheie declarația valorii. Proprietățile se redactează precum listele, fiind delimitate prin virgulă. Atunci când folosim operatorul `new`, în limbajul programatorilor spunem că am creat o instanță a unui obiect.
 
@@ -57,7 +66,9 @@ obi3.a = 'cineva';
 
 Exemplul oferit înfățișează cea mai întâlnită notație pentru crearea obiectelor pe care o numim *literală*. Vei observa că obiectele sunt declarate cu un identificator al unei variabile `const`.
 
-Modul de a adăuga proprietăți noi, fără a interveni asupra constructorului, este unic, fiind o marcă a limbajului de programare JavaScript. Este și ceea ce îl face plăcut în lucru prin abordarea directă.
+Modul de a adăuga proprietăți noi, fără a interveni asupra constructorului, este unic, fiind o marcă a limbajului de programare JavaScript. Este și ceea ce îl face plăcut în lucru prin abordarea directă. Douglas Crockford indică acest avantaj al limbajului, care oferă independență opus constrângerilor pe care o clasă îl impune privind numele proprietăților și tipul lor.
+
+Obiectele pot conține la rândul lor alte obiecte, fapt care le face pretabile pentru reprezentarea de înregistrări complexe, realizând adevărați arbori de date.
 
 #### Sintaxa identificatorilor
 
@@ -116,16 +127,16 @@ Aceste metode, de fapt, aceste **rețete** prestabilite, pot fi și ele alterate
 
 ## Mantre
 
--   ECMAScript vine cu obiectele sale din start care se numesc obiecte `built-in` în care este inclus și `global object` - obiectul global.
--   Totul în JavaScript poate avea comportamentul unui obiect cu două excepții: `null` și `undefined`.
+-   ECMAScript vine cu obiectele sale din start, care se numesc obiecte `built-in`, fiind inclus și `global object` - obiectul global.
+-   Totul în JavaScript poate avea comportamentul unui obiect exceptând: `null` și `undefined`.
 -   Toate obiectele în JavaScript descind din `Object`.
--   Toate obiectele moștenesc metode și proprietăți din `Object.prototype`, iar acestea pot fi suprascrise sau poți adăuga propriile proprietăți și metode.
+-   Toate obiectele moștenesc metode și proprietăți din `Object.prototype`, dar acestea pot fi suprascrise sau poți adăuga propriile proprietăți și metode.
 -   În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype. Acest obiect este gol și este creat de constructorul lui `Object()`.
 -   Fiecare funcție obiect are un obiect prototip diferit.
 -   Un obiect poate fi creat cu `new Object()`:
-  -1 acestă modalitate **nu va crea și constructor**.
-  -2 Accesarea `numeObiect.__proto__.constructor` răspunde cu `function Obiect()` la care s-a ajuns prin căutarea în lanțul prototipal.
--   O funcție apelată cu `new` în fața sa este un constructor.
+    1. Acestă modalitate **nu va crea și constructor**.
+    2. Accesarea `numeObiect.__proto__.constructor` răspunde cu `function Obiect()` la care s-a ajuns prin căutarea în lanțul prototipal.
+-   O funcție apelabilă cu `new` în fața sa este un constructor.
 
 ## Crearea obiectelor
 
@@ -189,7 +200,7 @@ const obi = new Ceva;
 
 Spunem că instanțiem obiecte de tipul constructorului. Pe cale de consecință, operatorului `instanceof` va indica mereu constructorul. În exemplul oferit, l-am introdus pe `this`. Este nevoie să lămurim câteva aspecte privind aceast cuvânt cheie, care denumește o legătură la un obiect context.
 
-Să ne gândim la o funcție ca la o persoană care privește **bolta celestă** într-o noapte înstelată. Cum ar putea povesti despre toate constelațiile văzute? Cum le-ar putea descrie printr-o singură expresie? Hai, nu e greu, am zis deja... da, da, ai remarcat perfect: **bolta celestă**. Dacă dorim să constrângem la un singur termen care să o identifice, am putea spune foarte simplu **cerul**, nu? Așa este și cuvântul cu înțeles special `this`, care s-ar traduce în română **acesta**. Am putea spune ca tehnică de învățare că this este acest obiect în care mă execut eu acum.
+Să ne gândim la o funcție ca la o persoană care privește **bolta celestă** într-o noapte înstelată. Cum ar putea povesti despre toate constelațiile văzute? Cum le-ar putea descrie printr-o singură expresie? Hai, nu e greu, am zis deja... da, da, ai remarcat perfect: **bolta celestă**. Dacă dorim să constrângem la un singur termen care să o identifice, am putea spune foarte simplu **cerul**, nu? Așa este și cuvântul cu înțeles special `this`, care s-ar traduce în română **acesta**. Am putea spune ca tehnică de învățare că `this` este acest obiect în care mă execut eu acum.
 
 Acest cuvânt cheie oferă posibilitatea de a referi proprietăți și metode chiar din interiorul obiectului. Ai putea întreba de ce ar fi nevoie să existe un cuvânt cheie care să facă referirea către membrii obiectului, dacă avem identificatorul obiectului. Răspunsul se leagă de posibilitatea ca un al programator să atribuie obiectul nostru unui alt identificator și în acel moment vei pierde toate referințele interne.
 
@@ -207,7 +218,7 @@ obi1.b(); // undefined
 // referința către funcție, corect?
 ```
 
-Alternativa corectă este cea a referirii obiectului din interiorul său folosind `this`. Astfel, la momentul unei evaluări a unei expresii, motorul va ști exact faptul că te referi la el și că acesta trebuie să ofere valorile de lucru. This este o legătură cu mediul lexical al obiectului context, este o adresă internă a obiectului care trimite la el însuși fără a folosi identificatorul.
+Alternativa corectă este cea a referirii obiectului din interiorul său folosind `this`. Astfel, la momentul unei evaluări a unei expresii, motorul va ști exact faptul că te referi la el și că acesta trebuie să ofere valorile de lucru. `This` este o legătură cu mediul lexical al obiectului context, este o adresă internă a obiectului care trimite la el însuși fără a folosi identificatorul.
 
 ```javascript
 const obi = {
@@ -222,7 +233,7 @@ Termenul stabilește și *conectarea* unei funcții cu obiectul și mediul forma
 
 Reține că referința `this` este strict legată de *locul* în care a fost apelată funcția, nu de *locul* unde a fost declarată aceasta. Sunt două lucruri distincte. Dacă nu le vei percepe astfel încă de acum, te vei lovi de multe erori și nu vei înțelege în profunzime anumite comportamente.
 
-#### this și constructorii în obiectul global
+#### `this` și constructorii în obiectul global
 
 Am văzut deja cum funcțiile pot returna obiecte, aceasta fiind o modalitate de a le crea. Dar atunci când ai nevoie de mai multă finețe în compunerea viitorului obiect, vei folosi funcțiile din nou în postura de constructori. Un constructor zămislește obiecte numai folosind operatorul `new`. Dacă nu o invoci cu `new`, chiar dacă este declarată cu ținta de a construi obiecte, aceasta se va comporta ca o funcție simplă cu toate consecințele rulări în acest mod. Aceste mecanism comportamental dual este chiar un avantaj oferit de limbaj. Cu ajutorul constructorilor, de fapt alcătuiești semnătura viitoarelor obiecte. Te vei întreba care este mecanismul magic prin care o funcție poate crea un obiect? Nicio magie, aici: pur și simplu, funcțiile sunt și ele obiecte!
 
@@ -256,7 +267,7 @@ Obiectele-funcții au la rândul lor o proprietate numită `prototype`. Această
 
 > Fiecare obiect creat de un constructor are o referință implicită (numită prototipul obiectului) către valoarea proprietății «prototype» a constructorului.
 
-#### Ce se întâmplă când folosești new
+#### Ce se întâmplă când folosești `new`
 
 Invocarea unei funcții constructor folosind operatorul `new`, declanșează parcurgerea unor etape esențiale. La final, motorul creează un obiect. Reține faptul că acest nou obiect trebuie referit printr-o expresie de tipul `const obiNou = new FacObiecte();`. Când ajunge la `new`, motorul JavaScript înțelege că este momentul să parcurgă etapele:
 
@@ -367,7 +378,7 @@ let obiectNou = new VehiculSpatial('ISS'); // { nume: "ISS", tip: "vehicul" }
 let obiectPacalitor = VehiculSpatial.call(obiectNou, 'Soyuz'); // Error: Funcția are rol de constructor! Invocă cu new
 ```
 
-Funcția are rol de constructor! Invocă cu new pentru a crea obiectul.
+Funcția are rol de constructor! Invocă cu `new` pentru a crea obiectul.
 
 #### Manipularea indirectă a valorilor
 
@@ -480,7 +491,7 @@ const aplicatie = aplicatie || {};
 
 În fragmentul de mai sus am apelat la o expresie de inițializarea a unei aplicații, care prin utilizarea operatorului logic `SAU`, va verifica existența unui identificator `aplicatie`, iar dacă acesta nu există, va fi creat un obiect care să fie containerul a ceea ce va fi. Această expresie este o practică foarte des întâlnită pentru a **rezerva** un *nume de domeniu* (**namespace**) pentru propria aplicație.
 
-### Crearea obiectelor cu Object.create()
+### Crearea obiectelor cu `Object.create()`
 
 Această metodă a obiectului intern fundamental `Object` a fost introdusă odată cu versiunea ES5 a standardului. Permite atribuirea directă a unui prototip unui obiect, eliberând prototipul din legătura sa cu propriul constructor, dacă acest lucru este dorit. Prin pasarea valorii `null`, ai posibilitatea să creezi un obiect care să nu aibă legătură prototipală intermediată. Foarte interesant, nu? Legătura se face automat la obiectul prototip a lui `Object`.
 
@@ -688,13 +699,15 @@ const obiNou = construiesteObi(1, 2);
 
 #### Folosirea operatorul punct
 
-Englezul îi spune **dot notation** și este cea mai facilă modalitate de a adăuga proprietăți unui obiect existent cu mențiunea ca acel obiect să nu fie înghețat sau protejat total la scriere.
+Englezul îi spune **dot notation** (*notație folosind punctul*) și este cea mai facilă modalitate de a adăuga proprietăți unui obiect existent cu mențiunea ca acel obiect să nu fie înghețat sau protejat total la scriere.
 
 ```javascript
 const newObj = {};            // Creează obiectul
 newObj.oCheie = 'Salutare'; // Scrie proprietăți
 let cheie = newObj.oCheie;  // Accesează proprietățile
 ```
+
+Posibilitatea de a adăuga în mod dinamic proprietăți dacă acestea nu există, este o altă caracteristică puternică a limbajului.
 
 #### Folosirea parantezelor drepte
 
@@ -704,7 +717,7 @@ newObj['oCheie'] = 'Salutare';  // Scrie proprietăți
 let cheie = newObj['oCheie'];   // Accesează proprietățile
 ```
 
-#### Folosirea metodei Object.defineProperty()
+#### Folosirea metodei `Object.defineProperty()`
 
 Această variantă de a introduce proprietăți într-un obiect este de o forță colosală pentru că astfel, poți controla atributele fiecărei proprietăți introduse.
 
@@ -718,7 +731,7 @@ Object.defineProperty(newObj, 'numeCheieNoua', {
 });
 ```
 
-#### Folosirea metodei Object.defineProperties()
+#### Folosirea metodei `Object.defineProperties()`
 
 Această metodă este utilizată în cazul în care trebuie introduse mai multe proprietăți deodată.
 
@@ -855,23 +868,31 @@ for ( cheie in obiect ) { console.log( cheie, obiect[cheie] ); };
 
 Standardul oferă definiția prototipului: *obiect al cărui proprietăți sunt puse la dispoziția altor obiecte*.
 
+**Moment Zen**: Un obiect este întotdeauna legat de un obiect prototip la ai cărui membri are acces.
+
 Nota atașată definiției este și ea foarte valoroasă pentru lămuririle pe care le aduce:
 
 > Atunci când un constructor creează un obiect, acel obiect va referi automat proprietatea `prototype` a constructorului cu scopul de a rezolva referințele proprietăților. Proprietatea `prototype` a constructorului poate fi referită de expresia `constructor.prototype`. Proprietățile adăugate prototipului unui obiect sunt puse la dispoziția tuturor obiectelor care accesează prototipul prin moștenire. Alternativa este crearea unui nou obiect având un prototip specificat explicit prin utilizarea funcției interne `Object.create`.
 
-Pentru a înțelege cu adevărat natura și specificitățile limbajului de programare JavaScript, trebuie să fie înțeles modul în care proprietățile unui obiect sunt *moștenite* de un altul. Nu uita nicio secundă faptul că JavaScript este o continuă comunicare între diferite obiecte, fie că acestea sunt cele interne, fie că sunt cele create de noi. Simplificând în tușe foarte groase, creatorii limbajului au dorit o modelare a structurilor de prelucrare a datelor după modul în care lumea reală funcționează: copiii au părinți, iar aceștia moștenesc caracteristicile lor, pe lângă cele care definesc propria persoană.
+Pentru a înțelege cu adevărat natura și specificitățile limbajului de programare JavaScript, trebuie să fie înțeles modul în care proprietățile unui obiect sunt *moștenite* de un altul. Un program JavaScript care rulează este o continuă comunicare între diferite obiecte, fie că acestea sunt cele interne, fie că sunt cele create de noi. Simplificând în tușe foarte groase, creatorii limbajului au dorit o modelare a structurilor de prelucrare a datelor după modul în care lumea reală funcționează: copiii au părinți, iar aceștia moștenesc caracteristicile lor, pe lângă cele care definesc propria persoană.
 
 **Moment Zen**: JavaScript este un limbaj bazat pe moștenire prototipală - prototypal inheritance
 
 În alte limbaje de programare așa cum este Java, de exemplu, pentru a genera un obiect ai nevoie de un fragment de cod, care are rolul de plan de construcție pentru viitoarele obiecte. Pur și simplu este o secvență de cod care descrie valorile și tipul lor, fiind proprietățile viitorului obiect.
 
-Astfel, între obiecte se creează această legătură numită *legătură prototipală*. Intern, obiectele mențin legătura cu obiectul prototipal prin intermediul unei proprietăți `[[Prototype]]`, care va indica obiectul prototipal de la care acesta moștenește. De exemplu, atunci când se instanțiază obiecte cu `new`, proprietatea prototype a constructorului va fi păstrată ca referință în slotul `[[Prototype]]` al obiectului instanțiat. Pentru a accesa valoarea acestei proprietăți va trebui să fie folosită metoda `Object.getPrototypeOf`.
+Astfel, între obiecte se creează această legătură numită *legătură prototipală*. Intern, obiectele mențin legătura cu obiectul prototipal prin intermediul unei proprietăți `[[Prototype]]`, care va indica obiectul prototipal de la care acesta moștenește. De exemplu, atunci când se instanțiază obiecte cu `new`, proprietatea `prototype` a constructorului va fi păstrată ca referință în slotul `[[Prototype]]` al obiectului instanțiat. Pentru a accesa valoarea acestei proprietăți va trebui să fie folosită metoda `Object.getPrototypeOf`.
 
-Aceste legături realizează ceea ce numim *moștenirea prototipală* - `prototypal inheritance`. Obiectul preexistent constituie prototipul pentru cel nou creat, care poate adăuga noi membri, noi comportamente. De fapt, vorbim despre o *delegare* pe lanțul prototipal format. Acest lucru înseamnă că atunci când ceri o proprietate care nu există, delegi solicitarea către prototip. Motorul caută referința și returnează o valoare, dacă aceasta este găsită. Dacă nu, se deleagă mai sus cererea, dacă mai există un obiect prototip părinte. Dacă nu mai există vreun părinte, este returnată o excepție. Acest proces de căutare, poate fi vizualizat ca un somon care sare în amonte pragurile unui râu.
+**Moment Zen**: Toate obiectele literale, moștenesc din obiectul prototipal `Object.prototype`.
+
+Aceste legături realizează ceea ce numim *moștenirea prototipală* - **prototypal inheritance**. Obiectul preexistent constituie prototipul pentru cel nou creat, care poate adăuga noi membri, noi comportamente. De fapt, vorbim despre o *delegare* pe lanțul prototipal format. Acest lucru înseamnă că atunci când ceri o proprietate care nu există, delegi solicitarea către prototip. Motorul caută referința și returnează o valoare, dacă aceasta este găsită. Dacă nu, se deleagă mai sus cererea, dacă mai există un obiect prototip părinte. Dacă nu mai există vreun părinte, este returnată o excepție. Acest proces de căutare, poate fi vizualizat ca un somon care sare în amonte pragurile unui râu.
 
 Unul din motivele pentru care ai folosi acest *lanț prototipal* este acela de a realiza șabloane care structurează funcționalități prin ascunderea sau expunerea anumitor detalii. Acest lucru este posibil prin introducerea de funcții în prototip. Avantajul major al acestui lucru este că funcția este creată o singură dată în obiectul prototip.
 
-Un avantaj extraordinar pe care-l oferă moștenirea prototipală este că odată cu modificarea obiectului prototip, toate funcționalitățile noi vor fi disponibile tuturor celor care le moștenesc. Poți reutiliza cod prin moștenire folosind lanțul prototipal care se formează între obiecte și care poate fi interogat prin proprietatea `__proto__`. Proprietatea `__proto__` nu este același lucru cu `prototype`. În cazul lui `__proto__`, acesta indică obiectul prototype al constructorului folosit pentru crearea obiectului instanțiat.
+Un avantaj extraordinar pe care-l oferă moștenirea prototipală este că odată cu modificarea obiectului prototip, toate funcționalitățile noi vor fi disponibile instantaneu tuturor celor care le moștenesc.
+
+**Moment Zen**: Modificarea obiectului prototipal implică reflectarea instantanee în obiectele care moștenesc din acesta.
+
+Poți reutiliza cod prin moștenire folosind lanțul prototipal care se formează între obiecte și care poate fi interogat prin proprietatea `__proto__`. Proprietatea `__proto__` nu este același lucru cu `prototype`. În cazul lui `__proto__`, acesta indică obiectul prototype al constructorului folosit pentru crearea obiectului instanțiat.
 
 ```javascript
 const obi = {ceva: 'salve'};// crearea unui obiect
@@ -908,7 +929,7 @@ Folosirea moștenirii prototipale introduce o ierarhie, o taxonomie prealabilă 
 
 De fapt, se poate vorbi de o *delegare comportamentală* și nu de o moștenire în sensul clasic. Obiectele stabilesc legături prototipale prin care se pot face delegări pe lanțul prototipal atunci când se caută ceva.
 
-Spune standardul:
+**Spune standardul**:
 
 > Toate **obiectele ordinare** au «un slot intern» numit `[[Prototype]]`.
 
@@ -919,9 +940,9 @@ Toate obiectele comune au *un slot intern* numit `[[Extensible]]`, care controle
 În cazul unui `[[Extensible]]` cu valoarea `false`, valoarea slotului intern `[[Prototype]]` a obiectului, nu poate fi modificată. În plus, de vreme ce a fost pusă pe `false`, nu o mai poți modifica la `true`.
 
 
-#### Introdu în prototip
+#### Modificarea obiectului prototipal
 
-Acesta este cazul simplu de moștenire care se poate realiza. Dacă avem un obiect, folosești metoda `create` a obiectului intern `Object` pentru cazul special în care ai nevoie să deturnezi legătura implicită la obiectul prototipal setat de motor și să pui alt obiect în loc cu rol de prototip.
+Acesta este cazul simplu de moștenire care se poate realiza. Dacă avem un obiect, folosești metoda `create()` a obiectului intern `Object` pentru cazul special în care ai nevoie să deturnezi legătura implicită la obiectul prototipal setat de motor și să pui alt obiect cu rolul de prototip.
 
 ```javascript
 const obiect = {};
@@ -1025,7 +1046,7 @@ Object.getPrototypeOf(obiect2);
 
 #### B. Crearea unui obiect literal
 
-Prin crearea directă a unui obiect literal, se generează o legătură automată către prototipul impus de `Object.prototype`
+Prin crearea directă a unui obiect literal, se generează o legătură automată către prototipul impus de `Object.prototype`.
 
 ```javascript
 const matrita = {ceva: 1};
@@ -1053,13 +1074,13 @@ Object.getPrototypeOf(obiect2); // Object { , 15 more… }
 Object.getPrototypeOf(obiect2) === Object.prototype; // true
 ```
 
-### Apelarea unei metode din prototype, clasic și cu super
+### Apelarea unei metode din `prototype`, clasic și cu `super`
 
-Uneori ai nevoie să accesezi direct metode sau valori din obiectul prototip de la care moștenești. Soluția *clasică* până la varianta curentă a standardului era să *obții* obiectul prototip de la care moștenește al tău aplicând `Object.getPrototypeOf(this)` chiar pe `this`, iar apoi obținând această referință, vei aplica metoda, dar cu apelare prin `call()` pe obiectul context în care evoluezi în acest moment.
+Uneori ai nevoie să accesezi direct metode sau valori din obiectul prototip de la care moștenești. Soluția *clasică* până la varianta curentă a standardului era să *obții* obiectul prototip de la care moștenește al tău aplicând `Object.getPrototypeOf(this)` chiar pe `this`, iar apoi obținând această referință, vei aplica metoda, dar cu apelare prin `call()` pe obiectul context.
 
 ```javascript
 Object.getPrototypeOf(this).numeMetodaDinPrototip.call(this); // varianta ES5
-super.numeMetodaDinPrototip() // varianta ES6
+super.numeMetodaDinPrototip();                                // varianta ES6
 ```
 
 După cum observi, această metodă veche a fost prescurtată la `super`, ceea ce reduce din verbozitate. Pentru cei cu ochiul ager, nu-i așa că aduce nițel a Java? `super` este o referință către obiectul prototip al obiectului de lucru curent. Este echivalentul lui `Object.getPrototypeOf(this)`. Nu uita faptul că `Object.getPrototypeOf()` returnează valoarea din proprietatea internă `[[Prototype]]`. Orice referință la `super` folosește proprietatea internă `[[HomeObject]]` pentru a determina pașii următori cum ar fi `Object.getPrototypeOf()` asupra valorii stocate de `[[HomeObject]]` cu scopul de a obține, de fapt prototipul.
@@ -1427,7 +1448,7 @@ console.log(rezultat.oriDoi()); // 4
 
 Este observabil cu cât efort s-a realizat acest lucru. Mai întâi am executat funcția `Părinte` în contextul lui `Copil`, pasându-i `this` pentru a seta corect contextul de execuție, adică în interiorul lui `Copil`. Au fost pasate atributele așteptate de `Părinte`. A trebuit să *rescriem* obiectul prototip al lui `Copil`, setându-l artificial la cel pe care dorim să-l moștenim folosind `Object.create()` în acest sens. A trebuit să facem un pas suplimentar setând proprietatea `constructor` să trimită înapoi la `Copil` pentru a consolida originea sa.
 
-#### extends și super
+#### `extends` și `super`
 
 În cazul claselor, mare parte din operațiunile complexe ale derivării sunt rezolvate prin introducerea sintagmei `extends` în declarația clasei pe care o dorești a fi derivata alteia. Ceea ce realizează este și abstractizarea funcționalităților unei clase, care va fi privită de cele derivate din ea ca un model de urmat privind comportamentele de bază. Similar copiilor care privesc și copiază comportamentele părinților, clasele, care extind altele, vor avea acces la metodele și proprietățile părintelui prin mecanismul de moștenire, care se va stabili automat. Putem afirma despre o clasă de la care se derivează că se comportă ca o interfață. O interfață fiind setul de date și funcționalități disponibil tuturor copiilor, dar care poate fi modificat de aceștia.
 
@@ -1545,9 +1566,9 @@ Toate metodele din obiectul prototip al lui Array sunt disponibile noului obiect
 Cel mai la îndemână exemplu sunt nodurile DOM. Parcurgerea (traversing) DOM-ului se numește „walking the DOM”.
 DOM-ul este o colecție de noduri. Cel mai adesea pentru accesarea informației din nodurile de interes, mai întâi acestea trebuie identificate. Se folosesc clasicele:
 
--   document.getElementById("#idfolosit"),
--   document.getElementsByTagName,
--   document.querySelector(pot fi tag-uri, class, id-uri, attributes, pseudoclase, elemente).
+-   `document.getElementById("#idfolosit")`,
+-   `document.getElementsByTagName`,
+-   `document.querySelector(`pot fi tag-uri, class, id-uri, attributes, pseudoclase, elemente`)`.
 
 ```javascript
 "use strict";
@@ -1704,9 +1725,9 @@ afisezCeva({x: 10, y: 20}); // "10 și 20"
 
 Am stabilit deja faptul că atunci când ai nevoie să mergi la originile unui anumit obiect, adică să identifici cum a fost creat, în cazul celor care au fost instanțiate în baza unui constructor, vom testa acest lucru folosind operatorul `instanceof`. Acest operator va indica prin `true` sau `false`, dacă un obiect este de tipul unui anumit constructor. În cazul obiectelor care au fost create folosind o declarație literală sau folosind constructorul intern `Object`, relația va fi dezvăluită prin interogarea proprietății `.constructor.name`, care va indica `Object`, iar în cazul constructorilor numele funcției cu rol de constructor. Pentru că proprietatea `name` a proprietății `constructor` poate fi suprascrisă, buna practică spune ca testarea să se facă folosind operatorul `instanceof`.
 
-### Testare cu operatorul in
+### Testare cu operatorul `in`
 
-Pentru a testa dacă o proprietate există se poate folosi operatorul `in`. Problema cu `in` este aceea că ia în calcul și ceea ce este în prototip.
+Pentru a testa dacă o proprietate există se poate folosi operatorul `in`. Problema cu `in` este aceea că ia în calcul și ceea ce este în obiectul prototipal din care se moștenește.
 
 ```javascript
 'altaProprietate' in obiect; // true
@@ -1716,7 +1737,7 @@ Pentru a testa dacă o proprietate există se poate folosi operatorul `in`. Prob
 'proprietate' in obiect; // true
 ```
 
-### Testare cu Object.hasOwnProperty
+### Testare cu `Object.hasOwnProperty()`
 
 Pentru a verifica dacă o proprietate aparține obiectului se va folosi `Object.hasOwnProperty()`:
 
@@ -1726,7 +1747,7 @@ obiect.hasOwnProperty('proprietate'); // false
 obiect.hasOwnProperty('toString'); // false
 ```
 
-### Testare cu getOwnPropertyNames
+### Testare cu `getOwnPropertyNames`
 
 Această metodă poate fi utilizată pentru a extrage informațiile care descriu un obiect. Mă refer la faptul că uneori avem nevoie să aflăm tot ce se poate afla despre un obiect pentru a ne face o idee generală despre ce oferă. Să vedem cum am putea obține toate informațiile despre un obiect.
 
@@ -1744,7 +1765,7 @@ console.log( Object.getOwnPropertyNames(String).filter( function (p) {
 
 Pentru obiecte care nu sunt foarte stufoase, se poate folosi cu succes și `console.dir(nume_obiect)`.
 
-### Testare cu for...in
+### Testare cu `for...in`
 
 Dacă folosești un `for...in` vei obține toate cheile, adică și pe cele din prototip. Deci, nu funcționează corect. De ce se întâmplă acest lucru? Pentru că sunt luate în considerare și proprietățile moștenite prin prototip, care sunt setate ca `enumerable`. Motivul pentru care proprietățile lui `Object` nu apar este că acestea nu sunt `enumerable`.
 
@@ -1894,4 +1915,4 @@ cerc1.arie(); //
 -   [Memory Management](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management)
 -   [Object-oriented JavaScript: A Deep Dive into ES6 Classes](https://www.sitepoint.com/object-oriented-javascript-deep-dive-es6-classes/)
 -   [What is the definition of “interface” in object oriented programming](https://stackoverflow.com/questions/2866987/what-is-the-definition-of-interface-in-object-oriented-programming)
--   [](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+-   [Classes, MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)

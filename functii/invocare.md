@@ -1,6 +1,8 @@
 # Invocarea funcțiilor
 
-La momentul începerii execuției codului, toate funcțiile declarate cu `function` există deja în mediul lexical (vezi etapa de compilare) și sunt atribuite identificatorilor ca valori. Acest lucru este valabil doar pentru declarațiile de funcții (**function declaration**), nu și pentru **expresiile de funcții**. Expresiile de funcții și **arrow functions** nu fac parte din această secvență, fiind create la momentul în care **execuția** ajunge unde sunt declarate și le evaluează pentru a atribui o valoare identificatorului din stânga egalului. Invocarea funcțiilor se face prin operatorul `()`. La invocare se creează un nou context de execuție, care ajunge în stiva apelurilor (*call-stack*).
+La momentul începerii execuției codului, toate funcțiile declarate cu `function` există deja în mediul lexical (vezi etapa de compilare) și sunt atribuite identificatorilor ca valori. Acest lucru este valabil doar pentru declarațiile de funcții (**function declaration**), nu și pentru **expresiile de funcții**. Expresiile de funcții și **arrow functions** nu fac parte din această secvență, fiind create la momentul în care **execuția** ajunge unde sunt declarate și le evaluează pentru a atribui o valoare identificatorului din stânga egalului.
+
+Invocarea funcțiilor se face prin operatorul `()`. La invocare se creează un nou context de execuție, care ajunge în stiva apelurilor (*call-stack*).
 
 **Spune standardul**:
 
@@ -13,7 +15,7 @@ La momentul începerii execuției codului, toate funcțiile declarate cu `functi
 Înainte de a radiografia efectele apelului de funcție, ne vom uita în standard la algoritmul intern motorului `FunctionInitialize(F, kind, ParameterList, Body, Scope )`. Argumentele acestui algoritm intern sunt o funcție obiect `F`, mențiunea `kind` care indică ce tip de funcție este (*Normală*, *Metodă*, *Arrow*), o listă cu toți parametrii, un corp care cuprinde codul ce urmează să fie evaluat și un *Mediu Lexical* care este identificat ca scope. Alcătuind acest context să vedem în ce constă execuția unei funcții.
 
  #1 Locul în care se întâmplă acest lucru se numește **call-site**.
- #2 Se creează un nou **execution context** - context de execuție care este introdus în stivă. Vorbim de context de execuție global (obiectul **window**), când funcția este invocată ca funcție, nu ca metodă sau callback.
+ #2 Se creează un nou **execution context** - context de execuție care este introdus în stivă - **call stack**. Vorbim de context de execuție global (obiectul **window**), când funcția este invocată ca funcție, nu ca metodă sau callback.
 
 Contextul de execuție este o sumă de informații (*activation record*) privind:
 
@@ -26,37 +28,42 @@ Contextul de execuție este o sumă de informații (*activation record*) privind
 
 Obiectul **arguments** este o colecție (seamănă dar nu este un array) a tuturor argumentelor pasate funcției și are proprietatea `length` pentru a afla numărul argumentelor pasate. Valorile pot fi obținute prin `arguments[index]`.
 
-## Invocarea funcțiilor - cazuri
+## Scenarii de invocare
 
-1.  ca funcții;
+1.  ca funcții în global;
 2.  ca metode;
-3.  ca arrow functions;
+3.  ca arrow function;
 4.  constructori cu `new`;
 5.  indirect prin apelarea într-un context de execuție diferit folosind `call()` și `apply()` (vezi binding explicit la `this`).
 
-În toate aceste cazuri funcția generează obiectul `this` în mod diferit.
+În toate aceste cazuri legătura `this` se generează diferit.
 
 1.  la obiectul global rulând sub `"strict mode";` este `undefined`,
 2.  la obiectul a cărui metodă este,
-3.  la obiectul care tocmai a fost returnat,
-4.  la obiectul precizat ca prim argument.
+3.  la `this`-ul obiectului context,
+4.  la obiectul care tocmai a fost returnat de constructor,
+5.  la obiectul precizat ca prim argument.
 
 ## Cazurile de invocare
 
 ### Funcție invocată
 
-Această invocare se întâmplă atunci când este folosit operatorul `()`.
+Această invocare se întâmplă atunci când este folosit operatorul `()`. Declarația de funcție va fi hoistată la momentul compilării, fiind omniprezentă. Expresiile de funcții au doar identificatorul hoistat dacă se folosește `var`, dar atribuirea valorii funcției se întâmplă când execuția ajunge unde se află.
 
 ### Invocarea ca metodă
 
 Când invoci funcția ca metodă a unui obiect, acel obiect devine **contextul** funcției, devenind accesibil funcției prin intermediul legăturii `this`. Acesta este mecanismul de acces la membrii obiectului.
+
+Constituirea legăturii `this` la obiect se întâmplă în momentul apelării metodei, nu mai devreme, când se constituie obiectul. Funcția cu rol de metodă va putea accesa și modifica membrii obiectului folosind legătura `this`.
+
+O funcție internă într-o metodă a unui obiect, va face legătura la obiectul global. Douglas Crockford spune că acest comportament este o eroare în proiectarea limbajului. O funcție internă unei metode ar trebui să poată accesa membrii obiectului metodei prin aceeași cale (`this`) folosită de metodă.
 
 ### Invocarea în rol de constructor
 
 Scopul unui constructor este acela de a crea un obiect, care este valoarea returnată prin execuția funcției cu operatorul `new`.
 
 1.  Se creează un obiect nou.
-2.  Se creează o legătură la obiectul prototype al funcției folosite cu `new`. Se creează legătura prototipală.
+2.  Se creează o legătură la obiectul prototype al funcției folosite cu `new`. Se creează legătura prototipală menținută peren pentru a reflecta în obiecte orice modificare a obiectului prototipal al funcției constructor.
 3.  Obiectul generat automat este pasat funcției cu rol de constructor ca fiind parametrul `this` și astfel, devine contextul de execuție a funcției constructor invocate (`this` este pasat ca parametru împreună cu `arguments`).
 4.  Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul (`}`), `this` va fi returnat automat.
 
@@ -67,8 +74,14 @@ function Ceva () {
   this.a = 10;
   return 100;
 };
+// adăugăm și o metodă publică
+Ceva.prototype.faCeva = function fcv (x) {
+  this.b = x;
+};
 Ceva(); // 100
 let instanta = new Ceva();
+instanta.faCeva(1000);
+console.log(instanta);
 ```
 
 Observăm că funcția noastră va avea un comportament *normal* și va returna evaluarea oricăror expresii din corp. Astfel se explică de ce o parte din constructorii obiectelor interne pot fi apelați drept funcții, unii fiind folosiți pentru a face *casting* unor valori pentru care dorim un tip fix. Atenție, dacă se va apela cu `new`, valoarea returnată va fi complet ignorată și se va crea un obiect nou.

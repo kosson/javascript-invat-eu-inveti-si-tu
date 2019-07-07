@@ -15,25 +15,29 @@ Atunci când o funcție este apelată, motorul rulează niște algoritmi interni
 Multe informații necesare înțelegerii `this` se leagă de discuția pe care am avut-o privind compilarea și execuția.
 Legătura (termenul în engleză fiind `binding`) la `this` depinde de obiectul *din care* s-a făcut apelul (în literatura din limba engleză i se spune *call-site*).
 
+Nu contează unde a fost declarată funcția, ci locul unde a fost invocată pentru a găsi obiectul la care se face legătura `this`. Locul declarării contează atunci când se dorește a se face un *closure* pe mediul lexical.
+
 ## Mică anatomie
 
-Pentru a înțelege conectarea `this`, cel mai util scenariu este acela în care această legătură se pierde. Să luăm cazul unei funcții cu rol de metodă, care este definită în obiect. Această funcție este gazda unei alteia, care realizează un closure pe mediul lexical al gazdei.
+Pentru a înțelege conectarea `this`, cel mai util scenariu este acela în care această legătură se pierde. Să luăm cazul unei funcții cu rol de metodă, care este definită în obiect. Această funcție este gazda unei alteia, care realizează un *closure* pe mediul lexical al gazdei. Un *closure* este un registru inventar al mediului lexical existent la momentul definirii funcției - ce era în jurul funcției.
 
 ```javascript
 // "use strict"; // în acest caz, this is undefined
 var ceva = 100;
 /*
-declararea cu let împiedică ceva
+declararea cu let ar împiedica ceva
 să devină variabilă globală
 */
 const obi = {
   ceva: 'text',
   faCeva: function gazda () {
     let ceva = 1000;
+
     function interna () {
       console.log(this.ceva); // 100
       console.log(ceva);      // 1000
     };
+
     return interna();
   }
 };
@@ -41,13 +45,49 @@ obi.faCeva(); // 100
 // dacă declari cu let este returnat undefined
 ```
 
-Apelarea funcției `interna`, nu realizează o legătură `this` la obiectul în care este definită metoda `gazda()`. Legătura se face la obiectul global, iar dacă fragmentul de cod ar rula sub regula `use strict`, rezultatul ar fi `undefined`.
+Apelarea funcției `interna`, nu realizează o legătură `this` la obiectul în care este definită metoda `gazda()`. Legătura se face la obiectul global, iar dacă fragmentul de cod ar rula sub regula `use strict`, rezultatul ar fi `undefined`. Douglas Crockford spune despre acest comportament ca fiind o eroare de proiectare a limbajului. O funcție găzduită de o metodă, ar trebui să aibă acces la membrii obiectului folosind aceeași legătură `this` pe care o folosește metoda care joacă rol de gazdă. În trecut această necesitate se făcea printr-o punte lexicală pe care o veți întâlni în mod curent în codul scris de alții.
 
-**Moment ZEN**: O funcție realizează o legătură this doar în momentul în care se execută.
+```javascript
+var valoare = 10;
+const obi = {
+  valoare: 1000,
+  valDinObi: function daMiVal () {
+    var punte = this;
+    var dinLexEnvMetoda = 10000;
+    function interna () {
+      console.log(this.valoare); // 10
+      console.log(punte.valoare); // 1000
+      console.log(dinLexEnvMetoda); // 10000
+    }
+    return interna();
+  }
+};
+obi.valDinObi();
+```
 
-Nu contează unde a fost declarată funcția, ci locul unde a fost invocată pentru a găsi obiectul la care se face legătura `this`. Locul declarării contează atunci când se dorește a se face un closure pe mediul lexical.
+Am numit `punte` variabila care face conectarea cu `this`-ul metodei gazdă. Dar ceea ce veți vedea în codul JavaScript este `var that = this;`, identificatorul variabilei în limba engleză însemnând *acela*. Între timp a fost adăugat limbajului funcțiile fat arrow, care folosesc legătura `this` pe care funcția gazdă a realizat-o.
 
-Chiar dacă o funcție este declarată în interiorul unui obiect, îndeplinind rolul de metodă a acestuia, trebuie considerată a fi un obiect separat de acesta. Nu putem gândi în termenul de *apartenență* la un anumit obiect. Ceea ce oferă obiectul este mecanismul prin care ajungem să executăm funcția. Din acest motiv, suntem tentați să gândim în termeni de apartenență; pentru că obiectul oferă referința. Nu poate fi accesată ca valoare sau apelată din exteriorul obiectului altfel decât folosind sintaxa cu punct: `obiect.funcție`. Referința prin `this` va reflecta identificatorii mediului lexical local al obiectului de la momentul execuției metodei.
+```javascript
+var valoare = 10;
+const obi = {
+  valoare: 1000,
+  valDinObi: function daMiVal () {
+    var dinLexEnvMetoda = 10000;
+    var interna = () => {
+      console.log(this.valoare);    // 1000
+      console.log(dinLexEnvMetoda); // 10000
+    }
+    return interna();
+  }
+};
+obi.valDinObi();
+```
+
+Într-un astfel de scenariu, nu mai este nevoie de a face puntea lexicală `var that = this;` pentru a obține o referință către obiectul context al gazdei.
+
+Chiar dacă o funcție este declarată în interiorul unui obiect, îndeplinind rolul de metodă a acestuia, trebuie considerată a fi un obiect separat de acesta. Nu putem gândi în termenul de *apartenență* la un anumit obiect doar pentru că a fost declarată într-o metodă. În ceea ce privește metodele, acestea aparțin unui obiect în măsura în care acel obiect oferă *adresa* la care pot fi găsite. Dar ele tot funcții obiect distincte sunt cu particularitatea că se conectează automat prin `this` la obiectul în care sunt declarate.
+
+O metodă nu poate fi accesată ca valoare sau apelată din exteriorul obiectului altfel decât folosind sintaxa cu punct: `obiect.funcție`. Referința prin `this` va reflecta identificatorii mediului lexical local al obiectului de la momentul execuției metodei.
 
 **Moment ZEN**: În JavaScript toate obiectele sunt entități independente. Ele realizează conexiuni unele cu celelalte prin referințe.
 
