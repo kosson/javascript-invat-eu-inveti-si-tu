@@ -117,28 +117,28 @@ Efectul este același: este returnat 6, adică numărul total de caractere din �
 
   B. Care este ultima apariție în șirul de caractere a unui caracter sau fragment: `'fragmente'.lastIndexOf('nt'); // 6`.
 
-  ## Dependințe cognitive
+## Dependințe cognitive
 
   -   primitiva string
   -   Obiecte
 
-  ## Alonje
+## Alonje
   -   Expresii Regulate
   -   Obiectul intern RegExp
 
-  JavaScript nu face diferență între string-urile poziționate între ghilimele simple ale limbii engleze și cele duble.
+JavaScript nu face diferență între string-urile poziționate între ghilimele simple ale limbii engleze și cele duble.
 
-  ## Mantre
+## Mantre
 
-  -   Pentru a concatena se folosește operatorul `+`.
-  -   Are metoda internă `@@iterator` ceea ce permite iterarea cu `for...of`. Se pot itera și fragmente `code point`-uri UTF.
-  -   JavaScript face o diferență foarte clară între obiectul String și primitiva șir. Același lucru se aplică și în cazul obiectelor Boolean și Number cu ale lor corespondențe la primitive.
-  -   JavaScript face automat conversia de la primitiva șir la obiectul String. Astfel este posibilă aplicarea metodelor obiectului.
-  -   șirurile în JavaScript sunt imuabile (nu se modifică șirul original),
-  -   șirurile sunt „consumate” de JavaScript de la stânga la dreapta,
-  -   din moment ce un caracter a fost „consumat”, acesta nu mai este folosit,
-  -   JavaScript convertește automat primitivele șir în obiecte String, fiind astfel posibilă folosirea metodelor obiectului String pentru primitivele string,
-  -   pentru a te asigura că poți face căutarea fără a te lovi de posibilele majuscule, mai întâi convertește toate caracterele șirului în minuscule folosind `toLowerCase()`. De exemplu: `var sir = "Acesta este un SIR"; sir.toLowerCase().startsWith("acesta"); // true`.
+-   Pentru a concatena se folosește operatorul `+`.
+-   Are metoda internă `@@iterator` ceea ce permite iterarea cu `for...of`. Se pot itera și fragmente `code point`-uri UTF.
+-   JavaScript face o diferență foarte clară între obiectul String și primitiva șir. Același lucru se aplică și în cazul obiectelor Boolean și Number cu ale lor corespondențe la primitive.
+-   JavaScript face automat conversia de la primitiva șir la obiectul String. Astfel este posibilă aplicarea metodelor obiectului.
+-   șirurile în JavaScript sunt imuabile (nu se modifică șirul original),
+-   șirurile sunt „consumate” de JavaScript de la stânga la dreapta,
+-   din moment ce un caracter a fost „consumat”, acesta nu mai este folosit,
+-   JavaScript convertește automat primitivele șir în obiecte String, fiind astfel posibilă folosirea metodelor obiectului String pentru primitivele string,
+-   pentru a te asigura că poți face căutarea fără a te lovi de posibilele majuscule, mai întâi convertește toate caracterele șirului în minuscule folosind `toLowerCase()`. De exemplu: `var sir = "Acesta este un SIR"; sir.toLowerCase().startsWith("acesta"); // true`.
 
 ## Resurse
 

@@ -1,6 +1,6 @@
 # Obiectul intern Date
 
-Obiectele Date măsoară timpul scurs de la 1 ianuarie 1970 în milisecunde.
+Obiectele `Date` măsoară timpul scurs de la 1 ianuarie 1970 în milisecunde.
 
 Apelarea ca funcție `Date()`, va returna un string cu valoarea timpului. Instanțierea cu new, va crea un obiect Date ale cărui proprietăți pot fi folosite.
 

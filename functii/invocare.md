@@ -99,7 +99,7 @@ let obi2 = new Ceva();
 
 Ca regulă de bună practică, constructorii îi denumim cu substantive și cu literă mare spre deosebire de funcții și metode pe care le denumim cu verbe și cu literă mică.
 
-În cazul constructorilor se mai ridică o problemă interesantă. Toate variabile declarate în funcția constructor vor fi accesibile metodelor obiectului nou creat prin closure. Se poate realiza astfel o ascundere a unor valori care pot fi manipulate prin accesori. Acest lucru se petrece pentru că oricare funcție ține minte mediul în care au fost create prin slotul intern \[\[Environment]].
+În cazul constructorilor se mai ridică o problemă interesantă. Toate variabile declarate în funcția constructor vor fi accesibile metodelor obiectului nou creat prin *closure*. Se poate realiza astfel o ascundere a unor valori care pot fi manipulate prin accesori. Acest lucru se petrece pentru că oricare funcție ține minte mediul în care au fost create prin slotul intern \[\[Environment]].
 
 ```javascript
 function Manipulare () {
@@ -118,11 +118,11 @@ obi.getAscunsă();
 obi.setAscunsă(20);
 ```
 
-Indiferent cât de multe obiecte ar fi instanțiate, se creează un closure pe mediul funcției care joacă rolul de constructor la momentul instanțierii. Obiectele generate sunt diferite, fiecare pornind de la valorile existente în funcția constructor la momentul invocării. Ceea ce am realizat cu această tehnică este să *ascundem* variabile și să le manipulăm prin efectul de closure realizat de metodele care le țin în viață - un joc între contextele de execuție și mediul lexical.
+Indiferent cât de multe obiecte ar fi instanțiate, se creează un *closure* pe mediul funcției care joacă rolul de constructor la momentul instanțierii. Obiectele generate sunt diferite, fiecare pornind de la valorile existente în funcția constructor la momentul invocării. Ceea ce am realizat cu această tehnică este să *ascundem* variabile și să le manipulăm prin efectul de *closure* realizat de metodele care le țin în viață - un joc între contextele de execuție și mediul lexical.
 
 Din nefericire dacă creăm un alt obiect și îi facem un identificator căruia îi atribuim metoda de acces către valoarea așa-zis **privată**, o vom putea accesa cu ușurință pentru că până la urmă, o metodă este o funcție, care este o valoare. Acesta este motivul pentru care în JavaScript nu există posibilitatea de a avea variabile private cu adevărat.
 
-### Invocarea funcțiilor prin call și apply()
+### Invocarea funcțiilor prin `call()` și `apply()`
 
 Cele două funcții realizează un binding explicit a funcției cu un nou context de execuție. Se face *un împrumut* al mecanismelor și proceselor interne ale funcției în contextul de lucru oferit de un anume obiect.
 

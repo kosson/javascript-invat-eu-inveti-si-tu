@@ -132,7 +132,7 @@ var x = 100, y = 'ceva';
 { var x = 10; console.log(this.x, this.y) }; // 10 ceva
 ```
 
-## Nimic cu void
+## Nimic cu `void`
 
 Utilizarea operatorului `void`, care precedă o expresie, o golește de valoarea pe care o avea.
 
@@ -141,7 +141,7 @@ void 1; // undefined
 void (function ki(){return 'energie';})(); // undefined
 ```
 
-Și acum, vom face un exercițiu Zen, privind la exemplul perfect de funcție, care se poate executa, dar a cărei esență este golul, nedefinitul. Vom folosi un alt tip de funcții introduse de curând și care se numesc fat arrow. Ceea ce le face le face perfecte pentru această mică demonstrație, este formula de scriere concisă.
+Și acum, vom face un exercițiu Zen, privind la exemplul perfect de funcție, care se poate executa, dar a cărei esență este golul, nedefinitul. Vom folosi un alt tip de funcții introduse de curând și care se numesc *fat arrow*. Ceea ce le face le face perfecte pentru această mică demonstrație, este formula de scriere concisă.
 
 ```javascript
 () => {}; // returnează constructorul

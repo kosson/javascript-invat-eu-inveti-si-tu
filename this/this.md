@@ -1,6 +1,6 @@
-# this, legătura la context
+# Legătura `this` - context de execuție
 
-Imaginează-ți Oceanul planetar. Acesta este obiectul nostru global. Să ne închipuim că orașele cu porturi sunt obiecte. Funcțiile sunt nave care prelucrează și transportă valori. Navele sunt la rândul lor obiecte având fiecare un nume și un pavilion sub care sunt înregistrate. De fiecare dată când intră într-un port, se leagă la o bază de date a portului disponibilă navei. Conexiunea realizată la baza de date a portului să o numim `this`.
+Imaginează-ți *Oceanul planetar*. Acesta este obiectul nostru global. Să ne închipuim că orașele cu porturi sunt obiecte. Funcțiile sunt nave care prelucrează și transportă valori. Navele sunt la rândul lor obiecte având fiecare un nume și un pavilion sub care sunt înregistrate. De fiecare dată când intră într-un port, se leagă la o bază de date a portului disponibilă navei. Conexiunea realizată la baza de date a portului să o numim `this`.
 
 Această relație trebuie lămurită pentru că, de fapt o funcție întodeaunea rulează în contextul unui obiect. Cuvântul cheie `this` identifică o legătură cu mediul lexical al contextului de execuție pentru o funcție la momentul execuției sale. Cuvântul crucial este **legătură**. Legătura se realizează doar la momentul execuției funcției!
 
@@ -309,7 +309,7 @@ const obiect = { a: 1000 };
 
 Nu uitați că odată cu ES6 se pot folosi *funcțiile săgeată* - arrow functions. Legătura `this` este una predictibilă în sensul că o folosește pe a gazdei.
 
-### Lanțul prototipal al obiectului și this
+### Lanțul prototipal și `this`
 
 Avem un obiect care are declarată o metodă. Din acest obiect sunt moștenite proprietățile de către un alt obiect copil. Invocarea unei metodei moștenite va crea o legătură `this` la obiectul în contextul căreia s-a făcut invocarea, nu la cel părinte, în care a fost definită.
 
@@ -328,7 +328,7 @@ console.log(beta.primo()); // 20
 
 #### Evenimentele din API-ul browserului
 
-Să ne imaginăm cazul unui obiect care are metode construite special pentru a gestiona o pagină sau un fragment de pagină web prin manipularea evenimentelor.
+Să ne imaginăm cazul unui obiect care are metode construite special pentru a gestiona o pagină sau un fragment de pagină web prin manipularea evenimentelor. În exemplu vom *înmagazina* răspunsul la un eveniment, adică apelul la o funcție într-un obiect care în scenariul nostru, este răspunzător cu gestiunea evenimentelor din pagină. La momentul execuției funcției când apare evenimentul, contextul său, legătura `this` formată este la obiectul eveniment (evenimentele sunt și ele evenimente). Să presupunem că nu dorim acest lucru. Vrem ca funcția să realizeze o legătură `this` la obiectul în interiorul căruia a fost definită. În cazul nostru, lexicografic vorbind, a fost definită în interiorul unei metode a obiectului. În gândirea noastră, am făcut acest lucru tocmai dorind să indicăm că am dori să folosim pe mai departe obiectul, drept context prin asigurarea unei legături perpetue `this`. Din nefericire, așa cum deja am aflat, definirea unui obiect funcției în alt obiect funcție cu rol de metodă, va stabili întotdeauna o legătură la obiectul global (`window` în cazul browserului și `global` în cazul Node.js).
 
 ```javascript
 const obiExecutor = {
@@ -344,7 +344,7 @@ const obiExecutor = {
 };
 ```
 
-Este nevoie de `bind(this)` pentru a păstra legătura la obiectul în cadrul căreia se dorește a fi executată metoda. Fără `bind(this)`, obiectul `this` va fi obiectul DOM la care se atașează listener-ul (funcția cu rol de receptor). Folosind `bind(this)` vom reface legătura `this` la obiectul în care a fost declarată metoda. Dar pentru ca acest lucru să se întâmple, se va folosi operatorul de grupare pentru a *repoziționa* legătura `this` la obiectul părinte, nu la obiectul DOM.
+Pentru a păstra legătura la obiectul în cadrul căreia se dorește a fi executată metoda, este nevoie de `bind(this)`. Fără `bind(this)`, obiectul `this` va fi obiectul DOM la care se atașează **listener**-ul (funcția cu rol de **receptor**). Folosind `bind(this)`, vom reface legătura `this` la obiectul în care a fost declarată metoda. Dar pentru ca acest lucru să se întâmple, se va folosi operatorul de grupare (semnalează o întreagă expresie ce trebuie evaluată) pentru a *repoziționa* legătura `this` la obiectul părinte, nu la obiectul DOM - `('click', (function(){}).bind(this))`.
 
 ```javascript
 const obiExecutor = {
@@ -355,7 +355,7 @@ const obiExecutor = {
   }
 };
 ```
-
+Istoric vorbind, pentru a realiza același efect, s-a folosit puntea lexicală `var that = this;` în metoda obiectului, cu intenția de a **fixa** legătura la `this` printr-o referință. Această practică este caducă. Odată cu noua sintaxă *fat arrow*, se elimină complet problema legăturii `this` pentru că o extresie de funcție folosind *fat arrow* va utiliza legătura `this` stabilită de funcția gazdă.
 Folosirea funcțiilor săgeată asigură conectarea la obiectul contextului de execuție dorit în cel mai predictibil mod:
 
 ```javascript
@@ -366,7 +366,7 @@ let obiExecutor = {
 };
 ```
 
-## this și fat arrows
+## Legătura `this` și *fat arrows*
 
 Funcțiile *fat arrow* nu stabilesc propria legătură `this`. Pur și simplu folosesc obiectul în contextul căruia rulează, iar dacă rulează într-o funcție, vor folosi legătura `this` creată de acea funcție. Funcțiile *fat arrows* sunt legate de scope-ul lexical, asta însemnând că `this` va fi același, adică cel din blocul părintelui. Vom porni analizând cazul în care generăm un obiect în baza unui constructor.
 
