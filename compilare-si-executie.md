@@ -2,7 +2,7 @@
 
 Este anul 1950. Războiul se terminase iar computerele treceau în faza comercială. Pe coridor ne întâlnim din nou cu Grace Hopper, doamna care găsise primul **bug** - molie - în măruntaiele lui **Harvard Mark I**.
 
-![](Grace_Hopper_and_UNIVAC.jpg)
+![](images/Grace_Hopper_and_UNIVAC.jpg)
 
 Anii 50 și 60 sunt ani de mare efervescență în domeniul computerelor. Stimabila doamnă, care este și un personaj hâtru pune un accent pe viteza de dezvoltare:
 

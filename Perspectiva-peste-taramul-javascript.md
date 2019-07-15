@@ -37,7 +37,7 @@ Forța acestui limbaj de programare rezidă tocmai din faptul că obiectele noas
 
 Acum că am lămurit în mare despre ce este vorba cu obiectele, trebuie să ne aplecăm asupra textului standardului pentru a înțelege ce se întâmplă în momentul în care codul sursă scris de noi ajunge în motorul JavaScript precum combustibilul într-un motor. De aici avem și denumirea de motor pentru software-ului care prelucrează sursa.
 
-![Tărâm](Realm.jpg)
+![Tărâm](images/Realm.jpg)
 
 ### Tărâmul de sub lupă
 
@@ -67,7 +67,7 @@ Dacă urmărești concomitent textul standardului, vei observa că folosește st
 
 Fiecare cuvânt din interiorul sintagmei este alipit de cuvântul anterior, dar începe cu majuscula care joacă și rol de separator. Privind acest mod de scriere, fiecare majusculă produce o `cocoașă` și de aici ideea de a numi astfel de scriere **camelcase** - `stilulCămilă`. Trebuie să menționez că acest mod de redactare este la mare concurență cu scrierea cu liniuță jos (`un_identificator`).
 
-![](Hieronymus_Bosch_-_The_Garden_of_Earthly_Delights_-_The_exterior_(shutters).jpg "Hieronymus Bosch - The Garden of Earthly Delights - The exterior. Resursă în Public Domain de la: https://en.wikipedia.org/wiki/The_Garden_of_Earthly_Delights#/media/File:Hieronymus_Bosch_-_The_Garden_of_Earthly_Delights_-_The_exterior_(shutters).jpg")
+![](images/Hieronymus_Bosch_-_The_Garden_of_Earthly_Delights_-_The_exterior_(shutters).jpg "Hieronymus Bosch - The Garden of Earthly Delights - The exterior. Resursă în Public Domain de la: https://en.wikipedia.org/wiki/The_Garden_of_Earthly_Delights#/media/File:Hieronymus_Bosch_-_The_Garden_of_Earthly_Delights_-_The_exterior_(shutters).jpg")
 
 `CreateRealm()` !!! spuse Demiurgul. Demiurgul nostru vine dotat cu algoritmii interni și resursele necesare creației.
 
@@ -81,7 +81,7 @@ Pentru că acum `Tărâmul` nu are încă substanță, **Demiurgul** inițiază 
 
 Acum se dezvăluie necesitatea de a înțelege formarea tărâmului JavaScript. Codul propriu are nevoie de obiectele intrinseci pentru a putea fi evaluat. Cunoașterea modului în care au apărut aceste obiecte intrinseci și relațiile pe care le formează cu alte elemente din **Realm**, o consider indispensabilă pentru înțelegerea deplină a acestui limbaj de programare.
 
-<img src="realmRec.png">
+<img src="images/realmRec.png">
 
 Pas 2. Acest pas este cel mai important, pentru că, urmând firul algoritmului `CreateIntrinsics(realmRec)`, vom asista la maiestuoasa naștere a tuturor entităților ECMAScript relevante. Să urmărim pașii:
 
@@ -157,7 +157,7 @@ Algoritmul abstract `AddRestrictedFunctionProperties(funcProto, realmRec)` adaug
 
 Pe scurt, proprietatea care face funcțiile apelabile și cea care le face capabile de a ține evidența argumentelor primite sunt adăugate prototipului.
 
-<img src="intrinsics.png">
+<img src="images/intrinsics.png">
 
 În acest moment, ceea ce s-a realizat este remarcabil: primul obiect cu un prototip care va permite celorlalte obiecte să moștenească și prima funcție cu un prototip care va permite celorlalte funcții și obiecte să moștenească. Dar încă Tărâmul este nepopulat. Avem un fel de Grădină în care avem doar un Adam (obiectul primordial) și o Evă (prima funcție). Restul bestiarului este inexistent. Toate cele necesare unei lumi, unui Tărâm viu sunt adăugate în această fază, fiind asimilate drept intrinsics.
 
@@ -174,7 +174,7 @@ Pe scurt, proprietatea care face funcțiile apelabile și cea care le face capab
 
 Revelator este faptul că toate, dar toate aceste entități sunt create folosind aceeași comandă abstractă, pe care, Demiurgul a folosit-o de două ori până acum: CreateBuiltinFunction(realmRec, <steps>, <prototype>, <slots>);
 
-![](ObiecteFundamentale.png)
+![](images/ObiecteFundamentale.png)
 
 2.14 Odată cu adăugarea tuturor celor menționate mai sus, înregistrarea `intrinsics` este deplin formată și a fost deja returnată ca ultim pas al comenzii abstracte `CreateIntrinsics (realmRec)`.
 
@@ -307,7 +307,7 @@ Mai avem introdus de curând (noul standard), numărul special `Infinity` și in
 
 Am vorbit mai devreme despre aceste valori. Valorile literale sunt de fapt exprimarea în scris a datelor cu care lucrează ECMAScript. Literalele sunt tipurile de date cu care lucrăm. Se numesc literale pentru fără a folosi caractere nu am putea spune computerului ce vrem să folosim. Păi dacă nu scrii `3`, cum altfel să știe compul că vrei să-i dai ca operand valoarea trei? Logic!
 
-<img src="LiteralValue.png" width="350px">
+<img src="images/LiteralValue.png" width="350px">
 
 Valorile literale sunt tipuri de date care pot fi definite fără să fie ceva instanțiat în mod special sau să creezi vreun obiect special pentru a lucra cu ele.
 

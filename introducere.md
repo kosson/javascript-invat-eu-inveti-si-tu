@@ -73,7 +73,7 @@ Pentru că acest material țintește pe cei care lucrează în domeniul umanioar
 La începutul secolului 20 al mileniului trecut, matematicianul Gottlob Frege a căutat „un limbaj al gândului pur”, care să poată fi folosit pentru a prezenta demonstrațiile matematice fără a se apela în vreun fel la mecanismele intuiției, ci doar cele ale logicii. Ceea ce căuta Gottlob Frege era o sintaxă care să fie precisă ea în sine pe care să o poți folosi fără a o interpreta. De fapt, acesta a fost pasul către realizarea visului lui Gottfried Leibniz de a găsi un set de reguli stricte pentru procesarea simbolurilor, ceea ce el numea „limbajul gândurilor” ca reducere a ideilor la un set de concepte nucleu, care prin combinare, să ofere expresivitatea tuturor ideilor indiferent de complexitatea lor. Pentru asta Leibnitz ar fi avut nevoie de o anumită algebră cu ajutorul căreia să poată reduce orice propoziție la o valoare de adevăr. Contribuțiile sale în algebra logicii sub forma operatorilor logici au fost completate un secol mai târziu de Gottlob Frege.
 
 <figure>
-  <img src="Young_frege.jpg" width="200px" alt="Imagine aflată în Domeniul Public; accesibilă la https://upload.wikimedia.org/wikipedia/commons/9/99/Young_frege.jpg">
+  <img src="images/Young_frege.jpg" width="200px" alt="Imagine aflată în Domeniul Public; accesibilă la https://upload.wikimedia.org/wikipedia/commons/9/99/Young_frege.jpg">
   <figcaption>Gottlob Frege, 8 Noiembrie, 1848 – 26 Iulie, 1925</figcaption>
 </figure>
 
@@ -96,7 +96,7 @@ Vă va ajuta să înțelegeți că scrierea unui fragment de cod este precum scr
 
 Ai o problemă pe care dorești să o rezolvi și în acest sens, creezi **pașii necesari**. Nu te sfii să scrii acești pași pe o coală de hârtie. Adevărata programare începe de la faza de creion și hârtie. În plus, este dovedit științific că soluțiile se văd din lucrul cu obiecte, din interacțiunea gândurilor cu lumea fizică.
 
-![](FluxDeLaProblemaLaAplicare.png)
+![](images/FluxDeLaProblemaLaAplicare.png)
 
 Succesiunea tuturor pașilor identificați de tine se numește **algoritm**. Transpunerea unui algoritm într-o soluție tehnică, se numește **program**, care este o succesiune de **instrucțiuni** pe care computerul le înțelege. Pentru a scrie un program, alegi un limbaj de programare, iar în cazul nostru, am ales deja: ECMAScript, adică JavaScript. Mai adaug doar că o transpunere a unui algoritm într-un program este o transpunere într-un **limbaj formal** (regulile sale interne îl formalizează).
 
@@ -112,7 +112,7 @@ Am identificat o definiție a ceea ce este un limbaj de programare și vom debut
 > <cite><a href="http://www.teora.ro/cgi-bin/teora/romania/mbshop.cgi?database=01&amp;action=view_product&amp;productID=%20823&amp;category=" title="Brookshear, J. Glenn. Introducere în informatică. Editura Teora. 1998\. Titlul original: Computer science - An overview, Fifth Edition">J. Glenn Brookshear.1998</a>
 > </cite>
 
-<img src="limbajDeProgramare.png" alt="Drawing" style="width: 300px;"/>
+<img src="images/limbajDeProgramare.png" alt="Drawing" style="width: 300px;"/>
 
 Standardul ECMAScript 2016 este un **limbaj de programare** cu aplicare largă. Inițial ECMAScript a fost dezvoltat ca un limbaj de scriptare (fragmente de cod de mici dimensiuni cu aplicativitate strictă pentru a dinamiza paginile web), dar a evoluat într-unul utilizat de la pagini web la roboți.
 
@@ -133,7 +133,7 @@ E timpul să intrăm în rolul de programator.
 
 Ești în fața editorului de text preferat gata să redactezi primul tău program. În fereastra editorului, pentru a te face înțeles computerului, vei redacta codul prin înșiruirea de caractere în cuvinte, sintagme, enunțuri și așa mai departe.
 
-<img src="CeEsteUnSir.png" width="350px">
+<img src="images/CeEsteUnSir.png" width="350px">
 
 Literele, pentru computer, nu sunt decât niște coduri alfanumerice în baza cărora poate afișa un anumit caracter pe ecran.
 Caracterele folosite pentru a scrie codul sursă ca și codare, respectă standardul internațional Unicode, care asociază coduri alfanumerice individuale pentru fiecare (Latin, Chirilic, etc.). Mai exact, fiecare secvență alfanumerică de codare se numește *punct de cod specific UTF16* (Unicode Transformation Format). Reține faptul că toate caracterele de lucru pentru un computer sunt pur și simplu coduri convenite la nivel internațional.
@@ -168,7 +168,7 @@ var textDeAnalizat = 'Acesta este un text demonstrativ care va enumera caractere
 
 Acum, că nu avem nicio eroare, aflându-te în Console, pur și simplu apelează numele variabilei pentru a vedea textul și ce-a mai rămas din el (pur și simplu scrii numele variabilei `textDeAnalizat` și dai ENTER).
 
-Am corectat doar până la `\r` pe care l-am lăsat așa înadins. Pune așa fragmentul și vezi ce se întâmplă. Da, combinația `\r` pur și simplu a dispărut din text. De ce? Pentru că indică faptul că în cazul în care se va trimite la imprimată acel text, el va fi tăiat de dinaintea lui `\r` și reluat pe următoarea linie. Asta înseamnă retur de car, adică capul de imprimare trece pe o nouă linie. Uneori, citind literatură de specialitate veți mai vedea și secvența CR/LF (Carriage return/Line feed), care este aceeași comandă trimisă unei imprimante: pune capul de imprimare (carriage) la capul liniei (adică la stânga - imprimarea caracterelor se face de la stânga la dreapta) și ridică pagina cu o linie, adică cu un rând (line feed).
+Am corectat doar până la `\r` pe care l-am lăsat așa înadins. Pune așa fragmentul și vezi ce se întâmplă. Da, combinația `\r` pur și simplu a dispărut din text. De ce? Pentru că indică faptul că în cazul în care se va trimite la imprimată acel text, el va fi tăiat de dinaintea lui `\r` și reluat pe următoarea linie. Asta înseamnă retur de car, adică capul de imprimare trece pe o nouă linie. Uneori, citind literatură de specialitate veți mai vedea și secvența CR/LF (**Carriage return**/**Line feed**), care este aceeași comandă trimisă unei imprimante: pune capul de imprimare (carriage) la capul liniei (adică la stânga - imprimarea caracterelor se face de la stânga la dreapta) și ridică pagina cu o linie, adică cu un rând (**line feed**).
 
 Acum corectează textul fiind aflat în Console. Ca să aduci în vizor variabila, chemi din istoricul operațiunilor linia în care introduceai textul în variabilă (apăsarea de două ori a tastei săgeată sus ar trebui să aducă în linia de comandă variabila) și pur și simplu corectează `\r` adăugându-i un backslash în față chiar lângă cel existent deja și dă ENTER. Variabila va fi rescrisă ca și conținut. Apelându-i numele încă o dată vei vedea la locul său combinația `\r`.
 
@@ -215,7 +215,7 @@ Toate elementele lexicografice care constituie codul în sine, cu excepția spa�
 
 Acești **atomi lexicali** sunt rezultatul parcurgerii unui fragment de cod (codul sursă) căruia i se aplică regulile lexicale specifice gramaticii impuse de standardul ECMAScript.
 
-<img src="AtomiiLexicali.png" width="350px">
+<img src="images/AtomiiLexicali.png" width="350px">
 
 Ca să-ți vină ușor să înțelegi, îți poți imagina un giuvaergiu, care dintr-un maldăr de pietre prețioase (codul sursă), ia una câte una (fragmente de cod), pentru a-i identifica caracteristicile și în final pentru a le pune pe fiecare după sortare în cutiuțele pregătite special înaintea asamblării într-o diademă deosebită (programul nostru care tocmai a făcut ceva spectaculos).
 
@@ -233,7 +233,7 @@ Capetele de rând sunt folosite pentru a mări lizibilitatea codului și pentru 
 
 **carriage return** este reprezentat prin combinația `\r` și mai este întâlnit ca abrevierea CR - *carriage return*). Se comportă ca o comandă directă care spune: *trage înapoi carul de imprimare* și începe să imprimi textul începând cu o nouă linie. Acest caracter este o reminiscență a utilizării vechilor mașini de scris, care migrând la cele electronice, încă aveau nevoie de un caracter special care să spună mecanismelor electromecanice să se întoarcă pe același rând și apoi *săltând* pagina de imprimare cu un rând: `print("ceva\rcapat");`. Efectul este vizibil, dacă fragmentul care conține caracterul special ar fi trimis către o imprimantă. S-ar produce aceeași rupere ca în cazul caracterului special `\n` numai că de această dată pe hîrtia imprimată. Efectul în Console este că `\r` dispare din text iar cele două cuvinte vor fi lipite. Efectul vizibil pe ecran este alipirea fragmentelor de text acolo unde era `\r`. Caracterul s-a păstrat și în limbajele de programare cu toate că îl veți întâlni mai rar în cazul conținutului unor fișiere precum cele cu extensia TXT mai vechi. Dacă ești curios, poți replica acest lucru salvând din LibreOffice ca txt cu menționarea formatului ASCII. Da, știu, este greu de crezut, dar nu am avut UTF dintodeauna. Ce-i UTF? Citește în continuare și vei afla minunea pe care o oferă acest standard de codare a caracterelor.
 
-![](CR.example.screenshot.libreoffice.png)
+![](images/CR.example.screenshot.libreoffice.png)
 
 **line separator**: uneori este reprezentat prin combinația de caractere `\n`, iar alte ori în funcție de sistemul de operare este `\r\n`. Efectul este trecerea pe o nouă linie a textului.
 
@@ -252,7 +252,7 @@ Acestea sunt caracterele *invizibile* cum ar fi spațiul, tasta space, pentru a 
 
 Sunt considerate a fi spații albe următoarele: `tab` (`\t` *tabulator orizontal*, fiind un spațiu cu o anumită întindere), `space` (spațiu), `non-breakable space` (spațiu care nu poate fi fracționat), `line tabulation` (sau vertical tab - `\v` - referindu-se la mișcarea pe verticală a liniilor), `form feed` (se referă la trecerea pe ceea ce este înțeles a fi o pagină nouă `\f`).
 
-<img src="TextSursa.png">
+<img src="images/TextSursa.png">
 
 Imediat după faza de constituire a **elementelor de input**, acestea mai sunt parcurse încă o dată, aplicându-se din nou regulile gramaticale pentru a identifica cine și ce funcție îndeplinește: care sunt **identificatorii**, **cuvintele rezervate** limbajului, etc.
 
@@ -295,13 +295,13 @@ Care este treaba cu **momentele ZEN**? Pe parcursul acestei călătorii, voi jal
 
 Pentru a ajunge la un rezultat avem nevoie mai întâi de niște valori, de niște date cu care să lucrăm. Operanzii, ca denumire, vin din matematică. Mda, știu, nu scăpăm... Nu te descuraja așa ușor! Pur și simplu programarea este o dezvoltare a matematicii și de acolo își trage și denumirile pentru *chestiile* cu care operăm. Am zis operăm, nu?! Păi ce poți face cu niște operanzi altceva în afară de a opera cu ei? O adunare, o înmulțire... mai multe operațiuni, unele grupate cu paranteze. Hai că mai vedem ce și cum putem combina în **expresiile pe care le formează**.
 
-<img src="OperanziSiOperator.png" width="300px">
+<img src="images/OperanziSiOperator.png" width="300px">
 
 ### Operatorii
 
 În limba engleza operatorii se numesc *operators*. Aceștia sunt caractere sau combinații de caractere care au rolul de a stabili o relație între doi operanzi. Exact ca în matematică. Rolul operatorilor este de a ajunge la un rezultat în urma *evaluării*. De exemplu, când ai expresia `1 > 0;`, operatorul de comparație `>` va oferi rezultatul, care este o valoare boolean `true` (ești încă aici? nu te-am pierdut, nu?!).
 
-![George Boole](George_Boole_color.jpg "George Boole, matematician, 1815-1864. Este creatorul logicii matematice moderne și a algebrei booleene. Resursă aflată în Domeniu public accesibilă la https://commons.wikimedia.org/wiki/File:George_Boole_color.jpg")
+![George Boole](images/George_Boole_color.jpg "George Boole, matematician, 1815-1864. Este creatorul logicii matematice moderne și a algebrei booleene. Resursă aflată în Domeniu public accesibilă la https://commons.wikimedia.org/wiki/File:George_Boole_color.jpg")
 
 În esență, putem spune că majoritatea rezultatelor, atunci când scriem cod, provin din astfel de evaluări. Ăăă, cum adică **boolean**? Da. E o valoare care testează adevărul și poartă numele de boolean în memoria cercetătorului George Boole, care a dezvoltat această ramură a algebrei. Nu uita că într-un computer, la nivelul cel mai de jos, totul este 1 și 0, `adevărat` **sau** `fals`, `adevărat` **ȘI** `fals`, `adevărat` **NU** `fals`. Apropo de Boole și de operatori. Tot de la Boole avem și regula comutativității pentru adunare `x + y = y + x` și regula distributivității `z(x + y) = zx + zy`.
 
@@ -417,7 +417,7 @@ Nu vreau să te zăpăcesc, dar o expresie poate fi în același timp un enunț 
 
 Enunțurile sunt precum frazele limbajului natural cu diferența în cazul nostru că nu se termină cu punct, ci cu punct și virgulă.
 
-<img src="EnuntExpresie.png" width="350px">
+<img src="images/images/EnuntExpresie.png" width="350px">
 
 Exemplul oferit deja nu este cel mai util. În schimb, există un enunț al celei mai utile expresii întâlnite în întreg limbajul: *enunțul expresiei de apelare* a unei funcții (**call expression**): `făCeva();`.
 
@@ -535,7 +535,7 @@ Declararea variabilelor și a funcțiilor se leagă organic de conceptul identif
 
 Adu-ți aminte că scopul pentru care scriem software este pentru a manipula valori. Operațiunile au efecte în manipularea anumitor resurse.
 
-![Identificatoriii pot fi percepuți ca fanioane](IdentificatoriIsland.png "Identificatori ca niște fanioane")
+![Identificatoriii pot fi percepuți ca fanioane](images/IdentificatoriIsland.png "Identificatori ca niște fanioane")
 
 Reperele de mai sus sunt identificatorii, care odată înțeleși, vor permite accesul la ceea ce înseamnă conceptul de variabilă.
 
