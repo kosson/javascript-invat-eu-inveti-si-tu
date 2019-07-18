@@ -8,7 +8,7 @@ Această structură capabilă să țină valori este cea mai utilizată atunci c
 
 **Spune standardul**:
 
-> Valoarea slotului intern [\[Prototype\]\] al constructorului `Array` este obiectul prototype al obiectul intern `Function`. Obiectul prototype al lui `Function` este în sine un obiect-funcție intern.
+> Valoarea slotului intern `[[Prototype]]` al constructorului `Array` este obiectul prototype al obiectul intern `Function`. Obiectul prototype al lui `Function` este în sine un obiect-funcție intern.
 
 ## Natura unui array
 

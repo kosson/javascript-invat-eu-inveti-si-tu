@@ -18,3 +18,10 @@ var html = ['<p>a</p>', '<p>b</p>', '<p>c</p>'].join('');
 // este mult mai rapid decât concatenarea tradițională
 var html = '<p>a</p>' + '<p>b</p>' + '<p>c</p>';
 ```
+
+Chiar dacă nu face parte din metodele obiectului prototip a lui `Array`, metoda `toString()` poate fi folosită cu succes pentru a transforma un array într-un string continuu a cărui părți sunt valorile array-ului despărțite de virgule.
+
+```javascript
+var testArr = ['ceva', 'aici'];
+console.log(testArr.toString()); // ceva,aici
+```
