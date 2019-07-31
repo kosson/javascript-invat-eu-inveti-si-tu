@@ -1,4 +1,4 @@
-Este locația unde se face apelarea funcției.
+Este locația de unde se face apelarea funcției.
 
 ## Mantre
 
