@@ -90,3 +90,17 @@ console.log(JSON.stringify(elementeComune, null, 2));
 ```
 
 Poate fi folosit cu mare succes și în funcții recursive.
+
+## Căutarea valorilor corespondente din două array-uri
+
+Uneori este necesară căutarea a unor valori care există într-un array, în alt array. Pe scurt, ai nevoie să găsești corespondențele în două seturi de valori.
+
+```javascript
+let roles = ["user", "ceva", "intern", "tester"];
+let reqvals = ["user", "intern","ceva", "tester"];
+
+function checkRoles () {
+    return reqvals.filter((rol) => roles.includes(rol));
+};
+console.log(checkRoles()); // [ 'user', 'intern', 'ceva', 'tester' ]
+```
