@@ -1,6 +1,6 @@
 # Array.prototype.filter()
 
-Această metodă poate fi înțeleasă ca un test aplicat fiecărui element dintr-un array. Testarea se face după anumite criterii introduse de o funcție callback. Funcția callback returnează o valoare de adevăr pentru elementul curent supus analizei. Dacă un element trece testul, acesta este adăugat unui nou array. Array-ul original nu este modificat.
+Această metodă poate fi înțeleasă ca un test aplicat fiecărui element dintr-un array. Testarea se face după anumite criterii introduse de o funcție callback. Funcția callback returnează o valoare de adevăr pentru elementul curent supus analizei. Dacă un element trece testul, acesta este adăugat unui nou array care se construiește din elementele primului care au trecut testul. Array-ul original nu este modificat.
 
 ```javascript
 const colectie = [23, 34, 2, 10];
@@ -8,12 +8,25 @@ colectie.filter((element) => element > 20);
 // Array [ 23, 34 ]
 ```
 
-Metoda `filter()` face parte integrantă din metodele obiectului intern `Array`. Alături de `map()` și `reduce()` face parte integrantă din paradigma „programării funcționale”.
+Metoda `filter()` face parte integrantă din metodele obiectului intern `Array`. Alături de `map()` și `reduce()` face parte integrantă din paradigma *programării funcționale*.
 Această funcționalitate intră pe lanțurile de prelucrare ale datelor.
+
+```javascript
+let carti = [
+    {id:1, nume: "De veghe în lanul de secară", împrumutată: true},
+    {id:2, nume: "Cel mai iubit dintre pământeni", împrumutată: false}
+];
+function stergeTitlu(id){
+    carti = carti.filter(exemplar => exemplar.id !== id);
+}
+stergeTitlu(2);
+console.log(carti);
+//[ { id: 1, nume: 'De veghe în lanul de secară', 'împrumutată': true } ]
+```
 
 ## Construiește de la 0 o funcție de filtrare
 
-Înainte de a folosi `filter()` așa cum este deja implementat, este util să vedem cum am construi de la 0 o astfel de funcționalitate.
+Înainte de a folosi `filter()` așa cum este deja implementat, este util să vedem cum am construi de la `0` o astfel de funcționalitate.
 
 ```javascript
 const colectie = ["prima", "a doua", "a treia", "a doua", "prima"];

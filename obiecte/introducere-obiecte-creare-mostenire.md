@@ -1103,7 +1103,16 @@ obi2.faAltceva(); // "ce-i returnat din obi1  este oferită aici"
 
 ## Clase în JavaScript
 
-JavaScript este un limbaj de programare bazat pe obiecte pe care nu le instanțiază în baza unei clase. Prin modul lor de lucru, funcțiile au oferit calea către implementarea claselor. Ce a rezolvat implementarea claselor odată cu versiunea ES6? Primul și cel mai important lucru este posibilitatea ca o *funcție obiect* să moștenească de la altă *funcție obiect*. Acest comportament a permis ca o funcție constructor să poată moșteni din altă funcție constructor.
+JavaScript este un limbaj de programare bazat pe obiecte pe care nu le instanțiază în baza unei clase. Prin modul lor de lucru, funcțiile au oferit calea către implementarea claselor.
+
+```javascript
+// expresia unei declarații de funcție
+let x = function () {}; // constructor.name -> Function
+// expresia declarației de clasă
+let Y = class {}; // constructor.name -> Function
+```
+
+Ce a rezolvat implementarea claselor odată cu versiunea ES6? Primul și cel mai important lucru este posibilitatea ca o *funcție obiect* să moștenească de la altă *funcție obiect*. Acest comportament a permis ca o funcție constructor să poată moșteni din altă funcție constructor.
 
 ```javascript
 // Limitările ES5
