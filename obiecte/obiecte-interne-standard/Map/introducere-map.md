@@ -132,11 +132,11 @@ colectie.delete('altceva'); //true
 colectie.has('altceva') // false
 ```
 
-### Metoda Map.prototype.clear()
+### Metoda `Map.prototype.clear()`
 
 Metoda este cât se poate de clară: șterge toate perechile din `Map`.
 
-### Metoda Map.prototype.entries()
+### Metoda `Map.prototype.entries()`
 
 Metoda returnează un obiect **Iterator** care conține perechi cheie - valoare pentru fiecare element din obiectul Map.
 
@@ -154,7 +154,7 @@ console.log(iteratorColectie.next().value); // Array [ "altceva", 1000 ]
 console.log(iteratorColectie.next().value); // Array [ Object, "hmmmmm" ]
 ```
 
-### Metoda Map.prototype.forEach()
+### Metoda `Map.prototype.forEach()`
 
 Metoda execută o funcție pentru fiecare pereche cheie - valoare din obiectul `Map` în ordinea inserției. Callback-ul nu se va executa pentru cheile care au fost șterse, dar se va executa pentru valorile prezente dar care sunt `undefined`.
 
@@ -179,7 +179,7 @@ colectie.forEach(ceEste);
 
 Fiecare element într-o buclă este un array format din cheie, care este primul element și valoare, care este al doilea element.
 
-### Metoda Map.prototype.keys() și Map.prototype.values()
+### Metoda `Map.prototype.keys()` și `Map.prototype.values()`
 
 Este o metodă care returnează un nou obiect iterator care conține cheile pentru fiecare element din obiectul `Map` în ordinea inserării.
 
