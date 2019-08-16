@@ -137,6 +137,16 @@ inm *= 2; //4
 
 ## Restul împărțirii (modulo) `%`
 
+Operațiunea modulo găsește restul unei operațiuni de împărțire. Răspunsul unei întrebări: de câte ori este cuprins 2 în 9, vom afla că de 4 ori, dar rămâne o valoare de 1.
+
 ```javascript
 9 % 2; // 1
 ```
+
+Rezultatul unei operațiuni modulo este o valoare dintr-un interval de la `0`, la valoarea divizorului minus 1. 
+
+Modulo este foarte util atunci când dorești să constitui un șablon repetitiv dintr-un interval închis la limita superioară.
+
+## Referințe
+
+- [Guest Tutorial #6: The Modulo Operator with Golan Levin, The coding Train](https://www.youtube.com/watch?v=r5Iy3v1co0A)
