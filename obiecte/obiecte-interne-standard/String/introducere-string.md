@@ -142,4 +142,5 @@ JavaScript nu face diferență între string-urile poziționate între ghilimele
 
 ## Resurse
 
-[Mozilla Developer Network - Template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)
+- [Mozilla Developer Network - Template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)
+- [Unicode in JavaScript](https://flaviocopes.com/javascript-unicode/)

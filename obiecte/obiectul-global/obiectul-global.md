@@ -18,7 +18,7 @@ Obiectul global are din start trei proprietăți valorice a căror atribute `wri
 
 ## Metode ale obiectului global - function properties
 
-### Funcția eval()
+### Funcția `eval()`
 
 Aceasta permite executarea de cod JavaScript, care este pasat ca string.
 
@@ -28,7 +28,7 @@ eval('console.log("ceva")'); // ceva
 
 În ceea ce privește folosirea acestei funcții, comunitatea recomandă limitarea utilizării din motive evidente de securitate și din motive de viteză. Există o mantră care spune că **eval is evil** - eval este rău.
 
-### Funcția parseInt()
+### Funcția `parseInt()`
 
 Este o funcție care primește ca argument un șir de caractere pe care încearcă să-l transforme într-un număr întreg.
 
@@ -47,7 +47,7 @@ parseInt('FF0', 16); // 4080
 parseInt('FF0', 10); // NaN
 ```
 
-### Funcția parseFloat()
+### Funcția `parseFloat()`
 
 Este o funcție care se aseamănă cu `parseInt()`, cu diferența că va căuta să returneze zecimalele dacă acestea pot fi extrapolate din șirul de caractere pasat.
 
@@ -63,7 +63,7 @@ parseFloat('12e5'); // 1200000
 
 Spre deosebire de `parseInt()`, `parseFloat()` înțelege și exponenții.
 
-### Funcția isNaN()
+### Funcția `isNaN()`
 
 Verifică dacă o valoare este `NaN` (*not a number*).
 
@@ -71,7 +71,7 @@ Verifică dacă o valoare este `NaN` (*not a number*).
 console.log(parseInt('ades23')); // NaN
 ```
 
-### Funcția isFinite()
+### Funcția `isFinite()`
 
 Este o funcție care permite verificarea unei valori din două puncte de vedere. Să nu fie `Infinity` sau `NaN`. În cazul celor două, returnează `false`. Nu uita că pentru JavaScript cel mai mare număr este `1.7976931348623157e+308`. Orice trece peste este considerat `Infinity`.
 

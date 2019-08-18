@@ -739,7 +739,7 @@ Gruparea activează un mecanism de memorizare care ține minte șirul de caracte
 
 Totuși, la ce ar fi bună memorarea fragmentelor de șir prin acest mecanism? Poți folosi acest mecanism atunci când dorești să cauți și să înlocuiești secvențe de text. Să presupunem că avem de parcurs un fragment XHTML, care este un soi de XML (Extended Markup Language) și avem de modificat ceva. Știm deja că XML-ul are o regulă strictă care spune că tagurile deschise trebuie închise, iar în cazul nostru: `<cite>Un citat</cite>`.
 
-Fiecărui grup îi sunt asignate numere de la stânga la dreapta începând cu `1`. Se pot referenția aceste grupuri cu backslash număr. De exemplu: `\1`.
+Fiecărui grup îi sunt asignate numere de la stânga la dreapta începând cu `1`. Se pot referi aceste grupuri cu backslash număr. De exemplu: `\1`.
 
 ```javascript
 let sir = '<p>Un <cite>citat.</cite></p><span>ceva</span>';
