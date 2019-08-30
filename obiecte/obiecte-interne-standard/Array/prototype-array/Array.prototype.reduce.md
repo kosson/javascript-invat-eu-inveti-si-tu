@@ -27,23 +27,28 @@ colectie.forEach(function(element){
 ```
 
 Ce-i nou? Faptul că `forEach` gestionează *modelarea* fiecărui element din array prin intermediul unei funcții pasate drept argument (te-ai prins, un *callback*).
-Reduce construiește pe ceea ce oferă `forEach` și `map` ducând mai departe capabilitățile de procesare prin utilizarea unei structuri de date cu rol de acumulator și a unor mecanisme ce permit o filtrare a datelor pe măsură ce acestea sunt prelucrate.
 
-Funcția callback primește patru argumente și se va aplica pe fiecare element al array-ului:
+Reduce construiește pe ceea ce oferă `forEach` și `map` ducând mai departe capabilitățile de procesare prin utilizarea unei structuri de date cu rol de acumulator și a unor mecanisme ce permit o filtrare a datelor pe măsură ce acestea sunt prelucrate. Metoda `reduce()` primește
 
--   `previousValue`: este valoarea acumulată până la momentul unei noi operațiuni. Aceasta este returnată de invocarea anterioară a callback-ului sau inițial este valoarea opțională pasată ca al doilea argument lui `reduce`,
+Funcția callback primește patru argumente și se va aplica pe fiecare element al array-ului cu excepția primului element din array:
+
+-   `acumulator`: este valoarea acumulată până la momentul unei noi operațiuni. Aceasta este returnată de invocarea anterioară a callback-ului sau inițial este valoarea opțională pasată ca al doilea argument lui `reduce`,
 -   `currentValue`: este elementul curent din array care este procesat,
--   `currentIndex`: indexul elementului care tocmai este procesat,
--   `obiectul`: chiar obiectul care trebuie parcurs.
+-   `currentIndex`: indexul elementului care tocmai este procesat și pornește de la valoarea `0`, dacă este oferit metodei `reduce` cel de-al doilea parametru. Dacă nu, pornește de la `1`.
+-   `arrayOriginal`: chiar obiectul care trebuie parcurs.
+
+Metoda `reduce` poate primi opțional, pe lângă callback și o valoare de inițiere. Această valoare va fi valoarea de inițiere a acumulatorului. În cazul în care valoarea de inițializare nu este introdusă, ca valoare pentru acumulator, va fi prima din array-ul de prelucrat, dar peste care se va trece fără a se face prelucrarea respectivului obiect - pur și simplu e gol.
 
 Pentru a înțelege mai repede `reduce`, este util să privim la următoarea secvență de cod:
 
 ```javascript
-['unu', 'doi', 'trei'].reduce(function(acumulator, elementulDeLucru, index){
+['unu', 'doi', 'trei'].reduce(function(acumulator, elementulDeLucru, index, arrOriginal){
   return acumulator;
 },{});
 // este returnată chiar valoarea de pornire: {}
 ```
+
+Observă faptul că valoarea inițială a acumulatorului este chiar `{}`, cel de-al doilea argument dat metodei `reduce`. În cazul în care se introduce valoarea de pornire, aceasta va fi acumulatorul și prima valoare din array-ul de prelucrare va fi `currentValue`. Dacă nu este dată o valoare de inițializare, acumulatorul va fi prima valoare din array, iar `currentValue`, cea de-a doua.
 
 ## Mantre
 
@@ -148,62 +153,6 @@ var alfabetic = colectie.reduce(function(acumulator, cuvant){
 },{});
 // Object { C: Array[3], B: Array[3], S: Array[1], O: Array[1] }
 ```
-
-## Reduce pe obiecte
-
-### Reduce pentru selectare după criterii specificate printr-un obiect opțional.
-
-```javascript
-var colectie = [
-  {clasa: 'cervide', sex: 'masculin', varsta: 10},
-  {clasa: 'cervide', sex: 'masculin', varsta: 8},
-  {clasa: 'cervide', sex: 'masculin', varsta: 12},
-  {clasa: 'cervide', sex: 'feminin', varsta: 4},
-  {clasa: 'cervide', sex: 'feminin', varsta: 2},
-];
-colectie.reduce(function(colectie, element, index){
-  colectie[element.sex].push(element) ;
-  return colectie;
-},{masculin: [], feminin: []});
-// Object { masculin: Array[3], feminin: Array[2] } --> fiecare array conține obiectele
-```
-
-Dacă array-ul este gol și nu este dată o valoare de pornire `initialValue`, atunci va fi emisă o eroare `TypeError`.
-Dacă array-ul are o singură valoare indiferent de poziția acesteia și nu este oferită o valoare `initialValue` sau dacă `initialValue` este dată, dar array-ul este gol, atunci valoarea unică va fi returnată fără a fi invocat callback-ul.
-
-```javascript
-[0, 1, 2, 3, 4].reduce(function(previousValue, currentValue, currentIndex, array) {
-  return previousValue + currentValue;
-}); // 10
-```
-
-|                  | previousValue | currentValue | currentIndex | array            | valoarea returnată |
-|:---------------- |:------------- |:------------ |:------------ |:---------------- |:------------------ |
-| prima invocare   | 0             | 1            | 1            | \[0, 1, 2, 3, 4] | 1                  |
-| a doua invocare  | 1             | 2            | 2            | \[0, 1, 2, 3, 4] | 3                  |
-| a treia invocare | 3             | 3            | 3            | \[0, 1, 2, 3, 4] | 6                  |
-| a patra invocare | 6             | 4            | 4            | \[0, 1, 2, 3, 4] | 10                 |
-
-Rezultatul lui `reduce` este la final 10. Varianta ES6 a aceleiași funcții `reduce` arată astfel:
-
-```javascript
-[0, 1, 2, 3, 4].reduce( (prev, curr) => prev + curr );
-```
-
-Dacă s-ar oferi o valoare inițială ca al doilea argument:
-
-```javascript
-[0, 1, 2, 3, 4].reduce(function(previousValue, currentValue, currentIndex, array) {
-  return previousValue + currentValue;
-}, 10);
-```
-|                  | previousValue | currentValue | previousIndex | array            | valoarea returnată |
-|:---------------- |:------------- |:------------ |:------------- |:---------------- |:------------------ |
-| prima invocare   | 10            | 0            | 0             | \[0, 1, 2, 3, 4] | 10                 |
-| a doua invocare  | 10            | 1            | 1             | \[0, 1, 2, 3, 4] | 11                 |
-| a treia invocare | 11            | 2            | 2             | \[0, 1, 2, 3, 4] | 13                 |
-| a patra invocare | 13            | 3            | 3             | \[0, 1, 2, 3, 4] | 16                 |
-| a patra invocare | 16            | 4            | 4             | \[0, 1, 2, 3, 4] | 20                 |
 
 ### Însumarea valorilor dintr-un array:
 
@@ -315,4 +264,139 @@ function cautaSirLung(colectie){
   }, {index: -1, valoare: ''});
 };
 cautaSirLung(colectie); // Object { index: 2, valoare: "telejurnal" }
+```
+
+## Reduce pe obiecte
+
+### Reduce pentru selectare după criterii specificate printr-un obiect opțional.
+
+```javascript
+var colectie = [
+  {clasa: 'cervide', sex: 'masculin', varsta: 10},
+  {clasa: 'cervide', sex: 'masculin', varsta: 8},
+  {clasa: 'cervide', sex: 'masculin', varsta: 12},
+  {clasa: 'cervide', sex: 'feminin', varsta: 4},
+  {clasa: 'cervide', sex: 'feminin', varsta: 2},
+];
+colectie.reduce(function(colectie, element, index){
+  colectie[element.sex].push(element) ;
+  return colectie;
+},{masculin: [], feminin: []});
+// Object { masculin: Array[3], feminin: Array[2] } --> fiecare array conține obiectele
+```
+
+Dacă array-ul este gol și nu este dată o valoare de pornire `initialValue`, atunci va fi emisă o eroare `TypeError`.
+Dacă array-ul are o singură valoare indiferent de poziția acesteia și nu este oferită o valoare `initialValue` sau dacă `initialValue` este dată, dar array-ul este gol, atunci valoarea unică va fi returnată fără a fi invocat callback-ul.
+
+```javascript
+[0, 1, 2, 3, 4].reduce(function(previousValue, currentValue, currentIndex, array) {
+  return previousValue + currentValue;
+}); // 10
+```
+
+|                  | previousValue | currentValue | currentIndex | array            | valoarea returnată |
+|:---------------- |:------------- |:------------ |:------------ |:---------------- |:------------------ |
+| prima invocare   | 0             | 1            | 1            | \[0, 1, 2, 3, 4] | 1                  |
+| a doua invocare  | 1             | 2            | 2            | \[0, 1, 2, 3, 4] | 3                  |
+| a treia invocare | 3             | 3            | 3            | \[0, 1, 2, 3, 4] | 6                  |
+| a patra invocare | 6             | 4            | 4            | \[0, 1, 2, 3, 4] | 10                 |
+
+Rezultatul lui `reduce` este la final 10. Varianta ES6 a aceleiași funcții `reduce` arată astfel:
+
+```javascript
+[0, 1, 2, 3, 4].reduce( (prev, curr) => prev + curr );
+```
+
+Dacă s-ar oferi o valoare inițială ca al doilea argument:
+
+```javascript
+[0, 1, 2, 3, 4].reduce(function(previousValue, currentValue, currentIndex, array) {
+  return previousValue + currentValue;
+}, 10);
+```
+|                  | previousValue | currentValue | previousIndex | array            | valoarea returnată |
+|:---------------- |:------------- |:------------ |:------------- |:---------------- |:------------------ |
+| prima invocare   | 10            | 0            | 0             | \[0, 1, 2, 3, 4] | 10                 |
+| a doua invocare  | 10            | 1            | 1             | \[0, 1, 2, 3, 4] | 11                 |
+| a treia invocare | 11            | 2            | 2             | \[0, 1, 2, 3, 4] | 13                 |
+| a patra invocare | 13            | 3            | 3             | \[0, 1, 2, 3, 4] | 16                 |
+| a patra invocare | 16            | 4            | 4             | \[0, 1, 2, 3, 4] | 20                 |
+
+### Folding pe un câmp al unei înregistrări
+
+Uneori ai nevoie să faci ceea ce se numește împăturire. Să presupunem că din teren culegi date care aparțin aceluiași set. Ceea ce ai dori la final este să transformi setul într-o singură înregistrare, iar toate elementele care se diferențiază ca parte a unui subset prezentat ca un array.
+
+Exemplu de date ar fi un CSV care adună toate activitățile pe care le poate avea o competență specifică din domeniul educației.
+
+![Activități ale Competențelor specifice](activitatiCompetenteSpecifice.png)
+
+Un fragment din aceste date după cum urmează:
+
+```csv
+nume,ids,cod,activitate,disciplină,nivel,act normativ,competență generală,număr competența generală
+Identificarea unor caracteristici ale corpurilor vii și nevii,1.1.,stiinte-identificare-caracteristici-cl3-1.1,"observarea unor corpuri și identificarea caracteristicilor acestora (de exemplu: organisme vii pentru identificarea părților componente, diferite obiecte pentru identificarea unor proprietăți precum formă, culoare, transparență)","Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,"Explorarea caracteristicilor unor corpuri, fenomene și procese",1
+Identificarea unor caracteristici ale corpurilor vii și nevii,1.1.,stiinte-identificare-caracteristici-cl3-1.1,"utilizarea unor modele pentru identificarea caracteristicilor principale ale corpurilor reprezentate (de exemplu: schițe de hărți pentru observarea suprafețelor de apă și uscat, mulaje ale unor tipuri de animale din diferite grupe)","Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,"Explorarea caracteristicilor unor corpuri, fenomene și procese",1
+Identificarea unor caracteristici ale corpurilor vii și nevii,1.1.,stiinte-identificare-caracteristici-cl3-1.1,"observarea dirijată a unor scheme simple, desene pentru identificarea
+etapelor unor fenomene/ procese (de exemplu: circuitul apei în natură)","Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,"Explorarea caracteristicilor unor corpuri, fenomene și procese",1
+Identificarea unor caracteristici ale corpurilor vii și nevii,1.1.,stiinte-identificare-caracteristici-cl3-1.1,"recunoașterea unor caracteristici ale corpurilor pornind de la prezentarea unor texte științifice adaptate vârstei elevilor, a unor povești sau povestiri (de exemplu: descrierea unor reacții ale animalelor în diferite situații)","Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,"Explorarea caracteristicilor unor corpuri, fenomene și procese",1
+Identificarea unor caracteristici ale corpurilor vii și nevii,1.1.,stiinte-identificare-caracteristici-cl3-1.1,"observarea unor aspecte dinamice ale realității înconjurătoare sau mai îndepărtate de mediul de viață cunoscut, prin vizionarea unor filme sau realizarea unor jocuri de rol (de exemplu, despre mișcarea apei pe suprafața Pământului, despre modul în care căderea  vântul pot
+produce energie)","Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,"Explorarea caracteristicilor unor corpuri, fenomene și procese",1
+Identificarea unor caracteristici ale corpurilor vii și nevii,1.1.,stiinte-identificare-caracteristici-cl3-1.1,"identificarea unor caracteristici ale corpurilor, fenomenelor, proceselor prin efectuarea unor experiențe simple (de exemplu: evidențierea diferențelor dintre diferite surse de apă, evidențierea mișcărilor apei pe suprafața planetei, evidențierea schimbării stării de agregare a apei și a relației cu temperatura, evidențierea mișcării aerului și a influenței vântului asupra norilor, evidențierea unor interacțiuni între corpuri și a efectelor lor)","Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,"Explorarea caracteristicilor unor corpuri, fenomene și procese",1
+"Utilizarea unor criterii pentru compararea unor corpuri, fenomene și procese",1.2.,stiinte-identificare-caracteristici-cl3-1.2,"identificarea unor criterii de comparare a unor corpuri, fenomene, procese din aceeași categorie (de exemplu: diverse proprietăți ale metalelor, diverse caracteristici ale unor animale)","Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,"Explorarea caracteristicilor unor corpuri, fenomene și procese",1
+"Utilizarea unor criterii pentru compararea unor corpuri, fenomene și procese",1.2.,stiinte-identificare-caracteristici-cl3-1.2,"compararea unor corpuri, fenomene, procese din aceeași categorie în scopul stabilirii asemănărilor și deosebirilor între ele (de exemplu: compararea metalelor după diferite proprietăți, a animalelor după diferite caracteristici)","Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,"Explorarea caracteristicilor unor corpuri, fenomene și procese",1
+"Utilizarea unor criterii pentru compararea unor corpuri, fenomene și procese",1.2.,stiinte-identificare-caracteristici-cl3-1.2,"selectarea unor corpuri după diferite criterii și realizarea unor colecții/ expoziții (de exemplu: colecții de obiecte selectate după formă, mărime, culoare, întrebuințări, colecții de plante sau părți componente ale acestora)","Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,"Explorarea caracteristicilor unor corpuri, fenomene și procese",1
+Identificarea etapelor unui demers investigativ vizând mediul înconjurător pe baza unui plan dat,2.1.,stiinte-identificare-caracteristici-cl3-2.1,formularea unor întrebări ce duc la necesitatea unei investigații pentru aflarea răspunsului (de exemplu: „Planta are nevoie de lumină pentru a trăi?”),"Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,Investigarea mediului înconjurător folosind instrumente și procedee specifice,2
+Identificarea etapelor unui demers investigativ vizând mediul înconjurător pe baza unui plan dat,2.1.,stiinte-identificare-caracteristici-cl3-2.1,"identificarea metodelor de lucru (de exemplu: observarea a două plante de același tip, crescute în condiții identice, dar cu iluminare diferită)","Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,Investigarea mediului înconjurător folosind instrumente și procedee specifice,2
+Identificarea etapelor unui demers investigativ vizând mediul înconjurător pe baza unui plan dat,2.1.,stiinte-identificare-caracteristici-cl3-2.1,"stabilirea resurselor necesare (de exemplu: două ghivece cu mușcate plantate în același tip de sol, apă, hârtie închisă la culoare)","Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,Investigarea mediului înconjurător folosind instrumente și procedee specifice,2
+Identificarea etapelor unui demers investigativ vizând mediul înconjurător pe baza unui plan dat,2.1.,stiinte-identificare-caracteristici-cl3-2.1,implicarea în alegerea modalităților de lucru (individual/ în grup),"Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,Investigarea mediului înconjurător folosind instrumente și procedee specifice,2
+Identificarea etapelor unui demers investigativ vizând mediul înconjurător pe baza unui plan dat,2.1.,stiinte-identificare-caracteristici-cl3-2.1,"realizarea unor estimări, predicții asupra subiectului supus investigației (de exemplu: vor exista/ nu vor exista diferențe între cele două plante, exemple de posibile diferențe)","Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,Investigarea mediului înconjurător folosind instrumente și procedee specifice,2
+```
+
+Ceea ce observați este câmpul `ids` care are un prim identificator comun mai multor înregistrări. Toate câmpurile sunt identice mai puțin cel `activitate`. Rezultatul la care dorim să ajungem este ca o singură înregistrare pentru un identificator unic, care să adune într-un array, activitățile.
+
+![](RezultatFoldingByOneField.png)
+
+```json
+[{
+    "nume": "Identificarea unor caracteristici ale corpurilor vii și nevii",
+    "ids": ["1.1."],
+    "cod": "stiinte-identificare-caracteristici-cl3-1.1",
+    "activitati": ["observarea unor corpuri și identificarea caracteristicilor acestora (de exemplu: organisme vii pentru identificarea părților componente, diferite obiecte pentru identificarea unor proprietăți precum formă, culoare, transparență)", "observarea unor corpuri și identificarea caracteristicilor acestora (de exemplu: organisme vii pentru identificarea părților componente, diferite obiecte pentru identificarea unor proprietăți precum formă, culoare, transparență)", "utilizarea unor modele pentru identificarea caracteristicilor principale ale corpurilor reprezentate (de exemplu: schițe de hărți pentru observarea suprafețelor de apă și uscat, mulaje ale unor tipuri de animale din diferite grupe)", "observarea dirijată a unor scheme simple, desene pentru identificarea\netapelor unor fenomene/ procese (de exemplu: circuitul apei în natură)", "recunoașterea unor caracteristici ale corpurilor pornind de la prezentarea unor texte științifice adaptate vârstei elevilor, a unor povești sau povestiri (de exemplu: descrierea unor reacții ale animalelor în diferite situații)", "observarea unor aspecte dinamice ale realității înconjurătoare sau mai îndepărtate de mediul de viață cunoscut, prin vizionarea unor filme sau realizarea unor jocuri de rol (de exemplu, despre mișcarea apei pe suprafața Pământului, despre modul în care căderea  vântul pot\nproduce energie)", "identificarea unor caracteristici ale corpurilor, fenomenelor, proceselor prin efectuarea unor experiențe simple (de exemplu: evidențierea diferențelor dintre diferite surse de apă, evidențierea mișcărilor apei pe suprafața planetei, evidențierea schimbării stării de agregare a apei și a relației cu temperatura, evidențierea mișcării aerului și a influenței vântului asupra norilor, evidențierea unor interacțiuni între corpuri și a efectelor lor)"],
+    "disciplina": ["Științe ale naturii,  clasa a III-a- a IV-a"],
+    "nivel": ["Clasa a III-a"],
+    "ref": ["OM 5003 / 02.12.2014"],
+    "parteA": "Explorarea caracteristicilor unor corpuri, fenomene și procese",
+    "compGen": "1"
+}, {
+    "nume": "Utilizarea unor criterii pentru compararea unor corpuri, fenomene și procese",
+    "ids": ["1.2."],
+    "cod": "stiinte-identificare-caracteristici-cl3-1.2",
+    "activitati": ["identificarea unor criterii de comparare a unor corpuri, fenomene, procese din aceeași categorie (de exemplu: diverse proprietăți ale metalelor, diverse caracteristici ale unor animale)", "compararea unor corpuri, fenomene, procese din aceeași categorie în scopul stabilirii asemănărilor și deosebirilor între ele (de exemplu: compararea metalelor după diferite proprietăți, a animalelor după diferite caracteristici)", "selectarea unor corpuri după diferite criterii și realizarea unor colecții/ expoziții (de exemplu: colecții de obiecte selectate după formă, mărime, culoare, întrebuințări, colecții de plante sau părți componente ale acestora)"],
+    "disciplina": ["Științe ale naturii,  clasa a III-a- a IV-a"],
+    "nivel": ["Clasa a III-a"],
+    "ref": ["OM 5003 / 02.12.2014"],
+    "parteA": "Explorarea caracteristicilor unor corpuri, fenomene și procese",
+    "compGen": "1"
+}]
+```
+
+O posibilă soluție de folding - *împăturire* ar fi următoarea:
+
+```javascript
+const y = x.reduce((arrAcc, elemArrOrig, idx, srcArr) => {
+    if (arrAcc.length === 0) {
+        arrAcc[idx] = elemArrOrig;
+    }
+    if (arrAcc.slice(-1)[0].ids[0] === elemArrOrig.ids[0]) {
+        elemArrOrig.activitati.forEach((act) => {
+            arrAcc.slice(-1)[0].activitati.push(act);
+        });
+        // compara următorul obiect din array-ul originar cu cel din acumulator
+        // dacă ids-urile corespund, adaugă activitatea la cel preexistent
+        // dacă nu corespund, adaugă obiectul din array-ul original la acumulator.
+    } else {
+        arrAcc.push(srcArr[idx])
+    }
+    return arrAcc;
+}, []);
 ```
