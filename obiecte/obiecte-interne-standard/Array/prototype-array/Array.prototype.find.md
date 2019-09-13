@@ -1,19 +1,16 @@
 # Array.prototype.find()
 
-Metoda a fost proiectată cu scopul de a descoperi un element din array care se potrivește după o condiție și mai puțin după o valoare. Este recomandabilă folosirea metodelor `indexOf()` sau `lastIndexOf()`, dacă este țintită valoarea.
+Metoda a fost proiectată cu scopul de a descoperi primul element din array care satisface o condiție impusă la execuția unui callback. Este recomandabilă folosirea metodelor `indexOf()` sau `lastIndexOf()`, dacă este dorită valoarea primei aparții sau a ultimei.
 
-Returnează valoarea căutată într-un array. Dacă un element al array-ului satisface condițiile unei funcții de test (callback), elementul căutat este returnat. Dacă nu este găsit, este returnat `undefined`.
+Dacă un element al array-ului satisface condițiile unei funcții de test (callback), primul întâlnit este returnat. Dacă nu este găsit, este returnat `undefined`. În cazul în care dorești să găsești toate elementele care satisfac criteriile, ar trebui folosită metoda `filter()`. Metoda nu modifică array-ul original.
 
-Metodele `find()` și `findIndex()` primesc două argumente: o funcție callback și o referință către un obiect care va fi folosit drept `this`. Funcția cu rol de callback poate primi trei argumente:
+Metodele `find()` și `findIndex()` primesc două argumente: o funcție callback și o referință către un obiect la care se dorește o legătură `this`. Funcția cu rol de callback poate primi trei argumente:
 
 -   *elementul* care este procesat,
 -   *indexul* elementului care este procesat,
 -   *array*-ul pentru care `find()` a fost invocat.
 
-Pur și simplu sare în ochi faptul că sunt pasate aceleași lucruri ca și lui `map()` sau lui `forEach()`.
-Revenind la `find()`, funcția callback ar trebui să returneze `true` dacă valoarea pasată drept cheie de căutare este găsită între elemente. În cazul în care este găsit un element care se potrivește, ambele metode vor returna `true`. Singura diferență între cele două este că `find()` returnează valoarea, iar `findIndex()`, indexul la care a fost găsită aceasta.
-
-Nu modifică array-ul pentru care este apelată metoda.
+Pur și simplu sare în ochi faptul că sunt pasate aceleași lucruri ca și lui `map()` sau lui `forEach()`. Metoda `find()` returnează valoarea, iar `findIndex()`, indexul la care a fost găsită aceasta.
 
 ```javascript
 var lada = [

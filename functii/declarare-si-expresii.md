@@ -48,7 +48,7 @@ function oFunctie () {            // funcție declarată
 };
 ```
 
-Reține că o funcție declarată este omniprezentă - beneficiază de hoisting pentru mediul lexical în care a fost declarată. Acesta este și motivul pentru care nu vei introduce niciodată declarații de funcții în `if`-uri, de exemplu. Degeaba o vei face pentru că indiferent de intenția a a declara o funcție care să fie valabilă doar pentru `if`, aceasta, de fapt va fi valabilă întregului cod. Un exemplu să înțelegi că hoistingul lucrează chiar dacă returnezi înaintea declarării funcției.
+Reține că o funcție declarată este omniprezentă - beneficiază de hoisting pentru mediul lexical în care a fost declarată. Acesta este și motivul pentru care nu vei introduce niciodată declarații de funcții în `if`-uri, de exemplu. Degeaba o vei face pentru că indiferent de intenția de a declara o funcție care să fie valabilă doar pentru `if`, aceasta, va fi disponibilă întregului cod. Mai jos este un exemplu să înțelegi că hoistingul lucrează chiar dacă returnezi înaintea declarării funcției.
 
 ```javascript
 (function () {
@@ -83,7 +83,7 @@ Eroarea apare pentru că se face *legătura* dintre identificator și funcție d
 })(); // fac ceva!
 ```
 
-Încă ceva: introducerea unei instrucțiuni de declarare între paranteze, o transformă în expresie.
+Încă ceva. Introducerea unei instrucțiuni de declarare între paranteze, o transformă în expresie.
 
 ```javascript
 (function faCeva () {});

@@ -4,13 +4,13 @@ Este anul 1950. Războiul se terminase iar computerele treceau în faza comercia
 
 ![](images/Grace_Hopper_and_UNIVAC.jpg)
 
-Anii 50 și 60 sunt ani de mare efervescență în domeniul computerelor. Stimabila doamnă, care este și un personaj hâtru pune un accent pe viteza de dezvoltare:
+Anii 50 și 60 sunt ani de mare efervescență în domeniul computerelor. Stimabila doamnă, care este și un personaj hâtru, pune un accent pe viteza de dezvoltare:
 
 > Înainte de Al Doilea Război Mondial, viața era simplă. După aceea am avut sisteme.
 
 Acum lucrează la primul computer comercial, *UNIVAC I* și conduce departamentul de programare Automatic Programming Development pentru compania Remington Rand. Este tare necăjită că mașinile de calcul nu înțeleg limba engleză, dar prin '53 va publica un articol științific despre compilatoare. Bine, deja exista un compilator încă din 1952, dar, stupoare: *nimeni nu-l atingea*, rememora dânsa ceva mai târziu, pentru că *mi se spusese că un computer face doar aritmetică*. De fapt, *nimeni nu credea* că se poate acest lucru.
 
-În acel moment, un compilator *traducea limbajul matematic în cod mașină*. Doamna Grace sau *bunica COBOL* așa cum este alintată, argumenta necesitatea ca persoanele care manipulează date să nu fie forțate să manipuleze simboluri așa cum o fac matematicienii. Dorința sa a fost să fie posibilă folosirea de *enunțuri în engleză*. Acestea au fost începuturile compilatoarelor și a limbajului de programare COBOL (COmmon Business-Oriented Language).
+În acel moment, un compilator *traducea limbajul matematic în cod mașină*. Doamna Grace sau *bunica COBOL* așa cum este alintată, argumenta necesitatea ca persoanele care manipulează date, să nu fie forțate să manipuleze simboluri așa cum o fac matematicienii. Dorința sa a fost să fie posibilă folosirea de *enunțuri în engleză*. Acestea au fost începuturile compilatoarelor și a limbajului de programare COBOL (COmmon Business-Oriented Language).
 
 Copilatoarele preiau codul sursă redactat într-un limbaj de programare și îl transformă în **cod obiect** pe care procesorul îl înțelegere. Codul obiect se execută direct și este înțeles de mașină.
 
@@ -308,4 +308,5 @@ faceva(2);                        // 12
 -   [Grace Hopper, Wikipedia în limba engleză](https://en.wikipedia.org/wiki/Grace_Hopper)
 -   [Hopper at the UNIVAC I console, c. 1960](https://en.wikipedia.org/wiki/Grace_Hopper#/media/File:Grace_Hopper_and_UNIVAC.jpg "SI Neg. 83-14878. Date: na...Grace Murray Hopper at the UNIVAC keyboard, c. 1960. Grace Brewster Murray: American mathematician and rear admiral in the U.S. Navy who was a pioneer in developing computer technology, helping to devise UNIVAC I. the first commercial electronic computer, and naval applications for COBOL (common-business-oriented language). This image, which was originally posted to Flickr, was uploaded to Commons using Flickr upload bot on 4 June 2012, 18:21 by Jan Arkesteijn. On that date, it was confirmed to be licensed under the terms of the license indicated Creative Commons Attribution 2.0 Generic license.")
 -   [The Wit and Wisdom of Grace Hopper. From The OCLC Newsletter, March/April, 1987, No. 167 (Editor and article author is Philip Schieber.)](http://www.cs.yale.edu/homes/tap/Files/hopper-wit.html)
--   [Lin Clark. A crash course in memory management](https://hacks.mozilla.org/2017/06/a-crash-course-in-memory-management/)
+-   [Lin Clark. A crash course in memory management | Mozilla Hacks](https://hacks.mozilla.org/2017/06/a-crash-course-in-memory-management/)
+-   [Lin Clark. Calls between JavaScript and WebAssembly are finally fast | Mozilla Hacks](https://hacks.mozilla.org/2018/10/calls-between-javascript-and-webassembly-are-finally-fast-%F0%9F%8E%89/)
