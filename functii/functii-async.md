@@ -1,6 +1,10 @@
 # Funcții async / await
 
-Acest enunț a fost introdus în EcmaScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile acestea poartă cuvântul cheie `async` în fața lui `function`. Apariția lor marchează o nouă paradigmă de lucru cu promisiunile.
+Acest enunț a fost introdus în EcmaScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile care au `async` în fața lui `function` vor returna mereu o promisiune.
+
+**Moment Zen**: Toate valorile returnate de o funcție `async` sunt împachetate în `Promise.resolve()`.
+
+Apariția lor marchează o nouă paradigmă de lucru cu promisiunile.
 
 ```javascript
 async function cevaAsincron () {
@@ -9,9 +13,10 @@ async function cevaAsincron () {
 };
 cevaAsincron().then(console.log);
 ```
-Valoarea 'apar asincron' va fi împachetată într-o promisiune datorită folosirii în subsidiar al lui `Promise.resolve`. Acest lucru se petrece în cazul primitivelor, dar atunci când trebuie returnat un obiect, acesta va fi returnat fără împachetare.
 
-**Moment Zen**: Toate valorile returnate de o funcție async sunt împachetate în `Promise.resolve()`.
+În exemplul de mai sus, valoarea 'apar asincron' va fi împachetată într-o promisiune datorită folosirii în subsidiar al lui `Promise.resolve()`.
+
+Avantajul este evident în cazul în care scrii o bibliotecă de cod sau o funcție cu rol utilitar în care nu știi dacă datele care vin sunt sync sau async. Atunci când trebuie returnat un obiect, acesta va fi returnat fără împachetare.
 
 Înainte de apariția acestor funcții, pentru a scrie cod asincron aveam la îndemână callback-uri și promisiuni. În mod curent, până la apariția async/await ai fi returnat un obiect `Promise` proaspăt instanțiat.
 
@@ -27,7 +32,7 @@ let x = simulare();
 // [[PromiseValue]]: "Salutare"
 ```
 
-Aceste noi funcții te fac să percepi asicronicitatea ceva mai secvențial, mai sincron. O funcție `async` returnează o promisiune. Cheia utilizării funcțiilor `async` este utilizarea operatorului `await`. Acest operator poate fi folosit în interiorul unei expresii de funcție `async` și numai în interiorul unei astfel de funcții. Acest operator returnează valoarea rezolvată a unei promisiuni. În același timp, operatorul oprește execuția funcției `async` până când promisiunea este rezolvată. Abia după rezolvarea promisiunii, va fi reluată execuția funcției. Dacă valoarea nu este o promisiune, este convertită la o promisiune rezolvată. În cazul în care promisiunea este respinsă, este returnată valoarea rezultată ca respingere.
+Aceste noi funcții te fac să percepi asicronicitatea ceva mai secvențial, mai sincron. O funcție `async` returnează o promisiune. Cheia utilizării funcțiilor `async` este utilizarea operatorului `await`. Acest operator poate fi folosit în interiorul unei expresii de funcție `async` și numai în interiorul unei astfel de funcții. Acesta returnează valoarea rezolvată a unei promisiuni. În același timp, operatorul oprește execuția funcției `async` până când promisiunea este rezolvată. Abia după rezolvarea promisiunii, va fi reluată execuția funcției. Dacă valoarea nu este o promisiune, este convertită la o promisiune rezolvată. În cazul în care promisiunea este respinsă, este returnată valoarea rezultată ca respingere.
 
 ```javascript
 async function sarcina () {
@@ -67,9 +72,9 @@ class Ceva {
 }
 ```
 
-## Cazul await
+## Operatorul await
 
-Funcțiile async își vor întrerupe execuția ori de câte ori întâlnesc `await` în corp.
+Funcțiile `async` își vor întrerupe execuția ori de câte ori întâlnesc `await` în corp.
 
 ## Exemplu
 
@@ -124,12 +129,23 @@ async function ceva () {
 
 Erorile care ar putea apărea în urma evaluării unei expresii `throw new Error('O eroare la evaluare')` din funcție. Acestea for putea fi gestionate în `catch(error){}`.
 
+## Concluzii
+
+Scrierea codului asyncron folosind `async`/`await` este o alternativă elegantă și mult mai eficientă (cel puțin în cazul detectării erorilor) pentru lucrul cu promisiunile. Totuși nu este un înlocuitor pentru promisiuni, ci un model mai eficient de folosire a acestora. De exemplu, pentru a rezolva în paralel promisiuni, vom apela `Promise.all()`, dar rezultatul poate fi gestionat cu un `async`.
+
+```javascript
+const [val1, val2, val3] = await Promise.all(promise1(), promise2(), promise3())
+```
+
 ## Dependințe cognitive
 
 - iteratori
 - generatoare
+- promisiuni
 
 ## Referințe
 
 -   [Asynchronous Adventures in JavaScript: Async/Await](https://medium.com/dailyjs/asynchronous-adventures-in-javascript-async-await-bd2e62f37ffd)
 -   [await. MDN web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+-   [7 Reasons Why JavaScript Async/Await Is Better Than Plain Promises (Tutorial)](https://dev.to/gafi/7-reasons-to-always-use-async-await-over-plain-promises-tutorial-4ej9)
+  -   [Async functions - making promises friendly | Google Developers](https://developers.google.com/web/fundamentals/primers/async-functions)

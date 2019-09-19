@@ -171,7 +171,7 @@ Cu `delete` nu se pot șterge decât proprietățile care chiar aparțin unui ob
 
 ## `void`
 
-Șterge valoarea returnată a unei expresii, adică expresia va fi evaluată, dar rezultatul evaluării va fi setat la `undefined`. Operatorul `void` nu trebuie confundat cu o funcție.
+Operatorul setează valoarea returnată a unei expresii la valoarea `undefined`. Expresia va fi evaluată, dar rezultatul va fi `undefined`.
 
 ```javascript
 void 0; // undefined
@@ -180,3 +180,27 @@ function faCeva () {return 'salve';};
 var x = void (faCeva());
 console.log(x); // undefined
 ```
+
+Operatorul poate fi folosit înaintea invocării unui IIFE cu scopul de a evita poluarea scope-ului global.
+
+```javascript
+void function () {} ();
+```
+
+Este important să reținem faptul că operatorul `void` conduce la evaluarea expresiei din dreapta (RHS), ceea ce permite, de exemplu, returnarea dintr-o funcție fără a returna vreo valoare.
+
+```javascript
+function facCeva (callbackUl) {
+  return void callbackUl();
+}
+```
+
+Domeniul de aplicație se extinde atunci când ai nevoie ca o funcție să returneze mereu `undefined`. Un exemplu evident este lucrul cu DOM-ul.
+
+```javascript
+button.onclick = () => void executOAltăFuncție();
+```
+
+## Resurse
+
+- [void in JavaScript and TypeScript, Stefan Baumgartner](https://fettblog.eu/void-in-javascript-and-typescript/)
