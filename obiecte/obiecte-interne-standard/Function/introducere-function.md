@@ -54,9 +54,9 @@ functieNoua('a','b','c','d'); // "a"
 
 ### Function.prototype.apply()
 
-Apelează o funcție căreia îi setează legătura `this` la obiectul precizat între paranteze . Argumentele pot fi pasate și ca array.
+Apelează o funcție căreia îi setează legătura `this` la obiectul precizat între paranteze . Argumentele destinate funcției pot fi un array.
 
-Funcția este pur și simplu invocată în contextul indicat de primul argument al lui `apply`, pasându-se argumentele care sunt elementele array-ului din al doilea argument al lui apply `nume_funcție.apply(this, ['para1', 'para2'])`.
+Funcția este pur și simplu invocată în contextul indicat de primul argument al lui `apply`, pasându-se argumentele care sunt elementele array-ului din al doilea argument al lui `apply`:  `nume_funcție.apply(this, ['para1', 'para2'])`.
 
 ```javascript
 "use strict";
@@ -77,13 +77,13 @@ Metoda primește două argumente:
 -   o referință către un obiect, care devine și `this` pentru funcția apelată cu `apply()`,
 -   o listă de argumente organizată ca array sau ceva ce seamănă cu un array (`array-like`).
 
-Dacă nu este invocat *strict mode* (`"use strict";`), `null` și `undefined` în cazul primului argument, acesta va fi înlocuit cu obiectul global, iar primitivele vor fi *învelite* în obiectul corespunzător (în limba engleză această operațiune este numită `boxing`).
+Dacă nu este invocat *strict mode* (`"use strict";`), `null` și `undefined` în cazul primului argument, acesta va fi înlocuit cu obiectul global, iar dacă pasezi primitive, acestea vor fi *învelite* în obiectul corespondent (în limba engleză această operațiune este numită `boxing`).
 
 Pentru parametrul listei de argumente se poate folosi și obiectul care seamănă ca un array: `arguments`. Acesta este un obiect care este disponibil mediului intern al funcției. Astfel, poți pasa toate argumentele în obiectul apelat, care trebuie să gestioneze aceste argumente.
 
 Începând cu ECMAScript 5 se poate folosi orice obiect care este array-like pentru al doilea argument. Cazul cel mai util ar fi aplicațiile practice în lucrul cu API-ul DOM-ului. Aici ne gândim la obiectele `NodeList` ( [referința MDN](https://developer.mozilla.org/en-US/docs/Web/API/NodeList) ) returnate de `Node.childNodes` și `document.querySelectorAll`. Atenție, `NodeList` nu sunt array-uri și nu se pot invoca metodele din prototipul lui `Array`.
 
-#### `apply()` în uz
+#### Metoda `apply()` în uz
 
 Obiectul pasat ca și context de execuție este menționat între paranteze, fiind urmat de un array cuprinzând argumentele funcției.
 
@@ -159,7 +159,7 @@ Un alt exemplu elocvent este întâlnit la gestionarea evenimentelor atunci cân
 
 ### Function.prototype.call()
 
-Apelează o funcție în contextul unui obiect precizat între parantezele rotunde, permițând și pasarea argumentelor funcției. Setează `this` la obiectul pasat și argumentele pot fi pasate așa cum sunt. Argumentele de după specificarea lui `this` sunt pasate funcției apelată cu `call()`.
+Apelează o funcție în contextul unui obiect precizat primul în argumente, urmat de menționarea parametrilor funcției unul după celălalt despărțiți prin virgule. Metoda setează legătura `this` la obiectul pasat. Argumentele de după specificarea lui `this` sunt pasate funcției apelată cu `call()`.
 
 ```javascript
 function faCeva (arg){
@@ -168,6 +168,45 @@ function faCeva (arg){
 faCeva.call(null, ['o banană', ' și un măr']);
 // Am primit o banană, și un măr
 ```
+
+În cazul în care funcția nu rulează sub regula `"use strict";`, iar primul argument în loc să fie un obiect, este `null` sau `undefined`, obiectul la care se va face legătura `this` va fi cel global. În cazul folosirii lui `"use strict";`, valoarea legăturii `this` va fi `undefined`.
+
+```javascript
+var ceva = 10;
+function afisez () {
+  'use strict'; // TypeError: this is undefined
+  console.log(this.ceva);
+}
+afisez(); // 10 în cazul în care funcția rulează fără regulă
+```
+
+Metoda permite realizarea de adevărate interfețe, care expun proprietăți comune unor clase de obiecte diferite. De exemplu, am putea avea o interfață pentru `Vehicule`, de exemplu. Indiferent că am putea avea clase de obiecte precum `Avioane` sau `Nave`, potențial, acestea pot avea descriptori comuni precum `nume`, `naționalitate`.
+
+```javascript
+function Vehicule (nume, nationalitate) {
+  this.nume = nume;
+  this.nationalitate = nationalitate;
+}
+
+function Avion (nume, nationalitate) {
+  Vehicule.call(this, nume, nationalitate);
+  this.mediu = 'aer';
+}
+
+function Nava (nume, nationalitate) {
+  Vehicule.call(this, nume, nationalitate);
+  this.mediu = 'apa';
+}
+
+var IAR81 = new Avion('IAR81', 'RO');
+// {mediu: "aer", nationalitate: "RO", nume: "IAR81"}
+var FerdinandI = new Nava('Ferdinand I', 'RO');
+// { nume: "Ferdinand I", nationalitate: "RO", mediu: "apa" }
+```
+
+Ceea ce am realizat este introducerea proprietăților comune din interfață în obiectele create în baza claselor diferite de vehicule.
+
+
 
 ### Function.prototype.toString()
 
