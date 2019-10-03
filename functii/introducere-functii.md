@@ -4,11 +4,11 @@ Douglas Crockford spunea în lucrarea de căpătâi *JavaScript: The Good Parts*
 
 > În general, arta programării este să transformi un set de cerințe într-un set de funcții și structuri de date.
 
-Povesteam la capitolul dedicat legăturii `this` că funcțiile sunt precum niște nave, care își execută misiunile în contextul *Oceanului planetar*. Acestea prelucrează date, dar pot fi la rândul lor purtătoarele propriilor date. De fiecare dată când ne gândim la o funcție, trebuie să privim un obiect. Funcțiile sunt obiecte. Ele în sine sunt valori care pot fi manipulate la fel cum facem cu oricare altă valoare a limbajului.
+Povesteam la capitolul dedicat legăturii `this` că funcțiile sunt precum niște nave, care își execută misiunile în contextul *Oceanului planetar*. Acestea prelucrează date, dar pot fi la rândul lor purtătoarele propriilor date. De fiecare dată când ne gândim la o funcție, trebuie să privim un obiect. Funcțiile sunt obiecte. În sine, sunt valori care pot fi manipulate la fel cum facem cu oricare altă valoare a limbajului.
 
 **Moment ZEN**: O funcție este un obiect care poate fi invocat.
 
-O funcție este declarată folosind cuvântul cheie `function`, opțional urmat de un șir de caractere, care este numele funcției urmate de paranteze rotunde. Dacă funcțiile nu primesc nume, le vom clasifica ca *anonime*. Între parantezele rotunde sunt declarați identificatori, care constituie argumentele funcției (acestea formează antetul). În interiorul funcției se transformă în tot atâtea variabile locale. Urmează apoi acolade ce delimitează blocul de cod ce găzduiește un set de enunțuri ce vor fi evaluate la invocarea funcției. Acesta este numit corpul funcției.
+O funcție este declarată folosind cuvântul cheie `function`, opțional urmat de un șir de caractere, care este **numele** funcției urmate de paranteze rotunde. Dacă funcțiile nu primesc nume, le vom clasifica ca *anonime*. Între parantezele rotunde sunt declarați identificatori, care constituie *argumentele* funcției (acestea formează **antetul**). În interiorul funcției se transformă în tot atâtea variabile locale. Urmează apoi acolade ce delimitează blocul de cod ce găzduiește un set de enunțuri, fiind evaluate la invocarea funcției. Acesta este numit **corpul** funcției.
 
 ```javascript
 function faCeva (arg1, arg2) {
