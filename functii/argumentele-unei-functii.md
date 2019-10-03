@@ -18,9 +18,9 @@ function fac3 ({x, y}) {}; fac3.length; // 1
 function fac4 (x, ...y) {}; fac4.length; // 1
 ```
 
-Fiecare argument trebuie pasat funcției în ordinea corectă pentru că valoarea sa se va *lega* de numele desemnat de programator între parantezele rotunde. Aceste nume, de fapt identificatori, se numesc parametri. Ca să clarificăm, valorile pasate unei funcții se numesc **argumente**, iar identificatorii menționați între paranteze (*headerul funcției*), de care se leagă aceste valori, se numesc **parametri**. O funcție poate primi mult mai multe argumente față de ceea ce este precizat ca parametri. Valorile acestea nu se pierd în neant. Ele vor putea fi regăsite în obiectul special `arguments`, dar dacă vei trimite mai puține argumente, restul parametrilor vor avea valoarea `undefined`. Parametrii vor face parte din mediul lexical al funcției.
+Fiecare argument trebuie pasat funcției în ordinea corectă pentru că valoarea sa se va *lega* de numele (identificator) desemnat de programator între parantezele rotunde. Valorile pasate unei funcții se numesc **argumente**, iar identificatorii menționați între paranteze (*headerul funcției*), de care se leagă aceste valori, se numesc **parametri**. O funcție poate primi mult mai multe argumente față de ceea ce este precizat ca parametri. Valorile acestea nu se pierd în neant. Ele vor putea fi regăsite în obiectul special `arguments`, dar dacă vei trimite mai puține argumente, restul parametrilor vor avea valoarea `undefined`. Parametrii vor face parte din mediul lexical al funcției.
 
-Toate aceste detalii sunt utile pentru că la un moment dat este necesară executarea unei funcții în funcție de numărul parametrilor săi. Poate să existe și cazul în care dorești un anumit parametru să stea întotdeauna pe ultima poziție pentru că, de fapt, acesta este la rândul său o funcție cu rol de callback (va fi apelată in interiorul funcției).
+Toate aceste detalii sunt utile, pentru că uneori este necesară executarea unei funcții în funcție de numărul parametrilor săi. Poți avea cazul în care dorești un anumit parametru să stea întotdeauna pe ultima poziție pentru că, de fapt, acesta este la rândul său o funcție cu rol de callback (va fi apelată in interiorul funcției) după ce toate evaluările se vor fi încheiat.
 
 ```javascript
 let x = 10, y = function init () { return `Salut, ${x}!` };
@@ -77,7 +77,7 @@ oFunctie.apply(null, argumentele); // argumentele sunt aplicate literalmente fun
 
 Acest exemplu ilustrează în adâncime ceea ce se petrece cu argumentele unei funcții. Am folosit soluția practică `Array.prototype.slice.call(arguments)` pentru a transforma obiectul `arguments` într-un array.
 
-Începând cu EcmaScript 2015 (ES6), unui parametru îi poți atribui direct o valoare la momentul definirii:
+Începând cu ECMAScript 2015 (**ES6**), unui parametru îi poți atribui direct o valoare la momentul definirii:
 
 ```javascript
 function facCeva(a, b = "o valoare"){
@@ -100,7 +100,7 @@ La invocarea unei funcții sunt disponibile `this`, care formează contextul de 
 })(2, 3); // 5
 ```
 
-ES6 introduce un nou mod de a introduce parametrii folosind operatorul trei puncte urmat de identificatorul unei structuri de date. Această nouă modalitate se numește `rest parameters` și permite preluarea ca argumente a unui număr necunoscut de argumente dintr-un array, de exemplu.
+ES6 introduce un nou mod de a introduce parametrii, folosind operatorul trei puncte urmat de identificatorul unei structuri de date. Această nouă modalitate se numește `rest parameters` și permite preluarea ca argumente a unui număr necunoscut de argumente dintr-un array, de exemplu.
 
 ```javascript
 function operatiune (...argumente) {
@@ -118,9 +118,9 @@ function operatiune (a, b, ...valori) {
 operatiune(2, 4, 20, 32, 110); // 2 4 3
 ```
 
-## Ce este arguments
+## Ce este `arguments`
 
-Este un obiect disponibil funcției la momentul execuției. Acesta permite accesul la toți parametrii. Atunci când pasăm unei funcții același număr de argumente câți parametri sunt, lucrurile sunt foarte clare. Ce te faci atunci când sunt pasați mult mai mulți parametri? Trebuie să fie o structură capabilă să înmagazineze surplusul. Pentru funcțiile variadice, această structură este obiectul `arguments`.
+Este un obiect disponibil funcției la momentul execuției. Acesta permite accesul la toți parametrii. Atunci când pasăm unei funcții același număr de argumente câți parametri sunt, lucrurile sunt foarte clare. Ce te faci atunci când sunt pasate mult mai multe argumente? Trebuie să fie o structură capabilă să înmagazineze surplusul. Pentru funcțiile variadice, această structură este obiectul `arguments`.
 
 **Spune standardul**:
 
@@ -204,7 +204,7 @@ console.log(test1(1,1)); // 11
 console.log(test2(1,1)); // 2
 ```
 
-## Operatorul spread
+## Operatorul *spread*
 
 Am văzut deja mai sus metoda prin care putem transforma `arguments` într-un array, dar există și alte metode pentru a gestiona argumentele pasate unei funcții, dar și parametrii.
 
