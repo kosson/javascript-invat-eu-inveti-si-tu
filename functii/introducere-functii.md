@@ -17,7 +17,7 @@ function faCeva (arg1, arg2) {
 }; faCeva(1, 3); //4
 ```
 
-Funcțiile oferă toate capabilitățile obiectelor pentru că **sunt obiecte**. Dacă privești la modul de redactare, chiar arată precum o declarație de obiect literal, având în plus cuvântul cheie `function` și parantezele rotunde în care poți introduce argumentele.
+Funcțiile oferă toate capabilitățile obiectelor pentru că **sunt obiecte**. Dacă privești la modul de redactare, chiar arată precum o declarație de obiect literal, având în plus cuvântul cheie `function` și parantezele rotunde între care poți introduce argumentele.
 
 ```javascript
 let obi = {};
@@ -28,7 +28,7 @@ fun.a = 10;
 // exact ca în cazul obiectelor
 ```
 
-Ba mai mult, funcțiile au chiar metode proprii pe care le poți utiliza în anumite cazuri. Am văzut deja utilitatea lui `call()`, `apply()` sau `bind()`. Din curiozitate, deschide consola în browser și declară o funcție: `function ceva () {};`. Acum scrie identificatorul funcției urmat de punct. Ceea ce vei vedea sunt toate proprietățile și metodele obiectului funcție. Cred că în acest moment ești convinsă că funcțiile sunt obiecte, de fapt.
+Ba mai mult, funcțiile au chiar metode proprii pe care le poți utiliza în anumite cazuri. Am văzut deja utilitatea lui `call()`, `apply()` sau `bind()`. Din curiozitate, deschide consola în browser (F12) și declară o funcție: `function ceva () {};`. Acum scrie identificatorul funcției urmat de punct. Ceea ce vei vedea sunt toate proprietățile și metodele obiectului funcție. Cred că în acest moment ești convinsă că funcțiile sunt obiecte, de fapt.
 
 Veți întâlni funcțiile la orice pas și în combinații diferite ca parte a unor expresii ale unui enunț sau ca declarații directe. Veți mai întâlni funcțiile ca valori pasate ca argumente unei alte funcții, fie ca identificator, fie declarate direct în antetul altei funcții. Le veți mai vedea la treabă în rolul de constructori de obiecte. Reține faptul că acolo unde este permisă scrierea unei expresii, poți scrie o funcție. Bunele practici îndeamnă programatorii să scrie funcțiile cât mai aproape de locul unde vor fi folosite.
 
@@ -64,9 +64,9 @@ Aplicarea unei funcții argumentelor sale produce un nou **mediu lexical**, un n
 
 **Spune standardul**:
 
-> Mediul unei funcții este un Mediu Lexical care corespunde invocării unui obiect funcție EMCAScript. Un mediu al unei funcții poate crea o nouă legătură `this`. Un mediu al funcției poate captura starea necesară pentru a satisface invocările metodei `super` [ECMAScript® 2017 Language Specification (ECMA-262, 8th edition, June 2017). 8.1 Lexical Environments](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-environment-records).
+> Mediul unei funcții este un Mediu Lexical care corespunde invocării unui obiect funcție ECMAScript. Un mediu al unei funcții poate crea o nouă legătură `this`. Un mediu al funcției poate captura starea necesară pentru a satisface invocările metodei `super` [ECMAScript® 2017 Language Specification (ECMA-262, 8th edition, June 2017). 8.1 Lexical Environments](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-environment-records).
 
-Ca obișnuință, ar fi de dorit să gândești că funcția se aplică pe argumente, atunci când acestea există. În adâncime, trebuie înțeles că acest comportament este posibil pentru că funcțiile sunt pur și simplu sunt **o-bi-ec-te**. Sunt niște obiecte speciale pentru că pur și simplu pot executa codul din interior ori de câte ori se dorește.
+Ca obișnuință, ar fi de dorit să gândești că funcția se aplică pe argumente, atunci când acestea există. În adâncime, trebuie înțeles că acest comportament este posibil pentru că funcțiile sunt pur și simplu **o-bi-ec-te**. Dar, sunt niște obiecte speciale pentru că pur și simplu pot executa codul din interior ori de câte ori se dorește.
 
 **Moment Zen**: O funcție, de fapt, *se aplică* argumentelor pasate care sunt valori, le prelucrează și le oferă apelantului prin returnare.
 
