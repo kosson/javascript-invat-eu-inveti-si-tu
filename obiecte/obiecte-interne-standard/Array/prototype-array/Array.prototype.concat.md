@@ -2,7 +2,7 @@
 
 Nu modifică structura array-ului.
 
-Realizează o *copie simplă* (*shallow copy*) formată din elementele array-ului asupra căruia se invocă metoda și elementele care se doresc a fi adăugate.
+Realizează o *copie simplă* (în limba engleză numită *shallow copy*) formată din elementele array-ului asupra căruia se invocă metoda și elementele care se doresc a fi adăugate.
 
 ```javascript
 var arr = [1, 2, 3];
@@ -40,4 +40,14 @@ function concat () {
 };
 var sirNou = concat('ceva', 'text', 'pentru', 'a', 'fi', 'unit');
 console.log(sirNou);
+```
+
+## Concat și spread
+
+Metoda `concat` *sudează* elementele a două array-uri luând ca array receptor pe cel pe care se aplică, iar cel de-al doilea este pasat. Acelați lucru poate fi realizat prin folosirea operatorului trei puncte (*spread*).
+
+```javascript
+var arr1 = ['a', 'b', 'c'];
+var arr2 = ['x', 'y', 'z'];
+arr1 = [...arr1, ...arr2];
 ```

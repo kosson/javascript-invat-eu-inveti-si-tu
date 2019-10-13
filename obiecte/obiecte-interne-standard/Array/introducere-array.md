@@ -81,7 +81,7 @@ var arr = [1, 2, 3];
 // [ 10, 2, 3 ]
 ```
 
-În cazul array-urilor, valorile sunt copiate prin referință pentru că array-urile sunt, de fapt obiecte. Din acest fapt putem trage câteva concluzii utile. Cu ajutorul unei funcții externe array-ului poți modifica valorile interne ale unui array. Pasarea unui array unei funcții drept argument, conduce la crearea unei referințe în mediul lexical către acel obiect array. Un alt lucru util de reținut este faptul că un array poate fi foarte bine o colecție de funcții. Acestea, de fapt sunt referințe către obiectele funcții, nu sunt funcțiile în sine. Singurul lucru care face diferența este modul de acces la funcțiile respective folosindu-se sintaxa specifică array-ului.
+În cazul array-urilor, valorile sunt copiate prin referință pentru că, de fapt, array-urile sunt obiecte. Din acest fapt putem trage câteva concluzii utile. Cu ajutorul unei funcții externe array-ului poți modifica valorile interne ale unui array. Pasarea unui array unei funcții drept argument, conduce la crearea unei referințe în mediul lexical către acel obiect array. Un alt lucru util de reținut este faptul că un array poate fi foarte bine o colecție de funcții. Acestea, de fapt sunt referințe către obiectele funcții, nu sunt funcțiile în sine. Singurul lucru care face diferența este modul de acces la funcțiile respective folosindu-se sintaxa specifică array-ului.
 
 ```javascript
 function faCeva () {
@@ -368,14 +368,14 @@ Exemplul de mai sus este perfect echivalent cu următoarea structură de cod int
 var arrDeArr = [ ['0','0','X'], ['0','0','0'], ['0','0','0'] ];
 ```
 
-### Copierea unui array
+### Copierea array-urilor
 
 Știm faptul că array-urile sunt obiecte. Obiectele sunt pasate prin referință, însemnând că nu poți copia un array pur și simplu atribuindu-l altui identificator.
 
 ```javascript
 let colectie = [1, 2];
 let alta = colectie;
-console.log(colectie === alta);
+console.log(colectie === alta); // true
 ```
 
 Totuși, dacă se dorește o copiere verbatim a unui array, soluția este constituirea unui nou prin utilizarea metodei `slice()` aplicată array-ului pe care dorești să-l copiezi.
@@ -386,7 +386,32 @@ let alta = colectie.slice();
 console.log(alta);
 ```
 
-Dacă un array are obiecte drept elemente dacă am copia acel array, de fapt am face o copie la referințele către obiecte. În limba engleză vom întâlni această situație cu denumirea *shallow copy* - **copie subțire**.
+Dacă un array are obiecte drept elemente dacă am copia acel array, de fapt am face o copie la referințele către obiecte. În limba engleză vom întâlni această situație cu denumirea *shallow copy* - **copie subțire**. metoda slice permite și un control al conținutului care va fi copiat pentru că putem menționa de la care index a array-ului original să înceapă copierea valorilor în cel nou.
+
+O altă metodă de a copia un array ar fi prin folosirea metodei `concat()`.
+
+```javascript
+let colectie = ["a", "b"];
+let alta = [].concat(colectie);
+console.log(alta);
+```
+
+Mai nou, poți folosi și metoda `Array.from()` pentru a copia un array pentru că această metodă transformă orice iterabil (chiar `Map` sau `Set`) din JavaScript într-un array.
+
+```javascript
+let colectie = ["a", "b"];
+let alta = Array.from(colectie);
+console.log(alta);
+```
+
+Tot în zona noutăților introduse limbajului, găsim și operatorul trei puncte (*spread*), care simplifică posibilitatea de a *copia* un array.
+
+```javascript
+let colectie = ["a", "b"];
+let alta = [...colectie];
+```
+
+Ceea ce trebuie reținut este faptul că operatorul va crea un nou array, lăsându-l neatins pe cel original.
 
 ## Manipularea dimensiunii
 

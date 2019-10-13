@@ -1,4 +1,4 @@
-# Instrucțiunea switch..case
+# Instrucțiunea switch...case
 
 Dacă în cazul folosirii instrucțiunii `if...else` ai de ales între două sau mai multe opțiuni folosind `else if`, în cazul lui `switch` lucrurile stau diferit, fiind permisă o ramificarea mult mai largă. Dar există o limitare. În cazul instrucțiunii `case`, evaluarea se va face pentru o valoare clară.
 

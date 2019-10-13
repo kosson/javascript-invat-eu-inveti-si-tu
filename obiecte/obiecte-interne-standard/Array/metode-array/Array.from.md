@@ -1,6 +1,6 @@
 # Array.from()
 
-Este o metodă introdusă de versiunea standardului ECMAScript 2015. Creează o instanță `new Array` din orice obiect care arată ca un array sau care este iterabil. Obiectele din care se creează array-urile trebuie să aibă o lungime și elementele indexate. Obiectul `arguments` are deja implementat protocolul de iterare și poate fi exploatat cu `Array.from()`.
+Este o metodă introdusă de versiunea standardului ECMAScript 2015. Creează o instanță `new Array` din orice obiect care este iterabil. Obiectele din care se creează array-urile trebuie să aibă o lungime și elementele indexate. De exemplu, obiectul `arguments` are deja implementat protocolul de iterare și poate fi exploatat cu `Array.from()`. La fel se poate face și în cazul `Map`-urilor sau a `Set`-urilor.
 
 ## Aplicarea pe `arguments`
 
@@ -32,7 +32,7 @@ function transforma () {
 transforma("unu", "doi", 3); // Array [ "unu", "doi", 3 ]
 ```
 
-## Aplicarea pe șirurile de caractere.
+## Aplicarea pe șirurile de caractere
 
 ```javascript
 Array.from("foo");
