@@ -1,6 +1,6 @@
 # Obiectul global JSON - introducere
 
-JSON este acronimul de la JavaScript Object Notation. JSON este un formate de date standardizat de ECMA: ECMA-404 The JSON Data Interchange Standard.
+JSON este acronimul de la JavaScript Object Notation. JSON este un format de date standardizat de ECMA: ECMA-404 The JSON Data Interchange Standard.
 
 ECMAScript 5 a introdus un nou obiect global JSON cu scopul de a oferi utilitare pentru gestionarea datelor în format JSON. Acest format este independent de limbajul de programare. Standardul oferă metode de serializare și deserializare a datelor în format JSON.
 
@@ -21,7 +21,7 @@ let json = `{
       "recordPacking": "json",
       "mainHeadings": {
         "data": {
-          "text": "Cariagiale, Ion Luca, 1853-1912",
+          "text": "Caragiale, Ion Luca, 1853-1912",
           "sources": {
             "s": "BNCHL"
           }
@@ -40,7 +40,7 @@ let json = `{
 const obi = JSON.parse(json);
 ```
 
-## Metoda JSON.stingify() - serializarea
+## Metoda JSON.stringify() - serializarea
 
 Această metodă primește ca prin argument un obiect JavaScript și atunci când se dorește un al doilea argument acesta este o funcție care prelucrează rezultatul într-un anumit fel.
 
@@ -50,12 +50,37 @@ const obi = {
     autor: 'Mateiu Caragiale'
 };
 let json = JSON.stringify(obi, ['titlu', 'autor']);
-//  "{\"titlu\":\"Craii de Curtea-Veche\",\"autor\":\"Mateiu Caragiale\"}"
+```
+
+În cazul în care proprietatea unui obiect are drept valoare un `Map`, `Set` și suratele *weak*, acestea nu vor fi convertite într-un array atunci când se va face o conversie.
+
+```javascript
+let obi = {
+  nume: 'Mateiu Caragiale',
+  titluri: new Set(['Sub pecetea tainei', 'Craii de Curtea-Veche', 'Soborul țațelor'])
+};
+let transformat = JSON.stringify(obi, (cheie, valoare) =>{
+  return valoare instanceof Set ? [...valoare] : valoare;
+});
+// {"nume":"Mateiu Caragiale","titluri":["Sub pecetea tainei","Craii de Curtea-Veche","Soborul țațelor"]} 
+```
+
+În cazul în care ai nevoie de înlocuirea unei valori din obiectul care va fi transformat, poți face ca a doua funcție să facă acest lucru.
+
+```javascript
+var opera = {
+  titlu: 'Craii de Curtea-Veche'
+}
+var transformat = JSON.stringify(opera, (cheie, valoare) => {
+  cheie === 'titlu' ? 'Sub pecetea tainei' : valoare;
+});
+// {"titlu":"Sub pecetea tainei"}
 ```
 
 ## Resurse
 
--   [Introducing JSON](http://json.org/)
+- [Introducing JSON](http://json.org/)
+- [TIL — The power of JSON.stringify replacer parameter](https://pawelgrzybek.com/til-the-power-of-json-stringify-replacer-parameter/)
 
 
 ## Sursă de date
