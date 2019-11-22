@@ -6,7 +6,7 @@ Standardul spune că **un obiect este un membru al tipului built-in Object** al 
 
 > ECMAScript este bazat pe obiecte: limbajul de bază și toate funcționalitățile sunt oferite de obiecte, iar un program ECMAScript este un ciorchine de obiecte care comunică.
 
-Obiectele sunt și ele valori. La aceste valori se ajunge printr-o referință (către o locație în memorie unde este stocat), în contrast cu valorile primitive care sunt însăși valoarea. Putem pune primitivele în mai multe zone de memorie, fiecare având identificatori diferiți. Obiectele ocupă o zonă de memorie și nu pot fi copiate în alte zone de memorie. Pur și simplu, sunt unice, așa cum o țară este unică în lume cu relieful, obiceiurile și sistemul de valori. Dar pentru a trimite o scrisoare cuiva în lume, trebuie să cunoști țara, orașul, strada și numele persoanei. Așa și cu obiectele. Pentru a folosi acea zonă de memorie ocupată de obiect, vom folosi referințele către aceasta.
+Obiectele sunt și ele valori. La aceste valori se ajunge printr-o **referință** (către o locație în memorie unde este stocat), în contrast cu primitivele care sunt chiar valoarea. Obiectele ocupă o zonă de memorie și nu pot fi copiate în alte zone de memorie. Zona de memorie în care sunt scrise valorile unui program Javascript se numește **heap** (lb. rom. *maldăr*). Pur și simplu, sunt unice, așa cum o țară este unică în lume cu relieful, obiceiurile și sistemul de valori. Dar pentru a trimite o scrisoare cuiva în lume, trebuie să cunoști țara, orașul, strada și numele persoanei. Așa și cu obiectele. Pentru a folosi acea zonă de memorie ocupată de obiect, vom folosi referința sau referințele către acesta.
 
 Privind la modul în care sunt organizate datele într-un obiect, vom remarca că acestea sunt colecții de proprietăți identificabile printr-un nume, fiind strânse împreună fără a avea o ordine internă. Este ca și cum ai strânge jucării de același tip într-o cutie după o zi de distracție. Obiectele sunt structuri de date dinamice ale căror proprietăți se modifică. Atunci când acest lucru se întâmplă spunem că obiectul își modifică starea.
 
@@ -25,21 +25,42 @@ Câteva concepte fundamentale pentru înțelegerea obiectelor în general:
 -   **Încapsulare**: este ceea ce obții atunci când pui împreună datele cu funcționalitățile care vor opera cu ele.
 -   **Agregarea obiectelor** se realizează atunci când un obiect are proprietăți care sunt referințe către alte obiecte.
 -   **Moștenirea** este un mecanism prin care obiectul creat poate folosi datele și funcționalitățile altuia cu rol de părinte.
--   **Poliformism** este caracteristica unui obiect de a deveni un comportament urmat de multe alte obiecte. Spunem că un obiect se comportă ca o interfață, care poate fi aplicată altor obiecte pentru a opera cu acestea.
+-   **Poliformism** este caracteristica unui obiect de a deveni *un comportament* urmat de multe alte obiecte. Spunem că un obiect se comportă ca *o interfață*, care poate fi aplicată altor obiecte pentru a opera cu acestea.
 
-Atunci când un obiect este creat, toate caracteristicile sale sunt moștenite de la un alt obiect cu rol de prototip așa cum un copil moștenește trăsăturile mamei. Chiar dacă acel copil este o persoană diferită, acesta moștenește de la părinții săi anumite caracteristici. Dacă am strânge aceste caracteristici într-un loc, acesta ar fi obiectul prototip. Să nu vi se pară ciudat că un prototip este un obiect, iar acesta la rândul lui are un prototip. E ca un lanț, care are drept limită superioară obiectele interne `Object` și `Function`, iar deasupra lor este valoarea `null`. Totuși acest lanț prototipal poate fi rupt.
+Atunci când un obiect este creat, toate caracteristicile sale sunt moștenite de la un alt obiect cu rol de **prototip** așa cum un copil moștenește trăsăturile părinților. Chiar dacă acel copil este o persoană diferită, acesta moștenește de la părinții săi anumite caracteristici. Dacă am strânge aceste caracteristici moștenite într-un set, acesta ar fi **obiectul prototip**. Să nu vi se pară ciudat că un prototip este un obiect, iar acesta la rândul lui are un prototip. E ca un lanț, care are drept limită superioară obiectele interne `Object` și `Function`, iar deasupra lor este valoarea `null`. Totuși acest lanț prototipal poate fi rupt dacă se dorește.
 
 ### Alcătuirea obiectelor
 
 Obiectele au **proprietăți** și **metode**. Împreună formează **membrii** obiectului.
 
-Proprietățile pot fi numere, boolean-uri, șiruri de caractere, funcții sau chiar obiecte. Proprietățile sunt valori, adică sunt **ceva**, iar metodele **fac ceva**. Membrii unui obiect constituie *semnătura* obiectului. Fiecare obiect are o *semnătură* distinctă. Dacă dorești să creezi mai multe obiecte asemănătoare, ai putea să le scrii sau să le generezi, dar în cazul acesta, cel mai înțelept este să folosești constructorii sau funcții care returnează obiecte. Astfel, elimini repetițiile inutile, care taxează resursele de calcul.
+Proprietățile pot fi numere, boolean-uri, șiruri de caractere, funcții sau chiar obiecte. **Proprietățile** sunt valori (primitive, funcții sau alte obiecte), iar metodele sunt funcții declarate în obiect sau în afara lui. Membrii unui obiect formează o adevărată *semnătura* a obiectului. Fiecare obiect are o *semnătură* distinctă. Dacă dorești să creezi mai multe obiecte asemănătoare, ai putea să le scrii sau să le generezi, dar cel mai înțelept este să folosești constructorii sau funcții care returnează obiecte. Astfel, elimini repetițiile inutile, care taxează resursele de calcul.
 
 ### Viața unui obiect
 
-Acum poți să-ți pui o întrebare foarte simplă: cât timp *trăiește* un obiect? Mai corect ar fi, cât timp este disponibil un obiect programului? Un obiect este disponibil atâta vreme cât există cel puțin o referință către acesta sau către o proprietate a sa. Ce se întâmplă când nu mai există nicio referință? Zona de memorie este eliberată de un mecanism intern motorului denumit în limba engleză *garbage collector*. În această lucrare veți mai întâlni expresia *colectat la gunoi*, ceea ce implică chiar acest proces de eliberare a memoriei care este unul automat. Dacă un obiect oferă metode altuia prin mecanismul de moștenire prototipală, acesta nu va fi colectat la gunoi pentru că de el depind alte obiecte care lucrează cu metode sau valori pe care le apelează din lanțul prototipal format. Acest tip de referință este una implicită. Atunci când un obiect face referințe către proprietățile unui alt obiect, spunem că realizează o referință explicită. Atunci când ambele referințe nu mai există, intervine mecanismul de colectare la gunoi și memoria este eliberată.
+Să explorăm prin fațetele oferite de următoarele întrebări:
 
-Obiectele sunt pasate ca valori prin referință. Înseamnă că ceea ce pasăm în program este o adresă către același obiect. Nu se fac copii ale obiectului atunci când pasăm unei funcții identificatorul său, de exemplu.
+- cât timp *trăiește* un obiect?
+- cât stă el scris în zona de memorie?
+- cât timp este disponibil un obiect programului?
+
+Un obiect este disponibil atâta vreme cât există cel puțin o referință către acesta sau către o proprietate a sa. Ce se întâmplă când nu mai există nicio referință? Zona de memorie este eliberată de un mecanism intern motorului denumit în limba engleză *garbage collector*. În această lucrare veți mai întâlni expresia *colectat la gunoi*, ceea ce implică chiar acest proces de eliberare a memoriei, care este unul automat.
+
+```javascript
+const obiectul1 = {ceva: 10};
+if (true) {
+  const obiectul2 = {altceva: 20}; // va fi distrus imediat ce testul se va termina
+  obiectul1.proprietatea1 = {undeva: 'Bod'};
+}
+```
+
+În exemplul de mai sus, obiectul definit pentru `proprietatea1` va fi păstrat pentru că am setat o referință către acesta în `obiectul1`. Câtă vreme `obiectul1` va trăi, va trăi și legătura către cel definit în blocul decizional - `obiectul1.proprietatea1`.
+Te vei întreba ce se petrece cu `obiectul2`. Acesta va fi *colectat la gunoi* pentru că mediul lexical în care a fost definit, cel al blocului decizional, colapsează la momentul încheierii testului, iar toate declarațiile spunem că devin *out of scope* - sunt în afara mediului lexical.
+
+Putem indica motorului distrugerea unui obiect și în consecință *colectarea la gunoi* prin setarea referinței la valoarea `undefined`.
+
+Dacă un obiect oferă metode altuia prin mecanismul de moștenire prototipală, acesta nu va fi *colectat la gunoi* pentru că de el depind alte obiecte, care lucrează cu metode sau valori, pe care le apelează din lanțul prototipal format. Acest tip de referință este una *implicită* (se face automat). Atunci când un obiect face referințe către proprietățile unui alt obiect, spunem că realizează o referință *explicită*, folosind un identificator. Atunci când ambele referințe nu mai există, intervine mecanismul de *colectare la gunoi* și zona de memorie în care exista, este eliberată.
+
+Obiectele sunt pasate ca valori de lucru prin referințe către acestea. Înseamnă că ceea ce pasăm în program este o adresă către același obiect. Nu se fac copii ale obiectului atunci când pasăm unei funcții identificatorul său, de exemplu. O referință se comportă ca o referință bibliografică către aceeași operă (carte). Poți exprima referința prin mai multe formate, dar entitatea referită este aceeași.
 
 ```javascript
 var obi1 = {}; let obi2 = {}; const obi3 = {};
@@ -1925,3 +1946,5 @@ cerc1.arie(); //
 -   [Object-oriented JavaScript: A Deep Dive into ES6 Classes](https://www.sitepoint.com/object-oriented-javascript-deep-dive-es6-classes/)
 -   [What is the definition of “interface” in object oriented programming](https://stackoverflow.com/questions/2866987/what-is-the-definition-of-interface-in-object-oriented-programming)
 -   [Classes, MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+-   [Inside V8: weak collections, ephemerons, and private fields by Sigurd Schneider | JSCAMP 2019](https://www.youtube.com/watch?v=MQsUiqVCJMc&fbclid=IwAR3ybYMW2jDnNTA39t9qVph6HELfbguoynnLP9FOSnsDw5tTVHZ43pjC1Z8)
+-   [Public and private class fields](https://v8.dev/features/class-fields)

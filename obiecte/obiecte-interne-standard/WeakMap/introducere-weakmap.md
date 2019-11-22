@@ -1,11 +1,28 @@
 # WeakMap
 
-Începând cu versiunea ES6 a standardului, au apărut obiecte dedicate realizării de colecții. Au apărut din necesitatea evitării diferitelor contrângeri impuse de obiecte obișnuite.
+Începând cu versiunea ES6 a standardului, au apărut obiecte dedicate realizării de colecții. Au apărut din necesitatea evitării diferitelor contrângeri impuse de obiectele obișnuite.
 
 Este o colecție de perechi cheie-valoare care au o particularitate foarte utilă: toate cheile sunt obiecte. Nu sunt admise valori primitive. `WeakMap`-ul este asemănător unui `Map` în sensul că are metode similare.
 
-De unde vine denumirea **weak**? În limba engleză *weak* înseamnă *slab*. În cazul obiectului nostru, această *slăbiciune* vine din faptul că de îndată ce nu mai este nevoie de obiectul care joacă rol de cheie, acesta va putea fi colectat la gunoi, ceea ce este echivalentul unei ștergeri din structura internă a obiectului însuși. Vă mai aduceți aminte de faptul că un obiect *trăiește* câtă vreme există o referință către acesta sau către una din proprietățile sale. Dacă am ține evidența unor obiecte folosind un `Map`, această structură ar ține o referință permanentă către un obiect, dacă acel obiect a devenit o proprietate a sa. Tocmai din necesitatea de a fi permisă colectarea la gunoi a obiectelor care nu mai sunt referențiate în altă parte, s-a născut această nouă structură de gestiune special pentru obiecte.
-Putem trage concluzia că vom folosi `WeakMap`-uri pentru a gestiona obiecte asupra cărora nu ai niciun control sau nu dorești acest lucru. Concluzia conduce către posibilele aplicații pentru un `WeakMap`.
+De unde vine denumirea **weak**? În limba engleză *weak* înseamnă *slab*. În cazul obiectului nostru, această *slăbiciune* vine din faptul că, de îndată ce nu mai există vreo referință către obiectul care joacă rol de cheie, acesta va putea fi *colectat la gunoi*, ceea ce este echivalentul unei ștergeri din structura internă a obiectului însuși.
+
+Amintiți-vă de faptul că un obiect *trăiește* câtă vreme există o referință către acesta sau către una din proprietățile sale. Dacă am ține evidența unor obiecte folosind un `Map`, această structură ar ține o referință permanentă către obiectul ca proprietate a sa. Dacă nu mai este referit, va fi menținut în viață în continuare taxând resursele.
+
+Din necesitatea *colectarii la gunoi* a obiectelor care nu mai sunt referite, s-a născut această nouă structură pentru gestionarea obiectelor *efemere*. În cazul în care nu mai există vreo referință către obiectul proprietate al unui `WeakMap`, sau respectivul obiect a fost setat la `undefined`, va fi *colectat la gunoi*. În cazul în care valoarea membrului unui `WeakMap` este un obiect, acesta va fi colectat și el la gunoi.
+
+```javascript
+const OBI_SLAB = new WeakMap();
+let obiProp = {ceva: 1};
+let obiVal = {undeva: 'Cugir'};
+OBI_SLAB.set(obiProp, obiVal);
+// verificări:
+OBI_SLAB.has(obiProp); // true
+obiProp = undefined;
+OBI_SLAB.has(obiProp); // false
+OBI_SLAB.get(obiProp); // undefined
+```
+
+**Moment ZEN**: Cheia ține valoarea în viață.
 
 ## Cache de obiecte
 
@@ -54,7 +71,7 @@ cnxCuReceptorul(obiW, function secund () {
   console.log(`Sunt evenimentul secund`);
 });
 
-function declanșezEv (obi, tinta) {           // obiectul cache (obi) în care sunt contorizate elementele (tinta) cu receptori 
+function declanșezEv (obi, tinta) {           // obiectul cache (obi) în care sunt contorizate elementele (tinta) cu receptori
   if (obi.get(tinta)) {
     for (const receptor of obi.get(tinta)) {
       receptor();
@@ -72,7 +89,7 @@ Cheile unui `WeakMap` nu sunt enumerabile și nici nu putem afla câte chei sunt
 
 ## Ascunderea proprietăților unei clase
 
-Uneori este nevoie să ascundem anumite părți ale unei clase și pentru acest lucru un WeakMap se pretează de minune.
+Uneori este nevoie să *ascundem* anumite părți ale unei clase pentru a nu fi accesibile și pentru acest lucru un `WeakMap` se pretează de minune. Să ne aducem aminte faptul că propritățile `static` ale claselor sunt totuși enumerabile și configurabile, ceea ce uneori nu ne dorim, mai ales când dorim protejarea anumitor date.
 
 ```javascript
 const datePrivate = new WeakMap();
@@ -92,9 +109,18 @@ unCeva.scotInfoAutor(); // "Gib I. Mihăiescu"
 unCeva.scotInfoTitlu(); // "La Grandiflora"
 ```
 
-## Metode WeakMap
+Această implementare permite o asociere a oricâtor obiecte vor fi generate în baza clasei `Ceva` cu datele private fiecărei instanțe. `WeakMap`-ul se comportă ca o tabelă secundară ce menține asocierile. În cazul în care un obiect instanțiat nu mai are nicio referință care să-l țină viu, acesta va fi *colectat la gunoi*, iar cheia din `WeakMap` va fi ștearsă.
 
-### WeakMap.prototype.delete(key)
+Cazurile în care ai folosi o astfel de modelare a unei clase sunt legate de:
+
+- unele obiecte care sunt instanțiate în baza clasei, au nevoie de un mecanism în care să stocheze obiecte tempoarare;
+- unele obiecte poate instanțiază alte obiecte care vin din biblioteci externe, având o caracteristică temporară, dar care nu trebuie modificate.
+
+Notă importantă: de îndată ce *câmpurile private* (**private fields**) vor fi parte a limbajului, o astfel de abordare, trebuie abandonată din motive de performanță. Un `WeakMap` rămâne totuși un hashmap pe care se face o căutare (*lookup*). Acestea sunt disponibile deja în Node.js (12) și Chrome (74).
+
+## Metode
+
+### `WeakMap.prototype.delete(key)`
 
 Șterge o cheie din WeakMap.
 
@@ -116,3 +142,5 @@ obiW.has(o1); // false
 -   [ES6 Collections: Using Map, Set, WeakMap, WeakSet](https://www.sitepoint.com/es6-collections-map-set-weakmap-weakset/)
 -   [Dwayne Charrington. What Are Weakmaps In ES6?](https://ilikekillnerds.com/2015/02/what-are-weakmaps-in-es6/)
 -   [ECMAScript 6 — New Features: Overview & Comparison. Map/Set & WeakMap/WeakSet](http://es6-features.org/#WeakLinkDataStructures)
+-   [Inside V8: weak collections, ephemerons, and private fields by Sigurd Schneider | JSCAMP 2019](https://www.youtube.com/watch?v=MQsUiqVCJMc&fbclid=IwAR3ybYMW2jDnNTA39t9qVph6HELfbguoynnLP9FOSnsDw5tTVHZ43pjC1Z8)
+-   [Public and private class fields](https://v8.dev/features/class-fields)

@@ -42,7 +42,11 @@ obi.set('alDoilea', {x: 10, y: function(){return this.a}});
 obi.set(new Date(), 'data creării proprietății');
 ```
 
-Spre deosebire de obiectul clasic, într-un `Map` poți introduce orice valoare, de la primitive, la obiecte, iar cheile nu vor mai fi limitate la șiruri de caractere. Se va instanția cu `new`: `new Map([cheie, valoare])`. Obiectul care va constitui colecția trebuie să fie iterabil. Chiar la instanțiere poți să începi să-l populezi pasând un array de array-uri. Fiecare element array va avea la rândul lui două elemente. Primul reprezintă cheia, iar cel de-al doilea, valoarea.
+Spre deosebire de obiectul clasic, într-un `Map` poți introduce orice valoare, de la primitive, la obiecte, iar cheile nu vor mai fi limitate la șiruri de caractere. Se va instanția cu `new`: `new Map([cheie, valoare])`.
+
+**Moment ZEN**: Cheia ține valoarea în viață.
+
+Obiectul care va constitui colecția trebuie să fie iterabil. Chiar la instanțiere poți să începi să-l populezi pasând un array de array-uri. Fiecare element array va avea la rândul lui două elemente. Primul reprezintă cheia, iar cel de-al doilea, valoarea.
 
 ```javascript
 const obiect = new Map([
@@ -89,6 +93,10 @@ for (let test of bibliotecaTest){
   console.log((test[0]() === test[1]) ? 'OK!' : 'FALSE');
 }; // OK!
 ```
+
+## Comportament și performanțe
+
+Referințele către obiecte `Map` și `Set` taxează memoria pentru că nu vor fi colectate la gunoi. Singurul moment când acest lucru se întâmplă este atunci când nu mai există nicio referință activă la acel `Map`. Obiectele stocate, vor fi păstrate în continuare în memorie chiar dacă nu sunt folosite. Singura modalitate de a contracara o astfel de taxare a performanței este prin eleminarea cheilor din `Map` sau chiar distrugerea `Map`-ului întreg. Un exemplu poate fi cazul în care este folosit un `Map` pentru gestionarea nodurilor DOM, dacă acestea vor fi șterse în logica programului, dar vor fi menținute în `Map`. Pentru rezolvarea problemelor de taxare a memoriei, au fost introduse în limbaj `WeakMap` și `WeakSet`. Acestea permit colectarea la gunoi când nu mai este nevoie de ele.
 
 ## Proprietăți
 
@@ -206,8 +214,4 @@ console.log([...colectie.keys()]); // [ "ceva", "altceva", Object ]
 console.log([...colectie.values()]); // [ "o valoare", 1000, "hmmmmm" ]
 ```
 
-Ca și curiozitate, valoarea `NaN` poate fi folosită  drept cheie.
-
-## Notă privind performanțele
-
-Referințele către obiecte `Map` și `Set` taxează memoria pentru că nu vor fi colectate la gunoi. În cazul în care este folosit un `Map` pentru gestionarea nodurilor DOM, dacă acestea vor fi șterse în logica programului, acestea vor fi menținute în `Map`. Pentru rezolvarea problemelor de taxare a memoriei, au fost introduse în limbaj `WeakMap` și `WeakSet`. Acestea permit colectarea la gunoi când nu mai este nevoie de ele.
+O curiozitate: valoarea `NaN` poate fi folosită  drept cheie.

@@ -1,5 +1,16 @@
 # Closures
 
+După ce vizitezi o galerie de artă, la o discuție cu prietenii în care le povestești ceea ce ai văzut, vei apela la memoria operelor de artă expuse. Chiar dacă te afli la 2000 de kilometri, vei avea o referință concretă către fiecare tablou pe care l-ai văzut. Îți vei aminti culorile, autorul și alte câteva atribute specifice fiecăruia dintre acestea. Acesta este un closure pe galeria de artă. Acest closure îți permite să te referi la fiecare obiect din galerie.
+
+```javascript
+var operă = 'Nighthawks';
+function povestesc () {
+  var autor = "Edward Hopper";
+  return operă + ' de ' + autor;
+}
+povestesc();
+```
+
 Motorul JavaScript ține evidența mediilor lexicale, fie că acestea sunt la nivel de bloc, la nivel de funcție sau globalul. Reține faptul că declararea variabilelor cu `var` introduce identificatorii în limitele unei funcții container sau în obiectul global ignorând complet blocurile delimitate prin acolade. Declararea variabilelor cu `let` și `const` introduce identificatori doar la nivelul blocului în care se face declararea și în blocurile de cod delimitate prin acolade.
 
 O funcție definită în interiorul unei funcții container generează un **closure** peste mediul lexical existent la momentul definirii.
