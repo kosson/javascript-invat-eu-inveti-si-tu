@@ -1,6 +1,11 @@
 # Funcții async / await
 
-Acest enunț a fost introdus în EcmaScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile care au `async` în fața lui `function` vor returna mereu o promisiune.
+Acest enunț a fost introdus în EcmaScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile care au cuvântul cheie `async` în față, vor returna mereu o promisiune.
+
+```javascript
+async function facCeva () {};
+async () => console.log;
+```
 
 **Moment Zen**: Toate valorile returnate de o funcție `async` sunt împachetate în `Promise.resolve()`.
 
@@ -145,7 +150,8 @@ const [val1, val2, val3] = await Promise.all(promise1(), promise2(), promise3())
 
 ## Referințe
 
--   [Asynchronous Adventures in JavaScript: Async/Await](https://medium.com/dailyjs/asynchronous-adventures-in-javascript-async-await-bd2e62f37ffd)
--   [await. MDN web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
--   [7 Reasons Why JavaScript Async/Await Is Better Than Plain Promises (Tutorial)](https://dev.to/gafi/7-reasons-to-always-use-async-await-over-plain-promises-tutorial-4ej9)
-  -   [Async functions - making promises friendly | Google Developers](https://developers.google.com/web/fundamentals/primers/async-functions)
+- [Asynchronous Adventures in JavaScript: Async/Await](https://medium.com/dailyjs/asynchronous-adventures-in-javascript-async-await-bd2e62f37ffd)
+- [await. MDN web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+- [7 Reasons Why JavaScript Async/Await Is Better Than Plain Promises (Tutorial)](https://dev.to/gafi/7-reasons-to-always-use-async-await-over-plain-promises-tutorial-4ej9)
+- [Async functions - making promises friendly | Google Developers](https://developers.google.com/web/fundamentals/primers/async-functions)
+- [Easier Node.js streams via async iteration](https://2ality.com/2019/11/nodejs-streams-async-iteration.html)

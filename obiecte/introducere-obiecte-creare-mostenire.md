@@ -1933,7 +1933,7 @@ cerc1.arie(); //
 -   Tot codul din clasă rulează automat în `strict mode`.
 -   Toate metodele create sunt automat non-enumerabile.
 -   Apelarea constructorului fără `new` conduce la o stare de eroare.
--   Numele clasei nu trebuie folosit în interiorul acesteia pentru o reasignare. Conduce la eroare.
+-   Numele clasei nu trebuie folosit în interiorul acesteia pentru o reatribuire. Conduce la eroare.
 -   În cazul folosirii expresiilor de clasă, nu este necesară introducerea unui identificator după cuvântul cheie `class`.
 -   `super()` setează legătura la `this` în cazul claselor derivate. Dacă folosești constructorul, adu-ți mereu aminte să invoci mai întâi de toate `super()`.
 -   clasele permit moștenirea din toate obiectele built-in: `class ArraySpecial extends Array {}`.

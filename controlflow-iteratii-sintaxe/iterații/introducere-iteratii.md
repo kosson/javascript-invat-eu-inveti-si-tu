@@ -12,13 +12,17 @@ Alternativa la procesele repetitive, la ciclurile iterative realizate cu buclele
 
 ## Interfața de iterare
 
-Am menționat deja despre protocoalele de iterare. ECMAScript 2015 (ES6) a introdus un nou mecanism de parcurgere a datelor numit **iterare**. Mai exact, un **protocol de iterare** pentru că iterarea acest concept este în ADN-ul programării. Conform noii versiuni a standardului (2019), protocolul de iterare s-a transformat într-o adevărată interfață de iterare.
+Am menționat deja despre protocoalele de iterare. ECMAScript 2015 (ES6) a introdus un nou mecanism de parcurgere a datelor numit **iterare**. Mai exact, un **protocol de iterare** pentru că iterarea acest concept este în ADN-ul programării. Conform noii versiuni a standardului (2019), protocolul de iterare s-a transformat într-o adevărată **interfață de iterare**. Textul [ECMAScript 2018](https://www.ecma-international.org/ecma-262/9.0/#sec-control-abstraction-objects) lămurește ce este o interfață, termen care trebuie înțeles de la bun început.
+
+> O interfață este un set de chei a unor proprietăți ale căror valori asociate reprezintă o anumită specificație. Orice obiect care oferă toate proprietățile descrise de specificațiile interfaței este *conform* interfeței. O interfață nu este reprezentată distinct de vreun obiect. În schimb, pot fi multe obiect implementate separat care sunt conforme cu o interfață. Un singur obiect, poate fi conform cu mai multe interfețe.
+
+Termenul cheie aici este această **conformitate**, pe care obiectele care implementează o interfață, trebuie să o respecte. De fapt, conformitatea impune anumite lucruri obiectului care implementează interfața, fie acestea comportamente ori metode specifice.
 
 În anul 1994, patru specialiști în informatică căutau să unifice soluțiile folosite în practica programării computerelor în șabloane ușor de înțeles. Cei patru, Erich Gamma, Richard Helm, Ralph Johnson și John Vlissides, numiți de comunitate *Gang of Four*, investighează în lucrarea *Design Patterns: Elements of Reusable Object-Oriented Software* mai multe soluții uniformizate la nivel abstract prin ceea ce se numește *design patterns*. Unul dintre acestea se numește *Iterator*, fiind catalogat un model comportamental. Intenția acestui model de organizare a funcționalităților era de a:
 
 > oferi o cale pentru a accesa secvențial elementele unui obiect agregat fără a expune reprezentarea sa internă.
 
-Este menționat faptul că acestui șablon i se mai spune și *Cursor* și cea mai importantă mențiune este legată de domeniul de aplicare. Astfel, un șablon Iterator este construit pentru *a oferi o interfață uniformă folosită în traversarea diferitelor structuri de agregare*. Trebuie adăugat faptul că iterarea se poate face doar pe structuri sincrone așa cum sunt array-urile. Nu se pot aplica în cazul evenimentelor, care sunt asincrone în natură.
+Este menționat faptul că acestui șablon i se mai spune și *Cursor* și cea mai importantă mențiune este legată de domeniul de aplicare. Astfel, un șablon `Iterator` este construit pentru *a oferi o interfață uniformă folosită în traversarea diferitelor structuri de agregare*. Trebuie adăugat faptul că iterarea se poate face doar pe structuri sincrone așa cum sunt array-urile. Nu se pot aplica în cazul evenimentelor, care sunt asincrone în natură.
 
 ### Cum se face iterarea
 

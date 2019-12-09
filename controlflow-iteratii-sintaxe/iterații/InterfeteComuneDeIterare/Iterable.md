@@ -1,12 +1,10 @@
-## Interfața `Iterable`
+## Interfața *Iterable*
 
-O interfață `Iterable` este cea care are o proprietate `@@iterator`. De fapt, ceea ce vrea această interfață este ca toate obiectele care o implementează să aibă proprietatea `@@iterator`. În fond, asta dorește orice interfață.
+O interfață *Iterable* are o proprietate `@@iterator`, care pentru oricare obiect ce implementează interfața, de fapt o preia ca membru, fiind o metodă internă a sa. Misiunea acesteia este să returneze un obiect *Iterator*, ce permite operațiuni specifice menționate la rândul lor de interfața *Iterator*, fiind asigurată **conformitatea**. Privind mai atent la `@@iterator`, observăm faptul că este un `Symbol`.
 
-Valoarea acesteia este o funcție care returnează un obiect `Iterator`. Acest obiect returnat trebuie să fie conform interfeței `Iterator`.
+Practic privind, de exemplu, `for...of` poate itera prin următoarele obiecte care respectă **protocolul Iterator**: `Array`, `Map`, `Set`, `String`, `TypedArray` și `arguments`.
 
-Pentru a fi iterabil, un obiect trebuie să aibă implementată la nivelul obiectului intern de la care moștenește metoda `@@iterator`. Bucla `for...of` poate itera prin următoarele obiecte care respectă **protocolul iterator**: `Array`, `Map`, `Set`, `String`, `TypedArray` și `arguments`.
-
-Aceste interfețe implementate cu ajutorul simbolurilor, permit parcurgerea și prelucrarea datelor care au fost introduse în valori ce moștenesc automat de la tipurile de obiecte interne corespondente. Acest lucru înseamnă că obiectul (sau unul din obiectele din lanțul prototipal), trebuie să aibă o proprietate cu o cheie `[Symbol.iterator]`. La ce mă refer este faptul că indiferent de natura datelor, text sau un array, ori un obiect *dicționar*, vor fi *ambalate* automat în obiectul intern corespondent. Acesta este și motivul pentru care poți aplica metode ale obiectelor interne direct pe valoarea identificată de o variabilă.
+Aceste interfețe implementate cu ajutorul simbolurilor, permit parcurgerea și prelucrarea datelor care au fost introduse în valori ce moștenesc automat de la tipurile de obiecte interne corespondente. Dacă obiectul intern implementează interfața *Iterable*, orice obiect care moștenește de la acesta, va fi la rândul său iterabil. Acest lucru înseamnă că obiectul (sau unul din obiectele din lanțul prototipal), trebuie să aibă o proprietate cu o cheie `[Symbol.iterator]`. Indiferent de natura datelor, `String` sau un `Array`, la momentul aplicării vreunei metode specifice obiectului intern corespondent, vor fi *ambalate* automat în obiectul intern corespondent. Acesta este și motivul pentru care poți aplica metode ale obiectelor interne direct pe valoarea identificată de o variabilă, chiar dacă aceasta este o valoare primară inițial.
 
 Valoarea lui `[Symbol.iterator]` este o funcție fără argumente ce returnează un obiect. Acest obiect returnat se conformează protocolului de interare (**iterator protocol**), ceea ce îl face pretabil unei prelucrări cu `for...of`, de exemplu.
 

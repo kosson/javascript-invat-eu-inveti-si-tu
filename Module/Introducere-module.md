@@ -247,6 +247,7 @@ Modulele sunt niște Singleton-uri, ceea ce înseamnă că ori de câte ori va f
 
 ## Referințe
 
--   [Axel Rauschmayer. Exploring ES6. 16. Modules](http://exploringjs.com/es6/ch_modules.html#sec_modules-vs-scripts)
--   [Addy Osmani. Writing Modular JavaScript With AMD, CommonJS & ES Harmony](https://addyosmani.com/writing-modular-js/)
--   [CommonJS Notes](http://requirejs.org/docs/commonjs.html)
+- [Axel Rauschmayer. Exploring ES6. 16. Modules](http://exploringjs.com/es6/ch_modules.html#sec_modules-vs-scripts)
+- [Addy Osmani. Writing Modular JavaScript With AMD, CommonJS & ES Harmony](https://addyosmani.com/writing-modular-js/)
+- [CommonJS Notes](http://requirejs.org/docs/commonjs.html)
+- [ES modules: A cartoon deep-dive | Lin Clark](https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/)

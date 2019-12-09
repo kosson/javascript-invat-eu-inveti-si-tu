@@ -475,6 +475,7 @@ let listaPromisiunilor = mapPromisificat(lista, dublezLitere);
 
 ## Resurse
 
+-   [Promises/A+](https://programminghistorian.org/en/lessons/installing-omeka)
 -   [ECMAScript versiunea 7](http://www.ecma-international.org/ecma-262/7.0/index.html#sec-promise-objects)
 -   [Trevor Burnham. Async JavaScript]()
 -   [Wikipedia. Futures and promises](https://en.wikipedia.org/wiki/Futures_and_promises)
