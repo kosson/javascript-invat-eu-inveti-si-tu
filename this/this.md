@@ -2,7 +2,7 @@
 
 Imaginează-ți *Oceanul planetar*. Acesta este obiectul nostru global. Să ne închipuim că orașele cu porturi sunt obiecte. Funcțiile sunt nave care prelucrează și transportă valori. Navele sunt la rândul lor obiecte având fiecare un nume și un pavilion sub care sunt înregistrate. De fiecare dată când intră într-un port, se leagă la o bază de date a portului disponibilă navei. Conexiunea realizată la baza de date a portului să o numim `this`.
 
-Această relație trebuie lămurită pentru că, de fapt o funcție întodeaunea rulează în contextul unui obiect. Cuvântul cheie `this` identifică o legătură cu mediul lexical al contextului de execuție pentru o funcție la momentul execuției sale. Cuvântul crucial este **legătură**. Legătura se realizează doar la momentul execuției funcției!
+Această relație trebuie lămurită pentru că, de fapt, o funcție întodeaunea rulează în contextul unui obiect. Cuvântul cheie `this` identifică o legătură cu mediul lexical al contextului de execuție pentru o funcție la momentul execuției sale. Cuvântul crucial este **legătură**. Legătura se realizează doar la momentul executării funcției!
 
 **Moment ZEN**: O funcție trebuie să fie în execuție pentru a realiza o legătură `this`.
 
@@ -10,24 +10,21 @@ Atunci când o funcție este apelată, motorul rulează niște algoritmi interni
 
 **Spune standardul**:
 
-> Un mediu de funcție este un Mediu Lexical care corespunde invocării unei funcții obiect ECMAScript. Un mediu de funcție poate stabili o nouă legătură `this`. \[...] Fiecare Înregistrare de Mediu este asociat cu un obiect numit binding object. \[...] Operațiunea abstractă `ResolveThisBinding` determină legătura cuvântului cheie `this` folosind `LexicalEnvironment` al contextului de execuție în derulare.
+> Un mediu de funcție este un Mediu Lexical care corespunde invocării unei funcții obiect ECMAScript. Un mediu de funcție poate stabili o nouă legătură `this`. ([function environment, 8.1 Lexical Environments](https://www.ecma-international.org/ecma-262/10.0/index.html#function-environment)).
 
-Multe informații necesare înțelegerii `this` se leagă de discuția pe care am avut-o privind compilarea și execuția.
-Legătura (termenul în engleză fiind `binding`) la `this` depinde de obiectul *din care* s-a făcut apelul (în literatura din limba engleză i se spune *call-site*).
+Multe informații necesare înțelegerii `this` se leagă de mediile lexicale.
+*Legătura* (termenul în engleză fiind `binding`) la `this` se stabilește cu obiectul *din care* s-a făcut apelul (în literatura din limba engleză i se spune *call-site*).
 
-Nu contează unde a fost declarată funcția, ci locul unde a fost invocată pentru a găsi obiectul la care se face legătura `this`. Locul declarării contează atunci când se dorește a se face un *closure* pe mediul lexical.
+Nu contează unde a fost declarată funcția, ci locul unde a fost invocată. Locul declarării contează atunci când se dorește a se face un *closure* pe mediul lexical din care face parte prin declararea sa acolo.
 
 ## Mică anatomie
 
-Pentru a înțelege conectarea `this`, cel mai util scenariu este acela în care această legătură se pierde. Să luăm cazul unei funcții cu rol de metodă, care este definită în obiect. Această funcție este gazda unei alteia, care realizează un *closure* pe mediul lexical al gazdei. Un *closure* este un registru inventar al mediului lexical existent la momentul definirii funcției - ce era în jurul funcției.
+Pentru a înțelege legătura `this`, vom observa ce ce petrece când aceasta se pierde. Să luăm cazul unei funcții cu rol de metodă, fiind definită într-un obiect. Metoda noastră este gazda unei alteia, care realizează un *closure* pe mediul lexical al gazdei. Un *closure* este un *registru inventar* al mediului lexical existent la momentul definirii funcției - ce era *în jurul* funcției.
 
 ```javascript
 // "use strict"; // în acest caz, this is undefined
-var ceva = 100;
-/*
-declararea cu let ar împiedica ceva
-să devină variabilă globală
-*/
+var ceva = 100; // ai putea declara și cu let
+/* let împiedică `ceva` să devină variabilă globală */
 const obi = {
   ceva: 'text',
   faCeva: function gazda () {
@@ -45,14 +42,14 @@ obi.faCeva(); // 100
 // dacă declari cu let este returnat undefined
 ```
 
-Apelarea funcției `interna`, nu realizează o legătură `this` la obiectul în care este definită metoda `gazda()`. Legătura se face la obiectul global, iar dacă fragmentul de cod ar rula sub regula `use strict`, rezultatul ar fi `undefined`. Douglas Crockford spune despre acest comportament ca fiind o eroare de proiectare a limbajului. O funcție găzduită de o metodă, ar trebui să aibă acces la membrii obiectului folosind aceeași legătură `this` pe care o folosește metoda care joacă rol de gazdă. În trecut această necesitate se făcea printr-o punte lexicală pe care o veți întâlni în mod curent în codul scris de alții.
+Apelarea funcției `interna`, nu realizează o legătură `this` la obiectul în care este definită metoda, adică `gazda()`. Legătura se face la obiectul global, iar dacă fragmentul de cod ar rula sub regula `use strict`, rezultatul ar fi `undefined`. Douglas Crockford spune despre acest comportament că este o eroare de proiectare a limbajului. O funcție găzduită de o metodă, ar trebui să aibă acces la membrii obiectului metodei, folosind aceeași legătură `this` pe care o folosește metoda, care joacă rol de gazdă. În trecut, această necesitate era rezolvată printr-o *punte lexicală* pe care o veți întâlni în mod curent în cod *legacy*.
 
 ```javascript
 var valoare = 10;
 const obi = {
   valoare: 1000,
   valDinObi: function daMiVal () {
-    var punte = this;
+    var punte = this; // puntea lexicală
     var dinLexEnvMetoda = 10000;
     function interna () {
       console.log(this.valoare); // 10
@@ -65,7 +62,7 @@ const obi = {
 obi.valDinObi();
 ```
 
-Am numit `punte` variabila care face conectarea cu `this`-ul metodei gazdă. Dar ceea ce veți vedea în codul JavaScript este `var that = this;`, identificatorul variabilei în limba engleză însemnând *acela*. Între timp a fost adăugat limbajului funcțiile fat arrow, care folosesc legătura `this` pe care funcția gazdă a realizat-o.
+Am numit `punte` variabila care face conectarea cu obiectul la care s-a legat `this`-ul metodei. În codul altora veți vedea ceva similar cu `var that = this;`, identificatorul variabilei în limba engleză însemnând *acela*. Între timp au fost adăugate limbajului funcțiile *fat arrow*, care folosesc legătura `this` pe care funcția gazdă a realizat-o.
 
 ```javascript
 var valoare = 10;
