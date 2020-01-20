@@ -5,9 +5,11 @@ Metoda este folosită pentru a aduce toate fragmentele care se potrivesc criteri
 Metoda returnează un iterator.
 
 ```javascript
-var text = var txt = 'Ceva\u{1F5D1} cu \u{1F5D2} și &#36;&#38; plus HaHa&#36;XOx&#38; &lt;';
-var entity = /&(?:#x[a-f0-9]+|#[0-9]+|[a-z0-9]+);?/igu;
+let regexp = /(Salut)+/gi;
+let fragment = "Salut prietene. Salutare, popor, salutări rudelor";
+let matches = fragment.matchAll(regexp);
 
-let array = [...str.matchAll(entity)];
-console.log(array);
+for (let match of matches) {
+  console.log(match);
+}
 ```
