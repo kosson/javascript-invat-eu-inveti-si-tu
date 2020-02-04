@@ -1,6 +1,6 @@
-# Math.ceil
+# Math.ceil()
 
-Este o metodă statică a lui Math care rotunjește superior o valoare.
+Este o metodă statică a lui `Math` care rotunjește valoarea la valoarea unui număr întreg apropiat.
 
 ```javascript
 Math.ceil(.73); // 1

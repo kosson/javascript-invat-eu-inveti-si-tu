@@ -6,15 +6,15 @@ Standardul spune că **un obiect este un membru al tipului built-in Object** al 
 
 > ECMAScript este bazat pe obiecte: limbajul de bază și toate funcționalitățile sunt oferite de obiecte, iar un program ECMAScript este un ciorchine de obiecte care comunică.
 
-Obiectele sunt și ele valori. La aceste valori se ajunge printr-o **referință** (către o locație în memorie unde este stocat), în contrast cu primitivele care sunt chiar valoarea. Obiectele ocupă o zonă de memorie și nu pot fi copiate în alte zone de memorie. Zona de memorie în care sunt scrise valorile unui program Javascript se numește **heap** (lb. rom. *maldăr*). Pur și simplu, sunt unice, așa cum o țară este unică în lume cu relieful, obiceiurile și sistemul de valori. Dar pentru a trimite o scrisoare cuiva în lume, trebuie să cunoști țara, orașul, strada și numele persoanei. Așa și cu obiectele. Pentru a folosi acea zonă de memorie ocupată de obiect, vom folosi referința sau referințele către acesta.
+Obiectele sunt și ele valori. La aceste valori se ajunge printr-o **referință** (către o locație în memorie unde este stocat), în contrast cu primitivele care sunt chiar valoarea. Obiectele ocupă o zonă de memorie și nu pot fi copiate în alte zone de memorie. Zona de memorie în care sunt scrise valorile unui program Javascript se numește **heap** (lb. rom. *maldăr*). Pur și simplu, sunt unice, așa cum o țară este unică în lume cu relieful, obiceiurile și sistemul de valori. Pentru a trimite o scrisoare cuiva, trebuie să cunoști țara, orașul, strada și numele persoanei. Este și cazul obiectelor. Pentru a folosi acea zonă de memorie ocupată de obiect, vom folosi referința sau referințele către acesta.
 
-Privind la modul în care sunt organizate datele într-un obiect, vom remarca că acestea sunt colecții de proprietăți identificabile printr-un nume, fiind strânse împreună fără a avea o ordine internă. Este ca și cum ai strânge jucării de același tip într-o cutie după o zi de distracție. Obiectele sunt structuri de date dinamice ale căror proprietăți se modifică. Atunci când acest lucru se întâmplă spunem că obiectul își modifică starea.
+Privind la modul în care sunt organizate datele într-un obiect, vom remarca că acestea sunt colecții de proprietăți identificabile printr-un nume, fiind strânse împreună fără a avea o ordine internă. Este ca și cum ai strânge jucării de același tip într-o cutie după o zi de distracție. Obiectele sunt structuri de date dinamice ale căror proprietăți se modifică. Atunci când acest lucru se întâmplă spunem că obiectul *își modifică starea*.
 
-**Despre alcătuirea unui obiect ne vorbește standardul**:
+**Despre alcătuirea unui obiect standardul spune**:
 
 > colecții de zero sau mai multe proprietăți fiecare având atribute care determină cum poate fi folosită.
 
-Pentru că obiectele sunt valori, acestea pot fi pasate unei funcții pentru a lucra cu datele obiectului în corpul funcției. Orice modificare aduci datelor atunci când faci prelucrări în funcție, se răsfrânge instantaneu prin modificarea valorilor obiectului pentru că lucrezi cu referințe. Părțile componente, mai exact proprietățile trebuie înțelese precum:
+Pentru că obiectele sunt valori, acestea pot fi pasate unei funcții pentru a lucra cu datele obiectului în corpul funcției. Orice modificare aduci datelor atunci când faci prelucrări în funcție, se răsfrânge instantaneu prin modificarea valorilor obiectului pentru că lucrezi cu referințe. Părțile componente, mai exact proprietățile trebuie înțelese în litera standardului:
 
 > containere care pot conține alte obiecte, valori primitive sau funcții.
 
@@ -27,13 +27,13 @@ Câteva concepte fundamentale pentru înțelegerea obiectelor în general:
 -   **Moștenirea** este un mecanism prin care obiectul creat poate folosi datele și funcționalitățile altuia cu rol de părinte.
 -   **Poliformism** este caracteristica unui obiect de a deveni *un comportament* urmat de multe alte obiecte. Spunem că un obiect se comportă ca *o interfață*, care poate fi aplicată altor obiecte pentru a opera cu acestea.
 
-Atunci când un obiect este creat, toate caracteristicile sale sunt moștenite de la un alt obiect cu rol de **prototip** așa cum un copil moștenește trăsăturile părinților. Chiar dacă acel copil este o persoană diferită, acesta moștenește de la părinții săi anumite caracteristici. Dacă am strânge aceste caracteristici moștenite într-un set, acesta ar fi **obiectul prototip**. Să nu vi se pară ciudat că un prototip este un obiect, iar acesta la rândul lui are un prototip. E ca un lanț, care are drept limită superioară obiectele interne `Object` și `Function`, iar deasupra lor este valoarea `null`. Totuși acest lanț prototipal poate fi rupt dacă se dorește.
+Atunci când un obiect este creat, toate caracteristicile sale sunt moștenite de la un alt obiect cu rol de **prototip** așa cum un copil moștenește trăsăturile părinților. Chiar dacă acel copil este o persoană diferită, acesta moștenește de la părinții săi anumite caracteristici. Dacă am strânge aceste caracteristici moștenite într-un set, acesta ar fi **obiectul prototip**. Să nu vi se pară ciudat că un prototip este un obiect, iar acesta la rândul lui are un prototip. E ca un lanț, care are drept limită superioară obiectele interne `Object` și `Function`, iar deasupra lor este valoarea `null`. Totuși acest lanț prototipal poate fi rupt la nevoie.
 
 ### Alcătuirea obiectelor
 
-Obiectele au **proprietăți** și **metode**. Împreună formează **membrii** obiectului.
+Obiectele au **proprietăți** și **metode** ce formează **membrii** obiectului.
 
-Proprietățile pot fi numere, boolean-uri, șiruri de caractere, funcții sau chiar obiecte. **Proprietățile** sunt valori (primitive, funcții sau alte obiecte), iar metodele sunt funcții declarate în obiect sau în afara lui. Membrii unui obiect formează o adevărată *semnătura* a obiectului. Fiecare obiect are o *semnătură* distinctă. Dacă dorești să creezi mai multe obiecte asemănătoare, ai putea să le scrii sau să le generezi, dar cel mai înțelept este să folosești constructorii sau funcții care returnează obiecte. Astfel, elimini repetițiile inutile, care taxează resursele de calcul.
+Proprietățile pot fi numere, boolean-uri, șiruri de caractere, funcții sau chiar alte obiecte. **Proprietățile** sunt valori (primitive, funcții sau alte obiecte), iar metodele sunt funcții declarate în obiect sau în afara lui. Membrii unui obiect formează o adevărată *semnătura* a obiectului. Fiecare obiect are o *semnătură* distinctă. Dacă dorești să creezi mai multe obiecte, cel mai înțelept este să folosești constructorii sau funcții care le returnează.
 
 ### Viața unui obiect
 
@@ -43,7 +43,7 @@ Să explorăm prin fațetele oferite de următoarele întrebări:
 - cât stă el scris în zona de memorie?
 - cât timp este disponibil un obiect programului?
 
-Un obiect este disponibil atâta vreme cât există cel puțin o referință către acesta sau către o proprietate a sa. Ce se întâmplă când nu mai există nicio referință? Zona de memorie este eliberată de un mecanism intern motorului denumit în limba engleză *garbage collector*. În această lucrare veți mai întâlni expresia *colectat la gunoi*, ceea ce implică chiar acest proces de eliberare a memoriei, care este unul automat.
+Un obiect este disponibil atâta vreme cât există cel puțin o referință către acesta sau către o proprietate a sa. Ce se întâmplă când nu mai există nicio referință? Zona de memorie este eliberată de un mecanism intern motorului denumit în limba engleză *garbage collector*. În această lucrare veți mai întâlni și expresia *colectat la gunoi*.
 
 ```javascript
 const obiectul1 = {ceva: 10};
@@ -54,13 +54,13 @@ if (true) {
 ```
 
 În exemplul de mai sus, obiectul definit pentru `proprietatea1` va fi păstrat pentru că am setat o referință către acesta în `obiectul1`. Câtă vreme `obiectul1` va trăi, va trăi și legătura către cel definit în blocul decizional - `obiectul1.proprietatea1`.
-Te vei întreba ce se petrece cu `obiectul2`. Acesta va fi *colectat la gunoi* pentru că mediul lexical în care a fost definit, cel al blocului decizional, colapsează la momentul încheierii testului, iar toate declarațiile spunem că devin *out of scope* - sunt în afara mediului lexical.
+Te vei întreba ce se petrece cu `obiectul2`. Acesta va fi *colectat la gunoi* pentru că mediul lexical în care a fost definit, cel al blocului decizional, colapsează la momentul încheierii testului, iar despre declarații spunem că devin *out of scope* - *ies în afara mediului lexical*.
 
 Putem indica motorului distrugerea unui obiect și în consecință *colectarea la gunoi* prin setarea referinței la valoarea `undefined`.
 
-Dacă un obiect oferă metode altuia prin mecanismul de moștenire prototipală, acesta nu va fi *colectat la gunoi* pentru că de el depind alte obiecte, care lucrează cu metode sau valori, pe care le apelează din lanțul prototipal format. Acest tip de referință este una *implicită* (se face automat). Atunci când un obiect face referințe către proprietățile unui alt obiect, spunem că realizează o referință *explicită*, folosind un identificator. Atunci când ambele referințe nu mai există, intervine mecanismul de *colectare la gunoi* și zona de memorie în care exista, este eliberată.
+Dacă un obiect oferă metode altuia prin mecanismul de moștenire prototipală, acesta nu va fi *colectat la gunoi* pentru că de el depind alte obiecte, care lucrează cu metode sau valori, pe care le apelează prin lanțul prototipal format. Acest tip de referință este una *implicită* (se face automat). Atunci când un obiect face referințe către proprietățile unui alt obiect, spunem că realizează o referință *explicită*, folosind un identificator. Atunci când ambele referințe nu mai există, intervine mecanismul de *colectare la gunoi* și zona de memorie în care exista, este eliberată.
 
-Obiectele sunt pasate ca valori de lucru prin referințe către acestea. Înseamnă că ceea ce pasăm în program este o adresă către același obiect. Nu se fac copii ale obiectului atunci când pasăm unei funcții identificatorul său, de exemplu. O referință se comportă ca o referință bibliografică către aceeași operă (carte). Poți exprima referința prin mai multe formate, dar entitatea referită este aceeași.
+Obiectele pot fi pasate ca valori prin referințe către acestea, adică o adresă către același obiect. Nu se fac copii ale obiectului atunci când pasăm unei funcții identificatorul său, de exemplu. O referință se comportă ca o referință bibliografică către aceeași operă (carte). Poți exprima referința prin mai multe formate, dar entitatea referită este aceeași.
 
 ```javascript
 var obi1 = {}; let obi2 = {}; const obi3 = {};
@@ -73,44 +73,46 @@ var obiA = obiB = obiC = {};
 
 Pentru a introduce o proprietate într-un obiect, pur și simplu vei avea obiectul marcat prin acolade, iar în interior, vei introduce identificatori urmați de valoarea care se va delimita prin două puncte: `{a: 'ceva'}`.
 
-Toate valorile text vor fi introduse în obiecte între ghilimele simple, iar restul valorilor așa cum sunt ele. Dacă nu sunt între ghilimele, înseamnă că avem identificatorii altor valori. Am putea introduce textul folosind și ghilimelele duble, dar dacă în text vor fi folosite ghilimelele duble (valori într-un CSV), instantaneu am avea o mare problemă. Motorul ar considera că, la primele ghilimele duble ale textului, se încheie declarația valorii. Proprietățile se redactează precum listele, fiind delimitate prin virgulă. Atunci când folosim operatorul `new`, în limbajul programatorilor spunem că am creat o instanță a unui obiect.
+Toate valorile text vor fi introduse în obiecte între ghilimele simple, iar restul valorilor așa cum sunt ele. Dacă nu sunt între ghilimele, înseamnă că avem identificatorii altor valori. Am putea introduce textul folosind și ghilimelele duble, dar dacă în text vor fi folosite ghilimelele duble (valori într-un CSV), instantaneu am avea o mare problemă. Motorul ar considera că, la primele ghilimele duble ale textului, se încheie declararea valorii. Proprietățile se redactează precum listele, fiind delimitate prin virgulă. Atunci când folosim operatorul `new`, în limbajul programatorilor spunem că am creat o instanță a unui obiect.
 
 ```javascript
 // notația literală
 const obi = { a: 'ceva text' };
 // proprietate cu string literal
-const obi2 = { "a": 'altceva' };
-// echivalent cu
+const obi2 = { "a": "altceva" };
+// fiind echivalent cu
 const obi3 = new Object();
 obi3.a = 'cineva';
 ```
 
-Exemplul oferit înfățișează cea mai întâlnită notație pentru crearea obiectelor pe care o numim *literală*. Vei observa că obiectele sunt declarate cu un identificator al unei variabile `const`.
+Exemplul indică cea mai întâlnită formulă de creare a obiectelor numită *literală*. Vei observa că obiectele sunt declarate cu un identificator al unei variabile `const`.
 
-Modul de a adăuga proprietăți noi, fără a interveni asupra constructorului, este unic, fiind o marcă a limbajului de programare JavaScript. Este și ceea ce îl face plăcut în lucru prin abordarea directă. Douglas Crockford indică acest avantaj al limbajului, care oferă independență opus constrângerilor pe care o clasă îl impune privind numele proprietăților și tipul lor.
+Modul de a adăuga proprietăți noi, fără a interveni asupra constructorului, este unic, fiind o marcă a limbajului de programare JavaScript. Este și ceea ce îl face plăcut în lucru prin abordarea directă. Douglas Crockford indică acest avantaj al limbajului, care oferă independență opus constrângerilor pe care o **clasă** (un șablon în baza căruia sunt instanțiate obiecte) îl impune privind numele proprietăților și tipul lor.
 
-Obiectele pot conține la rândul lor alte obiecte, fapt care le face pretabile pentru reprezentarea de înregistrări complexe, realizând adevărați arbori de date.
+Obiectele pot conține la rândul lor alte obiecte, fiind posibilă reprezentarea unor înregistrări complexe.
 
 #### Sintaxa identificatorilor
 
-Începând cu ECMAScript 2015, se poate folosi și notația prescurtată atunci când numele unei proprietăți este același cu numele identificatorului unei valori. Dacă numele proprietății este același cu cel al identificatorului unei valori putem introduce doar numele identificatorului.
+Începând cu ECMAScript 2015, se poate folosi și notația prescurtată atunci când numele unei proprietăți este același cu numele identificatorului unei valori. Dacă numele proprietății este același cu cel al identificatorului unei valori, putem introduce doar numele identificatorului.
 
 ```javascript
+// declararea valorilor
 let unu = 1, este = true;
+// constituirea obiectului
 const obi = {
   unu: unu,
   este: este
 };
-// în formă concisă
+// iar formă concisă este
 const obi = {unu, este};
-// efectul este același
+// dar efectul este același
 console.log(obi);
 // {"unu":1,"este":true}
 ```
 
-**Moment ZEN**: Obiectele pot fi privite ca array-uri asociative pentru că poți accesa valoarea folosind notația cu paranteze drepte: `obi['b']`.
+**Moment ZEN**: Obiectele au aspectul unor array-uri asociative pentru că poți accesa valoarea folosind notația cu paranteze drepte: `obi['b']`.
 
-Atunci când sunt adăugate proprietăți, folosind sintaxa cu paranteze pătrate, este permisă evaluarea expresiilor dintre parantezele pătrate, iar rezultatul devine cheia.
+Atunci când sunt adăugate proprietăți, folosirea sintaxei cu paranteze pătrate va permite evaluarea expresiilor dintre parantezele pătrate, iar rezultatul devine cheia.
 
 ```javascript
 let a = 'ce', b = `va`;
@@ -133,18 +135,24 @@ Textul standardului încadrează obiectele în următoarele categorii:
 -   **Standard objects** (*obiecte standard*) sunt toate obiectele JS. Obiectele *ordinary* și cele *exotice* fac parte din setul obiectelor **standard**.
 -   **Built-in objects** (*obiecte interne*) sunt toate obiectele pe care le expune din start motorul de JavaScript. Toate obiectele comune (*ordinary*) fac parte din setul celor interne.
 
-### Obiectele interne (built-in)
+### Obiectele interne limbajului
 
-Am menționat că JavaScript vine din start cu obiectele care se numesc în limba engleză *built-in object*. Le numim **obiecte interne** limbajului. Pentru a avea acces la ele nu-i nevoie să faci ceva. Pur și simplu ele sunt acolo deja, gata de a fi folosite. Există un detaliu pe care aș dori să-l remarcați cu atenție. Obiectul `global` este parte a obiectelor interne. Am putea concluziona că obiectul `global` plus **obiectele standard** constituie setul mare al celor **interne**. Obiectul global nu este containerul tuturor obiectelor oricât de tentant ar fi să-l imaginăm astfel. Dar este *containerul*, dacă vrei să-l închipui astfel, al întregului cod pe care-l scrii tu și al entităților care se formează la momentul evaluării acestuia.
+Am menționat că JavaScript oferă din oficiu obiecte care se numesc în limba engleză *built-in*. Le numim **obiecte interne** limbajului. Pentru a avea acces la ele nu-i nevoie să faci ceva. Pur și simplu ele sunt acolo deja, gata de a fi folosite. Există un detaliu important. Există un obiect de *fundal* pentru întreg codul scris de programator, care este numit `global`. Acesta face parte din setul obiectelor interne.
+Obiectul `global` plus **obiectele standard** constituie setul mare al celor **interne**.
+
+Obiectul global nu este containerul tuturor obiectelor oricât de tentant ar fi să-l imaginăm astfel. Poți totuși să-l consideri a fi contextul entităților propriului cod la momentul evaluării. Este chiar obiectul la care se face legătura `this` atunci când condul nu rulează sub regula `use strict`.
+
 Dincolo de acestea există un univers mult mai larg al unor seturi de obiecte puse la dispoziție de browser, de exemplu. Acestea vor constitui ceea ce numim **interfețe de programare a aplicațiilor**, în limba engleză **Application Programming Interfaces**, pe scurt **API**-uri.
 
-Modul în care înțelegem ce oferă din start un obiect intern, este determinat și de un set de algoritmi rulați de motorul care implementează standardul ECMAScript. Reamintesc faptul că pentru a putea programa în JavaScript, există un motor a cărui treabă este să facă acest lucru posibil. El se ocupă de generarea obiectelor interne, interpretarea codului sursă, ș.a.m.d. Poți să-ți închipui motorul JavaScript ca un turn de control.
+Modul în care înțelegem ce oferă din start un obiect intern, este determinat și de un set de algoritmi rulați de motorul care implementează standardul ECMAScript. Reamintesc faptul că pentru a putea programa în JavaScript, există un motor a cărui treabă este să genereze obiectele interne, să interpreteze codului sursă, ș.a.m.d. Poți să-ți închipui motorul JavaScript ca un turn de control.
 
-Acești algoritmi sunt numiți `metode interne` ale obiectelor interne. Metodele interne definesc comportamentul la momentul rulării codul privind crearea și utilizarea acelui obiect. Implementarea acestor metode interne specificate de standard cade în responsabilitatea celor care construiesc motoare JavaScript - producătorii de browsere și Node.js. Reține acest aspect pentru a nu fi surprins când vei auzi sau citi discuții despre performanțele unui anume motor în comparație cu altul. Aceste metode interne sunt toate procesele care se petrec în inima unui motor atunci când, de exemplu, apelezi o metodă a unui obiect intern cum ar fi `Object.create()` sau `String.split()`. Aceste adevărate biblioteci de cod scrise în alte limbaje de programare precum C++ sau Rust sunt executanții *instrucțiunilor* pe care noi le scriem în codul sursă JavaScript. De aici și atributul pus acestui limbaj **de scripting**. Un script fiind un set de instrucțiuni, care la momentul execuției angajează adevărate biblioteci de cod precompilate în limbaje de programare de nivel mai jos sau chiar binare, care comunică `1` și `0` direct cu procesorul și mai nou chiar și cu perifericele (Internet of Things). Am menționat acest lucru pentru a înțelege că noi operăm la un nivel foarte înalt, iar JavaScript poate fi perceput ca un rețetar ce se aplică într-un mediu dedicat interpretării respectivelor rețete.
+Acești algoritmi sunt numiți `metode interne` ale obiectelor interne. Metodele interne definesc comportamentul la momentul rulării codul privind crearea și utilizarea acelui obiect. Implementarea acestor metode interne specificate de standard cade în responsabilitatea celor care construiesc motoare JavaScript - producătorii de browsere și Node.js. Reține acest aspect pentru a nu fi surprins când vei auzi sau citi discuții despre performanțele unui anume motor în comparație cu altul. Aceste metode interne sunt toate procesele care se petrec în inima unui motor atunci când, de exemplu, apelezi o metodă a unui obiect intern cum ar fi `Object.create()` sau `String.split()`.
 
-Câteva astfel de rețete oferite de limbajul nostru de programare sunt foarte utile lucrului cu obiecte. De exemplu, metoda `Object.getPrototypeOf()` returnează un obiect sau `null`. Indică obiectul care oferă proprietățile moștenite, precum și pe cel asupra căruia se face interogarea cu `Object.getPrototypeOf(obiSursă)`. Returnarea lui `null` indică faptul că obiectul curent nu moștenește nicio proprietate. M-am oprit la această metodă pentru că obiectele prototip sunt pivoții pe care se realizează mecanismul de moștenire în JavaScript.
+Aceste adevărate biblioteci de cod scrise în alte limbaje de programare precum C++ sau Rust sunt executanții *instrucțiunilor* pe care noi le scriem în codul sursă JavaScript. De aici și atributul pus acestui limbaj **de scripting**. Un script fiind un set de instrucțiuni, care la momentul execuției angajează adevărate biblioteci de cod precompilate în limbaje de programare de nivel mai jos sau chiar binare, care comunică `1` și `0` direct cu procesorul și mai nou chiar și cu perifericele (Internet of Things). Am menționat acest lucru pentru a înțelege că noi operăm la un nivel foarte înalt, iar JavaScript poate fi perceput ca un *rețetar* ce se aplică într-un mediu dedicat interpretării respectivelor rețete.
 
-Aceste metode, de fapt, aceste **rețete** prestabilite, pot fi și ele alterate pentru că JavaScript permite chiar modificarea rețetelor originale (vezi obiectul intern `Reflect`). Este ca și cum ai modifica o carte de bucate așa cum vrei tu după necesitățile tale. Atingerea unui astfel de nivel implică un aspect negativ, iar acesta este pierderea compatibilității cu programele scrise de restul comunității. Închipuiește-ți ce s-ar întâmpla dacă aș modifica **rețeta** `Object.setPrototypeOf()`, dar alt programator dorește o interfațare cu software-ul scris de tine, fiind bun bazat că metoda sa `Object` respectă comportamentul așteptat prin standard? Ar fi un haos desăvârșit. Totuși, sunt momente când mici modificări îmbunătățesc performanța sau îmbogățesc programele.
+Câteva astfel de rețete oferite de limbajul nostru de programare sunt foarte utile lucrului cu obiecte. De exemplu, metoda `Object.getPrototypeOf()` returnează un obiect sau `null`. Indică obiectul care oferă proprietățile moștenite, precum și pe cel asupra căruia se face interogarea cu `Object.getPrototypeOf(obiSursă)`. Returnarea lui `null` indică faptul că obiectul curent nu moștenește nicio proprietate. M-am oprit la această metodă pentru că obiectele prototip oferă mecanismul de moștenire în JavaScript.
+
+Aceste metode, de fapt, aceste **rețete** prestabilite, pot fi și ele alterate pentru că JavaScript permite chiar modificarea rețetelor originale (vezi obiectul intern `Reflect`). Este ca și cum ai modifica o carte de bucate așa cum vrei tu după necesitățile tale. Atingerea unui astfel de nivel implică un aspect negativ, iar acesta este pierderea compatibilității cu programele scrise de restul comunității. Închipuiește-ți ce s-ar întâmpla dacă aș modifica **rețeta** `Object.setPrototypeOf()`, dar alt programator dorește o interfațare cu software-ul scris de tine, fiind bun bazat că metoda cu același nume respectă comportamentul așteptat prin standard? Ar fi un haos desăvârșit. Totuși, sunt momente când mici modificări îmbunătățesc performanța sau îmbogățesc programele.
 
 ## Mantre
 
@@ -152,7 +160,7 @@ Aceste metode, de fapt, aceste **rețete** prestabilite, pot fi și ele alterate
 -   Totul în JavaScript poate avea comportamentul unui obiect exceptând: `null` și `undefined`.
 -   Toate obiectele în JavaScript descind din `Object`.
 -   Toate obiectele moștenesc metode și proprietăți din `Object.prototype`, dar acestea pot fi suprascrise sau poți adăuga propriile proprietăți și metode.
--   În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype. Acest obiect este gol și este creat de constructorul lui `Object()`.
+-   În cazul tuturor funcțiilor, motorul JavaScript generează un obiect `prototype`. Acest obiect este gol și este creat de constructorul lui `Object()`.
 -   Fiecare funcție obiect are un obiect prototip diferit.
 -   Un obiect poate fi creat cu `new Object()`:
     1. Acestă modalitate **nu va crea și constructor**.
@@ -161,19 +169,17 @@ Aceste metode, de fapt, aceste **rețete** prestabilite, pot fi și ele alterate
 
 ## Crearea obiectelor
 
-Obiectele pot fi create în două feluri: prin declararea acestora sau prin construirea lor. Să le trecem în revistă:
+Obiectele pot fi create în două feluri: prin declararea acestora sau prin construirea lor.
 
-1. `const ObiNou = new Object();` la execuție cu `new` se respectă cele patru reguli: (1) crearea obiectului; (2) stabilirea lanțului prototipal; (3) legarea lui `this` la noul obiect; (4) obiectul nou creat este returnat. Sintaxa este echivalentă cu `const newObj = {}`.
+1. Crearea folosind `new`. De exemplu, pentru `const ObiNou = new Object();`, la executarea cu `new` se respectă cele patru reguli: (1) crearea obiectului; (2) stabilirea lanțului prototipal; (3) stabilirea legăturii `this` la noul obiect; (4) obiectul nou creat este returnat. Rezultatul este echivalent cu declarația literală: `const newObj = {}`.
 2. `const ObiNou = Object.create(null);`, unde `prototype` este setat la `null`. Acest model este supranumit *dict pattern*, adică șablonul de creare a unui dicționar.
-3. `const ObiNou = Object.create(Object.prototype);`, fiind echivalent sintaxei `var newObj = {}`.
-4. `const ObiNou = {};`, fiind echivalentă cu sintaxa `new Object()`.
+3. `const ObiNou = Object.create(Object.prototype);`, fiind echivalent cu `const newObj = {}`.
+4. `const ObiNou = {};`, fiind echivalentă cu `new Object()`.
 5. `function x () { return {} }; const y = x();`, returnează un obiect în urma execuției unei funcții.
 
-Toate variantele au același efect: creează un obiect gol.
+Toate variantele au același rezultat: creează un obiect gol.
 
-Atenție, obiectele create folosind `Object.create(null)` nu au constructor. Proprietatea `.constructor` va trimite la funcția la care a fost atașat `prototype` la momentul declarării. Am amintit de șablonul **dict**. Câteva lămuriri sunt necesare. Acum câțiva ani, nu aveam la îndemână obiectele interne `Map` și `Set` pentru a organiza date. În acest scop erau folosite obiectele comune. Programatorii trebuiau să găsească o alternativă pentru a folosi obiectele precum un siloz, mai corect precum un dicționar de chei - valori.
-
-Am zis dicționar pentru că ajută până și sintaxa la asemănarea cu unul (**cuvânt cheie: valoare**). Astfel, folosindu-se `Object.create(null)` puteai crea un obiect fără legătură prototipală. Obiectul rezultat nu era *poluat* cu proprietăți moștenite. Ceea ce rămânea era o structură care putea fi folosită precum un **dicționar**.
+Atenție, obiectele create folosind `Object.create(null)` nu au constructor. Proprietatea `.constructor` va trimite la funcția la care a fost atașat `prototype` la momentul declarării. Am amintit de șablonul **dict**. Câteva lămuriri sunt necesare. Acum câțiva ani, nu aveam la îndemână obiectele interne `Map` și `Set` pentru a organiza date. În acest scop erau folosite obiectele comune, care erau folosite precum dicționare de chei - valori. Sintaxa indică asemănarea cu unul (**cuvânt cheie: valoare**). Astfel, folosindu-se `Object.create(null)` puteai crea un obiect fără legătură prototipală. Obiectul rezultat nu era *poluat* cu proprietăți moștenite. Ceea ce rămânea era o structură care putea fi folosită precum un **dicționar**.
 
 Modalitatea de a crea obiecte prin returnarea dintr-o funcție este și ea des întâlnită. Acest model, șablon, tipar, spune-i cum îți place pentru că englezii îi spun **pattern**, se comportă ca o mică făbricuță de făcut obiecte. De fiecare dată când o astfel de funcție va fi apelată, tot atâtea obiecte vor fi returnate. Pentru exemplificare, vom iniția două colecții: una cu valori pentru care se creează obiectele și a doua în care le stocăm după ce au fost generate de `Făbricuță`.
 
@@ -212,7 +218,7 @@ console.log(VuiaI);
 // { nume: 'Vuia 1', deschidereAripi: 4, 'distanțăMaximă': 0.012 }
 ```
 
-În cazul constructorului de mai sus am folosit parametri cu valori din oficiu. Atunci când un obiect este instanțiat folosindu-se operatorul `new`, se va genera automat o proprietate numită `constructor`, care indică funcția care a generat obiectul. La apelarea cu operatorul `new`, mai întâi se generează obiectul și apoi se execută codul funcției. Execuția constructorului are ca efect atribuirea proprietăților inițiale ale noului obiect. Invocarea unui constructor fără `new` execută codul din corpul funcției fără a crea obiectul. În cazul în care constructorului nu i se pasează niciun argument, parantezele rotunde pot fi omise opțional.
+În cazul constructorului de mai sus am folosit parametri cu valori din oficiu. Atunci când un obiect este instanțiat cu operatorul `new`, se va genera automat o proprietate numită `constructor`, care indică funcția care a generat obiectul. La apelarea cu operatorul `new`, mai întâi se generează obiectul și apoi se execută codul funcției. Execuția constructorului are ca efect atribuirea proprietăților inițiale ale noului obiect. Invocarea unui constructor fără `new` execută codul din corpul funcției fără a crea obiectul. În cazul în care constructorului nu i se pasează niciun argument, parantezele rotunde pot fi omise opțional.
 
 ```javascript
 function Ceva () { this.a = 1 };
@@ -223,7 +229,7 @@ Spunem că instanțiem obiecte de tipul constructorului. Pe cale de consecință
 
 Să ne gândim la o funcție ca la o persoană care privește **bolta celestă** într-o noapte înstelată. Cum ar putea povesti despre toate constelațiile văzute? Cum le-ar putea descrie printr-o singură expresie? Hai, nu e greu, am zis deja... da, da, ai remarcat perfect: **bolta celestă**. Dacă dorim să constrângem la un singur termen care să o identifice, am putea spune foarte simplu **cerul**, nu? Așa este și cuvântul cu înțeles special `this`, care s-ar traduce în română **acesta**. Am putea spune ca tehnică de învățare că `this` este acest obiect în care mă execut eu acum.
 
-Acest cuvânt cheie oferă posibilitatea de a referi proprietăți și metode chiar din interiorul obiectului. Ai putea întreba de ce ar fi nevoie să existe un cuvânt cheie care să facă referirea către membrii obiectului, dacă avem identificatorul obiectului. Răspunsul se leagă de posibilitatea ca un al programator să atribuie obiectul nostru unui alt identificator și în acel moment vei pierde toate referințele interne.
+`This` este referința către proprietăți și metode din interiorul obiectului cu rol de context. Ai putea întreba de ce ar fi nevoie să existe un cuvânt cheie care să facă referirea către membrii obiectului, dacă avem identificatorul obiectului. Răspunsul se leagă de posibilitatea ca într-o etapă a executării codului, obiectului nostru i se atribuie un alt identificator. În acel moment vei pierde toate referințele interne, dacă ai fi folosit identificatorul inițial.
 
 ```javascript
 let obi = {
@@ -239,24 +245,25 @@ obi1.b(); // undefined
 // referința către funcție, corect?
 ```
 
-Alternativa corectă este cea a referirii obiectului din interiorul său folosind `this`. Astfel, la momentul unei evaluări a unei expresii, motorul va ști exact faptul că te referi la el și că acesta trebuie să ofere valorile de lucru. `This` este o legătură cu mediul lexical al obiectului context, este o adresă internă a obiectului care trimite la el însuși fără a folosi identificatorul.
+Alternativa corectă este cea a referirii obiectului din interiorul său folosind `this`. Astfel, la momentul evaluării unei expresii, motorul va ști exact faptul că te referi la obiectul vizat și că acesta trebuie să ofere valorile de lucru. `This` este o legătură cu mediul lexical al obiectului context. Este ca o formulă de adresare a obiectului pentru a trimite la propriile valori fără a folosi identificatorul.
 
 ```javascript
 const obi = {
   a: 1,
-  b: function () {
+  b: function metoda1 () {
     console.log(this.a);// o referință directă
   }
 };
+obi.b(); // 1
 ```
 
-Termenul stabilește și *conectarea* unei funcții cu obiectul și mediul format de acesta la momentul apelării unei funcții. Această conectare la obiectul context este cimentată prin crearea legăturii `this`. Pentru funcția care tocmai și-a început execuția `this` este o proprietate care nu poate fi modificată. Nu poți schimba cine este obiectul referit prin `this`.
+Pentru o funcție care tocmai și-a început execuția, `this` este o proprietate care nu poate fi modificată. Nu poți schimba cine este obiectul referit prin `this`. În cazul de mai sus, funcția cu rol de metodă, va avea acces la mediul lexical al obiectului pentru că, în primul rând a fost definită ca parte a aceluiați mediu lexical, dar mai mult, pentru că a stabilit legătura `this` automat la acel obiect.
 
-Reține că referința `this` este strict legată de *locul* în care a fost apelată funcția, nu de *locul* unde a fost declarată aceasta. Sunt două lucruri distincte. Dacă nu le vei percepe astfel încă de acum, te vei lovi de multe erori și nu vei înțelege în profunzime anumite comportamente.
+Totuși, reține faptul că referința `this` este strict legată de *locul* în care a fost apelată funcția, nu de *locul* unde a fost declarată aceasta. Sunt două lucruri distincte. Dacă nu le vei percepe astfel încă de acum, te vei lovi de multe erori și nu vei înțelege în profunzime anumite comportamente.
 
 #### `this` și constructorii în obiectul global
 
-Am văzut deja cum funcțiile pot returna obiecte, aceasta fiind o modalitate de a le crea. Dar atunci când ai nevoie de mai multă finețe în compunerea viitorului obiect, vei folosi funcțiile din nou în postura de constructori. Un constructor zămislește obiecte numai folosind operatorul `new`. Dacă nu o invoci cu `new`, chiar dacă este declarată cu ținta de a construi obiecte, aceasta se va comporta ca o funcție simplă cu toate consecințele rulări în acest mod. Aceste mecanism comportamental dual este chiar un avantaj oferit de limbaj. Cu ajutorul constructorilor, de fapt alcătuiești semnătura viitoarelor obiecte. Te vei întreba care este mecanismul magic prin care o funcție poate crea un obiect? Nicio magie, aici: pur și simplu, funcțiile sunt și ele obiecte!
+Am văzut deja cum funcțiile pot returna obiecte, aceasta fiind o modalitate de a le crea. Dar atunci când ai nevoie de mai multă finețe în compunerea viitorului obiect, vei folosi funcțiile din nou în postura de constructori. Un constructor zămislește obiecte folosind numai operatorul `new`. Dacă nu o invoci cu `new`, se va comporta ca o funcție simplă cu toate consecințele rulări în acest mod. Acest mecanism comportamental dual este chiar un avantaj oferit de limbaj. Cu ajutorul constructorilor, de fapt alcătuiești semnătura viitoarelor obiecte. Te vei întreba care este mecanismul magic prin care o funcție poate crea un obiect? Nicio magie, aici: pur și simplu, funcțiile sunt și ele obiecte!
 
 ```javascript
 function NumescNave (indicativ, nume) {
@@ -276,7 +283,7 @@ let obiect = new NumescNave('Tiangong-1', "Palatul Celest");
 console.log(obiect);
 ```
 
-Ceea se se remarcă imediat este faptul că rularea funcției `NumescNave` fără `"use strict";` injectează toate valorile precizate prin sintaxa `this.ceva` direct în obiectul global, care în cazul browserului este `window`. De ce? Pentru că la acesta a fost stabilită legătura implicită pentru valoarea lui `this`. În cazul rulării funcției sub `"use strict";`, motorul JavaScript ar fi semnalat o excepție și ar fi afișat: **Exception: TypeError: this is undefined**. Concluzie: injectarea valorilor nu s-ar mai produce.
+Din exemplu, se remarcă imediat faptul că rularea funcției `NumescNave` fără `"use strict";` va rezulta în injectarea tuturor valorilor menționate prin sintaxa `this.ceva`, direct în obiectul global, care în cazul browserului este `window`. De ce? Pentru că la acesta a fost stabilită legătura din oficiu pentru valoarea lui `this`. În cazul rulării funcției sub `"use strict";`, motorul JavaScript ar fi semnalat o excepție și ar fi afișat: **Exception: TypeError: this is undefined**. Concluzie: injectarea valorilor nu s-ar mai produce.
 
 ### Legătura prototipală la constructori
 
@@ -891,13 +898,13 @@ Standardul oferă definiția prototipului: *obiect al cărui proprietăți sunt 
 
 **Moment Zen**: Un obiect este întotdeauna legat de un obiect prototip la ai cărui membri are acces.
 
-Nota atașată definiției este și ea foarte valoroasă pentru lămuririle pe care le aduce:
+Nota atașată definiției din standard este și ea foarte valoroasă pentru lămuririle pe care le aduce:
 
 > Atunci când un constructor creează un obiect, acel obiect va referi automat proprietatea `prototype` a constructorului cu scopul de a rezolva referințele proprietăților. Proprietatea `prototype` a constructorului poate fi referită de expresia `constructor.prototype`. Proprietățile adăugate prototipului unui obiect sunt puse la dispoziția tuturor obiectelor care accesează prototipul prin moștenire. Alternativa este crearea unui nou obiect având un prototip specificat explicit prin utilizarea funcției interne `Object.create`.
 
 Pentru a înțelege cu adevărat natura și specificitățile limbajului de programare JavaScript, trebuie să fie înțeles modul în care proprietățile unui obiect sunt *moștenite* de un altul. Un program JavaScript care rulează este o continuă comunicare între diferite obiecte, fie că acestea sunt cele interne, fie că sunt cele create de noi. Simplificând în tușe foarte groase, creatorii limbajului au dorit o modelare a structurilor de prelucrare a datelor după modul în care lumea reală funcționează: copiii au părinți, iar aceștia moștenesc caracteristicile lor, pe lângă cele care definesc propria persoană.
 
-**Moment Zen**: JavaScript este un limbaj bazat pe moștenire prototipală - prototypal inheritance
+**Moment Zen**: JavaScript este un limbaj bazat pe moștenire prototipală - *prototypal inheritance*.
 
 În alte limbaje de programare așa cum este Java, de exemplu, pentru a genera un obiect ai nevoie de un fragment de cod, care are rolul de plan de construcție pentru viitoarele obiecte. Pur și simplu este o secvență de cod care descrie valorile și tipul lor, fiind proprietățile viitorului obiect.
 
@@ -1104,7 +1111,7 @@ Object.getPrototypeOf(this).numeMetodaDinPrototip.call(this); // varianta ES5
 super.numeMetodaDinPrototip();                                // varianta ES6
 ```
 
-După cum observi, această metodă veche a fost prescurtată la `super`, ceea ce reduce din verbozitate. Pentru cei cu ochiul ager, nu-i așa că aduce nițel a Java? `super` este o referință către obiectul prototip al obiectului de lucru curent. Este echivalentul lui `Object.getPrototypeOf(this)`. Nu uita faptul că `Object.getPrototypeOf()` returnează valoarea din proprietatea internă `[[Prototype]]`. Orice referință la `super` folosește proprietatea internă `[[HomeObject]]` pentru a determina pașii următori cum ar fi `Object.getPrototypeOf()` asupra valorii stocate de `[[HomeObject]]` cu scopul de a obține, de fapt prototipul.
+După cum observi, această metodă veche a fost prescurtată la `super`, ceea ce reduce din verbozitate. Pentru cei cu ochiul ager, nu-i așa că aduce nițel a Java? Termenul `super` este o referință către obiectul prototip al obiectului de lucru curent. Este echivalentul lui `Object.getPrototypeOf(this)`. Nu uita faptul că `Object.getPrototypeOf()` returnează valoarea din proprietatea internă `[[Prototype]]`. Orice referință la `super` folosește proprietatea internă `[[HomeObject]]` pentru a determina pașii următori cum ar fi `Object.getPrototypeOf()` asupra valorii stocate de `[[HomeObject]]` cu scopul de a obține, de fapt prototipul.
 
 ```javascript
 const obi1 = {
@@ -1114,12 +1121,12 @@ const obi1 = {
 };
 const obi2 = {
   faAltceva () {
-    return super.faceva() + ' este oferită aici';
+    return super.faceva() + 'este oferită aici';
   }
 };
 // setezi prototipul lui obi2 la cel a lui obi1.
 Object.setPrototypeOf(obi2, obi1);
-obi2.faAltceva(); // "ce-i returnat din obi1  este oferită aici"
+obi2.faAltceva(); // "ce-i returnat din obi1 este oferită aici"
 ```
 
 ## Clase în JavaScript
