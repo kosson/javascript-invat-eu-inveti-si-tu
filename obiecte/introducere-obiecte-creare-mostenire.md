@@ -631,12 +631,12 @@ Atributele sunt folosite pentru a defini și a explica starea proprietăților u
 
 <img src="ProprietatePentruDate.png" width="300">
 
-| Numele atributului | Valoarea returnată     | Descriere                                                                                   |
-|:------------------ |:---------------------- |:------------------------------------------------------------------------------------------- |
-| `value`            | oricare tip            | Este valoarea obținută prin accesarea proprietății                                          |
-| `writable`         | Boolean                | Dacă `false`, atributul `value` nu va putea fi scris folosind `set`                         |
-| `enumerable`       | Boolean                | Dacă este setat la `true`, proprietatea va putea fi enumerată într-un `for...in`            |
-| `configurable`     | Boolean                | Dacă `false`, nu poți modifica. Poți modifica `value` și setarea lui `writable` la `false`. |
+| Numele atributului | Valoarea returnată | Descriere                                                                                   |
+|:------------------ |:------------------ |:------------------------------------------------------------------------------------------- |
+| `value`            | oricare tip        | Este valoarea obținută prin accesarea proprietății                                          |
+| `writable`         | Boolean            | Dacă `false`, atributul `value` nu va putea fi scris folosind `set`                         |
+| `enumerable`       | Boolean            | Dacă este setat la `true`, proprietatea va putea fi enumerată într-un `for...in`            |
+| `configurable`     | Boolean            | Dacă `false`, nu poți modifica. Poți modifica `value` și setarea lui `writable` la `false`. |
 
 #### Atributele unei proprietăți accessor
 
@@ -1111,7 +1111,7 @@ Object.getPrototypeOf(this).numeMetodaDinPrototip.call(this); // varianta ES5
 super.numeMetodaDinPrototip();                                // varianta ES6
 ```
 
-După cum observi, această metodă veche a fost prescurtată la `super`, ceea ce reduce din verbozitate. Pentru cei cu ochiul ager, nu-i așa că aduce nițel a Java? Termenul `super` este o referință către obiectul prototip al obiectului de lucru curent. Este echivalentul lui `Object.getPrototypeOf(this)`. Nu uita faptul că `Object.getPrototypeOf()` returnează valoarea din proprietatea internă `[[Prototype]]`. Orice referință la `super` folosește proprietatea internă `[[HomeObject]]` pentru a determina pașii următori cum ar fi `Object.getPrototypeOf()` asupra valorii stocate de `[[HomeObject]]` cu scopul de a obține, de fapt prototipul.
+După cum observi, această metodă veche a fost prescurtată la `super`, ceea ce reduce din verbozitate. Pentru cei cu ochiul ager, nu-i așa că aduce nițel a Java? Ter`super` este o referință către obiectul prototip al obiectului de lucru curent. Este echivalentul lui `Object.getPrototypeOf(this)`. Nu uita faptul că `Object.getPrototypeOf()` returnează valoarea din proprietatea internă `[[Prototype]]`. Orice referință la `super` folosește proprietatea internă `[[HomeObject]]` pentru a determina pașii următori cum ar fi `Object.getPrototypeOf()` asupra valorii stocate de `[[HomeObject]]` cu scopul de a obține, de fapt prototipul.
 
 ```javascript
 const obi1 = {
@@ -1140,7 +1140,7 @@ let x = function () {}; // constructor.name -> Function
 let Y = class {}; // constructor.name -> Function
 ```
 
-Ce a rezolvat implementarea claselor odată cu versiunea ES6? Primul și cel mai important lucru este posibilitatea ca o *funcție obiect* să moștenească de la altă *funcție obiect*. Acest comportament a permis ca o funcție constructor să poată moșteni din altă funcție constructor.
+Ce a rezolvat implementarea claselor odată cu versiunea ES6? Primul și cel mai important lucru este posibilitatea ca o *funcție obiect* să moștenească de la altă *funcție obiect*. Acest comportament a permis ca o funcție constructor să poată moșteni din altă funcție constructor. Nu uitați faptul că funcțiile sunt și ele obiecte în JavaScript.
 
 ```javascript
 // Limitările ES5
@@ -1226,9 +1226,9 @@ class Test {
 };
 const unTest = new Test('Salut!');
 // câteva verificări
-console.log(unTest instanceof Test);    // true
-console.log(unTest instanceof Object);  // true
-console.log(typeof Test); // function
+console.log(unTest instanceof Test);     // true
+console.log(unTest instanceof Object);   // true
+console.log(typeof Test);                // function
 console.log(typeof Test.prototype.ecou); // function
 ```
 
@@ -1413,6 +1413,8 @@ class Ceva {
 }
 ```
 
+#### Getteri și setteri
+
 Cu ajutorul accesorilor se poate comunica direct cu proprietățile obiectului instanțiat în baza clasei.
 
 ```javascript
@@ -1420,6 +1422,7 @@ class AccesibilDeAfara {
   constructor (valoare) {
     this.val = valoare;
   };
+  // getter și setter
   get elem () {
     return this.val;
   };
@@ -1464,13 +1467,13 @@ Mai jos este modelul istoric comparat cu ceea ce propune `extends`. Să pornim d
 function Părinte (val) {
   this.statica = val;
 };
-Părinte.prototype.oriDoi = function () {
+Parinte.prototype.oriDoi = function () {
   return this.statica * 2;
 };
 function Copil (deinmultit) {
-  Părinte.call(this, deinmultit);
+  Parinte.call(this, deinmultit);
 };
-Copil.prototype = Object.create( Părinte.prototype, {
+Copil.prototype = Object.create( Parinte.prototype, {
     constructor: {
       value: Copil,
       enumerable: true,
@@ -1509,7 +1512,7 @@ class Copil extends Parinte {
 };
 const inmultire = new Copil(2);
 inmultire.oriDoi(); // 4
-console.log(inmultire instanceof Copil); // true
+console.log(inmultire instanceof Copil);   // true
 console.log(inmultire instanceof Părinte); // true
 ```
 
