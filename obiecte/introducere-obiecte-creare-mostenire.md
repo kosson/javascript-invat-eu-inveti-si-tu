@@ -1339,7 +1339,7 @@ Avion.id();
 
 ### Metodele statice
 
-Metodele statice există doar în corpul clasei și nu pot fi apelabile din obiectele create. O metodă statică este echivalentul adăugării unei metode unei funcții.
+Metodele statice există doar în corpul clasei și nu pot fi apelabile din obiectele create. O metodă statică este echivalentul adăugării unei metode unei funcții. Reține faptul că metodele statice nu sunt disponibile în obiectele instanțiate.
 
 ```javascript
 function Ceva () {};

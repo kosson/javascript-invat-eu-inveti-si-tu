@@ -2,7 +2,7 @@
 
 Aceste funcții au rolul de a prelua o altă funcție pentru a o forța să ia fix un singur argument.
 
-Spre exemplu, folosirea unui map pe un array.
+De exemplu, aplicarea unui `map()` pe un array.
 
 ```javascript
 [10, 20, 30].map(parseFloat); // [10, 20, 30]

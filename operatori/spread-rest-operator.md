@@ -3,7 +3,7 @@
 Acest operator produce confuzie pentru că se numește diferit în funcție de ce este pus să facă.
 Este un operator nou introdus de ECMAScript 2015, fiind inspirat de CoffeeScript (operatorul *splats*), care la rândul său a fost adoptat din Ruby. Acest operator foarte util funcționează pentru toate obiectele care au implementat *protocolul de iterare*. Deci, tot ce este iterabil, poate fi folosit cu acest operator. Șirurile de caractere și array-urile sunt iterabile, adică, intern au implementat protocolul de iterare.
 
-Exemplul cel mai facil pentru o mică încălzire este să iei un șir de caractere și să-l transformi într-un array al caracterelor sale.
+Exemplul cel mai facil pentru o mică încălzire este să iei un șir de caractere și să-l transformi într-un array al caracterelor sale folosind operatorul în rolul lor de spread.
 
 ```javascript
 var sir = "Am ceva";
@@ -15,7 +15,7 @@ var arr2 = sir.split("");
 
 ## Parametrii `rest`
 
-Lista parametrilor unei funcții este într-un context (*assignment context*) care permite atribuirea valorilor venite prin argumentele pasate funcției. Operatorul `...` folosit într-un context de atribuire, strânge valorile într-un array. Dacă folosești un `rest parameter` împreună cu alte argumente care vor fi pasate individual, asigură-te că cele individuale stau primele, iar `rest`-ul este la final.
+Lista parametrilor unei funcții se află într-un context (*assignment context*), care atribuie valori venite la momentul invocării funcției. Operatorul `...` folosit într-un context de atribuire, strânge valorile într-un array. Dacă folosești un `rest parameter` împreună cu alte argumente care vor fi pasate individual, asigură-te că cele individuale stau primele, iar operatorul este la final.
 
 ```javascript
 function faCeva (a, ...argumentele) {
@@ -28,7 +28,8 @@ Cunoscând deja faptul că și obiectul `arguments` colectează toate argumentel
 
 ## Operatorul `spread`
 
-Operatorul spread permite „desfacerea” (*spread* în limba română înseamnă a desface) unui array în elementele sale componente luate independent pentru a fi pasate unei funcții drept argumente. Acest operator folosește protocolul de iterare. Obiectul `arguments` are deja implementat protocolul de iterare în ECMAScript 2015.
+Operatorul spread permite *desfacerea* (*spread*) unui array în elementele sale componente care mai apoi sunt introduse ca proprietăți ale obiectului în al cărui context este invocat. Poți spune că folosești operatorul spread pentru a *extrage* valorile dintr-un array sau un obiect.
+De exemplu, poate fi utilizat în headerul unei funcții pentru a introduce valorile unui array sau obiect ca argumente ale funcției. Acest operator folosește protocolul de iterare. Obiectul `arguments` are deja implementat protocolul de iterare în ECMAScript 2015.
 
 ```javascript
 [..."012345"]
@@ -44,7 +45,7 @@ let birou = ['lampă', ...obiecte, 'scaun', 'tușieră'];
 birou; // Array [ "lampă", "pixuri", "creioane", "scaun", "tușieră" ]
 ```
 
-Permite transformarea unor obiecte array-like precum `arguments` și `NodeList` în array-uri adevărate. Anterior existenței acestui operator, aceste transformări se făceau prin aplicarea secvențe `[].slice` cu un `call` pe obiect:
+Permite transformarea unor obiecte array-like precum `arguments` și `NodeList` în array-uri adevărate. Anterior existenței acestui operator, aceste transformări se făceau prin aplicarea secvenței `[].slice` cu un `call` pe obiect:
 
 ```javascript
 Array.prototype.slice.call(obi);
@@ -78,16 +79,9 @@ let abcde = [].concat(ab, bc, ["e"]);
 abcde = [...ab, ...bc, 'e'];
 ```
 
-## Introducerea elementelor unui array printre elementele unuia existent
+## Copierea array-urilor și a obiectelor
 
-```javascript
-let arrIntrodus = [1, 2, 3];
-let arrGazda = [x, ...arrIntrodus, y, z];
-```
-
-## Copierea unui array
-
-În versiunile anterioare, acest lucru se obținea folosind `[].slice()`.
+În versiunile anterioare, acest lucru se obținea folosind tot `[].slice()`.
 
 ```javascript
 let arr1 = [1, 2, 3];
@@ -95,6 +89,19 @@ let arr2 = [...arr1]; // gata copia
 ```
 
 Această copiere în cazul elementelor care sunt obiecte, se face prin referință.
+Atunci când este nevoie, poți face și o copie a unui obiect.
+
+```javascript
+let obi = {
+  a: 1,
+  b: 2
+};
+let oby = {...obi};
+console.log(oby); // Object { a: 1, b: 2 }
+let o = [...obi]; // TypeError: obi is not iterable
+```
+
+Trebuie observat faptul că nu poți introduce proprietățile unui obiect ca elemente ale unui array.
 
 ## Pasarea valorilor unui array drept argumente
 

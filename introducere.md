@@ -260,7 +260,7 @@ Să analizăm împreună ce conțin elementele de intrare.
 
 ### Cuvintele cheie
 
-ECMAScript are un set de **cuvinte rezervate** din limba engleză, care nu pot fi folosite în propriile progrmae. Cuvintele cheie sunt un tip de **atomi lexicali** și se scriu întotdeauna fără majuscule.
+ECMAScript are un set de **cuvinte rezervate** din limba engleză, care nu pot fi folosite în propriile programe. Cuvintele cheie sunt un tip de **atomi lexicali** și se scriu întotdeauna fără majuscule.
 
 Le vom enumera aici cu traducerea lor pentru a vă familiariza la un prim contact: `break` (întrerupe cu sensul de *ieși din execuție*), `do` (fă cu sensul de *continuă ce faci*), `in` (în cu sensul *din*), `typeof` (*de tipul*), `case` (cazul cu sensul *în cazul*), `else` (altfel cu sensul de *în caz contrar*), `instanceof` (*instanță a lui*), `var` (*variabilă*), `catch` (*prinde*), `export` (*exportă*), `new` (nou cu sensul de *instanțiază un nou obiect*), `void` (golește cu sensul *golește de valoare*), `class` (*clasă*), `extends` (*extinde*), `return` (*returnează*), `while` (*cât timp*), `const` (*constantă*), `finally` (*încheie*), `super` (super cu sensul *caută în părinte*), `with` (*cu*), `continue` (*continuă*), `for` (pentru cu sensul *evaluând următoarea/le expresie/ii pentru fiecare element din*), `switch` (schimbă cu sensul *mergi pe ramura*), `yield` (produ cu sensul *dă-mi valori*), `debugger` (depanare cu sensul *activează depanatorul*), `function` (*funcție*), `this` (acesta cu sensul de *obiectul necesar drept context*), `default` (*inițial*), `if` (*dacă*), `throw` (aruncă cu sensul de a *scoate la lumină erorile*), `delete` (*șterge*), `import` (*importă*), `try` (*încearcă*), `await` (așteaptă cu sensul de *în așteptare*).
 
