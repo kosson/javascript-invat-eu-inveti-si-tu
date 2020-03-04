@@ -221,7 +221,7 @@ rezolvareLaCerere().then((valoare) => {
 
 ```
 
-Pentru a vedea la lucru promisiunile într-un posibil exemplu viabil pentru activitatea practică de lucru cu datele, vom apela funcția specializată `fetch()`, care este deja oferită atât de browser, cât și de Node.js. Ceea ce vom face este să aducem o înregistrare din setul pus la dispoziție de API-ul Europeana.
+Pentru a vedea la lucru promisiunile într-un posibil exemplu viabil pentru activitatea practică de lucru cu datele, vom apela funcția specializată `fetch()`, care este deja oferită atât de browser, cât și de Node.js. Ceea ce vom face este să aducem o înregistrare din setul pus la dispoziție de API-ul Europeana.eu.
 
 ```javascript
 // înlocuiește cheia API din link, cu una personală

@@ -7,7 +7,7 @@ async function facCeva () {};
 async () => console.log;
 ```
 
-**Moment Zen**: Toate valorile returnate de o funcție `async` sunt împachetate în `Promise.resolve()`.
+**Moment Zen**: Valoarea returnată de o funcție `async` este împachetată în `Promise.resolve()`.
 
 Apariția lor marchează o nouă paradigmă de lucru cu promisiunile.
 
@@ -47,6 +47,10 @@ async function sarcina () {
 sarcina().then(mesaj => console.log(mesaj));
 ```
 
+Înțelegând aceste aspecte, ajungem la concluzia că avantajul pe care îl oferă funcțiile `async`/`await` este legat de posibilitatea de a introduce o ordine în care să apară rezultatele datorită întreruperii execuției funcției și implicit a soluționării celorlalte prin efectul lui `await`, chiar dacă acestea sunt extrase într-o manieră asicronă. Pur și simplu oferă posibilitatea de a ordona succesiunea operațiunilor similar rulării sincrone a codului.
+
+Luând în considerare și cunoștințele de la promisiuni, ia-ți un moment de reflecție pentru a decide în codul pe care îl scrii care este cea mai bună soluție de a soluționa promisiunile: secvențial, folosind `async`/`await`, paralel, folosind `Promise.all` sau prima din toate cele evaluate folosind `Promise.race`.
+
 ## Declarare
 
 În ceea ce privește sintaxa, vor fi folosite în tandem două cuvinte cheie: `async` în deschiderea declarației și `await` în corpul funcției.
@@ -79,7 +83,9 @@ class Ceva {
 
 ## Operatorul `await`
 
-Funcțiile `async` își vor întrerupe execuția ori de câte ori întâlnesc `await` în corp.
+Funcțiile `async` își vor întrerupe execuția ori de câte ori întâlnesc `await` în corp. Cuvântul cheie `await` își produce efectele doar dacă este folosit în corpul funcțiilor `await`.
+
+Operatorul `await` expune o deficiență a acestor funcții. Ceea ce se petrece atunci când îl folosim este oprirea din execuție a întregului cod până când promisiunile sunt **rezolvate**. Aceasta este o caracteristică de execuție pe care o întâlnim la rularea codului sincron. Chiar dacă alte sarcini își urmează cursul, propriul cod este blocat în execuție.
 
 ## Exemplu
 
@@ -155,3 +161,4 @@ const [val1, val2, val3] = await Promise.all(promise1(), promise2(), promise3())
 - [7 Reasons Why JavaScript Async/Await Is Better Than Plain Promises (Tutorial)](https://dev.to/gafi/7-reasons-to-always-use-async-await-over-plain-promises-tutorial-4ej9)
 - [Async functions - making promises friendly | Google Developers](https://developers.google.com/web/fundamentals/primers/async-functions)
 - [Easier Node.js streams via async iteration](https://2ality.com/2019/11/nodejs-streams-async-iteration.html)
+- [Making asynchronous programming easier with async and await | MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await)

@@ -2,7 +2,7 @@
 
 Acest enunț este străbunicul instrumentelor de prelucrare a datelor sofisticate de astăzi.
 
-Spre deosebire de `while`, evaluarea expresiei care determină execuția codului, se face la final. Acest lucru permite executare cel puțin o dată a instrucțiunilor. Unele lucrări spun despre `do` că este *o structură repetitivă condiționată posterior* \[1] spre deosebire de `while`, care este *o structură repetitivă condiționată anterior*.
+Spre deosebire de `while`, evaluarea expresiei care determină execuția codului, se face la final. Acest lucru permite executare cel puțin o dată a instrucțiunilor. Unele lucrări spun despre `do` că este *o structură repetitivă condiționată posterior* [1] spre deosebire de `while`, care este *o structură repetitivă condiționată anterior*.
 
 ```javascript
 var oValoare = ~~(Math.random() * 10);
@@ -49,4 +49,4 @@ Privind codul scris dincolo de explicațiile oferite în comentarii, se observă
 
 ## Referințe
 
-\[1] Miloșescu, Mariana. Informatică: profil real: matematică informatică, intensiv informatică: manualul pentru clasa a IX-a - Ed. a 12-a. - București: Editura Didactică și Pedagogică, 2016, 2016, pg. 47
+[1] Miloșescu, Mariana. Informatică: profil real: matematică informatică, intensiv informatică: manualul pentru clasa a IX-a - Ed. a 12-a. - București: Editura Didactică și Pedagogică, 2016, 2016, pg. 47

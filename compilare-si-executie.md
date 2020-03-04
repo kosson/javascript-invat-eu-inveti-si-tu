@@ -12,7 +12,7 @@ Acum lucrează la primul computer comercial, *UNIVAC I* și conduce departamentu
 
 În acel moment, un compilator *traducea limbajul matematic în cod mașină*. Doamna Grace sau *bunica COBOL* așa cum este alintată, argumenta necesitatea ca persoanele care manipulează date, să nu fie forțate să manipuleze simboluri așa cum o fac matematicienii. Dorința sa a fost să fie posibilă folosirea de *enunțuri în engleză*. Acestea au fost începuturile compilatoarelor și a limbajului de programare COBOL (COmmon Business-Oriented Language).
 
-Copilatoarele preiau codul sursă redactat într-un limbaj de programare și îl transformă în **cod obiect** pe care procesorul îl înțelegere. Codul obiect se execută direct și este înțeles de mașină.
+Copilatoarele preiau codul sursă redactat într-un limbaj de programare și îl transformă în **cod obiect** pe care procesorul îl înțelege, fiind executat direct de mașină.
 
 ## Compilarea în JavaScript
 
@@ -115,9 +115,9 @@ Dacă există declarații precum `a = 1;` fără ca `a` să fie declarată varia
 
 Invocarea unei funcții conduce la alocarea unei zone de memorie numită *heap memory* în care se pregătește un context de execuție pentru funcție.
 
-Pentru că JavaScript are un singur fir de execuție, trebuie reținut faptul că de fiecare dată când o funcție este invocată, contextul de execuție a celui care a invocat funcția la momentul acela este înghețat urmând să se creeze un altul pentru evaluarea noii funcții. După ce funcția invocată și-a încheiat execuția, contextul de execuție a funcției care a făcut apelul este restaurat.
+Pentru că JavaScript are un singur fir de execuție, trebuie reținut faptul că de fiecare dată când o funcție este invocată, contextul de execuție este **înghețat** la forma în care era când a fost apelată funcția. Dacă această funcție rulează cod asincron în corp și are nevoie de mai mult timp să termine sau s-a apleat altă funcție din corp, pentru noua funcție apelată, se va crea un context de execuție nou-nouț necesar propriei execuții. Abia după ce funcția lansată între timp și-a încheiat propria execuție, contextul de execuție a primei este restaurat. Puteți să vă imaginați aceast mod de abordare a gestionării apelurilor precum o **stivă** în care cel mai recent apel este primul, va fi rezolvat și va dispărea totodată scoțînd la iveală apelul care aștepta cuminte dedesubt. Acest comportament ***sincron*** este folositor pentru programe care nu au nevoie să facă calcule intense sau să aducă resurse de la distanță. În cazul ultimelor, se va adopta o strategie asincronă pentru a nu bloca stiva apelurilor cu unul care are nevoie de timp mai îndelungat.
 
-Evidența apelurilor și a operațiunilor privind înghețarea și restaurarea contextelor de execuție este făcută de **call stack**. Tradus în română, *call stack* este **stiva de apeluri**. Acest mecanism de evidență a ceea ce se execută la un moment dat este prezent pentru a fi inspectat în *Debugger*. Pentru fiecare funcție, motorul creează un obiect care *ține minte* toate referințele necesare executării. Acest lucru este absolut necesar pentru realizarea de *closure*-uri. Motorul JavaScript (cazul V8) îl numește **obiect context**.
+Evidența apelurilor și a operațiunilor privind înghețarea și restaurarea contextelor de execuție este gestionată de **call stack**. Putem afirma că **firul de execuție** unic al JavaScript este caracterizat de existența unei stive FIFO - First In, First Out (*Primul intrat, primul ieșit*) - **call stack**. Tradus în română, *call stack* este **stiva de apeluri**. Acest mecanism de evidență a ceea ce se execută la un moment dat este prezent pentru a fi inspectat în *Debugger*. Pentru fiecare funcție, motorul creează un obiect care *ține minte* toate referințele necesare execuției. Acest lucru este absolut necesar pentru realizarea de *closure*-uri. Motorul JavaScript (cazul V8) îl numește **obiect context**. În momentul în care dintr-o eroare de programare (recursivitate prost aplicată, de exemplu), stiva apelurilor se umple și depășește spațiul de memorie alocat, spunem că avem un **stack overflow**.
 
 La invocarea funcției se creează un nou obiect al mediului lexical, care moștenește proprietăți din cel care era deja format la momentul declarării.
 
@@ -127,15 +127,15 @@ La invocarea funcției se creează un nou obiect al mediului lexical, care moșt
 
 > Contextul de execuție este un mecanism pentru a ține evidența evaluării codului la momentul în care acesta este rulat. În oricare moment există cel mult un context de execuție pentru fiecare agent care rulează cod. Acesta este cunoscut a fi *running execution context*. [ECMAScript® 2017 Language Specification (ECMA-262, 8th edition, June 2017). 8.3 Execution Contexts](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-execution-contexts)
 
-Am stabilit în acest moment că la momentul în care codul este evaluat, se va crea un **context de execuție** pentru un anumit fragment de cod. Nu putem avea mai mult de un **context de execuție în derulare** (*running execution context*), pentru că JavaScript are la dispoziție un singur fir de execuție.
+Am stabilit în acest moment că la momentul în care codul este evaluat, se va crea un **context de execuție** pentru un anumit fragment de cod. Nu putem avea mai mult de un **context de execuție în derulare** (*running execution context*), pentru că JavaScript are la dispoziție un singur fir de execuție (o singură stivă).
 
 **Spune standardul**:
 
 > Stiva executărilor contextelor este folosită pentru a urmări contextele de execuție. Contextul de execuție în derulare este întotdeauna primul element din stivă. De fiecare dată când este transferat controlul de la un cod executabil asociat contextului de execuție în derulare către unui cod executabil care nu este asociat cu acest context de execuție, se creează un nou context de execuție. Contextul de execuție nou este împins în capul stivei și devine noul context de execuție în derulare. [ECMAScript® 2017 Language Specification (ECMA-262, 8th edition, June 2017). 8.3 Execution Contexts](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-execution-contexts)
 
-Un context de execuție conține **tot** ce este necesar unui **agent** pentru a urmări evoluția execuției. Lămurim faptul că un **agent** în litera standardului este un executant al codului care pune la dispoziție stiva contextelor de execuție, un set al contextelor, un context de execuție în derulare, un set de cozi ale joburilor, o înregistrare de evidență necesară agentului și, cel mai important, un **fir de execuție**.
+Un **context de execuție** (numit și **runtime environment**) conține **tot** ce este necesar unui **agent** pentru a urmări evoluția execuției. Lămurim faptul că un **agent** în litera standardului este un executant al codului, care pune la dispoziție stiva contextelor de execuție, un set al contextelor, un context de execuție în derulare, un set de cozi ale joburilor, o înregistrare de evidență necesară agentului și, cel mai important, un **fir de execuție**.
 
-Standardul spune că vorbim propriu-zis de urmărirea unei stări de rulare a codului. Tot înseamnă orice este caracteristic motorului care implementează ECMAScript și este necesar urmăririi execuției codului.
+Standardul spune că vorbim propriu-zis de urmărirea unei stări de rulare a codului. Tot înseamnă orice este caracteristic motorului care implementează ECMAScript pentru a crea un runtime environment, adică *tot* ce este necesar urmăririi execuției codului.
 
 O stare are cel puțin următoarele componente pe care motorul le urmărește:
 
@@ -170,7 +170,7 @@ Conține:
 -   `this`,
 -   stiva variabilelor,
 -   Outer environment (pentru cazul funcțiilor. Global env nu are outer env),
--   codul javascript.
+-   codul JavaScript.
 
 Atenție, toate acestea sunt create de motorul JavaScript mai puțin codul sursă.
 

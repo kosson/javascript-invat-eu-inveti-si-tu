@@ -2,7 +2,7 @@
 
 Imaginează-ți *Oceanul planetar*. Acesta este obiectul nostru global. Să ne închipuim că orașele cu porturi sunt obiecte. Funcțiile sunt nave care prelucrează și transportă valori. Navele sunt la rândul lor obiecte având fiecare un nume și un pavilion sub care sunt înregistrate. De fiecare dată când intră într-un port, se leagă la o bază de date a portului disponibilă navei. Conexiunea realizată la baza de date a portului să o numim `this`.
 
-Această relație trebuie lămurită pentru că, de fapt, o funcție întodeaunea rulează în contextul unui obiect. Cuvântul cheie `this` identifică o legătură cu mediul lexical al contextului de execuție pentru o funcție la momentul execuției sale. Cuvântul crucial este **legătură**. Legătura se realizează doar la momentul executării funcției!
+Această relație trebuie lămurită pentru că, de fapt, o funcție întotdeaunea rulează în contextul unui obiect. Chiar textul standardului care reglementează Document Object Model numește `this` drept  **obiectul context**.Cuvântul cheie `this` identifică o legătură cu mediul lexical al contextului de execuție pentru o funcție la momentul execuției sale. Cuvântul crucial este **legătură**. Legătura se realizează doar la momentul executării funcției!
 
 **Moment ZEN**: O funcție trebuie să fie în execuție pentru a realiza o legătură `this`.
 
@@ -510,6 +510,7 @@ this.array.forEach(function (el) => {
 
 ## Resurse:
 
+- [DOM Living Standard](https://dom.spec.whatwg.org/#context-object)
 -   [MDN Function.prototype.bind()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
 -   [MDN this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
 -   [Crockford on Javascript - Functions](https://www.youtube.com/watch?v=lVnnxfdLdlM)
