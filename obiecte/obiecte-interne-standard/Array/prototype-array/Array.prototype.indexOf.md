@@ -12,7 +12,7 @@ array.indexOf(2, -1); // -1
 array.indexOf(2, -3); // 0
 ```
 
-## Caută și elimină elementul acolo unde apare și se repetă.
+## Elimnarea elementelor repetitive
 
 ```javascript
 const indices = [];
@@ -29,6 +29,16 @@ while (idx != -1) {
 };
 
 console.log(indices); // [0, 2, 4]
+```
+
+O variantă mai simplă este în combinație cu `filter()`. Metoda `index()` returnează **primul index** găsit pentru un element și vor trece doar elementele a căror index are aceeași valoare cu indexul elementului în cauză.
+
+```javascript
+var x = [1, 2, 2, 4];
+x.filter((item, index) => {
+  console.log(item, index,x.indexOf(item), x.indexOf(item) == index);
+  return x.indexOf(item) == index;
+});
 ```
 
 ## Căutarea unui element în array, iar dacă nu există, introducerea acestuia

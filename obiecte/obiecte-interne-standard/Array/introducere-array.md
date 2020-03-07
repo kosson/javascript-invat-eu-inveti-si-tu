@@ -2,7 +2,9 @@
 
 Este un obiect intern care are și rol de constructor. În literatura românească de specialitate veți întâlni adesea denumirea de *tablou*. Pentru că este mai simplu și în obișnuința multor programatori români să folosească termenul din engleză ca neologism acceptat de practica curentă, vom folosi și în acest material neologismul **array**. În comunitatea profesională array-ul mai este întâlnit și sub denumirea de *listă* sau *vector*.
 
-Array-urile sunt o bornă centrală a programării, indiferent de limbaj. Acestea permit stocarea temporară a unor valori într-o formă ușor accesibilă folosind indecși, dar cel mai important aspect este bogăția metodelor puse la dispoziție de obiectul intern `Array` pentru a prelucra, aranja, rearanja și filtra elementele conținute de array-uri. Ori de câte ori veți lucra cu valori primare veți folosi cu siguranță array-urile. Array-urile mai pot fi folosite și ca structuri de *depozitare* a obiectelor și funcțiilor. De exemplu, poți constitui un registru pentru elemente DOM cărora le asociezi câte un un eveniment sau alte funcționalități oferite de API-ul browserului. Array-ul este cel mai des întâlnit mecanism de a *prelua* date care vin ca efect a evaluării unei funcții sau a unei metode.
+Array-urile sunt o bornă centrală a programării, indiferent de limbaj. Acestea permit stocarea temporară a unor valori într-o formă ușor accesibilă folosind indecși, dar cel mai important aspect este bogăția metodelor puse la dispoziție de obiectul intern `Array` pentru a prelucra, aranja, rearanja și filtra elementele conținute de array-uri.
+
+Array-urile mai pot fi folosite și ca structuri de *depozitare* a obiectelor și funcțiilor. De exemplu, poți constitui un registru pentru elemente DOM cărora le asociezi câte un un eveniment sau alte funcționalități oferite de API-ul browserului. Array-ul este cel mai des întâlnit mecanism de a *prelua* date care vin ca efect a evaluării unei funcții sau a unei metode.
 
 Această structură capabilă să țină valori este cea mai utilizată atunci când suntem confruntați cu nevoia de a prelucra fragmente de date sau pentru a *memora* temporar valorile utile unui anumit context în care se execută codul.
 
@@ -693,6 +695,46 @@ console.log(x, restop); // 1 și Array [ 2, 3 ]
 
 Tot ce generează un array, folosindu-se această sintaxă, se poate transforma în legături la identificatori, adică valorile array-ului se pot asigna unor variabile ce sunt elementele unui alt array.
 
+## Aplicarea teroriei seturilor (mulțimi)
+
+### Uniunea A ⋃ B
+
+```javascript
+let A = [1,3,7];
+let B = [3,1,5];
+let uniune = [...new Set([...A, ...B])];
+// [ 1, 3 ]
+```
+
+### Intersecția A ⋂ B
+
+```javascript
+let A = [1,3,7];
+let B = [3,1,5];
+let intersecție = A.filter(elementComun => B.includes(elementComun));
+// [ 1, 3 ]
+```
+
+### Diferența (complementul) A \ B
+
+Complementul relativ al lui A în B. Mai simplu, privind mulțimea A și mulțimea B, după ce ai eliminat elementele comune celor două mulțimi, complementul este ce-a mai rămas din A.
+
+```javascript
+let A = [1,3,7];
+let B = [3,1,5];
+let diferența = A.filter(elementA => !B.includes(elementA));
+// [ 7 ]
+```
+
+### Diferența simetrică A ∆ B
+
+```javascript
+let A = [1,3,7];
+let B = [3,1,5];
+let diferențaSimetrică = A.filter(elementA => !B.includes(elementA)).concat(B.filter(elementB => !A.includes(elementB)));
+// [ 7, 5 ]
+```
+
 ## Curiozități
 
 ### [] egal cu ![]
@@ -727,4 +769,6 @@ Explicații:
 
 ## Resurse
 
--   [MDN Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array?redirectlocale=en-US&redirectslug=JavaScript%2FReference%2FGlobal_Objects%2FArray)
+- [MDN Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array?redirectlocale=en-US&redirectslug=JavaScript%2FReference%2FGlobal_Objects%2FArray)
+- [ES6 — Set vs Array — What and when?, Maya Shavin | Medium](https://medium.com/front-end-weekly/es6-set-vs-array-what-and-when-efc055655e1a)
+- [Array intersection, difference and union in ES6, Alvaro Saburido | Medium]()
