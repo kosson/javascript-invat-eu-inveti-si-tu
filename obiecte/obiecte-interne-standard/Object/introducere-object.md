@@ -1,12 +1,12 @@
 # Object
 
 Este un obiect intern al Javascript caracterizat de standard ca fiind unul dintre cele fundamentale. Poate fi folosit pentru crearea de obiecte atunci când este nevoie de setarea unor detalii fine ale proprietăților acestora.
-Creează un wrapper (un obiect ambalaj) pentru un obiect atunci când este instanțiat prin apelarea cu `new` a constructorului `Object`. Parafrazând o zicală românească, am putea spune că în acest moment *haina face omul*. Acest wrapper spune că lucrăm cu un obiect.
+Creează un *wrapper*, un *ambalaj* unui obiect atunci când este instanțiat prin apelarea cu `new` a constructorului `Object`. Parafrazând o zicală românească, am putea spune că în acest moment *haina face omul*. Acest wrapper spune că lucrăm cu un obiect.
 
 ## Mantre
 
 -   `Object` este un constructor.
--   `Object` creează un wrapper pentru o anumită valoare. Dacă valoarea este `null` sau `undefined`, `Object` va crea și returna un obiect gol.
+-   `Object` creează un *wrapper* pentru o anumită valoare. Dacă valoarea este `null` sau `undefined`, `Object` va crea și returna un obiect gol.
 -   Dacă valoarea pasată nu este `null` sau `undefined`, `Object` va returna un obiect de tipul care corespunde valorii oferite.
 -   Dacă valoarea este deja un obiect, va fi returnată valoarea.
 -   Obiectul window are o metodă numită Object \[ function Object() ]. Motorul Javascript construiește automat metoda Obiect în obiectul window (`window.Object` returnează function Object()).

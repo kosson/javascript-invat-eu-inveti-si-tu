@@ -4,16 +4,16 @@ Acești operatori investighează caracteristici importante ale obiectelor și re
 
 ## Operatorul `in`
 
-Dacă ești la început și încă nu știi nimic despre obiecte, poți le percepi precum colecții de date care pot fi accesate prin sintaxa cu punct. Prin acest operator testezi dacă o valoare există într-un obiect. Încă nu am ajuns la obiecte, dar vom parcurge acești operatori pentru a-i avea tratați unitar. Poți reveni în momentul în care deslușind tainele obiectelor vei găsi exemple îi utilizează.
+Dacă ești la început și încă nu știi nimic despre obiecte, poți le percepi precum colecții de date care pot fi accesate prin sintaxa cu punct. Prin acest operator testezi dacă o valoare există într-un obiect. Încă nu am ajuns la obiecte, dar vom parcurge acești operatori pentru a-i trata unitar. Poți reveni în momentul în care deslușind tainele obiectelor vei găsi exemple care îi utilizează.
 
-Revenind, în cazul array-urilor vorbim despre căutarea unui index cu valoarea specificată. Reține următoarea nuanță aici: căutăm dacă există indexul, nu căutăm valoarea asociată acestuia.
+Revenind, în cazul array-urilor vorbim despre căutarea unui index cu valoarea specificată. Reține următoarea nuanță aici: **căutăm dacă există indexul, nu valoarea asociată acestuia**.
 
 ```javascript
 2 in ['ceva', true, 3, 4]; // true
 'length' in ['a', 1, true];// true
 ```
 
-Interesant este că și `length` va returna `true`. De ce? Pentru că este o proprietate a obiectului intern `Array` la care ți s-a oferit acces prin moștenir. Trebuie precizat că de îndată ce declari un array, valoarea acestuia este *învelită* în obiectul asociat, ceea ce are ca efect lucrul cu un obiect array, care moștenește toate proprietățile obiectului intern `Array`, printre acestea fiind și `length`. Da, acesta va testa dacă există și îl va detecta pentru că, de fapt, a fost moștenit.
+Interesant este că și `length` va returna `true`. De ce? Pentru că este o proprietate a obiectului intern `Array` la care ți s-a oferit acces prin moștenire. Trebuie precizat că de îndată ce declari un array, valoarea acestuia este *învelită* în obiectul asociat, ceea ce are ca efect lucrul cu un obiect array, care moștenește toate proprietățile obiectului intern `Array`, printre acestea fiind și `length`. Da, acesta va testa dacă există și îl va detecta pentru că, de fapt, a fost moștenit.
 
 În cazul obiectelor se poate folosi `in` pentru a căuta după numele cheii.
 

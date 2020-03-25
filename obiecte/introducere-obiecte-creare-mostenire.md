@@ -2,11 +2,11 @@
 
 ## Familiarizare cu obiectele
 
-Standardul spune că **un obiect este un membru al tipului built-in Object** al limbajului. Din punct de vedere al taxonomiei, standardul este clar: *un tip a lui `Object`, care este o entitate internă limbajului nostru*. Însă pentru a realiza natura obiectelor, cităm standardul pentru următoarea lămurire:
+Standardul spune că **un obiect este un membru al tipului built-in Object** al limbajului. Din punct de vedere al taxonomiei, standardul este clar: *un tip a lui `Object`, care este o entitate internă limbajului nostru*. Însă pentru a realiza <u>natura</u> obiectelor, cităm standardul pentru următoarea lămurire:
 
 > ECMAScript este bazat pe obiecte: limbajul de bază și toate funcționalitățile sunt oferite de obiecte, iar un program ECMAScript este un ciorchine de obiecte care comunică.
 
-Obiectele sunt și ele valori. La aceste valori se ajunge printr-o **referință** (către o locație în memorie unde este stocat), în contrast cu primitivele care sunt chiar valoarea. Obiectele ocupă o zonă de memorie și nu pot fi copiate în alte zone de memorie. Zona de memorie în care sunt scrise valorile unui program Javascript se numește **heap** (lb. rom. *maldăr*). Pur și simplu, sunt unice, așa cum o țară este unică în lume cu relieful, obiceiurile și sistemul de valori. Pentru a trimite o scrisoare cuiva, trebuie să cunoști țara, orașul, strada și numele persoanei. Este și cazul obiectelor. Pentru a folosi acea zonă de memorie ocupată de obiect, vom folosi referința sau referințele către acesta.
+Obiectele sunt și ele valori. La aceste valori se ajunge printr-o **referință** (către o locație în memorie unde este stocat), în contrast cu primitivele care sunt chiar valoarea. Obiectele ocupă o zonă de memorie și nu pot fi copiate în alte zone de memorie. Zona de memorie în care sunt scrise valorile unui program JavaScript se numește **heap** (lb. rom. *maldăr*). Pur și simplu, sunt unice, așa cum o țară este unică în lume cu relieful, obiceiurile și sistemul de valori. Pentru a trimite o scrisoare cuiva, trebuie să cunoști țara, orașul, strada și numele persoanei. Este și cazul obiectelor. Pentru a folosi acea zonă de memorie ocupată de obiect, vom folosi referința sau referințele către acesta.
 
 Privind la modul în care sunt organizate datele într-un obiect, vom remarca că acestea sunt colecții de proprietăți identificabile printr-un nume, fiind strânse împreună fără a avea o ordine internă. Este ca și cum ai strânge jucării de același tip într-o cutie după o zi de distracție. Obiectele sunt structuri de date dinamice ale căror proprietăți se modifică. Atunci când acest lucru se întâmplă spunem că obiectul *își modifică starea*.
 
