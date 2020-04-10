@@ -82,7 +82,7 @@ for (let elem of obi) {
 }
 ```
 
-O astfel de încercare se va solda cu o eroare: `TypeError: obi is not iterable`. Ce-i de făcut? Cum am putea parcurge totuși o astfel de structură? Ne vom folosi de destructurare și de capacitatea metodei `Object.entries(obiect))` de a genera array-uri de array-uri, care vor putea fi iterate. Array-urile permit iterarea.
+O astfel de încercare se va solda cu o eroare: `TypeError: obi is not iterable`. Ce-i de făcut? Cum am putea parcurge totuși o astfel de structură? Ne vom folosi de destructurare și de capacitatea metodei `Object.entries(obiect))` de a genera array-uri de array-uri (în Python *tuples*), care vor putea fi iterate. Array-urile permit iterarea. Cu ajutorul destructurării (*destructuring assignment*), care este un mod de lucru specific pentru array-uri cu scopul de a obține valori din acestea și a le atribui unor variabile, vom obține perechi de variabile cu valorile fiecărui array generat de `Object.entries`.
 
 ```javascript
 for(let [cheie, valoare] of Object.entries(obi)){
@@ -92,7 +92,9 @@ for(let [cheie, valoare] of Object.entries(obi)){
 // b ceva
 ```
 
-După cum se observă am folosit **destructurarea** pentru a face declararea variabilelor. Fii foarte atent căci metodele vor fi reduse la `null` prin acțiunea lui `Object.entries(obi)`. Pentru că ești un om curios, te invit să faci un salt la destructurare pentru a citi măcar partea introductivă. Pe lângă destructurare ar trebui să mai faci un salt la obiectul intern `Object`, unde să arunci un ochi la metoda `entries()`.
+La nevoie, poți destructura doar prima valoare a fiecărui array menționând `let [cheie]`, iar atunci când ai nevoie doar de valori, poți omite pe prima prin expresia `let [,valoare]`.
+
+Fii foarte atent căci metodele vor fi reduse la `null` prin acțiunea lui `Object.entries(obi)`. Pentru că ești un om curios, te invit să faci un salt la destructurare pentru a citi măcar partea introductivă, apoi la obiectul `Array`, unde este tratată destructurarea acestora, dar și la `Object`. Pe lângă destructurare ar trebui să mai faci un salt la obiectul intern `Object`, unde să arunci un ochi la metoda `entries()`.
 
 Folosind destructurarea într-un `for...of`, putem extrage informații rapid dintr-un set de date.
 

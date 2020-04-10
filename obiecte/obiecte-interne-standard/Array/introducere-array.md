@@ -1,6 +1,6 @@
 # Array
 
-Este un obiect intern care are și rol de constructor. În literatura românească de specialitate veți întâlni adesea denumirea de *tablou*. Pentru că este mai simplu și în obișnuința multor programatori români să folosească termenul din engleză ca neologism acceptat de practica curentă, vom folosi și în acest material neologismul **array**. În comunitatea profesională array-ul mai este întâlnit și sub denumirea de *listă* sau *vector*.
+Este un obiect intern care are și rol de constructor. În literatura românească de specialitate veți întâlni adesea denumirea de *tablou*. Pentru că este mai simplu și în obișnuința multor programatori români să folosească termenul din engleză ca neologism acceptat de practica curentă, vom folosi în acest material neologismul **array**. În comunitatea profesională array-ul mai este întâlnit și sub denumirea de *listă* sau *vector*.
 
 Array-urile sunt o bornă centrală a programării, indiferent de limbaj. Acestea permit stocarea temporară a unor valori într-o formă ușor accesibilă folosind indecși, dar cel mai important aspect este bogăția metodelor puse la dispoziție de obiectul intern `Array` pentru a prelucra, aranja, rearanja și filtra elementele conținute de array-uri.
 
@@ -629,71 +629,7 @@ Mai sunt și metode general accesibile pe care le poți aplica (vezi metodele ob
 ['a', 'b', 'c'].toString(); // "a, b, c"
 ```
 
-### Destructurarea
-
-Destructurarea este un procedeu care are drept scop extragerea sau manipularea valorilor asignându-le unor variabile.
-
-```javascript
-var arr = ['unu', 'doi'];
-var [unu, doi] = arr;
-console.log(unu, doi);
-// 'unu' 'doi'
-```
-
-### Potrivire *unu-la-unu*
-
-```javascript
-var unu, doi, trei;
-[unu, doi, trei] = [1, 2, 3];
-console.log(unu, doi, trei);
-// 1 2 3
-```
-
-### Inversarea valorilor
-
-Destructurarea poate fi folosită cu succes pentru a inversa valorile între două variabile.
-
-```javascript
-var x = 10, y = 20;
-[x, y] = [y, x];
-console.log(x, y);
-```
-
-### Potrivirea unu-la-unu cu unu array returnat
-
-```javascript
-function genArray(){
-  return ['unu', 'doi', 'trei'];
-};
-[x, y, z] = genArray();
-console.log(x, y, z);
-// unu doi trei
-```
-
-### Valori implicite
-
-```javascript
-var x, y, z;
-[x = 1, y = 2, z = 3] = [1000];
-console.log(x, y, z); // 1000 2 3
-```
-
-### Folosirea cu `Regex`
-
-```javascript
-let [data, an, luna, zi] = /^(\d\d\d\d)-(\d\d)-(\d\d)$/.exec('1912-12-3');
-```
-
-Ceea ce s-a întâmplat este că ai scăpat de sarcina de a crea un array intermediar din care să extragi indice cu indice.
-
-### Folosirea operatorului rest (...)
-
-```javascript
-var [x, ...restop] = [1, 2, 3];
-console.log(x, restop); // 1 și Array [ 2, 3 ]
-```
-
-Tot ce generează un array, folosindu-se această sintaxă, se poate transforma în legături la identificatori, adică valorile array-ului se pot asigna unor variabile ce sunt elementele unui alt array.
+Dacă privim un array simplu așa cum este `['a', 'b', 'c']`, putem să ne gândim că toate valoarile stau la nivelul 0, direct „pe pământ”. Dacă într-un array, avem alte array-uri, putem să ne gândim că acestea indică un nivel de adâncime 1 - `['a', 'b', 'c', ['d', 'e']]`. Privind această construcție a unui array de array-uri, aplatizarea se poate aplica și nivelurilor de adâncime 1 sau mai multe aplicând pe array metodele `flat()` și/sau `flatMap`, care au fost introduse relativ recent în standard.
 
 ## Aplicarea teroriei seturilor (mulțimi)
 
@@ -772,3 +708,4 @@ Explicații:
 - [MDN Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array?redirectlocale=en-US&redirectslug=JavaScript%2FReference%2FGlobal_Objects%2FArray)
 - [ES6 — Set vs Array — What and when?, Maya Shavin | Medium](https://medium.com/front-end-weekly/es6-set-vs-array-what-and-when-efc055655e1a)
 - [Array intersection, difference and union in ES6, Alvaro Saburido | Medium]()
+- [ES6 In Depth: Destructuring | hacks.mozilla.org](https://hacks.mozilla.org/2015/05/es6-in-depth-destructuring/)

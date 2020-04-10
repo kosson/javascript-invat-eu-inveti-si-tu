@@ -140,11 +140,11 @@ Textul standardului încadrează obiectele în următoarele categorii:
 Am menționat că JavaScript oferă din oficiu obiecte care se numesc în limba engleză *built-in*. Le numim **obiecte interne** limbajului. Pentru a avea acces la ele nu-i nevoie să faci ceva. Pur și simplu ele sunt acolo deja, gata de a fi folosite. Există un detaliu important. Există un obiect de *fundal* pentru întreg codul scris de programator, care este numit `global`. Acesta face parte din setul obiectelor interne.
 Obiectul `global` plus **obiectele standard** constituie setul mare al celor **interne**.
 
-Obiectul global nu este containerul tuturor obiectelor oricât de tentant ar fi să-l imaginăm astfel. Poți totuși să-l consideri a fi contextul entităților propriului cod la momentul evaluării. Este chiar obiectul la care se face legătura `this` atunci când condul nu rulează sub regula `use strict`.
+Obiectul global nu este containerul tuturor obiectelor oricât de tentant ar fi să-l imaginăm astfel. Poți totuși să-l consideri a fi contextul entităților propriului cod la momentul evaluării. Este chiar obiectul la care se face legătura `this` atunci când codul nu rulează sub regula `use strict`.
 
 Dincolo de acestea există un univers mult mai larg al unor seturi de obiecte puse la dispoziție de browser, de exemplu. Acestea vor constitui ceea ce numim **interfețe de programare a aplicațiilor**, în limba engleză **Application Programming Interfaces**, pe scurt **API**-uri.
 
-Modul în care înțelegem ce oferă din start un obiect intern, este determinat și de un set de algoritmi rulați de motorul care implementează standardul ECMAScript. Reamintesc faptul că pentru a putea programa în JavaScript, există un motor a cărui treabă este să genereze obiectele interne, să interpreteze codului sursă, ș.a.m.d. Poți să-ți închipui motorul JavaScript ca un turn de control.
+Modul în care înțelegem ce oferă din start un obiect intern, este determinat și de un set de algoritmi rulați de motorul care implementează standardul ECMAScript. Reamintesc faptul că pentru a putea programa în JavaScript, există un motor al cărui treabă este să genereze obiectele interne, să interpreteze codului sursă, ș.a.m.d. Poți să-ți închipui motorul JavaScript ca pe un turn de control.
 
 Acești algoritmi sunt numiți `metode interne` ale obiectelor interne. Metodele interne definesc comportamentul la momentul rulării codul privind crearea și utilizarea acelui obiect. Implementarea acestor metode interne specificate de standard cade în responsabilitatea celor care construiesc motoare JavaScript - producătorii de browsere și Node.js. Reține acest aspect pentru a nu fi surprins când vei auzi sau citi discuții despre performanțele unui anume motor în comparație cu altul. Aceste metode interne sunt toate procesele care se petrec în inima unui motor atunci când, de exemplu, apelezi o metodă a unui obiect intern cum ar fi `Object.create()` sau `String.split()`.
 
@@ -1488,11 +1488,11 @@ console.log(rezultat.oriDoi()); // 4
 
 Este observabil cu cât efort s-a realizat acest lucru. Mai întâi am executat funcția `Părinte` în contextul lui `Copil`, pasându-i `this` pentru a seta corect contextul de execuție, adică în interiorul lui `Copil`. Au fost pasate atributele așteptate de `Părinte`. A trebuit să *rescriem* obiectul prototip al lui `Copil`, setându-l artificial la cel pe care dorim să-l moștenim folosind `Object.create()` în acest sens. A trebuit să facem un pas suplimentar setând proprietatea `constructor` să trimită înapoi la `Copil` pentru a consolida originea sa.
 
-#### `extends` și `super`
+#### extends și super
 
 În cazul claselor, mare parte din operațiunile complexe ale derivării sunt rezolvate prin introducerea sintagmei `extends` în declarația clasei pe care o dorești a fi derivata alteia. Ceea ce realizează este și abstractizarea funcționalităților unei clase, care va fi privită de cele derivate din ea ca un model de urmat privind comportamentele de bază. Similar copiilor care privesc și copiază comportamentele părinților, clasele, care extind altele, vor avea acces la metodele și proprietățile părintelui prin mecanismul de moștenire, care se va stabili automat. Putem afirma despre o clasă de la care se derivează că se comportă ca o interfață. O interfață fiind setul de date și funcționalități disponibil tuturor copiilor, dar care poate fi modificat de aceștia.
 
-Am stabilit faptul că prototipul este setat automat la obiectul prototip al constructorului părinte. Constructorul părintelui poate fi accesat folosind metoda `super()`. În clasele derivate, `super()` trebuie apelat înainte de a folosi `this` în funcția constructor a copilului. Acest lucru trebuie făcut pentru a seta o linie directă de moștenire cu proprietățile constructorului clasei părinte. Regula ar fi ca datele necesare alimentării părintelui pentru operațiunile sale interne, să le trimiți prin `super(arg1, arg2, etc)`. Ce este nevoie copilului, setezi prin `this`. Nu uita, că prin moștenire vei avea mereu acces la datele și metodele părintelui.
+Am stabilit faptul că prototipul este setat automat la obiectul prototip al constructorului părinte. Constructorul părintelui poate fi accesat folosind metoda `super()`. În clasele derivate, `super()` trebuie apelat înainte de a folosi `this` în funcția constructor a copilului. Acest lucru trebuie făcut pentru a seta o linie directă de moștenire cu proprietățile constructorului clasei părinte. Regula ar fi ca datele necesare alimentării părintelui pentru operațiunile sale interne, să le trimiți prin `super(arg1, arg2, etc)`. Ce este necesar copilului, setezi prin `this`. Nu uita, că prin moștenire vei avea mereu acces la datele și metodele părintelui.
 
 ```javascript
 class Parinte {
@@ -1502,14 +1502,14 @@ class Parinte {
   oriDoi () {
     return this.ceva * 2;
   }
-};
+}
 
 class Copil extends Parinte {
   constructor (val) {
     super(val);
     this.altceva = 10;
   }
-};
+}
 const inmultire = new Copil(2);
 inmultire.oriDoi(); // 4
 console.log(inmultire instanceof Copil);   // true
@@ -1666,7 +1666,49 @@ obiect.altaProprietate = 'altceva';
 
 ### Destructurarea obiectelor
 
-ES6 introduce posibilitatea seta variabile cu valorile cheilor unui obiect (*destructuring assignment*). Trebuie respectată o singură cerință: numele identificatorilor variabilelor trebuie să fie identice cu cele ale cheilor proprietăților din obiectul din care sunt luate valorile. Dacă vrem să privim obiectele precum depozite de valori identificate prin numele cheilor, atunci cu siguranță că atribuirea prin destructurare va fi o binecuvântare.
+ES6 introduce posibilitatea seta variabile cu valorile cheilor unui obiect (*destructuring assignment*). Trebuie respectată o singură cerință: numele identificatorilor variabilelor trebuie să fie identice cu cele ale cheilor proprietăților din obiectul din care sunt luate valorile.
+
+```javascript
+const obi1 = {ceva: 10};
+const obi2 = {altceva: 'text'}
+var {ceva: x} = obi1;
+var {altceva: y} = obi2;
+console.log(x, y); // 10 text
+```
+
+În cazul în care numele variabilei se dorește să fie chiar proprietatea, atunci putem redacta codul precum în exemplul următor.
+
+```javascript
+var {ceva: ceva} = obi1;
+var {altceva: altceva} = obi2;
+console.log(ceva, altceva); // 10 text
+```
+
+Putem aplica forma simplificată și vom ajunge la o formă pe care o veți întâlni foarte adesea în lucrul cu modulele.
+
+```javascript
+var {ceva} = obi1;
+var {altceva: altceva} = obi2;
+console.log(ceva, altceva);
+```
+
+Câtă vreme vei urma structura unui obiect indiferent de adâncimi, vei putea extrage valori în variabilele dorite.
+
+```javascript
+const obi = {
+  ceva: {
+    altceva: [
+      {cineva: 'Ionuț'}
+    ],
+    câte: 10
+  }
+}
+obi.ceva.altceva[0].cineva;
+var {ceva: {altceva: [{cineva}]}} = obi;
+console.log(cineva); // Ionuț
+```
+
+Dacă vrem să privim obiectele precum depozite de valori identificate prin numele cheilor, atunci cu siguranță că atribuirea prin destructurare va fi o binecuvântare.
 
 ```javascript
 const obi = {
@@ -1719,9 +1761,34 @@ let unu = 10,
 // () este nevoie pentru a indica ca {} nu marchează un bloc de cod, ci o expresie
 ```
 
-#### Destructurarea array-urilor
+În cazul în care se va face o destructurare pe un obiect care nu are nicio proprietate, vei obține valoarea `undefined` la variabilă.
 
-Destructurarea funcționează foarte bine și în cazul array-urilor, care la rândul lor sunt obiecte. În acest caz nu mai este necesară respectarea parității numelor identificatorilor cu cea a cheilor, pentru că nu mai avem chei. Potrivirea se va face în ordinea elementelor din array.
+```javascript
+var {nuexistă} = {};
+console.log(nuexistă); // undefined
+```
+
+#### Valori din oficiu
+
+Atribuirea de valori din oficiu se dovedește foarte utilă atunci când încerci să faci o destructurare pe un obiect gol.
+
+```javascript
+var {nuexistă = false} = {};
+console.log(nuexistă); // false
+```
+
+Poți seta chiar mesaje.
+
+```javascript
+const {proprietateDorită: eroare = "Nu am obținut nimic"} = {};
+console.log(eroare); // Nu am obținut nimic
+```
+
+#### Array-ul ca obiect destructurat
+
+Destructurarea funcționează foarte bine și în cazul array-urilor, care la rândul lor sunt obiecte. Acest subiect este tratat la capitolul dedicat obiectului intern `Array`.
+
+În cazul array-urilor este necesară respectarea parității numelor identificatorilor cu cea a cheilor, pentru că nu mai avem chei. Potrivirea se va face în ordinea elementelor din array. Pentru a aduna ce-a mai rămas, am folosit și operatorul *spread* pentru a strânge restul elementelor într-un array.
 
 ```javascript
 const arr = [1, true, function y () {return 'salut'}, 10, 20];
