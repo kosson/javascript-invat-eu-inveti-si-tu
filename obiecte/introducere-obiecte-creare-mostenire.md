@@ -2004,6 +2004,85 @@ const cerc1 = new ElementRotund(10);
 cerc1.arie(); //
 ```
 
+### Transformarea obiectelor
+
+#### Redenumirea unei chei și crearea unui obiect nou
+
+Nu există o metodă prin care să modifici numele unei proprietăți al unui obiect existent fără să creezi un obiect nou. Următorul exemplu implică parcurgerea setului de chei al unui obiect și pentru cheia dorită se face înlocuirea.
+
+```javascript
+const obiectNou = ({oldObj, oldKey, newKey}) => {
+  const keys = Object.keys(oldObj);
+  const newObj = keys.reduce((acc, val) => {
+    if(val === oldKey){
+        acc[newKey] = oldObj[oldKey];
+    }
+    else {
+        acc[val] = oldObj[val];
+    }
+    return acc;
+  }, {});
+
+  return newObj;
+};
+```
+
+Exemplu a fost preluate de la [JS rename an object key, while preserving its position in the object](https://stackoverflow.com/questions/48082071/js-rename-an-object-key-while-preserving-its-position-in-the-object).
+
+O altă idee preluată de la [JavaScript: Object Rename Key](https://stackoverflow.com/questions/4647817/javascript-object-rename-key) implică crearea unei noi metode în obiectul prototip al obiectului intern `Object`, care să permită redenumirea unei proprietăți.
+
+```javascript
+Object.defineProperty(
+    Object.prototype,
+    'renameProperty',
+    {
+        writable : false, // Să nu poată fi modificată acestă proprietate
+        enumerable : false, // Nu va apărea într-un for-in loop.
+        configurable : false, // Nu poate fi ștearsă cu operatorul delete
+        value : function (oldName, newName) {
+            // Dacă identificatorii proprietății sunt aceiași, e noop
+            if (oldName === newName) {
+                return this;
+            }
+            // Verifică numele vechi al proprietății
+            // pentru a evita o eroare ReferenceError în strict mode.
+            if (this.hasOwnProperty(oldName)) {
+                this[newName] = this[oldName];
+                delete this[oldName];
+            }
+            return this;
+        }
+    }
+);
+```
+
+O versiune mult simplificată ar fi cea prezentă în gistul [renameProperty.js](https://gist.github.com/TimLang/9636789)
+
+```javascript
+Object.prototype.renameProperty = function (oldName, newName) {
+    if (this.hasOwnProperty(oldName)) {
+        this[newName] = this[oldName];
+        delete this[oldName];
+    }
+    return this;
+};
+```
+
+O variantă pusă la dispoziție de [30secondsofcode](https://www.30secondsofcode.org/js/s/rename-keys/) extinde posibilitatea de a modifica numele mai multor proprietăți dacă acest lucru este necesar.
+
+```javascript
+const renameKeys = (keysMap, obj) =>
+Object.keys(obj).reduce(
+  (acc, key) => ({
+    ...acc,
+    ...{ [keysMap[key] || key]: obj[key] }
+  }),
+  {}
+);
+```
+
+Funcția primește ca prim argument un obiect a cărui proprietăți sunt identificatorii vechi, iar valorile pentru fiecare sunt numele noilor proprietăți. Al doilea obiect este cel original. Funcția returnează un obiect nou.
+
 ## Mantre
 
 -   Spre deosebire de funcții, declarația de clasă nu beneficiază de mecanismul de hoisting indiferent că este o declarație sau o expresie de clasă. Deci, până când execuția nu ajunge la locul declarației, clasa se află în Temporal Dead Zone (TDZ).
@@ -2025,3 +2104,6 @@ cerc1.arie(); //
 -   [Classes, MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 -   [Inside V8: weak collections, ephemerons, and private fields by Sigurd Schneider | JSCAMP 2019](https://www.youtube.com/watch?v=MQsUiqVCJMc&fbclid=IwAR3ybYMW2jDnNTA39t9qVph6HELfbguoynnLP9FOSnsDw5tTVHZ43pjC1Z8)
 -   [Public and private class fields](https://v8.dev/features/class-fields)
+-   [30 Seconds of Code: How to rename multiple object keys in JavaScript](https://medium.com/free-code-camp/30-seconds-of-code-rename-many-object-keys-in-javascript-268f279c7bfa)
+-   [Immutably Rename Object Keys in Javascript](https://medium.com/front-end-weekly/immutably-rename-object-keys-in-javascript-5f6353c7b6dd)
+-   [renameKeys | 30secondsofcode/js](https://www.30secondsofcode.org/js/s/rename-keys/)
