@@ -2027,7 +2027,7 @@ const obiectNou = ({oldObj, oldKey, newKey}) => {
 };
 ```
 
-Exemplu a fost preluate de la [JS rename an object key, while preserving its position in the object](https://stackoverflow.com/questions/48082071/js-rename-an-object-key-while-preserving-its-position-in-the-object).
+Exemplul a fost preluate de la [JS rename an object key, while preserving its position in the object](https://stackoverflow.com/questions/48082071/js-rename-an-object-key-while-preserving-its-position-in-the-object).
 
 O altă idee preluată de la [JavaScript: Object Rename Key](https://stackoverflow.com/questions/4647817/javascript-object-rename-key) implică crearea unei noi metode în obiectul prototip al obiectului intern `Object`, care să permită redenumirea unei proprietăți.
 
