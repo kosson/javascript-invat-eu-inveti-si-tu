@@ -12,12 +12,15 @@ Original a fost creată pentru a oferi încapsulare privată și publică.
 - Immediately Invoked Function Expressions - IIFE
 
 ## Mantre
+
 - nu necesită instanțiere cu `new`
 
 ## Ce este?
+
 O cale simplă de a incapsula metode. Poate fi considerat o cutie cu scule. O colecție de metode înrudite.
 
 ## Ce face?
+
 **Returnează un obiect**
 
 Exemplu de sintaxa de object literal pentru un modul.
@@ -56,4 +59,20 @@ Modul.metodaDeReconfigurare({
   frmSent: false,
   dimensiune: 'mic'
 });
+```
+
+## Constituirea unui modul
+
+De fapt, folosim posibilitatea de a crea funcții autoexecutabile, care să expună anumite părți sub forma unui obiect returnat, dar părțile private să fie variabile ale mediului intern pe care se face closure.
+
+```javascript
+var modul01 = ((function(){
+  var privata = 20;
+  // returnarea metodelor de acces la variabilele private
+  return {
+    setPrivata: function (nouaVal) {
+      privata = nouaVal;
+    }
+  }
+})());
 ```
