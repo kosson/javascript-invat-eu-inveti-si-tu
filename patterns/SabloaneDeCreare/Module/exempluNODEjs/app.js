@@ -12,7 +12,6 @@
 
 var opCtrl = require('./controller');
 
-
 var ISS = new opCtrl({nume: 'ISS', tip: 'statie'});
 
 ISS.getInfo();

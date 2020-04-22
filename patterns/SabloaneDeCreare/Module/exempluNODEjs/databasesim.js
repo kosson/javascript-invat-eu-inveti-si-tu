@@ -1,4 +1,4 @@
-var dbLucru = function (){
+var dbLucru = function () {
 
   var getEntitate = function (identificator){
     console.log('Aduc din baza entitatea folosind identificatorul ' + identificator);
