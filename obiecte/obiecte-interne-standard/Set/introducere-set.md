@@ -148,3 +148,14 @@ const unice = [...new Set(subset)];
 console.log(unice);
 // [ "pădure", "tăiere", "inactivitate", "deșertificare" ]
 ```
+
+## map / reduce / filter
+
+Un `Set` nu oferă posibilitatea de a prelucra datele setului folosind map, reduce și filter, dar se poate transforma un set într-un array folosind operatorul spread.
+
+```javascript
+const setNou = new Set(['a', 10, 'altceva']);
+const rez = [...setNou].filter(e => e == 10); // [10]
+```
+
+Pentru a transforma un `Set` într-un array pe care să se poată aplica metodele array-urilor, putem folosi și `Array.from(numeSet)`.

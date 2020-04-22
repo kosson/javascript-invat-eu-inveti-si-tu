@@ -106,7 +106,7 @@ Poate fi folosit cu mare succes și în funcții recursive.
 
 ## Căutarea valorilor corespondente din două array-uri
 
-Uneori este necesară căutarea a unor valori care există într-un array, în alt array. Pe scurt, ai nevoie să găsești corespondențele în două seturi de valori.
+Uneori este necesară căutarea a unor valori care există într-un array, în alt array. Pe scurt, ai nevoie să găsești corespondențele sau mai bine spus intersecția celor două seturi de valori.
 
 ```javascript
 let roles = ["user", "ceva", "intern", "tester"];

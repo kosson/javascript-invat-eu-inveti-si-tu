@@ -282,3 +282,7 @@ function iaOFuncție () {
   return function () {};
 };
 ```
+
+## Resurse
+
+- [JavaScript. The Core: 2nd Edition | http://dmitrysoshnikov.com](http://dmitrysoshnikov.com/ecmascript/javascript-the-core-2nd-edition/)

@@ -266,6 +266,32 @@ let îțiPromit = new Promise( function (resolve, reject) {
 console.log(îțiPromit); // 22
 ```
 
+Dacă nu faci un `return` de pe un `then()`, nu vei putea folosi valoarea în următorul.
+
+În cazul în care aplici `then` pe aceeași promisiune, dar nu folosești înlănțuirea, spunem că facem o bifurcare.
+
+```javascript
+let îțiPromit = new Promise( function (resolve, reject) {
+  var unȘir = `un fragment interesant`;
+  resolve(unȘir);
+});
+
+îțiPromit.then( function (unȘir) {
+  console.log(unȘir.length);
+}).catch( function (error) {
+  if(error) throw new Error('ceva nu este bine');
+});
+
+îțiPromit.then( function (dimensiune) {
+  console.log("Dimensiunea este: ", dimensiune);
+}).catch( function (error) {
+  if(error) throw new Error('ceva nu este bine');
+});
+console.log(îțiPromit); // 22 Dimensiunea este:  un fragment interesant
+```
+
+Mai trebuie adăugat faptul că erorile sunt propagate pe lanțul `then` până când sunt prelucrate cu un `catch`.
+
 ### Fă mai multe promisiuni odată
 
 Metoda `all` permite executarea mai multor promisiuni într-o manieră paralelă. Este ca și cum ar alinia promisiunile la o linie de start precum alergătorii pe pistă, fiecare pe culoarul lui. La final, după ce toate operațiunile asincrone s-au încheiat, va fi inițiată execuția unei funcții callback unice, adică a unui `then()`, care va trata rezultatul.
@@ -421,9 +447,31 @@ function promisificareCeva (parametru) {
 
 ## Programare funcțională cu promisiuni
 
+În anumite circumstanțe, pentru că promisiunile oferă o metodă elegantă de a trata codul care se execută asincron, poate că vei dori să promisifici o funcție care folosea un callback. Multe dintre metodele obiectelor interne pe care le pune la dispoziție din oficiu orice implementare de ECMAScript, folosesc paradigma callback-urilor.
+
+Pentru a promisifica orice utilitar, se va *îmbrăca* acel utilitar într-o funcție, care va returna o promisiune.
+
+```javascript
+function oFunctiePromisificată (intrare1, intrare2) {
+  return new Promise((resolve, reject) => {
+    functieDePromisificat(intrare1, intrare2, (error, date) => {
+      if (error) {
+        retunr reject(error);
+      }
+      rezolve(date);
+    });
+  });
+}
+oFunctiePromisificată.then((date) => {
+  // Fă ceva cu datele aduse aici.
+}).catch(error => console.error);
+```
+
+În cazul în care este folosit NodeJS, se poate folosi și `util.promisify(numeUtili)`
+
 ### O funcție `map()` promisificată
 
-Să presupunem că dorim că aplicăm o funcție pe datele dintr-o listă (poate fi foarte bine datele dintr-o listă de fișiere diferite în cazul folosirii Node.js cu `fs`).
+Să presupunem că dorim că aplicăm o funcție pe datele dintr-o listă (poate fi foarte bine datele dintr-o listă de fișiere diferite în cazul folosirii Node.js cu `fs`). În exemplul oferit, am denumit în limba română cele două callback-uri ale obiectului Promise la momentul instanțierii pentru a cimenta și mai mult faptul că cele două denumiri sunt doar niște convenții de numire a callback-urilor funcției cu rol de executor.
 
 ```javascript
 const lista = ["a", "b", "c"];
@@ -432,10 +480,11 @@ function dublezLitere (element) {
   return element + element;
 };
 
+// Promisificarea lui map
 function mapPromisificat (lista, functieDeAplicat) {
   // returnează o listă de promisiuni
-  let promisiuni = lista.map(function (element) {
-    // un element, o promisiune
+  let promisiuni = lista.map(function callbackPerElement (element) {
+    // un element, egal o promisiune
     const promisiune = new Promise (function (rezolvat, respins) {
       // invocarea funcției de transformare pe element
       functieDeAplicat(element, function (eroare, rezultat) {
@@ -451,6 +500,10 @@ function mapPromisificat (lista, functieDeAplicat) {
 let listaPromisiunilor = mapPromisificat(lista, dublezLitere);
 // obiect Promise
 ```
+
+Pentru fiecare element din array, creezi câte o promisiune.
+
+Totuși, pentru a respecta bunele practici, în lucrul curent ar trebui să folosim denumirile din limba engleză: `resolve` și `reject`.
 
 ## Mantre
 

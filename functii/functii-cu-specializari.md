@@ -44,7 +44,7 @@ Cu un astfel de instrument se poate face un mapping aplicând funcții ce preiau
 
 Este o funcție de combinare. I se spune și combinatorul K (i se mai spune „kestrel”).
 
-Pe scurt, ai două valori care intră într-o combinație. Prima valoare va fi returnată oricum sau dacă se dorește poate fi păstrată. Dacă a doua valoare din combinație este o funcție, aceasta se va aplica pe prima valoare care va fi luată drept argument.
+Pe scurt, ai două valori care intră într-o combinație. Prima valoare va fi returnată oricum sau dacă se dorește, poate fi păstrată. Dacă a doua valoare din combinație este o funcție. Aceasta se va aplica pe prima valoare, care va fi luată drept argument.
 
 ## Cum funcționează
 

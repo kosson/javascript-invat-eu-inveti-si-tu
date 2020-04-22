@@ -12,7 +12,7 @@ Executarea codului JavaScript este sincronă pentru majoritatea cazurilor, iar a
 
 Actorii principali:
 
-- **interpretorul** JavaScript, care execută fragmentele de cod ca răspuns la evenimente (callback-uri),
+- **interpretorul** JavaScript, care execută fragmentele de cod ca răspuns la evenimente (*callback*-uri),
 - **call stack** (*stiva apelurilor*), fiind locul în care se execută codul sincron,
 - **task queue** fiind **coada** în care se rânduiesc funcțiile cu rol de callback,
 - **microtask queue** sau **job queue**,
