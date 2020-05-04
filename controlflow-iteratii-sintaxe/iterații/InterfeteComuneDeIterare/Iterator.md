@@ -47,6 +47,32 @@ const ObiectIterabilNou = {
 }
 ```
 
+Poți returna un iterator particularizat folosind și funcțiile săgeată prin enunțul ce returnează obiecte: `() => ({})`. Să presupunem că vrem să generăm numere de la 1 la 10.
+
+```javascript
+const iteratorParticularizat = () => ({
+  [Symbol.iterator]: () => ({
+    kontor: 0,
+    next() {
+      if (this.kontor > 10) {
+        return {
+          done: true,
+          value: this.kontor
+        }
+      };
+      return {
+        done: false,
+        value: this.kontor++
+      };
+    }
+  })
+});
+let nr;
+for (nr of iteratorParticularizat()) {
+  console.log(nr);
+}
+```
+
 Dacă este nevoie, poți converti un obiect simplu în unul iterabil. Tot ce trebuie să faci este să adaugi o metodă `[Symbol.iterator]` pentru a adăuga protocolul de iterare.
 
 ```javascript

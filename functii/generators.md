@@ -22,7 +22,7 @@ Apelarea unui generator doar trimite funcția în stiva apelurilor și imediat e
 Dacă în execuție nu mai este întâlnit niciun `yield`, funcția generator returnează obiectul iterator, care în acest moment va avea valoarea `true` asociată cheii `done`.
 
 ```javascript
-obiect = {a: 1, b: 2};
+var obiect = {a: 1, b: 2};
 function* parcurgObiect (obiect) {
   for (let cheie of Object.keys(obiect)) {
     yield obiect[cheie];

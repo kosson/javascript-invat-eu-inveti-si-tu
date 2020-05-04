@@ -1,11 +1,22 @@
 # Funcții async / await
 
-Acest enunț a fost introdus în ECMAScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile care au cuvântul cheie `async` în față, vor returna mereu o promisiune.
+Acest enunț a fost introdus în ECMAScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile care au cuvântul cheie `async` în față, vor returna mereu o promisiune. Funcțiile `async` au comportament sicron, ceea ce înseamnă că execuția codului va aștepta ca execuția lor să se încheie. Atenție, dacă operațiunea întârzie, execuția va fi blocată.
 
 ```javascript
 async function facCeva () {};
 async () => console.log;
 ```
+
+În cazul în care atribui o funcție `async` unei variabile, aceasta va returna o promisiune.
+
+```javascript
+let cevaDeFăcut = async function facCeva () {
+  let rezultat = await executaCeva();
+  return rezultat;
+};
+```
+
+Valorile returnate dintr-o funcție `async` sunt precum rezultatele unui `Promise.resolve()`. Rezultatul este chiar valoarea pe care o accesezi în primul `then`.
 
 **Moment Zen**: Valoarea returnată de o funcție `async` este împachetată în `Promise.resolve()`.
 
@@ -23,7 +34,7 @@ cevaAsincron().then(console.log);
 
 Avantajul este evident în cazul în care scrii o bibliotecă de cod sau o funcție cu rol utilitar în care nu știi dacă datele care vin sunt *sync* sau *async*. Atunci când trebuie returnat un obiect, acesta va fi returnat fără împachetare.
 
-Înainte de apariția acestor funcții, pentru a scrie cod asincron aveam la îndemână callback-uri și promisiuni. În mod curent, până la apariția async/await ai fi returnat un obiect `Promise` proaspăt instanțiat.
+Înainte de apariția acestor funcții, pentru a scrie cod asincron aveam la îndemână callback-uri și promisiuni. În mod curent, până la apariția `async`/`await` ai fi returnat un obiect `Promise` proaspăt instanțiat.
 
 ```javascript
 function simulare () {
@@ -53,7 +64,7 @@ Luând în considerare și cunoștințele de la promisiuni, ia-ți un moment de 
 
 ## Declarare
 
-În ceea ce privește sintaxa, vor fi folosite în tandem două cuvinte cheie: `async` în deschiderea declarației și `await` în corpul funcției.
+În ceea ce privește sintaxa, vor fi folosite în tandem două cuvinte cheie: `async` în deschiderea declarației și `await` în corpul funcției. Faptul că pui `async` în fața unei funcții, nu transformă operațiunile din corpul funcției în constructuri asincrone. Codul se va executa în continuare sincron. Doar constructele asincrone precum `await` se vor executa asincron.
 
 ```javascript
 // declarație de funcție
@@ -83,7 +94,7 @@ class Ceva {
 
 ## Operatorul `await`
 
-Funcțiile `async` își vor întrerupe execuția ori de câte ori întâlnesc `await` în corp. Cuvântul cheie `await` își produce efectele doar dacă este folosit în corpul funcțiilor `await`.
+Funcțiile `async` își vor întrerupe execuția ori de câte ori întâlnesc `await` în corp. Cuvântul cheie `await` își produce efectele doar dacă este folosit în corpul funcțiilor `async`.
 
 Operatorul `await` expune o deficiență a acestor funcții. Ceea ce se petrece atunci când îl folosim este oprirea din execuție a întregului cod până când promisiunile sunt **rezolvate**. Aceasta este o caracteristică de execuție pe care o întâlnim la rularea codului sincron. Chiar dacă alte sarcini își urmează cursul, propriul cod este blocat în execuție.
 
@@ -146,6 +157,20 @@ Scrierea codului asyncron folosind `async`/`await` este o alternativă elegantă
 
 ```javascript
 const [val1, val2, val3] = await Promise.all(promise1(), promise2(), promise3())
+```
+
+Un posibil exemplu ar fi citirea mai multor fișiere în paralel. Pentru a rula aceste exemplu, vom folosi NodeJS. Mai întâi vom apela pachetele `fs` și `util` după care vom transforma metoda `readFile` într-un a promisificată.
+
+```javascript
+const util = require('util');
+const fs = require('fs');
+const readFile = util.promisify(fs.readFile);
+const fișiere = ['./primul.txt'. './alDoilea.txt'];
+(async () => {
+  let promisiuni = fișiere.map((nume) => readFile(nume, "utf8"));
+  let valori = await Promise.all(promisiuni); // citește fișierele în paralel.
+  console.log(valori);
+})();
 ```
 
 ## Dependințe cognitive

@@ -56,12 +56,37 @@ Acest lucru conduce la concluzia logică că numărul elementelor unui array va 
 [1, 2, 3].length; // 3
 ```
 
-### Ce poți introduce în array
+### Anatomia unui array
+
+Un array este un obiect. Putem demonstra acest lucru foarte simplu, cerând proprietățile proprii ale obiectului array.
+
+```javascript
+const arr = [1, 2, 3];
+let proprietăți = Object.getOwnPropertyNames(arr);
+console.log(proprietăți); // [ '0', '1', '2', 'length' ]
+```
+
+Privind din perspectiva protocoalelor de iterare, un array este un obiect ce implementează protocolul **iterator**. Acest lucru înseamnă că obiectul array are o proprietate `Symbol.iterator`, care invocată, face referință către un obiect ce pune la dispoziție o metodă `next()`. Apelarea metodei `next()`, va returna un obiect `{done: <Boolean>, value: <valoare>}` pentru fiecare valoare din array.
+
+```javascript
+const arr = [1, 2, 3];
+let exempluIterator = arr[Symbol.iterator]();
+let primulObReturnat = exempluIterator.next();
+console.log(primulObReturnat); // { value: 1, done: false }
+let alDoileaReturnat = exempluIterator.next();
+console.log(alDoileaReturnat); // { value: 2, done: false }
+let alTreileaReturnat = exempluIterator.next();
+console.log(alTreileaReturnat); // { value: 3, done: false }
+let alPatruleaReturnat = exempluIterator.next();
+console.log(alPatruleaReturnat); // { value: undefined, done: true }
+```
+
+## Ce valori poți introduce în array
 
 Am lămurit deja faptul că un array este un obiect care ordinează elementele folosind un index. Pe cale de consecință, putem introduce orice valoare într-un array. Valorile simple vor fi pasate direct, iar valorile care sunt obiecte, vor fi pasate prin referință. Dacă ai nevoie de o structură a cărei elemente să răspundă propriei tale scheme de adresare, vei folosi obiectele în mod direct. Pentru că standardul a evoluat, acum avem suplimentar o nouă structură de agregare a datelor numită `Map`. Ce aduce nou față de array-uri și obiectele simple? Posibilitatea de a avea perechi cheie - valoare cu diferența îmbucurătoare că pentru chei poți folosi, fie valori primitive, fie obiecte.
 Array-ul își păstrează valoarea pentru că oferă o structură de adresare organizată din start prin structura fixă a indecșilor.
 
-### Mediile lexicale
+## Mediile lexicale
 
 Dincolo de simplitatea adăugării unui element, ar fi necesar să vedem cum se petrece acest lucru în cazul mediilor lexicale (*scope*) create de funcții. Avem un prim caz, unde, în mediul lexical format de o funcție, se face o reatribuire a identificatorului (în engleză îi spune *rebounding*). Până la momentul reatribuirii, trimitea tot către **arr**. Ceea ce s-a petrecut este o schimbare la nivel de funcție a referinței. Chiar dacă a fost trimis drept argument array-ul `arr`, prin atribuirea identificatorului `a`, care este intern funcției, cu un alt array, s-a pierdut referința la cel pasat.
 
@@ -83,7 +108,7 @@ var arr = [1, 2, 3];
 // [ 10, 2, 3 ]
 ```
 
-În cazul array-urilor, valorile sunt copiate prin referință pentru că, de fapt, array-urile sunt obiecte. Din acest fapt putem trage câteva concluzii utile. Cu ajutorul unei funcții externe array-ului poți modifica valorile interne ale unui array. Pasarea unui array unei funcții drept argument, conduce la crearea unei referințe în mediul lexical către acel obiect array. Un alt lucru util de reținut este faptul că un array poate fi foarte bine o colecție de funcții. Acestea, de fapt sunt referințe către obiectele funcții, nu sunt funcțiile în sine. Singurul lucru care face diferența este modul de acces la funcțiile respective folosindu-se sintaxa specifică array-ului.
+În cazul array-urilor, valorile sunt copiate prin referință pentru că, de fapt, **array-urile sunt obiecte**. Din acest fapt putem trage câteva concluzii utile. Cu ajutorul unei funcții externe array-ului poți modifica valorile interne ale unui array. Pasarea unui array unei funcții drept argument, conduce la crearea unei referințe în mediul lexical către acel obiect array. Un alt lucru util de reținut este faptul că un array poate fi foarte bine o colecție de funcții. Acestea, de fapt sunt referințe către obiectele funcții, nu sunt funcțiile în sine. Singurul lucru care face diferența este modul de acces la funcțiile respective folosindu-se sintaxa specifică array-ului.
 
 ```javascript
 function faCeva () {
@@ -100,7 +125,7 @@ arr[0] === actiune; // true
 
 Rezultatul este `true` pentru că valoarea evaluată a expresiei `arr[0]` este `actiune`, care la rândul său ține valoarea evaluată a invocării lui `faCeva()`.
 
-### Lanțul prototipal al unui array
+## Lanțul prototipal al unui array
 
 Uneori este necesar să afli care este prototipul unei colecții de care nu ești sigur că este array curat sau array-like (*asemănător-cu-array*) - o entitate care are caracteristici apropiate de un array.
 
