@@ -76,7 +76,7 @@ Mai întâi, hai să creăm un cadru de test. Pentru asta vom folosi o pagină H
 </html>
 ```
 
-Fișierul nostru de javascript va fi încărcat ca sursă externă.
+Fișierul nostru de JavaScript va fi încărcat ca sursă externă.
 
 ```javascript
 /* FACTORY */

@@ -21,13 +21,13 @@ Acest model permite generarea unui obiect care va fi unic în aplicație. Cel ma
 -   Modificarea concomitentă a valorilor, va duce la suprascrierea valorilor.
 -   are o instanțiere întârziată, adică va fi folosit atunci când va fi nevoie de acesta, când va fi instanțiat.
 
-În Javascript, Singleton-urile folosesc la crearea unui spațiu distinct (namespace), care izolează codul implementării de *global scope*. Pentru acest obiect este oferit un singur punct de intrare către metode.
+În JavaScript, Singleton-urile folosesc la crearea unui spațiu distinct (namespace), care izolează codul implementării de *global scope*. Pentru acest obiect este oferit un singur punct de intrare către metode.
 
 **Moment ZEN**: Un Singleton este doar o structură de organizare a funcționalităților.
 
-Pentru a înțelege cum funcționează, cel mai simplu ar fi să-l analizăm. Avem o zonă privată și o zonă publică. Zona publică se comportă ca punct de intrare către zona internă. Partea „publică” oate fi considerată o interfață de acces.
+Pentru a înțelege cum funcționează, cel mai simplu ar fi să-l analizăm. Avem o zonă privată și o zonă publică. Zona publică se comportă ca punct de intrare către zona internă. Partea „publică” poate fi considerată o interfață de acces.
 
-### 1. declară un IIFE
+### 1. Declară un IIFE
 
 Pornim prin a construi un modul în sine folosind un IIFE. Acesta creează propriu mediu lexical, ceea ce oferă izolarea de care avem nevoie ca mai apoi să limităm la ceea ce este nevoie accesul din exterior.
 
@@ -35,7 +35,7 @@ Pornim prin a construi un modul în sine folosind un IIFE. Acesta creează propr
 var unSingleton = (function () {})();
 ```
 
-În interiorul funcției IIFE, declari o variabilă care va fi referința către obiect la momentul când acesta va fi creat.
+În interiorul funcției IIFE, declari o variabilă care va fi referi obiectul la momentul când acesta va fi creat.
 
 ```javascript
 var unSingleton = (function () {
@@ -43,9 +43,9 @@ var unSingleton = (function () {
 })();
 ```
 
-### 2. declară o funcție care propriu-zis are misiunea de a creea obiectul.
+### 2. Declară o funcție care propriu-zis are misiunea de a creea obiectul
 
-În interiorul funcției vor fi create toate metodele și toate proprietățile obiectului viitor. Obiectul returnat poate fi considerat un adevărat API (Application Programming Interface).
+În interiorul funcției vor fi create toate metodele și toate proprietățile obiectului viitor. Obiectul returnat poate fi considerat un adevărat API (Application Programming Interface). Acesta va expune public funcțiile prin care pot fi accesate și modificate date.
 
 ```javascript
 var unSingleton = (function () {
@@ -57,10 +57,10 @@ var unSingleton = (function () {
 })();
 ```
 
-### 3. returneză condițional obiectul constituit
+### 3. Returneză condițional obiectul constituit
 
-După ce dotezi funcția cu tot ce crezi că ar nevoie obiectului final, vei face un return unui obiect literal care are o unică metodă.
-Rolul metodei este să testeze dacă obiectul a fost instanțiat verificând valoarea variabilei definite inițial. Dacă valoarea este „undefined”, înseamnă că obiectul încă nu a fost instanțiat, fiind creat chiar acum. Acest lucru se va face prin atribuirea valorii evaluate prin invocarea funcției `generator`.
+După ce dotezi funcția cu tot ce crezi că ar nevoie obiectului final, vei face `return` unui obiect literal care are o unică metodă.
+Rolul metodei este să testeze dacă obiectul a fost instanțiat, verificând valoarea variabilei definite inițial. Dacă valoarea este „undefined”, înseamnă că obiectul încă nu a fost instanțiat, fiind pe loc. Acest lucru se va face prin atribuirea valorii evaluate prin invocarea funcției `generator`.
 Dacă obiectul a fost creat deja, pur și simplu va fi returnat.
 
 O convenție pentru construcția Singleton-urilor impune ca toți identificatorii pentru membrii privați ai obiectului să fie sufixați cu *underscore*.
@@ -95,7 +95,7 @@ O convenție pentru construcția Singleton-urilor impune ca toți identificatori
 })(window);
 ```
 
-### 4. utilizarea Singleton-ului
+### 4. Utilizarea Singleton-ului
 
 IIFE-ul returnează obiectul nostru care se va constitui la invocarea funcției `generator`.
 
@@ -138,11 +138,11 @@ var singletonTest = TestSingleton.creeaza({
 console.log(singletonTest.coordX); // afiseaza 10
 ```
 
-În cazul folosirii Node, datorită modului în care se face caching-ul, pentru a genera un Singleton este îndejuns să faci: `module.exports = numeFuncție()` sau `module.exports = new numeFunctie()`.
+În cazul folosirii Node.js, datorită modului în care se face caching-ul, pentru a genera un Singleton este îndejuns să faci: `module.exports = numeFuncție()` sau `module.exports = new numeFunctie()`.
 
 ## Singleton cu `class`
 
-Datorită faptului că în JavaScript, o clasă este o valoare „first-class” precum funcție, cu ajutorul acestora se pot construi mai rapid Singleton-uri.
+Pentru că în JavaScript, o clasă este o valoare „first-class”, precum sunt și funcțiile, cu ajutorul acestora se pot construi mai rapid Singleton-uri.
 
 ```javascript
 let avion = new class {
@@ -153,5 +153,5 @@ let avion = new class {
     console.log(this.id);
   };
 }('IAR 99');
-avion.id
+avion.id;
 ```
