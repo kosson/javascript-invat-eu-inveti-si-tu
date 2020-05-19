@@ -7,7 +7,7 @@ Este un șablon folosit atunci când nu știi tipul obiectelor pe care le vei cr
 function SolidPoliedru () {
     this.tipul = `poliedru`;
 };
-Primo.prototype.creează = function (fețe) {
+SolidPoliedru.prototype.creează = function (fețe) {
     this.entitate = `Am creat un poliedru cu ${fețe}`;
     return this;
 }
@@ -15,7 +15,7 @@ Primo.prototype.creează = function (fețe) {
 function SolidSferă () {
     this.tipul = `sferă`;
 };
-Secundo.prototype.creează = function (fețe) {
+SolidSferă.prototype.creează = function (fețe) {
     this.entitate = `Am creat o sferă`;
     return this;
 }
@@ -25,13 +25,13 @@ function SolideFactory () {
     this.registrulObiectelorCreate = {};    
     // creez metoda prin care fac instanțierea obiectelor din registrul celor posibile
     this.creez = function (numărFațete) {
-        return new this.registrulObiectelorCreate[numărFațete]().creez();
+        return new this.registrulObiectelorCreate[numărFațete]().creează();
     };
     // metoda de introducere a obiectelor în registru verificând dacă au o anumită metodă în prototype.
-    this.înregistrezObiecteDeCreat = function (obiectul, fețe) {
+    this.înregistrezObiecteDeCreat = function (fețe, obiectul) {
         // verifică dacă în prototype au o metodă creează. Dacă da, introdu un nou obiect în `registrulObiectelorCreate`. Verifici pur și simplu care este metoda de interfațare existentă. Atenție, JS nu are interfețe!!! În cazul nostru, dacă solidul are o metodă creează, este unul din obiectele pe care dorim să le creăm folosind aceast Factory.
         if (obiectul.prototype.creează) {
-            this.registrulObiectelorCreate[obiectul] = fețe;
+            this.registrulObiectelorCreate[fețe] = obiectul;
         }
     }
 };
@@ -49,5 +49,10 @@ function SolideGeneratorSingleton () {
 
     function creează (numarDeFațete) {
         var solid = _SF.creez(numărFațete)
+    }
+
+    if (!instanță) {
+        instanță = init();
+        return instanță;
     }
 }
