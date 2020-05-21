@@ -99,14 +99,22 @@ console.log(iteratorObjNou.next().value); // unu
 Folosind `Array.from(setVizat)` se poate obține un array dintr-un `Set`.
 
 ```javascript
-const unice = new Set(['ceva', 'alceva']);
-const arr =  Array.from(unice);
+const unice = new Set(['ceva', 'altceva']);
+const arr = Array.from(unice);
 ```
 
 ### Generarea unui array cu valori unice
 
 ```javascript
 const ArrayUnic = [...new Set(unArray)];
+```
+
+### Verificarea unui array ca subset al altuia
+
+Acest exemplu se folosește de dimensiunea lui `Set`. Dacă array-ul de control există în cel interogat, dimensiunea celui interogat nu se va modifica.
+
+```javascript
+const isSubset = (a, b) => (new Set(b)).size === (new Set(b.concat(a))).size;
 ```
 
 ## Parcurgerea unui set
@@ -139,7 +147,7 @@ for (let [cheie, valoare] of setNou.entries()) {
 
 ### Set cu elemente unice dintr-un Array
 
-Există posibilitatea ca la un moment dat să parcurgi programatic un text din care să extragi o submulțime de cuvinte după anumite criterii. Există posibilitatea ca aceste cuvinte să se repete în array-ul nou constituit. Ceea ce ar fi nevoie în acest scenariu este să se constituie un `Set` inițial de cuvinte la care în timp să se poată adăuga altele.
+Există posibilitatea ca la un moment dat să parcurgi programatic un text din care să extragi o submulțime de cuvinte după anumite criterii. Există posibilitatea ca aceste cuvinte să se repete în array-ul nou constituit. Ar fi nevoie în acest scenariu să se constituie un `Set` inițial de cuvinte la care în timp să se poată adăuga altele.
 `Set` va excela la acest capitol.
 
 ```javascript
@@ -149,9 +157,15 @@ console.log(unice);
 // [ "pădure", "tăiere", "inactivitate", "deșertificare" ]
 ```
 
+Acest caz conduce și la concluzia că în orice moment ai putea folosi un `Set` pentru a testa dacă toate valorile unui array sunt identice:
+
+```javascript
+const areEqual = arr => new Set(arr).size === 1;
+```
+
 ## map / reduce / filter
 
-Un `Set` nu oferă posibilitatea de a prelucra datele setului folosind map, reduce și filter, dar se poate transforma un set într-un array folosind operatorul spread.
+Un `Set` nu oferă posibilitatea de a prelucra datele setului folosind `map`, `reduce` și `filter`, dar se poate transforma un set într-un array folosind operatorul spread.
 
 ```javascript
 const setNou = new Set(['a', 10, 'altceva']);
@@ -159,3 +173,8 @@ const rez = [...setNou].filter(e => e == 10); // [10]
 ```
 
 Pentru a transforma un `Set` într-un array pe care să se poată aplica metodele array-urilor, putem folosi și `Array.from(numeSet)`.
+
+## Resurse
+
+- [Check if all items in an array are equal](https://1loc.dev/#check-if-all-items-in-an-array-are-equal)
+- [Check if an array is subset of other array](https://1loc.dev/#check-if-an-array-is-subset-of-other-array)

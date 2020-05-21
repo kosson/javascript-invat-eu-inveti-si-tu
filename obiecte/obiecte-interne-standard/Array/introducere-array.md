@@ -228,6 +228,14 @@ tablou[-1];          // ceva în afară
 
 Am indicat mai sus faptul că verificarea unui array cu `typeof` are drept rezultat tipul obiect. Deci este clară natura adâncă a acestui tip de structură. Ar fi foarte util de verificat în lucrul cu array-uri dacă există un anume index și mai ales care este valoarea indexului pentru o anumită valoare?
 
+### Este array-ul gol
+
+Următorul *one liner* verifică dacă obiectul are elemente sau nu. Returnează `true` în cazul în care avem un array gol sau `false` în caz contrar.
+
+```javascript
+const esteGol = arr => Array.isArray(arr) && Object.keys(arr).length > 0;
+```
+
 ### Existența unui index
 
 Pentru a verifica dacă un index există în array, poți folosi operatorul `in` pentru că un array, de fapt, este un obiect, iar indecșii sunt cheile lui. Operatorul `in` detectează dacă pentru un anumit index, există o valoare în array.
@@ -413,7 +421,7 @@ let alta = colectie.slice();
 console.log(alta);
 ```
 
-Dacă un array are obiecte drept elemente dacă am copia acel array, de fapt am face o copie la referințele către obiecte. În limba engleză vom întâlni această situație cu denumirea *shallow copy* - **copie subțire**. metoda slice permite și un control al conținutului care va fi copiat pentru că putem menționa de la care index a array-ului original să înceapă copierea valorilor în cel nou.
+Dacă un array are obiecte drept elemente dacă am copia acel array, de fapt am face o copie la referințele către obiecte. În limba engleză vom întâlni această situație cu denumirea *shallow copy* - **copie subțire**. metoda `slice` permite și un control al conținutului care va fi copiat pentru că putem menționa de la care index a array-ului original să înceapă copierea valorilor în cel nou.
 
 O altă metodă de a copia un array ar fi prin folosirea metodei `concat()`.
 
@@ -439,6 +447,8 @@ let alta = [...colectie];
 ```
 
 Ceea ce trebuie reținut este faptul că operatorul va crea un nou array, lăsându-l neatins pe cel original.
+
+Ar mai fi folosirea metodei `map` pentru a copia un array, precum în `const copie = arr => arr.map(x => x);`.
 
 ## Manipularea dimensiunii
 
@@ -472,7 +482,7 @@ const tablou = ['x', 'y'];
 tablou.length = 3;
 ```
 
-În acest moment ceea ce s-a întâmplat este că a fost introdus un slot gol în array.
+Mărind dimensiunea array-ului, care deja are elemente, de fapt se introduc sloturi goale.
 
 ### Scăderea dimensiunii unui array menționând `length`
 

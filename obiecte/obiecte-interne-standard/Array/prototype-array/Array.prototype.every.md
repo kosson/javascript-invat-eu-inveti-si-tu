@@ -1,6 +1,6 @@
 # Array.prototype.every()
 
-Metoda testează dacă absolut toate elementele din array trec un test care se face printr-un callback. Atenție, fiecare element, rând pe rând, trebuie să treacă testul pentru ca `every()` să returneze `true`.
+Metoda testează dacă absolut toate elementele din array trec un test, care se face printr-un callback. Atenție, fiecare element, rând pe rând, trebuie să treacă testul pentru ca `every()` să returneze `true`.
 
 Funcția de test poate primi trei argumente:
 
@@ -37,4 +37,19 @@ colectie.every(function (val, idx, arr) {
 }); // true
 ```
 
-Funcția callback verifică pentru fiecare element și returnează valoarea de adevăr pentru fiecare verificare.
+Funcția callback verifică pentru fiecare element și returnează valoarea de adevăr pentru fiecare verificare. Și o variantă *onw liner*:
+
+```javascript
+const suntEgaleIntreEle = arr => arr.length > 0 && arr.every(item => item === arr[0]);
+```
+
+Variantă *one liner* pentru a verifica dacă toate elementele sunt identice cu o valoare după care se face căutarea.
+
+```javascript
+const suntEgaleCuElementDat = (arr, value) => arr.every(item => item === value);
+```
+
+## Resurse
+
+- [Check if all array elements are equal to a given value](https://1loc.dev/#check-if-all-array-elements-are-equal-to-a-given-value)
+- [Check if all items in an array are equal](https://1loc.dev/#check-if-all-items-in-an-array-are-equal)
