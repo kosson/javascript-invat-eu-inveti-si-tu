@@ -1,6 +1,6 @@
 # Array.prototype.sort()
 
-Această metodă modifică definitiv array-ul original. Sortează elementele unui array și returnează acel array. Fii avertizat că această metodă modică array-ul. Există un mic truc care protejează array-ul original: folosirea metodei `slice()` pentru a face o copie pe care apoi faci sortarea.
+Această metodă modifică definitiv array-ul original. Sortează elementele unui array și returnează acel array.Există un mic truc care protejează array-ul original: folosirea metodei `slice()` pentru a face o copie pe care apoi faci sortarea.
 
 ```javascript
 const arrOrig = [23, 'ceva', 43, 8];
@@ -25,9 +25,9 @@ function compara (primulCaracter, alDoileaCaracter) {
 // Array [ "a", "c", "d" ]
 ```
 
-Pentru că valorile de lucru sunt cele ale tabelei Unicod și oarecum nu sunt evidente pentru cel care lucrează cu valorile array-ului, în practică s-a găsit o metodă de a face sortarea să se comporte mai apropiat de ceea ce se așteaptă de la o astfel de metodă.
+Pentru că valorile de lucru sunt cele ale tabelei Unicod, iar acest lucru uneori scapă celui care lucrează cu valorile array-ului, în practică s-a găsit o metodă de a face sortarea să se comporte mai apropiat de ceea ce se așteaptă de la o astfel de metodă.
 
-Acest lucru se transpune în pasarea unei funcții cu rol de sortare. Funcția pasată va compara două elemente x și y. Rezultatul comparării conduce la o decizie în ceea ce privește reorganizarea array-ului. Există trei cazuri în care comportamentul de sortare este modelat de ceea ce este returnat de funcția pasată:
+Acest lucru se transpune în pasarea unei funcții cu rol de sortare. Funcția pasată va compara două elemente `x` și `y`. Rezultatul comparării conduce la o decizie în ceea ce privește reorganizarea array-ului. Există trei cazuri în care comportamentul de sortare este modelat de ceea ce este returnat de funcția pasată:
 
 -   valoarea returnată mai mică de 0: x va sta înaintea lui y
 -   valoarea este mai mare de 0: y va sta înaintea lui x
@@ -72,15 +72,17 @@ O altă variantă de comparator pentru valori numerice este pur și simplu scăd
 [-23, -2, 102, 3, -54].sort( (x, y) => x - y );
 ```
 
+## Sortarea obiectelor
+
 Și obiectele pot fi sortate dacă este dată o valoarea uneia dintre proprietăți.
 
 ```javascript
 var colectie = [
-  {nume: 'Gina', valoare: 20},
-  {nume: 'Dobrin', valoare: 16},
-  {nume: 'Sanda', valoare: -12},
-  {nume: 'Nicolae', valoare: 40},
-  {nume: 'Pavel', valoare: -6}
+  {nume: 'Gina',    valoare: 20,  data: '2004-05-12'},
+  {nume: 'Dobrin',  valoare: 16,  data: '2016-08-24'},
+  {nume: 'Sanda',   valoare: -12, data: '1955-12-23'},
+  {nume: 'Nicolae', valoare: 40,  data: '1977-07-27'},
+  {nume: 'Pavel',   valoare: -6,  data: '1011-11-01'}
 ];
 
 // sortare după o valoare arbitrară
@@ -101,9 +103,29 @@ colectie.sort( function (x, y) {
   if ( numeX > numeY ) {return 1};
   return 0;
 });
+
+// ordonarea după data calendaristică - reducere la string
+colectie.sort( (ob1, ob2) => {
+  return new Date(ob1.data).valueOf() - new Date(ob2.data).valueOf();
+});
+
+// Sortare calendaristică după lună luând în considerare UTC
+colectie.sort((ob1, ob2) => {
+  let d1 = new Date(ob1.data);
+  let d2 = new Date(ob2.data);
+  if (d1.getUTCMonth() > d2.getUTCMonth()) {
+    return 1;
+  } else if (d1.getUTCMonth() < d2.getUTCMonth()) {
+    return -1;
+  } else {
+    return d1.getUTCDate() - d2.getUTCDate();
+  }
+});
 ```
 
 Rețineți tactica de a nivela diferențele pe care majusculele și minusculele le dau. S-a folosit metoda `toUpperCase()` pentru a nivela aceaste diferențe.
+
+## Inversarea sortării
 
 Mergând ceva mai departe, dacă extragem funcția separat, putem, la nevoie să inversăm rezultatul sortării.
 

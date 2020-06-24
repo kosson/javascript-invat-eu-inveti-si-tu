@@ -27,14 +27,6 @@ Opțional se poate menționa de unde să se înceapă căutarea prin specificare
 'cevatext'.lastIndexOf('');        // 8 fiind echivalent cu 'cevatext'.length
 ```
 
-## Combinația dintre substr și lastIndexOf.
-
-```javascript
-var fileName = window.location.href;
-fileName = fileName.substr(fileName.lastIndexOf("/") + 1);
-document.write("The file name of this page is " + fileName);
-```
-
 ## Mantre
 
 -   Căutarea se face fix după caracterul sau fragmentul specificat. Atenție la caracterele mari, la spații și diacritice.
