@@ -456,7 +456,7 @@ function oFunctiePromisificată (intrare1, intrare2) {
   return new Promise((resolve, reject) => {
     functieDePromisificat(intrare1, intrare2, (error, date) => {
       if (error) {
-        retunr reject(error);
+        return reject(error);
       }
       rezolve(date);
     });
@@ -471,7 +471,7 @@ oFunctiePromisificată.then((date) => {
 
 ### O funcție `map()` promisificată
 
-Să presupunem că dorim că aplicăm o funcție pe datele dintr-o listă (poate fi foarte bine datele dintr-o listă de fișiere diferite în cazul folosirii Node.js cu `fs`). În exemplul oferit, am denumit în limba română cele două callback-uri ale obiectului Promise la momentul instanțierii pentru a cimenta și mai mult faptul că cele două denumiri sunt doar niște convenții de numire a callback-urilor funcției cu rol de executor.
+Să presupunem că dorim că aplicăm o funcție pe datele dintr-o listă (poate fi foarte bine datele dintr-o listă de fișiere diferite în cazul folosirii Node.js cu `fs`). În exemplul oferit, am denumit în limba română cele două callback-uri ale obiectului `Promise` la momentul instanțierii pentru a cimenta și mai mult faptul că cele două denumiri sunt doar niște convenții de numire a callback-urilor funcției cu rol de executor.
 
 ```javascript
 const lista = ["a", "b", "c"];
@@ -504,6 +504,10 @@ let listaPromisiunilor = mapPromisificat(lista, dublezLitere);
 Pentru fiecare element din array, creezi câte o promisiune.
 
 Totuși, pentru a respecta bunele practici, în lucrul curent ar trebui să folosim denumirile din limba engleză: `resolve` și `reject`.
+
+## Promisiunile ca arbori
+
+Metodele `then`, `catch` și `allSettled` trebuie aplicate direct pe promisiune, nu pe o referință către promisiune. În cazul aplicării pe o referință, se va crea o altă ramură de promisiuni independentă de o alta posibilă. Acest lucru se petrece pentru că aceste metode creează la rândul lor o promisiune. Cel mai adesea aceste aspecte sunt detectate la momentul când se face debugging. Recomandarea generală este ca o promisiune să fie tratată cap-coadă prin daisy-chaining.
 
 ## Mantre
 
