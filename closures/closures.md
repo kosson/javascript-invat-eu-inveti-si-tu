@@ -17,7 +17,7 @@ O funcție definită în interiorul unei funcții container generează un **clos
 
 Am explorat deja la funcții posibile traduceri în limba română și pentru că ambii termeni identificați: **portiță** și  **breșă** nu sunt tocmai eleganți pentru uzul curent. Mai bine folosim termenul în limba engleză. După ce vom fi explorat mai mult, vom înțelege că este o caracteristică, un mecanism al limbajului de programare și astfel, am putea să ne gândim la acțiunea pe care o implică termenul de **closure**.
 
-Să o luăm încetișor. Primul lucru pe care-l știm despre funcții, este că acestea sunt acțiuni transformatoare asupra datelor pe care le primesc (aplicarea pe argumente de care am pomenit), fie că aceste date sunt *injectate* în funcție prin argumente, fie că sunt disponibile *la liber*, în mediul lexical unde a fost declarată funcția.
+Să o luăm încetișor. Primul lucru pe care-l știm despre funcții, este că acestea sunt acțiuni transformatoare asupra datelor pe care le primesc, fie că aceste date sunt *introduse* în funcție prin argumente, fie că sunt disponibile *la liber*, în mediul lexical unde a fost declarată funcția.
 
 Trebuie să ne aducem mereu aminte de importanța redactării codului și în consecință de locul **unde declarăm funcțiile**. Foarte important este și locul de unde le apelăm pentru că de acolo este posibil să *injectăm* prin argumente date. Există scenarii în care aceste date sunt necesare doar în locul în care este apelată funcția sau în obiectul în al cărui context a fost invocată.
 
@@ -53,7 +53,7 @@ Acest comportament al closure-urilor este oportun pentru a *ascunde* date, pentr
 
 ## Closure cu fat arrows
 
-Cel mai simplu și mai elegant exemplu este oferit de sintaxa modernă **fat arrow** pentru a ilustra un closure. Acest exemplu concis este prezentat de Reg **raganwald** Braithwaite în lucrarea sa „JavaScript Allongé, the **Six** Edition” și îl vom diseca la rândul nostru pentru a vedea cum se leagă cunoștințele dobândite de la **mediul lexical**, **funcții** și **compilare și execuție**.
+Cel mai simplu și mai elegant exemplu este oferit de sintaxa modernă **fat arrow** pentru a ilustra un closure. Acest exemplu concis este prezentat de Reg **raganwald** Braithwaite în lucrarea sa *JavaScript Allongé, the **Six** Edition* și îl vom diseca la rândul nostru pentru a vedea cum se leagă cunoștințele dobândite de la **mediul lexical**, **funcții** plus **compilare și execuție**.
 
 ```javascript
 ((x) => (y) => x)(5)(10); // 5

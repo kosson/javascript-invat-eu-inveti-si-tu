@@ -502,6 +502,10 @@ Ce nu poate constitui un enunț al unei expresii? Orice începe cu:
 
 Enunțurile pot fi indentate (pui spații albe înaintea fragmentului de cod și ca efect vizual se vor deplasa spre dreapta). Despre indentare spune *Marele Dicționar pentru Neologisme* din 2000: *plasare a programelor pe linii, pentru scrierea cât mai clară a acestora*.
 
+#### Enunțuri cu etichetă
+
+În limba engleză sunt numite *labeled statement* și pot fi utilizate în enunțurile cu `break` sau `continue`.
+
 ### Declarațiile
 
 Folosind cuvintele cheie ale limbajului faci declarații, care, de fapt, ceea ce menționează este tipul datelor cu care vei lucra în programul tău. Un exemplu foarte simplu este declararea unei variabile: `let x = 10;`.

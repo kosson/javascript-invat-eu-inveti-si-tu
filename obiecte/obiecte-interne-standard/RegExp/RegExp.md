@@ -414,15 +414,15 @@ Utilitatea? Uite, de exemplu, poți face căutări după caractere care, în afa
 
 #### Puțină practică cu seturile
 
-Uite, ceva foarte util. Parsarea însăși a codului sursă JavaScript pentru căutarea unui identificator, care deja știm că poate fi orice caracter plus `_` și `$`: `[A-Za-z_][A-Za-z_0-9]*`. Sau potrivirea unui tag HTML `<[A-Za-z][A-Za-z0-9]*>` - primul set forțează căutarea unui caracter, nu a unei cifre. Din tot ce-am povestit aici o concluzie care de ajutor este că trebuie să știi bine ce cauți și cum arată.
+Uite, ceva foarte util. Parsarea însăși a codului sursă JavaScript pentru căutarea unui identificator, care deja știm că poate fi orice caracter plus `_` și `$`: `[A-Za-z_][A-Za-z_0-9]*`. Sau potrivirea unui tag HTML `<[A-Za-z][A-Za-z0-9]*>` - primul set forțează căutarea unui caracter, nu a unei cifre. Din tot ce-am povestit, o concluzie  este că trebuie să știi bine ce cauți și cum arată.
 
-Un metoda ` comportament de întreruptor cu sensul de *asta sau asta*. Să spunem că avem două variante care ar putea fi intmetoda `oca`. Pentru a face o regăsire după ambele variante, vom opta pentru următoarea construcție regex: `/[cluj[- ]napmetoda `
+Un alt exemplu de set foarte util este cel care are comportament de întreruptor cu sensul de asta sau asta. Să spunem că avem două variante care ar putea fi introduse de utilizator: *cluj napoca* și *cluj-napoca*. Pentru a face o regăsire după ambele variante, vom opta pentru următoarea construcție regex: `/[cluj[-]napoca]/`.
 
-```metoda `
-letmetoda `apoca';
-letmetoda `
-conmetoda `a"]
-```metoda `
+```javascript
+let sir = 'cluj-napoca sau cluj - napoca sau cluj napoca';
+let cautare = sir.match(/cluj[- ]napoca/g);
+console.log(cautare); // ["cluj-napoca","cluj napoca"]
+```
 
 Sunt returnate ambele variante. Este folositor și pentru cazul în care vrei să oferi corecturi la cuvintele introduse cu erori de scriere: `/C[aâ]mpina/`.
 Un detaliu foarte important privind seturile, este cazul folosirii punctului. În interiorul seturilor, punctul nu are înțelesul de *orice caracter*, rol pe care-l are în construcțiile regex. În interiorul seturilor, punctul este punct. Asta permite identificarea de numere întregi, de exemplu. O construcție `[\d.][\d.]\d` poate regăsi toate numele întregi: `0.1` sau `.34`.
@@ -560,7 +560,7 @@ console.dir(cautare); // 2 potriviri
 
 ## Ancorarea și constrângerile de căutare
 
-Ancorele sunt menite a poziționa procesul de căutare înainte sau între caractere.
+Ancorele poziționează cursorul de căutare înainte sau între caractere.
 
 Metacaracterul carret `^`, inițiază procedura de căutare începând de la poziția de dinaintea primului caracter al șirului. De exemplu, `/^a/` va potrivi corect în șirul `agrar` pentru că avem caracterul `a`, care deschide șirul în acest caz. Similar este comportamentul metacaracterului `$`, care marchează limita imediat de după ultimul caracter al șirului. De exemplu, `/r$/`, va potrivi corect caracterul `r` dintr-un șir ca *dar*. O căutare după un șablon încadrat de `^` și `$`, va căuta ca șirul să înceapă strict cu acel caracter care stă imediat după `^` și care se încheie cu acel caracter menționat imediat înaintea lui `$`.
 
