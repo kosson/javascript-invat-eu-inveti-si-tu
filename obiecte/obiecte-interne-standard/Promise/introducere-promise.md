@@ -544,3 +544,4 @@ Metodele `then`, `catch` și `allSettled` trebuie aplicate direct pe promisiune,
 ### Video
 
 - [More About JavaScript ES6 Promises methods, Steve Griffith, Jul 27, 2017](https://www.youtube.com/watch?v=nB-aLKE76pY)
+- [Workshop: Broken Promises, The Workshop Edition - Matteo Collina and James Snell, NearForm](https://youtu.be/yRyfr1Qcf34)
