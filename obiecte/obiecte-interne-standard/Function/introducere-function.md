@@ -206,8 +206,6 @@ var FerdinandI = new Nava('Ferdinand I', 'RO');
 
 Ceea ce am realizat este introducerea proprietăților comune din interfață în obiectele create în baza claselor diferite de vehicule.
 
-
-
 ### Function.prototype.toString()
 
 Returnează un șir de caractere, care reprezintă codul sursă al acelei funcții.

@@ -1,13 +1,15 @@
 # Funcții async / await
 
-Acest enunț a fost introdus în ECMAScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile care au cuvântul cheie `async` în față, vor returna mereu o promisiune. Funcțiile `async` au comportament sicron, ceea ce înseamnă că execuția codului va aștepta ca execuția lor să se încheie. Atenție, dacă operațiunea întârzie, execuția va fi blocată.
+Acest enunț a fost introdus în ECMAScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile care au cuvântul cheie `async` în față, vor returna mereu o promisiune. De îndată ce codul este compilat și executat, funcțiile async sunt executate. Aceși comportament îl întâlnim și la promisiuni. În momentul în care se execută codul, acolo unde motorul întâlnește `new Promise(nume_callback)`, va executa funcția callback.
+
+Funcțiile `async` au comportament sicron, ceea ce înseamnă că execuția codului va aștepta ca execuția lor să se încheie. Atenție, dacă operațiunea întârzie, execuția va fi blocată.
 
 ```javascript
 async function facCeva () {};
 async () => console.log;
 ```
 
-În cazul în care atribui o funcție `async` unei variabile, aceasta va returna o promisiune.
+În cazul în care atribui o funcție `async` unei variabile, aceasta va fi o referință către o promisiune.
 
 ```javascript
 let cevaDeFăcut = async function facCeva () {
@@ -30,7 +32,7 @@ async function cevaAsincron () {
 cevaAsincron().then(console.log);
 ```
 
-În exemplul de mai sus, valoarea 'apar asincron' va fi împachetată într-o promisiune datorită folosirii în subsidiar al lui `Promise.resolve()`.
+În exemplul de mai sus, valoarea 'apar asincron' va fi împachetată într-o promisiune datorită folosirii în subsidiar al lui `Promise.resolve()`. În cazul funcțiilor `async` abia după ce ai rezolvat promisiunea returnată și ai apelat un `then` sau un `await`, corpul funcției va fi apelat asincron.
 
 Avantajul este evident în cazul în care scrii o bibliotecă de cod sau o funcție cu rol utilitar în care nu știi dacă datele care vin sunt *sync* sau *async*. Atunci când trebuie returnat un obiect, acesta va fi returnat fără împachetare.
 
@@ -48,7 +50,7 @@ let x = simulare();
 // [[PromiseValue]]: "Salutare"
 ```
 
-Aceste noi funcții te fac să percepi asicronicitatea ceva mai secvențial, mai sincron. O funcție `async` returnează o promisiune. Cheia utilizării funcțiilor `async` este utilizarea operatorului `await`. Acest operator poate fi folosit în interiorul unei expresii de funcție `async` și numai în interiorul unei astfel de funcții. Acesta returnează valoarea rezolvată a unei promisiuni. În același timp, operatorul oprește execuția funcției `async` până când promisiunea este rezolvată. Abia după rezolvarea promisiunii, va fi reluată execuția funcției. Dacă valoarea nu este o promisiune, este convertită la o promisiune rezolvată. În cazul în care promisiunea este respinsă, este returnată valoarea rezultată ca respingere.
+Aceste noi funcții te fac să percepi asicronicitatea ceva mai secvențial, mai sincron. Cheia utilizării funcțiilor `async` este utilizarea operatorului `await`, care poate fi folosit numai în interiorul unei astfel de funcții. Acesta returnează valoarea rezolvată a unei promisiuni. În același timp, operatorul oprește execuția funcției `async` până când promisiunea este rezolvată. Abia după rezolvarea promisiunii, va fi reluată execuția funcției. Dacă valoarea nu este o promisiune, este convertită la o promisiune rezolvată. În cazul în care promisiunea este respinsă, este returnată valoarea rezultată ca respingere.
 
 ```javascript
 async function sarcina () {
@@ -149,7 +151,44 @@ async function ceva () {
 };
 ```
 
-Erorile care ar putea apărea în urma evaluării unei expresii `throw new Error('O eroare la evaluare')` din funcție. Acestea for putea fi gestionate în `catch(error){}`.
+Erorile care ar putea apărea în urma evaluării unei expresii `throw new Error('O eroare la evaluare')` din funcție. Acestea vor putea fi gestionate în `catch(error){}`.
+
+Mai jos este un exemplu din Node.js cules din workshopul lui Matteo Collina și James Snell intitulat „Broken Promises” cu ocazia OpenJS World 2020.
+
+```javascript
+const EventEmitter = require('events');
+const {promisify} = require('util');
+
+const ev = new EventEmitter();
+const intarzie = promisify(setTimeout);
+
+ev.on('ceva', async () => {
+  await intarzie(2000);
+  try {
+    ceva_inexistent();
+  } catch (err) {
+    // ev.emit('error', err); // #1 Nu uita că se execută sincron
+    // #5 când throw va face bubbling, singura soluție este să-l trimiți pe nextTick
+    process.nextTick(() => ev.emit('error', err));
+  }
+});
+
+ev.on('error', (err) => {
+  // #2 asta înseamnă ca acest callback se execută încă în promisiune
+  /* console.log(err.message);*/
+  // #3 fapt care în cazul în care vrei aici să faci throw, se va face bubble în promisiunea generată de async mai sus
+  throw new Error('eroare'); // #4 va fi tratată în catch-ul asyncului cu un process.nextTick
+});
+
+// #6 Asigură-te că este activată tratarea de `uncaughtException`
+process.on('uncaughtException', (err) => {
+  console.log(err.message);
+});
+
+ev.emit('ceva');
+```
+
+Calea ciudată de a trata erorile a rezultat din utilizarea unei promisiuni, adică a funcției async acolo unde ar fi trebuit să fie un simplu callback. Una din concluziile importate este aceea că în momentul în care pasezi o funcție asincronă unui fragment de cod, acesta trebuie prevăzut un mecanism catch de gestionare a erorilor. O altă concluzie ar fi să nu pasezi un async unui EventEmitter.
 
 ## Concluzii
 
@@ -159,7 +198,7 @@ Scrierea codului asyncron folosind `async`/`await` este o alternativă elegantă
 const [val1, val2, val3] = await Promise.all(promise1(), promise2(), promise3())
 ```
 
-Un posibil exemplu ar fi citirea mai multor fișiere în paralel. Pentru a rula aceste exemplu, vom folosi NodeJS. Mai întâi vom apela pachetele `fs` și `util` după care vom transforma metoda `readFile` într-un a promisificată.
+Un posibil exemplu ar fi citirea mai multor fișiere în paralel. Pentru a rula aceste exemplu, vom folosi Node.js. Mai întâi vom apela pachetele `fs` și `util` după care vom transforma metoda `readFile` într-un a promisificată.
 
 ```javascript
 const util = require('util');
@@ -172,6 +211,36 @@ const fișiere = ['./primul.txt'. './alDoilea.txt'];
   console.log(valori);
 })();
 ```
+
+## Legătura cu promisiunile
+
+Această secțiune rulează codul în Node.js.
+
+```javascript
+new Promise((resolve, reject) => {
+  // Acest cod este rulat imediat ce promisiunea este creată
+  setTimeout(resolve, 100);
+}).then(() => {
+  // codul care va rula aici este **programat** să ruleze după timeout
+  // adică imediat ce lista de asteptare (queue) a microtaskurilor este epuizată
+}).catch();
+```
+
+Și versiunea async.
+
+```javascript
+const intarziere = promisify(setTimeout);
+
+async function ceva () {
+  // fragmentul de aici va fi rulat imediat ce această funcție este apelată.
+  await intarziere(2000);
+  // codul de aici este *programat* să ruleze după timeout,
+  // adică imediat ce lista de asteptare (queue) a microtaskurilor este epuizată
+  // echivalent rulării într-un then
+}
+```
+
+Tot codul care există după un await, este echivalentul rulării într-un `then`.
 
 ## Dependințe cognitive
 
