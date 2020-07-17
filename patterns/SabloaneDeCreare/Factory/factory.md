@@ -144,3 +144,27 @@ document.onreadystatechange = function () {
   }
 };
 ```
+
+## Factory folosind class
+
+Putem folosi sintaxa `class` pentru a crea factory-uri.
+
+```javascript
+class Carte {
+  constructor (id, titlu, autori, an, editura, limba = "ro_RO", cuprins, instanță) {
+    this.id = id;
+    this.descriere = {
+      this.titlu = titlu;
+      this.autori = autori;
+      this.an = an;
+      this.editura = editura;
+      this.limba = limba;
+      this.cuprins = cuprins;
+      this.instanță = instanță;
+    }
+  }
+  afișeazăDescrierea () {
+    console.log(this.descriere);
+  }
+}
+```

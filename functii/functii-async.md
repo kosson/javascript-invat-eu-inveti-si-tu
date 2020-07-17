@@ -1,6 +1,6 @@
 # Funcții async / await
 
-Acest enunț a fost introdus în ECMAScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile care au cuvântul cheie `async` în față, vor returna mereu o promisiune. De îndată ce codul este compilat și executat, funcțiile async sunt executate. Aceși comportament îl întâlnim și la promisiuni. În momentul în care se execută codul, acolo unde motorul întâlnește `new Promise(nume_callback)`, va executa funcția callback.
+Acest enunț a fost introdus în ECMAScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile care au cuvântul cheie `async` în față, vor returna mereu o promisiune. De îndată ce codul este compilat și executat, funcțiile async sunt executate. Acest comportament îl întâlnim și la promisiuni. În momentul în care se execută codul, acolo unde motorul întâlnește `new Promise(nume_callback)`, va executa funcția callback.
 
 Funcțiile `async` au comportament sicron, ceea ce înseamnă că execuția codului va aștepta ca execuția lor să se încheie. Atenție, dacă operațiunea întârzie, execuția va fi blocată.
 
