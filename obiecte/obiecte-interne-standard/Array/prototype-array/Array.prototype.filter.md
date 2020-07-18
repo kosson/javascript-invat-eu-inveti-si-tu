@@ -1,6 +1,6 @@
 # Array.prototype.filter()
 
-Această metodă poate fi înțeleasă ca un test aplicat fiecărui element dintr-un array. Testarea se face după anumite criterii introduse de o funcție callback. Funcția callback returnează o valoare de adevăr pentru elementul curent supus analizei. Dacă un element trece testul, acesta este adăugat unui nou array care se construiește din elementele primului care au trecut testul. Array-ul original nu este modificat.
+Această metodă poate fi înțeleasă ca un test aplicat fiecărui element dintr-un array. Elementele care trec testul sunt introduse într-un nou array. Testarea se face după anumite criterii introduse de o funcție callback. Funcția callback returnează o valoare de adevăr pentru elementul curent supus analizei. Array-ul original nu este modificat.
 
 ```javascript
 const colectie = [23, 34, 2, 10];
@@ -9,7 +9,7 @@ colectie.filter((element) => element > 20);
 ```
 
 Metoda `filter()` face parte integrantă din metodele obiectului intern `Array`. Alături de `map()` și `reduce()` face parte integrantă din paradigma *programării funcționale*.
-Această funcționalitate intră pe lanțurile de prelucrare ale datelor.
+Metoda se dovedește utilă în lanțurile de prelucrare ale datelor. Totuși există un aspect care trebuie luat în considerare, fiind strâns legat de performanțe și de eficiența operațiunilor de prelucrare. Metoda va face testarea tuturor elementelor unui array fără a se opri în momentul în care testul este pozitiv. În cazul unor array-uri de mari dimensiuni, această metodă trebuie analizată atent înainte de a fi folosită. Alternativ, pentru a opri procesul de prelucrare imediat ce testul este trecut, se poate folosi metoda `find()`.
 
 ```javascript
 let carti = [
@@ -69,7 +69,7 @@ let rezultat = filtrare (colectie, function (element) {
 console.log(JSON.stringify(rezultat, null, ' '));
 ```
 
-Un exemplu de filtrare pentru valorile care sunt truthy, care conțin ceva.
+Un exemplu de filtrare pentru valorile care sunt *truthy*, care conțin ceva.
 
 ```javascript
 const data = [ "bar", "foo", "", 0 ];

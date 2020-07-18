@@ -696,7 +696,7 @@ faCeva(); // undefined
 
 Aici este un element în plus. Funcția `faCeva` a fost declarată în obiectul global, ceea ce înseamnă că `scope`-ul său lexical se află în `global scope`. În cazul în care în global scope ar fi fost declarată valoarea `jeton`, la invocarea funcției în sine, nu ca metodă, ar fi fost adusă valoarea acesteia.
 
-Odată cu apariția noii versiuni ECMAScript, metodele au fost definite în mod formal. Standardul definește o metodă ca fiind **o funcție care are o proprietate internă `[[HomeObject]]`**. Această proprietate indică obiectul căruia îi aparține metoda. De curând a fost introdusă o simplificare a scrierii sintaxei:
+Odată cu apariția noii versiuni ECMAScript, metodele au fost definite în mod formal. Standardul definește o metodă ca fiind **o funcție care are o proprietate internă `[[HomeObject]]`**. Această proprietate indică obiectul căruia îi aparține metoda. De curând a fost introdusă o simplificare a scrierii sintaxei, folosind ceea ce numim formă prescurtată **concise method** - *metodă prescurtată*.
 
 ```javascript
 const obi = {
@@ -706,9 +706,7 @@ const obi = {
 obi.faCeva(); // 10
 ```
 
-Observați faptul că declararea metodei `faCeva()` s-a făcut cu notația prescurtată. Este o contragere a scrierii unei metode folosind o funcție anonimă. De la `faCeva: function () {console.log(this.x)}`, am ajuns la forma prescurtată `faCeva () { console.log(this.x) }`. În limba engleză, programatorii numesc această formă prescurtată **concise method** - *metodă prescurtată*. Ar fi bine să vă obișnuiți cu această notație pentru că o veți vedea din ce în ce mai des.
-
-Cazul cel mai util în care prescurtările strălucesc este cel al inițializării directe a proprietăților (în engleză programatorii numesc această tehnică **property initializer**) prin valorile parametrilor unei funcții de tip fabrică.
+De la `faCeva: function () {console.log(this.x)}`, am ajuns la forma prescurtată `faCeva () { console.log(this.x) }`. Cazul cel mai util în care prescurtările strălucesc este cel al inițializării directe a proprietăților (această tehnică este numită **property initializer**) prin valorile parametrilor unei funcții de tip fabrică (o funcție specializată în crearea de obiecte).
 
 ```javascript
 function construiesteObi (unu, doi) {
@@ -716,6 +714,20 @@ function construiesteObi (unu, doi) {
 };
 const obiNou = construiesteObi(1, 2);
 // Object { unu: 1, doi: 2 }
+```
+
+Trebuie făcută o mențiune foarte importantă pentru metodele unui obiect. O funcție săgeată nu poate face legătura `this` la obiectul pentru care ipotetic ar juca rol de metodă. Dar în cazul în care în interiorul metodei ai defini o funcție, aceasta ar putea fi o funcție săgeată. Avantajul ar fi că asigură legătura la `this`-ul metodei, care este obiectul.
+
+```javascript
+const obiLiteral = {
+  ceva: 10,
+  oMetoda () {
+    let altceva = 2;
+    let adun = () => this.ceva + altceva;
+    console.log(adun());
+  }
+};
+obiLiteral.oMetoda(); //12
 ```
 
 ### Adăugarea proprietăților
@@ -1128,8 +1140,7 @@ obi2.faAltceva(); // "ce-i returnat din obi1 este oferită aici"
 
 ### Obiecte similare array-ului
 
-Cel mai la îndemână exemplu sunt nodurile DOM. Parcurgerea (traversing) DOM-ului se numește „walking the DOM”.
-DOM-ul este o colecție de noduri. Cel mai adesea pentru accesarea informației din nodurile de interes, mai întâi acestea trebuie identificate. Se folosesc clasicele:
+Cel mai la îndemână exemplu sunt nodurile DOM. Parcurgerea (traversing) DOM-ului se numește „walking the DOM”. DOM-ul este o colecție de noduri. Cel mai adesea pentru accesarea informației din nodurile de interes, mai întâi acestea trebuie identificate. Se folosesc clasicele:
 
 -   `document.getElementById("#idfolosit")`,
 -   `document.getElementsByTagName`,
@@ -1177,7 +1188,7 @@ caAr.forEach(function (elem) {
 });
 ```
 
-Elementele găsite sunt de fapt o colecție de noduri, care este dinamică în sensul că, de fiecare dată când DOM-ul va suferi o modificare, se va actualiza și aceasta. În ES6 există o aceeași abordare: `arrayLike = Array.from(nodes)`. ES6 introduce un nou tip de obiecte iterabile - obiecte ale căror elemente pot fi extrase rând pe rând.
+Elementele găsite sunt de fapt o colecție de noduri. Aceste noduri sunt dinamice în sensul că, de fiecare dată când DOM-ul va suferi o modificare, se va actualiza și aceasta. În ES6 există o aceeași abordare: `arrayLike = Array.from(nodes)`. ES6 introduce un nou tip de obiecte iterabile - obiecte ale căror elemente pot fi extrase rând pe rând.
 
 ### Obiecte ca dicționare de valori
 
