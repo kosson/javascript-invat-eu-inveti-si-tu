@@ -22,6 +22,8 @@ Dacă doriți să sprijiniți mai departe munca editorială pentru următoarele 
 Pentru cei care vor să facă cinste cu o cafeluță, puteți să trimiteți una pe paypall.com la adresa de email kosson@gmail.com.
 Materialele acestea plus alte lucruri utile vor avea un spațiu organizat la https://kosson.ro/ieis2 și mai departe la https://ieis2.ro.
 
+Mai nou, poți să-mi dai o cafea la [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/P5P81Y27Q)
+
 ***JavaScript, I learn, you learn*** is a collection of texts meant to shed light on JavaScript topics aiming to become a free educational resource for all those who would like to learn the language.
 The content is in the Romanian language, but the illustrations convey an universal language easy to grasp. In the near future, I will try developing a visual encoding for the language entities. The aim is to achieve faster a deep understanding of programming concepts. This will open a new class of educational materials.
 If interested, please support my work at https://www.patreon.com/kosson or simply send me a coffee using paypall.com at kosson@gmail.com.

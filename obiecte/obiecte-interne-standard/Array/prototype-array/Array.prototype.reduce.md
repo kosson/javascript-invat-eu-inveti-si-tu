@@ -1,14 +1,12 @@
 # Array.prototype.reduce()
 
-Această metodă aplică o funcție tuturor entităților dintr-un array, de la stânga la dreapta, iar ceea ce rezultă este introdus într-un alt array sau obiect cu rol de acumulator al rezultatelor. În uzul curent vei mai întâlni și termenul de pliere. Îți poți închipui array-ul original, ca fiind o coală de hârtie pliată, iar fiecare pliu, fiind o entitate. Această metodă, *desface* fiecare pliu, rând pe rând, aplică o operațiune sau un set de operațiuni asupra pliului, și re-pliază. Plierea colii noastre va arăta diferit după forma pe care operațiunile au dat-o.
-
-Spunem că este returnată valoarea rezultată după reducere (*pliere*).
+Această metodă aplică o funcție tuturor entităților dintr-un array, de la stânga la dreapta, iar ceea ce rezultă este introdus într-un alt array sau obiect cu rol de acumulator al rezultatelor.
 
 Metoda se aplică pe un array și primește ca argumente o funcție callback și o valoare opțională de pornire, dacă se dorește. Trebuie reținut faptul că array-ul pe care se face *reducerea* poate fi constituit din elemente care pot fi orice valoare.
 
 ## Mică istorie
 
-Limbajul a avut dintotdeauna enunțul `for`. Poți parcurge foarte ușor un array cu un `for`:
+Limbajul a avut dintotdeauna enunțul `for`. Folosindu-l, poți parcurge foarte ușor un array aplicând anumite transformări pe fiecare element în parte.
 
 ```javascript
 var colectie = ["unu", "doi", "trei"];
@@ -17,7 +15,7 @@ for (var i = 0; i < colectie.length; i++) {
 };
 ```
 
-Odată cu versiunea a cincea a standardului, apare `forEach`, ca nouă metodă oferită de prototipul obiectului intern `Array`. Operațiunea de mai sus va avea un nou avatar:
+Odată cu versiunea a cincea a standardului, apare `forEach`, ca nouă metodă oferită de prototipul obiectului intern `Array`. Codul de mai sus poate fi rescris astfel:
 
 ```javascript
 var colectie = ["unu", "doi", "trei"];
@@ -26,20 +24,30 @@ colectie.forEach(function(element){
 });
 ```
 
-Ce-i nou? Faptul că `forEach` gestionează *modelarea* fiecărui element din array prin intermediul unei funcții pasate drept argument (te-ai prins, un *callback*).
+Ce-i nou? Faptul că `forEach` gestionează *modelarea* fiecărui element din array folosind o funcție cu rol de callback.
 
-Reduce construiește pe ceea ce oferă `forEach` și `map` ducând mai departe capabilitățile de procesare prin utilizarea unei structuri de date cu rol de acumulator și a unor mecanisme ce permit o filtrare a datelor pe măsură ce acestea sunt prelucrate. Metoda `reduce()` primește
+Reduce construiește pe ceea ce oferă `forEach` și `map`, ducând mai departe posibilitățile de procesare prin utilizarea unei structuri de date cu rol de acumulator și a unor mecanisme ce permit o filtrare a datelor pe măsură ce acestea sunt prelucrate. Pe lângă callback, `reduce` poate primi opțional, o valoare de inițiere.
 
 Funcția callback primește patru argumente și se va aplica pe fiecare element al array-ului cu excepția primului element din array:
 
--   `acumulator`: este valoarea acumulată până la momentul unei noi operațiuni. Aceasta este returnată de invocarea anterioară a callback-ului sau inițial este valoarea opțională pasată ca al doilea argument lui `reduce`,
--   `currentValue`: este elementul curent din array care este procesat,
--   `currentIndex`: indexul elementului care tocmai este procesat și pornește de la valoarea `0`, dacă este oferit metodei `reduce` cel de-al doilea parametru. Dacă nu, pornește de la `1`.
+-   `acumulator`: este valoarea acumulată până la momentul următoarei execuții a callback-ului,
+-   `currentValue`: este elementul curent procesat,
+-   `currentIndex`: indexul elementului care tocmai este procesat și pornește de la valoarea `0`, dacă `reduce` are cel de-al doilea parametru. Dacă nu, pornește de la `1`.
 -   `arrayOriginal`: chiar obiectul care trebuie parcurs.
 
-Metoda `reduce` poate primi opțional, pe lângă callback și o valoare de inițiere. Această valoare va fi valoarea de inițiere a acumulatorului. În cazul în care valoarea de inițializare nu este introdusă, ca valoare pentru acumulator, va fi prima din array-ul de prelucrat, dar peste care se va trece fără a se face prelucrarea respectivului obiect - pur și simplu e gol.
+Denumirile parametrilor funcției callback sunt arbitrar alese. Poți pune ce denumiri ți se par cel mai relevante pentru înțelegerea codului. Dacă nu sunt necesare, ultimele două argumente din cele patru pot fi omise.
 
-Pentru a înțelege mai repede `reduce`, este util să privim la următoarea secvență de cod:
+În cazul în care valoarea de inițiere (array sau obiect) nu este introdusă, valoarea acumulatorului va fi prima din array-ul de prelucrat. Acest element va fi luat în calcul pentru cea de-a doua execuție a callback-ului.
+
+```javascript
+['unu', 'doi', 'trei'].reduce( function (acumulator, elementulDeLucru, index, arrOriginal) {
+  return acumulator;
+});// este returnată prima valoare din array
+```
+
+Dacă nu este dată o valoare de inițializare, acumulatorul va fi prima valoare din array, iar `currentValue`, cea de-a doua. Când ai astfel de construcții, de regulă operezi cu valori primare dintr-un array. Un lucru foarte important este acela că obiectul acumulator, fie aceasta un obiect sau array, trebuie returnat.
+
+În cazul următoarei secvențe de cod, elementul de start va fi un obiect gol.
 
 ```javascript
 ['unu', 'doi', 'trei'].reduce(function(acumulator, elementulDeLucru, index, arrOriginal){
@@ -48,22 +56,20 @@ Pentru a înțelege mai repede `reduce`, este util să privim la următoarea sec
 // este returnată chiar valoarea de pornire: {}
 ```
 
-Observă faptul că valoarea inițială a acumulatorului este chiar `{}`, cel de-al doilea argument dat metodei `reduce`. În cazul în care se introduce valoarea de pornire, aceasta va fi acumulatorul și prima valoare din array-ul de prelucrare va fi `currentValue`. Dacă nu este dată o valoare de inițializare, acumulatorul va fi prima valoare din array, iar `currentValue`, cea de-a doua.
+Observă faptul că valoarea inițială a acumulatorului este cel de-al doilea argument. În cazul în care se introduce valoarea de pornire, aceasta va fi acumulatorul, iar prima valoare din array-ul de prelucrare va fi `currentValue`.
 
 ## Mantre
 
--   se mai numește și `fold`, adică o funcție care să plieze valori pe rezultatul computat deja,
--   este o metodă Array care primește drept argumente un callback și o valoare opțională,
+-   `reduce` se mai numește și `fold`, adică o funcție care *pliază* valori prin prelucrarea lor pe un rezultat existent,
 -   `[1,2,3].reduce(reducător, valoareInitiala)` este, de fapt, o expresie care va fi evaluată la o singură valoare finală a acumulatorului,
--   callback-ul primește patru argumente: `valoareaAnterioara`, `valoareaDeLucru`, `indexCurent`, `array`,
--   când este primită ca argument valoarea opțională, aceasta devine `valoareaAnterioara`,
--   `reduce()` trebuie să returneze ceva neapărat,
--   când pasezi ca argument opțional un obiect, elementele array-ului devin cheile obiectului nou creat,
--   dacă valoarea opțională este un obiect, în acesta se pot specifica criterii de selecție `{varsta: [], sex[]}`.
+-   callback-ul primește patru argumente: `acumulator`, `valoareaDeLucru`, `indexCurent`, `ÎntregulArray`,
+-   când este primită ca argument valoarea opțională, aceasta devine `acumulator`,
+-   `reduce()` trebuie neapărat să returneze acumulatorul,
+-   când pasezi ca argument opțional un obiect, elementele array-ului devin cheile obiectului nou creat
 
 ## Reduce în practică
 
-Pe lângă funcția callback mai poți da o valoare opțională, iar aceasta va fi folosită ca prim argument la prima invocare a callback-ului. Va fi valoarea de la care se pornește. Poate fi un array, un obiect sau o valoare, cum ar fi `0`. Depinde de valoarea de la care dorești să pornești.
+Al doilea argument opțional va juca rolul de acumulator la prima invocare a callback-ului. Va fi valoarea de la care se pornește. Poate fi un array, un obiect sau o valoare, cum ar fi `0`. Depinde de valoarea de la care dorești să pornești.
 
 ```javascript
 var valoriNoi = [1, 2, 3].reduce(function (acumulator, valoarea) {
@@ -85,6 +91,44 @@ Dacă nu este dată o valoare opțională de start ca al doilea argument după c
 ```
 
 ## Reduce pe array-uri
+
+Dacă array-ul este gol și nu este dată o valoare de pornire `initialValue`, atunci va fi emisă o eroare `TypeError`.
+Dacă array-ul are o singură valoare indiferent de poziția acesteia și nu este oferită o valoare `initialValue` sau dacă `initialValue` este dată, dar array-ul este gol, atunci valoarea unică va fi returnată fără a fi invocat callback-ul.
+
+```javascript
+[0, 1, 2, 3, 4].reduce(function(previousValue, currentValue, currentIndex, array) {
+  return previousValue + currentValue;
+}); // 10
+```
+
+|                  | previousValue | currentValue | currentIndex | array            | valoarea returnată |
+|:---------------- |:------------- |:------------ |:------------ |:---------------- |:------------------ |
+| prima invocare   | 0             | 1            | 1            | \[0, 1, 2, 3, 4] | 1                  |
+| a doua invocare  | 1             | 2            | 2            | \[0, 1, 2, 3, 4] | 3                  |
+| a treia invocare | 3             | 3            | 3            | \[0, 1, 2, 3, 4] | 6                  |
+| a patra invocare | 6             | 4            | 4            | \[0, 1, 2, 3, 4] | 10                 |
+
+Rezultatul lui `reduce` este la final 10. Varianta ES6 arată astfel:
+
+```javascript
+[0, 1, 2, 3, 4].reduce( (prev, curr) => prev + curr );
+```
+
+Dacă s-ar oferi o valoare inițială pentru al doilea argument, am avea următorul exemplu.
+
+```javascript
+[0, 1, 2, 3, 4].reduce(function(previousValue, currentValue, currentIndex, array) {
+  return previousValue + currentValue;
+}, 10);
+```
+
+|                  | previousValue | currentValue | previousIndex | array            | valoarea returnată |
+|:---------------- |:------------- |:------------ |:------------- |:---------------- |:------------------ |
+| prima invocare   | 10            | 0            | 0             | \[0, 1, 2, 3, 4] | 10                 |
+| a doua invocare  | 10            | 1            | 1             | \[0, 1, 2, 3, 4] | 11                 |
+| a treia invocare | 11            | 2            | 2             | \[0, 1, 2, 3, 4] | 13                 |
+| a patra invocare | 13            | 3            | 3             | \[0, 1, 2, 3, 4] | 16                 |
+| a patra invocare | 16            | 4            | 4             | \[0, 1, 2, 3, 4] | 20                 |
 
 Un exemplu de calcul pentru generarea unui obiect care să conțină pentru fiecare valoare a elementelor din array, pătratul lor:
 
@@ -151,7 +195,10 @@ var alfabetic = colectie.reduce(function(acumulator, cuvant){
   acumulator[cuvant[0]].push(cuvant);
   return acumulator;
 },{});
-// Object { C: Array[3], B: Array[3], S: Array[1], O: Array[1] }
+// { C: [ 'Constanța', 'Călimănești', 'Cluj' ],
+//   B: [ 'Bărcănești', 'Bacău', 'Baia Mare' ],
+//   S: [ 'Sinaia' ],
+//   O: [ 'Oradea' ] }
 ```
 
 ### Însumarea valorilor dintr-un array:
@@ -164,37 +211,26 @@ var total = [0, 1, 2, 3].reduce(function(a, b) {
 
 ### Aplatizarea unui array de array-uri:
 
+Chiar dacă în cazul array-urilor avem la îndemână în acest moment metoda `flat()`, în scop didactic, vom simula funcționarea lui `flat` folosind `reduce`.
+
 ```javascript
 var plat = [[0, 1], [2, 3], [4, 5]].reduce(function(previousValue, currentValue) {
   return previousValue.concat(currentValue);
-}, []);
-// aplatizat este: [0, 1, 2, 3, 4, 5]
+}, []); // aplatizat este: [0, 1, 2, 3, 4, 5]
 ```
  Un alt exemplu folosind toate argumentele callback-ului.
 
 ```javascript
 var texte = [["Gică", "Georgică"], "Abramburica", ["Nadia", "Ana"]].reduce(function (previousValue, currentValue, currentIndex, array) {
   return previousValue.concat(currentValue);
-}, []);
-texte ; // Array [ "Gică", "Georgică", "Abramburica", "Nadia", "Ana" ]
+}, []); // Array [ "Gică", "Georgică", "Abramburica", "Nadia", "Ana" ]
 ```
 
-#### Contopirea a două array-uri variantă cu functor
-
-```javascript
-var colectii = [["unul", "altul", "cineva"], ["munte", "șes", "podiș"]];
-// var secundo = ;
-var aplatizare = function(colectii) {
-  return colectii.reduce( function(tot, element){
-    return tot.concat(element);
-  });
-};
-aplatizare(colectii); // Array [ "unul", "altul", "cineva", "munte", "șes", "podiș" ]
-```
+### Folosirea `rest parameters`
 
 Folosirea `rest parameters`, adică o sintaxă ce permite extragerea unui `Array` din argumentele pasate unei funcții simplifică mult operațiunile. Această sintaxă constă în adăugarea unui nume de parametru prefixat de trei puncte de suspensie. Această sintaxă generează un `Array` adevărat, nu un *array-like* așa cum este `arguments`.
 
-Un exemplu de transformare a funcționalității unei funcții construite clasic, care face suma tuturor argumentelor (`arguments`) cu excepția primului, care va fi folosit drept multiplicator pentru suma obținută. Acest exemplu este oferit de Nicolás, un consultant JavaScript din Buenos Aires, Argentina în explicarea conceptelor noi pe care le introduce ECMAScript 2015 - [ES6 Spread and Butter in Depth](https://ponyfoo.com/articles/es6-spread-and-butter-in-depth)
+Un exemplu de transformare a funcționalității unei funcții construite clasic, care face suma tuturor argumentelor (`arguments`) cu excepția primului, care va fi folosit drept multiplicator pentru suma obținută. Acest exemplu este oferit de Nicolás, un consultant JavaScript din Buenos Aires, Argentina în explicarea conceptelor noi pe care le introduce ECMAScript 2015 - [ES6 Spread and Butter in Depth](https://ponyfoo.com/articles/es6-spread-and-butter-in-depth).
 
 ```javascript
 function faSumaSiDubleaza(){
@@ -211,7 +247,7 @@ var total = faSumaSiDubleaza(34,10,2,30,12);
 console.log(total); // 1836
 ```
 
-## Căutarea celui mai lung string dintr-un array de șiruri.
+### Căutarea celui mai lung string dintr-un array de șiruri.
 
 Varianta clasică ar fi următoarea:
 
@@ -227,7 +263,7 @@ Condiții:
 \#2. Testezi dacă dimensiunea șirului (element al array-ului) este mai mare decât dimensiunea șirului găsit anterior.
 
 -   DA -> atunci valoarea lui `celMaiLung` este suprascrisă cu noua valoare;
--   NU -> returnează valoarea lui celMaiLung;
+-   NU -> returnează valoarea lui `celMaiLung`;
 -   Aceeași operațiune de comparare se face pentru toate elementele array-ului cu valoarea găsită anterior până când este păstrată cea mai mare.
 
 ```javascript
@@ -266,9 +302,13 @@ function cautaSirLung(colectie){
 cautaSirLung(colectie); // Object { index: 2, valoare: "telejurnal" }
 ```
 
-## Reduce pe obiecte
+## Reduce pe array-uri de obiecte
+
+Metoda `reduce` are aplicativitate și în lucrul cu array-uri ale căror elemente sunt obiecte.
 
 ### Reduce pentru selectare după criterii specificate printr-un obiect opțional.
+
+În următorul exemplu putem culege date din elementele obiect ale array-ului pentru a constitui ordonări, clasificări și chiar statistici.
 
 ```javascript
 var colectie = [
@@ -279,52 +319,94 @@ var colectie = [
   {clasa: 'cervide', sex: 'feminin', varsta: 2},
 ];
 colectie.reduce(function(colectie, element, index){
-  colectie[element.sex].push(element) ;
+  colectie[element.sex].push(element);
   return colectie;
 },{masculin: [], feminin: []});
 // Object { masculin: Array[3], feminin: Array[2] } --> fiecare array conține obiectele
 ```
 
-Dacă array-ul este gol și nu este dată o valoare de pornire `initialValue`, atunci va fi emisă o eroare `TypeError`.
-Dacă array-ul are o singură valoare indiferent de poziția acesteia și nu este oferită o valoare `initialValue` sau dacă `initialValue` este dată, dar array-ul este gol, atunci valoarea unică va fi returnată fără a fi invocat callback-ul.
+În cazul extragerii de date într-un obiect nou folosid o colecție de obiecte, apare o problemă de care vă veți lovi. În cazul în care `reduce` întâlnește două obiecte în colecție iar valoarea unei proprietăți este identică, ceea ce va fi introdus în acumulator sunt valorile ultimului obiect întâlnit. Pentru a ilustra, am imaginat o colecție de cărți care cuprinde mai multe exemplare dintr-un titlu. Este observabil că indiferent câte exemplare am avea, în obiectul final este raportat doar unul singur care va purta datele ultimului exemplar.
+
 
 ```javascript
-[0, 1, 2, 3, 4].reduce(function(previousValue, currentValue, currentIndex, array) {
-  return previousValue + currentValue;
-}); // 10
+const colecție = [
+    {id: 10, titlu: "Undeva, cândva", 'împrumutată': true},
+    {id: 23, titlu: "Undeva, cândva", 'împrumutată': false},
+    {id: 4, titlu: "Unde mergem diseară", 'împrumutată': true},
+    {id: 5, titlu: "Unde mergem diseară", 'împrumutată': true},
+    {id: 34, titlu: "Ana", 'împrumutată': false}
+  ];
+  const titluri = colecție.reduce((acumulator, carte) => {
+    acumulator[carte.titlu] = []; // în cazul înregistrărilor cu valori identice, array-ul este suprascris
+    // rezolvare: acumulator[carte.titlu] = acumulator[carte.titlu] || [];
+    acumulator[carte.titlu].push({id: carte.id, împrumutată: carte.împrumutată});
+    return acumulator;
+  }, {});
+
+  console.log(titluri);
+
+/*
+{ 
+  "Undeva, cândva": [ 
+    { 
+      "id": 23, 
+      "împrumutată": false 
+    } 
+  ], 
+  "Unde mergem diseară": [ 
+    { 
+      "id": 5, 
+      "împrumutată": true 
+    } 
+  ], 
+  "Ana": [ 
+    { 
+      "id": 34, 
+      "împrumutată": false 
+    } 
+  ] 
+} 
+*/
 ```
 
-|                  | previousValue | currentValue | currentIndex | array            | valoarea returnată |
-|:---------------- |:------------- |:------------ |:------------ |:---------------- |:------------------ |
-| prima invocare   | 0             | 1            | 1            | \[0, 1, 2, 3, 4] | 1                  |
-| a doua invocare  | 1             | 2            | 2            | \[0, 1, 2, 3, 4] | 3                  |
-| a treia invocare | 3             | 3            | 3            | \[0, 1, 2, 3, 4] | 6                  |
-| a patra invocare | 6             | 4            | 4            | \[0, 1, 2, 3, 4] | 10                 |
+Acest lucru se petrece pentru că array-ul pe care dorim să-l completăm cu elementele specifice fiecărui exemplar, de fapt este suprascris în cazul prprietăților obiectului de prelucrat care au aceeași valoare. Rezolvarea este să indici elementul din noul array format în care să fie adăugate elementele specifice, iar dacă acest array nu există, să fie creat: `acumulator[carte.titlu] = acumulator[carte.titlu] || [];`. Reține faptul că pentru a acumula valori diferite ale unei proprietăți cu aceeași valoare, trebuie să indici aceeași *adresă* din obiectul care se constituie.
 
-Rezultatul lui `reduce` este la final 10. Varianta ES6 a aceleiași funcții `reduce` arată astfel:
+Rezultatul așteptat va fi cel dorit:
 
 ```javascript
-[0, 1, 2, 3, 4].reduce( (prev, curr) => prev + curr );
+{ 
+  "Undeva, cândva": [ 
+    { 
+      "id": 10, 
+      "împrumutată": true 
+    }, 
+    { 
+      "id": 23, 
+      "împrumutată": false 
+    } 
+  ], 
+  "Unde mergem diseară": [ 
+    { 
+      "id": 4, 
+      "împrumutată": true 
+    }, 
+    { 
+      "id": 5, 
+      "împrumutată": true 
+    } 
+  ], 
+  "Ana": [ 
+    { 
+      "id": 34, 
+      "împrumutată": false 
+    } 
+  ] 
+} 
 ```
 
-Dacă s-ar oferi o valoare inițială ca al doilea argument:
+### Folding pe o proprietate a unui obiect/ănregistrare/câmp
 
-```javascript
-[0, 1, 2, 3, 4].reduce(function(previousValue, currentValue, currentIndex, array) {
-  return previousValue + currentValue;
-}, 10);
-```
-|                  | previousValue | currentValue | previousIndex | array            | valoarea returnată |
-|:---------------- |:------------- |:------------ |:------------- |:---------------- |:------------------ |
-| prima invocare   | 10            | 0            | 0             | \[0, 1, 2, 3, 4] | 10                 |
-| a doua invocare  | 10            | 1            | 1             | \[0, 1, 2, 3, 4] | 11                 |
-| a treia invocare | 11            | 2            | 2             | \[0, 1, 2, 3, 4] | 13                 |
-| a patra invocare | 13            | 3            | 3             | \[0, 1, 2, 3, 4] | 16                 |
-| a patra invocare | 16            | 4            | 4             | \[0, 1, 2, 3, 4] | 20                 |
-
-### Folding pe un câmp al unei înregistrări
-
-Uneori ai nevoie să faci ceea ce se numește împăturire. Să presupunem că din teren culegi date care aparțin aceluiași set. Ceea ce ai dori la final este să transformi setul într-o singură înregistrare, iar toate elementele care se diferențiază ca parte a unui subset prezentat ca un array.
+Uneori ai nevoie să faci ceea ce se numește **împăturire**. Să presupunem că din teren culegi date care aparțin aceluiași set. Ceea ce ai dori la final este să transformi setul într-o singură înregistrare, iar toate elementele care se diferențiază ca parte a unui subset prezentat ca un array.
 
 Exemplu de date ar fi un CSV care adună toate activitățile pe care le poate avea o competență specifică din domeniul educației.
 
@@ -400,3 +482,7 @@ const y = x.reduce((arrAcc, elemArrOrig, idx, srcArr) => {
     return arrAcc;
 }, []);
 ```
+
+## Resurse
+
+- [Reduce Advanced - Part 4 of Functional Programming in JavaScript | YouTube](https://www.youtube.com/watch?v=1DMolJ2FrNY)

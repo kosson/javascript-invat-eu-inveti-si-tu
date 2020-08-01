@@ -19,6 +19,8 @@ Promise.all([p1, p2, p3]).then(function clbkPall (rezultatele) {
 }); // [ 1000, 10, "Hai, că am terminat!" ]
 ```
 
+Fii foarte atent că în cazul în care una dintre promisiuni generează o eroare (reject) celelate promisiuni vor continua să lucreze. Nu vor fi oprite.
+
 Metoda primește drept argument un obiect iterabil.
 
 În cazul în care iterabilul nu conține niciun element, promisiunea returnată va fi deja rezolvată. Dacă iterabilul are elemente, câtă vreme aceste sunt soluționate la rândul lor, promisiunea returnată va fi în `pending`.
