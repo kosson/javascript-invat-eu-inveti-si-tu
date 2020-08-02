@@ -11,4 +11,13 @@ var noulcontinut = continut.replace("trimis", deinlocuit);
 console.log(noulcontinut); // Eu am fost parașutat în lume
 ```
 
+Uneori pentru a extrage toate *capturing groups* fără a mai apela la metoda `exec()` al `RegExp` renunți la rezultat și folosești un callback. Această soluție a fost adusă în atenție de Lea Verou.
+
+```javascript
+let elementeUnice = new Set();
+unFragmentDeText.replace(/\/\*# sourceMappingURL=(.+?) \*\//g, ($0, url) => {
+  elementeUnice.add(url);
+});
+```
+
 Pentru exemplele ce vizează folosirea de șabloane `RegExp`, te îndrept să consulți materialul de la `RegExp.prototype[@@replace]`.

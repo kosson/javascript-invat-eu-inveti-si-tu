@@ -1205,14 +1205,11 @@ obiect.altaProprietate = 'altceva';
 ES6 introduce posibilitatea seta variabile cu valorile cheilor unui obiect (*destructuring assignment*). Trebuie respectată o singură cerință: numele identificatorilor variabilelor trebuie să fie identice cu cele ale cheilor proprietăților din obiectul din care sunt luate valorile.
 
 ```javascript
-const obi1 = {ceva: 10};
-const obi2 = {altceva: 'text'}
-var {ceva: x} = obi1;
-var {altceva: y} = obi2;
-console.log(x, y); // 10 text
+const testObj = {ceva: 1, altceva: 2};
+const {ceva, altceva:undeva} = testObj;
 ```
 
-În cazul în care numele variabilei se dorește să fie chiar proprietatea, atunci putem redacta codul precum în exemplul următor.
+În exemplul prezentat nu numai că am *extras* valorile în variabile, dar am și redenumit identificatorii, dacă numele originale ale cheilor nu sunt dorite. Pot fi extrase mai multe valori odată. În cazul în care numele variabilei se dorește să fie chiar proprietatea, atunci putem menționa explicit numele identificatorului să fie cel al cheii din obiect.
 
 ```javascript
 var {ceva: ceva} = obi1;
@@ -1220,15 +1217,7 @@ var {altceva: altceva} = obi2;
 console.log(ceva, altceva); // 10 text
 ```
 
-Putem aplica forma simplificată și vom ajunge la o formă pe care o veți întâlni foarte adesea în lucrul cu modulele.
-
-```javascript
-var {ceva} = obi1;
-var {altceva: altceva} = obi2;
-console.log(ceva, altceva);
-```
-
-Câtă vreme vei urma structura unui obiect indiferent de adâncimi, vei putea extrage valori în variabilele dorite.
+Putem aplica forma simplificată și vom ajunge la o formă pe care o veți întâlni foarte adesea în lucrul cu modulele. Forma simplificată a lui `var {altceva: altceva} = obi` este `var {altceva} = obi`. Câtă vreme vei urma structura unui obiect indiferent de adâncimi, vei putea extrage valori în variabilele dorite.
 
 ```javascript
 const obi = {
@@ -1274,9 +1263,7 @@ La fel de bine ar merge și atribuirea directă cu singura condiție ca expresia
 ( {a,b,c} = obi );
 ```
 
-Dacă nu este introdus între paranteze rotunde, motorul JavaScript va considera acoladele ca un bloc de cod distinct.
-
-La *transferul* valorilor este foarte posibil să aplici o modificare a valorilor preluate din obiect.
+Dacă nu este introdus între paranteze rotunde, motorul JavaScript va considera acoladele ca un bloc de cod distinct. La *transferul* valorilor este foarte posibil să aplici o modificare a valorilor preluate din obiect.
 
 ```javascript
 const {unu = 10, doi = 100} = {unu: 1000};
@@ -1297,7 +1284,7 @@ let unu = 10,
 // () este nevoie pentru a indica ca {} nu marchează un bloc de cod, ci o expresie
 ```
 
-În cazul în care se va face o destructurare pe un obiect care nu are nicio proprietate, vei obține valoarea `undefined` la variabilă.
+În cazul în care se va face o destructurare pe un obiect care nu are nicio proprietate sau care nu are proprietaea dorită, vei obține valoarea `undefined` pentru variabilă.
 
 ```javascript
 var {nuexistă} = {};
@@ -1306,7 +1293,7 @@ console.log(nuexistă); // undefined
 
 #### Valori din oficiu
 
-Atribuirea de valori din oficiu se dovedește foarte utilă atunci când încerci să faci o destructurare pe un obiect gol.
+Atribuirea de valori din oficiu se dovedește foarte utilă atunci când încerci să faci o destructurare pe un obiect gol sau care nu are proprietatea dorită.
 
 ```javascript
 var {nuexistă = false} = {};
@@ -1606,7 +1593,7 @@ Object.defineProperty(
 );
 ```
 
-O versiune mult simplificată ar fi cea prezentă în gistul [renameProperty.js](https://gist.github.com/TimLang/9636789)
+O versiune mult simplificată ar fi cea prezentă în gist-ul [renameProperty.js](https://gist.github.com/TimLang/9636789)
 
 ```javascript
 Object.prototype.renameProperty = function (oldName, newName) {

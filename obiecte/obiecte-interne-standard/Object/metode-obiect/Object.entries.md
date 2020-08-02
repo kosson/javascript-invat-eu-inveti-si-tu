@@ -2,7 +2,7 @@
 
 Este o metodă introdusă de ECMAScript 2017.
 
-Returnează un array de array-uri având drept valori numele tuturor proprietăților unui obiect sub formă de perechi în câte un array dedicat. Proprietățile trebuie să fie enumerabile și să aparțină obiectului respectiv.
+Returnează un array de array-uri având drept elemente array-uri fiecare având cheia și valoarea drept elemente. Proprietățile trebuie să fie enumerabile și să aparțină obiectului respectiv. Cel mai adesea veți vedea că această metodă este folosită pentru a transforma obiectele în iterabile pentru a putea prelucra datele unui obiect cu metode precum `map`, `filter` sau pentru a face un `reduce`.
 
 ```javascript
 let obi =  {
@@ -17,7 +17,7 @@ console.log(colectie);
 // [["a",10],["b",true],["c",null]]
 ```
 
-După cum se observă, această metodă este folositoare câtă vreme obiectul nostru este un set de date, de fapt. În cazul metodelor, valorile lor vor fi reduse la `null`. Trebuie să fii avertizat de faptul că toate cheile simbol, dacă există vor fi ignorate neapărând în array-ul rezultat.
+După cum se observă, această metodă este folositoare câtă vreme obiectul nostru este un set de date, de fapt. În cazul metodelor, valorile lor vor fi reduse la `null`. Trebuie să fii avertizat de faptul că toate cheile `Symbol`, dacă există vor fi ignorate și lipsă în array-ul rezultat.
 
 Un posibil scenariu de lucru ar fi combinarea cu metoda `map` pentru a transforma array-ul de date dându-i o nouă formă.
 

@@ -1,6 +1,14 @@
 # Funcțiile generator
 
-Funcțiile generator oferă posibilitatea de a parcurge o colecție de date. Este un nou tip de funcții introduse în ECMAScript 2015 care *produc* (*yield* în limba engleză) valori la cerere. Punerea unei steluțe după cuvântul cheie `function`, va semnala că avem de a face cu o funcție generator. La momentul apelării, o funcție generator nu execută codul intern, ci returnează un obiect `Generator` care este conform protocolului *iterator* dar și *iterable*. Obiectul returnat de funcțiile generator poate fi înțeles ca o bandă cu produse la casa unui magazin. La apăsarea unei pedale (*next()*), banda aduce în atenția operatorului comercial un produs pe care îl evaluează și apoi următorul produs ș.a.m.d. Funcțiile săgeată nu pot fi iteratori. Funcțiile generator nu pot juca rolul de constructori.
+Funcțiile generator oferă posibilitatea de a parcurge o colecție de date. Este un nou tip de funcții introduse în ECMAScript 2015 care *produc* (*yield* în limba engleză) valori la cerere. O funcție generator poate fi considerată a fi un constructor de obiecte `Generator`.
+
+**Moment ZEN**: Funcțiile generator nu pot juca rolul de constructori.
+
+Caracterul steluță așezat după cuvântul cheie `function`, va semnala că avem de a face cu o funcție generator. La momentul apelării, o funcție generator nu execută codul intern, ci returnează un obiect `Generator` conform protocolului *iterator* dar și *iterable*.
+
+**Moment ZEN**: Funcțiile săgeată nu pot fi iteratori.
+
+Obiectul returnat de funcțiile generator poate fi înțeles ca o bandă cu produse la casa unui magazin. La apăsarea unei pedale (*next()*), banda aduce în atenția operatorului comercial un produs pe care îl evaluează și apoi următorul produs ș.a.m.d.
 
 ```javascript
 function* ceva () {
@@ -84,7 +92,7 @@ let obiIterabil = testDeGen('important');
 obiIterabil.next().value; // "Ceva important"
 ```
 
-Reține faptul că funcțiile generator pot primi date și după ce au pornit execuția. Acest lucru se poate face prin intermediul argumentelor la momentul invocării, de exemplu.
+Reține faptul că funcțiile generator pot primi date și după ce au pornit execuția. Acest lucru se poate face prin intermediul argumentelor la momentul invocării.
 
 ### Mesaj din instanță către generator
 
@@ -128,7 +136,7 @@ Valoarea lui next anterior este altceva
  */
 ```
 
-## Scoaterea datelor
+## Obținerea datelor dintr-un generator
 
 Enunțul `for...of` parcurge generatorul și returnează chiar valorile existente.
 
@@ -275,6 +283,8 @@ console.log(colectie); // [ 1, 'a', { x: 1 }, 2, 'b', 3, 'c' ]
 
 ### Metode în obiecte literale
 
+Poți introduce metode async ca metode ale unui obiect. Atenție, acest lucru nu va transforma obiectul într-un iterable.
+
 ```javascript
 const obi = {
   *unGenerator () {
@@ -291,20 +301,6 @@ console.log(genNou.next());
 ### Metode în clase
 
 Funcțiile generator pot fi metode ale unui obiect. Pentru a realiza acest lucru, se va adăuga steluța în stânga identificatorului metodei.
-
-```javascript
-class Test {
-  *unGenerator () {
-    yield "bau!";
-  }
-}
-const obiIter = new Test();
-for (let elem of obiIter.unGenerator()) {
-  console.log(elem);
-}; // bau!
-```
-
-Funcțiile generator pot fi metode ale unei clase.
 
 ```javascript
 class Test {
@@ -505,9 +501,69 @@ function* generator () {
 corutina(generator);
 ```
 
+## Generatorii asincroni
+
+Funcțiile generator permit parcurgerea unor obiecte iterabile sincrone, iar pentru obiectele iterabile asincrone (implementează o metodă [Symbol.asyncIterator](){}), se vor folosi generatorarele asincrone. Pentru ca un obiect să fie unul **async iterabil**, trebuie să aibă o cheie `Symbol.asyncIterator`.
+
+```javascript
+const asyncItParticularizat = {
+  async* [Symbol.asyncIterator]() {
+    yield 'Primo';
+    yield 'Secundo';
+  }
+};
+(async () => {
+  let text;
+  for await (text of asyncItParticularizat) {
+    console.log(text);
+  }
+})();
+```
+
+Marca generatoarelor asincrone este caracterul steluță după `function` prefixat de *async*: `async function*`.
+**Generatoarele sincrone** returnează un obiect `Generator` pentru care o invocare a metodei `next()` a acestuia, produce un obiect `{value: 'oVal', done: true/false}`. Invocarea lui `next()` aduce valoarea adusă de `yield`, de fapt.
+**Generatoarele asincrone** returnează și ele un obiect `Generator`, dar pentru fiecare `next()` invocat, vom obține o promisiune pentru fiecare obiect `{value, done}` care a fost returnat de un `yield`.
+
+Anatomia unui apel `next()`:
+- un Promise este trimis în lista de microtaskuri.
+- dacă generatorul async nu este activ îl repune în execuție și așteaptă încheiere fie prin `yield`, `throw`, `return` sau `await`.
+- este retunată promisiunea după rezolvarea sa asincronă cel mai repede în următorul *tick*.
+
+În cazul generatoarelor asyncrone, toate apelurile la `next()` sunt introduse într-un *queue* de către motorul JavaScript și de îndată ce obiectul generator asincron este gata, i le pune la dispoziție. Acest lucru este foarte eficient pentru că nu va trebui să aștepți să fie hotărâtă starea promisiunii returnate de `next()`. Totuși, în cazurile în care ai nevoie de valoare lui `done`, va trebui să aștepți rezolvarea promisiunii returnate de `next()` pentru că în funcție de `true`/`false` poți decide cum execuți codul care urmează sau dacă mai apelezi încă o dată pe `next()` sau nu.
+
+Acestea au fost rezolvate deja și rezultatele așteaptă să fie accesate prin apelarea lui `next()`. În același fel se petrec lucrurile și în cazul `for...await...of`.
+
+Ca exemplu, să presupunem că vrem să accesăm valorile unui iterator asincron după ce toate promisiunile returnate individual prin `next()` au fost rezolvate.
+
+```javascript
+// funcție de transformare a unui iterabil sincron în iterabil asincron
+async function* creeazăUnIterabilAsincron (obiectIterabilSincron) {
+  let element;
+  for (element of obiectIterabilSincron) {
+    yield element;
+  }
+}
+// creează obiectul `Generator` pe care să poți aplica `next()`
+const asyncGenObj = creeazăUnIterabilAsincron (['ceva', 'altceva']);
+// rezolvă toate promisiunile returnate la fiecare apel `next()` și atribuie valoarea
+const [{value:valoarea1}, {value:valoarea2}] = await Promise.all([
+    asyncGenObj.next(), asyncGenObj.next()
+]);
+console.log(valoarea1, valoarea2); // ceva altceva
+```
+
+Observă faptul că nu a trebuit verificată valoarea lui `done` pentru că numărul de elemente din array-ul asincron este cunoscut. Astfel, a fost posibilă atribuirea valorilor unui număr fix de variabile.
+
+## Mantre
+
+- Toate generatoarele asincrone au un *queue* de Promises care să fie rezolvate printr-un `yield` sau un `throw`.
+-
+
 ## Dependințe cognitive
 
 -   funcții,
+-   medii lexicale,
+-   promisiuni,
 -   iteratori
 -   `for...of`
 
@@ -515,6 +571,9 @@ corutina(generator);
 
 - [Generator Function Definitions | ECMAScript® 2021 Language Specification](https://tc39.es/ecma262/#sec-generator-function-definitions)
 - [Async iterators and generators](https://javascript.info/async-iterators-generators)
-- https://www.wptutor.io/web/js/generators-coroutines-async-javascript
-- https://x.st/javascript-coroutines/
-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*
+- [Generoators, corutines](https://www.wptutor.io/web/js/generators-coroutines-async-javascript)
+- [Coroutine Event Loops in Javascript](https://x.st/javascript-coroutines/)
+- [function*|MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*)
+- [Generator|MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator)
+- [Exploring ES2018 and ES2019|Axel Rauschmayer|5.3. Asynchronous generators](https://exploringjs.com/es2018-es2019/ch_asynchronous-iteration.html#asynchronous-generators)
+- [ES6 Iterators, Generators, and Iterables|Domenic Denicola](https://blog.domenic.me/es6-iterators-generators-and-iterables/)

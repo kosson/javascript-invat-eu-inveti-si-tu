@@ -1,4 +1,4 @@
-# Funcții async / await
+# Funcții async/await
 
 Acest enunț a fost introdus în ECMAScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile care au cuvântul cheie `async` în față, vor returna mereu o promisiune. De îndată ce codul este compilat și executat, funcțiile async sunt executate. Acest comportament îl întâlnim și la promisiuni. În momentul în care se execută codul, acolo unde motorul întâlnește `new Promise(nume_callback)`, va executa funcția callback.
 
@@ -188,11 +188,11 @@ process.on('uncaughtException', (err) => {
 ev.emit('ceva');
 ```
 
-Calea ciudată de a trata erorile a rezultat din utilizarea unei promisiuni, adică a funcției async acolo unde ar fi trebuit să fie un simplu callback. Una din concluziile importate este aceea că în momentul în care pasezi o funcție asincronă unui fragment de cod, acesta trebuie prevăzut un mecanism catch de gestionare a erorilor. O altă concluzie ar fi să nu pasezi un async unui EventEmitter.
+Calea ciudată de a trata erorile a rezultat din utilizarea unei promisiuni, adică a funcției *async* acolo unde ar fi trebuit să fie un simplu callback. Una din concluziile importate este aceea că în momentul în care pasezi o funcție asincronă unui fragment de cod, acesta trebuie prevăzut un mecanism *catch* de gestionare a erorilor. O altă concluzie ar fi să nu pasezi un *async* unui `EventEmitter`.
 
 ## Concluzii
 
-Scrierea codului asyncron folosind `async`/`await` este o alternativă elegantă și mult mai eficientă (cel puțin în cazul detectării erorilor) pentru lucrul cu promisiunile. Totuși nu este un înlocuitor pentru promisiuni, ci un model mai eficient de folosire a acestora. De exemplu, pentru a rezolva în paralel promisiuni, vom apela `Promise.all()`, dar rezultatul poate fi gestionat cu un `async`.
+Scrierea codului asincron folosind `async`/`await` este o alternativă elegantă și mult mai eficientă (cel puțin în cazul detectării erorilor) pentru lucrul cu promisiunile. Totuși nu este un înlocuitor pentru promisiuni, ci un model mai eficient de folosire a acestora. De exemplu, pentru a rezolva în paralel promisiuni, vom apela `Promise.all()`, dar rezultatul poate fi gestionat cu un `async`.
 
 ```javascript
 const [val1, val2, val3] = await Promise.all(promise1(), promise2(), promise3())
@@ -226,7 +226,7 @@ new Promise((resolve, reject) => {
 }).catch();
 ```
 
-Și versiunea async.
+Și versiunea *async*.
 
 ```javascript
 const intarziere = promisify(setTimeout);
@@ -240,7 +240,7 @@ async function ceva () {
 }
 ```
 
-Tot codul care există după un await, este echivalentul rulării într-un `then`.
+Tot codul care există după un *await*, este echivalentul rulării într-un `then`.
 
 ## Dependințe cognitive
 
