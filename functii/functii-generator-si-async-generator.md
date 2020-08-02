@@ -512,7 +512,7 @@ const asyncItParticularizat = {
     yield 'Secundo';
   }
 };
-(async () => {
+(async function* unAsyncIterabil () {
   let text;
   for await (text of asyncItParticularizat) {
     console.log(text);
