@@ -177,6 +177,8 @@ console.log(unSpatiuSeparat.valoare);
 Regula spune că într-un fișier poate exista doar un singur modul și vice-versa.
 Pentru a lucra cu modulele, se vor folosi următoarele cuvinte rezervate: `export`, `default` și `import {numeModul} from numeModul`.
 
+**Moment ZEN**: Un modul exportă referințe (*bindings*), nu valori.
+
 Poți exporta mai multe lucruri odată într-un modul.
 
 ```javascript
@@ -208,7 +210,7 @@ Poți exporta chiar și o clasă.
 
 ```javascript
 /* clasa1.js */
-export default class Ceva { // conținut clasă } // nu încheia cu punct și virgulă
+export default class Ceva { } // nu încheia cu punct și virgulă
 
 /* main.js */
 import Clasa1 from "clasa1";
@@ -218,6 +220,8 @@ let clasa1 = new Clasa1();
 Din nefericire, nu poți importa sau exporta într-o manieră condițională și nici nu poți introduce enunțurile de export sau import într-un bloc de cod. Privind comportamentul importurile beneficiază de hoisting așa că nu contează unde se menționează importul d.p.d.v. sintactic.
 
 ### Importurile
+
+Atunci când faci un import, reține faptul că ceea ce aduci este un set de referințe către valori din modulul din care ai făcut importul. Acest aspect implică faptul că poți modifica starea sau valorile respectivelor referințe.
 
 **Importurile simple**
 
@@ -269,9 +273,25 @@ import defaultul, * as biblioCod from 'src/lib';
 import defaultul, {numeFunc1, numeFunc2} from 'src/lib';
 ```
 
+#### Aspectul dinamic al importurilor
+
+```javascript
+// dependință.mjs
+export let kontor = 1;
+export function incrementare() {
+   kontor++;
+}
+
+// main.mjs
+import { incrementare, kontor } from 'dependință';
+console.log(kontor); // 1
+incrementare();
+console.log(kontor); // 2
+```
+
 ### Exporturi
 
-Din interiorul unui modul pot fi exportate lucrurile care sunt necesare.
+Din interiorul unui modul pot fi exportate lucrurile care sunt necesare. Pot fi exportate variabile, funcții, clase și obiecte.
 
 Prima metodă constă în exportul per declarație în interiorul codului modulului. Pentru a realiza exportul, pur și simplu vei pune cuvântul cheie `export` înainte oricărei declarații pe care dorești să o exporți.
 
@@ -330,3 +350,5 @@ Modulele sunt niște Singleton-uri, ceea ce înseamnă că ori de câte ori va f
 - [Deploying ES2015+ Code in Production Today | Philip Walton](https://philipwalton.com/articles/deploying-es2015-code-in-production-today/)
 - [Using Native JavaScript Modules in Production Today | Philip Walton](https://philipwalton.com/articles/using-native-javascript-modules-in-production-today/)
 - [ECMAScript modules in browsers | Jake Archibald](https://jakearchibald.com/2017/es-modules-in-browsers/)
+- [ECMAScript 6 modules: the final syntax](https://2ality.com/2014/09/es6-modules-final.html)
+- [JavaScript modules|v8.dev|18 June 2018](https://v8.dev/features/modules)

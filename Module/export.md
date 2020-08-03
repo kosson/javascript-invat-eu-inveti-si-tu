@@ -3,7 +3,7 @@
 Expresia `export` permite realizarea unor legături *live* la funcții, obiecte sau la primitivele unui volum.
 Obiecte, funcțiile și primitivele pentru care se face export nu mai pot fi modificate de codul care le importă. Totuși, valorile pot fi modificate în modulul exportat, ceea ce se reflectă direct în codul care importă.
 
-Modulele care sunt exportate vor fi mereu în `strict mode` fie că scrii codul sub directivă, fie că nu.
+Modulele care sunt exportate vor fi mereu în `strict mode`, fie că scrii codul sub directivă, fie că nu.
 
 Declarația de export nu poate fi introdusă în scripturile introduse în pagina web.
 
@@ -45,6 +45,10 @@ export const {prop1, prop2: altNume} = obi;
 ```
 
 Pentru că toate aceste exporturi folosesc numele identificatorilor, se numesc și *named exports* - exporturi care poartă nume.
+
+## Exportul de obiecte
+
+Această practică nu este una de dorit pentru că ridică probleme în momentul în care din eroare suprascrii metodele modulului de la care ai referința.
 
 ## Exportul unei singure expresii folosind default
 
