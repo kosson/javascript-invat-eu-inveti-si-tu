@@ -35,7 +35,12 @@ Capacitatea unui browser de a gestiona module indică faptul că oferă suport p
 
 ## Caracteristici ale modulelor
 
-Codul unui modul este executat într-un mediu lexical (scope) propriu ceea ce înseamnă că variabilele, funcțiile și clasele sale nu vor fi în mediul lexical global. Pentru a avea acces la componentele unui modul din alt modul, trebuie să le exporți individual, creându-se astfel referințe active către acestea. Modulele pot fi importate menționând calea și uneori chiar URL-ul. Modulele sunt obiecte unice care pot fi importate so singură dată (Singleton). În obiectul global vei avea doar identificatori pentru module.
+Codul unui modul este executat într-un mediu lexical (scope) propriu ceea ce înseamnă că variabilele, funcțiile și clasele sale nu vor fi în mediul lexical global. În momentul în care motorul JavaScript parsează fișierele modul după ce l-a adus, fie de undeva online, fie de pe sistemul local, creează pentru fiecare ceea ce numim un *Module Record* în care sunt trecute importurile, exporturile, entitățile modulului, etc. O astfel de înregistrare este asociată modulului și este trecută într-un *caiet* de evidență numit [module maps](https://html.spec.whatwg.org/multipage/webappapis.html#module-map). Apoi motorul va transforma acest *Module Record* într-o instanță funcțională a modulului. Se vor crea alocări în memorie pentru variabile și alte entități, dar nu vor fi legate la valori încă. Apoi se vor crea alocări pentru exporturi și vor fi conectate importurile la ceea ce există deja instanțiat (modulele copil vor fi instanțiate ultimele până când toate dependințele au fost instanțiate). Ultimul pas este să se facă evaluarea codului din module în acest moment fiind disponibile și valorile care au fost legate la identificatorii lor. Deci avem faza de încărcare, de instanțiere și de execuție.
+
+Modulele beneficiază de un mecanism de caching, fapt care înseamnă că de este unul înstanțiat deja de un altul, nu va mai fi instanțiat unul nou.
+Toate modulele rulează implicit sub directiva `"use strict"`, ceea ce înseamnă automat că referința `this` este `undefined`.
+
+Pentru a avea acces la componentele unui modul din alt modul, trebuie să le exporți individual, creându-se astfel referințe active către acestea. Modulele pot fi importate menționând calea și uneori chiar URL-ul. Modulele sunt obiecte unice care pot fi importate so singură dată (Singleton). În obiectul global vei avea doar identificatori pentru module.
 Modulele au o structură *statică*, adică nu poți face modificări de structură la momentul executării acestora. Doar legăturile către elementele modulului sunt dinamice în sensul că poți accesa și modifica variabile sau obiecte din modulul de la care ai respectivele referințe importate.
 Un modul ECMAScript poate importa și exporta în același timp.
 
@@ -352,7 +357,11 @@ Modulele pot importa din alte module. Extensia fișierului poate fi omisă pentr
 
 Modulele sunt niște Singleton-uri, ceea ce înseamnă că ori de câte ori va fi importat în cursul execuției unui program, doar o singură instanță va fi activă.
 
-## Expunerea de elemente în global scope
+## Scope
+
+Fiecare modul are propriul scope (mediu lexical). Prin `export` faci disponibile elemente ale scope-ului modulului.
+
+### Expunerea de elemente în global scope
 
 Este posibl ca în anumite cazuri să ai nevoie să expui în global scop un element sau mai multe. Un caz ar fi un modul care creează un set de elemente cărora li se atașează dinamic receptori (*event listeners*) pentru o funcție care se află și ea în modul. Cum în cazul receptorilor aceștia se așteaptă să *găsească* funcția în global scope - *window*, putem face o *expunere* a respectivului element.
 
@@ -363,7 +372,7 @@ globalThis.clickPeDisciplina = clickPeDisciplina;
 // buton în window cu onclick:clickPeDisciplina(this)
 ```
 
-## Accesul la elementele din global
+### Accesul la elementele din global
 
 Pentru a avea acces în module la elementele scripturilor încărcate în pagină dar care nu sunt declarate a fi module, le poți importa direct într-un modul care are nevoie de ele.
 
