@@ -1,9 +1,11 @@
 # Module
 
+Modulele în JavaScript sunt cunoscute în literatura de specialitate ca *Module ECMAScript*, *ES modules* sau *ESM*.
+
 ## Preliminarii
 
-Modularizarea codului este o necesitate în momentul în care dezvolți o aplicație. În timp au fost dezvoltate instrumente care permit modularizarea, dar odată cu apariția lui ES6, modulele fac parte din limbaj.
-În ES5, modularizarea codului era realizată folosind biblioteci de cod precum RequireJS ce implementează standardul Asynchronous Module Definition (AMD) și modul de a realiza modularizarea de către Node.js, structurând modulele după cerințele CommonJS (încărcare sincronă).
+Modularizarea codului este o necesitate în momentul în care dezvolți o aplicație. În timp au fost dezvoltate instrumente care permit modularizarea, dar odată cu apariția lui ES6, modulele fac parte din limbaj. Este util să ne amintim faptul că browserul încarcă scripturile JavaScript într-o manieră asincronă.
+În ES5, modularizarea codului în browsere era realizată folosind biblioteci de cod precum RequireJS ce implementează standardul Asynchronous Module Definition (încărcare asincronă), iar modul de a realiza modularizarea în Node.js este guvernat de modelul pe care CommonJS (încărcare sincronă) îl oferă.
 
 Istoric vorbind, un anumit nivel de modularizare era făcut prin încărcarea diferitelor fragmente de cod JS în pagina web, dar acest lucru nu poate constitui un adevărat sistem de gestiune a diferitelor părți utile pentru a rula în armonie.
 
@@ -12,25 +14,32 @@ Istoric vorbind, un anumit nivel de modularizare era făcut prin încărcarea di
 <script type="application/javascript" src="CALE/procese.js" ></script>
 ```
 
-Totuși, cel mai util ar fi să existe un singur punct de intrare în aplicația care ar trebui să fie capabilă să gestioneze toate dependințele.
+Totuși, cel mai util ar fi să ai un singur punct de intrare în aplicație.
 
 ```html
 <script type="application/javascript" src="CALE/main.js" ></script>
 ```
 
-Odată cu apariția lui ES2015 browserele încep să ofere suport pentru module oferind posibilitatea de a încărca modular codul.
+Odată cu apariția lui ES2015 browserele încep să ofere suport pentru module oferind posibilitatea de a încărca modular codul. Și modulele JavaScript se încarcă asincron precum scripturile.
 
 ```html
 <script type=module src="./main.js"></script>
 ```
 
 Capacitatea unui browser de a gestiona module indică faptul că oferă suport pentru toate caracteristicile funcționale ale lui ES2015+. Pentru a încărca modulul trebuie menționată locația fișierului modul:
+
 - folosind o adresă web completă cu întreaga cale către fișierul modul: `<script type=module src="https://ceva.ro/main.js"></script>`,
 - o cale absolută: `<script type=module src="/radacina/subdirector/main.js"></script>`,
 - o cale relativă: `<script type=module src="./main.js"></script>`,
-- relativă cu adresare în adâncime sau către directorul părinte: `<script type=module src="../main.js"></script>`
+- o cale relativă cu adresare în adâncime sau către directorul părinte: `<script type=module src="../main.js"></script>`
 
-### Încărcare întârziată cu defer
+## Caracteristici ale modulelor
+
+Codul unui modul este executat într-un mediu lexical (scope) propriu ceea ce înseamnă că variabilele, funcțiile și clasele sale nu vor fi în mediul lexical global. Pentru a avea acces la componentele unui modul din alt modul, trebuie să le exporți individual, creându-se astfel referințe active către acestea. Modulele pot fi importate menționând calea și uneori chiar URL-ul. Modulele sunt obiecte unice care pot fi importate so singură dată (Singleton). În obiectul global vei avea doar identificatori pentru module.
+Modulele au o structură *statică*, adică nu poți face modificări de structură la momentul executării acestora. Doar legăturile către elementele modulului sunt dinamice în sensul că poți accesa și modifica variabile sau obiecte din modulul de la care ai respectivele referințe importate.
+Un modul ECMAScript poate importa și exporta în același timp.
+
+## Încărcare întârziată cu defer
 
 Folosirea lui `defer` garantează faptul că scripturile vor fi încărcate după ce s-a încheiat parsing-ul codului HTML. Scripturile care sunt module sunt încărcate asemănător comportamentului `defer`, adică asincron. Scripturile *inline* pot fi încărcate asincron.
 
@@ -166,11 +175,13 @@ var unSpatiuSeparat = {};
 console.log(unSpatiuSeparat.valoare);
 ```
 
-## Module ES6
+## Module ECMAScript
 
 **Spune standardul**:
 
 >Un Module are un `Module Record` care conține informație privind structura de import și export a unui modul. Înregistrările conținute sunt folosite doar la evaluarea unui modul. Modulele oferă avantajul că rulează codul în `"strict mode"` deja.
+
+Modulele ECMAScript sunt fișiere JavaScript care au extensia `.mjs`. Totuși, chiar dacă această extensie trebuie folosită, pot fi întâlnite module care au extensia `.js`.
 
 ## Analiza modulelor
 
@@ -217,7 +228,7 @@ import Clasa1 from "clasa1";
 let clasa1 = new Clasa1();
 ```
 
-Din nefericire, nu poți importa sau exporta într-o manieră condițională și nici nu poți introduce enunțurile de export sau import într-un bloc de cod. Privind comportamentul importurile beneficiază de hoisting așa că nu contează unde se menționează importul d.p.d.v. sintactic.
+Din nefericire, nu poți importa sau exporta într-o manieră condițională și nici nu poți introduce enunțurile de export sau import într-un bloc de cod. Privind comportamentul, importurile beneficiază de hoisting așa că nu contează unde se menționează importul d.p.d.v. sintactic.
 
 ### Importurile
 
@@ -337,9 +348,34 @@ Trebuie făcută o mențiune: la folosirea combinației `export *`, toate declar
 ## Caracteristicile modulelor
 
 Te vei întreba când se execută un modul? Răspunsul este la momentul încărcării.
-Modulele pot importa din alte module. Extensia fișierului poate fi omisă pentru simplificare. Pentru a ajunge la module se pot folosi căi relative, absolute sau nume care identifică modului, dar care trebuie configurate pentru a oferi această facilitate.
+Modulele pot importa din alte module. Extensia fișierului poate fi omisă pentru simplificare. Pentru a ajunge la module se pot folosi căi relative, absolute sau nume care identifică modulul, dar care trebuie configurate pentru a oferi această facilitate.
 
 Modulele sunt niște Singleton-uri, ceea ce înseamnă că ori de câte ori va fi importat în cursul execuției unui program, doar o singură instanță va fi activă.
+
+## Expunerea de elemente în global scope
+
+Este posibl ca în anumite cazuri să ai nevoie să expui în global scop un element sau mai multe. Un caz ar fi un modul care creează un set de elemente cărora li se atașează dinamic receptori (*event listeners*) pentru o funcție care se află și ea în modul. Cum în cazul receptorilor aceștia se așteaptă să *găsească* funcția în global scope - *window*, putem face o *expunere* a respectivului element.
+
+```javascript
+// modul
+function clickPeDisciplina (evt) {}
+globalThis.clickPeDisciplina = clickPeDisciplina;
+// buton în window cu onclick:clickPeDisciplina(this)
+```
+
+## Accesul la elementele din global
+
+Pentru a avea acces în module la elementele scripturilor încărcate în pagină dar care nu sunt declarate a fi module, le poți importa direct într-un modul care are nevoie de ele.
+
+```javascript
+// un modul
+import '../lib/editorjs/editor.js';
+import '../lib/editorjs/header.js';
+import '../lib/editorjs/paragraph.js';
+import '../lib/editorjs/list.js';
+
+// restul codului
+```
 
 ## Referințe
 
@@ -352,3 +388,4 @@ Modulele sunt niște Singleton-uri, ceea ce înseamnă că ori de câte ori va f
 - [ECMAScript modules in browsers | Jake Archibald](https://jakearchibald.com/2017/es-modules-in-browsers/)
 - [ECMAScript 6 modules: the final syntax](https://2ality.com/2014/09/es6-modules-final.html)
 - [JavaScript modules|v8.dev|18 June 2018](https://v8.dev/features/modules)
+- [JavaScript Module Pattern: In-Depth](https://www.nilovelez.com/2018/06/javascript-module-pattern-in-depth/)
