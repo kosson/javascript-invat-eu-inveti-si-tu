@@ -10,7 +10,7 @@ Scopul folosirii regex-urilor este acela de a *constitui* un filtru prin care tr
 
 > Forma și funcționalitatea expresiilor regulate sunt modelate după cele oferite de limbajul de programare Perl 5.
 
-Continuăm prin a ne transpune în starea necesară pentru lucrul cu șabloanele construite cu `RegExp`. Trebuie conștientizat din prima că `RegExp` lucrează la nivel de caracter individual, apoi seturi de caractere, grupuri și combinațiile dintre acestea. Dar starea necesară pornește de la conștientizarea importanței cruciale pe care o are un singur caracter, fie că acesta este *vizibil* sau *invizibil* (spațiile albe, taburile). Vă mai amintiți de faptul că JavaScript lucrează cu setul de caractere Unicode.
+Continuăm prin a ne transpune în starea necesară pentru lucrul cu șabloanele construite cu `RegExp`. Trebuie conștientizat din prima că `RegExp` lucrează la nivel de caracter individual, apoi seturi de caractere, grupuri și combinațiile dintre acestea. Dar starea necesară pornește de la conștientizarea importanței cruciale pe care o are un singur caracter, fie că acesta este *vizibil* sau *invizibil* (spațiile albe, taburile). Amintiți-vă de faptul că JavaScript lucrează cu setul de caractere Unicode.
 
 **Moment ZEN**: Un singur caracter face diferența între a găsi ceea ce cauți într-un șir sau nu.
 
@@ -47,11 +47,20 @@ console.log(/^.$/u.test(exemplu));
 // true, având fanionul Unicode
 ```
 
+În cazul în care ai de-a face cu diferite diacritice, va trebui menționat fanionul `u` și pentru a indica motorului să se aștepte la caractere cu diacritice, vom introduce în șablonul de căutare secvența semnal `\p{Letter}`.
+
+```javascript
+let rezultat = "Orăștie și Agăș".match(/[\p{Letter}]+/gu); // [ 'Orăștie', 'și', 'Agăș' ]
+console.log(rezultat);
+let trunchiat = "Orăștie și Agăș".match(/[\w]+/gu); // [ 'Or', 'tie', 'i', 'Ag' ]
+console.log(trunchiat);
+```
+
 Expresiile regulate sunt șabloane folosite pentru a căuta combinații de caractere în șiruri. Dacă vrei să lucrezi direct pentru a face experimente, poți folosi instrumentul online **RegExr** accesibil de la [http://www.regexr.com/](http://www.regexr.com/). Tot aici găsești și foarte multă documentație. Pentru JavaScript vezi și [https://regexper.com/](https://regexper.com/), care face o treabă foarte faină reprezentând cu hărți vizuale construcția șablonului.
 
 ## Detalii de funcționare ale motorului RegExp
 
-Tehnic vorbind, motorul `RegExp` este unul ***regex-directed***, adică șablonul ocupă rolul central. Motorul este o implementare **eager**, ceea ce înseamnă că este un motor foarte *nerăbdător* să ofere un rezultat. Dacă s-a format rezultatul respectându-se regulile, restul resursei de text este ignorat.
+Tehnic vorbind, motorul `RegExp` este unul *regex-directed*, adică șablonul ocupă rolul central. Motorul este o implementare *eager* (am putea traduce *iute*), ceea ce înseamnă că este un motor foarte *nerăbdător* să ofere un rezultat. Acest lucru implică următorul comportament: dacă s-a format rezultatul respectându-se regulile, restul resursei de text este ignorat.
 
 Am menționat aceast lucru pentru că acest motor, la momentul evaluării, returnează rezultatul potrivirii cu cel mai din stânga fragment din șirul de caractere, adică cel care se află cât mai aproape de începutul șirului, chiar dacă ar fi fost disponibilă o variantă mai apropiată de împlinirea tuturor criteriilor șablonului în corpul său. Reține acest aspect de funcționare. Te va ajuta să înțelegi mai bine problemele pentru care, aparent, nu există nicio rațiune.
 

@@ -74,7 +74,7 @@ Atunci când *împarți* codul în mai multe module, ar fi de mare ajutor să [p
 
 ### Încărcarea asincronă cu async
 
-Încărcarea asincronă a fișierelor javascript este aplicabilă și modulelor, fie acestea fișiere separate, fie *inline*. Reține faptul că în cazul folosirii `async`, scripturile se vor încărca și executa de îndată ce vor fi aduse de browser, adică în funcție de greutatea lor. În acest caz, ordinea în care apar în DOM nu mai contează.
+Încărcarea asincronă a fișierelor javascript este aplicabilă și modulelor, fie acestea fișiere separate, fie *inline*. Reține faptul că în cazul folosirii `async`, scripturile se vor încărca și executa de îndată ce vor fi aduse de browser, adică în funcție de dimensiunea lor. În acest caz, ordinea în care apar în DOM nu mai contează.
 
 ```javascript
 <!-- Acest fragment de cod se execută de îndată ce scripturile care necesită `import` au fost aduse de browser -->
