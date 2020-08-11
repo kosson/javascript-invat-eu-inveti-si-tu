@@ -21,6 +21,7 @@ try {
 };  // Bre, e nasol!  // Hai salut, am terminat
 ```
 
+În momentul evaluării codului, atunci când apare o eroare, firul de execuție (*runtime*-ul) încearcă să găsească un block `catch`, unde să fie prelucrată eroarea. Dacă nu găsește în funcția din stivă care a generat eroarea, va căuta mai jos în stivă după un `catch`, iar dacă nu există, în cazul browserelor va fi executată funcția cu rol de callback pentru evenimentul `onerror`, iar pentru Node.js va fi callback-ul atașat lui `process.on('uncaughtException')`. 
 Obiectul fundamental intern `Error` poate fi extins în caz că este necesar.
 
 ```javascript
