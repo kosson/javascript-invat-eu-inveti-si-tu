@@ -1,6 +1,12 @@
-# Module
+## Module ECMAScript
 
 Modulele în JavaScript sunt cunoscute în literatura de specialitate ca *Module ECMAScript*, *ES modules* sau *ESM*.
+
+**Spune standardul**:
+
+> Un Module are un `Module Record` care conține informație privind structura de import și export a unui modul. Înregistrările conținute sunt folosite doar la evaluarea unui modul. Modulele oferă avantajul că rulează codul în `"strict mode"` deja.
+
+Modulele ECMAScript sunt fișiere JavaScript care au extensia `.mjs`. Totuși, chiar dacă această extensie trebuie folosită, pot fi întâlnite module care au extensia `.js`.
 
 ## Preliminarii
 
@@ -35,14 +41,57 @@ Capacitatea unui browser de a gestiona module indică faptul că oferă suport p
 
 ## Caracteristici ale modulelor
 
-Codul unui modul este executat într-un mediu lexical (scope) propriu ceea ce înseamnă că variabilele, funcțiile și clasele sale nu vor fi în mediul lexical global. În momentul în care motorul JavaScript parsează fișierele modul după ce l-a adus, fie de undeva online, fie de pe sistemul local, creează pentru fiecare ceea ce numim un *Module Record* în care sunt trecute importurile, exporturile, entitățile modulului, etc. O astfel de înregistrare este asociată modulului și este trecută într-un *caiet* de evidență numit [module maps](https://html.spec.whatwg.org/multipage/webappapis.html#module-map). Apoi motorul va transforma acest *Module Record* într-o instanță funcțională a modulului. Se vor crea alocări în memorie pentru variabile și alte entități, dar nu vor fi legate la valori încă. Apoi se vor crea alocări pentru exporturi și vor fi conectate importurile la ceea ce există deja instanțiat (modulele copil vor fi instanțiate ultimele până când toate dependințele au fost instanțiate). Ultimul pas este să se facă evaluarea codului din module în acest moment fiind disponibile și valorile care au fost legate la identificatorii lor. Deci avem faza de încărcare, de instanțiere și de execuție.
+Codul unui modul este executat într-un mediu lexical (scope) propriu ceea ce înseamnă că variabilele, funcțiile și clasele sale nu vor fi în mediul lexical global. În momentul în care motorul JavaScript parsează fișierele modul după ce l-a adus, fie de undeva online, fie de pe sistemul local, creează pentru fiecare ceea ce numim un *Module Record* în care sunt trecute importurile, exporturile, entitățile modulului, Realm-ul. Modulele instanțiate deja nu vor mai fi instanțiate încă o dată chiar dacă sunt cerute de mai multe alte module. Se face un *caching* al modulelor. Acest mecanism de evidență pentru a gestiona cache-ul modulelor, se numește *module map*, un *caiet* de evidență numit [module maps](https://html.spec.whatwg.org/multipage/webappapis.html#module-map).
 
-Modulele beneficiază de un mecanism de caching, fapt care înseamnă că de este unul înstanțiat deja de un altul, nu va mai fi instanțiat unul nou.
-Toate modulele rulează implicit sub directiva `"use strict"`, ceea ce înseamnă automat că referința `this` este `undefined`.
+Apoi motorul va transforma acest *Module Record* într-o instanță funcțională a modulului. Instanțierea înseamnă și crearea alocărilor în memorie pentru variabile și altor entități, dar nu vor fi legate la valori încă. Apoi se vor crea alocări pentru exporturi și vor fi conectate importurile la ceea ce există deja instanțiat (modulele copil vor fi instanțiate ultimele până când toate dependințele au fost instanțiate). Ultimul pas este să se facă evaluarea codului din module în acest moment fiind disponibile și valorile care au fost legate la identificatorii lor. Deci avem faza de încărcare, de instanțiere și de execuție.
 
-Pentru a avea acces la componentele unui modul din alt modul, trebuie să le exporți individual, creându-se astfel referințe active către acestea. Modulele pot fi importate menționând calea și uneori chiar URL-ul. Modulele sunt obiecte unice care pot fi importate so singură dată (Singleton). În obiectul global vei avea doar identificatori pentru module.
-Modulele au o structură *statică*, adică nu poți face modificări de structură la momentul executării acestora. Doar legăturile către elementele modulului sunt dinamice în sensul că poți accesa și modifica variabile sau obiecte din modulul de la care ai respectivele referințe importate.
+Toate modulele rulează implicit sub directiva `"use strict"`, ceea ce înseamnă automat că referința `this` este `undefined`. Un program JavaScript care rulează sub declarația `"use strict;"` poate fi compilat ca modul JavaScript. Poate fi considerat a fi un modul JavaScript orice script folosește declarațiile `import` și `export`.
+
+Pentru a avea acces la componentele unui modul din alt modul, trebuie să le exporți individual, creându-se astfel *referințe active* (*live bindings*) către acestea. Modulele pot fi importate menționând calea și uneori chiar URL-ul. Modulele sunt obiecte unice care pot fi importate so singură dată (Singleton). În obiectul global vei avea doar identificatori pentru module.
+
+Modulele au o structură *statică*, adică nu poți face modificări de structură la momentul executării acestora. Doar legăturile către elementele modulului sunt dinamice în sensul că poți accesa entitățile respectivului modul și poți modifica valori din obiectele modulului de la care ai respectivele referințe importate.
 Un modul ECMAScript poate importa și exporta în același timp.
+
+Momentul executării un modul este la momentul încărcării. În funcție de atributele adăugate tag-ului `<script>`, fie `defer`, fie `async` modulul este încărcat și executat diferit în raport cu timpii de încărcare ai paginii.
+
+![](https://html.spec.whatwg.org/images/asyncdefer.svg)
+
+Modulele pot importa din alte module. Extensia fișierului poate fi omisă pentru simplificare. Pentru a ajunge la module se pot folosi căi relative, absolute sau nume care identifică modulul, dar care trebuie configurate pentru a oferi această facilitate.
+
+Modulele sunt niște Singleton-uri, ceea ce înseamnă că ori de câte ori va fi importat în cursul execuției unui program, doar o singură instanță va fi activă.
+
+## Scope
+
+Fiecare modul are propriul scope (mediu lexical). Prin `export` faci disponibile elemente ale scope-ului modulului.
+
+Mediile lexicale la care are acces un modul:
+- global scope
+- module scope
+
+### Expunerea de elemente în global scope
+
+Este posibl ca în anumite cazuri să ai nevoie să expui în global scop un element sau mai multe. Un caz ar fi un modul care creează un set de elemente cărora li se atașează dinamic receptori (*event listeners*) pentru o funcție care se află și ea în modul. Cum în cazul receptorilor aceștia se așteaptă să *găsească* funcția în global scope - *window*, putem face o *expunere* a respectivului element.
+
+```javascript
+// modul
+function clickPeDisciplina (evt) {}
+globalThis.clickPeDisciplina = clickPeDisciplina;
+// buton în window cu onclick:clickPeDisciplina(this)
+```
+
+### Accesul la elementele din global
+
+Pentru a avea acces în module la elementele scripturilor încărcate în pagină dar care nu sunt declarate a fi module, le poți importa direct într-un modul care are nevoie de ele.
+
+```javascript
+// un modul
+import '../lib/editorjs/editor.js';
+import '../lib/editorjs/header.js';
+import '../lib/editorjs/paragraph.js';
+import '../lib/editorjs/list.js';
+
+// restul codului
+```
 
 ## Încărcare întârziată cu defer
 
@@ -93,7 +142,7 @@ Trebuie menționat faptul că modulele se execută o singură dată indiferent d
 
 ## O privire retrospectivă
 
-JavaScript este un limbaj de programare care nu a avut din start suport pentru module. Singura metodă de a modulariza codul era prin setarea unor variabile globale. Inconvenientul este evident de vreme ce poți atribui altă valoare unui identificator pierzând referința la valoarea preexistentă. O altă variantă a fost introducerea codului în funcții, care erau autoexecutabile, returnând un obiect, care se prezenta ca o interfață.
+JavaScript este un limbaj de programare care nu a avut din start suport pentru module. Singura metodă de a modulariza codul era prin setarea unor variabile globale. Inconvenientul este evident de vreme ce poți atribui altă valoare unui identificator pierzând referința la valoarea preexistentă. O altă variantă a fost introducerea codului în funcții, care erau autoexecutabile, returnând un obiect, care se prezentă ca o interfață.
 
 ```javascript
 var modul = function mod01 () {
@@ -114,7 +163,7 @@ modul.adun(3);
 // registru
 var modules = (function reg () {
     var module = {}; // un registru de evidență
-    function define (nume_mod, functie) {
+    function define (nume_mod, functie) {15.2 Modules
         // lazzy-loading
         if (module[nume_mod]) throw new Error('Modulul există deja și este încărcat!')
 
@@ -179,14 +228,6 @@ var unSpatiuSeparat = {};
 })(unSpatiuSeparat);
 console.log(unSpatiuSeparat.valoare);
 ```
-
-## Module ECMAScript
-
-**Spune standardul**:
-
->Un Module are un `Module Record` care conține informație privind structura de import și export a unui modul. Înregistrările conținute sunt folosite doar la evaluarea unui modul. Modulele oferă avantajul că rulează codul în `"strict mode"` deja.
-
-Modulele ECMAScript sunt fișiere JavaScript care au extensia `.mjs`. Totuși, chiar dacă această extensie trebuie folosită, pot fi întâlnite module care au extensia `.js`.
 
 ## Analiza modulelor
 
@@ -350,44 +391,9 @@ export {facCeva as sarcina, contanta} from 'src/lib02';
 
 Trebuie făcută o mențiune: la folosirea combinației `export *`, toate declarațiile `default` sunt ignorate.
 
-## Caracteristicile modulelor
-
-Te vei întreba când se execută un modul? Răspunsul este la momentul încărcării.
-Modulele pot importa din alte module. Extensia fișierului poate fi omisă pentru simplificare. Pentru a ajunge la module se pot folosi căi relative, absolute sau nume care identifică modulul, dar care trebuie configurate pentru a oferi această facilitate.
-
-Modulele sunt niște Singleton-uri, ceea ce înseamnă că ori de câte ori va fi importat în cursul execuției unui program, doar o singură instanță va fi activă.
-
-## Scope
-
-Fiecare modul are propriul scope (mediu lexical). Prin `export` faci disponibile elemente ale scope-ului modulului.
-
-### Expunerea de elemente în global scope
-
-Este posibl ca în anumite cazuri să ai nevoie să expui în global scop un element sau mai multe. Un caz ar fi un modul care creează un set de elemente cărora li se atașează dinamic receptori (*event listeners*) pentru o funcție care se află și ea în modul. Cum în cazul receptorilor aceștia se așteaptă să *găsească* funcția în global scope - *window*, putem face o *expunere* a respectivului element.
-
-```javascript
-// modul
-function clickPeDisciplina (evt) {}
-globalThis.clickPeDisciplina = clickPeDisciplina;
-// buton în window cu onclick:clickPeDisciplina(this)
-```
-
-### Accesul la elementele din global
-
-Pentru a avea acces în module la elementele scripturilor încărcate în pagină dar care nu sunt declarate a fi module, le poți importa direct într-un modul care are nevoie de ele.
-
-```javascript
-// un modul
-import '../lib/editorjs/editor.js';
-import '../lib/editorjs/header.js';
-import '../lib/editorjs/paragraph.js';
-import '../lib/editorjs/list.js';
-
-// restul codului
-```
-
 ## Referințe
 
+- [15.2 Modules | ECMAScript® 2020 Language Specification](http://www.ecma-international.org/ecma-262/11.0/index.html#sec-modules)
 - [Axel Rauschmayer. Exploring ES6. 16. Modules](http://exploringjs.com/es6/ch_modules.html#sec_modules-vs-scripts)
 - [Addy Osmani. Writing Modular JavaScript With AMD, CommonJS & ES Harmony](https://addyosmani.com/writing-modular-js/)
 - [CommonJS Notes](http://requirejs.org/docs/commonjs.html)
@@ -398,3 +404,5 @@ import '../lib/editorjs/list.js';
 - [ECMAScript 6 modules: the final syntax](https://2ality.com/2014/09/es6-modules-final.html)
 - [JavaScript modules|v8.dev|18 June 2018](https://v8.dev/features/modules)
 - [JavaScript Module Pattern: In-Depth](https://www.nilovelez.com/2018/06/javascript-module-pattern-in-depth/)
+- [8.1.5.4 Module-related host hooks](https://html.spec.whatwg.org/multipage/webappapis.html#integration-with-the-javascript-module-system)
+- [Reduce JavaScript Payloads with Tree Shaking | Jeremy Wagner | Web Fundamentals | developers.google.com](https://developers.google.com/web/fundamentals/performance/optimizing-javascript/tree-shaking)

@@ -14,6 +14,13 @@ Metodei îi pasezi obiectul destinație urmat de obiectele din care copiezi prop
 cont obiNou = Object.assign({}, obiSursă1, obiSursă2);
 ```
 
+Ca alternativă, în cazul în care este necesar, se poate face o clonare a unui obiect folosind sintaxa spread precum în următorul exemplu.
+
+```javascript
+const obi1 = {a: 1, b: 2};
+const obiX = {...obi1};
+```
+
 ## Mantre
 
 - proprietățile care trebuie copiate trebuie să fie `enumerable`.
@@ -27,6 +34,8 @@ var obi = { unu: 1 };
 var copie = Object.assign({}, obi);
 console.log(copie); // { unu: 1 }
 ```
+
+Copierea obiectelor folosind această metodă conduce la realizarea de copii *simple* - *shallow copy* în limba engleză.
 
 ## Getteri si setteri in surse
 

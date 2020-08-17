@@ -239,3 +239,4 @@ Din nefericire, modelul asincronicității construit pe callback-uri conduce la 
 -   [Callback Hell](http://callbackhell.com/)
 -   [Using XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest),
 -   [Jake Archibald: In The Loop - JSConf.Asia | Youtube |  JSConf](https://www.youtube.com/watch?v=cCOL7MC4Pl0)
+-   [8.1.6.2 Queuing tasks | ](https://html.spec.whatwg.org/multipage/webappapis.html#queuing-tasks)

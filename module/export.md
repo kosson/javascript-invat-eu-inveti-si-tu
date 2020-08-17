@@ -1,7 +1,7 @@
 # Expresia export
 
-Expresia `export` permite realizarea unor legături *live* la funcții, obiecte sau la primitivele unui volum.
-Obiecte, funcțiile și primitivele pentru care se face export nu mai pot fi modificate de codul care le importă. Totuși, valorile pot fi modificate în modulul exportat, ceea ce se reflectă direct în codul care importă. Entitățile unui modul care nu sunt exportate, vor fi private acelui modul.
+Expresia `export` permite realizarea unor legături *live* la funcții, obiecte sau la primitivele unui modul.
+Obiecte, funcțiile și primitivele pentru care se face `export` nu mai pot fi modificate de codul care le importă. Totuși, valorile pot fi modificate în modulul exportat, ceea ce se reflectă direct în codul care importă. Entitățile unui modul care nu sunt exportate, vor fi private acelui modul.
 
 Modulele care sunt exportate vor fi mereu în `strict mode`, fie că scrii codul sub directivă, fie că nu.
 
@@ -67,14 +67,17 @@ Această practică nu este una de dorit pentru că ridică probleme în momentul
 
 ## Exportul default
 
-Exporturile default sunt folosite pentru a exporta o singură valoare sau pentru a avea cel puțin o valoare pe care să o folosești la export. Poți avea un sigur export `default` per modul, iar modulul va fi chiar respectivul identificator exportat `default`.
+Exporturile default sunt folosite pentru a exporta o singură valoare sau pentru a avea cel puțin o valoare pe care să o folosești la export. Poți avea un sigur export `default` per modul, iar modulul va fi chiar respectivul identificator exportat `default`. Exportul ca `default` a două sau mai multe entități va genera o eroare.
 
 ```javascript
 export default nume_identificator_expresie;
 // precum în următoarele:
 export default function numeFunctie () {}; // declarație funcție cu nume
-export default function* () {}; // declarație funcție
-export default class Ceva {};
+export default function* () {}; // declarație funcție [generator]
+// exportul unei clase cu nume sau fără. Nu încheia cu punct și virgulă.
+export default class Ceva {}
+export default class {}
+// desemnarea defaultului la finalul modulului.
 export {identificator1 as default, altceva};
 ```
 
@@ -88,7 +91,18 @@ export default ceva = 'test';
 import altceva from './init.js';
 ```
 
-Folosirea lui `default` nu înseamnă că nu poți exporta și altceva din modul. Bunele practici spun să eviți o astfel de abordare. Exporturile `default` pentru funcții și clase nu vor fi încheiate cu punct și virgulă.
+Folosirea lui `default` nu înseamnă că nu poți exporta și altceva din modul. Bunele practici spun să eviți o astfel de abordare.
+
+```javascript
+// fișierul modul care exporta
+export let x = 10;
+export let y = ['a', 'b'];
+export default let b = 'ceva';
+// fisierul modul care importă
+import defaultulNouNume, {x, y} from './numeFisierCareExp.mjs';
+```
+
+Exporturile `default` pentru funcții și clase nu vor fi încheiate cu punct și virgulă.
 
 ```javascript
 // modul1.js
@@ -131,12 +145,36 @@ export {
 
 Exporturile `default` pot fi importate schimbând numele obiectul importat: `import {default as numeLocalArbitrarAles} from './numeModul.mjs'`.
 
-## Export către un consumator terț - agregare
+## Exportarea către un consumator terț - agregare
+
+Pentru a exporta toate entitățile puse la dispoziție de un modul, poți menționa această opțiune cu `*`.
+
+```javascript
+// din `altModul.mjs`
+export * from './modul.mjs';
+```
+
+Trebuie menționat faptul că în cazul exportului mai departe al entităților unui modul, folosind `*`, nu va fi inclusă și entitatea `default`. Pentru a exporta mai departe și `default`-ul, va trebui menționat acest lucru într-o declarație separată.
+
+```javascript
+// din `altModul.mjs`
+export * from './modul.mjs';
+export {default} from './modul.mjs';
+// iar în `modulTerț` poți importa toate entitățile sub un singur nume
+import * as numeObiectSumator from './altModul';
+```
+
+Obiectul sumator folosit pentru a importa toate entitățile exportate de modulul de la care se preiau, va include și exportul `default`. Dacă vrei să imporți separat `default`-ul sub un nume dedicat, poți face acest lucru.
+
+```javascript
+import numePentruDefault , * as numeObiectSumator from './modul';
+```
+
+Atenție, în `numeObiectSumator` vei avea în continuare și `default`-ul, dar îl vei avea separat prin sintaxa din exemplu.
 
 Putem exporta direct dintr-un modul elementele unui altuia fără a mai face importul.
 
 ```javascript
-export * from './modul.mjs';
 export {a, b as altceva} from './unModul.mjs';
 export ceva from 'nume_fisier.js';
 // fiind echivalent cu
@@ -150,7 +188,7 @@ Acest lucru este util pentru cazul în care am avea nevoie să agregăm din mai 
 // fisier1.js
 let functie1 = function functie1 () {};
 let functie2 = function functie2 () {};
-export {functie1, functie2};https://exploringjs.com/impatient-js/ch_modules.html
+export {functie1, functie2}; // https://exploringjs.com/impatient-js/ch_modules.html
 // fisier2.js
 let class Ceva () {}
 export Ceva;
@@ -166,7 +204,20 @@ import {functie1, functie2, Ceva} from 'fisier_agregator.js';
 ```javascript
 export {ceva, altceva} from ... ;
 export {ceva as primo, altceva as secundo} from ...;
-export {default} from ...;
+export {default} from ...; // exportul unui default
+```
+
+Poți exporta `default`-ul urma și de alt elemente dacă acest lucru este necesar.
+
+```javascript
+// modulIntermediar.mjs
+export {
+  default, // sau cu redenumire `default as altNumePtrDefault`
+  elementul1,
+  elementul2
+} from './numeModul.mjs'; // va fi exportat defaultul și elementele lui `numeModul.mjs`
+// modululCareAreNevoieDeElemente.majuscul
+import unNUmeAlesPentruDefault, {elementul1, elementul2} from './modulIntermediar.mjs';
 ```
 
 ## Resurse
