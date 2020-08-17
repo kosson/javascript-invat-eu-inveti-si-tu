@@ -1,6 +1,6 @@
 # Object.prototype.hasOwnProperty()
 
-Este o metodă folosită în cazul în care dorești să utilizezi proprietățile care aparțin obiectului construit fără cele moștenite prin legătura prototipală. Este returnat un boolean. Orice obiect care *descinde* din `Object` moștenește și metoda `hasOwnProperty()`.
+Este o metodă folosită în cazul în care dorești să utilizezi proprietățile care aparțin obiectului exceptându-le pe cele moștenite prin legătura prototipală. Este returnat un boolean. Orice obiect care *descinde* din `Object` moștenește și metoda `hasOwnProperty()`.
 
 ```javascript
 "use strict";

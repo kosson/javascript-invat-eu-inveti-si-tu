@@ -47,7 +47,7 @@ Apoi motorul va transforma acest *Module Record* într-o instanță funcțional�
 
 Toate modulele rulează implicit sub directiva `"use strict"`, ceea ce înseamnă automat că referința `this` este `undefined`. Un program JavaScript care rulează sub declarația `"use strict;"` poate fi compilat ca modul JavaScript. Poate fi considerat a fi un modul JavaScript orice script folosește declarațiile `import` și `export`.
 
-Pentru a avea acces la componentele unui modul din alt modul, trebuie să le exporți individual, creându-se astfel *referințe active* (*live bindings*) către acestea. Modulele pot fi importate menționând calea și uneori chiar URL-ul. Modulele sunt obiecte unice care pot fi importate so singură dată (Singleton). În obiectul global vei avea doar identificatori pentru module.
+Pentru a avea acces la componentele unui modul din alt modul, trebuie să le exporți individual, creându-se astfel *referințe active* (*live bindings*) către acestea. Modulele pot fi importate menționând calea și uneori chiar URL-ul. Modulele sunt obiecte unice care pot fi importate o singură dată (Singleton). În obiectul global vei avea doar identificatori pentru module.
 
 Modulele au o structură *statică*, adică nu poți face modificări de structură la momentul executării acestora. Doar legăturile către elementele modulului sunt dinamice în sensul că poți accesa entitățile respectivului modul și poți modifica valori din obiectele modulului de la care ai respectivele referințe importate.
 Un modul ECMAScript poate importa și exporta în același timp.
