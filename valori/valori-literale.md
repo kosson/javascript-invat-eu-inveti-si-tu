@@ -144,7 +144,7 @@ Acestea sunt: `'` (ghilimele simple), `"` (ghilmele duble), `\b`, `\f`, `\r`, `\
 
 Începând cu ECMAScript 2015 avem un mod suplimentar de a lucra cu fragmente de text și acesta este numit **template literal** - *șabloane literale*. Chestia extraordinară este că permite introducerea de expresii care pot fi evaluate folosind secvența `${identificator sau expresie}` și lucrul cu fragmente de text pe mai multe rânduri. Pentru a construi un template string punem tot textul nostru între două <code>&#96;</code>, care este caracterul pentru reprezentarea **accentului grav** (grave accent, în engleză). Acest caracter mai este denumit în limba engleză și **backtick**.
 
-Acestea este semnul distinct care spune motorului JavaScript că se pot interpola rezultate ale evaluării unei expresii folosind combinațiea dollar-acolade precum în: `${oVariabilaSauExpresie}`.
+Acestea este semnul distinct care spune motorului JavaScript că se pot interpola rezultate ale evaluării unei expresii folosind combinația dollar-acolade precum în: `${oVariabilaSauExpresie}`.
 
 ```javascript
 var ceva = `ceva text ${numeIdentificator}`;
@@ -157,6 +157,14 @@ var a = 5, b = 10;
 console.log("Cinsprezece este suma " + (a + b) + " și\nnu " + (2 * a + b) + ".");
 // este echivalent cu:
 console.log(`Cinsprezece este suma ${a + b} și\nnu ${2 * a + b}.`);
+```
+
+Un aspect foarte util este că poți redacta fragmentele de cod pe mai multe rânduri fără a folosi `\n`.
+
+```javascript
+let ceva = `Acesta este un 
+fragment de text 
+pe trei rânduri`;
 ```
 
 O formă și mai avansată de *șabloane literale* (template literal) este cea numită `tagged template literals` - **literale șablon cu etichetă**. Un simplu exemplu:
@@ -200,6 +208,8 @@ function inlocuieste (text, atrInput, procInput) {
 var transmutare = inlocuieste`Un text ${atribut} cu ${procent} încântare.`;
 console.log(transmutare);
 ```
+
+Primul argument al funcției care va face interpolarea este unul dedicat șirurilor de caractere în care vor fi inserate valorile. Aceste fragmente de text sunt aduse în mediul lexical al funcției ca un array. Fiecare element al acestui array este un fragment de text până la limita la care apare interpolarea valorii. Al doile argument este cel căruia îi va fi atribuit prima expresie care va genera o valoare pentru prima interpolare.
 
 Există un exemplu și mai elaborat care permite introducerea unui șablon ca argument al unei funcții cu fiecare loc de substituire numerotat, iar aceasta, la rândul său, returnează o alta care va accepta drept argumente valorile ce vor completa șablonul.
 
