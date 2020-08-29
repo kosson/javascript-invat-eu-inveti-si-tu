@@ -79,7 +79,7 @@ Inițializarea unui obiect este o sarcină simplă folosind literalul corespunz�
 var obi = {unu: 1, este: true};
 ```
 
-Începând cu ECMAScript 2015 se poate folosi și notația prescurtată.
+Începând cu ECMAScript 2015 se poate folosi și notația prescurtată dacă numele identificatorilor sunt aceleași cu cele ale proprietăților.
 
 ```javascript
 var unu = 1, este = true;
@@ -142,7 +142,7 @@ Acestea sunt: `'` (ghilimele simple), `"` (ghilmele duble), `\b`, `\f`, `\r`, `\
 
 ## Template Literal - text șablon
 
-Începând cu ECMAScript 2015 avem un mod suplimentar de a lucra cu fragmente de text și acesta este numit **template literal** - *șabloane literale*. Chestia extraordinară este că permite introducerea de expresii care pot fi evaluate folosind secvența `${identificator sau expresie}` și lucrul cu fragmente de text pe mai multe rânduri. Pentru a construi un template string punem tot textul nostru între două <code>&#96;</code>, care este caracterul pentru reprezentarea **accentului grav** (grave accent, în engleză). Acest caracter mai este denumit în limba engleză și **backtick**.
+Începând cu ECMAScript 2015 avem un mod suplimentar de a lucra cu fragmente de text și acesta este numit **template literal** - *șabloane literale*. Chestia extraordinară este că permite introducerea de expresii care pot fi evaluate folosind secvența `${identificator sau expresie}` și lucrul cu fragmente de text pe mai multe rânduri. Pentru a construi un template string punem tot textul nostru între două <code>&#96;</code>, care este caracterul pentru reprezentarea **accentului grav** (*grave accent*, în engleză). Acest caracter mai este denumit în limba engleză și **backtick**.
 
 Acestea este semnul distinct care spune motorului JavaScript că se pot interpola rezultate ale evaluării unei expresii folosind combinația dollar-acolade precum în: `${oVariabilaSauExpresie}`.
 
@@ -150,7 +150,7 @@ Acestea este semnul distinct care spune motorului JavaScript că se pot interpol
 var ceva = `ceva text ${numeIdentificator}`;
 ```
 
-*Șabloanele literale* (template literal) sunt un pas evolutiv important dacă ne gândim la faptul că până acum trebuia să apelăm la concatenare pentru a introduce într-un șir de caractere rezultatul evaluării unor expresii. Acest lucru introduce un nivel suplimentar de calcul pentru că mototul JS trebuia mai întâi să analizeze dacă nu cumva este vorba despre o adunare. Așa, folosind *șabloanele literale*, lucrurile sunt clare.
+*Șabloanele literale* (template literal) sunt un pas evolutiv important dacă ne gândim la faptul că până acum trebuia să apelăm la concatenare pentru a introduce într-un șir de caractere rezultatul evaluării unor expresii. Acest lucru introduce un nivel suplimentar de calcul pentru că motorul trebuia mai întâi să analizeze dacă nu cumva este vorba despre o adunare. Așa, folosind *șabloanele literale*, lucrurile sunt clare.
 
 ```javascript
 var a = 5, b = 10;
@@ -162,8 +162,8 @@ console.log(`Cinsprezece este suma ${a + b} și\nnu ${2 * a + b}.`);
 Un aspect foarte util este că poți redacta fragmentele de cod pe mai multe rânduri fără a folosi `\n`.
 
 ```javascript
-let ceva = `Acesta este un 
-fragment de text 
+let ceva = `Acesta este un
+fragment de text
 pe trei rânduri`;
 ```
 

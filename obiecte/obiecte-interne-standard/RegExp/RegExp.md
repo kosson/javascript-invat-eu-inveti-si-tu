@@ -47,7 +47,7 @@ console.log(/^.$/u.test(exemplu));
 // true, având fanionul Unicode
 ```
 
-În cazul în care ai de-a face cu diferite diacritice, va trebui menționat fanionul `u` și pentru a indica motorului să se aștepte la caractere cu diacritice, vom introduce în șablonul de căutare secvența semnal `\p{Letter}`.
+În cazul în care ai de-a face cu diferite diacritice, va trebui menționat fanionul `u` și pentru a indica motorului să se aștepte la caractere cu diacritice (Unicode), vom introduce în șablonul de căutare secvența semnal `\p{Letter}`.
 
 ```javascript
 let rezultat = "Orăștie și Agăș".match(/[\p{Letter}]+/gu); // [ 'Orăștie', 'și', 'Agăș' ]
@@ -225,9 +225,9 @@ Dacă fanionul pentru *multiline* este prezent, atunci căutarea se va face imed
 
 #### Limitare la cuvânt - word boundary
 
-Acest metacaracter se comportă și el ca o ancoră. Va face și el o potrivire pe lungime zero. Indică granița strictă. Specializarea sa este identificarea fragmentelor care sunt formate din acele caractere și pot forma cuvinte. Deci, am putea distinge caracterele după capacitatea lor de a forma cuvinte sau nu.
+Acest metacaracter se comportă și el ca o ancoră. Va face și el o potrivire pe lungime zero. Indică granița strictă. Specializarea sa este identificarea fragmentelor care sunt formate din caracterele ce satisfac șablonul, dar care pot forma cuvinte. Deci, am putea distinge caracterele după capacitatea lor de a forma cuvinte sau nu.
 
-Dacă șirul debutează cu un caracter parte a unui cuvânt, motorul RegExp poziționează valid limita `\b` chiar înaintea acelui caracter atunci când își începe evaluarea. Adu-ți aminte că `\b` are dimensiune zero. Este doar o ancoră. Constrângerea se poate face ori la început, ori la finalul cuvântului.
+Dacă șirul debutează cu un caracter parte a unui cuvânt, motorul RegExp poziționează limita `\b` chiar înaintea acelui caracter atunci când își începe evaluarea. Adu-ți aminte că `\b` are dimensiune zero. Este doar o ancoră. Constrângerea se poate face ori la început, ori la finalul cuvântului.
 
 - `\b`: Caracterul «word border» marchează limitele de căutare;
 - `\B`: Este opusul lui `\b`.
@@ -237,8 +237,8 @@ De exemplu, în `"saturn".match(/\bs/); // [ "s" ]` este limita superioară, iar
 ```javascript
 let sir = 'Un pământean apăru în prag. Era negru pământ.';
 let cautare = sir.match(/\bpământ\b/g);
-console.dir(cautare); // apare o dată
-let cautare = sir.match(/pământ\B/g); // o potrivire
+console.dir(cautare); // apare o dată, fiind ultimul cuvânt
+let cautare = sir.match(/pământ\B/g); // o potrivire, fiind primul
 ```
 
 Fii atent că `\b` va considera punctele și liniile ca terminații. Le va percepe ca limite. De aceea în exemplul de mai sus este găsit fragmentul de la final. Opusul este folosirea lui `\B` care va potrivi doar fragmentele care sunt continuate, și care nu au un spațiu după sau înainte. Mergând pe aceeași idee, pot fi folosite caracterele `\s`, care indică chiar un spațiu sau un TAB.
