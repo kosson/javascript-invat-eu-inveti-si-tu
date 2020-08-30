@@ -209,7 +209,7 @@ var transmutare = inlocuieste`Un text ${atribut} cu ${procent} încântare.`;
 console.log(transmutare);
 ```
 
-Primul argument al funcției care va face interpolarea este unul dedicat șirurilor de caractere în care vor fi inserate valorile. Aceste fragmente de text sunt aduse în mediul lexical al funcției ca un array. Fiecare element al acestui array este un fragment de text până la limita la care apare interpolarea valorii. Al doile argument este cel căruia îi va fi atribuit prima expresie care va genera o valoare pentru prima interpolare.
+Primul argument al funcției care va face interpolarea este unul dedicat șirurilor de caractere în care vor fi inserate valorile. Aceste fragmente de text sunt aduse în mediul lexical al funcției ca un array. Fiecare element al acestui array este un fragment de text până la limita la care apare interpolarea valorii. Al doilea argument este cel căruia îi va fi atribuit prima expresie care va genera o valoare pentru prima interpolare.
 
 Există un exemplu și mai elaborat care permite introducerea unui șablon ca argument al unei funcții cu fiecare loc de substituire numerotat, iar aceasta, la rândul său, returnează o alta care va accepta drept argumente valorile ce vor completa șablonul.
 
