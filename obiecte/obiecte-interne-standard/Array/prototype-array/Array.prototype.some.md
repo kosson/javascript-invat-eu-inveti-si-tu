@@ -1,6 +1,6 @@
 # Array.prototype.some()
 
-Acestă metodă verifică dacă fie și numai un singur element din array trece de testul impus de o funcție. Funcția pasată drept argument trebuie să returneze o valoarea *truthy* sau *falsey*. Prima valoare care trece testul, va opri execuția lui `some()`, care va returna `true`, Pentru a returna `false` nicio valoare nu ar trebui să treacă testul.
+Metoda aplică o funcție fiecărui element al unui array. Dacă unul sau mai multe elemente trece testul, metoda va returna valoarea `true`. Funcția pasată drept argument trebuie să returneze o valoarea *truthy* sau *falsey*. Prima valoare care trece testul, va opri execuția lui `some()`. Pentru a returna `false` nicio valoare nu ar trebui să treacă testul.
 
 ```javascript
 function testeaza (element, index, array) {

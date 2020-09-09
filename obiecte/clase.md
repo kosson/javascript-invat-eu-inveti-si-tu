@@ -41,7 +41,7 @@ Totuși clasele au câteva detalii, care le departajează de funcții. Nu pot fi
 
 ### Drumul către clase - studiu
 
-Modelarea unei clase rudimentare se poate realiza prin introducerea de funcționalități și date în obiectul indicat prin `this` pentru o funcție. Adu-ți aminte că la executarea unei funcții constructor, folosind operatorul `new`, primul lucru pe care-l face motorul este să creeze un obiect în contextul căruia să execute corpul funcției.
+Modelarea unei clase rudimentare se poate realiza prin introducerea de funcționalități și date în obiectul indicat prin `this` pentru o funcție. Adu-ți aminte că la executarea unei funcții constructor, folosind operatorul `new`. Primul lucru pe care-l face motorul este să creeze un obiect în contextul căruia să execute corpul funcției.
 
 ```javascript
 function VehiculSpatial (identificator) {
@@ -60,9 +60,9 @@ console.log(Santinel.prezentare());
 // ori de câte ori este creat un nou obiect prin new
 ```
 
-Partea deficitară a unei astfel de soluții este că funcțiile care joacă rol de metode (obiectul context în care va rula funcția când va fi apelată cu `new`), vor fi recreate ori de câte ori este creat un nou obiect. Acest fapt implică probleme de performanță a codului ocupând memoria cu aceeași funcție recreată ori de câte ori este instanțiat un nou obiect.
+Soluția este deficitară pentru că funcțiile cu rol de metode (obiectul context în care va rula funcția când va fi apelată cu `new`), vor fi recreate ori de câte ori este creat un nou obiect. Acest fapt implică probleme de performanță a codului, ocupându-se noi spații de memorie cu aceeași funcție ori de câte ori este instanțiat un nou obiect.
 
-Modelarea unei clase rudimentare se poate realiza și prin introducerea de funcționalități și date în obiectul prototip al funcției. Astfel, prin mecanismul de moștenire prototipală, toate obiectele instanțiate cu `new`, vor beneficia de acces direct la toți membrii obiectului prototip.
+Mai departe, modelarea unei clase ante ES6 se poate realiza și prin introducerea de funcționalități și date în obiectul prototip al funcției. Astfel, prin mecanismul de moștenire prototipală, toate obiectele instanțiate cu `new`, vor beneficia de acces direct la toți membrii obiectului prototip.
 
 ```javascript
 function VehiculSpatial(identificator){
@@ -79,9 +79,9 @@ Santinel.an = 2015;
 console.log(Santinel.prezentare());
 ```
 
-Este rapid observabil faptul că simularea clasei s-a realizat prin introducerea de proprietăți în obiectul funcție folosind legătura `this`, care permite accesul la acesta, dar și în obiectul prototipal `prototype`.
+Astfel, am simulat o clasă prin introducerea de proprietăți în obiectul funcție folosind legătura `this`, care permite accesul la acesta, dar și în obiectul prototipal `prototype`.
 
-Prin introducerea noii sintaxe, se intenționează *crearea claselor pe baza moștenirii prototipale*. Sintaxa prezintă câteva particularități. Proprietățile viitorului obiect se introduc în metoda constructor. Metodele se introduc fără să fie precedate de cuvântul cheie `function` și nici nu vor fi despărțite prin virgulă. Accesarea proprietăților și metodelor se va face prin intermediul legăturii `this`. Însăși funcția clasă nu creează o legătură `this`.
+Prin introducerea noii sintaxe începând cu ES6, se intenționează *crearea claselor pe baza moștenirii prototipale*. Sintaxa prezintă câteva particularități. Proprietățile viitorului obiect se introduc în metoda constructor. Metodele se introduc fără să fie precedate de cuvântul cheie `function` și nici nu vor fi despărțite de altele prin vreun semn de punctuație. Accesarea proprietăților și metodelor se va face prin intermediul legăturii `this`. Însăși funcția clasă nu creează o legătură `this` la mometul instanțierii.
 
 ```javascript
 class Test {
@@ -134,7 +134,7 @@ Precum în cazul funcțiilor, clasele pot fi declarate, dar pot fi și expresii.
 
 #### Declarație de clasă
 
-Clasele pot fi declarate direct apelând la sintaxa `class NumeClasă {...}`. Ceea ce se petrece la declararea unei clase este că se constituie variabila cu numele clasei. Variabila este inițializată cu o funcție. În obiectul `prototype` al funcției este referită funcția constructor, purtând denumirea clasei, precum și toate metodele.
+Clasele pot fi declarate direct apelând la sintaxa `class NumeClasă {...}`. Ceea ce se petrece la declararea unei clase este că se constituie variabila cu numele clasei. Variabila este inițializată cu o funcție. În obiectul `prototype` al funcției se constituie o referință către funcția constructor, purtând denumirea clasei, precum și toate metodele.
 
 ```javascript
 class Ceva {
@@ -359,7 +359,7 @@ Este observabil cu cât efort s-a realizat acest lucru. Mai întâi am executat 
 
 #### extends și super
 
-În cazul claselor, mare parte din operațiunile complexe ale derivării sunt rezolvate prin introducerea sintagmei `extends` în declarația clasei pe care o dorești a fi derivata alteia. Ceea ce realizează este și abstractizarea funcționalităților unei clase, care va fi privită de cele derivate din ea ca un model de urmat privind comportamentele de bază. Similar copiilor care privesc și copiază comportamentele părinților, clasele, care extind altele, vor avea acces la metodele și proprietățile părintelui prin mecanismul de moștenire, care se va stabili automat. Putem afirma despre o clasă de la care se derivează că se comportă ca o interfață. O interfață fiind setul de date și funcționalități disponibil tuturor copiilor, dar care poate fi modificat de aceștia.
+În cazul claselor, mare parte din operațiunile complexe ale derivării sunt rezolvate prin introducerea sintagmei `extends` în declarația clasei pe care o dorești a fi derivata alteia. Ceea ce realizează este și abstractizarea funcționalităților unei clase, care va fi privită de cele derivate din ea ca un model de urmat privind comportamentele de bază. Similar copiilor care privesc și copiază comportamentele părinților, clasele care extind părinți, vor avea acces la metodele și proprietățile acestuia prin mecanismul de moștenire, care se va stabili automat. Putem afirma despre o clasă derivată că se comportă ca o interfață. O interfață fiind setul de date și funcționalități disponibil tuturor copiilor, dar care poate fi modificat de aceștia.
 
 Am stabilit faptul că prototipul este setat automat la obiectul prototip al constructorului părinte. Constructorul părintelui poate fi accesat folosind metoda `super()`. În clasele derivate, `super()` trebuie apelat înainte de a folosi `this` în funcția constructor a copilului. Acest lucru trebuie făcut pentru a seta o linie directă de moștenire cu proprietățile constructorului clasei părinte. Regula ar fi ca datele necesare alimentării părintelui pentru operațiunile sale interne, să le trimiți prin `super(arg1, arg2, etc)`. Ce este necesar copilului, setezi prin `this`. Nu uita, că prin moștenire vei avea mereu acces la datele și metodele părintelui.
 
@@ -411,7 +411,7 @@ const obi = new Copil(10);
 obi.afiseaza();
 ```
 
-Atunci când este nevoie, ai posibilitatea de a extinde și constructori care nu sunt clase.
+Atunci când este nevoie, ai posibilitatea de a extinde și constructori care nu sunt clase. De exemplu, poți extinde o funcție.
 
 ```javascript
 function Parinte () {};
@@ -425,6 +425,48 @@ class Copil extends Parinte {
 const obi = new Copil();
 obi.aduValoare(); // 10
 ```
+
+#### Accesarea din părinte a proprietăților copiilor
+
+Să presupunem că avem drept scenariu un obiect copil care pe lângă proprietățile părintelor la care are acces, va declara propriile proprietăți. Uneori vom avea clase părinte care să aibă declarate metode sau operațiuni de evaluare în care să intre proprietăți ale copiilor în cazul în care acestea există. Este și cazul exemplului de mai jos, unde părintele are acces la valorile proprietăților declarate în copil și poate face evaluarea expresiei fără probleme. În `super` alimentezi cu valori păritele conform semnăturii constructorului său. Ce este suplimentar, va fi declarat în mod obișnuit cu `this.numeProprietateNouă`.
+
+```javascript
+class Ceva {
+  constructor({a, b}) {
+    this.a = a;
+    this.b = b;
+    this.h = {salut: "Sunt părintele!"}
+    this.x = "setată în părinte"
+  }
+  accesez () {
+    console.log(this.a, this.b, this.c, this.x, this.h); // 10 20 {x: 1000} 'devine ceva al copilului'
+    return `${this.a}, ${this.b}, ${this.c.x}, ${this.x}, ${JSON.stringify(this.h)}`;
+  }
+}
+
+class Altceva extends Ceva {
+  constructor ({a, b, c}) {
+    super({
+      a: a,
+      b: b
+    });
+    this.c = c;
+    this.x = "devine ceva al copilului"
+    this.h.bau = "Eu sunt copchilul";
+  }
+}
+
+let obi = {
+  a: 10,
+  b: 20,
+  c: {x: 1000}
+}
+
+let eAltceva = new Altceva(obi);
+console.log(eAltceva.accesez()); // 10, 20, 1000, devine ceva al copilului {"salut":"Sunt părintele!","bau":"Eu sunt copchilul"}
+```
+
+Un astfel de scenariu este util atunci când lucrezi cu obiecte care sunt setate conform unor obiecte simple de configurare pe care le pasezi la momentul instanțierii copiilor.
 
 #### Suprascrierea metodelor
 
@@ -449,6 +491,47 @@ class Copil extends Parinte {
     super.afișare();
   }
 }
+
+let copil1 = new Copil("banane", "pere");
+copil1.afișare();
+
+class AltCopil extends Parinte {
+  constructor (undeva, cândva){
+    super("România");
+    this.undeva = undeva;
+    this.cândva = cândva;
+  }
+  afișare () {
+    return this.cândva + " voi merge la " + this.undeva + ", " + this.valoare;
+  }
+}
+
+let copil2 = new AltCopil("Bacău","în iarnă");
+```
+
+#### Moștenirea din obiecte simple
+
+În cazul în care este necesar, se poate seta obiectul prototipal al clasei la un obiect preexistent pentru a se putea moșteni proprietăți ale acestuia.
+
+```javascript
+const Părinte = {
+  ceva: 10,
+  măPrezint () {
+    return `Sunt ${this.nume}, un animățuț de nota ${this.ceva}`;
+  }
+};
+
+class Iepuraș {
+  constructor (nume) {
+    this.nume = nume;
+  }
+}
+
+// Aici preluăm proprietțile lui `Părinte`
+Object.setPrototypeOf(Iepuraș.prototype, Părinte);
+
+let unIepuraș = new Iepuraș("Cici");
+console.log(unIepuraș.măPrezint());
 ```
 
 ### Moștenirea din obiectele interne prin clase derivate
@@ -470,7 +553,7 @@ Toate metodele din obiectul prototip al lui Array sunt disponibile noului obiect
 
 ### Proprietăți simboluri
 
-În utilizarea claselor se poate dovedi utilă folosirea simbolurilor drept identificatori. Adu-ți aminte faptul că simbolurile nu pot fi modificate și unice.
+În utilizarea claselor se poate dovedi utilă folosirea simbolurilor drept identificatori. Adu-ți aminte faptul că simbolurile nu pot fi modificate și sunt unice.
 
 ```javascript
 const facCeva = Symbo('facCeva');
@@ -485,3 +568,8 @@ class OClasa {
   }
 }
 ```
+
+## Resurse
+
+- [14.6 Class Definitions | ECMAScript® 2021 Language Specification | Draft ECMA-262 / September 7, 2020](https://tc39.es/ecma262/#sec-class-definitions)
+- [Classes | JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)

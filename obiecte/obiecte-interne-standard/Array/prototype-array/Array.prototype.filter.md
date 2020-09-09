@@ -8,8 +8,9 @@ colectie.filter((element) => element > 20);
 // Array [ 23, 34 ]
 ```
 
-Metoda `filter()` face parte integrantă din metodele obiectului intern `Array`. Alături de `map()` și `reduce()` face parte integrantă din paradigma *programării funcționale*.
-Metoda se dovedește utilă în lanțurile de prelucrare ale datelor. Totuși există un aspect care trebuie luat în considerare, fiind strâns legat de performanțe și de eficiența operațiunilor de prelucrare. Metoda va face testarea tuturor elementelor unui array fără a se opri în momentul în care testul este pozitiv. În cazul unor array-uri de mari dimensiuni, această metodă trebuie analizată atent înainte de a fi folosită. Alternativ, pentru a opri procesul de prelucrare imediat ce testul este trecut, se poate folosi metoda `find()`.
+Metoda `filter()` face parte integrantă din metodele obiectului intern `Array`.
+
+Metoda va face testarea tuturor elementelor unui array fără a se opri în momentul în care testul este pozitiv. În cazul unor array-uri de mari dimensiuni, această metodă trebuie analizată atent înainte de a fi folosită. Alternativ, pentru a opri procesul de prelucrare imediat ce testul este trecut, se poate folosi metoda `find()`.
 
 ```javascript
 let carti = [
@@ -52,7 +53,7 @@ filtrare(colectie, function (element) {   // invoci filtrarea cu un array și ca
 
 Funcția cu rol de callback are rolul precis de a returna o valoare de adevăr în urma evaluării diferitelor expresii din interiorul său.
 
-Cum ar funcționa același procedeu pentru un JSON?
+Cum ar funcționa același procedeu pentru un obiect JSON?
 
 ```javascript
 const colectie = [
@@ -85,10 +86,10 @@ De foarte multe ori este necesară parcurgerea unui obiect și extragerea elemen
 
 ```javascript
 const colectie = [
-  {nume: "ISS", tip: "statie"},
-  {nume: "Soyuz", tip: "vehicul"},
+  {nume: "ISS",      tip: "statie"},
+  {nume: "Soyuz",    tip: "vehicul"},
   {nume: "Atlantis", tip: "vehicul"},
-  {nume: "Ariane", tip: "propulsor"}
+  {nume: "Ariane",   tip: "propulsor"}
 ];
 
 let existaElementul = function (element, obiect) {
@@ -106,7 +107,7 @@ Poate fi folosit cu mare succes și în funcții recursive.
 
 ## Căutarea valorilor corespondente din două array-uri
 
-Uneori este necesară căutarea a unor valori care există într-un array, în alt array. Pe scurt, ai nevoie să găsești corespondențele sau mai bine spus intersecția celor două seturi de valori.
+Uneori este necesară căutarea unei valori care există într-un array, într-un alt array. Pe scurt, ai nevoie să găsești corespondențele sau mai bine spus intersecția celor două seturi de valori.
 
 ```javascript
 let roles = ["user", "ceva", "intern", "tester"];

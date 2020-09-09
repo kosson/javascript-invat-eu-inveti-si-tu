@@ -747,7 +747,7 @@ Posibilitatea de a adăuga în mod dinamic proprietăți dacă acestea nu exist�
 #### Folosirea parantezelor drepte
 
 ```javascript
-const newObj = {};                // Creează obiectul
+const newObj = {};              // Creează obiectul
 newObj['oCheie'] = 'Salutare';  // Scrie proprietăți
 let cheie = newObj['oCheie'];   // Accesează proprietățile
 ```
@@ -812,7 +812,7 @@ Metodele pot fi și ele la rândul lor accesate folosind cele două tipuri de si
 1 `obiect.metoda()`
 2 `obiect["metoda"]()`
 
-Atunci când invoci o metodă folosind notația cu punct, ai acces la proprietățile obiectului folosind cuvântul cheie `this` deoarece obiectul în contextul căruia se execută funcția este `this`.
+Atunci când invoci o metodă folosind notația cu punct, ai acces la proprietățile obiectului folosind cuvântul cheie `this`, deoarece obiectul în contextul căruia se execută funcția este `this`.
 
 Pentru că sintaxa cu paranteze pătrate (`["proprietate"]`), folosește un șir de caractere (**string**), acest lucru înseamnă că o secvență de cod poate fi folosită pentru a construi valoarea acelui string, de exemplu prin concatenare. Dacă pentru accesare se va folosi orice altceva în afară de stringuri, numărul sau obiectul vor fi transformate în stringuri (folosindu-se mecanismul de coercion). ES6 introduce o nouă sintaxă care ușurează modul de constituire a numelui cheii unui obiect. Până acum, acest lucru se făcea astfel:
 

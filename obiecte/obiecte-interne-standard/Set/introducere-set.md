@@ -59,7 +59,7 @@ Funcția callback se va apela cu următoarele argumente:
 -   cheia elementului și
 -   setul care va fi traversat.
 
-Trebuie spus un lucru important: într-un obiect Set nu există chei, dar pentru a fi asigurată compatibilitatea cu `forEach`, intern există un mecanism de evidență folosit în mod similar lui `Map` și lui `Array`.
+Într-un obiect `Set` nu există chei, dar pentru a fi asigurată compatibilitatea cu `forEach`, intern există un mecanism de evidență folosit în mod similar lui `Map` și lui `Array`.
 
 Dacă nu este pasat un obiect care să fie folosit drept `this`, atunci este pasat automat `undefined`.
 
