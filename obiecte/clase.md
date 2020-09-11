@@ -304,6 +304,39 @@ obi.elem; // val: miau
 obi['elem'] = 12; // val: 12
 ```
 
+### Mediul lexical
+
+Clasele creează propriul mediu lexical la fel cu o fac și funcțiile.
+
+```javascript
+var externa = {
+  cici: 10
+};
+var fixă = 'piatră';
+
+class Ceva {
+  constructor () {
+    this.martor = 10000;
+    this.x = externa;
+    this.y = fixă;
+  }
+  // get x () {
+  //   return this.x;
+  // }
+  // set x (val) {
+  //   this.x = val;
+  // }
+}
+
+let a = new Ceva();
+// console.log(a.x); //?
+console.log("interna `martor` este ", a.martor, " iar `externa` este: ", a.x);
+externa.cici = 'bau', fixă = 'apă';
+console.log("`x` este ", a.x, " iar `y` este: ", a.y);
+```
+
+În exemplu de mai sus este observabil faptul că o clasă instanțiată creează un obiect care va fi încă conectat la mediul lexical al funcției cu rol de clasă. Ceea ce trebuie reținut este că valorile atribuite direct unei variabile, vor păstra valoarea așa cum era la momentul instanțierii obiectului. Orice modificare ulterioară nefiind oglindidă prin modificarea valorii interne. Totuși, dacă se face legătura la un obiect, valorile proprietăților acestuia pot fi modificate. Aceste modificări se vor reflecta și în valorile referințelor din obiect.
+
 ### Extinderea claselor
 
 Clasele pot fi extinse. Este indicată extinderea unei clase folosindu-se cuvântul cheie `extends`. În tratarea acestui subiect, legitim este să răspundem la întrebarea de ce? De ce avem nevoie să derivăm obiectele? Răspunsul vine din necesitatea de a putea avea acces la proprietățile și metodele unui obiect existent deja, pe care să nu le mai scriem din nou într-o nouă clasă, dar care să permită îmbogățirea sau modificarea acestora.
