@@ -124,7 +124,7 @@ new RegExp('^a+b$', 'g');
 
 ## Literalul funcțiilor
 
-Pentru a înțelege faptul că funcțiile au literalul lor, trebuie să înțelegem un lucru foarte simplu. În JavaScript, funcțile sunt valori.
+Pentru a înțelege faptul că funcțiile au literalul lor, trebuie să înțelegem un lucru foarte simplu. În JavaScript, **funcțile sunt valori**.
 
 ```javascript
 function () { return true };
@@ -142,7 +142,7 @@ Acestea sunt: `'` (ghilimele simple), `"` (ghilmele duble), `\b`, `\f`, `\r`, `\
 
 ## Template Literal - text șablon
 
-Începând cu ECMAScript 2015 avem un mod suplimentar de a lucra cu fragmente de text și acesta este numit **template literal** - *șabloane literale*. Chestia extraordinară este că permite introducerea de expresii care pot fi evaluate folosind secvența `${identificator sau expresie}` și lucrul cu fragmente de text pe mai multe rânduri. Pentru a construi un template string punem tot textul nostru între două <code>&#96;</code>, care este caracterul pentru reprezentarea **accentului grav** (*grave accent*, în engleză). Acest caracter mai este denumit în limba engleză și **backtick**.
+Începând cu ECMAScript 2015, avem un mod suplimentar de a lucra cu fragmente de text și acesta este numit **template literal** - *șabloane literale*. Acestea permit introducerea de expresii ce pot fi evaluate folosind secvența `${identificator sau expresie}`, precum și lucrul cu fragmente de text pe mai multe rânduri. Pentru a construi un *template string* punem tot textul nostru între două <code>&#96;</code>, fiind caracterul pentru reprezentarea **accentului grav** (*grave accent*, în engleză). Acest caracter mai este denumit în limba engleză și **backtick**.
 
 Acestea este semnul distinct care spune motorului JavaScript că se pot interpola rezultate ale evaluării unei expresii folosind combinația dollar-acolade precum în: `${oVariabilaSauExpresie}`.
 
@@ -150,7 +150,7 @@ Acestea este semnul distinct care spune motorului JavaScript că se pot interpol
 var ceva = `ceva text ${numeIdentificator}`;
 ```
 
-*Șabloanele literale* (template literal) sunt un pas evolutiv important dacă ne gândim la faptul că până acum trebuia să apelăm la concatenare pentru a introduce într-un șir de caractere rezultatul evaluării unor expresii. Acest lucru introduce un nivel suplimentar de calcul pentru că motorul trebuia mai întâi să analizeze dacă nu cumva este vorba despre o adunare. Așa, folosind *șabloanele literale*, lucrurile sunt clare.
+*Șabloanele literale* (template literal) sunt un pas evolutiv important, dacă ne gândim la faptul că până acum trebuia să apelăm la concatenare pentru a introduce într-un șir de caractere rezultatul evaluării unor expresii.
 
 ```javascript
 var a = 5, b = 10;
@@ -167,7 +167,7 @@ fragment de text
 pe trei rânduri`;
 ```
 
-O formă și mai avansată de *șabloane literale* (template literal) este cea numită `tagged template literals` - **literale șablon cu etichetă**. Un simplu exemplu:
+O formă și mai avansată de *șabloane literale* este cea numită `tagged template literals` - **șablon de literal cu etichete**. Un simplu exemplu:
 
 ```javascript
 var a = 0.5, b = 10;
@@ -175,7 +175,7 @@ var stranse = `Adunarea este: ${(a + b).toFixed(2)}, înmulțirea este: ${a * b}
 console.log(stranse);
 ```
 
-Se pot imbrica șabloane, precum în următorul exemplu:
+Șabloanele pot fi introduse în alte șabloane, precum în următorul exemplu:
 
 ```javascript
 var oParte = 'o parte de text',
@@ -185,16 +185,16 @@ console.log(altaParte);
 
 ### Tagged template literals - funcții de șablonare
 
-În acest caz, se folosește o funcție care este apelată cu datele template-ului literal care este procesat. Funcția primește datele din template ca bucăți individuale și trebuie să le combine pentru a creea rezultatul.
+În acest caz, se folosește o funcție, care este apelată cu datele template-ului literal. Funcția primește datele din template ca bucăți individuale și trebuie să le combine pentru a creea rezultatul.
 
 ```javascript
 var atribut = 'foarte bun',
     procent = '100';
 
 function inlocuieste (text, atrInput, procInput) {
-  var sirPanaPrimaInlocuire = text[0];
+  var sirPanaPrimaInlocuire =       text[0];
   var sirDeDupaInlocuirePanaLaUrm = text[1];
-  var ceAMaiRamas = text[2];
+  var ceAMaiRamas =                 text[2];
 
   // în funcție poți face anumite modificari valorilor
   // care vor fi interpolate
@@ -206,10 +206,76 @@ function inlocuieste (text, atrInput, procInput) {
 };
 
 var transmutare = inlocuieste`Un text ${atribut} cu ${procent} încântare.`;
+console.log(transmutare); // Un text foarte bun cu sută la sută încântare.
+```
+
+Primul argument al funcției care va face interpolarea reprezintă toate fragmentele de text pasate funcției, dar care nu sunt expresii: `facÎnlocuire`primulfragment ${varCuValoareAici} al doilea fragment`. Aceste fragmente de text sunt aduse în mediul lexical al funcției într-un array pe care în exemplu i-am pus numele `text` (primul parametru). Acest parametru este obligatoriu să existe.
+Fiecare element al acestui array este un fragment de text până la limita la care apare expresia `${valoareaVariabileiX}` ce interpolează valoarea.
+
+Al doilea argument este cel căruia îi va fi atribuită valoarea primei expresii, care va returna valoarea pentru a fi făcută prima interpolare.
+
+#### Valorile de interpolat ca array
+
+O variantă mai simplă ar fi să gestionăm restul parametrilor după primul ca un array. Vom porni de la exemplul anterior.
+
+```javascript
+var frags = ['foarte bun', 100];
+
+function inlocuieste (fragmenteTxt, arrValoriDeInterpolat) {
+  var sirPanaPrimaInlocuire =       fragmenteTxt[0],
+      sirDeDupaInlocuirePanaLaUrm = fragmenteTxt[1],
+      ceAMaiRamas =                 fragmenteTxt[2];
+
+  // în funcție poți face anumite modificari valorilor
+  // care vor fi interpolate
+  let totTextul = sirPanaPrimaInlocuire;
+  arrValoriDeInterpolat.map(function(valoarea) {
+    if (valoarea == 100) {
+      totTextul += ' sută la sută';
+      return;
+    };
+    totTextul += valoarea;
+  });
+
+  return totTextul + ceAMaiRamas;
+};
+
+var transmutare = inlocuieste`Un text ${frags} cu ${frags} încântare.`;
 console.log(transmutare);
 ```
 
-Primul argument al funcției care va face interpolarea este unul dedicat șirurilor de caractere în care vor fi inserate valorile. Aceste fragmente de text sunt aduse în mediul lexical al funcției ca un array. Fiecare element al acestui array este un fragment de text până la limita la care apare interpolarea valorii. Al doilea argument este cel căruia îi va fi atribuit prima expresie care va genera o valoare pentru prima interpolare.
+Mai poți avea cazul în care ai nevoie rapid să îmbraci toate fragementele de text dintr-un array, în taguri HTML. De exemplu `<li>`-uri.
+
+```javascript
+let arrTxt = ['ceva', 'altceva'];
+function genereazăLista (taguri, arr) {
+  let fragmentHTML = arr.map(function (txt) {
+    return `${taguri[0]}${txt}${taguri[1]}`
+  });
+  return fragmentHTML;
+};
+let rezultat = genereazăLista`<li>${arrTxt}</li>`;
+console.log(rezultat.join('')); // <li>ceva</li><li>altceva</li>
+```
+
+Pentru a simplifica și mai mult, în loc să generezi rezultatul și apoi să-l introduci într-un element, ai putea face acest lucru direct returnând o funcție care primește drept argument selectorul elementului în care va fi injectat rezultatul nostru.
+
+```javascript
+let arrTxt = ['ceva', 'altceva'];
+function adaugăListăLaPreexistent (taguri, arr) {
+  return function (element) {
+    let fragmentHTML = arr.map(function (txt) {
+      return `${taguri[0]}${txt}${taguri[1]}`
+    });
+    const fragmentHTML = fragmentHTML.join('');
+    document.query(element).innerHTML += fragmentHTML;
+  }
+};
+const injecteazăÎn = adaugăListăLaPreexistent`<li>${arrTxt}</li>`; // e o funcție
+injecteazăÎn('#elementul');
+```
+
+#### Substituire numerotată
 
 Există un exemplu și mai elaborat care permite introducerea unui șablon ca argument al unei funcții cu fiecare loc de substituire numerotat, iar aceasta, la rândul său, returnează o alta care va accepta drept argumente valorile ce vor completa șablonul.
 
