@@ -1,18 +1,19 @@
 # Funcții fat arrow
 
-Acest nou tip de funcții au fost introduse de ECMAScript 2015. Este tot un obiect-funcție. Cea mai simplă semnătură este `parametru => expresie`.
+Acest nou tip de funcții au fost introduse de ECMAScript 2015. Este tot un obiect-funcție. Cea mai simplă semnătură este `parametru => expresie`. Observă faptul că nu folosim cuvântul cheie `function`.
 
-Semnul care dă și denumirea de fat arrow este un egal urmat de semnul mai mare ca: =>, ceea ce trimite vizual la ideea că funcția returnează rezultatul evaluării codului din funcție, adică a expresiei. Corpul funcției este numit și „concis”, ceea ce implică faptul că doar expresiile pot constitui corpul funcției.
-Adu-ți aminte mereu faptul că în cazul unui bloc de cod, trebuie să scrii `return` pentru a scoate ceva din funcție. Doar în cazul expresiilor simple, precum un literal, beneficiem de un return implicit.
+Semnul care dă și denumirea de *fat arrow* (în română ar fi *săgeată groasă*) este un egal urmat de semnul mai mare ca: `=>`. O altă denumire acceptată este *funcție săgeată* (*arrow function*). Corpul funcției este numit și „concis”, implicând faptul că doar expresiile pot constitui corpul funcției.
 
-Sunt considerate a fi soluția perfectă pentru funcțiile anonime, care la rândul lor sunt cel mai des folosite în rolul de callback-uri. De fapt, asta a fost și gândirea din spatele deciziei de a introduce această sintaxă. Mai există și avantajul preluării `this` al callback-ului fără a mai fi nevoie să legi cu `bind()`. Există totuși cazul în care o funcție arrow, capătă un nume acesta fiind sub forma unei expresii de funcție cu nume.
+Adu-ți aminte mereu faptul că în cazul unui bloc de cod al unui *fat arrow*, trebuie să scrii `return` pentru a scoate rezultatul. Altfel, în cazul expresiilor simple sau al unui literal, beneficiem de un return implicit (*implicit return*), fără a mai fi nevoie de acoladele ce indică corpul funcției: `let a = () => 10`.
+
+Sunt considerate a fi soluția perfectă pentru funcțiile anonime, care la rândul lor sunt preferate în rolul de callback-uri. De fapt, asta a fost și gândirea din spatele deciziei de a introduce această sintaxă. Mai există și avantajul preluării `this` al callback-ului, fără a mai fi nevoie să legi cu `bind()`. Există totuși cazul în care o funcție arrow, capătă un nume acesta fiind sub forma unei expresii de funcție cu nume.
 
 ```javascript
 let faCeva = x => x * 2;
 faCeva.name; "faCeva"
 ```
 
-Funcțiile *fat arrows* la momentul execuției preiau `this` și `arguments` de la mediul lexical găzduitor. Nu creează propria legătură `this` și nici nu se constituie obiectul `arguments`. Pur și simplu, le folosește pe cele ale gazdei. Contextul de execuție este moștenit de la funcția sau obiectul în care sunt definite. La ce este bun acest lucru? Sunt evitate problemele legate de referința `this`.
+Funcțiile *fat arrows* la momentul execuției preiau `this` și `arguments` de la mediul lexical găzduitor. Nu creează propria legătură `this` și nici nu se constituie obiectul `arguments`, folosindu-le pe cele ale gazdei. Contextul de execuție este moștenit de la funcția sau obiectul în care sunt definite. La ce este bun acest lucru? Sunt evitate problemele legate de legătura realizată prin `this`.
 
 ```javascript
 // noua rutină
@@ -49,7 +50,7 @@ var obi = {
 obi.scot(); // pi
 ```
 
-Drept corp al funcției poate fi direct o expresie ce trebuie evaluată sau blocuri de cod convenționale precum în cazul funcțiilor declarate prin cuvântul cheie `function`. Hai să vedem câteva formule sintactice echivalente:
+Drept corp al funcției poate fi direct o expresie ce trebuie evaluată sau blocuri de cod convenționale precum în cazul funcțiilor „normale”. Hai să vedem câteva formule sintactice echivalente:
 
 ```javascript
 let oriDoi = valoare => valoare * valoare;
@@ -57,7 +58,7 @@ let oriDoi = valoare => valoare * valoare;
 let oriDoi = (valoare) => { return valoare * valoare };
 ```
 
-Un exemplu excelent este cel oferit de Reg *raganwald* Braithwaite în **JavaScript Allongé, the "Six" Edition**. Pornim de la o funcție care se execută imediat. Acesteia îi trimtem o valoare string arbitrară. Știind că funcțiile convenționale generează `arguments` și legătura `this`, la momentul returnării, vom executa o altă expresie de funcție. Aceasta la rândul său va primi o valoare arbitrară. Am trimis aceste valori pentru a popula obiectele `arguments` ale ambelor funcții. Astfel pe poziția `arguments[0]` vom avea valori în cazul ambelor funcții.
+Un exemplu excelent este cel oferit de Reg *raganwald* Braithwaite în **JavaScript Allongé, the "Six" Edition**. Pornim de la o funcție autoexecutabilă. Acesteia îi trimitem o valoare string arbitrară. Știind că funcțiile convenționale generează `arguments` și legătură `this`, la momentul returnării, vom evalua o altă expresie de funcție. Aceasta la rândul său va primi o valoare arbitrară. Am trimis aceste valori pentru a popula obiectele `arguments` ale ambelor funcții. Astfel pe poziția `arguments[0]` vom avea valori în cazul ambelor funcții.
 
 ```javascript
 (function () {
@@ -67,7 +68,7 @@ Un exemplu excelent este cel oferit de Reg *raganwald* Braithwaite în **JavaScr
 })('gazdă'); // "oaspete"
 ```
 
-Prin contrast, în cazul folosirii funcțiilor *fat arrow*, va fi utilizat obiectul `arguments` creat de funcția gazdă. Chiar dacă am împacheta funcția săgeată între paranteze rotunde cu scopul de a-i trimite un argument, acesta nu va fi utilizat pentru că nu există niciun mecanism dedicat evidenței argumentelor.
+Prin contrast, în cazul folosirii funcțiilor *fat arrow*, va fi utilizat obiectul `arguments` creat de funcția gazdă. Chiar dacă am împacheta *funcția săgeată* între paranteze rotunde cu scopul de a-i trimite un argument, acesta nu va fi utilizat pentru că nu există vreun mecanism dedicat stocării lor.
 
 ```javascript
 (function () {
@@ -76,7 +77,7 @@ Prin contrast, în cazul folosirii funcțiilor *fat arrow*, va fi utilizat obiec
 ```
 
 În cazul nostru, funcția *externă* va fi cea care va oferi valoarea de pe poziția `0` a propriului `arguments`.
-Funcțiile **fat arrow** își au originile în expresiile lambda ale programării funcționale. Un **fat arrow** este o funcție foarte simplă care nu poate fi folosită drept constructor. Aceste funcții nu au nume. Dacă ții neapărat, poți totuși să legi un identificator la ele prin formularea unei expresii de funcție: `let x = () => 10;`.
+Funcțiile **fat arrow** își au originile în expresiile lambda ale programării funcționale. Un **fat arrow** este o funcție foarte simplă care nu poate fi folosită drept constructor. Aceste funcții nu au nume. Poți să le atribui un identificator prin formularea unei expresii de funcție, precum în: `let x = () => 10;`.
 
 ```javascript
 (function faCeva (ceva) {
@@ -110,7 +111,9 @@ var zero = () => 'sunt zero argumente'; zero();
 var y = (unu, doi) => unu + doi; y(2, 5); // 7
 ```
 
-### Parametrii rest folosesc parantezele:
+### Parametrii rest
+
+Pentru acomodarea de *rest parameters* se folosesc parantezele rotunde neapărat. Folosirea acestora este cel mai apropiat lucru de obiectul `arguments`.
 
 ```javascript
 var z = [];
@@ -161,7 +164,11 @@ Pentru a returna un obiect trebuie întotdeauna să-l introduci între paranteze
 
 ### Fat arrows și this
 
-Arrow functions prezintă marele avantaj pentru că fac o legătură la contextul lexical din intenția programatorului. Acest lucru este binevenit în lucrul cu obiectele DOM. Uneori ai nevoie să faci prelucrări de date într-un obiect creat de tine. În acest scop, va trebui să faci legătura la contextul obiectului tău pentru a executa o funcție drept răspuns la un eveniment. Pentru că atașarea unei funcții de răspuns la un eveniment are drept efect rularea funcției în contextul obiectului DOM pentru care se ascultă un eveniment, trebuie să găsim un mecanism de schimbare a contextului.
+Funcțiile săgeată sunt opțiunea naturală pentru callback-uri. Reamintim faptul că un callback este o funcție care este definită sau primită într-un parametru și este rulată în interiorul funcției „gazdă”. Ar mai putea fi cazul în care definim un fat arrow în corpul funcției pentru un motiv bine întemeiat.
+
+Motivul pentru care este alegerea „naturală” este pentru că folosește legătura `this` stabilită de gazdă. Nu face acea deturnare a legăturii la obiectul global așa cum s-ar întâmpla în cazul funcțiilor definite cu `function`. Acest comportament elimină necesitatea din trecut de a face o legătură cu `bind()`, precum în `fnCallback.bind(this)` sau de a face artificiul lexical `let self = this;`. Reține faptul că legătura `this` a unei funcții „normale” se realizează **dinamic** în funcție de locul în care este apelată, dar legătura `this` a unei funcții săgeată va fi rezolvată **lexical** la cine este `this` al funcție gazdă. Dacă nu există o funcție gazdă, dacă nu rulăm codul sub regula `"use strict";`, `this` va fi obiectul global, iar în caz contrar, va fi `undefined`.
+
+ Acest lucru este binevenit în lucrul cu obiectele DOM. Uneori ai nevoie să faci prelucrări de date într-un obiect creat de tine. În acest scop, va trebui să faci legătura la contextul obiectului tău pentru a executa o funcție drept răspuns la un eveniment. Pentru că atașarea unei funcții de răspuns la un eveniment are drept efect rularea funcției în contextul obiectului DOM pentru care se ascultă un eveniment, trebuie să găsim un mecanism de schimbare a contextului.
 
 ```html
 <button type="button" name="button" id="test">Testeaza this</button>
@@ -180,7 +187,7 @@ Arrow functions prezintă marele avantaj pentru că fac o legătură la contextu
 </script>
 ```
 
-În acest moment contextul de execuție al metodei `schimbă` nu este obiectul creat de noi, ci obiectul generat de secția cu selectorul `getElementById`. Acest obiect nu are vreo proprietate ruptor. Avem nevoie să schimbăm cumva contextul. În trecut, se împacheta funcția de răspuns între paranteze rotunde și se folosea `bind()`.
+În acest moment contextul de execuție al metodei `schimbă` nu este obiectul creat de noi, ci obiectul generat de secția cu selectorul `getElementById`. Acest obiect nu are vreo proprietate `ruptor`. Avem nevoie să schimbăm cumva contextul. În trecut, se împacheta funcția de răspuns între paranteze rotunde și se folosea `bind()` pentru a face legătura la contextul corect.
 
 ```javascript
 element.addEventListener('click', (ruptor.schimba).bind(ruptor));
@@ -272,6 +279,10 @@ unArray.map( numeFuncție = valoare =>
 ```
 
 Se observă cum numirea funcției callback care folosește un fat arrow, a permis referențierea mai târziu. Expresia de atribuire a fat arrow-ului se va solda cu atribuirea valorii evaluate în urma execuției fat arrow-ului, ceea ce constituie un artificiu foarte elegant. Numele dat funcției mai servește și mecanismului de recursivitate la care s-a apelat ulterior.
+
+## Arrow functions și clasele
+
+Pentru că funcțiile săgeată rezolvă legătura `this` lexical, o astfel de funcție nu poate sta la baza construcției unei clase. Încercarea de instanțiere cu `new` a unei astfel de funcții, se va solda cu o eroare.
 
 ## Mantre
 

@@ -92,4 +92,4 @@ let rezultat = martor && 100; // rezultat va fi inițializat cu valoarea implici
 console.log(rezultat);
 ```
 
-Dacă martor va fi evaluat la o valoare truthy, atunci rezultat va fi inițializat cu o valoare implicită de 100. În caz contrar, rezultat va avea valoarea 0. Acesta poate fi considerat un microcircuit util în cazul condiționării unei inițializări de valoarea unei evaluări.
+Dacă martor va fi evaluat la o valoare truthy, atunci rezultat va fi inițializat cu o valoare implicită de 100. În caz contrar, rezultat va avea valoarea `0`. Acesta poate fi considerat un microcircuit util în cazul condiționării unei inițializări de valoarea unei evaluări.

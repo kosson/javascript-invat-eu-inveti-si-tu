@@ -8,7 +8,7 @@ Standardul spune că **un obiect este un membru al tipului built-in Object** al 
 
 Obiectele sunt și ele valori. La aceste valori se ajunge printr-o **referință** (către o locație în memorie unde este stocat), în contrast cu primitivele care sunt chiar valoarea. Obiectele ocupă o zonă de memorie și nu pot fi copiate în alte zone de memorie. Zona de memorie în care sunt scrise valorile unui program JavaScript se numește **heap** (lb. rom. *maldăr*). Pur și simplu, sunt unice, așa cum o țară este unică în lume cu relieful, obiceiurile și sistemul de valori. Pentru a trimite o scrisoare cuiva, trebuie să cunoști țara, orașul, strada și numele persoanei. Este și cazul obiectelor. Pentru a folosi acea zonă de memorie ocupată de obiect, vom folosi referința sau referințele către acesta.
 
-Privind la modul în care sunt organizate datele într-un obiect, vom remarca că acestea sunt colecții de proprietăți identificabile printr-un nume, fiind strânse împreună fără a avea o ordine internă. Este ca și cum ai strânge jucării de același tip într-o cutie după o zi de distracție. Obiectele sunt structuri de date dinamice ale căror proprietăți se modifică. Atunci când acest lucru se întâmplă spunem că obiectul *își modifică starea*.
+Privind la modul în care sunt organizate datele într-un obiect, vom remarca că acestea sunt colecții de proprietăți identificabile printr-un nume, fiind strânse împreună fără a avea o ordine internă. Este ca și cum ai strânge jucăriile unui copil într-o cutie după o zi de distracție. Obiectele sunt structuri de date dinamice ale căror proprietăți se modifică. Atunci când acest lucru se întâmplă spunem că obiectul *își modifică starea*.
 
 **Despre alcătuirea unui obiect standardul spune**:
 
@@ -139,7 +139,7 @@ Obiectul global nu este containerul tuturor obiectelor oricât de tentant ar fi 
 
 Dincolo de acestea există un univers mult mai larg al unor seturi de obiecte puse la dispoziție de browser, de exemplu. Acestea vor constitui ceea ce numim **interfețe de programare a aplicațiilor**, în limba engleză **Application Programming Interfaces**, pe scurt **API**-uri.
 
-Modul în care înțelegem ce oferă din start un obiect intern, este determinat și de un set de algoritmi rulați de motorul care implementează standardul ECMAScript. Reamintesc faptul că pentru a putea programa în JavaScript, există un motor al cărui treabă este să genereze obiectele interne, să interpreteze codului sursă, ș.a.m.d. Poți să-ți închipui motorul JavaScript ca pe un turn de control.
+Modul în care înțelegem ce oferă din start un obiect intern, este determinat și de un set de algoritmi rulați de motorul care implementează standardul ECMAScript. Reamintesc faptul că pentru a putea programa în JavaScript, există un motor al cărui treabă este să genereze obiectele interne, să interpreteze codului sursă, ș.a.m.d. Se comportă precum un turn de control.
 
 Acești algoritmi sunt numiți `metode interne` ale obiectelor interne. Metodele interne definesc comportamentul la momentul rulării codul privind crearea și utilizarea acelui obiect. Implementarea acestor metode interne specificate de standard cade în responsabilitatea celor care construiesc motoare JavaScript - producătorii de browsere și Node.js. Reține acest aspect pentru a nu fi surprins când vei auzi sau citi discuții despre performanțele unui anume motor în comparație cu altul. Aceste metode interne sunt toate procesele care se petrec în inima unui motor atunci când, de exemplu, apelezi o metodă a unui obiect intern cum ar fi `Object.create()` sau `String.split()`.
 
@@ -171,6 +171,7 @@ Obiectele pot fi create în două feluri: prin declararea acestora sau prin cons
 3. `const ObiNou = Object.create(Object.prototype);`, fiind echivalent cu `const newObj = {}`.
 4. `const ObiNou = {};`, fiind echivalentă cu `new Object()`.
 5. `function x () { return {} }; const y = x();`, returnează un obiect în urma execuției unei funcții.
+6. Crearea obiectelor folosind clase: `class X {}; const obiX = new X();`
 
 Toate variantele au același rezultat: creează un obiect gol.
 
@@ -814,7 +815,7 @@ Metodele pot fi și ele la rândul lor accesate folosind cele două tipuri de si
 
 Atunci când invoci o metodă folosind notația cu punct, ai acces la proprietățile obiectului folosind cuvântul cheie `this`, deoarece obiectul în contextul căruia se execută funcția este `this`.
 
-Pentru că sintaxa cu paranteze pătrate (`["proprietate"]`), folosește un șir de caractere (**string**), acest lucru înseamnă că o secvență de cod poate fi folosită pentru a construi valoarea acelui string, de exemplu prin concatenare. Dacă pentru accesare se va folosi orice altceva în afară de stringuri, numărul sau obiectul vor fi transformate în stringuri (folosindu-se mecanismul de coercion). ES6 introduce o nouă sintaxă care ușurează modul de constituire a numelui cheii unui obiect. Până acum, acest lucru se făcea astfel:
+Pentru că sintaxa cu paranteze pătrate (`["proprietate"]`), folosește un șir de caractere (**string**), acest lucru înseamnă că o secvență de cod poate fi folosită pentru a construi valoarea acelui string, de exemplu prin concatenare. Dacă pentru accesare se va folosi orice altceva în afară de stringuri, numărul sau obiectul vor fi transformate în stringuri (folosindu-se mecanismul de coercion). ES6 introduce o nouă sintaxă care ușurează modul de constituire a numelui cheii unui obiect. Până acum, acest lucru se făcea introducând din exterior valoarea.
 
 ```javascript
 let numeCheieNoua = "special";
@@ -822,7 +823,7 @@ const obi = {
   cheie1: 10,
   cheie2: "ceva"
 };
-obi[numeCheieNoua] = 1000;
+obi[numeCheieNoua] = 1000; // din afară
 ```
 
 ECMAScript 2015 propune următoarea sintaxă:
@@ -832,7 +833,7 @@ let numeCheieNoua = "special";
 const obi = {
   cheie1: 10,
   cheie2: "ceva",
-  [numeCheieNoua]: 1000
+  [numeCheieNoua]: 1000 // din interior
 };
 // { cheie1: 10, cheie2: "ceva", special: 1000 }
 ```
@@ -974,7 +975,6 @@ Toate obiectele comune au *un slot intern* numit `[[Extensible]]`, care controle
 
 În cazul unui `[[Extensible]]` cu valoarea `false`, valoarea slotului intern `[[Prototype]]` a obiectului, nu poate fi modificată. În plus, de vreme ce a fost pusă pe `false`, nu o mai poți modifica la `true`.
 
-
 #### Modificarea obiectului prototipal
 
 Acesta este cazul simplu de moștenire care se poate realiza. Dacă avem un obiect, folosești metoda `create()` a obiectului intern `Object` pentru cazul special în care ai nevoie să deturnezi legătura implicită la obiectul prototipal setat de motor și să pui alt obiect cu rolul de prototip.
@@ -1038,7 +1038,6 @@ Acesta este motivul pentru care trebuie acordată o atenție deosebită propriet
 -   Legătura prototipală se obține și prin invocarea cu `new`.
 -   Legătura prototipală creează un lanț de delegare pentru cazurile în care nu găsești o proprietate sau o metodă într-un anumit context de execuție.
 -   Relațiile prototipale pot cauza probleme atunci când este nevoie de enumerarea proprietăților obiectelor. Ambalează într-o funcție de verificare cu `Object.hasOwnPropery()`;
-
 
 ### Verificarea prototipului
 
@@ -1539,6 +1538,28 @@ let ElementRotund = function (raza) { this.raza = raza };
 functiiCerc.call(ElementRotund.prototype);
 const cerc1 = new ElementRotund(10);
 cerc1.arie();
+```
+
+### Fuzionarea obiectelor
+
+Uneori vei fi împins(ă) de nevoie să fuzioneze elementele mai multor obiecte într-unul singur. Ai putea lua abordarea construirii unui obiect nou căruia să-i adaugi unul câte unul fiecare membru al tuturor obiectelor pe care dorești să le fuzionezi. Asta ar fi o abordare naivă consumatoare de timp. Ai putea folosi `Object.assign` în combinație cu operatorul spread pentru a fuziona obiectele și ar funcționa foarte bine.
+
+```javascript
+Object.assign({
+  ...primulObiect,
+  ...aldoileaObiect,
+  ...altreileaObiect
+});
+```
+
+Din fericire există o a treia cale prin care operatorul spread care oferă o rezolvare instantanee.
+
+```javascript
+const fuzionat = {
+  ...primulObiect,
+  ...aldoileaObiect,
+  ...altreileaObiect
+}
 ```
 
 ## Transformarea obiectelor

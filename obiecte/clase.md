@@ -81,7 +81,7 @@ console.log(Santinel.prezentare());
 
 Astfel, am simulat o clasă prin introducerea de proprietăți în obiectul funcție folosind legătura `this`, care permite accesul la acesta, dar și în obiectul prototipal `prototype`.
 
-Prin introducerea noii sintaxe începând cu ES6, se intenționează *crearea claselor pe baza moștenirii prototipale*. Sintaxa prezintă câteva particularități. Proprietățile viitorului obiect se introduc în metoda constructor. Metodele se introduc fără să fie precedate de cuvântul cheie `function` și nici nu vor fi despărțite de altele prin vreun semn de punctuație. Accesarea proprietăților și metodelor se va face prin intermediul legăturii `this`. Însăși funcția clasă nu creează o legătură `this` la mometul instanțierii.
+Prin introducerea noii sintaxe începând cu ES6, se intenționează *crearea claselor pe baza moștenirii prototipale*. Sintaxa prezintă câteva particularități. Proprietățile viitorului obiect se introduc în metoda constructor. Metodele se introduc fără să fie precedate de cuvântul cheie `function` și nici nu vor fi despărțite de altele prin vreun semn de punctuație. Accesarea proprietăților și metodelor se va face prin intermediul legăturii `this`. Însăși funcția clasă nu creează o legătură `this` la momentul instanțierii.
 
 ```javascript
 class Test {
@@ -127,6 +127,34 @@ for(let prop in obi) {
 Spre deosebire de constructorii declarați cu `function`, clasele nu pot fi instanțiate fără operatorul `new`. Reține faptul că o clasă tot o funcție este de fapt. În JavaScript nu există entități clase. Toate metodele din obiectul `prototype` sunt setate cu `false` la `enumerable`. Acest lucru înseamnă că obiectul nu va afișa metodele clasei într-un `for...in`.
 
 Chiar dacă nu ai declarat o funcție `constructor`, aceasta va fi generată din oficiu. Poți verifica acest lucru interogând obiectul prototip al clasei. Posibilitatea de a adăuga proprietăți direct în obiectul prototip încă este posibilă, dar nu este recomandabilă.
+
+### Folosirea unei metode în alt context
+
+În momentul când ai nevoie de a folosi o metodă care oferă o anumită modalitate de a prelucra datele, dar într-un alt context, „desprinderea” de obiect conduce la pierderea legăturii la acesta prin `this`. Să examinăm următorul exemplu:
+
+```javascript
+class Cineva {
+  constructor (nume) {
+    this.nume = nume;
+  }
+  cineSunt() {
+    console.log(this.nume);
+  }
+}
+const Alina = new Cineva('Alina');
+```
+
+Dacă vom „reutiliza” metoda `cineSunt` a noului obiect `Alina`, într-un context dierit așa cum ar fi în postura de callback, `this` nu va indica mediul obiectului așa cum poate că logica ar dicta-o.
+
+```javascript
+setTimeout(Alina.cineSunt, 1000); // returnează `undefined`
+```
+
+Pentru a face o „reconectare”, trebuie folosit `bind()`. Adu-ți mereu aminte de faptul că funcțiile sunt etități distincte care se execută în contexte diferite. Ele nu *aparțin* unui obiect chiar dacă au fost definite ca metode ale acestuia.
+
+```javascript
+setTimeout(Alina.cineSunt.bind(Alina), 1000);
+```
 
 ### Declarații și expresii de clase
 
