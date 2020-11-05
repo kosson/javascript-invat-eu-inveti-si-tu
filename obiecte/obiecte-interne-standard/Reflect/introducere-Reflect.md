@@ -1,27 +1,31 @@
 # Obiectul intern Reflect
 
-Este un obiect intern introdus de curând de noua versiune a standardului.
+Acest obiect intern introdus de curând oferă metode utile care simplifică lucrul cu metodele obiectelor în JavaScript. Acest obiect intern nu este un *obiect funcție* care să poată fi invocat direct sau care să fie folosit drept constructor pentru alte obiecte. Poți să-ți imaginezi `Reflect` ca pe un instrument de investigație și intervenție directă.
 
-Oferă metode utile operațiunilor supuse interceptării în JavaScript. Acest obiect nu este un obiect funcție care să poată fi invocat direct sau care să fie folosit drept constructor pentru alte obiecte.
-Poți să-ți imaginezi `Reflect` ca pe un instrument de investigare a diferitelor *lucruri* în JavaScript.
-
-Cred că îți mai aduci aminte hărțile pe care le-am făcut la momentul în care explicam dualitatea obiect - funcție. Cu siguranță îți aduci bine aminte faptul că motorul JavaScript pune la bătaie o mulțime de *metode interne*, care acționează ori de câte ori folosim câte-o metodă predefinită a vreunui obiect JavaScript.
-
-Reflect oferă o cale către aceste metode *de adâncime* ale motorului JavaScript. Gândește-te la cazul util în care un obiect are *tăiată* moștenirea, dar parcă ai avea nevoie de metodele pe care `Object` ți le pune la dispoziție în prototipul său.
+Cred că îți mai aduci aminte hărțile pe care le-am făcut la momentul în care explicam dualitatea obiect - funcție. Cu siguranță îți aduci bine aminte faptul că motorul JavaScript pune la bătaie o mulțime de *obiecte interne*, fiecare expunând propriile metode predefinite. Obiectul intern `Reflect` oferă o cale către aceste metodele acestora. Gândește-te la cazul în care un obiect are *tăiată* moștenirea, dar parcă ai avea nevoie de metodele pe care `Object` ți le pune la dispoziție prin prototipul său.
 
 ```javascript
 var obi = Object.create(null); // un obiect cu moștenirea tăiată
 ```
 
-Multe obiecte sunt construite înadins astfel. Nu ar fi supercool dacă am avea o cale directă către utilitarele motorului JavaScript, chiar la acele *metode interne* despre care am vorbit de ne-am plictisit?
+Multe obiecte sunt construite înadins astfel. Nu ar fi supercool dacă am avea o cale directă către acele metode ale *obiectelor interne* despre care am vorbit de ne-am plictisit? Asta își propune să ofere `Reflect`: acces direct la utilitarele pe care altfel ar fi trebuit să le căutăm prin prototipul lui `Function` sau `Object`. Metodele pe care `Reflect` le pune la dispoziție sunt:
 
-Asta își propune să ofere `Reflect`: acces direct la utilitare superutile, pe care altfel ar fi trebuit să le căutăm prin prototipul lui `Function` sau `Object`.
-
-Hai să le vedem.
+- `Reflect.apply()`
+- `Reflect.construct()`
+- `Reflect.get()`
+- `Reflect.has()`
+- `Reflect.ownKeys()`
+- `Reflect.set()`
+- `Reflect.setPrototypeOf()`
+- `Reflect.defineProperty()`
+- `Reflect.deleteProperty()`
+- `Reflect.getOwnPropertyDescriptor()`
+- `Reflect.getPrototypeOf()`
+- `Reflect.isExtensible()`
 
 ## Reflect.apply(ținta, obiectulThis, listaArgumente)
 
-Apelează o anumită funcție (să-i spunem țintă) cu un set de argumente. Pentru a reține mai ușor modul de lucru, ai putea spune așa: Aplică-mi funcția sau utilitarul cutare în obiectul context cutare, aplicând-o pe următoarele argumente pe care ți le dau.
+Apelează o anumită funcție (să-i spunem țintă) cu un set de argumente. Pentru a reține mai ușor modul de lucru, ai putea spune așa: Aplică-mi funcția sau utilitarul cutare în obiectul context cutare, cu următoarele argumente pe care ți le dau.
 
 ```javascript
 var colectie = [1, 23, 43];
@@ -60,7 +64,15 @@ var obi = {a: true};
 Reflect.defineProperty(obi, 'b', {value: false}); // true
 ```
 
-Care-i aventajul asupra clasicului `Object.defineProperty`? Faptul că ai un răspuns imediat privind rezultatul modificării. Poți testa direct pentru `true` sau `false`, fără să fii nevoit să împachetezi într-un `try...catch` pentru a vedea dacă au apărut erori.
+Care-i avantajul asupra clasicului `Object.defineProperty`? Faptul că ai un răspuns imediat privind rezultatul modificării. Poți testa direct pentru `true` sau `false`, fără să fii nevoit să împachetezi într-un `try...catch` pentru a vedea dacă au apărut erori.
+
+```javascript
+try {
+  Object.defineProperty(obi, 'b', {value: false});
+} catch (e) {
+  // dacă a apărut o eroare, trateaz-o aici!
+}
+```
 
 ## Reflect.deleteProperty(obiectȚintă, cheiaProprietății)
 
@@ -106,7 +118,7 @@ Reflect.getPrototypeOf(obi);
 
 ## Reflect.has(obiectulȚintă, numeProprietate)
 
-Returnează o valoare Boolean prin care afli dacă proprietate există sau nu. Poți să-i asemuiești funcționalitatea cu cea a operatorului `in`.
+Returnează o valoare Boolean prin care afli dacă proprietate există sau nu. Poți să-i asemuiești funcționalitatea cu cea a operatorului `in` (`proprietate in obj`).
 
 ```javascript
 Reflect.has({a: 0}, 'a'); // true
@@ -129,7 +141,7 @@ Reflect.ownKeys([]); // ["length"]
 
 ## Reflect.preventExtensions(obiectulȚintă)
 
-Este o metodă prin care se blochează posibilitatea de a mai extinde un obiect. Această metodă este similară lui `Object.preventExtensions`. Metoda returnează o valaore Boolean, care indică faptul că s-a reușit blocarea sau nu.
+Este o metodă prin care se blochează posibilitatea de a mai extinde un obiect. Această metodă este similară lui `Object.preventExtensions`. Metoda returnează o valoare Boolean, care indică faptul că s-a reușit blocarea sau nu.
 
 ## Reflect.set(obiectulȚintă, numeProprietate, valoarea, obiectulThis)
 
@@ -156,11 +168,12 @@ Reflect.set(colectie, 'length', 1); // [ "ceva" ]
 
 ## Reflect.setPrototypeOf(obiectȚintă, obiectulCaPrototipNou)
 
-Această metodă poate modifica obiectul prototip pentru un obiect și este echivalentul lui `Object.setPrototypeOf()`. Apelarea metodei va returna un Boolean ce indică setara cu succes sau eșecul operațiunii.
+Această metodă poate modifica obiectul prototip pentru un obiect și este echivalentul lui `Object.setPrototypeOf()`. Apelarea metodei va returna un Boolean ce indică setarea cu succes sau eșecul operațiunii.
 
-Unul din avantajele utilizării `Reflect` este siguranța că nu folosești versiuni modificate ale algoritmilor originali. Există cod care modifică metodele originale, iar Reflect este singura metodă pentru a te asigura că folosești algoritmii curați.
+Unul din avantajele utilizării `Reflect` este siguranța că nu folosești versiuni modificate ale algoritmilor originali. Există cod care modifică metodele originale, iar `Reflect` este singura metodă pentru a te asigura că folosești algoritmii curați.
 
-## Referințe
+## Resurse
 
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect
-https://www.keithcirkel.co.uk/metaprogramming-in-es6-part-2-reflect/
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect
+- https://www.keithcirkel.co.uk/metaprogramming-in-es6-part-2-reflect/
+- [What is Metaprogramming in JavaScript? In English, please.](https://www.freecodecamp.org/news/what-is-metaprogramming-in-javascript-in-english-please/)

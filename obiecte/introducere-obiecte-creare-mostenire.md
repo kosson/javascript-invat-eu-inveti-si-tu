@@ -1566,7 +1566,7 @@ const fuzionat = {
 
 ### Redenumirea unei chei și crearea unui obiect nou
 
-Nu există o metodă prin care să modifici numele unei proprietăți al unui obiect existent fără să creezi un obiect nou. Următorul exemplu implică parcurgerea setului de chei al unui obiect și pentru cheia dorită se face înlocuirea.
+Nu există o metodă prin care să modifici numele unei proprietăți al unui obiect existent fără să creezi un obiect nou. Următorul exemplu implică parcurgerea setului de chei al unui obiect. Pentru cheia dorită se face înlocuirea.
 
 ```javascript
 const obiectNou = ({oldObj, oldKey, newKey}) => {
