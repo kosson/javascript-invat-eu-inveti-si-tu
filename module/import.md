@@ -1,8 +1,12 @@
 # import
 
-Această declarație este folosită pentru a importa legături live care sunt exportate de alt modul. Modulele importate se află în **strict mode**. Importurile trebuie făcute chiar la începutul fișierelor care fac importul. Trebuie să fie primele declarații. Preferabil este să imporți `default`-ul întotdeauna și să eviți importul entităților menționate între acolade. Sistemul modular a fost gândit pentru a avea un punct central de inserție.
+Această declarație este folosită pentru a importa legături live care sunt exportate de alt modul. Modulele importate se află în **strict mode**. Importurile trebuie făcute chiar la începutul fișierelor care fac importul. Trebuie să fie primele declarații. Preferabil este să imporți `default`-ul întotdeauna și să eviți importul entităților menționate între acolade. Sistemul modular a fost gândit pentru a avea un punct central de inserție. Atunci când imporți `default`-ul unui modul, trebuie să-i dai un identificator.
 
-Această declarație nu poate fi folosită în scripturi incluse în pagină, cu excepția celor a căror taguri (`<script>`) au atributul `type="module"`. Legăturile importate de la un modul se numesc live pentru că din modulul care importă se pot actualiza stările entităților importate. Acest lucru înseamnă că nu poți modifica direct o valoare primitivă, dar dacă ai importat o funcție care asta face, o vei modifica folosind acea funcție, care face closure pe variabila la care se leagă o primitivă.
+```javascript
+import numeAlesArbitrarPentruDefault from './numeModul.js';
+```
+
+Această declarație nu poate fi folosită în scripturi incluse în pagină, cu excepția celor a căror taguri (`<script>`) au atributul `type="module"`. Legăturile importate de la un modul se numesc **live** pentru că din modulul care importă se pot actualiza stările entităților importate. Acest lucru înseamnă că nu poți modifica direct o valoare primitivă, dar dacă ai importat o funcție care asta face, o vei modifica folosind acea funcție, care face closure pe variabila la care se leagă o primitivă.
 
 ```javascript
 // modul.mjs
@@ -46,7 +50,7 @@ const {ceva: altceva} = require('./unModul.mjs');
 
 ## Importul unui namespace
 
-Aceste importuri sunt o alternativă la importurile cu nume (*namespaced imports*). Namespace-urile sunt accesibile celui care importă ca un obiect ale cărui proprietăți sunt entitățile exportate cu nume din modulul importat.
+Aceste `import`-uri sunt o alternativă la cele cu nume (*namespaced imports*). Namespace-urile sunt accesibile celui care importă ca obiect ale cărui proprietăți sunt entitățile exportate cu numele lor din modulul ce le exporta. Ca efect, vor fi importate toate entitățile exportate de modul, acestea constituind un obiect. Va inclus și `default`-ul, care va putea fi accesat distinct prin proprietatea numită chiar `default`.
 
 ```javascript
 import * as numeobiect from "./nume-modul"; // importă un întreg namespace
@@ -57,16 +61,16 @@ Sunt câteva variații de import în funcție de anumite scenarii posibile.
 
 ```javascript
 import { entitate1 , entitate2 as alias2 , [...] } from "nume-modul"; // import entități cu redenumirea unora
-import defaultExport, { entitate1, entitate2 } from "nume-modul"; // importul separat al defaultului de restul entităților
+import defaultExport, { entitate1, entitate2 } from "nume-modul"; // importul separat al default-ului urmat de restul entităților
 import defaultExport, * as name from "nume-modul"; // importul separat al default-ului dar restul ca namespace.
 ```
 
 ## Importul de module cu side-effects
 
-Acest `import` nu va stabili vreo legătură la entitățile modulului. Ceea ce face `import`-ul este să încarce și execute codul. Codul modulului va fi executat, dar nu vor fi importate valori pentru că respectivul modul nu exportă nimic. Propriu-zis, se face importul pentru ceea ce produce evaluarea respectivului cod, pentru a-l inițializa. Un astfel de modul, de cod inițializat, va aduce modificări mediului lexical global.
+Acest `import` nu va stabili vreo legătură la entitățile modulului. Ceea ce face `import`-ul este să încarce și execute codul în modulul care-l importă. Codul modulului va fi executat, dar nu vor fi importate valori pentru că respectivul modul nu exportă nimic. Propriu-zis, se face importul pentru ceea ce produce evaluarea respectivului cod, pentru a-l inițializa. Un astfel de modul, de cod inițializat, va aduce modificări mediului lexical global.
 
 ```javascript
-import "nume-modul";
+import "./modul.js";
 ```
 
 Există chiar și o funcție dinamică `import()` care nu are nevoie de scripturi `type="module"`.

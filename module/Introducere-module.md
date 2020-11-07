@@ -10,8 +10,7 @@ Modulele ECMAScript sunt fișiere JavaScript care au extensia `.mjs`. Totuși, c
 
 ## Preliminarii
 
-Modularizarea codului este o necesitate în momentul în care dezvolți o aplicație. În timp au fost dezvoltate instrumente care permit modularizarea, dar odată cu apariția lui ES6, modulele fac parte din limbaj. Este util să ne amintim faptul că browserul încarcă scripturile JavaScript într-o manieră asincronă.
-În ES5, modularizarea codului în browsere era realizată folosind biblioteci de cod precum RequireJS ce implementează standardul Asynchronous Module Definition (încărcare asincronă), iar modul de a realiza modularizarea în Node.js este guvernat de modelul pe care CommonJS (încărcare sincronă) îl oferă.
+Modularizarea codului este o necesitate în momentul în care dezvolți o aplicație. În timp, au fost dezvoltate instrumente care permit modularizarea, ES6 introduce modulele în limbaj. Este util să ne amintim faptul că browserul încarcă scripturile JavaScript într-o manieră asincronă. În ES5, modularizarea codului în browsere era realizată folosind biblioteci de cod precum RequireJS ce implementează standardul Asynchronous Module Definition (încărcare asincronă), iar modul de a realiza modularizarea în Node.js este guvernat de modelul pe care CommonJS (încărcare sincronă) îl oferă.
 
 Istoric vorbind, un anumit nivel de modularizare era făcut prin încărcarea diferitelor fragmente de cod JS în pagina web, dar acest lucru nu poate constitui un adevărat sistem de gestiune a diferitelor părți utile pentru a rula în armonie.
 
@@ -26,7 +25,7 @@ Totuși, cel mai util ar fi să ai un singur punct de intrare în aplicație.
 <script type="application/javascript" src="CALE/main.js" ></script>
 ```
 
-Odată cu apariția lui ES2015 browserele încep să ofere suport pentru module oferind posibilitatea de a încărca modular codul. Și modulele JavaScript se încarcă asincron precum scripturile.
+Odată cu apariția lui ES6, browserele încep să ofere suport pentru module. Modulele JavaScript se încarcă asincron precum scripturile.
 
 ```html
 <script type=module src="./main.js"></script>
@@ -41,7 +40,7 @@ Capacitatea unui browser de a gestiona module indică faptul că oferă suport p
 
 ## Caracteristici ale modulelor
 
-Codul unui modul este executat într-un mediu lexical (scope) propriu ceea ce înseamnă că variabilele, funcțiile și clasele sale nu vor fi în mediul lexical global. În momentul în care motorul JavaScript parsează fișierele modul după ce l-a adus, fie de undeva online, fie de pe sistemul local, creează pentru fiecare ceea ce numim un *Module Record* în care sunt trecute importurile, exporturile, entitățile modulului, Realm-ul. Modulele instanțiate deja nu vor mai fi instanțiate încă o dată chiar dacă sunt cerute de mai multe alte module. Se face un *caching* al modulelor. Acest mecanism de evidență pentru a gestiona cache-ul modulelor, se numește *module map*, un *caiet* de evidență numit [module maps](https://html.spec.whatwg.org/multipage/webappapis.html#module-map).
+Codul unui modul este executat într-un mediu lexical (scope) propriu ceea ce înseamnă că variabilele, funcțiile și clasele sale nu vor fi în mediul lexical global. Când motorul JavaScript parsează fișierele modul după ce le-a descărcat, creează pentru fiecare ceea ce numim un *Module Record* în care sunt trecute importurile, exporturile, entitățile modulului și `Realm`-ul. Modulele instanțiate deja nu vor mai fi instanțiate încă o dată chiar dacă sunt cerute de mai multe alte module. Se face un *caching* al modulelor. Acest mecanism de evidență pentru gestiunea cache-ul modulelor, se numește [module maps](https://html.spec.whatwg.org/multipage/webappapis.html#module-map), un *caiet* de evidență.
 
 Apoi motorul va transforma acest *Module Record* într-o instanță funcțională a modulului. Instanțierea înseamnă și crearea alocărilor în memorie pentru variabile și altor entități, dar nu vor fi legate la valori încă. Apoi se vor crea alocări pentru exporturi și vor fi conectate importurile la ceea ce există deja instanțiat (modulele copil vor fi instanțiate ultimele până când toate dependințele au fost instanțiate). Ultimul pas este să se facă evaluarea codului din module în acest moment fiind disponibile și valorile care au fost legate la identificatorii lor. Deci avem faza de încărcare, de instanțiere și de execuție.
 
@@ -70,7 +69,7 @@ Mediile lexicale la care are acces un modul:
 
 ### Expunerea de elemente în global scope
 
-Este posibl ca în anumite cazuri să ai nevoie să expui în global scop un element sau mai multe. Un caz ar fi un modul care creează un set de elemente cărora li se atașează dinamic receptori (*event listeners*) pentru o funcție care se află și ea în modul. Cum în cazul receptorilor aceștia se așteaptă să *găsească* funcția în global scope - *window*, putem face o *expunere* a respectivului element.
+Este posibl ca în anumite cazuri să ai nevoie să expui în global scop o entitate sau mai multe. Un caz ar fi un modul care creează un set de elemente cărora li se atașează dinamic receptori (*event listeners*) pentru o funcție care se află și ea în modul. Cum în cazul receptorilor aceștia se așteaptă să *găsească* funcția în global scope - *window*, putem face o *expunere* a respectivului element.
 
 ```javascript
 // modul
@@ -123,7 +122,7 @@ Atunci când *împarți* codul în mai multe module, ar fi de mare ajutor să [p
 
 ### Încărcarea asincronă cu async
 
-Încărcarea asincronă a fișierelor javascript este aplicabilă și modulelor, fie acestea fișiere separate, fie *inline*. Reține faptul că în cazul folosirii `async`, scripturile se vor încărca și executa de îndată ce vor fi aduse de browser, adică în funcție de dimensiunea lor. În acest caz, ordinea în care apar în DOM nu mai contează.
+Încărcarea asincronă a fișierelor JavaScript este aplicabilă și modulelor, fie acestea fișiere separate, fie *inline*. Reține faptul că în cazul folosirii `async`, scripturile se vor încărca și executa de îndată ce vor fi aduse de browser, adică în funcție de dimensiunea lor. În acest caz, ordinea în care apar în DOM nu mai contează.
 
 ```javascript
 <!-- Acest fragment de cod se execută de îndată ce scripturile care necesită `import` au fost aduse de browser -->
@@ -138,7 +137,7 @@ Atunci când *împarți* codul în mai multe module, ar fi de mare ajutor să [p
 
 ### Particularitățile modulelor față de scripurile clasice
 
-Trebuie menționat faptul că modulele se execută o singură dată indiferent de câte ori le menționezi în codul HTML contrar comportamentului scripturilor ce nu sunt module care se execută de mai multe ori dacă sunt menționate de mai multe ori. Mai există o deosebire notabilă față de comportamentul scripturilor clasice: toate modulele sunt aduce respectând [CORS - Cross-Origin Resource Sharing](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS); în header să existe `Access-Control-Allow-Origin: *`.
+Trebuie menționat faptul că modulele se execută o singură dată indiferent de câte ori le menționezi în codul HTML contrar comportamentului scripturilor tradiționale, care se execută de mai multe ori, dacă sunt menționate de mai multe ori. Mai există o deosebire notabilă față de comportamentul scripturilor clasice: toate modulele sunt aduse respectând [CORS - Cross-Origin Resource Sharing](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS); în header trebuie să existe `Access-Control-Allow-Origin: *`.
 
 ## O privire retrospectivă
 
@@ -231,8 +230,7 @@ console.log(unSpatiuSeparat.valoare);
 
 ## Analiza modulelor
 
-Regula spune că într-un fișier poate exista doar un singur modul și vice-versa.
-Pentru a lucra cu modulele, se vor folosi următoarele cuvinte rezervate: `export`, `default` și `import {numeModul} from numeModul`.
+Regula spune că un modul JavaScript este un fișier întreg de cod. Pentru a lucra cu modulele, se vor folosi următoarele cuvinte rezervate: `export`, `default` și `import {numeModul} from numeModul`.
 
 **Moment ZEN**: Un modul exportă referințe (*bindings*), nu valori.
 
@@ -250,7 +248,7 @@ import {ceva, facCeva} from "faceTreaba";
 facCeva("Am ");
 ```
 
-Sau poți exporta un singur lucru în mod automat folosind cuvântul rezervat *default*.
+Sau poți exporta un singur lucru în mod automat folosind cuvântul rezervat *default*. Aceasta va fi valoarea principală exportată.
 
 ```javascript
 /* modulul lucru.js */
@@ -261,9 +259,7 @@ import facLucruri from "facLucruri";
 facLucruri(2);
 ```
 
-Fii foarte atent pentru că în cazul exportului folosind `default`, nu trebuie încheiat enunțul cu punct și virgulă.
-
-Poți exporta chiar și o clasă.
+Fii foarte atent pentru că în cazul exportului folosind `default`, NU trebuie încheiat enunțul cu punct și virgulă.
 
 ```javascript
 /* clasa1.js */

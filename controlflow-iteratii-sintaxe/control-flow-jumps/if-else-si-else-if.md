@@ -84,7 +84,7 @@ if (martor) {
 }
 ```
 
-Folosirea operatorilor booleani implică o evaluare apropiată de cea condițională și pot fi utilizați pentru inițializări a unor variabile cu valori implicite în cazul în care nu sunt primite cele așteptate.
+Folosirea operatorilor Boolean implică o evaluare apropiată de cea condițională și pot fi utilizați pentru inițializarea unor variabile cu valori din oficiu în cazul în care nu sunt primite cele așteptate.
 
 ```javascript
 let martor = 1; // dacă martor este truthy,
@@ -92,4 +92,17 @@ let rezultat = martor && 100; // rezultat va fi inițializat cu valoarea implici
 console.log(rezultat);
 ```
 
-Dacă martor va fi evaluat la o valoare truthy, atunci rezultat va fi inițializat cu o valoare implicită de 100. În caz contrar, rezultat va avea valoarea `0`. Acesta poate fi considerat un microcircuit util în cazul condiționării unei inițializări de valoarea unei evaluări.
+Dacă `martor` va fi evaluat la o valoare *truthy*, atunci `rezultat` va fi inițializat cu valoarea `100`. În caz contrar, `rezultat` va avea valoarea `0`. Acesta este cazul condiționării unei inițializări de rezultatul unei evaluări.
+
+În codul pe care îl vei scrie sau cel pe care-l vei întâlni, de cele mai multe ori vei vedea că `if` este pus să evalueze nu numai o valoare în sine, ci să evalueze expresii construite cu operatori logici.
+
+```javascript
+const ceva = 10;
+if (ceva === 1 || ceva === 10 } || ceva === 100) {
+  // execută codul
+}
+// fiind perfect echivalent cu
+if ([1, 10, 100].include(ceva)) {
+  // execută codul
+}
+```

@@ -159,11 +159,18 @@ const obi = obi || {nume: "obiect important"};
        "" || "stânga";  // "stânga"
 ```
 
-Se observă că aplicarea operatorilor pe diferitele valori, are ca finalitate returnarea unui dintre operanzi. În cazul lui `&&`, dacă primul operand poate fi transformat (*coercion*) într-o valoare `false`, îl va returna, dacă nu, va returna operandul din dreapta. 
+Se observă că aplicarea operatorilor pe diferitele valori, are ca finalitate returnarea unui dintre operanzi. În cazul lui `&&`, dacă primul operand poate fi transformat (*coercion*) într-o valoare `false`, îl va returna, dacă nu, va returna operandul din dreapta.
 
 În cazul lui `||`, îl va returna pe primul operand, dacă acesta poate fi transformat în `true`. În caz contrar, îl returnează pe cel din dreapta.
 
-Ceea ce observăm este faptul că operatorii booleani, în cazul JavaScript, se comportă mai mult ca niște selectori de valori în funcție de valoarea lor de adevăr. Acest comportament este cel mai vizibil atunci când folosești structuri de decizie pentru care evaluarea expresiei condiționale, nu se reduce la o valoare boolean, ci la una *truthy* sau *falsey*.
+Ceea ce observăm este faptul că operatorii Boolean, în cazul JavaScript, se comportă mai mult ca niște selectori de valori în funcție de valoarea lor de adevăr. Acest comportament este cel mai vizibil atunci când folosești structuri de decizie pentru care evaluarea expresiei condiționale, nu se reduce la o valoare boolean, ci la una *truthy* sau *falsey*.
+
+```javascript
+const ceva = 10;
+if (ceva === 1 || ceva === 10 } || ceva === 100) {
+  // execută codul
+}
+```
 
 ## Operatorul ternar
 

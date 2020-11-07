@@ -12,7 +12,7 @@ Există două tipuri de exporturi:
 - cele care poartă nume (*named exports* ori simplu *named*), însemnând că vor fi zero sau mai multe exporturi per modul;
 - exporturi implicite (*default exports* ori simplu *default*), însemnând că ai un singur export per modul.
 
-## Export expresiilor și a declarațiilor la nivel individual folosind numele
+## Exportul expresiilor și a declarațiilor la nivel individual folosind numele
 
 În cazul în care ai un set mic de expresii și/sau declarații, poți face export individual precum în exemplul de mai jos. La momentul importului trebuie folosit același nume cu cel al identificatorului exportat.
 
@@ -24,6 +24,12 @@ export const ceva = {a: 1}, constanta = 9.8;
 export function numeFunctie () {};
 // declarații de clase
 export class Ceva {}
+```
+
+Exportul obiectelor ridică probleme în momentul în care din eroare suprascrii metodele modulului de la care ai referința. Poți exporta obiecte chiar la momentul instanțierii acestora.
+
+```javascript
+export const obi = new Book();
 ```
 
 Poți exporta constante fără a mai fi nevoie de o declarație `const`.
@@ -43,7 +49,7 @@ const undeva = {long: '23.0540', lat: '45.9659'};
 export {ceva, altceva, undeva}; // lista de identificatori
 ```
 
-### Redenumirea identificatorilor
+### Redenumirea identificatorilor folosind `as`
 
 În cazul în care este nevoie, poți redenumi arbitrar identificatorii precum în exemplul următor.
 
@@ -61,13 +67,9 @@ export const {prop1, prop2: altNume} = obi;
 
 Pentru că toate aceste exporturi folosesc numele identificatorilor, se numesc și *named exports* - exporturi care poartă nume.
 
-## Exportul de obiecte
+## Exportul `default`
 
-Această practică nu este una de dorit pentru că ridică probleme în momentul în care din eroare suprascrii metodele modulului de la care ai referința.
-
-## Exportul default
-
-Exporturile default sunt folosite pentru a exporta o singură valoare sau pentru a avea cel puțin o valoare pe care să o folosești la export. Poți avea un sigur export `default` per modul, iar modulul va fi chiar respectivul identificator exportat `default`. Exportul ca `default` a două sau mai multe entități va genera o eroare.
+Exporturile `default` sunt folosite pentru a exporta o singură valoare sau pentru a avea cel puțin o valoare pe care să o folosești la export. Poți avea un sigur export `default` per modul, iar modulul va fi chiar respectivul identificator exportat `default`. Exportul ca `default` a două sau mai multe entități va genera o eroare.
 
 ```javascript
 export default nume_identificator_expresie;
@@ -77,7 +79,7 @@ export default function* () {}; // declarație funcție [generator]
 // exportul unei clase cu nume sau fără. Nu încheia cu punct și virgulă.
 export default class Ceva {}
 export default class {}
-// desemnarea defaultului la finalul modulului.
+// desemnarea default-ului la finalul modulului.
 export {identificator1 as default, altceva};
 ```
 
@@ -147,21 +149,21 @@ Exporturile `default` pot fi importate schimbând numele obiectul importat: `imp
 
 ## Exportarea către un consumator terț - agregare
 
-Pentru a exporta toate entitățile puse la dispoziție de un modul, poți menționa această opțiune cu `*`.
+Dacă dorești re-exportarea tuturor entităților mai departe, poți folosi `*`.
 
 ```javascript
-// din `altModul.mjs`
-export * from './modul.mjs';
+export * from "./modul01.js";
 ```
 
-Trebuie menționat faptul că în cazul exportului mai departe al entităților unui modul, folosind `*`, nu va fi inclusă și entitatea `default`. Pentru a exporta mai departe și `default`-ul, va trebui menționat acest lucru într-o declarație separată.
+Atenție, nu va re-exporta și exporturile `default` ale modului care se dorește a fi re-exportat, dacă acestea există. Motivul este acela că un modul poate avea doar un singur export `default`, iar acesta nu poate fi decât cel al modulului curent. Dacă fișierul curent nu are un `default` export, se poate re-exporta `default`-ul altuia și la nevoie, se poate chiar redenumi.
 
 ```javascript
-// din `altModul.mjs`
-export * from './modul.mjs';
-export {default} from './modul.mjs';
-// iar în `modulTerț` poți importa toate entitățile sub un singur nume
-import * as numeObiectSumator from './altModul';
+// main.js
+export { default } from './modul01.js';
+// iar în `modulTerț.js` poți importa toate entitățile sub un singur nume
+import * as numeObiectSumator from './modul01.js';
+// re-exportul se paote face și prin redenumirea default-ului (main.js)
+export { default as ceva } from './modul01.js';
 ```
 
 Obiectul sumator folosit pentru a importa toate entitățile exportate de modulul de la care se preiau, va include și exportul `default`. Dacă vrei să imporți separat `default`-ul sub un nume dedicat, poți face acest lucru.
