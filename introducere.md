@@ -90,7 +90,7 @@ JavaScript sau ECMAScript (titlul standardului) a pornit ca motor al dinamicii p
 
 Când vorbim de JavaScript, de fapt vorbim despre o implementare, adică de respectarea tuturor regulilor pe care le impune standardul ECMAScript - <http://www.ecma-international.org/memento/TC39.htm>.
 
-Ar fi util ca programarea să fie înțeleasă ca o limbă străină nouă, pe care ai nevoie să o înveți pentru a comunica cu un străin - computerul. De aceea, se numește și limbaj. ECMAScript, JavaScript sau JS ca și limbaj are o gramatică proprie cu toate regulile sale, de la modul în care înșiri caracterele, până la modul în care faci enunțurile pentru a avea sens și pentru un computer atunci când le evaluează.
+Ar fi util ca programarea să fie înțeleasă ca o limbă străină nouă, pe care ai nevoie să o înveți pentru a comunica cu un străin - computerul. De aceea, se numește și limbaj. Limbajul ECMAScript, JavaScript sau JS care o gramatică proprie cu toate regulile sale, de la modul în care înșiri caracterele, până la redactarea enunțurilor în vederea evaluării de computer.
 
 Vă va ajuta să înțelegeți că scrierea unui fragment de cod este precum scrierea unei fraze foarte lungi constituită din propoziții separate prin punct și virgulă. Dar această frază este forma cristalizată a unui algoritm. Să lămurim câteva lucruri de la bun început.
 
@@ -166,7 +166,7 @@ Cum ar arăta exemplul nostru corectat?
 var textDeAnalizat = 'Acesta este un text demonstrativ care va enumera caracterele cu înțeles special pentru JavaScript. Problema apare când în text folosim \' citat în engleză cu ghilimele simple\', poate "un citat în engleză între ghilimele duble", poate folosim un slash: /, ori un backslash \ sau vorbim despre carriage return \r sau despre new line \n, etc.';
 ```
 
-Acum, că nu avem nicio eroare, aflându-te în Console, pur și simplu apelează numele variabilei pentru a vedea textul și ce-a mai rămas din el (pur și simplu scrii numele variabilei `textDeAnalizat` și dai ENTER).
+Acum, că nu avem nicio eroare, aflându-te în *Console*, pur și simplu apelează numele variabilei pentru a vedea textul și ce-a mai rămas din el (pur și simplu scrii numele variabilei `textDeAnalizat` și dai ENTER).
 
 Am corectat doar până la `\r` pe care l-am lăsat așa înadins. Pune așa fragmentul și vezi ce se întâmplă. Da, combinația `\r` pur și simplu a dispărut din text. De ce? Pentru că indică faptul că în cazul în care se va trimite la imprimată acel text, el va fi tăiat de dinaintea lui `\r` și reluat pe următoarea linie. Asta înseamnă retur de car, adică capul de imprimare trece pe o nouă linie. Uneori, citind literatură de specialitate veți mai vedea și secvența CR/LF (**Carriage return**/**Line feed**), care este aceeași comandă trimisă unei imprimante: pune capul de imprimare (carriage) la capul liniei (adică la stânga - imprimarea caracterelor se face de la stânga la dreapta) și ridică pagina cu o linie, adică cu un rând (**line feed**).
 
@@ -336,8 +336,8 @@ let x;  // expresie de variabilă
 
 După cum spuneam, combinarea operanzilor cu operatorii, constituie **expresii**. Este necesară o mică precizare. Valorile de lucru sunt de două feluri:
 
--   fixe, care așa cum le-ai scris și așa rămân, numite și **literale**
--   valorile care se pot modifica în funcție de dinamica programului numite **variabile**, care pornesc de la o valoare dată sau nu.
+- fixe, care așa cum le-ai scris și așa rămân, numite și **literale**
+- valorile care se pot modifica în funcție de dinamica programului numite **variabile**, care pornesc de la o valoare dată sau nu.
 
 ```javascript
 let x = 1 + 1;
