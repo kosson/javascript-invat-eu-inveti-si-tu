@@ -22,9 +22,10 @@ Adu-ți mereu aminte că funcțiile sunt și ele obiecte și din acest motiv, la
 
 Câteva concepte fundamentale pentru înțelegerea obiectelor în general:
 
--   **Încapsulare**: este ceea ce obții atunci când pui împreună datele cu funcționalitățile care vor opera cu ele.
+-   **Abstractizare**: înseamnă ascunderea detaliilor de implementare în prototype sau într-o funcție. Poți înțelege abstractizarea ca o căutare și organizare a entităților similare din cod pentru a le oferi printr-o funcție sau un obiect.
+-   **Încapsulare**: este ceea ce obții atunci când pui împreună datele cu funcționalitățile care vor opera cu ele. În practică, se reduce la o *ascundere* a părților *private*. Un exemplu pentru incapsulare este un model de organizarea a codului numit Revealing Module Pattern.
 -   **Agregarea obiectelor** se realizează atunci când un obiect are proprietăți care sunt referințe către alte obiecte.
--   **Moștenirea** este un mecanism prin care obiectul creat poate folosi datele și funcționalitățile altuia cu rol de părinte.
+-   **Moștenirea** este un mecanism prin care obiectul creat poate folosi datele și funcționalitățile altuia cu rol de părinte. În JavaScript, moștenirea se realizează prin obiectul prototipal.
 -   **Poliformism** este caracteristica unui obiect de a deveni *un comportament* urmat de multe alte obiecte. Spunem că un obiect se comportă ca *o interfață*, care poate fi aplicată altor obiecte pentru a opera cu acestea.
 
 Atunci când un obiect este creat, toate caracteristicile sale sunt moștenite de la un alt obiect cu rol de **prototip** așa cum un copil moștenește trăsăturile părinților. Chiar dacă acel copil este o persoană diferită, acesta moștenește de la părinții săi anumite caracteristici. Dacă am strânge aceste caracteristici moștenite într-un set, acesta ar fi **obiectul prototip**. Să nu vi se pară ciudat că un prototip este un obiect, iar acesta la rândul lui are un prototip. E ca un lanț, care are drept limită superioară obiectele interne `Object` și `Function`, iar deasupra lor este valoarea `null`. Totuși acest lanț prototipal poate fi rupt la nevoie.
@@ -139,13 +140,13 @@ Obiectul global nu este containerul tuturor obiectelor oricât de tentant ar fi 
 
 Dincolo de acestea există un univers mult mai larg al unor seturi de obiecte puse la dispoziție de browser, de exemplu. Acestea vor constitui ceea ce numim **interfețe de programare a aplicațiilor**, în limba engleză **Application Programming Interfaces**, pe scurt **API**-uri.
 
-Modul în care înțelegem ce oferă din start un obiect intern, este determinat și de un set de algoritmi rulați de motorul care implementează standardul ECMAScript. Reamintesc faptul că pentru a putea programa în JavaScript, există un motor al cărui treabă este să genereze obiectele interne, să interpreteze codului sursă, ș.a.m.d. Se comportă precum un turn de control.
+Modul în care înțelegem ce oferă din start un obiect intern, este determinat și de un set de algoritmi rulați de motorul care implementează standardul ECMAScript. Reamintesc faptul că pentru a putea programa în JavaScript, există un motor al cărui treabă este să genereze obiectele interne, să interpreteze codului sursă, ș.a.m.d.
 
 Acești algoritmi sunt numiți `metode interne` ale obiectelor interne. Metodele interne definesc comportamentul la momentul rulării codul privind crearea și utilizarea acelui obiect. Implementarea acestor metode interne specificate de standard cade în responsabilitatea celor care construiesc motoare JavaScript - producătorii de browsere și Node.js. Reține acest aspect pentru a nu fi surprins când vei auzi sau citi discuții despre performanțele unui anume motor în comparație cu altul. Aceste metode interne sunt toate procesele care se petrec în inima unui motor atunci când, de exemplu, apelezi o metodă a unui obiect intern cum ar fi `Object.create()` sau `String.split()`.
 
-Aceste adevărate biblioteci de cod scrise în alte limbaje de programare precum C++ sau Rust sunt executanții *instrucțiunilor* pe care noi le scriem în codul sursă JavaScript. De aici și atributul pus acestui limbaj **de scripting**. Un script fiind un set de instrucțiuni, care la momentul execuției angajează adevărate biblioteci de cod precompilate în limbaje de programare de nivel mai jos sau chiar binare, care comunică `1` și `0` direct cu procesorul și mai nou chiar și cu perifericele (Internet of Things). Am menționat acest lucru pentru a înțelege că noi operăm la un nivel foarte înalt, iar JavaScript poate fi perceput ca un *rețetar* ce se aplică într-un mediu dedicat interpretării respectivelor rețete.
+Aceste adevărate biblioteci de cod scrise în alte limbaje de programare precum C++ sau Rust sunt executanții *instrucțiunilor* pe care noi le scriem în codul sursă JavaScript. De aici și atributul pus acestui limbaj **de scripting**. Un script fiind un set de instrucțiuni, care la momentul execuției angajează adevărate biblioteci de cod precompilate în limbaje de programare de nivel mai jos sau chiar binare, care comunică `1` și `0` direct cu procesorul și mai nou chiar și cu perifericele (Internet of Things). Am menționat acest lucru pentru a înțelege că noi operăm la un nivel foarte înalt, iar JavaScript poate fi perceput ca un *rețetar* aplicat unui mediu dedicat interpretării respectivelor rețete.
 
-Câteva astfel de rețete oferite de limbajul nostru de programare sunt foarte utile lucrului cu obiecte. De exemplu, metoda `Object.getPrototypeOf()` returnează un obiect sau `null`. Indică obiectul care oferă proprietățile moștenite, precum și pe cel asupra căruia se face interogarea cu `Object.getPrototypeOf(obiSursă)`. Returnarea lui `null` indică faptul că obiectul curent nu moștenește nicio proprietate. M-am oprit la această metodă pentru că obiectele prototip oferă mecanismul de moștenire în JavaScript.
+Câteva astfel de rețete sunt foarte utile lucrului cu obiecte. De exemplu, metoda `Object.getPrototypeOf()` returnează un obiect sau `null`. Indică obiectul care oferă proprietățile moștenite, precum și pe cel asupra căruia se face interogarea cu `Object.getPrototypeOf(obiSursă)`. Returnarea lui `null` indică faptul că obiectul curent nu moștenește nicio proprietate. M-am oprit la această metodă pentru că obiectele prototip oferă mecanismul de moștenire în JavaScript.
 
 Aceste metode, de fapt, aceste **rețete** prestabilite, pot fi și ele alterate pentru că JavaScript permite chiar modificarea rețetelor originale (vezi obiectul intern `Reflect`). Este ca și cum ai modifica o carte de bucate așa cum vrei tu după necesitățile tale. Atingerea unui astfel de nivel implică un aspect negativ, iar acesta este pierderea compatibilității cu programele scrise de restul comunității. Închipuiește-ți ce s-ar întâmpla dacă aș modifica **rețeta** `Object.setPrototypeOf()`, dar alt programator dorește o interfațare cu software-ul scris de tine, fiind bun bazat că metoda cu același nume respectă comportamentul așteptat prin standard? Ar fi un haos desăvârșit. Totuși, sunt momente când mici modificări îmbunătățesc performanța sau îmbogățesc programele.
 
@@ -164,9 +165,13 @@ Aceste metode, de fapt, aceste **rețete** prestabilite, pot fi și ele alterate
 
 ## Crearea obiectelor
 
-Obiectele pot fi create în două feluri: prin declararea acestora sau prin construirea lor. La declarare, de obicei declari literal proprietățile, iar în cazul construcției, de fapt se creează obiecte prin executarea unui funcții numite constructori a căror sarcină este să returneze un obiect cu toate proprietățile sale. Să trecem în revistă căteva metode prin care putem obține un obiect.
+În general, obiectele pot fi create prin declarare sau construire. La declarare, redactezi literal proprietățile. În cazul construirii, creezi obiecte executând o funcție numită *constructor*. Sarcina lor este să returneze un obiect cu toate proprietățile sale. Să trecem în revistă căteva metode prin care putem obține un obiect.
 
-1. Crearea în baza unui contructor folosind `new`. De exemplu, pentru `const ObiNou = new Object();`, la executarea cu `new` se respectă cele patru reguli: (1) crearea obiectului; (2) stabilirea lanțului prototipal; (3) stabilirea legăturii `this` la noul obiect; (4) obiectul nou creat este returnat. Rezultatul este echivalent cu declarația literală: `const newObj = {}`.
+1. Crearea în baza unui contructor folosind `new`. De exemplu, pentru `const ObiNou = new Object();`, la executarea cu `new` se respectă cele patru reguli:
+  1. crearea obiectului;
+  2. stabilirea lanțului prototipal;
+  3. stabilirea legăturii `this` la noul obiect;
+  4. obiectul nou creat este returnat. Rezultatul este echivalent cu declarația literală: `const newObj = {}`.
 2. `const ObiNou = Object.create(null);`, unde `prototype` este setat la `null`. Acest model este supranumit *dict pattern*, adică șablonul de creare a unui dicționar.
 3. `const ObiNou = Object.create(Object.prototype);`, fiind echivalent cu `const newObj = {}`.
 4. `const ObiNou = {};`, fiind echivalentă cu `new Object()`.
@@ -193,7 +198,7 @@ colObi[1]; // { valoarea: "y" }
 colObi[2]; // { valoarea: "z" }
 ```
 
-Am făcut un pas important în înțelegerea unei perspective lărgite asupra limbajului. Datele sunt așezate și sunt structurate în diferitele tipuri de agregări necesare unor scenarii diferite. Șablonul *Făbricuță* de mai sus elimină scrierea de mână a obiectelor care au aceeași **semnătură**. Semnătura poate fi considerată un logo pentru toate obiectele create cu aceleași proprietăți și metode. Putem spune că obiectele a căror structură a fost gândită să fie baza pentru crearea altora, sunt niște **interfețe**. O interfață este o sumă de caracteristici comune care vor fi regăsite la toate obiectele care vor dori să *implementeze* acea interfață. Făbricuța de mai sus creează obiecte cu semnătura `{ a: 1,  valoarea }`, interfața în cazul acesta fiind proprietățile `a` și `valoarea`.
+Am făcut un pas important în înțelegerea unei perspective lărgite asupra limbajului. Datele sunt așezate și sunt structurate în diferitele tipuri de agregări necesare unor scenarii diferite. Șablonul *Făbricuță* de mai sus elimină scrierea de mână a obiectelor care au aceeași **semnătură**. Putem spune că obiectele a căror structură a fost gândită să fie baza pentru crearea altora, sunt niște **interfețe**. O interfață este o sumă de caracteristici comune care vor fi regăsite la toate obiectele care vor dori să *implementeze* acea interfață. `Făbricuța` de mai sus creează obiecte cu semnătura `{ a: 1,  valoarea }`, interfața în cazul acesta fiind proprietățile `a` și `valoarea`.
 
 ### Folosirea constructorilor
 
@@ -206,7 +211,7 @@ Prin convenție, pentru a distinge constructorii de funcțiile simple, se va scr
 ```javascript
 function MatrițăAvionVuiaI (tip = 'experimental', an = '1906') {
   this.nume = 'Vuia 1';
-  this.deschidereAripi = 4; // în metri
+  this.deschidereAripi = 4;    // în metri
   this.distanțăMaximă = 0.012; // în kilometri
 };
 var VuiaI = new MatrițăAvionVuiaI();
@@ -214,18 +219,18 @@ console.log(VuiaI);
 // { nume: 'Vuia 1', deschidereAripi: 4, 'distanțăMaximă': 0.012 }
 ```
 
-În cazul constructorului de mai sus am folosit parametri cu valori din oficiu. Atunci când un obiect este instanțiat cu operatorul `new`, se va genera automat o proprietate numită `constructor`, care indică funcția care a generat obiectul. La apelarea cu operatorul `new`, mai întâi se generează obiectul și apoi se execută codul funcției. Execuția constructorului are ca efect atribuirea proprietăților inițiale ale noului obiect. Invocarea unui constructor fără `new` execută codul din corpul funcției fără a crea obiectul. În cazul în care constructorului nu i se pasează niciun argument, parantezele rotunde pot fi omise opțional.
+În cazul constructorului de mai sus am folosit parametri cu valori din oficiu. Atunci când un obiect este instanțiat cu operatorul `new`, se va genera automat o proprietate numită `constructor`, indicând funcția care a generat obiectul. La apelarea cu operatorul `new`, mai întâi se generează obiectul. După, se execută codul funcției. Execuția constructorului are ca efect atribuirea proprietăților inițiale ale noului obiect. Invocarea unui constructor fără `new` execută codul din corpul funcției fără a crea obiectul. În cazul în care constructorului nu i se pasează niciun argument, parantezele rotunde pot fi omise opțional.
 
 ```javascript
 function Ceva () { this.a = 1 };
 const obi = new Ceva;
 ```
 
-Spunem că instanțiem obiecte de tipul constructorului. Pe cale de consecință, operatorului `instanceof` va indica mereu constructorul. În exemplul oferit, l-am introdus pe `this`. Este nevoie să lămurim câteva aspecte privind aceast cuvânt cheie, care denumește o legătură la un obiect context.
+Spunem că instanțiem obiecte de tipul constructorului. Pe cale de consecință, operatorului `instanceof` va indica mereu constructorul. În exemplul constructorului `MatrițăAvionVuiaI`, l-am introdus pe `this`, un cuvânt cheie, care denumește o legătură la un obiect context.
 
-Să ne gândim la o funcție ca la o persoană care privește **bolta celestă** într-o noapte înstelată. Cum ar putea povesti despre toate constelațiile văzute? Cum le-ar putea descrie printr-o singură expresie? Hai, nu e greu, am zis deja... da, da, ai remarcat perfect: **bolta celestă**. Dacă dorim să constrângem la un singur termen care să o identifice, am putea spune foarte simplu **cerul**, nu? Așa este și cuvântul cu înțeles special `this`, care s-ar traduce în română **acesta**. Am putea spune ca tehnică de învățare că `this` este acest obiect în care mă execut eu acum.
+#### Legătura `this`
 
-`This` este referința către proprietăți și metode din interiorul obiectului cu rol de context. Ai putea întreba de ce ar fi nevoie să existe un cuvânt cheie care să facă referirea către membrii obiectului, dacă avem identificatorul obiectului. Răspunsul se leagă de posibilitatea ca într-o etapă a executării codului, obiectului nostru i se atribuie un alt identificator. În acel moment vei pierde toate referințele interne, dacă ai fi folosit identificatorul inițial.
+Legătura `this` este o conexiune live la proprietățile și metodele obiectului în al cărui context se execută o funcție. De ce ar fi nevoie să existe un cuvânt cheie, care să simbolizeze legătura la membrii obiectului, dacă avem identificatorul obiectului. Răspunsul se leagă de posibilitatea ca într-o etapă a executării codului, obiectului nostru să-i fie atribuit un alt identificator. În acel moment, vei pierde toate referințele către entitățile interne folosind identificatorul inițial.
 
 ```javascript
 let obi = {
@@ -241,7 +246,7 @@ obi1.b(); // undefined
 // referința către funcție, corect?
 ```
 
-Alternativa corectă este cea a referirii obiectului din interiorul său folosind `this`. Astfel, la momentul evaluării unei expresii, motorul va ști exact faptul că te referi la obiectul vizat și că acesta trebuie să ofere valorile de lucru. `This` este o legătură cu mediul lexical al obiectului context. Este ca o formulă de adresare a obiectului pentru a trimite la propriile valori fără a folosi identificatorul.
+Alternativa corectă este cea a referirii obiectului chiar din interiorul său folosind `this`, aceasta fiind o legătură cu mediul lexical al obiectului. Astfel, la momentul evaluării unei expresii, motorul va ști exact faptul că te referi la obiectul vizat și că acesta trebuie să ofere accesul la date.
 
 ```javascript
 const obi = {
@@ -253,13 +258,13 @@ const obi = {
 obi.b(); // 1
 ```
 
-Pentru o funcție care tocmai și-a început execuția, `this` este o proprietate care nu poate fi modificată. Nu poți schimba cine este obiectul referit prin `this`. În cazul de mai sus, funcția cu rol de metodă, va avea acces la mediul lexical al obiectului pentru că, în primul rând a fost definită ca parte a aceluiați mediu lexical, dar mai mult, pentru că a stabilit legătura `this` automat la acel obiect.
+Pentru o funcție care tocmai și-a început execuția, `this` este o proprietate care nu poate fi modificată. În cazul de mai sus, funcția cu rol de metodă, va avea acces la mediul lexical al obiectului pentru că, în primul rând a fost definită ca parte a aceluiași mediu lexical, dar mai mult, pentru că a stabilit legătura `this` automat la acel obiect.
 
 Totuși, reține faptul că referința `this` este strict legată de *locul* în care a fost apelată funcția, nu de *locul* unde a fost declarată aceasta. Sunt două lucruri distincte. Dacă nu le vei percepe astfel încă de acum, te vei lovi de multe erori și nu vei înțelege în profunzime anumite comportamente.
 
 #### `this` și constructorii în obiectul global
 
-Am văzut deja cum funcțiile pot returna obiecte, aceasta fiind o modalitate de a le crea. Dar atunci când ai nevoie de mai multă finețe în compunerea viitorului obiect, vei folosi funcțiile din nou în postura de constructori. Un constructor zămislește obiecte folosind numai operatorul `new`. Dacă nu o invoci cu `new`, se va comporta ca o funcție simplă cu toate consecințele rulări în acest mod. Acest mecanism comportamental dual este chiar un avantaj oferit de limbaj. Cu ajutorul constructorilor, de fapt alcătuiești semnătura viitoarelor obiecte. Te vei întreba care este mecanismul magic prin care o funcție poate crea un obiect? Nicio magie, aici: pur și simplu, funcțiile sunt și ele obiecte!
+Am văzut deja cum funcțiile pot returna obiecte, aceasta fiind o modalitate de a le crea. Dar atunci când ai nevoie de mai multă finețe în compunerea viitorului obiect, vei folosi funcțiile din nou din postura de constructori. Un constructor zămislește obiecte folosind numai operatorul `new`. Dacă nu o invoci cu `new`, se va comporta ca o funcție simplă cu toate consecințele rulări în acest mod. Acest mecanism comportamental dual este chiar un avantaj oferit de limbaj. Cu ajutorul constructorilor, de fapt alcătuiești *semnătura* viitoarelor obiecte. Te vei întreba care este mecanismul magic prin care o funcție poate crea un obiect? Nicio magie, aici: pur și simplu, funcțiile sunt și ele obiecte!
 
 ```javascript
 function NumescNave (indicativ, nume) {
@@ -279,7 +284,7 @@ let obiect = new NumescNave('Tiangong-1', "Palatul Celest");
 console.log(obiect);
 ```
 
-Din exemplu, se remarcă imediat faptul că rularea funcției `NumescNave` fără `"use strict";` va rezulta în injectarea tuturor valorilor menționate prin sintaxa `this.ceva`, direct în obiectul global, care în cazul browserului este `window`. De ce? Pentru că la acesta a fost stabilită legătura din oficiu pentru valoarea lui `this`. În cazul rulării funcției sub `"use strict";`, motorul JavaScript ar fi semnalat o excepție și ar fi afișat: **Exception: TypeError: this is undefined**. Concluzie: injectarea valorilor nu s-ar mai produce.
+Din exemplul funției `NumescNave`, se remarcă imediat faptul că rularea fără `"use strict";` va rezulta în injectarea tuturor valorilor menționate prin sintaxa `this.ceva`, direct în obiectul global, care în cazul browserului este `window`. De ce? Pentru că la acesta a fost stabilită legătura din oficiu pentru valoarea lui `this`. În cazul rulării funcției sub `"use strict";`, motorul JavaScript ar fi semnalat o excepție și ar fi afișat: **Exception: TypeError: this is undefined**. Concluzie: injectarea valorilor nu s-ar mai produce.
 
 ### Legătura prototipală la constructori
 
@@ -295,10 +300,10 @@ Obiectele-funcții au la rândul lor o proprietate numită `prototype`. Această
 
 Invocarea unei funcții constructor folosind operatorul `new`, declanșează parcurgerea unor etape esențiale. La final, motorul creează un obiect. Reține faptul că acest nou obiect trebuie referit printr-o expresie de tipul `const obiNou = new FacObiecte();`. Când ajunge la `new`, motorul JavaScript înțelege că este momentul să parcurgă etapele:
 
-1  Se creează un obiect nou.
-2  Se creează legătura prototipală la obiectul prototype al funcției constructor.
-3  Obiectul generat automat este pasat funcției cu rol de constructor ca fiind obiectul `this` și astfel, din acest moment devine contextul de execuție al funcției constructor invocate. După ce va fi înzestrat cu proprietățile dorite prin execuția corpului funcției constructor, obiectul `this` va fi returnat drept noul obiect.
-4  Dacă funcția constructor nu returnează ceva explicit, atunci înainte de a se închide blocul (`}`) se va returna automat obiectul constituit la pasul 1, după ce a fost *înzestrat* la pasul 3. În cazul în care funcția constructor returnează ceva explicit, nu se mai creează obiectul.
+1.  Se creează un obiect nou.
+2.  Se creează legătura prototipală la obiectul prototype al funcției constructor.
+3.  Obiectul generat automat este pasat funcției cu rol de constructor ca fiind obiectul `this` și astfel, din acest moment devine contextul de execuție al funcției constructor invocate. După ce va fi înzestrat cu proprietățile dorite prin execuția corpului funcției constructor, obiectul `this` va fi returnat drept noul obiect.
+4.  Dacă funcția constructor nu returnează ceva explicit, atunci înainte de a se închide blocul (`}`) se va returna automat obiectul constituit la pasul 1, după ce a fost *înzestrat* la pasul 3. În cazul în care funcția constructor returnează ceva explicit, nu se mai creează obiectul.
 
 Spuneam că la nevoie poți adăuga în prototipul funcției proprietăți pentru a fi moștenite mai târziu de obiectele create. Să spunem că avem o funcție cu rol de constructor și se instanțiază un obiect. Mai târziu, pentru că este nevoie de o proprietate care să fie moștenită de toate obiectele generate, se poate introduce direct în obiectul `prototype` al funcției și astfel va fi disponibilă și obiectelor instanțiate. Reține că poți introduce metode sau valori și mai târziu, după ce s-a făcut instanțierea.
 

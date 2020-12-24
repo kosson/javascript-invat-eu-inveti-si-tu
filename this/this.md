@@ -1,8 +1,8 @@
 # Legătura `this` - context de execuție
 
-Imaginează-ți *Oceanul planetar*. Acesta este obiectul nostru global. Să ne închipuim că orașele cu porturi sunt obiecte. Funcțiile sunt nave care prelucrează și transportă valori. Navele sunt la rândul lor obiecte având fiecare un nume și un pavilion sub care sunt înregistrate. De fiecare dată când intră într-un port, se leagă la o bază de date a portului disponibilă navei. Conexiunea realizată la baza de date a portului să o numim `this`.
+Să ne gândim la o funcție ca la o persoană care privește **bolta celestă** într-o noapte înstelată. Cum ar putea povesti despre toate constelațiile văzute? Cum le-ar putea descrie printr-o singură expresie? Hai, nu e greu, am zis deja... da, da, ai remarcat perfect: **bolta celestă**. Dacă dorim să constrângem la un singur termen care să o identifice, am putea spune foarte simplu **cerul**, nu? Așa este și cuvântul cu înțeles special `this`, care s-ar traduce în română **acesta**. Am putea spune că `this` este **acest** obiectul în contexul căruia se execută codul.
 
-Această relație trebuie lămurită pentru că, de fapt, o funcție întotdeaunea rulează în contextul unui obiect. Chiar textul standardului care reglementează Document Object Model numește `this` drept  **obiectul context**.Cuvântul cheie `this` identifică o legătură cu mediul lexical al contextului de execuție pentru o funcție la momentul execuției sale. Cuvântul crucial este **legătură**. Legătura se realizează doar la momentul executării funcției!
+O funcție rulează întotdeauna în contextul unui obiect. Chiar textul standardului care reglementează Document Object Model numește `this` drept **obiectul context**. Cuvântul cheie `this` identifică o legătură cu mediul lexical al obiectului context. Cuvântul crucial este **legătură** pentru că atunci când se realizează, se comportă ca o conexiune live la entitățile obiectului context. Legătura se realizează doar la momentul executării funcției!
 
 **Moment ZEN**: O funcție trebuie să fie în execuție pentru a realiza o legătură `this`.
 
@@ -82,13 +82,11 @@ obi.valDinObi();
 
 Într-un astfel de scenariu, nu mai este nevoie de a face puntea lexicală `var that = this;` pentru a obține o referință către obiectul context al gazdei.
 
-Chiar dacă o funcție este declarată în interiorul unui obiect, îndeplinind rolul de metodă a acestuia, trebuie considerată a fi un obiect separat de acesta. Nu putem gândi în termenul de *apartenență* la un anumit obiect doar pentru că a fost declarată într-o metodă. În ceea ce privește metodele, acestea aparțin unui obiect în măsura în care acel obiect oferă *adresa* la care pot fi găsite. Dar ele tot funcții obiect distincte sunt cu particularitatea că se conectează automat prin `this` la obiectul în care sunt declarate.
-
-O metodă nu poate fi accesată ca valoare sau apelată din exteriorul obiectului altfel decât folosind sintaxa cu punct: `obiect.funcție`. Referința prin `this` va reflecta identificatorii mediului lexical local al obiectului de la momentul execuției metodei.
+Chiar dacă o funcție este declarată în interiorul unui obiect, îndeplinind rolul de metodă a acestuia, trebuie considerată a fi un obiect separat de acesta. Nu putem gândi în termenul de *apartenență* la un anumit obiect doar pentru că a fost declarată în intriorul obiectului. În ceea ce privește metodele, acestea aparțin unui obiect în măsura în care acel obiect oferă *adresa* la care pot fi găsite. Dar ele tot funcții  distincte sunt cu particularitatea că se conectează automat prin `this` la obiectul în care sunt declarate. O metodă nu poate fi accesată ca valoare sau apelată din exteriorul obiectului altfel decât folosind sintaxa cu punct: `obiect.funcție`.
 
 **Moment ZEN**: În JavaScript toate obiectele sunt entități independente. Ele realizează conexiuni unele cu celelalte prin referințe.
 
-Obiectul poate fi considerat ca un furnizor de adresă, pentru a putea apela funcția-obiect, care joacă rol de metodă. Legătura aceasta poate fi văzută precum relația dintre navă și portul în care se află. Numele danei oferă o modalitate de a ajunge la navă. Pentru a înțelege, putem explora mai departe apelând în contextul unui obiect distinct metoda unui alt obiect.
+Obiectul poate fi considerat ca un furnizor de adresă, pentru a putea apela funcția-obiect, care joacă rol de metodă. Pentru a înțelege, putem explora mai departe apelând în contextul unui obiect distinct metoda unui alt obiect.
 
 ```javascript
 const obi = {
@@ -139,7 +137,7 @@ arataMiThis (); // true
 ```
 
 Atenție, nu contează dacă locul apelării este sub regula `"use strict";`, ci contează dacă funcția este sub această regulă. Am menționat acest aspect pentru că este posibil ca software-ul scris de tine să respecte regula `"use strict";`. Uneori propriul software este posibil să fie legat de software mai vechi (programatorii îi spun în engleză **legacy**, adică **moștenit**), care nu este sub regulă și astfel, fiind posibilă apariția unei serii de erori a căror sursă să fie chiar această diferență.
-Reține că pentru codul sub `"use strict";`, valoarea lui `this` este `undefined` pentru funcțiile declarate în global scope.
+Reține că pentru codul sub `"use strict";`, valoarea lui `this` este `undefined` pentru funcțiile declarate în *global scope*.
 
 ## Cum se realizează legăturile this
 
