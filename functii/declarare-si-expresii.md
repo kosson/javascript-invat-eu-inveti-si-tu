@@ -188,7 +188,7 @@ oFunctie(2, 4); // 6
 -   Funcțiile pot fi create dinamic folosind constructorul `Function`.
 -   Funcțiile nu sunt „deținute” sau „conținute” de un obiect atunci când sunt metode chiar dacă sunt declarate în obiect sau în afara lui.
 -   O declarație de funcție începe cu `function` ca și cuvânt cheie. Orice altceva este o expresie de funcție.
--   Definirea orcărei funcții, fie prin declarare, fie prin expresie are ca efect crearea automată a unei proprietăți `prototype`, care va permite funcției să devină constructor.
+-   Definirea oricărei funcții, fie prin declarare, fie prin expresie are ca efect crearea automată a unei proprietăți `prototype`, care va permite funcției să devină constructor.
 -   Invocarea unei funcții generează un nou **context de execuție** (TOT ce există și este necesar atunci când funcția se execută).
 -   Începând cu ES6, este posibilă declararea funcțiilor în blocuri (de exemplu, în `if`-uri).
 -   Toate variabilele și funcțiile definite în funcție sunt considerate parte a contextului de execuție.

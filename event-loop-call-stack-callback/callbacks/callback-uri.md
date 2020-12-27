@@ -64,19 +64,17 @@ Totuși trebuie spus un lucru la care trebuie reflectat foarte adânc. Există m
 -   Ești încredințat că va executa în parametrii doriți de tine codul din funcția pe care i-o pasezi ca și callback?
 -   Dacă nu ai scris tu întreaga aplicație care va folosi callback-ul, ai **încredere** să o folosești?
 
-Acestea sunt întrebări foarte serioase, care setează cadrul mental pentru căutarea de noi soluții. Acestea nu au întârziat să apară, fiind propulsate de standard: promisiunile și funcțiile async/await. În acest moment, recomandarea este ca în momentul dobândirii abilităților de lucru cu **promisiunile** sau cu funcțiile **async/await**, să fie abandonată practica callback-urilor.
+Acestea sunt întrebări foarte serioase, care setează cadrul mental pentru căutarea de noi soluții. Acestea nu au întârziat să apară, fiind propulsate de standard: promisiunile și funcțiile `async/await`. În acest moment, recomandarea este ca în momentul dobândirii abilităților de lucru cu **promisiunile** sau cu funcțiile **async/await**, să fie abandonată practica callback-urilor.
 
 Un argument în plus pentru abandonarea treptată a practicii callback-urilor este aceea că urmărirea callback-urilor este o sarcină dificilă în sine.
 
 ## Răspunsul la un eveniment
 
-Declarăm o funcție pe care o poreclim **funcția de bază**. Acesta este un termen arbitrar, care ne va ajuta să înțelegem mai bine relația cu o altă funcție: callback-ul. Funcția de bază este definită de utilizator cu scopul de a prelucra datele oferite la invocare. Funcția de bază are un mic secret. Primește funcția callback ca argument și după ce a terminat toate prelucrările, o execută la final pasându-i rezultatul evaluărilor din funcția de bază.
+Declarăm o funcție pe care o poreclim **funcția de bază**. Acesta este un termen arbitrar, care ne va ajuta să înțelegem mai bine relația cu o altă funcție: callback-ul. Funcția de bază este definită de utilizator cu scopul de a prelucra datele primite la invocare. Funcția de bază are un mic secret. Primește funcția callback ca argument și după ce a terminat evaluarea codului intern, la final pasează rezultatul callback-ului.
 
 **Moment ZEN**: Callback-ul este o funcție care este executată ca răspuns la un eveniment.
 
-În programarea funcțională, acest mod de a propaga rezultatul se numește **continuation passing style** (CPS). Returnarea rezultatului dintr-o funcție se numește **direct style**. Să-i spunem pe românește **abordare directă**.
-
-În continuare vom face o exemplificare **direct style** versus **continuation-passing style**
+În programarea funcțională, acest mod de a propaga rezultatul se numește **Continuation Passing Style** (CPS). Returnarea rezultatului dintr-o funcție se numește **direct style**. Să urmărim un exemplu **direct style** versus **continuation-passing style**.
 
 ```javascript
 // direct style - abordare direct
@@ -233,7 +231,7 @@ Sunt folosite în bibliotecile de cod pentru că oferă reutilizare. Permite ca 
 
 ### Utilizare în Node.js
 
-Un exemplu de folosire a callback-urilor în Node.js
+Node.js folosește callback-urile ca model de bază. Spre deosebire de browsere, Node.js permite interacțiunea cu resursele sistemului (I/O), ceea ce îl face susceptibil la timpi mari de execuție. Acest lucru nu se întâmplă pentru că API-urile Node.js rulează pe mai multe fire de execuție spre deosebire de browser. Un simplu exemplu de folosire a callback-urilor în Node.js.
 
 ```javascript
 var fs = require('fs');
@@ -247,7 +245,7 @@ var callback = function faCeva (error, data) {
 fs.readFile('date.csv', 'utf-8', callback);
 ```
 
-Atenție, în NodeJS, primul argument al unui callback va fi întotdeauna un obiect de eroare. Acesta este modelul care trebuie urmat. Datele vehiculate constituie cel de-al doilea argument.
+Atenție, în Node.js, primul argument al unui callback va fi întotdeauna un obiect de eroare. Acesta este modelul care trebuie urmat. Datele vehiculate constituie cel de-al doilea argument.
 
 ## Disciplina folosirii callback-urilor
 
