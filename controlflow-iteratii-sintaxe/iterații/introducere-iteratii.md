@@ -39,7 +39,6 @@ Standardul consideră `Iterable` și `Iterator` a fi **interfețe**.
 
 > O interfață este un set de chei ale unor proprietăți ale căror valori asociate răspund unei anume specificații. Oricare obiect care pune la dispoziție toate proprietățile așa cum sunt descrise de specificațiile unei interfețe, se conformează acelei interfețe. O interfață nu este reprezentată de un anume obiect distinct. Pot să fie multe obiecte implementate separate care să fie conforme cu orice interfață. Un obiect individual poate fi conform cu mai multe interfețe. [25.1.1Common Iteration Interfaces](https://www.ecma-international.org/ecma-262/10.0/index.html#sec-common-iteration-interfaces)
 
-
 ### Unde apar
 
 Interfețele de iterare sunt întâlnire ori de câte ori avem de-a face cu structuri de cod ce au capacitatea de a parcurge structuri de date organizate ca array-uri, `Map` sau `Set`, ori promisiuni.
@@ -64,7 +63,8 @@ Interfețele de iterare sunt întâlnire ori de câte ori avem de-a face cu stru
 
 ## Resurse
 
--   [MDN - Iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
--   [Iterables and iterators](http://exploringjs.com/es6/ch_iteration.html)
--   [Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)
--   [All you need to know about JavaScript Iterators and Generators](https://jfet97.github.io/JavaScript-Iterators-and-Generators/)
+- [MDN - Iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
+- [Iterables and iterators](http://exploringjs.com/es6/ch_iteration.html)
+- [Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)
+- [All you need to know about JavaScript Iterators and Generators](https://jfet97.github.io/JavaScript-Iterators-and-Generators/)
+- [Looping over Arrays: for vs. for-in vs. .forEach() vs. for-of](https://2ality.com/2021/01/looping-over-arrays.htm)

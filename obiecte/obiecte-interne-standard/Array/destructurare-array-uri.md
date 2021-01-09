@@ -65,7 +65,7 @@ console.log(x, y);
 
 ### Potrivirea unu-la-unu cu un array returnat
 
-În exemplul oferit, funcția returnează o structură care implementează protocolul de iterare și astfel, evaluarea sa va rezulta într-un obiect care poate fi destructurat.
+O funcție poate returna o structură care implementează protocolul de iterare și astfel, evaluarea sa va rezulta într-un obiect care poate fi destructurat.
 
 ```javascript
 function genArray(){
@@ -207,7 +207,7 @@ let divuri = Array.from(document.querySelectorAll('div'));
 
 ### Pasarea către metode ale obiectelor interne
 
-Folosirea operatorului se poate dovedi foarte elegantă pentru că elimină necesitatea de a folosi o buclă cu care să iterezi elementele unui array.
+Folosirea operatorului elimină necesitatea de a folosi o buclă cu care să iterezi elementele unui array.
 
 ```javascript
 let numbers = [23, 400, 6, 1021];
@@ -220,7 +220,16 @@ Atribuirea de valori din oficiu se dovedește foarte utilă atunci când încerc
 
 ```javascript
 let [valoare = false] = [];
-console.log(valoare);
+console.log(valoare); // false
+```
+
+## Generarea unui set cu valori unice
+
+Folosind destructurarea în combinație cu `Set` poți extrage un set unic de valori.
+
+```javascript
+const colectie = ['a', 'a', 'a', 'c', 'f', 'r', 'r', 'f'];
+const setnou = [...new Set(colectie)];
 ```
 
 ## Resurse
