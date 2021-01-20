@@ -1,8 +1,6 @@
 # DataView
 
-`DataView` este o interfață care poate fi utilizată în scopul scrierii și citirii de numere folosindu-se un `ArrayBuffer`.
-
-Un `DataView` nu poate opera decât în tandem cu un `ArrayBuffer`.
+`DataView` este o interfață care poate fi utilizată în scopul scrierii și citirii de numere folosindu-se un `ArrayBuffer`. Un `DataView` nu poate opera decât în tandem cu un `ArrayBuffer`.
 
 ```javascript
 var buffer = new ArrayBuffer(16);

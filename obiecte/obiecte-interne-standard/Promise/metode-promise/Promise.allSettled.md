@@ -1,6 +1,6 @@
 # Promise.allSettled()
 
-Metoda returnează o promisiune care se rezolvă după ce au fost soluționate toate promisiunile care ai fost pasate sub formă de array indiferent de rezolvarea acestora.
+Metoda returnează o promisiune care se rezolvă după ce au fost soluționate toate promisiunile care au fost pasate sub formă de array indiferent de rezolvarea acestora.
 
 ```javascript
 const promisiuni = [promisiune1, promisiune2];

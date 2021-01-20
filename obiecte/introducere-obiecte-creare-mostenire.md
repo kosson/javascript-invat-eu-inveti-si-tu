@@ -1206,7 +1206,7 @@ obiect.altaProprietate = 'altceva';
 
 ### Destructurarea obiectelor
 
-ES6 introduce posibilitatea seta variabile cu valorile cheilor unui obiect (*destructuring assignment*). Trebuie respectată o singură cerință: numele identificatorilor variabilelor trebuie să fie identice cu cele ale cheilor proprietăților din obiectul din care sunt luate valorile.
+ES6 introduce posibilitatea de a seta variabile cu valorile cheilor unui obiect (*destructuring assignment*). Trebuie respectată o singură cerință: numele identificatorilor variabilelor trebuie să fie identice cu cele ale cheilor proprietăților din obiectul din care sunt luate valorile. Trebuie remarcat faptul că entitatea din partea stângă a egalului nu este un obiect, ci un șablon care reprezintă calea către valoarea căutată în obiectul sursă.
 
 ```javascript
 const testObj = {ceva: 1, altceva: 2};
