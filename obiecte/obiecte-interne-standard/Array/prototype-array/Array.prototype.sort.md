@@ -103,7 +103,11 @@ colectie.sort( function (x, y) {
   if ( numeX > numeY ) {return 1};
   return 0;
 });
+```
 
+Rețineți tactica de a nivela diferențele pe care majusculele și minusculele le dau. S-a folosit metoda `toUpperCase()` pentru a nivela aceste diferențe.
+
+```javascript
 // ordonarea după data calendaristică - reducere la string
 colectie.sort( (ob1, ob2) => {
   return new Date(ob1.data).valueOf() - new Date(ob2.data).valueOf();
@@ -121,9 +125,23 @@ colectie.sort((ob1, ob2) => {
     return d1.getUTCDate() - d2.getUTCDate();
   }
 });
-```
 
-Rețineți tactica de a nivela diferențele pe care majusculele și minusculele le dau. S-a folosit metoda `toUpperCase()` pentru a nivela aceaste diferențe.
+// sortarea după mai multe câmpuri de același tip
+var colectie2 = [
+  {nume: 'Gina',    valoare: "mere"},
+  {nume: 'Dobrin',  valoare: "pere prune"},
+  {nume: 'Dobrin',  valoare: "alune"},
+  {nume: 'Nicolae', valoare: "măsline"},
+  {nume: 'Pavel',   valoare: "harbuz"}
+];
+colectie2.sort((x, y) => {
+  if (x.nume === y.nume) {
+    return x.valoare < y.valoare ? -1 : 1;
+  } else {
+    return x.nume < y.nume ? -1 : 1;
+  }
+});
+```
 
 ## Inversarea sortării
 

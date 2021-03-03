@@ -2,14 +2,14 @@
 
 Această metodă nu afectează array-ul original. Slice în limba engleză se referă la *a tăia*, *a decupa*, *a extrage o bucată*. Pentru a înțelege `slice`, cel mai bine este să vă imaginați un croitor care măsoară stofa cu un centimetru, face semne pentru bucata pe care o dorește și apoi taie materialul.
 
-Slice pentru array-uri este o metodă care returnează un nou array. Acesta este o copie a unei porțiuni delimitate prin argumentele pasate. Slice nu alterează array-ul original în niciun fel.
+Slice pentru array-uri este o metodă care returnează un nou array. Acesta este o copie a unei porțiuni delimitate prin argumentele pasate. Slice nu alterează array-ul original.
 
 Ca parametri acceptă:
 
 -   indexul de la care să pornească,
 -   indexul la care să se oprească.
 
-Dacă indexul de pornire este o valoare negativă, atunci se va porni de la finalul array-ului spre indexul 0. Dacă nu este menționat indexul (`undefined`), atunci `slice` pornește de la `0`. Dacă nu se menționează capătul, atunci va *tăia* până la capăt.
+Dacă indexul de pornire este o valoare negativă, atunci se va porni de la finalul array-ului spre indexul `0`. Dacă nu este menționat indexul (`undefined`), atunci `slice` pornește de la `0`. Dacă nu se menționează capătul, atunci va *tăia* până la capăt.
 
 Atenție, `slice` se duce până la limita menționată, dar nu include și valoarea de la indexul menționat.
 

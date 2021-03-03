@@ -1,6 +1,6 @@
 # Instrucțiunea `throw`
 
-Indică faptul că există o excepție de la regulile sintactice ale limbajului, o stare de eroare, care trebuie să fie instrumentată de o funcție dedicată cu tratarea acestora (*exception handler*). Când este întâlnit un throw, execuția funcției se va întrerupe.
+Indică faptul că există o excepție de la regulile sintactice ale limbajului, o stare de eroare, care trebuie să fie instrumentată de o funcție dedicată tratării acestora (*exception handler*). Când este întâlnit un `throw`, execuția funcției se va întrerupe, iar dacă nu există un `catch`, întregul program se va opri. În primul `catch` întâlnit, se va face `throw`-ul.
 
 ```javascript
 if (true) throw "E de rău, prietene!";
@@ -34,3 +34,5 @@ try {
   console.log(e.message);
 }; //  Este falsă valoarea
 ```
+
+În cazul lui Node.js, dacă nu este găsit un `try/catch` în al cărui catch să fie tratată excepția, excepția apărută, va fi semnalată acolo unde a apărut, iar executarea întregului program este oprită, iar serverul repornit.
