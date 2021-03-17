@@ -13,6 +13,15 @@ Metoda `Object.keys()` extrage toate cheile proprii (nu cele moștenite) ale unu
 "use strict";
 var obiect = { unu: "primul", doi: "al doilea" };
 
+// ES2015
+var chei = [];
+for (var cheie in obiect) {
+  if (obiect.hasOwnProperty(cheie)){
+    chei.push(cheie);
+  }
+}
+
+// ES2017
 Object.keys(obiect).forEach(function (cheie) {
   console.log( cheie, obiect[cheie] );
 }); // unu primul, doi al doilea

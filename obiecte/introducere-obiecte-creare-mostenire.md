@@ -41,7 +41,7 @@ Proprietățile pot fi numere, boolean-uri, șiruri de caractere, funcții sau c
 Să explorăm prin fațetele oferite de următoarele întrebări:
 
 - cât timp *trăiește* un obiect?
-- cât stă el scris în zona de memorie?
+- cât stă el scris în zona de memorie?Changes
 - cât timp este disponibil un obiect programului?
 
 Un obiect este disponibil atâta vreme cât există cel puțin o referință către acesta sau către o proprietate a sa. Ce se întâmplă când nu mai există nicio referință? Zona de memorie este eliberată de un mecanism intern motorului denumit în limba engleză *garbage collector*. În această lucrare veți mai întâlni și expresia *colectat la gunoi*.
@@ -284,7 +284,7 @@ let obiect = new NumescNave('Tiangong-1', "Palatul Celest");
 console.log(obiect);
 ```
 
-Din exemplul funției `NumescNave`, se remarcă imediat faptul că rularea fără `"use strict";` va rezulta în injectarea tuturor valorilor menționate prin sintaxa `this.ceva`, direct în obiectul global, care în cazul browserului este `window`. De ce? Pentru că la acesta a fost stabilită legătura din oficiu pentru valoarea lui `this`. În cazul rulării funcției sub `"use strict";`, motorul JavaScript ar fi semnalat o excepție și ar fi afișat: **Exception: TypeError: this is undefined**. Concluzie: injectarea valorilor nu s-ar mai produce.
+Din exemplul funcției `NumescNave`, se remarcă imediat faptul că rularea fără `"use strict";` va rezulta în injectarea tuturor valorilor menționate prin sintaxa `this.ceva`, direct în obiectul global, care în cazul browserului este `window`. De ce? Pentru că la acesta a fost stabilită legătura din oficiu pentru valoarea lui `this`. În cazul rulării funcției sub `"use strict";`, motorul JavaScript ar fi semnalat o excepție și ar fi afișat: **Exception: TypeError: this is undefined**. Concluzie: injectarea valorilor nu s-ar mai produce.
 
 ### Legătura prototipală la constructori
 
@@ -1149,7 +1149,7 @@ Cel mai la îndemână exemplu sunt nodurile DOM. Parcurgerea (traversing) DOM-u
 -   `document.getElementById("#idfolosit")`,
 -   `document.getElementsByTagName`,
 -   `document.querySelector(`pot fi tag-uri, class, id-uri, attributes, pseudoclase, elemente`)`.
-
+Changes
 ```javascript
 "use strict";
 var noduriDOM = document.querySelectorAll("div"),   // se constituie o colecție array-like

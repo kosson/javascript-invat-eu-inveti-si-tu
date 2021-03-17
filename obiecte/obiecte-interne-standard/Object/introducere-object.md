@@ -17,7 +17,7 @@ Creează un *wrapper*, un *ambalaj* unui obiect atunci când este instanțiat pr
 
 ## Spune standardul
 
-Valoarea slotului intern `[[Prototype]]` a obiectului cu rol de prototype pentru Object este `null` iar valoarea slotului intern `[[Extensible]]` este `true`.
+Valoarea slotului intern `[[Prototype]]` a obiectului cu rol de prototype pentru Object este `null`, iar valoarea slotului intern `[[Extensible]]` este `true`.
 
 ## Crearea obiectelor folosind constructorul `Object`
 
@@ -38,6 +38,29 @@ const object = new Object(Boolean());
 ```
 
 ![](ObjectMap.png)
+
+## Constructorul Object
+
+Constructorul `Object` creează un *ambalaj* peste o valoare dată drept argument. În cazul în care valoarea pasată este `null` sau `undefined`, creează un obiect gol. În caz contrar, va returna un obiect pentru tipul valorii pasate. Dacă-i pasezi un obiect, pur și simplu îl va returna.
+
+```javascript
+Object(null);      // {}
+Object(undefined); // {}
+Object({a: 1});    // {a: 1}
+Object();          // {}
+Object([]);        // []
+```
+
+După cum se observă, atunci când acest constructor este apelat fără `new` are același comportament precum `new Object()`. Acest lucru permite folosirea constructorului nu numai pentru a genera obiecte, dar și pentru a verifica valorile pentru a ne asigura că sunt de tip obiect.
+
+```javascript
+function test (obi = {}) {
+  if (Object(obi) === obi) {
+    console.log('E ok!');
+  }
+}
+```
+
 
 ## Object.prototype.constructor
 

@@ -4,7 +4,7 @@ Acest obiect a apărut din necesitatea de a gestiona obiecte care să aibă chei
 
 Într-un `Set`, `null` este tratat ca `undefined`.
 
-Dacă este pasat un obiect iterabil, toate elementele vor fi adăugat la noul `Set`.
+Dacă este pasat un obiect iterabil, toate elementele vor fi adăugate la noul `Set`.
 
 ```javascript
 const colectie = new Set([0, 1, 2, 3]);
@@ -117,7 +117,7 @@ Acest exemplu se folosește de dimensiunea lui `Set`. Dacă array-ul de control 
 const isSubset = (a, b) => (new Set(b)).size === (new Set(b.concat(a))).size;
 ```
 
-## Parcurgerea unui set
+## Parcurgerea unui Set
 
 ### Iterarea cu `for`
 
@@ -178,3 +178,4 @@ Pentru a transforma un `Set` într-un array pe care să se poată aplica metodel
 
 - [Check if all items in an array are equal](https://1loc.dev/#check-if-all-items-in-an-array-are-equal)
 - [Check if an array is subset of other array](https://1loc.dev/#check-if-an-array-is-subset-of-other-array)
+- [ES6 — Set vs Array — What and when?](https://medium.com/front-end-weekly/es6-set-vs-array-what-and-when-efc055655e1a)

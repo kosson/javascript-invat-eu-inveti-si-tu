@@ -2,7 +2,7 @@
 
 Metoda a fost proiectată cu scopul de a descoperi primul element din array care satisface o condiție impusă la execuția unui callback. Este recomandabilă folosirea metodelor `indexOf()` sau `lastIndexOf()`, dacă este dorită valoarea primei aparții sau a ultimei.
 
-Dacă un element al array-ului satisface condițiile unei funcții de test (callback), primul întâlnit este returnat. Dacă nu este găsit, este returnat `undefined`. În cazul în care dorești să găsești toate elementele care satisfac criteriile, ar trebui folosită metoda `filter()`. Metoda nu modifică array-ul original.
+Dacă un element al array-ului satisface condițiile unei funcții de test (callback), este returnat și căutarea se încheie. Dacă nu este găsit, este returnat `undefined`. În cazul în care dorești să găsești toate elementele care satisfac criteriile, ar trebui folosită metoda `filter()`. Metoda nu modifică array-ul original.
 
 Metodele `find()` și `findIndex()` primesc două argumente: o funcție callback și o referință către un obiect la care se dorește o legătură `this`. Funcția cu rol de callback poate primi trei argumente:
 

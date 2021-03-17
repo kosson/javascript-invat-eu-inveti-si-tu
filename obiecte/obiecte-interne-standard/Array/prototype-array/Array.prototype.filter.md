@@ -8,8 +8,6 @@ colectie.filter((element) => element > 20);
 // Array [ 23, 34 ]
 ```
 
-Metoda `filter()` face parte integrantă din metodele obiectului intern `Array`.
-
 Metoda va face testarea tuturor elementelor unui array fără a se opri în momentul în care testul este pozitiv. În cazul unor array-uri de mari dimensiuni, această metodă trebuie analizată atent înainte de a fi folosită. Alternativ, pentru a opri procesul de prelucrare imediat ce testul este trecut, se poate folosi metoda `find()`.
 
 ```javascript
@@ -25,7 +23,7 @@ console.log(carti);
 //[ { id: 1, nume: 'De veghe în lanul de secară', 'împrumutată': true } ]
 ```
 
-## Construiește de la 0 o funcție de filtrare
+## Construiește de la zero o funcție de filtrare
 
 Înainte de a folosi `filter()` așa cum este deja implementat, este util să vedem cum am construi de la `0` o astfel de funcționalitate.
 
