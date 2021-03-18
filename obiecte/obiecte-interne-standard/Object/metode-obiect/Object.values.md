@@ -1,6 +1,6 @@
 # Object.values()
 
-Este o metodă introdusă de ECMAScript 2017. Fiindu-i pasat un obiect, metoda va returna un array cu toate valorile proprietăților enumerabile ale unui obiect. Aceste proprietăți vor fi cele ale obiectului, nu și cele moștenite. Trebuie să fii avertizat de faptul că toate cheile simbol, dacă există vor fi ignorate neapărând în array-ul rezultat.
+Este o metodă introdusă de ECMAScript 2017. Fiindu-i pasat un obiect, metoda va returna un array cu toate valorile proprietăților enumerabile ale unui obiect. Aceste proprietăți vor fi cele ale obiectului, nu și cele moștenite. Trebuie să fii avertizat de faptul că toate cheile simbol, dacă există vor fi ignorate.
 
 ```javascript
 const obi = {a: 10, b: true};

@@ -149,6 +149,7 @@ const obB = [
   {
     propB: {
       undeva: 'Crasna'
+    console.log(Array.isArray(obi));
     }
   }
 ];
@@ -157,6 +158,7 @@ const obB = [
 ## Căutări recursive în obiecte
 
 Pentru a reuși căutarea într-un arbore așa cum sunt obiectele complexe, este necesară implementarea unei formule de căutare în respectivul obiect. Această structură implică o buclă care parcurge obiectul.
+    console.log(Array.isArray(obi));
 
 ### Căutarea numelui unei chei
 
@@ -188,7 +190,7 @@ Uneori ai nevoie să faci căutări în adâncimea obiectelor pentru a vedea dac
 
 #### Căutare până la găsirea primului rezultat
 
-Următorul exemplu permite căutarea folosind o funcție care testează existența valorii pentru o anumită cheie. Este returnat primului obiect descoperit, fie acesta cel rădăcină, fie un obiect din adâncime. Următorul exemplu prezintă o funcție care are capacitatea să parcurgă structuri complexe de date grație utilizării caracteristicii funcțiilor de a fi pasate altor funcții drept valori și a unei contrucții recursive care are paramtri care țin minte starea.
+Următorul exemplu permite căutarea folosind o funcție care testează existența valorii pentru o anumită cheie. Este returnat primului obiect descoperit, fie acesta cel rădăcină, fie un obiect din adâncime. Următorul exemplu prezintă o funcție care are capacitatea să parcurgă structuri complexe de date grație utilizării caracteristicii funcțiilor de a fi pasate altor funcții drept valori și a unei construcții recursive care are paramtri care țin minte starea.
 
 ```javascript
 const cautareUnicaInAdancime = (f, obj = {}) => {
@@ -204,10 +206,11 @@ const cautareUnicaInAdancime = (f, obj = {}) => {
     let k, v;
     for ([k, v] of Object.entries(obj)) {
       // constituie un array de array-uri și pentru fiecare valoare care este obiect
-      const res = cautareUnicaInAdancime (f, v); // aplică din nou funcția
+      const res = cautareUnicaInAdancime(f, v); // aplică din nou funcția
       // dacă rezultatul evaluării funcției este o valoare validă
       if (res !== undefined) {
-        return res; // este returnat obiectul de pe ramură
+        // return res; // este returnat obiectul de pe ramură
+        return {idxDataSet: k, resultObj: res};
       }
     }
   }
@@ -260,21 +263,180 @@ const cautareMultiplaAVal = (decautat = '', obi = {}) => {
 Mergem mai departe pe firul exemplului oferit de utilizatorul [Thank you](https://stackoverflow.com/users/633183/thank-you) de la (javascript - In an array of objects, returns objects where ANY value matches a specific string | stack overflow)[https://stackoverflow.com/questions/50538060/javascript-in-an-array-of-objects-returns-objects-where-any-value-matches-a-s/50538352#50538352] și vom abstractiza în funcții separate.
 
 ```javascript
-const oriceString = f => obi => Object.values(o).some(v => String(v) === v && f(v));
+const oriceString = f => obi => Object.values(obi).some(v => String(v) === v && f(v));
 const cautaCaseInsensitive = (x, y) => x.toLowerCase().includes(y.toLowerCase());
 const cautareMultiplaAVal = (decautat = '', obi = {}) => {
-  Array.from(cautareMultiplaInAdancime(oriceString(v => cautaCaseInsensitive(v, decautat)), obi));
+  return Array.from(cautareMultiplaInAdancime(oriceString(v => cautaCaseInsensitive(v, decautat)), obi));
 };
-// sau cazul cutării unice
-const cautareValOData (decautat = '', obi) => {
-  return cautareUnicaInAdancime(oriceString(v => cautaCaseInsensitive(v, decautat)), obi));
+// sau cazul căutării unice
+const cautareValOData = (decautat = '', obi) => {
+  return cautareUnicaInAdancime(oriceString(v => cautaCaseInsensitive(v, decautat)), obi);
 }
+```
+
+Și o varianta ES5
+
+```javascript
+function* cautareMultiplaInAdancime (f_getBranchObjs, obj = {}) {
+    // Dacă este pasat un obiect sau un array
+  if (Object(obj) === obj) {
+    // Dacă evaluarea funcției pasate este true,
+    // returnează primul obiect găsit care corespunde testului
+    if (f_getBranchObjs(obj) === true) {
+      // Atenție, este obiectul curent de pe ramură pornind cu rădăcina
+      yield obj;
+    }
+    // tratăm fiecare ramură (obiect în adâncime)
+    let k, v;
+    for ([k, v] of Object.entries(obj)) {
+
+      if (Number(k) !== 'NaN') {
+        v['idxDataSet'] = Number(k);
+      }
+      // constituie un array de array-uri și pentru fiecare valoare care este obiect
+      yield* cautareMultiplaInAdancime (f_getBranchObjs, v);
+    }
+  }
+};
+
+function oriceString (f_x) {
+  function getBranchObjs (arrOfobj) {
+    let arrValChei = Object.values(arrOfobj); //?
+    let someVals = arrValChei.some((v, i) => {
+      return String(v) === v && f_x(v);
+    });
+    return someVals;
+  };
+  return getBranchObjs;
+};
+
+function cautaCaseInsensitive (fragment, decautat) {
+  return fragment.toLowerCase().includes(decautat.toLowerCase()); //?
+};
+
+function cautareMultiplaAVal (decautat = '', obi = {}) {
+  function x (fragment) {
+    return cautaCaseInsensitive(fragment, decautat); //?
+  };
+  return Array.from(cautareMultiplaInAdancime(oriceString(x), obi));
+};
+```
+
+## Căutarea căii unei anumite valori
+
+Pentru că uneori este nevoie să mergi inapoi pe fir și să descoperi calea în obiect unde se află o anumită valoare, am ales două exemple de la https://stackoverflow.com/questions/25403781/how-to-get-the-path-from-javascript-object-from-key-and-value.
+
+O primă variantă pentru a descoperi prima apariție.
+
+```javascript
+function getPath(obj, value, path) {
+  try {
+    if (typeof obj !== 'object') {
+      return;
+    }
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        var t = path;
+        var v = obj[key];
+        if (!path) {
+          newPath = key;
+        } else {
+          newPath = path + '.' + key;
+        }
+        if (v === value) {
+          return newPath;
+        } else if (typeof v !== 'object') {
+          newPath = t;
+        }
+        var res = getPath(v, value, newPath);
+        if (res) {
+          return res;
+        }
+      }
+    }
+  } catch (e) {
+    console.log(e.message);
+  }
+}
+
+getPath(obA, 'Adjud');
+```
+
+O altă variantă pentru a descoperi toate aparițiile
+
+```javascript
+const myObjWithDupl = {
+  parentKey: {
+    someImportantStuff: "134",
+		arr: [
+      {a:1, b: 2, c: { d: "D VLAUE"}, yy: "bla" },
+      {a:1, b: 2, c: { d: "D VLAUE"}, yy: "bla" },
+      {a:1, b: 2, c: { d: "D VLAUE"}, xxx: "bla" },
+    ],
+  },
+  f: "hello",
+  x: {
+    y: "y_value",
+  }
+}
+
+/* interface FindKeysArguments {
+  obj: { [key: string]: any };
+  key: string;
+  pathToKey?: string;
+} */
+
+function findPathsToKey(options) {
+  const results = [];
+
+  (function findKey({
+    key,
+    obj,
+    pathToKey,
+  }) {
+    const oldPath = `${pathToKey ? pathToKey + "." : ""}`;
+    if (obj.hasOwnProperty(key)) {
+      results.push(`${oldPath}${key}`);
+    }
+
+    if (obj !== null && typeof obj === "object" && !Array.isArray(obj)) {
+      for (const k in obj) {
+        if (obj.hasOwnProperty(k)) {
+          if (Array.isArray(obj[k])) {
+            for (let j = 0; j < obj[k].length; j++) {
+              findKey({
+                obj: obj[k][j],
+                key,
+                pathToKey: `${oldPath}${k}[${j}]`,
+              });
+            }
+          }
+
+          if (obj[k] !== null && typeof obj[k] === "object") {
+            findKey({
+              obj: obj[k],
+              key,
+              pathToKey: `${oldPath}${k}`,
+            });
+          }
+
+          continue;
+        }
+      }
+    }
+  })(options);
+
+  return results;
+}
+
+ findPathsToKey({obj: myObjWithDupl, key: 'd'});
 ```
 
 #### Resurse
 
 https://stackoverflow.com/questions/50448968/find-object-in-array-with-subarray-checking-an-property/50456572#50456572
 https://stackoverflow.com/questions/50538060/javascript-in-an-array-of-objects-returns-objects-where-any-value-matches-a-s/50538352#50538352
+https://www.npmjs.com/package/object-scan
 
 ## Resurse
 
