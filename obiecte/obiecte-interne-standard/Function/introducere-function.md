@@ -115,6 +115,16 @@ adunare.apply(null, numere);
 Array.apply(null, Array(5)); // Array [ undefined, undefined, undefined, undefined, undefined ]
 ```
 
+#### Folosirea lui Reflect.apply()
+
+Poți folosi metoda `apply` a obiectului `Reflect` pentru a obține același rezultat. În acest caz, asigură-te că lista argumentelor nu este `null` sau `undefined`. În caz contrar, va fi indicată o eroare.
+
+```javascript
+var colectie = [1, 23, 43];
+var celMaiMareFunct = Function.prototype.apply.call(Math.max, null, colectie);
+var celMaiMareReflect = Reflect.apply(Math.max, null, colectie);
+```
+
 ### Function.prototype.bind()
 
 Returnează o funcție nouă a cărui `this` este setat la un obiect care trebuie să-l menționezi între paranteze urmat opțional de o secvență de argumente. Secvența de argumente introdusă de `bind()` are precedență asupra celor introduse la momentul apelării funcției.

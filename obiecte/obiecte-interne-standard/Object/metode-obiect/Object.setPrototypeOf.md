@@ -1,6 +1,6 @@
 # `Object.setPrototypeOf`
 
-Este o metodă pentru a seta prototipul (proprietatea internă [\[Prototype]]) a unui obiect, la prototipul altui obiect.
+Este o metodă pentru a seta prototipul (proprietatea internă \[\[Prototype]]) a unui obiect, la prototipul altui obiect.
 
 Este de dorit să fie evitată această practică în favoarea lui `Object.create()` din cauza lentorii introduse în rularea programului.
 
@@ -32,3 +32,5 @@ let instantaY = Object.setPrototypeOf(instantaX, obiectSecund);
 console.log(instantaX.emite()); // mesaj din obiectSecund
 Object.getPrototypeOf(instantaX) === obiectSecund; // true
 ```
+
+Echivalentul ar fi `Reflect.setPrototypeOf(obiectȚintă, obiectulCaPrototipNou)`.

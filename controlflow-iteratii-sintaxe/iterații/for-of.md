@@ -1,6 +1,6 @@
 # Enunțul for...of
 
-ES6 a introdus această nouă structură de iterare împreună cu două concepte importante: **iterable** și **iterator**. A apărut din necesitaea de a avea un instrument superior celor oferite de ES5 deja prin `for...in` și `forEach`. S-a dorit crearea unui instrument universal de iterare a unor structuri de date. De exemplu, în cazul array-urilor, se va uita după metoda internă `Array.prototype[@@iterator]()` a acestuia. În mod similar, obiectele prototype ale lui `Map` și `Set` au o metodă `[@@iterator]()`.
+ES6 a introdus această nouă structură de iterare împreună cu două concepte importante: **iterable** și **iterator**. A apărut din necesitatea de a avea un instrument superior celor oferite de ES5 deja prin `for...in` și `forEach`. S-a dorit crearea unui instrument universal de iterare a unor structuri de date. De exemplu, în cazul array-urilor, se va uita după metoda internă `Array.prototype[@@iterator]()` a acestuia. În mod similar, obiectele prototype ale lui `Map` și `Set` au o metodă `[@@iterator]()`.
 
 Poți folosi enunțul `for...of` dacă nu ai nevoie să lucrezi și cu indexurile elementelor componente ale colecției. Dacă ai nevoie de accesarea după index a unui element, vei folosi un clasic `for`.
 
@@ -134,7 +134,7 @@ const colecție = [
   {titlu: 'The Absorbent Mind ', autor: 'Montessori, Maria', id: 'absorbentmind031961mbp'}
 ];
 let titluri = [];
-for ({titlu, autor} of colecție) titluri.push([titlu,autor])
+for ({titlu, autor} of colecție) titluri.push([titlu, autor])
 console.log(titluri);
 /*
 [ [ 'Amusements in Mathematics', 'Dudeney, Henry Ernest' ],

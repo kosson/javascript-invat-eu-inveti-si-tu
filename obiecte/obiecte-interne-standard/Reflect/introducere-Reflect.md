@@ -25,7 +25,7 @@ Multe obiecte sunt construite înadins astfel. Nu ar fi supercool dacă am avea 
 
 ## Reflect.apply(ținta, obiectulThis, listaArgumente)
 
-Apelează o anumită funcție (să-i spunem țintă) cu un set de argumente. Pentru a reține mai ușor modul de lucru, ai putea spune așa: Aplică-mi funcția sau utilitarul cutare în obiectul context cutare, cu următoarele argumente pe care ți le dau.
+Apelează o anumită funcție (să-i spunem țintă) cu un set de argumente. Pentru a reține mai ușor modul de lucru, ai putea spune așa: *aplică-mi funcția sau utilitarul cutare în obiectul context cutare, cu următoarele argumente pe care ți le dau*.
 
 ```javascript
 var colectie = [1, 23, 43];
@@ -33,11 +33,32 @@ var celMaiMareFunct = Function.prototype.apply.call(Math.max, null, colectie);
 var celMaiMareReflect = Reflect.apply(Math.max, null, colectie);
 ```
 
-Anterior, în ES5, ai fi folosit `Function.prototype.apply()`. Este ușor de observat că varianta de utilizare cu `Reflect` reduce verbozitatea.
+Anterior, în ES5, ai fi folosit `Function.prototype.apply()`. Este ușor de observat că varianta de utilizare cu `Reflect` reduce verbozitatea. Mai există o diferență legată de momentul execuției funcției. În cazul metodei `Function`, dacă lista argumentelor este `null` sau `undefined`, funcția va fi aplicată fără argumente. În cazul `Reflect.apply` un astfel de scenariu nu este posibil, fiind indicată o stare de eroare.
+
+```javascript
+function f () {
+  return arguments.length;
+}
+f.apply(void 0, null);          // returnează 0
+Reflect.apply(f, void 0, null); // Uncaught TypeError: CreateListFromArrayLike called on non-object
+```
+
+O altă diferență este faptul că în cazul lui `Function.prototype.apply`, te aștepți ca funcția pe care o aplici să moșteneasâ de la `Function.prototype` și astfel să aibă metoda `nume_funcție.apply`. Dar sunt cazuri în care acest lucru nu se întâmplă așa cum este cazul următor.
+
+```javascript
+let unObiect = document.createElement('object');
+typeof unObiect; // returnează 'function'
+// dar nu are metoda `apply` pentru că nu moștenește de la `Function.prototype`
+unObiect.apply; // 'undefined'
+// În schimb, `Reflect` nu are nicio problemă
+Reflect.apply(unObiect, this_ul, lista_args); // totul OK!
+```
+
+Totuși, chiar și în acest caz poți folos o combinație de `call` cu `apply` și va funcționa: `Function.prototype.apply.call`. Câștigul este legat de simplitate.
 
 ## Reflect.construct(funcțiaTintă, listaArgumentelor)
 
-Este echivalentul folosirii operatorului `new`, dar numai că vom folosi această funcție, acest utilitar. Pentru a reține mai ușor, ai putea spune: Invocă-mi funcția menționată ca prim argument ca pe un constructor și pasează-i argumentele menționate la al doilea argument.
+Este echivalentul folosirii operatorului `new`, dar numai că vom folosi această funcție, acest utilitar. Pentru a reține mai ușor, ai putea spune: *invocă-mi funcția menționată ca prim argument ca pe un constructor și pasează-i argumentele menționate la al doilea argument*.
 
 ```javascript
 var obi1 = new Ceva(colectieDeArgs);
@@ -57,14 +78,14 @@ Reflect.getPrototypeOf(obiectNou);
 
 ## Reflect.defineProperty(obiectulȚintă, numeleProprietății, atributeleProprietății)
 
-De această dată, metoda va returna o valoare Boolean, care indică dacă s-a modificat obiectul țintit sau nu. Îți poți imagina această metodă ca pe un instrument foarte precis și elegant pentru a aduce modificări unui obiect deja existent. Poți adăuga sau modifica proprietăți existente deja.
+De această dată, metoda va returna o valoare `Boolean`, care indică dacă s-a modificat obiectul țintit sau nu. Îți poți imagina această metodă ca pe un instrument foarte precis și elegant pentru a aduce modificări unui obiect deja existent. Poți adăuga sau modifica proprietăți existente deja.
 
 ```javascript
 var obi = {a: true};
 Reflect.defineProperty(obi, 'b', {value: false}); // true
 ```
 
-Care-i avantajul asupra clasicului `Object.defineProperty`? Faptul că ai un răspuns imediat privind rezultatul modificării. Poți testa direct pentru `true` sau `false`, fără să fii nevoit să împachetezi într-un `try...catch` pentru a vedea dacă au apărut erori.
+Care-i avantajul asupra clasicului `Object.defineProperty()`? Faptul că ai un răspuns imediat privind rezultatul modificării. Poți testa direct pentru `true` sau `false`, fără să fii nevoit să împachetezi într-un `try...catch` pentru a vedea dacă au apărut erori.
 
 ```javascript
 try {
@@ -76,7 +97,7 @@ try {
 
 ## Reflect.deleteProperty(obiectȚintă, cheiaProprietății)
 
-Este echivalentul folosirii operatorului `delete` pe care-l știm deja. Returnează un Boolean care indică dacă ștergerea proprietății a fost cu succes sau contrariul.
+Este echivalentul folosirii operatorului `delete` pe care-l știm deja. Returnează un `Boolean` care indică dacă ștergerea proprietății a fost cu succes sau nu.
 
 ```javascript
 var obi = {a: 19, b: true};
@@ -139,9 +160,11 @@ Reflect.ownKeys(obi);
 Reflect.ownKeys([]); // ["length"]
 ```
 
+Pentru o bună raportare la metoda corespondentă a lui `Object`, vezi `Object.getOwnPropertyNames`.
+
 ## Reflect.preventExtensions(obiectulȚintă)
 
-Este o metodă prin care se blochează posibilitatea de a mai extinde un obiect. Această metodă este similară lui `Object.preventExtensions`. Metoda returnează o valoare Boolean, care indică faptul că s-a reușit blocarea sau nu.
+Este o metodă prin care se blochează posibilitatea de a mai extinde un obiect. Această metodă este similară lui `Object.preventExtensions`. Metoda returnează o valoare `Boolean`, care indică dacă s-a reușit blocarea sau nu.
 
 ## Reflect.set(obiectulȚintă, numeProprietate, valoarea, obiectulThis)
 
@@ -177,3 +200,4 @@ Unul din avantajele utilizării `Reflect` este siguranța că nu folosești vers
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect
 - https://www.keithcirkel.co.uk/metaprogramming-in-es6-part-2-reflect/
 - [What is Metaprogramming in JavaScript? In English, please.](https://www.freecodecamp.org/news/what-is-metaprogramming-in-javascript-in-english-please/)
+- [Is there any benefit to call Reflect.apply() over Function.prototype.apply() in ECMAScript 2015? | stack overflow](https://stackoverflow.com/questions/34707306/is-there-any-benefit-to-call-reflect-apply-over-function-prototype-apply-in)

@@ -772,6 +772,8 @@ Object.defineProperty(newObj, 'numeCheieNoua', {
 });
 ```
 
+Același lucru poți să-l faci folosind `Reflect.defineProperty` cu avantajul că în cazul reușitei modificării obiectului, metoda va returna `true`.
+
 #### Folosirea metodei `Object.defineProperties()`
 
 Această metodă este utilizată în cazul în care trebuie introduse mai multe proprietăți deodată.

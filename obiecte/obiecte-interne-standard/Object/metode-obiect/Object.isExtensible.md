@@ -15,3 +15,5 @@ Object.isExtensible(obi2);
 
 Din start, obiectele sunt extensibile.
 Obiectele pot fi „înghețate” folosind `Object.preventExtensions()`, `Object.seal()` sau `Object.freeze()`.
+
+Aceeași informație poate fi obținută folosind metoda `Reflect.isExtensible(obiectȚintă)`.

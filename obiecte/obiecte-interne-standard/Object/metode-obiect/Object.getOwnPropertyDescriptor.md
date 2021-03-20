@@ -22,3 +22,5 @@ Object.getOwnPropertyDescriptor(obi, 'prima');
 ```
 
 După cum se observă, este returnat un obiect care care proprietăți ce descriu detalii despre proprietatea pentru care acestea au fost solicitate.
+
+Același lucru îl poți realiza folosind metoda corespondentă a obiectului `Reflect`: `Reflect.getOwnPropertyDescriptor(obiectȚintă, numeProprietate)`.

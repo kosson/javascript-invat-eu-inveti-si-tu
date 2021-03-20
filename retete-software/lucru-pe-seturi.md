@@ -437,6 +437,7 @@ function findPathsToKey(options) {
 https://stackoverflow.com/questions/50448968/find-object-in-array-with-subarray-checking-an-property/50456572#50456572
 https://stackoverflow.com/questions/50538060/javascript-in-an-array-of-objects-returns-objects-where-any-value-matches-a-s/50538352#50538352
 https://www.npmjs.com/package/object-scan
+https://www.npmjs.com/package/object-path
 
 ## Resurse
 

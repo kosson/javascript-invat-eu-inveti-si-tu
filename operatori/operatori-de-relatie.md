@@ -33,6 +33,8 @@ Symbol.iterator in colectie; // true
 
 Mai devreme menționam faptul că investigarea unui obiect folosind acest operator, va merge pe lanțul prototipal pentru a căuta proprietăți. De exemplu, metoda `toSource()` este moștenită de la obiectul intern `Object`, ceea ce va conduce la returnarea valorii `true`, dacă va fi căutată.
 
+Același lucru îl obținem și prin folosirea metodei `Reflect.has(obiectulȚintă, numeProprietate)`.
+
 ## Operatorul `instanceof`
 
 Acest operator testează dacă în lanțul prototipal al unui obiect se află proprietatea `prototype` a unui constructor. Începând cu ES6, operatorul `instanceof` este o prescurtare care apelează metoda `hasInstance` a constructorului `Symbol`. Toate funcțiile au o metodă `Symbol.hasInstance` cu ajutorul căreia se poate verifica dacă un anume obiect este sau nu o instanță a acelei funcții.

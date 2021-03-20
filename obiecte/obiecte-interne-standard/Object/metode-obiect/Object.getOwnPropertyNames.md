@@ -17,3 +17,5 @@ Ordinea numelor proprietăților este acceași ca aceea pe care o oferă o bucl�
 let colectie = ['unu', 'doi', 'trei'];
 Object.getOwnPropertyNames(colectie); // Array [ "0", "1", "2", "length" ]
 ```
+
+Același rezultat îl poți obține folosind metoda `Reflect.ownKeys(obiectulȚintă)`.
