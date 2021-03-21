@@ -101,7 +101,6 @@ function cautareMultiplaAVal (decautat = '', obi = {}) {
   return Array.from(cautareMultiplaInAdancime(oriceString(x), obi));
 };
 
-
 const myObjWithDupl = {
   parentKey: {
     someImportantStuff: "134",
@@ -122,7 +121,6 @@ const myObjWithDupl = {
   key: string;v
   pathToKey?: string;
 } */
-
 function findPathsToKey(options) {
   const results = [];
 
@@ -210,14 +208,19 @@ function addpath2O (entity, path = '') {
 
 let newO = addpath2O(obA);
 console.log(JSON.stringify(newO, null, 2));
-// console.log(cautareMultiplaAVal('Adjud', newO));
 
-// console.log(exp(obA)); //?
-// let y = exp(obA);
-// console.log(JSON.stringify(y, null, 2));
-// console.log(obA.entries().next());
+/* =============================================================== */
 
-
-// let arry = ['a', 'b', 'c'];
-// console.log(Object.entries(arry));
-// console.log(Array.of(Object.entries(arry)));
+/**
+Funcția transformă structura de date primită într-un generator
+*/
+function* makeGen (data) {
+  if (Array.isArray(data)) {
+    let elem;
+    for (elem of data) {
+      yield elem;
+    }
+  } else {
+    yield* data;
+  }
+}
