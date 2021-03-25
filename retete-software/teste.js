@@ -2,14 +2,6 @@ const obA = [
   {
     propX: {
       ceva: 100,
-      undeva: 'Adjud'
-    },
-    lista1: ['haba', 'baba'],
-    altceva: 1
-  },
-  {
-    propY: {
-      ceva: 30,
       undeva: 'Adjud',
       testare: {
         ada: {
@@ -17,15 +9,8 @@ const obA = [
         }
       }
     },
-    altceva: 'o prop'
-  },
-  {
-    propX: {
-      ceva: 20,
-      undeva: 'Hunedoara'
-    },
-    bah: ['Vaslui', 'Adjud'],
-    altceva: true
+    lista1: ['haba', 'baba'],
+    altceva: 1
   },
   {
     propX: {
@@ -174,40 +159,39 @@ function findPathsToKey(options) {
 
 /* ------------------------------ */
 
+/*
+Funcție helper pentru a determina daca o valoare poate
+fi convertita cu succes la un numar
+*/
+function isNumeric(str) {
+  if (typeof str != "string") return false // we only process strings!
+  return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+         !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+}
+
 function addpath2O (entity, path = '') {
-  let k, v, i, newpath;v
-
-  // funcționează doar pentru obiecte și array-uri
-  if (Object(entity) === entity) {
-
-    for ([k, v] of Object.entries(entity)) {
-        newpath = path ? path + `[${k}]` : `[${k}]`;
-        console.log(entity[k]);
-
-        // trateaza cazul in care avem un array
-        if (Array.isArray(k)) {
-          console.log('Sunt un array vesel');
-          entity[k].push(newpath);
-        }
-
-        if (Object(v) === v && !Array.isArray(v)) {
-          v['path'] = path;
-        }
-
-        // dacă deja există calea setată la primul nivel
-        // for([e, f] of Object.entries(v)) {
-        //   path = path +'.'+ e;
-        //   if (Object(f) === f && f.path === undefined) {
-        //     Array.isArray(f) ? f.push(path) : f['path'] = path;
-        //   }
-        // }
-    };
+  let k, v, newpath;
+  let arrOfarr = Object.entries(entity);
+  // fiecare v este un obiect al array-ului sau o valoare simpla
+  for ([k, v] of arrOfarr) {
+    // newpath = path + (Number(k) === Number(k) ? `[${Number(k)}]` : `['${k}']`);
+    newpath = path + (isNumeric(k) ? `[${+k}]` : `['${k}']`);
+    // cazul obiect => obiecte si array-uri
+    if(Object(v) === v){
+      addpath2O(v, newpath);
+      // array
+      if(Array.isArray(v)) {
+        v.push(newpath);
+      }
+      // obiect
+      v.path = newpath;
+    }
   }
   return entity;
 }
 
 let newO = addpath2O(obA);
-console.log(JSON.stringify(newO, null, 2));
+console.log(JSON.stringify(newO, null, 2)); //?
 
 /* =============================================================== */
 

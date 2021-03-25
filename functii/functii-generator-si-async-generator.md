@@ -12,7 +12,7 @@ La momentul apelării, o funcție generator execută codul intern până la mome
 
 **Moment ZEN**: Returnarea explicită dintr-o funcție generator generează {value: valoare_evaluată_ptr_return, done: true }
 
-Obiectul generator respectă protocolului impus de interfața *Iterator* prin implementarea lui `[Symbol.iterator]()`, interfața *Iterable* prin implementarea lui `next()` și de *IteratorResult* prin rezultatul returnat de `yield` sub forma `{value: ceva, done: true/false}`. Faptul că obiectul rezultat este iterabil, dar în aceeași măsură este și un iterator. Faptul că este iterabil îl face pretabil la parcurgerea cu `for...of`, bucle sau poate fi chiar folosit cu operatorul spread (`...`).
+Obiectul generator respectă protocolului impus de interfața *Iterator* prin implementarea lui `[Symbol.iterator]()`, interfața *Iterable* prin implementarea lui `next()` și de *IteratorResult* prin rezultatul returnat de `yield` sub forma `{value: ceva, done: true/false}`. Obiectul rezultat este iterabil, dar în aceeași măsură este și un iterator. Faptul că este iterabil îl face pretabil la parcurgerea cu `for...of`, bucle sau poate fi chiar folosit cu operatorul spread (`...`).
 
 Prin intermediul operatorului `yield`, generatoarele pot primi și trimite date, acestea fiind *trimise* ca argument metodei `next(date)`.
 
@@ -33,8 +33,8 @@ Funcțiile generator pot fi declarate astfel:
 
 Poți itera obiectele generator folosind următoarele enunțuri și operatori:
 
-- bucle `for...of` (nu folosește valoarea lui `done`);
-- operatorul spread (`...`) care transformă obiectul iterator într-un array al valorilor acestuia `const set = [...funcGen()]` (nu folosește valoarea lui `done`);
+- bucle `for...of` (nu se folosește valoarea lui `done`);
+- operatorul spread (`...`) care transformă obiectul iterator într-un array al valorilor acestuia `const set = [...funcGen()]` (nu se folosește valoarea lui `done`);
 - destructurare `const [a, b] = funcGen();`
 - `yield*` pentru a face apeluri recursive pe funcția generator (se folosește de valoarea lui `done`);
 
@@ -63,8 +63,6 @@ x.next(); // încearcă să mai scoți un rezultat
 //Object { value: undefined, done: true }
 ```
 
-Obiectul returnat are niște metode disponibile pentru a iniția evaluarea expresiilor după cuvântul cheie `yield`. Aceste metode sunt `next()`, `return()` și `throw()`. Prima metodă returnează prima valoare a obiectului generator sub forma unui obiect `{value: 'test1', done: false}`.
-
 După evaluare, execuția generatorului se oprește în așteptarea unui nou apel al metodei `next()`. Poți percepe un generator ca un program care se execută la cerere și în etape. Fiecare etapă marcată de `yield` are asociată o stare.
 
 Parcurgerea unui iterabil în funcția generator este posibilă dacă este absolut necesar, dar nu se poate face `yield` din callbackuri aplicate de exemplu la `forEach`, `map`, etc.
@@ -73,20 +71,20 @@ Parcurgerea unui iterabil în funcția generator este posibilă dacă este absol
 
 Este posibilă parcurgerea unui iterabil într-o funcție generator folosind `for...of`, de exemplu.
 
-Apelarea unei funcții generator trimite funcția în stiva apelurilor,evaluând expresiile până la primul `yield`, când își suspendă execuția, returnând obiectul `Generator`. Apoi funcția își întrerupe execuția dispărând din stivă, dar obiectul returnat va ține o referință către contextul de execuție a funcției generator. De fiecare dată când funcția va fi reluată și suspendată, obiectul `Generator` va memora contextul de execuție. Reține faptul că întregul cod de înaintea primului `yield` va fi executat.
+Apelarea unei funcții generator trimite funcția în stiva apelurilor, evaluând expresiile până la primul `yield`, când își suspendă execuția, returnând obiectul `Generator`. Apoi funcția își întrerupe execuția dispărând din stivă, dar obiectul returnat va ține o referință către contextul de execuție a funcției generator. De fiecare dată când funcția va fi reluată și suspendată, obiectul `Generator` va memora contextul de execuție. Reține faptul că întregul cod de înaintea primului `yield` va fi executat.
 
 ```javascript
 function* unGen (val) {
   let ceva = 10; // se evaluează
   console.log('Am valoarea ', val + ceva); // se evaluează
-  let altceva = val**2; // se evaluează și apoi funcția îți încheie propria execuție.
+  let altceva = val**2; // se evaluează și apoi funcția își încheie propria execuție.
   yield altceva;
 };
 let x = unGen(2); // `x` este un obiect iterabil
 let primulRezultat = x.next(); // { value: 4, done: false }
 ```
 
-Execuția metodei `next()` nu creează un nou context de execuție, ci doar reactivează contextul de execuție a funcției generator, pe care-l împinge din nou în stivă. Se continuă execuția de unde a rămas începând cu expresiile de după `yield`. Codul este evaluat până la întâlnirea următorului `yield`, când execuția este suspendată din nou, nu înainte de a actualiza obiectul iterator care ține minte starea - ține viu contextul de execuție. Acest ultim aspect oferă un mare avantaj al generatoarelor pentru că rețin valorile între diferitele etape parcurse cu `next()`.
+Execuția metodei `next()` nu creează un nou context de execuție, ci doar reactivează contextul de execuție al funcției generator, pe care-l împinge din nou în stivă. Se continuă execuția de unde a rămas începând cu expresiile de după `yield`. Codul este evaluat până la întâlnirea următorului `yield`, când execuția este suspendată din nou, nu înainte de a actualiza obiectul iterator care ține minte starea - ține viu contextul de execuție. Acest ultim aspect oferă un mare avantaj al generatoarelor pentru că rețin valorile între diferitele etape parcurse cu `next()`.
 
 Dacă în execuție nu mai este întâlnit niciun `yield`, funcția generator returnează obiectul iterator, care în acest moment va avea valoarea `true` asociată cheii `done`. În exemplu avem un exemplu tipic de prelucrare a proprietăților unui obiect folosind un generator.
 

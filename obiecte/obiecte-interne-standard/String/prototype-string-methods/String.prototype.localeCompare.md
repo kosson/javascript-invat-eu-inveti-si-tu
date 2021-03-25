@@ -5,11 +5,13 @@ Este o metodă care returnează un număr. Numărul reprezintă rezultatul compa
 ```javascript
 'x'.localeCompare('z'); // -1
 ```
+
 O valoare `-1` indică faptul că în ordinea valorii care stă în spatele caracterului (în funcție de schema de codare), `x` stă înaintea lui `z`.
 
 ```javascript
 'x'.localeCompare('z'); // 0
 ```
+
 Dacă sunt echivalente, este semnalat prin `0`.
 
 Și un număr pozitiv, dacă valoarea șirului este mai mare decât referința.

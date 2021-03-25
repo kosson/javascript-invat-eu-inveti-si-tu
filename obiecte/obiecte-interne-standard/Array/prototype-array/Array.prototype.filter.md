@@ -1,6 +1,8 @@
 # Array.prototype.filter()
 
-Această metodă poate fi înțeleasă ca un test aplicat fiecărui element dintr-un array. Elementele care trec testul sunt introduse într-un nou array. Testarea se face după anumite criterii introduse de o funcție callback. Funcția callback returnează o valoare de adevăr pentru elementul curent supus analizei. Array-ul original nu este modificat.
+Această metodă poate fi înțeleasă ca un test aplicat fiecărui element dintr-un array. Elementele care trec testul sunt introduse într-un nou array pe care metoda `filter` îl returnează. Acest lucru permite înlănțuirea mai multor metode filter pentru a căuta după mai multe criterii într-o cascadă de filtre. 
+
+Testarea se face după anumite criterii introduse de o funcție callback. Funcția callback returnează o valoare de adevăr pentru elementul curent supus analizei. Array-ul original nu este modificat.
 
 ```javascript
 const colectie = [23, 34, 2, 10];
