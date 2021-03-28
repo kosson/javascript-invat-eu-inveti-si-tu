@@ -1,6 +1,6 @@
 # Closures
 
-După ce vizitezi o galerie de artă, la o discuție cu prietenii în care le povestești ceea ce ai văzut, vei apela la memoria operelor de artă expuse. Chiar dacă te afli la 2000 de kilometri, vei avea o referință concretă către fiecare tablou pe care l-ai văzut. Îți vei aminti culorile, autorul și alte câteva atribute specifice fiecăruia dintre acestea. Acesta este un closure pe galeria de artă. Acest closure îți permite să te referi la fiecare obiect din galerie.
+După ce vizitezi o galerie de artă, la o discuție cu prietenii în care le povestești ceea ce ai văzut, vei apela la memoria operelor de artă expuse. Chiar dacă te afli la 2000 de kilometri, vei avea o referință concretă pentru fiecare tablou pe care l-ai văzut. Îți vei aminti culorile, autorul și alte câteva atribute specifice fiecăruia. Acesta este un *closure* pe galeria de artă. Acest *closure* îți permite să te referi la fiecare obiect din galerie.
 
 ```javascript
 var operă = 'Nighthawks';
@@ -15,13 +15,25 @@ Motorul JavaScript ține evidența mediilor lexicale, fie că acestea sunt la ni
 
 O funcție definită în interiorul unei funcții container generează un **closure** peste mediul lexical existent la momentul definirii.
 
-Am explorat deja la funcții posibile traduceri în limba română și pentru că ambii termeni identificați: **portiță** și  **breșă** nu sunt tocmai eleganți pentru uzul curent. Mai bine folosim termenul în limba engleză. După ce vom fi explorat mai mult, vom înțelege că este o caracteristică, un mecanism al limbajului de programare și astfel, am putea să ne gândim la acțiunea pe care o implică termenul de **closure**.
+Am explorat deja la funcții posibile traduceri în limba română și pentru că o traducere nu este tocmai elegantă, mai bine folosim termenul în limba engleză. După ce vom fi explorat mai mult, vom înțelege că este o caracteristică, un mecanism a limbajului. Să o luăm încetișor. Primul lucru pe care-l știm despre funcții, este că acestea sunt acțiuni transformatoare asupra datelor pe care le primesc, fie că aceste date sunt *introduse* în funcție prin argumente, fie că sunt disponibile *la liber*, în mediul lexical unde a fost declarată funcția.
 
-Să o luăm încetișor. Primul lucru pe care-l știm despre funcții, este că acestea sunt acțiuni transformatoare asupra datelor pe care le primesc, fie că aceste date sunt *introduse* în funcție prin argumente, fie că sunt disponibile *la liber*, în mediul lexical unde a fost declarată funcția.
+Trebuie să ne aducem mereu aminte de importanța redactării codului și în consecință de locul **unde declarăm funcțiile**. Foarte important este și locul de unde le apelăm pentru că de acolo este posibil să *injectăm* date prin argumente. Există scenarii în care aceste date sunt necesare doar în locul în care este apelată funcția sau în obiectul în al cărui context a fost invocată.
 
-Trebuie să ne aducem mereu aminte de importanța redactării codului și în consecință de locul **unde declarăm funcțiile**. Foarte important este și locul de unde le apelăm pentru că de acolo este posibil să *injectăm* prin argumente date. Există scenarii în care aceste date sunt necesare doar în locul în care este apelată funcția sau în obiectul în al cărui context a fost invocată.
+O funcție declarată în mediul lexical global (*global scope*), va avea acces la toate proprietățile acestui obiect. Dacă o funcție, va fi declarată într-un bloc de cod sau într-o altă funcție, va avea acces la tot ce constituie mediul lexical format local de acel bloc de cod sau de funcție și mai sus la tot ce este în *global scope*.
 
-O funcție declarată în mediul lexical global, va avea acces la toate proprietățile acestui obiect. Dacă o funcție, va fi declarată într-un bloc de cod sau într-o altă funcție, aceasta va avea acces la tot ce constituie mediul lexical format local de acel bloc de cod sau de funcție. Pe scurt, legătura care se realizează la momentul compilării între funcție și mediul lexical în care a fost declarată, se numește `closure`. E ca dorul de casă. Chiar dacă ești plecat, vei avea mereu o conexiune cu toate lucrurile de acasă pentru că le **ții minte**, știi unde sunt și ce valoare au pentru tine. Dar în același timp ești conectat cu toate lucrurile unde ai ajuns, ceea ce ar fi legătura `this` în cazul executării funcției.
+```javascript
+let a = 'ceas ';
+function gazdă (ceva) {
+  let x = 'nou';
+  return function internă () {
+    console.log(ceva + x);
+  };
+};
+let prelucrezDate = gazdă(a);
+prelucrezDate();
+```
+
+Pe scurt, legătura care se realizează la momentul compilării între funcție și mediul lexical în care a fost declarată, se numește **closure**. E ca dorul de casă. Chiar dacă ești plecat, vei avea mereu o conexiune cu toate lucrurile de acasă pentru că le **ții minte**, știi unde sunt și *ce valoare au pentru tine*. Dar în același timp ești conectat cu toate lucrurile unde ai ajuns, ceea ce ar fi legătura `this` în cazul execuției funcției.
 
 Acum apare minunea: dacă declari o funcție în interiorul altei funcții, pe care o returnezi, vei avea acces la un set de date ce nu pot fi prelucrate direct. Acesta este și motivul pentru care avem acest instrument foarte puternic care este closure-ul. Poți realiza variabile private. Ascunderea unui set de date ce nu poate fi manipulat direct, care poate fi accesat la un moment dat sau dacă este nevoie cu o anumită întârzire, ori pur și simplu să știi că există o structură de date creată în anumite condiții, dar cu care poți interacționa, este ceea ce oferă closure-urile.
 
@@ -45,7 +57,7 @@ Funcțiile sunt valori! Pot fi pasate ca valori altor funcții și pot fi return
 
 **Moment Zen**: Closure-urile cuplează funcțiile cu mediile peste care face closure-uri.
 
-Un closure menține accesul la toate variabilele care erau *în scope* la momentul definirii funcției. Putem spune că o funcție din interiorul altei funcții este o funcție ***privată***, cu acces la mediul lexical al gazdei.
+Un closure menține accesul la toate variabilele care erau *în scope* la momentul definirii funcției. Putem spune că o funcție din interiorul altei funcții este o funcție *privată***ââ, cu acces la mediul lexical al gazdei.
 
 **Moment Zen**: Toate closure-urile - funcțiile din aceeași gazdă - împărtășesc același mediu.
 
@@ -174,7 +186,7 @@ Un closure este mecanismul prin care putem obține o **încapsulare** dinamică 
 
 > Încapsularea este unul din fundamentele programării orientate pe obiecte. Se referă la punerea laolaltă a datelor cu metodele care operează pe acestea. Încapsularea este folosită pentru a ascunde valorile sau starea unui obiect de date structurat în interiorul unei clase, ceea ce previne accesul direct al unor terți neautorizați la acestea. Clasa oferă metode accesibile public care sunt oferite uzual de către clasă (așa-numitele gettere și settere), prin care pot fi accesate valorile. Celelalte clase client apelează aceste metode pentru a obține și pentru a modifica valorile din obiect. [Wikipedia, Encapsulation (computer programming)](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming))
 
-Closure-urile întâlnite în practica curentă se fac prin returnarea unei funcții sau a unui obiect care conține metode sau se poate crea la momentul execuției funcției chiar în interiorul funcției gazdă.
+Closure-urile întâlnite în practica curentă se fac prin returnarea unei funcții sau a unui obiect care conține metode sau este creat la momentul execuției funcției chiar în interiorul funcției gazdă.
 
 ### Closure fără a returna
 
@@ -623,3 +635,4 @@ Funcțiile de nivel înalt și closure-urile formează coloana vertebrală a pro
 - [JavaScript Allongé, the "Six" Edition](https://leanpub.com/javascriptallongesix/read#closures)
 - [JavaScript Getters and Setters](https://javascriptplayground.com/blog/2013/12/es5-getters-setters/)
 - [Javascript Closures](http://jibbering.com/faq/notes/closures/)
+- [JavaScript Closures](https://kentcdodds.com/blog/javascript-closures)

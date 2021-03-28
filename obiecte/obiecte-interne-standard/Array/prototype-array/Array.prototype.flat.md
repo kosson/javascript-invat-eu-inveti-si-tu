@@ -1,7 +1,13 @@
 # Array.prototype.flat()
 
-Această metodă creează un array nou concatenând toate elementele până la o anumită adâncime menționată prin parametru.
-Ceea ce se petrece este o adevărată ***aplatizare*** a unui array care printre elemente poate avea și alte array-uri.
+Să presupunem că ai un array de array-uri pe care ai dori să-l „aplatizezi” creând unul singur cu toate elementele celorlalte drept elemente. Soluția ar fi să folosești un `concat.apply()` pe fiecare element.
+
+```javascript
+let arr = [1, 2, [3, 4]];
+[].concat.apply([], arr);
+```
+
+Noua metodă creează un array concatenând toate elementele până la o anumită adâncime menționată prin parametru.
 
 ```javascript
 let arr = [4, 345, [12, 84]];
