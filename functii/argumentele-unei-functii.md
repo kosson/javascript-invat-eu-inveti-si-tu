@@ -631,6 +631,24 @@ function peAlese(obi, ...chei){
 }; // chei conține toți parametrii de după primul.
 ```
 
+## Pasarea prin referință
+
+Există o situație interesantă care ține de modul în care sunt pasate valorile ca argumente. De exemplu, valorile care sunt pasate ca referințe așa cum sunt obiectele, reflectă modificările care li se aduc în momentul evaluării codului funcției.
+
+```javascript
+const valori = [45, 87, 14, 62, 9];
+
+function curve(arr, coeficient) {
+  let i;
+  for (i = 0; i < arr.length; ++i) {
+    arr[i] += coeficient;
+  }
+};
+
+curve(valori, 5);
+console.log(valori);
+```
+
 ## Mantre
 
 -   Valoarea parametrilor unei funcții este din start `undefined`.

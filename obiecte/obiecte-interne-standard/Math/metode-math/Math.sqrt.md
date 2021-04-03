@@ -1,7 +1,6 @@
 # Math.sqrt()
 
-Metodata returnează valoarea rădăcinii pătrate a unui număr.
-Dacă se încearcă o valaore negativă, este returnat `NaN`.
+Metodata returnează valoarea rădăcinii pătrate a unui număr. Dacă se încearcă o valoare negativă, este returnat `NaN`.
 
 ```javascript
 Math.sqrt(9); // 3

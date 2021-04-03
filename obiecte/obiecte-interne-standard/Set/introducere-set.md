@@ -105,16 +105,73 @@ const arr = Array.from(unice);
 
 ### Generarea unui array cu valori unice
 
+În cazul în care ai un array care poate avea și elemente duplicat, poți genera un nou array doar cu elementele unice.
+
 ```javascript
 const ArrayUnic = [...new Set(unArray)];
 ```
 
-### Verificarea unui array ca subset al altuia
+### Array ca subset al altuia
 
 Acest exemplu se folosește de dimensiunea lui `Set`. Dacă array-ul de control există în cel interogat, dimensiunea celui interogat nu se va modifica.
 
 ```javascript
 const isSubset = (a, b) => (new Set(b)).size === (new Set(b.concat(a))).size;
+```
+
+### Verifică dacă este superset
+
+Un set poate fi considerat a fi un *superset* al altuia dacă acesta conține toate elementele celuilalt.
+
+```javascript
+function isSuperset(setVerificat, subset) {
+  let element;
+  for (element of subset) {
+    if (!setVerificat.has(element)) {
+      return false;
+    }
+  }
+  return true;
+}
+let set1 = new Set([1, 2, 3]),
+    set2 = new Set([2, 3]);
+isSuperset(set1, set2); // true
+```
+
+### Intersecția seturilor
+
+Uneori este util să afli care este intersecția seturilor.
+
+```javascript
+function setIntersectie (set1, set2) {
+  let intersectie = new Set(set1);
+  let element;
+  for (element of set2) {
+    intersectie.add(element);
+  }
+  return intersectie;
+}
+let set1 = new Set([1, 2, 3, 4, 5]),
+    set2 = new Set(['a', 'b']);
+setIntersectie(set1, set2); // Set { 1, 2, 3, 4, 5, 'a', 'b' }
+```
+
+### Diferența
+
+Sunt multe ocaziile în care ai nevoie să afli care sunt elementele care nu sunt într-un set comparativ cu unul cu care faci comparația.
+
+```javascript
+function diferentaIntreSeturi (set1, set2) {
+  let diferenta = new Set(set1);
+  let element;
+  for (element of set2) {
+    diferenta.delete(element);
+  }
+  return diferenta;
+}
+let set1 = new Set([1, 2, 3, 4, 5]),
+    set2 = new Set([2, 'a', 'b']);
+diferentaIntreSeturi(set1, set2); //Set { 1, 3, 4, 5 } 
 ```
 
 ## Parcurgerea unui Set
@@ -137,10 +194,11 @@ for (let element of setNou.values()) {
 }; // unu 1 true
 ```
 
-Folosirea iteratorului creat prin folosirea metodei `entries()`.
+Poți transforma un un set într-un iterator folosid metoda `entries()`.
 
 ```javascript
-for (let [cheie, valoare] of setNou.entries()) {
+let cheie, valoare;
+for ([cheie, valoare] of setNou.entries()) {
   console.log(cheie)
 }; // unu 1 true
 ```

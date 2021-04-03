@@ -99,7 +99,7 @@ Am punctat în imagine faptul că unei funcții îi sunt puse la dispoziție dou
 
 ### Funcțiile returnează rezultate
 
-Funcțiile în JavaScript trebuie să returneze un rezultat fără excepție. Chiar în momentul declarării, funcțiile returnează ceva, iar acel ceva este valoarea `undefined`. Următoarele enunțuri sunt echivalente ca rezultat.
+Funcțiile în JavaScript trebuie să returneze un rezultat fără excepție. Chiar în momentul declarării, funcțiile returnează *ceva*, iar acel ceva este valoarea `undefined`. Următoarele enunțuri sunt echivalente ca rezultat.
 
 ```javascript
 function facCeva () {};
