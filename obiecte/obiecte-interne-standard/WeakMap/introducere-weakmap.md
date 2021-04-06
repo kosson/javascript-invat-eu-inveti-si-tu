@@ -2,13 +2,20 @@
 
 Începând cu versiunea ES6 a standardului, au apărut obiecte dedicate realizării de colecții. Au apărut din necesitatea evitării diferitelor contrângeri impuse de obiectele obișnuite.
 
-Este o colecție de perechi cheie-valoare care au o particularitate foarte utilă: toate cheile sunt obiecte. Nu sunt admise valori primitive. `WeakMap`-ul este asemănător unui `Map` în sensul că are metode similare.
+Este o colecție de perechi cheie-valoare care au o particularitate foarte utilă: toate cheile sunt obiecte spre deosebire de `Map`, unde pot fi și primitive. Nu sunt admise valori primitive, incluzând `Sympbol`. `WeakMap`-ul este asemănător unui `Map` în sensul că are metode similare:
+
+- `numeWeakMap.get(key)`,
+- `numeWeakMap.set(key, value)`,
+- `numeWeakMap.delete(key)`,
+- `numeWeakMap.has(key)`.
+
+Un `WeakMap` nu oferă suport pentru iterare prin metodele `keys()`, `values()`, `entries()`.
 
 De unde vine denumirea **weak**? În limba engleză *weak* înseamnă *slab*. În cazul obiectului nostru, această *slăbiciune* vine din faptul că, de îndată ce nu mai există vreo referință către obiectul care joacă rol de cheie, acesta va putea fi *colectat la gunoi*, ceea ce este echivalentul unei ștergeri din structura internă a obiectului însuși.
 
-Amintiți-vă de faptul că un obiect *trăiește* câtă vreme există o referință către acesta sau către una din proprietățile sale. Dacă am ține evidența unor obiecte folosind un `Map`, această structură ar ține o referință permanentă către obiectul ca proprietate a sa. Dacă nu mai este referit, va fi menținut în viață în continuare taxând resursele.
+Amintește-ți că un obiect *trăiește* câtă vreme există o referință către acesta sau către una din proprietățile sale. Dacă am ține evidența unor obiecte folosind un `Map`, această structură ar ține o referință permanentă către obiectul ca proprietate a sa. Dacă nu mai este referit, va fi menținut în viață în continuare taxând resursele. Din necesitatea *colectarii la gunoi* a obiectelor care nu mai sunt referite, s-a născut această nouă structură pentru gestionarea obiectelor *efemere*. În cazul în care nu mai există vreo referință către obiectul proprietate al unui `WeakMap`, sau respectivul obiect a fost setat la `undefined`, va fi *colectat la gunoi*. În cazul în care valoarea membrului unui `WeakMap` este un obiect, acesta va fi colectat și el la gunoi.
 
-Din necesitatea *colectarii la gunoi* a obiectelor care nu mai sunt referite, s-a născut această nouă structură pentru gestionarea obiectelor *efemere*. În cazul în care nu mai există vreo referință către obiectul proprietate al unui `WeakMap`, sau respectivul obiect a fost setat la `undefined`, va fi *colectat la gunoi*. În cazul în care valoarea membrului unui `WeakMap` este un obiect, acesta va fi colectat și el la gunoi.
+Pentru a crea un `WeakMap` se va folosi constructorul `WeakMap([iterabil])`.
 
 ```javascript
 const OBI_SLAB = new WeakMap();
@@ -21,6 +28,21 @@ obiProp = undefined;
 OBI_SLAB.has(obiProp); // false
 OBI_SLAB.get(obiProp); // undefined
 ```
+
+Acest comportament oferă posibilitatea folosirii lui `WeakMap` ca o structură temporară (*cache temporar*) în care poți asocia informație utilă anumitor obiecte, fie acestea elemente DOM, de exemplu, sau chiar obiecte din biblioteci de cod pe care le folosești.
+
+```javascript
+let temporar = new WeakMap;
+function introduInTemporar (obi) {
+  if(!temporar.has(obi)){
+    let rezultat = obi.a + obi.b; // aici poți performa operațiuni intermediare înainte de stocare
+    temporar.set(obi, rezultat);
+  }
+  return temporat.get(obi);
+}
+```
+
+În acest moment poți crea un obiect, pe care să-l introduci în obiectul temporar, dar de îndată ce-l vei seta la `null`, toate referințele și datele asociate fiecăreia, vor dispărea, fiind *colectate la gunoi*.
 
 **Moment ZEN**: Cheia ține valoarea în viață.
 
@@ -116,31 +138,44 @@ Cazurile în care ai folosi o astfel de modelare a unei clase sunt legate de:
 - unele obiecte care sunt instanțiate în baza clasei, au nevoie de un mecanism în care să stocheze obiecte tempoarare;
 - unele obiecte poate instanțiază alte obiecte care vin din biblioteci externe, având o caracteristică temporară, dar care nu trebuie modificate.
 
-Notă importantă: de îndată ce *câmpurile private* (**private fields**) vor fi parte a limbajului, o astfel de abordare, trebuie abandonată din motive de performanță. Un `WeakMap` rămâne totuși un hashmap pe care se face o căutare (*lookup*). Acestea sunt disponibile deja în Node.js (12) și Chrome (74).
+Notă importantă: de îndată ce *câmpurile private* (**private fields**) vor fi parte a limbajului, o astfel de abordare trebuie abandonată din motive de performanță. Un `WeakMap` rămâne totuși un hashmap pe care se face o căutare (*lookup*). Acestea sunt disponibile deja în Node.js (12) și Chrome (74).
 
-## Metode
+## Reimplementare cu o metodă clear
 
-### `WeakMap.prototype.delete(key)`
-
-Șterge o cheie din WeakMap.
+În cazurile în care ai nevoie să cureți direct obiectul `WeakMap`, poți augmenta precum în următoarea implementare exemplificată de Mozila MDN.
 
 ```javascript
-const obiW = new WeakMap();
-const o1 = {a: 1, b: 2},
-      o2 = {c: 3, d: 4};
-obiW.set(o1, 1);
-obiW.set(o2, 2);
-obiW.get(o1); // 1
-obiW.get(o2); // 2
-obiW.delete(o1);
-obiW.has(o1); // false
+class ClearableWeakMap {
+  constructor(init) {
+    this._wm = new WeakMap(init);
+  }
+  clear() {
+    this._wm = new WeakMap();
+  }
+  delete(k) {
+    return this._wm.delete(k);
+  }
+  get(k) {
+    return this._wm.get(k);
+  }
+  has(k) {
+    return this._wm.has(k);
+  }
+  set(k, v) {
+    this._wm.set(k, v);
+    return this;
+  }
+}
 ```
 
 ## Resurse
 
--   [What are the actual uses of ES6 WeakMap?.stackoverflow.com](https://stackoverflow.com/questions/29413222/what-are-the-actual-uses-of-es6-weakmap)
--   [ES6 Collections: Using Map, Set, WeakMap, WeakSet](https://www.sitepoint.com/es6-collections-map-set-weakmap-weakset/)
--   [Dwayne Charrington. What Are Weakmaps In ES6?](https://ilikekillnerds.com/2015/02/what-are-weakmaps-in-es6/)
--   [ECMAScript 6 — New Features: Overview & Comparison. Map/Set & WeakMap/WeakSet](http://es6-features.org/#WeakLinkDataStructures)
--   [Inside V8: weak collections, ephemerons, and private fields by Sigurd Schneider | JSCAMP 2019](https://www.youtube.com/watch?v=MQsUiqVCJMc&fbclid=IwAR3ybYMW2jDnNTA39t9qVph6HELfbguoynnLP9FOSnsDw5tTVHZ43pjC1Z8)
--   [Public and private class fields](https://v8.dev/features/class-fields)
+- [What are the actual uses of ES6 WeakMap?.stackoverflow.com](https://stackoverflow.com/questions/29413222/what-are-the-actual-uses-of-es6-weakmap)
+- [ES6 Collections: Using Map, Set, WeakMap, WeakSet](https://www.sitepoint.com/es6-collections-map-set-weakmap-weakset/)
+- [Dwayne Charrington. What Are Weakmaps In ES6?](https://ilikekillnerds.com/2015/02/what-are-weakmaps-in-es6/)
+- [ECMAScript 6 — New Features: Overview & Comparison. Map/Set & WeakMap/WeakSet](http://es6-features.org/#WeakLinkDataStructures)
+- [Inside V8: weak collections, ephemerons, and private fields by Sigurd Schneider | JSCAMP 2019](https://www.youtube.com/watch?v=MQsUiqVCJMc&fbclid=IwAR3ybYMW2jDnNTA39t9qVph6HELfbguoynnLP9FOSnsDw5tTVHZ43pjC1Z8)
+- [Public and private class fields](https://v8.dev/features/class-fields)
+- [WeakMap and WeakSet](https://javascript.info/weakmap-weakset)
+- [Keyed collections | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Keyed_collections#weakmap_object)
+- [WeakMap | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap)

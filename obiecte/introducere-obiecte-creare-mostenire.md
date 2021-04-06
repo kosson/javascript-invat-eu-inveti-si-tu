@@ -41,7 +41,7 @@ Proprietățile pot fi numere, boolean-uri, șiruri de caractere, funcții sau c
 Să explorăm prin fațetele oferite de următoarele întrebări:
 
 - cât timp *trăiește* un obiect?
-- cât stă el scris în zona de memorie?Changes
+- cât stă el scris în zona de memorie?
 - cât timp este disponibil un obiect programului?
 
 Un obiect este disponibil atâta vreme cât există cel puțin o referință către acesta sau către o proprietate a sa. Ce se întâmplă când nu mai există nicio referință? Zona de memorie este eliberată de un mecanism intern motorului denumit în limba engleză *garbage collector*. În această lucrare veți mai întâlni și expresia *colectat la gunoi*.
@@ -57,11 +57,27 @@ if (true) {
 În exemplul de mai sus, obiectul definit pentru `proprietatea1` va fi păstrat pentru că am setat o referință către acesta în `obiectul1`. Câtă vreme `obiectul1` va trăi, va trăi și legătura către cel definit în blocul decizional - `obiectul1.proprietatea1`.
 Te vei întreba ce se petrece cu `obiectul2`. Acesta va fi *colectat la gunoi* pentru că mediul lexical în care a fost definit, cel al blocului decizional, colapsează la momentul încheierii testului, iar despre declarații spunem că devin *out of scope* - *ies în afara mediului lexical*.
 
-Putem indica motorului distrugerea unui obiect și în consecință *colectarea la gunoi* prin setarea referinței la valoarea `undefined`.
+Putem indica motorului distrugerea unui obiect și în consecință *colectarea la gunoi* prin setarea referinței la valoarea `undefined` sau `null`.
+
+```javascript
+let obi = {ceva: 10};
+obi = null; // locația de memorie a fost curățată
+```
+
+Reține faptul că proprietățile unui obiect, precum și elementele unui array, care tot un obiect este, sunt accesibile câtă vreme sunt în memorie. Pentru a vedea un caz interesat, să punem un obiect ca element într-un array. Dacă obiectul va fi setat la `null`, totuși vom avea încă o referință la el accesând elementul de array.
+
+```javascript
+let obi = {ceva: 10};
+let arr = [obi];
+obi = null;
+console.log(arr[0]); //
+```
+
+Ceea ce s-a distrus prin `null` este legătura identificatorului `obi` la obiect, dar prin elementul array-ului, această legătură se păstrează accesând acel element.
 
 Dacă un obiect oferă metode altuia prin mecanismul de moștenire prototipală, acesta nu va fi *colectat la gunoi* pentru că de el depind alte obiecte, care lucrează cu metode sau valori, pe care le apelează prin lanțul prototipal format. Acest tip de referință este una *implicită* (se face automat). Atunci când un obiect face referințe către proprietățile unui alt obiect, spunem că realizează o referință *explicită*, folosind un identificator. Atunci când ambele referințe nu mai există, intervine mecanismul de *colectare la gunoi* și zona de memorie în care exista, este eliberată.
 
-Atunci când pasăm unei funcții un obiect, de fapt îi dăm referința către acesta. O referință se comportă precum o referință bibliografică către o operă (carte).
+Atunci când pasăm unei funcții un obiect, de fapt îi dăm referința către acesta. O referință se comportă precum o referință bibliografică către un fragment dintr-o carte.
 
 ```javascript
 var obi1 = {}; let obi2 = {}; const obi3 = {}; // avem trei obiecte distincte
@@ -1661,14 +1677,15 @@ Funcția primește ca prim argument un obiect a cărui proprietăți sunt identi
 
 ## Resurse
 
--   [Crockford on Javascript - Functions](https://www.youtube.com/watch?v=lVnnxfdLdlM)
--   [A fresh look at JavaScript Mixins, de  Angus Croll](https://javascriptweblog.wordpress.com/2011/05/31/a-fresh-look-at-javascript-mixins/)
--   [Memory Management](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management)
--   [Object-oriented JavaScript: A Deep Dive into ES6 Classes](https://www.sitepoint.com/object-oriented-javascript-deep-dive-es6-classes/)
--   [What is the definition of “interface” in object oriented programming](https://stackoverflow.com/questions/2866987/what-is-the-definition-of-interface-in-object-oriented-programming)
--   [Classes, MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
--   [Inside V8: weak collections, ephemerons, and private fields by Sigurd Schneider | JSCAMP 2019](https://www.youtube.com/watch?v=MQsUiqVCJMc&fbclid=IwAR3ybYMW2jDnNTA39t9qVph6HELfbguoynnLP9FOSnsDw5tTVHZ43pjC1Z8)
--   [Public and private class fields](https://v8.dev/features/class-fields)
--   [30 Seconds of Code: How to rename multiple object keys in JavaScript](https://medium.com/free-code-camp/30-seconds-of-code-rename-many-object-keys-in-javascript-268f279c7bfa)
--   [Immutably Rename Object Keys in Javascript](https://medium.com/front-end-weekly/immutably-rename-object-keys-in-javascript-5f6353c7b6dd)
--   [renameKeys | 30secondsofcode/js](https://www.30secondsofcode.org/js/s/rename-keys/)
+- [Crockford on Javascript - Functions](https://www.youtube.com/watch?v=lVnnxfdLdlM)
+- [A fresh look at JavaScript Mixins, de  Angus Croll](https://javascriptweblog.wordpress.com/2011/05/31/a-fresh-look-at-javascript-mixins/)
+- [Memory Management](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management)
+- [Object-oriented JavaScript: A Deep Dive into ES6 Classes](https://www.sitepoint.com/object-oriented-javascript-deep-dive-es6-classes/)
+- [What is the definition of “interface” in object oriented programming](https://stackoverflow.com/questions/2866987/what-is-the-definition-of-interface-in-object-oriented-programming)
+- [Classes, MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
+- [Inside V8: weak collections, ephemerons, and private fields by Sigurd Schneider | JSCAMP 2019](https://www.youtube.com/watch?v=MQsUiqVCJMc&fbclid=IwAR3ybYMW2jDnNTA39t9qVph6HELfbguoynnLP9FOSnsDw5tTVHZ43pjC1Z8)
+- [Public and private class fields](https://v8.dev/features/class-fields)
+- [30 Seconds of Code: How to rename multiple object keys in JavaScript](https://medium.com/free-code-camp/30-seconds-of-code-rename-many-object-keys-in-javascript-268f279c7bfa)
+- [Immutably Rename Object Keys in Javascript](https://medium.com/front-end-weekly/immutably-rename-object-keys-in-javascript-5f6353c7b6dd)
+- [renameKeys | 30secondsofcode/js](https://www.30secondsofcode.org/js/s/rename-keys/)
+- [Garbage collection | https://javascript.info/](https://javascript.info/garbage-collection)

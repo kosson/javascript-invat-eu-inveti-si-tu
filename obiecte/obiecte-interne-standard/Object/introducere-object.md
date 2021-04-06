@@ -61,7 +61,6 @@ function test (obi = {}) {
 }
 ```
 
-
 ## Object.prototype.constructor
 
 Indică funcția care stă la baza prototipului.
