@@ -17,3 +17,24 @@ Dacă nu există fanionul `g` în șablon, ceea ce va returna metoda `match()` e
 În cazul în care ai setat fanionul `g` pentru șablon și dorești să incluzi rezultatele aduse de grupurile de captură, va trebui să folosești `RegExp.exec()`.
 
 În cazul în care nu a fost găsit niciun rezultat, metoda returnează valoarea `null`.
+
+Dacă nu pasezi metodei niciun parametru regexp, va fi returnat un array cu un singur element; un string gol.
+
+## Proprietăți suplimentare
+
+### `groups`
+
+Acesta este un obiect al grupurilor *named capturing* ale căror chei sunt numele, iar valorile sunt *capturing groups* sau `undefined` dacă nu au fost definite *capturing groups*.
+
+### `index`
+
+Este indexul la care a fost găsit răspunsul.
+
+### `input`
+
+Este o copie a șirului de căutare găsit.
+
+## Resurse
+
+- [String.prototype.match() | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match)
+- [Groups and ranges | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Groups_and_Ranges)

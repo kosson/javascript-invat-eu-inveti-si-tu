@@ -78,7 +78,7 @@ function cnxCuReceptorul (obi, receptor) {
     // valoarea este un set pentru că unui obiect
     // i se pot atașa mai multe evenimente, care
     // sunt unice, deci pretabile la un Set
-    evCnxCuReceptori.set(obi, new Set());
+    evCnxCuReceptori.set(obi, new Set([receptor]));
   }
   // în acest moment putem atașa evenimentele
   evCnxCuReceptori.get(obi).add(receptor);
@@ -179,3 +179,4 @@ class ClearableWeakMap {
 - [WeakMap and WeakSet](https://javascript.info/weakmap-weakset)
 - [Keyed collections | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Keyed_collections#weakmap_object)
 - [WeakMap | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap)
+- [WeakMaps: Illustrated | javascript.plainenglish.io](https://javascript.plainenglish.io/weakmaps-illustrated-8169ce4764bb)

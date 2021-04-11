@@ -255,7 +255,7 @@ console.log(fragment.match(/\b\w{5}\b/gi)); // [ "Acest", "doare" ]
 Sunt acele caractere cu rolul de a identifica de câte ori apare sau este permisă apariția unui fragment.
 
 | Caracter | Semnificație                                                                                                   |
-|:-------- |:-------------------------------------------------------------------------------------------------------------- |
+|:--------:|:-------------------------------------------------------------------------------------------------------------- |
 | `*`      | indică o căutare după expresia de dinaintea lui de 0 sau mai multe ori - `{0,}`.                               |
 | `+`      | Se va face căutarea după expresia anterioară de una sau mai multe ori - `{1,}`.                                |
 | `?`      | Se va face căutare după expresia anterioară. Rezultatul poate fi 0 sau poate apărea o singură dată - `{0,1}`.  |
@@ -815,8 +815,9 @@ ceva.replace(/caut/g, 'vreau'); // "vreau ceva"
 
 Se mai pot folosi expresiile regulate și cu metoda `split` a obiectului `String`.
 
-## Referințe
+## Resurse
 
--   Mozilla Developer Network [Regular Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
--   Eloquent JavaScript. Second edition [Regular Expressions](http://eloquentjavascript.net/09_regexp.html)
--   Regular Expressions: The Complete Tutorial [Regular Expressions. The Complete Tutorial](https://www.princeton.edu/~mlovett/reference/Regular-Expressions.pdf)
+-   [Regular Expressions | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
+-   [Regular Expressions | Eloquent JavaScript. Second edition](http://eloquentjavascript.net/09_regexp.html)
+-   [Regular Expressions. The Complete Tutorial](https://www.princeton.edu/~mlovett/reference/Regular-Expressions.pdf)
+-   [Groups and ranges | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Groups_and_Ranges)
