@@ -1,6 +1,6 @@
 # Legătura `this` - context de execuție
 
-Să ne gândim la o funcție ca la o persoană care privește **bolta celestă** într-o noapte înstelată. Cum ar putea povesti despre toate constelațiile văzute? Cum le-ar putea descrie printr-o singură expresie? Hai, nu e greu, am zis deja... da, da, ai remarcat perfect: **bolta celestă**. Dacă dorim să constrângem la un singur termen care să o identifice, am putea spune foarte simplu **cerul**, nu? Așa este și cuvântul cu înțeles special `this`, care s-ar traduce în română **acesta**. Am putea spune că `this` este **acest** obiectu în contexul căruia se execută codul.
+Să ne gândim la o funcție ca la o persoană care privește **bolta celestă** într-o noapte înstelată. Cum ar putea povesti despre toate constelațiile văzute? Cum le-ar putea descrie printr-o singură expresie? Hai, nu e greu, am zis deja... da, da, ai remarcat perfect: **bolta celestă**. Dacă dorim să constrângem la un singur termen care să o identifice, am putea spune foarte simplu **cerul**, nu? Așa este și cuvântul cu înțeles special `this`, care s-ar traduce în română **acesta**. Am putea spune că `this` este **acest** obiect în contexul căruia se execută codul.
 
 O funcție rulează întotdeauna în contextul unui obiect. Chiar textul standardului care reglementează Document Object Model numește `this` drept **obiectul context**. Cuvântul cheie `this` identifică o legătură cu mediul lexical al obiectului context. Cuvântul crucial este **legătură** pentru că atunci când se realizează, se comportă ca o conexiune live la entitățile obiectului context. Legătura se realizează doar la momentul executării funcției!
 
@@ -19,7 +19,7 @@ Nu contează unde a fost declarată funcția, ci locul unde a fost invocată. Lo
 
 ## Mică anatomie
 
-Pentru a înțelege legătura `this`, vom observa ce ce petrece când aceasta se pierde. Să luăm cazul unei funcții cu rol de metodă, fiind definită într-un obiect. Metoda noastră este gazda unei alteia, care realizează un *closure* pe mediul lexical al gazdei. Un *closure* este un *registru inventar* al mediului lexical existent la momentul definirii funcției - ce era *în jurul* funcției.
+Pentru a înțelege legătura `this`, vom observa ce ce petrece când aceasta se pierde. Să luăm cazul unei funcții cu rol de metodă, fiind definită într-un obiect. Metoda noastră este gazda unei alteia, care realizează un *closure* pe mediul lexical al gazdei. Un *closure* este un *registru inventar* al mediului lexical existent la momentul definirii funcției - entitățile care erau *în jurul* funcției de care, potențial funcția are nevoie în execuție.
 
 ```javascript
 // "use strict"; // în acest caz, this is undefined
@@ -42,7 +42,7 @@ obi.faCeva(); // 100
 // dacă declari cu let este returnat undefined
 ```
 
-Apelarea funcției `interna`, nu realizează o legătură `this` la obiectul în care este definită metoda, adică `gazda()`. Legătura se face la obiectul global, iar dacă fragmentul de cod ar rula sub regula `use strict`, rezultatul ar fi `undefined`. Douglas Crockford spune despre acest comportament că este o eroare de proiectare a limbajului. O funcție găzduită de o metodă, ar trebui să aibă acces la membrii obiectului metodei, folosind aceeași legătură `this` pe care o folosește metoda, care joacă rol de gazdă. În trecut, această necesitate era rezolvată printr-o *punte lexicală* pe care o veți întâlni în mod curent în cod *legacy*.
+Apelarea funcției `interna`, nu realizează o legătură `this` la obiectul în care este definită metoda, adică `gazda()`. Legătura se face la obiectul global, iar dacă fragmentul de cod ar rula sub regula `use strict`, rezultatul ar fi `undefined`. Douglas Crockford spune despre acest comportament că este o eroare de proiectare a limbajului. O funcție găzduită de o metodă ar trebui să aibă acces la membrii obiectului metodei, folosind aceeași legătură `this` pe care o folosește metoda, care joacă rol de gazdă. În trecut, această necesitate era rezolvată printr-o *punte lexicală* pe care o veți întâlni în mod curent în cod mai *vechi* (*legacy*).
 
 ```javascript
 var valoare = 10;
@@ -82,7 +82,9 @@ obi.valDinObi();
 
 Într-un astfel de scenariu, nu mai este nevoie de a face puntea lexicală `var that = this;` pentru a obține o referință către obiectul context al gazdei.
 
-Chiar dacă o funcție este declarată în interiorul unui obiect, îndeplinind rolul de metodă a acestuia, trebuie considerată a fi un obiect separat de acesta. Nu putem gândi în termenul de *apartenență* la un anumit obiect doar pentru că a fost declarată în intriorul obiectului. În ceea ce privește metodele, acestea aparțin unui obiect în măsura în care acel obiect oferă *adresa* la care pot fi găsite. Dar ele tot funcții  distincte sunt cu particularitatea că se conectează automat prin `this` la obiectul în care sunt declarate. O metodă nu poate fi accesată ca valoare sau apelată din exteriorul obiectului altfel decât folosind sintaxa cu punct: `obiect.funcție`.
+**Moment ZEN**: Funcțiile săgeată folosesc legătura `this` a funcției/obiectul gazdă.
+
+Chiar dacă o funcție este declarată în interiorul unui obiect, îndeplinind rolul de metodă a acestuia, trebuie considerată a fi un obiect separat de acesta. Nu putem gândi în termenul de *apartenență* la un anumit obiect doar pentru că a fost declarată în intriorul obiectului. În ceea ce privește metodele, acestea aparțin unui obiect în măsura în care acel obiect oferă *adresa* la care pot fi găsite. Dar ele tot funcții distincte sunt cu particularitatea că se conectează automat prin `this` la obiectul în care sunt declarate. O metodă nu poate fi accesată ca valoare sau apelată din exteriorul obiectului altfel decât folosind sintaxa cu punct: `obiect.funcție`.
 
 **Moment ZEN**: În JavaScript toate obiectele sunt entități independente. Ele realizează conexiuni unele cu celelalte prin referințe.
 
@@ -263,7 +265,7 @@ console.log(rezultat); // 1100
 
 Este modul în care te asiguri întotdeauna că `this` este predictibil și nu alunecă în global scope. Se realizează un cuplaj forțat între o funcție care trebuie să ruleze musai în contextul unui anumit obiect.
 
-Începând cu ES5 suplimentar existentelor `call()` și `apply()` a fost introdusă și metoda `bind()` în prototipul obiectului intern `Function`. Această metodă este cel mai des întâlnită în uz atunci când se dorește conectarea permanentă a unei funcții cu un obiect. Îți dau un scenariu pentru a răspunde întrebării de ce. Conectarea unei funcții de răspuns la un obiect eveniment generat de interacțiunea unui click cu mouse-ul pe un buton dintr-o pagină. Obiectul este generat de browser, nu de programul tău. Funcția de răspuns este creată de tine. Cum să rulezi funcția de răspuns în contextul unui obiect creat de browser? Acesta este cazul tipic. Reține și faptul că `bind()` returnează o nouă funcție care trebuie apelată ulterior.
+Începând cu ES5 suplimentar existentelor `call()` și `apply()` a fost introdusă și metoda `bind()` în prototipul obiectului intern `Function`. Această metodă este cel mai des întâlnită în uz atunci când se dorește conectarea permanentă a unei funcții cu un obiect. Îți dau un scenariu pentru a răspunde întrebării de ce. Conectarea unei funcții de răspuns (*listener*/*handler*) la un obiect eveniment generat de interacțiunea unui click cu mouse-ul pe un buton dintr-o pagină. Obiectul este generat de browser, nu de programul tău. Funcția de răspuns este creată de tine. Cum să rulezi funcția de răspuns în contextul unui obiect creat de browser? Acesta este cazul tipic. Reține și faptul că `bind()` returnează o nouă funcție care trebuie apelată ulterior.
 
 ```javascript
 let activitate = function (valoare) {

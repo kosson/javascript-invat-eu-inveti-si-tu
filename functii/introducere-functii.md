@@ -19,7 +19,7 @@ faCeva(1, 3); //4
 let expresieDeFuncție = function () {};
 ```
 
-Pentru codul din interiorul funcției, argumentele se transformă în tot atâtea variabile locale. Urmează apoi o pereche de acolade ce delimitează **blocul de cod**. În JavaScript acoladele delimitează blocuri de cod, fiind constituit dintr-un set de enunțuri care sunt evaluate la invocarea funcției. Blocul de cod este numit și **corpul** funcției. Această redactare a funcțiilor mai primește o variantă numită **fat arrow functions** sau **arrow functions**, care tot funcții sunt dar sunt delcarate fără cuvântul cheie `function` și folosește semnul rezultă pentru a indica corpul. Dacă ai un argument unic, poți opta să nu mai pui parantezele rotunde. Buna practică spune să indici argumentele întotdeauna cu parantezele rotunde.
+Pentru codul din interiorul funcției, argumentele se transformă în tot atâtea variabile locale. Urmează apoi o pereche de acolade ce delimitează **blocul de cod**. În JavaScript acoladele delimitează blocuri de cod, fiind constituit dintr-un set de enunțuri care sunt evaluate la invocarea funcției. Blocul de cod este numit și **corpul** funcției. Această redactare a funcțiilor mai primește o variantă numită **fat arrow functions** sau **arrow functions**, care tot funcții sunt dar sunt declarate fără cuvântul cheie `function` și folosește semnul rezultă pentru a indica corpul. Dacă ai un argument unic, poți opta să nu mai pui parantezele rotunde. Buna practică spune să indici argumentele întotdeauna cu parantezele rotunde.
 
 ```javascript
 let expresieDeFuncție = () => {
@@ -89,7 +89,7 @@ Mediul lexical este un *registru* în care se ține evidența legăturilor dintr
 
 Ca obișnuință, ar fi de dorit să gândești că funcția se aplică pe argumente, atunci când acestea există. În adâncime, trebuie înțeles că acest comportament este posibil pentru că funcțiile sunt pur și simplu **o-bi-ec-te**. Sunt niște obiecte speciale pentru că pur și simplu pot executa codul din interior ori de câte ori se dorește.
 
-**Moment Zen**: O funcție, de fapt, *se aplică* argumentelor pasate care sunt valori, le prelucrează și le oferă apelantului prin returnare.
+**Moment Zen**: O funcție, de fapt, *se aplică* argumentelor pasate care sunt valori; le prelucrează și le oferă apelantului prin returnare.
 
 Un alt lucru foarte important despre funcții este că acestea atunci când sunt apelate, se execută **în contextul** unui obiect. În acest obiect **context**, de regulă, sunt valori necesare evaluării cu succes a codului intern.
 

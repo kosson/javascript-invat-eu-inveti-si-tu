@@ -246,6 +246,24 @@ Toate aceste obiecte interne folosesc simbolul *well-known* `Symbol.species` pen
 Array[Symbol.species]; // function Array()
 ```
 
+Poți să te folosești de acest simbol pentru a extinde obiectele interne care au acest simbol cu scopul de a le deriva.
+
+```javascript
+// scenariu ES5
+function List () {"use strict";};
+List.prototype = Object.create(Array.prototype);
+let lista = new List();
+lista.push('a', 'b', 'c');
+lista.slice(0) instanceof List; // false
+// încercarea de extindere eșuează
+
+// metoda corectă
+class List extends Array {};
+let l = new List();
+l.slice(0) instanceof(List); // true
+[].slice.call(l) instanceof(List); //true
+```
+
 ## Transformări
 
 ### `Symbol.toPrimitive`
@@ -340,3 +358,4 @@ Object.getPrototypeOf(x);
 
 -   [https://hacks.mozilla.org/2015/06/es6-in-depth-symbols/](https://hacks.mozilla.org/2015/06/es6-in-depth-symbols/)
 -   [Zakas, Nicholas C. Understanding ECMAScript 6: The Definitive Guide for JavaScript Developers](https://www.keithcirkel.co.uk/metaprogramming-in-es6-symbols/)
+-   [JS classes are not “just syntactic sugar” | Andrea Giammarchi | medium.com](https://webreflection.medium.com/js-classes-are-not-just-syntactic-sugar-28690fedf078)

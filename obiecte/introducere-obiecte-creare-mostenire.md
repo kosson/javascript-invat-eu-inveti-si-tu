@@ -933,7 +933,11 @@ Nota atașată definiției din standard este și ea foarte valoroasă pentru lă
 
 > Atunci când un constructor creează un obiect, acel obiect va referi automat proprietatea `prototype` a constructorului cu scopul de a rezolva referințele proprietăților. Proprietatea `prototype` a constructorului poate fi referită de expresia `constructor.prototype`. Proprietățile adăugate prototipului unui obiect sunt puse la dispoziția tuturor obiectelor care accesează prototipul prin moștenire. Alternativa este crearea unui nou obiect având un prototip specificat explicit prin utilizarea funcției interne `Object.create`.
 
-Pentru a înțelege cu adevărat natura și specificitățile limbajului de programare JavaScript, trebuie să fie înțeles modul în care proprietățile unui obiect sunt *moștenite* de un altul. Un program care rulează este o continuă comunicare între diferite obiecte, fie că acestea sunt cele interne, fie că sunt cele create de noi. Simplificând în tușe foarte groase, creatorii limbajului au dorit o modelare a structurilor de prelucrare a datelor după modul în care lumea reală funcționează: copiii au părinți, iar aceștia moștenesc caracteristicile lor, pe lângă cele care definesc propria persoană.
+Pentru a înțelege cu adevărat natura și specificitățile limbajului de programare JavaScript, trebuie să fie înțeles modul în care proprietățile unui obiect sunt *moștenite* de un altul.
+
+**Moment Zen**: Fiecare obiect are un prototip a cărui valoare este un alt obiect sau `null`.
+
+Un program care rulează este o continuă comunicare între diferite obiecte, fie că acestea sunt cele interne, fie că sunt cele create de noi. Simplificând în tușe foarte groase, creatorii limbajului au dorit o modelare a structurilor de prelucrare a datelor după modul în care lumea reală funcționează: copiii au părinți, iar aceștia moștenesc caracteristicile lor, pe lângă cele care definesc propria persoană.
 
 **Moment Zen**: JavaScript este un limbaj bazat pe moștenire prototipală - *prototypal inheritance*.
 
@@ -945,7 +949,7 @@ Astfel, între obiecte se creează această legătură numită *legătură proto
 
 Aceste legături realizează ceea ce numim *moștenirea prototipală* - **prototypal inheritance**. Obiectul preexistent constituie prototipul pentru cel nou creat, care poate adăuga noi membri, noi comportamente. De fapt, vorbim despre o *delegare* pe lanțul prototipal format. Acest lucru înseamnă că atunci când ceri o proprietate care nu există, delegi solicitarea către prototip. Motorul caută referința și returnează o valoare, dacă aceasta este găsită. Dacă nu, se deleagă mai sus cererea, dacă mai există un obiect prototip părinte. Dacă nu mai există vreun părinte, este returnată o excepție. Acest proces de căutare, poate fi vizualizat ca un somon care sare în amonte pragurile unui râu.
 
-Unul din motivele pentru care ai folosi acest *lanț prototipal* este acela de a realiza șabloane care structurează funcționalități prin ascunderea sau expunerea anumitor detalii. Acest lucru este posibil prin introducerea de funcții în prototip. Avantajul major al acestui lucru este că funcția este creată o singură dată în obiectul prototip.
+Unul din motivele pentru care ai folosi acest adevărat *lanț prototipal* este acela de a realiza șabloane care structurează funcționalități prin ascunderea sau expunerea anumitor detalii. Acest lucru este posibil prin introducerea de funcții în prototip. Avantajul major al acestui lucru este că funcția este creată o singură dată în obiectul prototip.
 
 Un avantaj extraordinar pe care-l oferă moștenirea prototipală este că odată cu modificarea obiectului prototip, toate funcționalitățile noi vor fi disponibile instantaneu tuturor celor care le moștenesc.
 
@@ -963,7 +967,11 @@ typeof inst.prototype;      // "undefined"
 typeof inst.constructor.prototype;  // "object"
 ```
 
-Poți înlocui oricând obiectul cu rol de prototip după instanțierea obiectelor, iar legătura lui `__proto__` va fi la obiectul tocmai înlocuit pentru toate obiectele instanțiate după înlocuire. Obiectele instanțiate mai vechi, de dinaintea înlocuirii obiectului prototip, vor avea `__proto__`, care trimite la cel vechi. Constructorul, de fapt, proprietatea `constructor` a noilor obiecte instanțiate după înlocuire, nu va mai returna identificatorul funcției constructor de la care s-a pornit, ci pe `Object()`. Pentru a repara acest lucru, va trebui, manual să fie setată proprietatea constructor:
+Poți înlocui oricând obiectul cu rol de prototip după instanțierea obiectelor, iar legătura lui `__proto__` va fi la obiectul tocmai înlocuit pentru toate obiectele instanțiate după înlocuire.
+
+**Moment Zen**: Pentru a afla care este obiectul prototipal, vezi care este valoarea lui `__proto__`.
+
+Obiectele instanțiate mai vechi, de dinaintea înlocuirii obiectului prototip, vor avea `__proto__`, care trimite la cel vechi. Constructorul, de fapt, proprietatea `constructor` a noilor obiecte instanțiate după înlocuire, nu va mai returna identificatorul funcției constructor de la care s-a pornit, ci pe `Object()`. Pentru a repara acest lucru, va trebui, manual să fie setată proprietatea constructor:
 
 ```javascript
 FuncConstr.prototype.constructor = FuncConstr.prototype.constructor;
@@ -1548,7 +1556,7 @@ function extinde (proprietati) {
 
 În acest caz se creează un nou obiect cu `this` (de fapt, face o copie a lui însuși), la care bucla `for` adaugă proprietățile de la obiectul care se dorește a fi integrat. De fapt, din punct de vedere tehnic, se face o copie a referințelor către proprietățile obiectului de integrat. Astfel se face extinderea obiectului original.
 
-Dacă funcțiile definite de un *mixin* sunt destinate a fi folosite de un alt obiect, se pune întrebarea dacă nu ar fi mai simplă apelarea mixinului într-un `call()`.
+Dacă funcțiile definite de un *mixin* sunt destinate a fi folosite de un alt obiect, se pune întrebarea dacă nu ar fi mai simplă apelarea mixin-ului într-un `call()`.
 
 ```javascript
 let functiiCerc = function () {
@@ -1663,17 +1671,6 @@ Object.keys(obj).reduce(
 ```
 
 Funcția primește ca prim argument un obiect a cărui proprietăți sunt identificatorii vechi, iar valorile pentru fiecare sunt numele noilor proprietăți. Al doilea obiect este cel original. Funcția returnează un obiect nou.
-
-## Mantre
-
--   Spre deosebire de funcții, declarația de clasă nu beneficiază de mecanismul de hoisting indiferent că este o declarație sau o expresie de clasă. Deci, până când execuția nu ajunge la locul declarației, clasa se află în Temporal Dead Zone (TDZ).
--   Tot codul din clasă rulează automat în `strict mode`.
--   Toate metodele create sunt automat non-enumerabile.
--   Apelarea constructorului fără `new` conduce la o stare de eroare.
--   Numele clasei nu trebuie folosit în interiorul acesteia pentru o reatribuire. Conduce la eroare.
--   În cazul folosirii expresiilor de clasă, nu este necesară introducerea unui identificator după cuvântul cheie `class`.
--   `super()` setează legătura la `this` în cazul claselor derivate. Dacă folosești constructorul, adu-ți mereu aminte să invoci mai întâi de toate `super()`.
--   clasele permit moștenirea din toate obiectele built-in: `class ArraySpecial extends Array {}`.
 
 ## Resurse
 
