@@ -634,6 +634,28 @@ const webObi = {
 };
 ```
 
+### Lazy loading
+
+În cazul în care ai nevoie să accesezi o valoare care a fost obținută printr-un efort (IO sau calcul), cel mai bine ar fi să faci caching la respectiva valoare pentru ca oricând o vei mai cere, aceasta să existe deja.
+
+```javascript
+const Test = {
+  get date() {
+    const dateComputate = oFunctieCareFaceIO();
+    // caching
+    Object.defineProperty(this, 'date', {
+      value:        dateComputate,
+      writable:     false,
+      configurable: false,
+      enumerable:   false
+    });
+    return dateComputate;
+  }
+}
+```
+
+Acest mecanism permite o *amânare* a calculării valorilor proprietăților până la momentul când acestea sunt solicitate. Acesta este cazul în care valoarea noastră este rezultată dintr-o operațiune care taxează resursele de calcul. Într-un astfel de scenariu, cel mai bine este să calculezi valoarea la prima solicitare, urmând ca apoi ori de câte ori este cerută, să fie servită dintr-un cache.
+
 ## Membrii obiectului
 
 ### Proprietățile unui obiect
@@ -1686,3 +1708,4 @@ Funcția primește ca prim argument un obiect a cărui proprietăți sunt identi
 - [Immutably Rename Object Keys in Javascript](https://medium.com/front-end-weekly/immutably-rename-object-keys-in-javascript-5f6353c7b6dd)
 - [renameKeys | 30secondsofcode/js](https://www.30secondsofcode.org/js/s/rename-keys/)
 - [Garbage collection | https://javascript.info/](https://javascript.info/garbage-collection)
+- [The lazy-loading property pattern in JavaScript | Nicholas C. Zakas | humanwhocodes.com](https://humanwhocodes.com/blog/2021/04/lazy-loading-property-pattern-javascript/)

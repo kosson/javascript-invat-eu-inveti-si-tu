@@ -413,6 +413,99 @@ obi.elem; // val: miau
 obi['elem'] = 12; // val: 12
 ```
 
+Un alt lucru important pe care getteri și setterii îl pot oferi este o încărcare a valorilor care rezultă dintr-o computație ce taxează resursele. Vorbim de un adevărat mecanism de încărcare întârziată (*lazy-loading property pattern*). Pentru valorile care apar în urma unei computații, nu este util să introduci în constructor taxarea. Motivul este legat de faptul că proprietățile care se vor reflecta în obiectele care vor fi instanțiate, este posibil să nu fie folosite, dar efortul de calcul a fost deja făcut.
+
+```javascript
+class Test {
+  constructor () {
+    this.valoareComputată = oFunctieCareFaceIO(); // ineficient
+  }
+}
+```
+
+Rezolvarea este folosirea getterilor și setterilor. Vom explora o soluție pe care o propune Nicholas C. Zakas privind *amânarea* momentului computației până când valoarea este solicitată. Zacas explică faptul că un pas înainte față de calcularea valorii în constructor, ar fi obținerea acestei doar când valoarea este cerută printr-un getter.
+
+```javascript
+class Test {
+  get valoarea() {
+    return oFunctieCareFaceIO();
+  }
+}
+```
+
+Chiar și așa, dacă valoarea este cerută destul de des, se va performa același calcul și acest lucru conduce la necesitatea creării unui pas suplimentar. Acest pas constă în crearea unui mecanism de caching din care să fie servită valoarea la momentul ulterioarelor cereri.
+
+```javascript
+class Test {
+  get date() {
+    const dateComputate = oFunctieCareFaceIO();
+    // caching
+    Object.defineProperty(this, 'date', {
+      value:        dateComputate,
+      writable:     false,
+      configurable: false,
+      enumerable:   false
+    });
+    return dateComputate;
+  }
+}
+const obiect = new Test();
+let date1 = obiect.date(); // apelează getter-ul
+let date2 = obiect.date(); // citește din cache valoarea
+```
+
+Ceea ce se petrece este că după prima calculare a valorii proprietății `date`, la următoarea solicitare, este oferită valoarea care deja a fost calculată stocată în proprietatea creată. O problemă a acestui model este că proprietatea `data` este creată ca non-enumerable, dar la primul apel, devine `enumerable`.
+
+```javascript
+const obiect = new Test();
+console.log(object.hasOwnProperty("date")); // false
+
+let date1 = obiect.date(); // apelează getter-ul
+console.log(object.hasOwnProperty("date")); // true
+```
+
+Mai există cazul în care dorești ca proprietatea calculată să existe doar în instanță.
+
+```javascript
+class Test {
+  constructor () {
+    // referință către obiect
+    const instanță = this;
+
+    // Mecanism de caching la nivel de instanță!!!
+    Object.defineProperty(this, 'date', {
+      // definire accesor
+      get () {
+        const dateComputate = oFunctieCareFaceIO();
+        // redefinirea proprietății `date` la nivelul obiectului instanțiat
+        Object.defineProperty(instanță, 'date', {
+          value:        dateComputate,
+          writable:     false,
+          configurable: false
+        });
+        return dateComputate;
+      },
+      configurable: true,
+      enumerable:   true
+    });
+  }
+}
+```
+
+Constructorul creează proprietatea accesor `date`. Această proprietate este creată la nivelul instanței, fiind folosită legătura `this`. Proprietatea de la nivelul instanței este creată folosind `Object.defineProperty`, dar fiind atenți să permitem configurarea plus enumerable. Faptul că setăm proprietatea a fi `configurable`, ne va permite să o *configurăm* mai departe aplicând `Object.defineProperty`.
+
+Pentru că în interiorul funcției `get`, legătura `this` se face la obiectul în care a fost declarată, nu la cel instanțiat în baza clasei. Din acest motiv avem nevoie de puntea lexicală `const instanță = this;`. Ceea ce se întâmplă este o redefinire a proprietății `date` care are acum o valoare fixă ce nu poate fi suprascrisă sau configurată pentru a o proteja. Prima dată când valoarea este cerută, este calculată și apoi servită ori de câte ori este necesar.
+
+Ceea ce este foarte util este faptul că proprietățile vor aparține doar instanțelor.
+
+```javascript
+const obiect = new Test();
+console.log(object.hasOwnProperty("date")); // true
+
+let date1 = obiect.date(); // apelează getter-ul
+console.log(object.hasOwnProperty("date")); // true
+```
+
 ## Mediul lexical
 
 Clasele creează propriul mediu lexical la fel cu o fac și funcțiile.
@@ -710,6 +803,7 @@ class OClasa {
   }
 }
 ```
+
 ## Mantre
 
 -   Spre deosebire de funcții, declarația de clasă nu beneficiază de mecanismul de hoisting indiferent că este o declarație sau o expresie de clasă. Deci, până când execuția nu ajunge la locul declarației, clasa se află în Temporal Dead Zone (TDZ).
@@ -726,3 +820,4 @@ class OClasa {
 - [14.6 Class Definitions | ECMAScript® 2021 Language Specification | Draft ECMA-262 / September 7, 2020](https://tc39.es/ecma262/#sec-class-definitions)
 - [Classes | JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 - [JS classes are not “just syntactic sugar” | Andrea Giammarchi | medium.com](https://webreflection.medium.com/js-classes-are-not-just-syntactic-sugar-28690fedf078)
+- [The lazy-loading property pattern in JavaScript | Nicholas C. Zakas | humanwhocodes.com](https://humanwhocodes.com/blog/2021/04/lazy-loading-property-pattern-javascript/)
