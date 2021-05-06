@@ -1,6 +1,6 @@
 # Symbol.asyncIterator
 
-Este un `Symbol` *bine-cunoscut* care permite accesul la metoda `@@asyncIterator` a unui obiect. Acest obiect generat va putea fi folosit într-un enunț `for...await...of`. Pentru ca un obiect să fie unul async iterabil, trebuie să aibă o cheie `Symbol.asyncIterator`. Acesta nu este *enumerable*, *writable* și nici *configurable*. În acest moment nu există obiecte *built-in* care să aibă această cheie setată din start.
+Este un `Symbol` *bine-cunoscut* care permite accesul la metoda `@@asyncIterator` a unui obiect. Acest obiect generat va putea fi folosit într-un enunț `for...await...of`. Pentru ca un obiect să fie unul *async iterabil*, trebuie să aibă o cheie `Symbol.asyncIterator`. Acesta nu este *enumerable*, *writable* și nici *configurable*. În acest moment nu există obiecte *built-in* care să aibă această cheie setată din start.
 
 ```javascript
 const asyncItParticularizat = {
@@ -43,7 +43,7 @@ const iteratorParticularizat = () => ({
 });
 ```
 
-## Aplicație de citire a fișierelor cu NodeJS
+## Aplicație de citire a fișierelor cu Node.js
 
 ```javascript
 const util = require('util');

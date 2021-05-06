@@ -1,5 +1,7 @@
 # Funcțiile generator
 
+## Introducere
+
 Funcțiile generator oferă posibilitatea de a parcurge colecții de date. Este un nou tip de funcții introduse în ECMAScript 2015 care *produc* (*yield* în limba engleză) valori la cerere. Caracterul steluță așezat după cuvântul cheie `function`, va semnala că avem de a face cu o funcție generator.
 
 **Moment ZEN**: Funcțiile săgeată nu pot fi iteratori.
@@ -12,9 +14,60 @@ La momentul apelării, o funcție generator execută codul intern până la mome
 
 **Moment ZEN**: Returnarea explicită dintr-o funcție generator generează {value: valoare_evaluată_ptr_return, done: true }
 
-Obiectul generator respectă protocolului impus de interfața *Iterator* prin implementarea lui `[Symbol.iterator]()`, interfața *Iterable* prin implementarea lui `next()` și de *IteratorResult* prin rezultatul returnat de `yield` sub forma `{value: ceva, done: true/false}`. Obiectul rezultat este iterabil, dar în aceeași măsură este și un iterator. Faptul că este iterabil îl face pretabil la parcurgerea cu `for...of`, bucle sau poate fi chiar folosit cu operatorul spread (`...`).
+Obiectul generator respectă protocolului impus de interfața *Iterable* prin implementarea lui `[Symbol.iterator]()`, interfața *Iterator* prin implementarea lui `next()` și de *IteratorResult* prin rezultatul returnat de `yield` sub forma `{value: ceva, done: true/false}`. Obiectul rezultat este iterabil, dar în aceeași măsură este și un iterator. Faptul că este iterabil îl face pretabil la parcurgerea cu `for...of`, bucle sau poate fi chiar folosit cu operatorul spread (`...`). Mai mult, prin intermediul operatorului `yield`, generatoarele pot primi și trimite date, acestea fiind *trimise* ca argument metodei `next(date)`.
 
-Prin intermediul operatorului `yield`, generatoarele pot primi și trimite date, acestea fiind *trimise* ca argument metodei `next(date)`.
+**Moment ZEN**: Funcțiile generator produc iteratori.
+
+Pentru a aduce o perspectivă importantă pentru înțelegerea funcțiilor generator, să privim la ceea ce rezolvă acestea. În exemplul oferit, avem o funcție care face o implementare a protocolului *iterable*, ceea ce înseamnă și implementarea protocolului *iterator*.
+
+```javascript
+function cronometruInvers (pornire) {
+  let următoareaValoare = pornire;
+
+  // implementare iterable
+  return {
+    [Symbol.iterator]: () => ({
+      // implementare iterator
+      next () {
+        if (următoareaValoare < 0) {
+          return { done: true };
+        }
+
+        return {
+          done: false,
+          value: următoareaValoare--
+        };
+      }
+    })
+  };
+};
+const timpRămas = cronometruInvers(3);
+let valoare;
+for (valoare of timpRămas) {
+  console.log(valoare);
+}
+```
+
+Aceeași funcție poate fi rescrisă mai simplu, transformând-o în generator.
+
+```javascript
+function * cronometruInvers (pornire) {
+  let val;
+  for (val = pornire; val >= 0; val--) {
+    yield val;
+  }
+};
+const timpRămas = cronometruInvers(3); // creezi un iterator
+console.log(timpRămas.next()); // { value: 3, done: false}
+console.log(timpRămas.next()); // { value: 2, done: false}
+console.log(timpRămas.next()); // { value: 1, done: false}
+console.log(timpRămas.next()); // { value: 0, done: false}
+console.log(timpRămas.next()); // { value: undefined, done: true}
+```
+
+După cum se observă, de cele mai multe ori, generatorii pot fi considerați a fi un adaos sintactic (*sintactic sugar*) pentru a genera iteratori.
+
+## Unde le folosești
 
 Poți folosi funcțiile generator în următoarele scenarii:
 
@@ -22,7 +75,7 @@ Poți folosi funcțiile generator în următoarele scenarii:
 - consumi date folosind un generator pentru că poți trimite date în funcția generator la momentul în care apelezi `next(data)`. Funcția își oprește execuția până când un nou calup de date este primit la următorul apel `next(data)`;
 - produci și consumi date folosind funcțiile generator din postura de corutine.
 
-Datorită acestui comportament al generatoarelor prin care este permisă întreruperea execuției, în practică mai sunt numite și **corutine** (*cooperatively multitasked tasks*) atunci când produc și consumă date deopotrivă. Corutinele mai pot fi înțelese drept funcții care își întrerup execuția pentru a ceda controlul alteia.
+Datorită acestui comportament al generatoarelor prin care este permisă întreruperea execuției, în practică mai sunt numite și **corutine** (*cooperatively multitasked tasks*), atunci când produc și consumă date deopotrivă. Corutinele mai pot fi înțelese drept funcții care își întrerup execuția pentru a ceda controlul alteia.
 
 Funcțiile generator pot fi declarate astfel:
 
@@ -51,7 +104,7 @@ Execuția unei funcții generator creează un obiect generator care pune la disp
 Obiectul returnat de funcțiile generator este iterabil și poate fi înțeles ca o bandă cu produse la casa unui magazin. La apăsarea unei pedale (metoda *next()*), banda aduce în atenția operatorului comercial un produs pe care îl evaluează returnând prețul și apoi următorul produs ș.a.m.d.
 
 ```javascript
-function* ceva () {
+function * ceva () {
   yield "test1";
   yield "test2";
 };
@@ -68,6 +121,8 @@ După evaluare, execuția generatorului se oprește în așteptarea unui nou ape
 Parcurgerea unui iterabil în funcția generator este posibilă dacă este absolut necesar, dar nu se poate face `yield` din callbackuri aplicate de exemplu la `forEach`, `map`, etc.
 
 **Moment ZEN**: Nu poți face `yield` din callback-uri.
+
+## Parcurgerea cu for...of
 
 Este posibilă parcurgerea unui iterabil într-o funcție generator folosind `for...of`, de exemplu.
 
@@ -262,7 +317,13 @@ while( !(obi = refIterator.next()).done ){
 
 Modalitatea de a parcurge un generator cu o buclă `while` este mai greoaie față de ceea ce oferă `for...of`.
 
-### Generatoare de generatoare
+Folosind sintaxa spread (`...numeGenerator`) poți aplica fiecare element al iterabilului într-un anumit anumit context. Acest lucru înseamnă că poți *extrage* valorile direct într-un array, de exemplu.
+
+```javascript
+let listaCompletată = [1, 2, ...numeGenerator]; // [1, 2, x, y, z]
+```
+
+## Generatoare de generatoare
 
 Dintr-un generator poți apela alte generatoare.
 
@@ -284,7 +345,7 @@ for(obi of emiteFormule()){
 };
 ```
 
-### Bucle infinite
+## Bucle infinite
 
 Generatorarele permit construcția de bucle infinite, fără teama că vor returna erori din mediul în care programul rulează. Acest lucru se petrece pentru că indiferent de faptul că limita este la infinit, generarea valorilor este controlată prin `yield`. Se poate ușor închipui o listă cu bilete de ordine sau orice necesită o listă de elemente, care să se prelungească la infinit și care au nevoie de o identificare unică, de exemplu.
 
@@ -512,7 +573,7 @@ Folosind acest model, funcția *ambalaj* oferă mecanismul de interacțiune cu g
 
 ```javascript
 // funcția care va crea obiectul generator
-function* funcCreareGenerator () {
+function * funcCreareGenerator () {
   let primaVal = yield;
   console.log('Iese prima valoare la primul yield: ', primaVal);
   let aDouaVal = yield;
@@ -672,7 +733,7 @@ function* facCevaSecvential () {
 };
 const ziCeva = facCevaSecvential();
 ziCeva.next(); // { value: undefined, done: false }
-ziCeva.throw('Auleu, ceva e rău.');
+ziCeva.throw('Aoleu, ceva e rău.');
 // Eroare Auleu, ceva e rău.
 // { value: undefined, done: true }
 ```

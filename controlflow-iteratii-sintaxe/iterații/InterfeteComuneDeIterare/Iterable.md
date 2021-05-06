@@ -1,6 +1,6 @@
 ## Interfața *Iterable*
 
-O interfață *Iterable* are o proprietate `@@iterator`, care pentru oricare obiect ce implementează interfața, de fapt o preia ca membru, fiind o metodă internă a sa. Misiunea acesteia este să returneze un obiect *Iterator*, ce permite operațiuni specifice menționate la rândul lor de interfața *Iterator*, fiind asigurată **conformitatea**. Privind mai atent la `@@iterator`, observăm faptul că este un `Symbol`.
+O interfață *Iterable* are o proprietate `@@iterator`. Pentru oricare obiect ce implementează acest adevărat protocol, vom găsi această metodă internă. Misiunea acesteia este să returneze un obiect *Iterator*, ce permite operațiunile specifice, fiind asigurată **conformitatea**. Privind mai atent la `@@iterator`, observăm faptul că este un `Symbol`. Pentru a face distincția rapidă între iterator și iterabil, reține că iteratorul poate itera date folosind `next()`, iar iterabilul poate fi parcurs folosind sintaxa `for...of`.
 
 Practic privind, de exemplu, `for...of` poate itera prin următoarele obiecte care respectă **protocolul Iterator**: `Array`, `Map`, `Set`, `String`, `TypedArray` și `arguments`.
 
@@ -9,12 +9,36 @@ Aceste interfețe implementate cu ajutorul simbolurilor, permit parcurgerea și 
 Valoarea lui `[Symbol.iterator]` este o funcție fără argumente ce returnează un obiect. Acest obiect returnat se conformează protocolului de interare (**iterator protocol**), ceea ce îl face pretabil unei prelucrări cu `for...of`, de exemplu.
 
 ```javascript
-const ObiectIterabilNou = {
-    // îl facem iterabil prin introducerea metodei specifice
-    [Symbol.iterator] () {
-        return Iterator;
-    }
+// implementare iterable
+function cronometruInvers (pornire) {
+  let următoareaValoare = pornire;
+  return {
+    [Symbol.iterator]: () => ({
+      // implementare iterator
+      next () {
+        if (următoareaValoare < 0) {
+          return { done: true };
+        }
+
+        return {
+          done: false,
+          value: următoareaValoare--
+        };
+      }
+    })
+  };
+};
+const timpRămas = cronometruInvers(3);
+let valoare;
+for (valoare of timpRămas) {
+  console.log(valoare);
 }
+```
+
+Folosind sintaxa spread (`...numeGenerator`) poți aplica fiecare element al iterabilului într-un anumit anumit context. Acest lucru înseamnă că poți *extrage* valorile direct într-un array, de exemplu.
+
+```javascript
+let listaCompletată = [10, 20, ...timpRămas]; // [10, 20, 3, 2, 1 0]
 ```
 
 Să luăm un exemplu care se bazează pe moștenirea de la obiectul intern `String` prin ambalare. Acest obiect intern este un exemplu de obiect iterabil construit în limbaj.
@@ -45,3 +69,70 @@ for (let x of [1, 2, 3]) {
 ```
 
 Parcurgerea se face automat, rezultatele fiind oferite la încheierea iterării. Ce te faci în momentul în care dorești să ai acces secvențial la valorile unei colecții? În acest caz, vom apela la funcțiile generator.
+
+## Iterabile asincrone
+
+Atunci când valorile apar într-o manieră asincronă, pentru a parcurge obiectul cu astfel de comportament, va trebui ca respectivul obiect să implementeze un `Simbol.asyncIterator` ca metodă, devenind astfel metoda `@@asyncIterator`.
+
+**Moment ZEN**: Un obiect este async iterable dacă implementează metoda @@asyncIterator.
+
+Metoda `next()` va trebui să returneze o promisiune care în starea *fulfilled* va avea drept valoare, chiar valoarea lui `next()`.
+Parcurgerea unui astfel de obiect se face utilizând sintaxa `for await...of`. Să investigăm un exemlu desfășurat pentru o implementare.
+
+```javascript
+// implementare async iterable
+function cronometruInvers (pornire) {
+  let următoareaValoare = pornire;
+  return {
+    [Symbol.asyncIterator] () {
+      return {
+        // implementare iterator async
+        async next () {
+          // rezolvă promisiunea
+          await new Promise(function (resolve, reject) {
+            setTimeout(resolve, 1000);
+          });
+
+          if (următoareaValoare < 0) {
+            return { done: true };
+          }
+
+          return {
+            done: false,
+            value: următoareaValoare--
+          };
+        }
+      }
+    }
+  };
+};
+const timpRămas = cronometruInvers(3);
+let valoare;
+for await (valoare of timpRămas) {
+  console.log(valoare);
+}
+```
+
+Pentru brevitate, am putea face uz de funcțiile generator.
+
+```javascript
+// implementare async iterable
+function cronometruInvers (pornire, delay = 1000) {
+  return {
+    [Symbol.asyncIterator]: async function * () {
+      let următoareaValoare;
+      for (următoareaValoare = pornire; următoareaValoare >= 0; următoareaValoare--) {
+        await new Promise(function (resolve, reject) {
+          setTimeout(resolve, delay);
+        });
+        yield următoareaValoare;
+      }
+    }
+  };
+};
+const timpRămas = cronometruInvers(3);
+let valoare;
+for await (valoare of timpRămas) {
+  console.log(valoare);
+}
+```

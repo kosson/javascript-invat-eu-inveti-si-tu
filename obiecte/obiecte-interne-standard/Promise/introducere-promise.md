@@ -18,7 +18,7 @@ Pentru a rezolva mai elegant problema asincronicității dincolo de ceea ce pot 
 
 > O promisiune este un obiect care este folosit ca locțiitor pentru rezultatele care ar putea apărea în urma unei computații întârziate (posibil asincronă).([25.4Promise Objects](http://www.ecma-international.org/ecma-262/7.0/index.html#sec-promise-objects)).
 
-**Moment ZEN**: O promisiune este un obiect care *împachetează* o operațiune asincronă cu specificația că va returna un rezultat sau o eroare la un moment viitor.
+**Moment ZEN**: O promisiune este un obiect care *împachetează* o operațiune asincronă cu specificația că va returna un rezultat sau o eroare într-un moment viitor.
 
 ## Scurt istoric
 

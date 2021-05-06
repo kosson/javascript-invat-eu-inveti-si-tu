@@ -1,14 +1,43 @@
 ## Interfața `Iterator`
 
-O interfață `Iterator` trebuie să includă o proprietate `next()`, care este o funcție ce returnează un obiect `IteratorResult`, care trebuie să fie conform interfeței `IteratorResult`.
+O interfață `Iterator` trebuie să includă o proprietate `next()`, care este o funcție ce returnează un obiect `IteratorResult`. Acesta trebuie să fie conform interfeței `IteratorResult`. Aceast adevărat protocol constituie baza protocolului iterable, care permite parcurgerea obiectelor care-l onorează folosind sintaxa `for...of`.
 
 Definește o modalitate standard pentru a produce o secvență de valori finite sau infinite. Se comportă ca un pointer.
 
 **Moment Zen**: Un obiect este un iterator atunci când implementează metoda `next()`.
 
+Conform acestei cerințe pentru ca un obiect să fie iterator, putem avea o implementare pentru a exemplifica, care respectă acest protocol.
+
+```javascript
+function cronometruInvers (pornire) {
+  let următoareaValoare = pornire;
+  return {
+    next () {
+      if (următoareaValoare < 0) {
+        return { done: true };
+      }
+
+      return {
+        done: false,
+        value: următoareaValoare--
+      };
+    }
+  };
+};
+
+const timpRămas = cronometruInvers(3);
+console.log(timpRămas.next()); // { value: 3, done: false}
+console.log(timpRămas.next()); // { value: 2, done: false}
+console.log(timpRămas.next()); // { value: 1, done: false}
+console.log(timpRămas.next()); // { value: 0, done: false}
+console.log(timpRămas.next()); // { value: undefined, done: true}
+```
+
 Metoda `next()` este o funcție care nu primește argumente, dar care returnează un obiect cu două proprietăți:
 
--   `done` care este un `Boolean` cu cele două alternative: dacă `true`, atunci iteratorul a trecut de finalul secvenței pe care a avut-o de parcurs; dacă `false` înseamnă că a produs următoarea valoare din secvență;
+-   `done` care este un `Boolean` cu cele două alternative:
+  -   dacă `true`, atunci iteratorul a trecut de finalul secvenței pe care a avut-o de parcurs;
+  -   dacă `false` înseamnă că a produs următoarea valoare din secvență;
 -   `value` care este valoarea returnată de iterator. Se poate omite atunci când `done` este `true`.
 
 Pentru exemplificare, vom constitui un iterator cu scopul de a parcurge un array.
@@ -227,3 +256,7 @@ class UnGenerator {
   }
 }
 ```
+
+## Resurse
+
+- [JavaScript async iterators | Luciano Mammino | Node.js design Patterns](https://www.nodejsdesignpatterns.com/blog/javascript-async-iterators/)

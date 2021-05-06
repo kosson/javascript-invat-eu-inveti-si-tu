@@ -1,6 +1,6 @@
 # Funcții async/await
 
-Acest enunț a fost introdus în ECMAScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile care au cuvântul cheie `async` în față, vor returna mereu o promisiune. De îndată ce codul este compilat și executat, funcțiile async sunt executate. Acest comportament îl întâlnim și la promisiuni. În momentul în care se execută codul, acolo unde motorul întâlnește `new Promise(nume_callback)`, va executa funcția callback.
+Acest enunț a fost introdus în ECMAScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile care au cuvântul cheie `async` în față, vor returna mereu o promisiune. De îndată ce codul este compilat și executat, *funcțiile async* sunt executate. Acest comportament îl întâlnim și la promisiuni. În momentul în care se execută codul, acolo unde motorul întâlnește `new Promise(nume_callback)`, va executa funcția callback.
 
 Funcțiile `async` au comportament sicron, ceea ce înseamnă că execuția codului va aștepta ca execuția lor să se încheie. Atenție, dacă operațiunea întârzie, execuția va fi blocată.
 
@@ -26,13 +26,14 @@ Apariția lor marchează o nouă paradigmă de lucru cu promisiunile.
 
 ```javascript
 async function cevaAsincron () {
+  // throw new Error('Ceva neclar aici');
   return 'apar asincron';
   // echivalentul lui return Promise.resolve('apar asincron');
 };
-cevaAsincron().then(console.log);
+cevaAsincron().then(console.log).catch((e) => console.error);
 ```
 
-În exemplul de mai sus, valoarea 'apar asincron' va fi împachetată într-o promisiune datorită folosirii în subsidiar al lui `Promise.resolve()`. În cazul funcțiilor `async` abia după ce ai rezolvat promisiunea returnată și ai apelat un `then` sau un `await`, corpul funcției va fi apelat asincron.
+În exemplul de mai sus, valoarea 'apar asincron' va fi împachetată într-o promisiune datorită folosirii în subsidiar al lui `Promise.resolve()`. În cazul funcțiilor `async` abia după ce ai rezolvat promisiunea returnată și ai apelat un `then` sau un `await`, corpul funcției va fi apelat asincron. Atenție, dacă din funcția *async*, vei face `throw` la vreo eroare, aceasta va fi *ridicată* în `catch`.
 
 Avantajul este evident în cazul în care scrii o bibliotecă de cod sau o funcție cu rol utilitar în care nu știi dacă datele care vin sunt *sync* sau *async*. Atunci când trebuie returnat un obiect, acesta va fi returnat fără împachetare.
 
@@ -48,19 +49,25 @@ let x = simulare();
 // Promise {[[PromiseStatus]]: "pending", [[PromiseValue]]: undefined}
 // după 2 secunde
 // [[PromiseValue]]: "Salutare"
+const prelucrează = async () => {
+  const rezultat = await simulare();
+  return rezultat;
+}
+
+prelucrează().then((mesaj) => console.log('mesajul este: ', mesaj)).catch((e) => console.error);
 ```
 
-Aceste noi funcții te fac să percepi asicronicitatea ceva mai secvențial, mai sincron. Cheia utilizării funcțiilor `async` este utilizarea operatorului `await`, care poate fi folosit numai în interiorul unei astfel de funcții. Acesta returnează valoarea rezolvată a unei promisiuni. În același timp, operatorul oprește execuția funcției `async` până când promisiunea este rezolvată. Abia după rezolvarea promisiunii, va fi reluată execuția funcției. Dacă valoarea nu este o promisiune, este convertită la o promisiune rezolvată. În cazul în care promisiunea este respinsă, este returnată valoarea rezultată ca respingere.
+Aceste noi funcții te fac să percepi asicronicitatea ceva mai secvențial, mai sincron. Cheia utilizării funcțiilor `async` este utilizarea operatorului `await`, care poate fi folosit numai în interiorul unei astfel de funcții. Acesta returnează valoarea rezolvată a unei promisiuni. În același timp, operatorul oprește execuția funcției `async` până când promisiunea este rezolvată. Abia după, va fi reluată execuția funcției. Dacă valoarea nu este o promisiune, este convertită la o promisiune rezolvată. În cazul în care promisiunea este respinsă, este returnată valoarea rezultată ca respingere.
 
 ```javascript
 async function sarcina () {
   let salut = await simulare();
   return `${salut}`;
 };
-sarcina().then(mesaj => console.log(mesaj));
+sarcina().then(mesaj => console.log(mesaj)).catch((e) => console.error);
 ```
 
-Înțelegând aceste aspecte, ajungem la concluzia că avantajul pe care îl oferă funcțiile `async`/`await` este legat de posibilitatea de a introduce o ordine în care să apară rezultatele datorită întreruperii execuției funcției și implicit a soluționării celorlalte prin efectul lui `await`, chiar dacă acestea sunt extrase într-o manieră asicronă. Pur și simplu oferă posibilitatea de a ordona succesiunea operațiunilor similar rulării sincrone a codului.
+Înțelegând aceste aspecte, ajungem la concluzia că avantajul pe care îl oferă funcțiile `async`/`await` este legat de posibilitatea de a introduce o ordine în care să apară rezultatele datorită întreruperii execuției funcției și implicit a soluționării celorlalte prin efectul lui `await`, chiar dacă acestea sunt extrase într-o manieră asicronă. Pur și simplu oferă posibilitatea de a ordona succesiunea operațiunilor similar rulării sincrone a codului. Un alt avantaj major este cel al obținerii valorilor în același mediu lexical (*scope*), în cazul în care rezolvi mai multe promisiuni în aceeași funcție `async`.
 
 Luând în considerare și cunoștințele de la promisiuni, ia-ți un moment de reflecție pentru a decide în codul pe care îl scrii care este cea mai bună soluție de a soluționa promisiunile: secvențial, folosind `async`/`await`, paralel, folosind `Promise.all` sau prima din toate cele evaluate folosind `Promise.race`.
 
