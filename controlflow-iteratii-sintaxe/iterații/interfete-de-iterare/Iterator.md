@@ -1,6 +1,6 @@
 ## Interfața `Iterator`
 
-O interfață `Iterator` trebuie să includă o proprietate `next()`, care este o funcție ce returnează un obiect `IteratorResult`. Acesta trebuie să fie conform interfeței `IteratorResult`. Aceast adevărat protocol constituie baza protocolului iterable, care permite parcurgerea obiectelor care-l onorează folosind sintaxa `for...of`.
+O interfață `Iterator` trebuie să includă o proprietate `next()`, care este o funcție ce returnează un obiect `IteratorResult`. Acesta trebuie să fie conform interfeței `IteratorResult`. Acest adevărat protocol constituie baza protocolului iterable, care permite parcurgerea obiectelor care-l onorează folosind sintaxa `for...of`.
 
 Definește o modalitate standard pentru a produce o secvență de valori finite sau infinite. Se comportă ca un pointer.
 

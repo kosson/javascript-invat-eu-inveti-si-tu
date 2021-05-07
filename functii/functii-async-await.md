@@ -2,7 +2,7 @@
 
 Acest enunț a fost introdus în ECMAScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile care au cuvântul cheie `async` în față, vor returna mereu o promisiune. De îndată ce codul este compilat și executat, *funcțiile async* sunt executate. Acest comportament îl întâlnim și la promisiuni. În momentul în care se execută codul, acolo unde motorul întâlnește `new Promise(nume_callback)`, va executa funcția callback.
 
-Funcțiile `async` au comportament sicron, ceea ce înseamnă că execuția codului va aștepta ca execuția lor să se încheie. Atenție, dacă operațiunea întârzie, execuția va fi blocată.
+Funcțiile `async` au comportament sicron, ceea ce înseamnă că execuția codului va aștepta ca evaluarea lor să se încheie. Atenție, dacă operațiunea întârzie, execuția va fi blocată.
 
 ```javascript
 async function facCeva () {};
@@ -67,20 +67,20 @@ async function sarcina () {
 sarcina().then(mesaj => console.log(mesaj)).catch((e) => console.error);
 ```
 
-Înțelegând aceste aspecte, ajungem la concluzia că avantajul pe care îl oferă funcțiile `async`/`await` este legat de posibilitatea de a introduce o ordine în care să apară rezultatele datorită întreruperii execuției funcției și implicit a soluționării celorlalte prin efectul lui `await`, chiar dacă acestea sunt extrase într-o manieră asicronă. Pur și simplu oferă posibilitatea de a ordona succesiunea operațiunilor similar rulării sincrone a codului. Un alt avantaj major este cel al obținerii valorilor în același mediu lexical (*scope*), în cazul în care rezolvi mai multe promisiuni în aceeași funcție `async`.
+Înțelegând aceste aspecte, ajungem la concluzia că avantajul pe care îl oferă funcțiile `async`/`await` este legat de posibilitatea de a introduce o ordine în care să apară rezultatele datorită întreruperii execuției funcției. Implicit, soluționarea celorlalte va fi întârziată prin efectul lui `await`. Acest lucru se petrece chiar dacă rezultatele sunt obținute într-o manieră asicronă. Pur și simplu este oferită posibilitatea de a ordona succesiunea operațiunilor similar rulării sincrone a codului. Un alt avantaj major este cel al obținerii valorilor în același mediu lexical (*scope*), în cazul în care rezolvi mai multe promisiuni în aceeași funcție `async`. Dezavantajul este întreruperea execuției funcției dacă operațiunea asincronă durează.
 
 Luând în considerare și cunoștințele de la promisiuni, ia-ți un moment de reflecție pentru a decide în codul pe care îl scrii care este cea mai bună soluție de a soluționa promisiunile: secvențial, folosind `async`/`await`, paralel, folosind `Promise.all` sau prima din toate cele evaluate folosind `Promise.race`.
 
 ## Declarare
 
-În ceea ce privește sintaxa, vor fi folosite în tandem două cuvinte cheie: `async` în deschiderea declarației și `await` în corpul funcției. Faptul că pui `async` în fața unei funcții, nu transformă operațiunile din corpul funcției în constructuri asincrone. Codul se va executa în continuare sincron. Doar constructele asincrone precum `await` se vor executa asincron.
+În ceea ce privește sintaxa, vor fi folosite în tandem două cuvinte cheie: `async` în deschiderea declarației și `await` în corpul funcției. Faptul că pui `async` în fața unei funcții, nu transformă toate expresiile în vederea evaluării în constructuri asincrone. Codul se va executa în continuare sincron. Doar expresiile precedate de `await` se vor executa asincron.
 
 ```javascript
 // declarație de funcție
 async numeFunctie () {
   await ...
 };
-// funcție săgeată
+// expresie de funcție săgeată
 var numeFunctie = async () => {
   await ...
 };
@@ -160,7 +160,7 @@ async function ceva () {
 
 Erorile care ar putea apărea în urma evaluării unei expresii `throw new Error('O eroare la evaluare')` din funcție. Acestea vor putea fi gestionate în `catch(error){}`.
 
-Mai jos este un exemplu din Node.js cules din workshopul lui Matteo Collina și James Snell intitulat „Broken Promises” cu ocazia OpenJS World 2020.
+Mai jos este un exemplu din Node.js cules din workshopul lui Matteo Collina și James Snell intitulat „Broken Promises” cu ocazia evenimentului *OpenJS World 2020*.
 
 ```javascript
 const EventEmitter = require('events');
@@ -205,7 +205,7 @@ Scrierea codului asincron folosind `async`/`await` este o alternativă elegantă
 const [val1, val2, val3] = await Promise.all(promise1(), promise2(), promise3())
 ```
 
-Un posibil exemplu ar fi citirea mai multor fișiere în paralel. Pentru a rula aceste exemplu, vom folosi Node.js. Mai întâi vom apela pachetele `fs` și `util` după care vom transforma metoda `readFile` într-un a promisificată.
+Un posibil exemplu ar fi citirea mai multor fișiere în paralel. Pentru a rula aceste exemplu, vom folosi Node.js. Mai întâi vom apela pachetele `fs` și `util` după care vom transforma metoda `readFile` într-una promisificată.
 
 ```javascript
 const util = require('util');
@@ -255,7 +255,7 @@ Tot codul care există după un *await*, este echivalentul rulării într-un `th
 - generatoare
 - promisiuni
 
-## Referințe
+## Resurse
 
 - [Asynchronous Adventures in JavaScript: Async/Await](https://medium.com/dailyjs/asynchronous-adventures-in-javascript-async-await-bd2e62f37ffd)
 - [await. MDN web docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)

@@ -5,7 +5,7 @@
 Constructorul creează un obiect funcție *async*. Toate funcțiile asincrone în JavaScript sunt obiecte `AsyncFunction`.
 Acestea folosesc constructorul `AsyncFunction` pentru a genera obiecte-funcții, care au toate mijloacele să controleze un flux asincron de prelucrare a datelor.
 
-O declarație `async function nume (){}` va genera un obiect `AsyncFunction`. Invocarea unei funcții `async` se va solda cu returnarea unui `Promise`.
+O declarație `async function nume () {}` va genera un obiect `AsyncFunction`. Invocarea unei funcții `async` se va solda cu returnarea unui `Promise`.
 
 ```javascript
 const unAsincron = async () => {
