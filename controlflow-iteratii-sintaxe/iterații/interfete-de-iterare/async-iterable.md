@@ -17,7 +17,7 @@ Diferențele dintre iteratorii simpli și cei asincroni poate fi întărită exp
 |Valoare lui `next()` este|orice valoare|un `Promise`|
 |enunț pentru iterare|`for...of`|`await for...of`|
 
-O altă diferență notabilă între obiectele iterator sincrone și cele asincrone este faptul că cele sincrone nu pot fi fi parcurse decât prin `for...of`, iar cele asincrone nu pot fi utilizate cu operatorul spread. 
+O altă diferență notabilă între obiectele iterator sincrone și cele asincrone este faptul că cele sincrone nu pot fi fi parcurse decât prin `for...of`, iar cele asincrone nu pot fi utilizate cu operatorul spread.
 
 Să investigăm un exemplu desfășurat pentru o implementare. Avem o funcție care returnează un obiect ce poate fi iterat folosind `for await...of`.
 

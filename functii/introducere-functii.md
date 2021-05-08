@@ -19,7 +19,7 @@ faCeva(1, 3); //4
 let expresieDeFuncție = function () {};
 ```
 
-Pentru codul din interiorul funcției, argumentele se transformă în tot atâtea variabile locale. Urmează apoi o pereche de acolade ce delimitează **blocul de cod**. În JavaScript acoladele delimitează blocuri de cod, fiind constituit dintr-un set de enunțuri care sunt evaluate la invocarea funcției. Blocul de cod este numit și **corpul** funcției. Această redactare a funcțiilor mai primește o variantă numită **fat arrow functions** sau **arrow functions**, care tot funcții sunt dar sunt declarate fără cuvântul cheie `function` și folosește semnul rezultă pentru a indica corpul. Dacă ai un argument unic, poți opta să nu mai pui parantezele rotunde. Buna practică spune să indici argumentele întotdeauna cu parantezele rotunde.
+Pentru codul din interiorul funcției, argumentele se transformă în tot atâtea variabile locale. Urmează apoi o pereche de acolade ce delimitează **blocul de cod**. În JavaScript acoladele delimitează blocuri de cod, fiind constituite din enunțuri, care sunt evaluate la momentul invocării. Blocul de cod este numit și **corpul** funcției. Această redactare a funcțiilor mai primește o variantă numită **fat arrow functions** sau **arrow functions**, care tot funcții sunt dar sunt declarate fără cuvântul cheie `function` și folosește semnul *rezultă* pentru a indica corpul. În cazul funcțiilor săgeată, dacă ai un argument unic, poți opta să nu mai pui parantezele rotunde. Buna practică spune să indici argumentele întotdeauna cu parantezele rotunde.
 
 ```javascript
 let expresieDeFuncție = () => {
@@ -46,9 +46,9 @@ fun.a = 10; // fun.a => 10
 // exact ca în cazul obiectelor
 ```
 
-Ba mai mult, funcțiile au chiar metode proprii pe care le poți utiliza în anumite cazuri. Sunt trei care sunt capitale: `call()`, `apply()` și `bind()`. Din curiozitate, deschide consola în browser (F12) și declară o funcție: `function ceva () {};`. Acum scrie identificatorul funcției urmat de punct. Ceea ce vei vedea sunt toate proprietățile și metodele obiectului funcție. Cred că în acest moment ești convinsă că funcțiile sunt obiecte, de fapt.
+Ba mai mult, funcțiile au chiar metode proprii pe care le poți utiliza în anumite cazuri. Sunt trei care sunt capitale: `call()`, `apply()` și `bind()`. Din curiozitate, deschide consola în browser (F12) și declară o funcție: `function ceva () {};` urmat de ENTER. Acum scrie numele funcției după care pune punct fără spațiu. Ceea ce vei vedea sunt toate proprietățile și metodele *obiectului funcție*. Cred că în acest moment ești convinsă că funcțiile sunt obiecte, de fapt.
 
-Veți întâlni funcțiile la orice pas și în combinații diferite ca parte a unor expresii ale unui enunț sau ca declarații directe. Veți mai întâlni funcțiile ca valori pasate ca argumente unei alte funcții, fie ca identificator, fie declarate direct în antet. Le veți mai vedea la treabă în rolul de constructori de obiecte. Reține faptul că acolo unde este permisă scrierea unei expresii, poți scrie o funcție. Bunele practici îndeamnă programatorii să scrie funcțiile cât mai aproape de locul unde vor fi folosite.
+Veți întâlni funcțiile la orice pas și în combinații diferite ca parte a unor expresii ale unui enunț sau ca declarații directe. Veți mai întâlni funcțiile ca valori pasate ca argumente unei alte funcții, fie pasând numele (*referința*), fie declarate direct în antet. Le veți mai vedea la treabă în rolul de constructori de obiecte. Reține faptul că acolo unde este permisă scrierea unei expresii, poți scrie o funcție. Bunele practici îndeamnă programatorii să scrie funcțiile cât mai aproape de locul unde vor fi folosite.
 
 Unul din motivele evidente pentru care există funcțiile este acela al reutilizării în diferite scenarii. De ce? Pentru că ar fi o nebunie să scrii aceeași secvență de cod de 1000 de ori, dacă în diferitele părți ale codului este nevoie de un „tratament” identic pentru valori diferite.
 

@@ -169,7 +169,8 @@ function scotNr () {
 };
 const obiect = {
   // un factory de iteratorare
-  [Symbol.iterator]: function* () {
+  // [Symbol.iterator]: function* () {
+  *[Symbol.iterator]() { // prescurtare pentru [Symbol.iterator]: function* ()
     while(true) {
       let numar = scotNr() > 3;
       if(numar) {
