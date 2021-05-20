@@ -57,7 +57,7 @@ const obiect = new Map([
 console.log([...obiect]); // Array [ Array[2], Array[2], Array[2] ]
 ```
 
-Obiectele `Map` au o metodă internă `@@iterator`. Aceasta este o veste foarte bună pentru că vom fi beneficiarii unor noi instrumente de acces la date cum ar fi operatorul `spread`.
+Obiectele `Map` au o metodă internă `@@iterator`. Aceasta este o veste foarte bună pentru că vom fi beneficiarii unor noi instrumente de procesare a datelor, precum `for...of` sau operatorul *spread* (`...nume_map`).
 
 ```javascript
 let x = 'ceva';

@@ -636,3 +636,4 @@ Funcțiile de nivel înalt și closure-urile formează coloana vertebrală a pro
 - [JavaScript Getters and Setters](https://javascriptplayground.com/blog/2013/12/es5-getters-setters/)
 - [Javascript Closures](http://jibbering.com/faq/notes/closures/)
 - [JavaScript Closures](https://kentcdodds.com/blog/javascript-closures)
+- [Grokking V8 closures for fun (and profit?) | Vyacheslav Egorov](https://mrale.ph/blog/2012/09/23/grokking-v8-closures-for-fun.html)

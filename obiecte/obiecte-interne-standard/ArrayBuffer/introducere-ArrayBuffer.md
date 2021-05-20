@@ -21,10 +21,22 @@ fereastra[1] = 23;
 console.log(fereastra); // { [Iterator]  0: 10, 1: 23 }​​​​​
 ```
 
+## Constructorul ArrayBuffer()
+
+Constructorul `ArrayBuffer(dimensiune)` este folosit pentru a crea un obiect `ArrayBuffer`. Primește drept argument dimensiunea în bytes.
+
+```javascript
+const buffer = new ArrayBuffer(8);
+console.log(buffer.byteLength); // 8
+```
+
 ## Mantre
 
 - Are o metodă `TypedArray.prototype[@@iterator]()`.
 
-## Referințe
+## Resurse
 
 - [24.1ArrayBuffer Objects, ECMAScript 2017](https://www.ecma-international.org/ecma-262/8.0/#sec-arraybuffer-objects)
+- [File upload with Socket.io](https://medium.com/@Mewsse/file-upload-with-socket-io-9d2d1229494)
+- [ArrayBuffer | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer)
+- [How do I send image to server via socket.io? | stackoverflow.com](https://stackoverflow.com/questions/59478402/how-do-i-send-image-to-server-via-socket-io)

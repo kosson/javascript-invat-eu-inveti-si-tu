@@ -20,7 +20,7 @@ console.log('La final?'); // apare după rezultatul execuției funcției.
 
 Exemplul dat este unul care se execută **sincron**, fiecare operațiune urmând anterioarei ș.a.m.d. Rezultatele apar predictibil în ordinea evaluărilor din funcția `cuRolDeMetoda`.
 
-De cele mai multe ori, funcția care primește drept ultim argument o altă funcție, joacă la rândul ei rolul de metodă a unui obiect. În momentul în care codul funcției cu rol de metodă și-a încheiat execuția, va fi lansată în execuție și cea care a fost rezervată execuției *ulterioare*. Acest comportament este exprimat de cuvântul dîn limba engleză *callback*, care ar putea fi tradus în contextul de care vorbim ca *apelează-mă ulterior*. Acest *ulterior* este *de îndată* ce s-a încheiat execuția funcția care a *programat* o execuție ulterioară a callback-ului.
+De cele mai multe ori, funcția care primește drept ultim argument o altă funcție, joacă la rândul ei rolul de metodă a unui obiect. În momentul în care codul funcției cu rol de metodă și-a încheiat execuția, va fi lansată în execuție și cea care a fost rezervată execuției *ulterioare*. Acest comportament este exprimat de termenul în engleză *callback*, care ar putea fi tradus în contextul de care vorbim ca *apelează-mă ulterior*. Acest *ulterior* este *de îndată* ce s-a încheiat execuția funcția care a *programat* o execuție ulterioară a callback-ului.
 
 Ceea ce se realizează prin folosirea de callback-uri este o adevărată *programare* pentru o execuție ulterioară a unei funcții. Utilitatea callback-urilor este dovedită în cazurile în care sunt necesare a fi realizate operațiuni care cer timp. Acest timp necesar aducerii unei resurse de la un server, de exemplu, ar bloca firul de execuție în modelul sincron de rulare a codului, ceea ce ar fi un dezastru din punct de vedere al performanțelor. Astfel, este nevoie de un mecanism care să scoată operațiunile cu amprentă mare în timp în afara liniei temporale de execuție sincronă. Rezolvarea vine tocmai din posibilitatea de a *programa* execuția unor funcții ceva mai târziu, după ce o operațiune dificilă s-a încheiat și avem rezultatul acesteiea.
 
@@ -69,12 +69,18 @@ function SimulatorAPI (valoare_declanșator, callback) {
     console.log('Primul apar eu!');
     if (valoare_declanșator == 1) {
       valoare_declanșator++;
-      callback(valoare_declanșator);
+      callback(null, valoare_declanșator);
+    } else {
+      let error = new Error(`Ceva nu a funcționat`);
+      callback(error, '');
     }
   }, 3000);
 };
 
-SimulatorAPI(1, (valoare) => {
+SimulatorAPI(1, (error, valoare) => {
+  if (error) {
+    throw error;
+  }
   console.log('La final apar și eu', valoare);
 });
 ```
@@ -83,13 +89,71 @@ SimulatorAPI(1, (valoare) => {
 
 Acest model este util pentru a returna codului care apelează un API valoarea după ce și-a încheiat treaba. Acest model este folosit pe scară largă, dar este ușor de văzut faptul că tendințele favorizează utilizarea promisiunilor și a funcțiilor `async`.
 
+## Callback hell - iadul apelurilor
+
+Folosirea callback-urilor poate să se soldeze cu o serie de imbricări ale apelurilor ceea ce seamănă vizual cu o piramidă datorită indentării codului. În exemplul cu titlu ilustrativ, se observă indentarea în adâncime, care formează un adevărat șablon pe care în veți întâlni în practică sub denumirea de *piramida pierzaniei* - *pyramid of doom* sau *iadul callback-urilor* - *callback hell*.
+
+```javascript
+funcAsyncUnu (err => {
+  funcAsyncDoi (err => {
+    funcAsyncTrei (err => {
+      //...
+    });
+  });
+});
+```
+
+Una din problemele acestui șablon este aceea a stabilirii unor closure-uri pe identificatori care au potențialul să se confunde pentru că au același indentificator, de exemplu. Vezi identificatorul `err` din exemplu. O altă problemă este chiar declararea funcțiilor cu rol de callback în așa-zisa logică a fragmentului de cod (*in-place function definitions*). Acest lucru conduce la confuzie pentru că în funcție numărul evaluărior din corpurile funcțiilor declarate, la un moment dat nu mai știi unde începe una și unde se încheie alta. Pe de altă parte se creează clojure-uri pe toată adâncimea, fapt care taxează resursele de memorie și predispune codul la *scurgeri de memorie* - *memory leaks*.
+
+### Bune practici pentru callback-uri
+
+Atunci când declari funcția cu rol de callback, cel mai potrivit este să o faci în afara logicii care o va folosi. Asta însemnă să nu mai declari funcția în poziția rezervată callback-ului, ci mai bine să o declari în afară și să folosești identificatorul (numele funcției) în loc.
+
+O altă bună practică spune să ieși din execuția funcției cât mai repede posibil (`return`, `continue`, `break`) testând anumite valori care indică o stare de eroare sau un rezultate neașteptat. Acesta este *early return principle* - *principiul returnării cât mai repede*.
+
+```javascript
+// mai simplu și eficient este
+if (error) {
+  return nume_callback(error);
+  // în loc de
+  nume_callback(...);
+  return;
+}
+// opozabil șablonului
+if (error) {
+  nume_callback(error);
+} else {
+  // evaluare cod când nu ai erori
+}
+```
+
+Reține faptul că după invocarea funcției cu rol de callback, execuția funcției din care s-a făcut invocarea acesteia va continua. Din acest motiv este necesar să folosești `return` pentru a încheia și execuția funcției apelante. Această returnare se poate face pentru că rezultatul dorit este produsul unei operațiuni asincrone, de fapt. Este irelevant ce returnează funcția apelantă pentru că rezultatul sau eroarea apar altundeva ca produs al unei operațiuni asincrone. Abia când acesta apare, este pasat funcției cu rol de callback.
+
+Denumește funcțiile cu rol de callback pentru a face depanarea codului mai ușoară atunci când privești stiva apelurilor.
+
+Pentru a lucra curat, nu imbrica funcțiile și folosește mecanismul de hoisting ca pe un avantaj. În plus, trebuie să gestionezi erorile care apar în fiecare callback.
+
+```javascript
+aducResursa('mar', function clbkPtrAducRes () {
+  careApeleazaAltceva ('serviciulX', function clbkPtrApelCeva () {
+    console.log('ceva');
+  }){};
+});
+```
+
+Totuși trebuie spus un lucru la care trebuie reflectat foarte adânc. Există momente când vei folosi biblioteci de cod externe, care vor prelua callback-ul pe care-l scrii, iar la final vor executa funcția scrisă de tine. Kyle Simpson pune câteva întrebări esențiale pentru verificarea și dobândirea siguranței în scenariul de lucru cu un callback:
+
+-   Ești sigur pe aplicația externă căreia îi pasezi callback-ul?
+-   Ești încredințat că va executa în parametrii doriți de tine codul din funcția pe care i-o pasezi drept callback?
+-   Dacă nu ai scris tu întreaga aplicație care va folosi callback-ul, ai **încredere** să o folosești?
+
+Acestea sunt întrebări foarte serioase, care setează cadrul mental pentru căutarea de noi soluții. Acestea nu au întârziat să apară, fiind propulsate de standard: promisiunile și funcțiile `async/await`. În acest moment, recomandarea este ca în momentul dobândirii abilităților de lucru cu **promisiunile** sau cu funcțiile **async/await**, să fie abandonată practica callback-urilor.
+
+Un argument în plus pentru abandonarea treptată a practicii callback-urilor este aceea că urmărirea callback-urilor este o sarcină dificilă în sine.
+
 ## Tratarea erorilor în callback-uri
 
-Să presupunem că în procesul de aducere a unei resurse de la distanță, ceva se petrece și apare o eroare. Cum gestionăm aceste erori pentru a le afla și pentru a reacționa în consecință. Există trei modalități de tratare a erorilor:
-
-- afișarea erorii folosind un `console.log(eroare)` sau un `console.error(eroare)`,
-- poți face un `throw eroare` ceea ce va conduce la încheierea execuției codului și afișarea erorii sau
-- în cazul rulării codului JavaScript în Node.js, poți pasa eroarea mai departe pe lanțul de execuție folosind `next(eroare)`.
+Să presupunem că în procesul de aducere a unei resurse de la distanță, ceva se petrece și apare o eroare. Cum gestionăm aceste erori pentru a le afla și pentru a reacționa în consecință. Dacă trecem în revistă exemplul funcției `SimulatorAPI` prezentat anterior, vom observa un principiu de tratare a erorilor, care sunt trimise funcției cu rol de callback pentru a fi tratate acolo.
 
 Node.js chiar ne-a obișnuit cu marca proprie de tratare a erorilor primul parametru al unui callback fiind chiar o referință către un obiect de eroare. Dacă apare o eroare, se constituie acel obiect și poate fi prelucrată.
 

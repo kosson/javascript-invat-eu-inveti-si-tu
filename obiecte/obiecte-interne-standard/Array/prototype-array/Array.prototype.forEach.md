@@ -84,7 +84,7 @@ Devine foarte utilă folosirea lui `forEach` atunci când lucrezi cu datele unui
 const map = new Map(), obi = {a: 1};
 map.set('ceva', obi);
 map.forEach(function (valoare, cheie) {
-  console.log(`Cheia este ${cheie} și valoarea este ${valoare}`);  
+  console.log(`Cheia este ${cheie} și valoarea este ${valoare}`);
 }, map);
 // Cheia este ceva și valoarea este [object Object]
 ```
@@ -95,4 +95,4 @@ Metoda nu poate fi înlănțuită (în limba engleză *chainable*). Callback-ul 
 
 În cazul în care avem de-a face cu un array dinamic, la care se adaugă elemente chiar în moment ce este executat `forEach()`, cele noi nu vor fi prelucrate. Dacă în momentul prelucrării cu `forEach()` sunt modificate valorile array-ului, metoda le va folosi pe cele găsite la momentul *trecerii*.
 
-Un `forEach` nu poate fi oprit in execuție decât prin semnalizarea unei erori.
+Un `forEach` nu poate fi oprit in execuție decât prin semnalarea unei erori.
