@@ -219,11 +219,11 @@ setTimeout (() => {
 console.log('Eu între timp m-am executat');
 ```
 
-Pe scurt, ceea ce se întâmplă este că apelarea lui `console.log()` intern din callback-ul lui `setTimeout()`, a fost *amânat* la execuție cinci secunde mai târziu unui API intern motorului JavaScript în vreme ce codul care urma a `setTimeout()`-ului a fost evaluat fără a mai aștepta finalizarea celui anterior. Este un fel de *valoarea vine, când vine*.
+Pe scurt, ceea ce se întâmplă este că apelarea lui `console.log()` intern din callback-ul lui `setTimeout()`, a fost *amânat* la execuție cinci secunde mai târziu unui API intern motorului JavaScript, în vreme ce codul care urma a `setTimeout()`-ului a fost evaluat fără a mai aștepta finalizarea celui anterior. Este un fel de *valoarea vine, când vine*.
 
 Din nefericire, modelul asincronicității construit pe callback-uri conduce la un anumit fenomen de aglomerare în care vei folosi un callback în interiorul unui alt callback și așa mai departe pentru atingerea unui anumit model funcțional. Apelarea unui callback atunci când deja execuți un callback și posibil un altul din cel tocmai apelat, conduce la o situație numită în literatura de specialitate **callback hell**. Unii programatori mai numesc această situație *piramida pierzaniei* - **pyramid of doom**, datorită formei pe care o dă indentarea codului. O astfel de practică trebuie evitată ori de câte ori este posibil printr-o abordare diferită a logicii aplicației, fie prin chaining, fie prin folosirea promisiunilor.
 
-# Referințe
+# Resurse
 
 -   Acest material a fost inspirat de prezetarea lui Philip Roberts: [What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ) de la JSConf EU 2014. Instrumentul de simulare „Loupe” este la [acest link](http://latentflip.com/loupe).
 -   [Wikipedia Call stack](https://en.wikipedia.org/wiki/Call_stack)
@@ -232,5 +232,6 @@ Din nefericire, modelul asincronicității construit pe callback-uri conduce la 
 -   [Callback Hell](http://callbackhell.com/)
 -   [Using XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest),
 -   [Jake Archibald: In The Loop - JSConf.Asia | Youtube |  JSConf](https://www.youtube.com/watch?v=cCOL7MC4Pl0)
--   [8.1.6.2 Queuing tasks | ](https://html.spec.whatwg.org/multipage/webappapis.html#queuing-tasks)
+-   [8.1.6.2 Queuing tasks | HTML. Living Standard | 21 May 2021 | html.spec.whatwg.org](https://html.spec.whatwg.org/multipage/webappapis.html#queuing-tasks)
+-   [8.1.6 Event loops | HTML. Living Standard | 21 May 2021 | html.spec.whatwg.org](https://html.spec.whatwg.org/multipage/webappapis.html#task-queue)
 -   [The Node.js Event Loop | Flavio Copes](https://flaviocopes.com/node-event-loop/)

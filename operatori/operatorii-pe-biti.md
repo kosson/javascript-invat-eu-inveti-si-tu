@@ -62,7 +62,7 @@ Verificarea:
 
 Acești operatori vor fi folosiți pe valori care sunt numere întregi pe 32 de biți. De fapt la momentul când se folosesc acești operatori, se face o conversie la un număr pe 32 de biți și abia apoi se face operațiunea.
 
-Sistemul actual de reprezentare a numerelor întregi pentru sistemele de calcul existente este numit **complement față de doi** a unui număr pentru care se poate memora și semnul (are bit de semn: bitul cel mai semnificativ este fie `1`, însemnând că valoarea este pozitivă, fie `0`, care înseamnă că valoarea este negativă). **Complement față de doi** înseamnă că valoarea maximă reprezentată merge pe axa pozitivă dar și pe cea negativă. În JavaScript avem o plajă de la `-2147483648` la `2147483647`.
+Sistemul actual de reprezentare a numerelor întregi pentru sistemele de calcul existente este numit **complement față de doi** a unui număr pentru care se poate memora și semnul (are bit de semn: bitul cel mai semnificativ este fie `1`, însemnând că valoarea este pozitivă, fie `0`, care înseamnă că valoarea este negativă). **Complement față de doi** înseamnă că valoarea maximă reprezentată merge pe axa pozitivă, dar și pe cea negativă. În JavaScript avem o plajă de la `-2147483648` la `2147483647`.
 
 Mai trebuie menționat un lucru foarte important. Atunci când vine vorba de lucrul cu valori numerice în JavaScript, acestea sunt de tip float, nu integer.
 

@@ -111,7 +111,7 @@ x;    // abia la următoarea utilizarea a
       // identificatorului acesta va indica noua valoare
 ```
 
-Te-ai fi așteptat ca la incrementare să fie returnat `2` fără dubiu. Acest lucru nu s-a întâmplat pentru că valoarea variabilei a fost returnată la momentul când a fost evaluat operatorul `++`, care returnează noua valoare.
+Te-ai fi așteptat ca la incrementare să fie returnat `2` fără dubiu. Acest lucru nu s-a întâmplat pentru că valoarea variabilei a fost returnată la momentul când a fost evaluat operatorul `++`, care o returnează pe cea nouă.
 
 Acest moment în timp este foarte important de reținut pentru că este după ce *cursorul* motorului a trecut de identificator și a *dat peste* operatorul de incrementare. După ce *cursorul* va trece și de operator, acesta returnează valoarea operandului, dar nu la valoarea incrementată. Ceea ce s-a petrecut este că *mediul de execuție* reține în continuare valoarea anterioară, dar nu și pe cea nouă, cea actualizată după trecerea cursorului de operator și incrementarea în urma evaluării care s-a făcut. Abia după ce mai *citim* (**evaluăm**) o dată identificatorul `x`, acesta indică valoarea actualizată. În cazul utilizării ca prefix, operatorul face mai întâi incrementarea. Astfel, vom avea la dispoziție valoarea actualizată fără a mai fi necesară citirea valorii identificatorului, care tot o operațiune de evaluare este.
 

@@ -86,7 +86,20 @@ parseFloat('3.1415');
 
 Această metodă este și membru a obiectului `Number` începând cu ECMAScript 2015.
 
+## Separatoare
+
+Pentru a fi mai ușor de citit numerele de mari dimensiuni, se poate folosi caracterul underscore pentru a separa mantisele.
+
+```javascript
+// numere zecimale
+1_543.85
+1_000_000
+```
+
+Același separator poate fi folosit și pentru numerele reprezentate octal, binar sau hexazecimal.
+
 ## Resurse
 
 - [Numbers | JavaScript.info](https://javascript.info/number)
 - [Why JavaScript is Bad At Math | Alexandra Langtom](https://javascript.plainenglish.io/why-javascript-is-bad-at-math-9b8247640caa)
+- [Lexical grammer | Numeric separators | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar)

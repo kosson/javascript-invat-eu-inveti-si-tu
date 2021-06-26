@@ -1,6 +1,15 @@
 # String.prototype.replaceAll()
 
 Această metodă returnează un șir nou de caractere în care s-a operat înlocuirea tuturor fragmentelor sau a cuvintelor indicate în primul argument, care este un șir de caractere sau un RegExp.
+
+```javascript
+'a'.replace('', '_'); // '_a'
+'aaa'.replace(/(?:)/g, '_'); // '_a_a_a_'
+
+// simplificarea pe care o aduce:
+'aaa'.replaceAll('', '_'); // '_a_a_a_'
+```
+
 Șirul de caractere original nu va fi modificat.
 
 ```javascript

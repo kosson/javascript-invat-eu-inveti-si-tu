@@ -310,3 +310,4 @@ faceva(2);                        // 12
 -   [The Wit and Wisdom of Grace Hopper. From The OCLC Newsletter, March/April, 1987, No. 167 (Editor and article author is Philip Schieber.)](http://www.cs.yale.edu/homes/tap/Files/hopper-wit.html)
 -   [Lin Clark. A crash course in memory management | Mozilla Hacks](https://hacks.mozilla.org/2017/06/a-crash-course-in-memory-management/)
 -   [Lin Clark. Calls between JavaScript and WebAssembly are finally fast | Mozilla Hacks](https://hacks.mozilla.org/2018/10/calls-between-javascript-and-webassembly-are-finally-fast-%F0%9F%8E%89/)
+-   [Parsing in JavaScript: Tools and Libraries](https://tomassetti.me/parsing-in-javascript/)

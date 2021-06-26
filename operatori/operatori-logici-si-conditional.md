@@ -82,7 +82,7 @@ Pentru a vă adăuga încă un instrument util în viitoarele evaluări. Legile 
 > NOT(**true** OR **false**) <=> NOT **true** AND NOT **false**
 > NOT(**true** AND **false**) <=> NOT **true** OR NOT **false**
 
-Pentru noi specialiștii în științele informării, legile lui Morgan au o rezonanță familiară pentru că se aplică la căutarea în text folosindu-se operatorii Boolean.
+Pentru noi specialiștii în științele informării, legile lui Morgan au o rezonanță familiară pentru că se aplică la căutarea în text, folosindu-se operatorii Boolean.
 
 > NOT(**termen1** OR **termen2**) este același lucru precum (NOT **termen1**) AND (NOT **termen2**)
 
@@ -104,6 +104,17 @@ La nevoie poți nega negația `!!true`. Folosind acest operator pe orice valoare
 ## Operatorul logic ȘI - `&&` (AND)
 
 Este un operator care spune firului de execuție că pentru a continua valorile de la stânga și de la dreapta operatorului, trebuie să fie evaluate la `true`. Doar dacă ambele expresii sunt evaluate la `true`, evaluarea poate continua. Dacă una dintre condiții este evaluată la `false`, întreaga evaluare este `false`, iar execuția va urma traseul pregătit pentru parcursul `false`.
+
+## Operatorul logic ȘI cu atribuire - `&&=`
+
+Acest operator este folosit pentru a atribui o valoare doar dacă operatorul din stânga se reduce la o valoare de adevăr (*truthy*).
+
+```javascript
+let a = 1, b = 0;
+a &&= 'ceva'; // a va avea valoarea "ceva"
+```
+
+În cazul în care valoarea nu este una *truthy*, variabila își păstrează valoarea inițială.
 
 ## Operatorul logic ORI - `||` (OR)
 
@@ -141,7 +152,7 @@ Acest comportament permite o uzanță des întâlnită în programare pentru ini
 const obi = obi || {nume: "obiect important"};
 ```
 
-În cazul nostru, obiectul `obi` ca operand este evaluat la o valoare *truthy* (toate obiectele la evaluare returnează *truthy*), dacă există deja, adică dacă a fost instanțiat. În acest caz literalul care instanția obiectul nu mai este evaluat.
+În cazul nostru, obiectul `obi` ca operand este evaluat la o valoare *truthy* (toate obiectele la evaluare returnează *truthy*), dacă există deja, adică dacă a fost instanțiat. În acest caz, literalul care instanția obiectul, nu mai este evaluat.
 
 **Spune standardul**:
 
@@ -170,6 +181,15 @@ const ceva = 10;
 if (ceva === 1 || ceva === 10 } || ceva === 100) {
   // execută codul
 }
+```
+
+## Operatorul ORI cu atribuire - `||=`
+
+Acest operator este folosit pentru a atribui o valoare doar dacă operatorul din stânga se reduce la o valoare falsă (*falsy*).
+
+```javascript
+let a = 0, b = 1;
+a ||= 'altceva'; // a va deveni "altceva"
 ```
 
 ## Operatorul ternar
