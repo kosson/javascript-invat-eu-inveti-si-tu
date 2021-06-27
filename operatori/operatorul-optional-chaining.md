@@ -14,8 +14,7 @@ let este = cevaInteresant?.detalii?.personal;
 console.log(este); // undefined
 // Poți combina cu nullish coalescing
 let alternativEste = cevaInteresant?.detalii ?? "satisfăcător";
-
-// Sau cu un Map
+// Sau poți folosi cu un Map
 const unMap = new Map();
 unMap.set("cheie0", {ceva: 10});
 let existaCeva = unMap.get("cheie0")?.ceva;

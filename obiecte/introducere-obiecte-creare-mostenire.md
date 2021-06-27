@@ -925,6 +925,24 @@ delete obiect['doi']; // true
 
 **Moment Zen**: În obiecte, numele proprietăților sunt stringuri sau simboluri.
 
+### Verificarea existenței unei proprietăți
+
+Pentru a verifica dacă există o propietate, vei accesa respectiva proprietate folosind operatorul `?.`. Acest operator se comportă ca un controlor ce verifică dacă există.
+
+```javascript
+const cevaInteresant = {
+  mesaj: "salutare",
+  detalii: {
+    loc: "Costinești",
+    scor: "5"
+  }
+}
+let este = cevaInteresant?.detalii?.personal;
+console.log(este); // undefined
+// Poți combina cu nullish coalescing
+let alternativEste = cevaInteresant?.detalii ?? "satisfăcător";
+```
+
 ### Eliminarea membrilor unui obiect
 
 Operatorul `delete` permite eliminarea unei proprietăți, adică a perechii cheie-valoare din obiect. Acesta are efect doar asupra proprietăților care aparțin obiectului. Prototipul nu este afectat. Delete returnează `false`, dacă proprietatea nu poate fi ștearsă, dar este deținută de obiect. Va returna `true` dacă proprietatea a fost ștearsă cu succes.
