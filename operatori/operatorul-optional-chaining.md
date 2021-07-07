@@ -22,6 +22,17 @@ let existaCeva = unMap.get("cheie0")?.ceva;
 
 Dacă am privi înlănțuirea de referințe către o valoare dorită ca pe o cale, operatorul rezolvă necesitatea de a valida existența proprietăților intermediare. Putem privi acest operator ca pe o optimizare în testarea cât mai timpurie a existenței unei proprietăți.
 
+Un alt caz în care operatorul *optional chaining* poate fi folosit este cel al primirii unui obiect JSON, pe care îl deserializezi și dorești să obții valoarea dintr-o cale în adâncime. Ai putea folosi ca până acum operatorul `&&`.
+
+```javascript
+let cine =
+  obiect &&
+  obiect.persoana &&
+  obiect.persoana.alias
+```
+
+Poți folosi chiar un lanț de `if`-uri pentru a testa fiecare proprietate, dar odată cu acest operator, soluția este mult mai simplă. 
+
 ## Chaining opțional pentru metode
 
 Chaining-ul opțional poate fi folosit atunci când se încearcă apelarea unei metode care nu există sau despre care nu se cunoaște date că ar fi disponibilă.

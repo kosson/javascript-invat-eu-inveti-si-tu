@@ -9,6 +9,11 @@ Ca parametri acceptă:
 -   indexul de la care să pornească,
 -   indexul la care să se oprească.
 
+```javascript
+const colecție = ["ceva", "altceva", "undeva", "cineva"];
+console.log(colecție.slice(1)); // [altceva", "undeva", "cineva"]
+```
+
 Dacă indexul de pornire este o valoare negativă, atunci se va porni de la finalul array-ului spre indexul `0`. Dacă nu este menționat indexul (`undefined`), atunci `slice` pornește de la `0`. Dacă nu se menționează capătul, atunci va *tăia* până la capăt.
 
 Atenție, `slice` se duce până la limita menționată, dar nu include și valoarea de la indexul menționat.

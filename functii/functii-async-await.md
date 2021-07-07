@@ -205,7 +205,7 @@ Scrierea codului asincron folosind `async`/`await` este o alternativă elegantă
 const [val1, val2, val3] = await Promise.all(promise1(), promise2(), promise3())
 ```
 
-Un posibil exemplu ar fi citirea mai multor fișiere în paralel. Pentru a rula aceste exemplu, vom folosi Node.js. Mai întâi vom apela pachetele `fs` și `util` după care vom transforma metoda `readFile` într-una promisificată.
+Un posibil exemplu ar fi citirea mai multor fișiere în paralel. Pentru a rula acest exemplu, vom folosi Node.js. Mai întâi vom apela pachetele `fs` și `util` după care vom transforma metoda `readFile` într-una promisificată.
 
 ```javascript
 const util = require('util');
