@@ -1,6 +1,6 @@
 # Callback-uri și asicronicitate
 
-Foarte multe dintre metodele pe care obiectele interne le oferă pentru a lucra cu datele, implică folosirea funcțiilor care vor juca un rol special, însemnând pasarea ca ultim argument a unei alte funcții care va fi apelată **ulterior**, după ce codul funcției și-a încheiat propria evaluare.În exemplul de mai jos, am realizat desemnat prima funcție să fie o valoare, care va fi pasată celei de-a doua pentru a modifica niște date.
+Foarte multe dintre metodele pe care obiectele interne le oferă pentru a lucra cu datele, implică folosirea funcțiilor care vor juca un rol special. Pasarea ca ultim argument a unei alte funcții numită *callback*, va permite apelarea **ulterioră** a acesteia după ce codul funcției și-a încheiat propria evaluare. În exemplul de mai jos, am desemnat prima funcție să fie o valoare, care va fi pasată celei de-a doua pentru a modifica niște date.
 
 ```javascript
 function fnCuRolDeCallback (ceva) {

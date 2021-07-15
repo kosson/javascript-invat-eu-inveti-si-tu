@@ -62,7 +62,35 @@ function fibonacci (x) {
 
 ## Recursivitate tail
 
-Un Tail Call Optimisation este un apel al unei funcții la încheierea evaluării codului gazdei după care nimic nu mai trebuie evaluat. Acest lucru implică faptul că ar fi posibil să apelezi o funcție dintr-o altă funcție fără ca stiva apelurilor să crească.
+Recursivitatea are o mare problemă legată de numărul de frame-uri pe care le putem adăuga în stiva apelurilor. În cazul în care funcția recursivă este apelată de foarte multe ori, este în situația de a depăși limita de memorie alocată stivei apelurilor, fapt care conduce încheierea rulării printr-o eroare legată de *stack overflow*.
+
+Frame-urile se vor adăuga până când *cazul de bază* va fi satisfăcut, moment în care exact la în cazul unui drum pe care l-ai marcat, valoarea este returnată rând pe rând frame-urilor care o așteaptă în ordine până la primul apel. Starea tuturor etapelor până la satisfacea *cazului de bază* este menținută prin înșiruirea frame-urilor. Acesta este cazul apelării recursive generale. În cazul unui apel tail-recursive, vom pasa funcției executate la fiecare etapă, un *acumulator* care să țină minte starea. Următorul exemplu explorează această optimizare.
+
+```javascript
+function tailRecursive (val) {
+  function executant (val, acumulator) {
+    // condiția ieșirii din recursivitate
+    if (val === 0) return acumulator + 'sferă';
+    // sarcina de lucru în care acumulatorul se îmbogățește ținând astfel în viață starea.
+    // console.log(acumulator);
+    //#3
+    return executant(val - 1, acumulator + "sferă într-o "); // se află în tail position pentru că este ultimul lucru pe care-l execută
+  }
+
+  //#2
+  return executant(val, "O sferă cu o "); // al doilea parametru este „cazul de bază”, adică valoarea inițială a acumulatorului
+}
+
+console.log(tailRecursive(5)); //#1
+// O sferă cu o sferă într-o sferă într-o sferă într-o sferă într-o sferă într-o sferă
+// sau comandă în Node.js
+const numarExecutii = parseInt(process.argv[2]);
+console.log(tailRecursive(numarExecutii)); // node nume_fisier.js 70000
+```
+
+Un Tail Call Optimisation este un apel al unei funcții (*tail recursive function*) la încheierea evaluării codului gazdei după care nimic nu mai trebuie evaluat. De fapt, este chiar ultimul lucru pe care funcția trebuie să-l facă.
+
+Acest lucru implică faptul că ar fi posibil să apelezi o funcție dintr-o altă funcție fără ca stiva apelurilor să crească. Folosind exemplul de mai sus, primul frame va fi cel al apelului lui `tailRecursive` (`#1`) căruia îi pasăm limita și valoarea inițială a acumulatorului. Funcția va executa `executant` (`#2`) pasând limita și acumulatorul și astfel, se va crea cel de-al doilea frame în call stack. În acest moment, la finalul execuției lui `executant`, pentru că nu a fost întrunită condiția ieșirii din recursivitate, se va face return-ul, care va proceda la apelarea din nou ceea ce va crea al treilea frame în stiva apelurilor (`#3`). În acest moment, când execuția se va termina, pentru că funcția `executant`  (`#2`) a returnat, va fi eliminată din stack frame. Adu-ți aminte că o funcție care a returnat își încheie existența și memoria este eliberată. Cu ceea ce rămâi este un singur apel, ultimul care se face prin `return`, iar starea între etape este menținută de acumulator.
 
 ```javascript
 function suntApelata (x) {
@@ -76,17 +104,7 @@ function altApelant () {
 }
 ```
 
-În cazul recursivității, este posibil ca stiva să devină foarte aglomerată.
-
-```javascript
-function fact (n) {
-    if (n == 1) {
-        return 1;
-    }
-    return n * fact(n - 1);
-};
-fact(4);
-```
+Din nefericire, nu toate motoarele de JavaScript sunt optimizate pentru a oferi TCO. Din nefericire, în acest moment chiar dacă folosim TCO, vom  lovi pragurile setate de call stack în cazul în care motorul nu are TCO.
 
 Ne vom folosi de exemplul calculării seriei de numere Fibonancci, dar vom avea grijă să apelăm chiar la final funcția recursivă.
 
@@ -200,3 +218,5 @@ mapper(func, arr); // [ 2, 3, 4 ]
 -   [Programming Loops vs Recursion - Computerphile](https://www.youtube.com/watch?v=HXNhEYqFo0o)
 -   [What on Earth is Recursion? - Computerphile](https://www.youtube.com/watch?v=Mv9NEXX1VHc)
 -   [The Most Difficult Program to Compute? - Computerphile](https://www.youtube.com/watch?v=i7sm9dzFtEI)
+-   [Recursion, Iteration, and JavaScript: A Love Story - Anjana Vakil | JSHeroes 2018](https://www.youtube.com/watch?v=FmiQr4nfoPQ)
+-   [Improve Your Recursions Performance With Tail Call Optimization](https://ireadyoulearn.info/2020/09/19/improve-your-recursions-performance-with-tail-call-optimizations/)
