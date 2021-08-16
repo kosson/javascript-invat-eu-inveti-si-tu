@@ -363,6 +363,28 @@ const obi2 = new UnConstructorNou();
 obi2.oValoare; // 1000
 ```
 
+Într-un constructor poți folosi metoda `Object.defineProperty()` cu scopul de a crea proprietăți pe care să le configurezi în toate aspectele.
+
+```javascript
+function SalutOameni (nume) {
+  Object.defineProperty(this, 'nume', {
+    get: function () {
+      return nume;
+    },
+    set: function (numePers) {
+      nume = numePers;
+    },
+    enumerable: true,
+    configurable: true
+  });
+
+  this.salutăOmul = function () {
+    console.log(this.nume);
+  }
+}
+// atenție, dacă nu apelezi cu new, this va fi obictul global
+```
+
 Odată cu evoluția standardului a fost oferită o alternativă elegantă prin metoda `Object.create()`, cu ajutorul căreia putem evita instanțierea cu `new`. Totuși declari o funcție constructor și adaugi în prototip proprietățile pe care obiectul le va moșteni.
 
 ```javascript
@@ -382,13 +404,13 @@ instanta.difuzor(); // Salut!
 
 Astfel, se va realiza conectarea la obiectul prototip al constructorului. Veți vedea faptul că folosirea sintaxei de lucru pentru clase, va realiza automat legătura la obiectul prototip al constructorului la momentul extinderii uneia.
 
-#### Constrângerea rolurilor
+## Constrângerea doar la rolul de constructor
 
-Uneori ai nevoie să restricționezi o funcție doar la rolul de constructor. Obiectul rezultat este o instanță a obiectului `this` a funcției constructor pentru că în baza lui `this` a fost instanțiat acesta. Bazându-ne pe acest lucru, putem verifica la momentul invocării dacă obiectul s-a creat sau nu. La apelarea cu `new` se creează obiectul, iar la execuția simplă nu se creează niciun obiect.
+Uneori ai nevoie să restricționezi o funcție doar la rolul de constructor. După cum știm deja, obiectul rezultat este o instanță a obiectului legat la `this` din funcția constructor. Noul obiect este de fapt `this`-ul funcției constructor. Putem verifica chiar la momentul conceperii obiectului, dacă acesta este de *tipul* constructorului, spunem noi - `if (this instanceof NumeConstructor)`. La instanțierea cu `new` se creează obiectul, iar la execuția simplă nu se creează niciun obiect.
 
 ```javascript
 function VehiculSpatial (nume) {
-  if(this instanceof VehiculSpatial){
+  if (this instanceof VehiculSpatial) {
     this.nume = nume;
     this.tip = 'vehicul';
   } else {
@@ -399,14 +421,14 @@ let obiectNou = new VehiculSpatial('ISS'); // { nume: "ISS", tip: "vehicul" }
 let obiectEsuat = VehiculSpatial(); // Error: Funcția are rol de constructor! Invocă cu new
 ```
 
-Această restricționare poate fi păcălită apelând constructorul nostru în contextul unui obiect deja creat în baza lui, fără a instanția cu `new`. Acest lucru este oferit de `call()`.
+Această restricționare poate fi păcălită totuși, apelând constructorul nostru în contextul unui obiect deja creat în baza lui, fără a instanția cu `new`. Acest lucru este oferit de `call()`.
 
 ```javascript
 let obiectPacalitor = VehiculSpatial.call(obiectNou, 'Soyuz');
 // în acest moment, obiectNou este modificat la Object { nume: "Soyuz", tip: "vehicul" }
 ```
 
-Folosirea metodei `call` a produs o legare a lui `this` la obiectul deja creat. Acest lucru conduce la rescrierea lui `nume` în obiectul gazdă (`obiectNou`). Acest comportament nu este cel așteptat atâta vreme cât am dorit ca funcția constructor să permită invocarea doar cu `new`, dar este posibil.
+Folosirea metodei `call` a produs o legare a lui `this` la obiectul deja creat. Acest lucru conduce la rescrierea lui `nume` în obiectul gazdă (`obiectNou`). Acest comportament nu este cel așteptat atâta vreme cât am dorit ca funcția constructor să permită invocarea doar cu `new`, dar iată că este posibil.
 
 În ES6 această problemă este reglată prin `new.target`. Această proprietate, care este mai specială pentru că se adresează unui viitor obiect ce nu a fost creat încă, capătă o valoare atunci când funcția este un constructor (apelat cu `new`, folosind metoda internă `[[Construct]]`). Dacă funcția constructor este apelată fără `new`, înseamnă că este apelată cu metoda internă `[[Call]]`, iar `new.target` va avea valoarea `undefined`.
 
@@ -425,7 +447,7 @@ let obiectPacalitor = VehiculSpatial.call(obiectNou, 'Soyuz'); // Error: Funcți
 
 Funcția are rol de constructor! Invocă cu `new` pentru a crea obiectul.
 
-#### Manipularea indirectă a valorilor
+## Setarea valorilor proprietăților folosind get și set
 
 Uneori este necesar să protejezi anumite valori ale unui obiect pe care-l generezi folosind o funcție constructor. Partea foarte frumoasă este că însăși funcția constructor permite introducerea unor mecanisme de acces și setare a valorilor în obiectul rezultat. Acest lucru se realizează prin funcții specializate care poartă denumirea de **accesori** și sunt cunoscuți ca fiind **getteri** (de la englezescul `get`, care înseamnă **a obține** o valoare) și **setteri** (de la englezescul `set`, care înseamnă a introduce o valoare).
 
@@ -433,7 +455,7 @@ Până la ECMAScript 5, *getter*ii și *setter*ii erau doar două funcții speci
 
 ```javascript
 function FaUnObiect (sunetPrimit) {
-  let sunet = sunetPrimit; // setare cu o valoare inițială
+  let _sunet = sunetPrimit; // setare cu o valoare inițială
   this.getSunet = function () {
     return sunet;
   };
@@ -486,7 +508,7 @@ obiect.ceva = 101; // inserție directă
 obiect // Object { colectie: Array[2] }
 ```
 
-Reține faptul că funcțiile în JavaScript sunt obiecte. Funcțiile fac closure pe valorile din mediul lexical extern, dacă acestea sunt necesare pentru evaluarea propriului cod. Poți simula astfel geterii și setterii construindu-i ca parte a unui obiect returnat la execuția unei funcții. Acest mecanism permite manipularea unor valori la care altfel nu ajungi ușor sau la valori care s-a dorit să fie protejate ori ascunse, de-a dreptul.
+Reține faptul că funcțiile în JavaScript sunt obiecte. Funcțiile fac closure pe valorile din mediul lexical extern pentru că acestea sunt necesare pentru evaluarea propriului cod. Poți simula astfel geterii și setterii construindu-i ca parte a unui obiect returnat la execuția unei funcții. Acest mecanism permite manipularea unor valori la care altfel nu ajungi ușor sau la valori care se doresc a fi protejate sau ascunse, de-a dreptul.
 
 ```javascript
 function unObiect () {
@@ -516,7 +538,7 @@ obiect.ceva = 'test';
 obiect.colectie; // [ "test" ]
 ```
 
-### Crearea printr-o declarație literală
+## Crearea obiectelor printr-o declarație literală
 
 Declararea literală este sintaxa cel mai adesea întrebuințată pentru a crea obiectele. Instant se va face cuplarea la obiectul prototipal al obiectului fundamental `Object`.
 
@@ -536,7 +558,7 @@ const aplicatie = aplicatie || {};
 
 În fragmentul de mai sus am apelat la o expresie de inițializarea a unei aplicații, care prin utilizarea operatorului logic `SAU`, va verifica existența unui identificator `aplicatie`, iar dacă acesta nu există, va fi creat un obiect care să fie containerul a ceea ce va fi. Această expresie este o practică foarte des întâlnită pentru a **rezerva** un *nume de domeniu* (**namespace**) pentru propria aplicație.
 
-### Crearea obiectelor cu `Object.create()`
+## Crearea obiectelor cu `Object.create()`
 
 Această metodă a obiectului intern fundamental `Object` a fost introdusă odată cu versiunea ES5 a standardului. Permite atribuirea directă a unui prototip unui obiect, eliberând prototipul din legătura sa cu propriul constructor, dacă acest lucru este dorit. Prin pasarea valorii `null`, ai posibilitatea să creezi un obiect care să nu aibă legătură prototipală intermediată. Foarte interesant, nu? Legătura se face automat la obiectul prototip a lui `Object`.
 
@@ -662,7 +684,13 @@ Acest mecanism permite o *amânare* a calculării valorilor proprietăților pâ
 
 Proprietățile obiectului sunt datele pe care dorim să le organizăm cu acel obiect și fac parte din membrii obiectului.
 
-După ce instanțiezi un obiect, ai nevoie să-l faci funcțional populându-l. Putem să ne imaginăm un obiect ca pe un container pentru un set de lucruri ce stabilesc împreună un sens, o unitate proprie gata să fie prelucrată. Până la apariția noilor obiecte interne `Map` și `Set`, obiectele erau folosite și pentru a stoca date, fiind numite de programatori **dicționare**. Alternativ, pentru a stoca date, poți folosi cu mare succes `Map` și `Set`. Dacă dorești să gestionezi obiecte care sunt folosite temporar așa cum sunt cele generate de evenimentele din DOM, folosește `WeakMap` și `WeakSet`.
+După ce instanțiezi un obiect, ai nevoie să-l faci funcțional populându-l. Putem să ne imaginăm un obiect ca pe un container pentru un set de lucruri ce stabilesc împreună un sens, o unitate proprie gata să fie prelucrată. Până la apariția noilor obiecte interne `Map` și `Set`, obiectele erau folosite și pentru a stoca date, fiind numite de programatori **dicționare**. Alternativ, pentru a stoca date, poți folosi cu mare succes `Map` și `Set`. Dacă dorești să gestionezi obiecte care sunt folosite temporar așa cum sunt cele generate de evenimentele din DOM, cel mai indicat este să folosești `WeakMap` și `WeakSet` care colectează automat obiectele la gunoi dacă nu mai există nicio referință la acestea.
+
+#### Tipurile proprietăților
+
+Într-un obiect veți întâlni două tipuri de proprietăți:
+- proprietăți ce țin date, asta însemnând primitive, dar și funcțiile cu rol de metode și
+- proprietăți *accessor*, care în loc de date, sunt funcții care sunt apelate atunci când este cerută proprietatea joacă rol de *getter*, iar atunci când setează valoarea proprietății joacă rol de *setter*.
 
 #### Atributele proprietăților unui obiect
 
@@ -774,9 +802,9 @@ const obiLiteral = {
 obiLiteral.oMetoda(); //12
 ```
 
-### Adăugarea proprietăților
+## Adăugarea proprietăților
 
-#### Folosirea operatorul punct
+### Folosirea operatorul punct
 
 Englezul îi spune **dot notation** (*notație folosind punctul*) și este cea mai facilă modalitate de a adăuga proprietăți unui obiect existent cu mențiunea ca acel obiect să nu fie înghețat sau protejat total la scriere.
 
@@ -788,7 +816,7 @@ let cheie = newObj.oCheie;  // Accesează proprietățile
 
 Posibilitatea de a adăuga în mod dinamic proprietăți dacă acestea nu există, este o altă caracteristică puternică a limbajului.
 
-#### Folosirea parantezelor drepte
+### Folosirea parantezelor drepte
 
 ```javascript
 const newObj = {};              // Creează obiectul
@@ -796,7 +824,7 @@ newObj['oCheie'] = 'Salutare';  // Scrie proprietăți
 let cheie = newObj['oCheie'];   // Accesează proprietățile
 ```
 
-#### Folosirea metodei `Object.defineProperty()`
+### Folosirea metodei `Object.defineProperty()`
 
 Această variantă de a introduce proprietăți într-un obiect este de o forță colosală pentru că astfel, poți controla atributele fiecărei proprietăți introduse.
 
@@ -812,7 +840,7 @@ Object.defineProperty(newObj, 'numeCheieNoua', {
 
 Același lucru poți să-l faci folosind `Reflect.defineProperty` cu avantajul că în cazul reușitei modificării obiectului, metoda va returna `true`.
 
-#### Folosirea metodei `Object.defineProperties()`
+### Folosirea metodei `Object.defineProperties()`
 
 Această metodă este utilizată în cazul în care trebuie introduse mai multe proprietăți deodată.
 
@@ -829,7 +857,7 @@ Object.defineProperties(obiNou, {
 });
 ```
 
-#### Proprietăți computate
+### Proprietăți computate
 
 Și dacă tot am introdus sintaxele binevenite ale versiunii ES6, cred că este momentul cel mai potrivit pentru a vă prezenta **proprietățile computate**. Dacă ai un obiect literal, poți să-i pui ca și cheie a proprietății o valoare tip șir (string) oferită de o variabilă, de fapt orice expresie validă care poate fi evaluată:
 
@@ -844,7 +872,7 @@ console.log(obi[prop]); // 189439
 console.log(obi['primul lucru']); // o balenă
 ```
 
-### Accesarea membrilor unui obiect
+## Accesarea membrilor unui obiect
 
 Accesarea proprietăților se poate face folosind sintaxa cu punct și cea cu paranteză pătrată:
 
@@ -925,25 +953,45 @@ delete obiect['doi']; // true
 
 **Moment Zen**: În obiecte, numele proprietăților sunt stringuri sau simboluri.
 
-### Verificarea existenței unei proprietăți
+## Verificarea existenței unei proprietăți
 
-Pentru a verifica dacă există o propietate, vei accesa respectiva proprietate folosind operatorul `?.`. Acest operator se comportă ca un controlor ce verifică dacă există.
+În practică vei întâlni uneori necesitatea testării existenței unei valori pentru o proprietate. Tentația ar fi să testezi direct folosind identificatorul proprietății.
+
+```javascript
+if (obi.ceva) {}
+```
+
+Problemele apar de la coercion pentru că în cazul în care proprietatea chiar ar avea una din valorile `null`, `undefined`, `0`, `false`, `NaN` sau un șir de caractere gol, acestea ar fi transformate automat la *falsy*, ceea ce conduce la rezultate eronate. O metodă mai bună, ar fi să folosești operatorul `in`, care va căuta o proprietate cu numele indicat și va returna `true`, dacă o găsește și `false` în caz contrar. Indiferent dacă proprietatea este o valoare sau o metodă, se va face căutarea.
+
+```javascript
+if ('ceva' in obi) {}
+```
+
+Lucrul foarte bun care se petrece atunci când se folosește operatorul `in` este acela că valoarea proprietății nu este evaluată.
+
+În cazul în care dorești să afli dacă proprietatea aparține obiectului și nu este una moștenită din prototype, vei folosi metoda `hasOwnProperty()`.
+
+```javascript
+if (obi.hasOwnProperty('ceva')) {}
+```
+
+Pentru a verifica dacă există o proprietate, îi vei testa existența folosind operatorul `?.`.
 
 ```javascript
 const cevaInteresant = {
-  mesaj: "salutare",
+  mesaj: 'salutare',
   detalii: {
-    loc: "Costinești",
-    scor: "5"
+    loc: 'Costinești',
+    scor: '5'
   }
 }
 let este = cevaInteresant?.detalii?.personal;
 console.log(este); // undefined
-// Poți combina cu nullish coalescing
-let alternativEste = cevaInteresant?.detalii ?? "satisfăcător";
+// Poți combina cu operatorul nullish coalescing
+let alternativEste = cevaInteresant?.detalii ?? 'satisfăcător';
 ```
 
-### Eliminarea membrilor unui obiect
+## Eliminarea membrilor unui obiect
 
 Operatorul `delete` permite eliminarea unei proprietăți, adică a perechii cheie-valoare din obiect. Acesta are efect doar asupra proprietăților care aparțin obiectului. Prototipul nu este afectat. Delete returnează `false`, dacă proprietatea nu poate fi ștearsă, dar este deținută de obiect. Va returna `true` dacă proprietatea a fost ștearsă cu succes.
 
@@ -993,9 +1041,22 @@ Unul din motivele pentru care ai folosi acest adevărat *lanț prototipal* este 
 
 Un avantaj extraordinar pe care-l oferă moștenirea prototipală este că odată cu modificarea obiectului prototip, toate funcționalitățile noi vor fi disponibile instantaneu tuturor celor care le moștenesc.
 
+La nevoie, în cazul în care dorești să specifici direct care este prototipul, poți crea obiectul care va juca rolul. Astfel, delegăm căutarea proprietăților către noul obiect specificat.
+
+```javascript
+const proto = {
+  salutare () {
+    return `Salut, ${this.nume}!`;
+  }
+}
+const PrimulSalut = Object.create(proto);
+PrimulSalut.nume = 'Daniel';
+PrimulSalut.salutare();
+```
+
 **Moment Zen**: Modificarea obiectului prototipal implică reflectarea instantanee în obiectele care moștenesc din acesta.
 
-Poți reutiliza cod prin moștenire folosind lanțul prototipal care se formează între obiecte și care poate fi interogat prin proprietatea `__proto__`. Proprietatea `__proto__` nu este același lucru cu `prototype`. În cazul lui `__proto__`, acesta indică obiectul prototype al constructorului folosit pentru crearea obiectului instanțiat.
+Poți reutiliza cod prin moștenire folosind lanțul prototipal care se formează între obiecte și care poate fi interogat prin proprietatea `__proto__`. Proprietatea `__proto__` nu este același lucru cu `prototype`. În cazul lui `__proto__`, acesta indică obiectul prototype al `constructorului folosit pentru crearea obiectului instanțiat.
 
 ```javascript
 const obi = {ceva: 'salve'};// crearea unui obiect
@@ -1727,3 +1788,4 @@ Funcția primește ca prim argument un obiect a cărui proprietăți sunt identi
 - [renameKeys | 30secondsofcode/js](https://www.30secondsofcode.org/js/s/rename-keys/)
 - [Garbage collection | https://javascript.info/](https://javascript.info/garbage-collection)
 - [The lazy-loading property pattern in JavaScript | Nicholas C. Zakas | humanwhocodes.com](https://humanwhocodes.com/blog/2021/04/lazy-loading-property-pattern-javascript/)
+- [NodeConf Remote 2020: JavaScript Prototypes Behind the Scenes](https://speakerdeck.com/wa7son/nodeconf-remote-2020-javascript-prototypes-behind-the-scenes)
