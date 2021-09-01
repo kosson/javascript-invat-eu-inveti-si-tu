@@ -36,11 +36,11 @@ Mai întâi de toate, acest operator încearcă o transformare a operandului în
 -'ten';        // NaN
 ```
 
-Încă nu am învățat despre obiecte, dar atunci când o vei face, reține că operatorul plus în cazul în care un obiect are o metodă `valueOf` ce returnează o valoare numerică, va face evaluarea metodei (o funcție într-un obiect se numește metodă) returnând rezultatului.
+Încă nu am învățat despre obiecte, dar atunci când o vei face, reține că operatorul plus în cazul în care un obiect are o metodă `valueOf` ce returnează o valoare numerică, va face evaluarea metodei (o funcție într-un obiect se numește metodă) returnând rezultatul.
 
 ## Adunări și concatenări cu `+`
 
-Acest operator mai este folosit și pentru a face concatenări, adică să construiască șiruri de caractere mai mari din fragmente mai mici. Semnalul pentru motorul JavaScript că se dorește o concatenare este acela că valoarea din stânga nu este o valoare numerică. **Pe cea din dreapta sa va încerca să o transforme într-una numerică pentru că acesta este comportamentul său nativ**. Deci, dacă valoarea din stânga nu este un număr, ci orice altceva, va încerca o concatenare.
+Acest operator mai este folosit și pentru a face concatenări, adică să construiască șiruri de caractere mai mari din fragmente mai mici. Semnalul pentru motorul JavaScript că se dorește o concatenare este faptul că valoarea din stânga nu este o valoare numerică. **Pe cea din dreapta sa va încerca să o transforme într-una numerică pentru că acesta este comportamentul său nativ**. Deci, dacă valoarea din stânga nu este un număr, ci orice altceva, va încerca o concatenare.
 
 ```javascript
 'ceva' + 1;   // "ceva1"
@@ -82,7 +82,7 @@ Minus precedă operandul convertind tipurile de date care nu sunt numere. Spre d
 
 ## Operatorul logic de negare `!`
 
-Încearcă mai întâi de toate o conversie a operandului la o valoare `Boolean`. Adu-ți mereu aminte faptul că în JavaScript toate expresiile pot fi evaluate la o valoare boolean. **Absolut toate expresiile se reduc la a fi truthy sau falsey**.
+Încearcă mai întâi de toate o conversie a operandului la o valoare `Boolean`. Adu-ți mereu aminte faptul că în JavaScript toate expresiile pot fi evaluate la o valoare boolean. **Absolut toate expresiile se reduc la a fi truthy sau falsy**.
 
 ```javascript
 !true;      // false
@@ -111,7 +111,7 @@ x;    // abia la următoarea utilizarea a
       // identificatorului acesta va indica noua valoare
 ```
 
-Te-ai fi așteptat ca la incrementare să fie returnat `2` fără dubiu. Acest lucru nu s-a întâmplat pentru că valoarea variabilei a fost returnată la momentul când a fost evaluat operatorul `++`, care o returnează pe cea nouă.
+Te-ai fi așteptat ca la incrementare să fie returnat `2` fără dubiu. Acest lucru nu s-a întâmplat pentru că valoarea variabilei a fost returnată la momentul când a fost evaluat operatorul `++`, obținându-se cea nouă.
 
 Acest moment în timp este foarte important de reținut pentru că este după ce *cursorul* motorului a trecut de identificator și a *dat peste* operatorul de incrementare. După ce *cursorul* va trece și de operator, acesta returnează valoarea operandului, dar nu la valoarea incrementată. Ceea ce s-a petrecut este că *mediul de execuție* reține în continuare valoarea anterioară, dar nu și pe cea nouă, cea actualizată după trecerea cursorului de operator și incrementarea în urma evaluării care s-a făcut. Abia după ce mai *citim* (**evaluăm**) o dată identificatorul `x`, acesta indică valoarea actualizată. În cazul utilizării ca prefix, operatorul face mai întâi incrementarea. Astfel, vom avea la dispoziție valoarea actualizată fără a mai fi necesară citirea valorii identificatorului, care tot o operațiune de evaluare este.
 

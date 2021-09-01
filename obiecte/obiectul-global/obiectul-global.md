@@ -35,7 +35,12 @@ Este o funcție care primește ca argument un șir de caractere pe care încearc
 ```javascript
 typeof parseInt('20'); // 20 "number"
 typeof parseInt('1ab'); // 1
+typeof parseInt(' 1ab'); // 1 "number"
 typeof parseInt('a1b'); // NaN
+parseInt('5435.23'); // 5423
+parseInt('234 433'); // 234'
+parseInt('-23 ceva'); // -23
+parseInt('  -56'); // -56
 ```
 
 Funcția acceptă și un al doilea parametru, care indică rădăcina, adică sistemul de numerație. Dacă al doilea parametru este omis, motorul presupune că baza va fi 10.
@@ -46,6 +51,8 @@ parseInt('101', 2);  // 5
 parseInt('FF0', 16); // 4080
 parseInt('FF0', 10); // NaN
 ```
+
+Această funcție globală are corespondet metoda obiectului `Number` cu același nume și fix același comportament.
 
 ### Funcția `parseFloat()`
 

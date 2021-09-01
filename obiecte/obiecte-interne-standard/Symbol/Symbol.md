@@ -306,7 +306,7 @@ Structura unei singure înregistrări din acest registru este cheie (un șir de 
 
 ## Nevoia pentru Symbol
 
-Un simbol este unic și nu poate fi modificat. Înțelegerea simbolurilor stă la baza instrumentelor de prelucrare a datelor, care implementează protocoalele de iterare. Obiectele care implementează simbolurile mai sunt numite și *Obiecte pentru controlul operațiunilor abstracte*.
+Un simbol este unic și nu poate fi modificat. Înțelegerea simbolurilor stă la baza instrumentelor de prelucrare a datelor, care implementează protocoalele de iterare. Obiectele care implementează simbolurile mai sunt numite și *obiecte pentru controlul operațiunilor abstracte*. Un simbol nu poate fi echivalent cu un alt simbol. Este pur și simplu unic.
 
 ```javascript
 console.log(Symbol('ceva') === Symbol('ceva')); // false
@@ -316,7 +316,7 @@ console.log(Symbol('ceva') === Symbol('ceva')); // false
 
 -   Simbolurile nu vor intra în conflict cu valorile șir ale cheilor unui obiect.
 -   Simbolurile nu implică faptul că sunt un set privat de valori.
--   Nu poți face transformări (coercion) pe simboluri.
+-   Nu poți face transformări (*coercion*) pe simboluri.
 
 ## Control Abstraction Objects
 
@@ -324,16 +324,18 @@ Noile variante ale standardului aduc lămuriri suplimentare asupra obiectelor ca
 
 ## Interfețe de iterare
 
-Să ne imaginăm că avem un obiect care poate fi deschis simplu de următoarea listă de proprietăți: culoare: roșie, gust: acrișor, formă: rotundă, areCodiță: true. Dacă am avea în față coșuri cu fructe, folosind acest model mental, am putea foarte ușor sorta doar merele pentru că acestea îndeplinesc toate criteriile. Folosind analogia, o interfață pentru motorul JavaScript este un set de proprietăți a căror valori se potrivesc unei anumite specificații a limbajului nostru de programare. Toate obiectele care au proprietățile ce descriu o anumită interfață, spunem că sunt conforme acelei interfețe. Proprietățile unei interfețe nu constituie un obiect în sine, ci sunt o listă pe care o regăsim la obiectele conforme. Un obiect poate să aibă proprietăți care să-l facă conform cu mai multe interfețe.
+Să ne imaginăm că avem un obiect care poate fi deschis simplu de următoarea listă de proprietăți: `culoare: roșie, gust: acrișor, formă: rotundă, areCodiță: true`. Dacă am avea în față coșuri cu fructe ce cresc în România, folosind acest model mental, am putea foarte ușor potrivi acestuia doar merele pentru că acestea îndeplinesc toate criteriile.
+
+Folosind analogia, o interfață pentru motorul JavaScript este un set de proprietăți a căror valori se potrivesc unei anumite specificații a limbajului nostru de programare. Toate obiectele care au proprietățile ce descriu o anumită interfață, spunem că sunt conforme acelei interfețe. Proprietățile unei interfețe nu constituie un obiect în sine, ci sunt o listă pe care o regăsim la obiectele conforme. Un obiect poate să aibă proprietăți care să-l facă conform cu mai multe interfețe.
 
 ### Interfața `Iterable`
 
-Interfața Iterable are o singură proprietate: `@@iterator`. Valoarea acestei proprietăți este o funcție care returnează un obiect **Iterator**, care este conform interfeței `Iterator`.
+Interfața Iterable are o singură proprietate: `@@iterator`. Valoarea acestei proprietăți este o funcție care returnează un obiect **Iterator**, fiind conform interfeței `Iterator`.
 
 ### Interfața `Iterator`
 
 Interfața Iterator trebuie să aibă următoarele proprietăți:
-- `next()`, o funcție care returnează un obiect conform interfeței `IteratorResult`.
+- să aibă metoda `next()`, o funcție care returnează un obiect conform interfeței `IteratorResult`.
 - `return`, o funcție care returnează un obiect `IteratorResult`. Semnalează obiectului iterator că nu se va mai face un apel `next()`.
 - `throw`, o funcție care returnează un obiect `IteratorResult`. Semnalează obiectului iterator că a fost detectată o condiție de eroare.
 
@@ -345,7 +347,7 @@ Această interfață trebuie să aibă următoarele proprietăți:
 
 ### Prototipul unui obiect iterator
 
-Prototipul unui iterator este prototipul lui `Object`, fiind un obiect ordinar. Poți extinde protitipul pentru că slotul intern `[[Extensible]]` este setat la `true`. Toate obiectele care implementează interfața `Iterator`, moștenesc automat și din obiectul prototip al obiectului iterator.
+Prototipul unui iterator este prototipul lui `Object`, fiind un obiect ordinar. Poți extinde prototipul pentru că slotul intern `[[Extensible]]` este setat la `true`. Toate obiectele care implementează interfața `Iterator`, moștenesc automat și din obiectul prototip al obiectului iterator.
 
 ```javascript
 const colectie = [1,3,5];
