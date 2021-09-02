@@ -60,7 +60,7 @@ while( !(element = iterator.next()).done ) {
 
 **Moment Zen**: Șirurile de caractere și seturile de valori sunt structuri iterabile.
 
-Odată cu ECMAScript 2015, beneficiem de enunțul `for...of`, care va face exact ce am realizat mai sus generând obiectul iterator. Array-urile sunt obiecte care implementează protocolul de iterare.
+Odată cu ECMAScript 2015, beneficiem de enunțul `for...of`, care va face exact ce am realizat mai sus generând obiectul iterator. Array-urile sunt obiecte care implementează protocolul de iterare. Pentru a verifica, dacă vom da repede `console.log(Array.prototype);` și observăm că este disponibilă o funcție `Symbol(Symbol.iterator)`. Dacă am executa această funcție, am obține un obiect iterator: `let iterator = nume_array[Symbol.iterator]()`.
 
 ```javascript
 for (let x of [1, 2, 3]) {

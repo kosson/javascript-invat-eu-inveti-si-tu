@@ -219,6 +219,8 @@ const fișiere = ['./primul.txt'. './alDoilea.txt'];
 })();
 ```
 
+*Funcțiile async sunt o glazură peste generatoare* spun producătorii motorului V8 în articolul [High-performance ES2015 and beyond](https://v8.dev/blog/high-performance-es2015). Pasul logic ar fi studiul generatoarelor și generatoarelor asincrone.
+
 ## Legătura cu promisiunile
 
 Această secțiune rulează codul în Node.js.
