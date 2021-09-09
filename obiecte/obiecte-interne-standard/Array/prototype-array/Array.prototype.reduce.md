@@ -320,11 +320,11 @@ colectie.reduce(function(colectie, element, index){
 
 ```javascript
 const colecție = [
-    {id: 10, titlu: "Undeva, cândva", 'împrumutată': true},
-    {id: 23, titlu: "Undeva, cândva", 'împrumutată': false},
-    {id: 4, titlu: "Unde mergem diseară", 'împrumutată': true},
-    {id: 5, titlu: "Unde mergem diseară", 'împrumutată': true},
-    {id: 34, titlu: "Ana", 'împrumutată': false}
+    {id: 10, titlu: "Undeva, cândva",      'împrumutată': true },
+    {id: 23, titlu: "Undeva, cândva",      'împrumutată': false},
+    {id: 4,  titlu: "Unde mergem diseară", 'împrumutată': true },
+    {id: 5,  titlu: "Unde mergem diseară", 'împrumutată': true },
+    {id: 34, titlu: "Ana",                 'împrumutată': false}
   ];
   const titluri = colecție.reduce((acumulator, carte) => {
     acumulator[carte.titlu] = []; // în cazul înregistrărilor cu valori identice, array-ul este suprascris

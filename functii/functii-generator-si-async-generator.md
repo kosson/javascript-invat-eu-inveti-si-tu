@@ -917,7 +917,7 @@ async function* aduJSON(url) {
 aduJSON('https://aiurea.ro/date.json').then(res => console.log(res)).catch(e => console.error);
 ```
 
-**Generatoarele sincrone** returnează un obiect `Generator` pentru care o invocare a metodei `next()`, produce un obiect `{value: 'oVal', done: true/false}`. Invocarea lui `next()` aduce valoarea adusă de `yield`, de fapt.
+**Generatoarele sincrone** returnează un obiect `Generator` pentru care o invocare a metodei `next()`, produce un obiect `{value: 'oVal', done: true/false}`. Invocarea lui `next()` aduce valoarea produsă de `yield`, de fapt.
 **Generatoarele asincrone** returnează și ele un obiect `Generator`, dar pentru fiecare `next()` invocat, vom obține o promisiune pentru fiecare obiect `{value, done}` care a fost returnat de un `yield`.
 
 Adu-ți mereu aminte de faptul că generatoarele primesc date prin `next()` în momentul când fac `yield`. Acest lucru permite *trezirea* unui generator ori de câte ori apar date asincrone, dar generatorului îi vor părea ca și cum ar fi apărut sincron.
@@ -926,13 +926,11 @@ Anatomia unui apel `next()`:
 
 - un `Promise` este trimis în lista de microtaskuri.
 - dacă generatorul async nu este activ îl repune în execuție și așteaptă încheiere fie prin `yield`, `throw`, `return` sau `await`.
-- este retunată promisiunea după rezolvarea sa asincronă cel mai repede în următorul *tick*.
+- este returnată promisiunea după rezolvarea sa asincronă cel mai repede în următorul *tick*.
 
-În cazul generatoarelor asyncrone, toate apelurile la `next()` sunt introduse într-un *queue* de către motorul JavaScript și de îndată ce obiectul generator asincron este gata, i le pune la dispoziție. Acest lucru este foarte eficient pentru că nu va trebui să aștepți să fie hotărâtă starea promisiunii returnate de `next()`. Totuși, în cazurile în care ai nevoie de valoare lui `done`, va trebui să aștepți rezolvarea promisiunii returnate de `next()` pentru că în funcție de `true`/`false` poți decide cum execuți codul care urmează sau dacă mai apelezi încă o dată pe `next()` sau nu.
+În cazul generatoarelor asincrone, toate apelurile la `next()` sunt introduse într-un *queue* de către motorul JavaScript. De îndată ce obiectul generator asincron este constituit, i le pune la dispoziție. Acest lucru este foarte eficient pentru că nu va trebui să aștepți să fie hotărâtă starea promisiunii returnate de `next()`. Totuși, în cazurile în care ai nevoie de valoarea lui `done`, va trebui să aștepți rezolvarea promisiunii returnate de `next()` pentru că în funcție de `true`/`false` poți decide cum execuți codul care urmează sau dacă mai apelezi încă o dată pe `next()` sau nu.
 
-Acestea au fost rezolvate deja și rezultatele așteaptă să fie accesate prin apelarea lui `next()`. În același fel se petrec lucrurile și în cazul `for...await...of`.
-
-Ca exemplu, să presupunem că vrem să accesăm valorile unui iterator asincron după ce toate promisiunile returnate individual prin `next()` au fost rezolvate.
+De exemplu, să presupunem că vrem să accesăm valorile unui iterator asincron după ce toate promisiunile returnate individual prin `next()` au fost rezolvate.
 
 ```javascript
 // funcție de transformare a unui iterabil sincron în iterabil asincron
@@ -944,6 +942,7 @@ async function* creeazăUnIterabilAsincron (obiectIterabilSincron) {
 }
 // creează obiectul `Generator` pe care să poți aplica `next()`
 const asyncGenObj = creeazăUnIterabilAsincron (['ceva', 'altceva']);
+
 // rezolvă toate promisiunile returnate la fiecare apel `next()` și atribuie valoarea
 const [{value: valoarea1}, {value: valoarea2}] = await Promise.all([
     asyncGenObj.next(), asyncGenObj.next()
@@ -1088,3 +1087,4 @@ Când codul executat în generator face `throw`, eroarea va fi afișată drept r
 - [Node.js fs.readdir recursive directory search](https://stackoverflow.com/questions/5827612/node-js-fs-readdir-recursive-directory-search/45130990#45130990)
 - [JavaScript Generators — Practical Use Cases | Héla Ben Khalfallah](https://betterprogramming.pub/javascript-generators-practical-use-cases-945d512ef252)
 - [Generators in JavaScript | egghead.io | John Lindquist](https://egghead.io/courses/generators-in-javascript-4b5f)
+- [Using async generators to stream data in JavaScript](https://www.youtube.com/watch?v=wrI-Jb0oFyk&t=89s)

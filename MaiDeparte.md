@@ -4,7 +4,7 @@
 
 Nu am dorit să intru în detalii ce țin de programarea web chiar dacă acest limbaj de programare a pornit de aici. Unitatea acestei lucrări este constituită de înțelegerea în adâncime a multiplelor fațete ale obiectelor și obiectelor-funcție. Aceasta este baza necesară pentru oricare ar fi opțiunile personale în ceea ce privește prelucrarea datelor. Este un bun moment să reamintesc faptul că necesitatea de a prelucra date constituie ținta noastră ca specialiști în domeniul informării.
 
-Am dorit să ilustrez cât mai bine conceptele abstracte. Sunt concepte și practici de lucru care produc declicul înțelegerii lor dacă le oferi îndeajuns de mult timp. Ținta permanentă a acestei lucrări a fost ca ilustrațiile și explicațiile ample, să scurteze timpul necesar înțelegerii în adâncime.
+Am dorit să ilustrez cât mai bine conceptele abstracte. Sunt concepte și practici de lucru care produc declicul înțelegerii lor dacă le oferi îndeajuns de mult timp. Ținta permanentă a acestei lucrări a fost ca ilustrațiile și explicațiile ample să scurteze timpul necesar înțelegerii în adâncime.
 
 ## Câte ceva despre software
 
