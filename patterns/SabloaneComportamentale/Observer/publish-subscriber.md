@@ -4,7 +4,7 @@ Acesta este un pattern înrudit cu Observer, care împrumută caracteristici ale
 
 Permite unui obiect (cunoscut și sub numele de abonat) să „observe” alt obiect (cel care publica). Un Observable poate fi și o colecție care vine într-o perioadă de timp.
 
-## Metoda push
+## Model ES5
 
 ```javascript
 var Observable = function (){
@@ -45,3 +45,55 @@ var observable = new Observable();
 observable.subscribe(Observer);
 observable.publish('We published!');
 ```
+
+## Implementare ES6 folosind clase
+
+```javascript
+class Observer {
+  constructor(){
+    this.subscribers = [];
+  }
+
+  subscribe(subscriber){
+    this.subscribers.push(subscriber);
+  }
+
+  publish(event, data){
+    this.subscribers
+        .filter(subscriber => subscriber.event === event)
+        .forEach(subscriber => subscriber.action(data));
+  }
+}
+
+const primulObserver = new Observer();
+
+// primul eveniment al primului observer
+primulObserver.subscribe({
+  event: "alerg",
+  action: (data) => {
+    console.log('Am primit pe „alerg”', data);
+    document.querySelector('#data').innerHTML = data;
+  }
+});
+
+// al doilea eveniment al primului observer
+primulObserver.subscribe({
+  event: "citesc",
+  action: (data) => {
+    console.log('Am primit pe „citesc”', data);
+  }
+});
+
+setTimeout(() => {
+  primulObserver.publish('alerg', 'Un calup de date care ajunge în observator');
+}, 1500);
+
+setTimeout(() => {
+  primulObserver.publish('citesc', 'Datele pe al doilea eveniment');
+}, 3500);
+```
+
+## Resurse
+
+- [The Observer Pattern | Learning JavaScript Design Patterns by Addy Osmani | O'Reilly](https://www.oreilly.com/library/view/learning-javascript-design/9781449334840/ch09s05.html)
+- [Observer pattern in vanilla JavaScript | Nevyan Neykov | youtube.com | Dec 7, 2019](https://www.youtube.com/watch?v=GNAXaqFQEqc)

@@ -600,7 +600,7 @@ Bunica.prototype.cineSunt = function identificare () { return "Eu sunt " + this.
 
 function Mamă (cine) { Bunica.call(this, cine); };
 Mamă.prototype = Object.create(Bunica.prototype); // se „injectează” prototipul Bunicii în Mamă
-// ATENȚIE! proprietatea .contructor se face de acum către Bunică()
+// ATENȚIE! proprietatea .constructor se face de acum către Bunică()
 Mamă.prototype.anunță = function euSunt () { console.log("Salut " + this.cineSunt() + ".") };
 
 const obi1 = new Mamă("obi1");

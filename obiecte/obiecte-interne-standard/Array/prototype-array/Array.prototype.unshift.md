@@ -1,8 +1,8 @@
 # Array.prototype.unshift()
 
-Această metodă modifică array-ul original, introducând un element sau mai multe în array-ul original chiar începând cu indexul 0 al acestuia. Metoda `unshift()` poate fi aplicată pe orice seamănă cu un array folosind metodele `call` sau `apply`.
+Această metodă modifică array-ul original, introducând un element sau mai multe începând de la indexul 0 al acestuia. Metoda `unshift()` poate fi aplicată pe orice structură de tip array folosind metodele `call` sau `apply`.
 
-Pentru a introduce elemente în *capul* array-ului existent, se vor pasa drept parametru noile elemente. Această metodă returnează lungimea noului array format.
+Pentru a introduce elemente în *capul* array-ului existent, se vor pasa drept parametru noile elemente. Metoda returnează lungimea noului array format.
 
 ```javascript
 var arr1 = ['a', 'b', 'c'];

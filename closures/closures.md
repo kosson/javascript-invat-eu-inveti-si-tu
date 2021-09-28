@@ -57,7 +57,7 @@ Funcțiile sunt valori! Pot fi pasate ca valori altor funcții și pot fi return
 
 **Moment Zen**: Closure-urile cuplează funcțiile cu mediile peste care face closure-uri.
 
-Un closure menține accesul la toate variabilele care erau *în scope* la momentul definirii funcției. Putem spune că o funcție din interiorul altei funcții este o funcție *privată***ââ, cu acces la mediul lexical al gazdei.
+Un closure menține accesul la toate variabilele care erau *în scope* la momentul definirii funcției. Putem spune că o funcție din interiorul altei funcții este o funcție *privată*, cu acces la mediul lexical al gazdei.
 
 **Moment Zen**: Toate closure-urile - funcțiile din aceeași gazdă - împărtășesc același mediu.
 
@@ -634,6 +634,6 @@ Funcțiile de nivel înalt și closure-urile formează coloana vertebrală a pro
 
 - [JavaScript Allongé, the "Six" Edition](https://leanpub.com/javascriptallongesix/read#closures)
 - [JavaScript Getters and Setters](https://javascriptplayground.com/blog/2013/12/es5-getters-setters/)
-- [Javascript Closures](http://jibbering.com/faq/notes/closures/)
-- [JavaScript Closures](https://kentcdodds.com/blog/javascript-closures)
+- [Javascript Closures | jibbering.com](http://jibbering.com/faq/notes/closures/)
+- [JavaScript Closures | kentcdodds.com](https://kentcdodds.com/blog/javascript-closures)
 - [Grokking V8 closures for fun (and profit?) | Vyacheslav Egorov](https://mrale.ph/blog/2012/09/23/grokking-v8-closures-for-fun.html)
