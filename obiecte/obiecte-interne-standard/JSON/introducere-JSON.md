@@ -59,7 +59,7 @@ let obi = {
   nume: 'Mateiu Caragiale',
   titluri: new Set(['Sub pecetea tainei', 'Craii de Curtea-Veche', 'Soborul țațelor'])
 };
-let transformat = JSON.stringify(obi, (cheie, valoare) =>{
+let transformat = JSON.stringify(obi, (cheie, valoare) => {
   return valoare instanceof Set ? [...valoare] : valoare;
 });
 // {"nume":"Mateiu Caragiale","titluri":["Sub pecetea tainei","Craii de Curtea-Veche","Soborul țațelor"]} 

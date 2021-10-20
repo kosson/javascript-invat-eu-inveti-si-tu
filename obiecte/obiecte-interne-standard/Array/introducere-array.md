@@ -138,11 +138,19 @@ protoLaProtoTablou; // Object { , 15 more… }
 Object.getPrototypeOf(protoLaProtoTablou); // null
 ```
 
-Structura lanțului ar fi: `array` --> `Array.prototype` --> `Object.prototype` --> `null`.
+Structura lanțului ar fi:
+
+```mermaid
+flowchart LR
+  array --> Array.prototype --> Object.prototype --> null
+```
 
 Colecțiile care sunt **asemănătoare-cu-array-urile** (array-like), vor avea un lanț mult mai scurt care-l indică la capăt pe `Object`.
 
-Structura lanțului ar fi: `arrayLike` --> `Object.prototype` --> `null`.
+```mermaid
+flowchart LR
+  arrayLike --> Object.prototype --> null
+```
 
 ## Manipulare elemente
 
@@ -168,7 +176,7 @@ console.log(tablou);
 
 ### Șterge toate elementele
 
-Dacă este necesar, putem șterge toate valorile din array, reasignând identificatorul inițial cu un array gol.
+Dacă este necesar, putem șterge toate valorile din array, atribuindu-i identificatorul inițial  un array gol.
 
 ```javascript
 let colectie = [1, 2];
@@ -186,13 +194,13 @@ delete colectie[2];
 Uneori array-urile sunt compuse de elemente, care la rândul lor sunt array-uri. În acest caz vorbim de array-uri multidimensionale.
 
 ```javascript
-var multidimensional = [[23, 10, 4],['a','b']];
+let multidimensional = [[23, 10, 4],['a','b']];
 ```
 
 Întrebarea care se pune în acest moment este cum accesezi o valoare dintr-un array care este de fapt un element al unui array? Pentru a răspunde acestei întrebări trebuie să ne imaginăm locația unei valori ca pe o adresă: *Botoșani, Str. Uverturii, Nr. 90*. Ce-ar fi dacă am transcrie adresa ca pe o interogare într-un array în JavaScript? Ar fi așa: `adresa[Botoșani][Uverturii][90]`. Nu fi păcălit de structura liniară a sintaxei. De fapt, se face o accesare în adâncime a unei locații, ca și cum am desface o păpușă rusească Matrioșca.
 
 ```javascript
-var multidimensional = [['unu','doi',[1, 2]], true];
+let multidimensional = [['unu','doi',[1, 2]], true];
 multidimensional[0][2][1]; // 2
 ```
 
@@ -201,7 +209,7 @@ Un bun exemplu, care să dovedească utilitatea unui array multidimensional, ar 
 Un array poate conține și expresii care **vor fi evaluate** înainte vreme ca array-ul să fie folosit.
 
 ```javascript
-var arr = [1 + 2, 4, (2 - 1) + 2]; console.log(arr); // [ 3, 4, 3 ]
+let arr = [1 + 2, 4, (2 - 1) + 2]; console.log(arr); // [ 3, 4, 3 ]
 ```
 
 **Moment Zen**: fiecare array este în sine o entitate distinctă pentru că fiecare array este un obiect.
@@ -215,14 +223,18 @@ var arr = [1 + 2, 4, (2 - 1) + 2]; console.log(arr); // [ 3, 4, 3 ]
 
 ### Indecșii negativi
 
-Indecșii care sunt numere negative vor fi considerați chei pentru valorile introduse în obiectul `Array`. Acestlucru este posibil pentru că natura unui array este a unui obiect.
+Indecșii care sunt numere negative vor fi considerați chei pentru valorile introduse în obiectul `Array`. Acest lucru este posibil pentru că natura unui array este un obiect.
 
 ```javascript
-var tablou = [];
+let tablou = [];
 tablou[-1] = 'ceva în afară';
 console.log(tablou); // Array [ ]
 tablou[-1];          // ceva în afară
 ```
+
+### Câteva operațiuni comune care permit manipularea elementelor
+
+![](operatiuniArrayuri.svg)
 
 ## Verificări și căutări
 
@@ -241,7 +253,7 @@ const esteGol = arr => Array.isArray(arr) && Object.keys(arr).length > 0;
 Pentru a verifica dacă un index există în array, poți folosi operatorul `in` pentru că un array, de fapt, este un obiect, iar indecșii sunt cheile lui. Operatorul `in` detectează dacă pentru un anumit index, există o valoare în array.
 
 ```javascript
-var tablou = [0, 1, , 2, 4, "unu"];
+let tablou = [0, 1, , 2, 4, "unu"];
 3 in tablou; // true
 2 in tablou; // false
 ```
@@ -320,22 +332,20 @@ colectie.push('el3');
 Alternativa la folosirea formei literale este oferită de constructor. Să nu uităm nicio clipă faptul că `Array` este un constructor, de fapt. Din motive de performanță, această practică este evitată în lucrul de zi cu zi. L-am amintit pentru că este însuși contructorul.
 
 ```javascript
-var tablou = new Array('abc','def');
+let tablou = new Array('abc','def');
 console.log(tablou); // Array [ "abc", "def" ]
 ```
 
 Dacă ai ales o astfel de practică, cea a lucrului cu funcția constructor, poți să-l folosești pentru a prestabili dimensiunea array-ul. Dacă se poate, acest lucru conduce la eficientizarea alocării memoriei pentru array-uri. Mai poți face acest lucru specificând dimensiunea cu ajutorul proprietății `length`, precum în `colecție.length = 5`. Mai departe, vom vedea că o soluție, care ar trebui să primeze, este aceea a utilizării metodei `fill()`. Dar să vedem contructorul la lucru:
 
 ```javascript
-var test = new Array(5);
+let test = new Array(5);
 console.log(test);
 ```
 
 S-a creat astfel un array cu cinci spații goale. Efectul este crearea unui array cu un număr fix de elemente, ceea ce ar fi de dorit ca și practică generală din motive de optimizare a performanțelor codului la momentul execuției. Preferabil, fă acest lucru prin utilizarea lui `fill()`.
 
 Mai este un caz al folosirii constructorului în ceea ce privește crearea unui array. Când ai nevoie de un array cu valori prestabilite. Spunem că un astfel de array prepopulat este unul *dens*.
-
-![](operatiuniArrayuri.svg)
 
 ### Array-uri dense cu `apply()`
 
@@ -376,6 +386,40 @@ Array(3).fill(4); // [4, 4, 4]
 ```
 
 Ultimul caz din seria de exemple de mai sus, se poate dovedi foarte util în practică. Să presupunem că dorești să generezi un obiect prepopulat cu valori. Acest obiect va avea la bază, printre alți membri, o pereche cheie:valoare, care va fi folosit drept indicator al dimensiunii array-ului. Ceea ce se va petrece este că aplicarea lui `fill`, care este aplicat obiectului sămânță în care găsește valoarea dimensiunii viitorului array, va conduce la „umplerea” obiectului cu tot atâția noi membri câți au fost specificați de `length`. Singura limitare este că identificatorii cheilor vor fi indecșii. Valorile care vor popula cheile obiectului, pot fi expresii sau valori simple.
+
+#### Inițializarea dinamică de array-uri dense
+
+Aceste tehnici necesită însușirea cunoștințelor legate de funcții și funcții săgeată, precum și rolul lor din postura de callback-uri.
+
+Sunt momente când ai nevoie să generezi dinamic array-uri deja populate. Prima soluție este folosirea operatorului spread pe un array gol pe care apoi îl parcurgi cu `map` pentru a-l popula cu valori echivalente cu numărul indexului.
+
+```javascript
+const arr = [...Array(5)].map((elemCurent, idx) => idx);
+console.log(arr); // (5) [0, 1, 2, 3, 4]
+```
+
+Folosind operatorul *spread* în combinație cu *map*, putem popula cu date aduse de aiurea folosindu-ne de callback-ul lui *map*.
+
+```javascript
+const arr = [...Array(5)].map(() => fncApelDeAPI());
+```
+
+O altă variantă care folosește parcurgerea array-ului cu `map` este ce în conjuncție cu `fill`.
+
+```javascript
+const arr = Array(5).fill(null).map((elemCurent, idx) => idx);
+console.log(arr); // (5) [0, 1, 2, 3, 4]
+```
+
+A doua posibilitate este utilizarea metodei `from`.
+
+```javascript
+const arr = Array.from(
+   { length: 5 },
+   (elemCurent, idx) => idx
+);
+console.log(arr); // (5) [0, 1, 2, 3, 4]
+```
 
 ### Crearea unui array multidimensional
 
@@ -744,3 +788,4 @@ Explicații:
 - [ES6 — Set vs Array — What and when?, Maya Shavin | Medium](https://medium.com/front-end-weekly/es6-set-vs-array-what-and-when-efc055655e1a)
 - [Array intersection, difference and union in ES6, Alvaro Saburido | Medium]()
 - [ES6 In Depth: Destructuring | hacks.mozilla.org](https://hacks.mozilla.org/2015/05/es6-in-depth-destructuring/)
+- [Quickly Populate a New JavaScript Array | Elijah Manor](https://elijahmanor.com/byte/js-fill-array)

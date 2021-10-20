@@ -55,6 +55,69 @@ removeNullUndefined({
 // { fuzz: 42 }
 ```
 
+Aceste exemple funcționează pe structuri simple de obiecte. O soluție care să funcționeze și pentru valori presetate, care se doresc a fi eleiminate, precum și pentru valori `Date`.
+
+```javascript
+const cleanEmpty = function(obj, defaults = [undefined, null, NaN, '']) {
+  if (!defaults.length) return obj
+  if (defaults.includes(obj)) return
+
+  if (Array.isArray(obj))
+    return obj
+      .map(v => v && typeof v === 'object' ? cleanEmpty(v, defaults) : v)
+      .filter(v => !defaults.includes(v))
+
+  return Object.entries(obj).length
+    ? Object.entries(obj)
+        .map(([k, v]) => ([k, v && typeof v === 'object' ? cleanEmpty(v, defaults) : v]))
+        .reduce((a, [k, v]) => (defaults.includes(v) ? a : { ...a, [k]: v}), {})
+    : obj
+}
+
+
+// testing
+
+console.log('testing: undefined \n', cleanEmpty(undefined))
+console.log('testing: null \n',cleanEmpty(null))
+console.log('testing: NaN \n',cleanEmpty(NaN))
+console.log('testing: empty string \n',cleanEmpty(''))
+console.log('testing: empty array \n',cleanEmpty([]))
+console.log('testing: date object \n',cleanEmpty(new Date(1589339052 * 1000)))
+console.log('testing: nested empty arr \n',cleanEmpty({ 1: { 2 :null, 3: [] }}))
+console.log('testing: comprehensive obj \n', cleanEmpty({
+  a: 5,
+  b: 0,
+  c: undefined,
+  d: {
+    e: null,
+    f: [{
+      a: undefined,
+      b: new Date(),
+      c: ''
+    }]
+  },
+  g: NaN,
+  h: null
+}))
+console.log('testing: different defaults \n', cleanEmpty({
+  a: 5,
+  b: 0,
+  c: undefined,
+  d: {
+    e: null,
+    f: [{
+      a: undefined,
+      b: '',
+      c: new Date()
+    }]
+  },
+  g: [0, 1, 2, 3, 4],
+  h: '',
+}, [undefined, null]))
+```
+
+Sursa este un post Stackoverflow: https://stackoverflow.com/a/61768333/1271340.
+
 ## Sortarea unui obiect după proprietățile sale
 
 ```javascript
