@@ -1,14 +1,14 @@
 # Dualitatea obiect - funcție
 
-JavaScript este un limbaj bazat pe obiecte. În Geneză, am văzut că exercitarea pașilor argoritmului intern `CreateRealm()`, care solicită rularea algoritmului `CreateIntrinsics(realmRec)`, suprinde ca pas distinct crearea primului obiect al limbajului (prin apelarea algoritmului `ObjectCreate(null)`). Astfel, s-a născut obiectul prototipal, care va fi folosit pentru a forma și obiectul prototipal al funcțiilor.
+JavaScript este un limbaj bazat pe obiecte. În materialul intitulat *Geneză*, am văzut că exercitarea pașilor argoritmului intern `CreateRealm()`, care solicită rularea algoritmului `CreateIntrinsics(realmRec)`, constituie un pas distinct în crearea primului obiect al limbajului (prin apelarea algoritmului `ObjectCreate(null)`). Astfel, s-a născut *obiectul prototipal*, care va fi folosit pentru a forma și obiectul prototipal al funcțiilor.
 
 Prin urmare, putem spune că **obiectele** și **funcțiile - obiect** sunt în permanentă relație. În lucrul de zi cu zi, nu ne vom lovi de necesitatea de a lucra cu **sloturile** interne ale celor două entități, dar este esențial a fi înțelese.
 
-O bună cunoaștere a acestor amănunte intime privind obiectele și funcțiile este o necesitate. Această secțiune s-a născut chiar din această necesitate. După ce am redactat capitolul dedicat funcțiilor și pe cel al obiectelor, am realizat că ar fi dificil să încerc o poziționare a unuia față de celălalt, mai ales că un cititor nefamiliarizat, se va lovi, cu siguranță de concepte pe care nu le-ar înțelege decât dacă le-ar fi știut dinainte. Astfel s-a născut acest material premergător ca o conciliere și o aprofundare a unor concepte care vor crea premiza înțelegerii celor două în armonie.
+O bună cunoaștere a acestor amănunte intime privind obiectele și funcțiile este o necesitate. Această secțiune s-a născut chiar din această necesitate. După ce am redactat capitolul dedicat funcțiilor și pe cel al obiectelor, am realizat că ar fi dificil să încerc o poziționare a unuia față de celălalt, mai ales că un cititor nefamiliarizat, se va lovi de concepte pe care nu le-ar înțelege decât dacă le-ar fi știut dinainte. Astfel s-a născut acest material premergător ca o conciliere și o aprofundare a unor concepte, care vor crea premiza înțelegerii celor două în armonie.
 
 ## Sloturi
 
-După cum am aflat din capitolul Genezei, motorul JavaScript trebuie să parcurgă o serie de pași aparținând unor algoritmi interni pentru a constitui un Tărâm (Realm) și odată cu acesta și obiectele intrinseci necesare pentru a se porni evaluarea codului sursă JavaScript.
+După cum am aflat din capitolul Genezei, motorul JavaScript trebuie să parcurgă o serie de pași aparținând unor algoritmi interni pentru a constitui un *Tărâm* (*Realm*) și odată cu acesta și obiectele intrinseci necesare pentru a se porni evaluarea codului sursă JavaScript.
 Ceea ce ochiul agil a cules ca informație specifică în capitolul genezei este faptul că generarea unui Tărâm nu este nimic mai mult decât constituirea unor registre în care se ține evidența unor înregistrări. Acestea poartă denumirea între paranteze pătrate: `[[intrinsics]]`. Sunt numite sloturi. Reamintindu-ne aceste detalii, vom avansa prin a face o mică anatomie a sloturilor, adică ce ce ascunde ca funcționalitate internă în motorul JavaScript pentru a fi capabilă generarea de obiecte și funcții.
 
 ## Obiecte

@@ -21,8 +21,9 @@ var lada = [
 function cautaPere (fruct) {
   return fruct.denumire === 'pere';
 };
-console.log(lada.find(cautaPere));
+lada.find(cautaPere);
 // {denumire: 'pere', cantitate: 0}
+lada.findIndex(cautaPere); // 1
 ```
 
 Un alt exemplu, foarte simplu:

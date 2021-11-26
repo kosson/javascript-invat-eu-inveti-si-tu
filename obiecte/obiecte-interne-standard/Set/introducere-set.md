@@ -1,6 +1,6 @@
 # Set
 
-Acest obiect a apărut din necesitatea de a gestiona obiecte care să aibă chei - valori unice indiferent de tipul acestora.
+Set este răspunsul la necesitatea de a gestiona obiecte care să aibă chei - valori unice indiferent de tipul acestora.
 
 Într-un `Set`, `null` este tratat ca `undefined`.
 
@@ -25,7 +25,7 @@ console.log(colectieValoriUnice);
 // Set [ "unu", 1, "I" ]
 ```
 
-Reține faptul că un `Set` este o colecție de elemente unice. Încercarea de a introduce un element care deja există va avea drept efect ignorarea lui. Se poate adăuga chiar și obiecte (reține că poți adăuga orice).
+Reține faptul că un `Set` este o colecție de elemente unice. Încercarea de a introduce un element care deja există va avea drept efect ignorarea lui. Se pot adăuga chiar și obiecte. Reține faptul că poți adăuga orice.
 
 ```javascript
 const colectieUnica = new Set();
@@ -113,7 +113,7 @@ const ArrayUnic = [...new Set(unArray)];
 
 ### Array ca subset al altuia
 
-Acest exemplu se folosește de dimensiunea lui `Set`. Dacă array-ul de control există în cel interogat, dimensiunea celui interogat nu se va modifica.
+Acest exemplu se folosește de dimensiunea lui `Set`. Dacă array-ul de control există în cel țintit, dimensiunea nu se va modifica.
 
 ```javascript
 const isSubset = (a, b) => (new Set(b)).size === (new Set(b.concat(a))).size;
@@ -171,7 +171,7 @@ function diferentaIntreSeturi (set1, set2) {
 }
 let set1 = new Set([1, 2, 3, 4, 5]),
     set2 = new Set([2, 'a', 'b']);
-diferentaIntreSeturi(set1, set2); //Set { 1, 3, 4, 5 } 
+diferentaIntreSeturi(set1, set2); //Set { 1, 3, 4, 5 }
 ```
 
 ## Parcurgerea unui Set

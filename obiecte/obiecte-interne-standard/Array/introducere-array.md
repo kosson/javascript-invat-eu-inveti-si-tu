@@ -16,7 +16,7 @@ Această structură capabilă să țină valori este cea mai utilizată atunci c
 
 ### Descriere
 
-Array-urile conțin mai multe valori numite `elemente`, care sunt ordonate cu niște chei de identificare numite indecși. Numărătoarea elementelor pornește de la `0`. Tipologic vorbind, un array este un obiect (verifică cu `typeof`).
+Array-urile conțin mai multe valori numite `elemente`, care sunt ordonate prin niște chei de identificare numite indecși. Numărătoarea elementelor pornește de la `0`. Tipologic vorbind, un array este un obiect (verifică cu `typeof`).
 
 ```javascript
 typeof []; // "object"
