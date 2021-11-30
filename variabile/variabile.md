@@ -3,21 +3,21 @@
 ## Introducere
 
 Vom aduce în prim plan câteva lucruri interesante despre activitatea cercetătorului Christopher Strachey, care a jucat un rol foarte important în fixarea semanticii limbajelor de programare. Este cunoscut prin notele sale de curs intitulate *Concepte fundamentale în limbajele de programare* (*Fundamental Concepts in Programming Languages*). Christopher Strachey este figura proeminentă a echipei care a creat limbajului de programare CPL (Combined Programming Language) în anii 60. Acest limbaj de programare este strămoșul limbajului de programare C influențat de ALGOL60.  Vă mai aduceți aminte din introducere, când am povestit despre partea stângă (**Left Hand Side**) și partea din dreapta (**Right Hand Side**) a unei expresii? Strachey le numește **L-value** și **R-value**.
-În notele de curs apare, pe lângă sintaxa conform BNF și o expresie care atribuie o valoare unui identificator: `let p = 3.5`. Am menționat aceste detalii pentru a vedea rădăcinile JavaScript, care rezonează cu trecutul programării atunci când privim noile sintaxe introduse de versiunile recente ale standardului ECMAScript.
+În notele de curs, pe lângă sintaxa conform BNF, apare și o expresie care atribuie o valoare unui identificator: `let p = 3.5`. Am menționat aceste detalii pentru a vedea rădăcinile JavaScript, care rezonează cu trecutul programării atunci când privim noile cuvinte cheie `let` și `const`.
 
-Christopher Strachey indică faptul că există termeni concurenți pentru *identificator*, care a fost introdus de ALGOL60. Aceștia sunt *nume* (în lb. engleză `name`) și *referință* (în lb. engleză `reference`), care era folosit de alte limbaje de programare. Tot din lucrarea sa vom găsi clarificarea că varibilele sunt *legate* de valori (**bound variable**). Acest lucru este important pentru a înțelege natura variabilelor, care în esență este o legătură dintre un identificator și o valoare. Variabilele care încă nu au atribuită o valoare sunt *variabile libere*. În JavaScript, variabilele libere primesc automat valoarea `undefined`.
+Christopher Strachey indică faptul că există termeni concurenți pentru *identificator*, care a fost introdus de ALGOL60. Aceștia sunt *nume* (în lb. engleză `name`) și *referință* (în lb. engleză `reference`), care era folosit de alte limbaje de programare. Tot din lucrarea sa vom găsi clarificarea că variabilele sunt *legate* de valori (**bound variable**). Acest lucru este important pentru a înțelege natura variabilelor, care, în esență, este o legătură între un identificator și o valoare. Variabilele care încă nu au atribuită o valoare sunt *variabile libere*. În JavaScript, variabilele libere primesc automat valoarea `undefined`.
 
 ```javascript
-var ceva; // undefined
+let ceva; // undefined
 ```
 
 ## Natura variabilelor
 
-O variabilă este ceea ce spune însăși cuvântul: o zonă rezervată de care este nevoie pentru a *memora* o valoare. Această valoare poate să se modifice pe măsură ce codul se execută și de aici și denumirea de variabilă. Pentru a înțelege cât mai bine variabilele, amintiți-vă de identificatori și rolul acestora în *spațiul* creat de mediul lexical. După cum bine v-ați amintit, identificatorii sunt etichetele necesare variabilelor pentru a identifica **zona rezervată**. E ca o tăbliță cu numele stației de autobuz. Știm că stația se numește *Laborator* și identifică un spațiu în care va intra autobuzul din când în când.
+O variabilă este ceea ce spune însuși cuvântul: o zonă rezervată de care este nevoie pentru a *memora* o valoare. Această valoare poate să se modifice pe măsură ce codul se execută și de aici și denumirea de *variabilă*. Pentru a înțelege cât mai bine variabilele, amintiți-vă de identificatori și rolul acestora în *spațiul* creat de mediul lexical. După cum bine v-ați amintit, identificatorii sunt etichetele necesare variabilelor pentru a identifica **zona rezervată** din memoria computerului. E ca o etichetă pe care o punem pe un borcan în care vom pune ceva valoros, i.e. o valoare.
 
 ## Declararea variabilelor
 
-Pentru a declara o variabilă se va scrie `var variabila = 'ceva';`. În cazul în care sunt declarate mai multe variabile, se vor înșirui folosindu-se operatorul virgula, fără a mai specifica cuvântul cheie rezervat limbajului.
+Pentru a declara o variabilă se va scrie `let variabila = 'ceva';`. În cazul în care sunt declarate mai multe variabile, se vor înșirui folosindu-se operatorul virgulă, fără a mai specifica cuvântul cheie rezervat limbajului.
 
 ```javascript
 var ceva; // undefined
@@ -54,7 +54,7 @@ let obi2 = obi;
 console.log(obi2);
 ```
 
-Chiar dacă am asignat o valoare de un anumit tip unei variable, poți în orice moment să asignezi o altă valoare de un alt tip, dacă acest pas este oportun.
+Chiar dacă am atribuit o valoare de un anumit tip unei variable, poți în orice moment să-i atribui o altă valoare de un alt tip.
 
 ```javascript
 let a = 1;
@@ -63,21 +63,21 @@ console.log(a);
 // "ceva"
 ```
 
-În JavaScript, abia la momentul constituirii mediului lexical, se fac și legăturile dintre numele identificatorilor și valorile lor. Atunci când sunt folosite numele identificatorilor în expresii, acestea sunt evaluate prin returnarea valorii lor.
+În JavaScript, abia la momentul constituirii mediului lexical se fac și legăturile dintre numele identificatorilor și valorile lor. Atunci când sunt folosite numele identificatorilor în expresii, acestea sunt evaluate prin returnarea valorii lor.
 
 ```javascript
-var a = {0: 10},
+let a = {0: 10},
     b = a;
 a === b; // true
 ```
 
 De fapt, ceea ce am realizat este o copiere a variabilei `a` prin referință. Spunem că noua variabilă `b` face o trimitere către variabila deja existentă `a`, care este legată la o valoare. În cazul nostru vorbim despre un obiect. Da, structura `{0: 10}` este un obiect foarte, foarte simplu.
 
-Aceeași demonstație se poate realiza prin pasarea valorii ca argument al unei funcții. Pentru exemplificare vom folosi un șablon des întâlnit în JavaScript, care se aplică pentru a executa imediat o funcție fără a o apela după identificatorul său. Vom introduce funcția în prima pereche de paranteze din expresia `()();`, ceea ce va conduce la evaluarea funcției instant. În limbaj tehnic, aceast șablon de lucru se numește IIFE (Imediately Invoked Function Expression) - **expresie de funcție invocată imediat**. Și mai folosim ceva foarte util: metoda `log()` a obiectului `Console`. Dar mai întâi, vă invit să priviți la exemplu pentru a crea ceva context și cu siguranță nedumerire.
+Aceeași demonstrație se poate realiza prin pasarea valorii ca argument al unei funcții. Pentru exemplificare vom folosi un șablon des întâlnit în JavaScript, care se aplică pentru a executa imediat o funcție fără a o apela după identificatorul său. Vom introduce funcția în prima pereche de paranteze din expresia `()();`, ceea ce va conduce la evaluarea funcției instant. În limbaj tehnic, aceast șablon de lucru se numește IIFE (Imediately Invoked Function Expression) - **expresie de funcție invocată imediat**. Și mai folosim ceva foarte util: metoda `log()` a obiectului `console` dare este disponibil din oficiu. Dar mai întâi, vă invit să priviți la exemplu pentru a crea ceva context și cu siguranță nedumerire.
 
 ```javascript
 (function () {
-  var x = 10;
+  let x = 10;
 })();
 console.log(x); // ReferenceError
 ```
@@ -91,37 +91,37 @@ Ce-i *mediul lexical*? Pornesc prin a-ți reaminti faptul că este crucial modul
 Funcțiile creează aceste zone numite medii lexicale, dar începând cu ES6, simpla declarare a blocului de cod prin acolade `{}`, creează un mediu lexical (*scope*). Este foarte importantă această regulă pentru că de ea ține modul în care izolăm, combinăm și punem execuția unei funcții într-un anumit context.
 
 ```javascript
-var a = {0: 10};
+let a = {0: 10};
 (function (b) {
   console.log(b === a);
 })(a); // true
 ```
 
-JavaScript permite modificarea valorii preexistente a unei varibile. Această posibilitate se numește *umbrire* (*shadowing*).
+JavaScript permite modificarea valorii preexistente a unei variabile. Această posibilitate se numește *umbrire* (*shadowing*).
 
 ```javascript
-var valoare = 10;
+let valoare = 10;
 valoare = 15;
 console.log(valoare); // 15
 ```
 
-Ceea ce se întâmplă este o refacere a unei legături la o altă valoare în mediul lexical. Merită investigat ceea ce se întâmplă și în cazul mediilor lexicale generate de funcții.
+Ceea ce se întâmplă este o mutarea unei legături la o altă valoare. Merită investigat ceea ce se întâmplă și în cazul mediilor lexicale generate de funcții.
 
 ```javascript
 (function x () {
-  var ceva = 10;
+  let ceva = 10;
   (function y () {
-    var ceva = 15;  // declarare
+    let ceva = 15;  // declarare
   })();
   return ceva;
 })(); // 10
 ```
 
-Funcția `x` creează un mediul lexical (un *scope*) în care se va afla valoarea `10` legată de numele `x`. În interiorul funcției `x`, este evaluată funcția `y`, care creează propriul mediu lexical în care este declarată o variabilă proprie cu numele `ceva`. Pentru că se face o declarare în sine, chiar dacă variabila poartă același nume cu variabila din mediul lexical (*scope*) extern la care funcția internă are acces, variabila din mediul intern, nu o va *umbri* (suprascrie) pe cea din mediul lexical extern. Situația se va schimba dacă nu se face declarare, ci atribuirea unei valori.
+Funcția `x` creează un mediul lexical (un *scope*) în care se va afla valoarea `10` legată de numele `x`. În interiorul funcției `x`, este evaluată funcția `y`, care creează propriul mediu lexical în care este declarată o variabilă proprie cu numele `ceva`. Pentru că se face o declarare, chiar dacă variabila poartă același nume cu variabila din mediul lexical (*scope*) extern la care funcția internă are acces, variabila din mediul intern, nu o va *umbri* (suprascrie) pe cea din mediul lexical extern. Situația se va schimba dacă nu se face declarare, ci atribuirea unei valori.
 
 ```javascript
 (function x () {
-  var ceva = 10;
+  let ceva = 10;
   (function y () {
     ceva = 15;  // atribuire
   })();
@@ -147,14 +147,14 @@ console.log(ceva);    // test
 În cazul în care variabila `ceva` ar fi fost declarată cu `var`, cea de-a doua declarație ar fi fost o redeclarare a aceluiași identificator. Acest lucru nu se petrece în cazul lui `let`. Chiar vorbim de două declarații distincte din două blocuri distincte de cod.
 Cele trei moduri de a declara variabile au efect și asupra mediului lexical.
 
-## Declarații cu var
+## Declarații folosind var
 
-Prin folosirea lui `var`, declararea variabilei se face în *global scope* sau într-o funcție. Nu este localizată la nivel de bloc de cod `{}` simplu. De exemplu, pentru o iterare cu `for`, variabila definită drept condiție este o variabilă *înregistrată* în scope-ul funcției care găzduiește `for`, nu în cel al lui `for`. Din nevoia de a localiza variabilele la nivel de bloc delimitat de `{}`, au fost introduse de ES6 declarațiile cu `let` și `const`.
+Declararea unei variabile folosind cuvântul cheie `var`, va avea ca efect declararea variabilei în *global scope* sau într-o funcție. Nu este localizată la nivel de bloc de cod simplu - `{}`. De exemplu, pentru o iterare cu `for`, variabila definită drept condiție este o variabilă *înregistrată* în scope-ul funcției care găzduiește `for`, nu în cel al lui `for`. Din nevoia de a localiza variabilele la nivel de bloc delimitat de acolade, au fost introduse de ES6 declarațiile cu `let` și `const`.
 
-O declarație `var` în cadrul unei funcții are două ipostaze:
+O declarație `var` în cadrul unei funcții declanșează aplicarea următoarelor comportamente:
 
--   partea declarativă este supusă `hoisting`-ului ajungând automat la `suprafața funcției`, având valoarea `undefined`, apoi
--   atribuirea valorii se face acolo unde se menționează în cod în momentul în care motorul a ajuns la acel fragment în procesul de evaluare.
+- partea declarativă (`var x`) este supusă `hoisting`-ului ajungând automat la `suprafața funcției`, având valoarea `undefined`, apoi
+- atribuirea valorii se face acolo unde se menționează în cod operatorul `=` în momentul în care motorul a ajuns la acel fragment în procesul de evaluare.
 
 Am menționat deja mecanismul de *hoisting*. Este regula prin care variabilele declarate cu `var` sunt puse la dispoziția întregului cod de la bun început, nu pe măsură ce evaluarea avansează. Spunem că identificatorii acestor declarații sunt omniprezenți din start chiar dacă sunt inițializați cu valoarea `undefined`. Pentru a înțelege cu adevărat hoisting-ul, ar fi necesar să vezi cum face JavaScript compilarea codului.
 
@@ -166,7 +166,7 @@ function ex () {
 };
 ```
 
-Buna practică spune ca atunci când folosești `var` pentru a declara variabile, pune-le pe toate imediat ce ai deschis blocul de cod. Astfel, le vei face omniprezente pentru acea zonă de cod și va fi mai ușor de operat cu ele. Un alt sfat foarte bun spune că, pentru a ușura comunicarea cu ceilalți programatori care vor inspecta codul tău mai târziu, faci declararea variabilelor cât mai aproape de locul în care vor fi utilizate. Uneori acest lucru necesită chiar redeclararea (shadowing) în locul în care se cere. Acesta este cazul în care avem de-a face cu fragmente imense de cod (500 - 1000 de linii de cod). De ce? Pentru a nu-l fugări pe colegul tău pe tot codul înapoi și să facă muncă de detectiv pentru a afla unde a fost declarată. Bineînțeles că vei face și un mic comentariu în care explici de ce ai ales redeclararea. Atenție, acest lucru nu este posibil atunci când folosești `let`. Acest lucru nu este permis în cazul lui `let` pentru că `let` permite declararea o singură dată într-un loc fix.
+Buna practică spune ca atunci când folosești `var` pentru a declara variabile, pune-le pe toate imediat ce ai deschis blocul de cod. Astfel, le vei face *omniprezente* pentru acea zonă de cod și va fi mai ușor de operat cu ele. Un alt sfat foarte bun spune că, pentru a ușura comunicarea cu ceilalți programatori care vor inspecta codul tău mai târziu, faci declararea variabilelor cât mai aproape de locul în care vor fi utilizate. Uneori acest lucru necesită chiar redeclararea (shadowing) în locul în care se cere. Acesta este cazul în care avem de-a face cu fragmente imense de cod (500 - 1000 de linii de cod). De ce? Pentru a nu-l fugări pe colegul tău din viitor pe tot codul înapoi pentru a face muncă de detectiv. Bineînțeles că vei face și un mic comentariu în care explici de ce ai ales redeclararea. Atenție, acest lucru nu este posibil atunci când folosești `let`. Acest lucru nu este permis în cazul lui `let` pentru că `let` permite declararea o singură dată într-un loc fix. Variabilele declarate cu `let` nu sunt afectate de *hoisting*.
 
 ```javascript
 function facCeva() {
@@ -186,7 +186,7 @@ function facCeva() {
 
 ## `let` și `const`
 
-Denumirea `let` este *fie*, precum în: *fie x un număr cu valoarea 1*. Definesc variabile în cel mai apropiat *mediu lexical* (*scope*), care poate fi global scope, un bloc `{}` sau o buclă precum `for`. Rolul lor este de a localiza la nivel de înregistrare în scope în următoarele medii: `global`, `function` și bloc `{}`.
+Cuvântul cheie `let` îl putem traduce *fie*, precum în: *fie `x` un număr cu valoarea `1`*. Este folosit pentru a defini variabile în cel mai apropiat *mediu lexical* (*scope*), care poate fi global scope, un bloc de cod delimitat prin acolade `{}` sau o buclă precum `for`. Rolul lor este de a localiza la nivel de înregistrare *în scope* în următoarele medii: `global`, `function` și bloc `{}`.
 
 ### Standardul spune
 
@@ -194,14 +194,14 @@ Denumirea `let` este *fie*, precum în: *fie x un număr cu valoarea 1*. Defines
 
 ## Mantre
 
--   La momentul creării, variabile declarate cu `var`, vor fi inițializate automat cu valoarea `undefined`.
--   Identificatorii variabilelor și a funcțiilor sunt recoltați prin mecanismul motorului JavaScript numit *identifier lookup*.
+-   La momentul creării, variabilele vor fi inițializate automat cu valoarea `undefined`.
+-   Identificatorii variabilelor și ai funcțiilor sunt recoltați prin mecanismul motorului JavaScript numit *identifier lookup*.
 -   Dacă declari o variabilă cu `var` în corpul unei declarații `if` sau `for`, această variabilă va fi disponibilă și în afara blocului funcțional, fie că blocul a fost executat sau nu.
 -   *Scope*-ul unei variabile poate fi înțeles mediul unde este găsit un identificator.
 -   Variabilele locale sunt reconectate la valori de câte ori funcția este invocată.
 -   Variabilele locale sunt reatribuite cu valori de fiecare dată când o funcție este invocată.
 -   Parametrii unei funcții sunt la rândul lor variabile locale.
--   Declarațiile de variabile se află în scope de la momentul în care au fost declarate, până la închiderea blocului funcției în care au fost declarate indiferent de imbricarea altor blocuri `{}`.
+-   Declarațiile de variabile se află *în scope* de la momentul în care au fost declarate, până la închiderea blocului funcției în care au fost declarate indiferent de imbricarea altor blocuri `{}`.
 
 ## Căutarea în scope chain
 
@@ -227,8 +227,8 @@ Când există o stare de confuzie, cel mai bine este să arunci o privire unde e
 
 ## Bune practici
 
-Folosește `const` pentru toate valorile pentru care nu se așteaptă nicio modificare și let în cazul în care știi clar că vor surveni modificări.
-Folosește var când ai nevoie de mecanismul de hoisting (omniprezența în cod), dar și pentru momentele când ai nevoie să o redeclari. Cu alte cuvinte, folosește `var` atunci când ai nevoie de o valoare în mai multe medii lexicale diferite, care eventual sunt înlănțuite (*scope chaining*).
+Folosește `const` pentru toate valorile pentru care nu se așteaptă nicio modificare și `let` în cazul în care știi clar că vor surveni modificări.
+Folosește `var` când ai nevoie de mecanismul de hoisting (omniprezența în cod), dar și pentru momentele când ai nevoie să o redeclari. Cu alte cuvinte, folosește `var` atunci când ai nevoie de o valoare în mai multe medii lexicale diferite, care eventual sunt înlănțuite (*scope chaining*).
 Declară toate variabilele necesare în capul codului/funcției în ordinea necesităților de accesare a valorilor. În cazul folosirii blocurilor de cod, care sunt permise odată cu ES6, pune toate declarațiile de variabile cu `let` chiar de la bun început pentru a evita TDZ - Temporal Dead Zone.
 
 ```javascript
@@ -243,6 +243,32 @@ function facCeva() {
 
 În bucle folosește întotdeauna `let` ori `const` pentru a crea pentru fiecare iterație propria legătură identificator - valoare. În cazul lui `var`, vei avea acces mereu doar la ultima valoare dată de ultima iterare (se face shadowing).
 
+## Testarea unei variabile pentru null sau undefined
+
+În situațiile în care ai o variabilă care trebuie să primească valoarea în urma unei evaluări sau ca răspuns al unei operațiuni asicrone, ai nevoie să testezi dacă a fost atribuită o valoare sau valorile `null` ori `undefined` care indică o problemă.
+
+```javascript
+let ceva = 10;
+
+if (typeof ceva === 'undefined') {
+    console.log('Variabilă undefined');
+} else if (typeof ceva === 'null') {
+    console.log('Valoarea este null');
+} else {
+    console.log(ceva);
+}
+```
+
+Poți testa după ambele dacă acest lucru este necesar.
+
+```javascript
+let undeva;
+if (undeva === null || undeva === undefined) {
+  console.log('Valaorea este null sau undefined');
+}
+```
+
 ## Resurse
 
-[Wikipedia, Name binding](https://en.wikipedia.org/wiki/Name_binding)
+- [Wikipedia, Name binding](https://en.wikipedia.org/wiki/Name_binding)
+- [](https://stackabuse.com/javascript-check-if-variable-is-a-undefined-or-null/)
