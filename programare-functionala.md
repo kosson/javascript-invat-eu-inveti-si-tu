@@ -1,6 +1,6 @@
 # Programarea funcțională
 
-Conceptele programării funcționale sunt necesare pentru a înțelege cum se face *descompunerea* (decomposing) unei funcții ceea ce conduce la o mai bună înțelegere a felului în care trebuie scris software în JavaScript. Este vorba și despre cum să denumești părțile la nivel individual pentru ca la momentul *compunerii* lor să stabilească relații între entități, care să fie ușor de modelat.
+Conceptele programării funcționale sunt necesare pentru a înțelege cum se face *descompunerea* (*decomposing*) unei funcții ceea ce conduce la o mai bună înțelegere a felului în care trebuie scris software în JavaScript. Este vorba și despre cum să denumești părțile la nivel individual pentru ca la momentul *compunerii* lor să stabilească relații între entități, care să fie ușor de modelat.
 
 JavaScript are un model de execuție foarte flexibil. Toate funcțiile beneficiază de metoda `apply()`, care permite apelarea funcției cu un array ca și cum elementele din array ar fi argumentele funcției.
 
@@ -58,14 +58,17 @@ faOAdunare([2, 3]); // 5
 
 ## Puritatea funcțiilor
 
-Înseamnă că o funcție este:
+O funcție pură nu va face nimic altceva în plus peste evaluarea codului și returnarea unui rezultat.
 
-- testabilă
-- portabilă
-- memoizabilă
-- paralelizabilă
+Purtate înseamnă că o funcție este:
+
+- testabilă,
+- portabilă,
+- memoizabilă,
+- paralelizabilă.
 
 O funcție pură este ușor de recunoscut dacă nu schimbă nimic în afara scope-ului său și care nu depinde de nimic din afara scope-ului său.
+
 O funcție pură oferă același rezultat dacă folosește aceiași parametri. Ceea ce se înțelege este faptul că funcția este independentă de starea sistemului/programului.
 
 ## Funcțiile în JavaScript sunt de primă clasă

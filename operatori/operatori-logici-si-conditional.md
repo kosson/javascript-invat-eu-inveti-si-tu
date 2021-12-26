@@ -74,7 +74,7 @@ Aplicat la domeniul programării, valorile variabilelor sunt reduse la corespond
 
 ## Legile lui De Morgan
 
-Pentru a vă adăuga încă un instrument util în viitoarele evaluări. Legile lui De Morgan sunt niște reguli simple de transformare care poartă numele matematicianului Augustus De Morgan:
+Pentru a vă adăuga încă un instrument util în viitoarele evaluări, Legile lui De Morgan sunt niște reguli simple de transformare. Acestea poartă numele matematicianului Augustus De Morgan:
 
 -   negarea *disjuncției* (adunarea logică) este conjuncția (înmulțirea) negațiilor
 -   negarea *conjuncției* este disjuncția negațiilor.
@@ -194,9 +194,9 @@ a ||= 'altceva'; // a va deveni "altceva"
 
 ## Operatorul ternar
 
-Acest operator oferă posibilitatea analizei și reducerii expresiilor la valori boolene pentru a apuca diferite căi de acțiune. Spre deosebire de restul operatorilor care sunt fie unari, fie binari, acesta face evaluarea pentru trei operanzi. De aici îi vine și denumirea de operator ternar.
+Acest operator oferă posibilitatea analizei și reducerii expresiilor la valori boolene pentru a apuca diferite căi în evaluare. Spre deosebire de restul operatorilor care sunt fie unari, fie binari, acesta face evaluarea pentru trei operanzi. De aici îi vine și denumirea de operator ternar.
 
-Are forma `expresie ? expresie pentru cazul true : expresie pentru cazul false`.
+Are urmoarea formă: `expresie ? expresie pentru cazul true : expresie pentru cazul false`.
 
 Primul operand de dinaintea semnului întrebării este cel care condiționează evaluarea celor care stau la dreapta și la strânga semnului două puncte. În cazul în care condiția este evaluată la o valoare truthy, prima expresie de după semnul întrebării va fi evaluată. În caz contrar, cea de după semnul două puncte.
 
@@ -204,15 +204,17 @@ Primul operand de dinaintea semnului întrebării este cel care condiționează 
 variabilă = 10 ? variabilă++ : 'am doar' + variabilă;
 ```
 
-Mulți programatori folosesc acest operator pe post de sintaxă prescurtată a enunțului `if...else`, dar recomandarea generală este contrară acestei practici prin folosirea directă a enunțului.
+Mulți programatori folosesc acest operator pe post de sintaxă prescurtată a enunțului `if...else`, dar recomandarea generală este contrară acestei practici. Există diferențe între cele două expresii.
 
 Mai poți folosi operatorul ternar pentru inițializarea condiționată a unei variabile în funcție de o expresie.
 
 ```javascript
-var x = true, y = 100;
-var z = x ? y : 'eroare de inițializare';
+let x = true, y = 100;
+let z = x ? y : 'eroare de inițializare';
 console.log(z);
 ```
+
+Ca regulă de bună practică, nu inculca ternarii pentru că devin greu de înțeles.
 
 ## Resurse
 
@@ -222,3 +224,4 @@ console.log(z);
 -   [Claude Shannon, painted portrait - la théorie de l'information _1010155](https://www.flickr.com/photos/home_of_chaos/7591110676/in/album-72157630621527032/)
 -   [Logical conjunction](https://en.wikipedia.org/wiki/Logical_conjunction)
 -   [Boolean algebra (structure)](https://en.wikipedia.org/wiki/Boolean_algebra_(structure))
+-   [RETHINKING THE JAVASCRIPT TERNARY OPERATOR | James Sinclair | 5th March 2021](https://jrsinclair.com/articles/2021/rethinking-the-javascript-ternary-operator/)

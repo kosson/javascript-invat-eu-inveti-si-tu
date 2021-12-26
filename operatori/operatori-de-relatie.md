@@ -22,7 +22,7 @@ var obi = {a: 1, b: 2};
 'b' in obi; // true
 ```
 
-În cazul în care o proprietate este eliminată prin folosirea operatorului `delete`, operatorul returnează `false`, în rest orice valoare ar avea, chiar și `undefined`, am avea un răspuns `true`.
+În cazul în care o proprietate este eliminată prin folosirea operatorului `delete`, operatorul returnează `false`. În rest, orice valoare ar avea, chiar și `undefined`, am avea un răspuns `true`.
 
 În momentul în care vei descoperi importanța simbolurilor, vei putea investiga dacă un anumit obiect are implementat protocolul de iterare. Operatorul `in` permite verificarea existenței unui simbol.
 

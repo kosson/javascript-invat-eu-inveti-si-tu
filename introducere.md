@@ -155,7 +155,7 @@ Acum avem o problemă. Dacă am introduce acest text într-o variabilă în vede
 Ceea ce se va întâmpla este că restul, pur și simplu va fi trunchiat și ignorat ca ceva neinteligibil. De aceea este nevoie să marcăm în text aceste caractere cu însemnătate specială printr-un **caracter de exceptare** (în engleză *escape sequence*), care să semnaleze motorului faptul că acel caracter face parte din text și nu este un semnal adresat lui ca un semnal că trebuie să facă o anumită operațiune. **Caracterul de exceptare este un backslash** care se aplică înaintea caracterelor cu înțeles special. Da, da, chiar și în cazul lui backslash pui un *backslash* înainte pentru ca JavaScript să-l considere un caracter al resursei text și nu un semnal. Pe românește îi spui computerului: prietene, caracterul precedat de backslash, te rog să nu-l interpretezi la valoarea sa specială pentru limbajul de programare, ci consideră-l parte a fragmentului de text analizat.
 
 ```javascript
-var textDeAnalizat = 'Acesta este un text demonstrativ care va enumera caracterele cu înțeles special pentru JavaScript. Problema apare când în text folosim ' citat în engleză cu ghilimele simple', poate "un citat în engleză între ghilimele duble", poate folosim un slash: /, ori un backslash \ sau vorbim despre carriage return \r sau despre new line \n, etc.';
+let textDeAnalizat = 'Acesta este un text demonstrativ care va enumera caracterele cu înțeles special pentru JavaScript. Problema apare când în text folosim ' citat în engleză cu ghilimele simple', poate "un citat în engleză între ghilimele duble", poate folosim un slash: /, ori un backslash \ sau vorbim despre carriage return \r sau despre new line \n, etc.';
 ```
 
 Dacă veți încerca exemplul de mai sus în *Console* (deschide browserul preferat, apasă `F12`, mergi în tabul Console), adică dacă veți pune acest fragment în Console, chiar veți genera și o eroare de sintaxă pentru că toate caracterele acelea cu rol special pentru JavaScript, au darul să creeze erori dacă sunt întâlnite în fragmentele de text pe care le alegeți pentru a lucra cu ele. Hai, poți spune că ai intrat bine în pâine: ai aflat ce-i o variabilă și că aceasta poate ține fragmente de text și ai experimentat puțin și cu instrumentul care îți va fi cel mai bun prieten de acum înainte: *Console*.
@@ -163,7 +163,7 @@ Dacă veți încerca exemplul de mai sus în *Console* (deschide browserul prefe
 Cum ar arăta exemplul nostru corectat?
 
 ```javascript
-var textDeAnalizat = 'Acesta este un text demonstrativ care va enumera caracterele cu înțeles special pentru JavaScript. Problema apare când în text folosim \' citat în engleză cu ghilimele simple\', poate "un citat în engleză între ghilimele duble", poate folosim un slash: /, ori un backslash \ sau vorbim despre carriage return \r sau despre new line \n, etc.';
+let textDeAnalizat = 'Acesta este un text demonstrativ care va enumera caracterele cu înțeles special pentru JavaScript. Problema apare când în text folosim \' citat în engleză cu ghilimele simple\', poate "un citat în engleză între ghilimele duble", poate folosim un slash: /, ori un backslash \ sau vorbim despre carriage return \r sau despre new line \n, etc.';
 ```
 
 Acum, că nu avem nicio eroare, aflându-te în *Console*, pur și simplu apelează numele variabilei pentru a vedea textul și ce-a mai rămas din el (pur și simplu scrii numele variabilei `textDeAnalizat` și dai ENTER).
@@ -181,7 +181,7 @@ Cazul ghilimelelor. În JavaScript, fragmentele de text pot fi introduse în var
 În cazul ghilimelelor, ca bună practică, se vor folosi ghilimele simple pentru declararea șirurilor de caractere pentru că, fiind un limbaj strâns legat de markup-ul paginilor web, ar putea cuprinde ghilimele duble ca parte a fragmentelor de pagină web construite dinamic.
 
 ```javascript
-var fragmentHTML = '<a href = "http://ceva.ro">Siteul Ceva.ro</a>';
+let fragmentHTML = '<a href = "http://ceva.ro">Siteul Ceva.ro</a>';
 ```
 
 Exemplul cu fragmentul de cod HTML este exemplificarea perfectă cu imbricarea acceptată a unor perechi de ghilimele duble între ghilimelele simple care delimitează resursa de text.
@@ -309,7 +309,7 @@ De cele mai multe ori, operatorii stabilesc o evaluare a expresiilor de la stân
 
 ### Expresiile
 
-În limba engleză se numesc **expressions**. O expresie este o combinație rezolvabilă de operatori și operanzi. Finalizarea rezolvării unei expresii se numește **evaluare**. Asta înseamnă că la momentul evaluării combinației, aceasta se va finaliza cu obținerea unei valori.
+În limba engleză se numesc **expressions**. O expresie este o combinație rezolvabilă de operatori și operanzi. Finalizarea rezolvării unei expresii se numește **evaluare**. Asta înseamnă că la momentul evaluării combinației, aceasta se va finaliza prin obținerea unei valori.
 
 Dicționarele explicative spun că o expresie este un **grup de numere, litere etc. legate între ele prin simboluri de operații matematice (adunare, înmulțire etc.)** (DEX 98) sau **formulă care exprimă raporturi matematice** (NODEX 2002).
 
@@ -393,7 +393,9 @@ Dacă ai amețit, e perfect normal. Respiră de cinci ori foarte adânc cu ochii
 
 ### Enunțuri (**statements**)
 
-Este echivalentul unei propoziții în limbaj uman. Componentele unui enunț pot fi **valori**, **operatori**, **expresii**, **cuvinte cheie** și **comentarii**.
+Este echivalentul unei propoziții în limbaj uman. Componentele unui enunț pot fi **valori**, **operatori**, **expresii**, **cuvinte cheie** și **comentarii**. Un enunț este o unitate de execuție distinctă. Spre deosebire de expresii, un enunț nu conduce la o valoare.
+
+Un exemplu de enunț este `if (true) { facCeva() }`. După cum observi, evaluarea unui enunț precum cel de mai sus, nu conduce la obținerea unei valori. Mai este ceva ce poate fi folosit pentru a înțelege enunțurile prin comparație cu expresiile. Enunțurile nu pot fi pasate drept argument unei funcții.
 
 **Moment ZEN**: Un program este o listă de enunțuri.
 
@@ -417,7 +419,7 @@ Nu vreau să te zăpăcesc, dar o expresie poate fi în același timp un enunț 
 
 Enunțurile sunt precum frazele limbajului natural cu diferența în cazul nostru că nu se termină cu punct, ci cu punct și virgulă.
 
-<img src="images/images/EnuntExpresie.png" width="350px">
+<img src="images/EnuntExpresie.png" width="350px">
 
 Exemplul oferit deja nu este cel mai util. În schimb, există un enunț al celei mai utile expresii întâlnite în întreg limbajul: *enunțul expresiei de apelare* a unei funcții (**call expression**): `făCeva();`.
 
@@ -447,11 +449,11 @@ Enunțurile pot sta singure sau pot fi adunate într-un bloc distinct. Acest blo
 }
 ```
 
-Veți vedea mai târziu cât de utile blocurile sunt în cazul scrierii instrucțiunilor care controlează execuția codului, cum ar fi deciziile prin `if..else` sau buclele, cum ar fi `while (expresie) {bloc de enunțuri}`.
+Veți vedea mai târziu cât de utile sunt blocurile în cazul scrierii enunțurilor care controlează execuția codului, cum ar fi deciziile prin `if...else` sau buclele precum `while (expresie) {bloc de enunțuri}`.
 
-Este nevoie acum să punem ordine în ideile pe care le-am explorat cu privire la enunțuri.
+### Tipuri de expresii
 
-Care sunt enunțurile în JavaScript? Conform standardului, expresiile sunt catalogate în **expresii primare** și **expresii între paranteze** și **listă de parametri arrow**.
+Conform standardului, expresiile sunt catalogate în **expresii primare**, **expresii între paranteze** și **listă de parametri arrow**.
 
 #### Expresii primare
 
@@ -474,7 +476,7 @@ Conform textului standardului, următoarele sintaxe pot fi considerate a fi expr
 -   literale de șablonare,
 -   parantezele rotunde de grupare și lista parametrilor unei funcții săgeată: `()` sau `( ,)`.
 
-#### Enunțuri ale expresiilor
+### Enunțuri ale expresiilor
 
 Acestea sunt fragmentele sintactice care au înțeles de sine stătător pentru compilator:
 

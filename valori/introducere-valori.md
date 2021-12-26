@@ -245,7 +245,7 @@ function inlocuieste (text, atribut, procent) {
 
   // în funcție poți face anumite modificari valorilor
   // care vor fi interpolate
-  var procInput; 
+  var procInput;
   if (procent == 100) {
     procInput = 'sută la sută';
   };
@@ -278,7 +278,7 @@ sablon1('leu', 10);
 
 ## Agregare date
 
-Orice limbaj de programare are nevoie de structuri care să permită stocarea și manipularea facilă a datelor. JavaScript permite manipularea datelor la nivelul unor structuri stabilite formal în limbaj precum array-urile și obiectele. Însă cele mai simple structuri de date sunt însăși șirurile de caractere, care se supun metodelor de prelucrare specifice unui array.
+Orice limbaj de programare are nevoie de structuri care să permită stocarea și manipularea facilă a datelor. JavaScript permite manipularea datelor la nivelul unor structuri stabilite formal în limbaj, precum array-urile și obiectele. Însă cele mai simple structuri de date sunt însăși șirurile de caractere, care se supun metodelor de prelucrare specifice unui array.
 Cele mai utile structuri de prelucrare a datelor sunt funcțiile. Pe acestea vă veți sprijini atunci când veți porni la manipularea valorilor. Din punct de vedere al preluării, imaginați-vă că sunteți în poziția unei funcții care produce niște rezultate. Dacă acele rezultate nu ar fi *salvate* într-o structură capabilă să le preia, acestea s-ar pierde.
 
 Obiectele pot fi transformate în array-uri dacă acest lucru servește procesării datelor conținute. De cele mai multe ori, varietatea și flexibilitatea metodelor obiectelor interne limbajului, vă vor oferi și soluțiile de prelucrare.
