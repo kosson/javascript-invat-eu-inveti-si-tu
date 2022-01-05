@@ -41,7 +41,7 @@ Acest operator testează dacă în lanțul prototipal al unui obiect se află pr
 
 ```javascript
 function EX () {};
-var obiX = new EX();
+let obiX = new EX();
 
 Object.getPrototypeOf(obiX); // prototype este Object
 console.log(EX.prototype); // prototype este tot Object

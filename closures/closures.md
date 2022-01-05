@@ -15,7 +15,7 @@ Motorul JavaScript ține evidența mediilor lexicale, fie că acestea sunt la ni
 
 O funcție definită în interiorul unei funcții container generează un **closure** peste mediul lexical existent la momentul definirii.
 
-Am explorat deja la funcții posibile traduceri în limba română și pentru că o traducere nu este tocmai elegantă, mai bine folosim termenul în limba engleză. După ce vom fi explorat mai mult, vom înțelege că este o caracteristică, un mecanism a limbajului. Să o luăm încetișor. Primul lucru pe care-l știm despre funcții, este că acestea sunt acțiuni transformatoare asupra datelor pe care le primesc, fie că aceste date sunt *introduse* în funcție prin argumente, fie că sunt disponibile *la liber*, în mediul lexical unde a fost declarată funcția.
+Am explorat deja la funcții posibile traduceri în limba română și pentru că o traducere nu este tocmai elegantă, mai bine folosim termenul în limba engleză. După ce vom fi explorat mai mult, vom înțelege că este o caracteristică, un mecanism al limbajului. Să o luăm încetișor. Primul lucru pe care-l știm despre funcții, este că acestea sunt acțiuni transformatoare asupra datelor pe care le primesc, fie că aceste date sunt *introduse* în funcție prin argumente, fie că sunt disponibile *la liber*, în mediul lexical unde a fost declarată funcția.
 
 Trebuie să ne aducem mereu aminte de importanța redactării codului și în consecință de locul **unde declarăm funcțiile**. Foarte important este și locul de unde le apelăm pentru că de acolo este posibil să *injectăm* date prin argumente. Există scenarii în care aceste date sunt necesare doar în locul în care este apelată funcția sau în obiectul în al cărui context a fost invocată.
 

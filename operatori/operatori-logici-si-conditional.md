@@ -141,7 +141,7 @@ true  && true;  // true
 Atenție la cazul în care poate ai dori evaluarea celui de-al doilea operand. Acest lucru nu se va întâmpla câtă vreme primul este *truthy*. Acest comportament poate fi considerat ca un mecanism selectiv de incrementare a unei variabile.
 
 ```javascript
-var x = false, y = 0;
+let x = false, y = 0;
 x || y++;
 console.log(y);
 ```
@@ -196,7 +196,7 @@ a ||= 'altceva'; // a va deveni "altceva"
 
 Acest operator oferă posibilitatea analizei și reducerii expresiilor la valori boolene pentru a apuca diferite căi în evaluare. Spre deosebire de restul operatorilor care sunt fie unari, fie binari, acesta face evaluarea pentru trei operanzi. De aici îi vine și denumirea de operator ternar.
 
-Are urmoarea formă: `expresie ? expresie pentru cazul true : expresie pentru cazul false`.
+Are următoarea formă: `expresie ? expresie pentru cazul true : expresie pentru cazul false`.
 
 Primul operand de dinaintea semnului întrebării este cel care condiționează evaluarea celor care stau la dreapta și la strânga semnului două puncte. În cazul în care condiția este evaluată la o valoare truthy, prima expresie de după semnul întrebării va fi evaluată. În caz contrar, cea de după semnul două puncte.
 

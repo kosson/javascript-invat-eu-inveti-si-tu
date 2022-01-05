@@ -10,3 +10,7 @@ Construiește și returnează un string nou făcut din concatenarea unui șir ca
 'abc'.repeat(3.5);  // 'abcabcabc' (se va converti la integer)
 'abc'.repeat(1/0);  // RangeError
 ```
+
+## Resurse
+
+- [String.prototype.repeat() | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat)

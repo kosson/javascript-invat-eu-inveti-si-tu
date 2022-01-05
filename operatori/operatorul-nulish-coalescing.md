@@ -11,7 +11,7 @@ const altceva = 0 ?? 42;
 console.log(altceva); // este returnată valoarea 0
 ```
 
-Acest operator vine ca un contrabalans la practica folosirii operatorului `||` care lucrează cu valori `falsy`, ceea ce conduce la probleme în cazul folosirii un șir de caractere vid sau chiar a lui `0`, care sunt valori.
+Acest operator vine ca un contrabalans la practica folosirii operatorului `||` care lucrează cu valori `falsey`, ceea ce conduce la probleme în cazul folosirii un șir de caractere vid sau chiar a lui `0`, care sunt valori.
 
 ## Logical nullish assignment (`??=`)
 
