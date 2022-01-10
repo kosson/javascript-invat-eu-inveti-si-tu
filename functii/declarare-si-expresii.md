@@ -12,7 +12,7 @@ Funcțiile pot fi definite (*create*) în următoarele moduri:
 
 Atenție, numele unei funcții nu-l vei găsi în mediului lexical în care funcția a fost declarată. Dar va fi găsit în registrul inventar al mediului format la execuția funcției. Acest lucru permite recursivitatea.
 
-```javascript și
+```javascript
 (function adunare () {
   console.log(adunare); // function adunare()
 })();

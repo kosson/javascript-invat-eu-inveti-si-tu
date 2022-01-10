@@ -2,9 +2,9 @@
 
 Începând cu versiunea ES6 a standardului, au apărut obiecte dedicate realizării de colecții. Au apărut din necesitatea evitării diferitelor contrângeri impuse de obiectele obișnuite.
 
-Este o colecție de perechi cheie-valoare care au o particularitate foarte utilă: toate cheile sunt obiecte spre deosebire de `Map`, unde pot fi și primitive. Nu sunt admise valori primitive, incluzând `Symbol`.
+Este o colecție de perechi cheie-valoare care au o particularitate foarte utilă: toate cheile sunt obiecte spre deosebire de `Map`, unde pot fi și primitive. Nu sunt admise valori primitive, incluzând `Symbol`. `WeakMap` nu are o proprietate `length`.
 
-De unde vine denumirea **weak**? În limba engleză *weak* înseamnă *slab*. În cazul obiectului nostru, această *slăbiciune* vine din faptul că, de îndată ce nu mai există vreo referință către obiectul care joacă rol de cheie, acesta va putea fi *colectat la gunoi*, ceea ce este echivalentul unei ștergeri din structura internă a obiectului însuși.
+De unde vine denumirea **weak**? În limba engleză *weak* înseamnă *slab*. În cazul obiectului nostru, această *slăbiciune* vine din faptul că, de îndată ce nu mai există vreo referință către obiectul care joacă rol de cheie, acesta fiind *colectat la gunoi*, nici `WeakMap`-ul nu va mai ține referința la acesta. Un `WeakMap` nu va menține o legătură la un obiect, dacă acest obiect a fost colectat la gunoi. Pentru a afla dacă un obiect există într-un `WeakMap`, mai întâi trebuie să ai o referință la acesta.
 
 Amintește-ți că un obiect *trăiește* câtă vreme există o referință către acesta sau către una din proprietățile sale. Dacă am ține evidența unor obiecte folosind un `Map`, această structură ar ține o referință permanentă către obiectul ca proprietate a sa. Dacă nu mai este referit, va fi menținut în viață în continuare taxând resursele. Din necesitatea *colectarii la gunoi* a obiectelor care nu mai sunt referite, s-a născut această nouă structură pentru gestionarea obiectelor [efemere](https://en.wikipedia.org/wiki/Ephemeron).
 
@@ -13,6 +13,8 @@ Amintește-ți că un obiect *trăiește* câtă vreme există o referință că
 În cazul în care nu mai există vreo referință către obiectul proprietate al unui `WeakMap`, sau respectivul obiect a fost setat la `undefined`, va fi *colectat la gunoi*.
 
 În cazul în care valoarea membrului unui `WeakMap` este un obiect, acesta va fi colectat și el la gunoi.
+
+Un `WeakMap` poate fi folosit pentru a extinde obiecte externe sau pentru a utiliza obiecte sigilate (*sealed*) cu beneficiul colectării la gunoi atunci când nu mai sunt utile.
 
 `WeakMap`-ul este asemănător unui `Map` în sensul că are metode similare:
 
@@ -74,6 +76,8 @@ const obi1 = {id: 1, a: 2};
 serveșteObiecte(obi1);
 ```
 
+Urmând același principiu, poți merge mai departe folosind `WeakMap`-ul drept colecție de rezultate care au necesitat resurse considerabile pentru a fi computate. Mai concret, să presupunem că avem o intrare într-un `WeakMap` care este un obiect provenit dintr-o bibliotecă de cod. În cazul în care folosești metodele acestui obiect pentru a obține niște date, dar computația taxează resursele, cel mai bine ar fi ca aceste rezultate să fie cache-uite pentru a nu le mai calcula odată.
+
 ## Gestionarea obiectelor DOM
 
 WeakMap-urile pot fi folosite și pentru a gestiona obiectele cărora le atașezi evenimente. Este cazul obiectelor DOM. Pentru a înțelege bine ceea ce se petrece, trebuie să-ți amintești mereu că o cheie a unui `WeakMap` este un obiect. Ai șters cheia?! Ai șters și valorile asociate acesteia. Aceasta este caracteristica „slabă” din denumirea obiectului intern `WeakMap`.
@@ -117,6 +121,110 @@ declanșezEv(evCnxCuReceptori, obiW);
 Avantajul gestionării obiectelor cărora li se atașează evenimente prin `WeakMap`-uri este acela că în momentul în care se face o colectare a gunoiului pe obiect, se face automat și pe receptori (în limba engleză *listeners* sau *event handlers*).
 
 În cazul în care avem funcții cu rol de receptor care sunt atașate obiectelor din DOM, atunci când obiectul din DOM este șters, aceste funcții receptor rămân în memorie fiind legate de mediul de execuție al browserului, nepermițându-i acestuia să fie colectat la gunoi. Adu-ți mereu aminte că funcțiile tot obiecte sunt.
+
+### Exemplu de manager de evenimente ale elementelor
+
+Aceste manager este util pentru cazurile în care dorești un control mai bun asupra obiectelor din DOM cărora li se atașează evenimente. Scopul este de a crea o structură în baza unui `WeakMap` cu ajutorul căreia să ții o evidență a elementelor cu care lucrezi.
+
+```javascript
+/*
+    <div id="container">
+      <input type="button" id="a" value="A">
+      <input type="button" id="b" value="B">
+      <input type="button" id="c" value="C">
+      <input type="button" id="dela" value="Delete A">
+    </div>
+*/
+
+class EventedElementsMgmt {
+    constructor () {
+        this.elements = new WeakMap();
+    }
+    add (elem, eventname, listener) {
+        let listeners = this.elements.get(elem); // încarcă cheia/obiectul element
+
+        // inițializare cheie nouă în WeakMap dacă nu există
+        if (listeners === undefined) {
+            listeners = {}; // de ex: {click: Set[fnc1, fnc2]}
+        }
+
+        // accesează proprietatea cu numele evenimentului -> ref la Set
+        let listenersSet4evt = listeners[eventname];
+
+        // inițializarea primului eveniment cu listenerul său
+        if (listenersSet4evt === undefined) {
+            listenersSet4evt = new Set();
+        }
+
+        listenersSet4evt.add(listener); // ai grijă, că lucrezi pe ref!!!
+
+        listeners[eventname] = listenersSet4evt; // actualizează cheia WeakMap-ului cu datele nou adăugate
+
+        this.elements.set(elem, listeners); // actualizează valoarea cheii din `WeakMap`.
+    }
+    remove (elem, eventname, listener) {
+        let listeners = this.elements.get(elem); // încarcă cheia/obiectul element
+        if (!listeners) return false;
+        // accesează proprietatea cu numele evenimentului -> ref la Set
+        let listenersSet4evt = listeners[eventname]; // este Set-ul cu toți receptorii asociați unui eveniment
+
+        // verifică dacă există un Set asociat tipului de eveniment.
+        if (!listenersSet4evt) {
+            return false;
+        } else if (listenersSet4evt.delete(listener)) {
+            // dacă ștergerea a returnat `true`, returnează `true`
+            return true;
+        }
+    }
+
+    /**
+     * Metoda declanșează execuția tuturor funcțiilor receptor pentru un tip de eveniment
+     * @param {Object} evt
+     * @returns {Boolean} `false` în cazul în care nu există funcțiie receptor
+     */
+    fire (evt) {
+        // console.log(this.elements.has(evt.currentTarget));
+        let elem = evt.currentTarget, eventname = evt.type; //srcElement
+        // console.log("dE LUCRU ", elem, eventname);
+        let listeners = this.elements.get(elem); // încarcă cheia/obiectul element
+        if (!listeners) return false;
+        // accesează proprietatea cu numele evenimentului -> ref la `Set`
+        let listenersSet4evt = listeners[eventname];
+        if (!listenersSet4evt) return false;
+        let listener;
+        for (listener of listenersSet4evt) {
+            setTimeout(listener, 0, evt); // execuția trebuie să fie asincronă.
+        }
+    }
+}
+
+const EVTM = new EventedElementsMgmt();
+
+let container = document.querySelector('#container');
+
+
+EVTM.add(document.querySelector('#a'), 'click', (evt) => {
+  // codul listener-ului
+  console.log(EVTM);
+});
+
+document.querySelector('#a').addEventListener('click', (evt) => {
+  EVTM.fire(evt);
+});
+
+// Ștergerea unui element
+let dela = document.querySelector('#dela');
+
+EVTM.add(dela, 'click', () => {
+  document.querySelector('#a').parentNode.removeChild(document.querySelector('#a'));
+});
+
+dela.addEventListener('click', (evt) => {
+  EVTM.fire(evt);
+});
+```
+
+Observă faptul că pentru posibilele elemente pe care la un moment dat le vei elimina, referința este construită dinamic (`document.querySelector('#a')`) fără legarea acesteia la vreun identificator. Astfel, referința va fi cheie în `WeakMap` și numai acolo. Acest lucru permite colectarea la gunoi de îndată de ștergi elementul.
 
 ## Ascunderea proprietăților unei clase
 
@@ -172,6 +280,37 @@ console.log(FabricaDeObiecte.getMetadate(unObiect)); // {id: 'f65b4948-8637-4a42
 unObiect = undefined;
 ```
 
+O altă posibilă utilitate ar fi de asociere a unor metadate suplimentare obiectelor DOM. De exemplu, pentru elemente `img`, ai putea să le asociezi structuri de date descriptive necesare utilizării pe toată durata de viață a obiectului respectiv.
+
+## Utilizarea de obiecte externe
+
+În momentul în care lucrezi cu API-uri, la accesarea acestuia vei avea la îndemână o referință.
+
+```javascript
+const ObiectDeLucru = InstanțiereObiectDinBibliotecaDeCod();
+```
+
+Apoi scrii o metodă pentru care dorești să ții un contor care să reprezinte de câte ori a fost apelată.
+
+```javascript
+function deCateOriApelez (ObiectDeLucru) {
+  deExecutatInContextulObiectului(ObiectDeLucru); // execuția acestei metode e ținta unei contorizări.
+};
+```
+
+Implementarea folosind `WeakMap`.
+
+```javascript
+let wm = new WeakMap();
+function deCateOriApelez (ObiectDeLucru) {
+  deExecutatInContextulObiectului(ObiectDeLucru);
+  let numarApelari = wm.get(ObiectDeLucru) || 0;
+  numarApelari++;
+  if (numarApelari > 25) reactioneaza();
+  wm.set(ObiectDeLucru, numarApelari);
+};
+```
+
 ## Reimplementare cu o metodă clear
 
 În cazurile în care ai nevoie să cureți direct însuși obiectul `WeakMap`, poți augmenta precum în următoarea implementare exemplificată de Mozila MDN.
@@ -208,10 +347,11 @@ class ClearableWeakMap {
 - [ECMAScript 6 — New Features: Overview & Comparison. Map/Set & WeakMap/WeakSet](http://es6-features.org/#WeakLinkDataStructures)
 - [Inside V8: weak collections, ephemerons, and private fields by Sigurd Schneider | JSCAMP 2019](https://www.youtube.com/watch?v=MQsUiqVCJMc&fbclid=IwAR3ybYMW2jDnNTA39t9qVph6HELfbguoynnLP9FOSnsDw5tTVHZ43pjC1Z8)
 - [Public and private class fields](https://v8.dev/features/class-fields)
-- [WeakMap and WeakSet](https://javascript.info/weakmap-weakset)
+- [WeakMap and WeakSet | javascript.info](https://javascript.info/weakmap-weakset)
 - [Keyed collections | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Keyed_collections#weakmap_object)
 - [WeakMap | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap)
 - [WeakMaps: Illustrated | javascript.plainenglish.io](https://javascript.plainenglish.io/weakmaps-illustrated-8169ce4764bb)
 - [Weak references and finalizers | Published 09 July 2019 · Updated 19 June 2020](https://v8.dev/features/weak-references)
 - [Create a Event System Using ES6 WeakMap | 12/7/2017 | YIOU CHEN](https://yiou.me/blog/posts/weakmap-event-system)
 - [WeakMaps: Illustrated | Joo Hom | Aug 3, 2020](https://javascript.plainenglish.io/weakmaps-illustrated-8169ce4764bb)
+- [How to detect if an object has been garbage collected in Javascript | Steve Hanov](http://stevehanov.ca/blog/?id=148)

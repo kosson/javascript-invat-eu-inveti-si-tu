@@ -1,6 +1,6 @@
 # Hoisting - omniprezență
 
-Hoistingul trebuie privit ca un comportament al motorului JavaScript care ia identificatorii și îi face omniprezenți pentru blocul de cod în care au fost declarați poziționându-i în **capul blocului** de cod. De fapt, această *omniprezență* este realizată la compilarea codului sursă și totul este disponibil pentru execuție.
+Hoistingul trebuie privit ca un comportament al motorului JavaScript care ia identificatorii și îi face omniprezenți pentru blocul de cod în care au fost declarați, poziționându-i în **capul blocului** de cod. De fapt, această *omniprezență* este realizată la compilarea codului sursă și totul este disponibil pentru execuție.
 
 ```javascript
 console.log(a);
@@ -15,7 +15,7 @@ console.log(a);
 
 Pentru a înțelege mai bine, tot faza de compilare a codului sursă este responsabilă cu realizarea hoisting-ului. La momentul compilării sunt *culese* într-un inventar global toate variabilele și funcțiile. Abia după aceea este interpretat codul și în final este executat. În concluzie, la momentul execuției, deja sunt disponibile toate variabilele și funcțiile la nivel de identificatori. Ba chiar în cazul funcțiilor, acestea sunt disponibile chiar mai devreme de variabile.
 
-Introducerea la momentul compilării a unei variabile în mediul lexical al funcției în interiorul căreia aceasta a fost declarată este cel mai rapid exemplu de hoisting - omniprezență. Acest mecanism pune la dispoziție variabilele funcției înainte să le fie atribuite valorile. Acest lucru se petrece deoarece, înainte de a fi executat programul, codul sursă trece printr-o fază de compilare, în care motorul JavaScript se uită să vadă mai întâi de toate care sunt identificatorii. Motorul trece apoi la execuție, moment în care toți identificatorii primesc valorile.
+Introducerea la momentul compilării a unei variabile în mediul lexical al funcției în interiorul căreia aceasta a fost declarată este cel mai rapid exemplu de hoisting - omniprezență. Acest mecanism pune la dispoziție variabilele funcției înainte să le fie atribuite valorile. Acest lucru se petrece deoarece, înainte de a fi executat programul, codul sursă trece printr-o fază de compilare, în care motorul JavaScript se uită să vadă mai întâi de toate care sunt identificatorii. Motorul trece apoi la execuție, moment în care toți identificatorii primesc valorile în locul în care se află în cod.
 
 ```javascript
 facCeva(); // prima
@@ -28,7 +28,7 @@ facCeva = function () {
 };
 ```
 
-Există un mic truc care trebuie stăpânit pentru a înțelege hoisting-ul. Declararea trebuie detașată ca etapă separată de cea în care se face atribuirea valorii. Nu cădea în capcana operatorul `=`, crezând că valoarea a fost deja atribuită la momentul în care ai declarat variabila.
+Există un mic truc care trebuie stăpânit pentru a înțelege hoisting-ul. Declararea trebuie înțeleasă ca etapă separată de cea în care se face atribuirea valorii. Nu cădea în capcana operatorul `=`, crezând că valoarea a fost deja atribuită la momentul în care ai declarat variabila.
 
 **Moment Zen**: declararea unei variabile și atribuirea variabilei (construirea legăturii dintre identificator și valoare) sunt două operațiuni diferite în timp. Declararea are drept efect constituirea mediului lexical prin popularea sa cu identificatori legați doar la `undefined`.
 
@@ -53,7 +53,7 @@ Din aceste motive este cel mai bine ca variabilele să fie declarate în capul f
 
 Hoistingul se manifestă la fel ca și în cazul variabilelor declarate cu `var`, atunci când ai o expresie de funcție. Este hoistată declarația, dar atribuirea valorii, care este funcția în sine, se face când motorul ajunge la evaluarea expresiei. Deci, nu vei putea apela înainte de a o inițializa cu valoarea de funcție.
 
-Cel mai evident exemplu este să scrii o funcție care să returneze după ce ai declarat variabila. Surpriza mare este returnarea valorii `undefined` deoarece declarația a hoistat variabila, dar nu a mai apucat să facă și *legătura* la valoare.
+Cel mai evident exemplu este să scrii o funcție care să returneze după ce ai declarat variabila. Surpriza mare este returnarea valorii `undefined` deoarece declarația a *hoistat* variabila, dar nu a mai apucat să facă și *legătura* la valoare.
 
 ```javascript
 (function () {

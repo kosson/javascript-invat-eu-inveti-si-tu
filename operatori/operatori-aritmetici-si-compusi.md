@@ -26,7 +26,7 @@ typeof text; // "string"
 Uneori ai nevoie să transformi o valoare numerică într-un șir de caractere. De cele mai multe ori este folosit acest truc pentru a *constrânge*, pentru a *transforma* valoarea primită de un parametru. Operatorul plus oferă prin natura sa această posibilitate. Singurul lucru pe care trebuie să-l faci este să pui valoarea pe care o dorești transformată în string într-o expresie în care în partea stângă ai un șir vid. Astfel, indiferent ce vine în partea dreaptă a operatorului, expresia după evaluare va oferi un șir de caractere.
 
 ```javascript
-var let = '' + 2; // '2' (șirul vid este convertit la 0)
+var ceva = '' + 2; // '2' (șirul vid este convertit la 0)
 ceva; // '2'
 typeof ceva; // 'string'
 undefined + 100; // NaN
@@ -36,7 +36,7 @@ Există câteva situații specifice pentru care înțelegerea se leagă de recep
 
 ## Operatorul plus-egal `+=` (adunare la preexistent și reatribuire)
 
-Acest operator compune într-un singur simbol două operațiuni prima este de a lua valoare existentă și a-i adăuga valoarea dorită, iar a doua este de a reatribui identificatorului noua valoare. Are înțelesul următor exprimat prin cod: `a = a + expresie;`
+Acest operator compune într-un singur simbol două operațiuni: prima este de a lua valoarea existentă căreia îi adaugă valoarea dorită, iar a doua este de reatribuire a noii valori identificatorului. Are înțelesul următor exprimat prin cod: `a = a + expresie;`
 
 Închipuiește-ți următoarea situație: ai nevoie să adaugi o valoare la una preexistentă. Cel mai simplu este să folosești operatorul plus simplu.
 
