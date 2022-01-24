@@ -224,7 +224,7 @@ dela.addEventListener('click', (evt) => {
 });
 ```
 
-Observă faptul că pentru posibilele elemente pe care la un moment dat le vei elimina, referința este construită dinamic (`document.querySelector('#a')`) fără legarea acesteia la vreun identificator. Astfel, referința va fi cheie în `WeakMap` și numai acolo. Acest lucru permite colectarea la gunoi de îndată de ștergi elementul.
+Observă faptul că pentru posibilele elemente pe care la un moment dat le vei elimina, referința este construită dinamic (`document.querySelector('#a')`) fără legarea acesteia la vreun identificator. Astfel, referința va fi cheie în `WeakMap` și numai acolo. Acest lucru permite colectarea la gunoi de îndată ce ștergi elementul.
 
 ## Ascunderea proprietăților unei clase
 

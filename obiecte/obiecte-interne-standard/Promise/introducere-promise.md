@@ -1,18 +1,24 @@
 # Promise
 
-Cea mai mare valoare individuală este timpul. Una din preocupările constante ale programatorului este aceea a gestionării timpilor de execuție printr-o succesiune eficientă a operațiunilor. Dincolo de aceste considerente abstracte, pentru moment, cel mai valoros lucru, atunci când scrii cod, este să poți întocmi o hartă mentală a execuției, unde să jalonezi declarații, medii lexicale, apeluri și timpi de execuție. Această hartă este strâns legată de algoritmica programului, dar pe măsura complexității realizate, apar **necunoscute** care trebuie gestionate. Aceste **necunoscute** sunt legate de **timpul** necesar execuției sau de succesiunea rezolvării anumitor evaluări care depind de alte resurse, unele aflate la distanță, iar altele poate necesitând resurse computaționale. Vă mai aduceți aminte de faptul că o funcție are nevoie de valorile din mediul lexical sau obiectul context pentru a putea să-și execute codul din corp? Ce se întâmplă atunci când o resursă este la distanță sau în corpul funcției este apelată o alta care aparține unui API extern, așa cum sunt cele puse la dispoziție de browser. Cea mai prost scenariu ar implica blocarea firului de execuție al programului pentru a satisface toate condițiile necesare efectuării propriilor evaluări. Dar ce-ar fi dacă am proceda la trimiterea în *fundal* (*runtime-ul de execuție*) a acestor operațiuni care necesită timp și/sau efort pentru a fi soluționate. O astfel de funcție, ar ieși de pe scenă precum un actor care **promite** să revină după ce va lua din culise recuzita necesară. Publicul va rămâne *în așteptare* urmărind jocul celorlalți actori rămași.
+Una din preocupările constante ale programatorului este aceea a gestionării timpilor de execuție printr-o succesiune eficientă a operațiunilor. Dincolo de aceste considerente abstracte, pentru moment, cel mai valoros lucru, atunci când scrii cod, este să poți întocmi o hartă mentală a execuției, pe care să jalonezi declarații, medii lexicale, apeluri și timpi de execuție. Această hartă este strâns legată de algoritmica programului. Uneori apar **necunoscute** care trebuie gestionate. Aceste **necunoscute** sunt legate de **timpul** necesar execuției sau de succesiunea rezolvării anumitor evaluări, care depind de alte resurse, unele aflate la distanță, iar altele poate necesitând resurse computaționale.
+
+Vă mai aduceți aminte de faptul că o funcție are nevoie de valorile din mediul lexical sau obiectul context pentru a putea să-și execute codul din corp? Ce se întâmplă atunci când o resursă este la distanță sau în corpul funcției este apelată o alta care aparține unui API extern, așa cum sunt cele puse la dispoziție de browser. Cea mai prost scenariu ar implica blocarea firului de execuție al programului pentru a satisface toate condițiile necesare efectuării propriilor evaluări.
+
+Ce-ar fi dacă am proceda la trimiterea în *fundal* (*runtime-ul de execuție*) a acestor operațiuni care necesită timp și/sau efort pentru a fi soluționate. O astfel de funcție ar ieși de pe scenă precum un actor care **promite** să revină după ce va lua din culise recuzita necesară. Publicul va rămâne *în așteptare* urmărind jocul celorlalți actori rămași.
 
 **Moment ZEN**: Promisiunile programează rularea de cod în manieră asincronă.
 
-Această operațiune de anticipare a unor rezultate în anumite cazuri este în strânsă legătură cu momentul în care se execută o anumită operațiune. Uneori, când soliciți niște date dintr-o sursă locală sau la distanță, serviciul responsabil poate să nu funcționeze. Sau datele să nu se fi generat dintr-o altă operațiune de prelucrare. În acest caz, vorbim de aspectele asincrone ale rulării codului. Toate aceste necunoscute, mici sincope, lucruri care nu pot fi stăpânite printr-o gândire pur algoritmică, au nevoie să fie gestionate cumva. Pot fi asemuite previziunii meteorologice prin care se încearcă anticiparea vremii. Cum în cazul programării este nevoie de un rezultat concret, aceste aprecieri ale posibilității obținerii sau nu a unui rezultat, poartă numele de **promisiuni**. O promisiune este o valoare care poate fi disponibilă **acum**, în **viitor** sau **niciodată**. Ceea ce se *promite* este faptul că vei primi un răspuns, fie acesta unul **pozitiv** (o valoare), fie unul **negativ** (o eroare).
+Această operațiune de anticipare a unor rezultate în anumite cazuri este în strânsă legătură cu momentul în care se execută o anumită operațiune. Uneori, când soliciți niște date dintr-o sursă locală sau la distanță, serviciul responsabil poate să nu funcționeze sau datele să nu se fi generat dintr-o altă operațiune de prelucrare anterioară. În acest caz, vorbim de aspectele asincrone ale rulării codului.
 
-Mulți practicieni apelează la comparația promisiunilor cu **IOU** -urile. Un IOU este o sintagmă în limba engleză: **I owe you** (**îți sunt dator** am traduce în română), care reglementează o realitate tranzacțională asemănătoare unor chitanțe sau AWB în cazul efectelor poștale. AWB-ul este un jeton pe care îl primești în urma achitării unui produs care urmează să-ți fie livrat. Produsul poate să-ți fie livrat după o perioadă (înregistrăm un **succes**) sau poți primi o explicație pentru problemele apărute la livrare (înregistrăm o **eroare**) însoțită de o posibilă rezolvare pentru problema apărută. În cazul AWB-urilor, poți urmări comanda și pentru o vreme vei vedea mesajul *în curs de livrare* - în engleză ar fi **pending**.
+Toate aceste necunoscute, mici sincope, lucruri care nu pot fi stăpânite printr-o gândire pur algoritmică, au nevoie să fie gestionate cumva. Pot fi asemuite previziunii meteorologice prin care se încearcă anticiparea vremii. Cum în cazul programării este nevoie de un rezultat concret, aceste aprecieri ale posibilității obținerii sau nu a unui rezultat, poartă numele de **promisiuni**. O promisiune este o valoare care poate fi disponibilă **acum**, în **viitor** sau **niciodată**. Ceea ce se *promite* este faptul că vei primi un răspuns, fie acesta unul **pozitiv** (o valoare), fie unul **negativ** (o eroare).
+
+Mulți practicieni apelează la comparația promisiunilor cu **IOU** -urile. Un IOU este o sintagmă în limba engleză: **I owe you** (**îți sunt dator** am traduce în română, ori colocvial *ai de primit*), care reglementează o realitate tranzacțională asemănătoare unor chitanțe sau AWB-uri (din limba engleză *air waybill*) în cazul efectelor poștale. AWB-ul este un jeton pe care îl primești în urma achitării unui produs care urmează să-ți fie livrat. Produsul poate să-ți fie livrat după o perioadă (înregistrăm un **succes**) sau poți primi o explicație pentru problemele apărute la livrare (înregistrăm o **eroare**) însoțită de o posibilă rezolvare pentru problema apărută. În cazul AWB-urilor, poți urmări comanda și pentru o vreme vei vedea mesajul *în curs de livrare* - în engleză ar fi **pending**.
 
 Mai există un termen care trebuie lămurit pentru că ne vom lovi de el adesea: **concurrency**, care s-ar traduce în limba română **concurență**, dar în contextul acestui limbaj de programare cu nuanța de **concomitent**. Kyle Simpson spune despre acest fenomen că două operațiuni în JavaScript se pot desfășura în aceeași fereastră de timp, dar asta nu înseamnă că se întâmplă în paralel. În JavaScript nimic nu se petrece în paralel pentru că avem un singur fir de execuție. În acest caz, se apelează la  prioritizarea execuției diverselor părți ale codului. Ce te faci când în lucrul curent, cu evenimente, multiple funcții încep evaluarea, iar unele au nevoie de valorile returnate de altele ș.a.m.d. În acest mediu înalt concurențial, avem deja componentele care reglează controlul programului: **stiva apelărilor**, **bucla evenimentelor** (*event loop*) și **coada sarcinilor** (*task queue*). Gestionarea acestui mediu concurențial, a introdus paradigma de lucru **asincron**.
 
 **Moment ZEN**: Codul care rulează asincron nu blochează event loop-ul.
 
-Pentru a rezolva mai elegant problema asincronicității dincolo de ceea ce pot oferi callback-urile, ES6 a introdus oficial conceptul de **promises** (promisiuni) în standard. Pe lângă *call stack*, *event loop* și *task queue*, promisiunile mai introduc un o coadă de așteptare proprie numită *microtask queue*, care are prioritate față de *task queue* în introducerea unor callback-uri în *event loop*.
+Pentru a rezolva mai elegant problema asincronicității dincolo de ceea ce pot oferi callback-urile, ES6 a introdus oficial conceptul de **promises** (promisiuni) în standard. Pe lângă *call stack*, *event loop* și *task queue*, promisiunile mai introduc o coadă de așteptare proprie numită *microtask queue*, care are prioritate față de *task queue* în introducerea unor callback-uri în *event loop*.
 
 **Standardul spune**:
 
@@ -47,13 +53,21 @@ listă.forEach(elementArray => console.log(elementArray)); // 1 2 3
 
 După cum am observat, am implicat în soluție o funcție cu rol de callback și deja am aflat că promisiunile sunt soluția la problemele pe care utilizarea acestora le ridică. Callback-urile au problemele lor bine-cunoscute printre care imposibilitatea de a colecta erorile ridicate prin `try...catch`.
 
-Promisiunile sunt obiecte care țin locul valorilor rezultate din operațiuni asincrone. Este un concept foarte puternic în sine. Este ca și cum ai calcula deja în cap ce ai face cu un lucru pe care l-ai comandat pe Internet, dar care nu a ajuns încă acasă. Gândește-te că ai avea un locțiitor de valoare, care ar permite deja utilizarea sa în combinație cu altele. Acest obiect locțiitor poate fi instrumentat grație unor stări prin care trece.
+**Moment ZEN**: Promisiunile sunt obiecte care țin locul valorilor rezultate din operațiuni asincrone.
+
+Este un concept foarte puternic în sine. Gândește-te că ai avea un locțiitor de valoare, care ar permite deja utilizarea sa în combinație cu altele.
+
+```javascript
+const loctiitorValoare = fetch("http://api.undeva.ro/date.json");
+```
+
+Acest obiect locțiitor poate fi instrumentat grație unor stări prin care trece. Pentru a *rezolva* obiectul promisiune, acesta ne pune la dispoziție metoda `then()`.
 
 **Standardul spune**:
 
 > Oricare obiect Promise este în una din cele trei stări posibile: `fulfilled`, `rejected` și `pending`.
 
-Promisiunile implică gestionarea celor trei stări posibile ale unui răspuns: `pending`, `fulfilled` și `rejected`. O stare `pending` (tradus prin *în așteptare*) este cea în care se află promisiunea de îndată ce a fost creată. Starea `pending` va perpetua până când starea sa se modifică în `fulfilled` (în lb. română *împlinită*) sau `rejected` (în limba română *respinsă*). Starea `fulfilled` implică faptul că promisiunea s-a soldat cu aducerea valorii așteptate. Starea `rejected` indică faptul că valoarea nu este disponibilă.
+Promisiunile implică gestionarea celor trei stări posibile ale unui răspuns: `pending`, `fulfilled` și `rejected`. O stare `pending` (tradus prin *în așteptare*) este cea în care se află promisiunea de îndată ce a fost creată. Starea `pending` va perpetua până când se modifică în `fulfilled` (în lb. română *împlinită*) sau `rejected` (în limba română *respinsă*). Starea `fulfilled` implică faptul că promisiunea a fost *rezolvată* prin aducerea valorii așteptate. Starea `rejected` indică faptul că valoarea nu este disponibilă.
 
 ### Pentru ce folosim promisiunile
 
@@ -78,11 +92,11 @@ thunk(); // Ionel Pavelescu
 
 După cum observi, o expresie de funcție *thunk* are totul pentru a-ți oferi o valoare. Nu trebuie să introduci nicio valoare pentru a avea deja una la momentul execuției. Acesta este modelul simplu al unui *thunk* sincron.
 
-Dincolo de operațiunea în sine, am construit un soi de *referință* către o valoare computată la apelarea oriunde în cod a funcției `thunk`, atunci când avem nevoie. Am numit funcția `thunk`, dar poate purta oricare alt nume. Mecanismul în sine este important de înțeles: accesul la o valoare computată care nu se schimbă pentru că este *hard-coded* (adică valorile sunt predefinite la apelarea lui `numePrenume`). Se mai petrece un lucru foarte important. Adu-ți aminte de faptul că o funcție pentru a se executa are nevoie de identificatorii valorilor din mediul lexical propriu sau a contextului. Variabila `thunk` va fi, de fapt, o referință către o stare ambalată într-un container. Această referință, acest container care ambalează o valoare, fie aceasta o funcție care returnează o valoare computată, va fi la dispoziția ta în întregul program.
+Dincolo de operațiunea în sine, am construit un soi de *referință* către o valoare computată la apelarea oriunde în cod a funcției `thunk`, atunci când avem nevoie. Am numit funcția `thunk`, dar poate purta oricare alt nume. Mecanismul în sine este important de înțeles: accesul la o valoare computată care nu se schimbă pentru că este *hard-coded* (adică valorile sunt predefinite la apelarea lui `numePrenume`). Se mai petrece un lucru foarte important. Adu-ți aminte de faptul că o funcție pentru a se executa are nevoie de identificatorii valorilor din mediul lexical propriu sau a contextului. Variabila `thunk` va fi o referință către o stare ambalată într-un container. Această referință, acest container care ambalează o valoare, fie aceasta o funcție care returnează o valoare computată, va fi la dispoziția ta în întregul program.
 
 Kyle Simpson spune că aici ar trebui să fim atenți pentru că, de fapt, aceasta este ideea principală a promisiunilor: **un ambalaj peste o valoare**. Referința către ambalaj poate fi utilizată în program ca orice valoare. Mai există un aspect important asociat promisiunilor, care merită reținut pentru a evita partizanatul. Promisiunile nu au fost introduse pentru a elimina callback-urile, ci pentru a elimina callback-urile inutile, spune Adam Boduch în lucrarea sa *JavaScript Concurency*.
 
-Un *thunk asincron* este o funcție care, spre deosebire de surata sincronă, are nevoie de o funcție callback care să-i fie pasată. Pentru a simula asincronicitatea, în funcția returnată, vom folosi utilitarul `setTimeout()`.
+Un *thunk asincron* este o funcție care, spre deosebire de surata sincronă, are nevoie de o funcție callback care să-i fie pasată. Pentru a simula asincronicitatea, în funcția returnată vom folosi utilitarul `setTimeout()`.
 
 ```javascript
 /* #1
@@ -197,9 +211,11 @@ rezolvareLaCerere().then((valoare) => {
 
 Un astfel de lucru cu promisiunile nu aduce niciun beneficiu, iar bune practici invită la evitarea sa.
 
-### Fă o promisiune
+### Fă o promisiune și împlinește-o
 
-La apelarea cu `new`, constructorul `Promise` creează obiectul promisiune care pune la dispoziție o metodă `then()`. Metoda `then()` primește o funcție cu rol de callback pentru prelucrarea datelor în caz de succes, fiind urmată de o metodă `catch()`, care afișează erorile.
+La apelarea cu `new`, constructorul `Promise` creează obiectul promisiune care pune la dispoziție o metodă `then()`. Am putea spune că prezența metodei `then` este marca promisiunilor.
+
+Metoda `then()` primește drept prim argument o funcție cu rol de callback pentru prelucrarea datelor în caz de succes (în limba engleză *fulfillment handler*), fiind urmată de o metodă `catch()`, care afișează erorile. În cazul în care sunt necesare date suplimentare pentru reușita operațiunii asincrone, acestea vor fi pasate funcției cu rol de callback. Metodei `then` îi poți pasa un al doilea argument, care tot o funcție cu rol de callback este. Aceasta va fi apelată în cazul unei respingeri (în limba engleză *rejection handler*).
 
 **Moment ZEN**: `then` este folosit pentru a constitui un lanț de operațiuni asincrone aplicabile pe rezultatul apărut.
 
@@ -216,8 +232,8 @@ let promisiune = new Promise((resolve, reject) => {
   };
 });
 promisiune.then(
-  promisiuneRezolvata => {
-    console.log(`Ți-am promis ceva! Vezi? ${promisiuneRezolvata}`);
+  valoarea => {
+    console.log(`Ți-am promis ceva! Vezi? ${valoarea}`);
   }
 ).catch(eroare => {
   console.log(`${eroare}`);

@@ -1,6 +1,6 @@
 # Array.prototype.join()
 
-Nu afectează array-ul. Concatenează elementele unui array într-un string a cărui caracter de separare poate fi setat.
+Nu afectează array-ul. Concatenează elementele unui array într-un string care le include pe toate. Poate fi menționat un caracter de separare care va apărea între elementele puse cap la cap.
 
 ```javascript
 var a = ['Ceva', 'Altceva', 'Altundeva'];
@@ -9,6 +9,8 @@ var text = a.join(', ');  // atribuie lui text 'Ceva, Altceva, Altundeva'
 var text = a.join(' + '); // atribuie lui text 'Ceva + Altceva + Altundeva'
 var text = a.join('');    // atribuie lui text 'CevaAltcevaAltundeva'
 ```
+
+Dacă nu menționezi niciun caracter, va fi introdusă automat o virgulă. Introducerea ca despărțitor a unui șir vid (`''`) are drept efect constituirea unui șir de caractere continuu, fără delimitare.
 
 Uneori când lucrezi cu fragmente de text, fie acestea și markup, indiferent că este HTML sau XML, poți folosi cu succes `join`.
 

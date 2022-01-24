@@ -2,7 +2,7 @@
 
 Acest enunț a fost introdus în ECMAScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile care au cuvântul cheie `async` în față, vor returna mereu o promisiune. De îndată ce codul este compilat și executat, *funcțiile async* sunt executate. Acest comportament îl întâlnim și la promisiuni. În momentul în care se execută codul, acolo unde motorul întâlnește `new Promise(nume_callback)`, va executa funcția callback.
 
-Funcțiile `async` au comportament sicron, ceea ce înseamnă că execuția codului va aștepta ca evaluarea lor să se încheie. Atenție, dacă operațiunea întârzie, execuția va fi blocată.
+Funcțiile `async` au comportament sincron, ceea ce înseamnă că execuția codului va aștepta ca evaluarea lor să se încheie. Atenție, dacă operațiunea întârzie, execuția va fi blocată.
 
 ```javascript
 async function facCeva () {};
@@ -22,7 +22,7 @@ Valorile returnate dintr-o funcție `async` sunt precum rezultatele unui `Promis
 
 **Moment Zen**: Valoarea returnată de o funcție `async` este împachetată în `Promise.resolve()`.
 
-Apariția lor marchează o nouă paradigmă de lucru cu promisiunile.
+Apariția funcțiilor `async` marchează o nouă paradigmă de lucru cu promisiunile.
 
 ```javascript
 async function cevaAsincron () {
@@ -199,7 +199,7 @@ Calea ciudată de a trata erorile a rezultat din utilizarea unei promisiuni, adi
 
 ## Concluzii
 
-Scrierea codului asincron folosind `async`/`await` este o alternativă elegantă și mult mai eficientă (cel puțin în cazul detectării erorilor) pentru lucrul cu promisiunile. Totuși nu este un înlocuitor pentru promisiuni, ci un model mai eficient de folosire a acestora. De exemplu, pentru a rezolva în paralel promisiuni, vom apela `Promise.all()`, dar rezultatul poate fi gestionat cu un `async`.
+Scrierea codului asincron folosind `async`/`await` este o alternativă elegantă și mult mai eficientă (cel puțin în cazul detectării erorilor) pentru lucrul cu promisiunile. Totuși nu este un înlocuitor pentru promisiuni, ci un model mai eficient de folosire al acestora. De exemplu, pentru a rezolva în paralel promisiuni, vom apela `Promise.all()`, dar rezultatul poate fi gestionat cu un `async`.
 
 ```javascript
 const [val1, val2, val3] = await Promise.all(promise1(), promise2(), promise3())
@@ -235,7 +235,7 @@ new Promise((resolve, reject) => {
 }).catch();
 ```
 
-Și versiunea *async*.
+Și versiunea *async* folosind pachetul *promisify*.
 
 ```javascript
 const intarziere = promisify(setTimeout);
@@ -251,6 +251,137 @@ async function ceva () {
 
 Tot codul care există după un *await*, este echivalentul rulării într-un `then`.
 
+## Modele de lucru
+
+Ken Snyder introduce un model de lucru interesant pornind de la practica curentă existentă în lucrul cu funcțiile asincrone. Acesta pornește de la modelul pe care majoritatea programatorilor îl folosesc în combinație cu un router pentru a gestiona rezultatul unei căi.
+
+```javascript
+router.get('/users/:id', async (req, res) => {
+  const client = new Client();
+  let user;
+  try {
+    await client.connect();
+    user = await client.find('users').where('id', req.path.id);
+  } catch(error) {
+    res.status(500);
+    user = { error };
+  } finally {
+    await client.close();
+  }
+  res.json(user);
+});
+```
+
+După cum se observă, pentru a gestiona erorile se folosește o construcție `try...catch`. Alternativa ar fi construcția unei funcții care să abstractizeze toate operațiunile.
+
+```javascript
+router.get('/users/:id', async (req, res) => {
+  const { result: user, error } = await withDbClient(client => {
+    return client.find('users').where('id', req.path.id);
+  });
+  if (error) {
+    res.status(500);
+  }
+  res.json({ user, error });
+});
+```
+
+Se observă faptul că o funcție cu rol de gestionar care returnează callback-ului rezultatele necesare trimiterii unui răspuns clientului. În plus, erorile vor fi ridicate la nivelul gestionarului și se asigură că nu vor fi excepții care să nu fie tratate. Un posibil model de implementare ar fi următorul.
+
+```javascript
+async function withDbClient(handler) {
+  const client = new DbClient();
+  let result = null;
+  let error = null;
+  try {
+    await client.connect();
+    result = await handler(client);
+  } catch (e) {
+    error = e;
+  } finally {
+    await client.close();
+  }
+  return { result, error };
+}
+```
+
+Domnul Ken Snyder numește acest model Result-Error Pattern pentru că la nivelul callback-ului sunt *extrase* rezultatele. Ne este oferit și un model de lucru pentru `fetch`: `const { data, error, response } = await fetchJson('/users/123');`.
+
+```javascript
+async function fetchJson(...args) {
+  let data = null;
+  let error = null;
+  let response = null;
+  try {
+    const response = await fetch(...args);
+    if (response.ok) {
+      try {
+        data = await response.json();
+      } catch (e) {
+        // not json
+      }
+    } else {
+      // note that statusText is always "" in HTTP2
+      error = `${response.status} ${response.statusText}`;
+    }
+  } catch(e) {
+    error = e;
+  }
+  return { data, error, response };
+}
+```
+
+Exemplele continuă și cu o aplicație practică în cazul lucrului cu Elasticsearch: `const { result, error, details } = await findPosts(query);`. În cazul lucrului cu Elastisearch este foarte adevărat că răspunsurile au un grad înalt de imbricare. Obiectul rezultate conține:
+
+- `records` - este un array de documente;
+- `total` - este numărul total de documente în cazul în care nu a fost aplicată nicio limită;
+- `aggregations` - informație fațetată conform criteriilor de căutare.
+
+```javascript
+// aduce date de la un anumit index în baza unui query specificat
+async function query (index, query) {
+  // Result-Error Pattern la un nivel ceva mai jos
+  const { result, error } = await withEsClient(client => {
+    return client.search({
+      index,
+      body: query.getQuery(),
+    });
+  });
+  // Returnează un obiect similar cu result-error
+  return {
+    result: formatRecords(result),
+    error,
+    details: result || error?.meta,
+  };
+}
+
+// Extrage înregistrările din răspunsuri
+function formatRecords(result) {
+  // Observă cât de adânc este nivelul de date în care se află rezultatele
+  if (result?.body?.hits?.hits) {
+    const records = [];
+    for (const hit of result.body.hits.hits) {
+      records.push(hit._source);
+    }
+    return {
+      records,
+      total: result.body.hits.total?.value || 0,
+      aggregations: result.aggregations,
+    };
+  } else {
+    return { records: [], total: null, aggregations: null };
+  }
+}
+```
+
+În final, funcția `findPosts` se poate transforma într-un *ambalaj* pentru `query()`.
+
+```javascript
+function findPosts(query) {
+  return query('posts', query);
+}
+```
+
 ## Dependințe cognitive
 
 - iteratori
@@ -265,3 +396,4 @@ Tot codul care există după un *await*, este echivalentul rulării într-un `th
 - [Async functions - making promises friendly | Google Developers](https://developers.google.com/web/fundamentals/primers/async-functions)
 - [Easier Node.js streams via async iteration](https://2ality.com/2019/11/nodejs-streams-async-iteration.html)
 - [Making asynchronous programming easier with async and await | MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await)
+- [How to Simplify Asynchronous JavaScript using the Result-Error Pattern | Ken Snyder | JANUARY 18, 2022](https://www.freecodecamp.org/news/simplify-asynchronous-javascript-using-the-result-error-pattern/)

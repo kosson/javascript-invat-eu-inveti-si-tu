@@ -1,6 +1,6 @@
 # Array.prototype.filter()
 
-Această metodă poate fi înțeleasă ca un test aplicat fiecărui element dintr-un array. Elementele care trec testul sunt introduse într-un nou array pe care metoda `filter` îl returnează. Acest lucru permite înlănțuirea mai multor metode filter pentru a căuta după mai multe criterii într-o cascadă de filtre. 
+Această metodă poate fi înțeleasă ca un test aplicat fiecărui element dintr-un array. Elementele care trec testul sunt introduse într-un nou array pe care metoda `filter` îl returnează. Acest lucru permite înlănțuirea mai multor metode filter pentru a căuta după mai multe criterii într-o cascadă de filtre. Funcția cu rol de callback trebuie să returneze o valoare care să poată fi redusă la `true`/`false`.
 
 Testarea se face după anumite criterii introduse de o funcție callback. Funcția callback returnează o valoare de adevăr pentru elementul curent supus analizei. Array-ul original nu este modificat.
 
@@ -50,8 +50,6 @@ filtrare(colectie, function (element) {   // invoci filtrarea cu un array și ca
 
 // Array [ "prima", "prima" ]
 ```
-
-Funcția cu rol de callback are rolul precis de a returna o valoare de adevăr în urma evaluării diferitelor expresii din interiorul său.
 
 Cum ar funcționa același procedeu pentru un obiect JSON?
 
