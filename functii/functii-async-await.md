@@ -397,3 +397,4 @@ function findPosts(query) {
 - [Easier Node.js streams via async iteration](https://2ality.com/2019/11/nodejs-streams-async-iteration.html)
 - [Making asynchronous programming easier with async and await | MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await)
 - [How to Simplify Asynchronous JavaScript using the Result-Error Pattern | Ken Snyder | JANUARY 18, 2022](https://www.freecodecamp.org/news/simplify-asynchronous-javascript-using-the-result-error-pattern/)
+- [Designing APIs for Asynchrony | 2013-08-23](https://blog.izs.me/2013/08/designing-apis-for-asynchrony/)

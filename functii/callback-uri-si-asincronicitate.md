@@ -167,3 +167,7 @@ fs.readFile('./numeFisier.txt', function (error, rezultat) {
 ```
 
 Construcțiile `try...catch` nu capturează erorile care apar în callback-uri asincrone. Acest lucru se petrece petru că execuția corpului callback-ului este deferită unei posibile metode asincrone, care nu returnează starea de eroare callback-ului, dacă nu este folosit cod special pentru a face acest lucru. Reține faptul că `try...catch` funcționează numai petru cod sincron și pentru construcții asincrone `async/await`.
+
+## Resurse
+
+- [Callbacks, synchronous and asynchronous | July 24, 2011](https://blog.ometer.com/2011/07/24/callbacks-synchronous-and-asynchronous/)

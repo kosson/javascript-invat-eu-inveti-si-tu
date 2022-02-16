@@ -809,7 +809,7 @@ obiLiteral.oMetoda(); //12
 Englezul îi spune **dot notation** (*notație folosind punctul*) și este cea mai facilă modalitate de a adăuga proprietăți unui obiect existent cu mențiunea ca acel obiect să nu fie înghețat sau protejat total la scriere.
 
 ```javascript
-const newObj = {};            // Creează obiectul
+const newObj = {};          // Creează obiectul
 newObj.oCheie = 'Salutare'; // Scrie proprietăți
 let cheie = newObj.oCheie;  // Accesează proprietățile
 ```
@@ -945,7 +945,7 @@ obiect['doi'] = 2;
 obiect; // { unu: 1, doi: 2 }
 ```
 
-Se pot și șterge exact ca și în cazul operatorului cu punct:
+Se pot și șterge exact precum în cazul operatorului cu punct:
 
 ```javascript
 delete obiect['doi']; // true
@@ -991,9 +991,29 @@ console.log(este); // undefined
 let alternativEste = cevaInteresant?.detalii ?? 'satisfăcător';
 ```
 
+## Bucle pe obiecte
+
+În momentul în care ai nevoie să parcurgi un obiect pentru a opera asupra membrilor săi, te poți folosi de *for...in* pentru a itera.
+
+```javascript
+let index = 0, cheie;
+for (cheie in obi) {
+  if (obi.hasOwnPropery(cheie)) {
+    console.log(`Proprietatea este ${cheie}, iar valoarea ${obi[cheie]}`);
+  }
+}
+```
+
+Parcurgerea unui obiect folosind *for...in* trebuie însoțită de verificararea suplimentară ca proprietatea să aparțină obiectului. Acest lucru este necesar pentru că *for...in* ia în considerare și proprietățile moștenite.
+
+Parcurgerea obiectelor este ușurată semnificativ de aparția următoarelor metode pe care **ES6** le-a introdus:
+- Object.keys(),
+- Object.values(),
+- Object.entries().
+
 ## Eliminarea membrilor unui obiect
 
-Operatorul `delete` permite eliminarea unei proprietăți, adică a perechii cheie-valoare din obiect. Acesta are efect doar asupra proprietăților care aparțin obiectului. Prototipul nu este afectat. Delete returnează `false`, dacă proprietatea nu poate fi ștearsă, dar este deținută de obiect. Va returna `true` dacă proprietatea a fost ștearsă cu succes.
+Operatorul `delete` permite eliminarea unei proprietăți, adică a perechii cheie-valoare din obiect. Acesta are efect doar asupra proprietăților care aparțin obiectului. Prototipul nu este afectat. Delete returnează `false`, dacă proprietatea nu poate fi ștearsă. Va returna `true` dacă proprietatea a fost ștearsă cu succes.
 
 ```javascript
 const obiect = { prima: 1, aDoua: 2 };
@@ -1056,7 +1076,7 @@ PrimulSalut.salutare();
 
 **Moment Zen**: Modificarea obiectului prototipal implică reflectarea instantanee în obiectele care moștenesc din acesta.
 
-Poți reutiliza cod prin moștenire folosind lanțul prototipal care se formează între obiecte și care poate fi interogat prin proprietatea `__proto__`. Proprietatea `__proto__` nu este același lucru cu `prototype`. În cazul lui `__proto__`, acesta indică obiectul prototype al `constructorului folosit pentru crearea obiectului instanțiat.
+Poți reutiliza cod prin moștenire folosind lanțul prototipal care se formează între obiecte și care poate fi interogat prin proprietatea `__proto__`. Proprietatea `__proto__` nu este același lucru cu `prototype`. În cazul lui `__proto__`, acesta indică obiectul prototype al constructorului folosit pentru crearea obiectului instanțiat.
 
 ```javascript
 const obi = {ceva: 'salve'};// crearea unui obiect

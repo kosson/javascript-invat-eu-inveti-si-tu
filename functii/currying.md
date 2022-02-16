@@ -1,6 +1,14 @@
 # Currying
 
-Currying descrie o funcție care este apelată cu mai puține argumente decât așteaptă și returnează o funcție care primește restul argumentelor. Cea nouă la rândul ei returnează rezultatul operațiunii asupra parametrilor.
+Currying descrie o funcție care este apelată cu mai puține argumente decât așteaptă și returnează o funcție care primește restul argumentelor. La rândul ei, cea nouă returnează rezultatul operațiunii asupra parametrilor. Currying-ul nu transformă funcția în ceva diferit. Tot un obiect apelabil (*callable*) este. Este modificat doar modul în care este apelată.
+
+```javascript
+// un apel obișnuit
+let rezultat = functie(param1, param2); // `functie` returnează o funcție
+
+// apelare folosind currying-ul
+let rezultat = functie(param1)(param2);
+```
 
 Tehnica de a introduce câteva argumente unei funcții cu returnarea uneia noi se numește `currying`.
 
@@ -25,10 +33,9 @@ var aDoua = prima(20, 21); console.log(aDoua); // 41
   (x, y) => x + y)(10)(20, 21); // 41
 ```
 
-## Dependințe cognitive
+## La ce folosește
 
--   funcții
--   closure
+O funcție care este folosită astfel permite reutilizarea a unor părți ale unui parametru.
 
 ## Aspecte practice
 
@@ -108,6 +115,16 @@ Un alt exemplu mai simplu de „curring” este cel de folosire a noii sintaxe �
     (c) => a + b + c)(1)(2)(3); // 6
 ```
 
+## Dependințe cognitive
+
+-   funcții
+-   closure
+
 ## Alonje
 
 - funcții de tip tap.
+
+## Resurse
+
+- [Currying | Javascript.info | 10th January 2021](https://javascript.info/currying-partials)
+- [Currying in JavaScript Introduction | Piyush Dubey | 12 Feb 2022](https://javascript.plainenglish.io/currying-in-javascript-15802dcde87c)

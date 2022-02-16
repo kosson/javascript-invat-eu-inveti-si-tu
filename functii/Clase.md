@@ -196,7 +196,7 @@ Modelul existent care permite popularea cu date a viitorului obiect este prin in
 
 ```javascript
 class ButonAcces extends HTMLElement {
-  
+
   constructor() {
     super();
     this.color = "magenta";
@@ -216,7 +216,7 @@ De curând, prin ES2022, poți declara variabilele direct în capul clasei, prec
 ```javascript
 class ButonAcces extends HTMLElement {
 	color = "magenta";
-    _clicked = false;
+  _clicked = false;
 }
 ```
 
@@ -302,8 +302,8 @@ Noile modificări ale standardului prevăd posibilitatea de a crea câmpuri **pr
 
 ```javascript
 class ButonAcces extends HTMLElement {
-	color = "magenta";
-    #clicked = false;
+  color = "magenta";
+  #clicked = false;
 }
 const butonul = new ButonAcces();
 butonul.#clicked = true; // Cannot be assigned a value from outside
@@ -313,16 +313,16 @@ O astfel de protecție se poate aplica și la metode, precum și accesorilor.
 
 ```javascript
 class ButonAcces extends HTMLElement {
-	color = "magenta";
+    color = "magenta";
     #contor = 0;
     #mesaj = "Bine ai venit!";
-    
+
     get #contor() {return #contor}
     set #contor(valoare) {this.#contor = valoare}
-    
+
     get #mesaj() {return #mesaj.toUpperCase()}
   	set #mesaj(text) {this.#mesaj = text.trim()}
-    
+
     constructor () {
         super();
         this.onmouseover = this.#mouseover.bind(this);
@@ -369,7 +369,7 @@ Avion.id();
 
 ### Metodele unui clase
 
-În interiorul clasei pot fi declarate funcții care joacă rolul metodelor în momentul în care se creează o instanță, adică un nou obiect. Metodele sunt create folosind numele identificatorului fără a mai fi necesar să menționezi cuvântul cheie `function`. 
+În interiorul clasei pot fi declarate funcții care joacă rolul metodelor în momentul în care se creează o instanță, adică un nou obiect. Metodele sunt create folosind numele identificatorului fără a mai fi necesar să menționezi cuvântul cheie `function`.
 
 #### Folosirea unei metode în alt context
 
@@ -921,3 +921,5 @@ class OClasa {
 - [Classes | JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 - [JS classes are not “just syntactic sugar” | Andrea Giammarchi | medium.com](https://webreflection.medium.com/js-classes-are-not-just-syntactic-sugar-28690fedf078)
 - [The lazy-loading property pattern in JavaScript | Nicholas C. Zakas | humanwhocodes.com](https://humanwhocodes.com/blog/2021/04/lazy-loading-property-pattern-javascript/)
+- [Private class features](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields)
+- [Working with private class features](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_With_Private_Class_Features)

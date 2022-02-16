@@ -12,7 +12,7 @@ array.indexOf(2, -1); // -1
 array.indexOf(2, -3); // 0
 ```
 
-## Elimnarea elementelor repetitive
+## Eliminarea elementelor repetitive
 
 ```javascript
 const indices = [];

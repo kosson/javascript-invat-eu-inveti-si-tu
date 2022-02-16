@@ -44,7 +44,7 @@ Profesorul Christopher Strachey spune:
 > Aplicarea unei funcții argumentelor sale implică evaluarea expresiei care o definește după ce au fost date valori variabilelor conectate la acestea din lista argumentelor.
 > Astfel, valoarea-R a funcției conține două părți: o regulă pentru evaluarea expresiei și un mediu care să-i ofere variabilele libere.
 
-Ne amintim că, o funcție este aplicată argumentelor sale și că, la momentul apelării acesteia, se creează și un mediu lexical nou. În acest nou mediu lexical (inventarul identificatorilor), argumentele sunt variabile care identifică, de fapt, expresii ce vor fi *legate* de o valoare.
+Ne amintim că, o funcție este aplicată argumentelor sale și că, la momentul apelării acesteia, se creează și un mediu lexical nou. În acest nou mediu lexical (inventarul identificatorilor), argumentele sunt variabile care, de fapt, identifică expresii ce vor fi *legate* de o valoare.
 
 ```javascript
 ((x) => x)(2 + 3); // 5

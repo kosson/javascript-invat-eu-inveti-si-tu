@@ -80,3 +80,7 @@ for await (valoare of timpRămas) {
   console.log(valoare);
 }
 ```
+
+## Resurse
+
+- [Getting Started with Async Iterators in Node.js | Valeri Karpov | July 17, 2018](https://thecodebarbarian.com/getting-started-with-async-iterators-in-node-js)
