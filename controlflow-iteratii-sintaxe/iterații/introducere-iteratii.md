@@ -12,7 +12,11 @@ Alternativa la procesele repetitive, la ciclurile iterative realizate cu buclele
 
 ## Interfața de iterare
 
-Am menționat deja despre protocoalele de iterare. ECMAScript 2015 (ES6) a introdus un nou mecanism de parcurgere a datelor numit **iterare**. Mai exact, un **protocol de iterare** pentru că iterarea acest concept este în ADN-ul programării. Conform noii versiuni a standardului (2019), protocolul de iterare s-a transformat într-o adevărată **interfață de iterare**. Textul [ECMAScript 2018](https://www.ecma-international.org/ecma-262/9.0/#sec-control-abstraction-objects) lămurește ce este o interfață, termen care trebuie înțeles de la bun început.
+În contextul programării computerelor, un *iterator* este un obiect ce permite prelucrarea/parcurgerea unei structuri de date cum este un array, de exemplu. Iteratorii își au originea în limbajul de programare CLU dezvoltat de Barbara Liskov în 1974 la Massachusetts Institute of Technology (MIT). Interarea se leagă și de conceptul de interfață după cum va urma.
+
+Am menționat deja despre protocoalele de iterare. ECMAScript 2015 (ES6) a introdus un nou mecanism de parcurgere a datelor numit **iterare**. Mai exact, un **protocol de iterare** pentru că iterarea acest concept este în ADN-ul programării.
+
+Conform noii versiuni a standardului (2019), protocolul de iterare s-a transformat într-o adevărată **interfață de iterare**. Textul [ECMAScript 2018](https://www.ecma-international.org/ecma-262/9.0/#sec-control-abstraction-objects) lămurește ce este o interfață, termen care trebuie înțeles de la bun început.
 
 > O interfață este un set de chei a unor proprietăți ale căror valori asociate reprezintă o anumită specificație. Orice obiect care oferă toate proprietățile descrise de specificațiile interfaței este *conform* interfeței. O interfață nu este reprezentată distinct de vreun obiect. În schimb, pot fi multe obiect implementate separat care sunt conforme cu o interfață. Un singur obiect, poate fi conform cu mai multe interfețe.
 
@@ -68,3 +72,5 @@ Interfețele de iterare sunt întâlnire ori de câte ori avem de-a face cu stru
 - [Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)
 - [All you need to know about JavaScript Iterators and Generators](https://jfet97.github.io/JavaScript-Iterators-and-Generators/)
 - [Looping over Arrays: for vs. for-in vs. .forEach() vs. for-of](https://2ality.com/2021/01/looping-over-arrays.htm)
+- [Iterator | Wikipedia](https://en.wikipedia.org/wiki/Iterator)
+- [CLU (programming language)](https://en.wikipedia.org/wiki/CLU_(programming_language))

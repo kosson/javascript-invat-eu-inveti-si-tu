@@ -66,6 +66,27 @@ let birou = ['lampă', ...obiecte, 'scaun', 'tușieră'];
 console.log(birou); // Array [ "lampă", "pixuri", "creioane", "scaun", "tușieră" ]
 ```
 
+Și în cazul obiectelor este posibilă folosirea operatorului.
+
+```javascript
+let c = {a:1, b:true};
+let xy = {...c, x: 'ab'}; // {a: 1, b: true, x: 'ab'}
+```
+
+Poți constitui un obiect nou doar din aplicarea spread-ului pe diferitele obiecte:
+
+```javascript
+let c = {a:1, b:true};
+let xyz = {...c, ...{f: 10}}; // {a: 1, b: true, f: 10}
+```
+
+O altă aplicare interesantă este și posibilitatea de a face *o copie* a unui obiect.
+
+```javascript
+let copieshallow = obi => {...obi};
+let oCopie = copieshallow(obj);
+```
+
 ## Resurse
 
 - [ES6 In Depth: Destructuring | hacks.mozilla.org](https://hacks.mozilla.org/2015/05/es6-in-depth-destructuring/)

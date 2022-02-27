@@ -112,7 +112,7 @@ O clasă poate avea o singură metodă `constructor` care este opțională. Inst
 
 Echivalent lui `constructor (val) {}`, este `function Test (val) { this.val = val }`. Urmează o listă a membrilor viitorului obiect, care menționează direct identificatorul fără cuvântul cheie `function`. Nu a fost folosită nici formula consacrată `Test.prototype.actiune`, rolul acesteia fiind preluat de funcția `constructor`. O clasă poate avea o singură metodă `constructor` care este opțională. Instanțierea se face folosind operatorul `new`. Atenție, obiectul `prototype` al clasei va fi protejat la scriere (**read-only**). Nu se comportă ca în cazul funcțiilor din modelul clasic în care poți adăuga ulterior în obiectul `prototype` proprietăți și metode.
 
-Legătura `this` are un rol central pentru clase pentru că numai așa vei putea accesa metodele și proprietățile clasei. Tot `this` permite înlănțuirea (*chaining* în limba engleză) metodelor unei clase pe obiectul instanțiat. Să te asiguri ca pentru clasele pe care dorești să le înlănțuiești, `this` să fie returnat din metodă la final. Acest lucru trebuie făcut pentru a actualiza valorile obiectului generat cu `new`.
+Legătura `this` are un rol central pentru clase pentru că numai așa vei putea accesa metodele și proprietățile clasei. Tot `this` permite înlănțuirea (*chaining* în limba engleză) metodelor unei clase pe obiectul instanțiat. Să te asiguri că acele clase pe care dorești să le înlănțuiești, `this` să fie returnat din metodă la final. Acest lucru trebuie făcut pentru a actualiza valorile obiectului generat cu `new`.
 
 ```javascript
 class Ceva {
@@ -196,7 +196,6 @@ Modelul existent care permite popularea cu date a viitorului obiect este prin in
 
 ```javascript
 class ButonAcces extends HTMLElement {
-
   constructor() {
     super();
     this.color = "magenta";
@@ -923,3 +922,6 @@ class OClasa {
 - [The lazy-loading property pattern in JavaScript | Nicholas C. Zakas | humanwhocodes.com](https://humanwhocodes.com/blog/2021/04/lazy-loading-property-pattern-javascript/)
 - [Private class features](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields)
 - [Working with private class features](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_With_Private_Class_Features)
+- [SOLID | Wikipedia](https://en.wikipedia.org/wiki/SOLID)
+- [Barbara Liskov | Wikipedia](https://en.wikipedia.org/wiki/Barbara_Liskov)
+- [Abstract data type | Wikipedia](https://en.wikipedia.org/wiki/Abstract_data_type)

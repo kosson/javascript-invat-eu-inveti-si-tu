@@ -1,6 +1,12 @@
 # Valorile în JavaScript
 
-Vă mai aduceți aminte despre identificatori? În capitolul introduc-tiv, ultimul subiect angajat a fost cel al identificatorilor și a fost pro-iectat să fie o punte cu acest capitol. Identificatorii se leagă organic cu valorile pentru că sunt ca o adresă prin care ajungem la valoare. Această legătură foarte intimă conduce mai departe la înțelegerea mediului lexical, care este un caiet de recensământ, unde sunt inventariate toate aceste legături ale identificatorilor cu valorile pentru care joacă rolul de referințe.
+## O introducere în tipurile de date
+
+Datele sunt materia primă pe care o prelucrăm în programele pe care le scriem.
+
+## Valorile în JavaScript
+
+Vă mai aduceți aminte despre identificatori? În capitolul introductiv, ultimul subiect angajat a fost cel al identificatorilor și a fost proiectat să fie o punte cu acest set de cunoștințe. Identificatorii se leagă organic cu valorile pentru că sunt ca o adresă prin care ajungem la valoare. Această legătură foarte intimă conduce mai departe la înțelegerea mediului lexical, care este un caiet de recensământ, unde sunt inventariate toate aceste legături ale identificatorilor cu valorile pentru care joacă rolul de referințe.
 
 Valorile sunt datele pe care un programator le poate manipula în JavaScript. Valorile ca tipologie sunt diferite.
 

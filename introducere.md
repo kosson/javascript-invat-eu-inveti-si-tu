@@ -66,7 +66,7 @@ Textul în dimensiunea lui digitală este o colecție de date în sine. El se ag
 
 Textul este o colecție structurată de caractere cu înțeles doar pentru om, care așteaptă un agent software pentru a o reordona și interconecta cu alte surse cu scopul de a oferi o nouă dimensiune valorică. De fapt, acesta este și scopul final pentru care învățăm programare: **extragerea valorii indiferent de formă și destinație pentru a ajunge la noi înțelesuri**.
 
-Pentru că acest material țintește pe cei care lucrează în domeniul umanioarelor, pentru că urmărește un salt la un nou nivel al celor care doresc să stăpânească arta de a manipula date, vă invit să faceți un efort de a înțelege forma și formatele acestora. Cel mai ades veți vedea că exemplele vor fi create folosind HTML5, care este la rândul său văr bun cu XML-ul pe baza căruia multe dintre datele domeniilor noastre sunt *împachetate* și distribuite. De multe ori, de cele mai multe ori vom folosi pentru *împachetare*, transmitere și manipulare formatul JSON, care este un subset chiar a limbajului de programare JavaScript.
+Pentru că acest material țintește pe cei care lucrează în domeniul umanioarelor, pentru că urmărește un salt la un nou nivel al celor care doresc să stăpânească arta de a manipula date, vă invit să faceți un efort de a înțelege forma și formatele acestora. Cel mai ades veți vedea că exemplele vor fi create folosind HTML5, care este la rândul său văr bun cu XML-ul pe baza căruia multe dintre datele domeniilor noastre sunt *împachetate* și distribuite. De multe ori, de cele mai multe ori vom folosi pentru *împachetare*, transmitere și manipulare formatul JSON, care este un subset chiar al limbajului de programare JavaScript.
 
 ## Anti-introducere
 
