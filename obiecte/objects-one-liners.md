@@ -41,7 +41,7 @@ pluck([
 
 ## Redenumirea cheilor unui obiect
 
-Pentru a redenumi cheile unui obiect, trebuie să ai contituit un obiect cu numele noilor chei drept valori ale celor existente care stau drept chei. Cheiea redenumirii este folosirea operatorului spread care prepopulează obiectul returnat cu toate valorile pentru fiecare iterație anterioară, plus înlocuirea pe cheia curentă.
+Pentru a redenumi cheile unui obiect, trebuie să ai contituit un obiect cu numele noilor chei drept valori ale celor existente care stau drept chei. Cheia redenumirii este folosirea operatorului spread care prepopulează obiectul returnat cu toate valorile pentru fiecare iterație anterioară, plus înlocuirea pe cheia curentă.
 
 ```javascript
 const renameKeys = (keysMap, obj) => Object.keys(obj).reduce((acc, key) => ({
@@ -155,7 +155,6 @@ const people = [
   { name: 'Fiona', age: 36 },
   { name: 'Buzz', age: 32 }
 ];
-sortBy(people, 'age');
 ```
 
 ## Resurse
