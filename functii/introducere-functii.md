@@ -192,7 +192,7 @@ Această concluzie vă va ajuta să înțelegeți mai repede ce este și cum fun
 
 ## Fat arrows
 
-Am menționat deja funcțiile *fat arrow*. În limba română s-ar traduce ca *săgeată grasă*, dar noi vom folosi denumirea din limba engleză. Numele îi vinde de la felul în care se prezintă vizual combinația dintre egal și semnul mai mare decât: `=>`și nu e nevoie de  cuvântul rezervat `function`. Adesea, aceste funcții sunt în poziția de ***callback-uri*** (funcții trimise ca valoare printr-un argument, care sunt apelate cu valoarea rezultată după ce întreaga funcție a fost evaluată). Până la callback să le analizăm.
+Am menționat deja funcțiile *fat arrow*. În limba română s-ar traduce ca *săgeată grasă*, dar noi vom folosi denumirea din limba engleză. Numele îi vine de la felul în care se prezintă vizual combinația dintre egal și semnul mai mare decât: `=>`și nu e nevoie de  cuvântul rezervat `function`. Adesea, aceste funcții sunt în poziția de ***callback-uri*** (funcții trimise ca valoare printr-un argument, care sunt apelate cu valoarea rezultată după ce întreaga funcție a fost evaluată). Până la callback să le analizăm.
 
 ```javascript
 (() => 'ceva')(); // ceva

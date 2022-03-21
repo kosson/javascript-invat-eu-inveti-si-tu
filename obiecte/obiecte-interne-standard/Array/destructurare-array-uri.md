@@ -1,34 +1,45 @@
 # Destructurarea
 
-Destructurarea o veți găsi în literatura de specialitate numită *destructuring assignment*. Destructurarea este un procedeu care are drept scop extragerea sau manipularea valorilor atribuindu-le unor variabile. Pentru a realiza destructurarea, se va folosi operatorul *spread*.
+Destructurarea o veți găsi în literatura de specialitate numită *destructuring assignment*. Destructurarea este un procedeu care are drept scop extragerea sau manipularea valorilor atribuindu-le unor variabile.
 
-Să pornim de la cazul tradițional, în care dacă aveai nevoie să faci o referință la o anumită valoare dintr-un array, fiecărei variabile îi atribuiai o adresă în baza indexului elementului.
+Să pornim de la cazul tradițional, în care dacă aveai nevoie să faci o referință la o anumită valoare dintr-un array, fiecărei variabile îi atribuiai valoarea în baza indexului elementului.
 
 ```javascript
-var arr = ['a', 'b'];
-var a = arr[0];
-var b = arr[1];
+let arr = ['a', 'b'];
+let a = arr[0],
+    b = arr[1];
 ```
 
-Atribuirea valorilor printr-o destructurare a array-ului din care se extrag, se dovedește a fi o binecuvântare în ceea ce privește concizia și utilitatea.
+Atribuirea valorilor printr-o destructurare a array-ului, se dovedește a fi o binecuvântare în ceea ce privește concizia și utilitatea.
 
 ```javascript
-var arr = ['unu', 'doi'];
-var [unu, doi] = arr;
-console.log(unu, doi);
-// 'unu' 'doi'
+let arr = ['unu', 'doi'];
+let [unu, doi] = arr;
+console.log(unu, doi); // 'unu' 'doi'
 ```
 
-Ceea ce am realizat este generarea variabilelor identificate prin `unu` și `doi`, care vor avea atribuite valorile string `unu` și `doi` după o formulă generală `var/let/const [var1, var2, ...varN] = array`.
-
-Destructurarea funcționează și în cazul array-urilor de array-uri, dar în acest caz, pentru a se face atribuirea corectă va trebui să se respecte structura întocmai precum în următorul exemplu.
+Ceea ce am realizat este generarea variabilelor identificate prin `unu` și `doi`, care vor avea atribuite valorile string `unu` și `doi`. Observă faptul că valorile au fost atribuite în ordinea din array identificatorilor menționați în expresia din stânga egalului. Nu este neapărat necesar să introduci identificatori pentru toate elementele array-ului.
 
 ```javascript
-var [a, [b, c, [d]]] = ['1', ['2', '3', ['4']]];
+let arry = ['ceva', 'altceva'];
+let [x] = arry;
+```
+
+Destructurarea funcționează și în cazul array-urilor de array-uri, dar în acest caz, pentru a se face atribuirea corectă, va trebui să se respecte structura întocmai, precum în următorul exemplu.
+
+```javascript
+let [a, [b, c, [d]]] = ['1', ['2', '3', ['4']]];
 console.log(a, b, c, d); // 1 2 3 4
 ```
 
-Un amănunt important privind destructurarea este că permite transformarea unor obiecte *array-like* precum `arguments` al funcțiilor și `NodeList` din DOM, în array-uri adevărate. Anterior existenței operatorului *spread*, aceste transformări se făceau prin aplicarea secvenței `[].slice` cu un `call` pe obiect:
+În cazul în care tot ceea ce dorești este să *capturezi* câteva valori pornind cu indexul 0, dar restul elementelor să le păstrezi într-un array separat, poți folosi operatorul spread.
+
+```javascript
+let arry = ['ceva', 'altceva', 'undeva', 'altcineva'];
+let [x, ...y] = arry; // ceva  ['altceva', 'undeva', 'altcineva']
+```
+
+Un amănunt important privind destructurarea este că permite transformarea unor obiecte *array-like*, cum este `arguments` și `NodeList` din DOM, în array-uri adevărate. Anterior existenței operatorului *spread*, aceste transformări se făceau prin aplicarea secvenței `[].slice` cu un `call` pe obiect.
 
 ```javascript
 Array.prototype.slice.call(obi);
@@ -40,8 +51,10 @@ Array.prototype.slice.call(obi);
 
 ### Potrivire *unu-la-unu*
 
+Potrivirea unu la unu a valorilor cu variabilele pregătite.
+
 ```javascript
-var unu, doi, trei;
+let unu, doi, trei;
 [unu, doi, trei] = [1, 2, 3];
 console.log(unu, doi, trei); // 1 2 3
 ```

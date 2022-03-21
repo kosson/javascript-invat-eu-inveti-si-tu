@@ -1353,11 +1353,11 @@ obiect.altaProprietate = 'altceva';
 
 ### Destructurarea obiectelor
 
-ES6 introduce posibilitatea de a seta variabile cu valorile cheilor unui obiect (*destructuring assignment*). Trebuie respectată o singură cerință: numele identificatorilor variabilelor trebuie să fie identice cu cele ale cheilor proprietăților din obiectul din care sunt luate valorile. Trebuie remarcat faptul că entitatea din partea stângă a egalului nu este un obiect, ci un șablon care reprezintă calea către valoarea căutată în obiectul sursă.
+ES6 introduce posibilitatea de a seta variabile cu valorile cheilor unui obiect (*destructuring assignment*). Există o regulă foarte importantă care trebuie respectată: numele identificatorilor variabilelor trebuie să fie identice cu cele ale cheilor proprietăților din obiectul din care sunt luate valorile. Trebuie remarcat faptul că entitatea din partea stângă a egalului nu este un obiect, ci un șablon care reprezintă calea către valoarea căutată în obiectul sursă.
 
 ```javascript
 const testObj = {ceva: 1, altceva: 2};
-const {ceva, altceva:undeva} = testObj;
+const {ceva, altceva:undeva} = testObj; // plus redenumire
 ```
 
 În exemplul prezentat nu numai că am *extras* valorile în variabile, dar am și redenumit identificatorii, dacă numele originale ale cheilor nu sunt dorite. Pot fi extrase mai multe valori odată. În cazul în care numele variabilei se dorește să fie chiar proprietatea, atunci putem menționa explicit numele identificatorului să fie cel al cheii din obiect.
@@ -1462,15 +1462,15 @@ console.log(eroare); // Nu am obținut nimic
 
 Destructurarea funcționează foarte bine și în cazul array-urilor, care la rândul lor sunt obiecte. Acest subiect este tratat la capitolul dedicat obiectului intern `Array`.
 
-În cazul array-urilor este necesară respectarea parității numelor identificatorilor cu cea a cheilor, pentru că nu mai avem chei. Potrivirea se va face în ordinea elementelor din array. Pentru a aduna ce-a mai rămas, am folosit și operatorul *spread* pentru a strânge restul elementelor într-un array.
+În cazul array-urilor este necesară respectarea parității identificatorilor menționați în expresia din stânga cu indecșii array-ului. Potrivirea se va face în ordinea elementelor din array. În exemplul de mai jos, pentru a aduna ce-a mai rămas, am folosit și operatorul *spread* pentru a strânge restul elementelor într-un array.
 
 ```javascript
 const arr = [1, true, function y () {return 'salut'}, 10, 20];
 const [nr, bool, igrec, ...valori] = arr;
-console.log(nr); // 1
-console.log(bool); // true
+console.log(nr);      // 1
+console.log(bool);    // true
 console.log(igrec()); // salut
-console.log(valori); //[Array] [10,20]
+console.log(valori);  //[Array] [10,20]
 ```
 
 Un alt caz interesant de destructurare este atunci când atribui unei structuri de identificare un întreg obiect. În acest caz, pentru a constitui identificatorul, trebuie introdusă în expresia de destructurare adresa întreagă către acel obiect.
