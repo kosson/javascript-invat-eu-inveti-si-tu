@@ -235,7 +235,7 @@ ranking([80, 80, 70, 50]); // [1, 1, 3, 4]
 ranking([80, 80, 80, 50]); // [1, 1, 1, 4]
 ```
 
-## Intrețeserea între elemente a unora nou
+## Intrețeserea între elemente a unora noi
 
 ```javascript
 const intersperse = (a, s) => [...Array(2 * a.length - 1)].map((_, i) => (i % 2 ? s : a[i / 2]));
@@ -295,6 +295,14 @@ const zip = (...arr) => Array.from({ length: Math.max(...arr.map((a) => a.length
 
 zip(['a', 'b', 'c', 'd', 'e'], [1, 2, 3, 4, 5]);
 // [['a', 1], ['b', 2], ['c', 3], ['d', 4], ['e', 5]]
+```
+
+## Amestecarea elementelor - shuffling
+
+Se folosește metoda `Math.random()` care întoarce un număr aleator în intervalul 0 - 1. În cazul în care metoda `random` returnează un număr mai mic decât 0.5, vei obține un număr negativ, iar dacă e peste, vei obține un număr pozitiv. Intervalul de lucru este -0.5 și +0.5.
+
+```javascript
+const shuffle = array => array.sort(() => 0.5-Math.random());
 ```
 
 ## Resurse

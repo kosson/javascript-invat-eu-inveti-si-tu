@@ -1,8 +1,8 @@
 # Instrucțiunile if, if...else și else if
 
-Aceast enunț este folosit pentru a crea mai multe posibile căi pe care evaluarea codului să o poată apuca în funcție de valoarea de adevăr obținută în urma evaluării unei expresii.
+Aceast enunț este folosit pentru a crea mai multe posibile căi pe care să o apuce execuția codului în funcție de valoarea de adevăr obținută în urma evaluării unei expresii.
 
-Adu-ți mereu aminte de faptul că toate expresiile în JavaScript se reduc la o valoare de adevăr. Este foarte important să-ți aduci aminte mereu de acest aspect pentru că uneori va fi nevoie să testezi dacă o expresie complexă se reduce la o valoare *truthy* sau la una *falsey*. Însăși posibilitatea de a modifica cursul de execuție a unui program determinând valoarea de adevăr, face posibil visul lui Leibnitz pe baza algebrei lui Boole (vezi introducerea).
+Adu-ți mereu aminte de faptul că toate expresiile în JavaScript se reduc la o valoare de adevăr. Este foarte important să-ți aduci aminte mereu de acest aspect pentru că uneori va fi nevoie să testezi dacă o expresie complexă se reduce la o valoare *truthy* sau la una *falsey*. Însăși posibilitatea de a modifica cursul de execuție al unui program determinând valoarea de adevăr, face posibil visul lui Leibnitz pe baza algebrei lui Boole (vezi introducerea).
 
 ```javascript
 if (true) {
@@ -117,3 +117,14 @@ Totuși, pentru a preîntâmpina efecte nedorite, putem adopta un stil de utiliz
 if(true){
   return executLaTrue();
 }
+```
+
+## Folosirea unei liste în locul testării repetate
+
+```javascript
+
+```
+
+## Resurse
+
+- [Replace multiple if statements with a lookup table](https://getfrontend.tips/replace-multiple-if-statements-with-a-lookup-table/)

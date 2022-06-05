@@ -1,6 +1,7 @@
 # Closures
 
-După ce vizitezi o galerie de artă, la o discuție cu prietenii în care le povestești ceea ce ai văzut, vei apela la memoria operelor de artă expuse. Chiar dacă te afli la 2000 de kilometri, vei avea o referință concretă pentru fiecare tablou pe care l-ai văzut. Îți vei aminti culorile, autorul și alte câteva atribute specifice fiecăruia. Acesta este un *closure* pe galeria de artă. Acest *closure* îți permite să te referi la fiecare obiect din galerie.
+După ce vizitezi o galerie de artă, la o discuție cu prietenii în care le povestești ceea ce ai văzut, vei apela la memoria operelor. Chiar dacă te afli la 2000 de kilometri, vei avea o referință concretă pentru fiecare tablou pe care l-ai văzut. Îți vei aminti culorile, autorul și alte câteva atribute specifice fiecăruia. Acesta este un *closure* pe galeria de artă. Acest *closure* îți permite să te referi la fiecare obiect din galerie.
+Motorul JavaScript ține evidența mediilor lexicale, fie că acestea sunt la nivel de bloc, la nivel de funcție sau globalul.
 
 ```javascript
 var operă = 'Nighthawks';
@@ -11,15 +12,17 @@ function povestesc () {
 povestesc();
 ```
 
-Motorul JavaScript ține evidența mediilor lexicale, fie că acestea sunt la nivel de bloc, la nivel de funcție sau globalul. Reține faptul că declararea variabilelor cu `var` introduce identificatorii în limitele unei funcții container sau în obiectul global ignorând complet blocurile delimitate prin acolade. Declararea variabilelor cu `let` și `const` introduce identificatori doar la nivelul blocului în care se face declararea și în blocurile de cod delimitate prin acolade.
+Declararea variabilelor cu `var` introduce identificatorii în limitele unei funcții care limitează disponibilitatea la nivelul acesteia, dar și în obiectul global, ignorând complet blocurile delimitate prin acoladele care le înconjoară. Declararea variabilelor cu `let` și `const` face identificatorii să fie disponibili doar la nivelul blocului în care se face declararea, precum și doar în blocurile de cod delimitate prin acolade.
 
-O funcție definită în interiorul unei funcții container generează un **closure** peste mediul lexical existent la momentul definirii.
+O funcție definită în interiorul unei funcții *container* generează un **closure** peste mediul lexical existent la momentul definirii. Putem spune că o funcție aflată în execuție va avea acces la toate variabilele definite în *scope chain* chiar dacă funcția ce o găzduia și-a încheiat execuția între timp.
 
-Am explorat deja la funcții posibile traduceri în limba română și pentru că o traducere nu este tocmai elegantă, mai bine folosim termenul în limba engleză. După ce vom fi explorat mai mult, vom înțelege că este o caracteristică, un mecanism al limbajului. Să o luăm încetișor. Primul lucru pe care-l știm despre funcții, este că acestea sunt acțiuni transformatoare asupra datelor pe care le primesc, fie că aceste date sunt *introduse* în funcție prin argumente, fie că sunt disponibile *la liber*, în mediul lexical unde a fost declarată funcția.
+Am explorat deja câteva posibile traduceri în limba română pentru termenul *closure*, dar o traducere directă nu este tocmai elegantă. Mai bine folosim termenul în limba engleză.
+
+Un closure este o caracteristică, un mecanism al limbajului JavaScript. Să o luăm încetișor. Primul lucru pe care-l știm despre funcții, este că acestea sunt acțiuni transformatoare asupra datelor pe care le primesc, fie că aceste date sunt *introduse* în funcție prin argumente, fie că sunt disponibile *la liber*, în mediul lexical unde a fost declarată funcția.
 
 Trebuie să ne aducem mereu aminte de importanța redactării codului și în consecință de locul **unde declarăm funcțiile**. Foarte important este și locul de unde le apelăm pentru că de acolo este posibil să *injectăm* date prin argumente. Există scenarii în care aceste date sunt necesare doar în locul în care este apelată funcția sau în obiectul în al cărui context a fost invocată.
 
-O funcție declarată în mediul lexical global (*global scope*), va avea acces la toate proprietățile acestui obiect. Dacă o funcție, va fi declarată într-un bloc de cod sau într-o altă funcție, va avea acces la tot ce constituie mediul lexical format local de acel bloc de cod sau de funcție și mai sus la tot ce este în *global scope*.
+O funcție declarată în mediul lexical global (*global scope*), va avea acces la toate proprietățile acestui obiect. Dacă o funcție, va fi declarată într-un bloc de cod sau într-o altă funcție, va avea acces la tot ce constituie mediul lexical format local de acel bloc de cod sau de funcție și mai sus la tot ce este în *global scope*. Un detaliu important este că o funcție găzduită de o alta face closer pe mediul lexical al gazdei, dar nu și pe parametrul arguments.
 
 ```javascript
 let a = 'ceas ';
@@ -637,3 +640,4 @@ Funcțiile de nivel înalt și closure-urile formează coloana vertebrală a pro
 - [Javascript Closures | jibbering.com](http://jibbering.com/faq/notes/closures/)
 - [JavaScript Closures | kentcdodds.com](https://kentcdodds.com/blog/javascript-closures)
 - [Grokking V8 closures for fun (and profit?) | Vyacheslav Egorov](https://mrale.ph/blog/2012/09/23/grokking-v8-closures-for-fun.html)
+- [Javascript Anonymous Closure | stackoverflow.com](https://stackoverflow.com/questions/16032840/javascript-anonymous-closure)

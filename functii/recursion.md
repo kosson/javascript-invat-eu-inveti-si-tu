@@ -228,3 +228,4 @@ mapper(func, arr); // [ 2, 3, 4 ]
 -   [The Most Difficult Program to Compute? - Computerphile](https://www.youtube.com/watch?v=i7sm9dzFtEI)
 -   [Recursion, Iteration, and JavaScript: A Love Story - Anjana Vakil | JSHeroes 2018](https://www.youtube.com/watch?v=FmiQr4nfoPQ)
 -   [Improve Your Recursions Performance With Tail Call Optimization](https://ireadyoulearn.info/2020/09/19/improve-your-recursions-performance-with-tail-call-optimizations/)
+-   [Recursion in 100 Seconds | Fireship](https://www.youtube.com/watch?v=rf60MejMz3E&t=18s)

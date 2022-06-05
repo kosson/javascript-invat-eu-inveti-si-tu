@@ -19,7 +19,9 @@ faCeva(1, 3); //4
 let expresieDeFuncție = function () {};
 ```
 
-Pentru codul din interiorul funcției, argumentele se transformă în tot atâtea variabile locale care pot fi accesate după numele date drept identificatori la momentul declarării funcției. Urmează o pereche de acolade ce delimitează **blocul de cod**. Blocurile de cod sunt constituite din *enunțuri*, care sunt evaluate la momentul invocării. Blocul de cod este numit și **corpul** funcției. Această sintaxă pentru declararea funcțiilor mai primește o variantă numită **fat arrow functions** sau **arrow functions**, fiind funcții declarate fără cuvântul cheie `function` care folosesc semnul *rezultă* urmat de corp. În cazul funcțiilor săgeată, dacă ai un argument unic, poți opta să nu mai pui parantezele rotunde. Buna practică spune să indici argumentele întotdeauna cu parantezele rotunde.
+Pentru codul din interiorul funcției, argumentele se transformă în tot atâtea variabile locale care pot fi accesate după numele date drept identificatori la momentul declarării funcției. Urmează o pereche de acolade ce delimitează **blocul de cod**. Blocurile de cod sunt constituite din *enunțuri*, care sunt evaluate la momentul invocării. Blocul de cod este numit și **corpul** funcției.
+
+Această sintaxă pentru declararea funcțiilor are o variantă numită **fat arrow functions** sau **arrow functions**, fiind funcții declarate fără cuvântul cheie `function`. Este folosit semnul *rezultă* urmat de corp. În cazul funcțiilor **săgeată**, dacă ai un argument unic, poți opta să nu mai pui parantezele rotunde. Buna practică spune să introduci argumentele întotdeauna folosind parantezele rotunde.
 
 ```javascript
 let expresieDeFuncție = () => {
@@ -115,7 +117,7 @@ function facLucruri () {
 
 Adesea vom dori returnarea rezultatelor ca un array sau ca un obiect. Pe lângă faptul că putem returna array-uri și obiecte, pot fi returnate chiar alte funcții. Nu voi înceta să repet faptul că o funcție mai întâi de toate este ea însăși o valoare. Funcțiile pot primi drept argumente alte funcții și pot returna mai apoi alte funcții. Acest aspect interesant al funcțiilor definește capacitatea acestora de a fi **de ordin înalt**. Returnarea datelor dintr-o funcție înseamnă și încheierea execuției acesteia și revenirea sa la starea de valoare. Poți să-ți imaginezi o funcție precum un bec, care în sine este o valoare. Alimentat, acesta transformă curentul electric în lumină și căldură. La deschiderea circuitului redevine doar un bec.
 
-Următorul exemplu expune o funcție care conține la rândul său o altă funcție. Acest scenariu este unul care introduce și conceptul de **closure** pentru că avem o funcție internă ce *face o ancorare* a mediului lexical în care a fost declarată. Acest lucru se întâmplă pentru că funcția are nevoie de variabilele necesare propriei execuții. Vom aprofunda **closure-urile**, dar pentru te știu fire curioasă, hai să privim la următoarea secvență de cod ca exemplu.
+Următorul exemplu expune o funcție care conține la rândul său o altă funcție. Acest scenariu este unul care introduce și conceptul de **closure**, deoarec funcția *internă* face o *memorizare* a mediului lexical în care a fost declarată. Acest lucru se întâmplă pentru că funcția are nevoie de variabilele declarare pentru propria execuție. Vom aprofunda **closure-urile**, dar pentru că te știu fire curioasă, hai să privim la următoarea secvență de cod.
 
 ```javascript
 function ex (unu, doi) {
