@@ -2,7 +2,7 @@
 
 Una din preocupările constante ale programatorului este aceea a gestionării timpilor de execuție printr-o succesiune eficientă a operațiunilor. Dincolo de aceste considerente abstracte, pentru moment, cel mai valoros lucru, atunci când scrii cod, este să poți întocmi o hartă mentală a execuției, pe care să jalonezi declarații, medii lexicale, apeluri și timpi de execuție. Această hartă este strâns legată de algoritmica programului. Uneori apar **necunoscute** care trebuie gestionate. Aceste **necunoscute** sunt legate de **timpul** necesar execuției sau de succesiunea rezolvării anumitor evaluări, care depind de alte resurse, unele aflate la distanță, iar altele poate necesitând resurse computaționale.
 
-Vă mai aduceți aminte de faptul că o funcție are nevoie de valorile din mediul lexical sau obiectul context pentru a putea să-și execute codul din corp? Ce se întâmplă atunci când o resursă este la distanță sau în corpul funcției este apelată o alta care aparține unui API extern, așa cum sunt cele puse la dispoziție de browser. Cea mai prost scenariu ar implica blocarea firului de execuție al programului pentru a satisface toate condițiile necesare efectuării propriilor evaluări.
+Vă mai aduceți aminte de faptul că o funcție are nevoie de valorile din mediul lexical sau obiectul context pentru a putea să-și execute codul din corp? Ce se întâmplă atunci când o resursă este la distanță sau în corpul funcției este apelată o alta care aparține unui API extern, așa cum sunt cele puse la dispoziție de browser. Cel mai prost scenariu ar implica blocarea firului de execuție al programului pentru a satisface toate condițiile necesare efectuării propriilor evaluări.
 
 Ce-ar fi dacă am proceda la trimiterea în *fundal* (*runtime-ul de execuție*) a acestor operațiuni care necesită timp și/sau efort pentru a fi soluționate. O astfel de funcție ar ieși de pe scenă precum un actor care **promite** să revină după ce va lua din culise recuzita necesară. Publicul va rămâne *în așteptare* urmărind jocul celorlalți actori rămași.
 
@@ -149,13 +149,13 @@ Pentru a face o promisiune, se va folosi constructorul `Promise` căruia îi pas
 const promisune = new Promise(function executor (resolve, reject) {});
 ```
 
-Constructorului îi este pasată o funcție care are două argumente, la rândul lor niște funcții cu rol de callback. Prin convenție, cele două callback-uri se numesc `resolve` și `reject`, dar este posibil să găsești și alte nume.
+Constructorului îi este pasată o funcție care are două argumente, la rândul lor niște funcții cu rol de callback. Prin convenție, cele două callback-uri se numesc `resolve` și `reject`, dar este posibil să le numești cum dorești.
 
 **Moment ZEN**: Funcția executor este executată imediat de motorul JavaScript.
 
 Executarea imediată a executorului face ca promisiunea să intre în starea `pending`. Când este apelat callback-ul `resolve`, promisiunea își modifică starea în `fulfilled`.
 
-O promisiune este *rezolvată*, dacă a fost *încheiată* sau dacă va servi drept stare altei promisiuni, care aștepta această rezolvare, dacă există un astfel de caz.
+O promisiune este *rezolvată*, dacă a fost *încheiată* sau dacă va servi drept stare altei promisiuni, care aștepta această rezolvare.
 
 Callback-ul `resolve()` conduce la obținerea unei valori în momentul apelării `then()`. Am putea traduce în limba română metoda `then` ca *apoi* sau *după aia*. Semantic, numele metodei implică acțiunea care se va petrece după ce promisiunea a intrat ori pe ramura `resolve`, ori pe ramura `rejected`.
 
@@ -209,7 +209,7 @@ rezolvareLaCerere().then((valoare) => {
 });
 ```
 
-Un astfel de lucru cu promisiunile nu aduce niciun beneficiu, iar bune practici invită la evitarea sa.
+Un astfel de lucru cu promisiunile nu aduce niciun beneficiu, iar bunele practici invită la evitarea sa.
 
 ### Fă o promisiune și împlinește-o
 
@@ -240,7 +240,7 @@ promisiune.then(
 });
 ```
 
-Tot codul din constructor va fi executat sincron la momentul instanțierii promisiunii. Spunem că promisiunile sunt *iuți* (*eager*) în execuția codului. Codul din funcția cu rol de executor nu este executat asincron. Linie după linie, tot codul va fi executat și în cazul în care sunt operațiuni asincrone în cod, acestea vor fi tratate în funcție de API-ul fiecăruia. Astfel, vor fi programate și tratate toate operațiunile asincrone, fiind folosite mecanismele *event loop*-ului. Pentru că promisiunile fac o *programare* a execuției codului asincron, am putea crede că fac o evaluare doar *dacă e necesar* (*lazy*), ceea ce este fals. În cazul în care dorești o evaluare *lazy* a unei promisiuni, o poți *îmbrăca* într-o funcție pe care să o aplezi în viitor *dacă e necesar*.
+Tot codul din constructor va fi executat sincron la momentul instanțierii promisiunii. Spunem că promisiunile sunt *iuți* (*eager*) în execuția codului. Codul din funcția cu rol de executor nu este executat asincron. Linie după linie, tot codul va fi executat și în cazul în care sunt operațiuni asincrone în cod, acestea vor fi tratate în funcție de API-ul fiecăruia. Astfel, vor fi programate și tratate toate operațiunile asincrone, fiind folosite mecanismele *event loop*-ului. Pentru că promisiunile fac o *programare* a execuției codului asincron, am putea crede că fac o evaluare doar *dacă e necesar* (*lazy*), ceea ce este fals. În cazul în care dorești o evaluare *lazy* a unei promisiuni, o poți *îmbrăca* într-o funcție pe care să o apelezi în viitor *dacă e necesar*.
 
 ```javascript
 const creezOPromisiuneLazy = () => new Promise((resolve, reject) => {
@@ -561,7 +561,7 @@ process.on('uncaughtException', (err) => {
 });
 ```
 
-Totuși, introdus de curând ai posibilitatea de a face EventEmitter-ul atent la erori dacă-i pasezi `{captureRejections: true}`, dar este experimental deocamdată (iulie, 2020) - [Capture Rejections of Promises](https://nodejs.org/api/events.html#events_capture_rejections_of_promises).
+Totuși, ai posibilitatea de a face EventEmitter-ul atent la erori dacă-i pasezi `{captureRejections: true}`, dar este experimental deocamdată (iulie, 2020) - [Capture Rejections of Promises](https://nodejs.org/api/events.html#events_capture_rejections_of_promises).
 
 Nu amestecați promisiunile cu callback-urile. Folosirea lor împreună este un lucru dificil și adeseori vă veți lovi de erori.
 Nu creați promisiuni în loop-uri. Acest lucru chiar dacă este posibil, va penaliza performanțele.

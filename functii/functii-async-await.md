@@ -1,15 +1,15 @@
 # Funcții async/await
 
-Acest enunț a fost introdus în ECMAScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile care au cuvântul cheie `async` în față, vor returna mereu o promisiune. De îndată ce codul este compilat și executat, *funcțiile async* sunt executate. Acest comportament îl întâlnim și la promisiuni. În momentul în care se execută codul, acolo unde motorul întâlnește `new Promise(nume_callback)`, va executa funcția callback.
+Acest enunț a fost introdus în ECMAScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile care au cuvântul cheie `async` în față, vor returna mereu o promisiune. De îndată ce codul este compilat și executat, *funcțiile async* sunt executate. Acest comportament îl întâlnim și la promisiuni, când tot codul din funția cu rol de executor este rulat. Acolo unde motorul întâlnește `new Promise(nume_callback)`, va executa funcția callback/executorul.
 
 Funcțiile `async` au comportament sincron, ceea ce înseamnă că execuția codului va aștepta ca evaluarea lor să se încheie. Atenție, dacă operațiunea întârzie, execuția va fi blocată.
 
 ```javascript
-async function facCeva () {};
-async () => console.log;
+async function facCeva () {}; // declarație cu `function`
+async () => console.log; // declarație de fat arrow
 ```
 
-În cazul în care atribui o funcție `async` unei variabile, aceasta va fi o referință către o promisiune.
+În cazul în care atribui o funcție `async` unei variabile, aceasta devine o referință către o promisiune.
 
 ```javascript
 let cevaDeFăcut = async function facCeva () {
@@ -33,9 +33,9 @@ async function cevaAsincron () {
 cevaAsincron().then(console.log).catch((e) => console.error);
 ```
 
-În exemplul de mai sus, valoarea 'apar asincron' va fi împachetată într-o promisiune datorită folosirii în subsidiar al lui `Promise.resolve()`. În cazul funcțiilor `async` abia după ce ai rezolvat promisiunea returnată și ai apelat un `then` sau un `await`, corpul funcției va fi apelat asincron. Atenție, dacă din funcția *async*, vei face `throw` la vreo eroare, aceasta va fi *ridicată* în `catch`.
+În exemplul de mai sus, valoarea 'apar asincron' va fi împachetată într-o promisiune datorită folosirii în subsidiar al lui `Promise.resolve()`. În cazul funcțiilor `async` abia după ce ai rezolvat promisiunea returnată și ai apelat un `then` sau un `await`, corpul funcției va fi apelat asincron. Atenție, dacă din funcția *async*, vei face `throw` la vreo eroare, aceasta va fi *ridicată*/trimisă în `catch`.
 
-Avantajul este evident în cazul în care scrii o bibliotecă de cod sau o funcție cu rol utilitar în care nu știi dacă datele care vin sunt *sync* sau *async*. Atunci când trebuie returnat un obiect, acesta va fi returnat fără împachetare.
+Avantajul este evident în cazul în care scrii o bibliotecă de cod sau o funcție cu rol utilitar, în care nu știi dacă datele care vin sunt *sync* sau *async*. Atunci când trebuie returnat un obiect, acesta va fi returnat fără împachetare.
 
 Înainte de apariția acestor funcții, pentru a scrie cod asincron aveam la îndemână callback-uri și promisiuni. În mod curent, până la apariția `async`/`await` ai fi returnat un obiect `Promise` proaspăt instanțiat.
 
@@ -199,188 +199,7 @@ Calea ciudată de a trata erorile a rezultat din utilizarea unei promisiuni, adi
 
 ## Concluzii
 
-Scrierea codului asincron folosind `async`/`await` este o alternativă elegantă și mult mai eficientă (cel puțin în cazul detectării erorilor) pentru lucrul cu promisiunile. Totuși nu este un înlocuitor pentru promisiuni, ci un model mai eficient de folosire al acestora. De exemplu, pentru a rezolva în paralel promisiuni, vom apela `Promise.all()`, dar rezultatul poate fi gestionat cu un `async`.
-
-```javascript
-const [val1, val2, val3] = await Promise.all(promise1(), promise2(), promise3())
-```
-
-Un posibil exemplu ar fi citirea mai multor fișiere în paralel. Pentru a rula acest exemplu, vom folosi Node.js. Mai întâi vom apela pachetele `fs` și `util` după care vom transforma metoda `readFile` într-una promisificată.
-
-```javascript
-const util = require('util');
-const fs = require('fs');
-const readFile = util.promisify(fs.readFile);
-const fișiere = ['./primul.txt'. './alDoilea.txt'];
-(async () => {
-  let promisiuni = fișiere.map((nume) => readFile(nume, "utf8"));
-  let valori = await Promise.all(promisiuni); // citește fișierele în paralel.
-  console.log(valori);
-})();
-```
-
-*Funcțiile async sunt o glazură peste generatoare* spun producătorii motorului V8 în articolul [High-performance ES2015 and beyond](https://v8.dev/blog/high-performance-es2015). Pasul logic ar fi studiul generatoarelor și generatoarelor asincrone.
-
-## Legătura cu promisiunile
-
-Această secțiune rulează codul în Node.js.
-
-```javascript
-new Promise((resolve, reject) => {
-  // Acest cod este rulat imediat ce promisiunea este creată
-  setTimeout(resolve, 100);
-}).then(() => {
-  // codul care va rula aici este **programat** să ruleze după timeout
-  // adică imediat ce lista de asteptare (queue) a microtaskurilor este epuizată
-}).catch();
-```
-
-Și versiunea *async* folosind pachetul *promisify*.
-
-```javascript
-const intarziere = promisify(setTimeout);
-
-async function ceva () {
-  // fragmentul de aici va fi rulat imediat ce această funcție este apelată.
-  await intarziere(2000);
-  // codul de aici este *programat* să ruleze după timeout,
-  // adică imediat ce lista de asteptare (queue) a microtaskurilor este epuizată
-  // echivalent rulării într-un then
-}
-```
-
-Tot codul care există după un *await*, este echivalentul rulării într-un `then`.
-
-## Modele de lucru
-
-Ken Snyder introduce un model de lucru interesant pornind de la practica curentă existentă în lucrul cu funcțiile asincrone. Acesta pornește de la modelul pe care majoritatea programatorilor îl folosesc în combinație cu un router pentru a gestiona rezultatul unei căi.
-
-```javascript
-router.get('/users/:id', async (req, res) => {
-  const client = new Client();
-  let user;
-  try {
-    await client.connect();
-    user = await client.find('users').where('id', req.path.id);
-  } catch(error) {
-    res.status(500);
-    user = { error };
-  } finally {
-    await client.close();
-  }
-  res.json(user);
-});
-```
-
-După cum se observă, pentru a gestiona erorile se folosește o construcție `try...catch`. Alternativa ar fi construcția unei funcții care să abstractizeze toate operațiunile.
-
-```javascript
-router.get('/users/:id', async (req, res) => {
-  const { result: user, error } = await withDbClient(client => {
-    return client.find('users').where('id', req.path.id);
-  });
-  if (error) {
-    res.status(500);
-  }
-  res.json({ user, error });
-});
-```
-
-Se observă faptul că o funcție cu rol de gestionar care returnează callback-ului rezultatele necesare trimiterii unui răspuns clientului. În plus, erorile vor fi ridicate la nivelul gestionarului și se asigură că nu vor fi excepții care să nu fie tratate. Un posibil model de implementare ar fi următorul.
-
-```javascript
-async function withDbClient(handler) {
-  const client = new DbClient();
-  let result = null;
-  let error = null;
-  try {
-    await client.connect();
-    result = await handler(client);
-  } catch (e) {
-    error = e;
-  } finally {
-    await client.close();
-  }
-  return { result, error };
-}
-```
-
-Domnul Ken Snyder numește acest model Result-Error Pattern pentru că la nivelul callback-ului sunt *extrase* rezultatele. Ne este oferit și un model de lucru pentru `fetch`: `const { data, error, response } = await fetchJson('/users/123');`.
-
-```javascript
-async function fetchJson(...args) {
-  let data = null;
-  let error = null;
-  let response = null;
-  try {
-    const response = await fetch(...args);
-    if (response.ok) {
-      try {
-        data = await response.json();
-      } catch (e) {
-        // not json
-      }
-    } else {
-      // note that statusText is always "" in HTTP2
-      error = `${response.status} ${response.statusText}`;
-    }
-  } catch(e) {
-    error = e;
-  }
-  return { data, error, response };
-}
-```
-
-Exemplele continuă și cu o aplicație practică în cazul lucrului cu Elasticsearch: `const { result, error, details } = await findPosts(query);`. În cazul lucrului cu Elastisearch este foarte adevărat că răspunsurile au un grad înalt de imbricare. Obiectul rezultate conține:
-
-- `records` - este un array de documente;
-- `total` - este numărul total de documente în cazul în care nu a fost aplicată nicio limită;
-- `aggregations` - informație fațetată conform criteriilor de căutare.
-
-```javascript
-// aduce date de la un anumit index în baza unui query specificat
-async function query (index, query) {
-  // Result-Error Pattern la un nivel ceva mai jos
-  const { result, error } = await withEsClient(client => {
-    return client.search({
-      index,
-      body: query.getQuery(),
-    });
-  });
-  // Returnează un obiect similar cu result-error
-  return {
-    result: formatRecords(result),
-    error,
-    details: result || error?.meta,
-  };
-}
-
-// Extrage înregistrările din răspunsuri
-function formatRecords(result) {
-  // Observă cât de adânc este nivelul de date în care se află rezultatele
-  if (result?.body?.hits?.hits) {
-    const records = [];
-    for (const hit of result.body.hits.hits) {
-      records.push(hit._source);
-    }
-    return {
-      records,
-      total: result.body.hits.total?.value || 0,
-      aggregations: result.aggregations,
-    };
-  } else {
-    return { records: [], total: null, aggregations: null };
-  }
-}
-```
-
-În final, funcția `findPosts` se poate transforma într-un *ambalaj* pentru `query()`.
-
-```javascript
-function findPosts(query) {
-  return query('posts', query);
-}
-```
+Scrierea codului asincron folosind `async`/`await` este o alternativă elegantă și mult mai eficientă (cel puțin în cazul detectării erorilor) pentru lucrul cu promisiunile.
 
 ## Dependințe cognitive
 
