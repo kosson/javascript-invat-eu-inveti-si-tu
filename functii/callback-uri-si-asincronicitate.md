@@ -1,6 +1,8 @@
-# Callback-uri și asicronicitate
+# Funcțiile în rol de callback-uri și noțiuni de asicronicitate
 
-Foarte multe dintre metodele pe care obiectele interne le oferă pentru a lucra cu datele, implică folosirea funcțiilor care vor juca un rol special. Pasarea ca ultim argument a unei alte funcții numită *callback*, va permite apelarea **ulterioră** a acesteia după ce codul funcției și-a încheiat propria evaluare. În exemplul de mai jos, am desemnat prima funcție să fie o valoare, care va fi pasată celei de-a doua pentru a modifica niște date.
+Cunoaștem faptul că JavaScript are un singur fir de execuție care în cazul execuției codului în manieră sincronă, va fi blocat dacă va fi rulată o funcție care necesită un timp mare de execuție. Întreaga execuție a programului se va opri. Pentru a evita o astfel de situație, operațiunile care iau mult timp „pregătesc” o funcție care să fie executată atunci când rezultatul este disponibil într-un viitor. Aceste funcții cu rol de callback sunt folosite de funcții care sunt asincrone. Asta înseamnă că sunt funcții care se folosesc de resursele sistemului de operare pentru a rezolva sarcina și care au nevoie de un mecanism, de un instrument de prelucrare a rezultatelor sale. Acest instrument facil vine sub forma unei funcții numită *callback*.
+
+Foarte multe dintre metodele pe care obiectele interne le oferă pentru a lucra cu datele, implică folosirea funcțiilor care vor juca acest rol special, cel de *callback*. Pasarea ca ultim argument a unei alte funcții numită *callback*, va permite apelarea sa **ulterioră** după ce codul funcției și-a încheiat propria evaluare. În exemplul de mai jos, am desemnat prima funcție să fie o valoare, care va fi pasată celei de-a doua pentru a modifica niște date.
 
 ```javascript
 function fnCuRolDeCallback (ceva) {
@@ -24,7 +26,7 @@ De cele mai multe ori, funcția care primește drept ultim argument o altă func
 
 Ceea ce se realizează prin folosirea de callback-uri este o adevărată *programare* pentru o execuție ulterioară a unei funcții. Utilitatea callback-urilor este dovedită în cazurile în care sunt necesare a fi realizate operațiuni care cer timp. Acest timp necesar aducerii unei resurse de la un server, de exemplu, ar bloca firul de execuție în modelul sincron de rulare a codului, ceea ce ar fi un dezastru din punct de vedere al performanțelor. Astfel, este nevoie de un mecanism care să scoată operațiunile cu amprentă mare în timp în afara liniei temporale de execuție sincronă. Rezolvarea vine tocmai din posibilitatea de a *programa* execuția unor funcții ceva mai târziu, după ce o operațiune dificilă s-a încheiat și avem rezultatul acesteiea.
 
-Asincronicitatea este caracteristica sau mai bine spus **marca** funcțiilor callback. Putem modifica exemplul dat pentru a transforma modul de execuție al unei funcții din sincron în asincron, dacă ne folosim de alte funcții care fac parte din instrumentarul browserului (API-uri) sau ale lui Node.js. Aceste API-uri sunt de fapt software specializat în interiorul browserului, care expun mediului de execuție JavaScript metode cărora le pasăm sarcini specializate. Metode precum `setTimeout` sau `setImmediate` fac parte din API-urile browserului, nu din JavaScript și din acest motiv, execuția codului pe care-l primesc, se va face într-un fir separat de cel al programului. Avantajul este evident: nu blocăm firul de execuție al programului nostru și facem o delegare a rezolvării **sarcinii** unor instrumente care beneficiază de propriile fire de execuție.
+Asincronicitatea este caracteristica sau mai bine spus **marca** funcțiilor callback. Putem modifica exemplul dat pentru a transforma modul de execuție al unei funcții din sincron în asincron, dacă ne folosim de alte funcții care fac parte din instrumentarul browserului (API-uri) sau ale lui Node.js. De fapt, aceste API-uri sunt software specializat, care expun mediului de execuție JavaScript metode cărora le pasăm funcții ce vor prelucra rezultatele returnate de acestea. Metode precum `setTimeout` sau `setImmediate` fac parte din API-urile browserului, nu din instrumentarul JavaScript și din acest motiv, execuția codului pe care-l primesc, se va face într-un fir separat de cel al programului folosind resursele sistemului de operare. Avantajul este evident: nu blocăm firul de execuție al programului nostru și facem o delegare a rezolvării **sarcinii** unor instrumente care beneficiază de propriile fire de execuție. La final, delegăm tratarea rezultatului prin utilizarea unei funcții de callback.
 
 Să analizăm exemplul din perspectiva delegării execuției funcției `fnCuRolDeCallback` unui instrument al browserului: `setImmediate`.
 
@@ -45,7 +47,7 @@ console.log('La final?'); // apare al doilea
 
 Când funcția `oFunctie` va fi rulată, atunci când întâlnește apelul către API-ul `setImmediate`, va *programa* execuția lui `fn` în funcție de ce face API-ul. De îndată ce API-ul și-a terminat treaba, iar stiva apelurilor funcțiilor este goală, se va introduce în stivă funcția pentru a fi executată. Acesta este motivul pentru care rezultatul apelului la `oFunctie` apare ultimul. Callback-urile sunt executate cu ajutorul event loop-ului și a listelor de așteptare în care sunt introduse acestea câtă vreme API-ul rulează.
 
-Reține faptul că la rularea funcției, se face apelul către API, iar funcția `oFunctie` își va încheia propria execuție chiar dacă are ceva *programat* într-un `setImmediate`. Atenție, dacă ar mai fi fost cod în `oFunctie` după apelul API-ului, acel cod s-ar fi executat sincron așa cum am fi așteptat în mod firesc.
+Reține faptul că la rularea funcției, se face apelul către API, iar funcția `oFunctie` își va încheia propria execuție chiar dacă are ceva *programat* printr-un `setImmediate`. Atenție, dacă ar mai fi fost cod în `oFunctie`, după apelul API-ului, acel cod s-ar fi executat sincron așa cum am fi așteptat în mod firesc.
 
 Nu vom remarca o modificare a comportamentului, dar în acest moment, funcția `fn` chiar utilizează un fir de execuție separat; cel al metodei `setImmediate`, care face parte din API-urile browserului. Legătura `this` se va face la mediul lexical al API-ului.
 
@@ -85,9 +87,9 @@ SimulatorAPI(1, (error, valoare) => {
 });
 ```
 
-În exemplul dat, am folosit API-ul `setTimeout`, care introduce în așteptare o funcție. După ce trec cel puțin trei secunde, event looop-ul se uită la callstack pentru a vedea dacă este gol. Dacă este gol, funcția pasată lui `setTimeout` va fi introdusă în callstack pentru a fi executată. Aceasta își începe execuția și apoi dă peste apelul către funcția cu rol de callback, pe care o va introduce în callstack peste cea *gazdă* și o va executa. Aceasta va returna rezultatul și pentru că gazda nu mai are nimic de executat și aceasta își va încheia propria execuție.
+În exemplul dat, am folosit API-ul `setTimeout`, care introduce într-o *coadă de așteptare* o funcție cu rol de callback. După ce trec cel puțin trei secunde, *event looop*-ul (un mecanism care gestionează mai multe *cozi de așteptare*) se uită la *call stack* pentru a vedea dacă este gol. Dacă este gol, funcția pasată lui `setTimeout` va fi introdusă în *call stack* pentru a fi executată. Aceasta își începe execuția și apoi dă peste apelul către funcția cu rol de callback, pe care o va introduce în callstack peste cea *gazdă* și o va executa. Aceasta va returna rezultatul și pentru că gazda nu mai are nimic de executat și aceasta își va încheia propria execuție.
 
-Acest model este util pentru a returna codului care apelează un API valoarea după ce și-a încheiat treaba. Acest model este folosit pe scară largă, dar este ușor de văzut faptul că tendințele favorizează utilizarea promisiunilor și a funcțiilor `async`.
+Acest model este util pentru a returna codului care apelează o metodă a un API valoarea așteptată după ce aceasta și-a încheiat treaba. Modelul este folosit pe scară largă, dar este ușor de remarcat favorizarea lucrului cu promisiunile și funcțiile `async`.
 
 ## Callback hell - iadul apelurilor
 
@@ -103,11 +105,11 @@ funcAsyncUnu (err => {
 });
 ```
 
-Una din problemele acestui șablon este aceea a stabilirii unor closure-uri pe identificatori care au potențialul să se confunde pentru că au același indentificator, de exemplu. Vezi identificatorul `err` din exemplu. O altă problemă este chiar declararea funcțiilor cu rol de callback în așa-zisa logică a fragmentului de cod (*in-place function definitions*). Acest lucru conduce la confuzie pentru că în funcție numărul evaluărilor din corpurile funcțiilor declarate, la un moment dat nu mai știi unde începe una și unde se încheie alta. Pe de altă parte se creează clojure-uri pe toată adâncimea, fapt care taxează resursele de memorie și predispune codul la *scurgeri de memorie* - *memory leaks*.
+Una din problemele acestui șablon este aceea a stabilirii unor closure-uri pe identificatorii care au potențialul să fie confundați pentru că au același nume. Vezi identificatorul `err` din exemplu. O altă problemă este chiar declararea funcțiilor cu rol de callback în așa-zisa logică a fragmentului de cod (*in-place function definitions*). Acest lucru conduce la confuzie pentru că în funcție numărul evaluărilor din corpurile funcțiilor declarate, la un moment dat nu mai știi unde începe una și unde se încheie alta. Pe de altă parte se creează *closure*-uri pe toată adâncimea, fapt care taxează resursele de memorie și predispune codul la *scurgeri de memorie* - *memory leaks*.
 
 ### Bune practici pentru callback-uri
 
-Atunci când declari funcția cu rol de callback, cel mai potrivit este să o faci în afara logicii care o va folosi. Asta însemnă să nu mai declari funcția în poziția rezervată callback-ului, ci mai bine să o declari în afară și să folosești identificatorul (numele funcției) în loc.
+Atunci când declari funcția cu rol de callback, cel mai potrivit este să o faci în afara blocului de cod care o va folosi. Asta însemnă să nu mai declari funcția în poziția rezervată callback-ului, ci mai bine să o declari în afară, folosind apoi numele funcției.
 
 O altă bună practică spune să ieși din execuția funcției cât mai repede posibil (`return`, `continue`, `break`) testând anumite valori care indică o stare de eroare sau un rezultate neașteptat. Acesta este *early return principle* - *principiul returnării cât mai repede*.
 
@@ -127,7 +129,7 @@ if (error) {
 }
 ```
 
-Reține faptul că după invocarea funcției cu rol de callback, execuția funcției din care s-a făcut invocarea acesteia va continua. Din acest motiv este necesar să folosești `return` pentru a încheia și execuția funcției apelante. Această returnare se poate face pentru că rezultatul dorit este produsul unei operațiuni asincrone, de fapt. Este irelevant ce returnează funcția apelantă pentru că rezultatul sau eroarea apar altundeva ca produs al unei operațiuni asincrone. Abia când acesta apare, este pasat funcției cu rol de callback.
+Reține faptul că după invocarea funcției cu rol de callback, execuția funcției din care s-a făcut invocarea acesteia va continua până când codul rămas va fi evaluat complet. Din acest motiv este necesar să folosești `return` pentru a încheia și execuția funcției apelante. Această returnare se poate face pentru că rezultatul dorit este produsul unei operațiuni asincrone, de fapt. Este irelevant ce returnează funcția apelantă pentru că rezultatul sau eroarea apar altundeva ca produs al unei operațiuni asincrone. Abia când acesta apare, este pasat funcției cu rol de callback.
 
 Denumește funcțiile cu rol de callback pentru a face depanarea codului mai ușoară atunci când privești stiva apelurilor.
 
@@ -149,7 +151,9 @@ Totuși trebuie spus un lucru la care trebuie reflectat foarte adânc. Există m
 
 Acestea sunt întrebări foarte serioase, care setează cadrul mental pentru căutarea de noi soluții. Acestea nu au întârziat să apară, fiind propulsate de standard: promisiunile și funcțiile `async/await`. În acest moment, recomandarea este ca în momentul dobândirii abilităților de lucru cu **promisiunile** sau cu funcțiile **async/await**, să fie abandonată practica callback-urilor.
 
-Un argument în plus pentru abandonarea treptată a practicii callback-urilor este aceea că urmărirea callback-urilor este o sarcină dificilă în sine.
+Un argument în plus pentru abandonarea treptată a practicii callback-urilor este dificultatea în urmărirea succesiunii execuției callback-urilor.
+
+Am menționat promisiunile ca o posibilă soluție la practica callback-urilor. În structura `Promise`-urilor ne vom reîntâlni cu funcțiile callback, dar modul în care este structurat codul oferă un mod de interacțiune mai simplu.
 
 ## Tratarea erorilor în callback-uri
 
@@ -166,8 +170,10 @@ fs.readFile('./numeFisier.txt', function (error, rezultat) {
 });
 ```
 
-Construcțiile `try...catch` nu capturează erorile care apar în callback-uri asincrone. Acest lucru se petrece petru că execuția corpului callback-ului este deferită unei posibile metode asincrone, care nu returnează starea de eroare callback-ului, dacă nu este folosit cod special pentru a face acest lucru. Reține faptul că `try...catch` funcționează numai pentru cod sincron și pentru construcții asincrone `async/await`.
+Construcțiile `try...catch` nu capturează erorile care apar în callback-uri asincrone. Acest lucru se petrece petru că execuția corpului callback-ului este deferită unei posibile metode asincrone, care nu returnează starea de eroare a callback-ului, dacă nu este folosit cod special pentru a face acest lucru. Reține faptul că `try...catch` funcționează numai pentru cod sincron și pentru construcții asincrone `async/await`.
 
 ## Resurse
 
 - [Callbacks, synchronous and asynchronous | July 24, 2011](https://blog.ometer.com/2011/07/24/callbacks-synchronous-and-asynchronous/)
+- [Callback Hell](http://callbackhell.com/)
+- [Flow Control in Modern JS: Callbacks to Promises to Async/Await | Craig Buckler | 2 iunie 2018](https://www.sitepoint.com/flow-control-callbacks-promises-async-await/)
