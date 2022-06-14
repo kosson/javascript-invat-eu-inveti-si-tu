@@ -86,7 +86,7 @@ function facCeva(a, b = "o valoare"){
 facCeva(); // "o valoare"
 ```
 
-Parametrii pot fi mai mulți față de ceea ce o funcție poate primi. Fiecare valoare primită va fi introdusă și atribuită parametrilor în ordinea în care au fost precizați.
+Fiecare valoare primită va fi introdusă și atribuită parametrilor în ordinea în care aceștia au fost precizați.
 
 La invocarea unei funcții sunt disponibile `this`, care formează contextul de execuție și `arguments`, care este un obiect. Obiectul `arguments` seamănă cu array-urile prin faptul că pot fi accesate valorile în mod similar, dar nu este un array.
 
@@ -109,7 +109,7 @@ function operatiune (...argumente) {
 operatiune(23,145,83); // 3
 ```
 
-Un exemplu cu o mică variație.
+Un exemplu cu o mică variație care permite *capturarea* tututor argumentelor suplimentare pasate într-un array.
 
 ```javascript
 function operatiune (a, b, ...valori) {

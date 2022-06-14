@@ -91,7 +91,7 @@ Acest model este util pentru a returna codului care apelează un API valoarea du
 
 ## Callback hell - iadul apelurilor
 
-Folosirea callback-urilor poate să se soldeze cu o serie de imbricări ale apelurilor ceea ce seamănă vizual cu o piramidă datorită indentării codului. În exemplul cu titlu ilustrativ, se observă indentarea în adâncime, care formează un adevărat șablon pe care în veți întâlni în practică sub denumirea de *piramida pierzaniei* - *pyramid of doom* sau *iadul callback-urilor* - *callback hell*.
+Folosirea callback-urilor poate să se soldeze cu o serie de imbricări ale apelurilor ceea ce seamănă vizual cu o piramidă datorită indentării codului. În exemplul cu titlu ilustrativ, se observă indentarea în adâncime, care formează un adevărat șablon pe care îl veți întâlni în practică sub denumirea de *piramida pierzaniei* - *pyramid of doom* sau *iadul callback-urilor* - *callback hell* (vezi http://callbackhell.com/).
 
 ```javascript
 funcAsyncUnu (err => {
@@ -103,7 +103,7 @@ funcAsyncUnu (err => {
 });
 ```
 
-Una din problemele acestui șablon este aceea a stabilirii unor closure-uri pe identificatori care au potențialul să se confunde pentru că au același indentificator, de exemplu. Vezi identificatorul `err` din exemplu. O altă problemă este chiar declararea funcțiilor cu rol de callback în așa-zisa logică a fragmentului de cod (*in-place function definitions*). Acest lucru conduce la confuzie pentru că în funcție numărul evaluărior din corpurile funcțiilor declarate, la un moment dat nu mai știi unde începe una și unde se încheie alta. Pe de altă parte se creează clojure-uri pe toată adâncimea, fapt care taxează resursele de memorie și predispune codul la *scurgeri de memorie* - *memory leaks*.
+Una din problemele acestui șablon este aceea a stabilirii unor closure-uri pe identificatori care au potențialul să se confunde pentru că au același indentificator, de exemplu. Vezi identificatorul `err` din exemplu. O altă problemă este chiar declararea funcțiilor cu rol de callback în așa-zisa logică a fragmentului de cod (*in-place function definitions*). Acest lucru conduce la confuzie pentru că în funcție numărul evaluărilor din corpurile funcțiilor declarate, la un moment dat nu mai știi unde începe una și unde se încheie alta. Pe de altă parte se creează clojure-uri pe toată adâncimea, fapt care taxează resursele de memorie și predispune codul la *scurgeri de memorie* - *memory leaks*.
 
 ### Bune practici pentru callback-uri
 
@@ -166,7 +166,7 @@ fs.readFile('./numeFisier.txt', function (error, rezultat) {
 });
 ```
 
-Construcțiile `try...catch` nu capturează erorile care apar în callback-uri asincrone. Acest lucru se petrece petru că execuția corpului callback-ului este deferită unei posibile metode asincrone, care nu returnează starea de eroare callback-ului, dacă nu este folosit cod special pentru a face acest lucru. Reține faptul că `try...catch` funcționează numai petru cod sincron și pentru construcții asincrone `async/await`.
+Construcțiile `try...catch` nu capturează erorile care apar în callback-uri asincrone. Acest lucru se petrece petru că execuția corpului callback-ului este deferită unei posibile metode asincrone, care nu returnează starea de eroare callback-ului, dacă nu este folosit cod special pentru a face acest lucru. Reține faptul că `try...catch` funcționează numai pentru cod sincron și pentru construcții asincrone `async/await`.
 
 ## Resurse
 
