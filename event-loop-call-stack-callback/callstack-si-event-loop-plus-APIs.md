@@ -4,27 +4,29 @@ Programele JavaScript sunt executate în mod tradițional în browserul web. Alt
 
 În momentul în care deschizi browserul, în spatele interfeței grafice este creat ceea ce se numește **mediul de execuție**. Tot software-ul care rulează în browser este limitat în acțiune la granițele browserului. Vorbim despre un mediu separat numit *mediul de execuție* (în engleză *Execution environment*).
 
+**Moment Zen**: JavaScript are un singur fir de execuție și o unică stivă pentru gestionarea apelurilor (*call stack*).
+
 Browserul are un set foarte important de utilitare gata pentru a fi utilizate și mulți programatori le numesc părți ale API-ului său. Ce este un API? Este acronimul de la **Application Programming Interface** (*interfață de programare pentru aplicații*), care este un set de conectori / funcționalități oferite din oficiu de un pachet software. Poți asemui funcțiile expuse de un API precum manetele și butoanele dintr-un cockpit. Nu trebuie să știi toate părțile componente ale avionului pentru a-l face să zboare. În plus, de regulă, există un manual detaliat pentru fiecare instrument.
 
 ## Mediul de execuție
 
-Executarea codului JavaScript este sincronă pentru majoritatea cazurilor, iar activitatea web este una ce implică conceptul de rulare asincronă. Asincronicitatea implică gândirea codului într-un model care rupe liniaritatea procedurală cu care creierul uman este obișnuit, forțându-ne să gândim în termenul relațiilor și timpilor de execuție care se stabilesc între diferitele entități, fie acestea ale browserului, fie ale codului propriu aflat în execuție. În momentul în care browserul se află în interacțiune cu utilizatorul, toată activitatea este tradusă în **task-uri** (în limba română: *sarcini*). Acestea se nasc în mediul de execuție.
+Executarea codului JavaScript este sincronă pentru majoritatea cazurilor, dar activitatea web este una ce implică conceptul de rulare asincronă. Asincronicitatea implică gândirea codului într-un model care rupe liniaritatea procedurală cu care creierul uman este obișnuit, forțându urmărirea execuției codului în termenii relațiilor și timpilor de execuție care se stabilesc între diferitele entități, fie acestea ale browserului, fie ale codului propriu aflat în execuție. În momentul în care browserul se află în interacțiune cu utilizatorul, toată activitatea este tradusă în **task-uri** (în limba română: *sarcini*). Acestea se nasc în *mediul de execuție*.
 
 Actorii principali sunt:
 
 - **interpretorul** JavaScript, care execută fragmentele de cod ca răspuns la evenimente (*callback*-uri),
-- **call stack** (*stiva apelurilor*), fiind locul în care se execută codul sincron,
-- **task queue** fiind **coada** în care se rânduiesc funcțiile cu rol de callback,
+- **call stack** (*stiva apelurilor*), fiind locul în care se execută codul sincron - o structură de date care ține minte ce se execută și ordinea,
+- **task queue** fiind **coada** în care se așteaptă trecerea în *call stack* funcțiile cu rol de callback,
 - **microtask queue** sau **job queue**,
-- **event loop** care este o neîntreruptă activitate de verificare a lui *microtask queue* și *task queue*.
+- **event loop** care este o neîntreruptă activitate de verificare a lui *microtask queue* și *task queue*, care atunci când call stack-ul este liber, trimite spre execuție callback-urile care așteaptă.
 
 ![](img/EventLoop.png)
 
 În cazul browser-ului sunt oferite din oficiu funcții care pot fi asemuite utilitarelor. Una deja o folosim în mod curent pentru a sonda rezultatele evaluărilor: `console.log()`. Aceasta face parte din API-urile Web puse la dispoziție de browser. Pentru a vedea câte instrumente există, nu ar fi rău să aruncați o privire la documentația existentă pe Mozilla Developer Network - [API](https://developer.mozilla.org/en-US/docs/Web/API).
 
-Cât privește codul JavaScript și execuția sa de către interpretor, există un concept fundamental necesar înțelegerii în adâncime. Acesta este cel de **control**. Vom spune că o anumită funcție este executată de **control** sau că acesta este returnat unei funcții care era în așteptare în stivă. **Controlul**, de fapt este firul roșu al execuției fragmentelor de cod ca răspuns la anumite evenimente.
+Cât privește codul JavaScript și execuția sa de către interpretor, există un concept fundamental necesar înțelegerii în adâncime. Acesta este cel de **control**. Vom spune că o anumită funcție este executată de **control** sau că acesta este returnat unei funcții care era în așteptare în stivă. **Controlul** este de fapt firul roșu al execuției fragmentelor de cod ca răspuns la anumite evenimente.
 
-Sunt convins că te-ai întrebat de foarte multe ori cum *știe* browserul să reacționeze la un click, de exemplu. Ori de câte ori apare un **eveniment** în browser, acesta este transformat într-o **sarcină** (execuția unei funcții cu rol de callback), care trebuie îndeplinită. Adu-ți aminte că o funcție poate fi pasată drept valoare unui argument unei alteia, pentru a fi executată la un moment dat. Callback-urile reprezintă modul în care comunicăm intențiile noastre unui API. Codul din callback ne aparține și este cel care va face ceva cu rezultatul pe care-l va primi de la API-ul căruia i-l pasăm. Callback-ul va fi programat spre execuție de îndată ce API-ul a adus niște rezultate. Ceea ce se petrece este că toate aceste API-uri, până să execute callback-ul, au nevoie de timp să-și facă și ele treaba: să aducă resurse de pe net, să facă calcule care necesită putere de calcul, etc. Aceasta este natura asyncronă a Javascript-ului.
+Sunt convins că te-ai întrebat de foarte multe ori cum *știe* browserul să reacționeze la un click, de exemplu. Ori de câte ori apare un **eveniment** în browser, acesta este transformat într-o **sarcină** (execuția unei funcții cu rol de callback), care trebuie îndeplinită. Adu-ți aminte că o funcție poate fi pasată drept valoare unui argument unei alteia, pentru a fi executată la un moment dat. Callback-urile reprezintă modul în care comunicăm intențiile noastre unui API. Codul din callback ne aparține și este cel care va face ceva cu rezultatul pe care-l va primi de la API-ul căruia i-l pasăm. Callback-ul va fi programat spre execuție de îndată ce API-ul a adus niște rezultate. Ceea ce se petrece este că toate aceste API-uri, până să execute callback-ul, au nevoie de timp să-și facă și ele treaba: să aducă resurse de pe net, să facă calcule care necesită putere de calcul, etc. Aceasta este natura asyncronă a JavaScript-ului.
 
 Pentru a anunța browserul că suntem interesați să răspundem prin execuția unei funcții atunci când apare un eveniment, vom atașa un **receptor de eveniment** (în limba engleză se numesc **event handlers** sau **event listeners**) pentru elementul care va fi acționat de utilizator. Atașarea se face folosind proprietatea `onNumeEveniment`. Dacă dorim specificarea directă a numelui evenimentului, vom folosi funcția `elementDOM.addEventListener('click', numeCallback)`. Browserul va căuta în cod funcția `numeCallback` și va încărca în memorie tot ce este nevoie pentru evaluarea funcției callback. Codul din corpul funcției este pasat interpretorului JavaScript, care are sarcina de a-l executa. Dacă sunt mai multe apeluri către alte funcții ș.a.m.d., se creează o stivă de apeluri care ține evidența a ceea ce se află în execuție. Când ultima funcție adăugată în stivă returnează, aceasta dispare cedând **controlul** celei de dedesubt ce aștepta rezultatul ș.a.m.d.
 
@@ -46,7 +48,7 @@ Indiferent de numărul funcțiilor apelate, doar una singură este în evaluare.
 
 Să ne imaginăm că pagina a fost încărcată și toate scripturile care au fost aduse ca resurse au fost deja executate. În acest moment, toate interacțiunile utilizatorului cu pagina sunt task-uri, care sunt gestionate de **event loop**, dar care sunt ordonate pentru a fi executate de motor. Pentru această situație, fragmentele de cod care sunt cerute a fi executate ca răspuns al unui eveniment, se numesc **job**-uri și pentru a le gestiona, motorul constituie câteva cozi de așteptare în funcție de tipul *job*-ului. Interpretorul folosește două *job queue*-uri. Una pentru a gestiona callback-urile care așteaptă datele în urma lucrului făcut de API-uri și alta folosită exclusiv pentru tratarea promisiunilor (vezi obiectul `Promise`), **microtask queue**.
 
-## Contextul de execuție al funcțiilor
+## Contextul de execuție al funcțiilor - call stack
 
 În multe lucrări veți vedea că momentul rulării codului unei funcții - contextul său de execuție - este reprezentat sau denumit **cadru** (în limba engleză *frame*). Un *cadru* este un concept abstract, care incorporează toate elementele asociate contextului de execuție: **mediul lexical propriu**, legătura `this`, **obiectul prototip**, stabilirea legăturii de **moștenire** și constituirea obiectului `arguments`. Toate aceste concepte se leagă la nivelul cel mai de jos, cel de alocarea a unor spații de memorie, care nu indică o structură. Acest spațiu de memorie este numit și *heap* în limba engleză.
 
@@ -79,11 +81,21 @@ Programarea bazată pe evenimente este o paradigmă înscrisă practicii de zi c
 
 Sunt necesare câteva lămuriri importante. Evaluarea codului din corpul unei funcții începe la momentul apelării. Atunci când o funcție este apelată, fie a programului, fie a API-ului, poți spune că aceasta creează un *eveniment*. Din acest motiv, JavaScript este considerat a fi **event-driven**, adică un limbaj a cărui principală activitate este să răspundă la evenimente. Și cum navigarea și interacțiunea cu o pagină web creează evenimente pentru care este necesar câte un răspuns, putem să înțelegem și mai bine rolul JavaScript pentru Platforma Web. **DOM**-ul (este în sine o micro-platformă), interpretorul, componenta de networking și toate celelalte părți componente ale unui browser alcătuiesc *mediul de execuție*.
 
-### Job și job queue
+### Job/task și job/task queue
 
-Înainte de toate, va trebui să lămurim conceptul de **job** și **job queue** pe care le introduce standardul. Am putea traduce în limba română un **job** ca **sarcină**, dar pentru că termenul este deja absorbit de limba română ca neologism, voi continua să-l folosesc ca atare. Spre deosebire de API-uri care sunt puse la dispoziție de browser, coada joburilor este un mecanism pus la dispoziție de motorul JavaScript și acest lucru este o diferență importantă pentru a înțelege că o operațiune desfășurată prin apelul unui API, va trimite rezultatul în *coada joburilor*, ca mecanism de reinserție în firul de execuție JavaScript.
+Înainte de toate, va trebui să lămurim conceptul de **job**/**task** și **job queue** pe care le introduce standardul. Am putea traduce în limba română un **job** ca **sarcină** (*task*), dar pentru că termenul este deja absorbit de limba română ca neologism, voi continua să-l folosesc ca atare. Spre deosebire de API-uri care sunt puse la dispoziție de browser, *coada joburilor* este un mecanism pus la dispoziție de motorul JavaScript. Acest lucru este important pentru a înțelege că o operațiune desfășurată prin apelul unui API va trimite rezultatul în *coada joburilor*. Această coadă va găzdui temporar funcțiile cu rol de callback pentru ca mecanismul event loop-ului să le trimită spre execuție de îndată ce call stack-ul este liber. Cel mai simplu exemplu este cel al API-ului `setTimeout` cu ajutorul căruia se poate *întârzia* execuția unei funcții și astfel demonstra funcționarea cozii joburilor în coordonare cu event loop (*bucla*) și cu stiva apelurilor (*call stack*).
 
-În cuprinsul materialelor, am folosit de multe ori API-ul `setTimeout()`. Acest API, după cum am practicat de multe ori primește ca prim parametru o funcție callback, iar al doilea, o valoare numerică ce reprezintă timpul în milisecunde după care se va executa funcția. Browserul pornește un cronometru și va trimite funcția în *coada de așteptare*. Mecanismele cozii vor aștepta primul momentul când stiva contextelor de execuție va fi goală și va injecta funcția callback pentru a fi executată. Vom mai investiga acest proces, dar ceea ce doream să subliniez aici un aspect important: timpul menționat este unul minim garantat de așteptare, dar la acesta se mai poate adăuga un timp cât l-a petrecut în coadă pentru a fi trimis spre execuție.
+```javascript
+function ante () {
+  console.log('Apar imediat!');
+};
+ante(); // #1 funcția ajunge în call stack, unde este executată
+setTimeout(() => console.log('Apar după!!!'), 2000); // este apelat API-ul `setTimeout` care pornește un temporizator de 2 secunde.
+// După încheierea celor două secunde, API-ul `setTimeout` trimite funcția fat arrow în coada joburilor
+// Event loop „vizitează” coada job-urilor, „vede” funcția cu rol de callback și în primul moment când call stack-ul este liber, o trimite în execuție
+```
+
+API-ul `setTimeout` este al browserului. Acesta primește drept primă valoare pentru primul parametru o funcție cu rol de callback. Pentru al doilea parametru vom avea o valoare numerică ce reprezintă timpul în milisecunde cu care va fi întârziată executarea funcției. API-ul `setTimeout` va porni un cronometru pentru două secunde. Când s-au scurs, trimite funcția cu rol de callback în *coada de așteptare*. Mecanismul event loop-ului vor aștepta primul moment când stiva contextelor de execuție (*call stack*) va fi goală și va injecta funcția callback pentru a fi executată. Vom mai investiga acest proces, dar ceea ce doream să subliniez aici un aspect important: timpul menționat este unul minim garantat de așteptare. La acesta se mai poate adăuga un timp petrecut în coadă pentru a fi trimis spre execuție pentru că este posibil ca în call stack să existe funcții care se execută.
 
 ```javascript
 function temporizator (x = 10000) {
@@ -106,6 +118,12 @@ expensive();
 Job-urile sunt organizate printr-un mecanism intern motorului, care se comportă ca o stivă FIFO (First In, First Out), ceea ce înseamnă că primul job intrat, va fi și primul care va ieși. Standardul recomandă ca motoarele diferiților implementatori să fie prevăzute cu cel puțin două stive de Job-uri: una dedicată validării și evaluării textelor sursă pentru scripturi și module, precum și una dedicată rezolvării promisiunilor.
 
 În resursele pe care le veți consulta suplimentar, veți remarca faptul că acest **job queue** este numit simplu **queue** sau **coada**.
+
+După executarea fiecărui *job* (funcție cu rol de callback care așteaptă execuția), browserul ia decizia împrospătării informației afișate pe ecran (*rendering*). O astfel de decizie este luată de browser de 60 de ori pe secundă (*frame rate*), adică la aproximativ 16 milisecunde o dată. În cazul în care un job/task nu și-a încheiat execuția în intervalul de timp de 16 milisecunde, browserul poate lua decizia amânării reîmprospătării informației de pe ecran. Reține faptul că ecranul poate suferi un delay în afișarea noilor informații în funcție de complexitatea codului rulat de funcția cu rol de callback, adică job-ul care a intrat în execuție în call stack.
+
+Tempoul cu care event loop-ul ia job-uri și le trimite call stack-ului, se numește `tick`. În funcție de API-urile folosite, este posibil să existe mai multe cozi de job-uri pe care browserul le prioritizează. De exemplu, pentru promisiuni și API-uri care folosesc promisiuni există o coadă numită `microtasks`. Această coadă este este epuizată la fiecare `tick` înainte ca browserul să avanseze la faza de reîmprospătare a ecranului (*rendering*). 
+
+Chiar și animațiile care se petrec în browser au propria coadă a frame-urilor de animație, unde toate callback-urile API-ului `requestAnimationFrame` sunt trimise. Aceste task-uri sunt trimise în execuție doar dacă browserul decide rularea mecanismelor de reîmprospătare a ecranului (*rendering pipeline*). Taskurile sunt rulate toate înainte de reîmprospătare pentru ca utilizatorul să vadă modificările atunci când browserul va termina și rularea reîmprospătării ecranului - *rendering pipeline*.
 
 ## Imaginea întregului
 

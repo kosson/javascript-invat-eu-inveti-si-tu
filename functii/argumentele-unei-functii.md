@@ -109,7 +109,7 @@ function operatiune (...argumente) {
 operatiune(23,145,83); // 3
 ```
 
-Un exemplu cu o mică variație care permite *capturarea* tututor argumentelor suplimentare pasate într-un array.
+Un exemplu cu o mică variație care permite *capturarea* tuturor argumentelor suplimentare pasate într-un array.
 
 ```javascript
 function operatiune (a, b, ...valori) {

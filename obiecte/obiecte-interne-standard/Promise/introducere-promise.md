@@ -146,7 +146,7 @@ Chiar dacă nu am avut la îndemână aproape 20 de ani pentru a ajunge la concl
 Pentru a face o promisiune, se va folosi constructorul `Promise` căruia îi pasăm un singur argument, care este o funcție. Această funcție este apelată imediat ce ai pasat-o contructorului. Acesta este o funcție cu rol de *executor*, spune standardul.
 
 ```javascript
-const promisune = new Promise(function executor (resolve, reject) {});
+const promisiune = new Promise(function executor (resolve, reject) {});
 ```
 
 Constructorului îi este pasată o funcție care are două argumente, la rândul lor niște funcții cu rol de callback. Prin convenție, cele două callback-uri se numesc `resolve` și `reject`, dar este posibil să le numești cum dorești.

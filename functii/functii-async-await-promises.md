@@ -1,6 +1,6 @@
 # Async/await și promisiunile
 
-Funcțiile async-await nu sunt un înlocuitor pentru promisiuni, ci un model mai eficient gestionare a acestora. De exemplu, pentru a rezolva în paralel promisiuni apelam `Promise.all()`, dar rezultatul poate fi gestionat cu un `async`. O posibilă semnătură de cod care semnalează o astfel de opțiune este fragmentul de mai jos.
+Funcțiile async-await nu sunt un înlocuitor pentru promisiuni, ci un model mai eficient de gestionare a acestora. De exemplu, pentru a rezolva în paralel promisiuni apelam `Promise.all()`, dar rezultatul poate fi tratat cu un `async`. O posibilă semnătură de cod care semnalează o astfel de opțiune este fragmentul de mai jos.
 
 ```javascript
 const [val1, val2, val3] = await Promise.all(promise1(), promise2(), promise3());
