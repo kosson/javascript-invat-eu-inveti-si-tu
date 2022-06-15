@@ -272,6 +272,17 @@ oFunctiePromisificată.then((date) => {
 
 În cazul în care este folosit Node.js, se poate folosi și `util.promisify(numeUtili)`. Un astfel de scenariu ar fi util atunci când dorești să folosești rezultatul într-un viitor apropiat, într-un lanț de apeluri `then()`.
 
+Un alt exemplu, care se poate dovedi util în anumite condiții, este realizarea unei funcții care întârzie declanșarea execuției codului.
+
+```javascript
+function nani (milisecunde) {
+  return new Promise(resolve => setTimeout(resolve, milisecunde));
+};
+nani(2000).then(() => {
+  console.log('Am stat pe tușă două secunde.');
+});
+```
+
 ## Promisiuni în tratarea apelurilor asincrone
 
 Promisiunile sunt un pas evolutiv care permite lucrul mult mai ușor cu API-urile, de fapt cu metodele acestora, care au nevoie de ceva timp pentru a aduce un rezultat. Pentru a vedea la lucru promisiunile într-un posibil exemplu viabil pentru activitatea practică de lucru cu datele, vom face un apel AJAX. Ceea ce vom face este să aducem o înregistrare din setul pus la dispoziție de API-ul Europeana.eu.
@@ -299,7 +310,7 @@ promisiune.then(rezultat => {
 }).catch(error => console.log(error));
 ```
 
-Pentru a exemplifica aplicat, am *promisificat* un apel AJAX către o resursă la distanță. În funcțiile care gestionează evenimentele `onload` și `onerror` am făcut apelurile către callback-urile specifice promisiunilor. Acest lucru permite lucrul cu metodele `then(succes, eșec)` și `catch(error)`. Numele parametrilor pot fi arbitrar alese, dar practica a creat o regulă de obișnuință prin termenii din limba engleză `resolve` și `reject`.
+Pentru a exemplifica aplicat, am *promisificat* un apel AJAX către o resursă la distanță. În funcțiile care gestionează evenimentele `onload` și `onerror` am făcut apelurile către callback-urile specifice promisiunilor. Acest lucru permite lucrul cu metodele `then(succes, eșec)` și `catch(error)`. Numele parametrilor pot fi arbitrar alese, dar practica a creat o regulă de conveniență prin termenii din limba engleză `resolve` și `reject`.
 
 ### Înlănțuirea metodelor `then()`
 
@@ -319,7 +330,26 @@ let îțiPromit = new Promise( function (resolve, reject) {
 console.log(îțiPromit); // 22
 ```
 
-Dacă nu faci un `return` din callback-ul pasat unui `then()`, nu vei putea folosi valoarea în următorul `then`. Buna practică spune să nu creezi lanțuri `then` pentru a controla modul de execuție a codului executat sincron. Făcând acest lucru vei executa cod sincron ambalat în promisiuni, care au ca efect penalizarea performanței. Adu-ți mereu aminte că promisiunile sunt folosite pentru a programa executarea asincronă a unui fragment de cod care lucrează cu resurse la distanță, hard disk, ș.a.m.d. Singurul loc unde ar trebui să ai cod sincron este în ultimul `then`.
+Dacă nu faci un `return` din callback-ul pasat unui `then()`, nu vei putea folosi valoarea în următorul `then`. Buna practică spune să nu creezi lanțuri `then` pentru a controla modul de execuție a codului executat sincron. Făcând acest lucru vei executa cod sincron ambalat în promisiuni, care au ca efect penalizarea performanței. Adu-ți mereu aminte că promisiunile sunt folosite pentru a programa execuția asincronă a unor fragmente de cod care lucrează cu resurse la distanță, hard disk, ș.a.m.d. Singurul loc unde ar trebui să ai cod sincron este în ultimul `then`.
+
+De regulă, ceea ce vei inlănțui folosind `then()` sunt apeluri asincrone care returnează rezultatul ce va fi prelucrat în următorul `then()` ș.a.m.d.
+
+```javascript
+apelAsincronPeUnAPI('https://ceva.ro/apiv1/resurse')
+  .then(apelAsincronAduUserDinBaza)
+  .then(apelAsincronLogActivitate)
+  .then(rezultat => {
+    // `rezultat` este ceea ce a returnat `apelAsincronLogActivitate`
+    console.log('am încheiat activitatea');
+    return rezultat; // va fi returnat către următorul `then`
+  })
+  .catch((error) => {
+    // apelul `catch` este executat pentru orice reject ar apărea pe lanțul apelurilor asincrone
+    console.error(error);
+  });
+```
+
+În cazul unui lanț, `catch` va fi apelat la primul `reject` apărut indiferent la care dintre apelurile asincrone. Din acel moment, restul `then`-urilor nu vor mai fi executate. Un lanț `then` se poate încheia cu o metodă `finally` care va executa callback-ul indiferent de faptul că promisiunea este *fullfiled* sau este *settled* prin *reject*. De regulă, metoda `finally` este folosită pentru a curăța resursele implicate cum ar fi închiderea conexiunilor la baze de date, ș.a.m.d.
 
 În cazul în care aplici `then` pe aceeași promisiune, dar nu folosești înlănțuirea, spunem că facem o bifurcare. Aici apar probleme în tratarea erorilor pentru că erorile apărute pe o ramură, nu vor putea fi tratate pe alta.
 
@@ -342,6 +372,48 @@ let îțiPromit = new Promise( function (resolve, reject) {
 });
 console.log(îțiPromit); // 22 Dimensiunea este:  un fragment interesant
 ```
+
+Un lanț de promisiuni poate fi împachetat într-o funcție gazdă la a cărei invocare să fie returnată o promisiune care să fie tratată folosind un singur `then`.
+
+```javascript
+function lantPrelucrari () {
+  return new Promise((resolve, reject) => {
+    apelAsincronPeUnAPI('https://ceva.ro/apiv1/users')
+      .then(apelAsincronAduUserDinBaza)
+      .then(apelAsincronLogActivitate)
+      .then(rezultat => {
+        // `rezultat` este ceea ce a returnat `apelAsincronLogActivitate`
+        console.log('am încheiat activitatea');
+        return rezultat; // va fi returnat către următorul `then`
+      })
+      .catch((error) => {
+        // apelul `catch` este executat pentru orice reject ar apărea pe lanțul apelurilor asincrone
+        console.error(error);
+      });
+  });
+};
+lantPrelucrari().then(rezultat => console.log).catch((error) => console.error);
+```
+
+Același exemplu l-ai putea transforma într-un `async/await` care să transforme sintaxa într-o variantă mai ușor de gestionat.
+
+```javascript
+async function lantPrelucrari () {
+  try {
+    const 
+      conectare  = await apelAsincronPeUnAPI('https://ceva.ro/apiv1/users'),
+      utilizator = await apelAsincronAduUserDinBaza(conectare),
+      logentry   = await apelAsincronLogActivitate(utilizator);
+    return logentry;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+(async () => {await lantPrelucrari();})();
+```
+
+Observă faptul că `await` face ca apelurile asincrone să pară a fi execuții sincrone. Reține faptul că o funcție `async` returnează întotdeauna o promisiune care poate fi *rezolvată* într-o altă funcție `async`. Un alt detaliu important este faptul că funcțiile `async` se bazează tot pe promisiuni, care la rândul lor se bazează pe callback-uri.
 
 ### Tratarea erorilor
 

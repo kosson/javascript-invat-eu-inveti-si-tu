@@ -10,10 +10,10 @@ oPromisiune.then(raspuns => {
 }, motivul => {
   // respingere
   console.log(motivul.message);
-}).catch(e => e);
+}).catch(error => console.error);
 ```
 
-Poți să înțelegi necesitatea callback-urilor ca niște acțiuni de răspus în cazurile posibile `fullfiled` ori `rejected`. Primul callback, cel al succesului și îndeplinirii acțiunii primește un singur argument, care este valoarea obținută în sine. Callbackul este executat cu prima ocazie când stiva se eliberează. Callback-ul în cazul `rejected` acceptă un argument acesta fiind și motivul pentru care nu s-a încheiat cu succes acțiunea.
+Poți să înțelegi callback-urile drept acțiuni ca reacție în cazurile posibile `fullfiled` ori `rejected`. Primul callback, cel al succesului și îndeplinirii acțiunii primește un singur argument, care este valoarea obținută în sine. Callback-ul va aștepta în *microtask queue* și este trimis spre execuție de event loop cu prima ocazie când stiva se eliberează. Callback-ul în cazul `rejected` acceptă un argument acesta fiind și motivul pentru care nu s-a încheiat cu succes acțiunea.
 
 Pentru ca o eroare să poată fi tratată, un `Promise` va trebui să paseze și cel de-al doilea callback - `reject` lui `catch`. Acest lucru este foarte util atunci când tratezi o promisiune anterioară într-o nouă promisiune.
 

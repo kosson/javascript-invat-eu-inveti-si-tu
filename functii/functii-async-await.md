@@ -1,6 +1,6 @@
 # Funcții async/await
 
-Acest enunț a fost introdus în ECMAScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile care au cuvântul cheie `async` în față, vor returna mereu o promisiune. De îndată ce codul este compilat și executat, *funcțiile async* sunt executate. Acest comportament îl întâlnim și la promisiuni, când tot codul din funția cu rol de executor este rulat. Acolo unde motorul întâlnește `new Promise(nume_callback)`, va executa funcția callback/executorul.
+Acest enunț a fost introdus în ECMAScript 2017 și face ca o funcție să returneze o promisiune (`Promise`). Funcțiile care au cuvântul cheie `async` în față, vor returna mereu o promisiune. De îndată ce codul este compilat și executat, *funcțiile async* sunt executate. Acest comportament îl întâlnim și la promisiuni, când tot codul din funcția cu rol de executor este rulat. Acolo unde motorul întâlnește `new Promise(nume_callback)`, va executa funcția callback/executorul. Reține faptul că funcțiile `async` se bazează pe promisiuni, care la rândul lor implică utilizare de callback-uri.
 
 Funcțiile `async` au comportament sincron, ceea ce înseamnă că execuția codului va aștepta ca evaluarea lor să se încheie. Atenție, dacă operațiunea întârzie, execuția va fi blocată.
 
@@ -146,7 +146,7 @@ Ceea ce permit funcțiile `async`/`await` este posibilitatea de a captura toate 
 
 ## Gestionarea erorilor
 
-Unul din avantajele majore ale folosirii sintaxei `async`/`await` este aceea că permite evaluarea codului în structuri `try...catch`.
+Unul din avantajele majore ale folosirii sintaxei `async`/`await` este aceea că permite evaluarea codului în structuri `try...catch`. Dacă nu folosești `try...catch` o funcție `async` care se soluționează cu o eroare va eșua fără să dea vreun semn.
 
 ```javascript
 async function ceva () {
@@ -158,9 +158,7 @@ async function ceva () {
 };
 ```
 
-Erorile care ar putea apărea în urma evaluării unei expresii `throw new Error('O eroare la evaluare')` din funcție. Acestea vor putea fi gestionate în `catch(error){}`.
-
-Mai jos este un exemplu din Node.js cules din workshopul lui Matteo Collina și James Snell intitulat „Broken Promises” cu ocazia evenimentului *OpenJS World 2020*.
+Erorile care ar putea apărea în urma evaluării unei expresii `throw new Error('O eroare la evaluare')` din funcție. Acestea vor putea fi gestionate în `catch(error){}`. Mai jos este un exemplu din Node.js cules din workshopul lui Matteo Collina și James Snell intitulat „Broken Promises” cu ocazia evenimentului *OpenJS World 2020*.
 
 ```javascript
 const EventEmitter = require('events');
@@ -195,11 +193,85 @@ process.on('uncaughtException', (err) => {
 ev.emit('ceva');
 ```
 
-Calea ciudată de a trata erorile a rezultat din utilizarea unei promisiuni, adică a funcției *async* acolo unde ar fi trebuit să fie un simplu callback. Una din concluziile importate este aceea că în momentul în care pasezi o funcție asincronă unui fragment de cod, acesta trebuie prevăzut un mecanism *catch* de gestionare a erorilor. O altă concluzie ar fi să nu pasezi un *async* unui `EventEmitter`.
+Felul ciudat de a trata erorile a rezultat din utilizarea unei promisiuni, adică a funcției *async* acolo unde ar fi trebuit să fie un simplu callback. Una din concluziile importate este aceea că în momentul în care pasezi o funcție asincronă unui fragment de cod, acesta trebuie prevăzut un mecanism *catch* de gestionare a erorilor. O altă concluzie ar fi să nu pasezi un *async* unui `EventEmitter`.
+
+### Tratarea erorilor pentru multiple await
+
+În cazul în care ai mai multe enunțuri `await`, ar trebui să ai mai multe blocuri `try...catch` pentru a gestiona erorile care apar de la fiecare.
+
+```javascript
+async function lantPrelucrari () {
+  const 
+    conectare  = await apelAsincronPeUnAPI('https://ceva.ro/apiv1/users'),
+    utilizator = await apelAsincronAduUserDinBaza(conectare),
+    logentry   = await apelAsincronLogActivitate(utilizator);
+  return logentry;
+};
+
+// funcție care prinde toate erorile
+function tratezErorile (func) {
+  return function (...args) {
+    return func(...args).catch((err) => {
+      console.error('Eroarea este', err);
+    });
+  };
+};
+(async () => {
+  await tratezErorile(lantPrelucrari)();
+})();
+```
+
+Pentru a evita un astfel de scenariu care ar încărca inutil codul, se poate crea o funcție specializată care să *prindă* toate erorile. Din nefericire, o astfel de soluție nu se potrivește în cazul în care ai nevoie să tratezi erorile în funcție de ceea ce indică.
+
+## Funcțiile async și buclele
+
+Apelarea unor funcții asyncrone din enunțuri care implică realizarea de bucle cum ar fi `for` sau chiar `forEach` nu funcționează. Acest lucru se petrece pentru că buclele rulează sincron și își încheie execuția înainte ca apelurile asincrone să-și încheie și ele execuția.
+
+```javascript
+async function facCeva (unArray) {
+  let element;
+  for (element of unArray) {
+    await oferaValoareaDin(element);
+  }
+};
+
+// sau
+async function facCeva (unArray) {
+  unArray.forEach(await (element) => {
+    await oferaValoareaDin(element);
+  });
+};
+```
+
+Din acest motiv, ES2018 a introdus iteratori asincroni, care funcționează precum iteratorii normali cu excepția că metoda `next()` în loc de a returna o valoare, returnează o promisiune. Cuvântul cheie `await` poate fi folosit în bucle `for...of`.
+
+```javascript
+async function facCeva (unArray) {
+  let element;
+  for await (element of unArray) {
+    oferaValoareaDin(element);
+  }
+};
+```
+
+Ceea ce se petrece este că bucla `for await ... of` execută operațiuni asincrone într-o serie.
+Un model alternativ ar fi să faci un *mapping* pe elementele array-ului și apoi să le rulezi cu `Promise.all()`.
+
+```javascript
+let arr = ['a','b','c'],
+    deRezolvat = arr.map(async (valoare, element) => {
+      console.log(`Acum procesez asincron pe `, element);
+      await functieCareProceseazaAsincron(valoare);
+    });
+
+await Promise.all(deRezolvat);
+```
+
+Toate promisiunile vor fi *rezolvate* în paralel. Un lucru de menționat este că procesarea unor array-uri de mari dimensiuni va avea repercusiuni asupra consumului de resurse.
 
 ## Concluzii
 
-Scrierea codului asincron folosind `async`/`await` este o alternativă elegantă și mult mai eficientă (cel puțin în cazul detectării erorilor) pentru lucrul cu promisiunile.
+Scrierea codului asincron folosind `async`/`await` este o alternativă elegantă și mult mai eficientă (cel puțin în cazul detectării erorilor) pentru lucrul cu promisiunile. Totuși, nu ignora faptul că promisiunile la rândul lor operează cu callback-uri. 
 
 ## Dependințe cognitive
 
@@ -217,3 +289,4 @@ Scrierea codului asincron folosind `async`/`await` este o alternativă elegantă
 - [Making asynchronous programming easier with async and await | MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await)
 - [How to Simplify Asynchronous JavaScript using the Result-Error Pattern | Ken Snyder | JANUARY 18, 2022](https://www.freecodecamp.org/news/simplify-asynchronous-javascript-using-the-result-error-pattern/)
 - [Designing APIs for Asynchrony | 2013-08-23](https://blog.izs.me/2013/08/designing-apis-for-asynchrony/)
+- [Flow Control in Modern JS: Callbacks to Promises to Async/Await | Craig Buckler | 2 iunie 2018](https://www.sitepoint.com/flow-control-callbacks-promises-async-await/)
