@@ -18,7 +18,30 @@ function fac3 ({x, y}) {}; fac3.length; // 1
 function fac4 (x, ...y) {}; fac4.length; // 1
 ```
 
-Fiecare argument trebuie pasat funcției în ordinea corectă pentru că valoarea sa se va *lega* de numele (identificator) desemnat de programator între parantezele rotunde. Valorile pasate unei funcții se numesc **argumente**, iar identificatorii menționați între paranteze (*headerul funcției*), de care se leagă aceste valori, se numesc **parametri**. O funcție poate primi mult mai multe argumente față de ceea ce este precizat ca parametri. Valorile acestea nu se pierd în neant. Ele vor putea fi regăsite în obiectul special `arguments`, dar dacă vei trimite mai puține argumente, restul parametrilor vor avea valoarea `undefined`. Parametrii vor face parte din mediul lexical al funcției.
+Fiecare argument trebuie pasat funcției în ordinea corectă pentru că valoarea sa se va *lega* de numele (identificator) desemnat de programator între parantezele rotunde. Valorile pasate unei funcții se numesc **argumente**, iar identificatorii menționați între paranteze (*headerul funcției*), de care se leagă aceste valori, se numesc **parametri**. 
+
+Parametrii preiau valorile pasate prin intermediul argumentelor.
+
+```javascript
+function demo (param1, param2) {
+  return param1 + param2;
+};
+// parametrii sunt declarațiile din funcție
+demo(1, 2); // argumentele este ceea ce pasezi funcției la invocare.
+```
+
+La nevoie poți specifica strict numărul argumentelor primite:
+
+```javascript
+function faCeva (a, b) {
+  if (arguments.length !== 2) { // sintaxa spread
+    throw new Error('Trebuie musai doar două argumente');
+  };
+};
+faCeva(1, 3, 4); // Error: Trebuie musai doar două argumente
+```
+
+O funcție poate primi mult mai multe argumente față de ceea ce este precizat ca parametri. Valorile acestea nu se pierd în neant. Ele vor putea fi regăsite în obiectul special `arguments`, dar dacă vei trimite mai puține argumente, restul parametrilor vor avea valoarea `undefined`. Parametrii vor face parte din mediul lexical al funcției.
 
 Toate aceste detalii sunt utile, pentru că uneori este necesară executarea unei funcții în funcție de numărul parametrilor săi. Poți avea cazul în care dorești un anumit parametru să stea întotdeauna pe ultima poziție pentru că, de fapt, acesta este la rândul său o funcție cu rol de callback (va fi apelată in interiorul funcției) după ce toate evaluările se vor fi încheiat.
 
@@ -38,6 +61,8 @@ if (fac2.length == 2) {
 Amintește-ți mereu faptul că proprietatea `length` poate fi doar citită - *read-only*. Și acum că am aflat cum să numărăm parametrii, sunt absolut convins că mă vei întreba cum să numărăm și argumentele. Nimic mai simplu: obiectul `arguments` are la rândul său o proprietate `length` care poate fi folosită pentru a afla câte argumente au fost pasate funcției: `arguments.length`. Spunem despre o funcție care primește mai multe argumente decât numărul parametrilor că este una `variadică`.
 
 ## Aplicarea pe argumente
+
+Aceasta este o perspectivă asupra relației dintre codul funcției și argumentele primite. Spunem că facem o **aplicare** a unei funcții argumentelor sale pentru a produce o valoare care să fie returnată.
 
 Profesorul Christopher Strachey spune:
 
@@ -99,25 +124,6 @@ La invocarea unei funcții sunt disponibile `this`, care formează contextul de 
   return cumulator;
 })(2, 3); // 5
 ```
-
-ES6 introduce un nou mod de a introduce parametrii, folosind operatorul trei puncte urmat de identificatorul unei structuri de date. Această nouă modalitate se numește `rest parameters` și permite preluarea ca argumente a unui număr necunoscut de argumente dintr-un array, de exemplu.
-
-```javascript
-function operatiune (...argumente) {
-  console.log(argumente.length);
-};
-operatiune(23,145,83); // 3
-```
-
-Un exemplu cu o mică variație care permite *capturarea* tuturor argumentelor suplimentare pasate într-un array.
-
-```javascript
-function operatiune (a, b, ...valori) {
-  console.log(a, b, valori.length);
-};
-operatiune(2, 4, 20, 32, 110); // 2 4 3
-```
-
 ## Ce este `arguments`
 
 Este un obiect disponibil funcției la momentul execuției. Acesta permite accesul la toți parametrii. Atunci când pasăm unei funcții același număr de argumente câți parametri sunt, lucrurile sunt foarte clare. Ce te faci atunci când sunt pasate mult mai multe argumente? Trebuie să fie o structură capabilă să înmagazineze surplusul. Pentru funcțiile variadice, această structură este obiectul `arguments`.
@@ -202,51 +208,6 @@ function test2 (x, y) {
 };
 console.log(test1(1,1)); // 11
 console.log(test2(1,1)); // 2
-```
-
-## Operatorul *spread*
-
-Am văzut deja mai sus metoda prin care putem transforma `arguments` într-un array, dar există și alte metode pentru a gestiona argumentele pasate unei funcții, dar și parametrii.
-
-Noua sintaxă ES6 a introdus operatorul (trei puncte), care în funcție de cazul de utilizare, poate **colecta** într-un array argumentele care nu au fost asociate cu un parametru sau la invocarea unei funcții, poate **desface** un array și fiecare valoare a acelui array va fi un argument trimis funcției.
-
-```javascript
-// adunarea într-un array a argumentelor neasociate parametrilor
-function facCeva (x, y, ...z) {};
-// spargerea unui array în argumentele necesare unei functii
-let colectie = [2, 4, 10];
-prelucrezNr(...colectie);
-```
-
-Hai să vedem același exemplu folosind acest nou operator:
-
-```javascript
-function oFunctie (x, y, z) {
-  console.log([].slice.call(arguments));
-};
-let argumente = [4, 5, 6];
-oFunctie(...argumente); // Array [ 4, 5, 6 ]
-```
-
-Parametrii preiau valorile pasate prin intermediul argumentelor.
-
-```javascript
-function demo (param1, param2) {
-  return param1 + param2;
-};
-// parametrii sunt declarațiile din funcție
-demo(1, 2); // argumentele este ceea ce pasezi funcției la invocare.
-```
-
-La nevoie poți specifica strict numărul argumentelor primite:
-
-```javascript
-function faCeva (a, b) {
-  if (arguments.length !== 2) { // sintaxa spread
-    throw new Error('Trebuie musai doar două argumente');
-  };
-};
-faCeva(1, 3, 4); // Error: Trebuie musai doar două argumente
 ```
 
 ## Transformă arguments în array
@@ -448,6 +409,62 @@ faCeva(); // Error: Prietene, pasează valoarea
 faCeva('ceva'); // "ceva"
 ```
 
+## Operatorul *spread* pe argumente
+
+Am văzut deja mai sus metoda prin care putem transforma `arguments` într-un array, dar există și alte metode pentru a gestiona argumentele pasate unei funcții, dar și parametrii.
+
+Noua sintaxă ES6 a introdus operatorul (trei puncte), care în funcție de cazul de utilizare, poate **colecta** într-un array argumentele care nu au fost asociate cu un parametru sau la invocarea unei funcții.
+
+```javascript
+function operatiune (...argumente) {
+  console.log(argumente.length);
+};
+operatiune(23,145,83); // 3
+```
+
+Operatorul trei puncte în ipostaza invocării unei funcții va **desface** un array și fiecare valoare a acelui array va fi un argument trimis funcției. Această nouă modalitate se numește `rest parameters`.
+
+```javascript
+function oFunctie (x, y, z) {
+  console.log([].slice.call(arguments));
+};
+let argumente = [4, 5, 6];
+oFunctie(...argumente); // Array [ 4, 5, 6 ]
+```
+
+Hai să vedem un exemplu similar cu efectele operatorului trei puncte în posturi diferite:
+
+```javascript
+// adunarea într-un array a argumentelor neasociate parametrilor
+function facCeva (x, y, ...z) {}; // STRANGE restul argumentelor
+// spargerea unui array în argumentele necesare unei functii
+let colectie = [2, 4, 10];
+prelucrezNr(...colectie); // DESFACE un array în valori pentru tot atâtea argumente
+```
+## Aplicarea parțială
+
+Aplicarea parțială este procesul de aplicare a unei funcții unei părți a argumentelor. Funcția este returnată pentru a fi folosită ulterior. Pe scurt, o funcție ia o funcție cu parametri multipli și returnează o funcție cu mai puțini parametri.
+
+```javascript
+const prima = (functie, arg) => function (...set) {
+  return functie.call(this, arg, ...set);
+};
+const combinaArgs = (a, b) => `am combinat ${a} cu ${b}`;
+const finalizare = prima(combinaArgs, ['ping', 'echo']);
+finalizare('pong'); // "am combinat ping,echo cu pong"
+```
+
+În exemplu, avem `prima` care este o funcție **fat arrow**.
+
+Această funcție primește două argumente:
+
+-   o altă funcție și
+-   un argument
+
+Ceea ce returnează este o funcție. Funcția returnată primește un set pe care-l **desface**, în engleză *spread*.
+
+La rândul ei, această funcție returnată va returna rezultatul aplicării funcției trimisă ca argument funcției gazdă în contextul ei (`this`), pe al doilea argument trimis funcției gazdă și mai multe argumente trimise funcției găzduite.
+
 ### Argumente ca modificatori
 
 ES6 permite introducerea unui obiect cu proprietăți având valori din oficiu. Acestea pot fi modificate prin argumentele funcției. Putem observa eleganța pe care *destructurarea* o oferă.
@@ -633,7 +650,7 @@ function peAlese(obi, ...chei){
 
 ## Pasarea prin referință
 
-Există o situație interesantă care ține de modul în care sunt pasate valorile ca argumente. De exemplu, valorile care sunt pasate ca referințe așa cum sunt obiectele, reflectă modificările care li se aduc în momentul evaluării codului funcției.
+Există o situație interesantă care ține de modul în care sunt pasate valorile ca argumente. De exemplu, valorile care sunt pasate ca referințe așa cum sunt obiectele, reflectă modificările de la momentul în care funcția începe să fie evaluată.
 
 ```javascript
 const valori = [45, 87, 14, 62, 9];

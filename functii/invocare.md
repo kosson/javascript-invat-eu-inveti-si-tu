@@ -10,6 +10,8 @@ Invocarea funcțiilor se face prin operatorul `()`. La invocare se creează un n
 
 [9.2.12 FunctionDeclarationInstantiation ( func, argumentsList ). Nota 1](https://www.ecma-international.org/ecma-262/8.0/index.html#sec-functiondeclarationinstantiation)
 
+Locul din structura sintactică a codului de unde se face invocarea funcției pentru a fi executată se numește **callsite**. Acesta nu este locul unde se declară funcția și nu trebuie cumva confundat cu call-stack-ul.
+
 ## Ce se întâmplă
 
 Înainte de a radiografia efectele apelului de funcție, ne vom uita în standard la algoritmul intern motorului `FunctionInitialize(F, kind, ParameterList, Body, Scope )`. Argumentele acestui algoritm intern sunt o funcție obiect `F`, mențiunea `kind` care indică ce tip de funcție este (*Normală*, *Metodă*, *Arrow*), o listă cu toți parametrii, un corp care cuprinde codul ce urmează să fie evaluat și un *Mediu Lexical* care este identificat ca scope. Alcătuind acest context să vedem în ce constă execuția unei funcții.
