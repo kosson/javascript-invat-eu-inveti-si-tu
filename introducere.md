@@ -70,7 +70,7 @@ Pentru că acest material țintește pe cei care lucrează în domeniul umanioar
 
 ## Anti-introducere
 
-La începutul secolului 20 al mileniului trecut, matematicianul Gottlob Frege a căutat „un limbaj al gândului pur”, care să poată fi folosit pentru a prezenta demonstrațiile matematice fără a se apela în vreun fel la mecanismele intuiției, ci doar cele ale logicii. Ceea ce căuta Gottlob Frege era o sintaxă care să fie precisă ea în sine pe care să o poți folosi fără a o interpreta. De fapt, acesta a fost pasul către realizarea visului lui Gottfried Leibniz de a găsi un set de reguli stricte pentru procesarea simbolurilor, ceea ce el numea „limbajul gândurilor” ca reducere a ideilor la un set de concepte nucleu, care prin combinare, să ofere expresivitatea tuturor ideilor indiferent de complexitatea lor. Pentru asta Leibnitz ar fi avut nevoie de o anumită algebră cu ajutorul căreia să poată reduce orice propoziție la o valoare de adevăr. Contribuțiile sale în algebra logicii sub forma operatorilor logici au fost completate un secol mai târziu de Gottlob Frege.
+La începutul secolului 20 al mileniului trecut, matematicianul Gottlob Frege a căutat „un limbaj al gândului pur”, care să poată fi folosit pentru a prezenta demonstrațiile matematice fără a se apela în vreun fel la mecanismele intuiției, ci doar cele ale logicii. Ceea ce căuta Gottlob Frege era o sintaxă care să fie precisă pe care să o poți folosi fără a o interpreta. De fapt, acesta a fost pasul către realizarea visului lui Gottfried Leibniz de a găsi un set de reguli stricte pentru procesarea simbolurilor, ceea ce el numea „limbajul gândurilor” ca reducere a ideilor la un set de concepte nucleu, care prin combinare, să ofere expresivitatea tuturor ideilor indiferent de complexitatea lor. Pentru asta Leibnitz ar fi avut nevoie de o anumită algebră cu ajutorul căreia să poată reduce orice propoziție la o valoare de adevăr. Contribuțiile sale în algebra logicii sub forma operatorilor logici au fost completate un secol mai târziu de Gottlob Frege.
 
 <figure>
   <img src="images/Young_frege.jpg" width="200px" alt="Imagine aflată în Domeniul Public; accesibilă la https://upload.wikimedia.org/wikipedia/commons/9/99/Young_frege.jpg">
@@ -190,7 +190,7 @@ Exemplul cu fragmentul de cod HTML este exemplificarea perfectă cu imbricarea a
 
 Se pune întrebarea: cum știe JavaScript să citească corect codul sursă, care este la rândul său un text pentru a face inteligibile unitățile sale funcționale, cele care produc înțeles pentru computer. În acest sens, nu numai JavaScript, ci toate limbajele de programare folosesc ceea ce se cheamă **separatoare**. Poți să ți le imaginezi precum separatoarele colorate din dosare, care fragmentează vizual părțile componente ale conținutului. Să vedem care sunt acestea.
 
-Acoladele `{}` au rolul de a indica mediul în care se va executa codul în JavaScript. Cel mai adesea veți vedea că indică **blocurile de cod ale funcțiilor**. Între acolade veți introduce liste de instrucțiuni și expresii specifice JavaScript separate prin punct și virgulă `;`. Acoladele și parantezele rotunde împreună cu punct și virgulă împart codul în calupuri ușor de urmărit vizual, dar mai mult de atât oferă *sens*, face *lizibil* codul și pentru computer prin *separarea* fragmentelor componente.
+Acoladele `{}` au rolul de a indica mediul în care se va executa codul în JavaScript. Cel mai adesea veți vedea că indică **blocurile de cod ale funcțiilor**. Între acolade veți introduce liste de instrucțiuni și expresii specifice JavaScript separate prin punct și virgulă `;`. Acoladele și parantezele rotunde împreună cu punct și virgulă împart codul în blocuri ușor de urmărit vizual, dar mai mult de atât oferă *sens*, face *lizibil* codul și pentru computer prin *separarea* fragmentelor componente.
 
 Acoladele mai au și un rol special: delimitează spații cu un rol special. Creează niște *grădini private*, care sunt **blocuri de cod** la care accesul se poate face doar dacă execuția programului intră în acea grădină.
 
@@ -330,7 +330,7 @@ JavaScript are următoarele categorii de expresii:
 Cea mai simplă expresie este o `valoare literală` scrisă direct. Poate fi și o variabilă fără valoare atribuită.
 
 ```javascript
-1;      // expresie de valoare literală
+1;      // expresie de valoare literală => produce valoarea 1 la finalul evaluării
 let x;  // expresie de variabilă
 ```
 
@@ -393,9 +393,9 @@ Dacă ai amețit, e perfect normal. Respiră de cinci ori foarte adânc cu ochii
 
 ### Enunțuri (**statements**)
 
-Este echivalentul unei propoziții în limbaj uman. Componentele unui enunț pot fi **valori**, **operatori**, **expresii**, **cuvinte cheie** și **comentarii**. Un enunț este o unitate de execuție distinctă. Spre deosebire de expresii, un enunț nu conduce la o valoare.
+Este echivalentul unei propoziții în limbaj uman. Componentele unui enunț pot fi: **valori**, **operatori**, **expresii**, **cuvinte cheie** și **comentarii**. Un enunț este o unitate de execuție distinctă. Spre deosebire de expresii, un enunț nu conduce la o valoare neapărat.
 
-Un exemplu de enunț este `if (true) { facCeva() }`. După cum observi, evaluarea unui enunț precum cel de mai sus, nu conduce la obținerea unei valori. Mai este ceva ce poate fi folosit pentru a înțelege enunțurile prin comparație cu expresiile. Enunțurile nu pot fi pasate drept argument unei funcții.
+Un exemplu de enunț este `if (true) { facCeva() }`. După cum observi, evaluarea unui enunț precum cel de mai sus, nu conduce la obținerea unei valori. Mai este ceva ce poate fi folosit pentru a înțelege enunțurile prin comparație cu expresiile. Enunțurile nu pot fi pasate drept argument unei funcții. Există un truc pe care îl poți folosi pentru a verifica dacă un fragment de cod este o expresie sau un enunț. Dacă pasezi fragmentul de cod lui `console.log(/* aici pasezi fragmentul de cod */)`, dacă se produce o eroare, ai de a face cu un enunț. Explicația este că argumentele unei funcții pot fi numai expresii.  
 
 **Moment ZEN**: Un program este o listă de enunțuri.
 

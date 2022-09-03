@@ -10,7 +10,7 @@ Ce-ar fi dacă am proceda la trimiterea în *fundal* (*runtime-ul de execuție*)
 
 Această operațiune de anticipare a unor rezultate în anumite cazuri este în strânsă legătură cu momentul în care se execută o anumită operațiune. Uneori, când soliciți niște date dintr-o sursă locală sau la distanță, serviciul responsabil poate să nu funcționeze sau datele să nu se fi generat dintr-o altă operațiune de prelucrare anterioară. În acest caz, vorbim de aspectele asincrone ale rulării codului.
 
-Toate aceste necunoscute, mici sincope, lucruri care nu pot fi stăpânite printr-o gândire pur algoritmică, au nevoie să fie gestionate cumva. Pot fi asemuite previziunii meteorologice prin care se încearcă anticiparea vremii. Cum în cazul programării este nevoie de un rezultat concret, aceste aprecieri ale posibilității obținerii sau nu a unui rezultat, poartă numele de **promisiuni**. O promisiune este o valoare care poate fi disponibilă **acum**, în **viitor** sau **niciodată**. Ceea ce se *promite* este faptul că vei primi un răspuns, fie acesta unul **pozitiv** (o valoare), fie unul **negativ** (o eroare).
+Să ne gândim că facem mai multe apeluri către servicii care ne răspund cu date, fiecare set fiind returnat la momente diferite, iar atunci când *apar* trebuie să declanșeze un eveniment care să le transforme sau să le afișeze. Gândirea pas cu pas nu ne mai poate ajuta și felul în care se întâmplă lucrurile conduc la senzația că lucrăm cu necunoscute. Toate aceste necunoscute, mici sincope, lucruri care nu pot fi stăpânite printr-o gândire pur algoritmică, au nevoie să fie gestionate cumva. Pot fi asemuite previziunii meteorologice prin care se încearcă anticiparea vremii. Cum în cazul programării este nevoie de un rezultat concret, aceste aprecieri ale posibilității obținerii sau nu a unui rezultat, poartă numele de **promisiuni**. O promisiune este o valoare care poate fi disponibilă **acum**, în **viitor** sau **niciodată**. Ceea ce se *promite* este faptul că vei primi un răspuns, fie acesta unul **pozitiv** (o valoare), fie unul **negativ** (o eroare).
 
 Mulți practicieni apelează la comparația promisiunilor cu **IOU** -urile. Un IOU este o sintagmă în limba engleză: **I owe you** (**îți sunt dator** am traduce în română, ori colocvial *ai de primit*), care reglementează o realitate tranzacțională asemănătoare unor chitanțe sau AWB-uri (din limba engleză *air waybill*) în cazul efectelor poștale. AWB-ul este un jeton pe care îl primești în urma achitării unui produs care urmează să-ți fie livrat. Produsul poate să-ți fie livrat după o perioadă (înregistrăm un **succes**) sau poți primi o explicație pentru problemele apărute la livrare (înregistrăm o **eroare**) însoțită de o posibilă rezolvare pentru problema apărută. În cazul AWB-urilor, poți urmări comanda și pentru o vreme vei vedea mesajul *în curs de livrare* - în engleză ar fi **pending**.
 
@@ -61,7 +61,7 @@ Este un concept foarte puternic în sine. Gândește-te că ai avea un locțiito
 const loctiitorValoare = fetch("http://api.undeva.ro/date.json");
 ```
 
-Acest obiect locțiitor poate fi instrumentat grație unor stări prin care trece. Pentru a *rezolva* obiectul promisiune, acesta ne pune la dispoziție metoda `then()`.
+Acest obiect locțiitor poate fi instrumentat grație *stărilor* prin care trece. Pentru a *rezolva* obiectul promisiune, acesta ne pune la dispoziție metoda `then()`.
 
 **Standardul spune**:
 
@@ -636,7 +636,7 @@ process.on('uncaughtException', (err) => {
 Totuși, ai posibilitatea de a face EventEmitter-ul atent la erori dacă-i pasezi `{captureRejections: true}`, dar este experimental deocamdată (iulie, 2020) - [Capture Rejections of Promises](https://nodejs.org/api/events.html#events_capture_rejections_of_promises).
 
 Nu amestecați promisiunile cu callback-urile. Folosirea lor împreună este un lucru dificil și adeseori vă veți lovi de erori.
-Nu creați promisiuni în loop-uri. Acest lucru chiar dacă este posibil, va penaliza performanțele.
+Nu creați promisiuni în loop-uri. Acest lucru chiar dacă este posibil, acest lucru va penaliza performanțele.
 Evită crearea de lanțuri lungi `then()`. Ceea ce se întâmplă este că pur și simplu se introduce mai mult cod în microqueue, se alocă mai multă memorie. Folosirea mai multor `then` înlănțuite pentru a controla codul și datele (în fiecare `then` rulezi cod sincron), nu este o soluție. Promisiunile servesc scopului primar de a rula cod asincron eliberând astfel event-loop-ul.
 
 Gestionează reject-urile. În cazul în care acestea sunt neglijate, memoria și performanțele generale vor avea de suferit. Dacă apare o eroare și nu o tratezi, pur și simplu ai de a face cu o *scurgere de memorie* (*memory leak*).
@@ -679,3 +679,4 @@ Gestionează reject-urile. În cazul în care acestea sunt neglijate, memoria ș
 - [More About JavaScript ES6 Promises methods, Steve Griffith, Jul 27, 2017](https://www.youtube.com/watch?v=nB-aLKE76pY)
 - [Workshop: Broken Promises, The Workshop Edition - Matteo Collina and James Snell, NearForm](https://youtu.be/yRyfr1Qcf34)
 - [Broken Promises - James Snell, NearForm](https://youtu.be/XV-u_Ow47s0)
+- [JavaScript Promises | The Coding Train](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6bKLPQvPRNNE65kBL62mVfx)
