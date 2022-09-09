@@ -79,7 +79,7 @@ console.log(~b); // 0000000000000010
 // rezultat: 2
 ```
 
-## Bitwise OR (`||`)
+## Bitwise OR (`|`)
 
 Operatorul va seta la valoarea `1` doar dacă ambii biți au valoarea `1` sau dacă doar unul singur are valoarea `1`.
 
