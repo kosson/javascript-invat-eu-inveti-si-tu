@@ -38,3 +38,4 @@ console.log(interceptor.x); // 1
 
 - [Meta programming](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Meta_programming)
 - [What is Metaprogramming in JavaScript? In English, please.](https://www.freecodecamp.org/news/what-is-metaprogramming-in-javascript-in-english-please/)
+- [Hacking the JavaScript using Proxies and Reflection | Erick Wendel](https://www.youtube.com/watch?v=_8G5jf_Mi64)

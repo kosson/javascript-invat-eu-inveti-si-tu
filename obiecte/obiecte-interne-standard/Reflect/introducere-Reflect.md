@@ -201,3 +201,4 @@ Unul din avantajele utilizării `Reflect` este siguranța că nu folosești vers
 - https://www.keithcirkel.co.uk/metaprogramming-in-es6-part-2-reflect/
 - [What is Metaprogramming in JavaScript? In English, please.](https://www.freecodecamp.org/news/what-is-metaprogramming-in-javascript-in-english-please/)
 - [Is there any benefit to call Reflect.apply() over Function.prototype.apply() in ECMAScript 2015? | stack overflow](https://stackoverflow.com/questions/34707306/is-there-any-benefit-to-call-reflect-apply-over-function-prototype-apply-in)
+- [Hacking the JavaScript using Proxies and Reflection | Erick Wendel](https://www.youtube.com/watch?v=_8G5jf_Mi64)
