@@ -38,7 +38,7 @@ Ascunderea datelor și a comportamentelor este felul în care pot fi privite fun
 
 ## Mantre
 
-- Funcțiile care sunt folosite pentru a crea alte funcții se numesc „de ordin înalt”.
+- Funcțiile care sunt folosite pentru a crea alte funcții se numesc *de ordin înalt*.
 - Orice funcție poate fi apelată cu oricâte argumente de orice tip în orice moment.
 - Funcțiile care returnează un Boolean, se numesc **predicate**.
 
@@ -163,9 +163,12 @@ console.log(colectieDeNume); // Array [ "Tereza", "Ciprian", "Gina" ]
 Promisiunile sunt implementate și ele ca functori. ECMAScript 2015 nu are o metodă map, dar alte biblioteci de cod au.
 Stream-urile sunt și ele implementatori ai lui `map()`.
 
-
 ## Funcțiile map(), filter(), reduce()
 
 Sunt o colecție nucleu pentru lucrul cu funcții de ordin înalt (higher order). Constituie instrumentarul pentru programarea funcțională pentru că iau o funcție drept input și returnează un rezultat care nu are efect.
 
 Aceste metode lucrează cu array-uri. Aceste metode aplică un callback pentru fiecare element dintr-un array, pe care nu-l modifică și returnează un alt array cu rezultatele pentru fiecare element asupra căruia a acționat respectivul callback.
+
+## Resurse
+
+- [Functional Programming Jargon | Hemanth](git@github.com:hemanth/functional-programming-jargon.git)

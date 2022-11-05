@@ -17,19 +17,15 @@ Multe dintre resursele dedicate învățării limbajului fac parte din propriile
 Mare parte a codului conține nume de variabile în limba română din dorința de a fi explicate cât mai bine resursele cu care se operează fără a calchia din exemplele redactate în limba engleză.
 
 Colecția nu este una finală și poate suferi multe modificări. Materialele vor fi redactate în Markdown. Cei care doresc alte formate vor putea transforma textele cu ajutorul utilitarului pandoc în formate care să avantajeze obișnuințele proprii de lectură.
-
-Dacă doriți să sprijiniți mai departe munca editorială pentru următoarele două volume, aștept contribuțiile la https://www.patreon.com/kosson.
-Pentru cei care vor să facă cinste cu o cafeluță, puteți să trimiteți una pe paypall.com la adresa de email kosson@gmail.com.
-Materialele acestea plus alte lucruri utile vor avea un spațiu organizat la https://kosson.ro/ieis2 și mai departe la https://ieis2.ro.
-
 ## Oferă suport
 
 Dacă ați găsit utile materialele, puteți sprijini folosind următoarele canale:
 
 - Donații ETH: 0xd4e9e977c4ae9387061ab8f7160666b5c1dc2a2d
 - Donații BTC: 1TCT7wcnD5a4sSKnBkudSvc9DMUd9nbLa
+- o cafeluță direct pe Revolut la [@nicolaemn](https://revolut.me/nicolaemn) 
 
-Mai nou, poți să-mi dai o cafea la [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/P5P81Y27Q)
+<img src="images/REVOLUT_QR.png" height="200" />
 
 ## For you, the supporter
 
