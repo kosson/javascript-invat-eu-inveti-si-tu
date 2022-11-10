@@ -1,10 +1,10 @@
 # Recursivitate
 
-În literatură recursivitatea mai este numită și **recurență**. Recursivitatea poate fi înțeleasă ca fiind apariția unui lucru în funcție de rezultatul interpretării regulilor acelui lucru.
+În literatura de specialitate recursivitatea mai este numită și **recurență** sau **recursie**. Recursivitatea poate fi înțeleasă ca o aplicare repetată a aceleiași funcții pe un rezultat care provine din evaluarea codului deoarece nu a fost întrunită o condiție de bază care rupe lanțul de execuție. Înțelegerea recursivității se leagă de înțelegerea contextului de execuție și a stivei contextelor de execuție.
 
 Recursivitatea este realizată în JavaScript folosind funcțiile. O funcție recursivă este o funcție care se apeleză pe sine însăși. Acest tip de funcții sunt folosite în probleme care necesită o abodare *divide et impera*, adică rezolvarea unei probleme prin divizarea în probleme mai mici.
 
-Funcțiile recursive sunt alternativa la procesele repetitive, la ciclurile iterative realizate cu bucle. Recursivitatea nu implică conceptul de ciclu. Este o funcție care se apelează pe sine însăși până când satisface o condiție limitativă.
+Funcțiile recursive sunt alternativa la procesele repetitive, la ciclurile iterative realizate cu bucle. este preferabilă folosirea recursivității în cazurile în care ai fi tentat să recurgi la bucle. Zohar Manna în *Mathematical Theory of Computation* (1974) spune că *recursivitatea este mai puternică decât iterarea*. Recursivitatea nu implică conceptul de ciclu. Este o funcție care se apelează pe sine însăși până când satisface o condiție limitativă.
 
 Capacitatea unei funcții de a se apela pe sine însăși conduce la efecte interesante atunci când vorbim despre parcurgerea unor calupuri de date. În cel mai simplu scenariu vorbim de faptul că funcția va executa același set de instrucțiuni până la epuizarea unei *condiții de bază*. Dacă nu există o *condiție de bază* sau dacă aceasta este gândită defectuos, se ajunge la o stare de eroare în care întreaga stivă de apeluri este consumată rezultând un *stack overflow*.
 
@@ -12,7 +12,7 @@ Capacitatea unei funcții de a se apela pe sine însăși conduce la efecte inte
 
 Pentru a scrie o funcție recursivă trebuie mai întâi să stabilești care este *condiția de bază* sau *cazul terminal*. Acest lucru trebuie făcut pentru că funcțiile recursive se vor autoapela până când valoarea returnată satisface *condiția de bază*. În condiția de bază nu trebuie să fie apelată funcția.
 
-În cazul recursivității, fiecare operațiune, adică fiecare nouă apelare este **subordonată** pasului anterior și adaugă un cadru nou de execuție în stiva de apeluri. Un exemplu simplu ar fi afișarea descrescătoare a unei serii de numere pentru care pasezi o limită superioară.
+În cazul recursivității, fiecare operațiune, adică fiecare nouă apelare este **subordonată** pasului anterior și adaugă un cadru nou de execuție în stiva de apeluri. Numărul de apeluri care vor fi făcute se numește *adâncimea recursivității*. În cazul JavaScript, motoarele nu permit o adâncime mai mare de 10.000 de apeluri. Această limitare va fi depășită când majoritatea motoarelor vor permite optimizări *tail call*. Un exemplu simplu ar fi afișarea descrescătoare a unei serii de numere pentru care pasezi o limită superioară.
 
 ```javascript
 function scad (numar) {
@@ -66,11 +66,11 @@ function fibonacci (x) {
 
 ## Recursivitate tail
 
-Recursivitatea are o mare problemă legată de numărul de frame-uri pe care le putem adăuga în stiva apelurilor. În cazul în care funcția recursivă este apelată de foarte multe ori, este în situația de a depăși limita de memorie alocată stivei apelurilor, fapt care conduce încheierea rulării printr-o eroare legată de *stack overflow*.
+Recursivitatea are o mare problemă legată de numărul de frame-uri pe care le putem adăuga în stiva apelurilor. În cazul în care funcția recursivă este apelată de foarte multe ori, este în situația de a depăși limita de memorie alocată stivei apelurilor (10.000), fapt care conduce încheierea rulării printr-o eroare legată de *stack overflow*.
 
-Frame-urile se vor adăuga până când *cazul de bază* va fi satisfăcut, moment în care valoarea este returnată rând pe rând frame-urilor care o așteaptă în ordine până la primul. Starea tuturor etapelor până la satisfacea *cazului de bază* este menținută prin înșiruirea frame-urilor. Acesta este cazul apelării recursive generale.
+Frame-urile se vor adăuga până când *cazul de bază* va fi satisfăcut, moment în care valoarea este returnată rând pe rând frame-urilor care o așteaptă în ordine până la primul. Starea tuturor etapelor până la satisfacerea *cazului de bază* este menținută prin înșiruirea frame-urilor. Acesta este cazul apelării recursive generale.
 
-În cazul unei funcții tail recursive, apelul către sine însăși este ultimul lucru care se petrece.
+În cazul unei funcții *tail recursive*, apelul către sine însăși este ultimul lucru care se petrece.
 
 În cazul unui apel tail-recursive, vom pasa funcției executate la fiecare etapă, un *acumulator* care să țină minte starea. Următorul exemplu explorează această optimizare.
 
@@ -86,7 +86,7 @@ function tailRecursive (val) {
   }
 
   //#2
-  return executant(val, "O sferă cu o "); // al doilea parametru este „cazul de bază”, adică valoarea inițială a acumulatorului
+  return executant(val, "O sferă cu o "); // al doilea parametru este *cazul de bază*, adică valoarea inițială a acumulatorului
 }
 
 console.log(tailRecursive(5)); //#1
@@ -223,9 +223,12 @@ mapper(func, arr); // [ 2, 3, 4 ]
 
 ## Resurse
 
--   [Programming Loops vs Recursion - Computerphile](https://www.youtube.com/watch?v=HXNhEYqFo0o)
--   [What on Earth is Recursion? - Computerphile](https://www.youtube.com/watch?v=Mv9NEXX1VHc)
--   [The Most Difficult Program to Compute? - Computerphile](https://www.youtube.com/watch?v=i7sm9dzFtEI)
--   [Recursion, Iteration, and JavaScript: A Love Story - Anjana Vakil | JSHeroes 2018](https://www.youtube.com/watch?v=FmiQr4nfoPQ)
--   [Improve Your Recursions Performance With Tail Call Optimization](https://ireadyoulearn.info/2020/09/19/improve-your-recursions-performance-with-tail-call-optimizations/)
--   [Recursion in 100 Seconds | Fireship](https://www.youtube.com/watch?v=rf60MejMz3E&t=18s)
+- [Programming Loops vs Recursion - Computerphile](https://www.youtube.com/watch?v=HXNhEYqFo0o)
+- [What on Earth is Recursion? - Computerphile](https://www.youtube.com/watch?v=Mv9NEXX1VHc)
+- [The Most Difficult Program to Compute? - Computerphile](https://www.youtube.com/watch?v=i7sm9dzFtEI)
+- [Recursion, Iteration, and JavaScript: A Love Story - Anjana Vakil | JSHeroes 2018](https://www.youtube.com/watch?v=FmiQr4nfoPQ)
+- [Improve Your Recursions Performance With Tail Call Optimization](https://ireadyoulearn.info/2020/09/19/improve-your-recursions-performance-with-tail-call-optimizations/)
+- [Recursion in 100 Seconds | Fireship](https://www.youtube.com/watch?v=rf60MejMz3E&t=18s)
+- [Recursion and stack | https://javascript.info/](https://javascript.info/recursion)
+- Manna Z. (1974). Mathematical theory of computation (International student). McGraw Hill.
+- [9.4 Execution Contexts | ECMAScript® 2023 Language Specification | November 10, 2022](https://tc39.es/ecma262/#sec-execution-contexts)

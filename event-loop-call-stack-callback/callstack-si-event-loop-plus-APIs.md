@@ -10,7 +10,7 @@ Browserul are un set foarte important de utilitare gata pentru a fi utilizate ș
 
 ## Mediul de execuție
 
-Executarea codului JavaScript este sincronă pentru majoritatea cazurilor, dar activitatea web este una ce implică conceptul de rulare asincronă. Asincronicitatea implică gândirea codului într-un model care rupe liniaritatea procedurală cu care creierul uman este obișnuit, forțându urmărirea execuției codului în termenii relațiilor și timpilor de execuție care se stabilesc între diferitele entități, fie acestea ale browserului, fie ale codului propriu aflat în execuție. În momentul în care browserul se află în interacțiune cu utilizatorul, toată activitatea este tradusă în **task-uri** (în limba română: *sarcini*). Acestea se nasc în *mediul de execuție*.
+Executarea codului JavaScript este sincronă pentru majoritatea cazurilor, dar activitatea web este una ce implică conceptul de rulare asincronă. Asincronicitatea implică gândirea codului într-un model care rupe liniaritatea procedurală cu care creierul uman este obișnuit, forțând urmărirea execuției codului în termenii relațiilor și timpilor de execuție care se stabilesc și apar între diferitele entități, fie acestea ale browserului, fie ale codului propriu aflat în execuție. În momentul în care browserul se află în interacțiune cu utilizatorul, toată activitatea este tradusă în **task-uri** (în limba română: *sarcini*). Acestea se nasc în *mediul de execuție*.
 
 Actorii principali sunt:
 
@@ -58,7 +58,7 @@ Când arunci privirea la ceea ce se petrece atunci când este rulat codul, imagi
 
 Evaluarea codului se face într-un *context de execuție* în plină desfășurare, care se poate suspenda în momentul în care o altă funcție este apelată în interiorul celei care este deja în execuție. În acest moment special de întrerupere, un alt context de execuție devine *context de execuție în efect* și astfel va purcede la evaluarea propriului cod. Mai târziu, codul suspendat poate redeveni la rândul său *contextul de execuție în efect* pentru că ceea ce l-a întrerupt s-a încheiat, fiind reluată execuția de la momentul întreruperii. Această succesiune a contextelor de execuție în efect este gestionată cu ajutorul unei structuri de date speciale.
 
-Structura de date care ține evidența funcțiilor care sunt în execuție, se numește **stiva apelurilor** - **call stack**. Să analizăm următoarea secvență de cod foarte simplă. Vom factoriza un număr natural pozitiv. Asta înseamnă că luăm numărul și îl înmulțim cu valoarea obținută după ce am scăzut o unitate și așa mai departe până când ajungem la `1`. Acesta este un caz în care vom folosi stiva apelurilor pentru că apelăm la recursivitate.
+Structura de date care ține evidența funcțiilor care sunt în execuție, se numește **stiva apelurilor** - **call stack**. Să analizăm următoarea secvență de cod foarte simplă. Vom factoriza un număr natural pozitiv. Asta înseamnă că luăm numărul și îl înmulțim cu valoarea obținută după ce am scăzut o unitate și așa mai departe până când ajungem la `1`. Acesta este un caz în care vom folosi *stiva apelurilor* apelând la recursivitate. Recursivitatea este un model de utilizare a unei funcții pentru a ajunge la un rezultat prin apelarea pe sine însăși până când o condiție de bază este întrunită. Introducem conceptul de recursivitate tocmai pentru că folosește stiva apelurilor în care va crea un soi de coadă de execuție.
 
 ```javascript
 function factorizez (x) {
@@ -72,8 +72,8 @@ fact(4); // 24 fiind 4*3*2*1
 
 Ceea ce se petrece mai sus este că pentru numărul natural pasat ca parametru funcției `factorizez`, va fi testat să nu fie `1` pentru că `1` factorial este `1`. Acesta este și declanșatorul ieșirii din recursivitate, de fapt. Legătura cu stiva contextelor de execuție se leagă de următorul scenariu:
 
--   Pentru prima dată funcția este apelată pasându-i-se argumentul cu valoarea `4`. Aceasta își începe execuția. Se creează în stivă cadrul de execuție pentru `factorizez`. Execuția codului din corpul funcției începe. Controlul se asigură că `x` nu este `1` și ajunge la momentul în care ar trebui să iasă din execuție prin returnarea rezultatului în urma evaluării expresiei de după `return`. Ce să vezi, această expresie implică apelarea funcției `factorizez` dar de data aceasta cu valoarea nu `x` din mediul de execuție curent, din care am scăzut o unitate.
--   Controlul oprește finalizarea funcției `factorizez` și apelează încă o dată funcția după ce a scăzut valoarea. Este creat un alt cadru de execuție peste cel al funcției *suspendate* în care se execută încă o dată corpul funcției. Se va ajunge la aceeași imposibilitate de finalizare, cu aceleași urmări. Acest lucru va fi repetat până când condiția ca `x` să fie `1` va fi întrunită. Abia atunci `1` este returnat din cel mai de sus context de execuție al stivei către cel de dedesubt care aștepta această valoare. Acest proces se va repeta în cascadă până când apelul original va avea valoarea așteptată pentru a încheia evaluarea.
+- Pentru prima dată funcția este apelată pasându-i-se argumentul cu valoarea `4`. Aceasta își începe execuția. Se creează în stivă cadrul de execuție pentru `factorizez`. Execuția codului din corpul funcției începe. Controlul se asigură că `x` nu este `1` și ajunge la momentul în care ar trebui să iasă din execuție prin returnarea rezultatului în urma evaluării expresiei de după `return`. Ce să vezi, această expresie implică apelarea funcției `factorizez` dar de data aceasta cu valoarea nu `x` din mediul de execuție curent, din care am scăzut o unitate.
+- Controlul oprește finalizarea funcției `factorizez` și apelează încă o dată funcția după ce a scăzut valoarea. Este creat un alt cadru de execuție peste cel al funcției *suspendate* în care se execută încă o dată corpul funcției. Se va ajunge la aceeași imposibilitate de finalizare, cu aceleași urmări. Acest lucru va fi repetat până când condiția ca `x` să fie `1` va fi întrunită. Abia atunci `1` este returnat din cel mai de sus context de execuție al stivei către cel de dedesubt care aștepta această valoare. Acest proces se va repeta în cascadă până când apelul original va avea valoarea așteptată pentru a încheia evaluarea.
 
 Programarea bazată pe evenimente este o paradigmă înscrisă practicii de zi cu zi tradițional legată de manipularea **DOM**-ului (*Document Object Model*). Modelul bazat pe *evenimente* mai este cunoscut drept modelul de gestiune al tuturor solicitărilor de preluare a controlului, care în engleză este numit *concurency model*. Chiar despre asta este și vorba: despre gestionarea intereselor concurente la momentul evaluării codului. În acest sens, este nevoie de un mecanism de gestiune a evenimentelor care să fie capabil să introducă ordine pentru a putea raționaliza codul și pașii necesari. Toate evenimentele sunt asincrone.
 
@@ -245,16 +245,17 @@ Pe scurt, ceea ce se întâmplă este că apelarea lui `console.log()` intern di
 
 Din nefericire, modelul asincronicității construit pe callback-uri conduce la un anumit fenomen de aglomerare în care vei folosi un callback în interiorul unui alt callback și așa mai departe pentru atingerea unui anumit model funcțional. Apelarea unui callback atunci când deja execuți un callback și posibil un altul din cel tocmai apelat, conduce la o situație numită în literatura de specialitate **callback hell**. Unii programatori mai numesc această situație *piramida pierzaniei* - **pyramid of doom**, datorită formei pe care o dă indentarea codului. O astfel de practică trebuie evitată ori de câte ori este posibil printr-o abordare diferită a logicii aplicației, fie prin chaining, fie prin folosirea promisiunilor.
 
-# Resurse
+## Resurse
 
--   Acest material a fost inspirat de prezetarea lui Philip Roberts: [What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ) de la JSConf EU 2014. Instrumentul de simulare „Loupe” este la [acest link](http://latentflip.com/loupe).
--   [Wikipedia Call stack](https://en.wikipedia.org/wiki/Call_stack)
--   [Concurrency model and Event Loop](https://developer.mozilla.org/en/docs/Web/JavaScript/EventLoop)
--   [Understanding the Node.js Event Loop](https://nodesource.com/blog/understanding-the-nodejs-event-loop/)
--   [Callback Hell](http://callbackhell.com/)
--   [Using XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest),
--   [Jake Archibald: In The Loop - JSConf.Asia | Youtube |  JSConf](https://www.youtube.com/watch?v=cCOL7MC4Pl0)
--   [8.1.6.2 Queuing tasks | HTML. Living Standard | 21 May 2021 | html.spec.whatwg.org](https://html.spec.whatwg.org/multipage/webappapis.html#queuing-tasks)
--   [8.1.6 Event loops | HTML. Living Standard | 21 May 2021 | html.spec.whatwg.org](https://html.spec.whatwg.org/multipage/webappapis.html#task-queue)
--   [The Node.js Event Loop | Flavio Copes](https://flaviocopes.com/node-event-loop/)
+- Acest material a fost inspirat de prezetarea lui Philip Roberts: [What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ) de la JSConf EU 2014. Instrumentul de simulare „Loupe” este la [acest link](http://latentflip.com/loupe).
+- [Wikipedia Call stack](https://en.wikipedia.org/wiki/Call_stack)
+- [Concurrency model and Event Loop](https://developer.mozilla.org/en/docs/Web/JavaScript/EventLoop)
+- [Understanding the Node.js Event Loop](https://nodesource.com/blog/understanding-the-nodejs-event-loop/)
+- [Callback Hell](http://callbackhell.com/)
+- [Using XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest),
+- [Jake Archibald: In The Loop - JSConf.Asia | Youtube |  JSConf](https://www.youtube.com/watch?v=cCOL7MC4Pl0)
+- [8.1.6.2 Queuing tasks | HTML. Living Standard | 21 May 2021 | html.spec.whatwg.org](https://html.spec.whatwg.org/multipage/webappapis.html#queuing-tasks)
+- [8.1.6 Event loops | HTML. Living Standard | 21 May 2021 | html.spec.whatwg.org](https://html.spec.whatwg.org/multipage/webappapis.html#task-queue)
+- [The Node.js Event Loop | Flavio Copes](https://flaviocopes.com/node-event-loop/)
 - [JavaScript Visualizer 9000](https://www.jsv9000.app/)
+- [9.4 Execution Contexts | ECMAScript® 2023 Language Specification | November 10, 2022](https://tc39.es/ecma262/#sec-execution-contexts)
