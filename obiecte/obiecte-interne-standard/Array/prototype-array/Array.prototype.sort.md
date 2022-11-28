@@ -32,9 +32,9 @@ function compara (primulCaracter, alDoileaCaracter) {
 
 Callback-ul are rol de sortare. Funcția pasată va compara două elemente `primulCaracter` și `alDoileaCaracter`. Rezultatul comparației conduce la o decizie în ceea ce privește reorganizarea array-ului. Există trei cazuri în care comportamentul de sortare este modelat de ceea ce este returnat de funcția pasată:
 
--   valoarea returnată mai mică de 0: `primulCaracter` va rămâne înaintea celui de `alDoileaCaracter`;
--   valoarea este mai mare de 0: `alDoileaCaracter` va trece înaintea `primulCaracter`;
--   valoarea este egală cu 0: `primulCaracter` și `alDoileaCaracter` își vor păstra pozițiile.
+- valoarea returnată mai mică de 0: `primulCaracter` va rămâne înaintea celui de `alDoileaCaracter`;
+- valoarea este mai mare de 0: `alDoileaCaracter` va trece înaintea `primulCaracter`;
+- valoarea este egală cu 0: `primulCaracter` și `alDoileaCaracter` își vor păstra pozițiile.
 
 Pentru a înțelege procesul, trebuie să ne readucem aminte cum transformă (*coercion*) valorile. Știm că metoda `sort` lucrează cu o valoare pe care o traduce într-o valoare de adevăr. Pentru valorile pe care le returnează funcția callback avem următoarele:
 
@@ -229,10 +229,11 @@ Această extindere ne permite să facem căutare după mult mai multe proprietă
 
 ```javascript
 
-// ordonarea după data calendaristică - reducere la string
+// ordonarea după data calendaristică - reducere la string care este un timestamp
 colectie.sort( (ob1, ob2) => {
-  return new Date(ob1.data).valueOf() - new Date(ob2.data).valueOf();
+  return new Date(ob1.data).valueOf() - new Date(ob2.data).valueOf(); // compari două timestamp-uri.
 });
+// sort() face compararea a două șiruri de caractere.
 
 // Sortare calendaristică după lună luând în considerare UTC
 colectie.sort((ob1, ob2) => {
