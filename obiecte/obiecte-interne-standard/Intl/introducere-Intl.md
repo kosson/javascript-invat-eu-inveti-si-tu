@@ -52,12 +52,30 @@ Acest obiect are drept proprietăți următorii constructori:
 - `Intl.RelativeTimeFormat()`,
 - `Intl.Segmenter()`.
 
+Să ne uităm la următoarea explicație pentru language tag-urile necesare limbii greacă. Să presupunem că vrem să afișăm date calendaristice celor care navighează din Grecia pe o anumită pagină.
+
+```javascript
+let rtf = new Intl.RelativeTimeFormat('el-Grek-GR-polyton-u-nu-native');
+```
+
+După cum vedeți, sunt mai multe language-tag-uri care sunt înșiruite drept prim argument al metodei: `el-Grek-GR-polyton-u-nu-native`. Să vedem ce înseamnă fiecare.
+
+- `el` marchează faptul că limba cu care vom lucra este greaca modernă. Codificarea este asigurată de convențiile ce stabilesc codul de limbă prin [ISO 639-1/639-2](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes);
+- `Grek` marchează care este scrierea pentru care vor fi afișate caracterele. În cazul nostru este *Greek* conform standardului [ISO 15924](https://unicode.org/iso15924/iso15924-codes.html);
+- `GR` este codificarea țării, care este Grecia conform [ISO 3166](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes);
+- `polyton` este codificarea conform [IANA](https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry) care desemnează tipul `polytonic greek`;
+- `u-nu-native` extensii Unicode pentru a afișa digiții cifrelor conform localizării de limbă aleasă (`u` Unicode Locale, `ca` este calendar, `nu` este number) conform [BCP 47 Extension U](https://www.rfc-editor.org/rfc/rfc6067).
+
 ## Metode statice
 
 - `Intl.getCanonicalLocales()`,
 - `Intl.supportedValuesOf()`.
 
-## Referințe
+## Resurse
 
 - [Intl](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl)
 - [The ECMAScript Internationalization API | Norbert Lindenberg | December 18, 2012](https://norbertlindenberg.com/2012/12/ecmascript-internationalization-api/index.html)
+- [Choosing a Language Tag](https://www.w3.org/International/questions/qa-choosing-language-tags.en)
+- [Tags for Identifying Languages](https://www.rfc-editor.org/rfc/rfc5646.html)
+- [Picking the Right Language Identifier](https://cldr.unicode.org/index/cldr-spec/picking-the-right-language-code)
+- [Unicode BCP47 Extensions | Mark Davis](https://www.w3.org/International/multilingualweb/dublin/slides/23b-davis.pdf)

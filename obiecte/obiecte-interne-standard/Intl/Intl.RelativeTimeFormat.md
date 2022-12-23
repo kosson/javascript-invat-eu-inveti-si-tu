@@ -17,3 +17,7 @@ function getDifferenceInDays (fromDate, toDate) {
 getDifferenceInDays(new Date('2022-02-12T16:10:23.000Z'), new Date());
 // '135 days ago'
 ```
+
+## Resurse
+
+- [4 alternatives to Moment.js for internationalizing dates | Esteban Herrera | October 9, 2019](https://blog.logrocket.com/4-alternatives-to-moment-js-for-internationalizing-dates/)

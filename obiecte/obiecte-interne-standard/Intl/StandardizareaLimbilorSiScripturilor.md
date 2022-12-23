@@ -1,8 +1,7 @@
 # Matching of Language Tags
 
-Acesta este RFC 4647 (Best Current Practice 47) care descrie o sintaxă numită *language range* care specifică elementele unei liste de preferințe pentru limbile de circulație internațională.
+Acesta este RFC 4647 (Best Current Practice 47) care descrie o sintaxă numită *language range*, specificând elementele unei liste de preferințe pentru limbile de circulație internațională.
 Tot BCP (Best Current Practice) 47 descrie diferite mecanisme care pot fi utilizate pentru a compara și potrivi opțiunile de limbă cu tag-urile de limbă standardizate (vezi RFC 4646). Un tag de limbă ajută la identificarea limbilor, fie că acestea sunt scrise sau vorbite. Sunt incluse chiar limbile și limbajele artificiale.
-
 
 ## ISO 639 Language Codes
 
