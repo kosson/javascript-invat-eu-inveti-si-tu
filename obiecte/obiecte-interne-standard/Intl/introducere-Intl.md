@@ -31,7 +31,7 @@ Suppress-Script: Latn
 %%
 ```
 
-Secvențele care sunt extensii ale BCP 47 sunt gestionate de [ Unicode CLDR Project](https://github.com/unicode-org/cldr/tree/main/common/bcp47) care este un registru specific.
+Secvențele care sunt extensii ale BCP 47 sunt gestionate de [Unicode CLDR Project](https://github.com/unicode-org/cldr/tree/main/common/bcp47) care este un registru specific.
 
 Extensia "u" (Unicode) poate fi folosită pentru a merge în mai mare adâncime cu necesitatea de a configura localizarea obiectelor `Intl.Collator`, `Intl.NumebrFormat` ori `Intl.DateTimeFormat`. Două exemple pe care le oferă MDN-ul sunt:
 

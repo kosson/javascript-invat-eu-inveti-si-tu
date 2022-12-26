@@ -50,7 +50,7 @@ Precizează algoritmul după care se face căutarea localizărilor disponibile. 
 
 #### timeZone
 
-Precizezi care fus orar/zonă/regiune va fi folosită pentru formatarea datei. IANA oferă o listă a acestora care poate fi accesată de la https://www.iana.org/time-zones. De exemplu: "Europe/Bucharest", "Asia/Shanghai", "Asia/Kolkata", "America/New_York".
+Precizezi care fus orar/zonă/regiune va fi folosită pentru formatarea datei. IANA oferă o listă a acestora care poate fi accesată de la <https://www.iana.org/time-zones>. De exemplu: "Europe/Bucharest", "Asia/Shanghai", "Asia/Kolkata", "America/New_York".
 
 #### hour12
 

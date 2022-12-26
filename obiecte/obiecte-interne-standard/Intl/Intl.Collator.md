@@ -45,7 +45,7 @@ Este obiectul de configurare pentru operațiunea de comparare. Acesta poate avea
 **sensitivity** precizează care este elementul(ele) care realizează distincția ce ar returna un rezultat diferit de zero. Valorile posibile sunt:
 
 - `base` care precizează faptul că doar caracterele care sunt distincte sunt considerate diferite. De exemplu, `a` este diferit total de `b`, dar `a` și cu `á` au aceeași bază, precum și în cazul `a` cu `A`;
-- `accent` precizează că diferite pot fi considerare caracterele care au litera de bază sau accentele diferite. De exemplu, `a` este diferit de `b`, `a` și cu `á` sunt socotite a fi tot diferite, dar `a` cu `A`, nu;
+- `accent` precizează că, diferite pot fi considerare caracterele care au litera de bază sau accentele diferite. De exemplu, `a` este diferit de `b`, `a` și cu `á` sunt socotite a fi tot diferite, dar `a` cu `A`, nu;
 - `case` consideră a fi diferite șirurile a căror litere de bază sau dacă sunt comparate majuscule cu cele de tipar, vor fi considerate a fi diferite. De exemplu, `a` și cu `á` vor fi comsiderare egale, dar  `a` cu `A`, nu;
 - `variant` fiind șiruri care diferă prin literele de bază, accente sau diacritice sau dacă sunt majuscule cu cele de tipar, caz în care `a` este diferit de `b`, `a` și cu `á` sunt diferite, precum și `a` cu `A`.
 
@@ -58,7 +58,6 @@ Valoarea din oficiu pentru `sort` este `variant`.
 **caseFirst** care precizează dacă mai întâi vei face sortare după majuscule sau nu.
 
 **collation** le-am precizat mai sus la posibilele collations.
-
 
 ```javascript
 console.log(new Intl.Collator().compare("a", "b")); // -1 însemnând că cele două caractere sunt diferite - valoare celui de-al doilea fiind mai mare decât primul din comparație
@@ -117,7 +116,7 @@ console.log(matches.join(", ")); // "Congrès, congres"
 
 ### Intl.Collator.prototype.resolvedOptions()
 
-Metoda returnează un nou obiect cu proprietăți ce reflectă localizările, precum și opțiunile aferente care au fost incluse și au produs efectele la momentul în care a fost instanțiat obiectul `Intl.Collator`. Ete foarte util atunci când ai nevoie să ai o confirmare a unei setări sau pur și simplu să facu debugging.
+Metoda returnează un nou obiect cu proprietăți ce reflectă localizările, precum și opțiunile aferente care au fost incluse și au produs efectele la momentul în care a fost instanțiat obiectul `Intl.Collator`. Este foarte util atunci când ai nevoie să ai o confirmare a unei setări sau pur și simplu să faci debugging.
 
 ```javascript
 const numberRo = new Intl.NumberFormat('ro-RO');

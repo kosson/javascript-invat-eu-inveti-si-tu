@@ -16,9 +16,9 @@ Constructorul lui `Function` este în sine un obiect funcție built-in. Acest ob
 
 Funcțiile create folosind `Function.prototype.bind()` au următoarele sloturi interne:
 
--   `[[BoundTargetFunction]]` care este obiectul funcție împachetat,
--   `[[BoundThis]]`, fiind valoarea care este pasată întotdeauna ca `this` atunci când este apelată funcția împachetată.
--   `[[BoundArguments]]` este o listă de valori a cărei valori sunt folosite ca prime argumente pentru funcția împachetată apelată.
+- `[[BoundTargetFunction]]` care este obiectul funcție împachetat,
+- `[[BoundThis]]`, fiind valoarea care este pasată întotdeauna ca `this` atunci când este apelată funcția împachetată.
+- `[[BoundArguments]]` este o listă de valori a cărei valori sunt folosite ca prime argumente pentru funcția împachetată apelată.
 
 Nu au proprietatea `prototype` obiectele funcții care sunt create prin `Function.prototype.bind()` sau care au fost create prin evaluarea definirii unei simple metode (care nu este `Generator`) sau funcțiile arrow.
 În exemplul alăturat, ultimul argument specifică codul executabil.
@@ -45,18 +45,16 @@ functieNoua('a','b','c','d'); // "a"
 
 ![](FunctiiMap.png)
 
-## Metode:
+## Metode
 
--   `Function.prototype.apply()`
--   `Function.prototype.bind()`
--   `Function.prototype.call()`
--   `Function.prototype.toString()`
+- `Function.prototype.apply()`
+- `Function.prototype.bind()`
+- `Function.prototype.call()`
+- `Function.prototype.toString()`
 
 ### Function.prototype.apply()
 
-Apelează o funcție căreia îi setează legătura `this` la obiectul precizat între paranteze . Argumentele destinate funcției pot fi un array.
-
-Funcția este pur și simplu invocată în contextul indicat de primul argument al lui `apply`, pasându-se argumentele care sunt elementele array-ului din al doilea argument al lui `apply`:  `nume_funcție.apply(this, ['para1', 'para2'])`.
+Apelează o funcție căreia îi setează legătura `this` la obiectul precizat drept valoare a primului parametru dintre paranteze. Argumentele destinate funcției pot fi un array, care este pasat drept al doilea parametru. Funcția este pur și simplu invocată în contextul indicat de primul argument al lui `apply`, pasându-se argumentele care sunt elementele array-ului din al doilea argument al lui `apply`:  `nume_funcție.apply(this, ['para1', 'para2'])`.
 
 ```javascript
 "use strict";
@@ -74,10 +72,34 @@ adunare.apply(obi, numere); // 21
 
 Metoda primește două argumente:
 
--   o referință către un obiect, care devine și `this` pentru funcția apelată cu `apply()`,
--   o listă de argumente organizată ca array sau ceva ce seamănă cu un array (`array-like`).
+- o referință către un obiect, care devine și `this` pentru funcția apelată cu `apply()`,
+- o listă de argumente organizată ca array sau ceva ce seamănă cu un array (`array-like`).
 
-Dacă nu este invocat *strict mode* (`"use strict";`), `null` și `undefined` în cazul primului argument, acesta va fi înlocuit cu obiectul global, iar dacă pasezi primitive, acestea vor fi *învelite* în obiectul corespondent (în limba engleză această operațiune este numită `boxing`).
+Dacă nu este invocat *strict mode* (`"use strict";`), de vei pasa `null` sau `undefined` în cazul primului argument, acesta va fi înlocuit cu obiectul global, iar dacă pasezi primitive, acestea vor fi *învelite* în obiectul corespondent (în limba engleză această operațiune este numită `boxing`). Adu-ți aminte mereu că folosind `apply` poți să *împrumuți* un obiect care să ofere datele și metodele funcției pe care tu dorești să o execuți. Acest comportament este foarte puternic din perspectiva efectelor pe care le poți realiza.
+
+```javascript
+let obi1 = {
+    x: 25,
+    y: facCeva,
+    z: function puf (primit) {
+        console.log(`Parametrul este: ${primit}`);
+        return this.x;
+    }
+}
+
+let obi2 = {
+    x: 202
+}
+
+function facCeva () {
+    console.log(`Valoarea lui x este ${obi.x}`);
+    return x + "n";
+};
+
+console.log(obi1.z.apply(obi2, ["bau"])); // Parametrul este: bau \n 202
+console.log(obi1.z.apply(obi1, ["bau"])); // Parametrul este: bau \n 25 fiind similar cu cel de mai jos
+console.log(obi1.z(["bau"]));
+```
 
 Pentru parametrul listei de argumente se poate folosi și obiectul care seamănă ca un array: `arguments`. Acesta este un obiect care este disponibil mediului intern al funcției. Astfel, poți pasa toate argumentele în obiectul apelat, care trebuie să gestioneze aceste argumente.
 
@@ -85,9 +107,7 @@ Pentru parametrul listei de argumente se poate folosi și obiectul care seamăn�
 
 #### Metoda `apply()` în uz
 
-Obiectul pasat ca și context de execuție este menționat între paranteze, fiind urmat de un array cuprinzând argumentele funcției.
-
-Începând cu ECMAScript 5, array-ul argumentelor pasate poate fi un obiect care are caracteristicile unui array. Ca exemplu de tipologie este `arguments`, care este un obiect asemănător unui array disponibil în timpul execuției unei funcții.
+Obiectul pasat cu rol de context de execuție este menționat între paranteze ca prim parametru, fiind urmat de un array cuprinzând argumentele funcției. Începând cu ECMAScript 5, array-ul argumentelor pasate poate fi un obiect care are caracteristicile unui array. Ca exemplu de tipologie este `arguments`, care este un obiect asemănător unui array disponibil în timpul execuției unei funcții.
 
 Ține minte că și funcțiile interne (metode ale obiectelor interne), se pot bucura de avantajele folosirii lui `apply()`. În cazul obiectului intern `Math`:
 
@@ -190,7 +210,7 @@ function afisez () {
 afisez(); // 10 în cazul în care funcția rulează fără regulă
 ```
 
-Metoda permite realizarea de adevărate interfețe, care expun proprietăți comune unor clase de obiecte diferite. De exemplu, am putea avea o interfață pentru `Vehicule`, de exemplu. Indiferent că am putea avea clase de obiecte precum `Avioane` sau `Nave`, potențial, acestea pot avea descriptori comuni precum `nume`, `naționalitate`.
+Metoda permite realizarea de adevărate interfețe, care expun proprietăți comune unor clase de obiecte diferite. De exemplu, am putea avea o interfață pentru `Vehicule`, de exemplu. Am putea avea clase de obiecte precum `Avioane` sau `Nave`, iar acestea pot avea descriptori comuni precum `nume`, `naționalitate`.
 
 ```javascript
 function Vehicule (nume, nationalitate) {

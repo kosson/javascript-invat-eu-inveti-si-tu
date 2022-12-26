@@ -24,7 +24,7 @@ Pentru a înțelege legătura `this`, vom observa ce ce petrece când aceasta se
 ```javascript
 // "use strict"; // în acest caz, `this` is undefined
 var ceva = 100; // ai putea declara și cu `let`
-/* Atenție, `let` împiedică `ceva` să devină variabilă globală */
+/* Atenție, `let` împiedică `ceva` să devină variabilă globală și rezultarul va fi returnarea valorii undefined*/
 const obi = {
   ceva: 'text',
   faCeva: function gazda () {
@@ -448,6 +448,7 @@ this.array.forEach((el) => {
   };
 });
 ```
+
 Pentru a realiza același lucru, înainte de ES6 cu al său *fat arrow* erau mai multe rețete care merită explorate.
 
 #### 1. constituirea unei punți lexicale
@@ -487,47 +488,47 @@ this.array.forEach(function (el) => {
 
 ## Dependințe cognitive
 
--   scope
--   funcții
--   `arguments`
--   call-site
--   constructori
--   `Function.prototype.apply()`
--   `Function.prototype.bind()`
--   `Function.prototype.call()`
+- scope
+- funcții
+- `arguments`
+- call-site
+- constructori
+- `Function.prototype.apply()`
+- `Function.prototype.bind()`
+- `Function.prototype.call()`
 
 ## Alonje
 
--   inversion of control
--   unit testing
--   înțelegerea programării funcționale
+- inversion of control
+- unit testing
+- înțelegerea programării funcționale
 
 ## Mantre
 
--   Prin `this`, de fapt accesezi starea obiectului cu care lucrezi.
--   Legătura `this` se realizează la momentul execuției codului, nu la momentul scrierii lui.
--   `this` este o referință către contextul de execuție curent în timp ce funcția se execută.
--   `this` nu se referă în niciun caz la **lexical scope**.
--   `this` este un binding pentru fiecare invocare a unei funcții care se bazează pe de-antregul pe call-site.
--   Funcțiile și obiectele sunt REFERENȚIATE, nu sunt deținute atunci când atribui IDENTIFICATORUL într-o expresie sau ca valoarea a unei metode.
--   Call-site (locul din cod unde este apelată o funcție) determină formarea lui `this`.
--   Modul de invocare influiențează felul în care obiectul este constituit (către care face referință `this`).
--   Toate funcțiile au la dispoziția lor un set de utilități preexistent, care poate fi apelat prin `[[Prototype]]`. Cele mai evidente sunt `call()` și `apply()`.
--   Atunci când există un obiect-context (folosit de o funcție prin apelare cu `apply()` sau `call()`), regula de bază a binding-ului spune că obiectul-context va fi cel la care se face bindingul `this`.
--   În contextul de execuție tot ce este cu `this.ceva` devine membru al obiectului generat.
--   Bindingul primar se face la obiectul global.
--   Bindingul implicit se face la contextul de execuție al unei funcții sau al unei metode.
--   o funcție poate fi invocată în patru moduri: (1) ca funcție (this e window); (2) ca metodă (this e obiectul); (3) ca și constructor (this e obiectul abia construit); (4) cu `apply()` și `call()` (this e primul obiect introdus).
--   `this` este cuvânt cheie rezervat.
--   `this` este o referință la obiectul care se creează în funcție de contextul de execuție.
--   `this` este o referință către un obiect-context: pentru funcțiile din global scope este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
--   în interiorul unui obiect, apelezi metodele folosind `this`, pentru că este o referință către proprietățile și metodele interne.
--   dacă o funcție a fost invocată în interiorul altei funcții sau a unui obiect, atunci `this` este o referință către obiectul în contextul în care a fost invocată. Pentru a înțelege, adu-ți aminte faptul că o funcție este un obiect, de fapt, dar nu uita că primește `this` automat, nu-l formează. Doar obiectele formează `this`.
--   Referința `this` va fi folosită pe durata execuției funcției.
--   în cazul funcțiilor, `this` nu este o referință către funcția în sine. Reține faptul că unei funcții îi sunt pasate tacit `this` și `arguments`.
--   `this` NU ESTE O REFERINȚĂ CĂTRE SCOPE-ul LEXICAL AL FUNCȚIEI.
--   `bind()` creează o nouă funcție, care atunci când este apelată va avea `this` setat la valoarea introdusă ca paramentru împreună cu o serie de argumente.
--   `bind()` nu modifică funcția originală cu nimic, pur și simplu construiește una nouă.
+- Prin `this`, de fapt accesezi starea obiectului cu care lucrezi.
+- Legătura `this` se realizează la momentul execuției codului, nu la momentul scrierii lui.
+- `this` este o referință către contextul de execuție curent în timp ce funcția se execută.
+- `this` nu se referă în niciun caz la **lexical scope**.
+- `this` este un binding pentru fiecare invocare a unei funcții care se bazează pe de-antregul pe call-site.
+- Funcțiile și obiectele sunt REFERENȚIATE, nu sunt deținute atunci când atribui IDENTIFICATORUL într-o expresie sau ca valoarea a unei metode.
+- Call-site (locul din cod unde este apelată o funcție) determină formarea lui `this`.
+- Modul de invocare influiențează felul în care obiectul este constituit (către care face referință `this`).
+- Toate funcțiile au la dispoziția lor un set de utilități preexistent, care poate fi apelat prin `[[Prototype]]`. Cele mai evidente sunt `call()` și `apply()`.
+- Atunci când există un obiect-context (folosit de o funcție prin apelare cu `apply()` sau `call()`), regula de bază a binding-ului spune că obiectul-context va fi cel la care se face bindingul `this`.
+- În contextul de execuție tot ce este cu `this.ceva` devine membru al obiectului generat.
+- Bindingul primar se face la obiectul global.
+- Bindingul implicit se face la contextul de execuție al unei funcții sau al unei metode.
+- o funcție poate fi invocată în patru moduri: (1) ca funcție (this e window); (2) ca metodă (this e obiectul); (3) ca și constructor (this e obiectul abia construit); (4) cu `apply()` și `call()` (this e primul obiect introdus).
+- `this` este cuvânt cheie rezervat.
+- `this` este o referință la obiectul care se creează în funcție de contextul de execuție.
+- `this` este o referință către un obiect-context: pentru funcțiile din global scope este `window`, pentru metode este obiectul în care se execută iar pentru noile obiecte create este chiar noul obiect generat.
+- în interiorul unui obiect, apelezi metodele folosind `this`, pentru că este o referință către proprietățile și metodele interne.
+- dacă o funcție a fost invocată în interiorul altei funcții sau a unui obiect, atunci `this` este o referință către obiectul în contextul în care a fost invocată. Pentru a înțelege, adu-ți aminte faptul că o funcție este un obiect, de fapt, dar nu uita că primește `this` automat, nu-l formează. Doar obiectele formează `this`.
+- Referința `this` va fi folosită pe durata execuției funcției.
+- în cazul funcțiilor, `this` nu este o referință către funcția în sine. Reține faptul că unei funcții îi sunt pasate tacit `this` și `arguments`.
+- `this` NU ESTE O REFERINȚĂ CĂTRE SCOPE-ul LEXICAL AL FUNCȚIEI.
+- `bind()` creează o nouă funcție, care atunci când este apelată va avea `this` setat la valoarea introdusă ca paramentru împreună cu o serie de argumente.
+- `bind()` nu modifică funcția originală cu nimic, pur și simplu construiește una nouă.
 
 ## Resurse:
 

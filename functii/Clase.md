@@ -1,4 +1,4 @@
-## Clase în JavaScript
+# Clase în JavaScript
 
 JavaScript este un limbaj de programare bazat pe obiecte pe care nu le instanțiază în baza unei clase. Prin modul lor de lucru, funcțiile au oferit calea către implementarea claselor. Ce a rezolvat implementarea claselor odată cu versiunea ES6? Primul și cel mai important lucru este posibilitatea ca o *funcție obiect* să moștenească de la altă *funcție obiect*. Acest comportament a permis ca o funcție constructor să poată moșteni din altă funcție constructor.
 
@@ -30,7 +30,7 @@ O altă problemă pe care o rezolvă clasele este posibilitatea de a extinde con
 
 Totuși clasele au câteva detalii, care le departajează de funcții. Nu pot fi apelate simplu fără operatorul `new`. Metodele, adică funcțiile declarate intern nu creează propriile obiecte `prototype`. Prototipul unei clase nu poate fi reatribuit unei alte funcții.
 
-### Drumul către clase - studiu
+## Drumul către clase - studiu
 
 Pentru a lămuri câteva aspecte care ajută la înțelegerea conceptului de clasă, vom porni de la tipurile de date - *data types* în limba engleză.
 
@@ -145,13 +145,13 @@ Spre deosebire de constructorii declarați cu `function`, clasele nu pot fi inst
 
 Chiar dacă nu ai declarat o funcție `constructor`, aceasta va fi generată din oficiu. Poți verifica acest lucru interogând obiectul prototip al clasei. Posibilitatea de a adăuga proprietăți direct în obiectul prototip încă este posibilă, dar nu este recomandabilă.
 
-### Declarații și expresii de clase
+## Declarații și expresii de clase
 
 Precum în cazul funcțiilor, clasele pot fi declarate, dar pot fi și expresii. Există un detaliu important care separă declarația claselor de cea a funcțiilor cu rol de constructor: clasele nu beneficiază de hoisting.
 
-#### Declarații și expresii de clasă
+### Declarații și expresii de clasă
 
-##### Declarații de clasă
+#### Declarații de clasă
 
 Clasele pot fi declarate direct apelând la sintaxa `class NumeClasă {...}`. Ceea ce se petrece la declararea unei clase este că se constituie variabila cu numele clasei. Variabila este inițializată cu o funcție. În obiectul `prototype` al funcției este referită funcția constructor, purtând denumirea clasei, precum și toate metodele.
 
@@ -176,7 +176,7 @@ Este util să menționăm faptul că în clase sunt acceptate *numele computate*
 
 După cum se observă, datele necesare inițializării obiectului sunt pasate clasei prin argumentele constructorului și sunt inițializare apoi în corpul acestuia, prin setarea de variabile interne. Acestea vor deveni tot atâtea proprietăți ale obiectului la momentul instanțierii.
 
-##### Expresie de clasă
+#### Expresie de clasă
 
 Sunt permise expresiile de clase. Similar funcțiilor, clasele pot să aibă nume sau nu. Dacă poartă nume, acesta este disponibil în blocul de cod al clasei. Testul cu `typeof` va fi întotdeauna `function`.
 
@@ -196,7 +196,7 @@ obi.ecou(); // Salut! function OClasă()
 
 În cazul expresiilor, poți avea un nume atașat clasei, dar apelarea acelui nume va fi posibilă doar din interiorul clasei.
 
-#### Câmpuri publice ale clasei
+### Câmpuri publice ale clasei
 
 Modelul existent care permite popularea cu date a viitorului obiect este prin intemediul constructorului, care, fie primește datele prin argumente, fie aceste câmpuri cu date sunt definite în corpul său.
 
@@ -220,8 +220,8 @@ De curând, prin ES2022, poți declara variabilele direct în capul clasei, prec
 
 ```javascript
 class ButonAcces extends HTMLElement {
-	color = "magenta";
-  _clicked = false;
+    color = "magenta";
+    _clicked = false;
 }
 ```
 
@@ -248,7 +248,7 @@ class Ceva {
 }
 ```
 
-#### Protejarea datelor clasei și noile câmpuri private ale clasei
+### Protejarea datelor clasei și noile câmpuri private ale clasei
 
 Prin convenție, programatorii au prefixat proprietățile pe care doreau să le protejeze cu un caracter *underscore* pentru a semnala celorlalți că acea proprietate nu trebuie modificată. Aceasta este doar o indicație, pentru că așa cum se vede din exemplu, proprietățile sunt accesibile instanțelor prin mecanismul de moștenire.
 
@@ -326,22 +326,22 @@ class ButonAcces extends HTMLElement {
     set #contor(valoare) {this.#contor = valoare}
 
     get #mesaj() {return #mesaj.toUpperCase()}
-  	set #mesaj(text) {this.#mesaj = text.trim()}
+    set #mesaj(text) {this.#mesaj = text.trim()}
 
     constructor () {
         super();
         this.onmouseover = this.#mouseover.bind(this);
     }
 
-  	#mouseover() {
-    	this.#contor = this.#contor++;
-    	this.#mesaj = `Ai accesat de ${this.#contor} ori.`
-  	}
+    #mouseover() {
+      this.#contor = this.#contor++;
+      this.#mesaj = `Ai accesat de ${this.#contor} ori.`
+    }
 }
 const butonul = new ButonAcces();
 ```
 
-#### Clasele sunt valori de prim-rang
+### Clasele sunt valori de prim-rang
 
 Clasele pot fi pasate drept valori funcțiilor. Funcțiile pot returna clase ca adevărate factory-uri (*Factory* este un șablon care *fabrică* obiecte).
 
@@ -372,11 +372,11 @@ const Avion = new class {
 Avion.id();
 ```
 
-### Metodele unui clase
+## Metodele unui clase
 
 În interiorul clasei pot fi declarate funcții care joacă rolul metodelor în momentul în care se creează o instanță, adică un nou obiect. Metodele sunt create folosind numele identificatorului fără a mai fi necesar să menționezi cuvântul cheie `function`.
 
-#### Folosirea unei metode în alt context
+### Folosirea unei metode în alt context
 
 În momentul când ai nevoie de a folosi o metodă care oferă o anumită modalitate de a prelucra datele, dar într-un alt context, „desprinderea” de obiect conduce la pierderea legăturii la acesta prin `this`. Să examinăm următorul exemplu:
 
@@ -404,7 +404,7 @@ Pentru a face o „reconectare”, trebuie folosit `bind()`. Adu-ți mereu amint
 setTimeout(Alina.cineSunt.bind(Alina), 1000);
 ```
 
-#### Metodele statice
+### Metodele statice
 
 Metodele statice există doar în corpul clasei și nu pot fi apelabile din obiectele create. O metodă statică este echivalentul adăugării unei metode unei funcții.
 
@@ -471,17 +471,17 @@ Dacă dorești ca aceste proprietăți să fie protejate și astfel accesibile d
 
 ```javascript
 class Ceva {
-    static #facUnCalcul (val) {
-    	return 42 - val;
-	};
-	static altCalcul (val) {
-    	return #facUnCalcul(val);
-	}
+      static #facUnCalcul (val) {
+        return 42 - val;
+    };
+    static altCalcul (val) {
+        return #facUnCalcul(val);
+    }
 }
 console.log(Ceva.altCalcul(10)); // 32
 ```
 
-#### Accesori și încapsulare
+### Accesori și încapsulare
 
 În JavaScript singura posibilitate de a atinge **încapsularea** prin care înțelegem protejarea datelor prin variabile private este să realizăm closure-uri. Clasele permit realizarea unei încapsulări dacă datele protejate le introducem în constructor și apoi le utilizăm prin accesori.
 
@@ -496,7 +496,7 @@ class Ceva {
 }
 ```
 
-##### Getteri și setteri
+#### Getteri și setteri
 
 Cu ajutorul accesorilor se poate comunica direct cu proprietățile obiectului instanțiat în baza clasei.
 
@@ -610,7 +610,7 @@ let date1 = obiect.date(); // apelează getter-ul
 console.log(object.hasOwnProperty("date")); // true
 ```
 
-### Mediul lexical
+## Mediul lexical
 
 Clasele creează propriul mediu lexical la fel cum o fac și funcțiile.
 
@@ -643,7 +643,7 @@ console.log("`x` este ", a.x, " iar `y` este: ", a.y);
 
 În exemplul de mai sus este observabil faptul că o clasă instanțiată creează un obiect care încă va fi conectat la mediul lexical al funcției cu rol de clasă. Ceea ce trebuie reținut este că valorile atribuite direct unei variabile, vor păstra valoarea așa cum era la momentul instanțierii obiectului. Orice modificare ulterioară nefiind oglindită prin modificarea valorii interne. Totuși, dacă se face legătura la un obiect, valorile proprietăților acestuia pot fi modificate. Aceste modificări se vor reflecta și în valorile referințelor din obiect.
 
-### Extinderea claselor
+## Extinderea claselor
 
 Clasele pot fi extinse. Este indicată extinderea unei clase folosindu-se cuvântul cheie `extends`. În tratarea acestui subiect, legitim este să răspundem la întrebarea de ce? De ce avem nevoie să derivăm obiectele? Răspunsul vine din necesitatea de a putea avea acces la proprietățile și metodele unui obiect existent deja, pe care să nu le mai scriem din nou într-o nouă clasă, dar care să permită îmbogățirea sau modificarea acestora.
 
@@ -667,7 +667,7 @@ class Altceva extends Ceva {
 
 Derivarea obiectelor înainte de clasele introduse de noul standard ES6 era un proces laborios de creare a unui obiect și apoi crearea unui altuia căruia îi era setat prototipul îmbogățit al primului. Clasele care moștenesc de la altele, se numesc *clase derivate*. Acest lucru înseamnă că toate proprietățile și metodele clasei derivate vor fi moștenite din clasa părinte.
 
-#### Modelul istoric
+### Modelul istoric
 
 Mai jos este modelul istoric comparat cu ceea ce propune `extends`. Să pornim de la modelul istoric.
 
@@ -696,7 +696,7 @@ console.log(rezultat.oriDoi()); // 4
 
 Este observabil cu cât efort s-a realizat acest lucru. Mai întâi am executat funcția `Părinte` în contextul lui `Copil`, pasându-i `this` pentru a seta corect contextul de execuție, adică în interiorul lui `Copil`. Au fost pasate atributele așteptate de `Părinte`. A trebuit să *rescriem* obiectul prototip al lui `Copil`, setându-l artificial la cel pe care dorim să-l moștenim folosind `Object.create()` în acest sens. A trebuit să facem un pas suplimentar setând proprietatea `constructor` să trimită înapoi la `Copil` pentru a consolida originea sa.
 
-#### extends și super
+### extends și super
 
 În cazul claselor, mare parte din operațiunile complexe ale derivării sunt rezolvate prin introducerea sintagmei `extends` în declarația clasei pe care o dorești a fi derivata alteia. Ceea ce realizează este și abstractizarea funcționalităților unei clase, care va fi privită de cele derivate din ea ca un model de urmat privind comportamentele de bază. Similar copiilor care privesc și copiază comportamentele părinților, clasele, care extind altele, vor avea acces la metodele și proprietățile părintelui prin mecanismul de moștenire, care se va stabili automat. Putem afirma despre o clasă de la care se derivează că se comportă ca o interfață. O interfață fiind setul de date și funcționalități disponibil tuturor copiilor, dar care poate fi modificat de aceștia.
 
@@ -807,7 +807,7 @@ class AltCopil extends Parinte {
 let copil2 = new AltCopil("Bacău","în iarnă");
 ```
 
-### Accesarea din părinte a proprietăților copiilor
+## Accesarea din părinte a proprietăților copiilor
 
 Să presupunem că avem drept scenariu un obiect copil care pe lângă proprietățile părintelor la care are acces, va declara propriile proprietăți. Uneori vom avea clase părinte care să aibă declarate metode sau operațiuni de evaluare în care să intre proprietăți ale copiilor în cazul în care acestea există. Este și cazul exemplului de mai jos, unde părintele are acces la valorile proprietăților declarate în copil și poate face evaluarea expresiei fără probleme. În `super` alimentezi cu valori păritele conform semnăturii constructorului său. Ce este suplimentar, va fi declarat în mod obișnuit cu `this.numeProprietateNouă`.
 
@@ -849,7 +849,7 @@ console.log(eAltceva.accesez()); // 10, 20, 1000, devine ceva al copilului {"sal
 
 Un astfel de scenariu este util atunci când lucrezi cu obiecte care sunt setate conform unor obiecte simple de configurare pe care le pasezi la momentul instanțierii copiilor.
 
-### Moștenirea din obiecte simple
+## Moștenirea din obiecte simple
 
 Când este necesar, se poate seta obiectul prototipal al clasei la un obiect preexistent pentru a se putea moșteni proprietăți ale acestuia.
 
@@ -874,7 +874,7 @@ let unIepuraș = new Iepuraș("Cici");
 console.log(unIepuraș.măPrezint());
 ```
 
-### Moștenirea din obiectele interne prin clase derivate
+## Moștenirea din obiectele interne prin clase derivate
 
 Clasele permit moștenirea din obiectele predefinite intern din JavaScript, ceea ce se poate dovedi foarte util atunci când vei dori niște funcționalități mai speciale pornind de la un obiect intern al limbajului. Acest lucru se realizează prin extinderea lor.
 
@@ -891,7 +891,7 @@ Toate metodele din obiectul prototip al lui Array sunt disponibile noului obiect
 
 `Symbol.species` definește o proprietate accesor, care returnează o funcție. Funcția este un constructor gata de a fi utilizat în locul constructorului.
 
-### Proprietăți simboluri
+## Proprietăți simboluri
 
 În utilizarea claselor se poate dovedi utilă folosirea simbolurilor drept identificatori. Adu-ți aminte faptul că simbolurile nu pot fi modificate și sunt unice.
 
@@ -911,18 +911,18 @@ class OClasa {
 
 ## Mantre
 
--   Spre deosebire de funcții, declarația de clasă nu beneficiază de mecanismul de hoisting indiferent că este o declarație sau o expresie de clasă. Deci, până când execuția nu ajunge la locul declarației, clasa se află în Temporal Dead Zone (TDZ).
--   Tot codul din clasă rulează automat în `strict mode`.
--   Toate metodele create sunt automat non-enumerabile.
--   Apelarea constructorului fără `new` conduce la o stare de eroare.
--   Numele clasei nu trebuie folosit în interiorul acesteia pentru o reatribuire. Conduce la eroare.
--   În cazul folosirii expresiilor de clasă, nu este necesară introducerea unui identificator după cuvântul cheie `class`.
--   `super()` setează legătura la `this` în cazul claselor derivate. Dacă folosești constructorul, adu-ți mereu aminte să invoci mai întâi de toate `super()`.
--   clasele permit moștenirea din toate obiectele built-in: `class ArraySpecial extends Array {}`.
+- Spre deosebire de funcții, declarația de clasă nu beneficiază de mecanismul de hoisting indiferent că este o declarație sau o expresie de clasă. Deci, până când execuția nu ajunge la locul declarației, clasa se află în Temporal Dead Zone (TDZ).
+- Tot codul din clasă rulează automat în `strict mode`.
+- Toate metodele create sunt automat non-enumerabile.
+- Apelarea constructorului fără `new` conduce la o stare de eroare.
+- Numele clasei nu trebuie folosit în interiorul acesteia pentru o reatribuire. Conduce la eroare.
+- În cazul folosirii expresiilor de clasă, nu este necesară introducerea unui identificator după cuvântul cheie `class`.
+- `super()` setează legătura la `this` în cazul claselor derivate. Dacă folosești constructorul, adu-ți mereu aminte să invoci mai întâi de toate `super()`.
+- clasele permit moștenirea din toate obiectele built-in: `class ArraySpecial extends Array {}`.
 
 ## Resurse
 
-- [14.6 Class Definitions | ECMAScript® 2021 Language Specification | Draft ECMA-262 / September 7, 2020](https://tc39.es/ecma262/#sec-class-definitions)
+- [14.6 Class Definitions | ECMAScript® 2021 Language Specification | Draft ECMA-262 | September 7, 2020](https://tc39.es/ecma262/#sec-class-definitions)
 - [Classes | JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)
 - [JS classes are not “just syntactic sugar” | Andrea Giammarchi | medium.com](https://webreflection.medium.com/js-classes-are-not-just-syntactic-sugar-28690fedf078)
 - [The lazy-loading property pattern in JavaScript | Nicholas C. Zakas | humanwhocodes.com](https://humanwhocodes.com/blog/2021/04/lazy-loading-property-pattern-javascript/)
@@ -932,3 +932,4 @@ class OClasa {
 - [Barbara Liskov | Wikipedia](https://en.wikipedia.org/wiki/Barbara_Liskov)
 - [Abstract data type | Wikipedia](https://en.wikipedia.org/wiki/Abstract_data_type)
 - [SOLID | Wikipedia](https://en.wikipedia.org/wiki/SOLID)
+- [Classes vs. Data Structures | Robert C. Martin (Uncle Bob) | The Clean Code Blog | 16 June 2019](https://blog.cleancoder.com/uncle-bob/2019/06/16/ObjectsAndDataStructures.html)

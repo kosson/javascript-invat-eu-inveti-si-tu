@@ -1,6 +1,6 @@
 # Funcțiile în rol de callback-uri și noțiuni de asicronicitate
 
-Cunoaștem faptul că JavaScript are un singur fir de execuție care în cazul execuției codului în manieră sincronă, va fi blocat dacă va fi rulată o funcție care necesită un timp mare de execuție. Întreaga execuție a programului se va opri. Pentru a evita o astfel de situație, operațiunile care iau mult timp „pregătesc” o funcție care să fie executată atunci când rezultatul este disponibil într-un viitor. Aceste funcții cu rol de callback sunt folosite de funcții care sunt asincrone. Asta înseamnă că sunt funcții care se folosesc de resursele sistemului de operare pentru a rezolva sarcina și care au nevoie de un mecanism, de un instrument de prelucrare a rezultatelor sale. Acest instrument facil vine sub forma unei funcții numită *callback*.
+Cunoaștem faptul că JavaScript are un singur fir de execuție care în cazul execuției codului în manieră sincronă, va fi blocat dacă va fi rulată o funcție care necesită un timp mare de execuție. Întreaga execuție a programului se va opri. Pentru a evita o astfel de situație, operațiunile care iau mult timp *pregătesc* o funcție care să fie executată atunci când rezultatul este disponibil într-un viitor. Aceste funcții cu rol de callback sunt folosite de funcții care sunt asincrone. Asta înseamnă că sunt funcții care se folosesc de resursele sistemului de operare pentru a rezolva sarcina și care au nevoie de un mecanism, de un instrument de prelucrare a rezultatelor sale. Acest instrument facil vine sub forma unei funcții numită *callback*.
 
 Foarte multe dintre metodele pe care obiectele interne le oferă pentru a lucra cu datele, implică folosirea funcțiilor care vor juca acest rol special, cel de *callback*. Pasarea ca ultim argument a unei alte funcții numită *callback*, va permite apelarea sa **ulterioră** după ce codul funcției și-a încheiat propria evaluare. În exemplul de mai jos, am desemnat prima funcție să fie o valoare, care va fi pasată celei de-a doua pentru a modifica niște date.
 
@@ -129,7 +129,7 @@ if (error) {
 }
 ```
 
-Reține faptul că după invocarea funcției cu rol de callback, execuția funcției din care s-a făcut invocarea acesteia va continua până când codul rămas va fi evaluat complet. Din acest motiv este necesar să folosești `return` pentru a încheia și execuția funcției apelante. Această returnare se poate face pentru că rezultatul dorit este produsul unei operațiuni asincrone, de fapt. Este irelevant ce returnează funcția apelantă pentru că rezultatul sau eroarea apar altundeva ca produs al unei operațiuni asincrone. Abia când acesta apare, este pasat funcției cu rol de callback.
+Reține faptul că după invocarea funcției cu rol de callback, execuția funcției din care s-a făcut invocarea acesteia va continua până când codul rămas va fi evaluat complet. Din acest motiv este necesar să folosești `return` pentru a încheia și execuția funcției apelante. Această returnare se poate face pentru că rezultatul dorit este produsul unei operațiuni asincrone, de fapt. Este irelevant ce returnează funcția apelantă pentru că rezultatul sau eroarea apar altundeva (la momentul în care funcția callback primește datele necesare și trece din coada de așteptare în call stack pentru a fi executată) ca produs al unei operațiuni asincrone. Abia când acesta apare, este pasat funcției cu rol de callback.
 
 Denumește funcțiile cu rol de callback pentru a face depanarea codului mai ușoară atunci când privești stiva apelurilor.
 
@@ -143,15 +143,15 @@ aducResursa('mar', function clbkPtrAducRes () {
 });
 ```
 
+## Inversion of control și injectarea dependințelor
+
 Totuși trebuie spus un lucru la care trebuie reflectat foarte adânc. Există momente când vei folosi biblioteci de cod externe, care vor prelua callback-ul pe care-l scrii, iar la final vor executa funcția scrisă de tine. Kyle Simpson pune câteva întrebări esențiale pentru verificarea și dobândirea siguranței în scenariul de lucru cu un callback:
 
--   Ești sigur pe aplicația externă căreia îi pasezi callback-ul?
--   Ești încredințat că va executa în parametrii doriți de tine codul din funcția pe care i-o pasezi drept callback?
--   Dacă nu ai scris tu întreaga aplicație care va folosi callback-ul, ai **încredere** să o folosești?
+- Ești sigur pe aplicația externă căreia îi pasezi callback-ul?
+- Ești încredințat că va executa în parametrii doriți de tine codul din funcția pe care i-o pasezi drept callback?
+- Dacă nu ai scris tu întreaga aplicație care va folosi callback-ul, ai **încredere** să o folosești?
 
-Acestea sunt întrebări foarte serioase, care setează cadrul mental pentru căutarea de noi soluții. Acestea nu au întârziat să apară, fiind propulsate de standard: promisiunile și funcțiile `async/await`. În acest moment, recomandarea este ca în momentul dobândirii abilităților de lucru cu **promisiunile** sau cu funcțiile **async/await**, să fie abandonată practica callback-urilor.
-
-Un argument în plus pentru abandonarea treptată a practicii callback-urilor este dificultatea în urmărirea succesiunii execuției callback-urilor.
+Acestea sunt întrebări foarte serioase, care setează cadrul mental pentru căutarea de noi soluții. Acestea nu au întârziat să apară, fiind propulsate de standard: promisiunile și funcțiile `async/await`. În acest moment, recomandarea este ca în momentul dobândirii abilităților de lucru cu **promisiunile** sau cu funcțiile **async/await**, să fie abandonată practica callback-urilor. Un argument în plus pentru abandonarea treptată a practicii callback-urilor este dificultatea în urmărirea succesiunii execuției callback-urilor. Totuși această practică își dovedește încă valoarea.
 
 Am menționat promisiunile ca o posibilă soluție la practica callback-urilor. În structura `Promise`-urilor ne vom reîntâlni cu funcțiile callback, dar modul în care este structurat codul oferă un mod de interacțiune mai simplu.
 

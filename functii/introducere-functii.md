@@ -126,7 +126,7 @@ Următorul exemplu expune o funcție care conține la rândul său o altă func�
 
 ```javascript
 function ex (unu, doi) {
-  console.log(this);  // legătura se face la obiectul golbal numit Window
+  console.log(this);  // legătura se face la obiectul global numit Window
   this.trei = 3;      // se creează prop trei: window.trei care este 3
   console.log(ex.arguments);
   // Arguments {0:1,1:2,calee:ex(),length:2,__proto__:Object}
@@ -274,13 +274,13 @@ Funcțiile moștenesc din `Function.prototype` și `Object.prototype` și propri
 
 **Moment Zen**: Funcțiile sunt efemere, fiind mecanismul prin care sunt preluate date, sunt prelucrate și apoi sunt returnate apelantului.
 
-Spre deosebire de restul obiectelor, funcțiile pot fi invocate. Funcțiile sunt un subtip de obiecte numit tehnic *callable object*, iar acest lucru înseamnă că pentru acea funcție, motorul care implementează standardul ECMAScript are o metodă internă `[[Call]]`, care permite apelarea funcției dar și **recursivitatea**. Am introdus termenul de recursivitate. Acesta se referă la capacitatea ca o funcție să se autoapeleze la momentul evaluării codului intern câtă vreme o condiție este întrunită.
+Spre deosebire de restul obiectelor, funcțiile pot fi invocate. Funcțiile sunt un subtip de obiecte numit tehnic *callable object*, iar acest lucru înseamnă că pentru acea funcție, motorul care implementează standardul ECMAScript are o metodă internă `[[Call]]`, care permite apelarea funcției dar și **recursivitatea**. Am introdus termenul de *recursivitate*. Acesta se referă la capacitatea ca o funcție să se autoapeleze la momentul evaluării codului intern câtă vreme o condiție este întrunită.
 
 O funcție care se apelează din interiorul său se numește **funcție recursivă**. Sunt trei modalități de a apela o funcție din interiorul ei:
 
--   după numele său,
--   folosind `arguments.callee`, o funcție proprietate a obiectului `arguments`,
--   folosind un identificator din scope pentru aceasta (numele funcției).
+- după numele său,
+- folosind `arguments.callee`, o funcție proprietate a obiectului `arguments`,
+- folosind un identificator din scope pentru aceasta (numele funcției).
 
 Funcțiile care pot deveni constructori prin apelarea cu `new` au o metodă internă `[[Construct]]`, care permite ca acestea să *construiască* obiecte. Nu toate funcțiile au această metodă internă. `Arrow functions` nu au `[[Construct]]`.
 
@@ -294,55 +294,55 @@ Funcțiile obiect au sloturi interne și merită menționat `Realm`, care este o
 
 ## Mantre
 
--   Funcțiile sunt obiecte care incapsulează cod parametrizat cu o legătură la mediul lexical în care a fost declarată funcția („closed over a lexical environment”).
--   Funcțiile a căror corp este o **expresie**, vor returna chiar evaluarea acelei expresii - *fat arrows*.
--   Constructorul obiectului `Function` este chiar o funcție. În schimb, `Function` este constructor pentru `Object`. Cele două sunt constructorii tuturor obiectelor interne.
--   Începând cu ES6, este posibilă declararea funcțiilor în blocuri (de exemplu, în `if`-uri).
--   Funcțiile sunt invocate într-un loc care determină rezultatul, adică într-un anumit *context*.
--   Orice funcție poate fi apelată cu oricâte argumente de orice tip în orice moment.
--   Toate funcțiile sunt obiecte instanțe ale tipului `Function`.
--   O funcție este declarată de o expresie care începe prin cuvântul rezervat limbajului: `function`.
--   Când funcțiile sunt executate mediul lexical folosit este cel de la momentul definirii, nu cel de la momentul invocării (asta înseamnă de fapt mediul lexical).
--   La momentul declarării, funcțiile sunt doar trecute în inventarul scope-ului existent printr-un identificator cu care se face o referință. În spate, se creează obiectul funcție care va conține codul intern al său și alte proprietăți între care chiar o referință către scope-ul existent la momentul declarării - **lexical scope**. La invocarea funcției se creează un nou obiect scope care moștenește proprietăți din cel la care s-a făcut referință la momentul declarării.
--   `this` și `arguments` sunt disponibile automat la invocarea unei funcții.
--   Când invoci funcția ca metodă a unui obiect, acel obiect devine **contextul** funcției, fiind disponibil funcției prin intermediul legăturii `this`.
--   `this` face legătura la un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută, iar pentru noile obiecte create este chiar noul obiect generat.
--   Funcțiile care nu sunt invocate ca metode, vor lega `this` la global object.
--   Funcțiile returnează automat valoarea `undefined` dacă nu returnează explicit ceva.
--   Funcțiile sunt ele însele valori. Pentru că sunt valori, Pot fi pasate ca argumente altor funcții. Funcțiile pot returna alte funcții.
--   Poți vedea câți parametri au fost declarați (`nume_functie.length`) și câte argumente i-au fost pasate (apelând din interiorul ei: `arguments.length`).
--   Funcțiile sunt obiecte („first-class objects”). Asta înseamnă că au conectări `[[Prototype]]`, fiind parte a lanțului prototipal.
--   Toate funcțiile au la dispoziția lor un set de utilitare accesibile prin legătura prototipală. Cele mai evidente sunt `call()`, `apply()` și `bind()`.
--   Funcțiile sincrone procedează la execuție fără a lăsa programul să execute altceva (comportament ce induce blocaje).
--   Funcțiile asincrone returnează imediat, iar rezultatul este pasat unei funcții specializate (callback). În cazul buclei evenimentelor, pasarea rezultatului se face la un ciclu viitor, adică de îndată ce stiva de execuție este liberă.
--   O funcție are acces și poate performa operațiuni asupra obiectului în interiorul căruia a fost invocată.
--   În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype (`numeFunctie.prototype`), care la rândul său se leagă automat la `Object.prototype`.
--   Funcțiile sunt legate de obiectul prototip prin metoda `.constructor`.
--   Fiecare funcție are un obiect prototip diferit.
--   O funcție apelată cu `new` în fața sa este un constructor. Numele funcției care va fi constructor, se scrie cu literă mare.
--   Funcțiile generează un mediu lexical propriu (scope).
--   Funcțiile care joacă rol de metode într-un obiect, de fapt nu aparțin obiectului, ci sunt doar invocate în contextul obiectului. Ceea ce „aparține” obiectului este, de fapt, referința către funcție. ATENȚIE! investighează mereu call-site-ul pentru a afla ce este în `this`.
--   Atunci când funcția este un callback, ține minte că tot o referință către funcție este (implicit assignment), nu este valoarea sa.
--   Dacă definești o funcție în interiorul altei funcții, atunci funcția internă trebuie să fie recreată de fiecare dată când funcția externă este executată (acest lucru se întâmplă pentru că funcțiile, de fapt, sunt obiecte). Acest comportament trebuie evitat. Definește funcția în afară și referențiaz-o sau execut-o în context local prin `call()` / `apply()` / `bind()`.
--   Orice funcție publică poate fi invocată cu `call()`, `apply()` sau `bind()`.
+- Funcțiile sunt obiecte care incapsulează cod parametrizat cu o legătură la mediul lexical în care a fost declarată funcția (*closed over a lexical environment*).
+- Funcțiile a căror corp este o **expresie**, vor returna chiar evaluarea acelei expresii - *fat arrows*.
+- Constructorul obiectului `Function` este chiar o funcție. În schimb, `Function` este constructor pentru `Object`. Cele două sunt constructorii tuturor obiectelor interne.
+- Începând cu ES6, este posibilă declararea funcțiilor în blocuri (de exemplu, în `if`-uri).
+- Funcțiile sunt invocate într-un loc care determină rezultatul, adică într-un anumit *context*.
+- Orice funcție poate fi apelată cu oricâte argumente de orice tip în orice moment.
+- Toate funcțiile sunt obiecte instanțe ale tipului `Function`.
+- O funcție este declarată de o expresie care începe prin cuvântul rezervat limbajului: `function`.
+- Când funcțiile sunt executate mediul lexical folosit este cel de la momentul definirii, nu cel de la momentul invocării (asta înseamnă de fapt mediul lexical).
+- La momentul declarării, funcțiile sunt doar trecute în inventarul scope-ului existent printr-un identificator cu care se face o referință. În spate, se creează obiectul funcție care va conține codul intern al său și alte proprietăți între care chiar o referință către scope-ul existent la momentul declarării - **lexical scope**. La invocarea funcției se creează un nou obiect scope care moștenește proprietăți din cel la care s-a făcut referință la momentul declarării.
+- `this` și `arguments` sunt disponibile automat la invocarea unei funcții.
+- Când invoci funcția ca metodă a unui obiect, acel obiect devine **contextul** funcției, fiind disponibil funcției prin intermediul legăturii `this`.
+- `this` face legătura la un obiect-context: pentru funcții simple este `window`, pentru metode este obiectul în care se execută, iar pentru noile obiecte create este chiar noul obiect generat.
+- Funcțiile care nu sunt invocate ca metode, vor lega `this` la global object.
+- Funcțiile returnează automat valoarea `undefined` dacă nu returnează explicit ceva.
+- Funcțiile sunt ele însele valori. Pentru că sunt valori, Pot fi pasate ca argumente altor funcții. Funcțiile pot returna alte funcții.
+- Poți vedea câți parametri au fost declarați (`nume_functie.length`) și câte argumente i-au fost pasate (apelând din interiorul ei: `arguments.length`).
+- Funcțiile sunt obiecte (*first-class objects*). Asta înseamnă că au conectări `[[Prototype]]`, fiind parte a lanțului prototipal.
+- Toate funcțiile au la dispoziția lor un set de utilitare accesibile prin legătura prototipală. Cele mai evidente sunt `call()`, `apply()` și `bind()`.
+- Funcțiile sincrone procedează la execuție fără a lăsa programul să execute altceva (comportament ce induce blocaje).
+- Funcțiile asincrone returnează imediat, iar rezultatul este pasat unei funcții specializate (callback). În cazul buclei evenimentelor, pasarea rezultatului se face la un ciclu viitor, adică de îndată ce stiva de execuție este liberă.
+- O funcție are acces și poate performa operațiuni asupra obiectului în interiorul căruia a fost invocată.
+- În cazul tuturor funcțiilor, motorul JavaScript generează un obiect prototype (`numeFunctie.prototype`), care la rândul său se leagă automat la `Object.prototype`.
+- Funcțiile sunt legate de obiectul prototip prin metoda `.constructor`.
+- Fiecare funcție are un obiect prototip diferit.
+- O funcție apelată cu `new` în fața sa este un constructor. Numele funcției care va fi constructor, se scrie cu literă mare.
+- Funcțiile generează un mediu lexical propriu (scope).
+- Funcțiile care joacă rol de metode într-un obiect, de fapt nu aparțin obiectului, ci sunt doar invocate în contextul obiectului. Ceea ce *aparține* obiectului este, de fapt, referința către funcție. ATENȚIE! investighează mereu call-site-ul pentru a afla ce este în `this`.
+- Atunci când funcția este un callback, ține minte că tot o referință către funcție este (implicit assignment), nu este valoarea sa.
+- Dacă definești o funcție în interiorul altei funcții, atunci funcția internă trebuie să fie recreată de fiecare dată când funcția externă este executată (acest lucru se întâmplă pentru că funcțiile, de fapt, sunt obiecte). Acest comportament trebuie evitat. Definește funcția în afară și referențiaz-o sau execut-o în context local prin `call()` / `apply()` / `bind()`.
+- Orice funcție publică poate fi invocată cu `call()`, `apply()` sau `bind()`.
 
 ## Dependințe cognitive
 
 Pentru a înțelege funcțiile ai nevoie să înțelegi următoarele:
 
--   identificatori
--   primitive
--   obiecte
--   obiecte interne
--   lexical environment (noțiuni elementare)
+- identificatori
+- primitive
+- obiecte
+- obiecte interne
+- lexical environment (noțiuni elementare)
 
 ## Alonje
 
--   closures
--   programare funcțională
+- closures
+- programare funcțională
 
 ## Resurse
 
--   [Wikipedia Subroutine](https://en.wikipedia.org/wiki/Subroutine)
--   [CHRISTOPHER STRACHEY, Fundamental Concepts in Programming Languages, Accesat 18 septembrie](https://www.itu.dk/courses/BPRD/E2013/fundamental-1967.pdf)
--   [A Foreword to ‘Fundamental Concepts in Programming Languages’, Accesat 18 septembrie](http://repository.readscheme.org/ftp/papers/plsemantics/oxford/strachey_forward.PDF)
+- [Wikipedia Subroutine](https://en.wikipedia.org/wiki/Subroutine)
+- [CHRISTOPHER STRACHEY, Fundamental Concepts in Programming Languages, Accesat 18 septembrie 2019](https://www.itu.dk/courses/BPRD/E2013/fundamental-1967.pdf)
+- [A Foreword to 'Fundamental Concepts in Programming Languages', Accesat 18 septembrie 2019](http://repository.readscheme.org/ftp/papers/plsemantics/oxford/strachey_forward.PDF)
