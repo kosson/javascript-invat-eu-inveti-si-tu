@@ -2,7 +2,7 @@
 
 Una din preocupările constante ale programatorului este aceea a gestionării timpilor de execuție printr-o succesiune eficientă a operațiunilor. Dincolo de aceste considerente abstracte, pentru moment, cel mai valoros lucru, atunci când scrii cod, este să poți întocmi o hartă mentală a execuției, pe care să jalonezi declarații, medii lexicale, apeluri și timpi de execuție. Această hartă este strâns legată de algoritmica programului. Uneori apar **necunoscute** care trebuie gestionate. Aceste **necunoscute** sunt legate de **timpul** necesar execuției sau de succesiunea rezolvării anumitor evaluări, care depind de alte resurse, unele aflate la distanță, iar altele poate necesitând resurse computaționale.
 
-Vă mai aduceți aminte de faptul că o funcție are nevoie de valorile din mediul lexical sau obiectul context pentru a putea să-și execute codul din corp? Ce se întâmplă atunci când o resursă este la distanță sau în corpul funcției este apelată o alta care aparține unui API extern, așa cum sunt cele puse la dispoziție de browser. Cel mai prost scenariu ar implica blocarea firului de execuție al programului pentru a satisface toate condițiile necesare efectuării propriilor evaluări.
+Vă mai aduceți aminte de faptul că o funcție are nevoie de valorile din mediul lexical sau obiectul context pentru a putea să-și execute codul din corp? Ce se întâmplă atunci când o resursă este la distanță sau în corpul funcției este apelată o alta care aparține unui API extern, așa cum sunt cele puse la dispoziție de browser. Cea mai prost scenariu ar implica blocarea firului de execuție al programului pentru a satisface toate condițiile necesare efectuării propriilor evaluări.
 
 Ce-ar fi dacă am proceda la trimiterea în *fundal* (*runtime-ul de execuție*) a acestor operațiuni care necesită timp și/sau efort pentru a fi soluționate. O astfel de funcție ar ieși de pe scenă precum un actor care **promite** să revină după ce va lua din culise recuzita necesară. Publicul va rămâne *în așteptare* urmărind jocul celorlalți actori rămași.
 
@@ -10,7 +10,7 @@ Ce-ar fi dacă am proceda la trimiterea în *fundal* (*runtime-ul de execuție*)
 
 Această operațiune de anticipare a unor rezultate în anumite cazuri este în strânsă legătură cu momentul în care se execută o anumită operațiune. Uneori, când soliciți niște date dintr-o sursă locală sau la distanță, serviciul responsabil poate să nu funcționeze sau datele să nu se fi generat dintr-o altă operațiune de prelucrare anterioară. În acest caz, vorbim de aspectele asincrone ale rulării codului.
 
-Să ne gândim că facem mai multe apeluri către servicii care ne răspund cu date, fiecare set fiind returnat la momente diferite, iar atunci când *apar* trebuie să declanșeze un eveniment care să le transforme sau să le afișeze. Gândirea pas cu pas nu ne mai poate ajuta și felul în care se întâmplă lucrurile conduc la senzația că lucrăm cu necunoscute. Toate aceste necunoscute, mici sincope, lucruri care nu pot fi stăpânite printr-o gândire pur algoritmică, au nevoie să fie gestionate cumva. Pot fi asemuite previziunii meteorologice prin care se încearcă anticiparea vremii. Cum în cazul programării este nevoie de un rezultat concret, aceste aprecieri ale posibilității obținerii sau nu a unui rezultat, poartă numele de **promisiuni**. O promisiune este o valoare care poate fi disponibilă **acum**, în **viitor** sau **niciodată**. Ceea ce se *promite* este faptul că vei primi un răspuns, fie acesta unul **pozitiv** (o valoare), fie unul **negativ** (o eroare).
+Toate aceste necunoscute, mici sincope, lucruri care nu pot fi stăpânite printr-o gândire pur algoritmică, au nevoie să fie gestionate cumva. Pot fi asemuite previziunii meteorologice prin care se încearcă anticiparea vremii. Cum în cazul programării este nevoie de un rezultat concret, aceste aprecieri ale posibilității obținerii sau nu a unui rezultat, poartă numele de **promisiuni**. O promisiune este o valoare care poate fi disponibilă **acum**, în **viitor** sau **niciodată**. Ceea ce se *promite* este faptul că vei primi un răspuns, fie acesta unul **pozitiv** (o valoare), fie unul **negativ** (o eroare).
 
 Mulți practicieni apelează la comparația promisiunilor cu **IOU** -urile. Un IOU este o sintagmă în limba engleză: **I owe you** (**îți sunt dator** am traduce în română, ori colocvial *ai de primit*), care reglementează o realitate tranzacțională asemănătoare unor chitanțe sau AWB-uri (din limba engleză *air waybill*) în cazul efectelor poștale. AWB-ul este un jeton pe care îl primești în urma achitării unui produs care urmează să-ți fie livrat. Produsul poate să-ți fie livrat după o perioadă (înregistrăm un **succes**) sau poți primi o explicație pentru problemele apărute la livrare (înregistrăm o **eroare**) însoțită de o posibilă rezolvare pentru problema apărută. În cazul AWB-urilor, poți urmări comanda și pentru o vreme vei vedea mesajul *în curs de livrare* - în engleză ar fi **pending**.
 
@@ -34,11 +34,11 @@ Promisiunile nu sunt un concept nou în programare. Trevor Burnham menționează
 
 Conform autorilor Wikipediei și lui Trevor Burnham, termenii de **promisiune**, **deferred** și **future** sunt folosiți interșanjabil.
 
-Termenul de **promise** (promisiune) a fost propus în anul 1976, dar după adoptarea în Python, un pas a mai lipsit pentru a fi preluat ca practică și în JavaScript. Și *deferred* își face apariția mai întâi în 2007, prin biblioteca de cod **Dojo** (`dojo.Deferred`). Doi ani mai târziu apare specificația *Promises/A* în biblioteca de cod **CommonJS**. În același an (2009) apare și **Node.js**, care folosește CommonJS pentru a realiza modularitatea. Merită menționat faptul că biblioteca de cod **JQuery**, care motorizează foarte multe pagini web în acest moment, a introdus conceptul de promisiuni, dar cu nuanța **deferred**, însemnând că poți declanșa o promisiune în mod direct fără a mai apela un callback. Prin folosirea promisiunilor, intrăm în zona **soluțiilor asincrone**, care implică o înțelegerea prealabilă a modului în care funcționează *bucla evenimentelor* și *callback-urile*.
+Termenul de **promise** (promisiune) a fost propus în anul 1976, dar după adoptarea în Python, doar un pas a mai lipsit pentru a fi preluat ca practică și în JavaScript. Și *deferred* își face apariția mai întâi în 2007, prin biblioteca de cod **Dojo** (`dojo.Deferred`). Doi ani mai târziu apare specificația *Promises/A* în biblioteca de cod **CommonJS**. În același an (2009) apare și **Node.js**, care folosește CommonJS pentru a realiza modularitatea. Merită menționat faptul că biblioteca de cod **JQuery**, care motorizează foarte multe pagini web în acest moment, a introdus conceptul de promisiuni, dar cu nuanța **deferred**, însemnând că poți declanșa o promisiune în mod direct fără a mai apela un callback. Prin folosirea promisiunilor, intrăm în zona **soluțiilor asincrone**, care implică o înțelegerea prealabilă a modului în care funcționează *bucla evenimentelor* și *callback-urile*.
 
 Promisiunile sunt **executate** sincron, dar sunt **rezolvate** asincron înaintea oricăror alte evenimente I/O.
 
-## Foaie de parcurs către promisiuni
+## Foaie de parcurs pentru promisiuni
 
 Pentru că odată cu promisiunile, ne apropiem de stadii avansate ale înțelegerii acestui limbaj de programare ca instrument de prelucrare a datelor, vom parcurge un scenariu simplu, pentru a ajunge în final să vedem care ar fi ajutorul pe care ni-l oferă. Pentru prelucrarea datelor simple dintr-un posibil array am folosit cu succes **soluțiile sincrone** din a căror gamă fac parte prelucrările de date cu instrucțiunea `for` sau cu metoda `forEach()` oferită de prototipul lui `Array`.
 
@@ -51,17 +51,19 @@ listă.forEach(function (elementArray) {
 listă.forEach(elementArray => console.log(elementArray)); // 1 2 3
 ```
 
-După cum am observat, am implicat în soluție o funcție cu rol de callback și deja am aflat că promisiunile sunt soluția la problemele pe care utilizarea acestora le ridică. Callback-urile au problemele lor bine-cunoscute printre care imposibilitatea de a colecta erorile ridicate prin `try...catch`.
+După cum am observat, am implicat în soluție o funcție cu rol de callback. Am aflat deja că promisiunile sunt soluția la problemele pe care utilizarea acestora le ridică. Callback-urile au problemele lor bine-cunoscute printre care și imposibilitatea de a colecta erorile ridicate folosind `try...catch`.
 
 **Moment ZEN**: Promisiunile sunt obiecte care țin locul valorilor rezultate din operațiuni asincrone.
 
-Este un concept foarte puternic în sine. Gândește-te că ai avea un locțiitor de valoare, care ar permite deja utilizarea sa în combinație cu altele.
+Este un concept foarte puternic în sine. Gândește-te că ai avea un locțiitor de valoare, care ar permite deja utilizarea sa în expresiile în care sunt folosite cu un detaliu foarte important: nu se blochează firul de execuție cât timp sunt aduse datele.
 
 ```javascript
-const loctiitorValoare = fetch("http://api.undeva.ro/date.json");
+const loctiitorValoare = fetch("http://api.undeva.ro/date.json"); // la un moment dat apar și datele
 ```
 
-Acest obiect locțiitor poate fi instrumentat grație *stărilor* prin care trece. Pentru a *rezolva* obiectul promisiune, acesta ne pune la dispoziție metoda `then()`.
+Acest obiect locțiitor poate fi instrumentat grație unor stări prin care trece. O promisiune este un obiect, de fapt. Un obiect care are capacitatea de a gestiona date care au nevoie de ceva timp să ajungă (apel web sau citire de pe disc). Când datele *ajung* în obiect, spunem că promisiunea a fost *rezolvată*.
+
+Pentru a *prelucra* datele la momentul în care promisiunea este rezolvată, obiectul promisiunii pune la dispoziție metoda `then()`. Pentru a *prinde* erorile apărute, avem la dispoziție metoda `catch()`. Ambele metode sunt înlănțuite și le sunt pasate funcții cu rol de callback care au rolul de a prelucra date sau instrumenta erorile.
 
 **Standardul spune**:
 
@@ -71,14 +73,14 @@ Promisiunile implică gestionarea celor trei stări posibile ale unui răspuns: 
 
 ### Pentru ce folosim promisiunile
 
-Cedarea controlului unei părți terțe printr-un callback, nu mai este un răspuns adecvat nevoilor privind precizia rulării codului. Pur și simplu nu ne mai permitem luxul de a folosi callback-uri despre care știm puține lucruri privitor la cum vor fi executate, când, de câte ori, în câte locuri ale API-ului (de regulă folosești API-uri construite de alții), ș.a.m.d. Totuși, mecanismul oferit de callback-uri își păstrează valoarea sa în anumite condiții.
+Atunci când folosești o funcție cu rol de callback, poți spune că cedezi o mare parte din controlul pe care îl ai asupra ceea ce se execută unei părți de aplicație pe care nu ai scris-o tu personal. Cedarea controlului unei părți terțe printr-un callback nu mai este un răspuns adecvat nevoilor privind precizia rulării codului. Pur și simplu nu ne mai permitem luxul de a folosi callback-uri despre care știm puține lucruri privitor la cum vor fi executate, când, de câte ori, în câte locuri ale API-ului (de regulă folosești API-uri construite de alții), ș.a.m.d. Totuși, mecanismul oferit de callback-uri își păstrează valoarea sa în anumite condiții.
 
-Cel mai important răspuns este că promisiunile permit rularea de cod asincron. Ca efect al acestei caracteristici, promisiunile permit *programarea* în timp a unor fragmente de cod care să ruleze după ce codul sincron și-a încheiat execuția.
+Câștigul cel mai important este că promisiunile permit rularea de cod asincron. Ca efect al acestei caracteristici, promisiunile permit *programarea* în timp a unor fragmente de cod care sunt executate după ce codul sincron și-a încheiat deja execuția. Acest lucru se întâmplă pentru că execuția expresiei care creează un obiect promisiune se execută sincron, în ordinea în care codul interpretat își urmează cursul firesc, dar ceea ce face, scopul, acțiunea pentru care am creat promisiunea este cod care va fi executat mai târziu, atunci când datele necesare respectivului cod sunt disponibile.
 
 ### Thunk, precursorul
 
-Vom explora un model de funcții existent, care ar mai rezolva din problemele callback-urilor. Acesta se numește funcții **thunk**, care conform lucrării lui P.Z.Ingerman din 1961, introduce conceptul, fiind în definiția sa *un fragment de cod care oferă o adresă*. În accepțiunea modernă și în contextul pregătitor înțelegerii promisiunilor, un *thunk* este o funcție care încapsulează în același timp cod sincron și asincron, acceptă un singur argument, care este o funcție CPS (*continuation passing style* - vezi la callback-uri) și returnează o altă funcție sau chiar un alt *thunk*.
-Un *thunk* asincron este o funcție căreia îi pasezi un callback pentru a scoate o valoare. Hai să vedem mai întâi cum arată un *thunk* sincron și care este utilitatea sa.
+Vom explora un model de funcții existent, care ar mai rezolva din problemele callback-urilor. Acesta se numește funcție **thunk**, care conform lucrării lui P.Z.Ingerman din 1961, introduce conceptul, fiind în definiția sa *un fragment de cod care oferă o adresă*. În accepțiunea modernă și în contextul pregătitor înțelegerii promisiunilor, un *thunk* este o funcție care încapsulează în același timp cod sincron și asincron. Funcția acceptă un singur argument, care este o funcție CPS (*continuation passing style* - vezi la callback-uri) și returnează o altă funcție sau chiar un alt *thunk*.
+Un *thunk* asincron este o funcție căreia îi pasezi un callback pentru a obține o valoare. Hai să vedem mai întâi cum arată un *thunk* sincron și care este utilitatea sa.
 
 ```javascript
 function numePrenume (nume, prenume) {
@@ -92,9 +94,9 @@ thunk(); // Ionel Pavelescu
 
 După cum observi, o expresie de funcție *thunk* are totul pentru a-ți oferi o valoare. Nu trebuie să introduci nicio valoare pentru a avea deja una la momentul execuției. Acesta este modelul simplu al unui *thunk* sincron.
 
-Dincolo de operațiunea în sine, am construit un soi de *referință* către o valoare computată la apelarea oriunde în cod a funcției `thunk`, atunci când avem nevoie. Am numit funcția `thunk`, dar poate purta oricare alt nume. Mecanismul în sine este important de înțeles: accesul la o valoare computată care nu se schimbă pentru că este *hard-coded* (adică valorile sunt predefinite la apelarea lui `numePrenume`). Se mai petrece un lucru foarte important. Adu-ți aminte de faptul că o funcție pentru a se executa are nevoie de identificatorii valorilor din mediul lexical propriu sau a contextului. Variabila `thunk` va fi o referință către o stare ambalată într-un container. Această referință, acest container care ambalează o valoare, fie aceasta o funcție care returnează o valoare computată, va fi la dispoziția ta în întregul program.
+Dincolo de operațiunea în sine, am construit un soi de *referință* către o valoare calculată la apelarea oriunde a funcției `thunk`. Am numit funcția `thunk`, dar poate purta oricare alt nume. Mecanismul în sine este important de înțeles: accesul la o valoare calculată care nu se schimbă pentru că este *hard-coded* (adică valorile sunt predefinite la apelarea lui `numePrenume`). Se mai petrece un lucru foarte important. Adu-ți aminte de faptul că o funcție, pentru a se executa, are nevoie de toți identificatorii valorilor din mediul lexical propriu sau ai contextului. Variabila `thunk` va fi o referință către o stare ambalată într-un container. Această referință, acest container care ambalează o valoare, fie aceasta o funcție care returnează o valoare computată, va fi la dispoziția ta în întregul program.
 
-Kyle Simpson spune că aici ar trebui să fim atenți pentru că, de fapt, aceasta este ideea principală a promisiunilor: **un ambalaj peste o valoare**. Referința către ambalaj poate fi utilizată în program ca orice valoare. Mai există un aspect important asociat promisiunilor, care merită reținut pentru a evita partizanatul. Promisiunile nu au fost introduse pentru a elimina callback-urile, ci pentru a elimina callback-urile inutile, spune Adam Boduch în lucrarea sa *JavaScript Concurency*.
+Kyle Simpson spune că aici ar trebui să fim atenți pentru că, de fapt, aceasta este ideea principală a promisiunilor: **un ambalaj peste o valoare**. Identificatorul ambalajului poate fi utilizat în program ca oricare altă valoare. Mai există un aspect important asociat promisiunilor, care merită reținut pentru a evita partizanatul. Promisiunile nu au fost introduse pentru a elimina callback-urile, ci pentru a elimina callback-urile inutile, spune Adam Boduch în lucrarea sa *JavaScript Concurency*.
 
 Un *thunk asincron* este o funcție care, spre deosebire de surata sincronă, are nevoie de o funcție callback care să-i fie pasată. Pentru a simula asincronicitatea, în funcția returnată vom folosi utilitarul `setTimeout()`.
 
@@ -139,45 +141,60 @@ Ceea ce tocmai am realizat este un mecanism prin care inițiem un apel căruia �
 Kyle Simpson explică entuziast că ceea ce am realizat prin apelarea funcției asincrone, este un ambalaj al operațiunilor care se vor desfășura într-o bulă de timp izolată. Un timp de execuție de care nu va mai depinde nicio altă funcție, care până mai odinioară, când foloseam callback-urile, ar fi trebuit să aștepte. Aceasta este majora deficiență a practicii callback-urilor: gestionarea timpului, care se concluzionează printr-o stare confuză, dacă privești cine așteaptă după cine să termine execuția pentru a avea datele de lucru necesare. Adu-ți mereu aminte că o funcție are nevoie de toate datele pentru a-și încheia evaluarea. Este important să corelezi cu faptul că JavaScript are un singur fir de execuție, care înseamnă o singură linie temporală.
 
 Chiar dacă nu am avut la îndemână aproape 20 de ani pentru a ajunge la concluziile lui Kyle, am să folosesc înțelepciunea dobândită pentru a vă spune și vouă că este mult mai bine să folosești promisiunile în practică și încet, încet să te depărtezi de callback-uri, folosindu-le acolo unde își dovedesc eficiența.
-Înțelegerea funcțiilor *thunk* conduce la înțelegerea *promise-urilor* pentru că, spune aceeași voce autorizată: *thunk-urile sunt promisiuni fără un API fățos*. Funcțiile *thunk* sunt o soluție mai bună opozabilă callback-urilor, dar sunt tot un soi de callback-uri din care factorul timp a fost abstractizat. Ceea ce rămâne este calea înțelegerii promisiunilor.
+Înțelegerea funcțiilor *thunk* conduce la înțelegerea *promise*-urilor pentru că, spune aceeași voce autorizată: *thunk-urile sunt promisiuni fără un API fățos*. Funcțiile *thunk* sunt o soluție mai bună opozabilă callback-urilor, dar sunt tot un soi de callback-uri din care factorul timp a fost abstractizat. Ceea ce rămâne este calea înțelegerii promisiunilor.
 
 ## Constructorul Promise()
 
-Pentru a face o promisiune, se va folosi constructorul `Promise` căruia îi pasăm un singur argument, care este o funcție. Această funcție este apelată imediat ce ai pasat-o contructorului. Acesta este o funcție cu rol de *executor*, spune standardul.
+Pentru a face o promisiune, se va folosi constructorul `Promise` căruia îi pasăm un singur argument, care este o funcție. Această funcție este apelată imediat ce ai pasat-o constructorului. Acesta este o funcție cu rol de *executor*, spune standardul.
 
 ```javascript
-const promisiune = new Promise(function executor (resolve, reject) {});
+const promisune = new Promise(function executor (resolve, reject) {});
 ```
 
-Constructorului îi este pasată o funcție care are două argumente, la rândul lor niște funcții cu rol de callback. Prin convenție, cele două callback-uri se numesc `resolve` și `reject`, dar este posibil să le numești cum dorești.
+Executorul care are două argumente, la rândul lor niște funcții cu rol de callback. Prin convenție, cele două callback-uri se numesc `resolve` și `reject`, dar poți să le redenumești dacă dorești. Sunt identificatorii celor două callback-uri.
 
 **Moment ZEN**: Funcția executor este executată imediat de motorul JavaScript.
 
-Executarea imediată a executorului face ca promisiunea să intre în starea `pending`. Când este apelat callback-ul `resolve`, promisiunea își modifică starea în `fulfilled`.
+Execuția imediată a executorului face ca promisiunea să intre în starea `pending`. Când este apelat callback-ul `resolve`, promisiunea își modifică starea în `fulfilled`.
 
-O promisiune este *rezolvată*, dacă a fost *încheiată* sau dacă va servi drept stare altei promisiuni, care aștepta această rezolvare.
+O promisiune este *rezolvată*, dacă a fost *încheiată* sau dacă va servi drept stare altei promisiuni, care aștepta această rezolvare, dacă există un astfel de caz.
 
-Callback-ul `resolve()` conduce la obținerea unei valori în momentul apelării `then()`. Am putea traduce în limba română metoda `then` ca *apoi* sau *după aia*. Semantic, numele metodei implică acțiunea care se va petrece după ce promisiunea a intrat ori pe ramura `resolve`, ori pe ramura `rejected`.
+Callback-ul `resolve()` este cea care obține datele la momentul apelării metodei `then`. Am putea traduce în limba română metoda `then` prin termenul *apoi* sau *după aia*. Semantic, numele metodei implică acțiunea care se va petrece după ce promisiunea a intrat ori pe ramura `resolve`, ori pe ramura `rejected` a posibilelor stări prin care se rezolvă o promisiune.
 
 ```javascript
-var promisiune = new Promise(function executor (resolve, reject) {
+let promisiune = new Promise(function executor (resolve, reject) {
+  let valoare = 'niște date'; // Obține aici o valoare prin evaluarea unei expresii
   // cod evaluat de executor. Încheierea execuției executorului este prin pasarea valorii lui resolve()
-  resolve(valoare); // declanșează apelarea lui then, care primește valoarea
+  resolve(valoare); // declanșează apelarea calllback-ului pasat în then, care primește valoarea
 });
 promisiune.then((valoare) => {
   console.log(valoare);
 }).catch( function oEroare (error) {
-  //cod tratare eroare
-});
+  // tratare eroare
+  console.log(error);
+}); // 'niște date'
 ```
 
 În urma evaluării callback-ul `resolve(valoare)` putem obține o valoare în sine sau un alt obiect `Promise`, care la rândul său va avea drept sarcină returnarea unei valori.
 
-Poți testa eșecul prin apelarea funcției callback `reject()`. Funcția `reject()` este și ea pasată *executorului* și la rândul său primește un argument, care, de regulă, este un obiect `Error`. Ceea ce produce apelarea callback-ului `reject` este să mute starea promisiunii din `pending` în `rejected`. Modificarea stării va atrage după sine apelarea callback-ului `error`, care a fost pasat în `catch()` ca argument al funcției callback. Obiectul eroare poate fi pasat chiar și lui `then()`.
+Poți testa eșecul prin apelarea funcției callback `reject`. Funcția cu rol de callback `reject` este și ea pasată *executorului*. La rândul său primește un argument, care, de regulă, este un obiect `Error`. 
 
-Metoda `catch(eroare)` are rolul de a *prinde* (în limba engleză *catch* înseamnă *a prinde*) toate erorile apărute similar comportamentului `try...catch`.
+```javascript
+let altăPromisiune = new Promise((resolve, reject) => {
+  try {
+    let valoare = 'niște date'; // Obține aici o valoare prin evaluarea unei expresii
+    resolve(valoare); // declanșează apelarea calllback-ului pasat în then, care primește valoarea
+  } catch (error) {
+    reject(new Error(error)); // erorile apărute în evaluarea expresiilor din `try`
+  }
+});
+```
 
-Returnarea din funcția executor nu înseamnă că a fost încheiată treaba pentru care am constituit promisiunea, ci faptul că această treabă a intrat în lucru și că în urma evaluării codului promisiunii am ajuns la un rezultat sau la un eșec.
+Ceea ce declanșează apelarea callback-ului `reject` este mutarea stării promisiunii din `pending` în `rejected`. Modificarea stării va atrage după sine apelarea funcției cu rol de callback care a fost pasată în `catch` ca argument.
+
+Metoda `catch((eroare) => console.error)` are rolul de a *prinde* (în limba engleză *catch* înseamnă *a prinde*) toate erorile apărute similar comportamentului `try...catch`.
+
+Returnarea din funcția executor nu înseamnă că a fost încheiată treaba pentru care am creat promisiunea, ci faptul că această treabă a intrat în lucru și că în urma evaluării codului promisiunii am ajuns la un rezultat sau la un eșec.
 
 Există posibilitatea ca o promisiune să nu-și poată schimba starea. Dacă nu este apelat callback-ul `resolve`, starea nu se poate schimba, promisiunea rămânând *agățată*.
 
@@ -188,46 +205,48 @@ new Promise((resolve, reject) => {
 }).then(() => {
   // reject();
   console.log('Eu nu am fost apelat încă');
-}).catch((e) => {
-  console.log('A apărut o eroare');
+}).catch((eroare) => {
+  return console.log('A apărut o eroare: ', eroare);
 });
 ```
 
-Dacă în exemplul de mai sus am comenta în cod callback-ul `resolve`, promisiunea ar rămâne perpetuu *agățată*. Asigură-te că starea promisiunii se va modifica la un moment dat. Interesant este și faptul că poți apela direct metoda `resolve()` a obiectului `Promise`.
+Dacă în exemplul de mai sus am comenta în cod callback-ul `resolve`, promisiunea ar rămâne perpetuu *agățată*. Asigură-te că starea promisiunii se va modifica la un moment dat. Interesant este și faptul că poți apela direct metoda `resolve` a obiectului `Promise`. Pentru a apela direct `resolve`, asigur-te că argumentul este o valoare care va exista cu siguranță fără a genera o eroare. În scop demonstrativ, vom folosi un șir de caractere.
 
 ```javascript
-var eRezolvatăDeja = Promise.resolve('valoarea necesară');
+let eRezolvatăDeja = Promise.resolve('valoarea necesară');
 eRezolvatăDeja.then((valoare) => {
   console.log(valoare);
 }).catch((eroare) => {
   if (eroare) throw eroare;
 });
 // sau
-var rezolvareLaCerere = () => Promise.resolve('altă valoare');
+let rezolvareLaCerere = () => Promise.resolve('altă valoare');
 rezolvareLaCerere().then((valoare) => {
   console.log(valoare);
+}).catch((eroare) => {
+  if (eroare) throw eroare;
 });
 ```
 
-Un astfel de lucru cu promisiunile nu aduce niciun beneficiu, iar bunele practici invită la evitarea sa.
+Un astfel de lucru cu promisiunile nu aduce niciun beneficiu, iar bune practici invită la evitarea sa. Obsevă faptul că poți crea o promisiune prin trei moduri. Instanțierea obiectului prin `new Promise(() => {})`, prin apelarea directă a metodei `Promise.resolve` sau prin apelarea directă `Promise.reject`.
 
 ### Fă o promisiune și împlinește-o
 
-La apelarea cu `new`, constructorul `Promise` creează obiectul promisiune care pune la dispoziție o metodă `then()`. Am putea spune că prezența metodei `then` este marca promisiunilor.
+La apelarea cu `new`, constructorul `Promise` creează obiectul promisiune, cel care pune la dispoziție o metodă `then`. Am putea spune că prezența metodei `then` este marca promisiunilor.
 
-Metoda `then()` primește drept prim argument o funcție cu rol de callback pentru prelucrarea datelor în caz de succes (în limba engleză *fulfillment handler*), fiind urmată de o metodă `catch()`, care afișează erorile. În cazul în care sunt necesare date suplimentare pentru reușita operațiunii asincrone, acestea vor fi pasate funcției cu rol de callback. Metodei `then` îi poți pasa un al doilea argument, care tot o funcție cu rol de callback este. Aceasta va fi apelată în cazul unei respingeri (în limba engleză *rejection handler*).
+Metoda `then` primește drept prim argument o funcție cu rol de callback pentru prelucrarea datelor în caz de succes (în limba engleză *fulfillment handler*), fiind urmată de o metodă `catch`, care tratează erorile. În cazul în care sunt necesare date suplimentare pentru reușita operațiunii asincrone, acestea vor fi pasate funcției cu rol de callback. Metodei `then` îi poți pasa un al doilea argument, care tot o funcție cu rol de callback este. Aceasta va fi apelată în cazul unei respingeri (în limba engleză *rejection handler*).
 
 **Moment ZEN**: `then` este folosit pentru a constitui un lanț de operațiuni asincrone aplicabile pe rezultatul apărut.
 
-Callback-ul din `then(callback)` este invocat dacă funcția `resolve()` este invocată pentru acea promisiune, condiția fiind satisfăcută. În caz contrar, se procesează eroarea în metoda `catch(obiEroare)`.
+Callback-ul din `then(callback)` este invocat dacă funcția `resolve()` este invocată pentru acea promisiune, condiția fiind satisfăcută. În caz contrar, se procesează eroarea în metoda `catch(fnTrateazăEroarea)`.
 
 ```javascript
 let promisiune = new Promise((resolve, reject) => {
   // scrii cod care face ceva și apoi condiționezi rezolvarea
   let conditie = false;
-  if(conditie){
+  if (conditie) {
     resolve("Am rezolvat treburile!");
-  }else{
+  } else {
     reject("Te refuz că treaba nu e făcută!");
   };
 });
@@ -235,12 +254,12 @@ promisiune.then(
   valoarea => {
     console.log(`Ți-am promis ceva! Vezi? ${valoarea}`);
   }
-).catch(eroare => {
+).catch((eroare) => {
   console.log(`${eroare}`);
 });
 ```
 
-Tot codul din constructor va fi executat sincron la momentul instanțierii promisiunii. Spunem că promisiunile sunt *iuți* (*eager*) în execuția codului. Codul din funcția cu rol de executor nu este executat asincron. Linie după linie, tot codul va fi executat și în cazul în care sunt operațiuni asincrone în cod, acestea vor fi tratate în funcție de API-ul fiecăruia. Astfel, vor fi programate și tratate toate operațiunile asincrone, fiind folosite mecanismele *event loop*-ului. Pentru că promisiunile fac o *programare* a execuției codului asincron, am putea crede că fac o evaluare doar *dacă e necesar* (*lazy*), ceea ce este fals. În cazul în care dorești o evaluare *lazy* a unei promisiuni, o poți *îmbrăca* într-o funcție pe care să o apelezi în viitor *dacă e necesar*.
+Tot codul din constructor va fi executat sincron la momentul instanțierii obiectului promisiune. Spunem că promisiunile sunt *iuți* (*eager*) în execuția codului. Codul din funcția cu rol de executor nu este executat asincron. Linie după linie, tot codul va fi executat și în cazul în care sunt operațiuni asincrone în cod, acestea vor fi tratate în funcție de API-ul fiecăruia. Astfel, vor fi programate și tratate toate operațiunile asincrone, fiind folosite mecanismele *event loop*-ului (cozile de așteptare: microtask și task). Pentru că promisiunile fac o *programare* a execuției codului asincron, am putea crede că fac o evaluare doar *dacă e necesar* (*lazy*), ceea ce este fals. În cazul în care dorești o evaluare *lazy* a unei promisiuni, o poți *îmbrăca* într-o funcție pe care să o aplezi în viitor *dacă e necesar*.
 
 ```javascript
 const creezOPromisiuneLazy = () => new Promise((resolve, reject) => {
@@ -250,9 +269,9 @@ const creezOPromisiuneLazy = () => new Promise((resolve, reject) => {
 
 ### Promisificarea funcțiilor sincrone
 
-În anumite circumstanțe, pentru că promisiunile oferă o metodă elegantă de a trata codul care se execută asincron, poate că vei dori să promisifici o funcție care folosea un callback. Multe dintre metodele obiectelor interne pe care le pune la dispoziție din oficiu orice implementare de ECMAScript, folosesc paradigma callback-urilor.
+În anumite circumstanțe, pentru că promisiunile oferă o metodă elegantă de a trata codul care se execută asincron, poate că vei dori să *promisifici* o funcție care folosea un callback. Multe dintre metodele obiectelor interne pe care le pune la dispoziție din oficiu orice implementare de ECMAScript, folosesc paradigma callback-urilor.
 
-Pentru a promisifica orice utilitar, se va *îmbrăca* acel utilitar într-o funcție, care va returna o promisiune.
+Pentru a promisifica orice altă funcție, se va *îmbrăca* acea funcție într-o funcție, care va returna o promisiune.
 
 ```javascript
 function oFunctiePromisificată (intrare1, intrare2) {
@@ -261,7 +280,7 @@ function oFunctiePromisificată (intrare1, intrare2) {
       if (error) {
         return reject(error);
       }
-      rezolve(date);
+      resolve(date);
     });
   });
 }
@@ -270,18 +289,7 @@ oFunctiePromisificată.then((date) => {
 }).catch(error => console.error);
 ```
 
-În cazul în care este folosit Node.js, se poate folosi și `util.promisify(numeUtili)`. Un astfel de scenariu ar fi util atunci când dorești să folosești rezultatul într-un viitor apropiat, într-un lanț de apeluri `then()`.
-
-Un alt exemplu, care se poate dovedi util în anumite condiții, este realizarea unei funcții care întârzie declanșarea execuției codului.
-
-```javascript
-function nani (milisecunde) {
-  return new Promise(resolve => setTimeout(resolve, milisecunde));
-};
-nani(2000).then(() => {
-  console.log('Am stat pe tușă două secunde.');
-});
-```
+În cazul în care este folosit Node.js, se poate folosi și `util.promisify(numeUtili)`. Un astfel de scenariu ar fi util atunci când dorești să folosești rezultatul într-un viitor apropiat, într-un lanț de apeluri `then`.
 
 ## Promisiuni în tratarea apelurilor asincrone
 
@@ -310,11 +318,11 @@ promisiune.then(rezultat => {
 }).catch(error => console.log(error));
 ```
 
-Pentru a exemplifica aplicat, am *promisificat* un apel AJAX către o resursă la distanță. În funcțiile care gestionează evenimentele `onload` și `onerror` am făcut apelurile către callback-urile specifice promisiunilor. Acest lucru permite lucrul cu metodele `then(succes, eșec)` și `catch(error)`. Numele parametrilor pot fi arbitrar alese, dar practica a creat o regulă de conveniență prin termenii din limba engleză `resolve` și `reject`.
+Pentru a exemplifica aplicat, am *promisificat* un apel AJAX către o resursă la distanță. În funcțiile care gestionează evenimentele `onload` și `onerror` am făcut apelurile către callback-urile specifice promisiunilor. Acest lucru permite lucrul cu metodele `then(succes, eșec)` și `catch(error)`. Numele parametrilor pot fi arbitrar alese, dar practica a creat o regulă de obișnuință prin termenii din limba engleză `resolve` și `reject`.
 
-### Înlănțuirea metodelor `then()`
+### Înlănțuirea metodelor then
 
-În cazul în care o metodă `then()` returnează o valoare, indiferent care este natura ei (poate fi chiar o altă promisiune), respectiva valoare este pasată unei alte metode `then((valDeLaAnterioara) => {})` pentru a fi prelucrată. În acest caz, spunem că se face o înlănțuire a metodelor `then()` (în limba engleză **chaining**).
+În cazul în care o metodă `then` returnează o valoare, indiferent care este natura ei (poate fi chiar o altă promisiune), respectiva valoare este pasată unei alte metode `then((valDeLaAnterioara) => {})` pentru a fi prelucrată. În acest caz, spunem că se face o înlănțuire a metodelor `then` (în limba engleză **chaining**).
 
 ```javascript
 let îțiPromit = new Promise( function (resolve, reject) {
@@ -330,26 +338,9 @@ let îțiPromit = new Promise( function (resolve, reject) {
 console.log(îțiPromit); // 22
 ```
 
-Dacă nu faci un `return` din callback-ul pasat unui `then()`, nu vei putea folosi valoarea în următorul `then`. Buna practică spune să nu creezi lanțuri `then` pentru a controla modul de execuție a codului executat sincron. Făcând acest lucru vei executa cod sincron ambalat în promisiuni, care au ca efect penalizarea performanței. Adu-ți mereu aminte că promisiunile sunt folosite pentru a programa execuția asincronă a unor fragmente de cod care lucrează cu resurse la distanță, hard disk, ș.a.m.d. Singurul loc unde ar trebui să ai cod sincron este în ultimul `then`.
+Dacă nu faci un `return` din callback-ul pasat unui `then`, nu vei putea folosi valoarea în următorul `then`. Reține faptul că metoda `then` returnează un obiect promisiune și acesta este motivul pentru care poți face chaining cu o altă metodă `then`. Valoarea care a rezultat în urma evaluării codului din callback-ului `then`-ului anterior va fi pasat callback-ului următorului `then`. 
 
-De regulă, ceea ce vei inlănțui folosind `then()` sunt apeluri asincrone care returnează rezultatul ce va fi prelucrat în următorul `then()` ș.a.m.d.
-
-```javascript
-apelAsincronPeUnAPI('https://ceva.ro/apiv1/resurse')
-  .then(apelAsincronAduUserDinBaza)
-  .then(apelAsincronLogActivitate)
-  .then(rezultat => {
-    // `rezultat` este ceea ce a returnat `apelAsincronLogActivitate`
-    console.log('am încheiat activitatea');
-    return rezultat; // va fi returnat către următorul `then`
-  })
-  .catch((error) => {
-    // apelul `catch` este executat pentru orice reject ar apărea pe lanțul apelurilor asincrone
-    console.error(error);
-  });
-```
-
-În cazul unui lanț, `catch` va fi apelat la primul `reject` apărut indiferent la care dintre apelurile asincrone. Din acel moment, restul `then`-urilor nu vor mai fi executate. Un lanț `then` se poate încheia cu o metodă `finally` care va executa callback-ul indiferent de faptul că promisiunea este *fullfiled* sau este *settled* prin *reject*. De regulă, metoda `finally` este folosită pentru a curăța resursele implicate cum ar fi închiderea conexiunilor la baze de date, ș.a.m.d.
+Buna practică spune să nu creezi lanțuri `then` pentru a controla modul de execuție al codului executat sincron. Făcând acest lucru vei executa cod sincron ambalat în promisiuni, care au ca efect penalizarea performanței. Adu-ți mereu aminte că promisiunile sunt folosite pentru a programa executarea asincronă a unui fragment de cod care lucrează cu resurse la distanță, hard disk, ș.a.m.d. Singurul loc unde ar trebui să ai cod sincron este în ultimul `then`.
 
 În cazul în care aplici `then` pe aceeași promisiune, dar nu folosești înlănțuirea, spunem că facem o bifurcare. Aici apar probleme în tratarea erorilor pentru că erorile apărute pe o ramură, nu vor putea fi tratate pe alta.
 
@@ -373,51 +364,9 @@ let îțiPromit = new Promise( function (resolve, reject) {
 console.log(îțiPromit); // 22 Dimensiunea este:  un fragment interesant
 ```
 
-Un lanț de promisiuni poate fi împachetat într-o funcție gazdă la a cărei invocare să fie returnată o promisiune care să fie tratată folosind un singur `then`.
-
-```javascript
-function lantPrelucrari () {
-  return new Promise((resolve, reject) => {
-    apelAsincronPeUnAPI('https://ceva.ro/apiv1/users')
-      .then(apelAsincronAduUserDinBaza)
-      .then(apelAsincronLogActivitate)
-      .then(rezultat => {
-        // `rezultat` este ceea ce a returnat `apelAsincronLogActivitate`
-        console.log('am încheiat activitatea');
-        return rezultat; // va fi returnat către următorul `then`
-      })
-      .catch((error) => {
-        // apelul `catch` este executat pentru orice reject ar apărea pe lanțul apelurilor asincrone
-        console.error(error);
-      });
-  });
-};
-lantPrelucrari().then(rezultat => console.log).catch((error) => console.error);
-```
-
-Același exemplu l-ai putea transforma într-un `async/await` care să transforme sintaxa într-o variantă mai ușor de gestionat.
-
-```javascript
-async function lantPrelucrari () {
-  try {
-    const 
-      conectare  = await apelAsincronPeUnAPI('https://ceva.ro/apiv1/users'),
-      utilizator = await apelAsincronAduUserDinBaza(conectare),
-      logentry   = await apelAsincronLogActivitate(utilizator);
-    return logentry;
-  } catch (err) {
-    console.error(err);
-    return null;
-  }
-};
-(async () => {await lantPrelucrari();})();
-```
-
-Observă faptul că `await` face ca apelurile asincrone să pară a fi execuții sincrone. Reține faptul că o funcție `async` returnează întotdeauna o promisiune care poate fi *rezolvată* într-o altă funcție `async`. Un alt detaliu important este faptul că funcțiile `async` se bazează tot pe promisiuni, care la rândul lor se bazează pe callback-uri.
-
 ### Tratarea erorilor
 
-Mai trebuie adăugat faptul că erorile sunt propagate pe lanțul `then()` până când sunt prelucrate cu un `catch()`. Doar erorile care apar în `then`-uri sunt prinse de `catch()`. Erorile care apar sau sunt definite în constructor, nu vor fi *prinse* de `catch()`.
+Mai trebuie adăugat faptul că erorile sunt propagate pe lanțul `then` până când sunt prelucrate cu un `catch`. Doar erorile care apar în `then`-uri sunt prinse de `catch`. Erorile care apar sau sunt definite în constructor, nu vor fi *prinse* de `catch`.
 
 ```javascript
 new Promise((resolve, reject) => {
@@ -425,9 +374,13 @@ new Promise((resolve, reject) => {
 })
 ```
 
+### Finalul unei promisiuni
+
+Un obiect promisiune pune la dispoziție o metodă `finally` care este mereu apelată, fie că promisiunea este rezolvată printr-un `fulfilled` sau printr-un `rejected`. Această metodă primește o funcție cu rol de callback a cărei cod va fi executat chiar la final.
+
 ### Evaluează mai multe promisiuni odată
 
-Metoda `all` permite executarea mai multor promisiuni într-o manieră paralelă. Este ca și cum ar alinia promisiunile la o linie de start precum alergătorii pe pistă, fiecare pe culoarul lui. La final, după ce toate operațiunile asincrone s-au încheiat, va fi inițiată execuția unei funcții callback unice, adică a unui `then()`, care va trata rezultatul.
+Metoda `all` permite executarea mai multor promisiuni într-o manieră paralelă. Este ca și cum ar alinia promisiunile la o linie de start precum alergătorii pe pistă, fiecare pe culoarul lui. La final, după ce toate operațiunile asincrone s-au încheiat, va fi inițiată execuția unei funcții callback unice, adică a unui `then`, care va trata rezultatul.
 
 ```javascript
 Promise.all([promisiune1(), promisiune2()]).then((arrayRezultate) => {
@@ -435,7 +388,7 @@ Promise.all([promisiune1(), promisiune2()]).then((arrayRezultate) => {
 });
 ```
 
-Apelând `then()` pe rezultat, vom avea acces la un array cu rezultate tuturor promisiunilor.
+Apelând `then` pe rezultat, vom avea acces la un array cu rezultate tuturor promisiunilor.
 
 Un exemplu de înlănțuire folosind arrow functions.
 
@@ -473,11 +426,11 @@ Promise.race([pasulUnu(), pasulDoi(), pasulTrei()]).then((rezultat) => {
 });
 ```
 
-Am introdus la final metoda `race()`, care va oferi rezultatul celei mai rapide promisiuni care a fost rezolvată.
+Am introdus la final metoda `race`, care va oferi rezultatul celei mai rapide promisiuni care a fost rezolvată.
 
 Un lanț de promisiuni poate fi integrat într-un alt lanț de promisiuni, dacă acest lucru este necesar. Folosirea promisiunilor nu trebuie limitată doar la un flux unic de prelucrare.
 
-Un caz ilustrative pentru `Promise.all()` este cel al aducerii într-o pagină web a mai multor resurse deodată. Pentru a realiza acest lucru va fi nevoie să lucrăm cu API-ul `fetch`, care, de fapt creează promisiuni.
+Un caz ilustrative pentru `Promise.all()` este cel al aducerii într-o pagină web a mai multor resurse deodată. Pentru a realiza acest lucru va fi nevoie să lucrăm cu API-ul `fetch`, care, de fapt, creează promisiuni.
 
 ### O funcție `map()` promisificată
 
@@ -633,10 +586,10 @@ process.on('uncaughtException', (err) => {
 });
 ```
 
-Totuși, ai posibilitatea de a face EventEmitter-ul atent la erori dacă-i pasezi `{captureRejections: true}`, dar este experimental deocamdată (iulie, 2020) - [Capture Rejections of Promises](https://nodejs.org/api/events.html#events_capture_rejections_of_promises).
+Totuși, introdus de curând ai posibilitatea de a face EventEmitter-ul atent la erori dacă-i pasezi `{captureRejections: true}`, dar este experimental deocamdată (iulie, 2020) - [Capture Rejections of Promises](https://nodejs.org/api/events.html#events_capture_rejections_of_promises).
 
 Nu amestecați promisiunile cu callback-urile. Folosirea lor împreună este un lucru dificil și adeseori vă veți lovi de erori.
-Nu creați promisiuni în loop-uri. Acest lucru chiar dacă este posibil, acest lucru va penaliza performanțele.
+Nu creați promisiuni în loop-uri. Acest lucru chiar dacă este posibil, va penaliza performanțele.
 Evită crearea de lanțuri lungi `then()`. Ceea ce se întâmplă este că pur și simplu se introduce mai mult cod în microqueue, se alocă mai multă memorie. Folosirea mai multor `then` înlănțuite pentru a controla codul și datele (în fiecare `then` rulezi cod sincron), nu este o soluție. Promisiunile servesc scopului primar de a rula cod asincron eliberând astfel event-loop-ul.
 
 Gestionează reject-urile. În cazul în care acestea sunt neglijate, memoria și performanțele generale vor avea de suferit. Dacă apare o eroare și nu o tratezi, pur și simplu ai de a face cu o *scurgere de memorie* (*memory leak*).
@@ -679,4 +632,3 @@ Gestionează reject-urile. În cazul în care acestea sunt neglijate, memoria ș
 - [More About JavaScript ES6 Promises methods, Steve Griffith, Jul 27, 2017](https://www.youtube.com/watch?v=nB-aLKE76pY)
 - [Workshop: Broken Promises, The Workshop Edition - Matteo Collina and James Snell, NearForm](https://youtu.be/yRyfr1Qcf34)
 - [Broken Promises - James Snell, NearForm](https://youtu.be/XV-u_Ow47s0)
-- [JavaScript Promises | The Coding Train](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6bKLPQvPRNNE65kBL62mVfx)
