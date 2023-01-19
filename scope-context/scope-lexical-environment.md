@@ -2,14 +2,14 @@
 
 ## Introducere
 
-În ceea ce privește localizarea valorilor declarate, felul în care este redactat textul, adică codul sursă, este crucial. De ce? Pentru că JavaScript interpretează locul declarațiilor de obiecte, de funcții și variabile ca fiind semnalul că trebuie să genereze niște planuri cu anumite separări între ele. Constituirea acestor *planuri* se petrece la momentul compilării codului atunci când se formează *tokenii* și sunt identificate structurile lexicale ale codului sursă. Este crucial să înțelegi că ordinea în care scrii codul comunică algoritmilor lexicografici din spatele motorului JavaScript cum se vor forma mediile lexicale. Reține: locul unde cauți entități este determinat de ordinea în care le întroduci în codul sursă.
+În ceea ce privește localizarea valorilor declarate, felul în care este redactat textul, adică codul sursă, este crucial. De ce? Pentru că JavaScript interpretează locul declarațiilor de obiecte, de funcții și variabile ca fiind semnalul că trebuie să genereze niște planuri cu anumite separări între ele. Constituirea acestor *planuri* se petrece la momentul compilării codului atunci când se formează *tokenii* și sunt identificate structurile lexicale ale codului sursă. Este crucial să înțelegi că ordinea în care scrii codul comunică algoritmilor lexicografici din spatele motorului JavaScript cum se vor forma mediile lexicale. Reține: locul unde cauți entități este determinat de locul unde introduci în codul sursă funcțiile/expresiile care ulterior vor fi evaluate.
 
-Compilatorul este cel responsabil pentru a pregăti în spate codul pe care îl servește motorului JavaScript. Compilarea se face de la cap la coadă într-o singură trecere pentru a fi gata de a fi executat imediat după. Aceste detalii alcătuiesc contextul pentru a înțelege cât mai bine aceste medii lexicale care se formează.
+Compilatorul este cel responsabil pentru a pregăti în spate codul pe care îl servește motorului JavaScript. Compilarea se face de la cap la coadă într-o singură trecere pentru a fi gata de a fi executat imediat după. Aceste detalii alcătuiesc contextul pentru a înțelege cât mai bine aceste *medii lexicale* care se formează.
 
-Textul standardului îl numește **lexical environment** sau **scope** (tradus în română *scope* ar fi *zonă*, *domeniu* în care ceva are efect). *Mediile* acestea au atributul de *lexical* pentru că sunt generate după apariția lor în *firul narativ* al codului, în funcție de punctuație și semne.
-Mediul lexical sau scope-ul poate fi foarte ușor înțeles ca un *registru inventar* al tuturor identificatorilor care au valori *legate* de aceștia.
+Textul standardului îl numește **lexical environment** sau **scope** (tradus în română *scope* ar fi *zonă*, *domeniu* în care ceva are efect). *Mediile* acestea au atributul de *lexical* pentru că sunt generate în funcție de locul unde apar în *firul narativ* al codului, în funcție de punctuație și semne.
+Mediul lexical sau scope-ul poate fi foarte ușor înțeles ca un *registru inventar* al tuturor identificatorilor care au valori *legate* de aceștia. Dacă o funcție a fost declarată într-o altă funcție, va *ține minte* toate datele din funcția gazdă unde a fost declarată. Bineînțeles, le va *ține minte* doar pe cele care-i sunt utile în evaluarea propriului corp. Acest fenomen se numește *closure*. Closure-ul este posibil datorită lexical scope-ului.
 
-În demersul nostru, vom folosi interșanjabil următoarele: **mediu lexical**, **scope** și **lexical scope**. Toate numesc același lucru. Termenul standardului este **mediu lexical**, dar în practica de zi cu zi veți întâlni denumirea de *scope*. Deja sunteți familiari cu ea de la întâlnirea cu debugger-ul când lucram cu *Global Scope* și *Function Scope*. De cele mai multe ori vă veți întâlni în diferite alte lucrări despre JavaScript cu ambele variante.
+În demersul nostru, vom folosi interșanjabil următoarele: **mediu lexical**, **scope** și **lexical scope**. Toate numesc același lucru. Termenul standardului este **mediu lexical**, dar în practica de zi cu zi veți întâlni denumirea de *scope*. Deja sunteți familiari cu ea de la întâlnirea cu debugger-ul, când lucram cu *Global Scope* și *Function Scope*. De cele mai multe ori vă veți întâlni în diferite alte lucrări despre JavaScript cu ambele variante.
 
 Mediul lexical nu este ceva nou, de curând adăugat limbajelor de programare. Rădăcinile conceptului și domeniul de aplicare vin chiar de la începutul deceniului șase al secolului trecut.
 
@@ -21,7 +21,7 @@ Un identificator se poate lega de un alt identificator care este legat la o valo
 
 ![Referințe](IdentificatoriReferinta.jpg "Referințe")
 
-Reține faptul că atunci când variabilei referință i se dă o valoare „solidă”, acest identificator nu va mai fi o referință, ci însăși variabila.
+Reține faptul că atunci când variabilei referință i se dă o valoare *solidă*, acest identificator nu va mai fi o referință, ci însăși variabila.
 
 ```javascript
 var ceva = 10;
@@ -34,7 +34,7 @@ console.log(ceva);    // 10
 
 Felicitări! Tocmai ai făcut o mare achiziție privind modul cum funcționează variabilele.
 
-În cazul funcțiilor, atunci când sunt pasate valori, reține faptul că JavaScript, de fapt copiază valoarea în **lexical environment**, care poate fi comparat pentru o ușoară referință comună cu un *registru inventar al mediului*. Acum putem spune că **o valoare este în scope**.
+În cazul funcțiilor, atunci când sunt pasate valori, reține faptul că JavaScript, de fapt copiază valoarea în **lexical environment**, care poate fi comparat pentru o ușoară referință comună cu un *registru inventar al mediului*. Acum putem spune că **o valoare este în scope**. Scope-ul este totalitatea datelor care sunt disponibile unei expresii atunci când aceasta este evaluată. Mai bine spus totalitatea regulilor prin care sunt accesibile datele necesare. Motorul JavaScript chiar are o proprietate internă numită `[[scope]]` care este o referință ce *blochează* zonele de memorie (pentru a nu fi *colectate la gunoi*) în care se află datele pentru a fi disponibile funcțiilor care au realizat un *closure* (*closure over variable environment* - C.O.V.E.) peste acestea. Will Sentance, CEO la Codesmith numește aceste date care persistă *rucsac* pentru că apelând funcția de oriunde, indiferent de contextul de execuție, va avea la dispoziție un rucsăcel cu date pe care i l-a oferit `[[scope]]` atunci când a fost declarată.
 
 **Moment Zen**: Mediul lexical se formează la faza de compilare.
 
@@ -42,12 +42,12 @@ Atunci când unei funcții îi sunt pasate referințe către valori drept argume
 
 Astfel, putem spune că există **tipuri** asociate valorilor (**value types**), adică **tipuri de valori** și **tipuri de referințe** (**reference types**).
 
-## Definiții
+## Generalizări privind lexical environment
 
 Este **locul** unde te uiți după identificatori.
-Locul unde definești variabilele determină zona.
-Este **mediul** în care au efect funcțiile și sunt disponibile variabilele.
-Global scope este locul de unde pot fi accesate funcții și variabile în întreg codul.
+Locul unde definești variabilele determină ce este disponibil expresiilor evaluate din același bloc de cod (delimitat prin `{}`, de exemplu).
+Este **mediul** în care codul funcțiilor este evaluat, fiindu-le disponibile identificatorii (*variabile*) ce conduc/leagă la valorile necesare.
+Global scope este locul de unde pot fi accesate funcții și variabile pentru întreg codul.
 
 ## Formare și alcătuire
 
@@ -55,15 +55,15 @@ Pentru a oferi cea mai corectă imagine a *mediului lexical*, voi folosi textul 
 
 ## Spune standardul
 
-*   Codul sursă este o structură lexicală.
-*   Când rulăm codul, acesta întră într-un proces de evaluare.
-*   Evaluarea structurii lexicale a codului produce un lexical environment.
-*   Spunem în acest moment că mediul lexical este asociat cu anumite structurile sintactice ale codului ECMAScript.
-*   Structurile sintactice cărora le sunt asociate medii lexicale sunt: declarațiile de funcții, declararea unui bloc de cod prin acolade și condiția `catch` a instrucțiunii `try`.
-*   De câte ori rulezi codul, acesta este evaluat și se va crea mediul lexical tot de atâtea ori.
-*   Un *mediu lexical* constă dintr-o **înregistrare de mediu** (în engleză, *Environment Record* ) și o referință la un mediu lexical care îl conține pe cel nou format. Referința poate avea valoarea **null**, dacă un nivel superior nu există. Înregistrarea de mediu este un inventar a tuturor legăturilor identificatorilor și spunem că este *asociat mediului lexical*.
-*   Mediul lexical este folosit pentru a defini asocieri ale identificatorilor cu variabile și funcții. Reține o mică diferență: mediul lexical permite definirea legăturilor, iar înregistrarea de mediu ține evidența legăturilor realizate.
-*   Din punctul de vedere al standardului, un mediu lexical este pur un mecanism al specificațiilor, care va fi implementat de cei care construiesc motoare JavaScript.
+* Codul sursă este o structură lexicală.
+* Când rulăm codul, acesta întră într-un proces de evaluare.
+* Evaluarea structurii lexicale a codului produce un lexical environment.
+* Spunem în acest moment că mediul lexical este asociat cu anumite structurile sintactice ale codului ECMAScript.
+* Structurile sintactice cărora le sunt asociate medii lexicale sunt: declarațiile de funcții, declararea unui bloc de cod prin acolade și condiția `catch` a instrucțiunii `try`.
+* De câte ori rulezi codul, acesta este evaluat și se va crea mediul lexical tot de atâtea ori.
+* Un *mediu lexical* constă dintr-o **înregistrare de mediu** (în engleză, *Environment Record* ) și o referință la un mediu lexical care îl conține pe cel nou format. Referința poate avea valoarea **null**, dacă un nivel superior nu există. Înregistrarea de mediu este un inventar a tuturor legăturilor identificatorilor și spunem că este *asociat mediului lexical*.
+* Mediul lexical este folosit pentru a defini asocieri ale identificatorilor cu variabile și funcții. Reține o mică diferență: mediul lexical permite definirea legăturilor, iar înregistrarea de mediu ține evidența legăturilor realizate.
+* Din punctul de vedere al standardului, un mediu lexical este pur un mecanism al specificațiilor, care va fi implementat de cei care construiesc motoare JavaScript.
 
 ### Mediului lexical și registrul descriptiv
 
@@ -77,14 +77,14 @@ Un **environment record** (descriere de mediu sau harta mediului) este un mecani
 
 Câte medii lexicale (**lexical environments**) se pot stabili:
 
--   **global environment** - mediul global este cel mai de sus posibil la care cele interne fac conexiuni.,
--   **module environment** - mediul lexical al modulelor conține legăturile la declarațiile de prim nivel ale unui **Module**. Conține legături importate în mod explicit de `Module`. Mediul extern al unui `Module` este **global environment**,
--   **function environment** - mediul lexical au unei funcții este un mediu care se stabilește **la invocarea** unei funcții. Mediul funcției poate să stabilească o nouă legătură la `this`. Un **function environment** este un **lexical environment** care corespunde momentului invocării funcției. Mediul funcției capturează și starea necesară pentru a permite invocații ale metodei `super`.
+* **global environment** - mediul global este cel mai de sus posibil la care cele interne fac conexiuni.,
+* **module environment** - mediul lexical al modulelor conține legăturile la declarațiile de prim nivel ale unui **Module**. Conține legături importate în mod explicit de `Module`. Mediul extern al unui `Module` este **global environment**,
+* **function environment** - mediul lexical au unei funcții este un mediu care se stabilește **la invocarea** unei funcții. Mediul funcției poate să stabilească o nouă legătură la `this`. Un **function environment** este un **lexical environment** care corespunde momentului invocării funcției. Mediul funcției capturează și starea necesară pentru a permite invocații ale metodei `super`.
 
 În obiectul **environment record** există două tipuri de valori:
 
--   ***declarative Enviroment Records*** - **înregistrări declarative în mediu** și
--   ***object Environment Records*** - **înregistrări de mediu ale obiectelor**.
+* ***declarative Enviroment Records*** - **înregistrări declarative în mediu** și
+* ***object Environment Records*** - **înregistrări de mediu ale obiectelor**.
 
 ***Declarative Enviroment Records*** definesc efectele unor elemente precum declarații de funcții, de variabile și structuri `try...catch`.
 ***Object Environment Records*** definesc efectele unor elemente precum declarația `with`, care asociază legătura identificatorului cu proprietățile unui obiect.
@@ -132,10 +132,10 @@ Este observabil faptul că variabila declarată în `if` este accesibilă în af
 
 Posibilele elemente cărora mediul lexical le ține evidența:
 
--   variabilele locale,
--   parametrii funcției în cazul în care avem de-a face cu o funcție,
--   declarații de funcții,
--   scope-ul blocului părinte (se face lanțul prin care se caută *pe fir* mai sus identificatorul pentru o variabilă cu care se dorește a se lucra).
+* variabilele locale,
+* parametrii funcției în cazul în care avem de-a face cu o funcție,
+* declarații de funcții,
+* scope-ul blocului părinte (se face lanțul prin care se caută *pe fir* mai sus identificatorul pentru o variabilă cu care se dorește a se lucra).
 
 ![Mediul lexical al unei funcții](exempluIdentificatori.png "Exemplu simplu de variabile în global scope și mediul lexical format de o funcție")
 
@@ -264,20 +264,20 @@ Ultimul element din **scope chain** este obiectul global.
 
 ## Mantre
 
--   Codul sursă mai întâi este compilat și abia după aceea este executat.
--   Mediul lexical este generat la faza de compilare. De fapt, acesta este un set de reguli pentru a determina cum se face căutarea după un anume identificator.
--   La momentul rulării codului mediile lexicale există deja. Doar legătura `this`, care se apropie de ideea de scope dinamic caracteristic altor limbaje, se consituie la momentul rulării codului, indicând contextul în care a fost apelată funcția.
--   Declararea funcțiilor generează mediile lexicale pentru fiecare.
--   Când funcțiile sunt executate, mediul lexical folosit este cel constituit la momentul compilării, nu cel existent la momentul invocării. Asta înseamnă lexical, de fapt.
--   La invocarea unei funcții se generează o referință către mediul lexical existent la momentul definirii. Dacă a fost definită în global, se va ține o referință la ce se află în global, se face o cartografiere a tuturor identificatorilor din global. Definirea unei alte funcții interne, va crea o referință către toți identificatorii funcției gazdă.
--   Un context de execuție stabilit la executarea unei funcții are un mediu lexical asociat, adică zona tuturor identificatorilor definiți în acel context.
--   Mediul lexical poate fi perceput ca o hartă de identificatori la a căror valori ai access. Atunci când este în execuție, interpretorul caută o proprietate în mediul lexical curent. Dacă nu o găsește, atunci interpretorul va căuta mai sus în mediul lexical părinte și tot așa până când nu mai există un alt mediu părinte. Această secvență de medii concentrice, se numește scope chain. Căutarea se mai numește *walking up the scope chain*.
--   Când este definită o funcție, aceasta memorează lanțul mediilor lexicale (scope chain) care era în efect în acel moment.
--   Obiectul creat de invocarea unei funcții este adăugat scope chain-ului existent. Scope chain-ul astfel rezultat reprezintă scope chain-ul de la acel moment. Obiectul rezultat de fapt are rolul de a face legăturile tuturor variabilelor funcției în scope chain.
--   Când funcția returnează, obiectul care face binding-ul variabilelor este scos din **scope chain**.
--   Dacă nu există funcții interne, nu mai există nicio legătură spre obiectul care face binding-ul variabilelor se distruge obiectul și se face garbage collecting.
--   Când sunt definite funcții interne, acestea la rândul lor generează referințe în scope chain. Chiar dacă funcția gazdă returnează, câtă vreme există o referință la funcția internă, aceasta va memora și identificatorii din mediul lexical al gazdei - se face closure.
--   Câtă vreme există o referință către o proprietate dintr-un mediu lexical, acesta va exista. Este principiul din spatele funcționării closure-urilor. Când o funcție returnează, mediul lexical creat de ea dispare, doar dacă nu cumva avem un closure (o altă funcție găzduită la care există o referință).
+* Codul sursă mai întâi este compilat și abia după aceea este executat.
+* Mediul lexical este generat la faza de compilare. De fapt, acesta este un set de reguli pentru a determina cum se face căutarea după un anume identificator.
+* La momentul rulării codului mediile lexicale există deja. Doar legătura `this`, care se apropie de ideea de scope dinamic caracteristic altor limbaje, se consituie la momentul rulării codului, indicând contextul în care a fost apelată funcția.
+* Declararea funcțiilor generează mediile lexicale pentru fiecare.
+* Când funcțiile sunt executate, mediul lexical folosit este cel constituit la momentul compilării, nu cel existent la momentul invocării. Asta înseamnă lexical, de fapt.
+* La invocarea unei funcții se generează o referință către mediul lexical existent la momentul definirii. Dacă a fost definită în global, se va ține o referință la ce se află în global, se face o cartografiere a tuturor identificatorilor din global. Definirea unei alte funcții interne, va crea o referință către toți identificatorii funcției gazdă.
+* Un context de execuție stabilit la executarea unei funcții are un mediu lexical asociat, adică zona tuturor identificatorilor definiți în acel context.
+* Mediul lexical poate fi perceput ca o hartă de identificatori la a căror valori ai access. Atunci când este în execuție, interpretorul caută o proprietate în mediul lexical curent. Dacă nu o găsește, atunci interpretorul va căuta mai sus în mediul lexical părinte și tot așa până când nu mai există un alt mediu părinte. Această secvență de medii concentrice, se numește scope chain. Căutarea se mai numește *walking up the scope chain*.
+* Când este definită o funcție, aceasta memorează lanțul mediilor lexicale (scope chain) care era în efect în acel moment.
+* Obiectul creat de invocarea unei funcții este adăugat scope chain-ului existent. Scope chain-ul astfel rezultat reprezintă scope chain-ul de la acel moment. Obiectul rezultat de fapt are rolul de a face legăturile tuturor variabilelor funcției în scope chain.
+* Când funcția returnează, obiectul care face binding-ul variabilelor este scos din **scope chain**.
+* Dacă nu există funcții interne, nu mai există nicio legătură spre obiectul care face binding-ul variabilelor se distruge obiectul și se face garbage collecting.
+* Când sunt definite funcții interne, acestea la rândul lor generează referințe în scope chain. Chiar dacă funcția gazdă returnează, câtă vreme există o referință la funcția internă, aceasta va memora și identificatorii din mediul lexical al gazdei - se face closure.
+* Câtă vreme există o referință către o proprietate dintr-un mediu lexical, acesta va exista. Este principiul din spatele funcționării closure-urilor. Când o funcție returnează, mediul lexical creat de ea dispare, doar dacă nu cumva avem un closure (o altă funcție găzduită la care există o referință).
 
 ## Alonjă
 
@@ -285,5 +285,5 @@ Constituie baza pentru înțelegerea closure-urilor.
 
 ## Referințe
 
--   [Wikipedia, Scope](https://en.wikipedia.org/wiki/Scope_(computer_science))
--   [Wikipedia, Immediately-invoked function expression](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression)
+* [Wikipedia, Scope](https://en.wikipedia.org/wiki/Scope_(computer_science))
+* [Wikipedia, Immediately-invoked function expression](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression)

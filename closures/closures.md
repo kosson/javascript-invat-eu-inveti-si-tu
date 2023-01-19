@@ -1,7 +1,7 @@
 # Closures
 
 După ce vizitezi o galerie de artă, la o discuție cu prietenii în care le povestești ceea ce ai văzut, vei apela la memoria operelor. Chiar dacă te afli la 2000 de kilometri, vei avea o referință concretă pentru fiecare tablou pe care l-ai văzut. Îți vei aminti culorile, autorul și alte câteva atribute specifice fiecăruia. Acesta este un *closure* pe galeria de artă. Acest *closure* îți permite să te referi la fiecare obiect din galerie.
-Motorul JavaScript ține evidența mediilor lexicale, fie că acestea sunt la nivel de bloc, la nivel de funcție sau globalul.
+Motorul JavaScript ține evidența mediilor lexicale, fie că acestea sunt la nivel de bloc, la nivel de funcție sau globalul. Pentru a înțelege în adâncime mecanismul, aprofundează cunoștințele privind mediul lexical, adică scope.
 
 ```javascript
 var operă = 'Nighthawks';
@@ -14,7 +14,7 @@ povestesc();
 
 Declararea variabilelor cu `var` introduce identificatorii în limitele unei funcții care limitează disponibilitatea la nivelul acesteia, dar și în obiectul global, ignorând complet blocurile delimitate prin acoladele care le înconjoară. Declararea variabilelor cu `let` și `const` face identificatorii să fie disponibili doar la nivelul blocului în care se face declararea, precum și doar în blocurile de cod delimitate prin acolade.
 
-O funcție definită în interiorul unei funcții *container* generează un **closure** peste mediul lexical existent la momentul definirii. Putem spune că o funcție aflată în execuție va avea acces la toate variabilele definite în *scope chain* chiar dacă funcția ce o găzduia și-a încheiat execuția între timp.
+O funcție definită în interiorul unei funcții *container* generează un **closure** peste mediul lexical existent la momentul definirii. Putem spune că o funcție aflată în execuție va avea acces la toate variabilele definite în *scope chain* chiar dacă funcția ce o găzduia și-a încheiat execuția între timp. Dacă funcția gazdă returnează mai mult de o funcție, să spunem un array de funcții sau un obiect în care funcțiile sunt metode, atunci, pentru fiecare dintre acestea vor fi disponibile datele din closure.
 
 Am explorat deja câteva posibile traduceri în limba română pentru termenul *closure*, dar o traducere directă nu este tocmai elegantă. Mai bine folosim termenul în limba engleză.
 
@@ -22,36 +22,35 @@ Un closure este o caracteristică, un mecanism al limbajului JavaScript. Să o l
 
 Trebuie să ne aducem mereu aminte de importanța redactării codului și în consecință de locul **unde declarăm funcțiile**. Foarte important este și locul de unde le apelăm pentru că de acolo este posibil să *injectăm* date prin argumente. Există scenarii în care aceste date sunt necesare doar în locul în care este apelată funcția sau în obiectul în al cărui context a fost invocată.
 
-O funcție declarată în mediul lexical global (*global scope*), va avea acces la toate proprietățile acestui obiect. Dacă o funcție, va fi declarată într-un bloc de cod sau într-o altă funcție, va avea acces la tot ce constituie mediul lexical format local de acel bloc de cod sau de funcție și mai sus la tot ce este în *global scope*. Un detaliu important este că o funcție găzduită de o alta face closer pe mediul lexical al gazdei, dar nu și pe parametrul arguments.
+O funcție declarată în mediul lexical global (*global scope*), va avea acces la toate proprietățile acestui obiect. Dacă o funcție, va fi declarată într-un bloc de cod sau într-o altă funcție, va avea acces la tot ce constituie mediul lexical format local de acel bloc de cod sau de funcție și mai sus la tot ce este în *global scope*. Un detaliu important este că o funcție găzduită de o alta face closure pe mediul lexical al gazdei, dar nu și pe arguments.
 
 ```javascript
 let a = 'ceas ';
 function gazdă (ceva) {
   let x = 'nou';
   return function internă () {
-    console.log(ceva + x);
+    console.log(ceva + x + ' ' + arguments[0]);
   };
 };
 let prelucrezDate = gazdă(a);
-prelucrezDate();
+prelucrezDate(); // "ceas nou undefined"
 ```
 
 Pe scurt, legătura care se realizează la momentul compilării între funcție și mediul lexical în care a fost declarată, se numește **closure**. E ca dorul de casă. Chiar dacă ești plecat, vei avea mereu o conexiune cu toate lucrurile de acasă pentru că le **ții minte**, știi unde sunt și *ce valoare au pentru tine*. Dar în același timp ești conectat cu toate lucrurile unde ai ajuns, ceea ce ar fi legătura `this` în cazul execuției funcției.
 
-Acum apare minunea: dacă declari o funcție în interiorul altei funcții, pe care o returnezi, vei avea acces la un set de date ce nu pot fi prelucrate direct. Acesta este și motivul pentru care avem acest instrument foarte puternic care este closure-ul. Poți realiza variabile private. Ascunderea unui set de date ce nu poate fi manipulat direct, care poate fi accesat la un moment dat sau dacă este nevoie cu o anumită întârzire, ori pur și simplu să știi că există o structură de date creată în anumite condiții, dar cu care poți interacționa, este ceea ce oferă closure-urile.
+Acum apare minunea: dacă declari o funcție în interiorul altei funcții, pe care o returnezi, vei avea acces la un set de date ce nu pot fi prelucrate direct. Acesta este și motivul pentru care avem acest instrument foarte puternic care este closure-ul. Poți realiza *variabile private*. Ascunderea unui set de date ce nu poate fi manipulat direct, care poate fi accesat la un moment dat sau dacă este nevoie cu o anumită întârziere, ori pur și simplu să știi că există o structură de date creată în anumite condiții, dar cu care poți interacționa, este ceea ce oferă closure-urile.
 
-Bineînțeles vei avea o variabilă-identificator căreia îi va fi atribuit rezultatul evaluării funcției gazdă. Rezultatul va fi funcția returnată (**nu uita niciodată că mai întâi de toate, o funcție este o valoare în sine**), care, magie, are acces încă la mediul lexical al funcției gazdă, chiar dacă aceasta și-a încheiat execuția.
+Bineînțeles, vei avea o variabilă-identificator căreia îi va fi atribuit rezultatul evaluării funcției gazdă. Rezultatul va fi funcția returnată (**nu uita niciodată că mai întâi de toate, o funcție este o valoare în sine**), care, magie, are acces încă la mediul lexical al funcției gazdă, chiar dacă aceasta și-a încheiat execuția.
 
-![](ClosureVisual.png)
+!["ghid vizual pentru closure"](ClosureVisual.png)
 
-Te vei întreba pe bună dreptate: cum să mai fie disponibile datele unei funcții care și-a terminat execuția, când știm foarte bine că *dispar* (sunt trimise la gunoi)?
+Te vei întreba pe bună dreptate: cum să mai fie disponibile datele unei funcții care și-a terminat execuția, când știm foarte bine că *dispar* (sunt *colectate la gunoi*)?
 
-Răspunsul este unul simplu și plin de lumină: funcția noastră a returnat o altă funcție, care și ea la rândul ei are nevoie de date din mediul lexical în care a fost declarată, plus toate referințele la datele necesare pentru a se putea face evaluarea codului din corpul său. Și cum acestea aparțineau funcției gazde, acestea nu vor fi colectate la gunoi, ci vor fi disponibile tocmai pentru a-i servi celei returnate.
+Răspunsul este unul simplu și plin de lumină: funcția noastră a returnat o altă funcție, care și ea la rândul ei are nevoie de date din mediul lexical în care a fost declarată, plus toate referințele la datele necesare pentru a se putea face evaluarea codului din corpul său. Și cum acestea aparțineau funcției gazde, acestea nu vor fi colectate la gunoi, ci vor fi disponibile tocmai pentru a-i servi celei returnate. Adu-ți mereu aminte de faptul că această structură de date disponibilă funcției care face closure, nu se formează decât în momentul în care funcția gazdă este executată. Adică atunci când gazda va crea contextul de execuție, moment în care se creează mediul local care va fi menținut în viață. Nu toate datele, ci doar cele necesare funcției returnate. Dacă s-ar ține în viață toate datele, acestea ar sta în memorie fără a fi utilizate vreodată de nimeni. Reține că un closure se face doar peste datele utile funcției returnate ca aceasta să se execute în bune condiții. După ce funcția gazdă și-a încheiat execuția, contextul de execuție pe care l-a creat dispare, dar nu și acest set de date necesar mai departe unei funcții returnate. Poți să te gândești că este cel mai util zombie pe care JavaScript îl creează.
 
 Profesorul Christopher Strachey, cercetător britanic în domeniul sistemelor de calcul, spunea încă din octombrie 1967:
 
 > Aplicarea unei funcții argumentelor sale implică evaluarea expresiei care o definește după ce au fost date valori variabilelor conectate la acestea din lista argumentelor.
-
 > Astfel, valoarea-R a funcției conține două părți: o regulă pentru evaluarea expresiei și un mediu care să-i ofere variabilele libere. O valoare-R de acest tip va fi numită un closure. Nu este nicio problemă în reprezentarea regulii dintr-un closure ca fiind adresa unui fragment de program ceea ce este suficient (i.e. punctul de acces pentru o subrutină). Cel mai direct mod de a reprezenta mediul este printr-un pointer (n.n. un pointer, este un indicator către o valoare) către un Free Variable List (FVL), care are câte o intrare pentru fiecare variabilă liberă a funcției. Această listă este formată atunci când funcția este definită inițial (mai exact atunci când expresia-λ care este funcția, este evaluată, de regulă la momentul definirii funcției) și în acest moment, fie valoarea-R, fie valoarea-L a oricăreia dintre variabilele libere este copiată în FVL.
 
 λ: lam(b)da este a unsprezecea literă a alfabetului grec.
@@ -62,7 +61,7 @@ Funcțiile sunt valori! Pot fi pasate ca valori altor funcții și pot fi return
 
 Un closure menține accesul la toate variabilele care erau *în scope* la momentul definirii funcției. Putem spune că o funcție din interiorul altei funcții este o funcție *privată*, cu acces la mediul lexical al gazdei.
 
-**Moment Zen**: Toate closure-urile - funcțiile din aceeași gazdă - împărtășesc același mediu.
+**Moment Zen**: Toate closure-urile *funcțiile din aceeași gazdă* împărtășesc același mediu.
 
 Acest comportament al closure-urilor este oportun pentru a *ascunde* date, pentru a le face private.
 
@@ -130,39 +129,39 @@ closureEx()();
 
 ## Dependințe cognitive
 
--   funcții
--   scope (**Lexical Environment**)
+* funcții
+* scope (**Lexical Environment**)
 
 ## Mantre
 
--   Folosirea cuvântului cheie `function` într-o funcție gazdă, creează un closure.
--   JavaScript are un **scope lexical** (lexical environment) generat la faza de compilare.
--   Closure-uri generează doar funcțiile.
--   Closure-ul în sine nu este un obiect care să conțină toată informația necesară.
--   Un closure permite accesarea variabilelor definite în funcția container și, atenție, le poate și modifica.
--   Toate variabilele din scope, chiar dacă sunt declarate după ce funcția container a fost declarată, sunt incluse în closure.
--   Accesarea de informație prin intermediul unui closure, taxează memoria, pentru că la fiecare invocare a funcției care face closure, un nou set de informații va fi alocat în memorie.
--   În cazul buclelor, bindingul closer-ului se va face pe ultimul rezultat al buclei. Nu te aștepta să existe rezultate intermediare. În acest caz, abia la momentul returnării funcției interne, se face referențierea valorilor și de aceea va fi ultima valoare din operațiunea de ciclare.
--   De fiecare dată când funcția externă este apelată, funcția internă este definită din nou. Codul funcției interne va fi identic, dar scope chain-ul asociat va fi diferit. Pe scurt, se resetează valorile la cele definite, daca acestea au fost modificate.
--   De fiecare dată când funcția gazdă este apelată, se creează un nou set de variabile pentru acea invocare.
--   Variabilele din scope-ul pus la dispoziție de un closure **pot fi modificate**.
--   **Un closure nu poate accesa `this` al funcției container**. În acest scop se folosește salvarea lui this într-o variabilă `var self = this;`
--   Un closure stochează valorile externe prin referință, nu prin valoare.
--   Ori de câte ori folosești `eval()` într-o funcție, este folosit un closure. Textul de cod pe care-l folosești cu eval poate referenția variabile locale ale funcției gazde, dar și variabile declarare în textul de cod folosit cu eval.
--   Folosirea constructorului de funcții în interiorul unei funcții gazde `new Function()`, nu conduce la crearea unui closure.
--   Closure-urile pot merge mai adânc de un nivel.
--   Closure-ul introduce posibilitatea unor **variabile private**.
--   Pentru ca un closure să se formeze nu este neapărat nevoie să se facă un return. Accesarea variabilelor din afara scope-ului lexical propriu, creează un closure.
+* Folosirea cuvântului cheie `function` într-o funcție gazdă, creează un closure.
+* JavaScript are un **scope lexical** (lexical environment) generat la faza de compilare.
+* Closure-uri generează doar funcțiile.
+* Closure-ul în sine nu este un obiect care să conțină toată informația necesară.
+* Un closure permite accesarea variabilelor definite în funcția container și, atenție, le poate și modifica.
+* Toate variabilele din scope, chiar dacă sunt declarate după ce funcția container a fost declarată, sunt incluse în closure.
+* Accesarea de informație prin intermediul unui closure, taxează memoria, pentru că la fiecare invocare a funcției care face closure, un nou set de informații va fi alocat în memorie.
+* În cazul buclelor, bindingul closer-ului se va face pe ultimul rezultat al buclei. Nu te aștepta să existe rezultate intermediare. În acest caz, abia la momentul returnării funcției interne, se face referențierea valorilor și de aceea va fi ultima valoare din operațiunea de ciclare.
+* De fiecare dată când funcția externă este apelată, funcția internă este definită din nou. Codul funcției interne va fi identic, dar scope chain-ul asociat va fi diferit. Pe scurt, se resetează valorile la cele definite, daca acestea au fost modificate.
+* De fiecare dată când funcția gazdă este apelată, se creează un nou set de variabile pentru acea invocare.
+* Variabilele din scope-ul pus la dispoziție de un closure **pot fi modificate**.
+* **Un closure nu poate accesa `this` al funcției container**. În acest scop se folosește salvarea lui this într-o variabilă `var self = this;`
+* Un closure stochează valorile externe prin referință, nu prin valoare.
+* Ori de câte ori folosești `eval()` într-o funcție, este folosit un closure. Textul de cod pe care-l folosești cu eval poate referenția variabile locale ale funcției gazde, dar și variabile declarare în textul de cod folosit cu eval.
+* Folosirea constructorului de funcții în interiorul unei funcții gazde `new Function()`, nu conduce la crearea unui closure.
+* Closure-urile pot merge mai adânc de un nivel.
+* Closure-ul introduce posibilitatea unor **variabile private**.
+* Pentru ca un closure să se formeze nu este neapărat nevoie să se facă un return. Accesarea variabilelor din afara scope-ului lexical propriu, creează un closure.
 
 ## Anatomie
 
 Un closure, are acces la:
 
--   variabile și obiectele care aparțin de scope-ul global,
--   variabilele și obiectele care aparțin scope-ului funcției părinte, plus parametrii acesteia,
--   toate variabilele declarate după (d.p.d.v. lexical) ce funcția (care face closure-ul) a fost declarată.
+* variabile și obiectele care aparțin de scope-ul global,
+* variabilele și obiectele care aparțin scope-ului funcției părinte, plus parametrii acesteia,
+* toate variabilele declarate după (d.p.d.v. lexical) ce funcția (care face closure-ul) a fost declarată.
 
-### La ce avem acces:
+### La ce avem acces
 
 ```javascript
 var extern = 1000;
@@ -378,8 +377,8 @@ Cu ajutorul closure-urilor se poate scrie cod care să ruleze într-un mediu izo
 ```javascript
 // exemplu de closure anonim
 (function () {
-	// toate variabilele și funcțiile se află doar în acest scope
-	// se pot accesa toate variabilele globale
+    // toate variabilele și funcțiile se află doar în acest scope
+    // se pot accesa toate variabilele globale
 }());
 ```
 
@@ -430,7 +429,7 @@ var alege = faCeva("Gino", colectie);
 alege();  // Gino
 ```
 
-### Bucle buclucașe - iterări care produc closure-uri
+### Bucle buclucașe * iterări care produc closure-uri
 
 Să ne aducem aminte faptul că ori de câte ori declari o funcție, aceasta face *o fotografie* a mediului lexical în care *s-a născut*.
 Buclele buclucașe se referă la faptul că te aștepți la un anumit rezultat, dar pentru că variabilele declarate cu `var` permit ceea ce se numește *shadowing*, adică înlocuirea valorii imediat ce este disponibilă o nouă valoare căreia îi este atribuită, vei avea în closure ultima valoare a buclei pentru acea variabilă, nu valorile de etapă, adică valoarea pentru fiecare iterație.
@@ -568,7 +567,7 @@ run();
 
 ![Scopping făcut la nivel de funcție internă care ține minte mediul pentru fiecare iterație](closureInLoops.png)
 
-### Diferența dintre binding și assignment - closures în bucle
+### Diferența dintre binding și assignment * closures în bucle
 
 Crearea unui mediu lexical la momentul rulării codului conduce la alocarea unui „spațiu” în memorie pentru fiecare variabilă care se „leagă” de o valoare în respectivul mediu lexical.
 
@@ -635,9 +634,9 @@ Funcțiile de nivel înalt și closure-urile formează coloana vertebrală a pro
 
 ## Referințe
 
-- [JavaScript Allongé, the "Six" Edition](https://leanpub.com/javascriptallongesix/read#closures)
-- [JavaScript Getters and Setters](https://javascriptplayground.com/blog/2013/12/es5-getters-setters/)
-- [Javascript Closures | jibbering.com](http://jibbering.com/faq/notes/closures/)
-- [JavaScript Closures | kentcdodds.com](https://kentcdodds.com/blog/javascript-closures)
-- [Grokking V8 closures for fun (and profit?) | Vyacheslav Egorov](https://mrale.ph/blog/2012/09/23/grokking-v8-closures-for-fun.html)
-- [Javascript Anonymous Closure | stackoverflow.com](https://stackoverflow.com/questions/16032840/javascript-anonymous-closure)
+* [JavaScript Allongé, the "Six" Edition](https://leanpub.com/javascriptallongesix/read#closures)
+* [JavaScript Getters and Setters](https://javascriptplayground.com/blog/2013/12/es5-getters-setters/)
+* [Javascript Closures | jibbering.com](http://jibbering.com/faq/notes/closures/)
+* [JavaScript Closures | kentcdodds.com](https://kentcdodds.com/blog/javascript-closures)
+* [Grokking V8 closures for fun (and profit?) | Vyacheslav Egorov](https://mrale.ph/blog/2012/09/23/grokking-v8-closures-for-fun.html)
+* [Javascript Anonymous Closure | stackoverflow.com](https://stackoverflow.com/questions/16032840/javascript-anonymous-closure)

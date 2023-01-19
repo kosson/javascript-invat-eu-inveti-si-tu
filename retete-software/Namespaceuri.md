@@ -1,8 +1,8 @@
 # Crearea de namespace-uri
 
-Pentru a evita coliziuni cu numele date unor constructori sau funcții care aparțin altor biblioteci de cod, se vor constitui „spații” destinate rulării codului propriu.
+Pentru a evita coliziuni cu numele date unor constructori sau funcții care aparțin altor biblioteci de cod, se vor constitui *spații* destinate rulării codului propriu.
 
-## Constituirea unor „namespaceuri” pentru propriile obiecte
+## Constituirea unor namespace-uri pentru propriile obiecte
 
 ```javascript
 var zonaMea = zonaMea || {}; // constituirea zonei în care va trăi obiectul creat

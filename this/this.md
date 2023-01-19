@@ -24,7 +24,7 @@ Pentru a înțelege legătura `this`, vom observa ce ce petrece când aceasta se
 ```javascript
 // "use strict"; // în acest caz, `this` is undefined
 var ceva = 100; // ai putea declara și cu `let`
-/* Atenție, `let` împiedică `ceva` să devină variabilă globală și rezultarul va fi returnarea valorii undefined*/
+/* Atenție, `let` împiedică `ceva` să devină variabilă globală și rezultatul va fi returnarea valorii undefined*/
 const obi = {
   ceva: 'text',
   faCeva: function gazda () {
@@ -530,7 +530,7 @@ this.array.forEach(function (el) => {
 - `bind()` creează o nouă funcție, care atunci când este apelată va avea `this` setat la valoarea introdusă ca paramentru împreună cu o serie de argumente.
 - `bind()` nu modifică funcția originală cu nimic, pur și simplu construiește una nouă.
 
-## Resurse:
+## Resurse
 
 - [DOM Living Standard](https://dom.spec.whatwg.org/#context-object)
 - [MDN Function.prototype.bind()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
