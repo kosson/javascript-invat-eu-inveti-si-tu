@@ -65,7 +65,7 @@ Un closure menține accesul la toate variabilele care erau *în scope* la moment
 
 Acest comportament al closure-urilor este oportun pentru a *ascunde* date, pentru a le face private.
 
-Un alt aspect foarte important pe care trebuie să-l reții este acela că ori de câte ori funcția gazdă este apelată, va crea un context de execuție, ceea ce înseamnă că și closure-uri diferite. 
+Un alt aspect foarte important pe care trebuie să-l reții este acela că ori de câte ori funcția gazdă este apelată, va crea un context de execuție, ceea ce înseamnă că și closure-uri diferite.
 
 ## Closure cu fat arrows
 
