@@ -185,7 +185,7 @@ Poți testa eșecul prin apelarea funcției callback `reject`. Funcția cu rol d
 let altăPromisiune = new Promise((resolve, reject) => {
   try {
     let valoare = 'niște date'; // Obține aici o valoare prin evaluarea unei expresii
-    resolve(valoare); // declanșează apelarea calllback-ului pasat în then, care primește valoarea
+    resolve(valoare); // resolve declanșează apelarea callback-ului pasat în then, care primește valoarea
   } catch (error) {
     reject(new Error(error)); // erorile apărute în evaluarea expresiilor din `try`
   }
@@ -212,7 +212,9 @@ new Promise((resolve, reject) => {
 });
 ```
 
-Dacă în exemplul de mai sus am comenta în cod callback-ul `resolve`, promisiunea ar rămâne perpetuu *agățată*. Asigură-te că starea promisiunii se va modifica la un moment dat. Interesant este și faptul că poți apela direct metoda `resolve` a obiectului `Promise`. Pentru a apela direct `resolve`, asigură-te că argumentul este o valoare care va exista cu siguranță fără a genera o eroare. În scop demonstrativ, vom folosi un șir de caractere.
+Dacă în exemplul de mai sus am comenta în cod callback-ul `resolve`, promisiunea ar rămâne perpetuu *agățată*. Asigură-te că starea promisiunii se va modifica la un moment dat.
+
+Interesant este și faptul că poți apela direct metoda `resolve` a obiectului `Promise`. Pentru a apela direct `resolve`, asigură-te că argumentul este o valoare care va exista cu siguranță fără a genera o eroare. În scop demonstrativ, vom folosi un șir de caractere.
 
 ```javascript
 let eRezolvatăDeja = Promise.resolve('valoarea necesară');
@@ -230,15 +232,17 @@ rezolvareLaCerere().then((valoare) => {
 });
 ```
 
-Un astfel de lucru cu promisiunile nu aduce niciun beneficiu, iar bune practici invită la evitarea sa. Obsevă faptul că poți crea o promisiune prin trei moduri. Instanțierea obiectului prin `new Promise(() => {})`, prin apelarea directă a metodei `Promise.resolve` sau prin apelarea directă `Promise.reject`.
+Un astfel de lucru cu promisiunile nu aduce niciun beneficiu, iar bune practici invită la evitarea sa. Observă faptul că poți crea o promisiune prin trei moduri. Instanțierea obiectului prin `new Promise(() => {})`, prin apelarea directă a metodei `Promise.resolve` sau prin apelarea directă `Promise.reject`. Utilizarea unor [API-uri ale browserului](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs), precum `fetch` sau `Clipboard`, care vor crea o promisiune sunt o altă metodă de a le crea.
 
 ### Fă o promisiune și împlinește-o
 
 La apelarea cu `new`, constructorul `Promise` creează obiectul promisiune, cel care pune la dispoziție o metodă `then`. Am putea spune că prezența metodei `then` este marca promisiunilor.
 
-Metoda `then` primește drept prim argument o funcție cu rol de callback pentru prelucrarea datelor în caz de succes (în limba engleză *fulfillment handler*). Metoda `then` primește drept prim parametru o referință către o funcție care va fi executată de îndată ce datele au sosit și stiva apelurilor este goală. Metodei `then` îi poți pasa un al doilea argument, care tot o funcție cu rol de callback este. Aceasta va fi apelată în cazul unei respingeri (în limba engleză *rejection handler*). Primul argument este un callback căruia, în spate îi sunt pasate datele ca valoare a primului argument al acesteia.
+Metoda `then` primește drept prim argument o funcție cu rol de callback pentru prelucrarea datelor în caz de succes (în limba engleză *fulfillment handler*). Calback-ul primit va fi introdus într-o coadă de așteptare numită *microtask queue*, unde va aștepta ca întreg codul sincron să-și termine execuția, adică stiva de execuție a apelurilor (*call stack*) este goală. Dacă *call stack*-ul este gol, callback-ul este luat din *microtask queue* unde aștepta, datele primite sunt legate automat la parametrul introdus ca prim argument al callback-ului și este introdus în *call stack* pentru a-i fi executat corpul. Adu-ți mereu aminte de faptul că motorul Javascript are două cozi de așteptare: *task queue* numit și *callback queue* în care sunt introduse funcțiile cu rol de callback care au fost pasate drept argument unor apeluri la API-uri ale browserului și una numită *microtask queue* care are prioritate în fața *task queue*-ului când vine vorba de întâietatea la execuție prin introducerea în *call stack*. Decizia și prioritizarea acestor funcții cu rol de callback o face mecanismul *event loop* care monitorizează permanent cele două cozi de așteptare. Pe bună dreptate, te vei întreba când ajunge callback-ul unei promisiuni în *microtask queue*. Motorul JavaScript monitorizează momentul când datele sunt disponibile și în acel moment, dacă tot codul sincron din global a fost executat, introduce callback-ul pasat lui `then` în *microtask queue*. Apoi, *event loop* va *injecta* funcția spre execuție în *call stack*, unde se va face evaluarea corpului funcției, având la dispoziție datele deja disponibile. Abia după ce *microtask queue* este gol, *call stack* este gol, *event loop* va trimite spre execuție și funcțiile din *callback queue*.
 
-Pentru a trata erorile înlănțuiești o metodă `catch` după `then`. 
+Metodei `then` îi poți pasa un al doilea argument, care tot o funcție cu rol de callback este. Aceasta va fi apelată în cazul unei respingeri (în limba engleză *rejection handler*). Primul argument este un callback căruia, în spate îi sunt pasate datele ca valoare a primului argument al acesteia.
+
+Pentru a trata erorile înlănțuiești o metodă `catch` după `then`.
 
 **Moment ZEN**: `then` este folosit pentru a constitui un lanț de operațiuni asincrone aplicabile pe rezultatul apărut.
 
@@ -263,7 +267,7 @@ promisiune.then(
 });
 ```
 
-Tot codul din constructor va fi executat sincron la momentul instanțierii obiectului promisiune. Spunem că promisiunile sunt *iuți* (*eager*) în execuția codului. Codul din funcția cu rol de executor nu este executat asincron. Linie după linie, tot codul va fi executat și în cazul în care sunt operațiuni asincrone în cod, acestea vor fi tratate în funcție de API-ul fiecăruia. Astfel, vor fi programate și tratate toate operațiunile asincrone, fiind folosite mecanismele *event loop*-ului (cozile de așteptare: microtask și task). Pentru că promisiunile fac o *programare* a execuției codului asincron, am putea crede că fac o evaluare doar *dacă e necesar* (*lazy*), ceea ce este fals. În cazul în care dorești o evaluare *lazy* a unei promisiuni, o poți *îmbrăca* într-o funcție pe care să o aplezi în viitor *dacă e necesar*.
+Tot codul din constructor va fi executat sincron la momentul instanțierii obiectului promisiune. Spunem că promisiunile sunt *iuți* (*eager*) în execuția codului. Codul din funcția cu rol de executor nu este executat asincron. Linie după linie, tot codul va fi executat și în cazul în care sunt operațiuni asincrone în cod, acestea vor fi tratate în funcție de API-ul fiecăruia. Astfel, vor fi programate și tratate toate operațiunile asincrone, fiind folosite mecanismele *event loop*-ului (cozile de așteptare: microtask și task). Pentru că promisiunile fac o *programare* a execuției codului asincron, am putea crede că fac o evaluare doar *dacă e necesar* (*lazy*), ceea ce este fals. În cazul în care dorești o evaluare *lazy* a unei promisiuni, o poți *îmbrăca* într-o funcție pe care să o apelezi în viitor *dacă e necesar*.
 
 ```javascript
 const creezOPromisiuneLazy = () => new Promise((resolve, reject) => {
@@ -630,6 +634,7 @@ Gestionează reject-urile. În cazul în care acestea sunt neglijate, memoria ș
 * [P.Z.Ingerman.Thunks: A Way of Compiling Procedure Statements with Some Comments on Procedure Declarations](http://archive.computerhistory.org/resources/text/algol/ACM_Algol_bulletin/1064045/frontmatter.pdf)
 * [Thunks](https://github.com/thunks/thunks)
 * [Rethinking Asynchronous JavaScript: Thunks](https://frontendmasters.com/courses/rethinking-async-js/thunks/)
+* [Native JavaScript Promises and Browser APIs | Will Fuqoa](https://fuqua.io/blog/2014/02/native-javascript-promises-and-browser-apis/)
 
 ### Video
 
