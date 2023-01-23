@@ -73,9 +73,45 @@ Funcția reprezintă o valoare în sine înainte de a fi executată - codul ECMA
 
 Pentru a înțelege mecanismele oferite de o funcție în prelucrarea datelor, vom examina o funcție desfăcând părțile sale așa cum le prezintă la momentul execuției. Până când nu este apelată, o funcție este o simplă valoare, un simplu obiect.
 
-![](FunctiaLaMomentulExecutiei.png)
+![O funcție așa cum arată aceasta în momentul execuției](FunctiaLaMomentulExecutiei.png)
 
-Atunci când este invocată o funcție, se creează un nou *mediu lexical* propriu acelei funcții, adică un set de date disponibil numai codului său. În afară de acesta, orice funcție va moșteni automat proprietățile și metodele obiectelor interne `Object` și `Function`. Îți mai aduci aminte de capitolul pe care l-am dedicat Genezei și apoi dualității funcție-obiect? Toate acele informații sunt necesare acum pentru a înțelege natura unei funcții. O funcție moștenește proprietăți de la cele două obiecte interne fundamentale `Object` și `Function`. Moștenește proprietățile din obiectul prototipal `Function.prototype`, care la rândul lui moștenește proprietăți din `Object.prototype`.
+Atunci când este invocată o funcție, se creează un nou *mediu lexical* propriu acelei funcții, adică un set de date disponibil numai codului său (*local scope*). În afară de acesta, orice funcție va moșteni automat proprietățile și metodele obiectelor interne `Object` și `Function`. Îți mai aduci aminte de capitolul pe care l-am dedicat Genezei și apoi dualității funcție-obiect? Toate acele informații sunt necesare acum pentru a înțelege natura unei funcții. O funcție moștenește proprietăți de la cele două obiecte interne fundamentale `Object` și `Function`. Moștenește proprietățile din obiectul prototipal `Function.prototype`, care la rândul lui moștenește proprietăți din `Object.prototype`.
+
+Pentru că o funcție este un obiect, îi pot fi adăugate proprietăți.
+
+```javascript
+function facCeva () {
+    return 'saluuut!';
+};
+
+facCeva.prima = 10;
+```
+
+Pornind de la exemplul de mai sus, vom observa că obiectul funcție are o proprietate numită `prototype` a cărei valoare este un obiect gol numai bun de a fi populat cu proprietăți utile cuiva. Iar acest *cuiva* este un viitor obiect care va fi instanțiat prin aplicarea operatorului `new` la momentul apelării funcției.
+
+```javascript
+function FacCeva () {
+    return 'saluuut!';
+};
+
+FacCeva.prima = 10;
+FacCeva.prototype; // este un obiect gol: {}
+
+FacCeva.prototype.salut = function () {
+    return 'salut';
+};
+
+FacCeva.prototype; // {salut: function...}
+
+let regasire = new FacCeva();
+regasire.salut(); // {salut: function...}
+
+regasire.__proto__; // {salut: function...}
+```
+
+Astfel se împlinește dualitatea funcție obiect prin această extraordinar de utilă posibilitate de a crea obiectul prototipal la care se va face legătura unui viitor obiect creat prin apelarea cu `new`. Tot ce se află în obiectul `facCeva.prototype` va fi accesibil noului obiect prin conexiunea pe care o face `__proto__`. Acestă legătură se realizează doar la momentul instanțierii cu `new`.
+
+Acesta este mecanismul pe baza căruia funcționează clasele în JavaScript. Clasele sunt doar o rearanjare sintactică a acestui mecanism de creare a obiectelor în baza unor funcții cu scopul de a concentra funcționalitățile și pentru a evita repetițiile și astfel erorile.
 
 ### Crearea contextului de execuție
 
