@@ -2,7 +2,6 @@
 
 Scopul acestui șablon este acela de a separa obiectele complexe de reprezentarea lor. Pe baza obiectului complex ar trebui să se poată crea diferite reprezentări.
 
-
 ```javascript
 function VehiculSpatial () {
   this.reactor = 'ataseaza un reactor';

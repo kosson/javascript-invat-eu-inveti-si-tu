@@ -1,6 +1,6 @@
 # Object.create()
 
-Este o metodă propusă de Douglas Crockford. Aceasta creează un obiect nou cu un prototip și proprietăți specificate. Pentru a înțelege istoricul și necesitatea acestei metode, vă recomand să citiți secțiunea *Prototype* a capitolului 3 *Object* din cartea sa *JavaScript: The Good Parts*. Următorul fragment de cod are o valoare istorică care oferă înțelegerea profundă a efectelor modernei metode pe care o avem la dispoziție.
+Este o metodă propusă de Douglas Crockford. Aceasta creează un obiect nou cu un prototip și proprietăți specificate. Pentru a înțelege istoricul și necesitatea acestei metode, vă recomand să citiți secțiunea *Prototype* a capitolului 3 *Object* din cartea sa *JavaScript: The Good Parts*. Următorul fragment de cod are o valoare istorică care oferă înțelegerea profundă a efectelor metodei moderne pe care o avem la dispoziție.
 
 ```javascript
 if (typeof Object.create !== 'function') {
@@ -12,7 +12,7 @@ if (typeof Object.create !== 'function') {
 }
 ```
 
-Este ușor de înțeles faptul că se introducea o nouă metodă obiectului global `Object`, care are rolul să creeze un constructor `F` căruia să-i atașeze un obiect prototip a cărui valoare va fi obiectul pasat noii metode `create`. La final, metoda returnează un obiect constituit prin instanțierea cu `new`.
+Este ușor de înțeles faptul că se introducea o nouă metodă obiectului global `Object` numită `create`. La momentul apelării, preia valoarea argumentului `o`, care este un obiect și înlocuiește obiectul `prototype` gol al unei funcții declarate intern. La final, metoda returnează un obiect constituit prin instanțierea cu `new` pe funcția a cărui obiect `prototype` va fi cel la care se va realiza legătura prototipală `__proto__` a obiectelor instanțiate folosind `Object.create`.
 
 Permite atribuirea directă a unui prototip unui obiect eliberând prototipul de legătura cu, constructorul.
 
@@ -136,8 +136,8 @@ var obiX     = {a: 'origine'},
 console.log(obiZ.a); // a
 ```
 
-## Referințe
+## Resurse
 
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create
-https://nemisj.com/why-getterssetters-is-a-bad-idea-in-javascript/
-https://stackoverflow.com/questions/18524652/how-to-use-javascript-object-defineproperty
+- [Object.create | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create)
+- [Why getters/setters is a bad idea in JavaScript | MAKS NEMISJ | 2015](https://nemisj.com/why-getterssetters-is-a-bad-idea-in-javascript/)
+- [how to use javascript Object.defineProperty | stackoverflow](https://stackoverflow.com/questions/18524652/how-to-use-javascript-object-defineproperty)

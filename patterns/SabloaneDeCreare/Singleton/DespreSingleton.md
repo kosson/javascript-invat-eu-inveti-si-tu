@@ -4,28 +4,28 @@ Acest model permite generarea unui obiect care va fi unic în aplicație. Cel ma
 
 ## Dependințe cognitive
 
--   funcții
--   this
--   obiecte
--   clojure
--   IIFE
--   Revealing Module Pattern
+* funcții
+* this
+* obiecte
+* clojure
+* IIFE
+* Revealing Module Pattern
 
 ## Mantre
 
--   folosit pentru a „conserva” starea unei aplicații și apoi accesa această stare în întreaga aplicație
--   este folosit doar la momentul instanțierii, iar după, poate fi doar actualizat, fiind unic în întreaga aplicație
--   creează un namespace distinct
--   are instanțiere întârziată
--   e o interfață globală constantă pentru toți cei care au nevoie să-l folosească
--   Modificarea concomitentă a valorilor, va duce la suprascrierea valorilor.
--   are o instanțiere întârziată, adică va fi folosit atunci când va fi nevoie de acesta, când va fi instanțiat.
+* folosit pentru a *conserva* starea unei aplicații și apoi accesa această stare în întreaga aplicație;
+* este folosit doar la momentul instanțierii, iar după, poate fi doar actualizat, fiind unic în întreaga aplicație;
+* creează un namespace distinct;
+* are instanțiere întârziată;
+* e o interfață globală constantă pentru toți cei care au nevoie să-l folosească;
+* Modificarea concomitentă a valorilor, va duce la suprascrierea valorilor;
+* are o instanțiere întârziată, adică va fi folosit atunci când va fi nevoie de acesta, când va fi instanțiat.
 
 În JavaScript, Singleton-urile folosesc la crearea unui spațiu distinct (namespace), care izolează codul implementării de *global scope*. Pentru acest obiect este oferit un singur punct de intrare către metode.
 
 **Moment ZEN**: Un Singleton este doar o structură de organizare a funcționalităților.
 
-Pentru a înțelege cum funcționează, cel mai simplu ar fi să-l analizăm. Avem o zonă privată și o zonă publică. Zona publică se comportă ca punct de intrare către zona internă. Partea „publică” poate fi considerată o interfață de acces.
+Pentru a înțelege cum funcționează, cel mai simplu ar fi să-l analizăm. Avem o zonă privată și o zonă publică. Zona publică se comportă ca punct de intrare către zona internă. Partea *publică* poate fi considerată o interfață de acces.
 
 ### 1. Declară un IIFE
 
@@ -60,7 +60,7 @@ var unSingleton = (function () {
 ### 3. Returneză condițional obiectul constituit
 
 După ce dotezi funcția cu tot ce crezi că ar nevoie obiectului final, vei face `return` unui obiect literal care are o unică metodă.
-Rolul metodei este să testeze dacă obiectul a fost instanțiat, verificând valoarea variabilei definite inițial. Dacă valoarea este „undefined”, înseamnă că obiectul încă nu a fost instanțiat, fiind pe loc. Acest lucru se va face prin atribuirea valorii evaluate prin invocarea funcției `generator`.
+Rolul metodei este să testeze dacă obiectul a fost instanțiat, verificând valoarea variabilei definite inițial. Dacă valoarea este *undefined*, înseamnă că obiectul încă nu a fost instanțiat. Acest lucru se va face prin atribuirea valorii evaluate prin invocarea funcției `generator`.
 Dacă obiectul a fost creat deja, pur și simplu va fi returnat.
 
 O convenție pentru construcția Singleton-urilor impune ca toți identificatorii pentru membrii privați ai obiectului să fie sufixați cu *underscore*.
@@ -142,7 +142,7 @@ console.log(singletonTest.coordX); // afiseaza 10
 
 ## Singleton cu `class`
 
-Pentru că în JavaScript, o clasă este o valoare „first-class”, precum sunt și funcțiile, cu ajutorul acestora se pot construi mai rapid Singleton-uri.
+Pentru că în JavaScript, o clasă este o valoare *first-class*, precum sunt și funcțiile, cu ajutorul acestora se pot construi mai rapid Singleton-uri.
 
 ```javascript
 let avion = new class {
