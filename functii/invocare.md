@@ -22,8 +22,8 @@ Locul din structura sintactică a codului de unde se face invocarea funcției pe
 Contextul de execuție este o sumă de informații (*activation record*) privind:
 
     1. **unde** a fost apelată funcția (în call-stack);
-    2. ce parametri au fost pasați, etc.;
-    3. referința `this` care va fi folosită pe durata execuției funcției.
+    2. ce argumente au fost pasate, etc.;
+    3. la care obiect s-a făcut legătura `this` ce va fi folosită pe durata execuției funcției.
 
  #3 Se face legătura la contextul lexical asociat acelei funcții (scope-ul). Pentru scope-ul extern, funcția va pune drept referință valoarea proprietății interne a funcției numită `[[Environment]]`.
  #4 Se generează un obiect căruia îi sunt pasate automat argumentele într-o colecție asemănătoare unui array și se constituie legătura **this**.
@@ -62,10 +62,12 @@ O funcție declarată în interiorul unei metode a unui obiect, va face legătur
 
 Scopul unui constructor este acela de a crea un obiect, care este valoarea returnată prin execuția funcției cu operatorul `new`.
 
-1. Se creează un obiect nou.
-2. Se creează o legătură la obiectul prototype al funcției folosite cu `new`. Se creează legătura prototipală menținută peren pentru a reflecta în obiecte orice modificare a obiectului prototipal al funcției constructor.
-3. Obiectul generat automat este pasat funcției cu rol de constructor ca fiind parametrul `this` și astfel, devine contextul de execuție a funcției constructor invocate (`this` este pasat ca parametru împreună cu `arguments`).
-4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul (`}`), `this` va fi returnat automat.
+1. Se creează un context de execuție nou al funcției cu rol de constructor în care se creează o proprietate `this` care are drept valoarea un obiect nou;
+2. Se creează o legătură la obiectul care este valoarea proprietății `prototype` a funcției invocate cu `new`. Orice metodă a noului  obiect sau cel la care se face legătura prin `__proto__` (`this.__proto__` va returna `numeFnConstuctor.prototype`), va fi executată în contextul acestuia nou creat acum. Astfel, se creează legătura prototipală menținută peren pentru a reflecta în obiectele instanțiate orice modificare obiectului prototipal al funcției cu rol de constructor (adăugăm sau scoatem metodele care sunt moștenite de instanțe);
+3. Obiectul tocmai creat, devine contextul de execuție al funcției constructor invocate. Acest lucru înseamnă că și argumentele pasate la invocare prin parametrii lor devin proprietăți ale obiectului nou creat;
+4. Dacă funcția nu returnează ceva, atunci înainte de a se închide blocul de cod (`}`), obiectul la care s-a făcut legătura `this` va fi returnat automat. În acest moment, contextul de execuție dispare și tot ce rămâne este un obiect cu niște perechi cheie (nume parametru constructor) - valoare, dar și o legătură prototipală prețioasă la obiectul `prototype` al funcției constructor asigurată prin `__proto__`.
+
+În momentul în care ai obținut obiectul instanțiat în baza funcției noastre cu rol de constructor, vei putea folosi toate metodele care sunt stocate în `numeFnConstructor.prototype`. Căutarea lor se face automat pe lanțul moștenirii (*prototype chain*) până când sunt găsite. Dacă nu există, va fi returnată o eroare. Un alt lucru important este acela că datele inițiale care sunt proprii unui obiect care reflectă o entitate de lucru, pot fi trimise ca argument constructorului la momentul în care se face invocarea cu `new`. În schimb, funcționalitățile comune pentru noul obiect și pentru toate celelalte care pot fi instanțiate în baza aceeași funcții cu rol de constructor, vor fi *moștenite* de la obiectul `prototype` al constructorului. Odată înțelese aceste amănunte, calea înțelegerii claselor, care sunt doar o rearanjare sintactică, este deschisă.
 
 Există o mică discuție aici referitoare la invocarea unei funcții care este proiectată a fi constructor, dar care este utilizată în afara acestui scop. O funcție constructor poate returna o valoare, dacă este apelată fără operatorul `new`.
 
@@ -91,34 +93,34 @@ Mai există o situație interesantă legată de pierderea capacității de a gen
 ```javascript
 const obi = {a: 1};
 function Ceva () {
-  this.a = 10;
-  return obi;
+    this.a = 10;
+    return obi;
 };
 let obi2 = new Ceva();
 ```
 
-Ca regulă de bună practică, constructorii îi denumim cu substantive și cu literă mare spre deosebire de funcții și metode pe care le denumim cu verbe și cu literă mică.
+Ca regulă de bună practică, vom numi funcțiile cu rol de constructorii folosind substantive începând cu majusculă, spre deosebire de restul funcțiilor și a metodelor pe care le denumim folosind verbe fără majusculă.
 
-În cazul constructorilor se mai ridică o problemă interesantă. Toate variabile declarate în funcția constructor vor fi accesibile metodelor obiectului nou creat prin *closure*. Se poate realiza astfel o ascundere a unor valori care pot fi manipulate prin accesori. Acest lucru se petrece pentru că oricare funcție ține minte mediul în care au fost create prin slotul intern `[[Environment]]`.
+În cazul constructorilor se mai ridică o problemă interesantă. Toate variabilele declarate în funcția constructor vor fi accesibile metodelor obiectului nou creat prin *closure*. Se poate realiza astfel o ascundere a unor valori care pot fi manipulate prin accesori, de exemplu. Acest lucru se petrece pentru că oricare funcție ține minte mediul în care au fost create prin slotul intern `[[Environment]]`.
 
 ```javascript
 function Manipulare () {
-  let ascunsă = 10;
-  // creezi un getter
-  this.getAscunsă = function () {
-    return ascunsă;
-  };
-  // creezi un seter
-  this.setAscunsă = function (valoare) {
-    ascunsă = valoare;
-  };
+    let ascunsă = 10;
+    // creezi un getter
+    this.getAscunsă = function () {
+      return ascunsă;
+    };
+    // creezi un seter
+    this.setAscunsă = function (valoare) {
+      ascunsă = valoare;
+    };
 };
 var obi = new Manipulare();
 obi.getAscunsă();
 obi.setAscunsă(20);
 ```
 
-Indiferent cât de multe obiecte ar fi instanțiate, se creează un *closure* pe mediul funcției care joacă rolul de constructor la momentul instanțierii. Obiectele generate sunt diferite, fiecare pornind de la valorile existente în funcția constructor la momentul invocării. Ceea ce am realizat cu această tehnică este să *ascundem* variabile și să le manipulăm prin efectul de *closure* realizat de metodele care le țin în viață - un joc între contextele de execuție și mediul lexical.
+Indiferent cât de multe obiecte ar fi instanțiate, se creează un *closure* pe mediul local al funcției la momentul invocării cu `new`. Obiectele generate sunt diferite, fiecare pornind de la valorile existente în funcția constructor la momentul invocării. Ceea ce am realizat cu această tehnică este să *ascundem* variabile și să le manipulăm prin efectul de *closure* realizat de metodele care le țin în viață - un joc între contextele de execuție și mediul lexical.
 
 Din nefericire dacă creăm un alt obiect și îi facem un identificator căruia îi atribuim metoda de acces către valoarea așa-zis **privată**, o vom putea accesa cu ușurință pentru că până la urmă, o metodă este o funcție, care este o valoare. Acesta este motivul pentru care în JavaScript nu există posibilitatea de a avea variabile private cu adevărat.
 
@@ -143,7 +145,7 @@ Un alt caz este apelarea unui callback:
 
 ```javascript
 function tester(callback){
-  callback && callback();
+    callback && callback();
 };
 ```
 
@@ -153,7 +155,7 @@ Un *tail call* este invocarea unei funcții atunci când o funcție este invocat
 
 ```javascript
 function gazda () {
-  return faCeva();
+    return faCeva();
 };
 ```
 
@@ -161,13 +163,13 @@ function gazda () {
 
 - A invoca înseamnă aplicarea funcției pe zero sau mai multe argumente.
 - Funcțiile sunt invocate într-un loc care determină rezultatul, adică într-un anumit *context*.
-- La invocarea funcțiilor pe lângă argumente sunt constituite tacit legătura `this` și obiectul `arguments`.
-- Când invoci funcția ca metodă a unui obiect, acel obiect devine **contextul** funcției și acesta devine disponibil în funcție prin intermediul parametrului `this`.
-- `this` este un obiect-context: pentru funcții simple este `window` (nu și sub regula use strict), pentru metode este obiectul în care se execută, iar pentru noile obiecte create este chiar noul obiect generat.
+- La invocarea constructorilor pe lângă argumentele programatorului sunt constituite tacit legăturile la `this` (*implicit argument*) și la obiectul `arguments`.
+- Când invoci funcția ca metodă a unui obiect, acel obiect devine **contextul** funcției și acesta devine disponibil în funcție prin intermediul legăturii la `this`.
+- `this` este un obiect-context: pentru funcții simple este `window` (nu și sub regula `use strict`), pentru metode este obiectul în care se execută, iar pentru noile obiecte create este chiar noul obiect instanțiat.
 - în `"strict mode";`, la invocarea directă în global execution context `this` este `undefined`.
-- există patru cazuri în care o funcție este invocată: (1) ca funcție invocată în mod direct; (2) ca metodă, fapt care leagă invocarea de un obiect; (3) drept constructor prin care un nou obiect este generat; (4) prin folosirea lui `call()` și `apply()`.
+- există patru cazuri în care o funcție este invocată: (1) ca funcție invocată în mod direct; (2) ca metodă, fapt care leagă invocarea de un obiect; (3) drept constructor prin care un nou obiect este instanțiat; (4) prin folosirea lui `call()` și `apply()`.
 - La evaluarea funcției toate declarațiile dintre `{}` vor genera un `Environment Record`. Invocarea unei funcții creează un scope nou.
-- Contextul de execuție al unei funcții se modifică după *locul* în care a fost invocată.
+- Contextul de execuție al unei funcții se modifică după *locul*/*obiectul* în care a fost invocată.
 - Ori de câte ori o funcție este invocată se creează un nou context de execuție care este introdus în call-stack.
-- O funcție are acces și poate performa operațiuni asupra obiectului în interiorul căruia a fost invocată.
+- O funcție are acces și poate performa operațiuni asupra obiectului în contextul căruia a fost invocată.
 - O funcție care returnează, fie `true`, fie `false` se numește funcție *predicat*.
