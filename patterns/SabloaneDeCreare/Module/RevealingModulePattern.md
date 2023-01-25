@@ -2,11 +2,13 @@
 
 Acest model de organizare a codului se numește *revealing* pentru că programatorul alege care părți vor fi expuse aplicației precum o interfață. Este o versiune îmbunătățită a lui Module.
 
+Principala preocupare a programatorului este de a cupla cât mai aproape datele de lucru cu mecanismele de prelucrare ale acestora.
+
 ## Dependințe cognitive
 
 - closures
 - Immediately Invoked Function Expressions - IIFE
-- Șablonul Module - Module Pattern
+- Înțelegerea lui Module - Module Pattern
 
 ## Crearea unui modul
 
@@ -138,7 +140,7 @@ Un modul poate avea puncte de legătură cu mediul înconjurător prin pasarea �
 var modul = (function () {
   var obiectDeReturnat = {
     membru: 'un membru public',
-    faCeva: function (){
+    faCeva: function () {
       console.log('ceva din interiorul modulului');
     }
   };
@@ -147,13 +149,14 @@ var modul = (function () {
 
 // în acest moment, modulul conservă și starea internă datorită closure-ului realizat.
 
-var plugin = (function(modul){
+var plugin = (function (modul) {
   modul.membruDinPlugin = 'membru inserat în modul de plugin';
 }(modul || {}));
 ```
 
 Instantaneu ceea ce se întâmplă este că plugin introduce în obiectul modul un nou membru.
 
-Dezavantajul major acestui șablon este acela că în cazul în care o funcție internă face o referință către o funcție publică, acea funcție publică nu poate fi suprascrisă dacă este nevoie de o corectură.
+Dezavantajul major acestui șablon este acela că în cazul în care o funcție internă face o referință către o funcție publică, acea funcție publică nu poate fi suprascrisă dacă este nevoie de o corectură. Din nefericire, datele și funcționalitățile pentru modificare acestora se află cuplate strâns.
 
-Un alt dezavantaj este acela că modulul trebuie să fie într-un singur fișier. Și încă un lucru foate important.
+Un alt dezavantaj este acela că modulul trebuie să fie într-un singur fișier.
+
