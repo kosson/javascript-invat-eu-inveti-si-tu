@@ -156,7 +156,7 @@ Obiectul global nu este containerul tuturor obiectelor oricât de tentant ar fi 
 
 Dincolo de acestea există un univers mult mai larg al unor seturi de obiecte puse la dispoziție de browser, de exemplu. Acestea vor constitui ceea ce numim **interfețe de programare a aplicațiilor**, în limba engleză **Application Programming Interfaces**, pe scurt **API**-uri.
 
-Modul în care înțelegem ce oferă din start un obiect intern, este determinat și de un set de algoritmi rulați de motorul care implementează standardul ECMAScript. Reamintesc faptul că pentru a putea programa în JavaScript, există un motor al cărui treabă este să genereze obiectele interne, să interpreteze codului sursă, ș.a.m.d.
+Modul în care înțelegem ce oferă din start un obiect intern, este determinat și de un set de algoritmi rulați de motorul care implementează standardul ECMAScript. Reamintesc faptul că pentru a putea programa în JavaScript, există un motor a cărui treabă este să genereze obiectele interne, să interpreteze codului sursă, ș.a.m.d.
 
 Acești algoritmi sunt numiți `metode interne` ale obiectelor interne. Metodele interne definesc comportamentul la momentul rulării codul privind crearea și utilizarea acelui obiect. Implementarea acestor metode interne specificate de standard cade în responsabilitatea celor care construiesc motoare JavaScript - producătorii de browsere și Node.js. Reține acest aspect pentru a nu fi surprins când vei auzi sau citi discuții despre performanțele unui anume motor în comparație cu altul. Aceste metode interne sunt toate procesele care se petrec în inima unui motor atunci când, de exemplu, apelezi o metodă a unui obiect intern cum ar fi `Object.create()` sau `String.split()`.
 
@@ -274,9 +274,9 @@ const obi = {
 obi.b(); // 1
 ```
 
-Pentru o funcție care tocmai și-a început execuția, `this` este o proprietate care nu poate fi modificată. În cazul de mai sus, funcția cu rol de metodă, va avea acces la mediul lexical al obiectului pentru că, în primul rând a fost definită ca parte a aceluiași mediu lexical, dar mai mult, pentru că a stabilit legătura `this` automat la acel obiect.
+Pentru o funcție care tocmai și-a început execuția, `this` este o proprietate care nu poate fi modificată. În cazul de mai sus, funcția cu rol de metodă, va avea acces la mediul lexical al obiectului pentru că, în primul rând a fost definită ca parte a aceluiași mediu lexical, dar mai mult, pentru că a stabilit legătura `this` automat la acel obiect. Ca o mnemonică ușor de reținut, legătura `this` se realizează la obiectul din stânga punctului la momentul invocării metodei: `obi.b();`.
 
-Totuși, reține faptul că referința `this` este strict legată de *locul* în care a fost apelată funcția, nu de *locul* unde a fost declarată aceasta. Sunt două lucruri distincte. Dacă nu le vei percepe astfel încă de acum, te vei lovi de multe erori și nu vei înțelege în profunzime anumite comportamente.
+Totuși, reține faptul că legătura `this` este strict legată de *locul* (obiectul context) în care a fost apelată funcția, nu de *locul* unde a fost declarată aceasta. Sunt două lucruri distincte. Dacă nu le vei percepe astfel încă de acum, te vei lovi de multe erori și nu vei înțelege în profunzime anumite comportamente.
 
 #### `this` și constructorii în obiectul global
 
@@ -1298,7 +1298,7 @@ Object.getPrototypeOf(this).numeMetodaDinPrototip.call(this); // varianta ES5
 super.numeMetodaDinPrototip();                                // varianta ES6
 ```
 
-După cum observi, această metodă veche a fost prescurtată la `super`, ceea ce reduce din verbozitate. Pentru cei cu ochiul ager, nu-i așa că aduce nițel a Java? Ter`super` este o referință către obiectul prototip al obiectului de lucru curent. Este echivalentul lui `Object.getPrototypeOf(this)`. Nu uita faptul că `Object.getPrototypeOf()` returnează valoarea din proprietatea internă `[[Prototype]]`. Orice referință la `super` folosește proprietatea internă `[[HomeObject]]` pentru a determina pașii următori cum ar fi `Object.getPrototypeOf()` asupra valorii stocate de `[[HomeObject]]` cu scopul de a obține, de fapt prototipul.
+După cum observi, această metodă veche a fost prescurtată la `super`, ceea ce reduce din verbozitate. Pentru cei cu ochiul ager, nu-i așa că aduce nițel a Java? Termenul `super` este o referință către obiectul prototip al obiectului de lucru curent. Este echivalentul lui `Object.getPrototypeOf(this)`. Nu uita faptul că `Object.getPrototypeOf()` returnează valoarea din proprietatea internă `[[Prototype]]`. Orice referință la `super` folosește proprietatea internă `[[HomeObject]]` pentru a determina pașii următori cum ar fi `Object.getPrototypeOf()` asupra valorii stocate de `[[HomeObject]]` cu scopul de a obține, de fapt prototipul.
 
 ```javascript
 const obi1 = {
