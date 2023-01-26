@@ -1,6 +1,6 @@
 # Compilare și execuție
 
-Este anul 1950. Războiul se terminase iar computerele treceau în faza comercială. Pe coridor ne întâlnim din nou cu Grace Hopper, doamna care găsise primul **bug** - molie - în măruntaiele lui **Harvard Mark I**.
+Războiul se terminase. Este anul 1950. Computerele treceau în faza comercială. Pe coridor ne întâlnim din nou cu Grace Hopper, doamna care găsise primul **bug** - molie - în măruntaiele lui **Harvard Mark I**.
 
 ![](images/Grace_Hopper_and_UNIVAC.jpg)
 
@@ -12,7 +12,7 @@ Acum lucrează la primul computer comercial, *UNIVAC I* și conduce departamentu
 
 În acel moment, un compilator *traducea limbajul matematic în cod mașină*. Doamna Grace sau *bunica COBOL* așa cum este alintată, argumenta necesitatea ca persoanele care manipulează date, să nu fie forțate să manipuleze simboluri așa cum o fac matematicienii. Dorința sa a fost să fie posibilă folosirea de *enunțuri în engleză*. Acestea au fost începuturile compilatoarelor și a limbajului de programare COBOL (COmmon Business-Oriented Language).
 
-Copilatoarele preiau codul sursă redactat într-un limbaj de programare și îl transformă în **cod obiect** pe care procesorul îl înțelege, fiind executat direct de mașină.
+Compilatoarele preiau codul sursă redactat într-un limbaj de programare și îl transformă în **cod obiect** pe care procesorul îl înțelege, fiind executat direct de mașină.
 
 ## Compilarea în JavaScript
 
