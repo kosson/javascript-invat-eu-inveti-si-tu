@@ -716,7 +716,7 @@ Prototipul (obiectul accesibil prin `prototype.__proto__`) este setat automat la
 
 În clasele derivate, `super()` trebuie apelat înainte de a folosi `this` în funcția constructor a copilului. Acest lucru trebuie făcut pentru a seta o linie directă de moștenire cu proprietățile constructorului clasei părinte. Motivul este că obiectul nu se mai naște în această funcție cu rol de clasă, cea copil, ci în funcția cu rol de clasă care este părintele. Aceasta a fost o decizie a creatorilor limbajului. Reține că în cazul extinderii unei clase, obiectul returnat nu se naște în clasa care extinde, ci în părinte, care îl returnează copilului pentru a deveni `this`-ul acestuia. Deci, funcția cu rol de clasă părinte, referită la momentul apelării cu `super()` este o invocare cu `new` cu scopul de a fi returnat un obiect. Obiectul returnat va avea proprietatea `__proto__` modificată să se lege la obiectul `prototype` al funcției cu rol de clasă copil și nu la funcția părinte care l-a creat. Acest amănunt este foarte important.
 
-Regula ar fi ca datele necesare alimentării părintelui pentru operațiunile sale interne, să le trimiți prin `super(arg1, arg2, etc)`. Ce este nevoie copilului, setezi prin `this`. Adu-ți mereu aminte că prin moștenire vei avea mereu acces la datele și metodele părintelui.
+Regula ar fi ca datele necesare alimentării părintelui pentru operațiunile sale interne, să le trimiți prin `super(arg1, arg2, etc)`. Dotările/funcționaitățile obiectului copil vor fi seatate prin `this`. Adu-ți mereu aminte că prin moștenire vei avea mereu acces la datele și metodele părintelui.
 
 ```javascript
 class Parinte {

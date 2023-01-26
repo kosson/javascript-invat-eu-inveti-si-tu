@@ -2,7 +2,7 @@
 
 Războiul se terminase. Este anul 1950. Computerele treceau în faza comercială. Pe coridor ne întâlnim din nou cu Grace Hopper, doamna care găsise primul **bug** - molie - în măruntaiele lui **Harvard Mark I**.
 
-![](images/Grace_Hopper_and_UNIVAC.jpg)
+![Grace Hopper și UNIVAC](images/Grace_Hopper_and_UNIVAC.jpg)
 
 Anii 50 și 60 sunt ani de mare efervescență în domeniul computerelor. Stimabila doamnă, care este și un personaj hâtru, pune un accent pe viteza de dezvoltare:
 
@@ -54,14 +54,14 @@ Rând pe rând, linie cu linie sunt notate (**registered**) în mediul lexical g
 
 ## Mantre
 
--   Faza de compilare este distinctă de faza de execuție a codului.
--   Înainte de evaluare este creat un `realm` pentru codul sursă.
--   La fiecare evaluare a codului sursă este recreat `lexical environment`.
--   În faza de compilare, variabilele și funcțiile sunt *înregistrate* în global scope, adică sunt create referințe în memorie pe baza identificatorilor lor.
--   În compilare sunt create doar referințe în ceea ce standardul numește `environment record` - registrul mediului pe care îl creează `lexical environment`.
--   Conținutul funcțiilor nu este procesat la compilare.
--   Execuția pornește imediat după această fază de *înregistrare*.
--   La momentul execuției, entitățile deja există și relaționează.
+* Faza de compilare este distinctă de faza de execuție a codului.
+* Înainte de evaluare este creat un `realm` pentru codul sursă.
+* La fiecare evaluare a codului sursă este recreat `lexical environment`.
+* În faza de compilare, variabilele și funcțiile sunt *înregistrate* în global scope, adică sunt create referințe în memorie pe baza identificatorilor lor.
+* În compilare sunt create doar referințe în ceea ce standardul numește `environment record` - registrul mediului pe care îl creează `lexical environment`.
+* Conținutul funcțiilor nu este procesat la compilare.
+* Execuția pornește imediat după această fază de *înregistrare*.
+* La momentul execuției, entitățile deja există și relaționează.
 
 ### Cazul funcțiilor
 
@@ -69,12 +69,12 @@ Rând pe rând, linie cu linie sunt notate (**registered**) în mediul lexical g
 
 La prima fază a compilării, corpul funcțiilor nu este parcurs de compilator. Acestea pur și simplu sunt doar inventariate și se *notează* referințe către ele. Abia la faza execuției, atunci când funcția este invocată, funcția intră în propria fază de compilare:
 
--   declară și inițializează argumentele funcției;
--   fiecare argument al unei funcții este de fapt o variabilă locală;
--   declară variabilele locale (din interiorul funcției), încluzând aici și funcțiile anonime care sunt atribuite unei variabile locale, de neinițializându-le;
--   declară și inițializează funcțiile.
+* declară și inițializează argumentele funcției;
+* fiecare argument al unei funcții este de fapt o variabilă locală;
+* declară variabilele locale (din interiorul funcției), încluzând aici și funcțiile anonime care sunt atribuite unei variabile locale, de neinițializându-le;
+* declară și inițializează funcțiile.
 
-Atenție, funcțiile sunt înregistrate, dar conținutul lor este stocat în memorie fără a fi compilat deocamdată. Adu-ți mereu aminte că funcțiile sunt valori. Acesta este și momentul în care sunt create obiectele-funcții care conțin codul funcției, plus alte proprietăți. Funcția pe lângă proprietățile sale, va stabili tacit legătura la context, identificând-o prin `this`, va constitui obiectul `arguments` și o altă proprietate internă (`[[Environment]]`), care este scope-ul preexistent la momentul declarării. Dacă declarăm o funcție în Global Object, **scope** va fi chiar <u>Global Object</u>.
+Atenție, funcțiile sunt înregistrate, dar conținutul lor este stocat în memorie fără a fi compilat deocamdată. Adu-ți mereu aminte că funcțiile sunt valori. Acesta este și momentul în care sunt create obiectele-funcții care conțin codul funcției, plus alte proprietăți. Funcția pe lângă proprietățile sale, va stabili tacit legătura la context, identificând-o prin `this`, va constitui obiectul `arguments` și o altă proprietate internă (`[[Environment]]`), care este scope-ul preexistent la momentul declarării. Dacă declarăm o funcție în Global Object, **scope** va fi chiar *Global Object*.
 
 Reține că fiecare funcție declarată stabilește propriul scope (*mediu lexical*), care la momentul apelării, va porni compilarea cu înregistrarea variabilelor proprii și a parametrilor. La rândul lor aceștia sunt tot variabile înregistrate în scope-ul creat de acea funcție.
 
@@ -139,12 +139,12 @@ Standardul spune că vorbim propriu-zis de urmărirea unei stări de rulare a co
 
 O stare are cel puțin următoarele componente pe care motorul le urmărește:
 
--   **starea de execuție a codului**, care este starea necesară pentru a executa, suspenda sau relua evaluarea codului asociat cu acest context de execuție
--   `Function`. Dacă contextul de execuție evaluează codul dintr-o funcție obiect, atunci valoarea acestei componente este chiar acea funcție obiect. Dacă contextul evaluează codul dintr-un **Script** sau dintr-un **Module**, atunci, valoarea componentei **Function** este `null`. Valoarea pentru Function în `running execution context` este numită și `active function object`.
--   `Realm` este registrul de tărâmuri (**Realm Record**) prin care codul asociat accesează resurse ECMAScript. Tărâmul asociat contextului de execuție este numit `current Realm Record`.
--   `ScriptOrModule` este o înregistrare care identifică un `Module` sau un `Script` în care își are originea codul rulat.
--   `LexicalEnvironment` identifică `Lexical Environment` - mediul care este folosit de referințele făcute prin identificatorii din codul rulat în contextul de execuție curent.
--   `VariableEnvironment` identifică scope-ul (`Lexical Environment`) al cărui EnvironmentRecord conține legăturile create de `VariableStatements` din contextul de execuție curent. Când se creează un context de execuție nou, `LexicalEnvironment` și `VariableEnvironment` au aceeași valoare.
+* **starea de execuție a codului**, care este starea necesară pentru a executa, suspenda sau relua evaluarea codului asociat cu acest context de execuție
+* `Function`. Dacă contextul de execuție evaluează codul dintr-o funcție obiect, atunci valoarea acestei componente este chiar acea funcție obiect. Dacă contextul evaluează codul dintr-un **Script** sau dintr-un **Module**, atunci, valoarea componentei **Function** este `null`. Valoarea pentru Function în `running execution context` este numită și `active function object`.
+* `Realm` este registrul de tărâmuri (**Realm Record**) prin care codul asociat accesează resurse ECMAScript. Tărâmul asociat contextului de execuție este numit `current Realm Record`.
+* `ScriptOrModule` este o înregistrare care identifică un `Module` sau un `Script` în care își are originea codul rulat.
+* `LexicalEnvironment` identifică `Lexical Environment` - mediul care este folosit de referințele făcute prin identificatorii din codul rulat în contextul de execuție curent.
+* `VariableEnvironment` identifică scope-ul (`Lexical Environment`) al cărui EnvironmentRecord conține legăturile create de `VariableStatements` din contextul de execuție curent. Când se creează un context de execuție nou, `LexicalEnvironment` și `VariableEnvironment` au aceeași valoare.
 
 Atunci când avem de-a face cu mai multe contexte de execuție, pentru urmărirea tuturor acestora este utilizată o **stivă a contextelor**
 
@@ -166,29 +166,29 @@ Execution Context este inițiat la executarea codului și este unul per per agen
 
 Conține:
 
--   Global object,
--   `this`,
--   stiva variabilelor,
--   Outer environment (pentru cazul funcțiilor. Global env nu are outer env),
--   codul JavaScript.
+* Global object,
+* `this`,
+* stiva variabilelor,
+* Outer environment (pentru cazul funcțiilor. Global env nu are outer env),
+* codul JavaScript.
 
 Atenție, toate acestea sunt create de motorul JavaScript mai puțin codul sursă.
 
 ## Mantre
 
--   Pentru orice program există un **global execution context** (activat spre exemplu când declari `<script>`).
--   Invocarea unei funcții generează un nou CONTEXT de EXECUȚIE. **Acesta nu este un obiect, ATENȚIE!**.
--   Un context de execuție are un *lexical environment* asociat, adică un scope, care conține toți identificatorii definiți în acel context.
--   Contextul de execuție este parte a scope-ului.
--   Contextul de execuție este constituit din TOT ce se întâmplă atunci când funcția se execută, adică toate variabilele și funcțiile. O variabilă este considerată a fi *în scope* - *in-scope*, dacă este accesibilă în contextul de execuție curent.
--   O metodă are drept **function context** însuși obiectul *în care* este invocată și poate fi accesat prin `this`.
--   **Function context** nu este **execution context**.
--   Pentru că JavaScript are un singur fir de execuție, trebuie reținut faptul că de fiecare dată când o funcție este invocată, contextul de execuție a celui care a invocat funcția la momentul acela este înghețat urmând să se creeze un altul pentru evaluarea noii funcții. După ce funcția invocată și-a încheiat execuția, contextul de execuție a funcției care a făcut apelul este restaurat. Evidența apelurilor și a operațiunilor privind înghețarea și restaurarea contextelor de execuție este făcută de **call stack**.
--   Ori de câte ori este invocată o funcție, se creează un nou context execuție (TOT ce se întâmplă atunci când funcția se execută).
--   Variabilele și funcțiile care fac parte din contextul de execuție, sunt memorate în EXECUTION CONTEXT OBJECT, care este un obiect al motorului JavaScript.
--   Contextul de execuție este parte a scope (format la faza de compilare).
--   Context este valoarea lui `this`.
--   Toate variabilele și funcțiile definite într-o funcție sunt considerate parte a contextului de execuție.
+* Pentru orice program există un **global execution context** (activat spre exemplu când declari `<script>`).
+* Invocarea unei funcții generează un nou CONTEXT de EXECUȚIE. **Acesta nu este un obiect, ATENȚIE!**.
+* Un context de execuție are un *lexical environment* asociat, adică un scope, care conține toți identificatorii definiți în acel context.
+* Contextul de execuție este parte a scope-ului.
+* Contextul de execuție este constituit din TOT ce se întâmplă atunci când funcția se execută, adică toate variabilele și funcțiile. O variabilă este considerată a fi *în scope* - *in-scope*, dacă este accesibilă în contextul de execuție curent.
+* O metodă are drept **function context** însuși obiectul *în care* este invocată și poate fi accesat prin `this`.
+* **Function context** nu este **execution context**.
+* Pentru că JavaScript are un singur fir de execuție, trebuie reținut faptul că de fiecare dată când o funcție este invocată, contextul de execuție a celui care a invocat funcția la momentul acela este înghețat urmând să se creeze un altul pentru evaluarea noii funcții. După ce funcția invocată și-a încheiat execuția, contextul de execuție a funcției care a făcut apelul este restaurat. Evidența apelurilor și a operațiunilor privind înghețarea și restaurarea contextelor de execuție este făcută de **call stack**.
+* Ori de câte ori este invocată o funcție, se creează un nou context execuție (TOT ce se întâmplă atunci când funcția se execută).
+* Variabilele și funcțiile care fac parte din contextul de execuție, sunt memorate în EXECUTION CONTEXT OBJECT, care este un obiect al motorului JavaScript.
+* Contextul de execuție este parte a scope-ului (format la faza de compilare).
+* Context este valoarea lui `this`.
+* Toate variabilele și funcțiile definite într-o funcție sunt considerate parte a contextului de execuție.
 
 ### Cazul obiectelor
 
@@ -244,70 +244,70 @@ faceva(2);                        // 12
 
 ### COMPILARE
 
--   **\# 0** Variabila „duda” este *înregistrată* și este inițializată cu *undefined*.
--   **\# 1** Identificatorul „**altaDuda**”
-    1.  *Compilatorul întreabă*: cine este identificatorul „**altaDuda**”?
+Pas \# 0 Variabila `duda` este *înregistrată* și este inițializată cu *undefined*.
+Pas \# 1 Identificatorul **altaDuda**
+    1.  *Compilatorul întreabă*: cine este identificatorul **altaDuda**?
     2.  *Răspuns*: nu știu, nu este o declarație de variabilă. Bine, bine, vedem mai târziu ce-i cu el.
     3.  *Efect*: `altaDuda` este ignorat (deocamdată).
 
--   **\# 2** Funcția `faceva` este înregistrată și este inițializată cu *undefined*. Conținutul funcției nu este parcurs de compilator. Deocamdată este stocat în memorie. Așa cum un șir sau un număr poate fi valoarea unei variabile, la fel corpul unei funcții este valoarea acesteia.
+Pas \# 2 Funcția `faceva` este înregistrată și este inițializată cu *undefined*. Conținutul funcției nu este parcurs de compilator. Deocamdată este stocat în memorie. Așa cum un șir sau un număr poate fi valoarea unei variabile, la fel corpul unei funcții este valoarea acesteia.
 
 ### EXECUȚIE
 
--   **\# 0** Valoarea *o dudă* este atribuită identificatorului `duda`.
--   **\# 1** Problema cu `altaDuda`
-    1.  *Contextul de execuție*: <u>Global scope</u> (mediul lexical global).
+Pas \# 0 Valoarea *o dudă* este atribuită identificatorului `duda`.
+Pas \# 1 Problema cu `altaDuda`
+    1.  *Contextul de execuție*: Global scope (mediul lexical global).
     2.  *Motorul întreabă*: știi cumva ce este `altaDuda`?
     3.  *Răspuns*: Nu, nu știu ce este, dar regula este ca eu să creez un identificator cu acest nume.
-    4.  *Efect*: `altaDuda` devine o variabilă în <u>global scope</u>. Valoarea `o altă dudă` este atribuită.
-    5.  Condițiile pentru ca această regulă să se aplice: să fii în <u>Global scope</u> și să nu fie invocat `'use strict';`.
+    4.  *Efect*: `altaDuda` devine o variabilă în global scope. Valoarea `o altă dudă` este atribuită.
+    5.  Condițiile pentru ca această regulă să se aplice: să fii în Global scope și să nu fie invocat `'use strict';`.
 
--   **\# 13** Este invocată funcția `faceva()`. Funcția intră în faza de execuție și ca urmare, scenariul se repetă. Mai întâi, se va intra într-o nouă fază de compilare.
-
-### COMPILARE:
-
--   Parametrii funcției sunt declarați ca variabile locale în funcție, mai exact în mediul lexical pe care funcția îl generează. Aceasta este regula.
--   **\# 5** compilatorul trece peste `ex` pentru că nu este o declarație și nu intră în compilare
--   declară funcția internă `sarcinaInterna`.
--   `ex` este declarată și este hoisted. Atenție, chiar dacă `ex` are mai sus o atribuire, în această fază sunt două lucruri distincte.
-
-### EXECUȚIE (se creează automat contextul de execuție).
-
--   variabilei locale param îi este atribuită valoarea 2
--   variabilei param îi este modificată valoarea.
-    -   **\# 5** Cine este *ex*?
-    -   **Context**: local scope.
-    -   **Motorul întreabă**: știi ce este `ex`?
-    -   **Răspuns**: Nu, nu știu, dar mă duc pe *scope chain* și caut în `container` până în Global Scope dacă este nevoie.
-    -   **Efect**: dacă o variabilă cu același nume este găsită pe lanțul de scope în Global scope valoarea din funcție modifică valoarea variabilei din global scope.
-    -   **Dacă**: nu este găsită o variabilă cu același nume *mai sus*, atunci va crea una din oficiu. Dacă se folosește `use strict`, va fi returnată o eroare `ReferenceError`.
--   **\# 11** se returnează funcția internă `sarcinaInterna` ceea ce conduce la invocarea acesteia.
+Pas \# 13 Este invocată funcția `faceva()`. Funcția intră în faza de execuție și ca urmare, scenariul se repetă. Mai întâi, se va intra într-o nouă fază de compilare.
 
 ### COMPILARE
 
--   **\# 7** este declarată variabila `ex`. Dacă există o variabilă cu același nume în funcția `container`, variabila acestuia nu va fi suprascrisă, ci întotdeauna se va referenția cea din scope-ul existent. Așa funcționează *scope resolution*, iar această stare de lucruri se numește variable *shadowing*.
--   este declarată variabila locală `fruct`.
--   **\# 9** Cine este *masura*?
--   **Context**: local scope.
--   **Motorul întreabă**: știi ce este masura?
--   **Răspuns**: Nu, nu știu, dar mă duc pe *scope chain* și caut în funcția container până în Global Scope dacă este nevoie.
+Parametrii funcției sunt declarați ca variabile locale în funcție, mai exact în mediul lexical pe care funcția îl generează. Aceasta este regula.
+Pas \# 5 compilatorul trece peste `ex` pentru că nu este o declarație și nu intră în compilare
+    - declară funcția internă `sarcinaInterna`;
+    - `ex` este declarată și este hoisted. Atenție, chiar dacă `ex` are mai sus o atribuire, în această fază sunt două lucruri distincte.
+
+### EXECUȚIE (se creează automat contextul de execuție).
+
+variabilei locale param îi este atribuită valoarea 2
+variabilei param îi este modificată valoarea.
+    * Pas \# 5 Cine este *ex*?
+    * **Context**: local scope.
+    * **Motorul întreabă**: știi ce este `ex`?
+    * **Răspuns**: Nu, nu știu, dar mă duc pe *scope chain* și caut în `container` până în Global Scope dacă este nevoie.
+    * **Efect**: dacă o variabilă cu același nume este găsită pe lanțul de scope în Global scope valoarea din funcție modifică valoarea variabilei din global scope.
+    * **Dacă**: nu este găsită o variabilă cu același nume *mai sus*, atunci va crea una din oficiu. Dacă se folosește `use strict`, va fi returnată o eroare `ReferenceError`.
+Pas \# 11 se returnează funcția internă `sarcinaInterna` ceea ce conduce la invocarea acesteia.
+
+### COMPILARE
+
+* Pas \# 7 este declarată variabila `ex`. Dacă există o variabilă cu același nume în funcția `container`, variabila acestuia nu va fi suprascrisă, ci întotdeauna se va referenția cea din scope-ul existent. Așa funcționează *scope resolution*, iar această stare de lucruri se numește variable *shadowing*.
+* este declarată variabila locală `fruct`.
+* Pas \# 9 Cine este *masura*?
+* **Context**: local scope.
+* **Motorul întreabă**: știi ce este masura?
+* **Răspuns**: Nu, nu știu, dar mă duc pe *scope chain* și caut în funcția container până în Global Scope dacă este nevoie.
 
 ### EXECUȚIE
 
--   variabilei `ex` îi este atribuită valoarea „din interior”.
--   variabilei `fruct` îi este atribuită valoarea `0`.
--   valiabila `măsura` va fi modificată în contextul local fiind înmulțită cu `2` și atribuită ei înseși.
--   valoarea `măsurii` este returnată în contextul de mai sus, adică valoarea `24`.
+* variabilei `ex` îi este atribuită valoarea *din interior*.
+* variabilei `fruct` îi este atribuită valoarea `0`.
+* valiabila `măsura` va fi modificată în contextul local fiind înmulțită cu `2` și atribuită ei înseși.
+* valoarea `măsurii` este returnată în contextul de mai sus, adică valoarea `24`.
 
 ## Referințe
 
--   [Arindam Paul - JavaScript VM internals, EventLoop, Async and ScopeChains](https://www.youtube.com/watch?v=QyUFheng6J0 "Este un material fantastic pentru a înțelege mai bine faza de compilare și cea de execuție")
--   [Lin Clark - An Abridged Cartoon Introduction To WebAssembly](https://www.smashingmagazine.com/2017/05/abridged-cartoon-introduction-webassembly/)
--   [Franziska Hinkelmann: JavaScript engines - how do they even? | JSConf EU 2017](https://www.youtube.com/watch?v=p-iiEDtpy6I)
--   [Marja Hölttä: Parsing JavaScript - better lazy than eager? | JSConf EU 2017](https://www.youtube.com/watch?v=Fg7niTmNNLg)
--   [Grace Hopper, Wikipedia în limba engleză](https://en.wikipedia.org/wiki/Grace_Hopper)
--   [Hopper at the UNIVAC I console, c. 1960](https://en.wikipedia.org/wiki/Grace_Hopper#/media/File:Grace_Hopper_and_UNIVAC.jpg "SI Neg. 83-14878. Date: na...Grace Murray Hopper at the UNIVAC keyboard, c. 1960. Grace Brewster Murray: American mathematician and rear admiral in the U.S. Navy who was a pioneer in developing computer technology, helping to devise UNIVAC I. the first commercial electronic computer, and naval applications for COBOL (common-business-oriented language). This image, which was originally posted to Flickr, was uploaded to Commons using Flickr upload bot on 4 June 2012, 18:21 by Jan Arkesteijn. On that date, it was confirmed to be licensed under the terms of the license indicated Creative Commons Attribution 2.0 Generic license.")
--   [The Wit and Wisdom of Grace Hopper. From The OCLC Newsletter, March/April, 1987, No. 167 (Editor and article author is Philip Schieber.)](http://www.cs.yale.edu/homes/tap/Files/hopper-wit.html)
--   [Lin Clark. A crash course in memory management | Mozilla Hacks](https://hacks.mozilla.org/2017/06/a-crash-course-in-memory-management/)
--   [Lin Clark. Calls between JavaScript and WebAssembly are finally fast | Mozilla Hacks](https://hacks.mozilla.org/2018/10/calls-between-javascript-and-webassembly-are-finally-fast-%F0%9F%8E%89/)
--   [Parsing in JavaScript: Tools and Libraries](https://tomassetti.me/parsing-in-javascript/)
+* [Arindam Paul - JavaScript VM internals, EventLoop, Async and ScopeChains](https://www.youtube.com/watch?v=QyUFheng6J0 "Este un material fantastic pentru a înțelege mai bine faza de compilare și cea de execuție")
+* [Lin Clark - An Abridged Cartoon Introduction To WebAssembly](https://www.smashingmagazine.com/2017/05/abridged-cartoon-introduction-webassembly/)
+* [Franziska Hinkelmann: JavaScript engines - how do they even? | JSConf EU 2017](https://www.youtube.com/watch?v=p-iiEDtpy6I)
+* [Marja Hölttä: Parsing JavaScript - better lazy than eager? | JSConf EU 2017](https://www.youtube.com/watch?v=Fg7niTmNNLg)
+* [Grace Hopper, Wikipedia în limba engleză](https://en.wikipedia.org/wiki/Grace_Hopper)
+* [Hopper at the UNIVAC I console, c. 1960](https://en.wikipedia.org/wiki/Grace_Hopper#/media/File:Grace_Hopper_and_UNIVAC.jpg "SI Neg. 83-14878. Date: na...Grace Murray Hopper at the UNIVAC keyboard, c. 1960. Grace Brewster Murray: American mathematician and rear admiral in the U.S. Navy who was a pioneer in developing computer technology, helping to devise UNIVAC I. the first commercial electronic computer, and naval applications for COBOL (common-business-oriented language). This image, which was originally posted to Flickr, was uploaded to Commons using Flickr upload bot on 4 June 2012, 18:21 by Jan Arkesteijn. On that date, it was confirmed to be licensed under the terms of the license indicated Creative Commons Attribution 2.0 Generic license.")
+* [The Wit and Wisdom of Grace Hopper. From The OCLC Newsletter, March/April, 1987, No. 167 (Editor and article author is Philip Schieber.)](http://www.cs.yale.edu/homes/tap/Files/hopper-wit.html)
+* [Lin Clark. A crash course in memory management | Mozilla Hacks](https://hacks.mozilla.org/2017/06/a-crash-course-in-memory-management/)
+* [Lin Clark. Calls between JavaScript and WebAssembly are finally fast | Mozilla Hacks](https://hacks.mozilla.org/2018/10/calls-between-javascript-and-webassembly-are-finally-fast-%F0%9F%8E%89/)
+* [Parsing in JavaScript: Tools and Libraries](https://tomassetti.me/parsing-in-javascript/)
