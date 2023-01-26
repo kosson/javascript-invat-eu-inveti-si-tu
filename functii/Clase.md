@@ -109,14 +109,16 @@ console.log('Obiectul prototipal de la care moștenește este: ', unTest.__proto
 
 Pentru a înțelege modelul de investigare din exemplu, trebuie aduse următoarele lămuriri:
 
-- `__proto__` este o proprietate prin care afli care este obiectul prototipal de la care moștenete un obiect.
+- `__proto__` este o proprietate prin care afli care este obiectul prototipal de la care moștenește un obiect.
 - `.prototype` indică obiectul creat de la care vor moșteni toate instanțele, nu obiectul prototipal al clasei.
 
 **Moment ZEN**: O clasă generează un obiect care va fi prototipul de la care vor moșteni toate instanțele create.
 
-O clasă poate avea o singură metodă `constructor` care este opțională. Instanțierea se face folosind operatorul `new`. Atenție, obiectul `prototype` al clasei va fi protejat la scriere (**read-only**). Nu se comportă ca în cazul funcțiilor din modelul clasic în care poți adăuga ulterior în obiectul `prototype` proprietăți și metode.
+O clasă poate avea o singură metodă `constructor`, care este opțională. Instanțierea se face folosind operatorul `new`. Atenție, obiectul `prototype` al clasei va fi protejat la scriere (**read-only**). Nu se comportă ca în cazul funcțiilor din modelul clasic în care poți adăuga ulterior în obiectul `prototype` proprietăți și metode.
 
-Echivalent lui `constructor (val) {}`, este `function Test (val) { this.val = val }`. Urmează o listă a membrilor viitorului obiect, care menționează direct identificatorul fără cuvântul cheie `function`. Nu a fost folosită nici formula consacrată `Test.prototype.actiune`, rolul acesteia fiind preluat de funcția `constructor`. O clasă poate avea o singură metodă `constructor` care este opțională. Instanțierea se face folosind operatorul `new`. Atenție, obiectul `prototype` al clasei va fi protejat la scriere (**read-only**). Nu se comportă ca în cazul funcțiilor din modelul clasic în care poți adăuga ulterior în obiectul `prototype` proprietăți și metode.
+Echivalent lui `constructor (val) {}`, este `function Test (val) { this.val = val }`. Observă faptul că la invocarea cu `new` a clasei, va fi executat `constructor`, care de fapt este funcția cu rol de clasă. Astfel, se realizează contextul de execuție.
+
+Urmează o listă a membrilor viitorului obiect, care menționează direct identificatorul fără cuvântul cheie `function`. Nu a fost folosită nici formula consacrată `Test.prototype.actiune`, rolul acesteia fiind preluat de funcția `constructor`. O clasă poate avea o singură metodă `constructor` care este opțională. Instanțierea se face folosind operatorul `new`. Atenție, obiectul `prototype` al clasei va fi protejat la scriere (**read-only**). Nu se comportă ca în cazul funcțiilor din modelul clasic în care poți adăuga ulterior în obiectul `prototype` proprietăți și metode.
 
 Legătura `this` are un rol central pentru clase pentru că numai așa vei putea accesa metodele și proprietățile clasei. Tot `this` permite înlănțuirea (*chaining* în limba engleză) metodelor unei clase pe obiectul instanțiat. Să te asiguri că acele clase pe care dorești să le înlănțuiești, `this` să fie returnat din metodă la final. Acest lucru trebuie făcut pentru a actualiza valorile obiectului generat cu `new`.
 
@@ -153,7 +155,7 @@ Precum în cazul funcțiilor, clasele pot fi declarate, dar pot fi și expresii.
 
 #### Declarații de clasă
 
-Clasele pot fi declarate direct apelând la sintaxa `class NumeClasă {...}`. Ceea ce se petrece la declararea unei clase este că se constituie variabila cu numele clasei. Variabila este inițializată cu o funcție. În obiectul `prototype` al funcției este referită funcția constructor, purtând denumirea clasei, precum și toate metodele.
+Clasele pot fi declarate direct apelând la sintaxa `class NumeClasă {...}`. Să ne reamintim mereu că funcțiile sunt tot obiecte. O proprietate a lor care de care ne folosim pentru a realiza moștenirea prototipală, este `prototype`, a cărui valoare este un obiect. În acest obiect introducem toate proprietățile pe care dorim ca obiectele create folosind funcția să le moștenească automat. Ceea ce se petrece la declararea unei clase este crearea unui identificator (variabilă) cu numele clasei. Variabila este inițializată cu o funcție. Corpul funcției clasă va fi în `constructor`, iar obiectul `prototype` al acesteia va conține toate metodele declarate în corpul clasei. Toate proprietățile declarate cu `this.ceva` vor fi proprietăți ale obiectului `prototype` al acesteia.
 
 ```javascript
 class Ceva {
@@ -392,13 +394,13 @@ class Cineva {
 const Alina = new Cineva('Alina');
 ```
 
-Dacă vom „reutiliza” metoda `cineSunt` a noului obiect `Alina`, într-un context diferit, de exemplu, din postura de *callback*, `this` nu va indica mediul obiectului așa cum poate că logica ar dicta-o.
+Dacă vom *reutiliza* metoda `cineSunt` a noului obiect `Alina`, într-un context diferit, de exemplu, din postura de *callback*, `this` nu va indica mediul obiectului așa cum poate că logica ar dicta-o.
 
 ```javascript
 setTimeout(Alina.cineSunt, 1000); // returnează `undefined`
 ```
 
-Pentru a face o „reconectare”, trebuie folosit `bind()`. Adu-ți mereu aminte de faptul că funcțiile sunt etități distincte care se execută în contexte diferite. Ele nu *aparțin* unui obiect chiar dacă au fost definite ca metode ale acestuia.
+Pentru a face o *reconectare*, trebuie folosit `bind()`. Adu-ți mereu aminte de faptul că funcțiile sunt etități distincte care se execută în contexte diferite. Ele nu *aparțin* unui obiect chiar dacă au fost definite ca metode ale acestuia.
 
 ```javascript
 setTimeout(Alina.cineSunt.bind(Alina), 1000);
@@ -596,7 +598,7 @@ class Test {
 }
 ```
 
-Constructorul creează proprietatea accesor `date`. Această proprietate este creată la nivelul instanței, fiind folosită legătura `this`. Proprietatea de la nivelul instanței este creată folosind `Object.defineProperty`, dar fiind atenți să permitem configurarea plus enumerable. Faptul că setăm proprietatea a fi `configurable`, ne va permite să o *configurăm* mai departe aplicând `Object.defineProperty`.
+Constructorul creează proprietatea accesor `date`. Această proprietate este creată la nivelul instanței, fiind folosită legătura `this`. Proprietatea de la nivelul instanței este creată folosind `Object.defineProperty`, dar fiind atenți să permitem configurarea plus enumerable. Faptul că setăm proprietatea să fie `configurable`, ne va permite să o *configurăm* mai departe aplicând `Object.defineProperty`.
 
 Pentru că în interiorul funcției `get`, legătura `this` se face la obiectul în care a fost declarată, nu la cel instanțiat în baza clasei. Din acest motiv avem nevoie de puntea lexicală `const instanță = this;`. Ceea ce se întâmplă este o redefinire a proprietății `date` care are acum o valoare fixă ce nu poate fi suprascrisă sau configurată pentru a o proteja. Prima dată când valoarea este cerută, este calculată și apoi servită ori de câte ori este necesar.
 
@@ -678,8 +680,11 @@ function Părinte (val) {
 Părinte.prototype.oriDoi = function () {
   return this.statica * 2;
 };
-function Copil (deinmultit) {
+function Copil (deinmultit, dateDinObiectulExtins) {
   Părinte.call(this, deinmultit);
+  // de aici în jos extinzi obiectul Părinte.prototype 
+  //pentru că acesta este referit prin this
+  this.dateDinObiectulExtins = dateDinObiectulExtins;
 };
 Copil.prototype = Object.create( Părinte.prototype, {
     constructor: {
@@ -690,17 +695,28 @@ Copil.prototype = Object.create( Părinte.prototype, {
     }
   }
 );
-let rezultat = new Copil(2);
+let rezultat = new Copil(2, 10);
 console.log(rezultat.oriDoi()); // 4
+console.log(rezultat.dateDinObiectulExtins); // 10
 ```
 
-Este observabil cu cât efort s-a realizat acest lucru. Mai întâi am executat funcția `Părinte` în contextul lui `Copil`, pasându-i `this` pentru a seta corect contextul de execuție, adică în interiorul lui `Copil`. Au fost pasate atributele așteptate de `Părinte`. A trebuit să *rescriem* obiectul prototip al lui `Copil`, setându-l artificial la cel pe care dorim să-l moștenim folosind `Object.create()` în acest sens. A trebuit să facem un pas suplimentar setând proprietatea `constructor` să trimită înapoi la `Copil` pentru a consolida originea sa.
+La momentul invocării cu `new` în procesul de creare a noului obiect, am executat funcția `Părinte` deja în contextul de execuție a funcției cu rol de constructor `Copil`. Execuția funcției `Părinte` am făcut-o folosind metoda `call` pasându-i drept prim parametru obiectul la care s-a făcut legătura `this`, adică la obiectul `Părinte.prototype`. Am făcut acest lucru pentru a seta noul obiect în contextul căruia să se execute, iar acesta este cel al lui `Părinte`. Deci, în acest moment avem acces la toate proprietățile din `Părinte.prototype`. Apoi, al doilea parametru este parametrul cu a cărui valoare vrem să operăm - argument așteptat de `Părinte` pentru a seta valoarea propriului parametru `val`.
+
+A trebuit să *rescriem* obiectul prototip al lui `Copil`, setându-l artificial la cel de la care dorim să-l moștenim (`Părinte.prototype`), folosind `Object.create()` în acest sens. A trebuit să facem un pas suplimentar setând o proprietate numită arbitrar `constructor`, care să refacă legătura la `Copil` pentru a consolida originea sa distinctă de `Părinte`, chiar dacă s-a realizat o legătură la obiectul `Părinte.prototype`, care ține funcționalitățile pe care am dorit să le extindem. Extinderea propriu-zisă a funcționalităților și a datelor de lucru se face în momentul execuției cu `new` a lui `Copil`, moment în care se creează contextul de execuție al său. Imediat se creează proprietatea `this` care este un obiect gol, dar care a stabilit deja legătura cu `Copil.prototype` prin `__proto__`. În acest context vom executa `Părinte.call(this, deinmultit)` care face posibilă *îmbogățirea* cu noi proprietăți a obiectului `Părinte.prototype` la care argumentul `this` a făcut legătura. După cum știm, în procesul de creare a unui obiect prin invocarea unei funcții constructor cu `new`, primul lucru care se întâmplă este să fie creată o proprietate în mediul local de execuție numită `this` care este un obiect gol, care devine prin popularea ulterioară cel pe care îl va returna la final. Astfel, contextul nou de execuție realizat prin apelarea `Părinte.call(this, deinmultit)`, va oferi accesul la toate funcționalitățile și datele proprii ale lui `Părinte`, dar cu mențiunea că acestea vor deveni proprietățile obiectului care tocmai se creează. Acest obiect `this` va fi cel al viitorului obiect, nu cel al lui `Părinte` pentru că acesta este apelat prin `call` ce permite *deturnarea* acestuia. Pentru a se executa cum trebuie, lui `Părinte.call` îi pasăm și al doilea parametru care sunt datele necesare sie. Altfel, legătura `this` s-ar fi făcut automat la obiectul global, ceea ce nu ne dorim. În schimb, metoda `call` permite această magie de a impune care obiect trebuie să fie folosit drept `this` - obiectul în contextul căruia se va face execuția. Acest este modelul tradițional prin care extindem funcții cu rol de constructor. Noul obiect va ține legătura cu `Copil.prototype` prin `__proto__`.
+
+Este observabil cu cât efort s-a realizat acest lucru. Înțelegerea legăturilor la obiectele `prototype` ale funcțiilor, unde poți stoca funcționalitățile obiectelor viitoare create prin instanțierea cu `new` este esențială.
 
 ### extends și super
 
-În cazul claselor, mare parte din operațiunile complexe ale derivării sunt rezolvate prin introducerea sintagmei `extends` în declarația clasei pe care o dorești a fi derivata alteia. Ceea ce realizează este și abstractizarea funcționalităților unei clase, care va fi privită de cele derivate din ea ca un model de urmat privind comportamentele de bază. Similar copiilor care privesc și copiază comportamentele părinților, clasele, care extind altele, vor avea acces la metodele și proprietățile părintelui prin mecanismul de moștenire, care se va stabili automat. Putem afirma despre o clasă de la care se derivează că se comportă ca o interfață. O interfață fiind setul de date și funcționalități disponibil tuturor copiilor, dar care poate fi modificat de aceștia.
+În cazul claselor, mare parte din operațiunile complexe ale derivării sunt rezolvate prin introducerea sintagmei `extends` în declarația clasei pe care o dorești a fi derivata alteia.
 
-Am stabilit faptul că prototipul este setat automat la obiectul prototip al constructorului părinte. Constructorul părintelui poate fi accesat folosind metoda `super()`. În clasele derivate, `super()` trebuie apelat înainte de a folosi `this` în funcția constructor a copilului. Acest lucru trebuie făcut pentru a seta o linie directă de moștenire cu proprietățile constructorului clasei părinte. Regula ar fi ca datele necesare alimentării părintelui pentru operațiunile sale interne, să le trimiți prin `super(arg1, arg2, etc)`. Ce este nevoie copilului, setezi prin `this`. Adu-ți mereu aminte că prin moștenire vei avea mereu acces la datele și metodele părintelui.
+Ceea ce realizează este și abstractizarea funcționalităților unei clase, care va fi privită de cele derivate din ea ca un model de urmat privind comportamentele de bază. Similar copiilor care privesc și copiază comportamentele părinților, clasele, care extind alte clase, vor avea acces la metodele și proprietățile părintelui prin mecanismul de moștenire, care se va stabili automat. Putem afirma despre o clasă de la care se derivează că se comportă ca o interfață. O interfață fiind setul de date și funcționalități disponibil tuturor copiilor, dar care poate fi modificat de aceștia.
+
+Prototipul (obiectul accesibil prin `prototype.__proto__`) este setat automat la obiectul `prototype` al constructorului părinte, iar proprietatea `__proto__` va referi întreaga funcție-obiect care este clasa părinte. Astfel, atunci când funcția `super()` este apelată, de fapt ceea ce apelează/invocă este funcția cu rol de clasă a părintelui (cel menționat la dreapta lui `extends`). Magia setării legăturii lui `prototype.__proto__` la  obiectul `prototype` al constructorului părinte (unde stau funcționalitățile dorite a fi moștenite) și legătura proprietății `__proto__` chiar la funcția însăși cu rol de clasă a părintelui, o realizează cuvântul cheie `extends`. Astfel, obiectul rezultat la final are acces la funcționalitățile părintelui, iar `super()` poate invoca de-a dreptul părintele și astfel pentru a crea obiectul de la care se face moștenirea.
+
+În clasele derivate, `super()` trebuie apelat înainte de a folosi `this` în funcția constructor a copilului. Acest lucru trebuie făcut pentru a seta o linie directă de moștenire cu proprietățile constructorului clasei părinte. Motivul este că obiectul nu se mai naște în această funcție cu rol de clasă, cea copil, ci în funcția cu rol de clasă care este părintele. Aceasta a fost o decizie a creatorilor limbajului. Reține că în cazul extinderii unei clase, obiectul returnat nu se naște în clasa care extinde, ci în părinte, care îl returnează copilului pentru a deveni `this`-ul acestuia. Deci, funcția cu rol de clasă părinte, referită la momentul apelării cu `super()` este o invocare cu `new` cu scopul de a fi returnat un obiect. Obiectul returnat va avea proprietatea `__proto__` modificată să se lege la obiectul `prototype` al funcției cu rol de clasă copil și nu la funcția părinte care l-a creat. Acest amănunt este foarte important.
+
+Regula ar fi ca datele necesare alimentării părintelui pentru operațiunile sale interne, să le trimiți prin `super(arg1, arg2, etc)`. Ce este nevoie copilului, setezi prin `this`. Adu-ți mereu aminte că prin moștenire vei avea mereu acces la datele și metodele părintelui.
 
 ```javascript
 class Parinte {
