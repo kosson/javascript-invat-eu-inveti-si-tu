@@ -124,5 +124,5 @@ Sunt executate corpurile modulelor iar în cazul celor părinte, mai întâi sun
 
 ## Resurse
 
-- [ESM’s transparent support for cyclic imports (advanced) | Axel Rauschmayer](https://exploringjs.com/impatient-js/ch_modules.html#esms-transparent-support-for-cyclic-imports-advanced)
+- [ESM's transparent support for cyclic imports (advanced) | Axel Rauschmayer](https://exploringjs.com/impatient-js/ch_modules.html#esms-transparent-support-for-cyclic-imports-advanced)
 - [es6 import for side effects meaning | stackoverflow](https://stackoverflow.com/questions/41127479/es6-import-for-side-effects-meaning)
