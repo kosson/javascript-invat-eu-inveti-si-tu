@@ -1391,7 +1391,7 @@ const testObj = {ceva: 1, altceva: 2};
 const {ceva, altceva:undeva} = testObj; // plus redenumire
 ```
 
-În exemplul prezentat nu numai că am *extras* valorile în variabile, dar am și redenumit identificatorii, dacă numele originale ale cheilor nu sunt dorite. Pot fi extrase mai multe valori odată. În cazul în care numele variabilei se dorește să fie chiar proprietatea, atunci putem menționa explicit numele identificatorului să fie cel al cheii din obiect.
+În exemplul prezentat nu numai că am *extras* valorile în variabile, dar am redenumit identificatorul `altceva` în `undeva`. Pot fi extrase mai multe valori odată. În cazul în care numele variabilei se dorește să fie chiar proprietatea, atunci putem menționa explicit ca numele identificatorului să fie cel al cheii din obiect.
 
 ```javascript
 var {ceva: ceva} = obi1;
@@ -1399,7 +1399,7 @@ var {altceva: altceva} = obi2;
 console.log(ceva, altceva); // 10 text
 ```
 
-Putem aplica forma simplificată și vom ajunge la o formă pe care o veți întâlni foarte adesea în lucrul cu modulele. Forma simplificată a lui `var {altceva: altceva} = obi` este `var {altceva} = obi`. Câtă vreme vei urma structura unui obiect indiferent de adâncimi, vei putea extrage valori în variabilele dorite.
+Putem aplica forma simplificată și vom ajunge la o formă pe care o veți întâlni foarte adesea în lucrul cu modulele. Forma simplificată a lui `var {altceva: altceva} = obi` este `var {altceva} = obi`. Câtă vreme vei urma calea către o proprietate aflată în adâncimea structurii unui obiect, vei putea extrage valori în variabilele dorite.
 
 ```javascript
 const obi = {
@@ -1439,13 +1439,15 @@ const {unu: prima, doi: aDoua} = obi;
 console.log(prima, aDoua); // 1 2
 ```
 
-La fel de bine ar merge și atribuirea directă cu singura condiție ca expresia să fie în interiorul unui operator de grupare.
+La fel de bine ar merge și atribuirea directă cu singura condiție ca expresia să fie în interiorul unui operator de grupare - `()`.
 
 ```javascript
 ( {a,b,c} = obi );
 ```
 
-Dacă nu este introdus între paranteze rotunde, motorul JavaScript va considera acoladele ca un bloc de cod distinct. La *transferul* valorilor este foarte posibil să aplici o modificare a valorilor preluate din obiect.
+Dacă nu este introdus între paranteze rotunde, motorul JavaScript va considera acoladele ca un bloc de cod distinct `{ // e un bloc de cod }`. Din acest motiv este necesară introducerea parantezelor rotunde pentru a forța atribuirea valorilor la momentul evaluării.
+
+La *transferul* valorilor este foarte posibil să aplici o modificare a valorilor preluate din obiect.
 
 ```javascript
 const {unu = 10, doi = 100} = {unu: 1000};
@@ -1493,7 +1495,7 @@ console.log(eroare); // Nu am obținut nimic
 
 Destructurarea funcționează foarte bine și în cazul array-urilor, care la rândul lor sunt obiecte. Acest subiect este tratat la capitolul dedicat obiectului intern `Array`.
 
-În cazul array-urilor este necesară respectarea parității identificatorilor menționați în expresia din stânga cu indecșii array-ului. Potrivirea se va face în ordinea elementelor din array. În exemplul de mai jos, pentru a aduna ce-a mai rămas, am folosit și operatorul *spread* pentru a strânge restul elementelor într-un array.
+În cazul array-urilor este necesară respectarea parității identificatorilor menționați în expresia din stânga cu indecșii array-ului. Potrivirea se va face în ordinea elementelor din array. În exemplul de mai jos, pentru a aduna ce-a mai rămas, am folosit și operatorul *rest* pentru a strânge restul elementelor într-un array.
 
 ```javascript
 const arr = [1, true, function y () {return 'salut'}, 10, 20];
@@ -1522,7 +1524,19 @@ console.log(y.i + y.j);
 // Salut, România!
 ```
 
-#### Mimarea parametrilor cu nume
+#### Întreruperea destructurării prin parametri rest
+
+În cazul în care dorești să faci atribuirea de valori individuale unor variabile, dar limitând numărul acestora, poți *colecta* restul într-un obiect distinct sau un array separat. Acest lucru îl vei realiza prin aplicarea sintaxei parametrilor rest.
+
+```javascript
+const { x, ...restDeValori } = { x: 1, y: 2, z: 3 };
+console.log(restDeValori); // { y: 2, z: 3 }
+
+const [x, ...subsetDeValori] = [1, 2, 3];
+console.log(subsetDeValori); // [2, 3]
+``` 
+
+#### Atribuirea valorilor parametrilor prin destructurare
 
 Să presupunem că ai nevoie să populezi parametrii unei funcții cu valorile unui obiect prin preluarea dinamică a acestora. Poți face acest lucru cu singura condiție ca numele parametrilor să corespundă proprietăților de unde se vor prelua valorile.
 
@@ -1840,3 +1854,4 @@ Funcția primește ca prim argument un obiect a cărui proprietăți sunt identi
 * [Garbage collection | https://javascript.info/](https://javascript.info/garbage-collection)
 * [The lazy-loading property pattern in JavaScript | Nicholas C. Zakas | humanwhocodes.com](https://humanwhocodes.com/blog/2021/04/lazy-loading-property-pattern-javascript/)
 * [NodeConf Remote 2020: JavaScript Prototypes Behind the Scenes](https://speakerdeck.com/wa7son/nodeconf-remote-2020-javascript-prototypes-behind-the-scenes)
+* [Object destructuring | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#object_destructuring)
