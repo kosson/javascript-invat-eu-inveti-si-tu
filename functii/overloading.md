@@ -1,3 +1,5 @@
+# Overloading
+
 Toate funcțiile au acces la datele din obiectul `arguments`.
 
 ## Mantre
@@ -28,7 +30,7 @@ function fuzioneazaObiecte(date){
 var obiectCompus = fuzioneazaObiecte(obiect1, obiect2);
 ```
 
-## Overloading făcut pe baza numărului de argumente pasat funcției.
+## Overloading făcut pe baza numărului de argumente pasat funcției
 
 Ținta este să realizezi ceva diferit ori de câte ori numărul argumentelor este de o anumită valoare.
 

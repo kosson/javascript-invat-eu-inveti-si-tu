@@ -1,17 +1,17 @@
 # Memoization
 
-Memoizarea este o strategie de a folosi rezultate care deja au fost computate pentru a le returna în cazul în care funcția pe care o invoci face niște evaluări ce necesită multe resurse. Memoizarea este foarte utilă în cazul utilizării de funcții recursive. Modul de construcție a unei funcții memoizate se leagă de mecanismul de memorare pe care trebuie să-l implementeze. Memoizarea trebuie făcute cu funcții pure.
+Memoizarea este o strategie de a folosi rezultate care deja au fost computate pentru a le returna în cazul în care funcția pe care o invoci face niște evaluări ce necesită multe resurse. Memoizarea este foarte utilă în cazul utilizării de funcții recursive. Modul de construcție a unei funcții memoizate se leagă de mecanismul de memorare pe care trebuie să-l implementeze. Mecanismul la care apelăm este avantajul pe care îl oferă funcțiile atunci când fac closure. Înțelegerea closure-urilor este esențială în acest moment. Memoizarea trebuie făcute cu funcții pure.
 
-Ori de câte ori o funcție ajunge la un rezultat îl introduce în argumente. Astfel, ori de câte ori apare o invocare cu un același set de argumente, se va returna rezultatul fără a se mai face computația. Mai jos este un exemplu care implementează memoria folosindu-se de faptul că o funcție este un obiect căruia îi poți adăuga proprietăți noi.
+Ori de câte ori o funcție ajunge la un rezultat îl introduce în argumente. Astfel, ori de câte ori apare o invocare cu un același set de argumente, se va returna rezultatul fără a se mai face computația. Mai jos este un exemplu care implementează *memorizarea* folosindu-se de faptul că o funcție este un obiect căruia îi poți adăuga proprietăți noi.
 
 ```javascript
 function cautaCeva (valoare) {
   if (!cautaCeva.rezultate) {
-    cautaCeva.rezultate = {}; // construiești o „memorie” a rezultatelor
+    cautaCeva.rezultate = {}; // construiești o memorie a rezultatelor
   }
   if (cautaCeva.rezultate[valoare] !== undefined) {
     return cautaCeva.rezultate[valoare];
-    // daca stringul căutat se află în „memorie”, va fi returnat
+    // daca stringul căutat se află în memorie, va fi returnat
   }
   return cautaCeva.rezultate[valoare] = valoare;
 };
@@ -22,7 +22,7 @@ cautaCeva.rezultate;  // Object { ceva: "ceva", altceva: "altceva" }
 
 După cum vedem, poți introduce chiar un obiect.
 
-Un alt exemplu adesea folosit este cel al funcțiilor care fac un closure pe mediul unei funcții gazdă. Astfel, vor avea o referință stabilă la mecanismul de stocare a datelor (cache).
+Un alt exemplu adesea folosit este cel al funcțiilor care fac un closure pe mediul unei funcții gazdă. Astfel, vor avea o referință stabilă la mecanismul de stocare a datelor (*cache*).
 
 ```javascript
 const memoizarePatrat = () => {

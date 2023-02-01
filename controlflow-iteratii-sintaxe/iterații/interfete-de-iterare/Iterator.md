@@ -1,6 +1,6 @@
-## Interfața `Iterator`
+# Interfața Iterator
 
-O interfață `Iterator` trebuie să includă o proprietate `next()`, care este o funcție ce returnează un obiect `IteratorResult`. Acesta trebuie să fie conform interfeței `IteratorResult`. Acest adevărat protocol constituie baza protocolului iterable, care permite parcurgerea obiectelor care-l onorează folosind sintaxa `for...of`.
+O interfață `Iterator` trebuie să includă o proprietate `next()`, care este o funcție ce returnează un obiect `IteratorResult`. Acesta trebuie să fie conform interfeței `IteratorResult`. Acest adevărat protocol constituie baza protocolului `Iterable`, care permite parcurgerea obiectelor care-l onorează folosind sintaxa `for...of`.
 
 Definește o modalitate standard pentru a produce o secvență de valori finite sau infinite. Se comportă ca un pointer.
 
@@ -35,10 +35,10 @@ console.log(timpRămas.next()); // { value: undefined, done: true}
 
 Metoda `next()` este o funcție care nu primește argumente, dar care returnează un obiect cu două proprietăți:
 
--   `done` care este un `Boolean` cu cele două alternative:
-  -   dacă `true`, atunci iteratorul a trecut de finalul secvenței pe care a avut-o de parcurs;
-  -   dacă `false` înseamnă că a produs următoarea valoare din secvență;
--   `value` care este valoarea returnată de iterator. Se poate omite atunci când `done` este `true`.
+* `done` care este un `Boolean` cu cele două alternative:
+  * dacă `true`, atunci iteratorul a trecut de finalul secvenței pe care a avut-o de parcurs;
+  * dacă `false` înseamnă că a produs următoarea valoare din secvență;
+* `value` care este valoarea returnată de iterator. Se poate omite atunci când `done` este `true`.
 
 Pentru exemplificare, vom constitui un iterator cu scopul de a parcurge un array.
 
@@ -53,8 +53,8 @@ iteratorNou.next(); // {value: undefined, done: true}
 
 Opțional mai sunt două proprietăți disponibile:
 
-- `return`, care este o funcție ce returnează un obiect `IteratorResult`, indicând obiectului `Iterator` că nu se dorește să se mai facă apeluri la metoda `next`. În acest caz, valoarea `done` a obiectului returnat va fi `true`, iar `value` va fi valoarea pasată drept argument metodei `return`.
-- `throw`, care este o funcție ce returnează un obiect `IteratorResult`, indicând obiectului `Iterator` că a fost detectată condiția unei erori. Argumentul acestei funcții va fi un obiect de eroare.
+* `return`, care este o funcție ce returnează un obiect `IteratorResult`, indicând obiectului `Iterator` că nu se dorește să se mai facă apeluri la metoda `next`. În acest caz, valoarea `done` a obiectului returnat va fi `true`, iar `value` va fi valoarea pasată drept argument metodei `return`.
+* `throw`, care este o funcție ce returnează un obiect `IteratorResult`, indicând obiectului `Iterator` că a fost detectată condiția unei erori. Argumentul acestei funcții va fi un obiect de eroare.
 
 Standardul indică faptul că înainte de a folosi aceste metode opționale, cel mai bine ar fi să verifici dacă acestea sunt puse la dispoziție.
 
@@ -260,4 +260,4 @@ class UnGenerator {
 
 ## Resurse
 
-- [JavaScript async iterators | Luciano Mammino | Node.js design Patterns](https://www.nodejsdesignpatterns.com/blog/javascript-async-iterators/)
+* [JavaScript async iterators | Luciano Mammino | Node.js design Patterns](https://www.nodejsdesignpatterns.com/blog/javascript-async-iterators/)

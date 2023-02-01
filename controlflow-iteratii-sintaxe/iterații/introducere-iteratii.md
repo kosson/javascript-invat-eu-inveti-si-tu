@@ -34,8 +34,8 @@ Pentru a lămuri aspectele privind iterarea, vom recurge din nou la explicațiil
 
 În parcurgerea unui set de date, atunci când rezultatul unui pas devine valoarea de start pentru următorul, atunci vorbim despre *iterare*. În acest moment avem două concepte centrale care merită atenția noastră deplină:
 
--   **iterable** fiind structura de date care expune elementele pentru a fi accesate public. Face acest lucru implementând o metodă care returnează un obiect numit *iterator*. Această metodă nu este abstractă, ci poate fi apelată în obiectele care pot fi iterate (`[Symbol.iterator]()`),
--   **iterator** fiind, de fapt, un pointer (în limba română ar fi tradus ca *indicator* sau *cursor*, dar poți să ți-l închipui ca un semn de carte) pentru traversarea elementelor unei structuri de date.
+* **iterable** fiind structura de date care expune elementele pentru a fi accesate public. Face acest lucru implementând o metodă care returnează un obiect numit *iterator*. Această metodă nu este abstractă, ci poate fi apelată în obiectele care pot fi iterate (`[Symbol.iterator]()`),
+* **iterator** fiind, de fapt, un pointer (în limba română ar fi tradus ca *indicator* sau *cursor*, dar poți să ți-l închipui ca un semn de carte) pentru traversarea elementelor unei structuri de date.
 
 Standardul consideră `Iterable` și `Iterator` a fi **interfețe**.
 
@@ -47,30 +47,30 @@ Standardul consideră `Iterable` și `Iterator` a fi **interfețe**.
 
 Interfețele de iterare sunt întâlnire ori de câte ori avem de-a face cu structuri de cod ce au capacitatea de a parcurge structuri de date organizate ca array-uri, `Map` sau `Set`, ori promisiuni.
 
--   `for...of`,
--   `Array.from()`,
--   operatorul spread (`...`),
--   constructorul pentru Map `new Map([['varza',1],[2, true]])`,
--   constructorul pentru Set `new Set([1,'doi',false])`,
--   `Promise.all()` și `Promise.race()`,
--   `yield* unObiectIterabil`.
+* `for...of`,
+* `Array.from()`,
+* operatorul spread (`...`),
+* constructorul pentru Map `new Map([['varza',1],[2, true]])`,
+* constructorul pentru Set `new Set([1,'doi',false])`,
+* `Promise.all()` și `Promise.race()`,
+* `yield* unObiectIterabil`.
 
 ## Dependințe
 
-- funcții,
-- obiecte,
-- moștenire
+* funcții,
+* obiecte,
+* moștenire
 
 ## Alonje
 
-- generatoare
+* generatoare
 
 ## Resurse
 
-- [MDN - Iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
-- [Iterables and iterators](http://exploringjs.com/es6/ch_iteration.html)
-- [Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)
-- [All you need to know about JavaScript Iterators and Generators](https://jfet97.github.io/JavaScript-Iterators-and-Generators/)
-- [Looping over Arrays: for vs. for-in vs. .forEach() vs. for-of](https://2ality.com/2021/01/looping-over-arrays.htm)
-- [Iterator | Wikipedia](https://en.wikipedia.org/wiki/Iterator)
-- [CLU (programming language)](https://en.wikipedia.org/wiki/CLU_(programming_language))
+* [MDN * Iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols)
+* [Iterables and iterators](http://exploringjs.com/es6/ch_iteration.html)
+* [Design Patterns](https://en.wikipedia.org/wiki/Design_Patterns)
+* [All you need to know about JavaScript Iterators and Generators](https://jfet97.github.io/JavaScript-Iterators-and-Generators/)
+* [Looping over Arrays: for vs. for-in vs. .forEach() vs. for-of](https://2ality.com/2021/01/looping-over-arrays.htm)
+* [Iterator | Wikipedia](https://en.wikipedia.org/wiki/Iterator)
+* [CLU (programming language)](https://en.wikipedia.org/wiki/CLU_(programming_language))

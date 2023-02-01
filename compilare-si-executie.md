@@ -271,16 +271,18 @@ Pas \# 5 compilatorul trece peste `ex` pentru că nu este o declarație și nu i
     - declară funcția internă `sarcinaInterna`;
     - `ex` este declarată și este hoisted. Atenție, chiar dacă `ex` are mai sus o atribuire, în această fază sunt două lucruri distincte.
 
-### EXECUȚIE (se creează automat contextul de execuție).
+### EXECUȚIE (se creează automat contextul de execuție)
 
-variabilei locale param îi este atribuită valoarea 2
-variabilei param îi este modificată valoarea.
-    * Pas \# 5 Cine este *ex*?
-    * **Context**: local scope.
-    * **Motorul întreabă**: știi ce este `ex`?
-    * **Răspuns**: Nu, nu știu, dar mă duc pe *scope chain* și caut în `container` până în Global Scope dacă este nevoie.
-    * **Efect**: dacă o variabilă cu același nume este găsită pe lanțul de scope în Global scope valoarea din funcție modifică valoarea variabilei din global scope.
-    * **Dacă**: nu este găsită o variabilă cu același nume *mai sus*, atunci va crea una din oficiu. Dacă se folosește `use strict`, va fi returnată o eroare `ReferenceError`.
+variabilei locale `param` îi este atribuită valoarea 2
+variabilei `param` îi este modificată valoarea:
+
+* Pas \# 5 Cine este *ex*?
+* **Context**: local scope.
+* **Motorul întreabă**: știi ce este `ex`?
+* **Răspuns**: Nu, nu știu, dar mă duc pe *scope chain* și caut în `container` până în Global Scope dacă este nevoie.
+* **Efect**: dacă o variabilă cu același nume este găsită pe lanțul de scope în Global scope valoarea din funcție modifică valoarea variabilei din global scope.
+* **Dacă**: nu este găsită o variabilă cu același nume *mai sus*, atunci va crea una din oficiu. Dacă se folosește `use strict`, va fi returnată o eroare `ReferenceError`.
+
 Pas \# 11 se returnează funcția internă `sarcinaInterna` ceea ce conduce la invocarea acesteia.
 
 ### COMPILARE
@@ -299,7 +301,7 @@ Pas \# 11 se returnează funcția internă `sarcinaInterna` ceea ce conduce la i
 * valiabila `măsura` va fi modificată în contextul local fiind înmulțită cu `2` și atribuită ei înseși.
 * valoarea `măsurii` este returnată în contextul de mai sus, adică valoarea `24`.
 
-## Referințe
+## Resurse
 
 * [Arindam Paul - JavaScript VM internals, EventLoop, Async and ScopeChains](https://www.youtube.com/watch?v=QyUFheng6J0 "Este un material fantastic pentru a înțelege mai bine faza de compilare și cea de execuție")
 * [Lin Clark - An Abridged Cartoon Introduction To WebAssembly](https://www.smashingmagazine.com/2017/05/abridged-cartoon-introduction-webassembly/)

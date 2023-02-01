@@ -1,4 +1,4 @@
-## Interfața *Iterable*
+# Interfața Iterable
 
 Un iterabil este o structură de date care permite accesul la elementele sale. Accesul este permis câte un element odată și în plus, un obiect iterabil ține minte poziția în care a ajuns. De exemplu, șirurile de caractere, array-urile, map-urile și set-urile.
 
