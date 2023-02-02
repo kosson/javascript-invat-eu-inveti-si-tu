@@ -584,7 +584,7 @@ const filteringGen = filter(['a', 'b', 'c'], i => i === 'a');
 
 ## Async/await fără async/await
 
-Generatoarele permit lucrul asincron prin simplu fapt că pot separa etapele de prelucrare prin apelurile `next` succesive. Următorul exemplu ni-l oferă tot Héla Ben Khalfallah. Să-l parcurgem.
+Generatoarele permit lucrul asincron prin simplu fapt că pot separa etapele de prelucrare prin apelurile `next` succesive. Următorul exemplu ni-l oferă Héla Ben Khalfallah. Să-l parcurgem.
 
 ```javascript
 function* fetchData() {
@@ -732,7 +732,7 @@ function* threader (...sources) { // faci spread pe toate array-urile și obții
         yielding = true;
         yield next.value;
       };
-      // când pentru o singur set de date `done` va fi `true`, valoarea lui `yielding` va rămâne `false`
+      // când pentru un singur set de date `done` va fi `true`, valoarea lui `yielding` va rămâne `false`
     };
 
   };
@@ -810,7 +810,7 @@ console.log(Array.from(ObiectNou));
 
 ## Recursivitate
 
-Unul din scopurile principale a întregului efort de a învăța programare este acela de a putea manipula datele de mari dimensiuni sau cele care de mare complexitate ca structură. Cel mai întrebuințat model de parcurgere a datelor de o mare complexitate este cel care folosește recursivitatea. Acesta este și cazul parcurgerii DOM (în engleză *walking the DOM*).
+Unul din scopurile principale a întregului efort de a învăța programare este acela de a putea manipula datele de mari dimensiuni sau cele cu structuri complexe. Cel mai întrebuințat model de parcurgere a datelor de o mare complexitate este cel care folosește recursivitatea. Acesta este și cazul parcurgerii DOM (în engleză *walking the DOM*).
 
 ```html
 <div id="start">
@@ -992,7 +992,7 @@ Adu-ți mereu aminte de faptul că generatoarele primesc date prin `next()` în 
 Anatomia unui apel `next()`:
 
 - un `Promise` este trimis în lista de microtaskuri.
-- dacă generatorul async nu este activ îl repune în execuție și așteaptă încheiere fie prin `yield`, `throw`, `return` sau `await`.
+- dacă generatorul async nu este activ îl repune în execuție și așteaptă finalizarea, fie prin `yield`, `throw`, `return` sau `await`.
 - este returnată promisiunea după rezolvarea sa asincronă cel mai repede în următorul *tick*.
 
 În cazul generatoarelor asincrone, toate apelurile la `next()` sunt introduse într-un *queue* de către motorul JavaScript. De îndată ce obiectul generator asincron este constituit, i le pune la dispoziție. Acest lucru este foarte eficient pentru că nu va trebui să aștepți să fie hotărâtă starea promisiunii returnate de `next()`. Totuși, în cazurile în care ai nevoie de valoarea lui `done`, va trebui să aștepți rezolvarea promisiunii returnate de `next()` pentru că în funcție de `true`/`false` poți decide cum execuți codul care urmează sau dacă mai apelezi încă o dată pe `next()` sau nu.
