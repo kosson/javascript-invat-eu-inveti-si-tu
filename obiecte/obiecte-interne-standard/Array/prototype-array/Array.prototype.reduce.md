@@ -1,8 +1,10 @@
 # Array.prototype.reduce()
 
+Această metodă este specială pentru că permite transformarea a două valori/entități de lucru la una singură (operațiune numită *reducer*) și apoi această nouă valoare obținută va deveni cea cu care se face următoarea transformare până la final.
+
 Metoda ia primul element al array-ului a cărui valoare este procesată de o funcție. Valorii rezultate i se va adăuga rezultatul procesării rând pe rând a tuturor elementelor rămase. Această primă valoare obținută se numește **acumulator**. Fiecare element al array-ului va fi procesat de funcția pasată metodei ca prim argument, iar rezultatul va fi adăugat incremental acumulatorului.
 
-Metoda primește drept argumente o funcție callback și o valoare opțională de pornire, care va fi semnătura acumulatorului, fiind opțională. Trebuie reținut faptul că array-ul pe care se face *reducerea* poate fi constituit din elemente care pot fi orice valoare (number, null, undefined, array, object, promise).
+Metoda primește drept argumente o funcție callback și o valoare opțională de pornire, care va fi semnătura acumulatorului, fiind opțională. Callback-ul poate fi înțeles ca un set de reguli de transformare a unui element al array-ului original într-o entitate diferită căreia îi faci un *push* în array-ul cu rol de acumulator. Trebuie reținut faptul că array-ul pe care se face *reducerea* poate fi constituit din elemente care pot fi orice valoare (number, null, undefined, array, object, promise).
 
 ## Mică istorie
 
@@ -15,31 +17,44 @@ for (var i = 0; i < colectie.length; i++) {
 };
 ```
 
-Odată cu versiunea a cincea a standardului, apare `forEach`, ca nouă metodă oferită de prototipul obiectului intern `Array`. Codul de mai sus poate fi rescris astfel:
+Începând cu ES5 avem la dispoziție `forEach`, ca nouă metodă oferită de prototipul obiectului intern `Array`. Codul de mai sus poate fi rescris astfel:
 
 ```javascript
 var colectie = ["unu", "doi", "trei"];
-colectie.forEach(function(element){
+colectie.forEach(function (element) {
   console.log(element);
 });
 ```
 
 Ce-i nou? Faptul că `forEach` gestionează *modelarea* fiecărui element din array folosind o funcție cu rol de callback.
 
-Reduce construiește pe ceea ce oferă `forEach` și `map`, ducând mai departe posibilitățile de procesare prin utilizarea unei structuri de date cu rol de acumulator și a unor mecanisme ce permit o filtrare a datelor pe măsură ce acestea sunt prelucrate. Pe lângă callback, `reduce` poate primi opțional, o valoare de inițiere.
+Reduce construiește pe ceea ce oferă `forEach` și `map`, ducând mai departe posibilitățile de procesare prin utilizarea unei structuri de date care este rezultatul evaluării interioare (*acumulator*) și a unor mecanisme ce permit filtrarea datelor pe măsură ce acestea sunt prelucrate. Pe lângă callback, `reduce` poate primi, opțional, o valoare de inițializare pentru *acumulator*. Pentru a înțelege mai bine ce face *reduce*, am putea recrea funcționalitatea sa utilizând *umilul* `for` de la care am plecat în micul nostru parcurs istoric.
+
+```javascript
+function reduceRecreat (acumulatorul, funcțiaPrelucrătoare, arrayDePrelucrat) {
+    for (let index = 0; index < arrayDePrelucrat.length; index++) {
+        acumulatorul = funcțiaPrelucrătoare(acumulatorul, arrayDePrelucrat[index]);
+    }
+    return acumulatorul;
+};
+function reducer (primaValoare, aDouaValoare) {
+    return primaValoare + aDouaValoare;
+}
+let rezultatFinal = reduceRecreat(0, reducer, [1, 2, 3]); // 6
+```
 
 ## Reduce în practică
 
-Funcția callback primește patru argumente și se va aplica pe fiecare element al array-ului cu excepția primului element din array:
+Funcția callback primește patru argumente și se va aplica pe fiecare element al array-ului cu excepția primului element din array-ul care trebuie *redus*:
 
--   `acumulator`: este valoarea acumulată până la momentul următoarei execuții a callback-ului,
--   `currentValue`: este elementul curent procesat,
--   `currentIndex`: indexul elementului care tocmai este procesat și pornește de la valoarea `0`, dacă `reduce` are cel de-al doilea parametru. Dacă nu, pornește de la `1`.
--   `arrayOriginal`: chiar obiectul care trebuie parcurs.
+* `acumulator`: reprezentând valoarea la care s-a ajuns prin evaluarea codului callback-ului,
+* `currentValue`: este elementul curent procesat,
+* `currentIndex`: indexul elementului care tocmai este procesat. Valoarea sa pornește de la valoarea `0`, dacă `reduce` are cel de-al doilea parametru. Dacă nu, pornește de la `1`.
+* `arrayOriginal`: identifică chiar obiectul care trebuie parcurs.
 
 Denumirile parametrilor funcției callback sunt arbitrar alese. Poți pune ce denumiri ți se par cel mai relevante pentru înțelegerea codului. Dacă nu sunt necesare, ultimele două argumente din cele patru pot fi omise.
 
-În cazul în care valoarea de inițiere (array sau obiect) nu este introdusă, valoarea acumulatorului va fi prima din array-ul de prelucrat. Acest element va fi luat în calcul pentru cea de-a doua execuție a callback-ului.
+În cazul în care valoarea de inițiere (array sau obiect) nu este introdusă, valoarea de inițializare a acumulatorului va fi prima din array-ul de prelucrat. Valoarea parametrului `currentValue` va fi cea de-a doua valoare din array-ul de prelucrare.
 
 ```javascript
 ['unu', 'doi', 'trei'].reduce( function (acumulator, elementulDeLucru, index, arrOriginal) {
@@ -47,9 +62,9 @@ Denumirile parametrilor funcției callback sunt arbitrar alese. Poți pune ce de
 });// este returnată prima valoare din array
 ```
 
-Dacă nu este dată o valoare de inițializare, acumulatorul va fi prima valoare din array, iar `currentValue`, cea de-a doua. Când ai astfel de construcții, de regulă operezi cu valori primare dintr-un array. Un lucru foarte important este acela că obiectul acumulator, fie aceasta un obiect sau array, trebuie returnat din funcția aplicată.
+Când ai astfel de construcții, de regulă operezi cu valori primare în array-ul de prelucrare. Un lucru foarte important este acela că obiectul acumulator, fie aceasta un obiect sau array, trebuie să fie ceea ce returnează  funcția cu rol de callback. Observă în exemplul de mai sus că metodei `reduce` nu îi este menționat cel de-al doilea parametru, fapt ce indică valoarea de inițiere cea cu indexul zero din array,
 
-În cazul următoarei secvențe de cod, elementul de start va fi un obiect gol.
+În cazul următoarei secvențe de cod, elementul de start va fi un obiect gol care este menționat în poziția celui de-al doilea parametru.
 
 ```javascript
 ['unu', 'doi', 'trei'].reduce(function (acumulator, elementulDeLucru, index, arrOriginal) {
@@ -58,19 +73,17 @@ Dacă nu este dată o valoare de inițializare, acumulatorul va fi prima valoare
 // este returnată chiar valoarea de pornire: {}
 ```
 
-Observă faptul că valoarea inițială a acumulatorului este cel de-al doilea argument. În cazul în care se introduce valoarea de pornire, aceasta va fi acumulatorul, iar prima valoare din array-ul de prelucrare va fi `currentValue`. Când pasezi ca argument opțional un obiect, valorile elementelor array-ului devin cheile obiectului nou creat.
+Observă faptul că valoarea inițială a acumulatorului este cel de-al doilea argument, în cazul nostru este un obiect gol. Aceasta va fi acumulatorul, iar prima valoare din array-ul de prelucrare va fi `currentValue`. Valorile elementelor array-ului devin cheile obiectului nou creat.
 
 ## Mantre
 
--   `reduce` se mai numește și `fold`, adică o funcție care *pliază* valori prin prelucrarea lor pe un rezultat existent,
--   `[1,2,3].reduce(reducător, valoareInitiala)` este, de fapt, o expresie care va fi evaluată la o singură valoare finală a acumulatorului,
--   callback-ul primește patru argumente: `acumulator`, `valoareaDeLucru`, `indexCurent`, `ÎntregulArray`,
--   când este primită ca argument valoarea opțională, aceasta devine `acumulator`,
--   funcția trebuie neapărat să returneze acumulatorul.
+* `reduce` se mai numește și `fold`, adică o funcție care *pliază* valori prin prelucrarea lor pe un rezultat existent,
+* `[1,2,3].reduce(reducător, valoareInitiala)` este, de fapt, o expresie care va fi evaluată la o singură valoare finală a acumulatorului,
+* callback-ul primește patru argumente: `acumulator`, `valoareaDeLucru`, `indexCurent`, `ÎntregulArray`,
+* când este primită ca argument valoarea opțională, aceasta devine `acumulator`,
+* funcția trebuie neapărat să returneze acumulatorul.
 
-## Reduce în practică
-
-Al doilea argument opțional va juca rolul de acumulator la prima invocare a callback-ului. Va fi valoarea de la care se pornește. Poate fi un array, un obiect sau o valoare, cum ar fi `0`. Depinde de valoarea de la care dorești să pornești.
+Acumulatorul poate fi un array, un obiect sau o valoare, cum ar fi `0`. Depinde de valoarea de la care dorești să pornești.
 
 ```javascript
 var valoriNoi = [1, 2, 3].reduce(function (acumulator, valoarea) {
@@ -85,7 +98,7 @@ Am pornit de la `0`, așa cum am specificat ca al doilea argument după callback
 Dacă nu este dată o valoare opțională de start ca al doilea argument după callback, `previousValue`, acumulatorul va fi prima valoare din array-ul nou format, iar `currentValue` va fi cea de-a doua.
 
 ```javascript
-['unu', 'doi', 'trei'].reduce(function(a, b){ return ceva; },{});
+['unu', 'doi', 'trei'].reduce(function (a, b) { return ceva; }, {});
 // Prima dată, a va fi obiectul opțional {}, iar b va fi array[0], adică primul element din array
 // A doua oară, a va fi rezultatul returnat de funcție, iar b va fi array[1]
 // A treia oară, a va fi rezultatul returnat de funcție, iar b ca fi array[2]
@@ -97,7 +110,7 @@ Dacă array-ul este gol și nu este dată o valoare de pornire `initialValue`, a
 Dacă array-ul are o singură valoare indiferent de poziția acesteia și nu este oferită o valoare `initialValue` sau dacă `initialValue` este dată, dar array-ul este gol, atunci valoarea unică va fi returnată fără a fi invocat callback-ul.
 
 ```javascript
-[0, 1, 2, 3, 4].reduce(function(previousValue, currentValue, currentIndex, array) {
+[0, 1, 2, 3, 4].reduce(function (previousValue, currentValue, currentIndex, array) {
   return previousValue + currentValue;
 }); // 10
 ```
@@ -172,7 +185,7 @@ console.log(rezultat);
 
 /** 2. Varianta contrasă */
 function numaraDuplicatele(){
-  return colectie.reduce(function(acumulator, element){
+  return colectie.reduce(function (acumulator, element) {
     acumulator[element] = (acumulator[element] + 1) || 1;
     // adaugă un element in obiectul construit având cheia
     // tot[element] cu valoarea 1 pentru un element unic
@@ -189,7 +202,7 @@ numaraDuplicatele();
 
 ```javascript
 var colectie = ["Constanța", "Bărcănești", "Sinaia", "Călimănești", "Bacău", "Oradea", "Cluj", "Baia Mare"];
-var alfabetic = colectie.reduce(function(acumulator, cuvant){
+var alfabetic = colectie.reduce(function (acumulator, cuvant) {
   if(!acumulator[cuvant[0]]){
     acumulator[cuvant[0]] = [];
   }
@@ -202,16 +215,17 @@ var alfabetic = colectie.reduce(function(acumulator, cuvant){
 //   O: [ 'Oradea' ] }
 ```
 
-### Aplatizarea unui array de array-uri:
+### Aplatizarea unui array de array-uri
 
 Chiar dacă în cazul array-urilor avem la îndemână în acest moment metoda `flat()`, în scop didactic, vom simula funcționarea lui `flat` folosind `reduce`.
 
 ```javascript
-var plat = [[0, 1], [2, 3], [4, 5]].reduce(function(previousValue, currentValue) {
+var plat = [[0, 1], [2, 3], [4, 5]].reduce(function (previousValue, currentValue) {
   return previousValue.concat(currentValue);
 }, []); // aplatizat este: [0, 1, 2, 3, 4, 5]
 ```
- Un alt exemplu folosind toate argumentele callback-ului.
+
+Un alt exemplu folosind toate argumentele callback-ului.
 
 ```javascript
 var texte = [["Gică", "Georgică"], "Abramburica", ["Nadia", "Ana"]].reduce(function (previousValue, currentValue, currentIndex, array) {
@@ -223,10 +237,10 @@ var texte = [["Gică", "Georgică"], "Abramburica", ["Nadia", "Ana"]].reduce(fun
 
 Folosirea `rest parameters`, adică o sintaxă ce permite extragerea unui `Array` din argumentele pasate unei funcții simplifică mult operațiunile. Această sintaxă constă în adăugarea unui nume de parametru prefixat de trei puncte de suspensie. Această sintaxă generează un `Array` adevărat, nu un *array-like* așa cum este `arguments`.
 
-Un exemplu de transformare a funcționalității unei funcții construite clasic, care face suma tuturor argumentelor (`arguments`) cu excepția primului, care va fi folosit drept multiplicator pentru suma obținută. Acest exemplu este oferit de Nicolás, un consultant JavaScript din Buenos Aires, Argentina în explicarea conceptelor noi pe care le introduce ECMAScript 2015 - [ES6 Spread and Butter in Depth](https://ponyfoo.com/articles/es6-spread-and-butter-in-depth).
+Un exemplu de transformare este obținerea sumei tuturor argumentelor (`arguments`) cu excepția primului, care va fi folosit drept multiplicator pentru cea obținută. Acest exemplu este oferit de Nicolás, un consultant JavaScript din Buenos Aires, Argentina în explicarea conceptelor noi pe care le introduce ECMAScript 2015 - [ES6 Spread and Butter in Depth](https://ponyfoo.com/articles/es6-spread-and-butter-in-depth).
 
 ```javascript
-function faSumaSiDubleaza(){
+function faSumaSiDubleaza () {
   var setNumere = Array.prototype.slice.call(arguments);
   // constituie array-ul transformand arguments; slice „taie” de la 0 până la capăt
   var multiplicator = setNumere.shift();
@@ -240,22 +254,22 @@ var total = faSumaSiDubleaza(34,10,2,30,12);
 console.log(total); // 1836
 ```
 
-### Căutarea celui mai lung string dintr-un array de șiruri.
+### Căutarea celui mai lung string dintr-un array de șiruri
 
 Varianta clasică ar fi să faci o funcție care trece în buclă fiecare element al array-ului căreia îi pasezi array-ul cu șiruri.
 
 Condiții:
 
--   inițiezi o variabilă contor,
--   inițiezi o variabilă care va ține valoarea celui mai mare șir,
--   contorul să fie mai mic decât valoarea dimensiunii array-ului,
--   preincrementezi contorul înainte de orice ai face pe fiecare ciclu.
+* inițiezi o variabilă contor,
+* inițiezi o variabilă care va ține valoarea celui mai mare șir,
+* contorul să fie mai mic decât valoarea dimensiunii array-ului,
+* preincrementezi contorul înainte de orice ai face pe fiecare ciclu.
 
 Testezi dacă dimensiunea șirului (element al array-ului) este mai mare decât dimensiunea șirului găsit anterior.
 
--   DA -> atunci valoarea lui `celMaiLung` este suprascrisă cu noua valoare;
--   NU -> returnează valoarea lui `celMaiLung`;
--   Aceeași operațiune de comparare se face pentru toate elementele array-ului cu valoarea găsită anterior până când este păstrată cea mai mare.
+* DA -> atunci valoarea lui `celMaiLung` este suprascrisă cu noua valoare;
+* NU -> returnează valoarea lui `celMaiLung`;
+* Aceeași operațiune de comparare se face pentru toate elementele array-ului cu valoarea găsită anterior până când este păstrată cea mai mare.
 
 ```javascript
 var colectie = ['ceva', 'altceva', 'telejurnal', 'agave'];
@@ -274,7 +288,7 @@ cautaSirLung(colectie); // telejurnal
 Varianta folosind `reduce`:
 
 ```javascript
-function cautaSirLung(colectie){
+function cautaSirLung (colectie) {
   return colectie.reduce(function(celMaiLung, valoareCurenta){
     return valoareCurenta.length > celMaiLung.length ? valoareCurenta : celMaiLung;
   }, '');
@@ -297,7 +311,7 @@ cautaSirLung(colectie); // Object { index: 2, valoare: "telejurnal" }
 
 Metoda `reduce` are aplicativitate și în lucrul cu array-uri ale căror elemente sunt obiecte.
 
-### Reduce pentru selectare după criterii specificate printr-un obiect opțional.
+### Reduce pentru selectare după criterii specificate printr-un obiect opțional
 
 În următorul exemplu putem culege date din elementele obiect ale array-ului pentru a constitui ordonări, clasificări și chiar statistici.
 
@@ -417,7 +431,7 @@ Identificarea unor caracteristici ale corpurilor vii și nevii,1.1.,stiinte-iden
 "Utilizarea unor criterii pentru compararea unor corpuri, fenomene și procese",1.2.,stiinte-identificare-caracteristici-cl3-1.2,"identificarea unor criterii de comparare a unor corpuri, fenomene, procese din aceeași categorie (de exemplu: diverse proprietăți ale metalelor, diverse caracteristici ale unor animale)","Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,"Explorarea caracteristicilor unor corpuri, fenomene și procese",1
 "Utilizarea unor criterii pentru compararea unor corpuri, fenomene și procese",1.2.,stiinte-identificare-caracteristici-cl3-1.2,"compararea unor corpuri, fenomene, procese din aceeași categorie în scopul stabilirii asemănărilor și deosebirilor între ele (de exemplu: compararea metalelor după diferite proprietăți, a animalelor după diferite caracteristici)","Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,"Explorarea caracteristicilor unor corpuri, fenomene și procese",1
 "Utilizarea unor criterii pentru compararea unor corpuri, fenomene și procese",1.2.,stiinte-identificare-caracteristici-cl3-1.2,"selectarea unor corpuri după diferite criterii și realizarea unor colecții/ expoziții (de exemplu: colecții de obiecte selectate după formă, mărime, culoare, întrebuințări, colecții de plante sau părți componente ale acestora)","Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,"Explorarea caracteristicilor unor corpuri, fenomene și procese",1
-Identificarea etapelor unui demers investigativ vizând mediul înconjurător pe baza unui plan dat,2.1.,stiinte-identificare-caracteristici-cl3-2.1,formularea unor întrebări ce duc la necesitatea unei investigații pentru aflarea răspunsului (de exemplu: „Planta are nevoie de lumină pentru a trăi?”),"Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,Investigarea mediului înconjurător folosind instrumente și procedee specifice,2
+Identificarea etapelor unui demers investigativ vizând mediul înconjurător pe baza unui plan dat,2.1.,stiinte-identificare-caracteristici-cl3-2.1,formularea unor întrebări ce duc la necesitatea unei investigații pentru aflarea răspunsului (de exemplu: *Planta are nevoie de lumină pentru a trăi?*),"Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,Investigarea mediului înconjurător folosind instrumente și procedee specifice,2
 Identificarea etapelor unui demers investigativ vizând mediul înconjurător pe baza unui plan dat,2.1.,stiinte-identificare-caracteristici-cl3-2.1,"identificarea metodelor de lucru (de exemplu: observarea a două plante de același tip, crescute în condiții identice, dar cu iluminare diferită)","Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,Investigarea mediului înconjurător folosind instrumente și procedee specifice,2
 Identificarea etapelor unui demers investigativ vizând mediul înconjurător pe baza unui plan dat,2.1.,stiinte-identificare-caracteristici-cl3-2.1,"stabilirea resurselor necesare (de exemplu: două ghivece cu mușcate plantate în același tip de sol, apă, hârtie închisă la culoare)","Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,Investigarea mediului înconjurător folosind instrumente și procedee specifice,2
 Identificarea etapelor unui demers investigativ vizând mediul înconjurător pe baza unui plan dat,2.1.,stiinte-identificare-caracteristici-cl3-2.1,implicarea în alegerea modalităților de lucru (individual/ în grup),"Științe ale naturii,  clasa a III-a- a IV-a",Clasa a III-a,OM 5003 / 02.12.2014,Investigarea mediului înconjurător folosind instrumente și procedee specifice,2
@@ -426,14 +440,14 @@ Identificarea etapelor unui demers investigativ vizând mediul înconjurător pe
 
 Ceea ce observați este câmpul `ids` care are un prim identificator comun mai multor înregistrări. Toate câmpurile sunt identice mai puțin cel `activitate`. Rezultatul la care dorim să ajungem este ca o singură înregistrare pentru un identificator unic, care să adune într-un array, activitățile.
 
-![](RezultatFoldingByOneField.png)
+![Ce rezultă din reducerea pe un singur câmp](RezultatFoldingByOneField.png)
 
 ```json
 [{
     "nume": "Identificarea unor caracteristici ale corpurilor vii și nevii",
     "ids": ["1.1."],
     "cod": "stiinte-identificare-caracteristici-cl3-1.1",
-    "activitati": ["observarea unor corpuri și identificarea caracteristicilor acestora (de exemplu: organisme vii pentru identificarea părților componente, diferite obiecte pentru identificarea unor proprietăți precum formă, culoare, transparență)", "observarea unor corpuri și identificarea caracteristicilor acestora (de exemplu: organisme vii pentru identificarea părților componente, diferite obiecte pentru identificarea unor proprietăți precum formă, culoare, transparență)", "utilizarea unor modele pentru identificarea caracteristicilor principale ale corpurilor reprezentate (de exemplu: schițe de hărți pentru observarea suprafețelor de apă și uscat, mulaje ale unor tipuri de animale din diferite grupe)", "observarea dirijată a unor scheme simple, desene pentru identificarea\netapelor unor fenomene/ procese (de exemplu: circuitul apei în natură)", "recunoașterea unor caracteristici ale corpurilor pornind de la prezentarea unor texte științifice adaptate vârstei elevilor, a unor povești sau povestiri (de exemplu: descrierea unor reacții ale animalelor în diferite situații)", "observarea unor aspecte dinamice ale realității înconjurătoare sau mai îndepărtate de mediul de viață cunoscut, prin vizionarea unor filme sau realizarea unor jocuri de rol (de exemplu, despre mișcarea apei pe suprafața Pământului, despre modul în care căderea  vântul pot\nproduce energie)", "identificarea unor caracteristici ale corpurilor, fenomenelor, proceselor prin efectuarea unor experiențe simple (de exemplu: evidențierea diferențelor dintre diferite surse de apă, evidențierea mișcărilor apei pe suprafața planetei, evidențierea schimbării stării de agregare a apei și a relației cu temperatura, evidențierea mișcării aerului și a influenței vântului asupra norilor, evidențierea unor interacțiuni între corpuri și a efectelor lor)"],
+    "activitati": ["observarea unor corpuri și identificarea caracteristicilor acestora", "observarea unor corpuri și identificarea caracteristicilor acestora", "utilizarea unor modele pentru identificarea caracteristicilor principale ale corpurilor reprezentate", "observarea dirijată a unor scheme simple, desene pentru identificarea etapelor unor fenomene/ procese (de exemplu: circuitul apei în natură)"],
     "disciplina": ["Științe ale naturii,  clasa a III-a- a IV-a"],
     "nivel": ["Clasa a III-a"],
     "ref": ["OM 5003 / 02.12.2014"],
@@ -443,7 +457,7 @@ Ceea ce observați este câmpul `ids` care are un prim identificator comun mai m
     "nume": "Utilizarea unor criterii pentru compararea unor corpuri, fenomene și procese",
     "ids": ["1.2."],
     "cod": "stiinte-identificare-caracteristici-cl3-1.2",
-    "activitati": ["identificarea unor criterii de comparare a unor corpuri, fenomene, procese din aceeași categorie (de exemplu: diverse proprietăți ale metalelor, diverse caracteristici ale unor animale)", "compararea unor corpuri, fenomene, procese din aceeași categorie în scopul stabilirii asemănărilor și deosebirilor între ele (de exemplu: compararea metalelor după diferite proprietăți, a animalelor după diferite caracteristici)", "selectarea unor corpuri după diferite criterii și realizarea unor colecții/ expoziții (de exemplu: colecții de obiecte selectate după formă, mărime, culoare, întrebuințări, colecții de plante sau părți componente ale acestora)"],
+    "activitati": ["identificarea unor criterii de comparare a unor corpuri, fenomene, procese din aceeași categorie", "compararea unor corpuri, fenomene, procese din aceeași categorie în scopul stabilirii asemănărilor și deosebirilor între ele", "selectarea unor corpuri după diferite criterii și realizarea unor colecții/ expoziții"],
     "disciplina": ["Științe ale naturii,  clasa a III-a- a IV-a"],
     "nivel": ["Clasa a III-a"],
     "ref": ["OM 5003 / 02.12.2014"],
@@ -452,7 +466,7 @@ Ceea ce observați este câmpul `ids` care are un prim identificator comun mai m
 }]
 ```
 
-O posibilă soluție de folding - *împăturire* ar fi următoarea:
+O posibilă soluție de *folding* ar fi următoarea:
 
 ```javascript
 const y = x.reduce((arrAcc, elemArrOrig, idx, srcArr) => {
@@ -475,7 +489,7 @@ const y = x.reduce((arrAcc, elemArrOrig, idx, srcArr) => {
 
 ## Compunerea cu map și filter
 
-Pentru a explora compunerea utilă cu alte două metode utile pe care le putem aplica array-urilor, vom porni de la un array al cărui elemente sunt obiecte.
+Pentru a explora compunerea utilă cu alte două metode utile pe care le putem aplica array-urilor, vom porni de la un array a cărui elemente sunt obiecte.
 
 ```javascript
 const colecție = [
@@ -496,5 +510,5 @@ const suma = colecție.map(inregistrare => inregistrare.pret).reduce((total, pre
 
 ## Resurse
 
-- [Reduce Advanced - Part 4 of Functional Programming in JavaScript | YouTube](https://www.youtube.com/watch?v=1DMolJ2FrNY)
-- [Understand JavaScript Reduce With 5 Examples | Valeri Karpov | http://thecodebarbarian.com](http://thecodebarbarian.com/javascript-reduce-in-5-examples.html)
+* [Reduce Advanced - Part 4 of Functional Programming in JavaScript | YouTube](https://www.youtube.com/watch?v=1DMolJ2FrNY)
+* [Understand JavaScript Reduce With 5 Examples | Valeri Karpov | http://thecodebarbarian.com](http://thecodebarbarian.com/javascript-reduce-in-5-examples.html)
