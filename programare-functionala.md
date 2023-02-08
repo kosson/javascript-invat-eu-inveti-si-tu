@@ -1,6 +1,6 @@
 # Programarea funcțională
 
-Conceptele programării funcționale sunt necesare pentru a înțelege cum se face *descompunerea* (*decomposing*) unei funcții ceea ce conduce la o mai bună înțelegere a felului în care trebuie scris software în JavaScript. Este vorba și despre cum să denumești părțile la nivel individual pentru ca la momentul *compunerii* lor să stabilească relații între entități, care să fie ușor de modelat.
+Conceptele programării funcționale sunt necesare pentru a înțelege cum se face *descompunerea* (*decomposing*) unei funcții ceea ce conduce la o mai bună înțelegere a felului în care trebuie scris software în JavaScript. Este vorba și despre cum să denumești părțile la nivel individual pentru ca la momentul *compunerii* lor să stabilească relații între entități care să fie ușor de modelat.
 
 JavaScript are un model de execuție foarte flexibil. Toate funcțiile beneficiază de metoda `apply()`, care permite apelarea funcției cu un array ca și cum elementele din array ar fi argumentele funcției.
 
@@ -58,7 +58,7 @@ faOAdunare([2, 3]); // 5
 
 ## Puritatea funcțiilor
 
-O funcție pură nu va face nimic altceva în plus peste evaluarea codului și returnarea unui rezultat.
+O funcție pură nu va face nimic altceva în plus peste evaluarea codului și returnarea unui rezultat. Ideea este ca funcția să nu modifice valori externe, cum ar fi în global scope, de exemplu. O funcție pură trebuie înșeleasă ca o unitate de execuție a codului intern care nu va modifica nimic din afara sa. Tot ce trebuie să facă este să returneze rezultatul unei evaluări a corpului. Aceasta trebuie să fie singura consecință a execuției funcției.
 
 Purtate înseamnă că o funcție este:
 
@@ -145,8 +145,9 @@ console.log(scoateNume); // Array [ "Jenifer", "dude", "ciocan" ]
 Sunt obiecte care au o metodă map. Functor-ul este obiectul care implementează `map()`. Deci, putem spune că, de fapt, `Array` este un functor pentru că are o metodă `map()`.
 
 Regulile pe care le îndeplinește Array prin metoda sa map:
-- transformă conținutul
-- menține structura
+
+- transformă conținutul,
+- menține structura,
 - valoarea pe care o returnează map trebuie să fie un functor de același tip. Adică poți face chaining cu map (`.map(//cod).map(// cod).map(// cod)`).
 
 ```javascript

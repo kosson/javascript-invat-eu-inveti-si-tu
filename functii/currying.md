@@ -14,7 +14,7 @@ Tehnica de a introduce câteva argumente unei funcții cu returnarea uneia noi s
 
 Ceea ce oferă un currying este faptul că o funcție poate fi apelată cu un argument și returnează o altă funcție căruia îi putem pasa un alt argument la un moment ulterior.
 
-Reține faptul că atunci când o variabilă are același nume ca o variabilă din mediul părinte, putem spune că suprascrie („shadowing”) valoarea din **mediul lexical** părinte.
+Reține faptul că atunci când o variabilă are același nume ca o variabilă din mediul părinte, putem spune că suprascrie (*shadowing*) valoarea din **mediul lexical** părinte.
 
 ```javascript
 function a (x) {
@@ -107,7 +107,7 @@ var tipul =
 
 Câștigul la currying este acela că lucrurile sunt segmentate pe responsabilități și se evită nebunia încercării de a determina starea sistemului.
 
-Un alt exemplu mai simplu de „curring” este cel de folosire a noii sintaxe „fat arrow”, care introduce mai mare claritate și simplitate.
+Un alt exemplu mai simplu de *curring* este cel de folosire a noii sintaxe *fat arrow*, care introduce mai mare claritate și simplitate.
 
 ```javascript
 ((a) =>
@@ -117,14 +117,14 @@ Un alt exemplu mai simplu de „curring” este cel de folosire a noii sintaxe �
 
 ## Dependințe cognitive
 
--   funcții
--   closure
+* funcții
+* closure
 
 ## Alonje
 
-- funcții de tip tap.
+* funcții de tip tap.
 
 ## Resurse
 
-- [Currying | Javascript.info | 10th January 2021](https://javascript.info/currying-partials)
-- [Currying in JavaScript Introduction | Piyush Dubey | 12 Feb 2022](https://javascript.plainenglish.io/currying-in-javascript-15802dcde87c)
+* [Currying | Javascript.info | 10th January 2021](https://javascript.info/currying-partials)
+* [Currying in JavaScript Introduction | Piyush Dubey | 12 Feb 2022](https://javascript.plainenglish.io/currying-in-javascript-15802dcde87c)
