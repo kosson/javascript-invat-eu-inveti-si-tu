@@ -6,10 +6,12 @@ ECMAScript 5 a introdus un nou obiect global JSON cu scopul de a oferi utilitare
 
 Câteva reguli de redactare a obiectelor JSON:
 
--   numele proprietăților se vor pune între ghilimele duble,
--   nu sunt admise funcții și `undefined` ca valori,
--   într-o structură JSON nu sunt admise comentarii.
+- numele proprietăților se vor pune între ghilimele duble,
+- nu sunt admise funcții și `undefined` ca valori,
+- într-o structură JSON nu sunt admise comentarii.
 
+Mai multe precizări pot fi găsite în conținutul RFC-ului 8259 pentru [The JavaScript Object Notation (JSON) Data Interchange Format](https://datatracker.ietf.org/doc/html/rfc8259).
+În Introducerea RFC-ului avem chiar și o definiție care lămurește natura acestui format de date: *JavaScript Object Notation (JSON) este un format text pentru serializarea datelor structurate*
 ## Metoda JSON.parse() - deserializarea
 
 Această metodă primește drept argument un șir de caractere care este reprezentarea unui JSON. Șirul de caractere este transformat într-un obiect JavaScript care poate fi utilizat în propriile programe.
