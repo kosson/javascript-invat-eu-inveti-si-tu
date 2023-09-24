@@ -4,9 +4,9 @@ Metoda testează dacă absolut toate elementele din array trec un test, care se 
 
 Funcția de test poate primi trei argumente:
 
--   valoarea curentă (obligatoriu) - elementul care este procesat,
--   indexul (opțional) - indexul elementului care este procesat,
--   array-ul pentru care `every` a fost invocat.
+- valoarea curentă (obligatoriu) - elementul care este procesat,
+- indexul (opțional) - indexul elementului care este procesat,
+- array-ul pentru care `every` a fost invocat.
 
 Pe lângă argumente, poate seta un `this` diferit.
 

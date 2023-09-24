@@ -234,7 +234,6 @@ Adu-ți mereu aminte că invocarea metodei `next()` face closure pe mediul lexic
 
 În cazul celui de-al doilea apel `next(20)`, firul de execuție își reia evaluarea corpului funcției unde a rămas. Unde a rămas este la `dateDeCareAmNevoieÎnViitor` care a rămas neinițializat. Pentru că metodei `next()` i-a fost pasată valoarea `20`, aceasta va deveni valoarea cu care se va inițializa `dateDeCareAmNevoieÎnViitor`, fiind considerat rezultatul evaluării expresiei `yield dateDeCareAmNevoieÎnViitor`. Reține că datele pe care le pasezi metodei `next()` vor fi considerate rezultatele evaluării expresiei `yield ceva` la reluarea execuției funcției. Ai putea spune că ai creat premiza *injectării* unor date în generator pe care le poți folosi ulterior, concomitent cu returnarea unora în aceeași mutare. Dar evaluarea continuă după inițializarea lui `dateDeCareAmNevoieÎnViitor` cu valoarea `20` și ajungem la următorul `yield` care ca returna evaluarea expresiei din dreapta. Fiind ultimul, va încheia și execuția funcției cu rol de generator.
 
-
 ## Sintactic sugar
 
 După cum se observă, de cele mai multe ori, generatorii pot fi considerați a fi un adaos sintactic (*sintactic sugar*) cu scopul de a crea obiecte iteratori. Propriu-zis, prin marcarea cu steluță a unei funcții, spunem motorului să implementeze toate mecanismele necesare creării unui obiect iterator la momentul invocării. Această specificitate a funcțiilor generator le face candidatul perfect pentru a obține serii de valori prin intermediul spreading-ului, buclelor și a recursivității.

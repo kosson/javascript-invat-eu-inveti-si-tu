@@ -2,7 +2,7 @@
 
 Începând cu versiunea ES6 a standardului, au apărut obiecte dedicate realizării de colecții. Au apărut din necesitatea evitării diferitelor contrângeri impuse de obiectele obișnuite.
 
-Este o colecție de perechi cheie-valoare care au o particularitate foarte utilă: toate cheile sunt obiecte spre deosebire de `Map`, unde pot fi și primitive. Nu sunt admise valori primitive, incluzând `Symbol`. `WeakMap` nu are o proprietate `length`.
+Un `WeakMap` este o colecție de perechi cheie-valoare care are o particularitate foarte utilă: toate cheile sunt obiecte spre deosebire de `Map`, unde pot fi și primitive. Nu sunt admise valori primitive, dar începând cu versiunea 2023 a standardului, este admis și `Symbol`. `WeakMap` nu are o proprietate `length`.
 
 De unde vine denumirea **weak**? În limba engleză *weak* înseamnă *slab*. În cazul obiectului nostru, această *slăbiciune* vine din faptul că, de îndată ce nu mai există vreo referință către obiectul care joacă rol de cheie, acesta fiind *colectat la gunoi*, nici `WeakMap`-ul nu va mai ține referința la acesta. Un `WeakMap` nu va menține o legătură la un obiect, dacă acest obiect a fost colectat la gunoi. Pentru a afla dacă un obiect există într-un `WeakMap`, mai întâi trebuie să ai o referință la acesta.
 

@@ -28,7 +28,7 @@ Motorul `RegExp` indică succesiunea caracterelor, de câte ori li se permite s�
 
 **Și acum, focalizare maximă.**
 
-Următorul regex este unul valid și solicită atenția ta ca detector de caractere. Fragmentul <code><span style='color: red'>_</span>?</code> (spațiu și semnul întrebării) te poate da peste cap dacă nu ești atent. Regula testează dacă există un spațiu sau nu înaintea semnului întrebării. Pentru o persoană neavizată, caracterul spațiu nu are importanță pentru că este invizibil. Dar acesta este indubitabil un caracter de care trebuie să ținem seama.
+Următorul regex este unul valid și solicită atenția ta din rolul de detector de caractere. Fragmentul ` ?` (spațiu și semnul întrebării) te poate da peste cap dacă nu ești atent. Regula testează dacă există un spațiu sau nu înaintea semnului întrebării. Pentru o persoană neavizată, caracterul spațiu nu are importanță pentru că este invizibil. Dar acesta este indubitabil un caracter de care trebuie să ținem seama.
 
 **Spune standardul**:
 
@@ -62,7 +62,7 @@ Expresiile regulate sunt șabloane folosite pentru a căuta combinații de carac
 
 Tehnic vorbind, motorul `RegExp` este unul *regex-directed*, adică șablonul ocupă rolul central. Motorul este o implementare *eager* (am putea traduce *iute*), ceea ce înseamnă că este un motor foarte *nerăbdător* să ofere un rezultat. Acest lucru implică următorul comportament: dacă s-a format rezultatul respectându-se regulile, restul resursei de text este ignorat.
 
-Am menționat aceast lucru pentru că acest motor, la momentul evaluării, returnează rezultatul potrivirii cu cel mai din stânga fragment din șirul de caractere, adică cel care se află cât mai aproape de începutul șirului, chiar dacă ar fi fost disponibilă o variantă mai apropiată de împlinirea tuturor criteriilor șablonului în corpul său. Reține acest aspect de funcționare. Te va ajuta să înțelegi mai bine problemele pentru care, aparent, nu există nicio rațiune.
+Am menționat aceast lucru pentru că acest motor, la momentul evaluării, returnează rezultatul potrivirii cu cel mai din stânga fragment din șirul de caractere, adică cel care se află cât mai aproape de începutul șirului, chiar dacă ar fi fost disponibilă o variantă mai apropiată de bifarea tuturor criteriilor șablonului în corpul său. Reține acest aspect de funcționare. Te va ajuta să înțelegi mai bine problemele pentru care, aparent, nu există nicio explicație.
 
 Aplicarea șablonului va porni prin *consumarea* șirului de caractere pornind de la primul, încercându-se toate variantele șablonului chiar din acest punct. Dacă toate variantele au fost epuizate, va mai *consuma* încă un caracter. Având acum două, va încerca din nou toate combinațiile până când un fragment se va potrivi. Acela va fi și punctul de oprire. Ține minte că fragmentul poate fi parte a unui cuvânt compus sau al unei formule pentru care nu a fost gândit șablonul. De aceea tipul motorului este *nerăbdător* - pur și simplu raportează prima potrivire indiferent de context.
 
@@ -70,15 +70,15 @@ Aplicarea șablonului va porni prin *consumarea* șirului de caractere pornind d
 
 Regex-urile fac uz de 11 caractere cu o însemnătate deosebită atunci când vine vorba de evaluarea unui șablon. Acestea sunt:
 
--   *backslash*: `\`,
--   *carret*: `^`,
--   *dollar*: `$`,
--   *punctul*: `.`,
--   *parantezele dreapte*: `[]`,
--   *parantezele rotunde*: `()`,
--   caracterul *pipe*: <code>&#124;</code>,
--   *semnul întrebării*: `?` și
--   *simbolul plus*: `+`.
+- *backslash*: `\`,
+- *carret*: `^`,
+- *dollar*: `$`,
+- *punctul*: `.`,
+- *parantezele dreapte*: `[]`,
+- *parantezele rotunde*: `()`,
+- caracterul *pipe*: `|`,
+- *semnul întrebării*: `?` și
+- *simbolul plus*: `+`.
 
 Aceste caractere au o valoare deosebită pentru motorul RegExp, dar și pentru JavaScript, fiind operatori ai limbajului. În același timp apar și în textele pe care le prelucrăm. În cazul construcțiilor de șabloane, pentru a introduce aceste caractere în evaluare, vor trebui precedate cu *backslash*: `\`. Acestea sunt bine-cunoscutele *secvențe escape*.
 
@@ -99,7 +99,7 @@ const cheieObiect = new RegExp('xy','g');
 console.log(cheieObiect.test('xyz')); // true
 ```
 
-Crearea folosind constructorul acceptă ca prim argument șablonul, iar ca al doilea, un fanion sau mai multe:
+Crearea folosind constructorul acceptă ca prim argument șablonul, iar pentru al doilea, un fanion sau mai multe:
 
 ```javascript
 new RegExp('/xyz/', 'i');
@@ -113,11 +113,11 @@ După cum se observă, sintaxa este: `/pattern/flags`. Regex-urile mai au în co
 
 `pattern`: este textul expresiei regulate urmat de următoarele `flag`-uri:
 
--   `g` - **global match**;
--   `i` - **ignore case** (nu ține cont de majuscule tratând toate caracterele uniform);
--   `m` - **multiline** - implică folosirea limitelor ^ și $ pentru o resursă text pe mai multe linii;
--   `u` - **unicode** - tratează secvența ca *puncte de cod* Unicode;
--   `y` - **sticky** face potrivirea numai după indexul indicat prin proprietatea `lastIndex` a expresiei regulate în șir.
+- `g` - **global match**;
+- `i` - **ignore case** (nu ține cont de majuscule tratând toate caracterele uniform);
+- `m` - **multiline** - implică folosirea limitelor ^ și $ pentru o resursă text pe mai multe linii;
+- `u` - **unicode** - tratează secvența ca *puncte de cod* Unicode;
+- `y` - **sticky** face potrivirea numai după indexul indicat prin proprietatea `lastIndex` a expresiei regulate în șir.
 
 ### Fanioane
 
@@ -160,26 +160,26 @@ sablon.test(sirCaractere); // true
 
 Aceste proprietăți sunt foarte utile atunci când dorești să afli starea în care se află obiectul regex la un anumit moment dat.
 
--   `RegExp.prototype.constructor` - returnează funcția obiect: function RegExp(),
--   `RegExp.prototype.flags` - returnează un string cu fanioanele setate pentru obiectul curent,
--   `RegExp.prototype.global` - dacă fanionul `g` a fost introdus, valoarea este `true`,
--   `RegExp.prototype.ignoreCase` - dacă fanionul `i` a fost introdus, valoarea este `true`,
--   `RegExp.prototype.multiline` - dacă fanionul `m` a fost introdus, valoarea este `true`,
--   `RegExp.prototype.source` returnează varianta text a obiectului,
--   `RegExp.prototype.sticky` - dacă fanionul `y` a fost introdus, valoarea este `true`,
--   `RegExp.prototype.unicode` - dacă fanionul `u` a fost introdus, valoarea este `true`.
+- `RegExp.prototype.constructor` returnează funcția obiect: function RegExp(),
+- `RegExp.prototype.flags` returnează un string cu fanioanele setate pentru obiectul curent,
+- `RegExp.prototype.global`; dacă fanionul `g` a fost introdus, valoarea este `true`,
+- `RegExp.prototype.ignoreCase`; dacă fanionul `i` a fost introdus, valoarea este `true`,
+- `RegExp.prototype.multiline`; dacă fanionul `m` a fost introdus, valoarea este `true`,
+- `RegExp.prototype.source` returnează varianta text a obiectului,
+- `RegExp.prototype.sticky`; dacă fanionul `y` a fost introdus, valoarea este `true`,
+- `RegExp.prototype.unicode`; dacă fanionul `u` a fost introdus, valoarea este `true`.
 
 ## Mantre
 
--   *Șirul este imuabil* (nu va fi modificat).
--   *Șirul este consumat* (cu sensul de procesare) de `RegExp` de la stânga la dreapta.
--   Din moment ce un caracter a fost *consumat*, acesta nu mai este folosit.
--   Expresiile regulate în JavaScript sunt obiecte.
--   `RegExp` în JavaScript avansează caracter cu caracter.
--   Folosirea funcției constructor are ca efect compilarea la momentul rulării.
--   Metacaracterele pot impune un comportament *greedy* (*expansiv*, adică consumă tot șirul) sau *lazy* (*autosuficient*, oprindu-se imediat după prima potrivire).
--   șabloanele sunt folosite cu metodele `exec` și `test` ale obiectului RegExp.
--   șabloanele sunt folosite cu metodele `match()`, `replace()`, `search()` și `split()` ale lui `String`.
+- *Șirul este imuabil* (nu va fi modificat).
+- *Șirul este consumat* (cu sensul de procesare) de `RegExp` de la stânga la dreapta.
+- Din moment ce un caracter a fost *consumat*, acesta nu mai este folosit.
+- Expresiile regulate în JavaScript sunt obiecte.
+- `RegExp` în JavaScript avansează caracter cu caracter.
+- Folosirea funcției constructor are ca efect compilarea la momentul rulării.
+- Metacaracterele pot impune un comportament *greedy* (*expansiv*, adică consumă tot șirul) sau *lazy* (*autosuficient*, oprindu-se imediat după prima potrivire).
+- șabloanele sunt folosite cu metodele `exec` și `test` ale obiectului RegExp.
+- șabloanele sunt folosite cu metodele `match()`, `replace()`, `search()` și `split()` ale lui `String`.
 
 ### Caracter cu caracter
 
@@ -283,7 +283,7 @@ De exemplu, `"caractere 1437675".match(/\d+/gui); // [ "1437675" ]`. Dar combin�
 
 ##### Cuantificatorul punct .
 
-De multe ori este asemănat unui *wildcard* cu care poți substitui orice (nu și *new lines*). Adevăratul wildcard totuși este setul `[\s\S]`. Acesta identifică tot ce este whitespace și tot ce nu este whitespace, pe scurt, orice. Un exemplu pentru a înțelege: `"acuma mai multe mere a anemice cam anapoda a".match(/.a/); // [ "ma" ]`. Dacă activezi globalul, vei avea `// [ "ma", "ma", " a", " a", "ca", " a", "na", "da", " a" ]`. Ceea ce este observabil este faptul că, în cazul menționat aduce litera a și una înaintea ei, dacă aceasta a fost găsită într-un cuvânt. Ordinea o dă poziția punctului. Dacă era așezat după caracterul căutat aveam `[ "ac", "a ", "ai", "a ", "an", "am", "an", "ap", "a " ]`.
+De multe ori este asemănat unui *wildcard* cu care poți substitui orice (nu și *new lines*). Adevăratul wildcard totuși este setul `[\s\S]`. Acesta identifică tot ce este whitespace și tot ce nu este whitespace, pe scurt, orice. Un exemplu pentru a înțelege: `"acuma mai multe mere a anemice cam anapoda a".match(/.a/); // [ "ma" ]`. Dacă activezi globalul, vei avea `// [ "ma", "ma", " a", " a", "ca", " a", "na", "da", " a" ]`. Ceea ce este observabil este faptul că, în cazul menționat aduce litera `a` și `una` înaintea ei, dacă aceasta a fost găsită într-un cuvânt. Ordinea o dă poziția punctului. Dacă era așezat după caracterul căutat aveam `[ "ac", "a ", "ai", "a ", "an", "am", "an", "ap", "a " ]`.
 
 - `ceva{x}`: fragmentul se poate repeta de câte ori precizează `x`
 - `ceva{x,}`: fragmentul se poate repeta de cel puțin `x` ori
@@ -352,7 +352,7 @@ Pentru secvența `\u{hhhh}`, `h` este un digit hexazecimal pentru un caracter Un
 
 ### Ori una, ori alta
 
-Uneori ai nevoia să-i spui motorului să facă o căutare după un caracter sau o alternativă la acesta. Acest lucru este posibil folosind un caracter special numit *pipe*. Pipe în expresia `a`<code>&#124;</code>`b` se traduce: fie `x`, fie pe `y`.
+Uneori ai nevoia să-i spui motorului să facă o căutare după un caracter sau o alternativă la acesta. Acest lucru este posibil folosind un caracter special numit *pipe*. Pipe în expresia `a|b` se traduce: fie `x`, fie pe `y`.
 
 Un caz ar fi atunci când dorești să găsești mai multe fragmente într-un șir.
 
@@ -399,14 +399,22 @@ Revenind la subiectul general al seturilor, acestea sunt cunoscute și sub denum
 - `[abc]` sau `[a-c]`: Căutarea se face după oricare dintre caractere: ori `a`, ori `b`, ori `c`,
 - `[^abc]` sau `[^a-c]`: Este un set de caractere care trebuie excluse.
 
-Prin specificarea liniuței îi spui motorului `RegExp` să includă toate caracterele între cele două menționate la stânga și la dreapta. Nu se vor face niciodată potriviri după două caractere din set sau mai multe. Doar un singur caracter este căutat. Acest comportament poate fi deturnat în combinație cu acoladele care specifică strict câte caractere pot fi potrivite din fiecare cuvânt al unui fragment de text.
+Folosind `[^abc]` instruiești motorul că orice caracter se află în set, nu trebuie să existe în rezultatul căutării.
+
+Prin specificarea liniuței îi spui motorului `RegExp` să includă toate caracterele între cele două menționate la stânga și la dreapta (*ranges*). Nu se vor face niciodată potriviri după două caractere din set sau mai multe. Doar un singur caracter este căutat. Acest comportament poate fi deturnat în combinație cu acoladele care specifică strict câte caractere pot fi potrivite din fiecare *cuvânt* al unui șir de caractere.
 
 ```javascript
 let sir = "Avem un ev evoluat evaluat";
 console.log(sir.match(/[a-z]{4}/gi)); // [ "Avem", "evol", "eval" ]
 ```
 
-Poți combina în același set mai multe subseturi. De exemplu, setul `[a-zA-Z0-9]` spune motorului că potrivirea se va face după toate caracterele precizate de subseturi, fie acestea litere sau digiți.
+Poți combina în același set mai multe subseturi. De exemplu, setul `[a-zA-Z0-9]` spune motorului că potrivirea se va face după toate caracterele precizate de subseturi, fie acestea litere sau cifre. În exemplificare, am introdus setul caracterelor Latin de la a la z, dar subsetul poate fi limitat la doar câteva. Seturile de căutare sunt case sensitive.
+În cazul în care specifici numărul de caractere care pot fi admise în căutare (`{4}`), poți folosi o virgulă după prima cifră care indică că respectivul caracter se poate repeta de `n` până la limita maximă a acestora în șirul de caractere, sau prin menționarea celei de-a doua cifre, specifici limita repetițiilor care sunt admise în rezultat.
+
+```javascript
+let șir = "Am pere în peer review";
+console.log(șir.match(/pe{1,}r/g)); // [ 'per', 'peer' ]
+```
 
 #### Rolul metacaracterelor în seturi
 
@@ -434,7 +442,7 @@ console.log(cautare); // ["cluj-napoca","cluj napoca"]
 ```
 
 Sunt returnate ambele variante. Este folositor și pentru cazul în care vrei să oferi corecturi la cuvintele introduse cu erori de scriere: `/C[aâ]mpina/`.
-Un detaliu foarte important privind seturile, este cazul folosirii punctului. În interiorul seturilor, punctul nu are înțelesul de *orice caracter*, rol pe care-l are în construcțiile regex. În interiorul seturilor, punctul este punct. Asta permite identificarea de numere întregi, de exemplu. O construcție `[\d.][\d.]\d` poate regăsi toate numele întregi: `0.1` sau `.34`.
+Un detaliu foarte important privind seturile, este cazul folosirii punctului. În interiorul seturilor, punctul nu are înțelesul de *orice caracter*, rol pe care-l are în construcțiile regex. În interiorul seturilor, punctul este punct. Asta permite identificarea de numere întregi, de exemplu. O construcție `[\d.][\d.]\d` poate returna toate numele întregi: `0.1` sau `.34`.
 
 Seturile pot fi repetate folosind cuantificatorii.
 
@@ -443,6 +451,15 @@ Recunoașterea fragmentelor de text care menționează ora sau data se poate fac
 ```javascript
 var sablon = /[0-9:amp]/;
 sablon.test('10am'); // true
+```
+
+Un exemplu foarte util este să cauți o valoare de strict patru cifre care poate fi o dată calendaristică sau o parte a acesteia.
+
+```javascript
+let șir = "Data nașterii este 12/05/1987";
+console.log(șir.match(/[0-9]{2,4}/g)); // [ '12', '05', '1987' ]
+
+console.log(șir.match(/[0-9]{4}/g)); // [ '1987' ]
 ```
 
 #### Negarea setului
@@ -461,13 +478,13 @@ Ai putea folosi negările pentru a marca tot ceea ce nu vrei să intre în compo
 
 Acestea pot fi rezumate astfel:
 
--   `[0-9]`     : `\d`,
--   `[^\d]`     : `\D`,
--   `[A-Za-z]`  : `\w`,
--   `[^\w]`     : `\W`,
--   `[ \t\r\n]` : `\s`,
--   `[^\s]`     : `\S`,
--   `[^\n]`     : `.`
+- `[0-9]`     : `\d`,
+- `[^\d]`     : `\D`,
+- `[A-Za-z]`  : `\w`,
+- `[^\w]`     : `\W`,
+- `[ \t\r\n]` : `\s`,
+- `[^\s]`     : `\S`,
+- `[^\n]`     : `.`
 
 Reține faptul că prescurtările se pot folosi și în interiorul seturilor: `[\d\s]`.
 
@@ -523,7 +540,7 @@ let cautare = sir.match(/pământ?/gi);
 console.dir(cautare); // apare de 2 ori
 ```
 
-De fapt, nu e chiar atât de inteligent `RegExp`-ul, ci doar spune că acea combinație de caractere trebuie să apară în șir numărându-se de câte ori apare indiferent ce precede sau cu ce continuă. Un strop de inteligență ar fi să introduci alternative într-un grup, care, la rândul său să existe sau nu.
+De fapt, nu e chiar atât de inteligent `RegExp`-ul, ci doar spune că acea combinație de caractere trebuie să apară în șir numărându-se de câte ori apare indiferent ce precede sau cu ce continuă. Un pas logic ar fi să introduci alternative într-un grup, care, la rândul său să existe sau nu.
 
 ```javascript
 let sir = 'Un pământean apăru în pragul pământiu. Era negru pământ.';
@@ -556,7 +573,7 @@ console.dir(cautare); // apare de 2 ori
 Chiar poți indica ca potrivirea să se facă doar după un anumit număr de caractere.
 
 ```javascript
-let cautare = sir.match(/a{2,}/gi);
+let cautare = sir.match(/a{2,}/gi); // cel puțin două caractere
 console.dir(cautare); // 3 potriviri
 ```
 
@@ -640,10 +657,11 @@ La ce ar folosi să știm asta? Ia gândește-te că dorești să prelucrezi fra
 
 ## Grupări
 
+Grupurile sunt folosite de cele mai multe ori pentru identificarea și înlocuirea unor secvențe de caractere.
 Grupările pot fi gândite ca posibilitatea de a construi șabloane elaborate, adevărate propoziții. Gruparea permite formularea de expresii secundare, care pot fi tratate precum o unitate.
 
 - `(x)`   : Identifică-l pe x și ține minte ce ai găsit,
-- `(?:x)` : Îl identifică pe x, dar nu-l ține minte, nu-l *capturează*,
+- `(?:x)` : Îl identifică pe x, dar nu-l ține minte, nu-l *capturează* (*non-capturing group*),
 - `x(?=y)`: Spune că `x` nu va fi returnat la potrivire dacă nu este urmat de `y`,
 - `x(?!y)`: Este inversul `lookahead`-ului. Șablonul va potrivi doar dacă `x` nu este urmat de `y`.
 
@@ -659,7 +677,7 @@ Nu-l va lua *captura* pe `x` chiar dacă l-a găsit.
 
 Această procedură se numește în engleză „lookahead” pe care l-am putea traduce **privește înainte**. De exemplu în `Ion Amariei`, șablonul `Ion(?=Amariei)`, va returna doar dacă Ion este urmat de Amariei. Semnătura unui *lookahead* este combinația `?=`. Dacă se dorește efectul contrar lookahead-ului, adică căutarea unei combinații de caractere care să nu fie urmată de cea precizată în *lookahead*, vei folosi negarea `?!`.
 
-Grupurile arată precum rețetele în care ingredientele indică modul în care se va face regăsirea. Grupurile permit o mai bună *țintire* a subșirurilor dorite. Să spunem că ai trei secvențe de caractere despărțite de spații și dorești să le regăsești. În loc să faci reguli care să potriveastă ceea ce sunt, ai putea face grupuri care să cuprindă ceea ce nu sunt.
+Grupurile arată precum rețetele în care ingredientele indică modul în care se va face regăsirea. Grupurile permit o mai bună *țintire* a subșirurilor dorite. Să spunem că ai trei secvențe de caractere despărțite de spații și dorești să le extragi dacă găsesc o potrivire în șir. În loc să faci reguli care să potriveastă ceea ce sunt, ai putea face grupuri care să cuprindă ceea ce nu sunt.
 
 ```javascript
 let sir = 'Un posibil fragment.';
@@ -669,7 +687,7 @@ console.log(cautare);
 // ["Un posibil fragment.", "Un", "posibil", "fragment."]
 ```
 
-În șirul propus, dorim să extragem primele trei cuvinte. Pentru aceasta, voi crea primul grup `(\S+)` de caractere a primului cuvânt spunând așa: selectează-mi toate caracterele care nu sunt spații, dacă există cel puțin unu. Apoi punem în șablon un spațiu pur și simplu fără a-l marca cu `\s` și purcedem la identificarea celui de-al doilea grup `(\S*)` pentru care spunem așa: selectează-mi toate caracterele care nu sunt spații indiferent de cele care pornesc de la `0` la `n`. De fapt, ceea ce dorim este să testăm dacă există un cuvânt între alte două. De aceea testăm cu `*` pentru că oferă posibilitatea să nu existe cuvântul *intern*. Apoi urmează cel de-al doilea spațiu și aici facem o limitare la o identificare a spațiului; poate să fie sau nu. Este doar în cazul în care avem cuvântul *intern*, în cazul nostru *posibil*. Încă nu este îndeajuns și precizăm cu `\b` că aceasta este limita căutării pentru secvența de dinaintea ultimului cuvânt. De la limită avem ultimul grup `(\S+)`, care spune: extrage tot ce nu este spațiu dacă am cel puțin un caracter non-spațiu.
+În șirul propus, dorim să extragem primele trei cuvinte. Pentru aceasta, voi crea primul grup `(\S+)` de caractere a primului cuvânt spunând așa: selectează-mi toate caracterele care nu sunt spații, dacă există cel puțin unu. Apoi punem în șablon un spațiu pur și simplu fără a-l marca cu `\s` și purcedem la identificarea celui de-al doilea grup `(\S*)` pentru care spunem așa: *selectează-mi toate caracterele care nu sunt spații indiferent de cele care pornesc de la `0` la `n`*. De fapt, ceea ce dorim este să testăm dacă există un cuvânt între alte două. De aceea testăm cu `*` pentru că oferă posibilitatea să nu existe cuvântul *intern*. Apoi urmează cel de-al doilea spațiu și aici facem o limitare la o identificare a spațiului; poate să fie sau nu. Este doar în cazul în care avem cuvântul *intern*, în cazul nostru *posibil*. Încă nu este îndeajuns și precizăm cu `\b` că aceasta este limita căutării pentru secvența de dinaintea ultimului cuvânt. De la limită avem ultimul grup `(\S+)`, care spune: extrage tot ce nu este spațiu dacă am cel puțin un caracter non-spațiu.
 
 Ce se întâmplă când ai doar două cuvinte și nu trei așa cum ai dori.
 
@@ -680,6 +698,7 @@ let cautare = sablon.exec(sir);
 console.dir(cautare);
 // ["Un fragment", "Un", "", "fragment"]
 ```
+
 ### Gruparea și capturarea
 
 Gruparea permite și așa-zisa *capturare*, de fapt o memorizare a rezultatelor grupurilor pentru a fi utilizate ulterior. Grupurile care nu capturează rezultatele sunt de preferat. Avantajul grupării este că poți aplica repetiții. În mod normal, repetițiile se aplică unui singur caracter sau unui set de caractere aflat la stânga metacaracterului.
@@ -817,7 +836,7 @@ Se mai pot folosi expresiile regulate și cu metoda `split` a obiectului `String
 
 ## Resurse
 
--   [Regular Expressions | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
--   [Regular Expressions | Eloquent JavaScript. Second edition](http://eloquentjavascript.net/09_regexp.html)
--   [Regular Expressions. The Complete Tutorial](https://www.princeton.edu/~mlovett/reference/Regular-Expressions.pdf)
--   [Groups and ranges | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Groups_and_Ranges)
+- [Regular Expressions | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
+- [Regular Expressions | Eloquent JavaScript. Second edition](http://eloquentjavascript.net/09_regexp.html)
+- [Regular Expressions. The Complete Tutorial](https://www.princeton.edu/~mlovett/reference/Regular-Expressions.pdf)
+- [Groups and ranges | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Groups_and_Ranges)
