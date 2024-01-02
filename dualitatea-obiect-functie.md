@@ -1,6 +1,6 @@
 # Dualitatea obiect - funcție
 
-JavaScript este un limbaj bazat pe obiecte. În materialul intitulat *Geneză*, am văzut că exercitarea pașilor argoritmului intern `CreateRealm()`, care solicită rularea algoritmului `CreateIntrinsics(realmRec)`, constituie un pas distinct în crearea primului obiect al limbajului (prin apelarea algoritmului `ObjectCreate(null)`). Astfel, s-a născut *obiectul prototipal*, care va fi folosit pentru a forma și obiectul prototipal al funcțiilor.
+JavaScript este un limbaj bazat pe obiecte. În materialul intitulat *Geneză*, am văzut că exercitarea pașilor algoritmului intern `CreateRealm()`, care solicită rularea algoritmului `CreateIntrinsics(realmRec)`, constituie un pas distinct în crearea primului obiect al limbajului (prin apelarea algoritmului `ObjectCreate(null)`). Astfel, s-a născut *obiectul prototipal*, care va fi folosit pentru a forma și obiectul prototipal al funcțiilor.
 
 Prin urmare, putem spune că **obiectele** și **funcțiile - obiect** sunt în permanentă relație. În lucrul de zi cu zi, nu ne vom lovi de necesitatea de a lucra cu **sloturile** interne ale celor două entități, dar este esențial a fi înțelese.
 
