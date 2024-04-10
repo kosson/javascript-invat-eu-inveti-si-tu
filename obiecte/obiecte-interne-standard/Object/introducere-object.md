@@ -1,6 +1,6 @@
 # Object
 
-Este un obiect intern al Javascript caracterizat de standard ca fiind unul dintre cele fundamentale. Poate fi folosit pentru crearea de obiecte atunci când este nevoie de setarea unor detalii fine ale proprietăților acestora.
+Este un obiect intern al JavaScript caracterizat de standard ca fiind unul dintre cele fundamentale. Poate fi folosit pentru crearea de obiecte atunci când este nevoie de setarea unor detalii fine ale proprietăților acestora.
 Creează un *wrapper*, un *ambalaj* unui obiect atunci când este instanțiat prin apelarea cu `new` a constructorului `Object`. Parafrazând o zicală românească, am putea spune că în acest moment *haina face omul*. Acest wrapper spune că lucrăm cu un obiect.
 
 ## Mantre

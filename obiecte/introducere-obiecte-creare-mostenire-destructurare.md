@@ -99,7 +99,7 @@ const obi2 = { "a": "altceva" };
 
 Exemplul indică cea mai întâlnită formulă de creare a obiectelor numită *literală*. Vei observa că obiectele sunt declarate cu un identificator al unei variabile `const`.
 
-Modul de a adăuga proprietăți noi, fără a interveni asupra constructorului, este unic, fiind o marcă a limbajului de programare JavaScript. Este și ceea ce îl face plăcut în lucru prin abordarea directă. Douglas Crockford indică acest avantaj al limbajului, care oferă independență opus constrângerilor pe care o **clasă** (un șablon în baza căruia sunt instanțiate obiecte) îl impune privind numele proprietăților și tipul lor.
+Modul de a adăuga proprietăți noi, fără a interveni asupra constructorului este unic, fiind o marcă a limbajului de programare JavaScript. Este și ceea ce îl face plăcut în lucru prin abordarea directă. Douglas Crockford indică acest avantaj al limbajului, care oferă independență opus constrângerilor pe care o **clasă** (un șablon în baza căruia sunt instanțiate obiecte) îl impune privind numele proprietăților și tipul lor.
 
 Obiectele pot conține la rândul lor alte obiecte, fiind posibilă reprezentarea unor înregistrări complexe.
 
@@ -304,9 +304,9 @@ Din exemplul funcției `NumescNave`, se remarcă imediat faptul că rularea făr
 
 ### Legătura prototipală la constructori
 
-După cum am văzut în capitolul dedicat genezei Tărâmului, atunci când s-au format **intrinsics**, a fost creat și obiectul prototip al tuturor obiectelor, care o fracțiune mai târziu a fost folosit pentru crearea obiectului-funcție ce va juca rolul de prototip al tuturor funcțiilor.
+După cum am văzut în capitolul dedicat genezei Tărâmului, atunci când s-au format **intrinsics**, a fost creat și obiectul prototip al tuturor obiectelor, care o fracțiune mai târziu a fost folosit pentru crearea *obiectului-funcție* ce va juca rolul de prototip al tuturor funcțiilor.
 
-Obiectele-funcții au la rândul lor o proprietate numită `prototype`. Această proprietate face posibilă moștenirea prototipală. În cazul apelării folosind operatorul `new`, se va genera legătura prototipală, fiind folosită chiar referința către obiectul prototip al funcției pentru a adăuga noul obiect în lanțul prototipal.
+Obiectele-funcții au la rândul lor o proprietate numită `prototype`. Această proprietate face posibilă **moștenirea prototipală**. În cazul apelării folosind operatorul `new`, se va genera legătura prototipală, fiind folosită chiar referința către obiectul prototip al funcției pentru a adăuga noul obiect în lanțul prototipal.
 
 **Spune standardul**:
 
@@ -679,7 +679,7 @@ console.log(ionel_munteanu); // { nume: 'ionel', prenume: 'munteanu', aprecieri:
 
 ### Lazy loading
 
-În cazul în care ai nevoie să accesezi o valoare care a fost obținută printr-un efort (IO sau calcul), cel mai bine ar fi să faci caching la respectiva valoare pentru ca oricând o vei mai cere, aceasta să existe deja.
+În cazul în care ai nevoie să accesezi o valoare care a fost obținută printr-un efort (IO sau calcul), cel mai bine ar fi să faci caching la respectiva valoare pentru ca de fiecare dată când o vei mai cere, aceasta să existe deja.
 
 ```javascript
 const Test = {
@@ -1032,7 +1032,7 @@ for (cheie in obi) {
 }
 ```
 
-Parcurgerea unui obiect folosind *for...in* trebuie însoțită de verificararea suplimentară ca proprietatea să aparțină obiectului. Acest lucru este necesar pentru că *for...in* ia în considerare și proprietățile moștenite.
+Parcurgerea unui obiect folosind *for...in* trebuie însoțită de o verificarea suplimentară ca proprietatea să aparțină obiectului. Acest lucru este necesar pentru că *for...in* ia în considerare și proprietățile moștenite.
 
 Parcurgerea obiectelor este ușurată semnificativ de aparția următoarelor metode pe care **ES6** le-a introdus:
 
@@ -1042,7 +1042,7 @@ Parcurgerea obiectelor este ușurată semnificativ de aparția următoarelor met
 
 ## Eliminarea membrilor unui obiect
 
-Operatorul `delete` permite eliminarea unei proprietăți, adică a perechii cheie-valoare din obiect. Acesta are efect doar asupra proprietăților care aparțin obiectului. Prototipul nu este afectat. Delete returnează `false`, dacă proprietatea nu poate fi ștearsă. Va returna `true` dacă proprietatea a fost ștearsă cu succes.
+Operatorul `delete` permite eliminarea unei proprietăți, adică a perechii cheie-valoare din obiect. Acesta are efect doar asupra proprietăților care aparțin obiectului. Prototipul nu este afectat. Instrucțiunea `delete` returnează `false` dacă proprietatea nu poate fi ștearsă. Va returna `true` dacă proprietatea a fost ștearsă cu succes.
 
 ```javascript
 const obiect = { prima: 1, aDoua: 2 };
@@ -1066,21 +1066,47 @@ Standardul oferă definiția prototipului: *obiect al cărui proprietăți sunt 
 
 **Moment Zen**: Un obiect este întotdeauna legat de un obiect prototipal la ai cărui membri are acces.
 
-Nota atașată definiției din standard este și ea foarte valoroasă pentru lămuririle pe care le aduce:
+Nota atașată definiției din textul standardului este și ea foarte valoroasă pentru lămuririle pe care le aduce:
 
 > Atunci când un constructor creează un obiect, acel obiect va referi automat proprietatea `prototype` a constructorului cu scopul de a rezolva referințele proprietăților. Proprietatea `prototype` a constructorului poate fi referită de expresia `constructor.prototype`. Proprietățile adăugate prototipului unui obiect sunt puse la dispoziția tuturor obiectelor care accesează prototipul prin moștenire. Alternativa este crearea unui nou obiect având un prototip specificat explicit prin utilizarea funcției interne `Object.create`.
 
 Pentru a înțelege cu adevărat natura și specificitățile limbajului de programare JavaScript, trebuie să fie înțeles modul în care proprietățile unui obiect sunt *moștenite* de un altul.
 
-**Moment Zen**: Fiecare obiect are un prototip a cărui valoare este un alt obiect sau `null`.
+**Moment Zen**: Fiecare obiect are un prototip al cărui valoare este un alt obiect sau `null`.
 
-Un program care rulează este o continuă comunicare între diferite obiecte, fie că acestea sunt cele interne, fie că sunt cele create de noi. Simplificând în tușe foarte groase, creatorii limbajului au dorit o modelare a structurilor de prelucrare a datelor după modul în care lumea reală funcționează: copiii au părinți, iar aceștia moștenesc caracteristicile lor, pe lângă cele care definesc propria persoană.
+Un program care rulează este o continuă comunicare între diferite obiecte, fie că acestea sunt cele interne, fie că sunt cele create de noi. Simplificând în tușe foarte groase, creatorii limbajului au dorit o modelare a structurilor de prelucrare a datelor după modul în care lumea reală funcționează: copiii moștenesc de la părinți caracteristicile lor, pe lângă cele care definesc propria persoană.
 
 **Moment Zen**: JavaScript este un limbaj bazat pe moștenire prototipală - *prototypal inheritance*.
 
-În alte limbaje de programare așa cum este Java, de exemplu, pentru a genera un obiect ai nevoie de un fragment de cod, care are rolul de plan de construcție pentru viitoarele obiecte. Pur și simplu este o secvență de cod care descrie valorile și tipul lor, fiind proprietățile viitorului obiect.
+În alte limbaje de programare așa cum este Java, de exemplu, pentru a genera un obiect ai nevoie de un fragment de cod, care are rolul de plan de construcție pentru viitoarele obiecte. Pur și simplu este o secvență de cod care descrie valorile și tipul lor, fiind proprietățile viitorului obiect. Acest fragment de cod este numit clasă.
 
-Astfel, între obiecte se creează această legătură numită *legătură prototipală*. Intern, obiectele mențin legătura cu obiectul prototipal prin intermediul unei proprietăți `[[Prototype]]`, care va indica obiectul prototipal de la care acesta moștenește. De exemplu, atunci când se instanțiază obiecte cu `new`, proprietatea `prototype` a constructorului va fi păstrată ca referință în slotul `[[Prototype]]` al obiectului instanțiat. Pentru a accesa valoarea acestei proprietăți va trebui să fie folosită metoda `Object.getPrototypeOf`.
+Astfel, între obiecte se creează această legătură numită *legătură prototipală*. Intern, obiectele mențin legătura cu obiectul prototipal prin intermediul unei proprietăți `[[Prototype]]`, care va indica obiectul prototipal de la care acesta moștenește. Toate obiectele din JavaScript au proprietatea `[[Protorype]]`. Valoarea acestei proprietăți trebuie să fie un obiect sau `null`. Această proprietate este ascunsă în sensul că nu se poate folosi direct în cod. Spunem că este un *slot intern*. Ca regulă generală, toate proprietățile între paranteze pătrate sunt considerare a fi sloturi *interne* și când există și metode acestea sunt *metode interne*. Aceste valori și metode interne sunt cele care în spatele cortinei definesc comportametul unui anumit obiect. Vorbim de adevărate comportamente pentru că la momentul creării unui obiect, motorul trebuie să știe ce tip are, care sunt proprietățile și metodele din oficiu și de la cine moștenește ce. 
+
+**Spune standardul**:
+
+> În ECMAScript, semanticile reale ale obiectelor sunt specificate prin utilizarea de algoritmi denumiți metode interne. Fiecare obiect din motorul ECMAScript are asociat un set de metode interne care definesc comportamentul la momentul rulării. Aceste metode interne nu fac parte din limbajul ECMAScript.
+
+(ECMAScript® 2025 Language Specification, https://tc39.es/ecma262/#sec-object-internal-methods-and-internal-slots)
+
+Pentru a obține valoarea, fie vei folosi proprietatea `__proto__`, fie metoda `Object.getPrototypeOf(numeObiect)`.
+
+```javascript
+let obi = {a: 19};
+let bix = Object.create(obi, {});
+bix.__proto__; // {a: 19}
+bix.__proto__ === Object.getPrototypeOf(bix); // true
+```
+
+Atunci când se instanțiază obiecte folosind operatorul `new`, proprietatea `prototype` a constructorului va fi păstrată ca referință în slotul `[[Prototype]]` al obiectului instanțiat. Pentru a accesa valoarea acestei proprietăți va trebui să fie folosită metoda `Object.getPrototypeOf(numeObiect)`, care, indiferent de obiectul pe care îl investighezi, va indica primul obiect pe linie de moștenire prototipală de la care moștenește proprietăți.
+
+```javascript
+let x = 'ceva';
+let y = Object.getPrototypeOf(x);
+// investigând în consola unui browser Chrome, vom descoperi `String`
+// String {'', anchor: ƒ, at: ƒ, big: ƒ, blink: ƒ, …}
+```
+
+Acest lucru se petrece pentru că șirul de caractere este transformat în obiectul tipului de date, care în cazul nostru este `String`.
 
 **Moment Zen**: Toate obiectele literale, moștenesc din obiectul prototipal `Object.prototype`.
 
@@ -1090,7 +1116,13 @@ Unul din motivele pentru care ai folosi acest adevărat *lanț prototipal* este 
 
 Un avantaj extraordinar pe care-l oferă moștenirea prototipală este că odată cu modificarea obiectului prototip, toate funcționalitățile noi vor fi disponibile instantaneu tuturor celor care le moștenesc.
 
+### Realizarea legăturii prototipale
+
 La nevoie, în cazul în care dorești să specifici direct care este prototipul, poți crea obiectul care va juca rolul. Astfel, delegăm căutarea proprietăților către noul obiect specificat.
+
+#### Folosirea metodei Object.create(obiPrototipal)
+
+Acesta este cazul simplu de moștenire care se poate realiza. Dacă avem un obiect, folosești metoda `create()` a obiectului intern `Object` pentru cazul special în care ai nevoie să deturnezi legătura implicită la obiectul prototipal setat de motor și să pui alt obiect cu rolul de prototip.
 
 ```javascript
 const proto = {
@@ -1105,6 +1137,19 @@ PrimulSalut.salutare();
 
 **Moment Zen**: Modificarea obiectului prototipal implică reflectarea instantanee în obiectele care moștenesc din acesta.
 
+#### Folosirea metodei Object.setPrototypeOf(obiOriginal, obiPrototipal)
+
+Pentru a modifica legătura obiectului prototipal la un altul, se poate folosi cu mare succes metoda `Object.setPrototypeOf()`. 
+
+```javascript
+const obiect = {};
+Object.getPrototypeOf(obiect); // Object { , 15 more… }
+Object.setPrototypeOf(obiect, {ceva: 10});
+// Object.getPrototypeOf(produs2) => Object { ceva: 10 }
+```
+
+### Utilizarea lui \_\_proto__
+
 Poți reutiliza cod prin moștenire folosind lanțul prototipal care se formează între obiecte și care poate fi interogat prin proprietatea `__proto__`. Proprietatea `__proto__` nu este același lucru cu `prototype`. În cazul lui `__proto__`, acesta indică obiectul prototype al constructorului folosit pentru crearea obiectului instanțiat.
 
 ```javascript
@@ -1117,7 +1162,7 @@ typeof inst.prototype;      // "undefined"
 typeof inst.constructor.prototype;  // "object"
 ```
 
-Poți înlocui oricând obiectul cu rol de prototip după instanțierea obiectelor, iar legătura lui `__proto__` va fi la obiectul tocmai înlocuit pentru toate obiectele instanțiate după înlocuire.
+Poți înlocui oricând obiectul cu rol de prototip după instanțierea obiectelor, iar legătura lui `__proto__` se va stabili la cel nou, care va fi sursa de proprietăți care vor fi moștenite mai apoi pe tot lanțul. Această posibilitate trebuie explorată cu deosebită grijă.
 
 **Moment Zen**: Pentru a afla care este obiectul prototipal, vezi care este valoarea lui `__proto__`.
 
@@ -1127,7 +1172,7 @@ Obiectele instanțiate mai vechi, de dinaintea înlocuirii obiectului prototip, 
 FuncConstr.prototype.constructor = FuncConstr.prototype.constructor;
 ```
 
-Două obiecte care conțin fix aceiași membri, nu sunt identice; au identități diferite și acest lucru le face unice.
+Două obiecte care au fix aceiași membri, nu sunt identice. Au identități diferite și acest lucru le face unice.
 
 ```javascript
 const a = { 0: 'ceva' },
@@ -1150,24 +1195,22 @@ De fapt, se poate vorbi de o *delegare comportamentală* și nu de o moștenire 
 
 > Toate **obiectele ordinare** au «un slot intern» numit `[[Prototype]]`.
 
-Valoarea acestui slot poate fi `null` sau un obiect care va oferi tuturor descendenților funcționalități și valori. `Object.getPrototypeOf()` returnează valoarea din proprietatea internă `[[Prototype]]`, iar `Object.setPrototypeOf()` o schimbă.
+Valoarea acestui slot poate fi `null` sau un obiect care va oferi tuturor descendenților funcționalități și valori. Metoda `Object.getPrototypeOf(numeObiect)` returnează valoarea din proprietatea internă `[[Prototype]]`, iar `Object.setPrototypeOf(numeObiect)` o modifică. Înainte de apariția ES6, argumentele trebuiau să fie neapărat obiecte, dar în acest moment, se aplică algoritmul de coerciție pe valorile pe care le pasezi realizându-se automat împachetarea în obiectul de tipul căruia este valoarea.
+
+```javascript
+Object.getPrototypeOf('ceva-string');
+// String {'', anchor: ƒ, at: ƒ, big: ƒ, blink: ƒ, …}
+```
+
+Observă faptul că este indicat obiectul prototipal al stringului care este chiar `String`.
 
 Toate obiectele comune au *un slot intern* numit `[[Extensible]]`, care controlează dacă pot fi adăugate sau nu proprietăți la obiect. Dacă valoarea acestui slot este `false`, atunci nu se mai pot adăuga proprietăți noi.
 
 În cazul unui `[[Extensible]]` cu valoarea `false`, valoarea slotului intern `[[Prototype]]` a obiectului, nu poate fi modificată. În plus, de vreme ce a fost pusă pe `false`, nu o mai poți modifica la `true`.
 
-### Modificarea obiectului prototipal
+### Modificarea obiectului prototipal sau a legăturii la acesta
 
-Acesta este cazul simplu de moștenire care se poate realiza. Dacă avem un obiect, folosești metoda `create()` a obiectului intern `Object` pentru cazul special în care ai nevoie să deturnezi legătura implicită la obiectul prototipal setat de motor și să pui alt obiect cu rolul de prototip.
-
-```javascript
-const obiect = {};
-Object.getPrototypeOf(obiect); // Object { , 15 more… }
-Object.setPrototypeOf(obiect, {ceva: 10});
-// Object.getPrototypeOf(produs2) => Object { ceva: 10 }
-```
-
-Pentru a evita introducerea a mai multor proprietăți succesiv, mai lesne este elaborarea unui obiect.
+Pentru a evita introducerea a mai multor proprietăți succesiv, mai lesne este elaborarea unui obiect care să joace rolul de prototype.
 
 ```javascript
 function Test (val) {
@@ -1177,8 +1220,14 @@ Test.prototype = {
   // constructor: Test,
   ceva: function () { console.log(this.a + 2) }
 };
-var obi = new Test(2);
+let obi = new Test(2);
+// care este constructorul în baza căruia a fost 
+// instanțiat obiectul numit `obi`
 console.log(obi.constructor.name); // Object
+// care obiect este indicat drept prototip:  
+obi.__proto__; // { ceva: [λ: ceva] }
+// echivalent cu Object.getPrototypeOf(obi);
+Object.getPrototypeOf(obi) === obi.__proto__; // true
 ```
 
 Înlocuirea obiectului prototipal al constructorului cu un obiect literal are un efect de care trebuie să țineți cont. Proprietatea `constructor` nu mai trimite către funcția constructor, ci direct către `Object`. Acest lucru se întâmplă pentru că proprietatea `constructor` ține de obiectul `prototype`, nu al instanței.
@@ -1289,7 +1338,7 @@ Object.getPrototypeOf(obiect2); // Object { , 15 more… }
 Object.getPrototypeOf(obiect2) === Object.prototype; // true
 ```
 
-### Apelarea unei metode din `prototype`, clasic și cu `super`
+### Apelarea unei metode din `prototype`, modelul clasic și cu `super`
 
 Uneori ai nevoie să accesezi direct metode sau valori din obiectul prototip de la care moștenești. Soluția *clasică* până la varianta curentă a standardului era să *obții* obiectul prototip de la care moștenește al tău aplicând `Object.getPrototypeOf(this)` chiar pe `this`, iar apoi obținând această referință, vei aplica metoda, dar cu apelare prin `call()` pe obiectul context.
 
@@ -1298,7 +1347,7 @@ Object.getPrototypeOf(this).numeMetodaDinPrototip.call(this); // varianta ES5
 super.numeMetodaDinPrototip();                                // varianta ES6
 ```
 
-După cum observi, această metodă veche a fost prescurtată la `super`, ceea ce reduce din verbozitate. Pentru cei cu ochiul ager, nu-i așa că aduce nițel a Java? Termenul `super` este o referință către obiectul prototip al obiectului de lucru curent. Este echivalentul lui `Object.getPrototypeOf(this)`. Nu uita faptul că `Object.getPrototypeOf()` returnează valoarea din proprietatea internă `[[Prototype]]`. Orice referință la `super` folosește proprietatea internă `[[HomeObject]]` pentru a determina pașii următori cum ar fi `Object.getPrototypeOf()` asupra valorii stocate de `[[HomeObject]]` cu scopul de a obține, de fapt prototipul.
+După cum observi, această metodă veche a fost prescurtată prin cuvântul cheie `super`, ceea ce reduce din verbozitate. Pentru cei cu ochiul ager, nu-i așa că aduce nițel a Java? Termenul `super` este o referință către obiectul prototip al obiectului de lucru curent. Este echivalentul lui `Object.getPrototypeOf(this)`. Nu uita faptul că `Object.getPrototypeOf()` returnează valoarea din proprietatea internă `[[Prototype]]`. Orice referință la `super` folosește proprietatea internă `[[HomeObject]]` pentru a determina pașii următori cum ar fi `Object.getPrototypeOf()` asupra valorii stocate de `[[HomeObject]]` cu scopul de a obține, de fapt prototipul.
 
 ```javascript
 const obi1 = {
@@ -1372,7 +1421,7 @@ caAr.forEach(function (elem) {
 
 Elementele găsite sunt de fapt o colecție de noduri. Aceste noduri sunt dinamice în sensul că, de fiecare dată când DOM-ul va suferi o modificare, se va actualiza și aceasta. În ES6 există o aceeași abordare: `arrayLike = Array.from(nodes)`. ES6 introduce un nou tip de obiecte iterabile * obiecte ale căror elemente pot fi extrase rând pe rând.
 
-### Obiecte ca dicționare de valori
+### Obiectele ca dicționare de valori
 
 JavaScript nu are structuri de date specifice unei *hărți* de valori, adică ceea ce se înțelege în alte limbaje de programare a fi un `map`. Singura modalitate este aceea de a folosi un obiect. În acest caz sunt anumite probleme care trebuie luate în considerare precum durerile de cap pe care le dă moștenirea. Lanțul prototipal care se stabilește, poate afecta citirea proprietăților. Unele operațiuni, se uită la tot lanțul prototipal și *văd* proprietăți moștenite. Alte operațiuni accesează doar proprietățile pe care obiectul le are fără a se uita la cele moștenite. Atunci când folosești un obiect drept colecție (`map`), trebuie operat asupra lui cu mare atenție.
 
@@ -1391,7 +1440,7 @@ const testObj = {ceva: 1, altceva: 2};
 const {ceva, altceva:undeva} = testObj; // plus redenumire
 ```
 
-În exemplul prezentat nu numai că am *extras* valorile în variabile, dar am redenumit identificatorul `altceva` în `undeva`. Pot fi extrase mai multe valori odată. În cazul în care numele variabilei se dorește să fie chiar proprietatea, atunci putem menționa explicit ca numele identificatorului să fie cel al cheii din obiect.
+În exemplul prezentat, nu numai că am *extras* valorile în variabile, dar am redenumit identificatorul `altceva` în `undeva`. Pot fi extrase mai multe valori odată. În cazul în care numele variabilei se dorește să fie chiar proprietatea, atunci putem menționa explicit ca numele identificatorului să fie cel al cheii din obiect.
 
 ```javascript
 var {ceva: ceva} = obi1;
@@ -1411,6 +1460,13 @@ const obi = {
   }
 }
 obi.ceva.altceva[0].cineva;
+Varianta de mai sus are o problemă atunci când o proprietate a obiectului se numește exact `hasOwnProperty`. Atunci aceasta va înceta să mai lucreze și este recomandabil să se facă un `call()`.
+
+```javascript
+function accesProprietatiProprii (obiectul, proprietatea) {
+  return (Object.prototype.hasOwnProperty.call(obiectul, proprietatea)) ? obiectul[proprietatea] : undefined;
+};
+```
 var {ceva: {altceva: [{cineva}]}} = obi;
 console.log(cineva); // Ionuț
 ```
@@ -1495,7 +1551,7 @@ console.log(eroare); // Nu am obținut nimic
 
 Destructurarea funcționează foarte bine și în cazul array-urilor, care la rândul lor sunt obiecte. Acest subiect este tratat la capitolul dedicat obiectului intern `Array`.
 
-În cazul array-urilor este necesară respectarea parității identificatorilor menționați în expresia din stânga cu indecșii array-ului. Potrivirea se va face în ordinea elementelor din array. În exemplul de mai jos, pentru a aduna ce-a mai rămas, am folosit și operatorul *rest* pentru a strânge restul elementelor într-un array.
+În cazul array-urilor este necesară respectarea parității identificatorilor menționați în expresia din stânga cu indecșii array-ului. Potrivirea se va face în ordinea elementelor din array. În exemplul de mai jos, pentru a aduna ce-a mai rămas, am folosit și operatorul *rest* strângând restul elementelor într-un array.
 
 ```javascript
 const arr = [1, true, function y () {return 'salut'}, 10, 20];
@@ -1573,7 +1629,7 @@ obiect.hasOwnProperty('proprietate'); // false
 obiect.hasOwnProperty('toString'); // false
 ```
 
-### Testare cu `getOwnPropertyNames`
+### Testare cu `getOwnPropertyNames()`
 
 Această metodă poate fi utilizată pentru a extrage informațiile care descriu un obiect. Mă refer la faptul că uneori avem nevoie să aflăm tot ce se poate afla despre un obiect pentru a ne face o idee generală despre ce oferă. Să vedem cum am putea obține toate informațiile despre un obiect.
 
@@ -1589,7 +1645,7 @@ console.log( Object.getOwnPropertyNames(String).filter( function (p) {
 }));
 ```
 
-Pentru obiecte care nu sunt foarte stufoase, se poate folosi cu succes și `console.dir(nume_obiect)`.
+Pentru obiecte care nu sunt foarte stufoase, pentru a investiga proprietățile definite, se poate folosi cu succes și `console.dir(nume_obiect)`.
 
 ### Testare cu `for...in`
 
