@@ -1,8 +1,8 @@
 # Obiectul intern Reflect
 
-Acest obiect intern introdus de curând oferă metode utile care simplifică lucrul cu metodele obiectelor în JavaScript. Acest obiect intern nu este un *obiect funcție* care să poată fi invocat direct sau care să fie folosit drept constructor pentru alte obiecte. Poți să-ți imaginezi `Reflect` ca pe un instrument de investigație și intervenție directă.
+Acest obiect intern oferă metode utile care simplifică lucrul cu metodele obiectelor în JavaScript. Acest obiect intern nu este un *obiect funcție* care să poată fi invocat direct sau care să fie folosit drept constructor pentru alte obiecte. Poți să-ți imaginezi `Reflect` ca pe un instrument de investigație și intervenție directă.
 
-Cred că îți mai aduci aminte hărțile pe care le-am făcut la momentul în care explicam dualitatea obiect - funcție. Cu siguranță îți aduci bine aminte faptul că motorul JavaScript pune la bătaie o mulțime de *obiecte interne*, fiecare expunând propriile metode predefinite. Obiectul intern `Reflect` oferă o cale către aceste metodele acestora. Gândește-te la cazul în care un obiect are *tăiată* moștenirea, dar parcă ai avea nevoie de metodele pe care `Object` ți le pune la dispoziție prin prototipul său.
+Cred că îți mai aduci aminte hărțile pe care le-am făcut la momentul în care explicam dualitatea obiect - funcție. Cu siguranță îți aduci bine aminte faptul că motorul JavaScript pune la dispoziție o mulțime de *obiecte interne*, fiecare expunând propriile metode predefinite. Obiectul intern `Reflect` oferă o cale către metodele acestora. Gândește-te la cazul în care un obiect are *tăiată* moștenirea, dar parcă ai avea nevoie de metodele pe care `Object` ți le pune la dispoziție prin prototipul său.
 
 ```javascript
 var obi = Object.create(null); // un obiect cu moștenirea tăiată
@@ -202,3 +202,4 @@ Unul din avantajele utilizării `Reflect` este siguranța că nu folosești vers
 - [What is Metaprogramming in JavaScript? In English, please.](https://www.freecodecamp.org/news/what-is-metaprogramming-in-javascript-in-english-please/)
 - [Is there any benefit to call Reflect.apply() over Function.prototype.apply() in ECMAScript 2015? | stack overflow](https://stackoverflow.com/questions/34707306/is-there-any-benefit-to-call-reflect-apply-over-function-prototype-apply-in)
 - [Hacking the JavaScript using Proxies and Reflection | Erick Wendel](https://www.youtube.com/watch?v=_8G5jf_Mi64)
+- [Proxy and Reflect](https://piccalil.li/blog/proxy-and-reflect/)
